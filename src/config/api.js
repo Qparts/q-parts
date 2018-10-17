@@ -7,7 +7,7 @@ const hostname = window && window.location && window.location.hostname;
 if (hostname === proxyHost) {
  backendHost = `http://${proxyHost}`
 } else {
- backendHost = 'http://localhost:8000'
+ backendHost = 'http://qtest.fareed9.com';
 }
 
 export const API_ROOT = `${backendHost}/api/${apiVersion}`;
