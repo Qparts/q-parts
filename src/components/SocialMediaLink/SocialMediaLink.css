@@ -1,0 +1,5 @@
+.SocialMediaLink-container {
+ display: flex;
+ flex-direction: column;
+ margin: 5em 0px 0px 23em;
+}

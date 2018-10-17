@@ -1,0 +1,23 @@
+.Products-container {
+ display: flex;
+ flex-direction: column;
+}
+
+.Products-items {
+ display: flex;
+ flex-direction: row;
+ width: 32%;
+ text-align: left;
+}
+
+.Products-item {
+ cursor: pointer;
+}
+
+.Products-container .btn-link {
+ color: #6c757d;
+}
+
+.Products-items img {
+ width: 12em
+}

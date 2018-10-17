@@ -1,0 +1,5 @@
+.Wishlist-container {
+ display: flex;
+ flex-direction: column;
+ margin: 1.5em 0px 0px 5em;
+}

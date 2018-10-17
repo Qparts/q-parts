@@ -1,0 +1,19 @@
+.VendorForm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.VendorForm-required > span {
+ color: red;
+}
+
+.VendorForm-phone-number {
+ display: flex;
+ align-items: flex-end;
+}
+
+.VendorForm-phone-number>*:first-child {
+  width: 3em
+}

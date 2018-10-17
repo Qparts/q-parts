@@ -1,0 +1,12 @@
+.GaragePopup-container {
+ display: flex;
+ width: 22em;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
+.GaragePopup-footer {
+ display: flex;
+ width: 22em;
+ justify-content: space-between;
+}

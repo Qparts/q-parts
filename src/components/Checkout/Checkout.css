@@ -1,0 +1,18 @@
+.Checkout-container {
+ display: flex;
+}
+
+.Checkout-shipping_address-footer {
+ display: flex;
+ align-items: baseline;
+}
+
+.Checkout-shipping_address-footer .btn-link {
+ color: #6c757d;
+}
+
+.Checkout-Order_summary {
+ display: flex;
+ flex-direction: row;
+ height: 27em;
+}

@@ -1,0 +1,30 @@
+.CompareProducts-container {
+ display: flex;
+ flex-direction: column;
+ margin: 1.5em 0px 0px 5em;
+}
+
+.CompareProducts-box {
+ display: flex;
+ flex-direction: row;
+}
+
+.CompareProducts-box_item {
+ display: flex;
+ flex-direction: row;
+ width: 40em;
+}
+
+.CompareProducts-button {
+ display: flex;
+ justify-content: flex-end;
+}
+
+.CompareProducts-footer {
+ display: flex;
+ align-items: baseline;
+}
+
+.CompareProducts-container .btn-link {
+ color: #6c757d;
+}

@@ -1,0 +1,8 @@
+.EditInfo-container {
+ display: flex;
+}
+
+.EditInfo-item {
+ display: flex;
+ justify-content: space-evenly;
+}

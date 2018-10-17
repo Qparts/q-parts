@@ -1,0 +1,12 @@
+.CheckoutPayment_new-card {
+ display: flex;
+ flex-direction: row;
+}
+
+.CheckoutPayment_new-card_expiration {
+ display: flex;
+}
+
+.CheckoutPayment_new-card_button {
+display: flex;
+}

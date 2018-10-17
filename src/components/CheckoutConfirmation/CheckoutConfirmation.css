@@ -1,0 +1,8 @@
+.CheckoutConfirmation-container {
+ display: flex;
+ justify-content: space-between;
+}
+
+.CheckoutConfirmation_items {
+ display: flex;
+}

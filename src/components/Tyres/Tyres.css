@@ -1,0 +1,39 @@
+.Tyres-container {
+	display: flex;
+}
+
+.Tyres-filter {
+	min-width: 13em;
+	text-align: start;
+	margin: 20px 0 0px 20px;
+}
+
+.Tyres-title {
+	display: flex;
+}
+
+.Tyres-filter_price {
+	display: flex;
+	min-width: 13em;
+}
+
+.Tyres-contents {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.Tyres-footer {
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+}
+
+.Tyres-sort_by {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.Tyres-sort_by .css-10nd86i {
+	width: 11em;
+}

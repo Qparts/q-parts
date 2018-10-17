@@ -1,0 +1,11 @@
+.OrderSummary-container {
+ display: flex;
+ flex-direction: column;
+ min-width: 23em;
+}
+
+.OrderSummary-item {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}

@@ -1,0 +1,33 @@
+.Garage-container {
+ display: flex;
+ flex-direction: column;
+ margin: 1.5em 0px 0px 5em;
+}
+
+.Garage-box {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-evenly;
+ width: 40em;
+ height: 5em;
+}
+
+.Garage-box_item {
+ display: flex;
+ flex-direction: row;
+ width: 40em;
+}
+
+.Garage-button {
+ display: flex;
+ justify-content: flex-end;
+}
+
+.Garage-footer {
+ display: flex;
+ align-items: baseline;
+}
+
+.Garage-container .btn-link {
+ color: #6c757d;
+}

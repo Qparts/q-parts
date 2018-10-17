@@ -1,0 +1,8 @@
+.Parts {
+  display: flex;
+  order: 0;
+}
+
+.Parts-table {
+  text-align: center;
+}

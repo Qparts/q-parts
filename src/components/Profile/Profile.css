@@ -1,0 +1,35 @@
+.Profile-container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ margin: 5em 0px 0px 23em;
+}
+
+.Profile-info-box {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-evenly;
+ width: 40em;
+ height: 13em;
+}
+
+.Profile-info-box_item {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+ width: 40em;
+}
+
+.Profile-name {
+ padding: 0px 28px 0px 30px;
+}
+
+.Profile-languages {
+ width: 18em;
+}
+
+.Profile-footer {
+ display: flex;
+ width: 40em;
+ justify-content: space-evenly;
+}

@@ -1,0 +1,22 @@
+.Order-container {
+ display: flex;
+ flex-direction: column;
+ margin: 1.5em 0px 0px 5em;
+ width: 100%;
+}
+
+.Order-return_conditions {
+ display: flex;
+ justify-content: space-between;
+}
+
+.Order_header {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.Order-footer {
+ display: flex;
+ justify-content: space-between;
+}

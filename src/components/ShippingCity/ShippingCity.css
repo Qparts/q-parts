@@ -1,0 +1,9 @@
+.ShippingCity-item {
+
+}
+
+.ShippingCity-footer {
+ display: flex;
+ width: 40em;
+ justify-content: space-evenly;
+}

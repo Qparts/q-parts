@@ -1,0 +1,9 @@
+.SignupForm-container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.SignupForm-container input[type="submit"] {
+ margin-left: 32%;
+}

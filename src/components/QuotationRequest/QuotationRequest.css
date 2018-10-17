@@ -1,0 +1,25 @@
+.QuotationRequest-container {
+ display: flex;
+ flex-direction: column;
+}
+
+.QuotationRequest-box {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-evenly;
+ margin: 2em 0px 0px 0px;
+}
+
+.QuotationRequest-box_item {
+ display: flex;
+}
+
+.QuotationRequest-selectInput {
+ width: 12em;
+}
+
+.QuotationRequest-footer {
+ display: flex;
+ justify-content: center;
+ margin: 2em 0 0 0;
+}

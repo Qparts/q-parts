@@ -1,0 +1,48 @@
+.Accessories-container {
+ display: flex;
+}
+
+.Accessories-contents {
+ display: flex;
+ flex-wrap: wrap;
+}
+
+.Accessories-items {
+ flex: 1 0 25%;
+ margin: 5px;
+}
+
+.Accessories-items img {
+ width: 12em
+}
+
+.Accessories-filter {
+ min-width: 13em;
+ text-align: start;
+ margin: 20px 0 0px 20px;
+}
+
+.Accessories-footer {
+ width: 100%;
+ text-align: center;
+ position: fixed;
+ bottom: 0;
+}
+
+.Accessories-filter_price {
+ display: flex;
+ min-width: 13em;
+}
+
+.Accessories-title {
+ display: flex;
+}
+
+.Accessories-sort_by {
+ display: flex;
+ justify-content: flex-end;
+}
+
+.Accessories-sort_by .css-10nd86i {
+ width: 11em;
+}

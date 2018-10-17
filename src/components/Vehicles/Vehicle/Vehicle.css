@@ -1,0 +1,9 @@
+.Vehicle-container {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+}
+
+.Vehicle-container>* {
+ width: 17%;
+}

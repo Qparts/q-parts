@@ -1,0 +1,8 @@
+.RenderRating-container {
+ display: flex;
+ flex-direction: column;
+}
+
+.RenderRating-required>span {
+ color: red;
+}

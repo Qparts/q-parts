@@ -1,0 +1,22 @@
+.OrderForm {
+ text-align: center;
+}
+
+.ManualForm-add_vehcile {
+ text-align: center;
+}
+
+.OrderForm-container {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-between;
+}
+
+.OrderForm-grow-item_mid {
+ flex: 1;
+}
+
+.OrderForm-grow-item_large {
+ flex: 2;
+}

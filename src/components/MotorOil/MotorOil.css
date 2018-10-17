@@ -1,0 +1,39 @@
+.MotorOil-container {
+	display: flex;
+}
+
+.MotorOil-filter {
+	min-width: 13em;
+	text-align: start;
+	margin: 20px 0 0px 20px;
+}
+
+.MotorOil-title {
+	display: flex;
+}
+
+.MotorOil-filter_price {
+	display: flex;
+	min-width: 13em;
+}
+
+.MotorOil-contents {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.MotorOil-footer {
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+}
+
+.MotorOil-sort_by {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.MotorOil-sort_by .css-10nd86i {
+	width: 11em;
+}

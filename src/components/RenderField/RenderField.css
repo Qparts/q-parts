@@ -1,0 +1,8 @@
+.RenderField-container {
+ display: flex;
+ flex-direction: column;
+}
+
+.RenderField-required>span {
+ color: red;
+}

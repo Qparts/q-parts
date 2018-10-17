@@ -1,0 +1,9 @@
+.RenderCartItem-box_item {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+}
+
+.RenderCartItem-input {
+ border: 0;
+}
