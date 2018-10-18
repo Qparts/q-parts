@@ -11,7 +11,7 @@ import WithProductView from '../../hoc/WithProductView';
 import { Checkbox } from 'primereact/components/checkbox/Checkbox';
 import queryString from 'qs';
 
-import { isEmpty, upperCaseFirstChar, replaceAll, addKey } from '../../utils';
+import { isEmpty, upperCaseFirstChar, replaceAll } from '../../utils';
 
 import './MotorOil.css';
 
@@ -36,8 +36,8 @@ class MotorOil extends Component {
 		const keys = Object.keys(query);
 
 		const filters = keys.map(key => {
-			const newArray = [query[key]];
-			const queryValues = replaceAll(newArray.join().split(','), '_', ' ');
+			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
+			const queryValues = replaceAll(newArray, '_', ' ');
 			const values = [...new Set(queryValues)];
 
 			return {
@@ -46,7 +46,10 @@ class MotorOil extends Component {
 			}
 		});
 
-		this.setState({ params: search });
+		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
+		
+
+		this.setState({ params: '?'.concat(newParams.join('&')) });
 		return this.addToFilter(filters);
 
 	}
