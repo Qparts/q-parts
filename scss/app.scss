@@ -69,3 +69,10 @@ $dir: ltr;
 @import 'layouts/_footer.scss';
 
 /* STATE - page of site*/
+@font-face {
+  font-family: "q-parts-icons";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./icon/q-parts-icons.eot");
+  src: url("./icon/q-parts-icons.eot?#iefix") format("embedded-opentype"), url("./icon/q-parts-icons.woff") format("woff"), url("./icon/q-parts-icons.ttf") format("truetype"), url("./icon/q-parts-icons.svg#q-parts-icons") format("svg");
+}

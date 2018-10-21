@@ -1,20 +1,22 @@
-import React, { Component, Fragment } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { Button, Menu, MenuItem, withStyles } from '@material-ui/core';
+import React, { Component, Fragment } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { Button, Menu, MenuItem, withStyles } from "@material-ui/core";
 
-import DropdownItem from '../UI/Nav/DropdownItem';
-import Nav from '../UI/Nav';
-import Vehicles from '../Vehicles/Vehicles';
-import { Dialog } from 'primereact/components/dialog/Dialog';
-import GaragePopup from '../../containers/GaragePopup/GaragePopup';
-import LanguageToggle from '../LanguageToggle';
-import select2 from 'select2'; // eslint-disable-line
-import $ from 'jquery'
+import DropdownItem from "../UI/Nav/DropdownItem";
+import Nav from "../UI/Nav";
+import Vehicles from "../Vehicles/Vehicles";
+import { Dialog } from "primereact/components/dialog/Dialog";
+import GaragePopup from "../../containers/GaragePopup/GaragePopup";
+import LanguageToggle from "../LanguageToggle";
+import Header from "./Header/Header.js";
+import Footer from "./Footer/Footer";
+import select2 from "select2"; // eslint-disable-line
+import $ from "jquery";
 
-import { TAB_ONE } from '../../constants';
-import { isEmpty } from '../../utils';
+import { TAB_ONE } from "../../constants";
+import { isEmpty } from "../../utils";
 
-import './Layout.css';
+import "./Layout.css";
 
 class Layout extends Component {
   constructor(props) {
@@ -24,15 +26,14 @@ class Layout extends Component {
       anchorEl: null,
       visible: false,
       newOrOldVechile: TAB_ONE
-    }
+    };
   }
 
   componentDidMount = () => {
     $(this.basicSelect).select2({
       minimumResultsForSearch: -1
-    })
-  }
-
+    });
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
@@ -43,38 +44,38 @@ class Layout extends Component {
   handleClick = event => {
     this.setState({
       anchorEl: event.currentTarget
-    })
-  }
+    });
+  };
 
   handleClose = () => {
     this.setState({
       anchorEl: null
-    })
-  }
+    });
+  };
 
-  handleAddVechile = (event) => {
+  handleAddVechile = event => {
     this.setState({
       visible: true
-    })
-  }
+    });
+  };
 
   handleChange = (event, value) => {
     this.setState({
       newOrOldVechile: value
-    })
+    });
   };
 
-  onHide = (event) => {
+  onHide = event => {
     this.setState({
       visible: false,
       newOrOldVechile: TAB_ONE
     });
-  }
+  };
 
   render() {
     const { anchorEl } = this.state;
     const { classes, isLoggedIn, fullName, vehicles, translate } = this.props;
-    const dialog =
+    const dialog = (
       <Dialog
         header={translate("dialog.vehicle.title")}
         maximizable={true}
@@ -82,63 +83,74 @@ class Layout extends Component {
         positionTop={0}
         minWidth={1000}
         modal={true}
-        onHide={this.onHide}>
+        onHide={this.onHide}
+      >
         <Vehicles
           newOrOldVechile={this.state.newOrOldVechile}
           onTabChange={this.handleChange}
           displayTwoTabs={!isEmpty(vehicles)}
         />
       </Dialog>
-    const authOrNotAuthButtons =
-      isLoggedIn ? (
-        <Fragment>
-          <Button
-            aria-owns={anchorEl ? 'menu' : null}
-            aria-haspopup="true"
-            onClick={this.handleClick}
-            classes={{
-              label: classes.label
-            }}
-          >
-            {fullName}
-          </Button>
-          <Menu
-            id="menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={this.handleClose}>
-            <MenuItem onClick={this.handleClose}>
-              <Link to="/setting/addresses">{translate("navBar.menu.menuItem.address")}</Link>
-            </MenuItem>
-            <MenuItem onClick={this.handleClose}>
-              <Link to="/setting/quotations">{translate("navBar.menu.menuItem.quotations")}</Link>
-            </MenuItem>
-            <MenuItem onClick={this.handleClose}>
-              <Link to="/setting">{translate("navBar.menu.menuItem.setting")}</Link>
-            </MenuItem>
-            <MenuItem onClick={this.handleClose}>
-              <Link to="/logout">{translate("navBar.menu.menuItem.logout")}</Link>
-            </MenuItem>
-          </Menu>
-        </Fragment>
-      ) : (
-          <Fragment>
-            <DropdownItem header={translate("navBar.signinSignup")}>
-              <div className="Layout-nav-popup">
-                <Button
-                  component={Link}
-                  to="/login"
-                  variant="contained"
-                  classes={{
-                    label: classes.label
-                  }} >{translate("general.signin")}
-                </Button>
-                <br />
-                {translate("dropdown.signup.message")} <Link to="/signup">{translate("dropdown.signup.link")}</Link>
-              </div>
-            </DropdownItem>
-          </Fragment>
-        )
+    );
+    const authOrNotAuthButtons = isLoggedIn ? (
+      <Fragment>
+        <Button
+          aria-owns={anchorEl ? "menu" : null}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+          classes={{
+            label: classes.label
+          }}
+        >
+          {fullName}
+        </Button>
+        <Menu
+          id="menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/setting/addresses">
+              {translate("navBar.menu.menuItem.address")}
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/setting/quotations">
+              {translate("navBar.menu.menuItem.quotations")}
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/setting">
+              {translate("navBar.menu.menuItem.setting")}
+            </Link>
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>
+            <Link to="/logout">{translate("navBar.menu.menuItem.logout")}</Link>
+          </MenuItem>
+        </Menu>
+      </Fragment>
+    ) : (
+      <Fragment>
+        <DropdownItem header={translate("navBar.signinSignup")}>
+          <div className="Layout-nav-popup">
+            <Button
+              component={Link}
+              to="/login"
+              variant="contained"
+              classes={{
+                label: classes.label
+              }}
+            >
+              {translate("general.signin")}
+            </Button>
+            <br />
+            {translate("dropdown.signup.message")}{" "}
+            <Link to="/signup">{translate("dropdown.signup.link")}</Link>
+          </div>
+        </DropdownItem>
+      </Fragment>
+    );
     return (
       <Fragment>
         <Nav id="TopNavbar">
@@ -153,77 +165,33 @@ class Layout extends Component {
             <Link to="/">{translate("navBar.blog")}</Link>
             <Link to="/">{translate("navBar.customOrder")}</Link>
           </div> */}
-          <div className=" header-first">
-            <div className="container-fluid d-flex justify-content-between">
-              <ul className="nav-icon-pl setting list-inline ">
-                <li className="ship-country">
-                  <div className="input-group">
-                    <span className="ship-to">Ship to</span>
-                    <select ref={ref => this.basicSelect = ref} id="shiping-country">
-                      <option defaultValue="KSA">KSA</option>
-                      <option value="2">Egypt</option>
-                      <option value="3">Jordan</option>
-                    </select>
-                  </div>
-                </li>
-                <li>
-                  <span className="seperator"></span>
-                </li>
-                <li>
-                  <a href="#" className="lang">العربية</a>
-                </li>
-              </ul>
-              <nav className="navbar">
-                <ul className="list-inline">
-                  <li>
-                    <a href="#" className="selected">Vehicle Part</a>
-                  </li>
-                  <li>
-                    <a href="#">Motor Oil</a>
-                  </li>
-                  <li>
-                    <a href="#">Tyres</a>
-                  </li>
-                  <li>
-                    <a href="#">Tools</a>
-                  </li>
-                  <li>
-                    <a href="#">Vendor</a>
-                  </li>
-                  <li>
-                    <a href="#">Accessories</a>
-                  </li>
-                  <li>
-                    <a href="#">Offers</a>
-                  </li>
-                </ul>
-              </nav>
-              <a href="#" className="btn custom-order"><i className="icon-custom-order"></i> <span>Custom Order</span></a>
-            </div>
-          </div>
+          <Header />
         </Nav>
         <hr />
         <Nav id="secondNavBar">
           <LanguageToggle localize={this.props.localize} />
-          <Link to="/"><i className="fas fa-home fa-2x"></i></Link>
-          {
-            !isEmpty(vehicles) ? <DropdownItem header={translate("navBar.garage")}>
+          <Link to="/">
+            <i className="fas fa-home fa-2x" />
+          </Link>
+          {!isEmpty(vehicles) ? (
+            <DropdownItem header={translate("navBar.garage")}>
               <GaragePopup
                 translate={translate}
                 className="Layout-nav-popup Layout-nav-garage_popup"
                 onAddVechile={this.handleAddVechile}
               />
-            </DropdownItem> : (
-                <Button
-                  variant="outlined"
-                  classes={{
-                    label: classes.label
-                  }}
-                  onClick={this.handleAddVechile} >
-                  {translate("navBar.garage")}
-                </Button>
-              )
-          }
+            </DropdownItem>
+          ) : (
+            <Button
+              variant="outlined"
+              classes={{
+                label: classes.label
+              }}
+              onClick={this.handleAddVechile}
+            >
+              {translate("navBar.garage")}
+            </Button>
+          )}
           {authOrNotAuthButtons}
           <div>
             <Button
@@ -232,22 +200,27 @@ class Layout extends Component {
               variant="outlined"
               classes={{
                 label: classes.label
-              }} >{translate("navBar.joinUs")}
+              }}
+            >
+              {translate("navBar.joinUs")}
             </Button>
           </div>
-          <Link to="/cart"><i className="fas fa-shopping-cart fa-2x"></i></Link>
+          <Link to="/cart">
+            <i className="fas fa-shopping-cart fa-2x" />
+          </Link>
         </Nav>
         {dialog}
         {this.props.children}
+        <Footer/>
       </Fragment>
-    )
+    );
   }
 }
 
 const styles = {
   label: {
-    textTransform: 'capitalize',
-  },
+    textTransform: "capitalize"
+  }
 };
 
 const WithLayout = withRouter(Layout);
