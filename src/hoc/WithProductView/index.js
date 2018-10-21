@@ -18,6 +18,7 @@ const WithProductView = WrappedComponent => {
 				currentProducts: this.getCurrentProducts(0),
 				first: 0,
 				rows,
+				selectedRadio: null
 			}
 		}
 
@@ -67,23 +68,52 @@ const WithProductView = WrappedComponent => {
 			const itemValue = item.value.replace(/ /, '_');
 
 			if (checked && index === -1) {
-				console.log(this.state.params);
-				
 				const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
-				
+
 				this.setState({
 					filtration: [...this.state.filtration, value],
 					params: newParams
 				});
 			} else if (index !== -1) {
 				const clone = [...this.state.filtration];
-				const newParams = this.state.params.slice(1).split(/[&]/);				
+				const newParams = this.state.params.slice(1).split(/[&]/);
 
 				clone.splice(index, 1);
 				newParams.splice(index, 1);
 				this.setState({
 					filtration: clone,
 					params: fixParamsFormat(newParams)
+				});
+			}
+		}
+
+		filterRadio = (item, event) => {
+			const { value } = event;
+			const clone = [...this.state.filtration];
+			const index = this.state.filtration.indexOf(this.state.selectedRadio);
+			const itemValue = item.value.replace(/ /, '_');
+			const oneFilter = 1;
+
+			if (index !== -1) {
+
+				const cloneParams = this.state.params.slice(1).split(/[&]/);
+				clone.splice(index, 1);
+				cloneParams.splice(index, 1);
+
+				const newParams = cloneParams.length >= oneFilter ? `${fixParamsFormat(cloneParams)}&${item.key}=${itemValue}` : `${fixParamsFormat(cloneParams)}${item.key}=${itemValue}`;
+
+				this.setState({
+					selectedRadio: value,
+					filtration: [...clone, value],
+					params: newParams
+				});
+			} else {
+				const newParams = this.state.params.length === oneFilter ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
+
+				this.setState({
+					selectedRadio: value,
+					filtration: [...clone, value],
+					params: fixParamsFormat(newParams.slice(1).split())
 				});
 			}
 		}
@@ -140,6 +170,17 @@ const WithProductView = WrappedComponent => {
 			this.setState({ params: fixParamsFormat(newParams) });
 		}
 
+		setRadioButton = (filter) => {
+			filter.map(filterObject => {
+				if (filterObject.componentType === 'Radio') {
+					const label = upperCaseFirstChar(filterObject.label);
+					const value = filterObject.values;
+
+					this.setState({selectedRadio: `${label} ${value}`});
+				}
+			})
+		}
+
 		render() {
 			return <WrappedComponent
 				currentProducts={this.state.currentProducts}
@@ -151,11 +192,13 @@ const WithProductView = WrappedComponent => {
 				renderSearch={this.renderSearch}
 				onAddToFilter={this.addToFilter}
 				onFilter={this.filter}
+				onFilterRadio={this.filterRadio}
 				onRemoveItem={this.removeItem}
 				isChecked={this.isChecked}
 				onClear={this.handleClear}
 				onSetParams={this.setParams}
-				
+				onSetRadioButton={this.setRadioButton}
+
 				{...this.state}
 				{...this.props} />
 		}
