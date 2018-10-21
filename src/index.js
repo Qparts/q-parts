@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import '../scss/app.scss';
+import 'select2/dist/css/select2.min.css'
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/omega/theme.css';

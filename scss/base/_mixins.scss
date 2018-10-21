@@ -1,0 +1,98 @@
+
+/*UNCTIONS*/
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+
+/*MIXIN*/
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+//@include font
+
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal ) {
+  @font-face {
+    font-family: $font-family;
+    font-weight: $weight;
+    font-style: $style;
+
+    src: url('#{$file-path}/#{$font-family}.eot');
+    src: url('#{$file-path}/#{$font-family}.eot?#iefix')               format('embedded-opentype'),
+         url('#{$file-path}/#{$font-family}.woff')                     format('woff'),
+         url('#{$file-path}/#{$font-family}.ttf')                      format('truetype'),
+         url('#{$file-path}/#{$font-family}.svg##{$font-family}')      format('svg');
+  }
+}
+
+@mixin bg-img-responsive($img-size) {
+  -webkit-background-size: $img-size;
+  -moz-background-size: $img-size;
+  -o-background-size: $img-size;
+  background-size: $img-size;
+}
+@mixin bg-color-alpha($red, $green, $blue, $alpha) {
+  background-color: rgba($red, $green, $blue, $alpha);
+}
+@mixin text-color-alpha($red, $green, $blue, $alpha) {
+color: rgba($red, $green, $blue, $alpha);
+}
+
+//box shadow
+@mixin box-shadow($top, $left, $blur, $color) {
+      -webkit-box-shadow:$top $left $blur $color ;
+      -moz-box-shadow:$top $left $blur $color;
+      box-shadow:$top $left $blur $color ;
+}
+
+//box shadow
+@mixin box-shadow-size($left, $top, $blur, $size, $color) {
+      -webkit-box-shadow:$left, $top, $blur, $size, $color ;
+      -moz-box-shadow:$left, $top, $blur, $size, $color;
+      box-shadow:$left, $top, $blur, $size, $color;
+}
+
+
+@mixin innerbox-shadow($top, $left, $blur, $color) {
+  -webkit-box-shadow:inset $top $left $blur $color;
+  -moz-box-shadow:inset $top $left $blur $color;
+  box-shadow:inset $top $left $blur $color;
+}
+
+// Opacity
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  // IE8 filter
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity=$opacity-ie);
+}
+
+//animate
+
+@mixin animat-delay($delay){
+  -webkit-animation-delay: $delay; /* Chrome, Safari, Opera */
+    animation-delay: $delay;
+}
+
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent);  // Opera 12
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
+}
+
+
+/* @include transition(all,2s,ease-out); */
+@mixin transition($what: all, $time: 0.2s, $how: ease-in-out) {
+    -webkit-transition: $what $time $how;
+    -moz-transition:    $what $time $how;
+    -ms-transition:     $what $time $how;
+    -o-transition:      $what $time $how;
+    transition:         $what $time $how;
+}

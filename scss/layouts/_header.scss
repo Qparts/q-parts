@@ -1,0 +1,148 @@
+.nav-icon-pl{
+  padding-#{$left}: 35px;
+}
+.main-header{
+
+  .header-first{
+    padding: 10px 0;
+    @extend .border-bottom;
+    border-color: $light-gray;
+    @extend .nav-icon-pl;
+  }
+}
+.setting{
+  @extend .position-relative;
+  top: 8px;
+  .ship-country{
+    margin-#{$right}: 0 !important;
+  }
+  .input-group{
+    position: relative;
+      .ship-to{
+        @include font-size(12px);
+      }
+      .select2-container {
+        margin-top: -4px;
+      }
+      .select2-container--default .select2-selection--single .select2-selection__rendered{
+        font-weight: 700;
+      }
+    }
+    .seperator{
+      height: 20px;
+  }
+  .lang{
+    @include if-ltr{
+      font-family: 'Cairo', sans-serif;
+      //@include font-size(13px);
+      font-weight: 400;
+      @extend .position-relative;
+      top: 1px;
+    };
+  }
+}
+.custom-order{
+  padding: side-values(5px 10px 5px 5px);
+  height: 37px;
+  .icon-custom-order{
+    color: $brand-color;
+    @include font-size(24px);
+    height: 27px;
+    @extend .d-inline-block;
+    margin-#{$right}: 5px;
+  }
+  > span{
+    position: relative;
+    top: -8px;
+  }
+  &:hover{
+    color: $brand-color;
+  }
+}
+.header-second{
+  padding: 10px 0;
+  .brand{
+    @extend .d-inline-block;
+    img{
+      width: 100px;
+      height: auto;
+      @extend .d-block;
+    }
+  }
+  .dropdown-toggle::after{
+    color: #ecebeb;
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-left-width: 5px;
+    margin-#{$left}: 0px;
+    @extend .position-relative;
+    top: 2px;
+  }
+}
+.user-actions{
+  padding-bottom: 0;
+  margin-top: 7px;
+  li:not(:last-child){
+    margin-#{$right}: 16px;
+  }
+  li{
+    @extend .align-middle;
+    height: 24px;
+  }
+
+  a{
+    @extend .d-inline-block;
+  }
+  .icon-search{
+    line-height: 20px;
+    @include font-size(20px);
+    @extend .d-block;
+    &:before{
+      //top: -5px;
+    }
+  }
+  .seperator{
+    height: 15px;
+    display: inline-table;
+  }
+  .user-account{
+    @include font-size(13.8px);
+    .user-img{
+      margin-#{$right}: 7px;
+      display: inline-block;
+      width: 17px;
+      img{
+        max-width: 100%;
+        display: block;
+      }
+    }
+    .seperator{
+      height: 10px;
+      margin: 0 5px;
+    }
+    b{
+      font-weight: 500;
+    }
+  }
+  .garage{
+  .garage-img{
+    margin-#{$right}: 7px;
+    display: inline-block;
+    width: 20px;
+    @extend .position-relative;
+    top: 2px;
+    img{
+      max-width: 100%;
+      display: block;
+    }
+  }
+}
+  .icon-heart,
+  .icon-cart{
+    @include font-size(22px);
+    height: 24px;
+    display: block;
+  }
+
+
+}

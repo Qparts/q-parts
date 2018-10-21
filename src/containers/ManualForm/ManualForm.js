@@ -22,7 +22,7 @@ import * as validations from '../../utils';
 import { isAuth } from '../../utils';
 import { TAB_ONE, ADD_VEHICLE } from '../../constants';
 
-import './ManualForm.css';
+import './ManualForm.scss';
 
 export class ManualForm extends Component {
   constructor(props) {
