@@ -10,8 +10,6 @@ import GaragePopup from "../../containers/GaragePopup/GaragePopup";
 import LanguageToggle from "../LanguageToggle";
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
-import select2 from "select2"; // eslint-disable-line
-import $ from "jquery";
 
 import { TAB_ONE } from "../../constants";
 import { isEmpty } from "../../utils";
@@ -28,12 +26,6 @@ class Layout extends Component {
       newOrOldVechile: TAB_ONE
     };
   }
-
-  componentDidMount = () => {
-    $(this.basicSelect).select2({
-      minimumResultsForSearch: -1
-    });
-  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
@@ -153,7 +145,7 @@ class Layout extends Component {
     );
     return (
       <Fragment>
-        <Nav id="TopNavbar">
+        {/* <Nav id="TopNavbar"> */}
           {/* <div className="Layout-top_nav">
             <Link to="/">{translate("navBar.vehiclePart")}</Link>
             <Link to="/motor-oil">{translate("navBar.motorOil")}</Link>
@@ -166,9 +158,8 @@ class Layout extends Component {
             <Link to="/">{translate("navBar.customOrder")}</Link>
           </div> */}
           <Header />
-        </Nav>
-        <hr />
-        <Nav id="secondNavBar">
+        {/* </Nav> */}
+        {/* <Nav id="secondNavBar">
           <LanguageToggle localize={this.props.localize} />
           <Link to="/">
             <i className="fas fa-home fa-2x" />
@@ -208,7 +199,7 @@ class Layout extends Component {
           <Link to="/cart">
             <i className="fas fa-shopping-cart fa-2x" />
           </Link>
-        </Nav>
+        </Nav> */}
         {dialog}
         {this.props.children}
         <Footer/>

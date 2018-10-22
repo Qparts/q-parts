@@ -73,7 +73,6 @@ class HeaderDetails extends Component {
             </li>
           </ul>
         </div>
-        <img className="d-block w-100" src="img/hero-lg.jpg" srcSet="img/hero-lg.jpg, img/cover-img-xs.jpg" />
       </div>
     );
   }

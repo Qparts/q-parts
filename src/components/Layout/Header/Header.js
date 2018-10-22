@@ -1,11 +1,16 @@
-import React, { Component, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
+import select2 from "select2"; // eslint-disable-line
+import $ from "jquery";
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-  }
+
+  componentDidMount = () => {
+    $(this.basicSelect).select2({
+      minimumResultsForSearch: -1
+    });
+  };
 
   /* <div className="Layout-top_nav">
             <Link to="/">{translate("navBar.vehiclePart")}</Link>

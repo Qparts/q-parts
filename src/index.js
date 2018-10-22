@@ -16,7 +16,6 @@ import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
 
-import 'typeface-roboto';
 import ErrorBoundary from './components/ErrorBoundary';
 
 

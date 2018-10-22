@@ -129,7 +129,48 @@ export class ManualForm extends Component {
 
     return (
       <Fragment>
-        <div className="OrderForm">
+        <img alt="" className="d-block w-100" src="img/hero-lg.jpg" srcSet="img/hero-lg.jpg, img/cover-img-xs.jpg" />
+          <div className="container-fluid">
+            <div className="row">
+              <header className="col">
+                <h1>Shop By Vechile</h1>
+                <p>
+                  Add your Vechile to easily find parts & accessories and to get product recommendations
+              </p>
+              </header>
+            </div>
+            <form className="row">
+              <div className="col-lg-4">
+                <label>I Need To Find</label>
+                <input type="text" className="form-control mb-2 mr-sm-2" placeholder="EX: Part Name,  Part Number,  Product Name" />
+              </div>
+              <div className="col-lg-6">
+                <label>For My Vechile</label>
+                <div className="form-inline row">
+                  <select className="custom-select col-lg-2">
+                    <option defaultValue="Select Year">Select Year</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <select className="custom-select col-lg-5">
+                    <option defaultValue="Select Make ">Select Make</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <select className="custom-select col-lg-5">
+                    <option defaultValue="Select Model">Select Model</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" className="btn btn-primary"><i className="icon-arrow-right"></i> Find</button>
+            </form>
+          </div>
+        {/* <div className="OrderForm">
           {alertOrderCompleted}
           <div>
             <h1>{translate("form.order.title")}</h1>
@@ -193,7 +234,7 @@ export class ManualForm extends Component {
             </div>
           </div>
         </form>
-        {dialog}
+        {dialog} */}
       </Fragment>
     );
   }
