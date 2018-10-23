@@ -35,7 +35,15 @@
     "إرسال",
     "Send"
    ]
-  }
+  },
+  "arabic": [
+    "Arabic",
+    "العربية"
+   ],
+   "english": [
+	"English",
+    "الإنجليزية"
+   ]
  },
  "navBar": {
   "vehiclePart": [
@@ -927,7 +935,7 @@
     ]
    },
    "arabic": [
-    "عربى",
+    "العربية",
     "Arabic"
    ],
    "english": [

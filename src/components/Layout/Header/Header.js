@@ -1,30 +1,40 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
-import select2 from "select2"; // eslint-disable-line
-import $ from "jquery";
-
+import Select from 'react-select';
+import LanguageToggle from '../../../components/LanguageToggle'
 class Header extends Component {
 
-  componentDidMount = () => {
-    $(this.basicSelect).select2({
-      minimumResultsForSearch: -1
-    });
-  };
-
-  /* <div className="Layout-top_nav">
-            <Link to="/">{translate("navBar.vehiclePart")}</Link>
-            <Link to="/motor-oil">{translate("navBar.motorOil")}</Link>
-            <Link to="/tyres">{translate("navBar.tyres")}</Link>
-            <Link to="/tools">{translate("navBar.tools")}</Link>
-            <Link to="/accessories">{translate("navBar.accessories")}</Link>
-            <Link to="/">{translate("navBar.vendor")}</Link>
-            <Link to="/">{translate("navBar.offers")}</Link>
-            <Link to="/">{translate("navBar.blog")}</Link>
-            <Link to="/">{translate("navBar.customOrder")}</Link>
-          </div> */
-
   render() {
+    // TODO: Need to find a way to style the select component. To make it exactly like the design
+    const shipToOptions = [
+      { value: 1, label: "KSA" },
+      { value: 2, label: "Egypt" },
+      { value: 1, label: "KSA" }
+    ];
+    const customStyles = {
+      container: () => ({
+        width: 'auto !important',
+        marginTop: '-4px',
+        fontWeight: '700'
+      }),
+      menuList: () => ({
+        padding: '5px 10px',
+        fontSize: '12px',
+        borderBottom: '1px solid $light-gray',
+        minWidth: '100px',
+        overflow: 'hidden',
+        borderWidth: '0'
+      }),
+      singleValue: () => ({
+        'borderWidth': '0',
+        fontSize: '12px',
+        padding: '0 0 0 5px',
+        display: 'inline-block !important',
+        borderRadius: '0'
+      })
+    }
+    const { translate, localize } = this.props;
     return (
       <div className="main-header">
         <div className=" header-first">
@@ -33,62 +43,51 @@ class Header extends Component {
               <li className="ship-country">
                 <div className="input-group">
                   <span className="ship-to">Ship to</span>
-                  <select
-                    ref={ref => (this.basicSelect = ref)}
-                    id="shiping-country"
-                  >
-                    <option defaultValue="KSA">KSA</option>
-                    <option value="2">Egypt</option>
-                    <option value="3">Jordan</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    defaultValue={shipToOptions[0]}
+                    options={shipToOptions} />
                 </div>
               </li>
               <li>
                 <span className="seperator" />
               </li>
               <li>
-                <a href="#" className="lang">
-                  العربية
-                </a>
+                <LanguageToggle localize={localize} translate={translate} />
               </li>
             </ul>
             <nav className="navbar">
               <ul className="list-inline">
                 <li>
-                  <Link to="/" className="selected">
-                    Vehicle Part
-                  </Link>
-                  {/* <a href="#" className="selected">
-                  Vehicle Part
-                </a> */}
+                  <Link className="selected" to="/">{translate("navBar.vehiclePart")}</Link>
                 </li>
                 <li>
-                  <Link to="/motor-oil">Motor Oil</Link>
-                  {/* <a  to="/motor-oil">Motor Oil</a> */}
+                  <Link to="/motor-oil">{translate("navBar.motorOil")}</Link>
                 </li>
                 <li>
-                  <Link to="/tyres">Tyres</Link>
-                  {/* <a href="#">Tyres</a> */}
+                  <Link to="/tyres">{translate("navBar.tyres")}</Link>
                 </li>
                 <li>
-                  <Link to="/tools">Tools</Link>
-                  {/* <a href="#">Tools</a> */}
+                  <Link to="/tools">{translate("navBar.tools")}</Link>
                 </li>
                 <li>
-                  <a href="#">Vendor</a>
+                  <Link to="/">{translate("navBar.vendor")}</Link>
                 </li>
                 <li>
-                  <Link to="/accessories">Accessories</Link>
-                  {/* <a href="#">Accessories</a> */}
+                  <Link to="/accessories">{translate("navBar.accessories")}</Link>
                 </li>
                 <li>
-                  <a href="#">Offers</a>
+                  <Link to="/">{translate("navBar.offers")}</Link>
+                </li>
+                <li>
+                  <Link to="/">{translate("navBar.blog")}</Link>
                 </li>
               </ul>
             </nav>
-            <a href="#" className="btn custom-order">
-              <i className="icon-custom-order" /> <span>Custom Order</span>
-            </a>
+            <Link className="btn custom-order" to="/">
+              <i className="icon-custom-order" />
+              <span>{translate("navBar.customOrder")}</span>
+            </Link>
           </div>
         </div>
         <HeaderDetails />

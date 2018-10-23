@@ -5,8 +5,7 @@ import { getOffers, getRecentlyViewedProducts } from "../../actions/apiAction";
 import { BEST_SELLER } from '../../constants';
 import { getTranslate } from 'react-localize-redux';
 import ManualForm from '../../containers/ManualForm/ManualForm';
-import Products from '../../components/Products/Products';
-import HomdeDetails from '../HomeDetails/HomeDetails';
+import HomeDetails from '../HomeDetails/HomeDetails';
 export class Home extends Component {
     componentWillMount() {
         this.props.getOffers(BEST_SELLER)
@@ -15,14 +14,12 @@ export class Home extends Component {
         return (
             <Fragment>
                 <ManualForm />
-                <HomdeDetails/>
-                {/* <Products
+                <HomeDetails
                     products={this.props.products}
                     getOffers={this.props.getOffers}
                     addRecentViewedProducts={this.props.addRecentViewedProducts}
                     onRecentlyViewedProducts={this.getRecentlyViewedProducts}
-                    translate={this.props.translate}
-                /> */}
+                    translate={this.props.translate} />
             </Fragment>
         )
     }

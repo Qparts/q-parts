@@ -66,7 +66,7 @@ class Layout extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { classes, isLoggedIn, fullName, vehicles, translate } = this.props;
+    const { classes, isLoggedIn, fullName, vehicles, translate, localize } = this.props;
     const dialog = (
       <Dialog
         header={translate("dialog.vehicle.title")}
@@ -145,61 +145,7 @@ class Layout extends Component {
     );
     return (
       <Fragment>
-        {/* <Nav id="TopNavbar"> */}
-          {/* <div className="Layout-top_nav">
-            <Link to="/">{translate("navBar.vehiclePart")}</Link>
-            <Link to="/motor-oil">{translate("navBar.motorOil")}</Link>
-            <Link to="/tyres">{translate("navBar.tyres")}</Link>
-            <Link to="/tools">{translate("navBar.tools")}</Link>
-            <Link to="/accessories">{translate("navBar.accessories")}</Link>
-            <Link to="/">{translate("navBar.vendor")}</Link>
-            <Link to="/">{translate("navBar.offers")}</Link>
-            <Link to="/">{translate("navBar.blog")}</Link>
-            <Link to="/">{translate("navBar.customOrder")}</Link>
-          </div> */}
-          <Header />
-        {/* </Nav> */}
-        {/* <Nav id="secondNavBar">
-          <LanguageToggle localize={this.props.localize} />
-          <Link to="/">
-            <i className="fas fa-home fa-2x" />
-          </Link>
-          {!isEmpty(vehicles) ? (
-            <DropdownItem header={translate("navBar.garage")}>
-              <GaragePopup
-                translate={translate}
-                className="Layout-nav-popup Layout-nav-garage_popup"
-                onAddVechile={this.handleAddVechile}
-              />
-            </DropdownItem>
-          ) : (
-            <Button
-              variant="outlined"
-              classes={{
-                label: classes.label
-              }}
-              onClick={this.handleAddVechile}
-            >
-              {translate("navBar.garage")}
-            </Button>
-          )}
-          {authOrNotAuthButtons}
-          <div>
-            <Button
-              component={Link}
-              to="/vendor_registration_form"
-              variant="outlined"
-              classes={{
-                label: classes.label
-              }}
-            >
-              {translate("navBar.joinUs")}
-            </Button>
-          </div>
-          <Link to="/cart">
-            <i className="fas fa-shopping-cart fa-2x" />
-          </Link>
-        </Nav> */}
+          <Header translate={translate} localize={localize}/>
         {dialog}
         {this.props.children}
         <Footer/>

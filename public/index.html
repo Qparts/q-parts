@@ -32,34 +32,6 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <script>
-      $(document).ready(function() {
-
-        console.log("done");
-        $(".my-rating").starRating({
-          readOnly: true,
-          emptyColor: '#cfcfcf',
-          activeColor: '#fabb12',
-          initialRating: 4,
-          strokeWidth: 0,
-          useGradient: false,
-          starSize: 15,
-        })
-  
-        $('.best-seller-items').slick({
-          dots: false,
-          infinite: true,
-          speed: 300,
-          slidesToShow: 1,
-          centerMode: true,
-          variableWidth: true
-        });
-        //select 2
-          $('.basic-select').select2({
-            minimumResultsForSearch: -1
-          });
-        });
-      </script>
   <title>React App</title>
 </head>
 <body>
