@@ -19,7 +19,8 @@ export class Home extends Component {
                     getOffers={this.props.getOffers}
                     addRecentViewedProducts={this.props.addRecentViewedProducts}
                     onRecentlyViewedProducts={this.getRecentlyViewedProducts}
-                    translate={this.props.translate} />
+                    translate={this.props.translate} 
+                    />
             </Fragment>
         )
     }

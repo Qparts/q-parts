@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import Select from 'react-select';
 import LanguageToggle from '../../../components/LanguageToggle'
+import { styles } from "../../../constants";
+
 class Header extends Component {
 
   render() {
@@ -10,31 +12,9 @@ class Header extends Component {
     const shipToOptions = [
       { value: 1, label: "KSA" },
       { value: 2, label: "Egypt" },
-      { value: 1, label: "KSA" }
+      { value: 1, label: "Jordan" }
     ];
-    const customStyles = {
-      container: () => ({
-        width: 'auto !important',
-        marginTop: '-4px',
-        fontWeight: '700'
-      }),
-      menuList: () => ({
-        padding: '5px 10px',
-        fontSize: '12px',
-        borderBottom: '1px solid $light-gray',
-        minWidth: '100px',
-        overflow: 'hidden',
-        borderWidth: '0'
-      }),
-      singleValue: () => ({
-        'borderWidth': '0',
-        fontSize: '12px',
-        padding: '0 0 0 5px',
-        display: 'inline-block !important',
-        borderRadius: '0'
-      })
-    }
-    const { translate, localize } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile } = this.props;
     return (
       <div className="main-header">
         <div className=" header-first">
@@ -44,7 +24,7 @@ class Header extends Component {
                 <div className="input-group">
                   <span className="ship-to">Ship to</span>
                   <Select
-                    styles={customStyles}
+                    styles={styles.select}
                     defaultValue={shipToOptions[0]}
                     options={shipToOptions} />
                 </div>
@@ -90,7 +70,12 @@ class Header extends Component {
             </Link>
           </div>
         </div>
-        <HeaderDetails />
+        <HeaderDetails
+          translate={translate}
+          isLoggedIn={isLoggedIn}
+          fullName={fullName}
+          vehicles={vehicles}
+          onAddVechile={onAddVechile} />
       </div>
     );
   }

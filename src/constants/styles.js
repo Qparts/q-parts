@@ -22,5 +22,27 @@ export const styles = {
    borderStyle: 'solid',
    borderWidth: 'thin'
   }
- }
+ },
+ select : {
+    container: () => ({
+      width: 'auto !important',
+      marginTop: '-4px',
+      fontWeight: '700'
+    }),
+    menuList: () => ({
+      padding: '5px 10px',
+      fontSize: '12px',
+      borderBottom: '1px solid $light-gray',
+      minWidth: '100px',
+      overflow: 'hidden',
+      borderWidth: '0'
+    }),
+    singleValue: () => ({
+      'borderWidth': '0',
+      fontSize: '12px',
+      padding: '0 0 0 5px',
+      display: 'inline-block !important',
+      borderRadius: '0'
+    })
+  }
 }

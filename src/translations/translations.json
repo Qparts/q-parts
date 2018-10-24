@@ -12,6 +12,10 @@
    "سجل",
    "Sign up"
   ],
+  "join": [
+   "انضم",
+   "Join"
+  ],
   "vehicleButton": {
    "add": [
     "إضافة مركبة",
@@ -144,12 +148,12 @@
  "form": {
   "order": {
    "title": [
-    "اطلب الان",
-    "Order Now"
+    "تسوق بواسطة السيارة",
+    "Shop By Vehicle"
    ],
    "subTitle": [
-    "اختر سيارتك لتخصيصها وتعديلها وترقيتها وإصلاحها واستبدالها",
-    "Select your vehicle to customize, modify, upgrade, repair and replace"
+    "إضافة سيارتك للعثور بسهولة على قطع الغيار والملحقات والحصول على توصيات المنتج",
+    "Add your Vehicle to easily find parts & accessories and to get product recommendations"
    ],
    "partNo": [
     "اريد ان اجد",
@@ -162,7 +166,7 @@
    "placeholder": {
     "partNo": [
      "الاسم أو الرقم",
-     "Name or number"
+     "EX: Part Name,  Part Number,  Product Name"
     ]
    },
    "trackOrder": [
