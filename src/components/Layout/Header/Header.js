@@ -14,7 +14,7 @@ class Header extends Component {
       { value: 2, label: "Egypt" },
       { value: 1, label: "Jordan" }
     ];
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin } = this.props;
     return (
       <div className="main-header">
         <div className=" header-first">
@@ -75,7 +75,8 @@ class Header extends Component {
           isLoggedIn={isLoggedIn}
           fullName={fullName}
           vehicles={vehicles}
-          onAddVechile={onAddVechile} />
+          onAddVechile={onAddVechile}
+          onSignin={onSignin} />
       </div>
     );
   }

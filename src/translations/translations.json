@@ -492,6 +492,10 @@
    "موصى به لك",
    "Recommended for you"
   ],
+  "subTitle": [
+    "مجموعة واسعة من العناصر لتختار من بينها",
+    "A wide selection of items for you to choose from"
+  ],
   "recommendation": {
    "bestSeller": [
     "الأكثر مبيعًا",
@@ -523,6 +527,12 @@
     "سيارتي",
     "My vehicle(s)"
    ]
+  },
+  "signin": {
+    "title": [
+      "مرحبا بعودتك",
+      "Welcome Back"
+    ]
   },
   "updateEmail": {
    "title": [

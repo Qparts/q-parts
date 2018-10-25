@@ -25,7 +25,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin } = this.props;
     const { anchorEl } = this.state;
     const signinJoinHeader =
       <Fragment>
@@ -89,8 +89,9 @@ class HeaderDetails extends Component {
             <DropdownItem header={signinJoinHeader}>
               <div>
                 <Button
-                  component={Link}
-                  to="/login"
+                  // component={Link}
+                  // to="/login"
+                  onClick={onSignin}
                   variant="contained"
                   classes={{
                     label: classes.label

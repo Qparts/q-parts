@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
 import Vehicles from "../Vehicles/Vehicles";
+import Login from "../../containers/Authentication/Login/Login";
 import { Dialog } from "primereact/components/dialog/Dialog";
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
@@ -17,7 +18,8 @@ class Layout extends Component {
 
     this.state = {
       visible: false,
-      newOrOldVechile: TAB_ONE
+      newOrOldVechile: TAB_ONE,
+      dialogType: 'signin'
     };
   }
 
@@ -27,9 +29,10 @@ class Layout extends Component {
     }
   }
 
-  handleAddVechile = event => {
+  handleDialog = (dialogType, event) => {
     this.setState({
-      visible: true
+      visible: true,
+      dialogType
     });
   };
 
@@ -45,12 +48,31 @@ class Layout extends Component {
       newOrOldVechile: TAB_ONE
     });
   };
+  getDialogComponent = () => {
+    const { vehicles } = this.props;
+    const { dialogType } = this.state;
+
+    switch (dialogType) {
+      case 'vehicle':
+        return <Vehicles
+          newOrOldVechile={this.state.newOrOldVechile}
+          onTabChange={this.handleChange}
+          displayTwoTabs={!isEmpty(vehicles)}
+        />
+      case 'signin':
+        return <Login />
+
+      default:
+        break;
+    }
+  }
 
   render() {
-    const { isLoggedIn, fullName, vehicles, translate, localize } = this.props;
+    const { isLoggedIn, fullName, translate, localize } = this.props;
+    const { dialogType } = this.state;
     const dialog = (
       <Dialog
-        header={translate("dialog.vehicle.title")}
+        header={translate(`dialog.${dialogType}.title`)}
         maximizable={true}
         visible={this.state.visible}
         positionTop={0}
@@ -58,11 +80,7 @@ class Layout extends Component {
         modal={true}
         onHide={this.onHide}
       >
-        <Vehicles
-          newOrOldVechile={this.state.newOrOldVechile}
-          onTabChange={this.handleChange}
-          displayTwoTabs={!isEmpty(vehicles)}
-        />
+        {this.getDialogComponent()}
       </Dialog>
     );
     return (
@@ -73,7 +91,8 @@ class Layout extends Component {
           vehicles={this.props.vehicles}
           isLoggedIn={isLoggedIn}
           fullName={fullName}
-          onAddVechile={this.handleAddVechile} />
+          onAddVechile={this.handleDialog.bind(this, 'vehicle')}
+          onSignin={this.handleDialog.bind(this, 'signin')} />
         {dialog}
         {this.props.children}
         <Footer />

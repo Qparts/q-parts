@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { Paper, Tabs, Tab } from '@material-ui/core';
@@ -63,9 +63,44 @@ class Login extends Component {
         this.props.history.push('/');
       });
   }
+  renderLogin = (login, dialog) => {
+    const { loginOrSignUp } = this.state;
+    const { translate } = this.props;
+    const { match } = this.props;
+
+    return <Fragment>
+      {
+        match.url === '/' ? null :
+        <Paper>
+        <Tabs
+          value={loginOrSignUp}
+          indicatorColor="primary"
+          textColor="primary"
+          onChange={this.handleChange}
+          fullWidth
+          centered >
+          <Tab label={translate("form.signin.tabs.tabOne")} />
+          <Tab label={translate("form.signin.tabs.tabTwo")} />
+        </Tabs>
+      </Paper>
+      }
+      {
+        loginOrSignUp === 1 &&
+        <TabContainer>
+          <div className="Login-container">
+            {login}
+            <hr />
+            <SocialMedia
+              handleResponse={this.props.handleResponse}
+              handleFailure={this.props.handleFailure} />
+          </div>
+          {dialog}
+        </TabContainer>
+      }
+    </Fragment>
+  }
 
   render() {
-    const { loginOrSignUp } = this.state;
     const { translate } = this.props;
     let login = (
       <form className="Login-container" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
@@ -114,36 +149,14 @@ class Login extends Component {
       <Switch>
         <Route path="/login" exact={true} render={() => {
           return (
-            <Fragment>
-              <Paper>
-                <Tabs
-                  value={loginOrSignUp}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  onChange={this.handleChange}
-                  fullWidth
-                  centered >
-                  <Tab label={translate("form.signin.tabs.tabOne")} />
-                  <Tab label={translate("form.signin.tabs.tabTwo")} />
-                </Tabs>
-              </Paper>
-              {
-                loginOrSignUp === 1 &&
-                <TabContainer>
-                  <div className="Login-container">
-                    {login}
-                    <hr />
-                    <SocialMedia
-                      handleResponse={this.props.handleResponse}
-                      handleFailure={this.props.handleFailure} />
-                  </div>
-                  {dialog}
-                </TabContainer>
-              }
-            </Fragment>
+            this.renderLogin(login, dialog)
           )
         }} />
-
+        <Route path="/" exact={true} render={() => {
+          return (
+            this.renderLogin(login, dialog)
+          )
+        }} />
         <PrivateRoute
           path="/login/reset-password"
           fakeAuth={this.state.showResetPassword}
@@ -179,5 +192,5 @@ Login = reduxForm({
   form: 'Login'
 })(Login)
 
-const WithLogin = WithSocialMedia(Login);
+const WithLogin = withRouter(WithSocialMedia(Login));
 export default connect(mapStateToProps, mapDispatchToProps)(WithLogin);

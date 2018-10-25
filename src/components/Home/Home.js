@@ -10,6 +10,10 @@ export class Home extends Component {
     componentWillMount() {
         this.props.getOffers(BEST_SELLER)
     }
+    getRecentlyViewedProducts = () => {
+        this.props.getRecentlyViewedProducts(this.props.recentViewedProducts)
+    }
+
     render() {
         return (
             <Fragment>
@@ -19,8 +23,8 @@ export class Home extends Component {
                     getOffers={this.props.getOffers}
                     addRecentViewedProducts={this.props.addRecentViewedProducts}
                     onRecentlyViewedProducts={this.getRecentlyViewedProducts}
-                    translate={this.props.translate} 
-                    />
+                    translate={this.props.translate}
+                />
             </Fragment>
         )
     }

@@ -1,25 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
-import Slider from "react-slick";
-import Stars from 'react-stars';
+import Products from "../Products/Products";
 
 class HomeDetails extends Component {
-  
+
   render() {
-    const setting = {
-      dots: false,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 1,
-      centerMode: true,
-      variableWidth: true
-    }
-    const rating = {
-      edit: false,
-      value: 4,
-      color1: '#cfcfcf',
-      color2: '#fabb12'
-    }
+    const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate } = this.props;
     return (
       <div className="container-fluid">
         <div className="row">
@@ -96,7 +82,7 @@ class HomeDetails extends Component {
                     <input
                       type="file"
                       className="custom-file-input"
-                      id="customFile"
+                      id="customFile1"
                     />
                   </div>
                 </div>
@@ -113,7 +99,7 @@ class HomeDetails extends Component {
                     <input
                       type="file"
                       className="custom-file-input"
-                      id="customFile"
+                      id="customFile2"
                     />
                   </div>
                 </div>
@@ -201,161 +187,13 @@ class HomeDetails extends Component {
             </a>
           </div>
         </div>
-        <div className="bg-light-gray">
-          <div className="container-fluid">
-            <div className="row">
-              <header className="col heading">
-                <h1>
-                  <span>Recommended </span> For You
-                </h1>
-                <p>A wide selection of items for you to choose from</p>
-              </header>
-              <ul
-                className="nav nav-pills list-inline"
-                id="pills-tab"
-                role="tablist"
-              >
-                <li>
-                  <a
-                    className="active"
-                    id="best-seller-tab"
-                    data-toggle="pill"
-                    href="#best-seller"
-                    role="tab"
-                    aria-controls="best-seller"
-                    aria-selected="true"
-                  >
-                    Best Seller
-                  </a>
-                </li>
-                <li>
-                  <a
-                    id="offers-tab"
-                    data-toggle="pill"
-                    href="#offers"
-                    role="tab"
-                    aria-controls="offers"
-                    aria-selected="false"
-                  >
-                    Offers
-                  </a>
-                </li>
-                <li>
-                  <a
-                    id="recently-viewed-tab"
-                    data-toggle="pill"
-                    href="#recently-viewed"
-                    role="tab"
-                    aria-controls="recently-viewed"
-                    aria-selected="false"
-                  >
-                    Recently Viewed
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="row">
-            <div className="tab-content col" id="pills-tabContent">
-              <div className="tab-pane fade show active" id="best-seller" role="tabpanel" aria-labelledby="best-seller-tab">
-                <Slider {...setting}>
-                  <div>
-                    <div className="card">
-                      <a href="#">
-                        <img className="card-img-top" src="img/product-2.jpg"/>
-                        <div className="card-body">
-                          <h5 className="card-title">Air Fuel Ratio Sensor</h5>
-                          <p className="product-brand">Bosch</p>
-                          <div className="product-review">
-                            <Stars {...rating}/>
-                            <span className="total-review">8 review</span>
-                          </div>
-                          <p className="price">
-                            20 <span className="currency">SR</span>
-                          </p>
-                        </div>
-                      </a>
-                      </div>
-                  </div>
-                  <div>
-                    <div className="card">
-                      <a href="#">
-                        <img className="card-img-top" src="img/product-3.jpg"/>
-                        <div className="card-body">
-                          <h5 className="card-title">8100 Synthetic Motor Oil</h5>
-                          <p className="product-brand">Motul USA</p>
-                          <div className="product-review">
-                            <Stars {...rating}/>
-                            <span className="total-review">2 review</span>
-                          </div>
-                          <p className="price">
-                            1000 <span className="currency">SR</span>
-                          </p>
-                        </div>
-                      </a>
-                      </div>
-                  </div>
-                  <div>
-                    <div className="card">
-                      <a href="#">
-                        <img className="card-img-top" src="img/product-4.jpg"/>
-                        <div className="card-body">
-                          <h5 className="card-title">NT05</h5>
-                          <p className="product-brand">NITTO</p>
-                          <div className="product-review">
-                            <Stars {...rating}/>
-                            <span className="total-review">8 review</span>
-                          </div>
-                          <p className="price">
-                            500 <span className="currency">SR / each</span>
-                          </p>
-                        </div>
-                      </a>
-                      </div>
-                  </div>
-                  <div>
-                    <div className="card">
-                      <a href="#">
-                        <img className="card-img-top" src="img/product-1.jpg"/>
-                        <div className="card-body">
-                          <h5 className="card-title">GM Original Equipment EGR..</h5>
-                          <p className="product-brand">ACDelco</p>
-                          <div className="product-review">
-                            <Stars {...rating}/>
-                            <span className="total-review">8 review</span>
-                          </div>
-                          <p className="price">
-                            1000 <span className="currency">SR</span>
-                          </p>
-                        </div>
-                      </a>
-                      </div>
-                  </div>
-                  <div>
-                    <div className="card">
-                      <a href="#">
-                        <img className="card-img-top" src="img/product-1.jpg"/>
-                        <div className="card-body">
-                          <h5 className="card-title">GM Original Equipment EGR..</h5>
-                          <p className="product-brand">ACDelco</p>
-                          <div className="product-review">
-                            <Stars {...rating}/>
-                            <span className="total-review">8 review</span>
-                          </div>
-                          <p className="price">
-                            1000 <span className="currency">SR</span>
-                          </p>
-                        </div>
-                      </a>
-                      </div>
-                  </div>
-                </Slider>
-              </div>
-              <div className="tab-pane fade" id="offers" role="tabpanel" aria-labelledby="offers-tab">...</div>
-              <div className="tab-pane fade" id="recently-viewed" role="tabpanel" aria-labelledby="recently-viewed-tab">...</div>
-            </div>
-          </div>
-          </div>
-        </div>
+        <Products
+          products={products}
+          getOffers={getOffers}
+          addRecentViewedProducts={addRecentViewedProducts}
+          onRecentlyViewedProducts={onRecentlyViewedProducts}
+          translate={translate}
+        />
       </div>
     );
   }
