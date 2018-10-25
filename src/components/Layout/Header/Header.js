@@ -12,7 +12,7 @@ class Header extends Component {
     const shipToOptions = [
       { value: 1, label: "KSA" },
       { value: 2, label: "Egypt" },
-      { value: 1, label: "Jordan" }
+      { value: 3, label: "Jordan" }
     ];
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin } = this.props;
     return (
@@ -23,10 +23,12 @@ class Header extends Component {
               <li className="ship-country">
                 <div className="input-group">
                   <span className="ship-to">Ship to</span>
-                  <Select
+                 <div className="custom-select">
+                 <Select
                     styles={styles.select}
                     defaultValue={shipToOptions[0]}
                     options={shipToOptions} />
+                </div>
                 </div>
               </li>
               <li>

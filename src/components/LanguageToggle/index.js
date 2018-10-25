@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { changeDefaultLanguage } from "../../actions/customerAction";
 
 const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, translate }) => {
+    console.log(localize);
+    console.log(translate);
     const handleLanguage = (lang) => {
         setActiveLanguage(lang.code)
 
