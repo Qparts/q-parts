@@ -10,6 +10,21 @@
     @extend .nav-icon-pl;
   }
 }
+.mobile-header {
+  .brand{
+    img{
+      width: 100px;
+      height: auto;
+    }
+  }
+  .custom-order {
+    padding: inherit;
+    display: inline;
+    .icon-custom-order{
+      color: $basic-black;
+    }
+  }
+}
 .setting{
   @extend .position-relative;
   top: 8px;

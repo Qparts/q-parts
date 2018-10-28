@@ -6,6 +6,7 @@ import Login from "../../containers/Authentication/Login/Login";
 import { Dialog } from "primereact/components/dialog/Dialog";
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
+import MobileHeader from "./MobileHeader/MobileHeader";
 
 import { TAB_ONE } from "../../constants";
 import { isEmpty } from "../../utils";
@@ -85,6 +86,7 @@ class Layout extends Component {
     );
     return (
       <Fragment>
+        <MobileHeader translate={translate} localize={localize}/>
         <Header
           translate={translate}
           localize={localize}

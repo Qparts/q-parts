@@ -16,7 +16,7 @@ class Header extends Component {
     ];
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin } = this.props;
     return (
-      <div className="main-header">
+      <div className="main-header w3-hide-small w3-hide-medium">
         <div className=" header-first">
           <div className="container-fluid d-flex justify-content-between">
             <ul className="nav-icon-pl setting list-inline ">
