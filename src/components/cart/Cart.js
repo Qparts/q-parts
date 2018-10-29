@@ -19,7 +19,7 @@ class Cart extends Component {
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
 				desc: item.product.desc,
-				price: `${item.product.salesPrice.toFixed(2).toString()} SR`,
+				price: `${item.product.salesPrice.toFixed(2)} SR`,
 				quantity: item.quantity,
 			}
 		});

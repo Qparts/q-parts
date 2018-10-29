@@ -31,3 +31,7 @@ export const replaceAll = (array, searchValue, replaceValue) => {
  });
  return replace;
 }
+
+export const getLength = (array) => (
+    array ? array.length : 0
+)

@@ -133,7 +133,7 @@ class Quotations extends Component {
                               const filteredItem = [{ id: quotationItem.id, quantity: quotationItem.quantity, desc: quotationItem.desc }];
                               const products = quotationItem.products.map(product => {
                                 return {
-                                  ...product, id: product.id, salesPrice: `${product.salesPrice.toFixed(2).toString()} SR`, productNumber: product.productNumber, makeId: undefined,
+                                  ...product, id: product.id, salesPrice: `${product.salesPrice.toFixed(2)} SR`, productNumber: product.productNumber, makeId: undefined,
                                   addToCart:
                                     <Button type="submit" className="btn btn-secondary" text={translate("product.buttons.addToCart")}
                                       onClick={this.addToCart.bind(this, { quantity: quotationItem.quantity, product })} />

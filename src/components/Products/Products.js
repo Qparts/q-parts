@@ -84,7 +84,7 @@ class Products extends Component {
                                                         <span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
                                                     </div>
                                                     <p className="price">
-                                                        {product.salesPrice.toFixed(2).toString()} <span className="currency">SR</span>
+                                                        {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
                                                     </p>
                                                 </div>
                                             </a>

@@ -27,7 +27,7 @@ class Wishlist extends Component {
   this.props.wishlist.forEach(list => {
    const tempWishlist = {
     desc: list.desc,
-    salesPrice: `${list.salesPrice.toFixed(2).toString()} SR`,
+    salesPrice: `${list.salesPrice.toFixed(2)} SR`,
     created: moment(list.created).format('MM/DD/YYYY'),
     actions: [
      <Button key={0} text={this.props.translate("setting.wishlist.table.addToCart")} className="btn btn-secondary" onClick={this.props.moveWishlistToCart.bind(this, list)} />,
