@@ -34,6 +34,34 @@
 
 /* Small Devices, Tablets */
 @media only screen and (max-width: 768px) {
+  .mobile-header.w3-hide-large.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: space-around;
+  }
+  button.w3-button.w3-white.w3-xxlarge {
+    position: relative;
+    left: -18px;
+    top: -2px;
+  }
+  a.brand.nav-icon-pl {
+    position: relative;
+    left: -93px;
+  }
+  .header-shopby-container{
+    text-align: center;
+  .header-shopby-vehicle {
+    position: relative;
+    top: -110px;
+    color: white;
+    font-weight: bold;
+    p{
+      padding-right: 44px;
+      padding-left: 43px;
+    }
+  }
+}
 }
 
 /* Extra Small Devices, Phones */

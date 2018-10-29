@@ -9,7 +9,7 @@ class HomeDetails extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <header className="col heading">
+          <header className="col col-lg-12 col-md-12 col-sm-12 col-xl-12 col-12 heading">
             <h1>
               <span>Custom</span> Order
             </h1>
@@ -20,7 +20,7 @@ class HomeDetails extends Component {
           </header>
         </div>
         <div className="row">
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-12 col-sm-12 col-xl-3">
             <div>
               <img src="img/request.svg" />
             </div>
@@ -29,7 +29,7 @@ class HomeDetails extends Component {
               <p>Fill in your vehicle data and the parts you want</p>
             </figcaption>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-12 col-sm-12 col-xl-3">
             <div>
               <img src="img/check-price.svg" />
             </div>
@@ -38,7 +38,7 @@ class HomeDetails extends Component {
               <p>The price will deliver to you within 24 hours</p>
             </figcaption>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-12 col-sm-12 col-xl-3">
             <div>
               <img src="img/add-to-cart.svg" />
             </div>
@@ -47,7 +47,7 @@ class HomeDetails extends Component {
               <p>choose Sipping Address and payment method</p>
             </figcaption>
           </div>
-          <div className="col-lg-3">
+          <div className="col-lg-3 col-md-12 col-sm-12 col-xl-3">
             <figure>
               <img src="img/delivery-product.svg" />
             </figure>
@@ -58,7 +58,7 @@ class HomeDetails extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col">
+          <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12">
             <header>
               <h2>
                 <span>
@@ -69,7 +69,7 @@ class HomeDetails extends Component {
             </header>
             <form>
               <div className="row">
-                <div className="col-lg-5">
+                <div className="col-lg-5 col-xl-5 col-md-12 col-sm-12">
                   <input
                     type="text"
                     className="form-control"
@@ -86,7 +86,7 @@ class HomeDetails extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-lg-5">
+                <div className="col-lg-5 col-xl-5 col-md-12 col-sm-12">
                   <input
                     type="text"
                     className="form-control"
@@ -103,7 +103,7 @@ class HomeDetails extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-lg-2">
+                <div className="col-lg-2 col-xl-2 col-md-12 col-sm-12">
                   <button type="submit" className="btn btn-primary">
                     Send <i className="icon-arrow=right" />
                   </button>
@@ -113,7 +113,7 @@ class HomeDetails extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-xl-4 col-md-12 col-sm-12">
             <a href="#">
               <figure>
                 <img src="img/vehicle-part-lg.png" />
@@ -123,9 +123,9 @@ class HomeDetails extends Component {
               </figcaption>
             </a>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-xl-4 col-md-12 col-sm-12">
             <div className="row">
-              <div className="col-lg-12 col-md-6">
+              <div className="col-lg-12 col-xl-12  col-md-6 col-sm-6">
                 <a href="#">
                   <figure>
                     <img src="img/maotor-oil.png" />
@@ -135,7 +135,7 @@ class HomeDetails extends Component {
                   </figcaption>
                 </a>
               </div>
-              <div className="col-lg-12 col-md-6">
+              <div className="col-lg-12 col-xl-12  col-md-6 col-sm-6">
                 <a href="#">
                   <figure>
                     <img src="img/tyres.png" />
@@ -147,9 +147,9 @@ class HomeDetails extends Component {
               </div>
             </div>
           </div>
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-xl-4 col-md-12 col-sm-12">
             <div className="row">
-              <div className="col-lg-12 col-md-6">
+              <div className="col-lg-12 col-xl-12  col-md-6 col-sm-6">
                 <a href="#">
                   <figure>
                     <img src="img/tools.png" />
@@ -159,7 +159,7 @@ class HomeDetails extends Component {
                   </figcaption>
                 </a>
               </div>
-              <div className="col-lg-12 col-md-6">
+              <div className="col-lg-12 col-xl-12  col-md-6 col-sm-6">
                 <a href="#">
                   <figure>
                     <img src="img/accessories.png" />
@@ -172,7 +172,7 @@ class HomeDetails extends Component {
             </div>
           </div>
         </div>
-        <div className="col">
+        <div className="col-lg-12 col-xl-12  col-md-6 col-sm-6">
           <div>
             <source media="(max-width: 576px)" srcSet="img/vendor-xs.jpg" />
             <img src="img/vendor.png" alt="Flowers" />
