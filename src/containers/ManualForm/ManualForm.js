@@ -154,7 +154,7 @@ export class ManualForm extends Component {
       <Fragment>
         <img
           alt=""
-          className="d-block w-100"
+          className="d-block w-100 mob-hero-img"
           src="img/hero-lg.jpg"
           srcSet="img/hero-lg.jpg, img/cover-img-xs.jpg"
         />
@@ -165,12 +165,12 @@ export class ManualForm extends Component {
               <p>{translate("form.order.subTitle")}</p>
             </header>
           </div>
-          <form className="row" onSubmit={handleSubmit(this.handleSubmit)}>
-            <div className="col-lg-4 col-xl-4  col-md-6 col-sm-6">
+          <form className="row mob-form-container" onSubmit={handleSubmit(this.handleSubmit)}>
+            <div className="col-lg-4 col-xl-4 mob-form-part-label  col-md-6 col-sm-6">
               <Field
                 label={translate("form.order.partNo")}
                 name="partNo"
-                className="form-control mb-2 mr-sm-2"
+                className="form-control mb-2 mr-sm-2 mob-part-no"
                 component={RenderField}
                 type="text"
                 placeholder={translate("form.order.placeholder.partNo")}
@@ -179,11 +179,11 @@ export class ManualForm extends Component {
             </div>
             {!isAuth(this.props.token) ? (
               <Fragment>
-                <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12">
-                  <label>{translate("form.order.make")}</label>
+                <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12 mob-form-order-container">
+                  <label className="mob-form-order-container-label">{translate("form.order.make")}</label>
                   <div className="form-inline row">
                     <Field
-                      className=" col-lg-4 col-xl-4  col-md-12 col-sm-12"
+                      className=" col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
                       name="maker"
                       placeholder="make"
                       component={SelectInput}
@@ -214,7 +214,7 @@ export class ManualForm extends Component {
                 <label>{translate("form.order.make")}</label>
                 <div className="form-inline row">
                   <Field
-                    className="col-lg-6 col-xl-6  col-md-12 col-sm-12"
+                    className="col-lg-6 col-xl-6 col-md-12 col-sm-12"
                     name="maker"
                     component={SelectInput}
                     options={dropdownList}
@@ -249,7 +249,7 @@ export class ManualForm extends Component {
 						</div> */}
             <Button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-primary manual-general-search-btn"
               text={
                 <i className="icon-arrow-right">
                   {translate("general.searchButton")}

@@ -49,25 +49,117 @@
     position: relative;
     left: -93px;
   }
-  .header-shopby-container{
+  .header-shopby-container {
     text-align: center;
-  .header-shopby-vehicle {
-    position: relative;
-    top: -110px;
-    color: white;
-    font-weight: bold;
-    p{
-      padding-right: 44px;
-      padding-left: 43px;
+    .header-shopby-vehicle {
+      position: relative;
+      top: -110px;
+      color: white;
+      font-weight: bold;
+      p {
+        padding-right: 44px;
+        padding-left: 43px;
+      }
     }
   }
-}
 }
 
 /* Extra Small Devices, Phones */
 @media only screen and (max-width: 480px) {
-}
+  .mob-hero-img {
+    height: 200px;
+  }
+  .RenderField-container.RenderField-required {
+    position: relative;
+    top: -25px;
+  }
+  .mobile-header.w3-hide-large.container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: space-around;
+  }
+  button.w3-button.w3-white.w3-xxlarge {
+    position: relative;
+    left: -18px;
+    top: -2px;
+  }
+  a.brand.nav-icon-pl {
+    position: relative;
+    left: -93px;
+  }
+  .header-shopby-container {
+    text-align: center;
+    .header-shopby-vehicle {
+      position: absolute;
+      top: 88px;
+      color: white;
+      font-weight: bold;
+      z-index: 1;
+      h1 {
+        font-size: 2.1rem;
+      }
+      p {
+        padding-right: 44px;
+        padding-left: 43px;
+      }
+    }
+  }
+  .mob-form-container {
+    position: relative;
+    top: -49px;
+    .mob-form-part-label {
+      position: relative;
+      top: -25px;
+      label {
+        color: black;
+        position: absolute;
+        z-index: 14;
+        left: 29px;
+        font-size: 16px;
+        font-weight: 800;
+      }
+    }
+    .form-control {
+      padding: 1.8rem 0.75rem;
+      border-radius: 17px 10px;
+    }
 
+    .mob-part-no {
+    }
+  }
+  .mob-form-order-container {
+    position: relative;
+    top: -32px;
+    .mob-form-order-container-label {
+      position: absolute;
+      top: -35px;
+      z-index: 9;
+      left: 26px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+  }
+  .manual-general-search-btn {
+    background: #ed4137;
+    color: white;
+    padding: 14px;
+    margin-left: 16px;
+    width: 429px;
+    border-radius: 20px 5px !important;
+    margin-right: -13px;
+  }
+  .manual-mob-maker {
+    background-color: transparent;
+    border-radius: 13px 8px;
+    padding: 14px;
+    position: relative;
+    top: -67px;
+    select {
+      background-color: transparent;
+    }
+  }
+}
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
 }
