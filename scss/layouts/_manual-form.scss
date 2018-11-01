@@ -1,0 +1,60 @@
+.manual-form {
+    background: url(/img/hero-lg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    min-height: 559px;
+    text-align: center;
+    color: $white;
+    padding-left: $padding-left;
+  
+    .manual-form__dropdown {
+      left: 1px;
+      @include boarder-right-radius(0, 20px);
+    }
+  
+    .manual-form-textbox {
+      @include boarder-left-radius;
+    }
+  
+    .manual-form__content {
+      position: relative;
+      top: 161px;
+      bottom: 261px;
+      margin-right: inherit;
+  
+      h1 {
+        font-size: $title-font-size;
+      }
+      .row {
+        div {
+          background-color: $white;
+          color: $basic-black;
+          text-align: left;
+        }
+        input {
+          border-style: none;
+        }
+      }
+  
+      label {
+        position: relative;
+        top: 19px;
+        left: 32px;
+      }
+  
+      input {
+        position: relative;
+        top: 16px;
+      }
+    }
+    button {
+      width: 258px;
+      height: 85px;
+      left: 10px;
+      text-align: left;
+    }
+    p {
+      margin-bottom: 29px;
+    }
+  }
