@@ -55,18 +55,23 @@ $dir: ltr;
 @import "base/_normalize.scss";
 @import "base/_base.scss";
 
+/* MEDIA QUERY */
+@import "queries/media-queries";
+
 /*MODULES  - Individual site components */
 @import "modules/_typography.scss";
 @import "modules/_blocks.scss";
 @import "modules/_buttons.scss";
 @import "modules/_components.scss";
+@import "modules/select";
 @import "modules/_sections.scss";
 /* LAYOUTS - page layout styles */
 
 @import "layouts/_nav.scss";
 @import "layouts/_header.scss";
 @import "layouts/_footer.scss";
-@import "queries/media-queries";
+@import "layouts/manual-form";
+@import "layouts/home-details";
 
 /* STATE - page of site*/
 @font-face {
@@ -81,19 +86,4 @@ $dir: ltr;
 }
 
 /* Add Custom Style To select , header */
-.custom-select {
-  position: relative !important;
-  top: -9px !important;
-  width: 128px !important;
-  left: 2px !important;
-  
-  .css-10nd86i {
-    position: relative!important;
-    box-sizing: border-box!important;
-    top: -7px!important;
-    width: 128px !important;
-    right: 11px !important;
-    left: -12px!important;
-  }
-}
 

@@ -1,17 +1,29 @@
 /*container max width*/
 
-.container-fluid{
+.container-fluid {
   max-width: $max-container;
 }
-.default-sec-margine{
-
+.default-sec-margine {
 }
-a{
-
+a {
 }
 a:focus,
 a:hover,
-a:active{
+a:active {
   text-decoration: none;
-  outline: 0;  
+  outline: 0;
+}
+
+h1 {
+  font-family: $title-font;
+}
+
+button {
+  font-family: $button-font;
+  font-size: 20px;
+
+  i {
+    position: relative;
+    left: 10px;
+  }
 }

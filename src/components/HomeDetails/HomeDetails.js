@@ -7,7 +7,7 @@ class HomeDetails extends Component {
   render() {
     const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate } = this.props;
     return (
-      <div className="container-fluid">
+      <div className="home-details container-fluid">
         <div className="row">
           <header className="col col-lg-12 col-md-12 col-sm-12 col-xl-12 col-12 heading">
             <h1>
@@ -104,7 +104,7 @@ class HomeDetails extends Component {
                   </div>
                 </div>
                 <div className="col-lg-2 col-xl-2 col-md-12 col-sm-12">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn-primary">
                     Send <i className="icon-arrow=right" />
                   </button>
                 </div>

@@ -1,32 +1,34 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Component } from 'react';
 import Select from 'react-select';
-
-import './SelectInput.css';
 import { styles } from '../../constants';
 
-export default props => {
-    return (
-        <Fragment>
-            <label>{props.label}</label> <br />
-            <sub>{props.sub}</sub>
-            <Fragment>
-                <Select
-                    {...props}
-                    {...props.input}
-                    isSearchable={true}
-                    styles={styles.select}
-                    value={props.input.value || props.defaultValue}
-                    onChange={(value) => props.input.onChange(value)}
-                    onBlur={() => props.input.onBlur(props.input.value)}
-                    options={props.options}
-                    className={props.className}
-                />
-                <div className="SelectInput-required">
-                    {props.meta.touched &&
-                        ((props.meta.error && <span><i className="fas fa-exclamation-circle"></i>{props.meta.error}</span>) ||
-                            (props.meta.warning && <span>{props.meta.warning}</span>))}
+export default class SelectInput extends Component {
+    render() {
+        return (
+            <div className="select-input">
+                <label>{this.props.label}</label> <br />
+                <sub>{this.props.sub}</sub>
+                <div>
+                    <Select
+                        classNamePrefix="select"
+                        {...this.props}
+                        {...this.props.input}
+                        indicatorSeparator={false}
+                        isSearchable={false}
+                        styles={styles.selectForm}
+                        value={this.props.input.value || this.props.defaultValue}
+                        onChange={(value) => this.props.input.onChange(value)}
+                        onBlur={() => this.props.input.onBlur(this.props.input.value)}
+                        options={this.props.options}
+                        className={this.props.className}
+                    />
+                    <div className="SelectInput-required">
+                        {this.props.meta.touched &&
+                            ((this.props.meta.error && <span><i className="fas fa-exclamation-circle"></i>{this.props.meta.error}</span>) ||
+                                (this.props.meta.warning && <span>{this.props.meta.warning}</span>))}
+                    </div>
                 </div>
-            </Fragment>
-        </Fragment>
-    );
+            </div>
+        );
+    }
 }

@@ -23,12 +23,12 @@ class Header extends Component {
               <li className="ship-country">
                 <div className="input-group">
                   <span className="ship-to">Ship to</span>
-                 <div className="custom-select">
-                 <Select
+                  <Select
+                    classNamePrefix="select"
+                    isSearchable={false}
                     styles={styles.select}
                     defaultValue={shipToOptions[0]}
                     options={shipToOptions} />
-                </div>
                 </div>
               </li>
               <li>

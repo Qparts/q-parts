@@ -41,12 +41,12 @@ export class MobileHeader extends Component {
 				<MobileHeaderDetails
 					onClose={this.closeNav}
 					ref={ref => this.mobileHeaderDetails = ref}
-					translate={translate} 
-					localize={localize}/>
+					translate={translate}
+					localize={localize} />
 				<div className="w3-overlay w3-animate-opacity" onClick={this.closeNav} style={{ cursor: 'pointer' }} ref={ref => this.overLay = ref}></div>
 				<div className="mobile-header w3-hide-large container-fluid">
 					<button className="w3-button w3-white w3-xxlarge" onClick={this.openNav}>&#9776;</button>
-					<Link className="brand nav-icon-pl" to="/">
+					<Link className="brand" to="/">
 						<img alt="qParts" src="img/qParts-logo.svg" />
 					</Link>
 					<div className="list-inline user-actions d-flex justify-content-end">

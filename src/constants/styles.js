@@ -1,3 +1,37 @@
+//COLOR
+const basicGray = '#37363d';
+const basicBlack = '#222222';
+const lightGray = '#f7f7f7';
+const brandColor = '#ed4036';
+
+const selectStyle = {
+  menu: (styles) => {
+    return {
+      ...styles,
+      boxShadow: 'none',
+    }
+  },
+  menuList: (styles) => {
+    return {
+      ...styles,
+      borderRadius: '0px 20px 20px 20px',
+      fontFamily: 'Roboto'
+    }
+  },
+  option: (styles, { data, isSelected, isFocused, options }) => {
+    const lastIndex = options.length - 1;
+
+    return {
+      ...styles,
+      background: isSelected ? lightGray : isFocused ? lightGray : 'none',
+      ':active': {
+        backgroundColor: lightGray,
+      },
+      borderBottom: options[lastIndex].label === data.label ? 'none' : `1px solid ${lightGray}`
+    }
+  }
+};
+
 export const styles = {
   cursor: {
     cursor: 'pointer'
@@ -24,35 +58,16 @@ export const styles = {
     }
   },
   select: {
-    // container: () => ({
-    //   width: 'auto !important',
-    //   marginTop: '-4px',
-    //   fontWeight: '700'
-    // }),
-    // control: () => ({
-    //   border: '0 !important',
-    // }),
-    // menuList: () => ({
-    //   padding: '5px 10px',
-    //   fontSize: '12px',
-    //   borderBottom: '1px solid light-gray',
-    //   minWidth: '100px',
-    //   overflow: 'hidden',
-    //   borderWidth: '0'
-    // }),
-    // singleValue: () => ({
-    //   borderWidth: '0',
-    //   fontSize: '12px',
-    //   padding: '0 0 0 5px',
-    //   display: 'inline-block !important',
-    //   borderRadius: '0'
-    // }),
-    // option: () => {
-    //   return {
-    //     backgroundColor: "#f7f7f7",
-    //     color: "#37363d",
-    //   }
-    // },
-    // indicatorSeparator: () => ({})
+    ...selectStyle
   },
+  selectForm: {
+    ...selectStyle,
+    menuList: (styles) => {
+      return {
+        ...styles,
+        borderRadius: '0px 0px 20px 20px',
+        fontFamily: 'Roboto'
+      }
+    },
+  }
 }

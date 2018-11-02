@@ -88,29 +88,29 @@ export class ManualForm extends Component {
     const makerData = vehicles.map(vehicle => {
       return {
         ...vehicle,
-        label: vehicle.nameAr,
+        label: vehicle.name,
         value: vehicle.id
       };
     });
 
     const modelData = _.has(this.props.formValues, "maker.models")
       ? this.props.formValues.maker.models.map(model => {
-          return {
-            ...model,
-            label: model.nameAr,
-            value: model.id
-          };
-        })
+        return {
+          ...model,
+          label: model.name,
+          value: model.id
+        };
+      })
       : [];
 
     const yearData = _.has(this.props.formValues, "model.modelYears")
       ? this.props.formValues.model.modelYears.map(modelYear => {
-          return {
-            ...modelYear,
-            label: modelYear.year,
-            value: modelYear.id
-          };
-        })
+        return {
+          ...modelYear,
+          label: modelYear.year,
+          value: modelYear.id
+        };
+      })
       : [];
 
     const dropdownList = this.props.vehiclesFormat.slice(0);
@@ -151,14 +151,8 @@ export class ManualForm extends Component {
     );
 
     return (
-      <Fragment>
-        <img
-          alt=""
-          className="d-block w-100 mob-hero-img"
-          src="img/hero-lg.jpg"
-          srcSet="img/hero-lg.jpg, img/cover-img-xs.jpg"
-        />
-        <div className="container-fluid">
+      <div className="manual-form">
+        <div className="manual-form__content">
           <div className="row header-shopby-container">
             <header className="col header-shopby-vehicle">
               <h1>{translate("form.order.title")}</h1>
@@ -166,9 +160,9 @@ export class ManualForm extends Component {
             </header>
           </div>
           <form className="row mob-form-container" onSubmit={handleSubmit(this.handleSubmit)}>
-            <div className="col-lg-4 col-xl-4 mob-form-part-label  col-md-6 col-sm-6">
+            <div className="col-lg-4 col-xl-4 mob-form-part-label  col-md-6 col-sm-6 manual-form-textbox manual-form__background">
               <Field
-                label={translate("form.order.partNo")}
+                label={<strong>{translate("form.order.partNo")}</strong>}
                 name="partNo"
                 className="form-control mb-2 mr-sm-2 mob-part-no"
                 component={RenderField}
@@ -179,17 +173,19 @@ export class ManualForm extends Component {
             </div>
             {!isAuth(this.props.token) ? (
               <Fragment>
-                <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12 mob-form-order-container">
-                  <label className="mob-form-order-container-label">{translate("form.order.make")}</label>
-                  <div className="form-inline row">
+                <div className="col-lg-6 col-xl-6 col-md-12 col-sm-12 mob-form-order-container manual-form__dropdown manual-form__background">
+                  <label className="mob-form-order-container-label">
+                    {<strong>{translate("form.order.make")}</strong>}</label>
+                  <div className="form-inline row manual-form__dropdown-input">
                     <Field
-                      className=" col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
+                      className="col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
                       name="maker"
                       placeholder="make"
                       component={SelectInput}
                       options={makerData}
                       validate={[validations.required]}
                     />
+                    <span className="seperator"></span>
                     <Field
                       className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
                       name="model"
@@ -198,6 +194,7 @@ export class ManualForm extends Component {
                       options={modelData}
                       validate={[validations.required]}
                     />
+                    <span className="seperator"></span>
                     <Field
                       className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
                       name="year"
@@ -210,20 +207,20 @@ export class ManualForm extends Component {
                 </div>
               </Fragment>
             ) : (
-              <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12">
-                <label>{translate("form.order.make")}</label>
-                <div className="form-inline row">
-                  <Field
-                    className="col-lg-6 col-xl-6 col-md-12 col-sm-12"
-                    name="maker"
-                    component={SelectInput}
-                    options={dropdownList}
-                    onChange={this.handleAddVehicle}
-                    validate={[validations.required]}
-                  />
+                <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12 manual-form__dropdown manual-form__background">
+                  <label>{translate("form.order.make")}</label>
+                  <div className="form-inline row manual-form__dropdown-input">
+                    <Field
+                      className="col-lg-6 col-xl-6 col-md-12 col-sm-12"
+                      name="maker"
+                      component={SelectInput}
+                      options={dropdownList}
+                      onChange={this.handleAddVehicle}
+                      validate={[validations.required]}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             {/* <div className="col-lg-6">
 							<label>For My Vechile</label>
 							<div className="form-inline row">
@@ -249,17 +246,18 @@ export class ManualForm extends Component {
 						</div> */}
             <Button
               type="submit"
-              className="btn btn-primary manual-general-search-btn"
+              className="col-lg-2 col-xl-2 col-md-12 btn-primary manual-general-search-btn"
               text={
-                <i className="icon-arrow-right">
-                  {translate("general.searchButton")}
-                </i>
+                <Fragment>
+                  <span>{translate("general.searchButton")}</span>
+                  <i className="icon-arrow-right"></i>
+                </Fragment>
               }
             />
           </form>
         </div>
         {dialog}
-      </Fragment>
+      </div>
     );
   }
 }

@@ -1,17 +1,24 @@
-.btn{
+.btn {
   padding: 10px 15px;
   background: $light-gray;
   @extend .link-border-radius;
   text-transform: uppercase;
-  @include transition (all, 0.5s, ease)
-
+  @include transition(all, 0.5s, ease);
 }
 
-.footer-custom-btn{
+.btn-primary {
+  @extend .btn;
+  border-style: none;
+  background: $brand-color;
+  color: $white;
+  padding-top: 31px;
+  padding-bottom: 31px;
+}
+
+.footer-custom-btn {
   padding: 10px 15px;
   background: $light-gray;
   @extend .link-border-radius;
   text-transform: uppercase;
-  @include transition (all, 0.5s, ease)
-
+  @include transition(all, 0.5s, ease);
 }

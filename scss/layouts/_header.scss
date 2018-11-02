@@ -1,9 +1,8 @@
-.nav-icon-pl{
+.nav-icon-pl {
   padding-#{$left}: 35px;
 }
-.main-header{
-
-  .header-first{
+.main-header {
+  .header-first {
     padding: 10px 0;
     @extend .border-bottom;
     border-color: $light-gray;
@@ -11,8 +10,8 @@
   }
 }
 .mobile-header {
-  .brand{
-    img{
+  .brand {
+    img {
       width: 100px;
       height: auto;
     }
@@ -20,74 +19,93 @@
   .custom-order {
     padding: inherit;
     display: inline;
-    .icon-custom-order{
+    .icon-custom-order {
       color: $basic-black;
     }
   }
 }
-.setting{
+.setting {
   @extend .position-relative;
   top: 8px;
-  .ship-country{
+  .ship-country {
     margin-#{$right}: 0 !important;
   }
-  .input-group{
+  .input-group {
     position: relative;
-      .ship-to{
-        @include font-size(12px);
+    .ship-to {
+      @include font-size(12px);
+    }
+    .css-10nd86i {
+      bottom: 4px;
+      width: 67px;
+      .select__control {
+        margin-top: -6px;
+        border-style: none;
+        background: none;
+        height: 10px;
+        width: 60px;
+
+        .select__indicators {
+          width: 20px;
+        }
+        .select__single-value {
+          font-weight: 700;
+        }
       }
-      .select2-container {
-        margin-top: -4px;
-      }
-      .select2-container--default .select2-selection--single .select2-selection__rendered{
-        font-weight: 700;
+      .select__menu {
+        @include boarder-left-radius(0);
+        @include boarder-right-radius;
       }
     }
-    .seperator{
-      height: 20px;
   }
-  .lang{
-    @include if-ltr{
-      font-family: 'Cairo', sans-serif;
+  .seperator {
+    position: relative;
+    left: 10px;
+    height: 20px;
+  }
+  .lang {
+    @include if-ltr {
+      font-family: "Cairo", sans-serif;
       //@include font-size(13px);
       font-weight: 400;
       @extend .position-relative;
       top: 1px;
-    };
+      left: 10px;
+    }
   }
-  .link{
+  .link {
     cursor: pointer;
   }
 }
-.custom-order{
+.custom-order {
   padding: side-values(5px 10px 5px 5px);
   height: 37px;
-  .icon-custom-order{
+  .icon-custom-order {
     color: $brand-color;
     @include font-size(24px);
     height: 27px;
     @extend .d-inline-block;
     margin-#{$right}: 5px;
   }
-  > span{
+  > span {
     position: relative;
     top: -8px;
   }
-  &:hover{
+  &:hover {
     color: $brand-color;
   }
 }
-.header-second{
+.header-second {
   padding: 10px 0;
-  .brand{
+  .brand {
     @extend .d-inline-block;
-    img{
+    img {
       width: 100px;
       height: auto;
       @extend .d-block;
     }
   }
-  .dropdown-toggle::after{
+  .dropdown-toggle::after {
     color: #ecebeb;
     border-top-width: 5px;
     border-right-width: 5px;
@@ -97,70 +115,68 @@
     top: 2px;
   }
 }
-.user-actions{
+.user-actions {
   padding-bottom: 0;
   margin-top: 7px;
-  li:not(:last-child){
+  li:not(:last-child) {
     margin-#{$right}: 16px;
   }
-  li{
+  li {
     @extend .align-middle;
     height: 24px;
   }
 
-  a{
+  a {
     @extend .d-inline-block;
   }
-  .icon-search{
+  .icon-search {
     line-height: 20px;
     @include font-size(20px);
     @extend .d-block;
-    &:before{
+    &:before {
       //top: -5px;
     }
   }
-  .seperator{
+  .seperator {
     height: 15px;
     display: inline-table;
   }
-  .user-account{
+  .user-account {
     @include font-size(13.8px);
-    .user-img{
+    .user-img {
       margin-#{$right}: 7px;
       display: inline-block;
       width: 17px;
-      img{
+      img {
         max-width: 100%;
         display: block;
       }
     }
-    .seperator{
+    .seperator {
       height: 10px;
       margin: 0 5px;
     }
-    b{
+    b {
       font-weight: 500;
     }
   }
-  .garage{
-  .garage-img{
-    margin-#{$right}: 7px;
-    display: inline-block;
-    width: 20px;
-    @extend .position-relative;
-    top: 2px;
-    img{
-      max-width: 100%;
-      display: block;
+  .garage {
+    .garage-img {
+      margin-#{$right}: 7px;
+      display: inline-block;
+      width: 20px;
+      @extend .position-relative;
+      top: 2px;
+      img {
+        max-width: 100%;
+        display: block;
+      }
     }
   }
-}
   .icon-heart,
-  .icon-cart{
+  .icon-cart {
     @include font-size(22px);
     height: 24px;
     display: block;
   }
-
-
 }

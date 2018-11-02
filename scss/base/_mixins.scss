@@ -96,3 +96,13 @@ color: rgba($red, $green, $blue, $alpha);
     -o-transition:      $what $time $how;
     transition:         $what $time $how;
 }
+
+@mixin boarder-left-radius($top: 20px, $bottom: 20px) {
+  border-top-left-radius: $top;
+  border-bottom-left-radius: $bottom;
+}
+
+@mixin boarder-right-radius($top: 20px, $bottom: 20px) {
+  border-top-right-radius: $top;
+  border-bottom-right-radius: $bottom;
+}

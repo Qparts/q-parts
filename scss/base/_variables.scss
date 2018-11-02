@@ -1,10 +1,12 @@
 /*FONT*/
+$title-font: 'Roboto';
+$button-font: 'Roboto';
 
 //COLOR
 $basic-gray: #37363d;
 $basic-black: #222222;
 $light-gray: #f7f7f7;
-$brand-color: #ee4036;
+$brand-color: #ed4036;
 //img
 $img-path: "/public/img";
 
@@ -13,9 +15,13 @@ $border-radius-base: 0;
 
 //BAS FONT SIZE
 $bas-font-size: 16px;
+$title-font-size: 55px;
 
 //container width
 $max-container : 1170px;
+
+// PADDING
+$padding-left: 128px;
 
 //ICON
 $icon-path: "/public/icon";

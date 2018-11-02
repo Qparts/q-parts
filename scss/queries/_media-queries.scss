@@ -159,6 +159,10 @@
       background-color: transparent;
     }
   }
+  .manual-form {
+    background: url(/img/cover-img-xs.jpg);
+    min-height: 531px;
+  }
 }
 /* Custom, iPhone Retina */
 @media only screen and (max-width: 320px) {
