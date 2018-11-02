@@ -1,9 +1,11 @@
 .manual-form {
-  background: url(/img/hero-lg.jpg);
+  @include large-medium-screens {
+    background: url(/img/hero-lg.jpg);
+    min-height: 559px;
+  }
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center top;
-  min-height: 559px;
   text-align: center;
   color: $white;
   padding-left: $padding-left;

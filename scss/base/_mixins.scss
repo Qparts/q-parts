@@ -106,3 +106,9 @@ color: rgba($red, $green, $blue, $alpha);
   border-top-right-radius: $top;
   border-bottom-right-radius: $bottom;
 }
+
+@mixin large-medium-screens {
+  @media (min-width: 480px) {
+    @content;
+  }
+}
