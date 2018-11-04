@@ -2,13 +2,12 @@
   @include large-medium-screens {
     background: url(/img/hero-lg.jpg);
     min-height: 559px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
   }
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
   text-align: center;
   color: $white;
-  padding-left: $padding-left;
 
   .manual-form__dropdown {
     left: 1px;
@@ -35,7 +34,6 @@
     position: relative;
     top: 161px;
     bottom: 261px;
-    margin-right: inherit;
 
     h1 {
       font-size: $title-font-size;

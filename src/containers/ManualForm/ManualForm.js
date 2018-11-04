@@ -152,7 +152,7 @@ export class ManualForm extends Component {
 
     return (
       <div className="manual-form">
-        <div className="manual-form__content">
+        <div className="container-fluid manual-form__content">
           <div className="row header-shopby-container">
             <header className="col header-shopby-vehicle">
               <h1>{translate("form.order.title")}</h1>
@@ -246,7 +246,7 @@ export class ManualForm extends Component {
 						</div> */}
             <Button
               type="submit"
-              className="col-lg-2 col-xl-2 col-md-12 btn-primary manual-general-search-btn"
+              className="col btn-primary manual-general-search-btn"
               text={
                 <Fragment>
                   <span>{translate("general.searchButton")}</span>
