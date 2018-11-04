@@ -21,7 +21,7 @@ h1, h3 {
 
 button {
   font-family: $button-font;
-  font-size: 20px;
+  @include font-size($button-font-size);
 
   i {
     position: relative;
@@ -29,18 +29,9 @@ button {
   }
 }
 
-.red-line {
-  width: 157px;
-  height: 2px;
-  border-radius: 1px;
-  background-color: $brand-color;
-}
-
-.dotted-line {
-  width: 11px;
-  height: 1px;
-  border: solid 0.7px #ededed;
-  background-color: #ededed;
+label {
+  text-transform: capitalize;
+  @include font-size($bas-font-size);
 }
 
 .request {
@@ -66,12 +57,5 @@ button {
 .upload-img {
   width: 26px;
   height: 23px;
-}
-
-.ellipse {
-  width: 49px;
-  height: 49px;
-  box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
-  background-color: #ffffff;
 }
 

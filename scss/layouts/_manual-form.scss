@@ -8,10 +8,20 @@
   }
   text-align: center;
   color: $white;
+  height: 85px;
+
+  .form-control {
+    border-style: none;
+    border-radius: 0;
+  }
 
   .manual-form__dropdown {
+    position: relative;
+    background-color: $white;
+    color: $basic-black;
     left: 1px;
     @include boarder-right-radius(0, 20px);
+    text-align: left;
 
     .select__control {
       width: 90px;
@@ -28,6 +38,12 @@
 
   .manual-form-textbox {
     @include boarder-left-radius;
+    color: $basic-black;
+    text-align: left;
+
+    input {
+      border-style: none;
+    }
   }
 
   .manual-form__content {
@@ -36,34 +52,18 @@
     bottom: 261px;
 
     h1 {
-      font-size: $title-font-size;
-    }
-    .manual-form__background {
-      background-color: $white;
-      color: $basic-black;
-      text-align: left;
-
-      input {
-        left: 18px;
-        border-style: none;
-        width: 364px;
-      }
+      @include font-size($title-font-size);
     }
 
     label {
       position: relative;
-      top: 19px;
       left: 32px;
-    }
-
-    input {
-      position: relative;
-      top: 16px;
+      color: $basic-black;
     }
   }
   button {
-    width: 258px;
-    height: 85px;
+    position: absolute;
+    width: 1000px;
     left: 10px;
     text-align: left;
   }
@@ -78,6 +78,6 @@
   }
 
   .manual-form__dropdown-input {
-    padding-left: 22px;
+    background-color: $white;
   }
 }

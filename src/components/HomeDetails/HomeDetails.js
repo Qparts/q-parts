@@ -53,7 +53,7 @@ class HomeDetails extends Component {
             <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12 ml-4">
               <header>
                 <h2>
-                  <span>
+                  <span className="ellipse">
                     <i className="icon-arrow-down" />
                   </span>
                   Start Now
@@ -68,9 +68,11 @@ class HomeDetails extends Component {
                       placeholder="Part Name, Number or image"
                     />
                     <div className="custom-file">
-                      <i>
-                        <img className="upload-img" src="img/upload-img.svg" alt="upload-img" />
-                      </i>
+                      <span className="ellipse">
+                        <i>
+                          <img className="upload-img" src="img/upload-img.svg" alt="upload-img" />
+                        </i>
+                      </span>
                       <input
                         type="file"
                         className="custom-file-input"

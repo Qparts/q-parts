@@ -159,101 +159,82 @@ export class ManualForm extends Component {
               <p>{translate("form.order.subTitle")}</p>
             </header>
           </div>
-          <form className="row mob-form-container" onSubmit={handleSubmit(this.handleSubmit)}>
-            <div className="col-lg-4 col-xl-4 mob-form-part-label  col-md-6 col-sm-6 manual-form-textbox manual-form__background">
-              <Field
-                label={<strong>{translate("form.order.partNo")}</strong>}
-                name="partNo"
-                className="form-control mb-2 mr-sm-2 mob-part-no"
-                component={RenderField}
-                type="text"
-                placeholder={translate("form.order.placeholder.partNo")}
-                validate={[validations.required]}
-              />
-            </div>
-            {!isAuth(this.props.token) ? (
-              <Fragment>
-                <div className="col-lg-6 col-xl-6 col-md-12 col-sm-12 mob-form-order-container manual-form__dropdown manual-form__background">
-                  <label className="mob-form-order-container-label">
-                    {<strong>{translate("form.order.make")}</strong>}</label>
-                  <div className="form-inline row manual-form__dropdown-input">
-                    <Field
-                      className="col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
-                      name="maker"
-                      placeholder="make"
-                      component={SelectInput}
-                      options={makerData}
-                      validate={[validations.required]}
-                    />
-                    <span className="seperator"></span>
-                    <Field
-                      className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
-                      name="model"
-                      placeholder="model"
-                      component={SelectInput}
-                      options={modelData}
-                      validate={[validations.required]}
-                    />
-                    <span className="seperator"></span>
-                    <Field
-                      className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
-                      name="year"
-                      placeholder="year"
-                      component={SelectInput}
-                      options={yearData}
-                      validate={[validations.required]}
-                    />
-                  </div>
-                </div>
-              </Fragment>
-            ) : (
-                <div className="col-lg-6 col-xl-6  col-md-12 col-sm-12 manual-form__dropdown manual-form__background">
-                  <label>{translate("form.order.make")}</label>
-                  <div className="form-inline row manual-form__dropdown-input">
-                    <Field
-                      className="col-lg-6 col-xl-6 col-md-12 col-sm-12"
-                      name="maker"
-                      component={SelectInput}
-                      options={dropdownList}
-                      onChange={this.handleAddVehicle}
-                      validate={[validations.required]}
-                    />
-                  </div>
-                </div>
-              )}
-            {/* <div className="col-lg-6">
-							<label>For My Vechile</label>
-							<div className="form-inline row">
-								<select className="custom-select col-lg-2">
-									<option defaultValue="Select Year">Select Year</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
-								<select className="custom-select col-lg-5">
-									<option defaultValue="Select Make ">Select Make</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
-								<select className="custom-select col-lg-5">
-									<option defaultValue="Select Model">Select Model</option>
-									<option value="1">One</option>
-									<option value="2">Two</option>
-									<option value="3">Three</option>
-								</select>
-							</div>
-						</div> */}
-            <Button
-              type="submit"
-              className="col btn-primary manual-general-search-btn"
-              text={
+          <form className="mob-form-container" onSubmit={handleSubmit(this.handleSubmit)}>
+            <div className="row no-gutters">
+              <div className="col-lg-4 col-md-6 col-sm-6 mob-form-part-label">
+                <Field
+                  label={<strong>{translate("form.order.partNo")}</strong>}
+                  name="partNo"
+                  className="form-control mb-2 mr-sm-2 mob-part-no h-100 manual-form-textbox"
+                  component={RenderField}
+                  type="text"
+                  placeholder={translate("form.order.placeholder.partNo")}
+                  validate={[validations.required]}
+                />
+              </div>
+              {!isAuth(this.props.token) ? (
                 <Fragment>
-                  <span>{translate("general.searchButton")}</span>
-                  <i className="icon-arrow-right"></i>
+                  <div className="col-lg-6 col-md-12 col-sm-12 mob-form-order-container manual-form__dropdown">
+                    <label className="mob-form-order-container-label">
+                      {<strong>{translate("form.order.make")}</strong>}</label>
+                    <div className="form-inline">
+                      <Field
+                        className="col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
+                        name="maker"
+                        placeholder="make"
+                        component={SelectInput}
+                        options={makerData}
+                        validate={[validations.required]}
+                      />
+                      <span className="seperator"></span>
+                      <Field
+                        className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
+                        name="model"
+                        placeholder="model"
+                        component={SelectInput}
+                        options={modelData}
+                        validate={[validations.required]}
+                      />
+                      <span className="seperator"></span>
+                      <Field
+                        className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
+                        name="year"
+                        placeholder="year"
+                        component={SelectInput}
+                        options={yearData}
+                        validate={[validations.required]}
+                      />
+                    </div>
+                  </div>
                 </Fragment>
-              }
-            />
+              ) : (
+                  <div className="col-lg-6  col-md-12 col-sm-12 manual-form__dropdown">
+                    <label>{translate("form.order.make")}</label>
+                    <div className="form-inline row">
+                      <Field
+                        className="col-lg-6 col-xl-6 col-md-12 col-sm-12"
+                        name="maker"
+                        component={SelectInput}
+                        options={dropdownList}
+                        onChange={this.handleAddVehicle}
+                        validate={[validations.required]}
+                      />
+                    </div>
+                  </div>
+                )}
+              <div className="col-2">
+                <Button
+                  type="submit"
+                  className="btn-primary manual-general-search-btn"
+                  text={
+                    <Fragment>
+                      <span>{translate("general.searchButton")}</span>
+                      <i className="icon-arrow-right"></i>
+                    </Fragment>
+                  }
+                />
+              </div>
+            </div>
           </form>
         </div>
         {dialog}
