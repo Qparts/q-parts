@@ -151,7 +151,7 @@ export class ManualForm extends Component {
     );
 
     return (
-      <div className="manual-form">
+      <section className="manual-form">
         <div className="container-fluid manual-form__content">
           <div className="row header-shopby-container">
             <header className="col header-shopby-vehicle">
@@ -238,7 +238,7 @@ export class ManualForm extends Component {
           </form>
         </div>
         {dialog}
-      </div>
+      </section>
     );
   }
 }

@@ -136,10 +136,10 @@
 
 .ellipse {
   border-radius: 20px;
-  width: 49px;
-  height: 49px;
+  width: 34px;
+  height: 34px;
   box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
-  background-color: #ffffff;
+  background-color: $white;
 }
 
 .red-line {
@@ -154,4 +154,25 @@
   height: 1px;
   border: solid 0.7px #ededed;
   background-color: #ededed;
+}
+
+.rounded-rectangle {
+  border-radius: 20px;
+  box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
+  background-color: $white;
+}
+
+.boarder-left-radius {
+  @include boarder-left-radius
+}
+
+.boarder-right-radius {
+  @include boarder-right-radius
+}
+
+.boarder-right-top-radius {
+  @include boarder-right-radius(20px, 0);
+}
+.boarder-right-bottom-radius {
+  @include boarder-right-radius(0, 20px);
 }

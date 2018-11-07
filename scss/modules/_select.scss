@@ -1,5 +1,6 @@
 .css-10nd86i {
   @include font-size($bas-font-size);
+  text-transform: capitalize;
   .select__control {
     border-style: none;
     background: none;
