@@ -1,6 +1,5 @@
 .home-details {
-  position: relative;
-  top: 77px;
+  margin-top: 77px;
 
   p {
     color: $charcoal-grey;
@@ -59,11 +58,6 @@
     }
   }
 
-  #catagory-imgs {
-    position: relative;
-    top: 111px;
-  }
-
   .input-group {
     .boarder-right-bottom-radius {
       @include boarder-right-radius(0, 20px);
@@ -81,5 +75,88 @@
       width: 100%;
     }
   }
-  
+}
+
+.catagory-imgs {
+  margin-top: 120px;
+
+  h3 {
+    color: white;
+  }
+  figcaption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .mt-lg-3 {
+    @include large {
+      margin-top: 1rem;
+    }
+    @include medium {
+      margin-top: 0;
+    }
+  }
+
+  .vehicle-part-img {
+    @include boarder-left-radius(20px, 20px);
+  }
+
+  .accessories-img {
+    @include boarder-right-radius(0, 20px);
+  }
+}
+
+.join-us {
+  margin-top: 30px;
+  h1 {
+    color: white;
+    @include large {
+      @include font-size(30px);
+    }
+    @include x-small {
+      @include font-size(25px);
+    }
+    @include small {
+      @include font-size(25px);
+    }
+  }
+  p {
+    color: $basic-white;
+    @include font-size(20px);
+    margin: 0;
+  }
+
+  div {
+    position: relative;
+  }
+
+  .row{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include x-small {
+      width: 100%;
+      left: 58%;
+    }
+
+    @include small {
+      display: block !important;
+      text-align: center;
+      width: 100%;
+      left: 58%;
+    }
+  }
+
+  .vendor-img {
+    @include boarder-left-radius(20px, 20px);
+    @include boarder-right-radius(0, 20px);
+
+    @include x-small {
+      background-image: url(/img/vendor-xs.jpg);
+      min-height: 159px;
+    }
+  }
 }

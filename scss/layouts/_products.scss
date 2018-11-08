@@ -1,4 +1,11 @@
-#products {
-  position: relative;
-  top: 100px;
+.products {
+  margin-top: 102px;
+
+  > div {
+    background: $light-gray;
+  }
+
+  header {
+    margin-top: 55px;
+  }
 }

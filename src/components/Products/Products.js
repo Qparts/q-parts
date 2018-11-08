@@ -34,12 +34,13 @@ class Products extends Component {
             color2: '#fabb12'
         }
         return (
-            <section id="products">
-                <div className="bg-light-gray">
+            <section className="products">
+                <div className="">
                     <div className="container-fluid">
                         <div className="row">
                             <header className="col heading">
                                 <h1>{translate("offers.title")}</h1>
+                                <hr className="red-line" />
                                 <p>{translate("offers.subTitle")}</p>
                             </header>
                             <ul
