@@ -13,7 +13,7 @@ class HomeDetails extends Component {
           <div className="row">
             <div className="col col-lg-12 col-md-12 col-sm-12 col-xl-12 col-12">
               <h1>Custom Order</h1>
-              <div className="row d-flex align-items-baseline">
+              <div className="row align-items-baseline">
                 <hr className="col-2 red-line ml-3" />
                 <p className="col">
                   We move fast. Send us request and we will replay by price and all
@@ -172,21 +172,23 @@ class HomeDetails extends Component {
           </div>
         </section>
         <section className="join-us container-fluid">
-          <div>
-            <img className="vendor-img" src="img/vendor.png" alt="vendor" />
-            <div className="row justify-content-center">
-              <p>OUR SALES MORE THAN 50,000 ITEM</p>
-              <h1>VENDOR ! Join Qetaa.com</h1>
-              <Button
-                type="submit"
-                className="btn-primary"
-                text={
-                  <Fragment>
-                    <span>{translate("general.join")}</span>
-                    <i className="icon-arrow-right"></i>
-                  </Fragment>
-                }
-              />
+          <div className="row">
+            <div className="col-12">
+              <img className="vendor-img" src="img/vendor.png" alt="vendor" />
+              <div className="row justify-content-center">
+                <p>OUR SALES MORE THAN 50,000 ITEM</p>
+                <h1>VENDOR ! Join Qetaa.com</h1>
+                <Button
+                  type="submit"
+                  className="btn-primary"
+                  text={
+                    <Fragment>
+                      <span>{translate("general.join")}</span>
+                      <i className="icon-arrow-right"></i>
+                    </Fragment>
+                  }
+                />
+              </div>
             </div>
           </div>
         </section>

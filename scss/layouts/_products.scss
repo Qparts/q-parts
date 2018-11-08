@@ -5,7 +5,46 @@
     background: $light-gray;
   }
 
+  .tab-content {
+    margin-bottom: 55px;
+  }
+
   header {
     margin-top: 55px;
+  }
+
+  .seperator {
+    height: 16px;
+  }
+
+  .slick-prev,
+  .slick-next {
+    @include font-size(23px);
+    cursor: pointer;
+  }
+
+  .slick-next {
+    position: absolute;
+    bottom: 96%;
+    left: 98%;
+    transform: translate(-50%, -50%);
+  }
+
+  .slick-prev {
+    position: absolute;
+    bottom: 96%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+  }
+
+  .slick-slide {
+    margin-left: 30px;
+    .card {
+      border-style: none;
+      border-radius: 20px;
+    }
+  }
+  div:nth-child(2) {
+    max-width: none;
   }
 }
