@@ -4,7 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 class Footer extends Component {
   render() {
     return (
-      <section className="footer">
+      <section id="footer">
         <div className="container-fluid">
           <ul className="list-unstyled row">
             <li className="media col">

@@ -69,10 +69,11 @@ $dir: ltr;
 
 @import "layouts/_nav.scss";
 @import "layouts/_header.scss";
-@import "layouts/_footer.scss";
 @import "layouts/manual-form";
 @import "layouts/home-details";
 @import "layouts/products";
+@import "layouts/apps-link";
+@import "layouts/_footer";
 
 /* STATE - page of site*/
 @font-face {

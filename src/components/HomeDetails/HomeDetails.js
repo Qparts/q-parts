@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import Products from "../Products/Products";
+import AppsLink from '../AppsLink/AppsLink';
 import Button from "../UI/Button";
 
 class HomeDetails extends Component {
@@ -199,6 +200,7 @@ class HomeDetails extends Component {
           onRecentlyViewedProducts={onRecentlyViewedProducts}
           translate={translate}
         />
+        <AppsLink />
       </Fragment>
     );
   }
