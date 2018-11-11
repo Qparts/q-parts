@@ -111,15 +111,7 @@
   margin-top: 30px;
   h1 {
     color: white;
-    @include large {
-      @include font-size(30px);
-    }
-    @include x-small {
-      @include font-size(25px);
-    }
-    @include small {
-      @include font-size(25px);
-    }
+    @include font-size(25px);
   }
   p {
     color: $basic-white;

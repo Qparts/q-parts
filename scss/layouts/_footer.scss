@@ -1,0 +1,85 @@
+.footer {
+  padding-top: 49px;
+  background: $basic-gray;
+
+  a,
+  p {
+    color: $basic-dark-white;
+  }
+
+  h5,
+  span {
+    color: $basic-white;
+    @include font-size(15px);
+  }
+
+  .form-control {
+    background: $basic-gray;
+    color: $basic-white;
+    border-radius: 20px 0 20px 20px;
+    border-color: $very-light-pink;
+  }
+
+  .form-inline {
+    input {
+      @include large {
+        width: 490px;
+      }
+      @include medium {
+        width: 490px;
+      }
+      @include small {
+        width: 490px;
+      }
+      margin-right: 11px;
+      width: auto;
+    }
+  }
+
+  .list-unstyled {
+    .contact-us {
+      margin-top: 15px;
+    }
+    a {
+      i[class*='icon-'] {
+        @extend .btn-primary;
+        border-radius: side-values(20px 0 20px 20px) !important;
+        background-color: $basic-gray;
+        border: solid $very-light-pink;
+        opacity: 0.4;
+        margin-right: 10px;
+        @include font-size(20px);
+      }
+    }
+  }
+
+  hr {
+    width: 1111px;
+    height: 1px;
+    opacity: 0.1;
+    background-color: $basic-white;
+  }
+
+  button {
+    text-transform: capitalize;
+  }
+
+  .media-body {
+    margin-left: 11px;
+    color: $basic-dark-white;
+    @include font-size(14px);
+  }
+  .media {
+    color: $basic-dark-white;
+    i {
+      @include font-size(35px);
+    }
+  }
+
+  .apps-link {
+    i {
+      @include font-size(18px);
+      margin-left: 15px;
+    }
+  }
+}
