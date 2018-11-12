@@ -1,5 +1,5 @@
 export const isEmpty = (array) => {
- return array.length === 0;
+ return array ? array.length === 0 : -1;
 }
 
 export const filterObject = (array, key) => {
@@ -31,3 +31,7 @@ export const replaceAll = (array, searchValue, replaceValue) => {
  });
  return replace;
 }
+
+export const getLength = (array) => (
+    array ? array.length : 0
+)

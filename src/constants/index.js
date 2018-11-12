@@ -1,5 +1,5 @@
-const arabic = 'Arabic';
-const english = 'English';
+const arabic = 'arabic';
+const english = 'english';
 
 export const RADIX = 10;
 export const TAB_ONE = 0;

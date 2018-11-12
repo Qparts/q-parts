@@ -1,0 +1,52 @@
+#apps-link {
+  margin-top: 90px;
+  margin-bottom: 85px;
+  div:first-child {
+    position: relative;
+    background: $brand-color;
+    height: 143px;
+    border-radius: side-values(0 20px 20px 20px) !important;
+    text-align: left;
+
+    h3 {
+      color: $basic-white;
+      @include font-size(30px);
+    }
+
+    p {
+      text-transform: uppercase;
+      color: $basic-white;
+      @include font-size(20px);
+    }
+
+    .mobile-app-img {
+      position: absolute;
+      top: 39%;
+      left: 14%;
+      transform: translate(-50%, -50%);
+    }
+    div {
+      margin-left: 369px;
+    }
+  }
+
+  div {
+    margin-top: 43px;
+    .assistant {
+      p {
+        text-transform: capitalize;
+        color: $basic-black;
+        @include font-size(12px);
+        line-height: 1.17;
+
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .whatsapp {
+    height: 45px;
+  }
+}

@@ -1,0 +1,26 @@
+.css-10nd86i {
+  @include font-size($bas-font-size);
+  text-transform: capitalize;
+  .select__control {
+    border-style: none;
+    background: none;
+    box-shadow: none;
+    cursor: pointer;
+    width: 90px;
+
+    .select__indicators {
+      width: 20px;
+    }
+    .select__value-container {
+      width: 50px;
+    }
+  }
+  .select__menu {
+    width: 139px;
+    .select__menu-list {
+      .select__option {
+        color: $basic-black;
+      }
+    }
+  }
+}

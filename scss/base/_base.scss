@@ -1,0 +1,61 @@
+/*container max width*/
+
+.container-fluid {
+  max-width: $max-container;
+}
+.default-sec-margine {
+}
+a {
+}
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+  outline: 0;
+}
+
+h1, h3 {
+  font-family: $title-font;
+  text-transform: uppercase;
+}
+
+button {
+  font-family: $button-font;
+  @include font-size($button-font-size);
+
+  i {
+    position: relative;
+    left: 3px;
+  }
+}
+
+label {
+  text-transform: capitalize;
+  @include font-size($bas-font-size);
+}
+
+.request {
+  width: 73px;
+  height: 81px;
+}
+
+.check-price {
+  width: 113px;
+  height: 71px;
+}
+
+.add-to-cart {
+  width: 77px;
+  height: 77px;
+}
+
+.delivery-product {
+  width: 106px;
+  height: 88px;
+}
+
+.upload-img {
+  width: 26px;
+  height: 23px;
+}
+

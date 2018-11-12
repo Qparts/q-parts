@@ -1,0 +1,50 @@
+/*FONT*/
+$title-font: 'Roboto';
+$button-font: 'Roboto';
+
+//COLOR
+$basic-gray: #37363d;
+$basic-black: #222222;
+$light-gray: #f7f7f7;
+$brand-color: #ed4036;
+$charcoal-grey: rgba(55, 54, 60, 0.6);
+$dark-charcoal-grey : #37363c;
+$light-charcoal-grey: rgba(55, 54, 60, 0.7);
+$gainsboro-color: #DCDCDC;
+$basic-white: rgba(255, 255, 255, 0.8);
+$basic-dark-white: rgba(255, 255, 255, 0.5);
+$very-light-pink: rgba(235, 235, 235, 0.3);
+//img
+$img-path: "/public/img";
+
+//border-radius-base
+$border-radius-base: 0;
+
+//BAS FONT SIZE
+$bas-font-size: 16px;
+$button-font-size: 20px;
+$title-font-size: 55px;
+$down-arrow-font-size: 25px;
+
+//container width
+$max-container : 1170px;
+
+// PADDING
+$padding-left: 128px;
+
+//ICON
+$icon-path: "/public/icon";
+$icon-font-name: "q-parts-icons";
+//sprite
+.sprite{
+  position: relative;
+  background:  url("#{$img-path}/sprite.png") no-repeat transparent;
+  display: block;
+}
+
+//bootstrap
+$link-color : $basic-gray;
+//$link-hover-decoration : none;
+//$link-hover-color : ;
+$font-family-base : 'Roboto', sans-serif;
+//$border-radius : 10px;

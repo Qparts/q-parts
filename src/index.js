@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import '../scss/app.scss';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/omega/theme.css';
@@ -15,7 +15,6 @@ import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
 
-import 'typeface-roboto';
 import ErrorBoundary from './components/ErrorBoundary';
 
 

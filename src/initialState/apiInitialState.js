@@ -1,8 +1,9 @@
 export const initialState = {
- country: null,
- countriesRegions: [],
- countries: [],
- vehicles: [],
+	country: null,
+	countriesRegions: [],
+	countries: [],
+	vehicles: [],
 	city: null,
-	products: []
+	products: [],
+	product: {}
 }

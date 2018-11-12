@@ -1,0 +1,92 @@
+/*Direction */
+// Override default value for $dir in directional.scss
+$dir: ltr;
+
+// Import helpers from directional.scss
+@import "base/_directional.scss";
+
+@import "base/_variables.scss";
+
+// Import helpers from bootestrap
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/root";
+@import "bootstrap/reboot";
+@import "bootstrap/type";
+@import "bootstrap/images";
+//@import "bootstrap/code";
+@import "bootstrap/grid";
+//@import "bootstrap/tables";
+@import "bootstrap/forms";
+//@import "bootstrap/buttons";
+@import "bootstrap/transitions";
+@import "bootstrap/dropdown";
+//@import "bootstrap/button-group";
+@import "bootstrap/input-group";
+@import "bootstrap/custom-forms";
+@import "bootstrap/nav";
+@import "bootstrap/navbar";
+@import "bootstrap/card";
+//@import "bootstrap/breadcrumb";
+//@import "bootstrap/pagination";
+//@import "bootstrap/badge";
+//@import "bootstrap/jumbotron";
+//@import "bootstrap/alert";
+//@import "bootstrap/progress";
+@import "bootstrap/media";
+//@import "bootstrap/list-group";
+@import "bootstrap/close";
+@import "bootstrap/modal";
+//@import "bootstrap/tooltip";
+//@import "bootstrap/popover";
+@import "bootstrap/carousel";
+@import "bootstrap/utilities";
+//@import "bootstrap/print";
+
+//select2-develop
+@import "select2-develop/core";
+
+/* slick slider component*/
+
+@import "modules/_slick.scss";
+/* BASE - Base styles , variables, mixins, ect*/
+@import "base/_mixins.scss";
+@import "base/_normalize.scss";
+@import "base/_base.scss";
+
+/* MEDIA QUERY */
+@import "queries/media-queries";
+
+/*MODULES  - Individual site components */
+@import "modules/_typography.scss";
+@import "modules/_blocks.scss";
+@import "modules/_buttons.scss";
+@import "modules/_components.scss";
+@import "modules/select";
+@import "modules/_sections.scss";
+@import "modules/_title.scss";
+/* LAYOUTS - page layout styles */
+
+@import "layouts/_nav.scss";
+@import "layouts/_header.scss";
+@import "layouts/manual-form";
+@import "layouts/home-details";
+@import "layouts/products";
+@import "layouts/apps-link";
+@import "layouts/_footer";
+
+/* STATE - page of site*/
+@font-face {
+  font-family: "q-parts-icons";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./icon/q-parts-icons.eot");
+  src: url("./icon/q-parts-icons.eot?#iefix") format("embedded-opentype"),
+    url("./icon/q-parts-icons.woff") format("woff"),
+    url("./icon/q-parts-icons.ttf") format("truetype"),
+    url("./icon/q-parts-icons.svg#q-parts-icons") format("svg");
+}
+
+/* Add Custom Style To select , header */
+

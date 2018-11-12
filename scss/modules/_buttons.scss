@@ -1,0 +1,44 @@
+.btn {
+  padding: 10px 15px;
+  background: $light-gray;
+  @extend .link-border-radius;
+  text-transform: uppercase;
+  @include transition(all, 0.5s, ease);
+  cursor: pointer;
+}
+
+.btn-primary {
+  @extend .btn;
+  border-style: none;
+  background: $brand-color;
+  color: $white;
+}
+.btn-link {
+  @extend .btn;
+  color: $charcoal-grey;
+  border-style: none;
+  text-transform: capitalize;
+
+  &.selected {
+    color: $basic-black;
+    font-weight: 500;
+  }
+
+  &:focus,
+  &.focus {
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  &:hover{
+    color: $brand-color;
+  }
+}
+
+.footer-custom-btn {
+  padding: 10px 15px;
+  background: $light-gray;
+  @extend .link-border-radius;
+  text-transform: uppercase;
+  @include transition(all, 0.5s, ease);
+}

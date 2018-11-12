@@ -4,6 +4,10 @@
    "بحث",
    "find"
   ],
+  "send": [
+    "إرسال",
+    "Send"
+  ],
   "signin": [
    "تسجيل الدخول",
    "Sign in"
@@ -11,6 +15,10 @@
   "signup": [
    "سجل",
    "Sign up"
+  ],
+  "join": [
+   "انضم",
+   "Join"
   ],
   "vehicleButton": {
    "add": [
@@ -35,7 +43,15 @@
     "إرسال",
     "Send"
    ]
-  }
+  },
+  "arabic": [
+    "Arabic",
+    "العربية"
+   ],
+   "english": [
+	"English",
+    "الإنجليزية"
+   ]
  },
  "navBar": {
   "vehiclePart": [
@@ -136,12 +152,12 @@
  "form": {
   "order": {
    "title": [
-    "اطلب الان",
-    "Order Now"
+    "تسوق بواسطة السيارة",
+    "Shop By Vehicle"
    ],
    "subTitle": [
-    "اختر سيارتك لتخصيصها وتعديلها وترقيتها وإصلاحها واستبدالها",
-    "Select your vehicle to customize, modify, upgrade, repair and replace"
+    "إضافة سيارتك للعثور بسهولة على قطع الغيار والملحقات والحصول على توصيات المنتج",
+    "Add your Vehicle to easily find parts & accessories and to get product recommendations"
    ],
    "partNo": [
     "اريد ان اجد",
@@ -154,7 +170,7 @@
    "placeholder": {
     "partNo": [
      "الاسم أو الرقم",
-     "Name or number"
+     "EX: Part Name,  Part Number,  Product Name"
     ]
    },
    "trackOrder": [
@@ -480,6 +496,10 @@
    "موصى به لك",
    "Recommended for you"
   ],
+  "subTitle": [
+    "مجموعة واسعة من العناصر لتختار من بينها",
+    "A wide selection of items for you to choose from"
+  ],
   "recommendation": {
    "bestSeller": [
     "الأكثر مبيعًا",
@@ -511,6 +531,12 @@
     "سيارتي",
     "My vehicle(s)"
    ]
+  },
+  "signin": {
+    "title": [
+      "مرحبا بعودتك",
+      "Welcome Back"
+    ]
   },
   "updateEmail": {
    "title": [
@@ -927,7 +953,7 @@
     ]
    },
    "arabic": [
-    "عربى",
+    "العربية",
     "Arabic"
    ],
    "english": [

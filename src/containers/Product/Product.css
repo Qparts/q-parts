@@ -22,6 +22,10 @@
  display: flex;
 }
 
+.Product-item_specs {
+	display: flex;
+}
+
 .Product-reviews_header {
  display: flex;
 }

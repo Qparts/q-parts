@@ -4,12 +4,11 @@ import './RenderField.css';
 
 const renderField = props => {
   return (
-    <Fragment>
+    <div className={props.className}>
       <label>{props.label}</label> <br />
       <sub>{props.sub}</sub>
       <div className="RenderField-container RenderField-required">
         <input
-          className={props.className}
           type={props.type}
           placeholder={props.placeholder}
           {...props.input}
@@ -20,7 +19,7 @@ const renderField = props => {
               (props.meta.warning && <span>{props.meta.warning}</span>))}
         </Fragment>
       </div>
-    </Fragment>
+    </div>
   );
 }
 
