@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import Products from "../Products/Products";
 import AppsLink from '../AppsLink/AppsLink';
 import Button from "../UI/Button";
+import Title from '../UI/Title';
 
 class HomeDetails extends Component {
 
@@ -10,54 +11,50 @@ class HomeDetails extends Component {
     const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate } = this.props;
     return (
       <Fragment>
-        <section className="home-details container-fluid">
+        <section id="home-details" className="container-fluid">
+          <Title
+            header="Custom order"
+            subHeader="We move fast. Send us request and we will replay by price and all details"
+          />
           <div className="row">
             <div className="col col-lg-12 col-md-12 col-sm-12 col-xl-12 col-12">
-              <h1>Custom Order</h1>
-              <div className="row align-items-baseline">
-                <hr className="col-2 red-line ml-3" />
-                <p className="col">
-                  We move fast. Send us request and we will replay by price and all
-                  details
-            </p>
-              </div>
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12 ml-4">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <div className="row">
                   <div className="col-lg-12">
-                    <div className="row">
+                    <div className="row text-center">
                       <div className="col-lg-3">
                         <img className="request" src="img/request.svg" alt="request" />
-                        <figcaption>
+                        <figcaption className="clearfix">
                           <h3>Request</h3>
-                          <p>Fill in your vehicle data and the parts you want</p>
+                          <p>Fill in your vehicle data and the <span>parts you want</span></p>
                         </figcaption>
                       </div>
                       <div className="col-lg-3">
                         <img className="check-price" src="img/check-price.svg" alt="check-price" />
                         <figcaption>
                           <h3>Check Price</h3>
-                          <p>The price will deliver to you within 24 hours</p>
+                          <p>The price will deliver to you <span>within 24 hours</span></p>
                         </figcaption>
                       </div>
                       <div className="col-lg-3">
                         <img className="add-to-cart" src="img/add-to-cart.svg" alt="add-to-cart" />
                         <figcaption>
                           <h3>Add To Cart</h3>
-                          <p>choose Sipping Address and payment method</p>
+                          <p>choose Sipping Address <span>and payment method</span></p>
                         </figcaption>
                       </div>
                       <div className="col-lg-3">
                         <img className="delivery-product" src="img/delivery-product.svg" alt="delivery-product" />
                         <figcaption>
                           <h3>Receive Order</h3>
-                          <p>Your order for your workshop or anywher you love</p>
+                          <p>Your order for your workshop or <span>anywher you love</span></p>
                         </figcaption>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12 ml-4">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xl-12">
                 <header>
                   <h2>Start Now</h2>
                   <div className="ellipse">
@@ -110,7 +107,7 @@ class HomeDetails extends Component {
             </div>
           </div>
         </section>
-        <section className="catagory-imgs container-fluid">
+        <section id="catagory-imgs" className="container-fluid">
           <div className="row">
             <div className="col-lg-4 col-xl-4 col-md-12 col-sm-12">
               <a href="">
@@ -172,13 +169,17 @@ class HomeDetails extends Component {
             </div>
           </div>
         </section>
-        <section className="join-us container-fluid">
+        <section id="join-us" className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <img className="vendor-img" src="img/vendor.png" alt="vendor" />
-              <div className="row justify-content-center">
-                <p>OUR SALES MORE THAN 50,000 ITEM</p>
-                <h1>VENDOR ! Join Qetaa.com</h1>
+              <div>
+                <img className="vendor-img" src="img/vendor.png" alt="vendor" />
+              </div>
+              <div className="d-flex justify-content-center">
+                <p>
+                  OUR SALES MORE THAN 50,000 ITEM
+                  <h1>VENDOR ! Join Qetaa.com</h1>
+                </p>
                 <Button
                   type="submit"
                   className="btn-primary"

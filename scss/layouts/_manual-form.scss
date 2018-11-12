@@ -1,4 +1,4 @@
-.manual-form {
+#manual-form {
   @include large-medium-screens {
     background: url(/img/hero-lg.jpg);
     min-height: 559px;
@@ -13,6 +13,8 @@
   .form-control {
     border-style: none;
     border-radius: 0;
+    @include font-size(15px);
+    font-family: 'Roboto';
   }
 
   .manual-form__dropdown {
@@ -25,6 +27,8 @@
 
     .select__control {
       width: 90px;
+      @include font-size(15px);
+      font-family: 'Roboto';
       .select__value-container {
         width: 55px;
       }
@@ -56,9 +60,10 @@
     }
 
     label {
-      position: relative;
-      left: 32px;
       color: $basic-black;
+      @include font-size(15px);
+      font-weight: 500;
+      font-family: 'Roboto';
     }
   }
   button {
@@ -69,6 +74,7 @@
   }
   p {
     margin-bottom: 29px;
+    @include font-size(15px);
   }
 
   .seperator {

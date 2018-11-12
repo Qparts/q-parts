@@ -1,4 +1,4 @@
-.products {
+#products {
   margin-top: 102px;
 
   > div {
@@ -7,6 +7,14 @@
 
   .tab-content {
     margin-bottom: 55px;
+  }
+
+  #title {
+    padding-top: 55px;
+
+    hr {
+      width: 255px;
+    }
   }
 
   header {

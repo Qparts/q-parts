@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import Stars from 'react-stars';
 import NextArrow from '../UI/NextArrow/NextArrow';
 import PrevArrow from '../UI/PrevArrow/PrevArrow';
+import Title from '../UI/Title';
 
 import './Products.css';
 import { BEST_SELLER, OFFERS } from '../../constants';
@@ -38,18 +39,13 @@ class Products extends Component {
             color2: '#fabb12'
         }
         return (
-            <section className="products">
+            <section id="products">
                 <div className="">
                     <div className="container-fluid">
-                        <div className="row">
-                            <header className="col d-none d-lg-block d-md-block">
-                                <h1>{translate("offers.title")}</h1>
-                                <div className="row align-items-baseline">
-                                    <hr className="col-2 ml-3 red-line" />
-                                    <p className="col">{translate("offers.subTitle")}</p>
-                                </div>
-                            </header>
-                        </div>
+                        <Title
+                            header={translate("offers.title")}
+                            subHeader={translate("offers.subTitle")}
+                        />
                         <div className="row">
                             <div className="col">
                                 <ul

@@ -151,7 +151,7 @@ export class ManualForm extends Component {
     );
 
     return (
-      <section className="manual-form">
+      <section id="manual-form">
         <div className="container-fluid manual-form__content">
           <div className="row header-shopby-container">
             <header className="col header-shopby-vehicle">
@@ -163,7 +163,7 @@ export class ManualForm extends Component {
             <div className="row no-gutters">
               <div className="col-lg-4 col-md-6 col-sm-6 mob-form-part-label">
                 <Field
-                  label={<strong>{translate("form.order.partNo")}</strong>}
+                  label={translate("form.order.partNo")}
                   name="partNo"
                   className="form-control mb-2 mr-sm-2 mob-part-no h-100 manual-form-textbox"
                   component={RenderField}
@@ -175,8 +175,7 @@ export class ManualForm extends Component {
               {!isAuth(this.props.token) ? (
                 <Fragment>
                   <div className="col-lg-6 col-md-12 col-sm-12 mob-form-order-container manual-form__dropdown">
-                    <label className="mob-form-order-container-label">
-                      {<strong>{translate("form.order.make")}</strong>}</label>
+                    <label className="mob-form-order-container-label">{translate("form.order.make")}</label>
                     <div className="form-inline">
                       <Field
                         className="col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"

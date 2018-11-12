@@ -1,12 +1,22 @@
-.home-details {
+#home-details {
   margin-top: 77px;
 
-  p {
-    color: $charcoal-grey;
+  figcaption {
+    h3 {
+      color: $dark-charcoal-grey;
+      font-weight: normal;
+    }
+    span {
+      display: block;
+    }
   }
 
-  h3 {
-    color: #37363c;
+  form {
+    button {
+      span {
+        text-transform: capitalize;
+      }
+    }
   }
 
   header > {
@@ -14,6 +24,10 @@
       position: absolute;
       top: 4px;
       left: -23px;
+    }
+    h2 {
+      @include font-size(25px);
+      text-transform: uppercase;
     }
   }
 
@@ -33,6 +47,10 @@
       right: 2px;
       z-index: 10;
       box-shadow: none;
+      margin-top: 4px;
+      margin-right: 10px;
+      min-width: 43px;
+      min-height: 43px;
 
       i {
         input {
@@ -55,7 +73,13 @@
     input {
       border: 0;
       background: $light-gray;
+      min-height: 51px;
     }
+  }
+
+  .upload-img {
+    margin-left: 4px;
+    margin-top: 9px;
   }
 
   .input-group {
@@ -77,7 +101,7 @@
   }
 }
 
-.catagory-imgs {
+#catagory-imgs {
   margin-top: 120px;
 
   h3 {
@@ -107,7 +131,7 @@
   }
 }
 
-.join-us {
+#join-us {
   margin-top: 30px;
   h1 {
     color: white;
@@ -123,7 +147,13 @@
     position: relative;
   }
 
-  .row > .col-12 > .row{
+  button {
+    min-height: 51px;
+    margin-left: 12px;
+    text-transform: capitalize;
+  }
+
+  .row > .col-12 > .d-flex {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -145,6 +175,7 @@
   .vendor-img {
     @include boarder-left-radius(20px, 20px);
     @include boarder-right-radius(0, 20px);
+    width: 100%;
 
     @include x-small {
       background-image: url(/img/vendor-xs.jpg);
