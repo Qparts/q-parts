@@ -3,6 +3,14 @@ const basicGray = '#37363d';
 const basicBlack = '#222222';
 const lightGray = '#f7f7f7';
 const brandColor = '#ed4036';
+const charcoalGrey = 'rgba(55, 54, 60, 0.6)';
+const charcoalGreyTwo = 'rgba(55, 54, 61, 0.8)';
+const darkCharcoalGrey = '#37363c';
+const lightCharcoalGrey = 'rgba(55, 54, 60, 0.7)';
+const gainsboroColor = '#DCDCDC';
+const basicWhite = 'rgba(255, 255, 255, 0.8)';
+const basicDarkWhite = 'rgba(255, 255, 255, 0.5)';
+const veryLightPink = 'rgba(235, 235, 235, 0.3)';
 
 const selectStyle = {
   menu: (styles) => {
@@ -70,4 +78,19 @@ export const styles = {
       }
     },
   }
+}
+
+export const colors = {
+  basicGray,
+  basicBlack,
+  lightGray,
+  brandColor,
+  charcoalGrey,
+  charcoalGreyTwo,
+  darkCharcoalGrey,
+  lightCharcoalGrey,
+  gainsboroColor,
+  basicWhite,
+  basicDarkWhite,
+  veryLightPink,
 }

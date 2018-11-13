@@ -35,6 +35,23 @@
   }
 }
 
+.btn-facebook {
+  @extend .btn-primary;
+  background: $white;
+  border-radius: side-values(0 0 0 20px) !important;
+
+}
+.btn-google {
+  @extend .btn-primary;
+  background: $white;
+  border-radius: side-values(0 0 0 0) !important;
+}
+.btn-twitter {
+  @extend .btn-primary;
+  background: $white;
+  border-radius: side-values(0 0 20px 0) !important;
+}
+
 .footer-custom-btn {
   padding: 10px 15px;
   background: $light-gray;

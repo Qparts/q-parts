@@ -11,8 +11,3 @@
 .Signup-break_line {
  width: 100%
 }
-
-.SignupForm-social_media {
- display: flex;
- flex-direction: row;
-}

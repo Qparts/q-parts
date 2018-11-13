@@ -29,6 +29,7 @@ export const BEST_SELLER = 'Best Seller';
 export const OFFERS = 'Offers';
 export const RECENT_VIEWED = 'Recent Viewed';
 export { styles } from './styles';
+export { colors } from './styles';
 export const categorySortOptions = [
 	{ value: 'recommended', label: 'Recommended' },
 	{ value: 'lPrice', label: 'Lowest price' },

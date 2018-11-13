@@ -5,8 +5,8 @@ import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { Paper, Tabs, Tab } from '@material-ui/core';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Button } from 'primereact/components/button/Button';
 import { Dialog } from 'primereact/components/dialog/Dialog';
+import Button from '../../../components/UI/Button';
 
 import RenderField from '../../../components/RenderField/RenderField';
 import TabContainer from '../../../components/UI/TabContainer';
@@ -24,6 +24,8 @@ import { getComponentName } from '../../../utils';
 
 import './Login.css';
 import { ON_SOCIAL_MEDIA_LOGIN } from '../../../constants';
+import Title from '../../../components/UI/Title';
+import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
 class Login extends Component {
   constructor(props) {
@@ -31,7 +33,8 @@ class Login extends Component {
 
     this.state = {
       loginOrSignUp: 1,
-      showResetPassword: false
+      showResetPassword: false,
+      rememberMe: ''
     }
   }
 
@@ -56,6 +59,10 @@ class Login extends Component {
       });
   }
 
+  handleRememberMe = e => {
+    this.setState({ rememberMe: e.value })
+  }
+
   onResetPassword = values => {
     const serverErrorField = "code"
     return this.props.resetPassword(values, serverErrorField)
@@ -71,31 +78,36 @@ class Login extends Component {
     return <Fragment>
       {
         match.url === '/' ? null :
-        <Paper>
-        <Tabs
-          value={loginOrSignUp}
-          indicatorColor="primary"
-          textColor="primary"
-          onChange={this.handleChange}
-          fullWidth
-          centered >
-          <Tab label={translate("form.signin.tabs.tabOne")} />
-          <Tab label={translate("form.signin.tabs.tabTwo")} />
-        </Tabs>
-      </Paper>
+          <Paper>
+            <Tabs
+              value={loginOrSignUp}
+              indicatorColor="primary"
+              textColor="primary"
+              onChange={this.handleChange}
+              fullWidth
+              centered >
+              <Tab label={translate("form.signin.tabs.tabOne")} />
+              <Tab label={translate("form.signin.tabs.tabTwo")} />
+            </Tabs>
+          </Paper>
       }
       {
         loginOrSignUp === 1 &&
-        <TabContainer>
-          <div className="Login-container">
+        <Fragment>
+          <div>
             {login}
-            <hr />
             <SocialMedia
+              title={translate("form.signin.socialMedia")}
               handleResponse={this.props.handleResponse}
               handleFailure={this.props.handleFailure} />
+            <div id="sign-up">
+              <p>{translate("form.signin.signup")}</p>
+              <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
+              <p>{translate("form.signin.here")}</p>
+            </div>
           </div>
           {dialog}
-        </TabContainer>
+        </Fragment>
       }
     </Fragment>
   }
@@ -103,8 +115,9 @@ class Login extends Component {
   render() {
     const { translate } = this.props;
     let login = (
-      <form className="Login-container" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-        <div>
+      <Fragment>
+        <Title header={translate("dialog.signin.title")} />
+        <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <div className="form-group">
             <Field
               label={translate("form.signin.email")}
@@ -122,16 +135,20 @@ class Login extends Component {
               validate={[validations.required]} />
           </div>
           <div>
-            <Button label={translate("form.signin.button")} icon="" />
+            <div>
+              <RadioButton value={true} name="rememberMe" onChange={this.handleRememberMe} checked={true === this.state.rememberMe} />
+              <label>{translate("form.signin.rememberMe")}</label>
+            </div>
             <button
               onClick={this.props.onShowDialog}
               type="button"
-              className="btn btn-sm btn-link">
+              className="btn-link">
               {translate("form.signin.forgotPassword")}
             </button>
           </div>
-        </div>
-      </form>
+          <Button className="btn-primary" text={translate("form.signin.button")} icon="icon-arrow-right" />
+        </form>
+      </Fragment>
     )
     const dialog =
       <Dialog header={translate("dialog.passwordRecovery.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
@@ -147,24 +164,28 @@ class Login extends Component {
       </Dialog>
     return (
       <Switch>
-        <Route path="/login" exact={true} render={() => {
-          return (
-            this.renderLogin(login, dialog)
-          )
-        }} />
-        <Route path="/" exact={true} render={() => {
-          return (
-            this.renderLogin(login, dialog)
-          )
-        }} />
-        <PrivateRoute
-          path="/login/reset-password"
-          fakeAuth={this.state.showResetPassword}
-          translate={translate}
-          component={ResetPassword}
-          showPhoneNo={true}
-          onSubmit={this.onResetPassword}
-          redirectTo="/login" />
+        <section id="login">
+          <div className="container-fluid">
+            <Route path="/login" exact={true} render={() => {
+              return (
+                this.renderLogin(login, dialog)
+              )
+            }} />
+            <Route path="/" exact={true} render={() => {
+              return (
+                this.renderLogin(login, dialog)
+              )
+            }} />
+            <PrivateRoute
+              path="/login/reset-password"
+              fakeAuth={this.state.showResetPassword}
+              translate={translate}
+              component={ResetPassword}
+              showPhoneNo={true}
+              onSubmit={this.onResetPassword}
+              redirectTo="/login" />
+          </div>
+        </section>
       </Switch>
     )
   }

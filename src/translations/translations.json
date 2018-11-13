@@ -1,1407 +1,1426 @@
 {
- "general": {
-  "searchButton": [
-   "بحث",
-   "find"
-  ],
-  "send": [
-    "إرسال",
-    "Send"
-  ],
-  "signin": [
-   "تسجيل الدخول",
-   "Sign in"
-  ],
-  "signup": [
-   "سجل",
-   "Sign up"
-  ],
-  "join": [
-   "انضم",
-   "Join"
-  ],
-  "vehicleButton": {
-   "add": [
-    "إضافة مركبة",
-    "Add vehicle"
-   ],
-   "remove": [
-    "مسح التاريخ",
-    "Clear history"
-   ]
+  "general": {
+    "searchButton": [
+      "بحث",
+      "find"
+    ],
+    "send": [
+      "إرسال",
+      "Send"
+    ],
+    "signin": [
+      "تسجيل الدخول",
+      "Sign in"
+    ],
+    "signup": [
+      "سجل",
+      "Sign up"
+    ],
+    "join": [
+      "انضم",
+      "Join"
+    ],
+    "vehicleButton": {
+      "add": [
+        "إضافة مركبة",
+        "Add vehicle"
+      ],
+      "remove": [
+        "مسح التاريخ",
+        "Clear history"
+      ]
+    },
+    "buttons": {
+      "confirm": [
+        "تؤكد",
+        "Confirm"
+      ],
+      "cancel": [
+        "إلغاء",
+        "Cancel"
+      ],
+      "send": [
+        "إرسال",
+        "Send"
+      ]
+    },
+    "arabic": [
+      "Arabic",
+      "العربية"
+    ],
+    "english": [
+      "English",
+      "الإنجليزية"
+    ]
   },
-  "buttons": {
-   "confirm": [
-    "تؤكد",
-    "Confirm"
-   ],
-   "cancel": [
-    "إلغاء",
-    "Cancel"
-   ],
-   "send": [
-    "إرسال",
-    "Send"
-   ]
+  "navBar": {
+    "vehiclePart": [
+      "جزء السيارة",
+      "Vehicle part"
+    ],
+    "motorOil": [
+      "زيت المحرك",
+      "Motor oil"
+    ],
+    "tyres": [
+      "الإطارات",
+      "Tyres"
+    ],
+    "tools": [
+      "أدوات",
+      "Tools"
+    ],
+    "accessories": [
+      "مستلزمات",
+      "Accessories"
+    ],
+    "garage": [
+      "كراج",
+      "Garage"
+    ],
+    "vendor": [
+      "بائع",
+      "Vendor"
+    ],
+    "offers": [
+      "عروض",
+      "Offers"
+    ],
+    "blog": [
+      "مدونة",
+      "Blog"
+    ],
+    "customOrder": [
+      "طلبية الزبون",
+      "Custom order"
+    ],
+    "signinSignup": [
+      "تسجيل الدخول / سجل",
+      "Sign In/Sign Up"
+    ],
+    "joinUs": [
+      "انضم إلينا",
+      "Join Us"
+    ],
+    "menu": {
+      "menuItem": {
+        "order": [
+          "طلباتي",
+          "My orders"
+        ],
+        "address": [
+          "عناويني",
+          "My addresses"
+        ],
+        "setting": [
+          "إعدادات",
+          "Settings"
+        ],
+        "logout": [
+          "الخروج",
+          "Log out"
+        ],
+        "quotations": [
+          "الاقتباسات",
+          "Quotations"
+        ]
+      }
+    }
   },
-  "arabic": [
-    "Arabic",
-    "العربية"
-   ],
-   "english": [
-	"English",
-    "الإنجليزية"
-   ]
- },
- "navBar": {
-  "vehiclePart": [
-   "جزء السيارة",
-   "Vehicle part"
-  ],
-  "motorOil": [
-   "زيت المحرك",
-   "Motor oil"
-  ],
-  "tyres": [
-   "الإطارات",
-   "Tyres"
-  ],
-  "tools": [
-   "أدوات",
-   "Tools"
-  ],
-  "accessories": [
-   "مستلزمات",
-   "Accessories"
-  ],
-  "garage": [
-   "كراج",
-   "Garage"
-  ],
-  "vendor": [
-   "بائع",
-   "Vendor"
-  ],
-  "offers": [
-   "عروض",
-   "Offers"
-  ],
-  "blog": [
-   "مدونة",
-   "Blog"
-  ],
-  "customOrder": [
-   "طلبية الزبون",
-   "Custom order"
-  ],
-  "signinSignup": [
-   "تسجيل الدخول / سجل",
-   "Sign In/Sign Up"
-  ],
-  "joinUs": [
-   "انضم إلينا",
-   "Join Us"
-  ],
-  "menu": {
-   "menuItem": {
-    "order": [
-     "طلباتي",
-     "My orders"
-    ],
-    "address": [
-     "عناويني",
-     "My addresses"
-    ],
-    "setting": [
-     "إعدادات",
-     "Settings"
-    ],
-    "logout": [
-     "الخروج",
-     "Log out"
-    ],
-    "quotations": [
-     "الاقتباسات",
-     "Quotations"
-    ]
-   }
-  }
- },
- "dropdown": {
-  "signup": {
-   "message": [
-    "هل انت جديد هنا؟",
-    "New Customer?"
-   ],
-   "link": [
-    "أبدأ هنا",
-    "Start here"
-   ]
+  "dropdown": {
+    "signup": {
+      "message": [
+        "هل انت جديد هنا؟",
+        "New Customer?"
+      ],
+      "link": [
+        "أبدأ هنا",
+        "Start here"
+      ]
+    },
+    "garage": {
+      "title": [
+        "سيارتي المحفوظة",
+        "My saved Vehicles"
+      ],
+      "subTitle": [
+        "عرض وإدارة وإيجاد أجزاء للسيارات كراجك",
+        "View, manage and find parts for the vehicles in your garage"
+      ]
+    }
   },
-  "garage": {
-   "title": [
-    "سيارتي المحفوظة",
-    "My saved Vehicles"
-   ],
-   "subTitle": [
-    "عرض وإدارة وإيجاد أجزاء للسيارات كراجك",
-    "View, manage and find parts for the vehicles in your garage"
-   ]
-  }
- },
- "form": {
-  "order": {
-   "title": [
-    "تسوق بواسطة السيارة",
-    "Shop By Vehicle"
-   ],
-   "subTitle": [
-    "إضافة سيارتك للعثور بسهولة على قطع الغيار والملحقات والحصول على توصيات المنتج",
-    "Add your Vehicle to easily find parts & accessories and to get product recommendations"
-   ],
-   "partNo": [
-    "اريد ان اجد",
-    "I need to find"
-   ],
-   "make": [
-    "لسيارتي",
-    "For my vehicle "
-   ],
-   "placeholder": {
-    "partNo": [
-     "الاسم أو الرقم",
-     "EX: Part Name,  Part Number,  Product Name"
-    ]
-   },
-   "trackOrder": [
-    ".شكرا لك! لقد تم تسجيل طلبك",
-    "Thank you! your order has been placed."
-   ],
-   "trackButton": [
-    "أتبع طلبك",
-    "Track your order"
-   ]
+  "form": {
+    "order": {
+      "title": [
+        "تسوق بواسطة السيارة",
+        "Shop By Vehicle"
+      ],
+      "subTitle": [
+        "إضافة سيارتك للعثور بسهولة على قطع الغيار والملحقات والحصول على توصيات المنتج",
+        "Add your Vehicle to easily find parts & accessories and to get product recommendations"
+      ],
+      "partNo": [
+        "اريد ان اجد",
+        "I need to find"
+      ],
+      "make": [
+        "لسيارتي",
+        "For my vehicle "
+      ],
+      "placeholder": {
+        "partNo": [
+          "الاسم أو الرقم",
+          "EX: Part Name,  Part Number,  Product Name"
+        ]
+      },
+      "trackOrder": [
+        ".شكرا لك! لقد تم تسجيل طلبك",
+        "Thank you! your order has been placed."
+      ],
+      "trackButton": [
+        "أتبع طلبك",
+        "Track your order"
+      ]
+    },
+    "signin": {
+      "email": [
+        "البريد الإلكتروني",
+        "Email"
+      ],
+      "password": [
+        "كلمه السر",
+        "Password"
+      ],
+      "forgotPassword": [
+        "نسيت كلمة السر؟",
+        "Forgot your password?"
+      ],
+      "button": [
+        "تسجيل الدخول",
+        "Sign in"
+      ],
+      "rememberMe": [
+        "تذكرنى",
+        "Remember me"
+      ],
+      "signup": [
+        "ليس لديك حساب؟",
+        "Don't have an account?"
+      ],
+      "joinUs": [
+        "انضم إلينا",
+        "Join Us"
+      ],
+      "here": [
+        "هنا",
+        "here"
+      ],
+      "tabs": {
+        "tabOne": [
+          "سجل",
+          "Sign up"
+        ],
+        "tabTwo": [
+          "تسجيل الدخول",
+          "Sign in"
+        ]
+      },
+      "placeholders": {
+        "email": [
+          "أدخل بريدك الالكتروني",
+          "Enter your email"
+        ],
+        "password": [
+          "ادخل رقمك السري",
+          "Enter your password"
+        ]
+      },
+      "socialMedia": [
+        "أو تسجيل الدخول باستخدام",
+        "Or Sign in with"
+      ]
+    },
+    "signup": {
+      "firstName": [
+        "الاسم الاول",
+        "First name"
+      ],
+      "lastName": [
+        "اسم العائلة",
+        "Last name"
+      ],
+      "email": [
+        "البريد الإلكتروني",
+        "Email"
+      ],
+      "country": [
+        "اختر دولة",
+        "Select a country"
+      ],
+      "mobile": [
+        "رقم الهاتف المحمول",
+        "Mobile number"
+      ],
+      "password": [
+        "كلمه السر",
+        "Password"
+      ],
+      "confirmPassword": [
+        "أكد كلمه السري",
+        "Confirm your password"
+      ],
+      "tabs": {
+        "tabOne": [
+          "سجل",
+          "Sign up"
+        ],
+        "tabTwo": [
+          "تسجيل الدخول",
+          "Sign in"
+        ]
+      },
+      "button": [
+        "إنشاء حساب",
+        "create an account"
+      ],
+      "placeholders": {
+        "firstName": [
+          "الاسم الاول",
+          "First name"
+        ],
+        "lastName": [
+          "اسم العائلة",
+          "Last name"
+        ],
+        "email": [
+          "أدخل بريدك الالكتروني",
+          "Enter your email"
+        ],
+        "country": [
+          "اختر دولة",
+          "Select a country"
+        ],
+        "mobile": [
+          "رقم الهاتف المحمول",
+          "Mobile number"
+        ],
+        "password": [
+          "ادخل رقمك السري",
+          "Enter your password"
+        ],
+        "confirmPassword": [
+          "أكد كلمه السري",
+          "Confirm your password"
+        ]
+      }
+    },
+    "vehicle": {
+      "make": [
+        "اختر السيارة",
+        "Choose a car"
+      ],
+      "model": [
+        "موديل",
+        "Model"
+      ],
+      "year": [
+        "عام",
+        "Year"
+      ],
+      "vin": [
+        "رقم الهيكل",
+        "Vin number"
+      ],
+      "placeholder": {
+        "vin": [
+          "أدخل رقم الهيكل الخاص بك",
+          "Enter your Vin number"
+        ]
+      },
+      "buttons": {
+        "add": [
+          "أضف سيارة ",
+          "Add a vehicle"
+        ],
+        "select": [
+          "اختار",
+          "Select"
+        ]
+      },
+      "tabs": {
+        "tabOne": [
+          "إضافة سيارة جديدة",
+          "Add a new vehicle"
+        ],
+        "tabTwo": [
+          "اختر من المركبات المحفوظة الخاصة بك",
+          "Select from your saved vehicles"
+        ]
+      }
+    },
+    "address": {
+      "map": [
+        "اختر من خريطة جوجل",
+        "Select from google map"
+      ],
+      "title": [
+        "عنوان",
+        "Title"
+      ],
+      "region": [
+        "منطقة",
+        "Region"
+      ],
+      "city": [
+        "مدينة",
+        "City"
+      ],
+      "line1": [
+        "خط عنوان 1",
+        "Address line 1"
+      ],
+      "line2": [
+        "خط عنوان 2",
+        "Address line 2"
+      ],
+      "zipCode": [
+        "الرمز البريدي",
+        "Zip / Postal code"
+      ],
+      "buttons": {
+        "defaultAddress": [
+          "تعيين العنوان الافتراضي",
+          "Set default address"
+        ],
+        "confirm": [
+          "تؤكد",
+          "Confirm"
+        ],
+        "cancel": [
+          "إلغاء",
+          "Cancel"
+        ],
+        "deliver": [
+          "التوصيل لهذا العنوان",
+          "Deliver to this address"
+        ]
+      }
+    },
+    "vendor": {
+      "name": [
+        "اسم الشركة أو المؤسسة",
+        "Name of the company or establishment"
+      ],
+      "businessType": {
+        "title": [
+          "اختر نشاط عملك",
+          "Choose your business activity type"
+        ],
+        "retailer": [
+          "تاجر تجزئة",
+          "Retailer"
+        ],
+        "wholesaler": [
+          "تاجر جملة",
+          "Wholesaler"
+        ],
+        "maintenance": [
+          "ورشة صيانة",
+          "Maintenance workshop"
+        ]
+      },
+      "modelType": [
+        "موديلات السيارات التي ",
+        "The models of cars you work with"
+      ],
+      "partType": {
+        "title": [
+          "نوع القطع",
+          "Type of the part"
+        ],
+        "original": [
+          "أصلية",
+          "Original"
+        ],
+        "commercial": [
+          "تجارية",
+          "Commercial"
+        ],
+        "both": [
+          "أصلية و تجارية",
+          "I work in both"
+        ]
+      },
+      "branchLocation": {
+        "title": [
+          "موقع الفرع الرئيسي",
+          "The main branch location"
+        ],
+        "country": [
+          "اختر دولة",
+          "Select a country"
+        ],
+        "region": [
+          "اختر المنطقة",
+          "Select a region"
+        ],
+        "city": [
+          "اختر المدينة",
+          "Select a city"
+        ]
+      },
+      "branchesAmount": {
+        "label": [
+          "عدد الفروع لديك؟",
+          "How many branches do you own?"
+        ],
+        "sub": [
+          "يرجى كتابة رقم",
+          "Please type in a number"
+        ]
+      },
+      "deliveryService": {
+        "title": [
+          "هل لديك خدمة توصيل؟",
+          "Do you have a delivery service"
+        ],
+        "yes": [
+          "نعم",
+          "Yes"
+        ],
+        "no": [
+          "لا",
+          "No"
+        ]
+      },
+      "managerName": [
+        "اسم المسؤول",
+        "Name of the manager"
+      ],
+      "mobile": [
+        "رقم الجوال",
+        "Your mobile number"
+      ],
+      "email": [
+        "البريد الالكتروني",
+        "Your email"
+      ],
+      "submit": [
+        "ارسل طلب التسجيل",
+        "Submit"
+      ]
+    }
   },
-  "signin": {
-   "email": [
-    "البريد الإلكتروني",
-    "Email"
-   ],
-   "password": [
-    "كلمه السر",
-    "Password"
-   ],
-   "forgotPassword": [
-    "نسيت كلمة السر؟",
-    "Forgot your password?"
-   ],
-   "button": [
-    "تسجيل الدخول",
-    "Sign in"
-   ],
-   "tabs": {
-    "tabOne": [
-     "سجل",
-     "Sign up"
-    ],
-    "tabTwo": [
-     "تسجيل الدخول",
-     "Sign in"
-    ]
-   },
-   "placeholders": {
-    "email": [
-     "أدخل بريدك الالكتروني",
-     "Enter your email"
-    ],
-    "password": [
-     "ادخل رقمك السري",
-     "Enter your password"
-    ]
-   }
-  },
-  "signup": {
-   "firstName": [
-    "الاسم الاول",
-    "First name"
-   ],
-   "lastName": [
-    "اسم العائلة",
-    "Last name"
-   ],
-   "email": [
-    "البريد الإلكتروني",
-    "Email"
-   ],
-   "country": [
-    "اختر دولة",
-    "Select a country"
-   ],
-   "mobile": [
-    "رقم الهاتف المحمول",
-    "Mobile number"
-   ],
-   "password": [
-    "كلمه السر",
-    "Password"
-   ],
-   "confirmPassword": [
-    "أكد كلمه السري",
-    "Confirm your password"
-   ],
-   "tabs": {
-    "tabOne": [
-     "سجل",
-     "Sign up"
-    ],
-    "tabTwo": [
-     "تسجيل الدخول",
-     "Sign in"
-    ]
-   },
-   "button": [
-    "إنشاء حساب",
-    "create an account"
-   ],
-   "placeholders": {
-    "firstName": [
-     "الاسم الاول",
-     "First name"
-    ],
-    "lastName": [
-     "اسم العائلة",
-     "Last name"
-    ],
-    "email": [
-     "أدخل بريدك الالكتروني",
-     "Enter your email"
-    ],
-    "country": [
-     "اختر دولة",
-     "Select a country"
-    ],
-    "mobile": [
-     "رقم الهاتف المحمول",
-     "Mobile number"
-    ],
-    "password": [
-     "ادخل رقمك السري",
-     "Enter your password"
-    ],
-    "confirmPassword": [
-     "أكد كلمه السري",
-     "Confirm your password"
-    ]
-   }
-  },
-  "vehicle": {
-   "make": [
-    "اختر السيارة",
-    "Choose a car"
-   ],
-   "model": [
-    "موديل",
-    "Model"
-   ],
-   "year": [
-    "عام",
-    "Year"
-   ],
-   "vin": [
-    "رقم الهيكل",
-    "Vin number"
-   ],
-   "placeholder": {
-    "vin": [
-     "أدخل رقم الهيكل الخاص بك",
-     "Enter your Vin number"
-    ]
-   },
-   "buttons": {
-    "add": [
-     "أضف سيارة ",
-     "Add a vehicle"
-    ],
-    "select": [
-     "اختار",
-     "Select"
-    ]
-   },
-   "tabs": {
-    "tabOne": [
-     "إضافة سيارة جديدة",
-     "Add a new vehicle"
-    ],
-    "tabTwo": [
-     "اختر من المركبات المحفوظة الخاصة بك",
-     "Select from your saved vehicles"
-    ]
-   }
-  },
-  "address": {
-   "map": [
-    "اختر من خريطة جوجل",
-    "Select from google map"
-   ],
-   "title": [
-    "عنوان",
-    "Title"
-   ],
-   "region": [
-    "منطقة",
-    "Region"
-   ],
-   "city": [
-    "مدينة",
-    "City"
-   ],
-   "line1": [
-    "خط عنوان 1",
-    "Address line 1"
-   ],
-   "line2": [
-    "خط عنوان 2",
-    "Address line 2"
-   ],
-   "zipCode": [
-    "الرمز البريدي",
-    "Zip / Postal code"
-   ],
-   "buttons": {
-    "defaultAddress": [
-     "تعيين العنوان الافتراضي",
-     "Set default address"
-    ],
-    "confirm": [
-     "تؤكد",
-     "Confirm"
-    ],
-    "cancel": [
-     "إلغاء",
-     "Cancel"
-    ],
-    "deliver": [
-     "التوصيل لهذا العنوان",
-     "Deliver to this address"
-    ]
-   }
-  },
-  "vendor": {
-   "name": [
-    "اسم الشركة أو المؤسسة",
-    "Name of the company or establishment"
-   ],
-   "businessType": {
+  "offers": {
     "title": [
-     "اختر نشاط عملك",
-     "Choose your business activity type"
+      "موصى به لك",
+      "Recommended for you"
     ],
-    "retailer": [
-     "تاجر تجزئة",
-     "Retailer"
+    "subTitle": [
+      "مجموعة واسعة من العناصر لتختار من بينها",
+      "A wide selection of items for you to choose from"
     ],
-    "wholesaler": [
-     "تاجر جملة",
-     "Wholesaler"
-    ],
-    "maintenance": [
-     "ورشة صيانة",
-     "Maintenance workshop"
-    ]
-   },
-   "modelType": [
-    "موديلات السيارات التي ",
-    "The models of cars you work with"
-   ],
-   "partType": {
-    "title": [
-     "نوع القطع",
-     "Type of the part"
-    ],
-    "original": [
-     "أصلية",
-     "Original"
-    ],
-    "commercial": [
-     "تجارية",
-     "Commercial"
-    ],
-    "both": [
-     "أصلية و تجارية",
-     "I work in both"
-    ]
-   },
-   "branchLocation": {
-    "title": [
-     "موقع الفرع الرئيسي",
-     "The main branch location"
-    ],
-    "country": [
-     "اختر دولة",
-     "Select a country"
-    ],
-    "region": [
-     "اختر المنطقة",
-     "Select a region"
-    ],
-    "city": [
-     "اختر المدينة",
-     "Select a city"
-    ]
-   },
-   "branchesAmount": {
-    "label": [
-     "عدد الفروع لديك؟",
-     "How many branches do you own?"
-    ],
-    "sub": [
-     "يرجى كتابة رقم",
-     "Please type in a number"
-    ]
-   },
-   "deliveryService": {
-    "title": [
-     "هل لديك خدمة توصيل؟",
-     "Do you have a delivery service"
-    ],
-    "yes": [
-     "نعم",
-     "Yes"
-    ],
-    "no": [
-     "لا",
-     "No"
-    ]
-   },
-   "managerName": [
-    "اسم المسؤول",
-    "Name of the manager"
-   ],
-   "mobile": [
-    "رقم الجوال",
-    "Your mobile number"
-   ],
-   "email": [
-    "البريد الالكتروني",
-    "Your email"
-   ],
-   "submit": [
-    "ارسل طلب التسجيل",
-    "Submit"
-   ]
-  }
- },
- "offers": {
-  "title": [
-   "موصى به لك",
-   "Recommended for you"
-  ],
-  "subTitle": [
-    "مجموعة واسعة من العناصر لتختار من بينها",
-    "A wide selection of items for you to choose from"
-  ],
-  "recommendation": {
-   "bestSeller": [
-    "الأكثر مبيعًا",
-    "Best seller"
-   ],
-   "offers": [
-    "عروض",
-    "Offers"
-   ],
-   "recentViewed": [
-    "شوهدت مؤخرا",
-    "Recently viewed"
-   ]
-  }
- },
- "dialog": {
-  "passwordRecovery": {
-   "title": [
-    "إعادة تهيئة كلمة المرور",
-    "Password Recovery"
-   ],
-   "subTitle": [
-    "رقم الجوال",
-    "Your mobile number"
-   ]
+    "recommendation": {
+      "bestSeller": [
+        "الأكثر مبيعًا",
+        "Best seller"
+      ],
+      "offers": [
+        "عروض",
+        "Offers"
+      ],
+      "recentViewed": [
+        "شوهدت مؤخرا",
+        "Recently viewed"
+      ]
+    }
   },
-  "vehicle": {
-   "title": [
-    "سيارتي",
-    "My vehicle(s)"
-   ]
-  },
-  "signin": {
-    "title": [
-      "مرحبا بعودتك",
-      "Welcome Back"
-    ]
-  },
-  "updateEmail": {
-   "title": [
-    "تغيير الايميل",
-    "Change your email"
-   ],
-   "placeholder": [
-    "بريدك الالكتروني الجديد",
-    "Your new email"
-   ],
-   "cancel": [
-    "إلغاء",
-    "Cancel"
-   ],
-   "update": [
-    "تحديث",
-    "Update"
-   ]
-  },
-  "updatePassword": {
-   "title": [
-    "تغيير كلمة السر",
-    "Change your password"
-   ]
-  },
-  "address": {
-   "title": [
-    "أضف عنوان الشحن",
-    "Add shipping address"
-   ]
-  },
-  "signup": {
-   "title": [
-    "تحقق من رقم الجوال",
-    "Verify Mobile Number"
-   ],
-   "label": [
-    "يرجى إدخال الرمز الخاص بك من الرسائل القصيرة التي أرسلناها إليك",
-    "Please enter your code from SMS we've sent you"
-   ],
-   "placeholder": [
-    "رمز",
-    "Code"
-   ],
-   "footer": [
-    "أعد إرسال الرمز",
-    "Resend code"
-   ],
-   "resendCode": [
-    "ألم تحصل على الرمز؟",
-    "Didn't get the code?"
-   ],
-   "resendCodeLink": [
-    "أعد إرسال الرمز",
-    "Resend code"
-   ]
+  "dialog": {
+    "passwordRecovery": {
+      "title": [
+        "إعادة تهيئة كلمة المرور",
+        "Password Recovery"
+      ],
+      "subTitle": [
+        "رقم الجوال",
+        "Your mobile number"
+      ]
+    },
+    "vehicle": {
+      "title": [
+        "سيارتي",
+        "My vehicle(s)"
+      ]
+    },
+    "signin": {
+      "title": [
+        "مرحبا بعودتك",
+        "Welcome Back"
+      ]
+    },
+    "updateEmail": {
+      "title": [
+        "تغيير الايميل",
+        "Change your email"
+      ],
+      "placeholder": [
+        "بريدك الالكتروني الجديد",
+        "Your new email"
+      ],
+      "cancel": [
+        "إلغاء",
+        "Cancel"
+      ],
+      "update": [
+        "تحديث",
+        "Update"
+      ]
+    },
+    "updatePassword": {
+      "title": [
+        "تغيير كلمة السر",
+        "Change your password"
+      ]
+    },
+    "address": {
+      "title": [
+        "أضف عنوان الشحن",
+        "Add shipping address"
+      ]
+    },
+    "signup": {
+      "title": [
+        "تحقق من رقم الجوال",
+        "Verify Mobile Number"
+      ],
+      "label": [
+        "يرجى إدخال الرمز الخاص بك من الرسائل القصيرة التي أرسلناها إليك",
+        "Please enter your code from SMS we've sent you"
+      ],
+      "placeholder": [
+        "رمز",
+        "Code"
+      ],
+      "footer": [
+        "أعد إرسال الرمز",
+        "Resend code"
+      ],
+      "resendCode": [
+        "ألم تحصل على الرمز؟",
+        "Didn't get the code?"
+      ],
+      "resendCodeLink": [
+        "أعد إرسال الرمز",
+        "Resend code"
+      ]
+    },
+    "shippingCity": {
+      "title": [
+        "اختر مدينة الشحن",
+        "Select shipping city"
+      ],
+      "label": [
+        "أضف مدينة الشحن",
+        "Add shipping city"
+      ]
+    }
   },
   "shippingCity": {
-   "title": [
-    "اختر مدينة الشحن",
-    "Select shipping city"
-   ],
-   "label": [
-    "أضف مدينة الشحن",
-    "Add shipping city"
-   ]
-
-  }
- },
- "shippingCity": {
-  "placeholder": {
-   "region": [
-    "اختر المنطقة",
-    "Select a region"
-   ],
-   "city": [
-    "اختر المدينة",
-    "Select a city"
-   ]
-  },
-  "termsCondition": [
-   "أوافق على شروط الشروط",
-   "I agree to terms of conditions"
-  ]
- },
- "autocomplete": {
-  "buttons": {
-   "continue": [
-    "استمر",
-    "Continue"
-   ],
-   "placeholder": [
-    "أدخل الموقع",
-    "Enter a location"
-   ]
-  }
- },
- "resetPassword": {
-  "placeholder": {
-   "oldPassword": [
-    "كلمة المرور القديمة",
-    "Old password"
-   ],
-   "newPassword": [
-    "كلمة السر الجديدة",
-    "New password"
-   ],
-   "confirmPassword": [
-    "أكد رقمك السري",
-    "Confirm your password"
-   ],
-   "mobile": [
-    "رقم الهاتف المحمول",
-    "Mobile number"
-   ],
-   "code": [
-    "ادخل الرمز",
-    "Enter the code"
-   ]
-  },
-  "cancel": [
-   "إلغاء",
-   "Cancel"
-  ],
-  "update": [
-   "تحديث",
-   "Update"
-  ]
- },
- "searchResult": {
-  "title": [
-   "اسم الجزء في",
-   "Part name in"
-  ],
-  "partAvailability": [
-   "لسوء الحظ ، اسم الجزء في",
-   "Unfortunately, part name in"
-  ],
-  "priceAvailability": [
-   "السعر غير متوفر",
-   "The price is not available"
-  ],
-  "notAvailable": [
-   "غير متاح",
-   "is not available"
-  ],
-  "buttons": {
-   "makeOrder": [
-    "إصدار أمر",
-    "Make an order"
-   ],
-   "browse": [
-    "تصفح الكتالوج",
-    "Browse catalog"
-   ]
-  }
- },
- "setting": {
-  "links": {
-   "quotations": [
-    "الاقتباسات",
-    "Quotations"
-   ],
-   "orders": [
-    "أوامر",
-    "Orders"
-   ],
-   "helpCenter": [
-    "مركز المساعدة",
-    "Help center"
-   ],
-   "wishlist": [
-    "الأماني",
-    "Wish list"
-   ],
-   "garage": [
-    "مرآبك",
-    "Your garage"
-   ],
-   "accountSetting": [
-    "إعدادات الحساب",
-    "Account setting"
-   ],
-   "addressBook": [
-    "دليل العناوين",
-    "Address book"
-   ],
-   "socialMedia": [
-    "وسائل الاعلام الاجتماعية",
-    "Social media"
-   ]
-  },
-  "quotations": {
-   "title": [
-    "طلبك",
-    "Your request"
-   ],
-   "pendingRequest": {
-    "tab": [
-     "في انتظار الطلب",
-     "Pending requests"
-    ],
-    "table": {
-     "requestNo": [
-      "رقم الطلب",
-      "Request number"
-     ],
-     "status": [
-      "الحالة",
-      "Status"
-     ],
-     "dateOfSend": [
-      "تاريخ الإرسال",
-      "Date of send"
-     ],
-     "comment": [
-      "تعليق",
-      "Comment"
-     ],
-     "details": {
-      "button": [
-       "التفاصيل",
-       "Details"
+    "placeholder": {
+      "region": [
+        "اختر المنطقة",
+        "Select a region"
       ],
-      "itemNo": [
-       "رقم الشيء",
-       "Item number"
-      ],
-      "quantity": [
-       "كمية",
-       "Quantity"
-      ],
-      "itemName": [
-       "اسم العنصر",
-       "Item name"
+      "city": [
+        "اختر المدينة",
+        "Select a city"
       ]
-     }
-    }
-   },
-   "repliedRequest": {
-    "tab": [
-     "طلب رد",
-     "Replied requests"
-    ]
-   }
-  },
-  "orders": {
-   "title": [
-    "طلباتك",
-    "Your orders"
-   ],
-   "filter": {
-    "all": [
-     "الكل",
-     "All"
-    ],
-    "shipped": [
-     "شحنها",
-     "Shipped"
-    ],
-    "underPro": [
-     "تحت التجهيز",
-     "Under processing"
-    ],
-    "date": {
-     "pastThreeMonths": [
-      "3 أشهر الماضية",
-      "Past 3 months"
-     ],
-     "pastSixMonths": [
-      "6 أشهر الماضية",
-      "Past 6 months"
-     ],
-     "pastOneYear": [
-      "الماضي 1 سنة",
-      "Past 1 year"
-     ]
     },
-    "input": [
-     "البحث عن طريق رقم الطلب",
-     "Search by order number"
+    "termsCondition": [
+      "أوافق على شروط الشروط",
+      "I agree to terms of conditions"
     ]
-   },
-   "table": {
-    "orderNo": [
-     "رقم الأمر",
-     "Order number"
+  },
+  "autocomplete": {
+    "buttons": {
+      "continue": [
+        "استمر",
+        "Continue"
+      ],
+      "placeholder": [
+        "أدخل الموقع",
+        "Enter a location"
+      ]
+    }
+  },
+  "resetPassword": {
+    "placeholder": {
+      "oldPassword": [
+        "كلمة المرور القديمة",
+        "Old password"
+      ],
+      "newPassword": [
+        "كلمة السر الجديدة",
+        "New password"
+      ],
+      "confirmPassword": [
+        "أكد رقمك السري",
+        "Confirm your password"
+      ],
+      "mobile": [
+        "رقم الهاتف المحمول",
+        "Mobile number"
+      ],
+      "code": [
+        "ادخل الرمز",
+        "Enter the code"
+      ]
+    },
+    "cancel": [
+      "إلغاء",
+      "Cancel"
     ],
-    "date": [
-     "تاريخ",
-     "Date"
+    "update": [
+      "تحديث",
+      "Update"
+    ]
+  },
+  "searchResult": {
+    "title": [
+      "اسم الجزء في",
+      "Part name in"
     ],
-    "items": [
-     "العناصر",
-     "Items"
+    "partAvailability": [
+      "لسوء الحظ ، اسم الجزء في",
+      "Unfortunately, part name in"
     ],
-    "totalAmount": [
-     "المبلغ الإجمالي",
-     "Total amount"
+    "priceAvailability": [
+      "السعر غير متوفر",
+      "The price is not available"
     ],
-    "orderStatus": [
-     "حالة الطلب",
-     "Order status"
-    ],
-    "actions": [
-     "أفعال",
-     "Actions"
+    "notAvailable": [
+      "غير متاح",
+      "is not available"
     ],
     "buttons": {
-     "details": [
-      "تفاصيل",
-      "Details"
-     ],
-     "reorder": [
-      "إعادة ترتيب",
-      "Reorder"
-     ]
+      "makeOrder": [
+        "إصدار أمر",
+        "Make an order"
+      ],
+      "browse": [
+        "تصفح الكتالوج",
+        "Browse catalog"
+      ]
     }
-   }
   },
-  "helpCenter": {
-   "button": [
-    "تقديم طلب",
-    "Submit a request"
-   ]
-  },
-  "wishlist": {
-   "table": {
-    "item": [
-     "بند",
-     "Item"
-    ],
-    "price": [
-     "السعر",
-     "price"
-    ],
-    "date": [
-     "وأضاف",
-     "Added"
-    ],
-    "addToCart": [
-     "أضف إلى السلة",
-     "Add to cart"
-    ],
-    "delete": [
-     "حذف",
-     "Delete"
-    ]
-   }
-  },
-  "garage": {
-   "title": [
-    "كراج",
-    "Garage"
-   ],
-   "add": [
-    "إضافة مركبة",
-    "Add a vehicle"
-   ],
-   "delete": [
-    "حذف",
-    "Delete"
-   ]
-  },
-  "accountSetting": {
-   "info": {
-    "title": [
-     "معلومات الحساب",
-     "Account info"
-    ],
-    "label": [
-     "اسم",
-     "Name"
-    ],
-    "fNamePlaceholder": [
-     "اسمك الأول",
-     "Your first name"
-    ],
-    "lNamePlaceholder": [
-     "اسمك الاخير",
-     "Your last name"
-    ]
-   },
-   "access": {
-    "title": [
-     "الوصول للحساب",
-     "Account access"
-    ],
-    "email": [
-     "البريد الإلكتروني",
-     "Email"
-    ],
-    "emailButton": [
-     "تغيير البريد الإلكتروني الخاص بك",
-     "Change your email"
-    ],
-    "password": [
-     "كلمه السر",
-     "Password"
-    ],
-    "passwordButton": [
-     "غير كلمة المرور الخاصة بك",
-     "Change your password"
-    ]
-   },
-   "notification": {
-    "title": [
-     "إعلام",
-     "Notification"
-    ],
-    "placeholder": [
-     "اختر لغتك",
-     "Select your language"
-    ]
-   },
-   "arabic": [
-    "العربية",
-    "Arabic"
-   ],
-   "english": [
-    "الإنجليزية",
-    "English"
-   ],
-   "cancel": [
-    "إلغاء",
-    "Cancel"
-   ],
-   "save": [
-    "احفظ التغييرات",
-    "Save changes"
-   ]
-  },
-  "addressBook": {
-   "title": [
-    "دليل العناوين",
-    "Address Book"
-   ],
-   "add": [
-    "اضف عنوان",
-    "Add address"
-   ]
-  },
-  "order": {
-   "orderNo": [
-    "رقم الأمر",
-    "Order number"
-   ],
-   "orderPlaced": [
-    "تم الطلب",
-    "Order placed"
-   ],
-   "shippedTo": [
-    "تم شحنها إلي",
-    "Shipped to"
-   ],
-   "returnCondition": [
-    "لمزيد من المعلومات حول ما يمكن إرجاعه وتبادله ، يرجى الاطلاع على موقعنا",
-    "For more information on what can be returned and exchanged, please view our"
-   ],
-   "buttons": {
-    "returnEx": [
-     "العودة أو الصرف",
-     "Return or exchange"
-    ],
-    "cancel": [
-     "إلغاء",
-     "Cancel"
-    ],
-    "returnCondition": [
-     "تبادل أو / وظروف العودة",
-     "Exchange or/and return conditions"
-    ],
-    "shippingCondition": [
-     "الشحن والشروط",
-     "Shipping and conditions"
-    ]
-   },
-   "orderDetail": {
-    "title": [
-     "تفاصيل الطلب",
-     "Order details"
-    ],
-    "table": {
-     "items": [
-      "العناصر",
-      "Items"
-     ],
-     "quantity": [
-      "كمية",
-      "Quantity"
-     ],
-     "price": [
-      "السعر",
-      "price"
-     ]
-    }
-   },
-   "orderSummary": [
-    "ملخص الطلب",
-    "Order summary"
-   ]
-  }
- },
- "product": {
-  "buttons": {
-   "addToCart": [
-    "أضف إلى السلة",
-    "Add to cart"
-   ]
-  },
-  "compare": [
-   "مقارنة مع منتجات مماثلة",
-   "Compare to similar products"
-  ],
-  "related": [
-   "المنتجات ذات الصلة",
-   "Related products"
-  ],
-  "detail": [
-   "تفاصيل المنتج",
-   "Product details"
-  ],
-  "reviews": [
-   "تعليقات المنتج",
-   "Product reviews"
-  ],
-  "rating": [
-   "متوسط تقييم",
-   "Average rating"
-  ],
-  "ratingRange": [
-   "من",
-   "of"
-  ],
-  "writeReview": {
-   "title": [
-    "اكتب مراجعتك",
-    "Write your review"
-   ],
-   "placeholder": [
-    "أضف تعليقك هنا",
-    "Add your review here"
-   ],
-   "cancel": [
-    "إلغاء",
-    "Cancel"
-   ],
-   "sumbit": [
-    "خضع",
-    "Submit"
-   ]
-  },
-  "recentViewed": [
-   "منتجاتك التي تم عرضها مؤخرًا",
-   "Your recently viewed products"
-  ]
- },
- "compareProduct": {
-  "prices": [
-   "أسعار",
-   "prices"
-  ],
-  "customerRating": {
-   "title": [
-    "تقييم العملاء",
-    "Customer rating"
-   ],
-   "review": [
-    "إعادة النظر",
-    "Review"
-   ]
-  }
- },
- "cart": {
-  "table": {
-   "items": [
-    "العناصر",
-    "Items"
-   ],
-   "quantity": [
-    "كمية",
-    "Quantity"
-   ],
-   "price": [
-    "السعر",
-    "price"
-   ],
-   "delete": [
-    "حذف",
-    "Delete"
-   ]
-  },
-  "keepShopping": [
-   "حافظ على التسوق",
-   "Keep shopping"
-  ]
- },
- "orderSummary": {
-  "title": [
-   "ملخص الطلب",
-   "Order summary"
-  ],
-  "itemsAmount": [
-   "الوحدات الموجودة فى سلة التسوق الخاصة بك",
-   "item(s) in your cart"
-  ],
-  "subtotal": [
-   "حاصل الجمع",
-   "Subtotal"
-  ],
-  "shippingCost": [
-   "تكلفة الشحن",
-   "Shipping cost"
-  ],
-  "total": [
-   "مجموع",
-   "Total"
-  ],
-  "checkout": [
-   "الدفع",
-   "Checkout now"
-  ],
-  "placeOrder": [
-   "ضع طلبك",
-   "Place your order"
-  ]
- },
- "checkout": {
-  "customerTitle": [
-   "معلومات العميل",
-   "Customer information"
-  ],
-  "paymentTitle": [
-   "دفع",
-   "Payment"
-  ],
-  "confirmTitle": [
-   "راجع طلباتك",
-   "Review your order"
-  ],
-  "payment": {
-   "title": [
-    "اختر طريقة الدفع",
-    "Select a payment method"
-   ],
-   "method": [
-    "طريقة الدفع او السداد",
-    "Payment method"
-   ],
-   "buttons": {
-    "creditCard": [
-     "بطاقة ائتمان",
-     "Credit card"
-    ],
-    "bankTransfer": [
-     "التحويل المصرفي",
-     "Bank transfer"
-    ],
-    "cash": [
-     "الدفع عن الاستلام",
-     "Cash on delivery"
-    ],
-    "newCard": [
-     "أضف بطاقة جديدة",
-     "Add a new card"
-    ],
-    "continue": [
-     "استمر",
-     "Continue"
-    ]
-   },
-   "creditCard": {
-    "table": {
-     "card": [
-      "بطاقات الائتمان الخاصة بك",
-      "Your credit card"
-     ],
-     "name": [
-      "الاسم على البطاقة",
-      "Name on the card"
-     ],
-     "cardNo": [
-      "رقم البطاقة",
-      "Card number"
-     ],
-     "expiration": [
-      "انتهاء الصلاحية",
-      "Expiration"
-     ]
+  "setting": {
+    "links": {
+      "quotations": [
+        "الاقتباسات",
+        "Quotations"
+      ],
+      "orders": [
+        "أوامر",
+        "Orders"
+      ],
+      "helpCenter": [
+        "مركز المساعدة",
+        "Help center"
+      ],
+      "wishlist": [
+        "الأماني",
+        "Wish list"
+      ],
+      "garage": [
+        "مرآبك",
+        "Your garage"
+      ],
+      "accountSetting": [
+        "إعدادات الحساب",
+        "Account setting"
+      ],
+      "addressBook": [
+        "دليل العناوين",
+        "Address book"
+      ],
+      "socialMedia": [
+        "وسائل الاعلام الاجتماعية",
+        "Social media"
+      ]
     },
-    "newCard": {
-     "name": [
-      "الاسم على البطاقة",
-      "Name on the card"
-     ],
-     "cardNo": [
-      "رقم البطاقة",
-      "Card number"
-     ],
-     "expiration": [
-      "انتهاء الصلاحية",
-      "Expiration date"
-     ],
-     "add": [
-      "أضف بطاقتك",
-      "Add your card"
-     ]
+    "quotations": {
+      "title": [
+        "طلبك",
+        "Your request"
+      ],
+      "pendingRequest": {
+        "tab": [
+          "في انتظار الطلب",
+          "Pending requests"
+        ],
+        "table": {
+          "requestNo": [
+            "رقم الطلب",
+            "Request number"
+          ],
+          "status": [
+            "الحالة",
+            "Status"
+          ],
+          "dateOfSend": [
+            "تاريخ الإرسال",
+            "Date of send"
+          ],
+          "comment": [
+            "تعليق",
+            "Comment"
+          ],
+          "details": {
+            "button": [
+              "التفاصيل",
+              "Details"
+            ],
+            "itemNo": [
+              "رقم الشيء",
+              "Item number"
+            ],
+            "quantity": [
+              "كمية",
+              "Quantity"
+            ],
+            "itemName": [
+              "اسم العنصر",
+              "Item name"
+            ]
+          }
+        }
+      },
+      "repliedRequest": {
+        "tab": [
+          "طلب رد",
+          "Replied requests"
+        ]
+      }
+    },
+    "orders": {
+      "title": [
+        "طلباتك",
+        "Your orders"
+      ],
+      "filter": {
+        "all": [
+          "الكل",
+          "All"
+        ],
+        "shipped": [
+          "شحنها",
+          "Shipped"
+        ],
+        "underPro": [
+          "تحت التجهيز",
+          "Under processing"
+        ],
+        "date": {
+          "pastThreeMonths": [
+            "3 أشهر الماضية",
+            "Past 3 months"
+          ],
+          "pastSixMonths": [
+            "6 أشهر الماضية",
+            "Past 6 months"
+          ],
+          "pastOneYear": [
+            "الماضي 1 سنة",
+            "Past 1 year"
+          ]
+        },
+        "input": [
+          "البحث عن طريق رقم الطلب",
+          "Search by order number"
+        ]
+      },
+      "table": {
+        "orderNo": [
+          "رقم الأمر",
+          "Order number"
+        ],
+        "date": [
+          "تاريخ",
+          "Date"
+        ],
+        "items": [
+          "العناصر",
+          "Items"
+        ],
+        "totalAmount": [
+          "المبلغ الإجمالي",
+          "Total amount"
+        ],
+        "orderStatus": [
+          "حالة الطلب",
+          "Order status"
+        ],
+        "actions": [
+          "أفعال",
+          "Actions"
+        ],
+        "buttons": {
+          "details": [
+            "تفاصيل",
+            "Details"
+          ],
+          "reorder": [
+            "إعادة ترتيب",
+            "Reorder"
+          ]
+        }
+      }
+    },
+    "helpCenter": {
+      "button": [
+        "تقديم طلب",
+        "Submit a request"
+      ]
+    },
+    "wishlist": {
+      "table": {
+        "item": [
+          "بند",
+          "Item"
+        ],
+        "price": [
+          "السعر",
+          "price"
+        ],
+        "date": [
+          "وأضاف",
+          "Added"
+        ],
+        "addToCart": [
+          "أضف إلى السلة",
+          "Add to cart"
+        ],
+        "delete": [
+          "حذف",
+          "Delete"
+        ]
+      }
+    },
+    "garage": {
+      "title": [
+        "كراج",
+        "Garage"
+      ],
+      "add": [
+        "إضافة مركبة",
+        "Add a vehicle"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ]
+    },
+    "accountSetting": {
+      "info": {
+        "title": [
+          "معلومات الحساب",
+          "Account info"
+        ],
+        "label": [
+          "اسم",
+          "Name"
+        ],
+        "fNamePlaceholder": [
+          "اسمك الأول",
+          "Your first name"
+        ],
+        "lNamePlaceholder": [
+          "اسمك الاخير",
+          "Your last name"
+        ]
+      },
+      "access": {
+        "title": [
+          "الوصول للحساب",
+          "Account access"
+        ],
+        "email": [
+          "البريد الإلكتروني",
+          "Email"
+        ],
+        "emailButton": [
+          "تغيير البريد الإلكتروني الخاص بك",
+          "Change your email"
+        ],
+        "password": [
+          "كلمه السر",
+          "Password"
+        ],
+        "passwordButton": [
+          "غير كلمة المرور الخاصة بك",
+          "Change your password"
+        ]
+      },
+      "notification": {
+        "title": [
+          "إعلام",
+          "Notification"
+        ],
+        "placeholder": [
+          "اختر لغتك",
+          "Select your language"
+        ]
+      },
+      "arabic": [
+        "العربية",
+        "Arabic"
+      ],
+      "english": [
+        "الإنجليزية",
+        "English"
+      ],
+      "cancel": [
+        "إلغاء",
+        "Cancel"
+      ],
+      "save": [
+        "احفظ التغييرات",
+        "Save changes"
+      ]
+    },
+    "addressBook": {
+      "title": [
+        "دليل العناوين",
+        "Address Book"
+      ],
+      "add": [
+        "اضف عنوان",
+        "Add address"
+      ]
+    },
+    "order": {
+      "orderNo": [
+        "رقم الأمر",
+        "Order number"
+      ],
+      "orderPlaced": [
+        "تم الطلب",
+        "Order placed"
+      ],
+      "shippedTo": [
+        "تم شحنها إلي",
+        "Shipped to"
+      ],
+      "returnCondition": [
+        "لمزيد من المعلومات حول ما يمكن إرجاعه وتبادله ، يرجى الاطلاع على موقعنا",
+        "For more information on what can be returned and exchanged, please view our"
+      ],
+      "buttons": {
+        "returnEx": [
+          "العودة أو الصرف",
+          "Return or exchange"
+        ],
+        "cancel": [
+          "إلغاء",
+          "Cancel"
+        ],
+        "returnCondition": [
+          "تبادل أو / وظروف العودة",
+          "Exchange or/and return conditions"
+        ],
+        "shippingCondition": [
+          "الشحن والشروط",
+          "Shipping and conditions"
+        ]
+      },
+      "orderDetail": {
+        "title": [
+          "تفاصيل الطلب",
+          "Order details"
+        ],
+        "table": {
+          "items": [
+            "العناصر",
+            "Items"
+          ],
+          "quantity": [
+            "كمية",
+            "Quantity"
+          ],
+          "price": [
+            "السعر",
+            "price"
+          ]
+        }
+      },
+      "orderSummary": [
+        "ملخص الطلب",
+        "Order summary"
+      ]
     }
-   },
-   "bankTransfer": {
+  },
+  "product": {
+    "buttons": {
+      "addToCart": [
+        "أضف إلى السلة",
+        "Add to cart"
+      ]
+    },
+    "compare": [
+      "مقارنة مع منتجات مماثلة",
+      "Compare to similar products"
+    ],
+    "related": [
+      "المنتجات ذات الصلة",
+      "Related products"
+    ],
+    "detail": [
+      "تفاصيل المنتج",
+      "Product details"
+    ],
+    "reviews": [
+      "تعليقات المنتج",
+      "Product reviews"
+    ],
+    "rating": [
+      "متوسط تقييم",
+      "Average rating"
+    ],
+    "ratingRange": [
+      "من",
+      "of"
+    ],
+    "writeReview": {
+      "title": [
+        "اكتب مراجعتك",
+        "Write your review"
+      ],
+      "placeholder": [
+        "أضف تعليقك هنا",
+        "Add your review here"
+      ],
+      "cancel": [
+        "إلغاء",
+        "Cancel"
+      ],
+      "sumbit": [
+        "خضع",
+        "Submit"
+      ]
+    },
+    "recentViewed": [
+      "منتجاتك التي تم عرضها مؤخرًا",
+      "Your recently viewed products"
+    ]
+  },
+  "compareProduct": {
+    "prices": [
+      "أسعار",
+      "prices"
+    ],
+    "customerRating": {
+      "title": [
+        "تقييم العملاء",
+        "Customer rating"
+      ],
+      "review": [
+        "إعادة النظر",
+        "Review"
+      ]
+    }
+  },
+  "cart": {
+    "table": {
+      "items": [
+        "العناصر",
+        "Items"
+      ],
+      "quantity": [
+        "كمية",
+        "Quantity"
+      ],
+      "price": [
+        "السعر",
+        "price"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ]
+    },
+    "keepShopping": [
+      "حافظ على التسوق",
+      "Keep shopping"
+    ]
+  },
+  "orderSummary": {
     "title": [
-     "تفاصيل البنك",
-     "Bank detail"
+      "ملخص الطلب",
+      "Order summary"
     ],
-    "name": [
-     "اسم البنك",
-     "Bank name"
+    "itemsAmount": [
+      "الوحدات الموجودة فى سلة التسوق الخاصة بك",
+      "item(s) in your cart"
     ],
-    "holderName": [
-     "اسم صاحب الحساب",
-     "Account holder's name"
+    "subtotal": [
+      "حاصل الجمع",
+      "Subtotal"
     ],
-    "number": [
-     "رقم حساب",
-     "Account number"
+    "shippingCost": [
+      "تكلفة الشحن",
+      "Shipping cost"
     ],
-    "code": [
-     "رقم التحويل المالي",
-     "SWIFT code"
+    "total": [
+      "مجموع",
+      "Total"
+    ],
+    "checkout": [
+      "الدفع",
+      "Checkout now"
+    ],
+    "placeOrder": [
+      "ضع طلبك",
+      "Place your order"
     ]
-   },
-   "cash": {
+  },
+  "checkout": {
+    "customerTitle": [
+      "معلومات العميل",
+      "Customer information"
+    ],
+    "paymentTitle": [
+      "دفع",
+      "Payment"
+    ],
+    "confirmTitle": [
+      "راجع طلباتك",
+      "Review your order"
+    ],
+    "payment": {
+      "title": [
+        "اختر طريقة الدفع",
+        "Select a payment method"
+      ],
+      "method": [
+        "طريقة الدفع او السداد",
+        "Payment method"
+      ],
+      "buttons": {
+        "creditCard": [
+          "بطاقة ائتمان",
+          "Credit card"
+        ],
+        "bankTransfer": [
+          "التحويل المصرفي",
+          "Bank transfer"
+        ],
+        "cash": [
+          "الدفع عن الاستلام",
+          "Cash on delivery"
+        ],
+        "newCard": [
+          "أضف بطاقة جديدة",
+          "Add a new card"
+        ],
+        "continue": [
+          "استمر",
+          "Continue"
+        ]
+      },
+      "creditCard": {
+        "table": {
+          "card": [
+            "بطاقات الائتمان الخاصة بك",
+            "Your credit card"
+          ],
+          "name": [
+            "الاسم على البطاقة",
+            "Name on the card"
+          ],
+          "cardNo": [
+            "رقم البطاقة",
+            "Card number"
+          ],
+          "expiration": [
+            "انتهاء الصلاحية",
+            "Expiration"
+          ]
+        },
+        "newCard": {
+          "name": [
+            "الاسم على البطاقة",
+            "Name on the card"
+          ],
+          "cardNo": [
+            "رقم البطاقة",
+            "Card number"
+          ],
+          "expiration": [
+            "انتهاء الصلاحية",
+            "Expiration date"
+          ],
+          "add": [
+            "أضف بطاقتك",
+            "Add your card"
+          ]
+        }
+      },
+      "bankTransfer": {
+        "title": [
+          "تفاصيل البنك",
+          "Bank detail"
+        ],
+        "name": [
+          "اسم البنك",
+          "Bank name"
+        ],
+        "holderName": [
+          "اسم صاحب الحساب",
+          "Account holder's name"
+        ],
+        "number": [
+          "رقم حساب",
+          "Account number"
+        ],
+        "code": [
+          "رقم التحويل المالي",
+          "SWIFT code"
+        ]
+      },
+      "cash": {
+        "title": [
+          "ادفع نقدًا عند الاستلام",
+          "Pay with cash upon delivery"
+        ]
+      }
+    },
+    "confirm": {
+      "table": {
+        "items": [
+          "العناصر",
+          "Items"
+        ],
+        "quantity": [
+          "كمية",
+          "Quantity"
+        ],
+        "price": [
+          "السعر",
+          "price"
+        ]
+      },
+      "placeOrder": [
+        "ضع طلبك",
+        "Place your order"
+      ]
+    }
+  },
+  "shippingAddress": {
     "title": [
-     "ادفع نقدًا عند الاستلام",
-     "Pay with cash upon delivery"
-    ]
-   }
+      "عنوان الشحن",
+      "Shipping address"
+    ],
+    "subTitle": [
+      "المكان الذي ترغب في شحن سلعك فيه",
+      "Where you would like your items shipped"
+    ],
+    "buttons": {
+      "deliveryAddress": [
+        "التوصيل لهذا العنوان",
+        "Deliver to this address"
+      ],
+      "edit": [
+        "تصحيح",
+        "Edit"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ]
+    }
   },
-  "confirm": {
-   "table": {
-    "items": [
-     "العناصر",
-     "Items"
+  "deliveryAddress": {
+    "title": [
+      "عنوان التسليم",
+      "Delivery address"
     ],
-    "quantity": [
-     "كمية",
-     "Quantity"
-    ],
-    "price": [
-     "السعر",
-     "price"
+    "change": [
+      "تغيير",
+      "Change"
     ]
-   },
-   "placeOrder": [
-    "ضع طلبك",
-    "Place your order"
-   ]
-  }
- },
- "shippingAddress": {
-  "title": [
-   "عنوان الشحن",
-   "Shipping address"
-  ],
-  "subTitle": [
-   "المكان الذي ترغب في شحن سلعك فيه",
-   "Where you would like your items shipped"
-  ],
-  "buttons": {
-   "deliveryAddress": [
-    "التوصيل لهذا العنوان",
-    "Deliver to this address"
-   ],
-   "edit": [
-    "تصحيح",
-    "Edit"
-   ],
-   "delete": [
-    "حذف",
-    "Delete"
-   ]
-  }
- },
- "deliveryAddress": {
-  "title": [
-   "عنوان التسليم",
-   "Delivery address"
-  ],
-  "change": [
-   "تغيير",
-   "Change"
-  ]
- },
- "paymentMethod": {
-  "title": [
-   "طريقة الدفع او السداد",
-   "Payment method"
-  ],
-  "change": [
-   "تغيير",
-   "Change"
-  ]
- },
- "quotationRequest": {
-  "title": [
-   "طلب ل",
-   "Request for"
-  ],
-  "subTitle": [
-   "اطلب جزء سيارتك بمجرد إرسال طلب وسوف نقوم بالرد عليك بتفاصيل السعر",
-   "Order your car part by just sending a request and we will reply to you with the price details"
-  ],
-  "carInfo": {
-   "title": [
-    "معلومات السيارة",
-    "Car info"
-   ],
-   "select": [
-    "اختر السيارة",
-    "Select vehicle"
-   ]
   },
-  "partInfo": {
-   "title": [
-    "جزء المعلومات",
-    "Part information"
-   ],
-   "add": [
-    "أضف جزء",
-    "Add part"
-   ],
-   "delete": [
-    "حذف",
-    "Delete"
-   ]
-  },
-  "send": [
-   "ارسل طلب",
-   "Send request"
-  ],
-  "placeholder": {
-   "carInfo": {
-    "vehicle": [
-     "كلمة البحث",
-     "Search keyword"
+  "paymentMethod": {
+    "title": [
+      "طريقة الدفع او السداد",
+      "Payment method"
     ],
-    "model": [
-     "اختر نموذجًا",
-     "Select a model"
-    ],
-    "year": [
-     "اختر سنة",
-     "Select a year"
-    ],
-    "vin": [
-     "أدخل رقم الهيكل الخاص بك",
-     "Enter your Vin number"
+    "change": [
+      "تغيير",
+      "Change"
     ]
-   }
+  },
+  "quotationRequest": {
+    "title": [
+      "طلب ل",
+      "Request for"
+    ],
+    "subTitle": [
+      "اطلب جزء سيارتك بمجرد إرسال طلب وسوف نقوم بالرد عليك بتفاصيل السعر",
+      "Order your car part by just sending a request and we will reply to you with the price details"
+    ],
+    "carInfo": {
+      "title": [
+        "معلومات السيارة",
+        "Car info"
+      ],
+      "select": [
+        "اختر السيارة",
+        "Select vehicle"
+      ]
+    },
+    "partInfo": {
+      "title": [
+        "جزء المعلومات",
+        "Part information"
+      ],
+      "add": [
+        "أضف جزء",
+        "Add part"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ]
+    },
+    "send": [
+      "ارسل طلب",
+      "Send request"
+    ],
+    "placeholder": {
+      "carInfo": {
+        "vehicle": [
+          "كلمة البحث",
+          "Search keyword"
+        ],
+        "model": [
+          "اختر نموذجًا",
+          "Select a model"
+        ],
+        "year": [
+          "اختر سنة",
+          "Select a year"
+        ],
+        "vin": [
+          "أدخل رقم الهيكل الخاص بك",
+          "Enter your Vin number"
+        ]
+      }
+    }
+  },
+  "renderFileInput": {
+    "uploadFile": [
+      "رفع ملف",
+      "Upload file"
+    ]
   }
- },
- "renderFileInput": {
-  "uploadFile": [
-   "رفع ملف",
-   "Upload file"
-  ]
- }
 }
