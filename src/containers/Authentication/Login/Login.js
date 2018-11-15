@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
-import { Paper, Tabs, Tab } from '@material-ui/core';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import { Dialog } from 'primereact/components/dialog/Dialog';
 import Button from '../../../components/UI/Button';
 
 import RenderField from '../../../components/RenderField/RenderField';
-import TabContainer from '../../../components/UI/TabContainer';
 import SocialMedia from '../SocialMedia/SocialMedia';
 import VerificationNumber from '../../../components/VerificationNumber/VerificationNumber';
 import PrivateRoute from '../../../components/PrivateRoute';
@@ -22,7 +20,6 @@ import * as validations from '../../../utils';
 import { getComponentName } from '../../../utils';
 
 
-import './Login.css';
 import { ON_SOCIAL_MEDIA_LOGIN } from '../../../constants';
 import Title from '../../../components/UI/Title';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
@@ -32,7 +29,6 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      loginOrSignUp: 1,
       showResetPassword: false,
       rememberMe: ''
     }
@@ -71,45 +67,23 @@ class Login extends Component {
       });
   }
   renderLogin = (login, dialog) => {
-    const { loginOrSignUp } = this.state;
     const { translate } = this.props;
-    const { match } = this.props;
 
     return <Fragment>
-      {
-        match.url === '/' ? null :
-          <Paper>
-            <Tabs
-              value={loginOrSignUp}
-              indicatorColor="primary"
-              textColor="primary"
-              onChange={this.handleChange}
-              fullWidth
-              centered >
-              <Tab label={translate("form.signin.tabs.tabOne")} />
-              <Tab label={translate("form.signin.tabs.tabTwo")} />
-            </Tabs>
-          </Paper>
-      }
-      {
-        loginOrSignUp === 1 &&
-        <Fragment>
-          <div>
-            {login}
-            <SocialMedia
-              title={translate("form.signin.socialMedia")}
-              handleResponse={this.props.handleResponse}
-              handleFailure={this.props.handleFailure} />
-            <div id="sign-up">
-              <p>{translate("form.signin.signup")}</p>
-              <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
-              <p>{translate("form.signin.here")}</p>
+            <div>
+              {login}
+              <SocialMedia
+                title={translate("form.signin.socialMedia")}
+                handleResponse={this.props.handleResponse}
+                handleFailure={this.props.handleFailure} />
+              <div id="sign-up-link">
+                <p>{translate("form.signin.signup")}</p>
+                <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
+                <p>{translate("form.signin.here")}</p>
+              </div>
             </div>
-          </div>
-          {dialog}
+            {dialog}
         </Fragment>
-      }
-    </Fragment>
   }
 
   render() {
@@ -172,6 +146,11 @@ class Login extends Component {
               )
             }} />
             <Route path="/" exact={true} render={() => {
+              return (
+                this.renderLogin(login, dialog)
+              )
+            }} />
+            <Route path="/signup" exact={true} render={() => {
               return (
                 this.renderLogin(login, dialog)
               )

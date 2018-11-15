@@ -1,32 +1,24 @@
 import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Paper, Tabs, Tab } from '@material-ui/core';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import { Dialog } from 'primereact/components/dialog/Dialog';
 
 import SignupForm from './SignupForm/SignupForm';
 import SocialMedia from '../SocialMedia/SocialMedia';
-import TabContainer from '../../../components/UI/TabContainer';
 import VerificationNumber from '../../../components/VerificationNumber/VerificationNumber';
 import { getComponentName } from '../../../utils';
 import { getCountries } from '../../../actions/apiAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
+import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo } from '../../../actions/customerAction';
-import { ON_SOCIAL_MEDIA_SIGNUP } from '../../../constants';
+import { ON_SOCIAL_MEDIA_SIGNUP, colors } from '../../../constants';
 
-import './Signup.css';
+import Title from '../../../components/UI/Title';
 
 
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loginOrSignUp: 0,
-    }
-  }
 
   componentWillMount() {
     this.props.emailSignup();
@@ -58,52 +50,70 @@ class Signup extends Component {
   }
 
   render() {
-    const { loginOrSignUp } = this.state;
-    const { translate } = this.props;
+    const { translate, onShowDialog } = this.props;
     const signup = <SignupForm
       showPassword={this.props.showPassword}
       onSubmit={this.handleSubmit}
       countries={this.props.countries} />
-    const dialog =
-      <Dialog header={translate("dialog.signup.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
-        <div className="Signup-verification_number">
-          <VerificationNumber
-            label={translate("dialog.signup.label")}
-            name="code"
-            placeholder={translate("dialog.signup.placeholder")}
-            footer={translate("dialog.signup.footer")}
-            submitButton={translate("general.buttons.confirm")}
-            onSubmit={this.onConfirmDialog}
-          />
-          <p>{translate("dialog.signup.resendCode")}<button type="button" className="btn btn-sm btn-link">{translate("dialog.signup.resendCodeLink")}</button></p>
-        </div>
-      </Dialog>
+    // const dialog =
+    //   <Dialog header={translate("dialog.signup.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
+    //     <div className="Signup-verification_number">
+    //       <VerificationNumber
+    //         label={translate("dialog.signup.label")}
+    //         name="code"
+    //         placeholder={translate("dialog.signup.placeholder")}
+    //         footer={translate("dialog.signup.footer")}
+    //         submitButton={translate("general.buttons.confirm")}
+    //         onSubmit={this.onConfirmDialog}
+    //       />
+    //       <p>{translate("dialog.signup.resendCode")}<button type="button" className="btn btn-sm btn-link">{translate("dialog.signup.resendCodeLink")}</button></p>
+    //     </div>
+    //   </Dialog>
+    const dialog = <Dialog
+      showHeader={true}
+      maximizable={true}
+      visible={this.props.visible}
+      positionTop={65}
+      modal={true}
+      onHide={this.props.onHide}
+      style={{
+        background: colors.lightGray
+      }}
+    >
+      <Login />
+    </Dialog>
     return (
-      <Fragment>
-        <Paper>
-          <Tabs
-            value={loginOrSignUp}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={this.handleChange}
-            fullWidth
-            centered >
-            <Tab label={translate("form.signin.tabs.tabOne")} />
-            <Tab label={translate("form.signin.tabs.tabTwo")} />
-          </Tabs>
-        </Paper>
-        {loginOrSignUp === 0 &&
-          <TabContainer>
-            <div className="SignupForm-container">
+      <section id="signup">
+        <div className="container-fluid">
+          <Title
+            header={translate("form.signup.title")}
+            subHeader={translate("form.signup.subHeader")}
+          />
+          <div className="row">
+            <div className="column">
               {signup}
-              <hr />
+            </div>
+            <div className="column">
+              <span className="seperator"></span>
+              <div id="signin-link">
+                <span className="user-img">
+                  <img class="user" alt="user" src="img/user.svg" />
+                </span>
+                <span>{translate("form.signup.haveAccount")}
+                <span className="btn-link" onClick={onShowDialog}>{translate("form.signup.signinLink")}</span>
+                {translate("form.signup.here")}
+                </span>
+              </div>
               <SocialMedia
+                title={translate("form.signup.socialMedia")}
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
+              <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
             </div>
-            {dialog}
-          </TabContainer>}
-      </Fragment>
+          </div>
+        </div>
+        {dialog}
+      </section>
     )
   }
 }

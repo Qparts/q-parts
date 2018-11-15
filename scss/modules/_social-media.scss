@@ -1,0 +1,30 @@
+#social-media {
+  > div:first-child {
+    position: relative;
+    margin-top: 35px;
+    height: 20px;
+    text-align: center;
+
+    p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: $light-gray;
+      color: $lighter-grey;
+      line-height: 1.67;
+      padding-left: 12px;
+      padding-right: 12px;
+      @include font-size(15px);
+    }
+  }
+  > div:nth-child(2) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 29px;
+  }
+  div {
+    margin-left: 7px;
+  }
+}

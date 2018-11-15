@@ -215,16 +215,6 @@
         "هنا",
         "here"
       ],
-      "tabs": {
-        "tabOne": [
-          "سجل",
-          "Sign up"
-        ],
-        "tabTwo": [
-          "تسجيل الدخول",
-          "Sign in"
-        ]
-      },
       "placeholders": {
         "email": [
           "أدخل بريدك الالكتروني",
@@ -241,6 +231,14 @@
       ]
     },
     "signup": {
+      "title": [
+        "انضم إلينا",
+        "Join Us"
+      ],
+      "subHeader": [
+        "عرض وإدارة وإيجاد أجزاء للسيارات في المرآب الخاص بك",
+        "View, manage and find parts for the vehicles in your garage"
+      ],
       "firstName": [
         "الاسم الاول",
         "First name"
@@ -257,9 +255,9 @@
         "اختر دولة",
         "Select a country"
       ],
-      "mobile": [
-        "رقم الهاتف المحمول",
-        "Mobile number"
+      "city": [
+        "اختر المدينة",
+        "Select a city"
       ],
       "password": [
         "كلمه السر",
@@ -269,19 +267,9 @@
         "أكد كلمه السري",
         "Confirm your password"
       ],
-      "tabs": {
-        "tabOne": [
-          "سجل",
-          "Sign up"
-        ],
-        "tabTwo": [
-          "تسجيل الدخول",
-          "Sign in"
-        ]
-      },
       "button": [
-        "إنشاء حساب",
-        "create an account"
+        "تسجيل",
+        "Register"
       ],
       "placeholders": {
         "firstName": [
@@ -300,19 +288,39 @@
           "اختر دولة",
           "Select a country"
         ],
-        "mobile": [
-          "رقم الهاتف المحمول",
-          "Mobile number"
+        "city": [
+          "اختر المدينة",
+          "Select a city"
         ],
         "password": [
           "ادخل رقمك السري",
-          "Enter your password"
+          "Password (at least 6 characters)"
         ],
         "confirmPassword": [
           "أكد كلمه السري",
           "Confirm your password"
         ]
-      }
+      },
+      "socialMedia": [
+        "أو تسجيل الدخول باستخدام",
+        "Or Sign in with"
+      ],
+      "socialMediaInfo": [
+        ".تسجيل الدخول الاجتماعي يبقيك من إنشاء حساب آخر",
+        "Social Login keeps you from creating another account."
+      ],
+      "haveAccount": [
+        "هل لديك حساب؟",
+        "Already have an account?"
+      ],
+      "here": [
+        "هنا",
+        "here"
+      ],
+      "signinLink": [
+        "تسجيل الدخول",
+        "Sign in"
+      ]
     },
     "vehicle": {
       "make": [

@@ -10,6 +10,9 @@
 
     .select__indicators {
       width: 20px;
+      .select__indicator-separator {
+        width: 0;
+      }
     }
     .select__value-container {
       width: 50px;
