@@ -18,26 +18,30 @@ class SignupForm extends Component {
   render() {
     const { translate } = this.props;
     return (
-      <div>
-        <form onSubmit={this.props.handleSubmit}>
-          <div className="signup-form__two-inputs">
-            <div className="form-group">
-              <Field
-                label={translate("form.signup.firstName")}
-                name="firstName"
-                component={RenderField}
-                type="text"
-                placeholder={translate("form.signup.placeholders.firstName")}
-                validate={[validations.required]} />
+      <form className="row" onSubmit={this.props.handleSubmit}>
+        <div className="col-12">
+          <div className="row signup-form__two-inputs">
+            <div className="col-6">
+              <div className="form-group">
+                <Field
+                  label={translate("form.signup.firstName")}
+                  name="firstName"
+                  component={RenderField}
+                  type="text"
+                  placeholder={translate("form.signup.placeholders.firstName")}
+                  validate={[validations.required]} />
+              </div>
             </div>
-            <div className="form-group">
-              <Field
-                label={translate("form.signup.lastName")}
-                name="lastName"
-                component={RenderField}
-                type="text"
-                placeholder={translate("form.signup.placeholders.lastName")}
-                validate={[validations.required]} />
+            <div className="col-6">
+              <div className="form-group">
+                <Field
+                  label={translate("form.signup.lastName")}
+                  name="lastName"
+                  component={RenderField}
+                  type="text"
+                  placeholder={translate("form.signup.placeholders.lastName")}
+                  validate={[validations.required]} />
+              </div>
             </div>
           </div>
           <div className="form-group">
@@ -49,38 +53,44 @@ class SignupForm extends Component {
               placeholder={translate("form.signup.placeholders.email")}
               validate={[validations.required, validations.email]} />
           </div>
-          <div id="country-city">
-            <div className="form-group">
-              <Field
-                label={translate("form.signup.country")}
-                name="countryId"
-                component={SelectInput}
-                clearable={false}
-                options={this.props.countries}
-                placeholder={translate("form.signup.placeholders.country")}
-                validate={[validations.required]} />
+          <div id="country-city" className="row signup-form__two-inputs">
+            <div className="col-6">
+              <div className="form-group">
+                <Field
+                  label={translate("form.signup.country")}
+                  name="countryId"
+                  component={SelectInput}
+                  clearable={false}
+                  options={this.props.countries}
+                  placeholder={translate("form.signup.placeholders.country")}
+                  validate={[validations.required]} />
+              </div>
             </div>
-            <div className="form-group">
-              <Field
-                label={translate("form.signup.city")}
-                name="city"
-                component={SelectInput}
-                clearable={false}
-                options={this.props.countries}
-                placeholder={translate("form.signup.placeholders.city")}
-                validate={[validations.required]} />
+            <div className="col-6">
+              <div className="form-group">
+                <Field
+                  label={translate("form.signup.city")}
+                  name="city"
+                  component={SelectInput}
+                  clearable={false}
+                  options={this.props.countries}
+                  placeholder={translate("form.signup.placeholders.city")}
+                  validate={[validations.required]} />
+              </div>
             </div>
           </div>
           {
             this.props.showPassword && (
-                <div className="form-group">
-                  <Field
-                    label={translate("form.signup.password")}
-                    name="password"
-                    component={RenderField}
-                    type="password" placeholder={translate("form.signup.placeholders.password")}
-                    validate={[validations.required]} />
-                </div>
+              <div className="form-group password-strength">
+                <Field
+                  hasPasswordStrength={true}
+                  label={translate("form.signup.password")}
+                  name="password"
+                  component={RenderField}
+                  type="password" placeholder={translate("form.signup.placeholders.password")}
+                  validate={[validations.required]} />
+                  <label>Password Strength</label>
+              </div>
             )
           }
           <div id="bottom">
@@ -95,8 +105,8 @@ class SignupForm extends Component {
               text={translate("form.signup.button")}
               icon="icon-arrow-right" />
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     );
   }
 }

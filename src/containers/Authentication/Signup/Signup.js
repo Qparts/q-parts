@@ -90,10 +90,10 @@ class Signup extends Component {
             subHeader={translate("form.signup.subHeader")}
           />
           <div className="row">
-            <div className="column">
+            <div className="col-lg-6 col-sm-12">
               {signup}
             </div>
-            <div className="column">
+            <div id="right-half" className="col-lg-6 col-sm-12">
               <span className="seperator"></span>
               <div id="signin-link">
                 <span className="user-img">

@@ -33,11 +33,13 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <LocalizeProvider store={store}>
-      <ErrorBoundary>
-        <Routes />
-      </ErrorBoundary>
-    </LocalizeProvider>
+    <div dir="ltr">
+      <LocalizeProvider store={store}>
+        <ErrorBoundary>
+          <Routes />
+        </ErrorBoundary>
+      </LocalizeProvider>
+    </div>
   </Provider>
   , document.getElementById('root'));
 registerServiceWorker();

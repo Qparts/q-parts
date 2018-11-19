@@ -178,7 +178,6 @@ export class ManualForm extends Component {
                     <label className="mob-form-order-container-label">{translate("form.order.make")}</label>
                     <div className="form-inline">
                       <Field
-                        className="col-lg-4 col-xl-4 manual-mob-maker col-md-12 col-sm-12"
                         name="maker"
                         placeholder="make"
                         component={SelectInput}
@@ -187,7 +186,6 @@ export class ManualForm extends Component {
                       />
                       <span className="seperator"></span>
                       <Field
-                        className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
                         name="model"
                         placeholder="model"
                         component={SelectInput}
@@ -196,7 +194,6 @@ export class ManualForm extends Component {
                       />
                       <span className="seperator"></span>
                       <Field
-                        className="col-lg-4 col-xl-4  col-md-12 col-sm-12"
                         name="year"
                         placeholder="year"
                         component={SelectInput}

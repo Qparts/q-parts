@@ -2,6 +2,10 @@
   padding-top: 75px;
   background: $light-gray;
 
+  @include small {
+    padding-top: 0;
+  }
+
   .form-group {
     margin-bottom: 40px;
   }
@@ -14,7 +18,7 @@
       text-transform: capitalize;
     }
     .red-line {
-      width: 153px;
+      max-width: 153px;
       height: 1px;
     }
   }
@@ -32,9 +36,9 @@
     input {
       @extend .rounded-rectangle;
       @include boarder-right-radius(0, 20px);
-      width: 528px;
       height: 55px;
       padding-left: 20px;
+      width: 100%;
     }
     input::placeholder {
       color: $charcoal-grey-two-40;
@@ -46,20 +50,15 @@
   }
   .row {
     position: relative;
-    display: flex;
-  }
-  .column {
-    flex: 50%;
   }
 
   .signup-form__two-inputs {
-    display: flex;
-    div {
-      input {
-        width: 259px;
-      }
+    @extend .no-gutters;
+    .form-group {
+      // max-width: 259px;
     }
     > div:nth-child(1) {
+      padding-right: 10px;
       input {
         border-radius: side-values(20px 0 0 20px) !important;
       }
@@ -69,13 +68,9 @@
         border-radius: side-values(0 0 20px 0) !important;
       }
     }
-    > .form-group:first-child {
-      margin-right: 10px;
-    }
   }
 
   #country-city {
-    display: flex;
     > .form-group:first-child {
       margin-right: 10px;
     }
@@ -98,7 +93,6 @@
     > div:nth-child(1) {
       .css-10nd86i {
         @extend .rounded-rectangle;
-        width: 259px;
         height: 55px;
         border-radius: side-values(20px 0 0 20px) !important;
       }
@@ -106,7 +100,6 @@
     > div:nth-child(2) {
       .css-10nd86i {
         @extend .rounded-rectangle;
-        width: 259px;
         height: 55px;
         border-radius: side-values(0 0 20px 0) !important;
       }
@@ -115,11 +108,22 @@
 
   #bottom {
     display: flex;
+
+    @include small {
+      display: block;
+    }
+
     button {
-      width: 143px;
       height: 51px;
       text-transform: capitalize;
-      margin-left: 78px;
+      margin-left: auto;
+
+      @include small {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 64px;
+        text-align: right;
+      }
     }
 
     > p {
@@ -127,6 +131,9 @@
       line-height: 25px;
       padding: 0px 8px;
       margin-bottom: 255px;
+      @include small {
+        margin-bottom: 0;
+      }
       span {
         display: block;
       }
@@ -134,8 +141,7 @@
   }
 
   #signin-link {
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
     align-items: baseline;
     .user-img {
       width: 17px;
@@ -156,6 +162,9 @@
       text-transform: inherit;
     }
   }
+  #right-half {
+    text-align: center;
+  }
   #social-media {
     position: relative;
     top: -8px;
@@ -165,13 +174,44 @@
     text-align: center;
   }
   .seperator {
-    position: absolute;
-    display: list-item;
-    list-style: none;
-    height: 570px;
-    background: $very-light-grey;
+    @include medium {
+      position: absolute;
+      display: list-item;
+      list-style: none;
+      height: 570px;
+      background: $very-light-grey;
+    }
   }
-  #social-media-info{
+  #social-media-info {
     @include font-size(15px);
+  }
+
+  .ReactPasswordStrength {
+    @extend .rounded-rectangle;
+    @include boarder-right-radius(0, 20px);
+    box-shadow: none;
+  
+    .ReactPasswordStrength-input {
+      height: auto;
+      @include font-size(16px);
+    }
+  
+    .ReactPasswordStrength-strength-bar {
+      position: absolute;
+      height: 4px;
+      top: 97px;
+      right: initial;
+    }
+  
+    .ReactPasswordStrength-strength-desc {
+      width: auto;
+      top: 62px;
+    }
+  }
+  .password-strength {
+
+    > label {
+      margin-top: 20px;
+    }
   }
 }

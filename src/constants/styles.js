@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 //COLOR
 const basicGray = '#37363d';
 const basicBlack = '#222222';
@@ -11,6 +13,9 @@ const gainsboroColor = '#DCDCDC';
 const basicWhite = 'rgba(255, 255, 255, 0.8)';
 const basicDarkWhite = 'rgba(255, 255, 255, 0.5)';
 const veryLightPink = 'rgba(235, 235, 235, 0.3)';
+const error = '#fbc0bd';
+const invalid = '#e8d59a';
+const success = 'rgba(48, 213, 118, 0.3)';
 
 const selectStyle = {
   menu: (styles) => {
@@ -39,6 +44,18 @@ const selectStyle = {
     }
   }
 };
+
+const isSucceed = (error, touched) => {
+  return touched && _.isUndefined(error)
+}
+
+const isRequired = (error, touched) => {
+  return touched && error;
+}
+
+const isInvalid = (error, touched) => {
+  return touched && error.includes('Invalid');
+}
 
 export const styles = {
   cursor: {
@@ -93,4 +110,11 @@ export const colors = {
   basicWhite,
   basicDarkWhite,
   veryLightPink,
+  error,
+  invalid,
+  success
+}
+
+export const helpers = {
+  isSucceed, isRequired, isInvalid
 }

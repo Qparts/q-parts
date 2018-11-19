@@ -4,7 +4,7 @@ export const initialState = {
   lastName: '',
   mobile: '',
   email: '',
-  countryId: -1,
+  countryId: null,
   addresses: [],
   socialMediaId: null,
   platform: null,
