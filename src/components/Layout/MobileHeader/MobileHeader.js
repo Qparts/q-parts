@@ -35,14 +35,15 @@ export class MobileHeader extends Component {
 	}
 
 	render() {
-		const { translate, localize } = this.props
+		const { translate, localize, changeDefaultDirection } = this.props
 		return (
 			<Fragment>
 				<MobileHeaderDetails
 					onClose={this.closeNav}
 					ref={ref => this.mobileHeaderDetails = ref}
 					translate={translate}
-					localize={localize} />
+					localize={localize}
+					changeDefaultDirection={changeDefaultDirection} />
 				<div className="w3-overlay w3-animate-opacity" onClick={this.closeNav} style={{ cursor: 'pointer' }} ref={ref => this.overLay = ref}></div>
 				<div className="mobile-header w3-hide-large">
 					<div className="d-flex justify-content-between container-fluid">
@@ -51,7 +52,7 @@ export class MobileHeader extends Component {
 							<Link className="brand nav-icon-pl" to="/">
 								<img alt="qParts" src="img/qParts-logo.svg" />
 							</Link>
-						</div> 
+						</div>
 						<div className="list-inline user-actions">
 							<li className="search">
 								<a href="">
@@ -59,7 +60,7 @@ export class MobileHeader extends Component {
 								</a>
 							</li>
 							<li>
-							<span className="seperator" />
+								<span className="seperator" />
 							</li>
 							<li className="search">
 								<Link to="/cart">
@@ -67,7 +68,7 @@ export class MobileHeader extends Component {
 								</Link>
 							</li>
 							<li>
-							<span className="seperator" />
+								<span className="seperator" />
 							</li>
 							<li className="search">
 								<Link to="/">

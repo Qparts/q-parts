@@ -4,7 +4,7 @@ import LanguageToggle from '../../../components/LanguageToggle'
 
 export class MobileHeaderDetails extends Component {
     render() {
-        const { translate, localize } = this.props
+        const { translate, localize, changeDefaultDirection } = this.props
         return (
             <div className="w3-sidebar w3-bar-block w3-animate-left" style={{ display: 'none', zIndex: '5' }} ref={ref => this.sideBar = ref}>
                 <ul className="list-inline user-actions">
@@ -51,7 +51,7 @@ export class MobileHeaderDetails extends Component {
                 <hr />
                 <div className="w3-bar-item">
                     <i className="icon-world" />
-                    <LanguageToggle localize={localize} translate={translate} />
+                    <LanguageToggle localize={localize} translate={translate} changeDefaultDirection={changeDefaultDirection} />
                 </div>
                 <hr />
                 <Link className="w3-bar-item" to="/">Shipping & delivery</Link>

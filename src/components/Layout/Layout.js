@@ -88,7 +88,10 @@ class Layout extends Component {
     );
     return (
       <Fragment>
-        <MobileHeader translate={translate} localize={localize} />
+        <MobileHeader
+          translate={translate}
+          localize={localize}
+          changeDefaultDirection={changeDefaultDirection} />
         <Header
           translate={translate}
           localize={localize}

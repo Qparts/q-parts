@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
-import loadStyle from './config/app-style';
+//import loadStyle from './config/app-style';
+import '../scss/app.scss';
 
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -27,7 +28,7 @@ class Root extends React.Component {
     };
 
     initialStoreLoad(store);
-    loadStyle(this.state.direction);
+    //loadStyle(this.state.direction);
 
     store.subscribe(() => {
       saveState({
@@ -44,16 +45,18 @@ class Root extends React.Component {
     });
   }
 
+  /*
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.direction !== this.state.direction) {
       loadStyle(this.state.direction)
     }
   }
+  */
 
   render() {
     return (
       <Provider store={store}>
-        <DirectionProvider direction={this.state.direction}>
+       <DirectionProvider direction={'ltr'}>
           <LocalizeProvider store={store}>
             <ErrorBoundary>
               <Routes />
