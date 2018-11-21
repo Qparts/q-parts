@@ -69,7 +69,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { isLoggedIn, fullName, translate, localize } = this.props;
+    const { isLoggedIn, fullName, translate, localize, changeDefaultDirection } = this.props;
     const { dialogType } = this.state;
     const dialog = (
       <Dialog
@@ -96,7 +96,8 @@ class Layout extends Component {
           isLoggedIn={isLoggedIn}
           fullName={fullName}
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
-          onSignin={this.handleDialog.bind(this, 'signin')} />
+          onSignin={this.handleDialog.bind(this, 'signin')}
+          changeDefaultDirection={changeDefaultDirection} />
         {dialog}
         {this.props.children}
         <Footer />

@@ -42,5 +42,6 @@ export const initialState = {
  },
  isOrderCompleted: false,
  recentViewedProducts: [],
- wishlist: []
+ wishlist: [],
+ direction: 'rtl'
 }
