@@ -55,9 +55,6 @@ $dir: ltr;
 @import "base/_normalize.scss";
 @import "base/_base.scss";
 
-/* MEDIA QUERY */
-@import "queries/media-queries";
-
 /*MODULES  - Individual site components */
 @import "modules/_typography.scss";
 @import "modules/_blocks.scss";

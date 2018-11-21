@@ -4,7 +4,6 @@ export class AppsLink extends Component {
     static propTypes = {
 
     }
-
     render() {
         return (
             <section id="apps-link">

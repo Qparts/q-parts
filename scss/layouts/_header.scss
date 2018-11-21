@@ -1,6 +1,16 @@
 .nav-icon-pl {
-  padding-#{$left}: 35px;
+  @include large-medium-screens{
+    padding-#{$left}: 35px;
+  }
+  @include small-screen{
+    padding-#{$left}: 1px;
+  }
 }
+
+.q-burger-btn{
+  height: 50px;
+}
+
 .main-header {
   .header-first {
     padding: 10px 0;
@@ -10,6 +20,7 @@
   }
 }
 .mobile-header {
+  height: 50px;
   .brand {
     img {
       width: 100px;
@@ -80,12 +91,15 @@
 .custom-order {
   padding: side-values(5px 10px 5px 5px);
   height: 37px;
+  
   .icon-custom-order {
-    color: $brand-color;
-    @include font-size(24px);
-    height: 27px;
     @extend .d-inline-block;
-    margin-#{$right}: 5px;
+    @include large-medium-screens{
+      color: $brand-color;
+      @include font-size(24px);
+      height: 27px;
+      margin-#{$right}: 5px;
+    }
   }
   > span {
     position: relative;
@@ -117,10 +131,18 @@
 }
 .user-actions {
   padding-bottom: 0;
-  margin-top: 7px;
   li:not(:last-child) {
     margin-#{$right}: 16px;
   }
+  @include large-medium-screens{
+    margin-top: 7px; 
+  }
+
+  @include small-screen{
+    margin-top: 15px;
+  }
+  
+
   li {
     @extend .align-middle;
     height: 24px;
@@ -129,9 +151,17 @@
   a {
     @extend .d-inline-block;
   }
+
+  .icon-custom-order{
+    @include small-screen{
+      @include font-size(22px);
+      height: 24px;
+      display: block;
+  }
+}
   .icon-search {
     line-height: 20px;
-    @include font-size(20px);
+    @include font-size(22px);
     @extend .d-block;
     &:before {
       //top: -5px;

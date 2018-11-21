@@ -1,5 +1,16 @@
 #home-details {
-  margin-top: 77px;
+  @include large-medium-screens{
+    margin-top: 77px;
+  }
+  @include small-screen{
+    margin-top: -117px;
+  }
+
+  .custom-order-arrow{
+      color: #ededed;
+      @include font-size(20px);
+  }
+  
 
   figcaption {
     h3 {
@@ -23,11 +34,20 @@
     .ellipse {
       position: absolute;
       top: 4px;
-      left: -23px;
+      @include large-medium-screens{
+        left: -23px;
+      }
+      @include small-screen{
+        left: -5px;
+      }
+      
     }
     h2 {
       @include font-size(25px);
       text-transform: uppercase;
+      @include small-screen{
+        margin-left: 20px;
+      }
     }
   }
 
@@ -89,20 +109,49 @@
     .boarder-left-radius {
       @include boarder-left-radius(20px, 20px);
     }
+
+    .part-name-input{
+      @include large-medium-screens{
+        @include boarder-left-radius;
+      }
+      @include small-screen{
+        @include boarder-left-radius(20px, 0);
+        margin-bottom: 4px;
+      }
+    }
+
+    .vin-input{
+      @include large-medium-screens{
+        @include boarder-right-radius(0, 20px);
+      }
+      @include small-screen{
+        @include boarder-left-radius(0, 20px);
+        @include boarder-right-radius(0, 20px);
+        margin-bottom: 8px;
+      }
+    }
   }
 
   .w-sm-100 {
-    @include x-small {
+    @include small-screen {
       width: 100%;
     }
-    @include small {
+    @include small-screen {
       width: 100%;
     }
   }
 }
 
 #catagory-imgs {
-  margin-top: 120px;
+  @include large-medium-screens{
+    margin-top: 120px;
+  }
+
+  @include small-screen{
+    margin-top: 70px;
+  }
+
+  
 
   h3 {
     color: white;
@@ -114,25 +163,94 @@
     transform: translate(-50%, -50%);
   }
   .mt-lg-3 {
-    @include large {
+    @include large-screen {
       margin-top: 1rem;
     }
-    @include medium {
+    @include medium-screen {
       margin-top: 0;
     }
   }
 
-  .vehicle-part-img {
-    @include boarder-left-radius(20px, 20px);
+  .spare-part-img-container{
+    img{
+      @include large-medium-screens{
+        @include boarder-left-radius(20px, 20px);
+        content: url(/img/vehicle-part-lg.png);
+        bottom: 0;
+      }
+      @include small-screen{
+        @include boarder-left-radius(20px, 0);
+        content: url(/img/vehicle-part-lg.png); 
+        max-height: 199px;
+      }
+      
+    }
   }
 
-  .accessories-img {
-    @include boarder-right-radius(0, 20px);
+  .motor-oil-img-container{
+    img{
+      @include large-medium-screens{
+        padding-bottom: 17px;
+        content: url(/img/motor-oil.png); 
+      }
+      @include small-screen{
+        content: url(/img/motor-oil.png); 
+        max-height: 178px;
+      }
+      
+    }
   }
+
+  .tyre-img-container{
+    img{
+      @include large-medium-screens{
+        content: url(/img/tyres.png); 
+      }
+      @include small-screen{
+        content: url(/img/tyres.png); 
+        max-height: 178px;
+      }
+      
+    }
+  }
+  
+  .tools-img-container{
+    img{
+      @include large-medium-screens{
+        padding-bottom: 17px;
+        content: url(/img/tools.png); 
+      }
+      @include small-screen{
+        @include boarder-left-radius(0, 20px);
+        content: url(/img/tools.png); 
+        max-height: 178px;
+      }
+      
+    }
+  }
+
+  .accessories-img-container{
+    img{
+      @include boarder-right-radius(0, 20px);
+      @include large-medium-screens{
+        content: url(/img/accessories.png);
+      }
+      @include small-screen{
+        
+        content: url(/img/accessories.png);
+        max-height: 179px;
+
+      }
+    }
+  }
+
 }
 
 #join-us {
   margin-top: 30px;
+  @include small-screen{
+    margin-bottom: 70px;
+  }
   h1 {
     color: white;
     @include font-size(25px);
@@ -159,27 +277,41 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    @include x-small {
+    @include small-screen {
       width: 100%;
       left: 58%;
     }
 
-    @include small {
+    @include small-screen {
       display: block !important;
       text-align: center;
-      width: 100%;
       left: 58%;
+    }
+  
+
+  }
+
+  .vendor-img-container{
+    img{
+      @include boarder-left-radius(20px, 20px);
+      @include boarder-right-radius(0, 20px);
+      @include large-medium-screens{
+        content: url(/img/vendor.png);
+      }
+      @include small-screen{        
+        content: url(/img/vendor.png);
+        min-height: 159px;
+        max-width: 450px;
+       
+      }
     }
   }
 
-  .vendor-img {
-    @include boarder-left-radius(20px, 20px);
-    @include boarder-right-radius(0, 20px);
-    width: 100%;
 
-    @include x-small {
+  .vendor-img {    
+    @include small-screen {
       background-image: url(/img/vendor-xs.jpg);
-      min-height: 159px;
+      
     }
   }
 }
