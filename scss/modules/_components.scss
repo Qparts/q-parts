@@ -164,9 +164,15 @@
 }
 
 .rounded-rectangle {
-  border-radius: 20px;
+  @extend .div-border-radius;
   @extend .box-shadow;
-  background-color: $white;
+}
+
+.group-shadow-div {
+  position: absolute;
+  @extend .w-100;
+  #{$right}: 0;
+  @extend .rounded-rectangle;
 }
 
 .radio-button {

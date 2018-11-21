@@ -11,6 +11,16 @@
     margin-bottom: 40px;
   }
 
+  .shadow-input {
+    @extend .rounded-rectangle;
+  }
+
+  .group-shadow-input {
+    @extend .group-shadow-div;
+    height: 55px;
+    top: 32px;
+  }
+
   #title {
     h1 {
       color: $basic-gray;
@@ -35,11 +45,11 @@
     padding: inherit;
 
     input {
-      @extend .rounded-rectangle;
       border-radius: corner-values(20px 0 20px 20px) !important;
       height: 55px;
       padding-#{$left}: 20px;
       width: 100%;
+      background: $white;
     }
     input::placeholder {
       color: $charcoal-grey-two-40;
@@ -55,13 +65,13 @@
 
   .signup-form__two-inputs {
     @extend .no-gutters;
-    > div:nth-child(1) {
-      padding-#{$right}: 10px;
+    .col-6:nth-child(2) {
       input {
         border-radius: corner-values(20px 0 0 20px) !important;
       }
     }
-    > div:nth-child(2) {
+    .col-6:nth-child(3) {
+      padding-#{$left}: 10px;
       input {
         border-radius: corner-values(0 0 20px 0) !important;
       }
@@ -73,6 +83,7 @@
       margin-#{$right}: 10px;
     }
     .css-10nd86i {
+      background: $white;
       .select__control {
         width: auto;
         top: 50%;
@@ -88,16 +99,14 @@
         margin-#{$left}: 20px;
       }
     }
-    > div:nth-child(1) {
+    > div:nth-child(2) {
       .css-10nd86i {
-        @extend .rounded-rectangle;
         height: 55px;
         border-radius: corner-values(20px 0 0 20px) !important;
       }
     }
-    > div:nth-child(2) {
+    > div:nth-child(3) {
       .css-10nd86i {
-        @extend .rounded-rectangle;
         height: 55px;
         border-radius: corner-values(0 0 20px 0) !important;
       }
@@ -185,7 +194,6 @@
   }
 
   .ReactPasswordStrength {
-    @extend .rounded-rectangle;
     border-radius: corner-values(20px 0 20px 20px) !important;
     box-shadow: none;
 

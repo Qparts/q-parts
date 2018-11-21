@@ -27,6 +27,9 @@ class RenderField extends Component {
         right: '0',
         paddingTop: '11px',
         paddingRight: '18px',
+      },
+      borderShadow: {
+        boxShadow: '0px 18px 18px 0px rgba(0, 0, 0, 0.07)',
       }
     }
     return (
@@ -35,7 +38,7 @@ class RenderField extends Component {
         <sub>{this.props.sub}</sub>
         <div className="RenderField">
           <input
-            style={this.props.hasPasswordStrength ? { display: 'none' } : styles.border}
+            style={this.props.hasPasswordStrength ? { display: 'none' } : this.props.boxShadow ? styles.shadow : styles.border}
             type={this.props.type}
             placeholder={this.props.placeholder}
             {...this.props.input}

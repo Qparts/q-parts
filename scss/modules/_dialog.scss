@@ -1,6 +1,7 @@
 .ui-dialog.ui-widget {
   .ui-dialog-titlebar {
     background: $light-gray;
+    border-radius: inherit;
   }
 }
 .ui-dialog{
