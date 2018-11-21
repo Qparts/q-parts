@@ -134,9 +134,9 @@ class HeaderDetails extends Component {
                     />
                   ) : (
                       <ButtonCustom
-                        className="btn btn-primary"
-                        text={"Add a new vehicle"}>
-                      </ButtonCustom>
+                        className="btn-primary"
+                        text={"Add a new vehicle"}
+                        onClick={onAddVechile} />
                     )}
                 </Fragment>
               </DropdownItem>

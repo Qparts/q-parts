@@ -1,0 +1,224 @@
+#signup {
+  padding-top: 75px;
+  background: $light-gray;
+  text-align: $left;
+
+  @include small-screen {
+    padding-top: 0;
+  }
+
+  .form-group {
+    margin-bottom: 40px;
+  }
+
+  .shadow-input {
+    @extend .rounded-rectangle;
+  }
+
+  .group-shadow-input {
+    @extend .group-shadow-div;
+    height: 55px;
+    top: 32px;
+  }
+
+  #title {
+    h1 {
+      color: $basic-gray;
+      font-weight: 300;
+      @include font-size(50px);
+      text-transform: capitalize;
+    }
+    .red-line {
+      max-width: 153px;
+      height: 1px;
+    }
+  }
+  .select-input {
+    label {
+      @include font-size(16px);
+      padding-#{$left}: 13px;
+    }
+  }
+  .form-control {
+    background: inherit;
+    border: none;
+    padding: inherit;
+
+    input {
+      border-radius: corner-values(20px 0 20px 20px) !important;
+      height: 55px;
+      padding-#{$left}: 20px;
+      width: 100%;
+      background: $white;
+    }
+    input::placeholder {
+      color: $charcoal-grey-two-40;
+    }
+    label {
+      @include font-size(16px);
+      padding-#{$left}: 13px;
+    }
+  }
+  .row {
+    position: relative;
+  }
+
+  .signup-form__two-inputs {
+    @extend .no-gutters;
+    .col-6:nth-child(2) {
+      input {
+        border-radius: corner-values(20px 0 0 20px) !important;
+      }
+    }
+    .col-6:nth-child(3) {
+      padding-#{$left}: 10px;
+      input {
+        border-radius: corner-values(0 0 20px 0) !important;
+      }
+    }
+  }
+
+  #country-city {
+    > .form-group:first-child {
+      margin-#{$right}: 10px;
+    }
+    .css-10nd86i {
+      background: $white;
+      .select__control {
+        width: auto;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        .select__indicators {
+          width: auto;
+          margin-top: auto;
+        }
+      }
+      .select__value-container {
+        padding: inherit;
+        margin-#{$left}: 20px;
+      }
+    }
+    > div:nth-child(2) {
+      .css-10nd86i {
+        height: 55px;
+        border-radius: corner-values(20px 0 0 20px) !important;
+      }
+    }
+    > div:nth-child(3) {
+      .css-10nd86i {
+        height: 55px;
+        border-radius: corner-values(0 0 20px 0) !important;
+      }
+    }
+  }
+
+  #bottom {
+    display: flex;
+
+    @include small-screen {
+      display: block;
+    }
+
+    button {
+      height: 51px;
+      text-transform: capitalize;
+      margin-#{$left}: auto;
+
+      @include small-screen {
+        width: 100%;
+        margin-#{$left}: 0;
+        margin-bottom: 64px;
+        text-align: $right;
+      }
+    }
+
+    > p {
+      @include font-size(15px);
+      line-height: 25px;
+      padding: 0px 8px;
+      margin-bottom: 255px;
+      @include small-screen {
+        margin-bottom: 0;
+      }
+      span {
+        display: block;
+      }
+    }
+  }
+
+  #signin-link {
+    display: inline-flex;
+    align-items: baseline;
+    .user-img {
+      width: 17px;
+      img {
+        max-width: 100%;
+      }
+    }
+    > span:nth-child(2) {
+      position: relative;
+      top: 5px;
+      padding-#{$left}: 4px;
+      @include font-size(18px);
+    }
+    .btn-link {
+      position: relative;
+      color: $brand-color;
+      padding: 4px 4px;
+      text-transform: inherit;
+    }
+  }
+  #right-half {
+    text-align: center;
+  }
+  #social-media {
+    position: relative;
+    top: -8px;
+    margin-bottom: 24px;
+  }
+  .row > .column:nth-child(2) {
+    text-align: center;
+  }
+  .seperator {
+    @include medium-screen {
+      position: absolute;
+      display: list-item;
+      list-style: none;
+      height: 570px;
+      background: $very-light-grey;
+    }
+  }
+  #social-media-info {
+    @include font-size(15px);
+  }
+
+  .ReactPasswordStrength {
+    border-radius: corner-values(20px 0 20px 20px) !important;
+    box-shadow: none;
+
+    .ReactPasswordStrength-input {
+      height: auto;
+      @include font-size(16px);
+    }
+
+    .ReactPasswordStrength-strength-bar {
+      position: absolute;
+      height: 4px;
+      top: 97px;
+      #{$right}: initial;
+    }
+
+    .ReactPasswordStrength-strength-desc {
+      width: auto;
+      top: 62px;
+      #{$right}: 0;
+      #{$left}: unset;
+    }
+  }
+  .password-strength {
+    > label {
+      margin-top: 20px;
+    }
+  }
+}

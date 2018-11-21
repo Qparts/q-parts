@@ -63,6 +63,9 @@ $dir: ltr;
 @import "modules/select";
 @import "modules/_sections.scss";
 @import "modules/_title.scss";
+@import "modules/dialog";
+@import "modules/social-media";
+@import "modules/renderField";
 /* LAYOUTS - page layout styles */
 
 @import "layouts/_nav.scss";
@@ -71,6 +74,8 @@ $dir: ltr;
 @import "layouts/home-details";
 @import "layouts/products";
 @import "layouts/apps-link";
+@import "layouts/authentication/login";
+@import "layouts/authentication/signup";
 @import "layouts/_footer";
 
 /* STATE - page of site*/

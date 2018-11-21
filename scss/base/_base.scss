@@ -59,3 +59,11 @@ label {
   height: 23px;
 }
 
+.icon-facebook-logo {
+  @include font-size(32px);
+  color: $facebook-color;
+}
+.icon-twitter {
+  @include font-size(32px);
+  color: $twitter-color;
+}

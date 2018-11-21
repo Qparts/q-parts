@@ -8,7 +8,7 @@ import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
 import MobileHeader from "./MobileHeader/MobileHeader";
 import MobileFooter from "./Footer/MobileFooter";
-import { TAB_ONE } from "../../constants";
+import { TAB_ONE, styles, colors } from "../../constants";
 import { isEmpty } from "../../utils";
 
 import "./Layout.css";
@@ -69,24 +69,26 @@ class Layout extends Component {
   }
 
   render() {
-    const { isLoggedIn, fullName, translate, localize } = this.props;
+    const { isLoggedIn, fullName, translate, localize, changeDefaultDirection } = this.props;
     const { dialogType } = this.state;
     const dialog = (
       <Dialog
-        header={translate(`dialog.${dialogType}.title`)}
+        showHeader={true}
         maximizable={true}
         visible={this.state.visible}
-        positionTop={0}
-        minWidth={1000}
+        positionTop={65}
         modal={true}
         onHide={this.onHide}
+        style={{
+          background: colors.lightGray
+        }}
       >
         {this.getDialogComponent()}
       </Dialog>
     );
     return (
       <Fragment>
-        <MobileHeader translate={translate} localize={localize}/>
+        <MobileHeader translate={translate} localize={localize} />
         <Header
           translate={translate}
           localize={localize}
@@ -94,7 +96,8 @@ class Layout extends Component {
           isLoggedIn={isLoggedIn}
           fullName={fullName}
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
-          onSignin={this.handleDialog.bind(this, 'signin')} />
+          onSignin={this.handleDialog.bind(this, 'signin')}
+          changeDefaultDirection={changeDefaultDirection} />
         {dialog}
         {this.props.children}
         <Footer />

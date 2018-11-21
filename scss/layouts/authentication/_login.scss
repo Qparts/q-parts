@@ -1,0 +1,83 @@
+#login {
+  background: $light-gray;
+  .form-control {
+    background: inherit;
+    border: none;
+    padding: inherit;
+
+    input {
+      @extend .rounded-rectangle;
+      @include boarder-right-radius(0, 20px);
+      width: 528px;
+      height: 55px;
+      padding-left: 20px;
+    }
+    input::placeholder {
+      color: $charcoal-grey-two-40;
+    }
+    label {
+      @include font-size(16px);
+      padding-left: 13px;
+    }
+  }
+  .btn-link {
+    color: $charcoal-grey-two;
+  }
+  h1 {
+    color: $charcoal-grey-two;
+    text-transform: capitalize;
+    font-weight: normal;
+    font-family: 'Roboto';
+    line-height: unset;
+    @include font-size(50px);
+  }
+
+  .ui-radiobutton + label {
+    text-transform: inherit;
+    vertical-align: inherit;
+  }
+  label {
+    color: $charcoal-grey-two;
+    @include font-size(15px);
+  }
+  .btn-primary {
+    @extend .box-shadow;
+    text-align: right;
+    text-transform: capitalize;
+    @include font-size(20px);
+  }
+  form {
+    div:nth-child(3) {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      .btn-link {
+        background: inherit;
+      }
+    }
+    .form-group:nth-child(2) {
+      label {
+      }
+    }
+  }
+  #sign-up-link {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    @include font-size(18px);
+
+    p {
+      color: $basic-gray;
+    }
+
+    button {
+      padding: 0;
+      margin-left: 4px;
+      margin-right: 4px;
+      span {
+        color: $brand-color;
+      }
+    }
+  }
+}

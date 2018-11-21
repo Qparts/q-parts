@@ -4,7 +4,7 @@ export const initialState = {
   lastName: '',
   mobile: '',
   email: '',
-  countryId: -1,
+  countryId: null,
   addresses: [],
   socialMediaId: null,
   platform: null,
@@ -42,5 +42,6 @@ export const initialState = {
  },
  isOrderCompleted: false,
  recentViewedProducts: [],
- wishlist: []
+ wishlist: [],
+ direction: 'rtl'
 }

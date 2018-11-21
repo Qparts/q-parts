@@ -145,7 +145,7 @@
   border-radius: 20px;
   width: 34px;
   height: 34px;
-  box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
+  @extend .box-shadow;
   background-color: $white;
 }
 
@@ -163,9 +163,29 @@
   background-color: #ededed;
 }
 
+.solid-line {
+  display: inline-block;
+  width: 412px;
+  height: 1px;
+  background-color: $very-light-grey;
+}
+
 .rounded-rectangle {
-  border-radius: 20px;
-  box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
+  @extend .div-border-radius;
+  @extend .box-shadow;
+}
+
+.group-shadow-div {
+  position: absolute;
+  @extend .w-100;
+  #{$right}: 0;
+  @extend .rounded-rectangle;
+}
+
+.radio-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 9px;
   background-color: $white;
 }
 

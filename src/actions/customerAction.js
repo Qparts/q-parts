@@ -38,6 +38,7 @@ export const DELETE_VEHICLE = 'DELETE_VEHICLE';
 export const ADD_RECENT_VIEWED_PRODUCTS = 'ADD_RECENT_VIEWED_PRODUCTS';
 export const ADD_WISHLIST = 'ADD_WISHLIST';
 export const DELETE_WISHLIST = 'DELETE_WISHLIST';
+export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
 
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
@@ -490,5 +491,12 @@ export const deleteWishlist = (product) => {
   return {
     type: DELETE_WISHLIST,
     payload: product
+  }
+}
+
+export const changeDefaultDirection = (lang) => {
+  return {
+    type: CHANGE_DEFAULT_DIRECTION,
+    payload: lang
   }
 }

@@ -1,0 +1,97 @@
+/*Direction */
+// Override default value for $dir in directional.scss
+$dir: rtl;
+
+// Import helpers from directional.scss
+@import "base/_directional.scss";
+
+@import "base/_variables.scss";
+
+// Import helpers from bootestrap
+@import "bootstrap-rtl/functions";
+@import "bootstrap-rtl/variables";
+@import "bootstrap-rtl/mixins";
+@import "bootstrap-rtl/root";
+@import "bootstrap-rtl/reboot";
+@import "bootstrap-rtl/type";
+@import "bootstrap-rtl/images";
+//@import "bootstrap-rtl/code";
+@import "bootstrap-rtl/grid";
+//@import "bootstrap-rtl/tables";
+@import "bootstrap-rtl/forms";
+//@import "bootstrap-rtl/buttons";
+@import "bootstrap-rtl/transitions";
+@import "bootstrap-rtl/dropdown";
+//@import "bootstrap-rtl/button-group";
+@import "bootstrap-rtl/input-group";
+@import "bootstrap-rtl/custom-forms";
+@import "bootstrap-rtl/nav";
+@import "bootstrap-rtl/navbar";
+@import "bootstrap-rtl/card";
+//@import "bootstrap-rtl/breadcrumb";
+//@import "bootstrap-rtl/pagination";
+//@import "bootstrap-rtl/badge";
+//@import "bootstrap-rtl/jumbotron";
+//@import "bootstrap-rtl/alert";
+//@import "bootstrap-rtl/progress";
+@import "bootstrap-rtl/media";
+//@import "bootstrap-rtl/list-group";
+@import "bootstrap-rtl/close";
+@import "bootstrap-rtl/modal";
+//@import "bootstrap-rtl/tooltip";
+//@import "bootstrap-rtl/popover";
+@import "bootstrap-rtl/carousel";
+@import "bootstrap-rtl/utilities";
+//@import "bootstrap-rtl/print";
+
+//select2-develop
+@import "select2-develop/core";
+
+/* slick slider component*/
+
+@import "modules/_slick.scss";
+/* BASE - Base styles , variables, mixins, ect*/
+@import "base/_mixins.scss";
+@import "base/_normalize.scss";
+@import "base/_base.scss";
+
+/* MEDIA QUERY */
+// @import "queries/media-queries";
+
+/*MODULES  - Individual site components */
+@import "modules/_typography.scss";
+@import "modules/_blocks.scss";
+@import "modules/_buttons.scss";
+@import "modules/_components.scss";
+@import "modules/select";
+@import "modules/_sections.scss";
+@import "modules/_title.scss";
+@import "modules/dialog";
+@import "modules/social-media";
+@import "modules/renderField";
+/* LAYOUTS - page layout styles */
+
+@import "layouts/_nav.scss";
+@import "layouts/_header.scss";
+@import "layouts/manual-form";
+@import "layouts/home-details";
+@import "layouts/products";
+@import "layouts/apps-link";
+@import "layouts/authentication/login";
+@import "layouts/authentication/signup";
+@import "layouts/_footer";
+
+/* STATE - page of site*/
+@font-face {
+  font-family: "q-parts-icons";
+  font-weight: normal;
+  font-style: normal;
+  src: url("./icon/q-parts-icons.eot");
+  src: url("./icon/q-parts-icons.eot?#iefix") format("embedded-opentype"),
+    url("./icon/q-parts-icons.woff") format("woff"),
+    url("./icon/q-parts-icons.ttf") format("truetype"),
+    url("./icon/q-parts-icons.svg#q-parts-icons") format("svg");
+}
+
+/* Add Custom Style To select , header */
+

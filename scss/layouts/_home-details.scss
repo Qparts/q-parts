@@ -263,6 +263,9 @@
 
   div {
     position: relative;
+    @include boarder-left-radius(20px, 20px);
+    @include boarder-right-radius(0, 20px);
+    overflow: hidden;
   }
 
   button {
@@ -296,6 +299,7 @@
       @include boarder-left-radius(20px, 20px);
       @include boarder-right-radius(0, 20px);
       @include large-medium-screens{
+        width: 100%;
         content: url(/img/vendor.png);
       }
       @include small-screen{        
@@ -304,14 +308,6 @@
         max-width: 450px;
        
       }
-    }
-  }
-
-
-  .vendor-img {    
-    @include small-screen {
-      background-image: url(/img/vendor-xs.jpg);
-      
     }
   }
 }

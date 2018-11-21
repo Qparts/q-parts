@@ -9,43 +9,51 @@ import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
+import { changeDefaultDirection } from '../../actions/customerAction';
 
 
 class Routes extends Component {
 
 
- render() {
-  return (
-   <Router>
-    <Fragment>
-     <NetworkError error={this.props.error} />
-     <Layout
-      isLoggedIn={isAuth(this.props.token)}
-      fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
-      vehicles={this.props.vehicles}
-      localize={this.props.localize}
-      translate={this.props.translate}
-     >
-      <Switch>
-       {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-      </Switch>
-     </Layout>
-    </Fragment>
-   </Router>
-  )
- }
+    render() {
+        return (
+            <Router>
+                <Fragment>
+                    <NetworkError error={this.props.error} />
+                    <Layout
+                        isLoggedIn={isAuth(this.props.token)}
+                        fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
+                        vehicles={this.props.vehicles}
+                        localize={this.props.localize}
+                        translate={this.props.translate}
+                        changeDefaultDirection={this.props.changeDefaultDirection}
+                    >
+                        <Switch>
+                            {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                        </Switch>
+                    </Layout>
+                </Fragment>
+            </Router>
+        )
+    }
 }
 
 const mapStateToProps = state => {
- const customer = state.customer.detail;
- return {
-  customer,
-  token: state.customer.token,
-  vehicles: customer.vehicles,
-  localize: state.localize,
-  translate: getTranslate(state.localize),
-  error: state.networkError.error
- }
+    const customer = state.customer.detail;
+    return {
+        customer,
+        token: state.customer.token,
+        vehicles: customer.vehicles,
+        localize: state.localize,
+        translate: getTranslate(state.localize),
+        error: state.networkError.error
+    }
 }
 
-export default connect(mapStateToProps, null)(Routes);
+const mapDispatchToProps = dispatch => {
+    return {
+        changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routes);
