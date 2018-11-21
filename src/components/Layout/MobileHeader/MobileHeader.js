@@ -44,29 +44,37 @@ export class MobileHeader extends Component {
 					translate={translate}
 					localize={localize} />
 				<div className="w3-overlay w3-animate-opacity" onClick={this.closeNav} style={{ cursor: 'pointer' }} ref={ref => this.overLay = ref}></div>
-				<div className="mobile-header w3-hide-large container-fluid">
-					<button className="w3-button w3-white w3-xxlarge" onClick={this.openNav}>&#9776;</button>
-					<Link className="brand" to="/">
-						<img alt="qParts" src="img/qParts-logo.svg" />
-					</Link>
-					<div className="list-inline user-actions d-flex justify-content-end">
-						<li className="search">
-							<a href="">
-								<i className="icon-search" />
-							</a>
-						</li>
-						<span className="seperator" />
-						<li>
-							<Link to="/cart">
-								<i className="icon-cart" />
+				<div className="mobile-header w3-hide-large">
+					<div className="d-flex justify-content-between container-fluid">
+						<div>
+							<button className="w3-button w3-white w3-xlarge q-burger-btn" onClick={this.openNav}>&#9776;</button>
+							<Link className="brand nav-icon-pl" to="/">
+								<img alt="qParts" src="img/qParts-logo.svg" />
 							</Link>
-						</li>
-						<span className="seperator" />
-						<li>
-							<Link className="custom-order" to="/">
-								<i className="icon-custom-order" />
-							</Link>
-						</li>
+						</div> 
+						<div className="list-inline user-actions">
+							<li className="search">
+								<a href="">
+									<i className="icon-search" />
+								</a>
+							</li>
+							<li>
+							<span className="seperator" />
+							</li>
+							<li className="search">
+								<Link to="/cart">
+									<i className="icon-cart" />
+								</Link>
+							</li>
+							<li>
+							<span className="seperator" />
+							</li>
+							<li className="search">
+								<Link to="/">
+									<i className="icon-custom-order" />
+								</Link>
+							</li>
+						</div>
 					</div>
 				</div>
 			</Fragment>

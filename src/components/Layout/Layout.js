@@ -7,7 +7,7 @@ import { Dialog } from "primereact/components/dialog/Dialog";
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
 import MobileHeader from "./MobileHeader/MobileHeader";
-
+import MobileFooter from "./Footer/MobileFooter";
 import { TAB_ONE } from "../../constants";
 import { isEmpty } from "../../utils";
 
@@ -98,6 +98,7 @@ class Layout extends Component {
         {dialog}
         {this.props.children}
         <Footer />
+        <MobileFooter/>
       </Fragment>
     );
   }

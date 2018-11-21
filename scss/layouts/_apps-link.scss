@@ -1,4 +1,7 @@
 #apps-link {
+  @include small-screen{
+    display: none;
+  }
   margin-top: 90px;
   margin-bottom: 85px;
   div:first-child {
