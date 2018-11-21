@@ -1,3 +1,14 @@
+
+.manual-form-image{
+  @include small-screen{
+    background: url(/img/cover-img-xs.jpg);
+    height: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
 #manual-form {
   @include large-medium-screens {
     background: url(/img/hero-lg.jpg);
@@ -6,9 +17,12 @@
     background-size: cover;
     background-position: center top;
   }
+  @include small-screen{
+    min-height: 559px;
+  }
+
   text-align: center;
   color: $white;
-  height: 85px;
 
   .form-control {
     border-style: none;
@@ -21,12 +35,23 @@
     position: relative;
     background-color: $white;
     color: $basic-black;
-    left: 1px;
     @include boarder-right-radius(0, 20px);
+    
     text-align: left;
 
+    @include small-screen{
+      @include box-shadow;
+      @include boarder-left-radius(0, 20px);
+      padding-bottom: 10px;
+    }
+
     .select__control {
-      width: 90px;
+      @include large-medium-screens{
+        width: 90px;
+      }
+      @include small-screen{
+        width: 100%;
+      }
       @include font-size(15px);
       font-family: 'Roboto';
       .select__value-container {
@@ -36,45 +61,136 @@
 
     .select-input {
       position: relative;
-      bottom: 9px;
+      @include large-medium-screens{
+        bottom: 9px;
+      }
+      
+    }
+
+    .dropdown-label{
+      color: $basic-black;
+      @include font-size(15px);
+      font-weight: 500;
+      font-family: 'Roboto';
+      @include large-medium-screens{
+      
+      }
+     
+    }
+
+    .dropdown-label-container{
+      @include small-screen{
+        margin-left: 20px!important;
+        margin-top: 3px;
+      }
+    }
+
+    .make-select-container{
+        @include small-screen{
+          margin-top: 0;
+        }
+        label{
+          @include small-screen{
+            display: none;
+          }
+        }
+        br{
+          @include small-screen{
+            display: none;
+          }
+        }
+      
     }
   }
 
+  .manual-form-textbox-container{
+    margin-bottom: 1px;
+  }
+
   .manual-form-textbox {
-    @include boarder-left-radius;
-    color: $basic-black;
     text-align: left;
+    color: $basic-black;
+    @include large-medium-screens{
+      @include boarder-left-radius;
+     
+    }
+    @include small-screen{
+      @include boarder-left-radius(20px,0);
+      margin-bottom: 5px;
+    }
+   
 
     input {
       border-style: none;
+      @include small-screen{
+        @include boarder-left-radius(20px, 20px);
+      }
     }
   }
 
   .manual-form__content {
     position: relative;
-    top: 161px;
-    bottom: 261px;
+    @include large-medium-screens{
+      top: 161px;
+      bottom: 261px;
+    }
+    
+    @include small-screen{
+      top: -186px;
+      bottom: -186px;
+    }
 
     h1 {
-      @include font-size($title-font-size);
+      @include large-medium-screens{
+        @include font-size($title-font-size);
+      }
+      @include small-screen{
+        @include font-size(35px);
+        height: 34px;
+        margin-bottom: 18px;
+      }
     }
 
     label {
-      color: $basic-black;
-      @include font-size(15px);
-      font-weight: 500;
-      font-family: 'Roboto';
+        color: $basic-black;
+        @include font-size(15px);
+        font-weight: 500;
+        font-family: 'Roboto';
+      @include large-medium-screens{
+        
+      }
+      @include small-screen{
+        margin-left: 10px;
+      }
     }
   }
   button {
-    position: absolute;
-    width: 1000px;
-    left: 10px;
+    position: relative;
     text-align: left;
+    @include large-medium-screens{
+      left: 10px;
+    }
+    @include small-screen{
+      width: 100%;
+      top: 20px;
+      height: 85px;
+    }
   }
   p {
     margin-bottom: 29px;
-    @include font-size(15px);
+    @include large-medium-screens{
+      @include font-size(15px);  
+    }
+    @include small-screen{
+      @include font-size(12px);
+      padding-left: 35px;
+      padding-right: 35px;
+      font-weight: normal;
+      height: 33px;
+      margin-bottom: 23px;
+    }
+    
+    
   }
 
   .seperator {
@@ -82,6 +198,14 @@
     left: 10px;
     height: 20px;
   }
+
+  .h-seperator {
+    position: relative;
+    left: 10px;
+    height: 1px;
+  }
+
+
 
   .manual-form__dropdown-input {
     background-color: $white;

@@ -1,4 +1,9 @@
 #products {
+
+  @include small-screen{
+    display: none;
+  }
+  
   margin-top: 102px;
 
   > div {
@@ -10,6 +15,9 @@
   }
 
   #title {
+    @include small-screen{
+      display: none;
+    }
     padding-top: 55px;
 
     hr {

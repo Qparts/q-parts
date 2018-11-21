@@ -134,6 +134,13 @@
   @extend .align-middle;
 }
 
+.h-seperator{
+  width: 100%;
+  background: #ccc;
+  display: inline-block;
+  @extend .align-middle;
+}
+
 .ellipse {
   border-radius: 20px;
   width: 34px;
