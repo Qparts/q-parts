@@ -1,0 +1,11 @@
+#tyres {
+    @include medium-screen {
+        background: url(/img/hero-lg.jpg);
+        min-height: 350px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+      }
+
+      color: $white;
+}

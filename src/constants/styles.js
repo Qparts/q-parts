@@ -1,3 +1,6 @@
+import React from 'react';
+import NextArrow from '../components/UI/NextArrow/NextArrow';
+import PrevArrow from '../components/UI/PrevArrow/PrevArrow';
 import _ from 'lodash'
 
 //COLOR
@@ -95,6 +98,22 @@ export const styles = {
       }
     },
   }
+}
+
+export const sliderSetting = {
+  dots: false,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 1,
+  centerMode: true,
+  variableWidth: true,
+  nextArrow: <NextArrow />,
+  prevArrow: <PrevArrow />
+}
+export const starsRating = {
+  edit: false,
+  color1: '#cfcfcf',
+  color2: '#fabb12'
 }
 
 export const colors = {

@@ -31,48 +31,9 @@ class Vehicles extends Component {
 
 
   render() {
-    const { vehiclesFormat, newOrOldVechile, onTabChange, translate, displayTwoTabs } = this.props;
+    const { translate } = this.props;
     return (
-      <Fragment>
-        <Paper>
-          <Tabs
-            value={newOrOldVechile}
-            indicatorColor="primary"
-            textColor="primary"
-            onChange={onTabChange}
-            fullWidth
-            centered >
-            <Tab label={translate("form.vehicle.tabs.tabOne")} />
-            {
-              displayTwoTabs && <Tab label={translate("form.vehicle.tabs.tabTwo")} />
-            }
-          </Tabs>
-        </Paper>
-        {
-          newOrOldVechile === TAB_ONE && <TabContainer>
-            <Vehicle translate={translate}/>
-          </TabContainer>
-        }
-        {
-          newOrOldVechile === TAB_TWO && <TabContainer>
-            <div className="Vehicles-overall-layout">
-              <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-                <div className="Vehicles-container">
-                  <Field
-                    className="Vehicles-input"
-                    name="vehicle"
-                    component={SelectInput}
-                    options={vehiclesFormat}
-                  />
-                  <div className="Vehicles-button">
-                    <Button label={translate("form.vehicle.buttons.select")} icon="" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </TabContainer>
-        }
-      </Fragment>
+      <Vehicle translate={translate}/>
     )
   }
 }
