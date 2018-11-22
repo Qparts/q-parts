@@ -89,8 +89,6 @@ class Login extends Component {
   render() {
     const { translate } = this.props;
     let login = (
-      <Fragment>
-        <Title header={translate("dialog.signin.title")} />
         <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <div className="form-group">
             <Field
@@ -122,7 +120,6 @@ class Login extends Component {
           </div>
           <Button className="btn-primary" text={translate("form.signin.button")} icon="icon-arrow-right" />
         </form>
-      </Fragment>
     )
     const dialog =
       <Dialog header={translate("dialog.passwordRecovery.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>

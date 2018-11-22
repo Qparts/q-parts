@@ -12,6 +12,7 @@ import { TAB_ONE, styles, colors } from "../../constants";
 import { isEmpty } from "../../utils";
 
 import "./Layout.css";
+import Title from '../UI/Title';
 
 class Layout extends Component {
   constructor(props) {
@@ -43,6 +44,22 @@ class Layout extends Component {
     });
   };
 
+  getHeader = () => {
+    const { translate } = this.props;
+    switch (this.state.dialogType) {
+      case 'vehicle':
+        return <Title
+          header={'Add Vehicle'}
+          subHeader={'Store vehicles in your garage and Get product recommendations'} />
+
+      case 'signin':
+        return <Title header={translate("dialog.signin.title")} />
+
+      default:
+        break;
+    }
+  }
+
   onHide = event => {
     this.setState({
       visible: false,
@@ -73,7 +90,7 @@ class Layout extends Component {
     const { dialogType } = this.state;
     const dialog = (
       <Dialog
-        showHeader={true}
+        header={this.getHeader()}
         maximizable={true}
         visible={this.state.visible}
         positionTop={65}
@@ -104,7 +121,7 @@ class Layout extends Component {
         {dialog}
         {this.props.children}
         <Footer />
-        <MobileFooter/>
+        <MobileFooter />
       </Fragment>
     );
   }

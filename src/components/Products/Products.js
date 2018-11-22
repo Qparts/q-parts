@@ -3,8 +3,7 @@ import Button from '../UI/Button';
 import { withRouter } from 'react-router-dom';
 import Slider from "react-slick";
 import Stars from 'react-stars';
-import NextArrow from '../UI/NextArrow/NextArrow';
-import PrevArrow from '../UI/PrevArrow/PrevArrow';
+import { sliderSetting, starsRating } from '../../constants';
 import Title from '../UI/Title';
 
 import './Products.css';
@@ -23,21 +22,6 @@ class Products extends Component {
 
     render() {
         const { translate } = this.props;
-        const setting = {
-            dots: false,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            centerMode: true,
-            variableWidth: true,
-            nextArrow: <NextArrow />,
-            prevArrow: <PrevArrow />
-        }
-        const rating = {
-            edit: false,
-            color1: '#cfcfcf',
-            color2: '#fabb12'
-        }
         return (
             <section id="products">
                 <div className="">
@@ -83,7 +67,7 @@ class Products extends Component {
                             </div>
                             <div className="tab-content col" id="pills-tabContent">
                                 <div className="tab-pane fade show active" id="best-seller" role="tabpanel" aria-labelledby="best-seller-tab">
-                                    <Slider {...setting}>
+                                    <Slider {...sliderSetting}>
                                         {
                                             this.props.products.map((product, idx) => (
                                                 <a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
@@ -92,7 +76,7 @@ class Products extends Component {
                                                         <h5 className="card-title">{product.desc}</h5>
                                                         <p className="product-brand">{product.manufacturer.name}</p>
                                                         <div className="product-review">
-                                                            <Stars values={product.averageRating} {...rating} />
+                                                            <Stars values={product.averageRating} {...starsRating} />
                                                             <span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
                                                         </div>
                                                         <p className="price">
