@@ -3,10 +3,7 @@
 .container-fluid {
   max-width: $max-container;
 }
-.default-sec-margine {
-}
-a {
-}
+
 a:focus,
 a:hover,
 a:active {
@@ -14,7 +11,8 @@ a:active {
   outline: 0;
 }
 
-h1, h3 {
+h1,
+h3 {
   font-family: $title-font;
   text-transform: uppercase;
 }

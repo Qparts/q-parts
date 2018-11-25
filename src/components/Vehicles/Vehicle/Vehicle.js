@@ -5,17 +5,25 @@ import { withRouter } from 'react-router-dom';
 
 import SelectInput from '../../SelectInput/SelectInput';
 import RenderField from '../../RenderField/RenderField';
-import { Button } from 'primereact/components/button/Button';
 import { saveFormDataToCache, clearFormDataFromCache } from '../../../actions/baseFormAction';
 import { addVehcile } from '../../../actions/customerAction';
+import Button from '../../UI/Button';
+import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
 import { isAuth } from '../../../utils';
+import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
-import './Vehicle.css';
 
 class Vehicle extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      defaultVehicle: ''
+    }
+  }
 
   handleSubmit = values => {
     this.props.saveFormDataToCache(values);
@@ -30,6 +38,10 @@ class Vehicle extends Component {
       this.props.history.push('/login');
 
     }
+  }
+
+  handleDefaultVehicle = e => {
+    this.setState({ defaultVehicle: e.value })
   }
 
 
@@ -62,43 +74,58 @@ class Vehicle extends Component {
       }) : [];
 
     return (
-      <form className="Vehicle-container" onSubmit={handleSubmit(this.handleSubmit)}>
-        <div className="form-group">
-          <label>{translate("form.vehicle.make")}</label>
-          <Field
-            name="make"
-            placeholder=""
-            component={SelectInput}
-            options={makeData}
-            validate={[validations.required]} />
+      <form onSubmit={handleSubmit(this.handleSubmit)}>
+        <div className="row">
+          <div className="group-shadow-input" />
+          <div className="col-lg-3 div-first-rounded">
+            <Field
+              name="make"
+              placeholder={translate("form.vehicle.make")}
+              component={SelectInput}
+              options={makeData}
+              validate={[validations.required]} />
+          </div>
+          <div className="col-lg-3 ">
+            <Field
+              name="model"
+              placeholder={translate("form.vehicle.model")}
+              component={SelectInput}
+              options={modelData}
+              validate={[validations.required]} />
+          </div>
+          <div className="col-lg-3 ">
+            <Field
+              name="year"
+              placeholder={translate("form.vehicle.year")}
+              component={SelectInput}
+              options={yearData}
+              validate={[validations.required]} />
+          </div>
+          <div className="col-lg-3 div-last-rounded">
+            <Field
+              name="vin"
+              placeholder={translate("form.vehicle.vin")}
+              component={RenderField}
+              type="text"
+              validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
+            <Field
+              name="vinImage"
+              component={RenderFileInput}
+              image='image'
+            />
+          </div>
         </div>
-        <div className="form-group">
-          <label>{translate("form.vehicle.model")}</label>
-          <Field
-            name="model"
-            placeholder=""
-            component={SelectInput}
-            options={modelData}
-            validate={[validations.required]} />
+        <div className="row">
+          <div className="col-6 align-self-end">
+            <div className="vehicle-radio">
+              <RadioButton value={true} name="defaultAddress" onChange={this.handleDefaultVehicle} checked={true === this.state.defaultVehicle} />
+              <label>{translate("form.signup.defaultVehicle")}</label>
+            </div>
+          </div>
+          <div className="col-6 text-align-right">
+            <Button className="btn-primary" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
+          </div>
         </div>
-        <div className="form-group">
-          <label>{translate("form.vehicle.year")}</label>
-          <Field
-            name="year"
-            placeholder=""
-            component={SelectInput}
-            options={yearData}
-            validate={[validations.required]} />
-        </div>
-        <div className="form-group">
-          <label>{translate("form.vehicle.vin")}</label>
-          <Field
-            name="vin"
-            component={RenderField}
-            type="text" placeholder={translate("form.vehicle.placeholder.vin")}
-            validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
-        </div>
-        <Button label={translate("form.vehicle.buttons.add")} />
       </form>
     )
   }

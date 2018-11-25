@@ -66,6 +66,7 @@ $dir: ltr;
 @import "modules/dialog";
 @import "modules/social-media";
 @import "modules/renderField";
+@import "modules/renderFileInput";
 /* LAYOUTS - page layout styles */
 
 @import "layouts/_nav.scss";
@@ -78,6 +79,7 @@ $dir: ltr;
 @import "layouts/authentication/signup";
 @import "layouts/tyres/tyres";
 @import "layouts/tyres/tyres-search";
+@import "layouts/vehicles/vehicles";
 @import "layouts/_footer";
 
 /* STATE - page of site*/

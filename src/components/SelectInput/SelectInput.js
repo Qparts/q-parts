@@ -14,7 +14,7 @@ export default class SelectInput extends Component {
         })
         return (
             <div className="select-input">
-                <label>{this.props.label}</label> <br />
+            <label>{this.props.label}</label> <br />
                 <sub>{this.props.sub}</sub>
                 <Select
                     className={css(style.border)}

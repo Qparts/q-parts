@@ -54,7 +54,7 @@ class SignupForm extends Component {
             validate={[validations.required, validations.email]} />
         </div>
         <div id="country-city" className="row signup-form__two-inputs">
-          <div className="group-shadow-input"></div>
+          <div className="group-shadow-input" />
           <div className="col-6">
             <div className="form-group">
               <Field

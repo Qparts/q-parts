@@ -1,0 +1,37 @@
+#render-file-input {
+  .input-group-prepend {
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    .ellipse {
+      box-shadow: none;
+      min-width: 43px;
+      min-height: 43px;
+      margin-right: 10px;
+    }
+
+    button {
+      background: none;
+      color: inherit;
+      border: none;
+      font: inherit;
+      cursor: pointer;
+      outline: inherit;
+    }
+  }
+
+  .RenderFileInput-image_input {
+    display: none;
+  }
+
+  .RenderFileInput-img {
+    width: 60px;
+    height: 60px;
+  }
+  .upload-img {
+    margin-left: 4px;
+    margin-top: 9px;
+  }
+}

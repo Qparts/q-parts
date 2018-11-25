@@ -6,10 +6,8 @@
     background: none;
     box-shadow: none;
     cursor: pointer;
-    width: 90px;
 
     .select__indicators {
-      width: 20px;
       .select__indicator-separator {
         width: 0;
       }
@@ -19,7 +17,6 @@
     }
   }
   .select__menu {
-    width: 139px;
     .select__menu-list {
       .select__option {
         color: $basic-black;
