@@ -2,121 +2,167 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
-import { Paginator } from 'primereact/components/paginator/Paginator';
-import Select from 'react-select';
+import Slider from 'react-slick';
+import Stars from 'react-stars';
+import Title from '../UI/Title';
+import Manufacturers from '../Manufacturers/Manufacturers';
+import Ads from '../Ads/Ads';
+import {
+	Field,
+	reduxForm,
+	getFormValues,
+} from "redux-form";
 import Button from '../UI/Button';
-import { styles, categorySortOptions } from '../../constants';
-import ProductGridView from '../ProductGridView/ProductGridView';
-import WithProductView from '../../hoc/WithProductView';
-import { Checkbox } from 'primereact/components/checkbox/Checkbox';
-import queryString from 'qs';
 
-import { isEmpty, replaceAll } from '../../utils';
+import * as validations from "../../utils";
 
-import './MotorOil.css';
-
-const viscosity_grade = 'viscosity_grade';
-const volume = 'volume';
-const brand = 'brand';
-const price = 'price';
-const rating = 'rating';
+import SelectInput from '../SelectInput/SelectInput';
+import { getTranslate } from 'react-localize-redux';
+import { sliderSetting, starsRating } from '../../constants';
 
 class MotorOil extends Component {
-
-	componentDidMount() {
-		const { location: { search }, filterObject } = this.props;
-		const query = queryString.parse(search.slice(1));
-		const keys = Object.keys(query);
-
-		const filters = keys.map(key => {
-			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
-			const queryValues = replaceAll(newArray, '_', ' ');
-			const values = [...new Set(queryValues)];
-
-			return {
-				label: key,
-				values
-			}
-		});
-
-		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
-
-		this.props.onSetParams(newParams)
-		return this.props.onAddToFilter(filters, filterObject);
+	handleSubmit = values => {
 
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		const { location: { search }, history, match } = this.props;
+	goToProduct = () => {
 
-		if (search !== prevProps.location.search) {
-
-		} else if (this.props.params !== prevProps.params) {
-			history.push(`${match.url}${this.props.params}`);
-		}
 	}
 
+	getReviewsLength = () => {
+
+	}
 	render() {
-		const buttonsStyle = {
-			price: {
-				width: '5em'
-			}
-		}
-		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear } = this.props;
-
+		const { translate, handleSubmit, products, viscosity, brand } = this.props;
 		return (
 			<Fragment>
-				<div style={styles.grey} className="MotorOil-title">
-					<h4>Motor Oil</h4>
-				</div>
-				<div className="MotorOil-sort_by">
-					<label htmlFor="">Sort by</label>
-					<Select options={categorySortOptions} onChange={this.props.handleSelectChange} />
-				</div>
-				<div style={isEmpty(filtration) ? styles.hide : styles.grey}>
-					{
-						filtration.map((item, index) => (
-							<label key={index} style={{ ...styles.listingPage.searchResult, ...styles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
-						))
-					}
-				</div>
-				<div className="MotorOil-container">
-					<div className="MotorOil-filter border rounded card">
-						<p>{filterObject.viscosity_grade.label}</p>
-						<input className="form-control" type="text" name="" id="" placeholder="Search" />
-						{renderSearch({ filtration: filterObject.viscosity_grade, key: viscosity_grade }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.volume.label}</p>
-						{renderSearch({ filtration: filterObject.volume, key: volume }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.brand.label}</p>
-						{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.price.label}</p>
-						{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
-						<div className="MotorOil-filter_price">
-							<input style={buttonsStyle.price} className="form-control" type="text" placeholder="Min" name="" id="" />
-							<input style={buttonsStyle.price} className="form-control" type="text" placeholder="Max" name="" id="" />
-							<Button text="Go" className="btn btn-secondary" />
+				<section id="motor-oil">
+					<div className="tyres-image" />
+					<div className="container-fluid tyres-content">
+						<div className="row tyres-title">
+							<header className="col">
+								<h1>{translate("navBar.tyres")}</h1>
+							</header>
 						</div>
-						<hr />
-						<p>{filterObject.rating.label}</p>
-						{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<Button text="Clear all" className="btn btn-secondary" onClick={onClear} />
+						<form onSubmit={handleSubmit(this.handleSubmit)}>
+							<div className="row no-gutters">
+								<div className="col-12 subtitle-container">
+									<h2>{translate("tyresPage.selectTyreSize")}</h2>
+									<p>Make sure it fits! Search by size</p>
+								</div>
+								<div className="col-12 tyres-dropdown">
+									<div className="form-inline">
+										<div className="col-md-9 size-selection-container">
+											<div className="row">
+												<div className="col-md-4 width-field-container">
+													<Field
+														name="viscosity"
+														className="form-control width-field"
+														placeholder="viscosity"
+														component={SelectInput}
+														options={viscosity}
+														validate={[validations.required]}
+													/>
+												</div>
+												<div className="col-12 w3-hide-large w3-hide-medium">
+													<div className="h-seperator" />
+												</div>
+												<div className="col-md-4 height-field-container">
+													<Field
+														name="brand"
+														className="form-control height-field"
+														placeholder="brand"
+														component={SelectInput}
+														options={brand}
+														validate={[validations.required]}
+													/>
+												</div>
+												<div className="col-12 w3-hide-large w3-hide-medium">
+													<div className="h-seperator" />
+												</div>
+											</div>
+										</div>
+										<div className="col-md-3 btn-container">
+											<Button type="submit"
+												className="btn-primary"
+												text={
+													<Fragment>
+														<span>{translate("general.search")}</span>
+														<i className="icon-arrow-right"></i>
+													</Fragment>
+												}
+											/>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</form>
 					</div>
-					<div className="MotorOil-contents">
-						<ProductGridView currentProducts={this.props.currentProducts} />
-						<div className="MotorOil-footer">
-							<Paginator
-								first={this.props.first}
-								rows={this.props.rows}
-								totalRecords={this.props.products.length}
-								onPageChange={this.props.onPageChange.bind(this)}
-								template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
-							</Paginator>
-						</div>
-					</div>
+				</section>
+				<div className="component-background">
+					<section id="tyres-best-sellers" className="container-fluid">
+						<Title
+							header={translate("offers.recommendation.bestSeller")}
+							subHeader={translate("offers.subTitle")}
+						/>
+						<Slider {...sliderSetting}>
+							{
+								this.props.products.map((product, idx) => (
+									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
+										<img className="card-img-top" src="img/product-2.jpg" alt="product" />
+										<div className="card-body">
+											<h5 className="card-title">{product.desc}</h5>
+											<p className="product-brand">{product.manufacturer.name}</p>
+											<div className="product-review">
+												<Stars values={product.averageRating} {...starsRating} />
+												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
+											</div>
+											<p className="price">
+												{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+											</p>
+										</div>
+									</a>
+								))
+							}
+						</Slider>
+					</section>
+					<section id="tyres-top-brands" className="container-fluid">
+						<Title
+							header={translate("offers.recommendation.topBrands")}
+							subHeader={translate("offers.subTitle")}
+						/>
+						<Manufacturers products={products} />
+					</section>
+					<section id="tyres-ads" className="container-fluid">
+						<Ads />
+					</section>
+					<section id="tyres-sizes" className="container-fluid">
+						<Title
+							header={translate("tyresPage.popularSizes")}
+							subHeader={translate("offers.subTitle")}
+						/>
+						<Slider {...sliderSetting}>
+							{
+								this.props.products.map((product, idx) => (
+									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
+										<img className="card-img-top" src="img/product-2.jpg" alt="product" />
+										<div className="card-body">
+											<h5 className="card-title">{product.desc}</h5>
+											<p className="product-brand">{product.manufacturer.name}</p>
+											<div className="product-review">
+												<Stars values={product.averageRating} {...starsRating} />
+												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
+											</div>
+											<p className="price">
+												{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+											</p>
+										</div>
+									</a>
+								))
+							}
+						</Slider>
+					</section>
 				</div>
 			</Fragment>
 		)
@@ -125,7 +171,8 @@ class MotorOil extends Component {
 
 const mapStateToProps = state => {
 	return {
-		products: state.api.products
+		products: state.api.products,
+		translate: getTranslate(state.localize),
 	}
 }
 
@@ -136,31 +183,21 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
+MotorOil = reduxForm({
+	form: "MotorOil"
+})(MotorOil);
+
 MotorOil.defaultProps = {
-	filterObject: {
-		[viscosity_grade]: {
-			label: 'Viscosity grade',
-			values: ['SAE OW', 'SAE OW-5', 'SAE OW-10', 'SAE OW-15', 'SAE OW-20', 'SAE OW-30', 'SAE OW-40', 'SAE OW-42', 'SAE OW-50']
-		},
-		[volume]: {
-			label: 'Volume',
-			values: ['8 oz', '1 quart', '1.05 quart', '5 gllons', '15 oz']
-		},
-		[brand]: {
-			label: 'Brand',
-			values: ['ACDelco', 'Amalie oil']
-		},
-		[price]: {
-			label: 'Price',
-			values: ['> 50', '50-100', '100-300']
-		},
-		[rating]: {
-			label: 'Rating',
-			values: ['4 and up more', '3 and up more', 'Not yet rated']
-		}
-	}
+	viscosity: [
+		{ value: 'SAE_OW', label: 'SAE OW' },
+		{ value: 'SAE_OW-5', label: 'SAE OW-5' },
+		{ value: 'SAE_OW-10', label: 'SAE OW-10' }
+	],
+	brand: [
+		{ value: 'ACDelco', label: 'ACDelco' },
+		{ value: 'Amalie_oil', label: 'Amalie oil' },
+		{ value: 80, label: '80' }
+	]
 }
 
-const withMotorOil = WithProductView(MotorOil);
-
-export default connect(mapStateToProps, mapDispatchToProps)(withMotorOil);
+export default connect(mapStateToProps, mapDispatchToProps)(MotorOil);
