@@ -37,7 +37,7 @@ export class MobileHeader extends Component {
 	render() {
 		const { translate, localize, changeDefaultDirection } = this.props
 		return (
-			<Fragment>
+			<section id="mobile-header-details">
 				<MobileHeaderDetails
 					onClose={this.closeNav}
 					ref={ref => this.mobileHeaderDetails = ref}
@@ -78,7 +78,7 @@ export class MobileHeader extends Component {
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</section>
 		)
 	}
 }
