@@ -1,6 +1,6 @@
-.tyres-image{
+.oil-image{
     @include small-screen{
-      background: url(/img/tyres-xs.jpg);
+      background: url(/img/oil-xs.jpg);
       height: 250px;
       background-repeat: no-repeat;
       background-size: cover;
@@ -8,8 +8,7 @@
     }
   }
 
-
-#tyres-best-sellers{
+#oil-best-sellers{
     @include large-medium-screens{
         padding-top: 55px;
     }
@@ -18,24 +17,26 @@
     }
 }
 
-#tyres-top-brands{
+#oil-top-brands{
     .brand-container{
         padding-bottom: 17px;
     }
 }
 
-#tyres-ads{
+#oil-ads{
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#tyres-sizes{
+
+#oil-grades{
 
 }
 
-#tyres {
+
+#motor-oil{
     @include large-medium-screens {
-        background: url(/img/tyres-lg.jpg);
+        background: url(/img/oil-lg.jpg);
         min-height: 350px;
         background-repeat: no-repeat;
         background-size: cover;
@@ -45,14 +46,14 @@
       color: $white;
       text-align: center;
 
-      .tyres-content{
+      .oil-content{
         position: relative;
         @include large-medium-screens{
           top: 155px;
           bottom: 261px;
         }
 
-        .tyres-title{
+        .oil-title{
             height: 34px;
         }
 
@@ -71,6 +72,7 @@
 
         .subtitle-container{
             @include large-medium-screens{
+                padding-top: 46px;
                 padding-bottom: 14px;
                 h2 {
                     text-transform: uppercase;
@@ -111,7 +113,7 @@
         }
         
 
-        .tyres-dropdown{
+        .oil-dropdown{
             .size-selection-container{
                 @include small-screen{
                     @include box-shadow;
@@ -134,35 +136,23 @@
             br{
                   display: none;
             }
-            .width-field-container{
+            .viscosity-field-container{
                 background-color:#fff;
                 @include boarder-left-radius;
                 max-height: 51px;
 
-                .width-field{
+                .viscosity-field{
                     border: none;
                     width: 100%;
                 }
             }
-
-            .height-field-container{
-                background-color:#fff;
-                #{$left}: 1px;
-                max-height: 51px;
-                .height-field{
-                    border: none;
-                    width:100%;
-                    height: auto;
-                }
-            }
             
-
-            .diameter-field-container{
+            .brand-field-container{
                 background-color:#fff;
                 #{$left}: 2px;
                 max-height: 51px;
                 @include boarder-right-radius(0, 20px);
-                .diameter-field{
+                .brand-field{
                     width: 100%;
                     border:none;
                 }
@@ -182,6 +172,4 @@
 
         }
       }
-
-     
 }

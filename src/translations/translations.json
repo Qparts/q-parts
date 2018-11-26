@@ -63,8 +63,18 @@
       "Select Size"
     ],
     "popularSizes":[
-      "المقاسات الأكثر مبيعا",
+      "المقاسات الأكثر طلبا",
       "Popular Tyre Sizes"
+    ]
+  },
+  "motorOilPage": {
+    "selectViscosity":[
+      "اختر درجة اللزوجة",
+      "Select Viscosity Grade"
+    ],
+    "popularGrades":[
+      "الدرجات الأكثر طلبا",
+      "Popular Viscosity Grades"
     ]
   },
   "navBar": {

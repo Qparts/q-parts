@@ -37,27 +37,27 @@ class MotorOil extends Component {
 		return (
 			<Fragment>
 				<section id="motor-oil">
-					<div className="tyres-image" />
-					<div className="container-fluid tyres-content">
-						<div className="row tyres-title">
+					<div className="oil-image" />
+					<div className="container-fluid oil-content">
+						<div className="row oil-title">
 							<header className="col">
-								<h1>{translate("navBar.tyres")}</h1>
+								<h1>{translate("navBar.motorOil")}</h1>
 							</header>
 						</div>
 						<form onSubmit={handleSubmit(this.handleSubmit)}>
 							<div className="row no-gutters">
 								<div className="col-12 subtitle-container">
-									<h2>{translate("tyresPage.selectTyreSize")}</h2>
-									<p>Make sure it fits! Search by size</p>
+									<h2>{translate("motorOilPage.selectViscosity")}</h2>
+									<p>Make sure it fits! Search by viscosity grade</p>
 								</div>
-								<div className="col-12 tyres-dropdown">
+								<div className="col-12 oil-dropdown">
 									<div className="form-inline">
-										<div className="col-md-9 size-selection-container">
+										<div className="col-md-8 size-selection-container">
 											<div className="row">
-												<div className="col-md-4 width-field-container">
+												<div className="col-md-6 viscosity-field-container">
 													<Field
 														name="viscosity"
-														className="form-control width-field"
+														className="form-control viscosity-field"
 														placeholder="viscosity"
 														component={SelectInput}
 														options={viscosity}
@@ -67,18 +67,15 @@ class MotorOil extends Component {
 												<div className="col-12 w3-hide-large w3-hide-medium">
 													<div className="h-seperator" />
 												</div>
-												<div className="col-md-4 height-field-container">
+												<div className="col-md-6 brand-field-container">
 													<Field
 														name="brand"
-														className="form-control height-field"
+														className="form-control brand-field"
 														placeholder="brand"
 														component={SelectInput}
 														options={brand}
 														validate={[validations.required]}
 													/>
-												</div>
-												<div className="col-12 w3-hide-large w3-hide-medium">
-													<div className="h-seperator" />
 												</div>
 											</div>
 										</div>
@@ -101,7 +98,7 @@ class MotorOil extends Component {
 					</div>
 				</section>
 				<div className="component-background">
-					<section id="tyres-best-sellers" className="container-fluid">
+					<section id="oil-best-sellers" className="container-fluid">
 						<Title
 							header={translate("offers.recommendation.bestSeller")}
 							subHeader={translate("offers.subTitle")}
@@ -127,19 +124,19 @@ class MotorOil extends Component {
 							}
 						</Slider>
 					</section>
-					<section id="tyres-top-brands" className="container-fluid">
+					<section id="oil-top-brands" className="container-fluid">
 						<Title
 							header={translate("offers.recommendation.topBrands")}
 							subHeader={translate("offers.subTitle")}
 						/>
 						<Manufacturers products={products} />
 					</section>
-					<section id="tyres-ads" className="container-fluid">
+					<section id="oil-ads" className="container-fluid">
 						<Ads />
 					</section>
-					<section id="tyres-sizes" className="container-fluid">
+					<section id="oil-grades" className="container-fluid">
 						<Title
-							header={translate("tyresPage.popularSizes")}
+							header={translate("motorOilPage.popularGrades")}
 							subHeader={translate("offers.subTitle")}
 						/>
 						<Slider {...sliderSetting}>
