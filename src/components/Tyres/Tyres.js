@@ -38,68 +38,78 @@ class Tyres extends Component {
 
 	render() {
 		const { translate, handleSubmit, products, width, height, diameter } = this.props;
-
 		return (
 			<Fragment>
 				<section id="tyres">
-					<div className="container-fluid">
-						<div className="row">
+					<div className="tyres-image" />
+					<div className="container-fluid tyres-content">
+						<div className="row tyres-title">
 							<header className="col">
-								<h1>{translate("form.order.title")}</h1>
-								<p>{translate("form.order.subTitle")}</p>
+								<h1>{translate("navBar.tyres")}</h1>
 							</header>
 						</div>
-						<form className="row no-gutters" onSubmit={handleSubmit(this.handleSubmit)}>
-							<div className="col-lg-3 col-md-12 col-sm-12">
-								<Field
-									name="width"
-									placeholder="width"
-									component={SelectInput}
-									options={width}
-									validate={[validations.required]}
-								/>
-							</div>
-							<div className="col-lg-1 w3-hide-small w3-hide-medium">
-								<div className="seperator" />
-							</div>
-							<div className="col-sm-12 w3-hide-large">
-								<div className="h-seperator" />
-							</div>
-							<div className="col-lg-3 col-md-12 col-sm-12">
-								<Field
-									name="height"
-									placeholder="height"
-									component={SelectInput}
-									options={height}
-									validate={[validations.required]}
-								/>
-							</div>
-							<div className="col-lg-1 w3-hide-small w3-hide-medium">
-								<div className="seperator" />
-							</div>
-							<div className="col-sm-12 w3-hide-large">
-								<div className="h-seperator" />
-							</div>
-							<div className="col-lg-3 col-md-12 col-sm-12">
-								<Field
-									name="diameter"
-									placeholder="diameter"
-									component={SelectInput}
-									options={diameter}
-									validate={[validations.required]}
-								/>
-							</div>
-							<div className="col-lg-3 col-md-12 col-sm-12">
-								<Button
-									type="submit"
-									className="btn-primary"
-									text={
-										<Fragment>
-											<span>{translate("general.searchButton")}</span>
-											<i className="icon-arrow-right"></i>
-										</Fragment>
-									}
-								/>
+						<form onSubmit={handleSubmit(this.handleSubmit)}>
+							<div className="row no-gutters">
+								<div className="col-12 subtitle-container">
+									<h2>{translate("tyresPage.selectTyreSize")}</h2>
+									<p>Make sure it fits! Search by size</p>
+								</div>
+								<div className="col-12 tyres-dropdown">
+									<div className="form-inline">
+										<div className="col-md-9 size-selection-container">
+											<div className="row">
+												<div className="col-md-4 width-field-container">
+													<Field
+														name="width"
+														className="form-control width-field"
+														placeholder="width"
+														component={SelectInput}
+														options={width}
+														validate={[validations.required]}
+													/>
+												</div>
+												<div className="col-12 w3-hide-large w3-hide-medium">
+													<div className="h-seperator" />
+												</div>
+												<div className="col-md-4 height-field-container">
+													<Field
+														name="height"
+														className="form-control height-field"
+														placeholder="height"
+														component={SelectInput}
+														options={height}
+														validate={[validations.required]}
+													/>
+												</div>
+												<div className="col-12 w3-hide-large w3-hide-medium">
+													<div className="h-seperator" />
+												</div>
+												<div className="col-md-4 diameter-field-container">
+													<Field
+														name="diameter"
+														className="form-control diameter-field"
+														placeholder="diameter"
+														component={SelectInput}
+														options={diameter}
+														validate={[validations.required]}
+													/>
+												</div>
+											</div>
+										</div>
+										<div className="col-md-3 btn-container">
+											<Button type="submit"
+												className="btn-primary"
+												text={
+													<Fragment>
+														<span>{translate("general.search")}</span>
+														<i className="icon-arrow-right"></i>
+													</Fragment>
+												}
+											/>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</form>
 					</div>
@@ -107,7 +117,7 @@ class Tyres extends Component {
 				<div className="component-background">
 					<section id="tyres-best-sellers" className="container-fluid">
 						<Title
-							header={translate("offers.title")}
+							header={translate("offers.recommendation.bestSeller")}
 							subHeader={translate("offers.subTitle")}
 						/>
 						<Slider {...sliderSetting}>
@@ -133,18 +143,17 @@ class Tyres extends Component {
 					</section>
 					<section id="tyres-top-brands" className="container-fluid">
 						<Title
-							header={translate("offers.title")}
+							header={translate("offers.recommendation.topBrands")}
 							subHeader={translate("offers.subTitle")}
 						/>
 						<Manufacturers products={products} />
 					</section>
-					<section id="ads" className="container-fluid">
+					<section id="tyres-ads" className="container-fluid">
 						<Ads />
 					</section>
 					<section id="tyres-sizes" className="container-fluid">
-						<section id="tyres-best-sellers" className="container-fluid">
 							<Title
-								header={translate("offers.title")}
+								header={translate("tyresPage.popularSizes")}
 								subHeader={translate("offers.subTitle")}
 							/>
 							<Slider {...sliderSetting}>
@@ -167,7 +176,6 @@ class Tyres extends Component {
 									))
 								}
 							</Slider>
-						</section>
 					</section>
 				</div>
 			</Fragment>
