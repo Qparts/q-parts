@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 const Button = props => (
     <button {...props}>
         {
-            props.reverseOrder ? <Fragment>
+            props.isReverseOrder ? <Fragment>
                 <i className={props.icon}></i>
                 <span>{props.text}</span>
             </Fragment> :
