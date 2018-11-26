@@ -4,6 +4,10 @@
       "بحث",
       "find"
     ],
+    "search" : [
+      "بحث",
+      "Search"
+    ],
     "send": [
       "إرسال",
       "Send"
@@ -51,6 +55,16 @@
     "english": [
       "English",
       "الإنجليزية"
+    ]
+  },
+  "tyresPage": {
+    "selectTyreSize": [
+      "اختر المقاس",
+      "Select Size"
+    ],
+    "popularSizes":[
+      "المقاسات الأكثر مبيعا",
+      "Popular Tyre Sizes"
     ]
   },
   "navBar": {
@@ -544,6 +558,10 @@
       "recentViewed": [
         "شوهدت مؤخرا",
         "Recently viewed"
+      ],
+      "topBrands":[
+        "أفضل الماركات",
+        "Top Brands"
       ]
     }
   },

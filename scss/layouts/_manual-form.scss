@@ -1,4 +1,3 @@
-
 .manual-form-image{
   @include small-screen{
     background: url(/img/cover-img-xs.jpg);
@@ -10,19 +9,16 @@
 }
 
 #manual-form {
+  min-height: 559px;
+  text-align: center;
+  color: $white;
+
   @include large-medium-screens {
     background: url(/img/hero-lg.jpg);
-    min-height: 559px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center top;
   }
-  @include small-screen{
-    min-height: 559px;
-  }
-
-  text-align: center;
-  color: $white;
 
   .form-control {
     border-style: none;

@@ -20,6 +20,8 @@
     .select__menu-list {
       .select__option {
         color: $basic-black;
+        text-align: $left;
+        cursor: pointer;
       }
     }
   }

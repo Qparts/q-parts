@@ -117,10 +117,7 @@
 
   .form-inline {
     input {
-      @include large-screen {
-        width: 490px;
-      }
-      @include medium-screen {
+      @include large-medium-screens {
         width: 490px;
       }
       @include small-screen {
