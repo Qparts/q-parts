@@ -246,7 +246,7 @@ export class ManualForm extends Component {
 							<div className="col-lg-1 col-md-12 col-sm-12">
 								<Button
 									type="submit"
-									className="btn-primary manual-general-search-btn"
+									className="btn-primary form-control"
 									text={
 										<Fragment>
 											<span>{translate("general.searchButton")}</span>
