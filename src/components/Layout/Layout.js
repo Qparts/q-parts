@@ -79,11 +79,7 @@ class Layout extends Component {
 
     switch (dialogType) {
       case 'vehicle':
-        return <Vehicles
-          newOrOldVechile={this.state.newOrOldVechile}
-          onTabChange={this.handleChange}
-          displayTwoTabs={!isEmpty(vehicles)}
-        />
+        return <Vehicles />
       case 'signin':
         return <Login />
 

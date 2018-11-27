@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import { getTranslate } from "react-localize-redux";
+import { withRouter } from 'react-router-dom';
 
 import Vehicle from './Vehicle/Vehicle';
+import Title from '../UI/Title';
 
 
 
@@ -25,9 +27,18 @@ class Vehicles extends Component {
 
 
   render() {
-    const { translate } = this.props;
+    const { translate, match: { url } } = this.props;
+    console.log(this);
+
     return (
       <section id="vehicles" className="container-fluid">
+        {
+          url === '/vehicles' ? (
+            <Title
+              header={translate("dialog.vehicle.title")}
+              subHeader={translate("dialog.vehicle.subTitle")} />
+          ) : null
+        }
         <Vehicle translate={translate} />
       </section>
     )
@@ -52,4 +63,6 @@ Vehicles = reduxForm({
   form: 'Vehicles'
 })(Vehicles)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Vehicles);
+const withVehicles = withRouter(Vehicles)
+
+export default connect(mapStateToProps, mapDispatchToProps)(withVehicles);

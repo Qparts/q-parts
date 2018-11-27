@@ -77,7 +77,7 @@ class Vehicle extends Component {
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="row">
           <div className="group-shadow-input" />
-          <div className="col-lg-3 div-first-rounded">
+          <div className="col-md-3 div-first-rounded m-sm">
             <Field
               name="make"
               placeholder={translate("form.vehicle.make")}
@@ -85,7 +85,7 @@ class Vehicle extends Component {
               options={makeData}
               validate={[validations.required]} />
           </div>
-          <div className="col-lg-3 ">
+          <div className="col-md-3 m-sm">
             <Field
               name="model"
               placeholder={translate("form.vehicle.model")}
@@ -93,7 +93,7 @@ class Vehicle extends Component {
               options={modelData}
               validate={[validations.required]} />
           </div>
-          <div className="col-lg-3 ">
+          <div className="col-md-3 m-sm">
             <Field
               name="year"
               placeholder={translate("form.vehicle.year")}
@@ -101,7 +101,7 @@ class Vehicle extends Component {
               options={yearData}
               validate={[validations.required]} />
           </div>
-          <div className="col-lg-3 div-last-rounded">
+          <div className="col-md-3 div-last-rounded m-sm">
             <Field
               name="vin"
               placeholder={translate("form.vehicle.vin")}
@@ -116,13 +116,13 @@ class Vehicle extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-6 align-self-end">
+          <div className="col-md-6 col-sm-12 align-self-end">
             <div className="vehicle-radio">
               <RadioButton value={true} name="defaultAddress" onChange={this.handleDefaultVehicle} checked={true === this.state.defaultVehicle} />
               <label>{translate("form.signup.defaultVehicle")}</label>
             </div>
           </div>
-          <div className="col-6 text-align-right">
+          <div className="col-md-6 col-sm-12 text-align">
             <Button className="btn-primary" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
           </div>
         </div>

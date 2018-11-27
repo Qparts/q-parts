@@ -10,7 +10,6 @@ export class MobileHeaderDetails extends Component {
         return (
             <section id="mobile-header-details">
                 <SideBar
-                    ref={ref => this.currentSideBar = ref}
                     onCloseNav={onCloseNav}
                     setSideBarRef={setSideBarRef}
                     setOverLay={setOverLay}>
@@ -30,10 +29,10 @@ export class MobileHeaderDetails extends Component {
                         <i className="icon-home" />
                         <span>Home</span>
                     </Link>
-                    <Button isReverseOrder={true}
-                        className="w3-bar-item w3-button"
-                        text={'Garage'}
-                        icon="icon-garage" />
+                    <Link className="w3-bar-item" to="/vehicles" onClick={onCloseNav}>
+                        <i className="icon-garage" />
+                        <span>Garage</span>
+                    </Link>
                     <Link className="w3-bar-item" to="setting/orders">
                         <i className="icon-custom-order" />
                         <span>Orders</span>
