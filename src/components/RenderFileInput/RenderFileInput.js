@@ -103,7 +103,7 @@ class renderFileInput extends Component {
           <span className="ellipse">
             <i>
               <Button
-                text={<img className="upload-img" src="img/upload-img.svg" alt="upload-img" />}
+                text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />}
                 type="reset" onClick={() => this.fileInput.click()} />
             </i>
           </span>

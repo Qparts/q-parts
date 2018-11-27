@@ -12,7 +12,7 @@ export class Ads extends PureComponent {
                 nav
                 items={1}
             >
-                <div className="item"><img style={{ height: '288px'}} src="img/hero-lg.jpg" alt="ad"/></div>
+                <div className="item"><img style={{ height: '288px'}} src="/img/hero-lg.jpg" alt="ad"/></div>
             </OwlCarousel>
         )
     }

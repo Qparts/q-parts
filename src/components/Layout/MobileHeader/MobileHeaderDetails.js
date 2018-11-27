@@ -17,7 +17,7 @@ export class MobileHeaderDetails extends Component {
                         <Link to="/login">
                             <li className="user-account">
                                 <span className="user-img">
-                                    <img alt="user" src="img/user.svg" />
+                                    <img alt="user" src="/img/user.svg" />
                                 </span>
                                 {translate("general.signin")}
                                 <span className="seperator" />
