@@ -128,7 +128,7 @@
 }
 
 @mixin small-screen {
-  @media only screen and (max-width: 767.99px) {
+  @media only screen and (max-width: 767px) {
     @content;
   }
 }
