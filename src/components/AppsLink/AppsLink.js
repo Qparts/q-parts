@@ -12,9 +12,9 @@ export class AppsLink extends Component {
                         <h3>All You Need for your car in one app</h3>
                         <p>Download for free</p>
                     </div>
-                    <img className="mobile-app-img" src="img/mobile-app.png" alt="" />
+                    <img className="mobile-app-img" src="/img/mobile-app.png" alt="" />
                     <div className="assistant d-flex flex-row justify-content-end">
-                        <img className="whatsapp" src="img/whatsapp-logo.svg" alt="whatsapp" />
+                        <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                         <p className="align-self-end">
                             Have a Question?
                             <span>

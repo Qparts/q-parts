@@ -235,3 +235,7 @@
 .component-background {
   background: $light-gray;
 }
+
+.component-background-color {
+  background-image: linear-gradient(to bottom, #37363d, #37363d), linear-gradient(to right, #ee4036, #000000);
+}

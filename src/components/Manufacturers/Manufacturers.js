@@ -15,7 +15,7 @@ export class Manufacturers extends Component {
                                 <CardMedia
                                     component="img"
                                     alt="Contemplative Reptile"
-                                    image={"img/bridgestone.png"}
+                                    image={"/img/bridgestone.png"}
                                     title="Contemplative Reptile"
                                 />
                             </Card>

@@ -97,7 +97,7 @@ class Signup extends Component {
               <span className="seperator"></span>
               <div id="signin-link">
                 <span className="user-img">
-                  <img class="user" alt="user" src="img/user.svg" />
+                  <img class="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
                 <span className="btn-link" onClick={onShowDialog}>{translate("form.signup.signinLink")}</span>

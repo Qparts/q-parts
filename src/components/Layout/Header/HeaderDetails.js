@@ -30,7 +30,7 @@ class HeaderDetails extends Component {
     const signinJoinHeader =
       <Fragment>
         <span className="user-img">
-          <img alt="user" src="img/user.svg" />
+          <img alt="user" src="/img/user.svg" />
         </span>
         <b>{translate("general.signin")}</b>
         <span className="seperator" />
@@ -40,7 +40,7 @@ class HeaderDetails extends Component {
     const garageHeader =
       <Fragment>
         <span className="garage-img">
-          <img alt="garage" src="img/garage.svg" />
+          <img alt="garage" src="/img/garage.svg" />
         </span>{" "}
         {translate("navBar.garage")}
       </Fragment>
@@ -108,7 +108,7 @@ class HeaderDetails extends Component {
       <div className="header-second">
         <div className="d-flex justify-content-between container-fluid">
           <Link className="brand nav-icon-pl" to="/">
-            <img alt="qParts" src="img/qParts-logo.svg" />
+            <img alt="qParts" src="/img/qParts-logo.svg" />
           </Link>
           <ul className="list-inline user-actions">
             <li className="search">

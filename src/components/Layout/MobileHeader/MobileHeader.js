@@ -21,7 +21,7 @@ export class MobileHeader extends Component {
 						<div>
 							<button className="w3-button w3-white w3-xlarge q-burger-btn" onClick={onOpenNav}>&#9776;</button>
 							<Link className="brand nav-icon-pl" to="/">
-								<img alt="qParts" src="img/qParts-logo.svg" />
+								<img alt="qParts" src="/img/qParts-logo.svg" />
 							</Link>
 						</div>
 						<div className="list-inline user-actions">
