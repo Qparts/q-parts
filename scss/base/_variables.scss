@@ -21,7 +21,7 @@ $very-light-pink: rgba(235, 235, 235, 0.3);
 $facebook-color: #475993;
 $twitter-color: #03a9f4;
 //img
-$img-path: "/public/img";
+$img-path: "../public/img";
 
 //border-radius-base
 $border-radius-base: 0;
@@ -39,7 +39,7 @@ $max-container : 1170px;
 $padding-left: 128px;
 
 //ICON
-$icon-path: "/public/icon";
+$icon-path: "../public/icon";
 $icon-font-name: "q-parts-icons";
 //sprite
 .sprite{

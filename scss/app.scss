@@ -3,9 +3,9 @@
 $dir: ltr;
 
 // Import helpers from directional.scss
-@import "base/_directional.scss";
+@import "base/directional.scss";
 
-@import "base/_variables.scss";
+@import "base/variables.scss";
 
 // Import helpers from bootestrap
 @import "bootstrap/functions";
@@ -49,27 +49,28 @@ $dir: ltr;
 
 /* slick slider component*/
 
-@import "modules/_slick.scss";
+@import "modules/slick.scss";
 /* BASE - Base styles , variables, mixins, ect*/
-@import "base/_mixins.scss";
-@import "base/_normalize.scss";
-@import "base/_base.scss";
+@import "base/mixins.scss";
+@import "base/normalize.scss";
+@import "base/base.scss";
 
 /*MODULES  - Individual site components */
-@import "modules/_typography.scss";
-@import "modules/_blocks.scss";
-@import "modules/_buttons.scss";
-@import "modules/_components.scss";
+@import "modules/typography.scss";
+@import "modules/blocks.scss";
+@import "modules/buttons.scss";
+@import "modules/components.scss";
 @import "modules/select";
-@import "modules/_sections.scss";
-@import "modules/_title.scss";
+@import "modules/sections.scss";
+@import "modules/title.scss";
 @import "modules/dialog";
 @import "modules/social-media";
 @import "modules/renderField";
+@import "modules/renderFileInput";
 /* LAYOUTS - page layout styles */
 
-@import "layouts/_nav.scss";
-@import "layouts/_header.scss";
+@import "layouts/nav.scss";
+@import "layouts/header.scss";
 @import "layouts/manual-form";
 @import "layouts/home-details";
 @import "layouts/products";
@@ -79,20 +80,6 @@ $dir: ltr;
 @import "layouts/tyres/tyres";
 @import "layouts/category/motor-oil";
 @import "layouts/tyres/tyres-search";
-@import "layouts/_footer";
+@import "layouts/vehicles/vehicles";
+@import "layouts/footer";
 @import "layouts/quotation-request";
-
-/* STATE - page of site*/
-@font-face {
-  font-family: "q-parts-icons";
-  font-weight: normal;
-  font-style: normal;
-  src: url("./icon/q-parts-icons.eot");
-  src: url("./icon/q-parts-icons.eot?#iefix") format("embedded-opentype"),
-    url("./icon/q-parts-icons.woff") format("woff"),
-    url("./icon/q-parts-icons.ttf") format("truetype"),
-    url("./icon/q-parts-icons.svg#q-parts-icons") format("svg");
-}
-
-/* Add Custom Style To select , header */
-
