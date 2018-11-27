@@ -137,21 +137,9 @@ class Login extends Component {
       <Switch>
         <section id="login">
           <div className="container-fluid">
-            <Route path="/login" exact={true} render={() => {
-              return (
-                this.renderLogin(login, dialog)
-              )
-            }} />
-            <Route path="/" exact={true} render={() => {
-              return (
-                this.renderLogin(login, dialog)
-              )
-            }} />
-            <Route path="/signup" exact={true} render={() => {
-              return (
-                this.renderLogin(login, dialog)
-              )
-            }} />
+            {
+              this.renderLogin(login, dialog)
+            }
             <PrivateRoute
               path="/login/reset-password"
               fakeAuth={this.state.showResetPassword}

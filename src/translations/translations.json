@@ -334,6 +334,10 @@
       "signinLink": [
         "تسجيل الدخول",
         "Sign in"
+      ],
+      "defaultVehicle": [
+        "تعيين كمركبة افتراضية",
+        "Set as default Vehicle"
       ]
     },
     "vehicle": {
@@ -574,8 +578,12 @@
     },
     "vehicle": {
       "title": [
-        "سيارتي",
-        "My vehicle(s)"
+        "أضف سيارة",
+        "Add a vehicle"
+      ],
+      "subTitle": [
+        "تخزين المركبات في المرآب الخاص بك والحصول على توصيات المنتج",
+        "Store vehicles in your garage and Get product recommendations"
       ]
     },
     "signin": {

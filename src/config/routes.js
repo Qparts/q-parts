@@ -14,6 +14,7 @@ import Product from '../containers/Product/Product';
 import Accessories from '../components/Accessories/Accessories';
 import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
+import Vehicles from '../components/Vehicles/Vehicles';
 
 
 export const routes = (isAuth) => [
@@ -47,6 +48,10 @@ export const routes = (isAuth) => [
   component: Signup,
   isAuth: !isAuth,
   redirectTo: '/'
+ },
+ {
+  path: "/vehicles",
+  component: Vehicles,
  },
  {
   path: "/catalog",

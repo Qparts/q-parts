@@ -44,16 +44,23 @@ class Layout extends Component {
     });
   };
 
-  getHeader = () => {
+  getDialogProps = () => {
+    const { dialogType } = this.state;
     const { translate } = this.props;
-    switch (this.state.dialogType) {
-      case 'vehicle':
-        return <Title
-          header={'Add Vehicle'}
-          subHeader={'Store vehicles in your garage and Get product recommendations'} />
 
+    switch (dialogType) {
+      case 'vehicle':
+        return {
+          minWidth: 1083,
+          header: <Title
+            header={translate("dialog.vehicle.title")}
+            subHeader={translate("dialog.vehicle.subTitle")} />
+        }
       case 'signin':
-        return <Title header={translate("dialog.signin.title")} />
+        return {
+          minWidth: 0,
+          header: <Title header={translate("dialog.signin.title")} />
+        }
 
       default:
         break;
@@ -72,11 +79,7 @@ class Layout extends Component {
 
     switch (dialogType) {
       case 'vehicle':
-        return <Vehicles
-          newOrOldVechile={this.state.newOrOldVechile}
-          onTabChange={this.handleChange}
-          displayTwoTabs={!isEmpty(vehicles)}
-        />
+        return <Vehicles />
       case 'signin':
         return <Login />
 
@@ -90,8 +93,9 @@ class Layout extends Component {
     const { dialogType } = this.state;
     const dialog = (
       <Dialog
-        header={this.getHeader()}
+        header={this.getDialogProps().header}
         maximizable={true}
+        minWidth={this.getDialogProps().minWidth}
         visible={this.state.visible}
         positionTop={65}
         modal={true}

@@ -1,0 +1,136 @@
+#vehicles {
+  @include small-screen {
+    padding-top: 36px;
+    background: $light-gray;
+  }
+  .group-shadow-input {
+    @extend .group-shadow-div;
+    height: 55px;
+    top: 9px;
+    background: $white;
+
+    @include small-screen {
+      height: 324px;
+    }
+  }
+
+  form {
+    > .row {
+      position: relative;
+      @extend .no-gutters;
+
+      .col-md-3 {
+        padding-right: 6px;
+
+        @include small-screen {
+          padding-right: inherit;
+        }
+      }
+    }
+
+    > .row:nth-child(2) {
+      margin-top: 40px;
+    }
+  }
+
+  .div-first-rounded {
+    .select-input {
+      margin-#{$left}: 11px;
+      border-radius: corner-values(20px 0 0 20px) !important;
+
+      @include small-screen {
+        margin-#{$left}: 0;
+      }
+
+      @include medium-screen {
+        margin-#{$left}: 0;
+      }
+    }
+  }
+
+  .div-last-rounded {
+    .form-control {
+      border-radius: 0 0 20px 0 !important;
+
+      @include small-screen {
+        border-radius: 0 0 20px 20px !important;
+      }
+    }
+    input {
+      border-radius: inherit;
+      height: 55px;
+    }
+  }
+
+  .form-control {
+    border: none;
+    background: $light-gray;
+    padding: inherit;
+    padding-#{$left}: 13px;
+
+    label,
+    sub,
+    br {
+      display: none;
+    }
+  }
+
+  .css-10nd86i {
+    padding-top: 11px;
+    border-radius: inherit;
+    .select__control {
+      @extend .w-100;
+    }
+  }
+  .select-input {
+    height: 55px;
+    background: $light-gray;
+  }
+
+  .vehicle-radio {
+    align-items: baseline;
+  }
+  .text-align {
+    text-align: $right;
+    @include small-screen {
+      text-align: inherit;
+    }
+  }
+  .btn-primary {
+    @include font-size(20px);
+    height: 55px;
+    @extend .box-shadow;
+    @extend .w-sm-100;
+    text-transform: capitalize;
+    text-align: $right;
+
+    @include small-screen {
+      margin-bottom: 202px
+    }
+  }
+  .select-input {
+    label,
+    sub,
+    br {
+      display: none;
+    }
+  }
+  #title {
+    @include small-screen {
+      h1 {
+        text-transform: capitalize;
+      }
+      > div {
+        display: inline-block !important;
+      }
+    }
+  }
+
+  .m-sm {
+    @include small-screen {
+      margin-top: 25px;
+      margin-#{$left}: 15px;
+      margin-#{$right}: 15px;
+    }
+  }
+}

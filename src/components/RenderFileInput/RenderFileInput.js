@@ -4,7 +4,6 @@ import Lightbox from 'react-images';
 import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 
-import './RenderFileInput.css';
 
 const originalImage = 'originalImage';
 const convertedImg = 'convertedImg';
@@ -91,7 +90,7 @@ class renderFileInput extends Component {
   render() {
     const { input: { onChange, onBlur }, translate, ...props } = this.props;
     return (
-      <Fragment>
+      <section id="render-file-input">
         <input
           className="RenderFileInput-image_input"
           onChange={this.adaptFileEventToValue(onChange)}
@@ -100,8 +99,14 @@ class renderFileInput extends Component {
           type="file"
           {...props.input}
         />
-        <Button text={translate("renderFileInput.uploadFile")} type="reset" onClick={() => this.fileInput.click()} />
-        <div>
+        <div className="input-group-prepend">
+          <span className="ellipse">
+            <i>
+              <Button
+                text={<img className="upload-img" src="img/upload-img.svg" alt="upload-img" />}
+                type="reset" onClick={() => this.fileInput.click()} />
+            </i>
+          </span>
           <img
             style={{ display: 'none' }}
             alt="not found"
@@ -123,7 +128,7 @@ class renderFileInput extends Component {
           isOpen={this.state.lightboxIsOpen}
           onClose={this.closeLightbox}
         />
-      </Fragment>
+      </section>
     );
   }
 };

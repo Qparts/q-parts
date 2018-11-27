@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Button = props => (
     <button {...props}>
-        <span>{props.text}</span>
-        <i className={props.icon}></i>
+        {
+            props.isReverseOrder ? <Fragment>
+                <i className={props.icon}></i>
+                <span>{props.text}</span>
+            </Fragment> :
+
+                <Fragment>
+                    <span>{props.text}</span>
+                    <i className={props.icon}></i>
+                </Fragment>
+        }
     </button>
 )
 
