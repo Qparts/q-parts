@@ -107,7 +107,7 @@ class MotorOil extends Component {
 							{
 								this.props.products.map((product, idx) => (
 									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
-										<img className="card-img-top" src="img/product-2.jpg" alt="product" />
+										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
 										<div className="card-body">
 											<h5 className="card-title">{product.desc}</h5>
 											<p className="product-brand">{product.manufacturer.name}</p>
@@ -143,7 +143,7 @@ class MotorOil extends Component {
 							{
 								this.props.products.map((product, idx) => (
 									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
-										<img className="card-img-top" src="img/product-2.jpg" alt="product" />
+										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
 										<div className="card-body">
 											<h5 className="card-title">{product.desc}</h5>
 											<p className="product-brand">{product.manufacturer.name}</p>

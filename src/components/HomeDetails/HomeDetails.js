@@ -23,7 +23,7 @@ class HomeDetails extends Component {
 									<div className="col-lg-12">
 										<div className="row text-center">
 											<div className="col-lg-3">
-												<img className="request" src="img/request.svg" alt="request" />
+												<img className="request" src="/img/request.svg" alt="request" />
 												<figcaption className="clearfix">
 													<h3>Request</h3>
 													<p>Fill in your vehicle data and the <span>parts you want</span></p>
@@ -31,7 +31,7 @@ class HomeDetails extends Component {
 											</div>
 											<div className="col-sm-12 w3-hide-large icon-arrow-down custom-order-arrow"></div>
 											<div className="col-lg-3">
-												<img className="check-price" src="img/check-price.svg" alt="check-price" />
+												<img className="check-price" src="/img/check-price.svg" alt="check-price" />
 												<figcaption>
 													<h3>Check Price</h3>
 													<p>The price will deliver to you <span>within 24 hours</span></p>
@@ -39,7 +39,7 @@ class HomeDetails extends Component {
 											</div>
 											<div className="col-sm-12 w3-hide-large icon-arrow-down custom-order-arrow"></div>
 											<div className="col-lg-3">
-												<img className="add-to-cart" src="img/add-to-cart.svg" alt="add-to-cart" />
+												<img className="add-to-cart" src="/img/add-to-cart.svg" alt="add-to-cart" />
 												<figcaption>
 													<h3>Add To Cart</h3>
 													<p>choose Sipping Address <span>and payment method</span></p>
@@ -47,7 +47,7 @@ class HomeDetails extends Component {
 											</div>
 											<div className="col-sm-12 w3-hide-large icon-arrow-down custom-order-arrow"></div>
 											<div className="col-lg-3">
-												<img className="delivery-product" src="img/delivery-product.svg" alt="delivery-product" />
+												<img className="delivery-product" src="/img/delivery-product.svg" alt="delivery-product" />
 												<figcaption>
 													<h3>Receive Order</h3>
 													<p>Your order for your workshop or <span>anywher you love</span></p>
@@ -73,7 +73,7 @@ class HomeDetails extends Component {
 													<i>
 														<input type="file" ref={ref => this.fileInput = ref} />
 														<Button
-															text={<img className="upload-img" src="img/upload-img.svg" alt="upload-img" />}
+															text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />}
 															type="reset" onClick={() => this.fileInput.click()} />
 													</i>
 												</span>
@@ -86,7 +86,7 @@ class HomeDetails extends Component {
 													<i>
 														<input type="file" ref={ref => this.fileInput = ref} />
 														<Button
-															text={<img className="upload-img" src="img/upload-img.svg" alt="upload-img" />}
+															text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />}
 															type="reset" onClick={() => this.fileInput.click()} />
 													</i>
 												</span>

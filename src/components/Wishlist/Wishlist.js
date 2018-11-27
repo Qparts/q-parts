@@ -3,8 +3,6 @@ import Table from '../UI/Table';
 import Button from '../UI/Button';
 import moment from 'moment';
 
-import './Wishlist.css';
-
 class Wishlist extends Component {
  constructor(props) {
   super(props);
@@ -48,13 +46,16 @@ class Wishlist extends Component {
    translate("setting.wishlist.table.date"),
   ];
   return (
-   <div className="Wishlist-container">
-    <div className="border rounded card">
+   <section id="wish-list">
+    {/* <div className="border rounded card">
      <Table headers={headers}
       columns={this.state.wishlist}
      />
+    </div> */}
+    <div className="component-background-color">
+
     </div>
-   </div>
+   </section>
   )
  }
 }
