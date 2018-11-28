@@ -1,15 +1,16 @@
 import React from 'react';
 
-import './index.css';
-
 const Header = props => (
- <div className={props.className}>
-  {props.text}
- </div>
+    <section id="header">
+        <div className="component-background-color" />
+        <div className="header-container">
+            <span>{props.text}</span>
+        </div>
+    </section>
 )
 
 Header.defaultProps = {
- className: "Header bg-light navbar-nav"
+    className: ""
 }
 
 export default Header;

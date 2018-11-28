@@ -47,14 +47,12 @@ class Wishlist extends Component {
   ];
   return (
    <section id="wish-list">
-    {/* <div className="border rounded card">
+    <div className="border rounded card col-md-10">
      <Table headers={headers}
       columns={this.state.wishlist}
      />
-    </div> */}
-    <div className="component-background-color">
-
     </div>
+    
    </section>
   )
  }

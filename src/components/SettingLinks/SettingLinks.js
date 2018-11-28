@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
-import './SettingLinks.css';
+// import './SettingLinks.css';
 
 const profileLinks = ({ match, translate }) => {
  const links = [
@@ -17,7 +17,7 @@ const profileLinks = ({ match, translate }) => {
 
  return (
   <Fragment>
-   <div className="SettingLinks-container">
+   <div className="col-md-2">
     <ul className="SettingsLinks-ul bg-light navbar-nav">
      {links.map((link, idx) => {
       return (
