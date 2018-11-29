@@ -163,7 +163,12 @@
   }
 
   .spare-part-img-container{
-    img{
+    overflow: hidden;
+    @include small-screen{
+      padding-bottom: 32px;
+    }
+
+    .spare-part-img{
       @include large-medium-screens{
         @include boarder-left-radius(20px, 20px);
         content: url(/img/vehicle-part-lg.png);
@@ -171,65 +176,83 @@
       }
       @include small-screen{
         @include boarder-left-radius(20px, 0);
-        content: url(/img/vehicle-part-lg.png); 
-        max-height: 199px;
-      }
-      
+        background: url(/img/vehicle-part-xs.jpg); 
+        height: 199px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
     }
+  }
   }
 
   .motor-oil-img-container{
-    img{
+    padding-bottom: 32px;
+    .motor-oil-img{
       @include large-medium-screens{
-        padding-bottom: 17px;
-        content: url(/img/motor-oil.png); 
+        background: url(/img/motor-oil.png);
+        height: 270px;
       }
       @include small-screen{
-        content: url(/img/motor-oil.png); 
-        max-height: 178px;
+        background: url(/img/motor-oil.png); 
+        height: 178px;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
       }
-      
     }
   }
 
   .tyre-img-container{
-    img{
+    .tyre-img{
       @include large-medium-screens{
-        content: url(/img/tyres.png); 
+        background: url(/img/tyres.png); 
+        height: 270px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
       }
       @include small-screen{
-        content: url(/img/tyres.png); 
-        max-height: 178px;
+        background: url(/img/tyres.png); 
+        height: 178px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;  
       }
-      
     }
   }
   
   .tools-img-container{
-    img{
+    @include large-medium-screens{
+      padding-bottom: 32px;
+    }
+    .tools-img{
       @include large-medium-screens{
-        padding-bottom: 17px;
-        content: url(/img/tools.png); 
+        background: url(/img/tools.png); 
+        height: 270px;
       }
       @include small-screen{
         @include boarder-left-radius(0, 20px);
-        content: url(/img/tools.png); 
+        background: url(/img/tools.png); 
         max-height: 178px;
+        height: 178px;
       }
-      
     }
   }
 
   .accessories-img-container{
-    img{
+    overflow: hidden; 
+    .accessories-img{
       @include boarder-right-radius(0, 20px);
+
       @include large-medium-screens{
-        content: url(/img/accessories.png);
+        background: url(/img/accessories.png);
+        height: 270px;
       }
       @include small-screen{
-        
-        content: url(/img/accessories.png);
-        max-height: 179px;
+        background: url(/img/accessories.png);
+        height: 179px;
 
       }
     }
@@ -238,7 +261,10 @@
 }
 
 #join-us {
+  @include boarder-left-radius(20px, 20px);
+  @include boarder-right-radius(0, 20px);
   margin-top: 30px;
+
   @include small-screen{
     margin-bottom: 70px;
   }
@@ -250,13 +276,6 @@
     color: $basic-white;
     @include font-size(20px);
     margin: 0;
-  }
-
-  div {
-    position: relative;
-    @include boarder-left-radius(20px, 20px);
-    @include boarder-right-radius(0, 20px);
-    overflow: hidden;
   }
 
   button {
@@ -271,32 +290,31 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    @include small-screen {
-      width: 100%;
-      left: 58%;
-    }
 
     @include small-screen {
-      display: block !important;
       text-align: center;
-      left: 58%;
+      width: 90%;
     }
-  
-
   }
 
   .vendor-img-container{
-    img{
+    .vendor-img{
       @include boarder-left-radius(20px, 20px);
       @include boarder-right-radius(0, 20px);
       @include large-medium-screens{
         width: 100%;
-        content: url(/img/vendor.png);
+        background: url(/img/vendor.png);
+        height: 159px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
       }
       @include small-screen{        
-        content: url(/img/vendor.png);
-        min-height: 159px;
-        max-width: 450px;
+        background: url(/img/vendor-xs.jpg);
+        height: 159px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
        
       }
     }

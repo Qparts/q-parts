@@ -1,0 +1,138 @@
+#custom-header {
+  color: $white;
+  text-align: center;
+  @include large-medium-screens {
+    background: url(/img/tyres-lg.jpg);
+    min-height: 249px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+  @include small-screen {
+    background: url(/img/tyres-xxs.jpg);
+    height: 192px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+  .custom-header-content {
+    position: relative;
+    @include large-medium-screens {
+      top: 87px;
+      bottom: 261px;
+    }
+    .custom-header-title {
+      height: 34px;
+      p {
+        margin-bottom: 0;
+      }
+      h1 {
+        @include large-medium-screens {
+          @include font-size($title-font-size);
+        }
+      }
+    }
+
+    @include small-screen {
+      top: -160px;
+      bottom: -160px;
+    }
+  }
+}
+
+#custom-title {
+  .title-left {
+    @include boarder-right-radius(0, 20px);
+    background-color: $light-gray;
+    height: 125px;
+    h1 {
+      @include font-size(100px);
+      font-weight: 300;
+      color: $brand-color;
+      text-align: $right;
+    }
+  }
+  .title-right {
+    h1 {
+      @include large-medium-screens {
+        @include font-size(40px);
+        padding-top: 32px;
+      }
+      @include small-screen {
+        @include font-size(35px);
+        padding-top: 26px;
+      }
+      color: $basic-gray;
+      font-weight: 300;
+      opacity: 0.5;
+      margin-bottom: 0;
+    }
+    p {
+      @include large-medium-screens {
+        @include font-size(25px);
+      }
+      @include small-screen {
+        @include font-size(20px);
+      }
+
+      color: $basic-gray;
+      font-weight: 300;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+#custom-steps {
+  h3 {
+    @include font-size(20px);
+  }
+  .steps-container {
+    padding-top: 37px;
+
+    .request,
+    .check-price,
+    .add-to-cart,
+    .delivery-product {
+      @include small-screen {
+        width: 100%;
+      }
+    }
+  }
+  p {
+    color: $basic-gray;
+    opacity: 0.5;
+  }
+
+  .disabled {
+    h3 {
+      color: $basic-gray;
+      opacity: 0.5;
+    }
+  }
+}
+
+#custom-details{
+    .title-container{
+        padding-top: 79px;
+    }
+
+    h3{
+        @include font-size(20px);
+        color: $basic-gray;
+        font-weight: normal;
+        font-style: normal;
+        text-transform: none;
+    }
+    .vehicle-info-container{
+        @include box-shadow;
+        @include boarder-left-radius;
+
+        .garage-btn-container{
+            text-align: right;
+            
+        }
+    }
+
+    
+}

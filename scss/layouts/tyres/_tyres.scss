@@ -34,6 +34,9 @@
 }
 
 #tyres {
+    color: $white;
+    text-align: center;
+
     @include large-medium-screens {
         background: url(/img/tyres-lg.jpg);
         min-height: 350px;
@@ -42,8 +45,7 @@
         background-position: center top;
       }
 
-      color: $white;
-      text-align: center;
+     
 
       .tyres-content{
         position: relative;
