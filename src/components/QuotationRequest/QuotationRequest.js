@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
 	Field, reduxForm, change as changeFieldValue, FieldArray, getFormValues
 } from 'redux-form';
@@ -17,8 +17,8 @@ import { getRegions } from '../../actions/apiAction';
 import { addQuotationToCart } from '../../actions/cartAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
-
 import './QuotationRequest.css';
+import Title from '../UI/Title';
 
 class QuotationRequest extends Component {
 	constructor(props) {
@@ -97,10 +97,96 @@ class QuotationRequest extends Component {
 			</div>
 		</Dialog>
 		return (
+			<Fragment>
+				<section id="custom-header">
+					<div className="container-fluid custom-header-content">
+						<div className="row custom-header-title">
+							<header className="col">
+								<h1>Custom Order</h1>
+								<p>We move fast. Send us request and we will reply by price and all details</p>
+							</header>
+						</div>
+					</div>
+				</section>
+				<section id="custom-title">
+					<div className="container-fluid">
+						<div className="row">
+							<div className="col-md-6 col-3 title-left">
+								<h1>3</h1>
+							</div>
+							<div className="col-md-6 col-9 title-right">
+								<h1>STEPS</h1>
+								<p>To get your parts anywhere you like</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="custom-steps">
+					<div className="container-fluid">
+						<div className="row steps-container" align="center">
+							<div className="col-12">
+								<div className="row text-center">
+									<div className="col-3">
+										<img className="request" src="/img/request.svg" alt="request" />
+										<figcaption className="clearfix">
+											<h3>Request</h3>
+											<p>Fill in your vehicle data and the <span>parts you want</span></p>
+										</figcaption>
+									</div>
+									<div className="col-3 disabled">
+										<img className="check-price" src="/img/check-price.svg" alt="check-price" />
+										<figcaption>
+											<h3>Check Price</h3>
+											<p>The price will deliver to you <span>within 24 hours</span></p>
+										</figcaption>
+									</div>
+									<div className="col-3 disabled">
+										<img className="add-to-cart" src="/img/add-to-cart.svg" alt="add-to-cart" />
+										<figcaption>
+											<h3>Add To Cart</h3>
+											<p>choose Sipping Address <span>and payment method</span></p>
+										</figcaption>
+									</div>
+									<div className="col-3 disabled">
+										<img className="delivery-product" src="/img/delivery-product.svg" alt="delivery-product" />
+										<figcaption>
+											<h3>Receive Order</h3>
+											<p>Your order for your workshop or <span>anywher you love</span></p>
+										</figcaption>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section id="custom-details">
+					<div className="container-fluid">
+						<div className="title-container">
+							<Title header="Parts Request"
+								subHeader="Fill in your vehicle data and the parts you want" />
+						</div>
+						<form onSubmit={handleSubmit(this.handleSubmit)}>
+							<div className="vehicle-info-container col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h3>Vehicle Information</h3>
+									</div>
+									<div className="col-6 garage-btn-container">
+										
+									</div>
+								</div>
+							</div>
+							<div className="QuotationRequest-footer">
+								<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />
+							</div>
+
+						</form>
+					</div>
+				</section>
+			</Fragment>
+
+			/*
 			<div className="QuotationRequest-container">
-				{dialog}
-				<Header text={`${translate("quotationRequest.title")} ${this.props.itemName}`} />
-				<form onSubmit={handleSubmit(this.handleSubmit)}>
 					<p>{translate("quotationRequest.subTitle")}</p>
 					<div className="border rounded">
 						<div className="QuotationRequest-box bg-light navbar-nav">
@@ -165,8 +251,8 @@ class QuotationRequest extends Component {
 					<div className="QuotationRequest-footer">
 						<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />
 					</div>
-				</form>
 			</div>
+			*/
 		)
 	}
 }
