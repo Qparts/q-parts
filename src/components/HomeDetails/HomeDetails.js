@@ -114,9 +114,7 @@ class HomeDetails extends Component {
 					<div className="row">
 						<div className="spare-part-img-container col-md-4 col-12">
 							<a href="">
-								<figure>
-									<img className="vehicle-part-img" alt="vehicle-part" />
-								</figure>
+								<div className="spare-part-img"></div>
 								<figcaption>
 									<h3>Spare Parts</h3>
 								</figcaption>
@@ -125,20 +123,16 @@ class HomeDetails extends Component {
 						<div className="col-md-4 col-sm-12">
 							<div className="row">
 								<div className="motor-oil-img-container col-md-12 col-6">
-									<a href="">
-										<figure>
-											<img alt="motor-oil" />
-										</figure>
+									<a href="/motor-oil">
+										<div className="motor-oil-img" />
 										<figcaption>
 											<h3>Motor Oil</h3>
 										</figcaption>
 									</a>
 								</div>
 								<div className="tyre-img-container col-md-12 col-6">
-									<a href="">
-										<figure>
-											<img alt="tyres" />
-										</figure>
+									<a href="/tyres">
+										<div className="tyre-img" />
 										<figcaption>
 											<h3>Tyres</h3>
 										</figcaption>
@@ -149,20 +143,16 @@ class HomeDetails extends Component {
 						<div className="col-md-4 col-sm-12">
 							<div className="row">
 								<div className="tools-img-container col-md-12 col-6">
-									<a href="">
-										<figure>
-											<img alt="tools" />
-										</figure>
+									<a href="/tools">
+										<div className="tools-img" />
 										<figcaption>
 											<h3>Tools</h3>
 										</figcaption>
 									</a>
 								</div>
 								<div className="accessories-img-container col-md-12 col-6">
-									<a href="">
-										<figure>
-											<img alt="accessories" />
-										</figure>
+									<a href="/accessories">
+										<div className="accessories-img" />
 										<figcaption>
 											<h3>Accessories</h3>
 										</figcaption>
@@ -176,8 +166,8 @@ class HomeDetails extends Component {
 				<section id="join-us" className="container-fluid">
 					<div className="row">
 						<div className="col-12">
-							<div className="col-12 vendor-img-container" align="center">
-								<img className="vendor-img"  alt="vendor" />
+							<div className="vendor-img-container" align="center">
+								<div className="vendor-img" alt="vendor" />
 							</div>
 							<div className="d-flex justify-content-center">
 								<p>

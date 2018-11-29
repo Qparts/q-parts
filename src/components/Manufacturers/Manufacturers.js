@@ -10,7 +10,7 @@ export class Manufacturers extends Component {
                 {
                     this.props.products.map(product => (
 
-                        <div className="col-md-2 col-4 tyre-brand-container">
+                        <div className="col-md-2 col-4 brand-container">
                             <Card>
                                 <CardMedia
                                     component="img"

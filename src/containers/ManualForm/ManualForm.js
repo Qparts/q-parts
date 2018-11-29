@@ -164,7 +164,7 @@ export class ManualForm extends Component {
 					</div>
 					<form onSubmit={handleSubmit(this.handleSubmit)}>
 						<div className="row no-gutters">
-							<div className="col-lg-4 col-md-6 col-sm-6 manual-form-textbox-container">
+							<div className="col-md-4 col-12 manual-form-textbox-container">
 								<Field
 									label={translate("form.order.partNo")}
 									name="partNo"
@@ -177,12 +177,12 @@ export class ManualForm extends Component {
 							</div>
 							{!isAuth(this.props.token) ? (
 								<Fragment>
-									<div className="col-lg-6 col-md-12 col-sm-12 manual-form__dropdown">
-										<div className="col-xs-12 dropdown-label-container">
+									<div className="col-md-6 col-12 manual-form__dropdown">
+										<div className="col-12 dropdown-label-container">
 											<span className="dropdown-label">{translate("form.order.make")}</span>
 										</div>
 										<div className="form-inline">
-											<div className="make-select-container col-lg-3 col-md-12 col-sm-12">
+											<div className="make-select-container col-md-3 col-12">
 												<Field
 													className=""
 													name="maker"
@@ -192,13 +192,13 @@ export class ManualForm extends Component {
 													validate={[validations.required]}
 												/>
 											</div>
-											<div className="col-lg-1 w3-hide-small w3-hide-medium">
+											<div className="col-md-1 w3-hide-small">
 												<div className="seperator" />
 											</div>
-											<div className="col-sm-12 w3-hide-large">
+											<div className="col-12 w3-hide-large w3-hide-medium">
 												<div className="h-seperator" />
 											</div>
-											<div className="make-select-container col-lg-3 col-md-12 col-sm-12">
+											<div className="make-select-container col-md-3 col-12">
 												<Field
 													className="mob-maker"
 													name="model"
@@ -208,13 +208,13 @@ export class ManualForm extends Component {
 													validate={[validations.required]}
 												/>
 											</div>
-											<div className="col-lg-1 w3-hide-small w3-hide-medium">
+											<div className="col-md-1 w3-hide-small">
 												<div className="seperator" />
 											</div>
-											<div className="col-sm-12 w3-hide-large">
+											<div className="col-12 w3-hide-large w3-hide-medium">
 												<div className="h-seperator" />
 											</div>
-											<div className="make-select-container col-lg-4 col-md-12 col-sm-12">
+											<div className="make-select-container col-md-4 col-12">
 												<Field
 													className="manual-mob-maker"
 													name="year"
@@ -229,7 +229,7 @@ export class ManualForm extends Component {
 									</div>
 								</Fragment>
 							) : (
-									<div className="col-lg-6  col-md-12 col-sm-12 manual-form__dropdown">
+									<div className="col-lg-6 col-md-12 col-sm-12 manual-form__dropdown">
 										<label>{translate("form.order.make")}</label>
 										<div className="form-inline row">
 											<Field
@@ -243,7 +243,7 @@ export class ManualForm extends Component {
 										</div>
 									</div>
 								)}
-							<div className="col-lg-1 col-md-12 col-sm-12">
+							<div className="col-md-1 col-12">
 								<Button
 									type="submit"
 									className="btn-primary form-control"
