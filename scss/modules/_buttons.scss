@@ -13,6 +13,13 @@
   background: $brand-color;
   color: $white;
 }
+
+.btn-secondary {
+  @extend .btn;
+  border-style: none;
+  background: $light-gray;
+}
+
 .btn-link {
   @extend .btn;
   color: $charcoal-grey;

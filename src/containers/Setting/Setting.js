@@ -36,7 +36,7 @@ import {
   match
 } from '../../utils';
 
-import './Setting.css';
+import Header from '../../components/UI/Header';
 
 const name = 'name';
 const phone = 'phone';
@@ -217,112 +217,119 @@ class Setting extends Component {
       </Dialog>
 
     return (
-      <div className="Setting-container">
-        <SettingLinks {...this.props} />
-        <Switch>
-          <Route path="/setting/profile" exact={true} render={({ match }) => {
-            return (
-              <Fragment>
-                <Profile
-                  customer={this.props.customer}
-                  title="Personal customer"
-                  name="name"
-                  email="email"
-                  password="password"
-                  onShowEditDialog={this.handleShowDialog}
-                  onSubmit={this.onEdit.bind(this, name)}
-                  {...this.props} />
-                {dialog}
-              </Fragment>
-            )
-          }} />
+      <section id="setting">
+        <Header text={"Wish list"} />
+        <div className="component-background">
+          <section id="setting-details" className="container-fluid">
+            <div className="row">
+              <SettingLinks {...this.props} />
+              <Switch>
+                <Route path="/setting/profile" exact={true} render={({ match }) => {
+                  return (
+                    <Fragment>
+                      <Profile
+                        customer={this.props.customer}
+                        title="Personal customer"
+                        name="name"
+                        email="email"
+                        password="password"
+                        onShowEditDialog={this.handleShowDialog}
+                        onSubmit={this.onEdit.bind(this, name)}
+                        {...this.props} />
+                      {dialog}
+                    </Fragment>
+                  )
+                }} />
 
-          <Route path="/setting/quotations" exact={true} render={() => {
-            return (
-              <Fragment>
-                <Quotations
-                  customer={this.props.customer}
-                  getQuotation={this.props.getQuotation}
-                  getRepliedQuotation={this.props.getRepliedQuotation}
-                  translate={this.props.translate}
-                  addToCart={this.props.addToCart} />
-              </Fragment>
-            )
-          }} />
+                <Route path="/setting/quotations" exact={true} render={() => {
+                  return (
+                    <Fragment>
+                      <Quotations
+                        customer={this.props.customer}
+                        getQuotation={this.props.getQuotation}
+                        getRepliedQuotation={this.props.getRepliedQuotation}
+                        translate={this.props.translate}
+                        addToCart={this.props.addToCart} />
+                    </Fragment>
+                  )
+                }} />
 
-          <Route path="/setting/connect" exact={true} render={({ match }) => {
-            return (
-              <Fragment>
-                <SocialMediaLink
-                  connectedPlatforms={this.props.connectedPlatforms}
-                  handleResponse={this.props.handleResponse}
-                  handleFailure={this.props.handleFailure} />
-              </Fragment>
-            )
-          }} />
-          <Route path="/setting/addresses" exact={true} render={() => {
-            return (
-              <Fragment>
-                <Addresses
-                  customer={this.props.customer}
-                  onShowAdressDialog={this.handleShowDialog}
-                  onEditAddress={this.handleEditAddress}
-                  translate={this.props.translate} />
-                {addressDialog}
-              </Fragment>
-            )
-          }} />
-          <Route path="/setting/orders/" exact={true} render={() => {
-            return (
-              <Orders translate={this.props.translate} />
-            )
-          }} />
+                <Route path="/setting/connect" exact={true} render={({ match }) => {
+                  return (
+                    <Fragment>
+                      <SocialMediaLink
+                        connectedPlatforms={this.props.connectedPlatforms}
+                        handleResponse={this.props.handleResponse}
+                        handleFailure={this.props.handleFailure} />
+                    </Fragment>
+                  )
+                }} />
+                <Route path="/setting/addresses" exact={true} render={() => {
+                  return (
+                    <Fragment>
+                      <Addresses
+                        customer={this.props.customer}
+                        onShowAdressDialog={this.handleShowDialog}
+                        onEditAddress={this.handleEditAddress}
+                        translate={this.props.translate} />
+                      {addressDialog}
+                    </Fragment>
+                  )
+                }} />
+                <Route path="/setting/orders/" exact={true} render={() => {
+                  return (
+                    <Orders translate={this.props.translate} />
+                  )
+                }} />
 
-          <Route path="/setting/orders/:orderId" exact={true} render={() => {
-            return (
-              <Order translate={this.props.translate} checkout={this.props.checkout} />
-            )
-          }} />
-          <Route path="/setting/help_center" exact={true} render={() => {
-            return (
-              <HelpCenter translate={this.props.translate} />
-            )
-          }} />
-          <Route path="/setting/garage" exact={true} render={() => {
-            return (
-              <Fragment>
-                <Garage
-                  vehiclesFormat={this.props.vehiclesFormat}
-                  onShowVehicleDialog={this.handleShowDialog}
-                  onDeleteVehicle={this.handleDeleteVehicle}
-                  translate={this.props.translate} />
-                {garageDialog}
-              </Fragment>
-            )
-          }} />
-          <Route path="/setting/wishlist" exact={true} render={() => {
-            return (
-              <Wishlist
-                wishlist={this.props.wishlist}
-                deleteWishlist={this.props.deleteWishlist}
-                moveWishlistToCart={this.props.moveWishlistToCart}
-                translate={this.props.translate} />
-            )
-          }} />
-          <PrivateRoute
-            path="/setting/profile/phone"
-            component={EditInfo}
-            labels={["Confirmation number", "Phone number"]}
-            names={["confirmationNo", "mobile"]}
-            name=""
-            type="text"
-            placeholder={["Confirmation number", "Your phone number"]}
-            renderField={this.renderField}
-            onSubmit={this.onEdit.bind(this, phone)}
-            redirectTo="/setting/profile" />
+                <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                  return (
+                    <Order translate={this.props.translate} checkout={this.props.checkout} />
+                  )
+                }} />
+                <Route path="/setting/help_center" exact={true} render={() => {
+                  return (
+                    <HelpCenter translate={this.props.translate} />
+                  )
+                }} />
+                <Route path="/setting/garage" exact={true} render={() => {
+                  return (
+                    <Fragment>
+                      <Garage
+                        vehiclesFormat={this.props.vehiclesFormat}
+                        onShowVehicleDialog={this.handleShowDialog}
+                        onDeleteVehicle={this.handleDeleteVehicle}
+                        translate={this.props.translate} />
+                      {garageDialog}
+                    </Fragment>
+                  )
+                }} />
+                <Route path="/setting/wishlist" exact={true} render={() => {
+                  return (
+                    <Wishlist
+                      wishlist={this.props.wishlist}
+                      deleteWishlist={this.props.deleteWishlist}
+                      moveWishlistToCart={this.props.moveWishlistToCart}
+                      translate={this.props.translate} />
+                  )
+                }} />
+                <PrivateRoute
+                  path="/setting/profile/phone"
+                  component={EditInfo}
+                  labels={["Confirmation number", "Phone number"]}
+                  names={["confirmationNo", "mobile"]}
+                  name=""
+                  type="text"
+                  placeholder={["Confirmation number", "Your phone number"]}
+                  renderField={this.renderField}
+                  onSubmit={this.onEdit.bind(this, phone)}
+                  redirectTo="/setting/profile" />
 
-        </Switch>
-      </div>
+              </Switch>
+            </div>
+          </section>
+        </div>
+      </section>
     );
   }
 }

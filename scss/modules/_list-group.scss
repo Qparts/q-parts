@@ -1,0 +1,37 @@
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: $list-group-item-padding-y $list-group-item-padding-x;
+    // Place the border on the list items and negative margin up for better styling
+    margin-bottom: -$list-group-border-width;
+    background-color: $list-group-bg;
+    border: none;
+  
+    &:first-child {
+      border-radius: side-values(20px 0 0 0);
+    }
+  
+    &:last-child {
+      margin-bottom: 0;
+      border-radius: side-values(0 0 20px 20px);
+    }
+  
+    @include hover-focus {
+      z-index: 1; // Place hover/active items above their siblings for proper border styling
+      text-decoration: none;
+    }
+  
+    &.disabled,
+    &:disabled {
+      color: $list-group-disabled-color;
+      background-color: $list-group-disabled-bg;
+    }
+  
+    // Include both here for `<a>`s and `<button>`s
+    &.active {
+      z-index: 2; // Place active items above their siblings for proper border styling
+      color: $list-group-active-color;
+      background-color: $list-group-active-bg;
+      border-color: $list-group-active-border-color;
+    }
+  }
