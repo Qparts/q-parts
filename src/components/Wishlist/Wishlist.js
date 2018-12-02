@@ -82,7 +82,7 @@ class Wishlist extends Component {
                                 </div>
                                 <div className="col-12 col-md-7 pt">
                                     <div>
-                                        <span style={styles.addedDate}>{item.created}</span>
+                                        <span className="added-date" style={styles.addedDate}>{item.created}</span>
                                         {item.actions}
                                     </div>
                                 </div>

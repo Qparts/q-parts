@@ -25,14 +25,12 @@
     text-align: $right;
     div:first-child {
       justify-content: flex-end;
-
-      // @include small-screen {
-      //   padding-#{$right}: 0;
-      // }
     }
-    span:first-child {
+    .added-date {
       @include medium-screen {
+        position: relative;
         display: block;
+        right: 53px;
       }
     }
   }
@@ -53,7 +51,6 @@
     @include font-size(15px);
   }
   .btn-secondary {
-    // display: inherit;
     text-transform: capitalize;
     @include font-size(14px);
     @include small-screen {
