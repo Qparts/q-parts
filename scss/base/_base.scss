@@ -32,6 +32,10 @@ label {
   @include font-size($bas-font-size);
 }
 
+.border{
+  border: 0 !important;
+}
+
 .request {
   width: 73px;
   height: 81px;

@@ -1,0 +1,43 @@
+#cart {
+  padding-top: 70px;
+
+  .border {
+    margin-bottom: 20px;
+  }
+  .cart_product-details {
+    display: flex;
+    flex-wrap: wrap;
+
+    span:first-child {
+      width: 100%;
+    }
+  }
+  .part-text {
+    @include font-size(17px);
+  }
+  .manufacturer-text {
+    padding-#{$right}: 11px;
+    @include font-size(15px);
+    font-weight: bold;
+  }
+  .sales-price {
+    @include font-size(30px);
+    font-weight: 300;
+  }
+  .currency {
+    @include font-size(15px);
+  }
+  .btn-secondary {
+    text-transform: capitalize;
+    @include font-size(14px);
+    @include small-screen {
+      width: 126px;
+    }
+  }
+  .pt {
+    padding-top: 20px;
+  }
+  .col-md-6 {
+      text-align: $right;
+  }
+}

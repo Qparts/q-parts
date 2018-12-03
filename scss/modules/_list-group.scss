@@ -5,7 +5,6 @@
     // Place the border on the list items and negative margin up for better styling
     margin-bottom: -$list-group-border-width;
     background-color: $list-group-bg;
-    border: none;
   
     &:first-child {
       border-radius: side-values(20px 0 0 0);
