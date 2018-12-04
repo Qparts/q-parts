@@ -1409,7 +1409,7 @@
       "Request for"
     ],
     "subTitle": [
-      "اطلب جزء سيارتك بمجرد إرسال طلب وسوف نقوم بالرد عليك بتفاصيل السعر",
+      "اطلب قطع سيارتك بمجرد إرسال طلب وسوف نقوم بالرد عليك بتفاصيل السعر",
       "Order your car part by just sending a request and we will reply to you with the price details"
     ],
     "carInfo": {
@@ -1424,12 +1424,12 @@
     },
     "partInfo": {
       "title": [
-        "جزء المعلومات",
+        "معلومات القطعة",
         "Part information"
       ],
       "add": [
-        "أضف جزء",
-        "Add part"
+        "أضف قطعة أخرى",
+        "+Add Another Part"
       ],
       "delete": [
         "حذف",
