@@ -11,6 +11,16 @@
   font-size: $size;
   font-size: calculateRem($size);
 }
+
+@mixin padding-left($size){
+  padding-#{$left}: $size;
+}
+
+@mixin padding-right($size){
+  padding-#{$right}: $size;
+}
+
+
 //@include font
 
 @mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {

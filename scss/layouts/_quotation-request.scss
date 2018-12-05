@@ -117,6 +117,8 @@
         padding-top: 79px;
     }
 
+   
+
     h3{
         @include font-size(20px);
         color: $basic-gray;
@@ -124,15 +126,71 @@
         font-style: normal;
         text-transform: none;
     }
-    .vehicle-info-container{
+    .custom-container{
         @include box-shadow;
         @include boarder-left-radius;
+        margin-left:11px;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+
+        label{
+          display: none;
+        }
+        br{
+          display: none;
+        }
 
         .garage-btn-container{
             text-align: right;
-            
+        }
+
+        .select-field-make{
+          @include boarder-left-radius;
+          background: $light-gray;
+          height: 55px;
+          width: 100%;
+        }
+    
+        .select-field-middle{
+          background: $light-gray;
+          height: 55px;
+        }
+
+        .field-vin{
+          @include boarder-right-radius(0, 20px);
+          background: $light-gray;
+          height: 55px;
+        }
+
+        .parts-container{
+          padding-bottom: 11px;
+          label{
+            display: none;
+          }
+          br{
+            display: none;
+          }
+
+          .btn{
+            left:0;
+            @include font-size(15px);
+          }
+        
+        }
+        .add-part-btn-container{
+          text-align: $right;
+          position: relative;
+          .btn{
+            @include box-shadow;
+            color: $brand-color;
+            @include font-size(15px);
+            position: absolute;
+            width: inherit;
+            right: -16px;
+            top: 11px;
+            background:$white;
+            border-top-right-radius: 0!important;
+          }
         }
     }
-
-    
-}
+  }
