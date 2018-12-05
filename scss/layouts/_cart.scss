@@ -1,8 +1,27 @@
 #cart {
   padding-top: 70px;
 
+  .RenderImage {
+    padding-top: 15px;
+    padding-left: 15px;
+
+    img {
+      height: 100px !important;
+    }
+  }
+
   .border {
     margin-bottom: 20px;
+
+    &:first-child {
+      border-radius: corner-values(20px 0 0 0) !important;
+    }
+    &:last-child {
+      border-radius: corner-values(0 0 20px 20px) !important;
+    }
+    .row {
+      margin-bottom: 20px;
+    }
   }
   .cart_product-details {
     display: flex;
@@ -13,6 +32,7 @@
     }
   }
   .part-text {
+    text-transform: capitalize;
     @include font-size(17px);
   }
   .manufacturer-text {
@@ -38,6 +58,26 @@
     padding-top: 20px;
   }
   .col-md-6 {
-      text-align: $right;
+    text-align: $right;
+    padding-right: 34px;
+
+    .part-text {
+      opacity: 0.8;
+      @include font-size(15px);
+      font-family: Roboto;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.13;
+      letter-spacing: normal;
+      text-align: left;
+      color: $dark-80;
+    }
+  }
+  button {
+    @include font-size(13px);
+    i {
+      right: 6px;
+    }
   }
 }

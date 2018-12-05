@@ -36,7 +36,7 @@ export default class extends Component {
                 {submitFailed && error && <span>{error}</span>}
                 {fields.map((cartItem, idx) => {
                     console.log(`${cartItem}.itemName`)
-                    return <div key={idx} className="border rounded card">
+                    return <div key={idx} className="border card">
                         <div class="row">
                             <div className="col-5 col-md-2">
                                 <Field
@@ -82,9 +82,11 @@ export default class extends Component {
                                         />
                                     </div>
                                     <Button
+                                        isReverseOrder={true}
                                         type="button"
                                         className="btn-secondary"
                                         text={"Move to wishlist"}
+                                        icon="icon-heart"
                                     />
                                     <Button
                                         type="button"
