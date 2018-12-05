@@ -272,9 +272,20 @@ class QuotationRequest extends Component {
 								</div>
 							</div>
 
+							<div className="col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h1>Vehicle Information</h1>
+									</div>
+									<div className="col-6 garage-btn-container">
+										<Button type="submit" className="btn btn-primary" text={translate("quotationRequest.send")} />
+									</div>
+								</div>
+							</div>
+
 
 							<div className="QuotationRequest-footer">
-								<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />
+								
 							</div>
 
 						</form>
