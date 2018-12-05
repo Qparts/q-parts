@@ -239,6 +239,39 @@ class QuotationRequest extends Component {
 								/>
 							</div>
 
+							<div className="custom-container col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h3>{translate("quotationRequest.partInfo.title")}</h3>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-6 padding-right-0">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="select-field-make"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+									<div className="col-6 padding-left-6">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="field-vin"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+								</div>
+							</div>
+
 
 							<div className="QuotationRequest-footer">
 								<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />

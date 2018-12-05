@@ -70,10 +70,10 @@ label {
   @include padding-left(6px);
 }
 
-.padding-right-0{
-  @include padding-right(0);
+.padding-left-0{
+  @include padding-left(0);
 }
 
-.no-right-padding{
-  padding-right:0;
+.padding-right-0{
+  @include padding-right(0);
 }

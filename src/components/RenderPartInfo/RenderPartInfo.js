@@ -58,10 +58,10 @@ class RenderPartInfo extends Component {
                                 component={NumberPicker}
                             />
                         </div>
-                        <div className="col-1">
+                        <div className="col-1 padding-left-0">
                             <Button
                                 type="button"
-                                className="btn btn-light"
+                                className="btn btn-primary"
                                 text={this.props.deleteButton}
                                 onClick={() => fields.remove(idx)}
                             />
