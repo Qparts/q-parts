@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Field } from 'redux-form'
 import RenderField from '../RenderField/RenderField';
 import Button from '../UI/Button';
@@ -23,26 +23,26 @@ class RenderPartInfo extends Component {
             <div>
                 {submitFailed && error && <span>{error}</span>}
                 {fields.map((partInfo, idx) => (
-                    <div key={idx} className="row parts-container">
-                        
-                        <div className="col-8">
-                            <Field
-                                className="select-field-make"
-                                name={`${partInfo}.itemName`}
-                                type="text"
-                                component={RenderField}
-                                placeholder={this.props.placeholder}
-                                validate={[validations.required]}
-                            />
+                    <Fragment>
+                        <div key={idx} className="row parts-container">
+                            <div className="col-md-8 col-12">
+                                <Field
+                                    className="part-desc-field"
+                                    name={`${partInfo}.itemName`}
+                                    type="text"
+                                    component={RenderField}
+                                    placeholder={this.props.placeholder}
+                                    validate={[validations.required]}
+                                />
 
-                            <Field
-                            name={`${partInfo}.image`}
-                            image={`${partInfo}.image`}
-                            component={RenderFileInput}
-                        />
-                        </div>
+                                <Field
+                                    name={`${partInfo}.image`}
+                                    image={`${partInfo}.image`}
+                                    component={RenderFileInput}
+                                />
+                            </div>
 
-                        {/* <Field
+                            {/* <Field
      name={`${partInfo}.condition`}
      className="QuotationRequest-selectInput"
      component={SelectInput}
@@ -52,21 +52,24 @@ class RenderPartInfo extends Component {
       { value: 'all ', label: 'All' }
      ]}
     /> */}
-                        <div className="col-3 padding-left-0">
-                            <Field
-                                name={`${partInfo}.quantity`}
-                                component={NumberPicker}
-                            />
+                            <div className="col-6 col-md-3 number-picker-container">
+                                <Field
+                                    name={`${partInfo}.quantity`}
+                                    component={NumberPicker}
+                                />
+                            </div>
+                            <div className="col-md-1 col-6 delete-btn-container">
+                                <Button
+                                    type="button"
+                                    className="btn btn-light"
+                                    text={this.props.deleteButton}
+                                    onClick={() => fields.remove(idx)}
+                                />
+                            </div>
                         </div>
-                        <div className="col-1 padding-left-0">
-                            <Button
-                                type="button"
-                                className="btn btn-primary"
-                                text={this.props.deleteButton}
-                                onClick={() => fields.remove(idx)}
-                            />
-                        </div>
-                    </div>
+                        
+                    </Fragment>
+
                 ))}
                 <div className="add-part-btn-container">
                     <Button type="reset" className="btn" text={this.props.add}

@@ -68,7 +68,12 @@ label {
   @include font-size(32px);
   color: $twitter-color;
 }
-
+/*
+.padding-md-left-6{
+  @include large-medium-screens{
+    @include padding-left(6px);
+  }
+}
 .padding-left-6{
   @include padding-left(6px);
 }
@@ -80,3 +85,12 @@ label {
 .padding-right-0{
   @include padding-right(0);
 }
+
+.padding-md-right-0{
+  @include large-medium-screens {
+    @include padding-right(0);  
+  }
+  
+  
+}
+*/
