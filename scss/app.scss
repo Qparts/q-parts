@@ -1,11 +1,11 @@
 /*Direction */
-// Override default value for $dir in directional.scss
+// Override default value for $dir in directional
 $dir: ltr;
 
-// Import helpers from directional.scss
-@import "base/directional.scss";
+// Import helpers from directional
+@import "base/directional";
 
-@import "base/variables.scss";
+@import "base/variables";
 
 // Import helpers from bootestrap
 @import "bootstrap/functions";
@@ -49,29 +49,30 @@ $dir: ltr;
 
 /* slick slider component*/
 
-@import "modules/slick.scss";
+@import "modules/slick";
 /* BASE - Base styles , variables, mixins, ect*/
-@import "base/mixins.scss";
-@import "base/normalize.scss";
-@import "base/base.scss";
+@import "base/mixins";
+@import "base/normalize";
+@import "base/base";
 
 /*MODULES  - Individual site components */
-@import "modules/typography.scss";
-@import "modules/blocks.scss";
-@import "modules/buttons.scss";
+@import "modules/typography";
+@import "modules/blocks";
+@import "modules/buttons";
 @import "modules/list-group";
-@import "modules/components.scss";
+@import "modules/components";
 @import "modules/select";
-@import "modules/sections.scss";
-@import "modules/title.scss";
+@import "modules/sections";
+@import "modules/title";
 @import "modules/dialog";
 @import "modules/social-media";
 @import "modules/renderField";
 @import "modules/renderFileInput";
+@import "modules/number_picker";
 /* LAYOUTS - page layout styles */
 
-@import "layouts/nav.scss";
-@import "layouts/header.scss";
+@import "layouts/nav";
+@import "layouts/header";
 @import "layouts/manual-form";
 @import "layouts/home-details";
 @import "layouts/products";
@@ -85,6 +86,7 @@ $dir: ltr;
 @import "layouts/setting/wish-list";
 @import "layouts/setting/setting";
 @import "layouts/garage-popup";
+@import "layouts/cart";
 @import "layouts/quotation-request";
 @import "layouts/send-request";
 @import "layouts/footer";

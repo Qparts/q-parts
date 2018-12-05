@@ -1,10 +1,65 @@
 #wish-list {
-  .component-background-color {
-    
-  }
-
   .wish-list_product-details {
     display: flex;
-   flex-direction: column;
+    flex-wrap: wrap;
+
+    span {
+      color: $dark-charcoal-grey;
+    }
+
+    span:first-child {
+      width: 100%;
+    }
+  }
+
+  .border {
+    margin-bottom: 20px;
+  }
+
+  .pt {
+    padding-top: 20px;
+  }
+
+  .col-md-7 {
+    text-align: $right;
+    div:first-child {
+      justify-content: flex-end;
+    }
+    .added-date {
+      @include medium-screen {
+        position: relative;
+        display: block;
+        right: 53px;
+      }
+    }
+  }
+
+  .part-text {
+    @include font-size(17px);
+  }
+  .manufacturer-text {
+    padding-#{$right}: 11px;
+    @include font-size(15px);
+    font-weight: bold;
+  }
+  .sales-price {
+    @include font-size(30px);
+    font-weight: 300;
+  }
+  .currency {
+    @include font-size(15px);
+  }
+  .btn-secondary {
+    text-transform: capitalize;
+    @include font-size(14px);
+    @include small-screen {
+      width: 126px;
+    }
+  }
+  button {
+    height: 40px;
+    i {
+      padding-right: 5px;
+    }
   }
 }

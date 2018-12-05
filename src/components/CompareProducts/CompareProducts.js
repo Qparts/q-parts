@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { filterObject } from '../../utils';
-import RenderImages from '../RenderImages';
+import RenderProductImages from '../RenderProductImages';
 
 import { styles } from '../../constants';
 
@@ -55,7 +55,7 @@ class CompareProducts extends Component {
 
   return (
    <div>
-    <RenderImages products={this.props.products} goToProduct={this.props.goToProduct} />
+    <RenderProductImages products={this.props.products} goToProduct={this.props.goToProduct} />
     {/* {this.renderComparision(prices, headers[0])} */}
     {/* {this.renderComparision(countReviews, headers[1])} */}
    </div>
