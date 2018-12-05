@@ -176,7 +176,7 @@ class QuotationRequest extends Component {
 									</div>
 								</div>
 								<div className="row">
-									<div className="col-3 padding-right-0">
+									<div className="col-12 col-md-3 select-field-make-container">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
@@ -187,33 +187,33 @@ class QuotationRequest extends Component {
 										/>
 
 									</div>
-									<div className="col-3 padding-right-0 padding-left-6">
+									<div className="col-12 col-md-3 select-field-model-container">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
-											className="select-field-middle"
+											className="select-field-model"
 											component={SelectInput}
 											onChange={(value) => this.handleFillValues(value)}
 											options={this.props.vehiclesFormat}
 										/>
 
 									</div>
-									<div className="col-2 padding-right-0 padding-left-6">
+									<div className="col-12 col-md-2 select-field-year-container">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
-											className="select-field-middle"
+											className="select-field-year"
 											component={SelectInput}
 											onChange={(value) => this.handleFillValues(value)}
 											options={this.props.vehiclesFormat}
 										/>
 
 									</div>
-									<div className="col-4 padding-left-6">
+									<div className="col-12 col-md-4 vin-field-container padding-md-left-6">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
-											className="field-vin"
+											className="vin-field"
 											component={SelectInput}
 											onChange={(value) => this.handleFillValues(value)}
 											options={this.props.vehiclesFormat}
@@ -234,7 +234,11 @@ class QuotationRequest extends Component {
 									name="quotationCartItems"
 									component={RenderPartInfo}
 									add={translate("quotationRequest.partInfo.add")}
-									deleteButton={translate("quotationRequest.partInfo.delete")}
+									deleteButton={
+										<Fragment>
+											<i className="icon-close"></i>
+										</Fragment>
+									}
 									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
 								/>
 							</div>
@@ -242,52 +246,50 @@ class QuotationRequest extends Component {
 							<div className="custom-container col-12">
 								<div className="row d-flex">
 									<div className="col-6">
-										<h3>{translate("quotationRequest.partInfo.title")}</h3>
+										<h3>Shipping Information</h3>
 									</div>
 								</div>
 
 								<div className="row">
-									<div className="col-6 padding-right-0">
+									<div className="col-md-6 col-12 select-country-field-container padding-md-right-0">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
-											className="select-field-make"
+											className="select-country-field"
 											component={SelectInput}
 											onChange={(value) => this.handleFillValues(value)}
 											options={this.props.vehiclesFormat}
 										/>
 
 									</div>
-									<div className="col-6 padding-left-6">
+									<div className="col-md-6 col-12 select-city-field-container padding-md-left-6">
 										<Field
 											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
 											name="vehicleForm"
-											className="field-vin"
+											className="select-city-field"
 											component={SelectInput}
 											onChange={(value) => this.handleFillValues(value)}
 											options={this.props.vehiclesFormat}
 										/>
-
 									</div>
 								</div>
 							</div>
 
-							<div className="col-12">
+							<div className="col-12 padding-right-0">
 								<div className="row d-flex">
 									<div className="col-6">
-										<h1>Vehicle Information</h1>
+										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
 									</div>
-									<div className="col-6 garage-btn-container">
-										<Button type="submit" className="btn btn-primary" text={translate("quotationRequest.send")} />
+									<div className="col-6 garage-btn-container padding-md-right-0">
+										<Button type="submit" className="btn btn-primary" text={
+											<Fragment>
+												<span>{translate("general.send")}</span>
+												<i className="icon-arrow-right"></i>
+											</Fragment>
+										}	 />
 									</div>
 								</div>
 							</div>
-
-
-							<div className="QuotationRequest-footer">
-								
-							</div>
-
 						</form>
 					</div>
 				</section>
