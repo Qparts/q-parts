@@ -234,7 +234,11 @@ class QuotationRequest extends Component {
 									name="quotationCartItems"
 									component={RenderPartInfo}
 									add={translate("quotationRequest.partInfo.add")}
-									deleteButton={translate("quotationRequest.partInfo.delete")}
+									deleteButton={
+										<Fragment>
+											<i className="icon-close"></i>
+										</Fragment>
+									}
 									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
 								/>
 							</div>
@@ -272,22 +276,21 @@ class QuotationRequest extends Component {
 								</div>
 							</div>
 
-							<div className="col-12">
+							<div className="col-12 padding-right-0">
 								<div className="row d-flex">
 									<div className="col-6">
-										<h1>Vehicle Information</h1>
+										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
 									</div>
-									<div className="col-6 garage-btn-container">
-										<Button type="submit" className="btn btn-primary" text={translate("quotationRequest.send")} />
+									<div className="col-6 garage-btn-container padding-right-0">
+										<Button type="submit" className="btn btn-primary" text={
+											<Fragment>
+												<span>{translate("general.send")}</span>
+												<i className="icon-arrow-right"></i>
+											</Fragment>
+										}	 />
 									</div>
 								</div>
 							</div>
-
-
-							<div className="QuotationRequest-footer">
-								
-							</div>
-
 						</form>
 					</div>
 				</section>

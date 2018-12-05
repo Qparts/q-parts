@@ -52,7 +52,7 @@ class RenderPartInfo extends Component {
       { value: 'all ', label: 'All' }
      ]}
     /> */}
-                        <div className="col-3">
+                        <div className="col-3 padding-left-0">
                             <Field
                                 name={`${partInfo}.quantity`}
                                 component={NumberPicker}
