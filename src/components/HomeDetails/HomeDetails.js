@@ -93,16 +93,18 @@ class HomeDetails extends Component {
 											</div>
 										</div>
 										<div className="mr-2 w-sm-100">
-											<Button
-												type="submit"
-												className="btn-primary w-sm-100"
-												text={
-													<Fragment>
-														<span>{translate("general.send")}</span>
-														<i className="icon-arrow-right"></i>
-													</Fragment>
-												}
-											/>
+											<Link to='/send'>
+												<Button
+													type="submit"
+													className="btn-primary w-sm-100"
+													text={
+														<Fragment>
+															<span>{translate("general.send")}</span>
+															<i className="icon-arrow-right"></i>
+														</Fragment>
+													}
+												/>
+											</Link>
 										</div>
 									</form>
 								</div>

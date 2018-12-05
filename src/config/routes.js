@@ -15,6 +15,7 @@ import Accessories from '../components/Accessories/Accessories';
 import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
 import Vehicles from '../components/Vehicles/Vehicles';
+import SendRequest from '../components/SendRequest/SendRequest';
 
 
 export const routes = (isAuth) => [
@@ -97,5 +98,9 @@ export const routes = (isAuth) => [
  {
   path: "/motor-oil",
   component: MotorOil
+ },
+ {
+  path: "/send",
+  component: SendRequest
  }
 ];

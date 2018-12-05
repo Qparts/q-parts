@@ -20,6 +20,12 @@ height: 100%;
 .div-border-radius{
   border-radius: side-values(20px 0 20px 20px) !important;
 }
+.link-border-radius-signIn{
+  border-radius: side-values(0 0px 0px 20px) !important;
+}
+.link-border-radius-dropdown{
+  border-radius: side-values(0 0px 20px 20px) !important;
+}
 
 .hover-link{
   background: $light-gray;
