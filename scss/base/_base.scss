@@ -68,3 +68,15 @@ label {
   @include font-size(32px);
   color: $twitter-color;
 }
+
+.padding-left-6{
+  @include padding-left(6px);
+}
+
+.padding-left-0{
+  @include padding-left(0);
+}
+
+.padding-right-0{
+  @include padding-right(0);
+}

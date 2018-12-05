@@ -166,18 +166,126 @@ class QuotationRequest extends Component {
 								subHeader="Fill in your vehicle data and the parts you want" />
 						</div>
 						<form onSubmit={handleSubmit(this.handleSubmit)}>
-							<div className="vehicle-info-container col-12">
+							<div className="custom-container col-12">
 								<div className="row d-flex">
 									<div className="col-6">
 										<h3>Vehicle Information</h3>
 									</div>
 									<div className="col-6 garage-btn-container">
-										
+										Button
+									</div>
+								</div>
+								<div className="row">
+									<div className="col-3 padding-right-0">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="select-field-make"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+									<div className="col-3 padding-right-0 padding-left-6">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="select-field-middle"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+									<div className="col-2 padding-right-0 padding-left-6">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="select-field-middle"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+									<div className="col-4 padding-left-6">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="field-vin"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
 									</div>
 								</div>
 							</div>
+
+
+							<div className="custom-container col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h3>{translate("quotationRequest.partInfo.title")}</h3>
+									</div>
+								</div>
+								<FieldArray
+									name="quotationCartItems"
+									component={RenderPartInfo}
+									add={translate("quotationRequest.partInfo.add")}
+									deleteButton={translate("quotationRequest.partInfo.delete")}
+									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
+								/>
+							</div>
+
+							<div className="custom-container col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h3>{translate("quotationRequest.partInfo.title")}</h3>
+									</div>
+								</div>
+
+								<div className="row">
+									<div className="col-6 padding-right-0">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="select-field-make"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+									<div className="col-6 padding-left-6">
+										<Field
+											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
+											name="vehicleForm"
+											className="field-vin"
+											component={SelectInput}
+											onChange={(value) => this.handleFillValues(value)}
+											options={this.props.vehiclesFormat}
+										/>
+
+									</div>
+								</div>
+							</div>
+
+							<div className="col-12">
+								<div className="row d-flex">
+									<div className="col-6">
+										<h1>Vehicle Information</h1>
+									</div>
+									<div className="col-6 garage-btn-container">
+										<Button type="submit" className="btn btn-primary" text={translate("quotationRequest.send")} />
+									</div>
+								</div>
+							</div>
+
+
 							<div className="QuotationRequest-footer">
-								<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />
+								
 							</div>
 
 						</form>
