@@ -8,8 +8,6 @@ import Button from '../UI/Button';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate } from 'react-localize-redux';
 
-import './Cart.css';
-
 class Cart extends Component {
 	handleSubmit = values => {
 		this.props.history.push('/checkout');
@@ -19,39 +17,39 @@ class Cart extends Component {
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
 				desc: item.product.desc,
-				price: `${item.product.salesPrice.toFixed(2)} SR`,
+				price: item.product.salesPrice.toFixed(2),
+				currency: 'SR',
 				quantity: item.quantity,
+				quantityLabel: 'quantity',
+				image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
+				productNumber: item.product.productNumber,
+                manufacturerName: item.product.manufacturer.name
 			}
 		});
-		const headers = [
-			translate("cart.table.items"),
-			translate("cart.table.quantity"),
-			translate("cart.table.price"),
-		]
 
 		return (
-			<form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-				<div className="Cart-container">
-					<div className="border rounded card card-body">
-						<Table
-							headers={headers}
-							columns={[{}]}
-						/>
-						<FieldArray
-							name="purchasedItems"
-							deleteText={translate("cart.table.delete")}
-							purchasedItems={checkoutData}
-							component={RenderCartItem}
-						/>
-					</div>
-					<OrderSummary translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
-				</div>
-				<div className="Cart-button">
-					<div>
-						<Button type="reset" className="btn btn-light" text={translate("cart.keepShopping")} />
-					</div>
-				</div>
-			</form>
+			<div className="component-background">
+				<section id="cart">
+					<dir className="container-fluid">
+						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+							<div className="col-md-9">
+								<FieldArray
+									name="purchasedItems"
+									deleteText={translate("cart.table.delete")}
+									purchasedItems={checkoutData}
+									component={RenderCartItem}
+								/>
+							</div>
+							<OrderSummary col="col-md-3" translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
+							<div className="Cart-button">
+								<div>
+									<Button type="reset" className="btn btn-light" text={translate("cart.keepShopping")} />
+								</div>
+							</div>
+						</form>
+					</dir>
+				</section>
+			</div>
 		);
 	}
 }

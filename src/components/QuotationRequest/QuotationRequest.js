@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import RenderField from '../RenderField/RenderField';
 import SelectInput from '../SelectInput/SelectInput';
 import Button from '../UI/Button';
-import Header from '../UI/Header';
+import SectionHeader from '../UI/SectionHeader';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import { Dialog } from '../../../node_modules/primereact/components/dialog/Dialog';

@@ -10,7 +10,7 @@ import { addToCart } from '../../../actions/cartAction';
 
 import { generateQuantity } from '../../../utils';
 import { isAuth } from '../../../utils';
-import Header from '../../../components/UI/Header';
+import SectionHeader from '../../../components/UI/SectionHeader';
 import { getTranslate } from 'react-localize-redux';
 
 import './SearchResult.css';
@@ -70,7 +70,7 @@ class SearchResult extends Component {
     if (!isAvailable) {
       return (
         <Fragment>
-          <Header text={`${translate("searchResult.title")} ${currentSearchVehicle.name}`} />
+          <SectionHeader text={`${translate("searchResult.title")} ${currentSearchVehicle.name}`} />
           <div className="SearchResult-not_found">
             <p>{`${translate("searchResult.partAvailability")} ${currentSearchVehicle.name} ${translate("searchResult.notAvailable")}`}</p>
             <div className="SearchResult-buttons">
