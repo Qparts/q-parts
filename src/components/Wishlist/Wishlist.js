@@ -26,11 +26,22 @@ class Wishlist extends Component {
         this.props.wishlist.forEach(list => {
             const tempWishlist = {
                 desc: list.desc,
-                salesPrice: `${list.salesPrice.toFixed(2)} SR`,
+                salesPrice: list.salesPrice.toFixed(2),
+                currency: 'SR',
                 created: `Added: ${moment(list.created).format('MM/DD/YYYY')}`,
                 actions: [
-                    <Button key={0} text={this.props.translate("setting.wishlist.table.addToCart")} className="btn-secondary" onClick={this.props.moveWishlistToCart.bind(this, list)} />,
-                    <Button key={1} text={this.props.translate("setting.wishlist.table.delete")} className="btn btn-light" onClick={this.props.deleteWishlist.bind(this, list)} />
+                    <Button
+                        key={0}
+                        isReverseOrder={true}
+                        className="btn-secondary"
+                        icon="icon-cart"
+                        text={this.props.translate("setting.wishlist.table.addToCart")}
+                        onClick={this.props.moveWishlistToCart.bind(this, list)} />,
+                    <Button
+                        key={1}
+                        className="btn btn-light"
+                        text="X"
+                        onClick={this.props.deleteWishlist.bind(this, list)} />
                 ],
                 image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
                 productNumber: list.productNumber,
@@ -50,25 +61,28 @@ class Wishlist extends Component {
             translate("setting.wishlist.table.date"),
         ];
         return (
-            <section id="wish-list" className="col-md-10">
+            <section id="wish-list" className="col-md-10 col-12">
                 {
                     this.state.wishlist.map(item => (
                         <div className="border rounded card">
                             <div className="row">
-                                <div className="col-md-2">
+                                <div className="col-5 col-md-2">
                                     <img style={{ height: '165px' }} src={item.image} alt="no vehicle found" />
                                 </div>
-                                <div className="col-md-3">
+                                <div className="col-7 col-md-3 pt">
                                     <div className="wish-list_product-details">
-                                        <span>{item.desc}</span>
-                                        <span>{item.manufacturerName}</span>
-                                        <span>{item.productNumber}</span>
-                                        <span>{item.salesPrice}</span>
+                                        <span className="part-text" style={styles}>{item.desc}</span>
+                                        <span className="manufacturer-text">{item.manufacturerName}</span>
+                                        <span className="part-text">{item.productNumber}</span>
+                                        <div className="w-sm-100">
+                                            <span className="sales-price">{item.salesPrice}</span>
+                                            <span className="currency">{item.currency}</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="col-md-7">
-                                    <span style={styles.addedDate}>{item.created}</span>
+                                <div className="col-12 col-md-7 pt">
                                     <div>
+                                        <span className="added-date" style={styles.addedDate}>{item.created}</span>
                                         {item.actions}
                                     </div>
                                 </div>
@@ -84,6 +98,9 @@ class Wishlist extends Component {
 
 const styles = {
     addedDate: {
+        color: colors.charcoalGrey,
+    },
+    partText: {
         color: colors.charcoalGrey
     }
 }

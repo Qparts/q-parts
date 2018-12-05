@@ -36,7 +36,10 @@ import {
   match
 } from '../../utils';
 
-import Header from '../../components/UI/Header';
+import SectionHeader from '../../components/UI/SectionHeader';
+import {
+  quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia
+} from '../../constants';
 
 const name = 'name';
 const phone = 'phone';
@@ -56,9 +59,23 @@ class Setting extends Component {
       cityFound: false,
       AddAdressType: "",
       defaultAddress: null,
-      newOrOldVechile: TAB_ONE
+      newOrOldVechile: TAB_ONE,
+      sectionHeader: ''
     }
 
+  }
+
+  componentDidMount = () => {
+    this.getSectionHeader(this.props.location.pathname);
+  }
+  
+
+  componentDidUpdate(prevProps, prevState) {
+    const { location: { pathname } } = this.props;
+    const prevPathname = prevProps.location.pathname;
+    if (pathname !== prevPathname) {
+      this.getSectionHeader(pathname)
+    }
   }
 
   renderField = ({ label, type, placeholder, input, meta: { touched, error } }) => {
@@ -143,6 +160,41 @@ class Setting extends Component {
     this.handleShowDialog.bind(this, null);
   }
 
+  getSectionHeader = (pathname) => {
+    const pathnameSplit = pathname.split('/');
+    const sectionHeader = pathnameSplit[pathnameSplit.length - 1];
+    const { translate } = this.props;
+
+    switch (sectionHeader) {
+      case quotations:
+        return this.setState({ sectionHeader: translate(`setting.links.${quotations}`) });
+
+      case orders:
+        return this.setState({ sectionHeader: translate(`setting.links.${orders}`) });
+
+      case 'help_center':
+        return this.setState({ sectionHeader: translate(`setting.links.${helpCenter}`) });
+
+      case 'wishlist':
+        return this.setState({ sectionHeader: translate(`setting.links.${wishlist}`) });
+
+      case garage:
+        return this.setState({ sectionHeader: translate(`setting.links.${garage}`) });
+
+      case 'profile':
+        return this.setState({ sectionHeader: translate(`setting.links.${accountSetting}`) });
+
+      case 'addresses':
+        return this.setState({ sectionHeader: translate(`setting.links.${addressBook}`) });
+
+      case 'connect':
+        return this.setState({ sectionHeader: translate(`setting.links.${socialMedia}`) });
+
+      default:
+        break;
+    }
+  }
+
   render() {
     const { translate } = this.props;
     let dialog;
@@ -218,7 +270,7 @@ class Setting extends Component {
 
     return (
       <section id="setting">
-        <Header text={"Wish list"} />
+        <SectionHeader text={this.state.sectionHeader} />
         <div className="component-background">
           <section id="setting-details" className="container-fluid">
             <div className="row">

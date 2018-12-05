@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './RecentViewedProducts.css';
-import RenderImages from '../RenderImages';
+import RenderProductImages from '../RenderProductImages';
 
 
 class RecentViewedProducts extends Component {
@@ -20,7 +20,7 @@ class RecentViewedProducts extends Component {
   return (
    <div>
     <h4>{this.props.title}</h4>
-    <RenderImages products={this.props.products} goToProduct={this.props.goToProduct} />
+    <RenderProductImages products={this.props.products} goToProduct={this.props.goToProduct} />
    </div>
   )
  }

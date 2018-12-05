@@ -35,3 +35,11 @@ export const categorySortOptions = [
 	{ value: 'hPrice', label: 'Highest price' },
 	{ value: 'rating', label: 'Rating' }
 ];
+export const quotations = 'quotations';
+export const orders = 'orders';
+export const helpCenter = 'helpCenter';
+export const wishlist = 'wishlist';
+export const garage = 'garage';
+export const accountSetting = 'accountSetting';
+export const addressBook = 'addressBook';
+export const socialMedia = 'socialMedia';

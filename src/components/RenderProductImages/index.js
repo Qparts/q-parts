@@ -3,7 +3,7 @@ import { styles } from '../../constants';
 
 import './index.css';
 
-const renderImages = ({ products, goToProduct}) => {
+const renderProductImages = ({ products, goToProduct}) => {
  return <div className="RenderImages-container">
   {
    products.map((product, idx) => {
@@ -18,4 +18,4 @@ const renderImages = ({ products, goToProduct}) => {
  </div>
 }
 
-export default renderImages;
+export default renderProductImages;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = props => (
+const SectionHeader = props => (
     <section id="header">
         <div className="component-background-color" />
         <div className="header-container">
@@ -9,8 +9,8 @@ const Header = props => (
     </section>
 )
 
-Header.defaultProps = {
+SectionHeader.defaultProps = {
     className: ""
 }
 
-export default Header;
+export default SectionHeader;

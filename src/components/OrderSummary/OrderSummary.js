@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../UI/Button';
 
-import './OrderSummary.css';
+// import './OrderSummary.css';
 
 class OrderSummary extends Component {
  render() {
@@ -11,7 +11,7 @@ class OrderSummary extends Component {
    <p>3 {translate("orderSummary.itemsAmount")}</p>
   </div>
   return (
-   <div className="OrderSummary-container ">
+   <div className={this.props.col}>
     {renderHeader}
     <div className="OrderSummary-item card card-body">
      <p>{translate("orderSummary.subtotal")}</p>
