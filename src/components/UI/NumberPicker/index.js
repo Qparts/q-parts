@@ -34,7 +34,7 @@ class NumberPicker extends Component {
                 value={INCREMENT}
                 onClick={(value) => this.handleClick(value)} />
             <input
-                className="margin-right-3"
+                className="form-control margin-right-3"
                 readOnly
                 {...this.props.input}
             />
