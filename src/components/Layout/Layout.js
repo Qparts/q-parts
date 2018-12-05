@@ -11,7 +11,6 @@ import MobileFooter from "./Footer/MobileFooter";
 import { TAB_ONE, styles, colors } from "../../constants";
 import { isEmpty } from "../../utils";
 
-import "./Layout.css";
 import Title from '../UI/Title';
 
 class Layout extends Component {
