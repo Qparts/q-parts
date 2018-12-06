@@ -10,7 +10,8 @@ class HeaderDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null
+      anchorEl: null,
+      count: 0,
     }
   }
   handleClick = event => {
@@ -26,7 +27,7 @@ class HeaderDetails extends Component {
   };
   render() {
     const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin } = this.props;
-    const { anchorEl } = this.state;
+    const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
         <span className="user-img">
@@ -41,6 +42,7 @@ class HeaderDetails extends Component {
       <Fragment>
         <span className="garage-img">
           <img alt="garage" src="/img/garage.svg" />
+          <div>{count}</div>
         </span>{" "}
         {translate("navBar.garage")}
       </Fragment>
@@ -86,21 +88,38 @@ class HeaderDetails extends Component {
     ) : (
         <Fragment>
           <li className="user-account">
-            <DropdownItem header={signinJoinHeader}>
-              <div>
-                <Button
-                  // component={Link}
-                  // to="/login"
-                  onClick={onSignin}
-                  variant="contained"
-                  classes={{
-                    label: classes.label
-                  }} >{translate("general.signin")}
-                </Button>
-                <br />
-                {translate("dropdown.signup.message")} <Link to="/signup">{translate("dropdown.signup.link")}</Link>
-              </div>
-            </DropdownItem>
+            <a>
+              <DropdownItem DropdownItemId="signin" header={signinJoinHeader}>
+                <div className="dropdown-header">
+                  <p>Welcome Back</p>
+                  <div>
+                    <button type="submit" className="btn-primary" onClick={onSignin}>
+                      {translate("general.signin")} <i className="icon-arrow-right" />
+                    </button>
+                    <a href="#"><i className="icon-facebook-logo" /></a>
+                    <a href="#"><i className="icon-google-logo" /></a>
+                    <a href="#" className="twit"><i className="icon-twitter" /></a>
+                  </div>
+                  <br />
+                  <p className="text-singIn">{translate("dropdown.signup.message")}</p> <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+                  <i className="icon-arrow-right" />
+                  <div class="dropdown-divider"  >
+                  </div>
+                  <div className="dropdown-footer">
+                    <li>
+                      <img alt="garage" src="/img/garage.svg" /> <p>Orders</p>
+                    </li>
+                    <li>
+                      <img alt="garage" src="/img/request.svg" /> <p>Request</p>
+                    </li>
+                    <li>
+                      <img alt="garage" src="/img/garage.svg" /> <p>My Garage</p>
+                    </li>
+                  </div>
+                </div>
+
+              </DropdownItem>
+            </a>
           </li>
         </Fragment>
       );
@@ -124,22 +143,24 @@ class HeaderDetails extends Component {
               <span className="seperator" />
             </li>
             <li className="garage">
-              <DropdownItem header={garageHeader}>
-                <Fragment>
-                  {!isEmpty(vehicles) ? (
-                    <GaragePopup
-                      translate={translate}
-                      className=""
-                      onAddVechile={onAddVechile}
-                    />
-                  ) : (
-                      <ButtonCustom
-                        className="btn-primary"
-                        text={"Add a new vehicle"}
-                        onClick={onAddVechile} />
-                    )}
-                </Fragment>
-              </DropdownItem>
+              <a>
+                <DropdownItem DropdownItemId="garage" header={garageHeader}>
+                  <Fragment>
+                    {!isEmpty(vehicles) ? (
+                      <GaragePopup
+                        translate={translate}
+                        className=""
+                        onAddVechile={onAddVechile}
+                      />
+                    ) : (
+                        <ButtonCustom
+                          className="btn-primary"
+                          text={"Add a new vehicle"}
+                          onClick={onAddVechile} />
+                      )}
+                  </Fragment>
+                </DropdownItem>
+              </a>
             </li>
             <li>
               <Link to="/wishlist">

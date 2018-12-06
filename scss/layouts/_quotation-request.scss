@@ -112,85 +112,272 @@
   }
 }
 
-#custom-details{
-    .title-container{
-        padding-top: 79px;
+#custom-details {
+  padding-bottom: 87px;
+  .title-container {
+    padding-top: 79px;
+  }
+
+  a {
+    color: $brand-color;
+  }
+
+  h3 {
+    @include font-size(20px);
+    color: $basic-gray;
+    font-weight: normal;
+    font-style: normal;
+    text-transform: none;
+  }
+  .garage-btn-container {
+    text-align: right;
+  }
+
+  .custom-container {
+    @include box-shadow;
+    @include boarder-left-radius;
+    margin-left: 11px;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+
+    label {
+      display: none;
+    }
+    br {
+      display: none;
     }
 
-   
+    .select-field-make-container {
+      @include large-medium-screens {
+        @include padding-right(0);
+      }
 
-    h3{
-        @include font-size(20px);
-        color: $basic-gray;
-        font-weight: normal;
-        font-style: normal;
-        text-transform: none;
-    }
-    .custom-container{
-        @include box-shadow;
-        @include boarder-left-radius;
-        margin-left:11px;
+      @include small-screen {
         padding-bottom: 10px;
-        margin-bottom: 30px;
+        padding-top: 10px;
+      }
 
-        label{
-          display: none;
-        }
-        br{
-          display: none;
-        }
-
-        .garage-btn-container{
-            text-align: right;
+      .select-field-make {
+        height: 55px;
+        background: $light-gray;
+        @include small-screen {
+          @include boarder-left-radius(20px, 0);
         }
 
-        .select-field-make{
+        @include large-medium-screens {
           @include boarder-left-radius;
-          background: $light-gray;
-          height: 55px;
-          width: 100%;
         }
-    
-        .select-field-middle{
-          background: $light-gray;
-          height: 55px;
-        }
+      }
+    }
 
-        .field-vin{
+    .select-field-model-container {
+      @include large-medium-screens {
+        @include padding-right(0);
+        @include padding-left(6px);
+      }
+
+      @include small-screen {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .select-field-model {
+        height: 55px;
+        background: $light-gray;
+      }
+    }
+
+    .select-field-year-container {
+      @include large-medium-screens {
+        @include padding-right(0);
+        @include padding-left(6px);
+      }
+
+      @include small-screen {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .select-field-year {
+        height: 55px;
+        background: $light-gray;
+      }
+    }
+
+    .vin-field-container{
+      @include large-medium-screens {
+        @include padding-left(6px);
+      }
+
+      @include small-screen {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .vin-field {
+        @include large-medium-screens{
           @include boarder-right-radius(0, 20px);
-          background: $light-gray;
-          height: 55px;
         }
-
-        .parts-container{
-          padding-bottom: 11px;
-          label{
-            display: none;
-          }
-          br{
-            display: none;
-          }
-
-          .btn{
-            left:0;
-            @include font-size(15px);
-          }
+        @include small-screen{
+          @include boarder-right-radius(0, 20px);
+          @include boarder-left-radius(0, 20px);
+        }
         
+        background: $light-gray;
+        height: 55px;
+      }
+
+    }
+
+
+    .select-country-field-container{
+      @include large-medium-screens {
+        @include padding-right(0);
+      }
+
+      @include small-screen {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .select-country-field{
+        @include large-medium-screens{
+          @include boarder-left-radius;
         }
-        .add-part-btn-container{
-          text-align: $right;
-          position: relative;
-          .btn{
-            @include box-shadow;
-            color: $brand-color;
-            @include font-size(15px);
-            position: absolute;
-            width: inherit;
-            right: -16px;
-            top: 11px;
-            background:$white;
-            border-top-right-radius: 0!important;
+        @include small-screen{
+          @include boarder-left-radius(20px, 0);
+        }
+        background: $light-gray;
+        height: 55px;
+      }
+    }
+
+    .select-city-field-container{
+      @include large-medium-screens {
+        @include padding-left(6px);
+      }
+
+      @include small-screen {
+        padding-bottom: 10px;
+        padding-top: 10px;
+      }
+
+      .select-city-field{
+        @include large-medium-screens{
+          @include boarder-right-radius(0, 20px);
+        }
+        @include small-screen{
+          @include boarder-right-radius(0, 20px);
+          @include boarder-left-radius(0, 20px);
+        }
+        background: $light-gray;
+        height: 55px;
+      }
+    }
+
+    .parts-container {
+      padding-bottom: 11px;
+      label {
+        display: none;
+      }
+      br {
+        display: none;
+      }
+
+      .part-desc-field {
+        padding-left:10px;
+        width: 100%;
+        height: 55px;
+        background: $light-gray;
+        @include font-size(16px);
+
+
+        @include small-screen {
+          @include boarder-left-radius(20px, 0);
+        }
+
+        @include large-medium-screens {
+          @include boarder-left-radius;
+        }
+      }
+
+      .number-picker-container{
+        @include large-medium-screens{
+          padding-left: 0;
+        }
+
+        @include small-screen{
+          padding-bottom: 10px;
+          padding-top: 10px;
+        }
+
+        #number-picker {
+          .btn-positive {
+            @include font-size(18px);
+            border-radius: side-values(0 0 0 20px) !important;
+            height: 55px;
+          }
+          .btn-negative {
+            @include font-size(18px);
+            border-radius: side-values(0 0 0 0) !important;
+            height: 55px;
+            @include boarder-right-radius(0, 20px);
+          }
+          input {
+            @include font-size(18px);
+            @extend .btn-secondary;
+            padding: 0;
+            height: 55px;
+            text-align: center;
+            cursor: inherit;
+            border-radius: side-values(0 0 0 0) !important;
           }
         }
+
+      }
+
+      .delete-btn-container{
+
+        @include small-screen{
+          text-align: right;
+          padding-bottom: 10px;
+          padding-top: 10px;
+        }
+        @include large-medium-screens{
+          text-align: $right;
+          @include padding-left(0);
+        }
+        .btn {
+          border: none;
+          width: 100%;
+          @include small-screen{
+            width: 50%;
+            border-radius: side-values(0 0 20px 0) !important;
+          }
+          height: 55px;
+          left: 0;
+          
+          @include font-size(15px);
+        }
+      }
+      
+
+      
+    }
+    .add-part-btn-container {
+      text-align: $right;
+      position: relative;
+      .btn {
+        @include box-shadow;
+        color: $brand-color;
+        @include font-size(15px);
+        position: absolute;
+        width: inherit;
+        right: -16px;
+        top: 11px;
+        background: $white;
+        border-top-right-radius: 0 !important;
+      }
     }
   }
+}
