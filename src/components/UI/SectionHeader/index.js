@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SectionHeader = props => (
-    <section id="header">
+    <section id="section-header">
         <div className="component-background-color" />
         <div className="header-container">
             <span>{props.text}</span>

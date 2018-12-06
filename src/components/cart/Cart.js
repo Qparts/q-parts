@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { reduxForm, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
-import Table from '../UI/Table';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import Button from '../UI/Button';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate } from 'react-localize-redux';
+import SectionHeader from '../UI/SectionHeader';
 
 class Cart extends Component {
 	handleSubmit = values => {
@@ -23,14 +23,15 @@ class Cart extends Component {
 				quantityLabel: 'quantity',
 				image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
 				productNumber: item.product.productNumber,
-                manufacturerName: item.product.manufacturer.name
+				manufacturerName: item.product.manufacturer.name
 			}
 		});
 
 		return (
-			<div className="component-background">
-				<section id="cart">
-					<dir className="container-fluid">
+			<section id="cart">
+				<div className="component-background">
+					<SectionHeader text={"Cart"} />
+					<dir className="container-fluid" id="cart-details">
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-md-9">
 								<FieldArray
@@ -39,17 +40,19 @@ class Cart extends Component {
 									purchasedItems={checkoutData}
 									component={RenderCartItem}
 								/>
-							</div>
-							<OrderSummary col="col-md-3" translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
-							<div className="Cart-button">
-								<div>
-									<Button type="reset" className="btn btn-light" text={translate("cart.keepShopping")} />
+								<div style={styles.divBtn}>
+									<Button
+										type="reset"
+										className="btn-secondary btn-shopping"
+										text={translate("cart.keepShopping")}
+										icon="icon-arrow-right" />
 								</div>
 							</div>
+							<OrderSummary col="col-md-3" translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
 						</form>
 					</dir>
-				</section>
-			</div>
+				</div>
+			</section>
 		);
 	}
 }
@@ -65,6 +68,12 @@ Cart = reduxForm({
 	form: 'Cart'
 })(Cart)
 
+
+const styles = {
+	divBtn: {
+		textAlign: 'right'
+	}
+}
 
 const withCart = withRouter(Cart);
 

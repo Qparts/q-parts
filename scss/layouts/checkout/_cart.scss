@@ -1,5 +1,5 @@
 #cart {
-  padding-top: 70px;
+  position: relative;
 
   .RenderImage {
     padding-top: 15px;
@@ -8,6 +8,10 @@
     img {
       height: 100px !important;
     }
+  }
+
+  #cart-details {
+    padding-top: 70px;
   }
 
   .border {
@@ -57,27 +61,45 @@
   .pt {
     padding-top: 20px;
   }
-  .col-md-6 {
-    text-align: $right;
-    padding-right: 34px;
+  .row {
+    .col-md-5:nth-child(3) {
+      text-align: $right;
+      padding-right: 33px;
 
-    .part-text {
-      opacity: 0.8;
-      @include font-size(15px);
-      font-family: Roboto;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.13;
-      letter-spacing: normal;
-      text-align: left;
-      color: $dark-80;
+      .part-text {
+        opacity: 0.8;
+        @include font-size(15px);
+        font-family: Roboto;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.13;
+        letter-spacing: normal;
+        text-align: left;
+        color: $dark-80;
+      }
+      #number-picker {
+        justify-content: flex-end;
+        input {
+          max-width: 55px;
+        }
+      }
     }
   }
   button {
     @include font-size(13px);
     i {
-      right: 6px;
+      padding-right: 7px;
+    }
+  }
+  .col-md-9 {
+    .btn-shopping {
+      background: $dark-gray;
+      min-width: 425px;
+      text-align: right;
+      i {
+        padding-left: 10px;
+      }
     }
   }
 }

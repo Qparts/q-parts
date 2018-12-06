@@ -1,9 +1,0 @@
-.Cart-container {
- display: flex;
- flex-direction: row;
-}
-
-.Cart-button {
- display: flex;
- justify-content: space-around;
-}

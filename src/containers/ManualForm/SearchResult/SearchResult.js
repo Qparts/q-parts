@@ -70,7 +70,6 @@ class SearchResult extends Component {
     if (!isAvailable) {
       return (
         <Fragment>
-          <SectionHeader text={`${translate("searchResult.title")} ${currentSearchVehicle.name}`} />
           <div className="SearchResult-not_found">
             <p>{`${translate("searchResult.partAvailability")} ${currentSearchVehicle.name} ${translate("searchResult.notAvailable")}`}</p>
             <div className="SearchResult-buttons">
