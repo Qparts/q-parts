@@ -69,6 +69,7 @@ $dir: ltr;
 @import "modules/renderField";
 @import "modules/renderFileInput";
 @import "modules/number_picker";
+@import "modules/section_header";
 /* LAYOUTS - page layout styles */
 
 @import "layouts/nav";
@@ -86,7 +87,9 @@ $dir: ltr;
 @import "layouts/setting/wish-list";
 @import "layouts/setting/setting";
 @import "layouts/garage-popup";
-@import "layouts/cart";
+@import "layouts/checkout/cart";
+@import "layouts/checkout/order_summary.scss";
 @import "layouts/quotation-request";
 @import "layouts/send-request";
+@import "layouts/search_result";
 @import "layouts/footer";

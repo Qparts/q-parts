@@ -7,6 +7,7 @@ import _ from 'lodash'
 const basicGray = '#37363d';
 const basicBlack = '#222222';
 const lightGray = '#f7f7f7';
+const darkGray = '#efeeee';
 const brandColor = '#ed4036';
 const charcoalGrey = 'rgba(55, 54, 60, 0.6)';
 const charcoalGreyTwo = 'rgba(55, 54, 61, 0.8)';
@@ -120,6 +121,7 @@ export const colors = {
   basicGray,
   basicBlack,
   lightGray,
+  darkGray,
   brandColor,
   charcoalGrey,
   charcoalGreyTwo,

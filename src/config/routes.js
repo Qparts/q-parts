@@ -1,7 +1,7 @@
 import App from '../components/App';
 import Cart from '../components/cart/Cart';
 import VendorForm from '../components/VendorForm/VendorForm'
-import SearchResult from '../containers/ManualForm/SearchResult/SearchResult';
+import ProductResult from '../containers/ManualForm/SearchResult/SearchResult';
 import Catalog from '../containers/Catalog/Catalog';
 import Login from '../containers/Authentication/Login/Login';
 import Signup from '../containers/Authentication/Signup/Signup'
@@ -16,6 +16,7 @@ import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
 import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';
+import SearchResult from '../containers/SearchResult/SearchResult'
 
 
 export const routes = (isAuth) => [
@@ -26,7 +27,7 @@ export const routes = (isAuth) => [
  },
  {
   path: "/order/part/:partNo/makeId/:makeId",
-  component: SearchResult,
+  component: ProductResult,
  },
  {
   path: "/order/quotation-request",
@@ -102,5 +103,9 @@ export const routes = (isAuth) => [
  {
   path: "/send",
   component: SendRequest
+ },
+ {
+  path: "/listing",
+  component: SearchResult
  }
 ];

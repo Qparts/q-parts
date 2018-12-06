@@ -44,7 +44,7 @@ export default class extends Component {
                                     component={RenderImage}
                                 />
                             </div>
-                            <div className="col-7 col-md-4 pt">
+                            <div className="col-7 col-md-5 pt">
                                 <div className="cart_product-details">
                                     <Field
                                         className="part-text"
@@ -96,7 +96,7 @@ export default class extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="col-12 col-md-6 pt">
+                            <div className="col-12 col-md-5 pt">
                                 <Field
                                     className="part-text"
                                     name={`${cartItem}.quantityLabel`}

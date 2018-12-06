@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
-import { Paginator } from 'primereact/components/paginator/Paginator';
 import Select from 'react-select';
-import Button from '../UI/Button';
+import Button from '../../components/UI/Button';
 import { styles, categorySortOptions } from '../../constants';
-import ProductGridView from '../ProductGridView/ProductGridView';
 import WithProductView from '../../hoc/WithProductView';
 import { Checkbox } from 'primereact/components/checkbox/Checkbox';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
@@ -70,10 +69,7 @@ class TyresSearch extends Component {
 		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
 
 		return (
-			<Fragment>
-				<div style={styles.grey} className="Tyres-title">
-					<h4>Tyres</h4>
-				</div>
+			<section id="search-result">
 				<div className="Tyres-sort_by">
 					<label htmlFor="">Sort by</label>
 					<Select options={categorySortOptions} onChange={this.props.handleSelectChange} />
@@ -116,18 +112,9 @@ class TyresSearch extends Component {
 					</div>
 					<div className="Tyres-contents">
 						<ProductGridView currentProducts={this.props.currentProducts} />
-						<div className="Tyres-footer">
-							<Paginator
-								first={this.props.first}
-								rows={this.props.rows}
-								totalRecords={this.props.products.length}
-								onPageChange={this.props.onPageChange.bind(this)}
-								template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
-							</Paginator>
-						</div>
 					</div>
 				</div>
-			</Fragment>
+			</section>
 		)
 	}
 }

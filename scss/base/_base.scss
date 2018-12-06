@@ -20,9 +20,10 @@ h3 {
 button {
   font-family: $button-font;
   @include font-size($button-font-size);
-
+  
   i {
     position: relative;
+    top: 3px;
   }
 }
 
