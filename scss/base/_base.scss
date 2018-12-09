@@ -20,7 +20,7 @@ h3 {
 button {
   font-family: $button-font;
   @include font-size($button-font-size);
-  
+
   i {
     position: relative;
     top: 3px;
@@ -32,7 +32,7 @@ label {
   @include font-size($bas-font-size);
 }
 
-.border{
+.border {
   border: 0 !important;
 }
 
@@ -68,6 +68,19 @@ label {
 .icon-twitter {
   @include font-size(32px);
   color: $twitter-color;
+}
+.q-display-small {
+  display: none;
+
+  @include small-screen {
+    display: block;
+  }
+}
+.q-hide-small {
+  display: block;
+  @include small-screen {
+    display: none;
+  }
 }
 /*
 .padding-md-left-6{

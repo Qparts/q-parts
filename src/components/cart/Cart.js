@@ -34,6 +34,24 @@ class Cart extends Component {
 					<dir className="container-fluid" id="cart-details">
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-md-9">
+								<div className="border card q-display-small">
+									<div className="checkout-sm-container">
+										<div className="column">
+											<span className="item-key">{translate("orderSummary.total")}</span>
+											<span className="item-value">
+												2050
+												<span>SR</span>
+											</span>
+										</div>
+										<div className="column">
+											<Button
+												type="submit"
+												className="btn-primary"
+												text={"Checkout"}
+												icon="icon-arrow-right" />
+										</div>
+									</div>
+								</div>
 								<FieldArray
 									name="purchasedItems"
 									deleteText={translate("cart.table.delete")}

@@ -1,10 +1,9 @@
 #order-summary {
   h5 {
-    height: 25px;
     font-family: Roboto;
     @include font-size(25px);
     text-transform: capitalize;
-    text-align: left;
+    text-align: $left;
     color: $basic-gray;
   }
   .order-summary__text-muted,
@@ -14,19 +13,30 @@
     @include font-size(13px);
     line-height: 1.31;
     letter-spacing: normal;
-    text-align: left;
+    text-align: $left;
     color: $dark-70;
   }
   .order-summary__details {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding-top: 17px;
+    margin-top: 32px;
     span {
       flex: 0 50%;
     }
     .item-value {
       text-align: end;
+      font-family: Roboto;
+      @include font-size(17px);
+      line-height: 1;
+      color: $black;
+
+      > span {
+        font-family: Roboto;
+        @include font-size(11px);
+        color: $charcoal-grey;
+        padding-#{$left}: 5px;
+      }
     }
 
     .h-seperator {
@@ -37,26 +47,25 @@
     }
   }
   .order-summary__header {
-    height: 66px;
     .h-seperator {
       position: absolute;
       background: $light-gray;
       height: 2px;
-      left: 0;
-      top: 84px;
+      #{$left}: 0;
+      margin-top: 16px;
     }
   }
   .btn-primary {
     width: 100%;
     border-radius: side-values(0 0 20px 20px) !important;
-    text-align: right;
+    text-align: $right;
     text-transform: capitalize;
   }
   button {
     @include font-size(20px);
 
     i {
-      padding-left: 7px;
+      padding-#{$left}: 7px;
     }
   }
 }
