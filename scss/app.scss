@@ -70,6 +70,7 @@ $dir: ltr;
 @import "modules/renderFileInput";
 @import "modules/number_picker";
 @import "modules/section_header";
+@import "modules/customer_service";
 /* LAYOUTS - page layout styles */
 
 @import "layouts/nav";
@@ -77,6 +78,7 @@ $dir: ltr;
 @import "layouts/manual-form";
 @import "layouts/home-details";
 @import "layouts/products";
+@import "layouts/product";
 @import "layouts/apps-link";
 @import "layouts/authentication/login";
 @import "layouts/authentication/signup";

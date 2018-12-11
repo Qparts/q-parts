@@ -27,7 +27,7 @@ class NumberPicker extends Component {
     }
 
     render() {
-        return <div id="number-picker">
+        return <div id="number-picker" className={this.props.col}>
             <Button
                 className="btn-positive margin-right-3"
                 text="+"
