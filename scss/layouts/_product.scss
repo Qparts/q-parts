@@ -1,0 +1,96 @@
+#product {
+  .product-item_image {
+    background: white;
+    text-align: $right;
+  }
+  .btn-primary {
+    text-align: $right;
+    i {
+      padding-left: 6px;
+    }
+  }
+  .btn-wishlist {
+    text-align: right;
+  }
+  .product-item_desc {
+    @include font-size(35px);
+    font-weight: 300;
+    color: $dark-charcoal-grey;
+  }
+  .product-item_manufacturer {
+    opacity: 0.8;
+    font-family: Roboto;
+    @include font-size(18px);
+    color: $charcoal-grey-80;
+    span:nth-child(1) {
+      padding-right: 5px;
+    }
+    span:nth-child(2) {
+      padding-right: 11px;
+    }
+  }
+  .product-item_sales-price {
+    span:first-child {
+      @include font-size(39px);
+      color: $dark-charcoal-grey;
+    }
+    span:nth-child(2) {
+      padding-left: 6px;
+      @include font-size(18px);
+    }
+  }
+  .product-item_specs {
+    margin-top: 29px;
+    > span:first-child {
+      @include font-size(18px);
+      color: $basic-gray;
+    }
+    > div {
+      margin-top: 20px;
+      @include font-size(15px);
+      .specs-key {
+        padding-right: 7%;
+        color: $charcoal-grey-80;
+      }
+      .specs-value {
+        color: $dark-charcoal-grey;
+      }
+    }
+  }
+  .col-3 {
+    .btn-primary {
+      margin-top: 16px;
+      background: $white;
+      color: $black;
+    }
+  }
+  .product-review {
+    display: flex;
+    align-items: center;
+
+    > span:last-child {
+      padding-left: 6px;
+      opacity: 0.8;
+      @include font-size(18px);
+      line-height: 0.94;
+      color: $dark-80;
+    }
+  }
+  .h-seperator {
+    height: 1px;
+    background-color: #dddfe2;
+  }
+  .product-item_buttons {
+    padding-top: 30px;
+    #number-picker {
+      button,
+      input {
+        background: $white;
+      }
+    }
+    .btn-primary {
+      width: 100%;
+      margin-left: 10px;
+    }
+  }
+}
