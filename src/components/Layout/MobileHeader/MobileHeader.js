@@ -6,7 +6,7 @@ import WithSideBar from '../../../hoc/WithSideBar';
 export class MobileHeader extends Component {
 
 	render() {
-		const { translate, localize, changeDefaultDirection, onOpenNav, onCloseNav, setSideBarRef, setOverLay } = this.props
+		const { translate, localize, changeDefaultDirection, onOpenNav, onCloseNav, setSideBarRef, setOverLay, vehicles, onSignin, onSearch, vehiclesFormat, selectedVehicle } = this.props
 		return (
 			<Fragment>
 				<MobileHeaderDetails
@@ -14,7 +14,11 @@ export class MobileHeader extends Component {
 					setOverLay={setOverLay}
 					onCloseNav={onCloseNav}
 					translate={translate}
+					vehicles={vehicles}
 					localize={localize}
+					onSignin={onSignin}
+					vehiclesFormat={vehiclesFormat}
+					selectedVehicle={selectedVehicle}
 					changeDefaultDirection={changeDefaultDirection} />
 				<div className="mobile-header w3-hide-large">
 					<div className="d-flex justify-content-between container-fluid">
@@ -26,7 +30,7 @@ export class MobileHeader extends Component {
 						</div>
 						<div className="list-inline user-actions">
 							<li className="search">
-								<a href="">
+								<a onClick={onSearch}>
 									<i className="icon-search" />
 								</a>
 							</li>

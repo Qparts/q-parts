@@ -98,6 +98,9 @@ export const styles = {
         fontFamily: 'Roboto'
       }
     },
+  },
+  arrow_right: {
+    color: "black"
   }
 }
 

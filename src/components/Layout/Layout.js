@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
 import Vehicles from "../Vehicles/Vehicles";
+import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
 import { Dialog } from "primereact/components/dialog/Dialog";
 import Header from "./Header/Header.js";
@@ -60,7 +61,10 @@ class Layout extends Component {
           minWidth: 0,
           header: <Title header={translate("dialog.signin.title")} />
         }
-
+      case 'search':
+        return {
+          minWidth: '80%'
+        }
       default:
         break;
     }
@@ -81,6 +85,8 @@ class Layout extends Component {
         return <Vehicles />
       case 'signin':
         return <Login />
+      case 'search':
+        return <Search />
 
       default:
         break;
@@ -88,7 +94,7 @@ class Layout extends Component {
   }
 
   render() {
-    const { isLoggedIn, fullName, translate, localize, changeDefaultDirection } = this.props;
+    const { isLoggedIn, fullName, translate, localize, changeDefaultDirection, vehiclesFormat, selectedVehicle } = this.props;
     const { dialogType } = this.state;
     const dialog = (
       <Dialog
@@ -111,7 +117,13 @@ class Layout extends Component {
         <MobileHeader
           translate={translate}
           localize={localize}
-          changeDefaultDirection={changeDefaultDirection} />
+          selectedVehicle={selectedVehicle}
+          changeDefaultDirection={changeDefaultDirection}
+          vehicles={this.props.vehicles}
+          vehiclesFormat={vehiclesFormat}
+          onAddVechile={this.handleDialog.bind(this, 'vehicle')}
+          onSignin={this.handleDialog.bind(this, 'signin')}
+          onSearch={this.handleDialog.bind(this, 'search')} />
         <Header
           translate={translate}
           localize={localize}
@@ -120,6 +132,7 @@ class Layout extends Component {
           fullName={fullName}
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
           onSignin={this.handleDialog.bind(this, 'signin')}
+          onSearch={this.handleDialog.bind(this, 'search')}
           changeDefaultDirection={changeDefaultDirection} />
         {dialog}
         {this.props.children}
