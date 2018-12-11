@@ -9,7 +9,7 @@ import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
-import { changeDefaultDirection } from '../../actions/customerAction';
+// import { changeDefaultDirection } from '../../actions/customerAction';
 
 
 class Routes extends Component {
@@ -26,7 +26,9 @@ class Routes extends Component {
                         vehicles={this.props.vehicles}
                         localize={this.props.localize}
                         translate={this.props.translate}
-                        changeDefaultDirection={this.props.changeDefaultDirection}
+                        vehiclesFormat={this.props.vehiclesFormat}
+                        selectedVehicle={this.props.selectedVehicle}
+                        // changeDefaultDirection={this.props.changeDefaultDirection}
                     >
                         <Switch>
                             {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
@@ -44,6 +46,8 @@ const mapStateToProps = state => {
         customer,
         token: state.customer.token,
         vehicles: customer.vehicles,
+        vehiclesFormat: state.customer.vehiclesFormat,
+        selectedVehicle: state.customer.selectedVehicle,
         localize: state.localize,
         translate: getTranslate(state.localize),
         error: state.networkError.error
@@ -52,7 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
+        // changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
     }
 }
 
