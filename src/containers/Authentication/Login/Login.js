@@ -136,7 +136,6 @@ class Login extends Component {
     return (
       <Switch>
         <section id="login">
-          <div className="container-fluid">
             {
               this.renderLogin(login, dialog)
             }
@@ -148,7 +147,6 @@ class Login extends Component {
               showPhoneNo={true}
               onSubmit={this.onResetPassword}
               redirectTo="/login" />
-          </div>
         </section>
       </Switch>
     )
