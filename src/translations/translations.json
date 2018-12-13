@@ -1122,17 +1122,25 @@
       "تفاصيل المنتج",
       "Product details"
     ],
-    "reviews": [
+    "titleReviews": [
       "تعليقات المنتج",
       "Product reviews"
     ],
+    "reviews": [
+      "تعليقات",
+      "Review(s)"
+    ],
     "rating": [
-      "متوسط تقييم",
-      "Average rating"
+      "تقييم",
+      "Rating"
     ],
     "ratingRange": [
       "من",
       "of"
+    ],
+    "averageRating": [
+      "متوسط تقييم",
+      "Average rating"
     ],
     "writeReview": {
       "title": [

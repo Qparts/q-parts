@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Lightbox from 'react-images';
 import { Field, reduxForm, getFormValues } from 'redux-form';
-import { Rating } from 'primereact/components/rating/Rating';
 import NumberPicker from '../../components/UI/NumberPicker';
 import Button from '../../components/UI/Button';
 import CompareProducts from '../../components/CompareProducts/CompareProducts';
@@ -16,8 +15,13 @@ import { getProduct } from '../../actions/apiAction';
 import { addRecentViewedProducts, addWishlist } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
+import {
+  Card, CardText, CardBody,
+  CardTitle, ListGroupItem, ListGroup
+} from 'reactstrap';
 
 import * as validations from '../../utils';
+import * as directional from '../../utils';
 import _ from 'lodash';
 
 import * as constant from '../../constants';
@@ -112,7 +116,14 @@ class Product extends Component {
     this.props.addWishlist(item);
   }
 
-  renderSpecs = () => {
+  renderSpecs = (isList = false) => {
+    const data = [
+      { key: 'Tire Type', value: 'Truck / SUV' },
+      { key: 'Tire Size', value: '245 / 60 R18' },
+      { key: 'Speed Rating', value: 'H = 130 mph' },
+      { key: 'Load Index', value: '109 = 2271 lbs/tire' },
+    ]
+    let Component = isList ? ListGroupItem : Fragment;
     // const keys = this.props.currentLanguage === constant.EN ?
     //   Object.keys(this.props.product.specs) : Object.keys(this.props.product.specsAr);
     // const specs = this.props.currentLanguage === constant.EN ?
@@ -130,8 +141,14 @@ class Product extends Component {
     //   </Fragment>
     // )
     return <div>
-      <span className="specs-key">Tire Type:</span>
-      <span className="specs-value">Truck / SUV</span>
+      {
+        data.map((item, idx) => (
+          <Component key={idx}>
+            <span className="specs-key">{item.key}:</span>
+            <span className="specs-value">{item.value}</span>
+          </Component>
+        ))
+      }
     </div>
   }
 
@@ -145,6 +162,12 @@ class Product extends Component {
     this.setState({
       currentImage: this.state.currentImage - 1
     });
+  }
+
+  productStyles = {
+    averageRatingCount: {
+      [directional.paddingRight(this.props.direction)]: '2px'
+    }
   }
 
   render() {
@@ -208,7 +231,7 @@ class Product extends Component {
                         <Button className="btn-primary" icon="icon-heart" />
                       </div>
                       <div className="col-12 product-review">
-                        <Stars values={product.averageRating} {...constant.starsRating} />
+                        <Stars value={getLength(product.reviews)} {...constant.starsRating} />
                         <span>{getLength(product.reviews)} review</span>
                       </div>
 
@@ -236,22 +259,136 @@ class Product extends Component {
                       </div>
                       <div className="col-12">
                         <span className="h-seperator" />
+                        <CustomerService
+                          messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
+                          url="" />
                       </div>
                     </div>
                   </div>
                 </Fragment>
               }
             </form>
-            <CustomerService
-              messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
-              url="" />
-            {/* <h4>{translate("product.compare")}</h4> */}
-            {/* <CompareProducts
+            <div className="row">
+              <div className="col-8">
+                <div className="row">
+                  <div className="col-12 product-details">
+                    <h4>{translate("product.detail")}</h4>
+                    <Card className="border">
+                      <CardBody>
+                        <CardTitle>
+                          RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
+                          This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
+                          </CardTitle>
+                        <CardText>
+                          <ListGroup className="product-details-specs">
+                            {this.renderSpecs(true)}
+                          </ListGroup>
+                        </CardText>
+                      </CardBody>
+                    </Card>
+                  </div>
+                  <div className="col-12 product-reviews">
+                    <h4>{translate("product.titleReviews")}</h4>
+                    <Card className="border">
+                      <CardBody>
+                        <CardTitle className="average-rating">
+                          <div>
+                            <Stars value={5} {...constant.starsRating} />
+                            <span style={this.productStyles.averageRatingCount}>{getLength(this.props.product.reviews)}</span>
+                            <span>{translate("product.reviews")}</span>
+                          </div>
+                          <span>{`${translate("product.averageRating")}: ${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
+                        </CardTitle>
+                      </CardBody>
+                    </Card>
+                    <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn-primary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
+                    {
+                      this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                        <Field
+                          name="rating"
+                          cancel={false}
+                          component={RenderRating}
+                          validate={[validations.required]}
+                        />
+                        <Field
+                          name="review"
+                          component={RenderField}
+                          type="text"
+                          placeholder={translate("product.writeReview.placeholder")}
+                          validate={[validations.required]} />
+                        <Button type="reset" className="btn btn-light" text={translate("product.writeReview.cancel")} onClick={this.handleWriteReview.bind(this, false)} />
+                        <Button type="submit" className="btn btn-secondary" text={translate("product.writeReview.sumbit")} />
+                      </form>
+                    }
+                  </div>
+                  <div className="col-12 product-reviews__customer-reviews">
+                    {
+                      this.props.product.reviews.map((review, idx) => {
+                        return <div key={idx}>
+                          <div className="">
+                            <span>{review.customerName}</span>
+                            <span style={styles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                          </div>
+                          <div className="">
+                            <Stars value={review.rating} {...constant.starsRating} />
+                            <span style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} 5`}</span>
+                          </div>
+                          <span style={styles.grey}>{review.text}</span>
+                        </div>
+                      })
+                    }
+                  </div>
+                </div>
+              </div>
+              <div className="col-4">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    initialValues: { quantity: 1 },
+    product: state.api.product,
+    recentViewedProducts: state.customer.recentViewedProducts,
+    customer: state.customer.detail,
+    formValues: getFormValues('Product')(state),
+    translate: getTranslate(state.localize),
+    currentLanguage: getActiveLanguage(state.localize).code,
+    direction: state.customer.direction,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (item) => dispatch(addToCart(item)),
+    addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
+    addWishlist: (product) => dispatch(addWishlist(product)),
+    getProduct: (productId) => dispatch(getProduct(productId))
+  }
+}
+
+Product = reduxForm({
+  form: 'Product'
+})(Product)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
+
+
+
+{/* <h4>{translate("product.compare")}</h4> */ }
+{/* <CompareProducts
           headers={compareHeaders}
           products={this.props.products}
           goToProduct={this.goToProduct}
           reviewText={translate("compareProduct.customerRating.review")} /> */}
-            {/* <div>
+{/* <div>
           {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
           <h4>{translate("product.detail")}</h4>
           {
@@ -306,40 +443,7 @@ class Product extends Component {
             })
           }
         </div> */}
-            {/* <RecentViewedProducts
+{/* <RecentViewedProducts
           title={translate("product.recentViewed")}
           products={this.props.recentViewedProducts}
           goToProduct={this.goToProduct} /> */}
-          </div>
-        </div>
-      </section>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    initialValues: { quantity: 1 },
-    product: state.api.product,
-    recentViewedProducts: state.customer.recentViewedProducts,
-    customer: state.customer.detail,
-    formValues: getFormValues('Product')(state),
-    translate: getTranslate(state.localize),
-    currentLanguage: getActiveLanguage(state.localize).code,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: (item) => dispatch(addToCart(item)),
-    addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-    addWishlist: (product) => dispatch(addWishlist(product)),
-    getProduct: (productId) => dispatch(getProduct(productId))
-  }
-}
-
-Product = reduxForm({
-  form: 'Product'
-})(Product)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -4,7 +4,7 @@ export class CustomerService extends Component {
 
     render() {
         return (
-            <div className="d-flex flex-row justify-content-end" id="customer-service">
+            <div className="d-flex flex-row" id="customer-service">
                 <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                 <div>
                     {
