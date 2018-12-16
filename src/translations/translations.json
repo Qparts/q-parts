@@ -1136,7 +1136,7 @@
     ],
     "ratingRange": [
       "من",
-      "of"
+      "out of"
     ],
     "averageRating": [
       "متوسط تقييم",
@@ -1144,8 +1144,8 @@
     ],
     "writeReview": {
       "title": [
-        "اكتب مراجعتك",
-        "Write your review"
+        "تقييم هذا المنتج",
+        "Rate this product"
       ],
       "placeholder": [
         "أضف تعليقك هنا",

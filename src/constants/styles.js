@@ -8,15 +8,25 @@ const basicGray = '#37363d';
 const basicBlack = '#222222';
 const lightGray = '#f7f7f7';
 const darkGray = '#efeeee';
+const veryLightGrey = '#e2e2e2';
 const brandColor = '#ed4036';
 const charcoalGrey = 'rgba(55, 54, 60, 0.6)';
 const charcoalGreyTwo = 'rgba(55, 54, 61, 0.8)';
+const charcoalGreyTwo40 = 'rgba(55, 54, 61, 0.4)';
+const charcoalGrey80 = 'rgba(55, 54, 60, 0.8)';
 const darkCharcoalGrey = '#37363c';
 const lightCharcoalGrey = 'rgba(55, 54, 60, 0.7)';
+const lighterGrey = 'rgba(55, 54, 61, 0.5)';
 const gainsboroColor = '#DCDCDC';
 const basicWhite = 'rgba(255, 255, 255, 0.8)';
 const basicDarkWhite = 'rgba(255, 255, 255, 0.5)';
 const veryLightPink = 'rgba(235, 235, 235, 0.3)';
+const facebookColor = '#475993';
+const twitterColor = '#03a9f4';
+const dark50 = 'rgba(39, 39, 52, 0.5)';
+const dark70 = 'rgba(39, 39, 52, 0.7)';
+const dark80 = 'rgba(39, 39, 52, 0.8)';
+
 const error = '#fbc0bd';
 const invalid = '#e8d59a';
 const success = 'rgba(48, 213, 118, 0.3)';
@@ -125,15 +135,24 @@ export const colors = {
   basicBlack,
   lightGray,
   darkGray,
+  veryLightGrey,
   brandColor,
   charcoalGrey,
   charcoalGreyTwo,
+  charcoalGreyTwo40,
+  charcoalGrey80,
   darkCharcoalGrey,
   lightCharcoalGrey,
+  lighterGrey,
   gainsboroColor,
   basicWhite,
   basicDarkWhite,
   veryLightPink,
+  facebookColor,
+  twitterColor,
+  dark50,
+  dark70,
+  dark80,
   error,
   invalid,
   success

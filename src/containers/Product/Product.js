@@ -25,8 +25,10 @@ import * as directional from '../../utils';
 import _ from 'lodash';
 
 import * as constant from '../../constants';
+import { colors } from '../../constants';
 import { styles } from '../../constants';
 import { getLength } from '../../utils/array';
+import { fontSize } from '../../utils/font';
 
 class Product extends Component {
   constructor(props) {
@@ -165,8 +167,33 @@ class Product extends Component {
   }
 
   productStyles = {
-    averageRatingCount: {
-      [directional.paddingRight(this.props.direction)]: '2px'
+    averageRating: {
+      fontFamily: 'Roboto',
+      fontSize: fontSize(20),
+      color: colors.basicBlack,
+      fontWeight: 'normal',
+    },
+    customerReviews: {
+      div: {
+        display: 'flex',
+        justifyContent: 'space-between',
+      },
+      name: {
+        fontFamily: 'Roboto',
+        fontSize: fontSize(17),
+        fontWeight: 'normal',
+      },
+      text: {
+        fontSize: fontSize(13),
+        fontWeight: 'normal',
+      },
+      date: {
+        opacity: '0.5',
+        fontFamily: 'Roboto',
+        fontSize: fontSize(13),
+        fontWeight: 'normal',
+        color: colors.lighterGrey,
+      }
     }
   }
 
@@ -190,6 +217,17 @@ class Product extends Component {
         })
       }
     </div>
+    let reviewsTest = product.reviews;
+    reviewsTest.push({
+      id: 3,
+      customerId: 1,
+      customerName: "Fareed Rezaei",
+      rating: 4,
+      text: "This is a good product indeed",
+      productId: 1278,
+      created: 1540639115285,
+      status: "A"
+    })
 
     if (_.isEmpty(this.props.product)) return null;
 
@@ -269,7 +307,7 @@ class Product extends Component {
               }
             </form>
             <div className="row">
-              <div className="col-8">
+              <div className="col-12">
                 <div className="row">
                   <div className="col-12 product-details">
                     <h4>{translate("product.detail")}</h4>
@@ -289,54 +327,71 @@ class Product extends Component {
                   </div>
                   <div className="col-12 product-reviews">
                     <h4>{translate("product.titleReviews")}</h4>
-                    <Card className="border">
-                      <CardBody>
-                        <CardTitle className="average-rating">
+                    <Card className="border average-rating-card">
+                      <CardTitle className="average-rating">
+                        <div>
                           <div>
-                            <Stars value={5} {...constant.starsRating} />
-                            <span style={this.productStyles.averageRatingCount}>{getLength(this.props.product.reviews)}</span>
-                            <span>{translate("product.reviews")}</span>
+                            <div>
+                              <Stars value={product.averageRating} {...constant.starsRating} />
+                              <span style={this.productStyles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
+                            </div>
+                            <div className="average-rating_count">
+                              <span>{getLength(product.reviews)}</span>
+                              <span>{translate("product.reviews")}</span>
+                            </div>
                           </div>
-                          <span>{`${translate("product.averageRating")}: ${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
-                        </CardTitle>
-                      </CardBody>
-                    </Card>
-                    <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn-primary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
-                    {
-                      this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
-                        <Field
-                          name="rating"
-                          cancel={false}
-                          component={RenderRating}
-                          validate={[validations.required]}
-                        />
-                        <Field
-                          name="review"
-                          component={RenderField}
-                          type="text"
-                          placeholder={translate("product.writeReview.placeholder")}
-                          validate={[validations.required]} />
-                        <Button type="reset" className="btn btn-light" text={translate("product.writeReview.cancel")} onClick={this.handleWriteReview.bind(this, false)} />
-                        <Button type="submit" className="btn btn-secondary" text={translate("product.writeReview.sumbit")} />
-                      </form>
-                    }
-                  </div>
-                  <div className="col-12 product-reviews__customer-reviews">
-                    {
-                      this.props.product.reviews.map((review, idx) => {
-                        return <div key={idx}>
-                          <div className="">
-                            <span>{review.customerName}</span>
-                            <span style={styles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                          <div>
+                            <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn-link" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
+                            <Stars {...constant.starsRating} />
+                            {
+                              this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                                <Field
+                                  name="rating"
+                                  cancel={false}
+                                  component={RenderRating}
+                                  validate={[validations.required]}
+                                />
+                                <Field
+                                  name="review"
+                                  component={RenderField}
+                                  type="text"
+                                  placeholder={translate("product.writeReview.placeholder")}
+                                  validate={[validations.required]} />
+                                <Button type="reset" className="btn btn-light" text={translate("product.writeReview.cancel")} onClick={this.handleWriteReview.bind(this, false)} />
+                                <Button type="submit" className="btn btn-secondary" text={translate("product.writeReview.sumbit")} />
+                              </form>
+                            }
                           </div>
-                          <div className="">
-                            <Stars value={review.rating} {...constant.starsRating} />
-                            <span style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} 5`}</span>
-                          </div>
-                          <span style={styles.grey}>{review.text}</span>
                         </div>
-                      })
-                    }
+                      </CardTitle>
+                    </Card>
+                    <Card className="border customers-reviews-card">
+                      <ListGroup>
+                        {
+                          reviewsTest.map((review, idx) => {
+                            return <ListGroupItem>
+                              <div className="customers-reviews" style={this.productStyles.customerReviews.div} key={idx}>
+                                <div className="d-flex flex-row">
+                                  <div>
+                                    <span className="user-img">
+                                      <img alt="user" src="/img/user.svg" />
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span style={this.productStyles.customerReviews.name}>{review.customerName}</span>
+                                    <Stars value={review.rating} {...constant.starsRating} />
+                                    <span style={this.productStyles.customerReviews.text}>{review.text}</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span style={this.productStyles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                                </div>
+                              </div>
+                            </ListGroupItem>
+                          })
+                        }
+                      </ListGroup>
+                    </Card>
                   </div>
                 </div>
               </div>
