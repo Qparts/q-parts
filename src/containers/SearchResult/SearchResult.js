@@ -10,6 +10,7 @@ import WithProductView from '../../hoc/WithProductView';
 import { Checkbox } from 'primereact/components/checkbox/Checkbox';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import queryString from 'qs';
+import { Collapse, Card, CardBody } from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
 
@@ -22,6 +23,16 @@ const rating = 'rating';
 const Radio = 'Radio'
 
 class TyresSearch extends Component {
+
+	constructor(props) {
+		super(props);
+		this.toggle = this.toggle.bind(this);
+		this.state = { collapse: true };
+	}
+
+	toggle() {
+		this.setState({ collapse: !this.state.collapse });
+	}
 
 	componentDidMount() {
 		const { location: { search }, filterObject } = this.props;
@@ -69,52 +80,185 @@ class TyresSearch extends Component {
 		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
 
 		return (
-			<section id="search-result">
-				<div className="Tyres-sort_by">
-					<label htmlFor="">Sort by</label>
-					<Select options={categorySortOptions} onChange={this.props.handleSelectChange} />
-				</div>
-				<div style={isEmpty(filtration) ? styles.hide : styles.grey}>
-					{
-						filtration.map((item, index) => (
-							<label key={index} style={{ ...styles.listingPage.searchResult, ...styles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
-						))
-					}
-				</div>
-				<div className="Tyres-container">
-					<div className="Tyres-filter border rounded card">
-						<p>{filterObject.diameter.label}</p>
-						<input className="form-control" type="text" name="" id="" placeholder="Search" />
-						{renderSearch({ filtration: filterObject.diameter, key: diameter }, RadioButton, onFilterRadio, isChecked)}
-						<hr />
-						<p>{filterObject.profile.label}</p>
-						{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.width.label}</p>
-						<input className="form-control" type="text" name="" id="" placeholder="Search" />
-						{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.brand.label}</p>
-						{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<p>{filterObject.price.label}</p>
-						{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
-						<div className="Tyres-filter_price">
-							<input style={buttonsStyle.price} className="form-control" type="text" placeholder="Min" name="" id="" />
-							<input style={buttonsStyle.price} className="form-control" type="text" placeholder="Max" name="" id="" />
-							<Button text="Go" className="btn btn-secondary" />
+
+			<Fragment>
+				<section id="results-container">
+					<div className="container-fluid d-flex">
+						<div className="filter-container col-3">
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.diameter.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<CardBody>
+											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+											{renderSearch({ filtration: filterObject.diameter, key: diameter }, RadioButton, onFilterRadio, isChecked)}
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.profile.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+										<CardBody>
+											{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.width.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<CardBody>
+											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+											{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
+
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.brand.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<CardBody>
+											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+											{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
+
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.price.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<CardBody>
+											{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
+											<div className="row d-flex">
+												<div className="col-lg-4 col-md-6 search-box-min-container">
+													<input className="form-control search-box-min" type="text" placeholder="Min" name="" id="" />
+												</div>
+												<div className="col-lg-4 col-md-6 search-box-max-container">
+													<input className="form-control search-box-max" type="text" placeholder="Max" name="" id="" />
+												</div>
+												<div className="col-lg-4 col-md-12 search-box-min-container">
+													<Button text="Go" className="btn btn-primary" />
+												</div>
+											</div>
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
+
+							<div className="filter-category card col-12">
+								<div className="row">
+									<div className="col-9 title">
+										<p>{filterObject.rating.label}</p>
+									</div>
+									<div className="col-3">
+										<a onClick={this.toggle}>
+											<i className="icon-cart" />
+										</a>
+									</div>
+								</div>
+								<Collapse isOpen={this.state.collapse}>
+									<Card className="filter-body">
+										<CardBody>
+											{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
+											<Button text="Clear all" className="btn btn-secondary" onClick={onClear} />
+										</CardBody>
+									</Card>
+								</Collapse>
+								<hr />
+							</div>
 						</div>
-						<hr />
-						<p>{filterObject.rating.label}</p>
-						{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
-						<hr />
-						<Button text="Clear all" className="btn btn-secondary" onClick={onClear} />
+
+						<div className="products-container col-9">
+							<div className="search-control-panel row">
+								<div className="col-12">
+									<label htmlFor="">Sort by</label>
+									<Select options={categorySortOptions} onChange={this.props.handleSelectChange} />
+								</div>
+							</div>
+							<div className="selected-filters-panel row">
+								<div className="col-12" style={isEmpty(filtration) ? styles.hide : styles.grey}>
+									{
+										filtration.map((item, index) => (
+											<label key={index} style={{ ...styles.listingPage.searchResult, ...styles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
+										))
+									}
+								</div>
+							</div>
+
+							<div className="selected-compare-panel row">
+								<div className="col-12" style={isEmpty(filtration) ? styles.hide : styles.grey}>
+									{
+										filtration.map((item, index) => (
+											<label key={index} style={{ ...styles.listingPage.searchResult, ...styles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
+										))
+									}
+								</div>
+							</div>
+							<div className="products-panel row">
+								<ProductGridView currentProducts={this.props.currentProducts} />
+							</div>
+						</div>
 					</div>
-					<div className="Tyres-contents">
-						<ProductGridView currentProducts={this.props.currentProducts} />
-					</div>
-				</div>
-			</section>
+				</section>
+			</Fragment>
 		)
 	}
 }
