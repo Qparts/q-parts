@@ -1148,16 +1148,16 @@
         "Rate this product"
       ],
       "placeholder": [
-        "أضف تعليقك هنا",
-        "Add your review here"
+        "اكتب مراجعتك:",
+        "Write your review:"
       ],
       "cancel": [
         "إلغاء",
         "Cancel"
       ],
       "sumbit": [
-        "خضع",
-        "Submit"
+        "إرسال مراجعة",
+        "Submit Review"
       ]
     },
     "recentViewed": [

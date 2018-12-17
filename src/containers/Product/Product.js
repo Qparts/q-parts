@@ -26,7 +26,7 @@ import _ from 'lodash';
 
 import * as constant from '../../constants';
 import { colors } from '../../constants';
-import { styles } from '../../constants';
+import { styles as commonStyles } from '../../constants';
 import { getLength } from '../../utils/array';
 import { fontSize } from '../../utils/font';
 
@@ -136,7 +136,7 @@ class Product extends Component {
     //       keys.map((key, idx) => (
     //         <div key={idx} className="Product-item_specs">
     //           <span>{key}</span>:
-    //             <span style={styles.rightSpace}>{specs[key]}</span>
+    //             <span style={commonStyles.rightSpace}>{specs[key]}</span>
     //         </div>
     //       ))
     //     }
@@ -166,38 +166,45 @@ class Product extends Component {
     });
   }
 
-  productStyles = {
-    averageRating: {
-      fontFamily: 'Roboto',
-      fontSize: fontSize(20),
-      color: colors.basicBlack,
-      fontWeight: 'normal',
-    },
-    customerReviews: {
-      div: {
-        display: 'flex',
-        justifyContent: 'space-between',
-      },
-      name: {
-        fontFamily: 'Roboto',
-        fontSize: fontSize(17),
-        fontWeight: 'normal',
-      },
-      text: {
-        fontSize: fontSize(13),
-        fontWeight: 'normal',
-      },
-      date: {
-        opacity: '0.5',
-        fontFamily: 'Roboto',
-        fontSize: fontSize(13),
-        fontWeight: 'normal',
-        color: colors.lighterGrey,
-      }
-    }
-  }
-
   render() {
+    const styles = {
+      averageRating: {
+        fontFamily: 'Roboto',
+        fontSize: fontSize(20),
+        color: colors.basicBlack,
+        fontWeight: 'normal',
+      },
+      averageRatingCard: {
+        paddingBottom: this.state.canWriteReview ? '50px' : 'inherit'
+      },
+      customerReviews: {
+        div: {
+          display: 'flex',
+          justifyContent: 'space-between',
+        },
+        name: {
+          fontFamily: 'Roboto',
+          fontSize: fontSize(17),
+          fontWeight: 'normal',
+        },
+        text: {
+          fontSize: fontSize(13),
+          fontWeight: 'normal',
+        },
+        date: {
+          opacity: '0.5',
+          fontFamily: 'Roboto',
+          fontSize: fontSize(13),
+          fontWeight: 'normal',
+          color: colors.lighterGrey,
+        }
+      },
+      productReviews: {
+        btnLinkParent: {
+          float: this.state.canWriteReview ? 'none' : directional.right(this.props.direction)
+        }
+      }
+    };
     const { translate, product } = this.props;
     const compareHeaders = [
       translate("compareProduct.prices"),
@@ -208,7 +215,7 @@ class Product extends Component {
       {
         this.state.relatedProduct.map((product, idx) => {
           return <Fragment key={idx}>
-            <div style={styles.cursor} className="Product-related_products" onClick={this.goToProduct.bind(this, product)}>
+            <div style={commonStyles.cursor} className="Product-related_products" onClick={this.goToProduct.bind(this, product)}>
               <img src={product.image} alt="" />
               <span>{product.desc}</span>
               <span>{product.manufacturers}</span>
@@ -240,7 +247,7 @@ class Product extends Component {
                 this.props.product && <Fragment>
                   <div className="col-5 product-item_image">
                     <img
-                      style={styles.cursor}
+                      style={commonStyles.cursor}
                       src={"/img/product-4.jpg"}
                       onClick={this.showLightbox}
                       alt=""
@@ -327,50 +334,69 @@ class Product extends Component {
                   </div>
                   <div className="col-12 product-reviews">
                     <h4>{translate("product.titleReviews")}</h4>
-                    <Card className="border average-rating-card">
-                      <CardTitle className="average-rating">
-                        <div>
-                          <div>
-                            <div>
-                              <Stars value={product.averageRating} {...constant.starsRating} />
-                              <span style={this.productStyles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
+                    <Card style={styles.averageRatingCard} className="border average-rating-card">
+                      <div className="average-rating">
+                        <div className="average-rating_header">
+                          <div className="sm-block">
+                            <div className="d-flex">
+                              <Stars className="average-rating_stars" value={product.averageRating} {...constant.starsRating} />
+                              <span style={styles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
                             </div>
                             <div className="average-rating_count">
                               <span>{getLength(product.reviews)}</span>
                               <span>{translate("product.reviews")}</span>
                             </div>
                           </div>
-                          <div>
-                            <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn-link" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
-                            <Stars {...constant.starsRating} />
-                            {
-                              this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                        </div>
+                        <div style={styles.productReviews.btnLinkParent} className="btn-link_parent">
+                          <span className={this.state.canWriteReview ? "h-seperator" : "sm-seperator"} />
+                          <Button
+                            style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
+                            type="submit" className="btn-link"
+                            text={translate("product.writeReview.title")}
+                            onClick={this.handleWriteReview.bind(this, true)}
+                            icon="icon-arrow-right" />
+                          {
+                            this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                              <div className="review-form_header">
+                                <span>{translate("product.writeReview.title")}</span>
                                 <Field
                                   name="rating"
                                   cancel={false}
                                   component={RenderRating}
                                   validate={[validations.required]}
                                 />
+                              </div>
+                              <div className="group-shadow-input">
                                 <Field
                                   name="review"
                                   component={RenderField}
                                   type="text"
                                   placeholder={translate("product.writeReview.placeholder")}
                                   validate={[validations.required]} />
-                                <Button type="reset" className="btn btn-light" text={translate("product.writeReview.cancel")} onClick={this.handleWriteReview.bind(this, false)} />
-                                <Button type="submit" className="btn btn-secondary" text={translate("product.writeReview.sumbit")} />
-                              </form>
-                            }
-                          </div>
+                                <div className="group-buttons">
+                                  <Button
+                                    type="reset"
+                                    className="btn-secondary"
+                                    text={translate("product.writeReview.cancel")}
+                                    onClick={this.handleWriteReview.bind(this, false)} />
+                                  <Button
+                                    type="submit"
+                                    className="btn-primary"
+                                    text={translate("product.writeReview.sumbit")} />
+                                </div>
+                              </div>
+                            </form>
+                          }
                         </div>
-                      </CardTitle>
+                      </div>
                     </Card>
                     <Card className="border customers-reviews-card">
                       <ListGroup>
                         {
                           reviewsTest.map((review, idx) => {
                             return <ListGroupItem>
-                              <div className="customers-reviews" style={this.productStyles.customerReviews.div} key={idx}>
+                              <div className="customers-reviews" style={styles.customerReviews.div} key={idx}>
                                 <div className="d-flex flex-row">
                                   <div>
                                     <span className="user-img">
@@ -378,13 +404,13 @@ class Product extends Component {
                                     </span>
                                   </div>
                                   <div>
-                                    <span style={this.productStyles.customerReviews.name}>{review.customerName}</span>
+                                    <span style={styles.customerReviews.name}>{review.customerName}</span>
                                     <Stars value={review.rating} {...constant.starsRating} />
-                                    <span style={this.productStyles.customerReviews.text}>{review.text}</span>
+                                    <span style={styles.customerReviews.text}>{review.text}</span>
                                   </div>
                                 </div>
                                 <div>
-                                  <span style={this.productStyles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                                  <span style={styles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
                                 </div>
                               </div>
                             </ListGroupItem>
@@ -458,9 +484,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Product);
             <h4>{translate("product.reviews")}({getLength(this.props.product.reviews)})</h4>
             <div className="Product-reviews_header">
               <Rating value={5} readonly cancel={false} />
-              <p style={styles.rightSpace}>{`${translate("product.rating")}: 5 ${translate("product.ratingRange")} 5`}</span>
+              <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: 5 ${translate("product.ratingRange")} 5`}</span>
             </div>
-            <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn btn-secondary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
+            <Button style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show} type="submit" className="btn btn-secondary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
             {
               this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
                 <Field
@@ -486,13 +512,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Product);
               return <div key={idx}>
                 <div className="Product-reviews">
                   <span>{review.customerName}</span>
-                  <p style={styles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                  <p style={commonStyles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
                 </div>
                 <div className="Product-reviews">
                   <Rating value={review.rating} readonly cancel={false} />
-                  <p style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.products.averageRating}`}</span>
+                  <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.products.averageRating}`}</span>
                 </div>
-                <p style={styles.grey}>{review.text}</span>
+                <p style={commonStyles.grey}>{review.text}</span>
                 <hr />
               </div>
             })
