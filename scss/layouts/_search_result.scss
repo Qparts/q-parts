@@ -1,41 +1,98 @@
-#search-result {
-    .Tyres-container {
-        display: flex;
+#results-container {
+  background-color: $light-gray;
+
+  .filter-container {
+    min-width: 15em;
+    text-align: start;
+    margin: 20px 0 0px 20px;
+
+    .search-box{
+      background-color: $light-gray;
+      border:none;
+      height: 35px;
+      @include boarder-left-radius(20px, 20px);
+      @include boarder-right-radius(0, 20px);
     }
+
+    .search-box-min-container{
+      @include padding-right(0);
+      .search-box-min{
+        background-color: $light-gray;
+        border:none;
+        height: 35px;
+        @include boarder-left-radius(20px, 20px);
+      }
+    }
+
+    .search-box-max-container{
+      @include padding-right(0);
+      @include padding-left(6px);
+      .search-box-min{
+        background-color: $light-gray;
+        border:none;
+        height: 35px;
+        @include boarder-left-radius(20px, 20px);
+      }
+    }
+
+    .search-box-btn-container{
+      @include padding-left(6px);
+
+    }
+      
+
     
-    .Tyres-filter {
-        min-width: 13em;
-        text-align: start;
-        margin: 20px 0 0px 20px;
+
+    .search-box-max{
+      background-color: $light-gray;
+      border:none;
+      height: 35px;
+      @include margin-right(3px);
+      @include boarder-right-radius(0, 20px);
     }
+
+    .btn-primary{
+      height: 35px;
+      padding-top: 5px;
+      width: 100%;
+    }
+
     
-    .Tyres-title {
-        display: flex;
+
+    .filter-category{
+      padding-top: 19px;
+      border:none;
+
+      p{
+        font-weight: 500;
+        @include font-size(18px);
+      }
+      .filter-body{
+        border:none;
+        .card-body{
+          padding:0;
+        }
+      }
     }
-    
-    .Tyres-filter_price {
-        display: flex;
-        min-width: 13em;
+  }
+
+  .products-container {
+    @include padding-left(28px);
+    width: 100%;
+    .search-control-panel {
+      @include padding-left(12px);
+      margin-bottom: 26px; 
     }
-    
-    .Tyres-contents {
-        display: flex;
-        flex-wrap: wrap;
+    .selected-filters-panel{
+        margin-bottom: 21px;
     }
-    
-    .Tyres-footer {
-        width: 100%;
-        text-align: center;
-        position: fixed;
-        bottom: 0;
+
+    .selected-compare-panel{
+        margin-bottom: 30px;
     }
-    
-    .Tyres-sort_by {
-        display: flex;
-        justify-content: flex-end;
+
+    .products-panel{
+        @include padding-left(28px);
     }
-    
-    .Tyres-sort_by .css-10nd86i {
-        width: 11em;
-    }
+  }
 }

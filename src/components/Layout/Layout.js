@@ -77,7 +77,7 @@ class Layout extends Component {
       case 'signin':
         return <Login />
       case 'search':
-        return <Search />
+        return <Search onTogglePopup={this.props.togglePopup} />
 
       default:
         break;

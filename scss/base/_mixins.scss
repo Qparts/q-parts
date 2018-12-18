@@ -20,6 +20,13 @@
   padding-#{$right}: $size;
 }
 
+@mixin margin-right($size){
+  margin-#{$right}: $size;
+}
+
+@mixin margin-left($size){
+  margin-#{$left}: $size;
+}
 
 //@include font
 
