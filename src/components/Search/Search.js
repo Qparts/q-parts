@@ -21,7 +21,7 @@ class Search extends React.Component {
   onChangeSearch = e => {
     this.setState({
       searchText: e.target.value,
-      url:`/search?search-key=${e.target.value}`
+      url:`/listing?search-key=${e.target.value}`
     })
   }
 

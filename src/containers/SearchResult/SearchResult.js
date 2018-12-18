@@ -40,7 +40,7 @@ class TyresSearch extends Component {
 		const keys = Object.keys(query);
 
 		const filters = keys.map(key => {
-			const componentType = filterObject[key].componentType;
+			const componentType = filterObject[key] ? filterObject[key].componentType : null;
 			const lastIndex = query[key].length - 1;
 			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
 			const queryValues = replaceAll(newArray, '_', ' ');
