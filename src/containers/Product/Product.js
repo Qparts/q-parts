@@ -298,7 +298,7 @@ class Product extends Component {
                 </div>
                 <div className="Product-reviews">
                   <Rating value={review.rating} readonly cancel={false} />
-                  <p style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.products.averageRating}`}</span>
+                  <p style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.product.averageRating}`}</p>
                 </div>
                 <p style={styles.grey}>{review.text}</span>
                 <hr />

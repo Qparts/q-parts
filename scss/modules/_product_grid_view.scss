@@ -1,0 +1,34 @@
+.product-holder {
+  padding-top: 10px;
+  background-color: $white;
+  @include margin-right(30px);
+  @include padding-left(0);
+  margin-bottom: 30px;
+  @include box-shadow;
+
+  img {
+      max-width: 90%;
+  }
+
+  .details-holder{
+      padding-left: 12px;
+  }
+
+  .part-text {
+    text-transform: capitalize;
+    @include font-size(17px);
+  }
+  .manufacturer-text {
+    @include padding-right(11px);
+    @include font-size(15px);
+    font-weight: bold;
+  }
+
+  .sales-price {
+    @include font-size(20px);
+    font-weight: normal;
+  }
+  .currency {
+    @include font-size(15px);
+  }
+}
