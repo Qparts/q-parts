@@ -142,16 +142,28 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      margin: 12px 0px 5px 0px;
+      margin: side-values(12px 0px 5px 0px);
       color: rgba(55, 54, 61, 0.6);
     }
-    .join-us-text {
-      font-family: Roboto;
-      font-size: 15px;
-      font-weight: 500;
-      color: $basic-gray;
-      text-transform: none;
+    div{
+      display: flex;
+      p{
+        margin:0px;
+      }
+      .join-us-text {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 500;
+        color: $basic-gray;
+        text-transform: none;
+        margin-#{$left}: 1px;
+      }
+      i{
+        line-height: 27px;
+        margin-#{$left}: 1px;
+      }
     }
+
     .btn {
       background: $light-gray;
       @extend .link-border-radius-signIn;
@@ -166,22 +178,29 @@
       color: $white;
       font-size: 16px;
     }
-    a {
-      padding: 5px 10px;
-      margin-#{$left}: 5px;
+    .btn-facebook {
+      margin-#{$left}: 7px;
       background-color: $light-gray;
       color: #475993;
-      font-size: 20px;
-      i {
-        font-size: 22px;
-      }
+      font-size: 19px;
+      line-height: 44px;
+      border-radius: side-values(0) !important;
+      box-shadow: none;
     }
-    a.twit {
-      border-radius: 0px 20px 20px 0px;
+    .btn-twitter{
+      margin-#{$left}: 7px;
+      background-color: $light-gray;
+      color: #475993;
+      font-size: 19px;
+      line-height: 44px;
+      border-radius: side-values(0px 20px 20px 0px) !important;
+      box-shadow: none;
     }
   }
   .dropdown-footer {
-    margin-#{$left}: 10px;
+    li{
+      background: $light-gray;
+    }
     p {
       opacity: 1;
       width: 58px;
@@ -321,7 +340,7 @@
 .show {
   color: $basic-gray;
   background-color: $light-gray;
-  border-radius: 0px 0 20px 20px;
+  border-radius: side-values(0px 0 20px 20px);
   padding: 0px;
 }
 
@@ -332,54 +351,156 @@
       #{$left}: 0;
     }
   }
-  //header Sing In / Join
+  .user-actions{
+    margin: 0px;
+    padding: 0px;
+    background: $basic-gray;
+    margin-bottom: 35px;
+    .user-account{
+      display: flex;
+      color: white;
+      margin: side-values(0px 0px 11px 0px);
+      .user-img{
+        margin-#{$right}: 7px;
+        display: inline-block;
+          img{
+            margin-#{$right}: 7px;
+            border-radius: 50px;
+            background: white;
+            max-width: 200%;
+            width: 44px;
+            padding: 7px;
+          }
+      }
+      p{
+        margin-#{$left}: 20px;
+        line-height: 34px;
+      }
+    }
+  }
+  .btn-link{
+    background: none;
+    color: black;
+  }
+  .sidebar-icon{
+    margin-bottom: 30px;
+    div{
+      display: flex;
+    }
+    i{
+      font-size: 15px;
+    }
+    span{
+      margin-#{$left}: 7px;
+    }
+  }
+  .select__single-value{
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: $left;
+    color: var(--basic-gray);
+  }
+  .setting{
+    padding: 0px;
+    .ship-to{
+      font-size: 13px;
+    }
+    .lang-toggle{
+      display: flex;
+      a {
+        line-height: 12px;
+      }
+    }
+  }
+  .downloadApp{
+    display: flex;
+    margin: side-values(34px 0px 34px 0px);
+    p{
+      display: inline-block;
+      margin: 0px;
+    }
+    i{
+      margin-#{$left}: 10px;
+      font-size: 20px;
+      line-height: 18px;
+    }
+  }
+  .footer-sideBar{
+    margin: 0px;
+    li{
+      background: $light-gray;
+      list-style-type: none;
+        p{
+          line-height: 13px;
+          margin-top: 10px;
+          margin-bottom: 10px;
+          margin-#{$left}: 7px;
+        }
+        i{
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+    }
+  }
   //header Sing In / Join
   .dropdown-header {
     p {
-      margin-top: 30px;
       opacity: 0.6;
       font-family: Roboto;
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 300;
       text-align: $left;
       color: rgba(55, 54, 61, 0.6);
       text-transform: none;
       display: inline-block;
+      margin: 0px;
     }
-    .user {
-      span {
+    .user{
+      display: flex;
+      margin-top: 21px;
+      margin-bottom: 21px;
+        p {
+          opacity: 0.6;
+          font-family: Roboto;
+          font-size: 23px;
+          font-weight: 300;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 50px;
+          margin-bottom: 0px;
+          letter-spacing: normal;
+          text-align: left;
+          color: rgba(55, 54, 61, 0.6);
+        }
+      img{
         margin-#{$right}: 7px;
-        display: inline-block;
         background-color: $light-gray;
-        padding: 10px 15px;
-        margin-top: 20px;
         border-radius: 50px;
-        width: 56px;
-        height: 56px;
+        width: 50px;
+        height: 50px;
+        padding: 10px;
       }
-      p {
-        width: 194px;
-        height: 24px;
-        opacity: 0.6;
-        font-family: Roboto;
-        font-size: 30px;
-        font-weight: 300;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: $left;
-        color: rgba(55, 54, 61, 0.6);
-        display: inline-block;
+    }
+    .join-us{
+      display: flex;
+      i{
+        line-height: 26px;
+        margin-#{$left}: 5px;
       }
     }
     .join-us-text {
       font-family: Roboto;
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 500;
       text-align: $left;
       color: $basic-gray;
       text-transform: none;
+      margin-#{$left}: 8px;
     }
     .btn {
       background: $light-gray;
@@ -393,18 +514,26 @@
       border-style: none;
       background: $brand-color;
       color: $white;
-      font-size: 19px;
-      margin-top: 10px;
+      font-size: 15px;
+      width: 100px;
     }
-    a {
-      padding: 10px 12px;
-      margin-#{$left}: 7px;
+    .btn-facebook {
+      margin-#{$left}: 3px;
       background-color: $light-gray;
       color: #475993;
-      font-size: 22px;
+      font-size: 17px;
+      line-height: 48px;
+      border-radius: side-values(0) !important;
+      box-shadow: none;
     }
-    a.twit {
-      border-radius: 0px 20px 20px 0px;
+    .btn-twitter{
+      margin-#{$left}: 3px;
+      background-color: $light-gray;
+      color: #475993;
+      font-size: 17px;
+      line-height: 48px;
+      border-radius: side-values(0px 20px 20px 0px) !important;
+      box-shadow: none;
     }
   }
   .dropdown-footer {
@@ -434,6 +563,59 @@
   .slider-back {
     margin-top: 17px;
     margin-#{$left}: 15px;
-    font-size: 17px;
+    display: flex;
+    p{
+      margin-#{$left}: 3px;
+      font-family: Roboto;
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 20px;
+      letter-spacing: normal;
+      text-align: left;
+      color: var(--dark-charcoal-grey);
+    }
+    i{
+      font-size: 17px;
+    }
+  }
+  .btn-primary{
+    background: black;
+  }
+}
+
+#Search{
+  p{
+    width: 523px;
+    height: 16px;
+    opacity: 0.5;
+    font-family: Roboto;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.56;
+    letter-spacing: normal;
+    text-align: left;
+    color: var(--lighter-gray);
+  }
+  input{
+    border-radius: side-values(20px 0px 20px 20px) !important;
+    border-style: none;
+    height: 55px;
+    width: 100%;
+    background: #f1f1f1;
+    display: inline;
+    text-transform: none;
+  }
+  button{
+    width: 62px;
+    height: 55px;
+    box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
+    text-align: center;
+    i{
+      font-size: 25px;
+    }
   }
 }

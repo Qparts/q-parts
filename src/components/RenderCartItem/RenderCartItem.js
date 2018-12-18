@@ -35,16 +35,15 @@ export default class extends Component {
             <Fragment>
                 {submitFailed && error && <span>{error}</span>}
                 {fields.map((cartItem, idx) => {
-                    console.log(`${cartItem}.itemName`)
                     return <div key={idx} className="border card">
                         <div class="row">
-                            <div className="col-5 col-md-2">
+                            <div className="col-3 col-md-2">
                                 <Field
                                     name={`${cartItem}.image`}
                                     component={RenderImage}
                                 />
                             </div>
-                            <div className="col-7 col-md-5 pt">
+                            <div className="col-9 col-md-5 pt">
                                 <div className="cart_product-details">
                                     <Field
                                         className="part-text"
@@ -61,12 +60,25 @@ export default class extends Component {
                                         readOnly
                                     />
                                     <Field
-                                        className="part-text"
+                                        className="part-text w-sm-100"
                                         name={`${cartItem}.productNumber`}
                                         type="text"
                                         component={RenderField}
                                         readOnly
                                     />
+                                    <div className="q-display-small quantity-small">
+                                        <Field
+                                            className="part-text"
+                                            name={`${cartItem}.quantityLabel`}
+                                            type="text"
+                                            component={RenderField}
+                                            readOnly
+                                        />
+                                        <Field
+                                            name={`${cartItem}.quantity`}
+                                            component={NumberPicker}
+                                        />
+                                    </div>
                                     <div className="w-100">
                                         <Field
                                             className="sales-price"
@@ -96,7 +108,7 @@ export default class extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="col-12 col-md-5 pt">
+                            <div className="col-md-5 pt q-hide-small">
                                 <Field
                                     className="part-text"
                                     name={`${cartItem}.quantityLabel`}

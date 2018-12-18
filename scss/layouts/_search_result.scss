@@ -25,7 +25,8 @@
     }
 
     .search-box-max-container{
-      @include padding-left(0);
+      @include padding-right(0);
+      @include padding-left(6px);
       .search-box-min{
         background-color: $light-gray;
         border:none;
@@ -33,6 +34,12 @@
         @include boarder-left-radius(20px, 20px);
       }
     }
+
+    .search-box-btn-container{
+      @include padding-left(6px);
+
+    }
+      
 
     
 
@@ -89,49 +96,3 @@
     }
   }
 }
-
-
-
-/*
-#search-result {
-  .Tyres-container {
-    display: flex;
-  }
-
-  .Tyres-filter {
-    min-width: 13em;
-    text-align: start;
-    margin: 20px 0 0px 20px;
-  }
-
-  .Tyres-title {
-    display: flex;
-  }
-
-  .Tyres-filter_price {
-    display: flex;
-    min-width: 13em;
-  }
-
-  .Tyres-contents {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .Tyres-footer {
-    width: 100%;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-  }
-
-  .Tyres-sort_by {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .Tyres-sort_by .css-10nd86i {
-    width: 11em;
-  }
-}
-*/

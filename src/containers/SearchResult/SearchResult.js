@@ -193,7 +193,7 @@ class TyresSearch extends Component {
 												<div className="col-lg-4 col-md-6 search-box-max-container">
 													<input className="form-control search-box-max" type="text" placeholder="Max" name="" id="" />
 												</div>
-												<div className="col-lg-4 col-md-12 search-box-min-container">
+												<div className="col-lg-4 col-md-12 search-box-btn-container">
 													<Button text="Go" className="btn btn-primary" />
 												</div>
 											</div>

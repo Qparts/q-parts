@@ -3,7 +3,7 @@
 
   .RenderImage {
     padding-top: 15px;
-    padding-left: 15px;
+    padding-#{$left}: 15px;
 
     img {
       height: 100px !important;
@@ -12,6 +12,10 @@
 
   #cart-details {
     padding-top: 70px;
+
+    @include small-screen {
+      padding-top: 29px;
+    }
   }
 
   .border {
@@ -19,6 +23,16 @@
 
     &:first-child {
       border-radius: corner-values(20px 0 0 0) !important;
+
+      @include small-screen {
+        border-radius: side-values(0 0 20px 20px) !important;
+      }
+    }
+
+    &:nth-child(2) {
+      @include small-screen {
+        border-radius: corner-values(20px 0 0 0) !important;
+      }
     }
     &:last-child {
       border-radius: corner-values(0 0 20px 20px) !important;
@@ -54,9 +68,6 @@
   .btn-secondary {
     text-transform: capitalize;
     @include font-size(14px);
-    @include small-screen {
-      width: 126px;
-    }
   }
   .pt {
     padding-top: 20px;
@@ -64,7 +75,7 @@
   .row {
     .col-md-5:nth-child(3) {
       text-align: $right;
-      padding-right: 33px;
+      padding-#{$right}: 33px;
 
       .part-text {
         opacity: 0.8;
@@ -75,7 +86,7 @@
         font-stretch: normal;
         line-height: 1.13;
         letter-spacing: normal;
-        text-align: left;
+        text-align: $left;
         color: $dark-80;
       }
       #number-picker {
@@ -89,17 +100,89 @@
   button {
     @include font-size(13px);
     i {
-      padding-right: 7px;
+      padding-#{$right}: 7px;
     }
   }
   .col-md-9 {
     .btn-shopping {
       background: $dark-gray;
-      min-width: 425px;
-      text-align: right;
-      i {
-        padding-left: 10px;
+      text-align: $right;
+      width: 50%;
+      @include small-screen {
+        width: 100%;
+
+        margin-bottom: 50px;
       }
+      i {
+        padding-#{$left}: 10px;
+      }
+    }
+    .quantity-small {
+      @include small-screen {
+        display: flex;
+        align-items: baseline;
+        .part-text {
+          width: auto;
+          padding-#{$right}: 11px;
+          opacity: 0.8;
+          @include font-size(15px);
+          font-family: Roboto;
+          line-height: 1.13;
+          letter-spacing: normal;
+          color: $dark-80;
+        }
+      }
+    }
+  }
+  .checkout-sm-container {
+    display: flex;
+
+    .column {
+      flex: 50%;
+      padding-#{$left}: 15px;
+
+      .item-key {
+        padding-top: 15px;
+        display: block;
+        opacity: 0.7;
+        font-family: Roboto;
+        @include font-size(13px);
+        line-height: 1.31;
+        letter-spacing: normal;
+        text-align: $left;
+        color: $dark-70;
+      }
+
+      .item-value {
+        font-family: Roboto;
+        @include font-size(17px);
+        line-height: 1;
+        text-align: $left;
+        color: $black;
+        > span {
+          font-family: Roboto;
+          @include font-size(11px);
+          text-align: $left;
+          color: $charcoal-grey;
+          padding-#{$left}: 3px;
+        }
+      }
+
+      .btn-primary {
+        @include font-size(20px);
+        width: 100%;
+        height: 100%;
+        border-radius: side-values(0 0 20px 20px) !important;
+        text-align: $right;
+        text-transform: capitalize;
+        i {
+          padding-#{$left}: 7px;
+          padding-#{$right}: 0;
+        }
+      }
+    }
+    .column:first-child {
+      padding-bottom: 13px;
     }
   }
 }

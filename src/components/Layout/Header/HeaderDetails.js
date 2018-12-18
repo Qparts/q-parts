@@ -26,7 +26,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
@@ -89,20 +89,23 @@ class HeaderDetails extends Component {
         <Fragment>
           <li className="user-account">
             <a>
-              <DropdownItem DropdownItemId="signin" header={signinJoinHeader}>
+              <DropdownItem dropdownItemId="signin" header={signinJoinHeader}>
                 <div className="dropdown-header">
                   <p>Welcome Back</p>
-                  <div>
+                  <div style={styles.btn_social}>
                     <button type="submit" className="btn-primary" onClick={onSignin}>
                       {translate("general.signin")} <i className="icon-arrow-right" />
                     </button>
-                    <a href="#"><i className="icon-facebook-logo" /></a>
-                    <a href="#"><i className="icon-google-logo" /></a>
-                    <a href="#" className="twit"><i className="icon-twitter" /></a>
+                    <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
+                    <a href="#"><i className="icon-google-logo btn-facebook" /></a>
+                    <a href="#"><i className="icon-twitter btn-twitter" style={{ color: "#03a9f4" }} /></a>
                   </div>
                   <br />
-                  <p className="text-singIn">{translate("dropdown.signup.message")}</p> <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
-                  <i className="icon-arrow-right" />
+                  <div style={styles.text}>
+                    <p>{translate("dropdown.signup.message")}</p>
+                    <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+                    <i className="icon-arrow-right" style={styles.arrow_right} />
+                  </div>
                   <div class="dropdown-divider"  >
                   </div>
                   <div className="dropdown-footer">
@@ -131,7 +134,7 @@ class HeaderDetails extends Component {
           </Link>
           <ul className="list-inline user-actions">
             <li className="search">
-              <a href="">
+              <a onClick={onSearch}>
                 <i className="icon-search" />
               </a>
             </li>
@@ -144,7 +147,7 @@ class HeaderDetails extends Component {
             </li>
             <li className="garage">
               <a>
-                <DropdownItem DropdownItemId="garage" header={garageHeader}>
+                <DropdownItem dropdownItemId="garage" header={garageHeader}>
                   <Fragment>
                     {!isEmpty(vehicles) ? (
                       <GaragePopup
@@ -182,7 +185,18 @@ class HeaderDetails extends Component {
 const styles = {
   label: {
     textTransform: "capitalize"
+  },
+  btn_social: {
+    display: 'flex',
+    margin: "0px 0px 10px 0px"
+  },
+  text: {
+    margin: "0px 0px 24px 0px"
+  },
+  arrow_right: {
+    color: "black"
   }
+
 };
 
 export default withStyles(styles)(HeaderDetails);;
