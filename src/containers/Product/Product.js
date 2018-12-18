@@ -29,6 +29,9 @@ import { colors } from '../../constants';
 import { styles as commonStyles } from '../../constants';
 import { getLength } from '../../utils/array';
 import { fontSize } from '../../utils/font';
+import Title from '../../components/UI/Title';
+import { MediumScreen, SmallScreen } from '../../components/Device';
+import Slider from "react-slick";
 
 class Product extends Component {
   constructor(props) {
@@ -210,20 +213,63 @@ class Product extends Component {
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
     ]
-    const renderRelatedProduct = <div>
-      <h4>{translate("product.related")}</h4>
-      {
-        this.state.relatedProduct.map((product, idx) => {
-          return <Fragment key={idx}>
-            <div style={commonStyles.cursor} className="Product-related_products" onClick={this.goToProduct.bind(this, product)}>
-              <img src={product.image} alt="" />
-              <span>{product.desc}</span>
-              <span>{product.manufacturers}</span>
-            </div>
-          </Fragment>
-        })
-      }
-    </div>
+    const renderRelatedProduct = <Fragment>
+      <MediumScreen>
+        <Card className="border related-products">
+          <CardTitle>
+            <Title header={translate("product.related")} />
+          </CardTitle>
+          <ListGroup className="">
+            {
+              this.props.products.map((product, idx) => {
+                return <ListGroupItem key={idx}>
+                  <div className="img-container">
+                    <img src="/img/product-4.jpg" alt="" />
+                  </div>
+                  <div>
+                    <h5>{product.desc}</h5>
+                    <div>
+                      <span>{product.manufacturer.name}</span>
+                      <span className="seperator" />
+                      <span>Size(215/60 R17)</span>
+                    </div>
+                    <div className="product-review">
+                      <Stars values={product.averageRating} {...constant.starsRating} />
+                      <span className="total-review">{getLength(product.reviews)} review</span>
+                    </div>
+                    <span className="price">
+                      {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+                    </span>
+                  </div>
+                </ListGroupItem>
+              })
+            }
+          </ListGroup>
+        </Card>
+      </MediumScreen>
+      <SmallScreen>
+        <Slider {...constant.sliderSetting}>
+          {
+            this.props.products.map((product, idx) => (
+              <a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
+                <img className="card-img-top" src="/img/product-2.jpg" alt="product" />
+                <div className="card-body">
+                  <h5 className="card-title">{product.desc}</h5>
+                  <p className="product-brand">{product.manufacturer.name}</p>
+                  <div className="product-review">
+                    <Stars values={product.averageRating} {...constant.starsRating} />
+                    <span className="total-review">{getLength(product.reviews)} review</span>
+                  </div>
+                  <p className="price">
+                    {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </Slider>
+      </SmallScreen>
+    </Fragment>
     let reviewsTest = product.reviews;
     reviewsTest.push({
       id: 3,
@@ -245,7 +291,7 @@ class Product extends Component {
             <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
               {
                 this.props.product && <Fragment>
-                  <div className="col-5 product-item_image">
+                  <div className="col-12 col-md-5 product-item_image">
                     <img
                       style={commonStyles.cursor}
                       src={"/img/product-4.jpg"}
@@ -261,7 +307,7 @@ class Product extends Component {
                       onClickPrev={this.gotoPrevious}
                     />
                   </div>
-                  <div className="col-7 product-item_detail">
+                  <div className="col-12 col-md-7 product-item_detail">
                     <div className="row">
                       <div className="col-9">
                         <span className="product-item_desc">{product.desc}</span>
@@ -314,7 +360,7 @@ class Product extends Component {
               }
             </form>
             <div className="row">
-              <div className="col-12">
+              <div className="col-12 col-md-8">
                 <div className="row">
                   <div className="col-12 product-details">
                     <h4>{translate("product.detail")}</h4>
@@ -421,8 +467,8 @@ class Product extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
-
+              <div className="col-12 col-md-4">
+                {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
               </div>
             </div>
           </div>
@@ -436,6 +482,7 @@ const mapStateToProps = state => {
   return {
     initialValues: { quantity: 1 },
     product: state.api.product,
+    products: state.api.products,
     recentViewedProducts: state.customer.recentViewedProducts,
     customer: state.customer.detail,
     formValues: getFormValues('Product')(state),
