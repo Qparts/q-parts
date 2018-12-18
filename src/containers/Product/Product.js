@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Lightbox from 'react-images';
 import { Field, reduxForm, getFormValues } from 'redux-form';
-import { Rating } from 'primereact/components/rating/Rating';
 import NumberPicker from '../../components/UI/NumberPicker';
 import Button from '../../components/UI/Button';
 import CompareProducts from '../../components/CompareProducts/CompareProducts';
@@ -16,13 +15,23 @@ import { getProduct } from '../../actions/apiAction';
 import { addRecentViewedProducts, addWishlist } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
+import {
+  Card, CardText, CardBody,
+  CardTitle, ListGroupItem, ListGroup
+} from 'reactstrap';
 
 import * as validations from '../../utils';
+import * as directional from '../../utils';
 import _ from 'lodash';
 
 import * as constant from '../../constants';
-import { styles } from '../../constants';
+import { colors } from '../../constants';
+import { styles as commonStyles } from '../../constants';
 import { getLength } from '../../utils/array';
+import { fontSize } from '../../utils/font';
+import Title from '../../components/UI/Title';
+import { MediumScreen, SmallScreen } from '../../components/Device';
+import Slider from "react-slick";
 
 class Product extends Component {
   constructor(props) {
@@ -112,7 +121,14 @@ class Product extends Component {
     this.props.addWishlist(item);
   }
 
-  renderSpecs = () => {
+  renderSpecs = (isList = false) => {
+    const data = [
+      { key: 'Tire Type', value: 'Truck / SUV' },
+      { key: 'Tire Size', value: '245 / 60 R18' },
+      { key: 'Speed Rating', value: 'H = 130 mph' },
+      { key: 'Load Index', value: '109 = 2271 lbs/tire' },
+    ]
+    let Component = isList ? ListGroupItem : Fragment;
     // const keys = this.props.currentLanguage === constant.EN ?
     //   Object.keys(this.props.product.specs) : Object.keys(this.props.product.specsAr);
     // const specs = this.props.currentLanguage === constant.EN ?
@@ -123,15 +139,21 @@ class Product extends Component {
     //       keys.map((key, idx) => (
     //         <div key={idx} className="Product-item_specs">
     //           <span>{key}</span>:
-    //             <span style={styles.rightSpace}>{specs[key]}</span>
+    //             <span style={commonStyles.rightSpace}>{specs[key]}</span>
     //         </div>
     //       ))
     //     }
     //   </Fragment>
     // )
     return <div>
-      <span className="specs-key">Tire Type:</span>
-      <span className="specs-value">Truck / SUV</span>
+      {
+        data.map((item, idx) => (
+          <Component key={idx}>
+            <span className="specs-key">{item.key}:</span>
+            <span className="specs-value">{item.value}</span>
+          </Component>
+        ))
+      }
     </div>
   }
 
@@ -148,25 +170,117 @@ class Product extends Component {
   }
 
   render() {
+    const styles = {
+      averageRating: {
+        fontFamily: 'Roboto',
+        fontSize: fontSize(20),
+        color: colors.basicBlack,
+        fontWeight: 'normal',
+      },
+      averageRatingCard: {
+        paddingBottom: this.state.canWriteReview ? '50px' : 'inherit'
+      },
+      customerReviews: {
+        div: {
+          display: 'flex',
+          justifyContent: 'space-between',
+        },
+        name: {
+          fontFamily: 'Roboto',
+          fontSize: fontSize(17),
+          fontWeight: 'normal',
+        },
+        text: {
+          fontSize: fontSize(13),
+          fontWeight: 'normal',
+        },
+        date: {
+          opacity: '0.5',
+          fontFamily: 'Roboto',
+          fontSize: fontSize(13),
+          fontWeight: 'normal',
+          color: colors.lighterGrey,
+        }
+      },
+      productReviews: {
+        btnLinkParent: {
+          float: this.state.canWriteReview ? 'none' : directional.right(this.props.direction)
+        }
+      }
+    };
     const { translate, product } = this.props;
     const compareHeaders = [
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
     ]
-    const renderRelatedProduct = <div>
-      <h4>{translate("product.related")}</h4>
-      {
-        this.state.relatedProduct.map((product, idx) => {
-          return <Fragment key={idx}>
-            <div style={styles.cursor} className="Product-related_products" onClick={this.goToProduct.bind(this, product)}>
-              <img src={product.image} alt="" />
-              <span>{product.desc}</span>
-              <span>{product.manufacturers}</span>
-            </div>
-          </Fragment>
-        })
-      }
-    </div>
+    const renderRelatedProduct = <Fragment>
+      <MediumScreen>
+        <Card className="border related-products">
+          <CardTitle>
+            <Title header={translate("product.related")} />
+          </CardTitle>
+          <ListGroup className="">
+            {
+              this.props.products.map((product, idx) => {
+                return <ListGroupItem key={idx}>
+                  <div className="img-container">
+                    <img src="/img/product-4.jpg" alt="" />
+                  </div>
+                  <div>
+                    <h5>{product.desc}</h5>
+                    <div>
+                      <span>{product.manufacturer.name}</span>
+                      <span className="seperator" />
+                      <span>Size(215/60 R17)</span>
+                    </div>
+                    <div className="product-review">
+                      <Stars values={product.averageRating} {...constant.starsRating} />
+                      <span className="total-review">{getLength(product.reviews)} review</span>
+                    </div>
+                    <span className="price">
+                      {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+                    </span>
+                  </div>
+                </ListGroupItem>
+              })
+            }
+          </ListGroup>
+        </Card>
+      </MediumScreen>
+      <SmallScreen>
+        <Slider {...constant.sliderSetting}>
+          {
+            this.props.products.map((product, idx) => (
+              <a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
+                <img className="card-img-top" src="/img/product-2.jpg" alt="product" />
+                <div className="card-body">
+                  <h5 className="card-title">{product.desc}</h5>
+                  <p className="product-brand">{product.manufacturer.name}</p>
+                  <div className="product-review">
+                    <Stars values={product.averageRating} {...constant.starsRating} />
+                    <span className="total-review">{getLength(product.reviews)} review</span>
+                  </div>
+                  <p className="price">
+                    {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+                  </p>
+                </div>
+              </a>
+            ))
+          }
+        </Slider>
+      </SmallScreen>
+    </Fragment>
+    let reviewsTest = product.reviews;
+    reviewsTest.push({
+      id: 3,
+      customerId: 1,
+      customerName: "Fareed Rezaei",
+      rating: 4,
+      text: "This is a good product indeed",
+      productId: 1278,
+      created: 1540639115285,
+      status: "A"
+    })
 
     if (_.isEmpty(this.props.product)) return null;
 
@@ -177,9 +291,9 @@ class Product extends Component {
             <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
               {
                 this.props.product && <Fragment>
-                  <div className="col-5 product-item_image">
+                  <div className="col-12 col-md-5 product-item_image">
                     <img
-                      style={styles.cursor}
+                      style={commonStyles.cursor}
                       src={"/img/product-4.jpg"}
                       onClick={this.showLightbox}
                       alt=""
@@ -193,7 +307,7 @@ class Product extends Component {
                       onClickPrev={this.gotoPrevious}
                     />
                   </div>
-                  <div className="col-7 product-item_detail">
+                  <div className="col-12 col-md-7 product-item_detail">
                     <div className="row">
                       <div className="col-9">
                         <span className="product-item_desc">{product.desc}</span>
@@ -208,7 +322,7 @@ class Product extends Component {
                         <Button className="btn-primary" icon="icon-heart" />
                       </div>
                       <div className="col-12 product-review">
-                        <Stars values={product.averageRating} {...constant.starsRating} />
+                        <Stars value={getLength(product.reviews)} {...constant.starsRating} />
                         <span>{getLength(product.reviews)} review</span>
                       </div>
 
@@ -236,22 +350,173 @@ class Product extends Component {
                       </div>
                       <div className="col-12">
                         <span className="h-seperator" />
+                        <CustomerService
+                          messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
+                          url="" />
                       </div>
                     </div>
                   </div>
                 </Fragment>
               }
             </form>
-            <CustomerService
-              messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
-              url="" />
-            {/* <h4>{translate("product.compare")}</h4> */}
-            {/* <CompareProducts
+            <div className="row">
+              <div className="col-12 col-md-8">
+                <div className="row">
+                  <div className="col-12 product-details">
+                    <h4>{translate("product.detail")}</h4>
+                    <Card className="border">
+                      <CardBody>
+                        <CardTitle>
+                          RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
+                          This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
+                          </CardTitle>
+                        <CardText>
+                          <ListGroup className="product-details-specs">
+                            {this.renderSpecs(true)}
+                          </ListGroup>
+                        </CardText>
+                      </CardBody>
+                    </Card>
+                  </div>
+                  <div className="col-12 product-reviews">
+                    <h4>{translate("product.titleReviews")}</h4>
+                    <Card style={styles.averageRatingCard} className="border average-rating-card">
+                      <div className="average-rating">
+                        <div className="average-rating_header">
+                          <div className="sm-block">
+                            <div className="d-flex">
+                              <Stars className="average-rating_stars" value={product.averageRating} {...constant.starsRating} />
+                              <span style={styles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
+                            </div>
+                            <div className="average-rating_count">
+                              <span>{getLength(product.reviews)}</span>
+                              <span>{translate("product.reviews")}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div style={styles.productReviews.btnLinkParent} className="btn-link_parent">
+                          <span className={this.state.canWriteReview ? "h-seperator" : "sm-seperator"} />
+                          <Button
+                            style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
+                            type="submit" className="btn-link"
+                            text={translate("product.writeReview.title")}
+                            onClick={this.handleWriteReview.bind(this, true)}
+                            icon="icon-arrow-right" />
+                          {
+                            this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                              <div className="review-form_header">
+                                <span>{translate("product.writeReview.title")}</span>
+                                <Field
+                                  name="rating"
+                                  cancel={false}
+                                  component={RenderRating}
+                                  validate={[validations.required]}
+                                />
+                              </div>
+                              <div className="group-shadow-input">
+                                <Field
+                                  name="review"
+                                  component={RenderField}
+                                  type="text"
+                                  placeholder={translate("product.writeReview.placeholder")}
+                                  validate={[validations.required]} />
+                                <div className="group-buttons">
+                                  <Button
+                                    type="reset"
+                                    className="btn-secondary"
+                                    text={translate("product.writeReview.cancel")}
+                                    onClick={this.handleWriteReview.bind(this, false)} />
+                                  <Button
+                                    type="submit"
+                                    className="btn-primary"
+                                    text={translate("product.writeReview.sumbit")} />
+                                </div>
+                              </div>
+                            </form>
+                          }
+                        </div>
+                      </div>
+                    </Card>
+                    <Card className="border customers-reviews-card">
+                      <ListGroup>
+                        {
+                          reviewsTest.map((review, idx) => {
+                            return <ListGroupItem>
+                              <div className="customers-reviews" style={styles.customerReviews.div} key={idx}>
+                                <div className="d-flex flex-row">
+                                  <div>
+                                    <span className="user-img">
+                                      <img alt="user" src="/img/user.svg" />
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span style={styles.customerReviews.name}>{review.customerName}</span>
+                                    <Stars value={review.rating} {...constant.starsRating} />
+                                    <span style={styles.customerReviews.text}>{review.text}</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span style={styles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                                </div>
+                              </div>
+                            </ListGroupItem>
+                          })
+                        }
+                      </ListGroup>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-md-4">
+                {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    initialValues: { quantity: 1 },
+    product: state.api.product,
+    products: state.api.products,
+    recentViewedProducts: state.customer.recentViewedProducts,
+    customer: state.customer.detail,
+    formValues: getFormValues('Product')(state),
+    translate: getTranslate(state.localize),
+    currentLanguage: getActiveLanguage(state.localize).code,
+    direction: state.customer.direction,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (item) => dispatch(addToCart(item)),
+    addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
+    addWishlist: (product) => dispatch(addWishlist(product)),
+    getProduct: (productId) => dispatch(getProduct(productId))
+  }
+}
+
+Product = reduxForm({
+  form: 'Product'
+})(Product)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Product);
+
+
+
+
+{/* <h4>{translate("product.compare")}</h4> */ }
+{/* <CompareProducts
           headers={compareHeaders}
           products={this.props.products}
           goToProduct={this.goToProduct}
           reviewText={translate("compareProduct.customerRating.review")} /> */}
-            {/* <div>
+{/* <div>
           {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
           <h4>{translate("product.detail")}</h4>
           {
@@ -266,9 +531,9 @@ class Product extends Component {
             <h4>{translate("product.reviews")}({getLength(this.props.product.reviews)})</h4>
             <div className="Product-reviews_header">
               <Rating value={5} readonly cancel={false} />
-              <p style={styles.rightSpace}>{`${translate("product.rating")}: 5 ${translate("product.ratingRange")} 5`}</span>
+              <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: 5 ${translate("product.ratingRange")} 5`}</span>
             </div>
-            <Button style={this.state.canWriteReview ? styles.hide : styles.show} type="submit" className="btn btn-secondary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
+            <Button style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show} type="submit" className="btn btn-secondary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
             {
               this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
                 <Field
@@ -294,52 +559,19 @@ class Product extends Component {
               return <div key={idx}>
                 <div className="Product-reviews">
                   <span>{review.customerName}</span>
-                  <p style={styles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                  <p style={commonStyles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
                 </div>
                 <div className="Product-reviews">
                   <Rating value={review.rating} readonly cancel={false} />
-                  <p style={styles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.product.averageRating}`}</p>
+                  <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.products.averageRating}`}</span>
                 </div>
-                <p style={styles.grey}>{review.text}</span>
+                <p style={commonStyles.grey}>{review.text}</span>
                 <hr />
               </div>
             })
           }
         </div> */}
-            {/* <RecentViewedProducts
+{/* <RecentViewedProducts
           title={translate("product.recentViewed")}
           products={this.props.recentViewedProducts}
           goToProduct={this.goToProduct} /> */}
-          </div>
-        </div>
-      </section>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    initialValues: { quantity: 1 },
-    product: state.api.product,
-    recentViewedProducts: state.customer.recentViewedProducts,
-    customer: state.customer.detail,
-    formValues: getFormValues('Product')(state),
-    translate: getTranslate(state.localize),
-    currentLanguage: getActiveLanguage(state.localize).code,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: (item) => dispatch(addToCart(item)),
-    addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-    addWishlist: (product) => dispatch(addWishlist(product)),
-    getProduct: (productId) => dispatch(getProduct(productId))
-  }
-}
-
-Product = reduxForm({
-  form: 'Product'
-})(Product)
-
-export default connect(mapStateToProps, mapDispatchToProps)(Product);

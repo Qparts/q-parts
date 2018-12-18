@@ -1,20 +1,27 @@
-.ui-dialog.ui-widget {
-  .ui-dialog-titlebar {
+.modal-dialog {
+  border-radius: side-values(20px 0 20px 20px) !important;
+  max-width: $max-container-popup;
+  .modal-content {
+    @extend .container-fluid;
     background: $light-gray;
     border-radius: inherit;
-
-    .ui-dialog-titlebar-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
+    .modal-header {
+      border-bottom: 0;
+      #title {
+        h1 {
+          font-family: Roboto;
+          @include font-size(50px);
+          font-weight: 300;
+          color: $basic-gray;
+          text-transform: capitalize;
+        }
+        .red-line {
+          height: 1px;
+        }
+      }
     }
-  }
-}
-.ui-dialog {
-  border-radius: side-values(20px 0 20px 20px) !important;
-  #title {
-    h1 {
-      text-transform: capitalize;
+    .modal-body {
+      padding: inherit;
     }
   }
 }

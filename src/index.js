@@ -56,7 +56,7 @@ class Root extends React.Component {
   render() {
     return (
       <Provider store={store}>
-       <DirectionProvider direction={'ltr'}>
+       <DirectionProvider direction={this.state.direction}>
           <LocalizeProvider store={store}>
             <ErrorBoundary>
               <Routes />

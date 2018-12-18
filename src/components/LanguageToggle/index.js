@@ -9,7 +9,7 @@ const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, tr
         setActiveLanguage(lang.code)
 
         changeDefaultLanguage(lang.code);
-        changeDefaultDirection(lang.code);
+        // changeDefaultDirection(lang.code);
     }
     return localize.languages.map(lang => (
         !lang.active && (

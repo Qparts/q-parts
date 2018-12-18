@@ -4,7 +4,7 @@ import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, EMAIL_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
-  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION
+  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, TOGGLE_POPUP
 } from '../actions/customerAction';
 import { AR } from '../constants';
 import _ from 'lodash';
@@ -166,9 +166,12 @@ export default function reducer(state = initialState, action) {
       return { ...state, wishlist: removedWishlist };
 
     case CHANGE_DEFAULT_DIRECTION:
-    const newDirection = action.payload === AR ? 'rtl' : 'ltr';    
-    
-    return {...state, direction: newDirection}
+      const newDirection = action.payload === AR ? 'rtl' : 'ltr';
+
+      return { ...state, direction: newDirection }
+
+    case TOGGLE_POPUP:
+      return { ...state, modal: !state.modal }
 
 
     default:

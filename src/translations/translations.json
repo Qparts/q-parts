@@ -1122,34 +1122,42 @@
       "تفاصيل المنتج",
       "Product details"
     ],
-    "reviews": [
+    "titleReviews": [
       "تعليقات المنتج",
       "Product reviews"
     ],
+    "reviews": [
+      "تعليقات",
+      "Review(s)"
+    ],
     "rating": [
-      "متوسط تقييم",
-      "Average rating"
+      "تقييم",
+      "Rating"
     ],
     "ratingRange": [
       "من",
-      "of"
+      "out of"
+    ],
+    "averageRating": [
+      "متوسط تقييم",
+      "Average rating"
     ],
     "writeReview": {
       "title": [
-        "اكتب مراجعتك",
-        "Write your review"
+        "تقييم هذا المنتج",
+        "Rate this product"
       ],
       "placeholder": [
-        "أضف تعليقك هنا",
-        "Add your review here"
+        "اكتب مراجعتك:",
+        "Write your review:"
       ],
       "cancel": [
         "إلغاء",
         "Cancel"
       ],
       "sumbit": [
-        "خضع",
-        "Submit"
+        "إرسال مراجعة",
+        "Submit Review"
       ]
     },
     "recentViewed": [

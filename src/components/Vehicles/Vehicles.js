@@ -31,7 +31,7 @@ class Vehicles extends Component {
     console.log(this);
 
     return (
-      <section id="vehicles" className="container-fluid">
+      <section id="vehicles">
         {
           url === '/vehicles' ? (
             <Title
