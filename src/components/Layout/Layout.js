@@ -19,7 +19,8 @@ class Layout extends Component {
     super(props);
 
     this.state = {
-      dialogType: 'signin'
+      dialogType: 'signin',
+      modal: false
     };
   }
 
@@ -28,15 +29,19 @@ class Layout extends Component {
     //   this.onHide();
     // }
     if (this.props.isLoggedIn && prevProps.isLoggedIn !== this.props.isLoggedIn) {
-      this.props.togglePopup();
+      this.togglePopup();
     }
   }
 
   handleDialog = (dialogType) => {
     this.setState({ dialogType });
-    this.props.togglePopup();
+    this.togglePopup();
   };
-
+  togglePopup = () =>{
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
   handleChange = (event, value) => {
     this.setState({
       newOrOldVechile: value
@@ -60,7 +65,8 @@ class Layout extends Component {
         }
       case 'search':
         return {
-          minWidth: '80%'
+          header: <p>All auo parts in one place - choose yours among 1.000.000 of spare parts</p>,
+          className: "search-popup"
         }
       default:
         break;
@@ -77,7 +83,7 @@ class Layout extends Component {
       case 'signin':
         return <Login />
       case 'search':
-        return <Search onTogglePopup={this.props.togglePopup} />
+        return <Search />
 
       default:
         break;
@@ -87,11 +93,11 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      vehiclesFormat, selectedVehicle, modal, togglePopup
+      vehiclesFormat, selectedVehicle
     } = this.props;
     const dialog = (
-      <Modal isOpen={modal} toggle={togglePopup} >
-        <ModalHeader toggle={togglePopup}>{this.getDialogProps().header}</ModalHeader>
+      <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
         </ModalBody>

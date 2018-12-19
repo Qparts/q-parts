@@ -584,7 +584,7 @@
       line-height: 20px;
       letter-spacing: normal;
       text-align: left;
-      color: var(--dark-charcoal-grey);
+      color: $dark-charcoal-grey;
     }
     i {
       font-size: 17px;
@@ -596,25 +596,13 @@
 }
 
 #Search {
-  p {
-    width: 523px;
-    height: 16px;
-    opacity: 0.5;
-    font-family: Roboto;
-    font-size: 16px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.56;
-    letter-spacing: normal;
-    text-align: left;
-    color: var(--lighter-gray);
+  .form-row{
+    margin-bottom: 30px;
   }
   input {
     border-radius: side-values(20px 0px 20px 20px) !important;
     border-style: none;
     height: 55px;
-    width: 100%;
     background: #f1f1f1;
     display: inline;
     text-transform: none;

@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import Stars from 'react-stars'
 
-import './RenderRating.css';
 import { starsRating } from '../../constants';
 
 

@@ -24,6 +24,14 @@ import * as validations from '../../utils';
 import * as directional from '../../utils';
 import _ from 'lodash';
 
+//dialog
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import AddProduct from "./AddProductPopup/AddProduct"
+
+//Router
+import PrivateRoute from '../../components/PrivateRoute/index.js'
+import { Switch,Route } from 'react-router-dom';
+
 import * as constant from '../../constants';
 import { colors } from '../../constants';
 import { styles as commonStyles } from '../../constants';
@@ -57,7 +65,49 @@ class Product extends Component {
           reviews: [],
           price: 100
         }
-      ]
+      ],
+      dialogType: 'addProduct',
+      data: [],
+      auth: false,
+      modal: false
+    }
+  }
+  handleDialog = (dialogType, data) => {
+    this.setState({
+      dialogType,
+      data: data
+    });
+    this.togglePopup();
+  };
+
+  togglePopup = () => {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+
+  getDialogProps = () => {
+    const { dialogType } = this.state;
+    switch (dialogType) {
+      case 'addProduct':
+        return {
+          minWidth: '80%',
+          header:
+            <h1><span>{this.state.data.quantity} Item</span> Added To Cart</h1>
+        }
+      default:
+        break;
+    }
+  }
+
+  getDialogComponent = () => {
+    const { dialogType } = this.state;
+
+    switch (dialogType) {
+      case 'addProduct':
+        return <AddProduct data={this.state.data}/>
+      default:
+        break;
     }
   }
 
@@ -65,6 +115,9 @@ class Product extends Component {
     const { match: { params } } = this.props
 
     this.props.getProduct(params.productId)
+    this.setState({
+      auth: !this.state.auth
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -75,6 +128,11 @@ class Product extends Component {
       this.props.getProduct(productId);
     }
   }
+  componentWillMount() {
+    this.setState({
+      data: this.props.product
+    })
+  }
 
   closeLightbox = () => {
     this.setState({
@@ -83,10 +141,19 @@ class Product extends Component {
   }
 
   submit = ({ quantity }) => {
+    //width screen
+    let width = window.innerWidth;
     const item = { ...this.props.product, quantity };
-
     this.props.addToCart(item);
-
+    if (width > 992) {
+      this.handleDialog('addProduct', item)
+    } else {
+      const { match: { params } } = this.props
+      this.props.history.push({
+        pathname: `/products/${params.productId}/AddProduct`,
+        state: { data: item }
+      })
+    }
   }
 
   submitReview = ({ review, rating }) => {
@@ -208,11 +275,19 @@ class Product extends Component {
         }
       }
     };
-    const { translate, product } = this.props;
+    const { translate, product, match: { params } } = this.props;
     const compareHeaders = [
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
-    ]
+    ];
+    const dialog = (
+      <Modal className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          {this.getDialogComponent()}
+        </ModalBody>
+      </Modal>
+    );
     const renderRelatedProduct = <Fragment>
       <MediumScreen>
         <Card className="border related-products">
@@ -270,7 +345,7 @@ class Product extends Component {
         </Slider>
       </SmallScreen>
     </Fragment>
-    let reviewsTest = product.reviews;
+    let reviewsTest = product ? product.reviews : null;
     reviewsTest.push({
       id: 3,
       customerId: 1,
@@ -285,195 +360,206 @@ class Product extends Component {
     if (_.isEmpty(this.props.product)) return null;
 
     return (
-      <section id="product">
-        <div className="component-background">
-          <div className="container-fluid">
-            <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
-              {
-                this.props.product && <Fragment>
-                  <div className="col-12 col-md-5 product-item_image">
-                    <img
-                      style={commonStyles.cursor}
-                      src={"/img/product-4.jpg"}
-                      onClick={this.showLightbox}
-                      alt=""
-                    />
-                    <Lightbox
-                      currentImage={this.state.currentImage}
-                      images={[{ src: "/img/product-4.jpg" }, { src: "/img/product-3.jpg" }]}
-                      isOpen={this.state.lightboxIsOpen}
-                      onClose={this.closeLightbox}
-                      onClickNext={this.goToNext}
-                      onClickPrev={this.gotoPrevious}
-                    />
-                  </div>
-                  <div className="col-12 col-md-7 product-item_detail">
-                    <div className="row">
-                      <div className="col-9">
-                        <span className="product-item_desc">{product.desc}</span>
-                        <div className="product-item_manufacturer">
-                          <span>By</span>
-                          <span>{product.manufacturer.name}</span>
-                          <span>{product.productNumber}</span>
-                        </div>
-
-                      </div>
-                      <div className="col-3 btn-wishlist">
-                        <Button className="btn-primary" icon="icon-heart" />
-                      </div>
-                      <div className="col-12 product-review">
-                        <Stars value={getLength(product.reviews)} {...constant.starsRating} />
-                        <span>{getLength(product.reviews)} review</span>
-                      </div>
-
-                      <div className="col-12 product-item_sales-price">
-                        <span>{product.salesPrice.toFixed(2)}</span>
-                        <span>SR</span>
-                      </div>
-                      <div className="col-12">
-                        <span className="h-seperator" />
-                      </div>
-                      <div className="col-12 product-item_specs">
-                        <span>Specifications</span>
-                        {this.renderSpecs()}
-                      </div>
-                      <div className="col-12 d-flex product-item_buttons">
-                        <Field
-                          name="quantity"
-                          component={NumberPicker}
+      <Switch>
+        <Route path={'/products/:productId'} exact >
+          <section id="product">
+            <div className="component-background">
+              <div className="container-fluid">
+                <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
+                  {
+                    this.props.product && <Fragment>
+                      <div className="col-12 col-md-5 product-item_image">
+                        <img
+                          style={commonStyles.cursor}
+                          src={"/img/product-4.jpg"}
+                          onClick={this.showLightbox}
+                          alt=""
                         />
-                        <Button
-                          type="submit"
-                          className="btn-primary"
-                          text={translate("product.buttons.addToCart")}
-                          icon="icon-cart" />
+                        <Lightbox
+                          currentImage={this.state.currentImage}
+                          images={[{ src: "/img/product-4.jpg" }, { src: "/img/product-3.jpg" }]}
+                          isOpen={this.state.lightboxIsOpen}
+                          onClose={this.closeLightbox}
+                          onClickNext={this.goToNext}
+                          onClickPrev={this.gotoPrevious}
+                        />
                       </div>
-                      <div className="col-12">
-                        <span className="h-seperator" />
-                        <CustomerService
-                          messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
-                          url="" />
+                      <div className="col-12 col-md-7 product-item_detail">
+                        <div className="row">
+                          <div className="col-9">
+                            <span className="product-item_desc">{product.desc}</span>
+                            <div className="product-item_manufacturer">
+                              <span>By</span>
+                              <span>{product.manufacturer.name}</span>
+                              <span>{product.productNumber}</span>
+                            </div>
+
+                          </div>
+                          <div className="col-3 btn-wishlist">
+                            <Button className="btn-primary" icon="icon-heart" />
+                          </div>
+                          <div className="col-12 product-review">
+                            <Stars value={getLength(product.reviews)} {...constant.starsRating} />
+                            <span>{getLength(product.reviews)} review</span>
+                          </div>
+
+                          <div className="col-12 product-item_sales-price">
+                            <span>{product.salesPrice.toFixed(2)}</span>
+                            <span>SR</span>
+                          </div>
+                          <div className="col-12">
+                            <span className="h-seperator" />
+                          </div>
+                          <div className="col-12 product-item_specs">
+                            <span>Specifications</span>
+                            {this.renderSpecs()}
+                          </div>
+                          <div className="col-12 d-flex product-item_buttons">
+                            <Field
+                              name="quantity"
+                              component={NumberPicker}
+                            />
+                            <Button
+                              type="submit"
+                              className="btn-primary"
+                              text={translate("product.buttons.addToCart")}
+                              icon="icon-cart" />
+                          </div>
+                          <div className="col-12">
+                            <span className="h-seperator" />
+                            <CustomerService
+                              messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
+                              url="" />
+                          </div>
+                        </div>
+                      </div>
+                    </Fragment>
+                  }
+                </form>
+                <div className="row">
+                  <div className="col-12 col-md-8">
+                    <div className="row">
+                      <div className="col-12 product-details">
+                        <h4>{translate("product.detail")}</h4>
+                        <Card className="border">
+                          <CardBody>
+                            <CardTitle>
+                              RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
+                              This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
+                          </CardTitle>
+                            <CardText>
+                              <ListGroup className="product-details-specs">
+                                {this.renderSpecs(true)}
+                              </ListGroup>
+                            </CardText>
+                          </CardBody>
+                        </Card>
+                      </div>
+                      <div className="col-12 product-reviews">
+                        <h4>{translate("product.titleReviews")}</h4>
+                        <Card style={styles.averageRatingCard} className="border average-rating-card">
+                          <div className="average-rating">
+                            <div className="average-rating_header">
+                              <div className="sm-block">
+                                <div className="d-flex">
+                                  <Stars className="average-rating_stars" value={product.averageRating} {...constant.starsRating} />
+                                  <span style={styles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
+                                </div>
+                                <div className="average-rating_count">
+                                  <span>{getLength(product.reviews)}</span>
+                                  <span>{translate("product.reviews")}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div style={styles.productReviews.btnLinkParent} className="btn-link_parent">
+                              <span className={this.state.canWriteReview ? "h-seperator" : "sm-seperator"} />
+                              <Button
+                                style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
+                                type="submit" className="btn-link"
+                                text={translate("product.writeReview.title")}
+                                onClick={this.handleWriteReview.bind(this, true)}
+                                icon="icon-arrow-right" />
+                              {
+                                this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
+                                  <div className="review-form_header">
+                                    <span>{translate("product.writeReview.title")}</span>
+                                    <Field
+                                      name="rating"
+                                      cancel={false}
+                                      component={RenderRating}
+                                      validate={[validations.required]}
+                                    />
+                                  </div>
+                                  <div className="group-shadow-input">
+                                    <Field
+                                      name="review"
+                                      component={RenderField}
+                                      type="text"
+                                      placeholder={translate("product.writeReview.placeholder")}
+                                      validate={[validations.required]} />
+                                    <div className="group-buttons">
+                                      <Button
+                                        type="reset"
+                                        className="btn-secondary"
+                                        text={translate("product.writeReview.cancel")}
+                                        onClick={this.handleWriteReview.bind(this, false)} />
+                                      <Button
+                                        type="submit"
+                                        className="btn-primary"
+                                        text={translate("product.writeReview.sumbit")} />
+                                    </div>
+                                  </div>
+                                </form>
+                              }
+                            </div>
+                          </div>
+                        </Card>
+                        <Card className="border customers-reviews-card">
+                          <ListGroup>
+                            {
+                              reviewsTest.map((review, idx) => {
+                                return <ListGroupItem>
+                                  <div className="customers-reviews" style={styles.customerReviews.div} key={idx}>
+                                    <div className="d-flex flex-row">
+                                      <div>
+                                        <span className="user-img">
+                                          <img alt="user" src="/img/user.svg" />
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <span style={styles.customerReviews.name}>{review.customerName}</span>
+                                        <Stars value={review.rating} {...constant.starsRating} />
+                                        <span style={styles.customerReviews.text}>{review.text}</span>
+                                      </div>
+                                    </div>
+                                    <div>
+                                      <span style={styles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
+                                    </div>
+                                  </div>
+                                </ListGroupItem>
+                              })
+                            }
+                          </ListGroup>
+                        </Card>
                       </div>
                     </div>
                   </div>
-                </Fragment>
-              }
-            </form>
-            <div className="row">
-              <div className="col-12 col-md-8">
-                <div className="row">
-                  <div className="col-12 product-details">
-                    <h4>{translate("product.detail")}</h4>
-                    <Card className="border">
-                      <CardBody>
-                        <CardTitle>
-                          RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
-                          This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
-                          </CardTitle>
-                        <CardText>
-                          <ListGroup className="product-details-specs">
-                            {this.renderSpecs(true)}
-                          </ListGroup>
-                        </CardText>
-                      </CardBody>
-                    </Card>
-                  </div>
-                  <div className="col-12 product-reviews">
-                    <h4>{translate("product.titleReviews")}</h4>
-                    <Card style={styles.averageRatingCard} className="border average-rating-card">
-                      <div className="average-rating">
-                        <div className="average-rating_header">
-                          <div className="sm-block">
-                            <div className="d-flex">
-                              <Stars className="average-rating_stars" value={product.averageRating} {...constant.starsRating} />
-                              <span style={styles.averageRating}>{`${product.averageRating} ${translate("product.ratingRange")} 5`}</span>
-                            </div>
-                            <div className="average-rating_count">
-                              <span>{getLength(product.reviews)}</span>
-                              <span>{translate("product.reviews")}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div style={styles.productReviews.btnLinkParent} className="btn-link_parent">
-                          <span className={this.state.canWriteReview ? "h-seperator" : "sm-seperator"} />
-                          <Button
-                            style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
-                            type="submit" className="btn-link"
-                            text={translate("product.writeReview.title")}
-                            onClick={this.handleWriteReview.bind(this, true)}
-                            icon="icon-arrow-right" />
-                          {
-                            this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
-                              <div className="review-form_header">
-                                <span>{translate("product.writeReview.title")}</span>
-                                <Field
-                                  name="rating"
-                                  cancel={false}
-                                  component={RenderRating}
-                                  validate={[validations.required]}
-                                />
-                              </div>
-                              <div className="group-shadow-input">
-                                <Field
-                                  name="review"
-                                  component={RenderField}
-                                  type="text"
-                                  placeholder={translate("product.writeReview.placeholder")}
-                                  validate={[validations.required]} />
-                                <div className="group-buttons">
-                                  <Button
-                                    type="reset"
-                                    className="btn-secondary"
-                                    text={translate("product.writeReview.cancel")}
-                                    onClick={this.handleWriteReview.bind(this, false)} />
-                                  <Button
-                                    type="submit"
-                                    className="btn-primary"
-                                    text={translate("product.writeReview.sumbit")} />
-                                </div>
-                              </div>
-                            </form>
-                          }
-                        </div>
-                      </div>
-                    </Card>
-                    <Card className="border customers-reviews-card">
-                      <ListGroup>
-                        {
-                          reviewsTest.map((review, idx) => {
-                            return <ListGroupItem>
-                              <div className="customers-reviews" style={styles.customerReviews.div} key={idx}>
-                                <div className="d-flex flex-row">
-                                  <div>
-                                    <span className="user-img">
-                                      <img alt="user" src="/img/user.svg" />
-                                    </span>
-                                  </div>
-                                  <div>
-                                    <span style={styles.customerReviews.name}>{review.customerName}</span>
-                                    <Stars value={review.rating} {...constant.starsRating} />
-                                    <span style={styles.customerReviews.text}>{review.text}</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span style={styles.customerReviews.date}>{moment(review.created).format('MM/DD/YYYY')}</span>
-                                </div>
-                              </div>
-                            </ListGroupItem>
-                          })
-                        }
-                      </ListGroup>
-                    </Card>
+                  <div className="col-12 col-md-4">
+                    {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-md-4">
-                {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
+            {dialog}
+          </section>
+        </Route>
+        <PrivateRoute
+          path={'/products/:productId/AddProduct'}
+          component={AddProduct}
+          exact
+          fakeAuth={this.state.auth}
+          redirectTo="/" />
+      </Switch >
     );
   }
 }

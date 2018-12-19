@@ -110,7 +110,7 @@ export const styles = {
     },
   },
   arrow_right: {
-    color: "black"
+    color :"black"
   }
 }
 
