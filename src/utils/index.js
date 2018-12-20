@@ -5,4 +5,5 @@ export * from './validation';
 export { isAuth, handleNetworkError } from './auth';
 export { isEmpty, filterObject, toUpperCaseForEach, replaceAll } from './array';
 export { upperCaseFirstChar, lowerCaseFirstChar } from './string';
-export { getComponentName } from './components'
+export { getComponentName } from './components';
+export { left, right, paddingLeft, paddingRight, sideValues } from './directional'

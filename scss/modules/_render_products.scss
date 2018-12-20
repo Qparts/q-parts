@@ -1,0 +1,9 @@
+#render-products {
+  h1 {
+    padding-bottom: 40px;
+    @include font-size(25px);
+    font-weight: 500;
+    color: $dark-charcoal-grey;
+    text-transform: capitalize;
+  }
+}

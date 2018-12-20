@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import Vehicles from "../Vehicles/Vehicles";
 import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
-import { Dialog } from "primereact/components/dialog/Dialog";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
 import MobileHeader from "./MobileHeader/MobileHeader";
@@ -19,25 +19,29 @@ class Layout extends Component {
     super(props);
 
     this.state = {
-      visible: false,
-      newOrOldVechile: TAB_ONE,
-      dialogType: 'signin'
+      dialogType: 'signin',
+      modal: false
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
-      this.onHide();
+    // if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
+    //   this.onHide();
+    // }
+    if (this.props.isLoggedIn && prevProps.isLoggedIn !== this.props.isLoggedIn) {
+      this.togglePopup();
     }
   }
 
-  handleDialog = (dialogType, event) => {
-    this.setState({
-      visible: true,
-      dialogType
-    });
+  handleDialog = (dialogType) => {
+    this.setState({ dialogType });
+    this.togglePopup();
   };
-
+  togglePopup = () =>{
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
   handleChange = (event, value) => {
     this.setState({
       newOrOldVechile: value
@@ -51,31 +55,24 @@ class Layout extends Component {
     switch (dialogType) {
       case 'vehicle':
         return {
-          minWidth: 1083,
           header: <Title
             header={translate("dialog.vehicle.title")}
             subHeader={translate("dialog.vehicle.subTitle")} />
         }
       case 'signin':
         return {
-          minWidth: 0,
           header: <Title header={translate("dialog.signin.title")} />
         }
       case 'search':
         return {
-          minWidth: '80%'
+          header: <p>All auo parts in one place - choose yours among 1.000.000 of spare parts</p>,
+          className: "search-popup"
         }
       default:
         break;
     }
   }
 
-  onHide = event => {
-    this.setState({
-      visible: false,
-      newOrOldVechile: TAB_ONE
-    });
-  };
   getDialogComponent = () => {
     const { vehicles } = this.props;
     const { dialogType } = this.state;
@@ -94,24 +91,18 @@ class Layout extends Component {
   }
 
   render() {
-    const { isLoggedIn, fullName, translate, localize, changeDefaultDirection, vehiclesFormat, selectedVehicle } = this.props;
-    const { dialogType } = this.state;
+    const {
+      isLoggedIn, fullName, translate, localize, changeDefaultDirection,
+      vehiclesFormat, selectedVehicle
+    } = this.props;
     const dialog = (
-      <Dialog
-        header={this.getDialogProps().header}
-        maximizable={true}
-        minWidth={this.getDialogProps().minWidth}
-        visible={this.state.visible}
-        positionTop={65}
-        modal={true}
-        onHide={this.onHide}
-        style={{
-          background: colors.lightGray
-        }}
-      >
-        {this.getDialogComponent()}
-      </Dialog>
-    );
+      <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          {this.getDialogComponent()}
+        </ModalBody>
+      </Modal>
+    )
     return (
       <Fragment>
         <MobileHeader

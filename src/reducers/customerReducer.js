@@ -166,9 +166,9 @@ export default function reducer(state = initialState, action) {
       return { ...state, wishlist: removedWishlist };
 
     case CHANGE_DEFAULT_DIRECTION:
-    const newDirection = action.payload === AR ? 'rtl' : 'ltr';    
-    
-    return {...state, direction: newDirection}
+      const newDirection = action.payload === AR ? 'rtl' : 'ltr';
+
+      return { ...state, direction: newDirection }
 
 
     default:

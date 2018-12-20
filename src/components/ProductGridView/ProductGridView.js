@@ -9,16 +9,22 @@ class ProductGridView extends Component {
 	render() {
 		return this.props.currentProducts.map((product, idx) => {
 			return <Fragment key={idx}>
-				<div className="Accessories-items" >
-					<img src={"/img/product-3.jpg"} alt="" />
-					<span>{product.desc}</span>
-					<span>{product.manufacturer.name}</span>
-					<span>{product.productNumber}</span>
-					<div className="product-review">
-						<Stars values={product.averageRating} {...starsRating} />
-						<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
+				<div className="col-4" >
+					<div className=" product-holder">
+						<div align="center">
+							<img src={"/img/product-3.jpg"} alt="" /><br />
+						</div>
+						<div className="details-holder">
+							<span className="part-text">{product.desc}</span><br />
+							<span className="manufacturer-text">{product.manufacturer.name}</span>
+							{/* <span>{product.productNumber}</span> */}
+							<div className="product-review">
+								<Stars values={product.averageRating} {...starsRating} />
+								<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
+							</div>
+							<span className="sales-price">{`${product.salesPrice.toFixed(2)} SR`}</span>
+						</div>
 					</div>
-					<span>{`${product.salesPrice.toFixed(2)} SR`}</span>
 				</div>
 			</Fragment>
 		})

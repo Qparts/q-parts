@@ -1,20 +1,71 @@
-.ui-dialog.ui-widget {
-  .ui-dialog-titlebar {
+.modal-dialog {
+  border-radius: side-values(20px 0 20px 20px) !important;
+  max-width: $max-container-popup;
+  .modal-content {
+    @extend .container-fluid;
     background: $light-gray;
     border-radius: inherit;
-
-    .ui-dialog-titlebar-close {
-      position: absolute;
-      top: 16px;
-      right: 16px;
+    .modal-header {
+      border-bottom: 0;
+      #title {
+        h1 {
+          font-family: Roboto;
+          @include font-size(50px);
+          font-weight: 300;
+          color: $basic-gray;
+          text-transform: capitalize;
+        }
+        .red-line {
+          height: 1px;
+        }
+      }
+    }
+    .modal-body {
+      padding: inherit;
     }
   }
 }
-.ui-dialog {
-  border-radius: side-values(20px 0 20px 20px) !important;
-  #title {
+
+.product-checkout_popup {
+  .modal-content {
+    background: white;
+  }
+  .modal-title {
     h1 {
-      text-transform: capitalize;
+      height: 24px;
+      font-family: Roboto;
+      size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: $left;
+      text-transform: none;
+      span {
+        border-bottom: 2px solid #ee4036;
+      }
+      margin-bottom: 53px;
+    }
+  }
+}
+
+.search-popup {
+  .modal-header{
+    p {
+      margin-bottom: 0px;
+      width: 523px;
+      height: 16px;
+      opacity: 0.5;
+      font-family: Roboto;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.56;
+      letter-spacing: normal;
+      text-align: left;
+      color: $lighter-grey;
     }
   }
 }

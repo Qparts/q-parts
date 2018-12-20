@@ -13,7 +13,7 @@ export class Title extends Component {
                     {rest.join(' ')}
                 </h1>
                 <div className="d-inline-flex align-items-baseline">
-                    <hr className="red-line" />
+                    <span className="red-line" />
                     <p>
                         {subHeader}
                     </p>

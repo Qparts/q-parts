@@ -256,32 +256,31 @@ class Cart extends Component {
 									<h2>Products Related To Items In Your Cart</h2>
 								</header>
 								<div>
-        <h2> Responsive </h2>
-        <Slider {...settings}>
-
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-        </Slider>
-      </div>
+				        	<h2> Responsive </h2>
+					        <Slider {...settings}>
+					          <div>
+					            <h3>2</h3>
+					          </div>
+					          <div>
+					            <h3>3</h3>
+					          </div>
+					          <div>
+					            <h3>4</h3>
+					          </div>
+					          <div>
+					            <h3>5</h3>
+					          </div>
+					          <div>
+					            <h3>6</h3>
+					          </div>
+					          <div>
+					            <h3>7</h3>
+					          </div>
+					          <div>
+					            <h3>8</h3>
+					          </div>
+					        </Slider>
+      					</div>
 							</div>
 						</div>
 					</div>

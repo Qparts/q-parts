@@ -28,7 +28,7 @@ class Routes extends Component {
                         translate={this.props.translate}
                         vehiclesFormat={this.props.vehiclesFormat}
                         selectedVehicle={this.props.selectedVehicle}
-                        // changeDefaultDirection={this.props.changeDefaultDirection}
+                    // changeDefaultDirection={this.props.changeDefaultDirection}
                     >
                         <Switch>
                             {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
@@ -50,7 +50,7 @@ const mapStateToProps = state => {
         selectedVehicle: state.customer.selectedVehicle,
         localize: state.localize,
         translate: getTranslate(state.localize),
-        error: state.networkError.error
+        error: state.networkError.error,
     }
 }
 
