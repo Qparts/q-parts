@@ -116,10 +116,9 @@ export const styles = {
 
 export const sliderSetting = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 300,
   slidesToShow: 1,
-  centerMode: true,
   variableWidth: true,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />
