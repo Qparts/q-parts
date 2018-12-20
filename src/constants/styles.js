@@ -110,16 +110,15 @@ export const styles = {
     },
   },
   arrow_right: {
-    color: "black"
+    color :"black"
   }
 }
 
 export const sliderSetting = {
   dots: false,
-  infinite: true,
+  infinite: false,
   speed: 300,
   slidesToShow: 1,
-  centerMode: true,
   variableWidth: true,
   nextArrow: <NextArrow />,
   prevArrow: <PrevArrow />

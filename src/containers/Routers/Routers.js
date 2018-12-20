@@ -9,7 +9,6 @@ import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
-import { togglePopup } from '../../actions/customerAction';
 // import { changeDefaultDirection } from '../../actions/customerAction';
 
 
@@ -29,8 +28,6 @@ class Routes extends Component {
                         translate={this.props.translate}
                         vehiclesFormat={this.props.vehiclesFormat}
                         selectedVehicle={this.props.selectedVehicle}
-                        togglePopup={this.props.togglePopup}
-                        modal={this.props.modal}
                     // changeDefaultDirection={this.props.changeDefaultDirection}
                     >
                         <Switch>
@@ -54,14 +51,12 @@ const mapStateToProps = state => {
         localize: state.localize,
         translate: getTranslate(state.localize),
         error: state.networkError.error,
-        modal: state.customer.modal,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         // changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
-        togglePopup: () => dispatch(togglePopup())
     }
 }
 
