@@ -63,46 +63,10 @@ class Checkout extends Component {
 		const { translate } = this.props;
 
 		return (
-			<Fragment>
-				<div>
-					<h1>{this.state.header}</h1>
-				</div>
-				<div className="Checkout-container">
-					<Switch>
-						<Route path="/checkout" exact={true} render={() => {
-							return <CheckoutShipping
-								address={this.props.address}
-								customer={this.props.customer}
-								getRegions={this.props.getRegions}
-								getCountry={this.props.getCountry}
-								regions={this.props.regions}
-								country={this.props.country}
-								confirmUserAddress={this.props.confirmUserAddress}
-								onShowGoogleMap={this.handleShowGoogleMap}
-								onCityFound={this.handleCityFound}
-								showGoogleMap={this.state.showGoogleMap}
-								cityFound={this.state.cityFound}
-								city={this.props.city}
-								findCity={this.props.findCity}
-								translate={this.props.translate}
-								isDelivery={this.state.isDelivery}
-								defaultAddress={this.props.defaultAddress}
-								addDeliveryAddress={this.props.addDeliveryAddress} />
-						}} />
+			<section>
+			<h1>Shopping cart xx</h1>
 
-						<Route path="/checkout/payment" exact={true} render={() => {
-							return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} />
-						}} />
-
-						<Route path="/checkout/confirm" exact={true} render={() => {
-							return <CheckoutConfirmation translate={translate} checkout={this.props.checkout} completeOrder={this.props.completeOrder} />
-						}} />
-					</Switch>
-					<div className="Checkout-Order_summary">
-						<OrderSummary translate={translate} isDelivery={canSubmitOrder} submitButton={translate("orderSummary.placeOrder")} />
-					</div>
-				</div>
-			</Fragment>
+			</section>
 		)
 	}
 }
@@ -131,3 +95,41 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+// <div>
+// 	<h1>{this.state.header}</h1>
+// </div>
+// <div className="Checkout-container">
+// 	<Switch>
+// 		<Route path="/checkout" exact={true} render={() => {
+// 			return <CheckoutShipping
+// 				address={this.props.address}
+// 				customer={this.props.customer}
+// 				getRegions={this.props.getRegions}
+// 				getCountry={this.props.getCountry}
+// 				regions={this.props.regions}
+// 				country={this.props.country}
+// 				confirmUserAddress={this.props.confirmUserAddress}
+// 				onShowGoogleMap={this.handleShowGoogleMap}
+// 				onCityFound={this.handleCityFound}
+// 				showGoogleMap={this.state.showGoogleMap}
+// 				cityFound={this.state.cityFound}
+// 				city={this.props.city}
+// 				findCity={this.props.findCity}
+// 				translate={this.props.translate}
+// 				isDelivery={this.state.isDelivery}
+// 				defaultAddress={this.props.defaultAddress}
+// 				addDeliveryAddress={this.props.addDeliveryAddress} />
+// 		}} />
+//
+// 		<Route path="/checkout/payment" exact={true} render={() => {
+// 			return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} />
+// 		}} />
+//
+// 		<Route path="/checkout/confirm" exact={true} render={() => {
+// 			return <CheckoutConfirmation translate={translate} checkout={this.props.checkout} completeOrder={this.props.completeOrder} />
+// 		}} />
+// 	</Switch>
+// 	<div className="Checkout-Order_summary">
+// 		<OrderSummary translate={translate} isDelivery={canSubmitOrder} submitButton={translate("orderSummary.placeOrder")} />
+// 	</div>
+// </div>

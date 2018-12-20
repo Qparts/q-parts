@@ -31,8 +31,13 @@ const selectStyle = {
   menuList: (styles) => {
     return {
       ...styles,
-      borderRadius: '0px 20px 20px 20px',
-      fontFamily: 'Roboto'
+    }
+  },
+
+  groupHeading: (styles) => {
+    return {
+      ...styles,
+
     }
   },
   option: (styles, { data, isSelected, isFocused, options }) => {
@@ -40,11 +45,6 @@ const selectStyle = {
 
     return {
       ...styles,
-      background: isSelected ? lightGray : isFocused ? lightGray : 'none',
-      ':active': {
-        backgroundColor: lightGray,
-      },
-      borderBottom: options[lastIndex].label === data.label ? 'none' : `1px solid ${lightGray}`
     }
   }
 };
