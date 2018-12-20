@@ -1,0 +1,106 @@
+.order-summery{
+  @extend .border-radius-div;
+  @extend .overflow-xy-h;
+  @extend .box-shadow;
+  margin-bottom: 40px;
+  > header{
+    padding: 20px 20px 15px;
+    @extend .bg-white;
+    margin-bottom: 2px;
+    h2{
+      @include font-size(25px);
+      margin-bottom: 2px;
+      font-weight: 400;
+    }
+    span{
+      @include font-size(13px);
+      @include opacity(0.7);
+    }
+  }
+  > ul{
+    @extend .bg-white;
+    margin: 0;
+    padding: 0 20px;
+    li{
+      border-bottom: 1px solid $dark-gray;
+      padding: 15px 0;
+      line-height: 15px;
+      label{
+        @include opacity(0.7);
+        @extend .d-inline-block;
+        @extend .text-capitalize;
+        @include font-size(13px);
+        @extend .mb-0;
+      }
+      p{
+        @include font-size(17px);
+        @extend .float-#{$right};
+        @extend .mb-0;
+        span{
+          @extend .text-uppercase;
+          @include font-size(12px);
+          margin-#{$left}: 2px;
+        }
+      }
+      &:last-child{
+        border-bottom-width: 0;
+      }
+    }
+  }
+  > .btn-primary{
+    @extend .w-100;
+    @extend .text-#{$right};
+    @include font-size(19px);
+    @extend .text-capitalize;
+    @extend .mt-2;
+    line-height: 27px;
+    border-top-#{$right}-radius: 0 !important;
+    i{
+      height: 23px;
+      margin-#{$left}: 10px;
+      &:before{
+        @include font-size(23px);
+        top: 2px;
+      }
+    }
+    &:hover,
+    &:focus{
+      padding-#{$right}: 30px;
+    }
+  }
+}
+.chat-div{
+  padding: 0 10px;
+  img{
+    max-width: 40px;
+  }
+  .media-body{
+    P{
+      @include font-size(13px);
+      margin-top: 2px;
+      span{
+        @include font-size(14px);
+        @extend .d-block;
+      }
+    }
+  }
+  &:hover{
+    p{
+      span{
+        @extend .underline;
+      }
+    }
+  }
+}
+.banner-250{
+  width: 250px;
+  height: 250px;
+  @extend .bg-white;
+  @extend .text-center;
+  @extend .mx-auto;
+  margin-top: 30px;
+  p{
+    @extend .d-table-cell;
+    @extend .align-middle;
+  }
+}

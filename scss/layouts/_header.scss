@@ -44,34 +44,16 @@
   .input-group {
     position: relative;
     .ship-to {
-      @include font-size(12px);
+      @include font-size(14px);
+      margin-#{$right}: 5px;
     }
-    .css-10nd86i {
-      bottom: 4px;
-      width: 67px;
-      .select__control {
-        margin-top: -6px;
-        border-style: none;
-        background: none;
-        height: 10px;
-        width: 60px;
-
-        .select__indicators {
-          width: 20px;
-        }
-        .select__single-value {
-          font-weight: 700;
-        }
-      }
-      .select__menu {
-        @include boarder-left-radius(0);
-        @include boarder-right-radius;
-      }
+    .select__menu{
+      margin-top: 14px;
     }
   }
   .seperator {
     position: relative;
-    left: 10px;
+    left: 8px;
     height: 20px;
   }
   .lang {
@@ -80,8 +62,7 @@
       //@include font-size(13px);
       font-weight: 400;
       @extend .position-relative;
-      top: 1px;
-      left: 10px;
+      left: 11px;
     }
   }
   .link {
@@ -614,6 +595,19 @@
     text-align: center;
     i {
       font-size: 25px;
+    }
+  }
+}
+
+.default-header-bg{
+  background: linear-gradient(to #{$right}, #87363d, #37363a , #372628, #1e1b1e);
+  min-height: 105px;
+  header{
+    h1{
+      @include font-size(50px);
+      color: $white;
+      padding-top: 25px;
+      @extend .d-inline-block;
     }
   }
 }

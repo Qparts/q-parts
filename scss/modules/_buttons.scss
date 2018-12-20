@@ -1,33 +1,56 @@
 .btn {
   padding: 10px 15px;
-  background: $light-gray;
   @extend .link-border-radius;
-  text-transform: uppercase;
   @include transition(all, 0.5s, ease);
   cursor: pointer;
+  font-weight: 400;
+  @extend .d-inline-block;
+  border-width: 0;
+  i{
+    @extend .d-inline-block;
+  }
 }
 
 .btn-primary {
   @extend .btn;
   border-style: none;
   background: $brand-color;
+  text-transform: uppercase;
   color: $white;
+  &:hover,
+  &:focus{
+    background: darken($brand-color, 10%);
+  }
+}
+.btn-gray{
+  @extend .btn;
+  background: $light-gray;
+  @include font-size(13px);
+  text-transform: capitalize;
+  &:hover{
+    background: $dark-gray;
+  }
+}
+.btn-gray-secondary{
+  @extend .btn;
+  background: $dark-gray;
+  &:hover{
+    background: darken($dark-gray, 3%);
+  }
 }
 
 .btn-secondary {
   @extend .btn;
   border-style: none;
-  background: $light-gray;
 }
 
 .btn-link {
-  @extend .btn;
   color: $charcoal-grey;
   border-style: none;
   background: none;
   text-transform: capitalize;
   padding: 0;
-
+  background: $light-gray;
   &.selected {
     color: $basic-black;
     font-weight: 500;
@@ -70,4 +93,23 @@
   @extend .link-border-radius;
   text-transform: uppercase;
   @include transition(all, 0.5s, ease);
+}
+.delete-btn{
+  @include transition(all, 0.5s, ease);
+  @include opacity(0.6);
+  &:hover,
+  &:focus{
+    color: $brand-color;
+  }
+  i{
+    @include font-size(18px);
+    height: 18px
+  }
+  span{
+    @include font-size(13px);
+    @extend .position-relative;
+    top: -2px;
+    margin-#{$left}: 2px;
+
+  }
 }

@@ -24,110 +24,218 @@
   -moz-osx-font-smoothing: grayscale;
   @extend .position-relative;
 }
-.icon-add-vehicle:before {
-  content: '\61';
+.icon-add:before {
+  content: "\61";
 }
-.icon-alert:before {
-  content: '\62';
+.icon-add-card:before {
+  content: "\62";
 }
-.icon-apple:before {
-  content: '\63';
+.icon-add-location:before {
+  content: "\63";
+}
+.icon-address:before {
+  content: "\64";
+}
+.icon-arrow-d:before {
+  content: "\65";
 }
 .icon-arrow-down:before {
-  content: '\64';
+  content: "\66";
+}
+.icon-arrow-l:before {
+  content: "\67";
+}
+.icon-arrow-r:before {
+  content: "\68";
+}
+.icon-back:before {
+  content: "\69";
+}
+.icon-bank:before {
+  content: "\6a";
+}
+.icon-cash:before {
+  content: "\6b";
+}
+.icon-cash-payment:before {
+  content: "\6c";
+}
+.icon-clear:before {
+  content: "\6d";
+}
+.icon-credit-card:before {
+  content: "\6e";
+}
+.icon-current:before {
+  content: "\6f";
+}
+.icon-debit-card:before {
+  content: "\70";
+}
+.icon-delivered-step:before {
+  content: "\71";
+}
+.icon-door:before {
+  content: "\72";
+}
+.icon-edit:before {
+  content: "\73";
+}
+.icon-less:before {
+  content: "\74";
+}
+.icon-location:before {
+  content: "\75";
+}
+.icon-minus:before {
+  content: "\76";
+}
+.icon-payment:before {
+  content: "\77";
+}
+.icon-plus:before {
+  content: "\78";
+}
+.icon-price-quote:before {
+  content: "\79";
+}
+.icon-price-tag:before {
+  content: "\7a";
+}
+.icon-return:before {
+  content: "\41";
+}
+.icon-save-f:before {
+  content: "\42";
+}
+.icon-secure:before {
+  content: "\43";
+}
+.icon-share:before {
+  content: "\44";
+}
+.icon-shipping:before {
+  content: "\45";
+}
+.icon-sign-out:before {
+  content: "\46";
+}
+.icon-time:before {
+  content: "\47";
+}
+.icon-trash:before {
+  content: "\48";
+}
+.icon-vehicle-history:before {
+  content: "\49";
+}
+.icon-verify-number:before {
+  content: "\4a";
+}
+.icon-add-vehicle:before {
+  content: "\4b";
+}
+.icon-apple:before {
+  content: "\4c";
+}
+.icon-alert:before {
+  content: "\4d";
+}
+.icon-arrow-dwon:before {
+  content: "\4e";
 }
 .icon-arrow-left:before {
-  content: '\65';
-}
-.icon-arrow-right:before {
-  content: '\66';
-}
-.icon-cart:before {
-  content: '\67';
-}
-.icon-checked:before {
-  content: '\68';
-}
-.icon-close:before {
-  content: '\69';
+  content: "\4f";
 }
 .icon-custom-order:before {
-  content: '\6b';
-}
-.icon-delivery:before {
-  content: '\6c';
-}
-.icon-email:before {
-  content: '\6d';
-}
-.icon-facebook-logo:before {
-  content: '\6e';
-}
-.icon-filter:before {
-  content: '\6f';
-}
-.icon-garage:before {
-  content: '\70';
-}
-.icon-grid:before {
-  content: '\71';
-}
-.icon-heart:before {
-  content: '\72';
-}
-.icon-hide-password:before {
-  content: '\73';
+  content: "\50";
 }
 .icon-home:before {
-  content: '\74';
-}
-.icon-linked-in-logo:before {
-  content: '\75';
-}
-.icon-list:before {
-  content: '\76';
-}
-.icon-play-store:before {
-  content: '\77';
-}
-.icon-pricing:before {
-  content: '\78';
-}
-.icon-product:before {
-  content: '\79';
+  content: "\51";
 }
 .icon-reset:before {
-  content: '\7a';
-}
-.icon-search:before {
-  content: '\41';
-}
-.icon-send:before {
-  content: '\42';
-}
-.icon-shopping-bag:before {
-  content: '\43';
-}
-.icon-show-password:before {
-  content: '\44';
-}
-.icon-to-up:before {
-  content: '\45';
+  content: "\52";
 }
 .icon-twitter:before {
-  content: '\47';
+  content: "\53";
 }
-.icon-user:before {
-  content: '\48';
+.icon-to-up:before {
+  content: "\54";
 }
-.icon-vehicle:before {
-  content: '\49';
+.icon-product:before {
+  content: "\55";
 }
-.icon-wallet:before {
-  content: '\4a';
+.icon-hide-password:before {
+  content: "\56";
+}
+.icon-pricing:before {
+  content: "\57";
+}
+.icon-heart:before {
+  content: "\58";
+}
+.icon-grid:before {
+  content: "\59";
+}
+.icon-garage:before {
+  content: "\5a";
+}
+.icon-close:before {
+  content: "\30";
 }
 .icon-whatsapp:before {
-  content: '\4b';
+  content: "\31";
+}
+.icon-wallet:before {
+  content: "\32";
+}
+.icon-vehicle:before {
+  content: "\33";
+}
+.icon-user:before {
+  content: "\34";
+}
+.icon-search:before {
+  content: "\35";
+}
+.icon-send:before {
+  content: "\36";
+}
+.icon-shopping-bag:before {
+  content: "\37";
+}
+.icon-show-password:before {
+  content: "\38";
+}
+.icon-play-store:before {
+  content: "\39";
+}
+.icon-list:before {
+  content: "\21";
+}
+.icon-linked-in-logo:before {
+  content: "\22";
+}
+.icon-email:before {
+  content: "\23";
+}
+.icon-delivery:before {
+  content: "\24";
+}
+.icon-arrow-right:before {
+  content: "\25";
+}
+.icon-cart:before {
+  content: "\26";
+}
+.icon-checked:before {
+  content: "\27";
+}
+.icon-filter:before {
+  content: "\28";
+}
+.icon-facebook-logo:before {
+  content: "\29";
 }
 //select2
 .select2-container--default .select2-selection--single {
@@ -296,16 +404,77 @@
     opacity: 0.2;
   }
 }
-
 .component-background {
   background: $light-gray;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+.border-radius-div{
+  border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+}
+.overflow-xy-h{
+  overflow: hidden;
+}
+.bg-white{
+  background: $white;
+}
+.product-options{
+  margin-top: 15px;
+  border-bottom: 1px solid $dark-gray;
+  width: 100%;
+  .d-table-row{
+    .d-table-cell{
+      padding: 5px 10px;
+      @include font-size(15px);
+      border-top: 1px solid $dark-gray;
+      .icon-checked:before{
+        color: $brand-color;
+        top: 3px;
+      }
+      &:first-child{
+        text-transform: capitalize;
+        border-#{$right}: 1px solid $dark-gray;
+        width: 30%;
+        span{
+          @include opacity(0.5);
+        }
+      }
+    }
+  }
 }
 
-.component-background-color {
-  background: linear-gradient(to right, #ee4036, #000000),
-    linear-gradient(to bottom, #37363d, #37363d);
-  position: absolute;
-  height: 105px;
-  left: 0;
-  right: 0;
+.quantity{
+  @extend .border-radius-div;
+  overflow: hidden;
+  .input-group-prepend,
+  input{
+    margin-#{$right}: 3px;
+    &:last-child{
+      margin-#{$right}: 0;
+    }
+  }
+  input{
+    background: $light-gray !important;
+    border-width: 0;
+    text-align: center;
+    box-shadow: none;
+    color: $basic-gray;
+    @include font-size(17px);
+  }
+  button{
+    @extend .btn-gray;
+    border-radius: 0 !important ;
+    &:disabled{
+      i{
+       @include opacity(0.8);
+      }
+      cursor: default;
+      &:hover{
+        background: $light-gray;
+      }
+    }
+  }
+}
+.underline{
+  text-decoration: underline;
 }

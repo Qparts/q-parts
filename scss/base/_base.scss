@@ -82,6 +82,9 @@ label {
     display: none;
   }
 }
+img{
+  max-width: 100%;
+}
 /*
 .padding-md-left-6{
   @include large-medium-screens{
@@ -102,9 +105,9 @@ label {
 
 .padding-md-right-0{
   @include large-medium-screens {
-    @include padding-right(0);  
+    @include padding-right(0);
   }
-  
-  
+
+
 }
 */
