@@ -47,7 +47,7 @@
 .btn-link {
   color: $charcoal-grey;
   border-style: none;
-  background: none;
+  background: none !important;
   text-transform: capitalize;
   padding: 0;
   background: $light-gray;
