@@ -21,7 +21,7 @@ export default class RenderProducts extends Component {
 
   render() {
     return (
-      <section className={this.props.className} id="render-products">
+      <section className={this.props.className}>
         {
           this.props.isListView ? (
             <Fragment>

@@ -3,6 +3,7 @@
   background-color: $white;
   @include margin-right(30px);
   @include padding-left(0);
+  padding-bottom: 30px;
   margin-bottom: 30px;
   @include box-shadow;
 

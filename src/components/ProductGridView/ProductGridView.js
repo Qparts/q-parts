@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Stars from 'react-stars';
 import { starsRating } from '../../constants';
+import { getLength } from '../../utils/array';
 
 class ProductGridView extends Component {
 	getReviewsLength = (reviews) => (
@@ -18,9 +19,9 @@ class ProductGridView extends Component {
 							<span className="part-text">{product.desc}</span><br />
 							<span className="manufacturer-text">{product.manufacturer.name}</span>
 							{/* <span>{product.productNumber}</span> */}
-							<div className="product-review">
+							<div className="product-review_slide">
 								<Stars values={product.averageRating} {...starsRating} />
-								<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
+								<span className="product-review">{getLength(product.reviews)} review</span>
 							</div>
 							<span className="sales-price">{`${product.salesPrice.toFixed(2)} SR`}</span>
 						</div>

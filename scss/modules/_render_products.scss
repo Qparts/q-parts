@@ -1,18 +1,16 @@
-#render-products {
-  .seperator {
-    height: 10px;
-    margin: 0 9px;
-  }
-  .product-review_list {
-    padding-top: 21px;
-    display: flex;
-    align-items: center;
-  }
-  .product-review_slide {
-    padding-top: 7px;
-    display: flex;
-    align-items: center;
-  }
+.product-seperator {
+  height: 10px;
+  margin: 0 9px;
+}
+.product-review_list {
+  padding-top: 21px;
+  display: flex;
+  align-items: center;
+}
+.product-review_slide {
+  padding-top: 7px;
+  display: flex;
+  align-items: center;
 }
 .product-title{
   @include font-size(15px);
