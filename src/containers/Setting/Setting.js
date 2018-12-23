@@ -68,7 +68,7 @@ class Setting extends Component {
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
   }
-  
+
 
   componentDidUpdate(prevProps, prevState) {
     const { location: { pathname } } = this.props;
