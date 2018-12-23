@@ -81,7 +81,7 @@ class Layout extends Component {
       case 'vehicle':
         return <Vehicles />
       case 'signin':
-        return <Login />
+        return <Login toggle={this.togglePopup}/>
       case 'search':
         return <Search toggle={this.togglePopup}/>
 

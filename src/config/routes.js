@@ -17,95 +17,100 @@ import MotorOil from '../components/MotorOil/MotorOil';
 import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
+import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
 
 
 export const routes = (isAuth) => [
- {
-  path: "/",
-  exact: true,
-  component: App,
- },
- {
-  path: "/order/part/:partNo/makeId/:makeId",
-  component: ProductResult,
- },
- {
-  path: "/order/quotation-request",
-  component: QuotationRequest,
-  isAuth: isAuth,
-  redirectTo: '/'
- },
- {
-  path: "/login",
-  component: Login,
-  isAuth: !isAuth,
-  redirectTo: '/'
- },
- {
-  path: "/logout",
-  component: Logout
- },
- {
-  path: "/signup",
-  component: Signup,
-  isAuth: !isAuth,
-  redirectTo: '/'
- },
- {
-  path: "/vehicles",
-  component: Vehicles,
- },
- {
-  path: "/catalog",
-  component: Catalog
- },
- {
-  path: "/cart",
-  component: Cart
- },
- {
-  path: "/setting",
-  component: Setting,
-  isAuth: isAuth,
-  redirectTo: '/'
- },
- {
-  path: "/vendor_registration_form",
-  component: VendorForm,
- },
- {
-  path: "/qtest.fareed9.com/change-email/",
-  exact: true,
-  component: VerifyEmail,
- },
- {
-  path: "/checkout",
-  component: Checkout,
-  isAuth: isAuth,
-  redirectTo: '/login'
- },
- {
-  path: "/products/:productId",
-  component: Product
- },
- {
-  path: "/accessories",
-  component: Accessories
- },
- {
-  path: "/tyres",
-  component: Tyres
- },
- {
-  path: "/motor-oil",
-  component: MotorOil
- },
- {
-  path: "/send",
-  component: SendRequest
- },
- {
-  path: "/listing",
-  component: SearchResult
- }
+    {
+        path: "/",
+        exact: true,
+        component: App,
+    },
+    {
+        path: "/order/part/:partNo/makeId/:makeId",
+        component: ProductResult,
+    },
+    {
+        path: "/order/quotation-request",
+        component: QuotationRequest,
+        isAuth: isAuth,
+        redirectTo: '/'
+    },
+    {
+        path: "/login",
+        component: Login,
+        isAuth: !isAuth,
+        redirectTo: '/'
+    },
+    {
+        path: "/logout",
+        component: Logout
+    },
+    {
+        path: "/signup",
+        component: Signup,
+        isAuth: !isAuth,
+        redirectTo: '/'
+    },
+    {
+        path: "/vehicles",
+        component: Vehicles,
+    },
+    {
+        path: "/catalog",
+        component: Catalog
+    },
+    {
+        path: "/cart",
+        component: Cart
+    },
+    {
+        path: "/setting",
+        component: Setting,
+        isAuth: isAuth,
+        redirectTo: '/'
+    },
+    {
+        path: "/vendor_registration_form",
+        component: VendorForm,
+    },
+    {
+        path: "/qtest.fareed9.com/change-email/",
+        exact: true,
+        component: VerifyEmail,
+    },
+    {
+        path: "/checkout",
+        component: Checkout,
+        isAuth: isAuth,
+        redirectTo: '/login'
+    },
+    {
+        path: "/products/:productId",
+        component: Product
+    },
+    {
+        path: "/accessories",
+        component: Accessories
+    },
+    {
+        path: "/tyres",
+        component: Tyres
+    },
+    {
+        path: "/motor-oil",
+        component: MotorOil
+    },
+    {
+        path: "/send",
+        component: SendRequest
+    },
+    {
+        path: "/listing",
+        component: SearchResult
+    },
+    {
+        path: "/forgotPassword",
+        component: ForgotPassword
+    },
 ];

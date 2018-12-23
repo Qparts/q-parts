@@ -85,6 +85,10 @@ class Login extends Component {
             {dialog}
         </Fragment>
   }
+  forgotPassword = (event) =>{
+    this.props.history.push('/forgotPassword')
+    this.props.toggle();
+  }
 
   render() {
     const { translate } = this.props;
@@ -112,7 +116,7 @@ class Login extends Component {
               <label>{translate("form.signin.rememberMe")}</label>
             </div>
             <button
-              onClick={this.props.onShowDialog}
+              onClick={this.forgotPassword}
               type="button"
               className="btn-link">
               {translate("form.signin.forgotPassword")}
