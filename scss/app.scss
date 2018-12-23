@@ -50,7 +50,7 @@ $dir: ltr;
 /* slick slider component*/
 
 @import "modules/slick";
-/* BASE - Base styles , variables, mixins, ect*/
+/* BASE - Base styles , variables, mixins, etc*/
 @import "base/mixins";
 @import "base/normalize";
 @import "base/base";
@@ -95,4 +95,7 @@ $dir: ltr;
 @import "layouts/quotation-request";
 @import "layouts/send-request";
 @import "layouts/search_result";
+@import "layouts/authentication/forgot-password";
+@import "layouts/authentication/confirm-signup";
+@import "layouts/authentication/email-verification";
 @import "layouts/footer";
