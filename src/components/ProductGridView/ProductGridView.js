@@ -23,7 +23,8 @@ class ProductGridView extends Component {
 								<Stars values={product.averageRating} {...starsRating} />
 								<span className="product-review">{getLength(product.reviews)} review</span>
 							</div>
-							<span className="sales-price">{`${product.salesPrice.toFixed(2)} SR`}</span>
+							<span className="product-price">{product.salesPrice.toFixed(2)}</span>
+							<span className="product-currency">SR</span>
 						</div>
 					</div>
 				</div>

@@ -6,72 +6,84 @@
     text-align: start;
     margin: 20px 0 0px 20px;
 
-    .search-box{
+    .search-box {
       background-color: $light-gray;
-      border:none;
+      border: none;
       height: 35px;
+      margin-bottom: 19px;
       @include boarder-left-radius(20px, 20px);
       @include boarder-right-radius(0, 20px);
+
+      &::placeholder {
+        font-family: 'q-parts-icons';
+      }
     }
 
-    .search-box-min-container{
+    .search-box-min-container {
       @include padding-right(0);
-      .search-box-min{
+      .search-box-min {
         background-color: $light-gray;
-        border:none;
+        border: none;
         height: 35px;
         @include boarder-left-radius(20px, 20px);
       }
     }
 
-    .search-box-max-container{
+    .search-box-max-container {
       @include padding-right(0);
       @include padding-left(6px);
-      .search-box-min{
+      .search-box-min {
         background-color: $light-gray;
-        border:none;
+        border: none;
         height: 35px;
         @include boarder-left-radius(20px, 20px);
       }
     }
 
-    .search-box-btn-container{
+    .search-box-btn-container {
       @include padding-left(6px);
-
     }
-      
 
-    
-
-    .search-box-max{
+    .search-box-max {
       background-color: $light-gray;
-      border:none;
+      border: none;
       height: 35px;
       @include margin-right(3px);
       @include boarder-right-radius(0, 20px);
     }
 
-    .btn-primary{
+    .btn-primary {
       height: 35px;
       padding-top: 5px;
       width: 100%;
     }
 
-    
+    .filter-category {
+      padding-top: 14px;
+      border: none;
+      border-radius: 0;
 
-    .filter-category{
-      padding-top: 19px;
-      border:none;
-
-      p{
+      &:not(:last-child) {
+        margin-bottom: 2px;
+      }
+      p {
         font-weight: 500;
         @include font-size(18px);
       }
-      .filter-body{
-        border:none;
-        .card-body{
-          padding:0;
+      .filter-body {
+        border: none;
+        .card-body {
+          padding: 0;
         }
+      }
+      .dropdown-icon {
+        padding-top: 4px;
+      }
+      &:first-child {
+        border-radius: corner-values(20px 0 0 0);
+      }
+      &:last-child {
+        border-radius: corner-values(0 0 20px 20px);
       }
     }
   }
@@ -81,18 +93,18 @@
     width: 100%;
     .search-control-panel {
       @include padding-left(12px);
-      margin-bottom: 26px; 
+      margin-bottom: 26px;
     }
-    .selected-filters-panel{
-        margin-bottom: 21px;
-    }
-
-    .selected-compare-panel{
-        margin-bottom: 30px;
+    .selected-filters-panel {
+      margin-bottom: 21px;
     }
 
-    .products-panel{
-        @include padding-left(28px);
+    .selected-compare-panel {
+      margin-bottom: 30px;
+    }
+
+    .products-panel {
+      @include padding-left(28px);
     }
   }
 }
