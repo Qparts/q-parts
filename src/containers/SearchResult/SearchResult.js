@@ -10,7 +10,7 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import queryString from 'qs';
-import { Collapse, Card, CardBody } from 'reactstrap';
+import { Collapse, Card, CardBody, CardTitle } from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
 
@@ -21,6 +21,8 @@ const brand = 'brand';
 const price = 'price';
 const rating = 'rating';
 const Radio = 'Radio'
+const GRID = 'GRID';
+const LIST = 'LIST';
 
 class TyresSearch extends Component {
 
@@ -33,11 +35,16 @@ class TyresSearch extends Component {
 			collapse4: false,
 			collapse5: false,
 			collapse6: false,
+			selectedView: GRID
 		};
 	}
 
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
+	}
+
+	changeView = (selectedView) => {
+		this.setState({ selectedView })
 	}
 
 	componentDidMount() {
@@ -78,14 +85,20 @@ class TyresSearch extends Component {
 	}
 
 	getCollapseIcon = (collapse) => {
-		console.log(collapse);
-		
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
 
 	render() {
 		const styles = {
-
+			iconGrid: {
+				opacity: this.state.selectedView === GRID ? 1 : 0.3
+			},
+			iconList: {
+				opacity: this.state.selectedView === LIST ? 1 : 0.3
+			},
+			show : {
+				display: 'flex'
+			}
 		}
 		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
 
@@ -123,7 +136,7 @@ class TyresSearch extends Component {
 									</div>
 									<div className="col-3 dropdown-icon">
 										<a onClick={this.toggle.bind(this, 'collapse2')}>
-										<i className={this.getCollapseIcon('collapse2')} />
+											<i className={this.getCollapseIcon('collapse2')} />
 										</a>
 									</div>
 								</div>
@@ -143,7 +156,7 @@ class TyresSearch extends Component {
 									</div>
 									<div className="col-3 dropdown-icon">
 										<a onClick={this.toggle.bind(this, 'collapse3')}>
-										<i className={this.getCollapseIcon('collapse3')} />
+											<i className={this.getCollapseIcon('collapse3')} />
 										</a>
 									</div>
 								</div>
@@ -164,7 +177,7 @@ class TyresSearch extends Component {
 									</div>
 									<div className="col-3 dropdown-icon">
 										<a onClick={this.toggle.bind(this, 'collapse4')}>
-										<i className={this.getCollapseIcon('collapse4')} />
+											<i className={this.getCollapseIcon('collapse4')} />
 										</a>
 									</div>
 								</div>
@@ -185,7 +198,7 @@ class TyresSearch extends Component {
 									</div>
 									<div className="col-3 dropdown-icon">
 										<a onClick={this.toggle.bind(this, 'collapse5')}>
-										<i className={this.getCollapseIcon('collapse5')} />
+											<i className={this.getCollapseIcon('collapse5')} />
 										</a>
 									</div>
 								</div>
@@ -216,7 +229,7 @@ class TyresSearch extends Component {
 									</div>
 									<div className="col-3 dropdown-icon">
 										<a onClick={this.toggle.bind(this, 'collapse6')}>
-										<i className={this.getCollapseIcon('collapse6')} />
+											<i className={this.getCollapseIcon('collapse6')} />
 										</a>
 									</div>
 								</div>
@@ -224,7 +237,6 @@ class TyresSearch extends Component {
 									<Card className="filter-body">
 										<CardBody>
 											{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
-											<Button text="Clear all" className="btn btn-secondary" onClick={onClear} />
 										</CardBody>
 									</Card>
 								</Collapse>
@@ -233,28 +245,32 @@ class TyresSearch extends Component {
 
 						<div className="products-container col-9">
 							<div className="search-control-panel row">
-								<div className="col-12">
-									<label htmlFor="">Sort by</label>
-									<Select options={categorySortOptions} onChange={this.props.handleSelectChange} />
-								</div>
+								<Card className="col-12">
+									<CardTitle className="d-flex justify-content-between">
+										<label htmlFor="">1 - 60 of 200 results</label>
+										<div className="right-side-selection">
+											<label htmlFor="">Sort by</label>
+											<Select
+												className="select__container"
+												classNamePrefix="select"
+												isSearchable={false}
+												defaultValue={categorySortOptions[0]}
+												options={categorySortOptions}
+												onChange={this.props.handleSelectChange} />
+											<i style={styles.iconGrid} className="icon-list" onClick={this.changeView.bind(this, GRID)} />
+											<i style={styles.iconList} className="icon-grid" onClick={this.changeView.bind(this, LIST)} />
+										</div>
+									</CardTitle>
+								</Card>
 							</div>
 							<div className="selected-filters-panel row">
-								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : commonStyles.grey}>
+								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : styles.show}>
 									{
 										filtration.map((item, index) => (
-											<label key={index} style={{ ...commonStyles.listingPage.searchResult, ...commonStyles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
+											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)}/></label>
 										))
 									}
-								</div>
-							</div>
-
-							<div className="selected-compare-panel row">
-								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : commonStyles.grey}>
-									{
-										filtration.map((item, index) => (
-											<label key={index} style={{ ...commonStyles.listingPage.searchResult, ...commonStyles.rightSpace }} onClick={onRemoveItem.bind(this, index)}>{item}</label>
-										))
-									}
+									<Button text="Clear all" className="btn-gray-secondary" onClick={onClear} />
 								</div>
 							</div>
 							<div className="products-panel row">

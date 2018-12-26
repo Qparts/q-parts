@@ -31,7 +31,6 @@
 
     .search-box-max-container {
       @include padding-right(0);
-      @include padding-left(6px);
       .search-box-min {
         background-color: $light-gray;
         border: none;
@@ -89,22 +88,84 @@
   }
 
   .products-container {
-    @include padding-left(28px);
     width: 100%;
     .search-control-panel {
-      @include padding-left(12px);
+      margin: side-values(20px 0 0px 0);
+      @include padding-right(30px);
       margin-bottom: 26px;
     }
     .selected-filters-panel {
       margin-bottom: 21px;
+
+      label {
+        position: relative;
+        border: 1px solid $light-gray-2;
+        padding: side-values(15px 25px 15px 15px);
+        margin-right: 4px;
+        margin-bottom: 0;
+
+        &:last-of-type {
+          border-radius: corner-values(0 0 20px 0);
+          margin-right: 0;
+        }
+        &:first-child {
+          border-radius: corner-values(20px 0 0 20px);
+        }
+        i {
+          position: absolute;
+          cursor: pointer;
+          @include font-size(8px);
+          right: 5px;
+          top: 5px;
+          color: $light-gray-2;
+        }
+      }
+      .btn-gray-secondary {
+        margin-left: 10px;
+        text-transform: capitalize;
+      }
     }
 
     .selected-compare-panel {
       margin-bottom: 30px;
     }
-
-    .products-panel {
-      @include padding-left(28px);
+    .card {
+      border: 0;
+      border-radius: corner-values(20px 0 0 0);
+      .card-title {
+        padding-top: 20px;
+      }
+      label {
+        @include font-size(15px);
+        font-weight: normal;
+        color: $dark-charcoal-grey;
+        font-weight: normal;
+      }
+      .right-side-selection {
+        display: flex;
+        align-items: center;
+        @include font-size(14px);
+        .select__container {
+          position: relative !important;
+          margin-left: 10px;
+          margin-right: 22px;
+          height: 35px;
+          background-color: #f6f6f6;
+          border-radius: side-values(20px 0 20px 20px);
+          .select__single-value {
+            font-family: Roboto;
+            @include font-size(15px);
+            font-weight: normal;
+            color: $dark-charcoal-grey;
+          }
+        }
+        .icon-list {
+          margin-right: 10px;
+        }
+        i {
+          font-size: 24px;
+        }
+      }
     }
   }
 }
