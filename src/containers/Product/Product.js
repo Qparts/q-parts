@@ -224,6 +224,23 @@ class Product extends Component {
     </div>
   }
 
+  renderTopRow = () => {
+    const { product } = this.props
+    return <div className="row group-header-opacity_second">
+      <div className="col-9 pt-18">
+        <span className="product-item_desc">{product.desc}</span>
+        <div className="product-item_manufacturer">
+          <span>By</span>
+          <span>{product.manufacturer.name}</span>
+          <span>{product.productNumber}</span>
+        </div>
+      </div>
+      <div className="col-3 btn-wishlist pt-18">
+        <Button className="btn-primary" icon="icon-heart" />
+      </div>
+    </div>
+  }
+
   goToNext = () => {
     this.setState({
       currentImage: this.state.currentImage + 1
@@ -290,47 +307,25 @@ class Product extends Component {
     );
     const renderRelatedProduct = <Fragment>
       <MediumScreen>
-        <Card className="border related-products">
-          <CardTitle>
-            <Title header={translate("product.related")} />
-          </CardTitle>
-          <ListGroup className="">
-            {
-              this.props.products.map((product, idx) => {
-                return <ListGroupItem key={idx}>
-                  <div className="img-container">
-                    <img src="/img/product-4.jpg" alt="" />
-                  </div>
-                  <div>
-                    <h5>{product.desc}</h5>
-                    <div>
-                      <span>{product.manufacturer.name}</span>
-                      <span className="seperator" />
-                      <span>Size(215/60 R17)</span>
-                    </div>
-                    <div className="product-review">
-                      <Stars values={product.averageRating} {...constant.starsRating} />
-                      <span className="total-review">{getLength(product.reviews)} review</span>
-                    </div>
-                    <span className="price">
-                      {product.salesPrice.toFixed(2)} <span className="currency">SR</span>
-                    </span>
-                  </div>
-                </ListGroupItem>
-              })
-            }
-          </ListGroup>
-        </Card>
+        <RenderProducts
+          cardClass="border related-products"
+          imageClass="img-container"
+          isListView={true}
+          className="product-related_list"
+          header={translate("product.related")}
+          products={this.props.products}
+          goToProduct={this.goToProduct} />
       </MediumScreen>
       <SmallScreen>
         <RenderProducts
+          isListView={false}
           className="product-related_list"
           header={translate("product.related")}
-          products={this.props.products} 
+          products={this.props.products}
           goToProduct={this.goToProduct} />
       </SmallScreen>
     </Fragment>
-    let reviewsTest = product ? product.reviews : null;
+    let reviewsTest = _.isEmpty(product) ? [] : product.reviews;
     reviewsTest.push({
       id: 3,
       customerId: 1,
@@ -343,7 +338,12 @@ class Product extends Component {
     })
 
     const renderRecentProduct = <Fragment>
-      <RenderProducts className="product-recent-viewed_list" header={translate("offers.recommendation.recentViewed")} products={this.props.products} goToProduct={this.goToProduct} />
+      <RenderProducts
+        isListView={false}
+        className="product-recent-viewed_list"
+        header={translate("offers.recommendation.recentViewed")}
+        products={this.props.products}
+        goToProduct={this.goToProduct} />
     </Fragment>
 
     if (_.isEmpty(this.props.product)) return null;
@@ -352,77 +352,48 @@ class Product extends Component {
       <Switch>
         <Route path={'/products/:productId'} exact >
           <section id="product">
-            <div className="container-fluid component-background">
-              <div className="row">
-                <div className="col-5 group-header-opacity_first">
-                  <div className="btn-back">
-                    <Button text={"back"} className="btn-primary" />
-                  </div>
-                </div>
-                <div className="col-7">
-                  <div className="row group-header-opacity_second">
-                    <div className="col-9 pt-18">
-                      <span className="product-item_desc">{product.desc}</span>
-                      <div className="product-item_manufacturer">
-                        <span>By</span>
-                        <span>{product.manufacturer.name}</span>
-                        <span>{product.productNumber}</span>
+            <div className="component-background">
+              <div className="container-fluid">
+                <MediumScreen>
+                  <div className="row top-row">
+                    <div className="col-5 group-header-opacity_first">
+                      <div className="btn-back">
+                        <Button className="btn-primary" text={"back"} icon="icon-back" isReverseOrder={true} />
                       </div>
                     </div>
-                    <div className="col-3 btn-wishlist pt-18">
-                      <Button className="btn-primary" icon="icon-heart" />
+                    <div className="col-7">
+                      {this.renderTopRow()}
                     </div>
                   </div>
-                </div>
-              </div>
-              <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
-                {
-                  this.props.product && <Fragment>
-                    <div className="col-12 col-md-5 product-item_image">
-                      {/* <div className="row">
-                          <div className="col-12 product_header">
-                            <div className="group-header-opacity_first" />
-                            <div className="btn-back pt-18">
-                              <Button text={"back"} className="btn-primary" />
-                            </div>
-                          </div>
-                        </div> */}
-                      <img
-                        style={commonStyles.cursor}
-                        src={"/img/product-4.jpg"}
-                        onClick={this.showLightbox}
-                        alt=""
-                      />
-                      <Lightbox
-                        currentImage={this.state.currentImage}
-                        images={[{ src: "/img/product-4.jpg" }, { src: "/img/product-3.jpg" }]}
-                        isOpen={this.state.lightboxIsOpen}
-                        onClose={this.closeLightbox}
-                        onClickNext={this.goToNext}
-                        onClickPrev={this.gotoPrevious}
-                      />
-                    </div>
-                    <div className="col-12 col-md-7 component-background">
-                      <div className="container-fluid">
+                </MediumScreen>
+                <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
+                  {
+                    this.props.product && <Fragment>
+                      <div className="col-12 col-md-5 product-item_image">
+                        <img
+                          style={commonStyles.cursor}
+                          src={"/img/product-4.jpg"}
+                          onClick={this.showLightbox}
+                          alt=""
+                        />
+                        <Lightbox
+                          currentImage={this.state.currentImage}
+                          images={[{ src: "/img/product-4.jpg" }, { src: "/img/product-3.jpg" }]}
+                          isOpen={this.state.lightboxIsOpen}
+                          onClose={this.closeLightbox}
+                          onClickNext={this.goToNext}
+                          onClickPrev={this.gotoPrevious}
+                        />
+                      </div>
+                      <div className="col-12 col-md-7">
                         <div className="product-item_detail">
                           <div className="row">
-                            {/* <div className="col-12 product_header">
-                            <div className="row">
-                              <div className="group-header-opacity_second" />
-                              <div className="col-9 pt-18">
-                                <span className="product-item_desc">{product.desc}</span>
-                                <div className="product-item_manufacturer">
-                                  <span>By</span>
-                                  <span>{product.manufacturer.name}</span>
-                                  <span>{product.productNumber}</span>
-                                </div>
+                            <SmallScreen>
+                              <div className="col-12">
+                                {this.renderTopRow()}
                               </div>
-                              <div className="col-3 btn-wishlist pt-18">
-                                <Button className="btn-primary" icon="icon-heart" />
-                              </div>
-                            </div>
-                          </div> */}
-                            <div className="col-12 product-review">
+                            </SmallScreen>
+                            <div className="col-12 product-review_list">
                               <Stars value={getLength(product.reviews)} {...constant.starsRating} />
                               <span>{getLength(product.reviews)} review</span>
                             </div>
@@ -449,7 +420,7 @@ class Product extends Component {
                                 text={translate("product.buttons.addToCart")}
                                 icon="icon-cart" />
                             </div>
-                            <div className="col-12">
+                            <div className="col-12 product-item_detail_footer">
                               <span className="h-seperator" />
                               <CustomerService
                                 messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
@@ -457,15 +428,10 @@ class Product extends Component {
                             </div>
                           </div>
                         </div>
-
                       </div>
-                    </div>
-                  </Fragment>
-                }
-              </form>
-            </div>
-            <div className="component-background">
-              <div className="container-fluid">
+                    </Fragment>
+                  }
+                </form>
                 <div className="row">
                   <div className="col-12 col-md-8">
                     <div className="row">
@@ -584,9 +550,9 @@ class Product extends Component {
                     {!_.isEmpty(this.state.relatedProduct) && renderRecentProduct}
                   </div>
                 </div>
+                {dialog}
               </div>
             </div>
-            {dialog}
           </section>
         </Route>
         <PrivateRoute

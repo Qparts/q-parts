@@ -83,7 +83,7 @@ class Layout extends Component {
       case 'signin':
         return <Login toggle={this.togglePopup}/>
       case 'search':
-        return <Search />
+        return <Search toggle={this.togglePopup}/>
 
       default:
         break;

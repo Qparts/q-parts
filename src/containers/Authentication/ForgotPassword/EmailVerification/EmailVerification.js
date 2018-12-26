@@ -5,15 +5,15 @@ class EmailVerification extends Component {
   constructor(props){
     super(props);
     this.state={
-      hidecomp: false
+      hidecomp: true
     }
   }
-  componentDidMount() {
-    var that= this;
-    setTimeout(function(){that.setState({
-      hidecomp: !that.state.hidecomp
-    }) }, 10000);
-  }
+  // componentDidMount() {
+  //   var that= this;
+  //   setTimeout(function(){that.setState({
+  //     hidecomp: !that.state.hidecomp
+  //   }) }, 10000);
+  // }
   render () {
     const style = this.state.hidecomp ?{display: 'none'} : {};
     return(

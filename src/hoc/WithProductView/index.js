@@ -63,7 +63,7 @@ const WithProductView = WrappedComponent => {
 		}
 
 		filter = (item, event) => {
-			const { value, checked } = event;
+			const { value, checked } = event.target;
 			const index = this.state.filtration.indexOf(value);
 			const itemValue = item.value.replace(/ /, '_');
 
@@ -141,8 +141,11 @@ const WithProductView = WrappedComponent => {
 		renderSearch = ({ filtration, key }, Component, handleChange, isChecked) => {
 			return filtration.values.map((value, index) => (
 				<div key={index}>
-					<Component onChange={handleChange.bind(this, { key, value })} value={`${filtration.label} ${value}`} checked={isChecked(`${filtration.label} ${value}`)} />
-					<label>{value}</label>
+					<Component
+						onChange={handleChange.bind(this, { key, value })}
+						value={`${filtration.label} ${value}`}
+						checked={isChecked(`${filtration.label} ${value}`)}
+						label={value} />
 				</div>
 			))
 		}
@@ -176,7 +179,7 @@ const WithProductView = WrappedComponent => {
 					const label = upperCaseFirstChar(filterObject.label);
 					const value = filterObject.values;
 
-					this.setState({selectedRadio: `${label} ${value}`});
+					this.setState({ selectedRadio: `${label} ${value}` });
 				}
 			})
 		}
