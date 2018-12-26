@@ -6,7 +6,7 @@
   font-weight: 400;
   @extend .d-inline-block;
   border-width: 0;
-  i{
+  i {
     @extend .d-inline-block;
   }
 }
@@ -18,23 +18,23 @@
   text-transform: uppercase;
   color: $white;
   &:hover,
-  &:focus{
+  &:focus {
     background: darken($brand-color, 10%);
   }
 }
-.btn-gray{
+.btn-gray {
   @extend .btn;
   background: $light-gray;
   @include font-size(13px);
   text-transform: capitalize;
-  &:hover{
+  &:hover {
     background: $dark-gray;
   }
 }
-.btn-gray-secondary{
+.btn-gray-secondary {
   @extend .btn;
   background: $dark-gray;
-  &:hover{
+  &:hover {
     background: darken($dark-gray, 3%);
   }
 }
@@ -47,7 +47,7 @@
 .btn-link {
   color: $charcoal-grey;
   border-style: none;
-  background: none;
+  background: none !important;
   text-transform: capitalize;
   padding: 0;
   background: $light-gray;
@@ -62,7 +62,7 @@
     box-shadow: none;
   }
 
-  &:hover{
+  &:hover {
     color: $brand-color;
   }
 }
@@ -72,7 +72,6 @@
   @extend .box-shadow;
   background: $white;
   border-radius: side-values(0 0 0 20px) !important;
-
 }
 .btn-google {
   @extend .btn-primary;
@@ -94,22 +93,21 @@
   text-transform: uppercase;
   @include transition(all, 0.5s, ease);
 }
-.delete-btn{
+.delete-btn {
   @include transition(all, 0.5s, ease);
   @include opacity(0.6);
   &:hover,
-  &:focus{
+  &:focus {
     color: $brand-color;
   }
-  i{
+  i {
     @include font-size(18px);
-    height: 18px
+    height: 18px;
   }
-  span{
+  span {
     @include font-size(13px);
     @extend .position-relative;
     top: -2px;
     margin-#{$left}: 2px;
-
   }
 }

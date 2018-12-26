@@ -1,9 +1,60 @@
-#render-products {
-  h1 {
-    padding-bottom: 40px;
-    @include font-size(25px);
-    font-weight: 500;
-    color: $dark-charcoal-grey;
-    text-transform: capitalize;
-  }
+.product-seperator {
+  height: 10px;
+  margin: 0 9px;
+}
+.product-review_list {
+  padding-top: 21px;
+  display: flex;
+  align-items: center;
+}
+.product-review_slide {
+  padding-top: 7px;
+  display: flex;
+  align-items: center;
+}
+.product-title{
+  @include font-size(15px);
+  font-weight: normal;
+  @include font-size(20px);
+}
+
+.product-extras {
+  opacity: 0.7;
+  font-family: Roboto;
+  @include font-size(14px);
+  font-weight: normal;
+  color: $light-charcoal-grey;
+}
+
+.product-manufacturer {
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: bold;
+  color: $dark-charcoal-grey;
+}
+
+.product-review {
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: normal;
+  line-height: 1.31;
+  color: $basic-gray;
+  padding-#{$left}: 6px;
+}
+.product-price {
+  font-family: Roboto;
+  @include font-size(20px);
+  font-weight: normal;
+  line-height: normal;
+  color: $dark-charcoal-grey;
+}
+
+.product-currency {
+  width: 16px;
+  height: 11px;
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: normal;
+  line-height: normal;
+  color: $dark-charcoal-grey;
 }

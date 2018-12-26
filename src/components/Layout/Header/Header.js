@@ -15,16 +15,16 @@ class Header extends Component {
       { value: 3, label: "Jordan" }
     ];
     const formatGroupLabel = () => (
-     <div className="placeholder">
-       <span >Select city</span>
-     </div>
-   );
-   const groupedOptions = [
-     {
-       label: 'Colours', // call this say ShipTo
-       options: shipToOptions,
-     },
-   ];
+      <div className="placeholder">
+        <span >Select city</span>
+      </div>
+    );
+    const groupedOptions = [
+      {
+        label: 'Colours', // call this say ShipTo
+        options: shipToOptions,
+      },
+    ];
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch } = this.props;
     return (
@@ -35,13 +35,13 @@ class Header extends Component {
               <li className="ship-country">
                 <div className="input-group">
                   <span className="ship-to">Ship to</span>
-                    <Select
-  	classNamePrefix="select"
-  	isSearchable={false}
-  	styles={styles.select}
-  	defaultValue={shipToOptions[0]}
-  	options={groupedOptions} //change this here
-  	formatGroupLabel={formatGroupLabel}/>
+                  <Select
+                    classNamePrefix="select"
+                    isSearchable={false}
+                    styles={styles.select}
+                    defaultValue={shipToOptions[0]}
+                    options={groupedOptions}
+                    formatGroupLabel={formatGroupLabel} />
                 </div>
               </li>
               <li>
