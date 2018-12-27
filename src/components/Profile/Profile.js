@@ -16,7 +16,22 @@ class profile extends Component {
   constructor(props) {
     super(props);
     this.state={
-      check: false
+      checkNotif_email: false,
+      checkNotif_phone: false,
+      checkRecive_email: false
+    }
+  }
+  checkNoification = e =>{
+    if(e.target.name === "check-phone"){
+      this.setState({
+        checkNotif_phone: !this.state.checkNotif_phone,
+        checkNotif_email: false
+      })
+    }else{
+      this.setState({
+        checkNotif_email: !this.state.checkNotif_email,
+        checkNotif_phone: false
+      })
     }
   }
   render(){
@@ -155,19 +170,17 @@ class profile extends Component {
                 </div>
                 <div className="col-12 notification">
                     <Checkbox
-                      onChange={e => this.setState({
-                        check: !this.state.check
-                      })}
-                      checked={this.state.check}
+                      name="check-email"
+                      onChange={this.checkNoification}
+                      checked={this.state.checkNotif_email}
                       label="Send Notification by E-mail"
                       />
                 </div>
                 <div className="col-12 notification">
                     <Checkbox
-                      onChange={e => this.setState({
-                        check: !this.state.check
-                      })}
-                      checked={this.state.check}
+                      name="check-phone"
+                      onChange={this.checkNoification}
+                      checked={this.state.checkNotif_phone}
                       label="Send Notification by phone number"
                       />
                 </div>
@@ -184,9 +197,9 @@ class profile extends Component {
                 <div className="col-12 email-check">
                   <Checkbox
                     onChange={e => this.setState({
-                      check: !this.state.check
+                      checkRecive_email: !this.state.checkRecive_email
                     })}
-                    checked={this.state.check}
+                    checked={this.state.checkRecive_email}
                     label="I would like to receive emails on upcoming promotions"
                     />
                 </div>
