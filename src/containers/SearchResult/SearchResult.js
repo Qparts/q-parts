@@ -13,6 +13,7 @@ import queryString from 'qs';
 import { Collapse, Card, CardBody, CardTitle } from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
+import ProductListView from '../../components/ProductListView/ProductListView';
 
 const diameter = 'diameter';
 const profile = 'profile';
@@ -88,7 +89,16 @@ class TyresSearch extends Component {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
 
+	renderProducts = () => (
+		this.state.selectedView === GRID ? (
+			<ProductGridView currentProducts={this.props.currentProducts} />
+		) :
+			<ProductListView currentProducts={this.props.currentProducts} />
+	)
+
 	render() {
+		console.log(this.state.selectedView === GRID);
+
 		const styles = {
 			iconGrid: {
 				opacity: this.state.selectedView === GRID ? 1 : 0.3
@@ -96,7 +106,7 @@ class TyresSearch extends Component {
 			iconList: {
 				opacity: this.state.selectedView === LIST ? 1 : 0.3
 			},
-			show : {
+			show: {
 				display: 'flex'
 			}
 		}
@@ -257,8 +267,8 @@ class TyresSearch extends Component {
 												defaultValue={categorySortOptions[0]}
 												options={categorySortOptions}
 												onChange={this.props.handleSelectChange} />
-											<i style={styles.iconGrid} className="icon-list" onClick={this.changeView.bind(this, GRID)} />
-											<i style={styles.iconList} className="icon-grid" onClick={this.changeView.bind(this, LIST)} />
+											<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} />
+											<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
 										</div>
 									</CardTitle>
 								</Card>
@@ -267,14 +277,14 @@ class TyresSearch extends Component {
 								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : styles.show}>
 									{
 										filtration.map((item, index) => (
-											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)}/></label>
+											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
 										))
 									}
 									<Button text="Clear all" className="btn-gray-secondary" onClick={onClear} />
 								</div>
 							</div>
 							<div className="products-panel row">
-								<ProductGridView currentProducts={this.props.currentProducts} />
+								{this.renderProducts()}
 							</div>
 						</div>
 					</div>

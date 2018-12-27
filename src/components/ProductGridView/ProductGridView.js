@@ -32,7 +32,7 @@ class ProductGridView extends Component {
 							<img src={"/img/product-3.jpg"} alt="" />
 							{
 								this.state.isProductsHovering[idx] &&
-								<div className="hover-buttons">
+								<div className="product-buttons">
 									<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
 									<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
 								</div>
