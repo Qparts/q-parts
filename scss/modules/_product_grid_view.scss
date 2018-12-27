@@ -1,37 +1,42 @@
-.product-holder {
-  padding-top: 10px;
-  background-color: $white;
-  @include padding-left(0);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-  @include box-shadow;
-
-  .image-container {
-    position: relative;
-    img {
-      max-width: 90%;
+.product-grid-view {
+  .product-holder {
+    padding-top: 10px;
+    background-color: $white;
+    @include padding-left(0);
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    @include box-shadow;
+    @include small-screen {
+      box-shadow: none;
     }
-  }
-
-  .details-holder {
-    @include padding-left(12px);
-  }
-
-  .part-text {
-    text-transform: capitalize;
-    @include font-size(17px);
-  }
-  .manufacturer-text {
-    @include padding-right(11px);
-    @include font-size(15px);
-    font-weight: bold;
-  }
-
-  .sales-price {
-    @include font-size(20px);
-    font-weight: normal;
-  }
-  .currency {
-    @include font-size(15px);
+  
+    .image-container {
+      position: relative;
+      img {
+        max-width: 90%;
+      }
+    }
+  
+    .details-holder {
+      @include padding-left(12px);
+    }
+  
+    .part-text {
+      text-transform: capitalize;
+      @include font-size(17px);
+    }
+    .manufacturer-text {
+      @include padding-right(11px);
+      @include font-size(15px);
+      font-weight: bold;
+    }
+  
+    .sales-price {
+      @include font-size(20px);
+      font-weight: normal;
+    }
+    .currency {
+      @include font-size(15px);
+    }
   }
 }

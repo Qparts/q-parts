@@ -23,7 +23,7 @@ class ProductGridView extends Component {
 	render() {
 		return this.props.currentProducts.map((product, idx) => {
 			return <Fragment key={idx}>
-				<div className="col-4" >
+				<div className="product-grid-view col-6 col-md-4" >
 					<div
 						className=" product-holder"
 						onMouseEnter={this.handleMouseHover.bind(this, idx)}
