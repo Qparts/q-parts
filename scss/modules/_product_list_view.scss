@@ -1,19 +1,18 @@
 .product-list-view {
-  background: inherit;
+  background: none;
   .list-group {
     .list-group-item {
+      background: $white;
+      overflow: hidden;
       display: flex;
       margin-bottom: 30px;
       @include padding-right(10px);
       border: 0;
       .image-container {
-        width: 100%;
         @include padding-right(26px);
       }
       .last-col {
-        @include padding-left(42px);
         .price-container {
-          max-width: 180px;
           height: 75px;
           background-color: #f8f8f8;
           border-radius: corner-values(20px 0 20px 20px);
@@ -26,16 +25,14 @@
           margin-top: 11px;
           position: static;
           transform: none;
+          justify-content: flex-end;
 
           .btn-detail,
           .btn-cart {
             background: $basic-gray;
           }
-          .btn-cart {
+          .btn-detail {
             width: 100%;
-            .icon-plus {
-              #{$right}: 23px;
-            }
           }
         }
       }

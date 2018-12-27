@@ -15,9 +15,12 @@ const link = props => (
                     {
                         _.isEmpty(props.icons) ?
                             <i className={props.icon}></i> :
-                            props.icons.map((icon, idx) => (
-                                <i key={idx} className={icon}></i>
-                            ))
+                            <span> {
+                                props.icons.map((icon, idx) => (
+                                    <i key={idx} className={icon}></i>
+                                ))
+                            }
+                            </span>
                     }
                 </Fragment>
         }

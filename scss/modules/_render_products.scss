@@ -99,22 +99,24 @@
     border-radius: corner-values(0 20px 20px 0) !important;
     color: $white;
 
-    .icon-cart {
+    span {
       position: relative;
-      top: 3px;
-      @include font-size(26px);
-    }
-    .icon-plus {
-      position: absolute;
-      background: $white;
-      border-radius: 20px;
-      padding: 3px;
-      width: 15px;
-      height: 15px;
-      @include font-size(9px);
-      top: 8px;
-      #{$right}: 13px;
-      color: $brand-color;
+      .icon-cart {
+        position: relative;
+        top: 3px;
+        @include font-size(26px);
+      }
+      .icon-plus {
+        position: absolute;
+        background: $white;
+        border-radius: 20px;
+        padding: 3px;
+        width: 15px;
+        height: 15px;
+        @include font-size(9px);
+        #{$left}: 14px;
+        color: $brand-color;
+      }
     }
   }
   .product-details {

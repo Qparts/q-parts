@@ -21,11 +21,11 @@ class ProductListView extends Component {
 			<ListGroup>
 				{
 					this.props.currentProducts.map((product, idx) => (
-						<ListGroupItem key={idx}>
-							<div className="image-container">
+						<ListGroupItem key={idx} className="row">
+							<div className="col-3">
 								<CardImg src="/img/product-2.jpg" alt="car image" />
 							</div>
-							<div>
+							<div className="col-9 col-md-5">
 								<h5 className="product-title">{product.desc}</h5>
 								<div>
 									<span className="product-manufacturer">{product.manufacturer.name}</span>
@@ -41,7 +41,7 @@ class ProductListView extends Component {
 									</span>
 								</div>
 							</div>
-							<div className="last-col">
+							<div className="col-9 offset-3 col-md-4 offset-md-0 last-col">
 								<div className="price-container">
 									<span className="product-price">{product.salesPrice.toFixed(2)}</span>
 									<span className="product-currency">SR</span>
