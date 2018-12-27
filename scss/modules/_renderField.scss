@@ -1,3 +1,7 @@
 .RenderField {
     position: relative;
+    input{
+      @include padding-left(13px !important) 
+      padding-left: 13px;
+    }
 }

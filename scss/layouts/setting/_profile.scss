@@ -353,7 +353,7 @@ form{
             text-align: $left;
             margin-#{$left}: 14px;
             color: #37363d;
-          }    
+          }
           .checkmark{
             border-radius: 9px;
           }
@@ -365,7 +365,7 @@ form{
       margin-bottom: 60px;
       .shadow{
           @extend .group-shadow-div;
-          width: 58% !important;
+          width: 506px !important;
           height: 50px;
           @include margin-right(16px)
       }
