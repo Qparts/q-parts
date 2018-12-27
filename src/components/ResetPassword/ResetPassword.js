@@ -6,6 +6,8 @@ import Button from '../UI/Button';
 import * as validations from '../../utils';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
+import { Link } from "react-router-dom";
+
 import './ResetPassword.css';
 class resetPassword extends Component {
   constructor(props) {
@@ -40,18 +42,21 @@ class resetPassword extends Component {
                   <Field name="oldPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.oldPassword")} validate={[validations.required]} />
                 </div>
                 <div>
-                    <Button onClick={this.forgotPassword} text="Forgot it?"/>
+                  <Link className="btn-primary" to="/forgotPassword">Forgot it?</Link>
                   <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required, validations.confirmPassword]} />
                 </div>
               </div>
             </Fragment>
           )
       }
+
       <div className="footer-password row">
-        {
-          !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={onHide} />
-        }
-        <Button className="btn btn-secondary col-8" text={updateBtn}/>
+        <div className="shadow">
+        </div>
+          {
+            !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={onHide} />
+          }
+          <Button className="btn btn-secondary col-8" text={updateBtn}/>
       </div>
     </form>
   )
