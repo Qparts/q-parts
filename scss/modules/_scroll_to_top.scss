@@ -1,0 +1,19 @@
+.scroll-to-top {
+  position: relative;
+  left: 85%;
+  top: -62px;
+  p {
+    .icon-to-up {
+      color: #37363d;
+      opacity: 0.5;
+      @include font-size(50px);
+    }
+    color: $basic-gray;
+    background-color: #f7f7f7;
+    position: absolute;
+    height: 45px;
+    max-width: 50px;
+    text-align: center;
+    border-radius: 50%;
+  }
+}

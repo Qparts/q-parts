@@ -109,16 +109,14 @@ class TyresSearch extends Component {
 						<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} /> :
 
 						<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
-					}
-					<span className="seperator" />
-					<i className="icon-filter" onClick={this.changeView.bind(this, GRID)} />
+				}
+				<span className="seperator" />
+				<i className="icon-filter" onClick={this.changeView.bind(this, GRID)} />
 			</SmallScreen>
 		</Fragment>
 	)
 
 	render() {
-		console.log(this.state.selectedView === GRID);
-
 		const styles = {
 			iconGrid: {
 				opacity: this.state.selectedView === GRID ? 1 : 0.3

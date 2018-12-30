@@ -7,6 +7,7 @@ import Link from '../UI/Link';
 import {
 	Card, CardTitle, ListGroupItem, ListGroup, CardImg
 } from 'reactstrap';
+import { MediumScreen } from '../Device';
 
 class ProductListView extends Component {
 	constructor(props) {
@@ -46,10 +47,12 @@ class ProductListView extends Component {
 									<span className="product-price">{product.salesPrice.toFixed(2)}</span>
 									<span className="product-currency">SR</span>
 								</div>
-								<div className="product-buttons">
-									<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
-									<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
-								</div>
+								<MediumScreen>
+									<div className="product-buttons">
+										<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
+										<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
+									</div>
+								</MediumScreen>
 							</div>
 						</ListGroupItem>
 					))
