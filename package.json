@@ -38,7 +38,6 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
-    "node-sass": "^4.9.4",
     "npm": "^6.4.1",
     "oauthio-web": "^0.6.2",
     "object-assign": "4.1.1",
@@ -105,11 +104,11 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "google-maps": "^3.2.1",
+    "node-sass": "^4.11.0",
     "react-test-renderer": "^16.4.2",
     "react-testing-library": "^3.1.7",
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
-    "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0"
   },
   "jest": {
