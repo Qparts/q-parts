@@ -125,7 +125,6 @@ form{
             }
           }
           .country {
-            margin-bottom: 38px;
             .css-10nd86i {
               width: 98%;
               height: 55px;
@@ -238,25 +237,22 @@ form{
           br {
             display: none;
           }
-        input {
-          border-radius: inherit;
         }
-        label{
-          height: 10px;
-          opacity: 0.6;
-          font-family: Roboto;
-          @include font-size(13px)
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: 1.92;
-          letter-spacing: normal;
-          text-align: $left;
-          margin-left: 10px;
-          color: rgba(55, 54, 61, 0.6);
+        .RenderField{
+          border-radius: none;
+          border: none !important;
+          width: 98%;
+          margin-bottom: 13px;
+          input{
+            margin-bottom: 0px;
+            width: 100%;
+          }
+          label{
+            top: 0px;
           }
         }
         .btn-secondary{
+          text-align: center;
           background: $light-gray;
           height: 55px;
           margin-bottom: 30px;

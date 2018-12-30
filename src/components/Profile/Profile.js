@@ -10,7 +10,7 @@ import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import './Profile.css';
 import CustomerService from '../CustomerService/CustomerService';
 import Checkbox from '../UI/Checkbox';
-
+import { Link } from "react-router-dom";
 
 class profile extends Component {
   constructor(props) {
@@ -19,19 +19,6 @@ class profile extends Component {
       checkNotif_email: false,
       checkNotif_phone: false,
       checkRecive_email: false
-    }
-  }
-  checkNoification = e =>{
-    if(e.target.name === "check-phone"){
-      this.setState({
-        checkNotif_phone: !this.state.checkNotif_phone,
-        checkNotif_email: false
-      })
-    }else{
-      this.setState({
-        checkNotif_email: !this.state.checkNotif_email,
-        checkNotif_phone: false
-      })
     }
   }
   render(){
@@ -151,8 +138,8 @@ class profile extends Component {
                 component={RenderField}
                 type="text"
                 placeholder={translate("setting.accountSetting.access.email")}
-                validate={[validations.required]} />
-              <button className="btn btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className="icon-arrow-right" />{translate("setting.accountSetting.access.passwordButton")}</p></button>
+                hasFloatLabel/>
+              <Link to="#" className="btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className="icon-arrow-right" />{translate("setting.accountSetting.access.passwordButton")}</p></Link>
             </div>
           </div>
           <br />
@@ -174,7 +161,9 @@ class profile extends Component {
                 <div className="col-12 notification">
                     <Checkbox
                       name="check-email"
-                      onChange={this.checkNoification}
+                      onChange={e => this.setState({
+                        checkNotif_email: !this.state.checkNotif_email
+                      })}
                       checked={this.state.checkNotif_email}
                       label="Send Notification by E-mail"
                       />
@@ -182,7 +171,9 @@ class profile extends Component {
                 <div className="col-12 notification">
                     <Checkbox
                       name="check-phone"
-                      onChange={this.checkNoification}
+                      onChange={e => this.setState({
+                        checkNotif_phone: !this.state.checkNotif_phone
+                      })}
                       checked={this.state.checkNotif_phone}
                       label="Send Notification by phone number"
                       />
