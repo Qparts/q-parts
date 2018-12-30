@@ -12,7 +12,7 @@ form{
         p{
           margin: 0px;
           font-family: Roboto;
-          @include font-size(20px)
+          @include font-size(20px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -114,7 +114,7 @@ form{
             height: 10px;
             opacity: 0.6;
             font-family: Roboto;
-            @include font-size(13px)
+            @include font-size(13px);
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -144,7 +144,7 @@ form{
               transform: translate(-25%, -0%);
               opacity: 0.5;
               font-family: Roboto;
-              @include font-size(13px)
+              @include font-size(13px);
               font-weight: normal;
               font-style: normal;
               font-stretch: normal;
@@ -214,7 +214,7 @@ form{
           width: 143px;
           height: 15px;
           font-family: Roboto;
-          @include font-size(20px)
+          @include font-size(20px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -230,7 +230,7 @@ form{
         .form-control{
           border: none;
           background: $light-gray;
-          border-radius: side-values(0 0 20px 0) !important;
+          border-radius: side-values(20px 0 20px 20px) !important;
           width: 98%;
           margin-bottom: 15px;
           sub,
@@ -258,7 +258,7 @@ form{
           margin-bottom: 30px;
           p{
             font-family: Roboto;
-            @include font-size(16px)
+            @include font-size(16px);
             margin-top: 10px;
             font-weight: normal;
             font-style: normal;
@@ -281,7 +281,7 @@ form{
         margin-bottom: 3px;
         p{
           font-family: Roboto;
-          @include font-size(20px)
+          @include font-size(20px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -315,7 +315,7 @@ form{
           label{
             margin-bottom: 0px;
             font-family: Roboto;
-            @include font-size(16px)
+            @include font-size(16px);
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -340,7 +340,7 @@ form{
         margin-bottom: 3px;
         p{
           font-family: Roboto;
-          @include font-size(20px)
+          @include font-size(20px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -358,7 +358,7 @@ form{
           label{
             margin-bottom: 0px;
             font-family: Roboto;
-            @include font-size(16px)
+            @include font-size(16px);
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
@@ -381,7 +381,7 @@ form{
           @extend .group-shadow-div;
           width: 506px !important;
           height: 50px;
-          @include margin-right(16px)
+          @include margin-right(16px);
       }
       .btn-light{
         width: 90px;
