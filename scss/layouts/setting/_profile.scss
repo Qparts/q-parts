@@ -41,11 +41,11 @@ form{
               }
             }
             input {
-              text-align: center;
+              text-align: $right;
               border-radius: inherit;
               height: 44px;
               width: 171px;
-              margin-#{$left}: -12px;
+              padding-#{$right}: 10px !important;
             }
           }
           .input-group-prepend {
@@ -54,12 +54,17 @@ form{
             .ellipse {
               background: none;
             }
+            img{
+              margin-top: 20px !important;
+              margin-#{$left}: 15px !important;
+            }
           }
-          img {
+          .main-img{
             margin-#{$right}: 20px;
             border-radius: 50px;
             background: $light-gray;
             width: 60px;
+            padding: 10px;
           }
         }
 
@@ -68,14 +73,31 @@ form{
             .form-control{
               border-radius: side-values(20px 0 0 20px) !important;
             }
-            input.form-control{
-              margin-#{$left}: -10px;
+            .RenderField{
+              border-radius: side-values(20px 0 0 20px) !important;
+              input{
+                margin-bottom: 0px;
+              }
+              label{
+                top: 0px;
+              }
             }
           }
           .last-name{
             .form-control{
               border-radius: side-values(0 0 20px 0) !important;
-              margin-#{$left}: -10px;
+            }
+            .RenderField{
+              border-radius: side-values(0 0 20px 0) !important;
+              margin-left: -13px;
+              width: 100%;
+              input{
+                margin-bottom: 0px;
+                width: 100%;
+              }
+              label{
+                top: 0px;
+              }
             }
           }
           .form-control{
@@ -111,9 +133,6 @@ form{
               background-color: #f7f7f7;
               border-radius: side-values(20px 0 20px 20px) !important;
               position: relative !important;
-              .select__menu{
-                margin-#{$left}: -10px;
-              }
             }
             .select__control{
               margin-top: 15px;
@@ -133,6 +152,7 @@ form{
               line-height: 1.92;
               letter-spacing: normal;
               color: rgba(55, 54, 61, 0.5);
+              top: 20%;
             }
             .phone-number{
               display: flex;
@@ -148,7 +168,6 @@ form{
                 border-radius: 0 0 0 0 !important;
                 border: none;
                 background: $light-gray;
-                padding: inherit;
                 height: 55px;
                 width: 110%;
                 label,
@@ -172,7 +191,6 @@ form{
                 border-radius: side-values(0 0 20px 0) !important;
                 border: none;
                 background: $light-gray;
-                padding: inherit;
                 height: 55px;
                 width: 110%;
                 label,

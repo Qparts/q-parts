@@ -252,7 +252,7 @@ class Setting extends Component {
           <ResetPassword
             translate={translate}
             showPhoneNo={false}
-            onHide={this.onHide}
+            toggle={this.togglePopup}
             onSubmit={this.onEdit.bind(this, password)}
           />
         </ModalBody>

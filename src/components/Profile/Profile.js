@@ -35,8 +35,8 @@ class profile extends Component {
     }
   }
   render(){
-    const { translate } = this.props;
-    const editEmail = 'email'
+        const { translate } = this.props;
+      const editEmail = 'email'
     const editPassword = 'password'
     const languagesOptions = [
       { value: AR, label: translate("setting.accountSetting.arabic") },
@@ -52,19 +52,19 @@ class profile extends Component {
             </div>
             <div className="info-body">
               <div className="user-img">
-                  <img alt="user" src="/img/user.svg" />
-                  <div className="col-md-3 div-last-rounded">
-                    <Field
-                      name="profileImg"
-                      component={RenderFileInput}
-                      image='image'
-                    />
-                    <Field
-                      name="image"
-                      placeholder="Change picture"
-                      component={RenderField}
-                      type="text"
-                      validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
+                <img className="main-img" alt="user" src="/img/user.svg" />
+                <div className="col-md-3 div-last-rounded">
+                  <Field
+                    name="profileImg"
+                    component={RenderFileInput}
+                    image='image'
+                  />
+                  <Field
+                    name="image"
+                    placeholder="Change picture"
+                    component={RenderField}
+                    type="text"
+                    validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
                 </div>
               </div>
               <div className="Profile-info-box_item Profile-name row">
@@ -75,6 +75,7 @@ class profile extends Component {
                     component={RenderField}
                     type="text"
                     placeholder={translate("setting.accountSetting.info.fNamePlaceholder")}
+                    hasFloatLabel
                     validate={[validations.required]} />
                 </div>
                 <div className="col-6 last-name">
@@ -84,6 +85,7 @@ class profile extends Component {
                     component={RenderField}
                     type="text"
                     placeholder={translate("setting.accountSetting.info.lNamePlaceholder")}
+                    hasFloatLabel
                     validate={[validations.required]} />
                 </div>
                 <div className="country col-12">
@@ -91,44 +93,44 @@ class profile extends Component {
                     name="country"
                     component={SelectInput}
                     clearable={false}
-                    options={[{label:'1',value:'2'}]}
+                    options={[{ label: '1', value: '2' }]}
                     placeholder="Select country"
                     validate={[validations.required]} />
                 </div>
                 <div className="row col-12 phone-info">
                   <p className="col-12">Alternate Phone Number</p>
-                <div className="phone-number col-6">
-                  <div className="first">
-                    <Field
-                      name="phone"
-                      component={RenderField}
-                      clearable={false}
-                      placeholder="+966"
-                      validate={[validations.required]} />
-                  </div>
+                  <div className="phone-number col-6">
+                    <div className="first">
+                      <Field
+                        name="phone"
+                        component={RenderField}
+                        clearable={false}
+                        placeholder="+966"
+                        validate={[validations.required]} />
+                    </div>
                     <Field
                       name="phone-number"
                       component={RenderField}
                       clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
-                </div>
-                <div className="alternate-phone-number col-6">
-                  <div className="first">
-                    <Field
-                      name="alternate-phone"
-                      component={RenderField}
-                      clearable={false}
-                      placeholder="+966"
-                      validate={[validations.required]} />
                   </div>
+                  <div className="alternate-phone-number col-6">
+                    <div className="first">
+                      <Field
+                        name="alternate-phone"
+                        component={RenderField}
+                        clearable={false}
+                        placeholder="+966"
+                        validate={[validations.required]} />
+                    </div>
                     <Field
                       name="alternate-phone-number"
                       component={RenderField}
                       clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
-                </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,6 +145,7 @@ class profile extends Component {
             </div>
             <div className="Profile-access-box_item">
               <Field
+                disabled
                 label={translate("setting.accountSetting.access.email")}
                 name="email"
                 component={RenderField}
@@ -201,7 +204,7 @@ class profile extends Component {
                     })}
                     checked={this.state.checkRecive_email}
                     label="I would like to receive emails on upcoming promotions"
-                    />
+                  />
                 </div>
               </div>
             </div>
@@ -210,7 +213,7 @@ class profile extends Component {
           <div className="Profile-footer">
             <div className="shadow"></div>
             <button type="reset" className="btn btn-light"><p>{translate("setting.accountSetting.cancel")}</p></button>
-            <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className="icon-arrow-right"/></p></button>
+            <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className="icon-arrow-right" /></p></button>
           </div>
           <div className="row">
             <a className="bg-whatsapp">

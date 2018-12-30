@@ -16,8 +16,11 @@ class resetPassword extends Component {
   forgotPassword = (event) =>{
     this.props.history.push('/forgotPassword')
   }
+  onCancle = () =>{
+    this.props.toggle();
+  }
  render() {
-  const { handleSubmit, showPhoneNo, onHide, translate } = this.props;
+  const { handleSubmit, showPhoneNo, translate } = this.props;
   const updateBtn = <p>{translate("resetPassword.update")}<i className="icon-arrow-right"></i></p>
   const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
   return (
@@ -54,7 +57,7 @@ class resetPassword extends Component {
         <div className="shadow">
         </div>
           {
-            !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={onHide} />
+            !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={this.onCancle} />
           }
           <Button className="btn btn-secondary col-8" text={updateBtn}/>
       </div>
