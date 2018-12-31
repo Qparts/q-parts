@@ -12,7 +12,7 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import {
-	Collapse, Card, CardBody, CardTitle, InputGroup, InputGroupAddon, Input
+	Collapse, Card, CardBody, CardTitle, ListGroup, InputGroup, InputGroupAddon, Input
 } from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
@@ -94,10 +94,17 @@ class TyresSearch extends Component {
 	}
 
 	renderProducts = () => (
-		this.state.selectedView === GRID ? (
-			<ProductGridView currentProducts={this.props.currentProducts} />
-		) :
-			<ProductListView currentProducts={this.props.currentProducts} />
+		this.props.currentProducts.map((product, idx) => (
+			this.state.selectedView === GRID ? (
+				<ProductGridView key={idx} product={product} />
+			)
+				:
+				<Card className="product-list-view col-12">
+					<ListGroup>
+						<ProductListView key={idx} product={product} />
+					</ListGroup>
+				</Card>
+		))
 	)
 
 	renderIcons = (styles) => (

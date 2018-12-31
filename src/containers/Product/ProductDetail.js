@@ -41,7 +41,7 @@ import { fontSize } from '../../utils/font';
 import Title from '../../components/UI/Title';
 import { MediumScreen, SmallScreen } from '../../components/Device';
 
-class Product extends Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -589,11 +589,11 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-Product = reduxForm({
+ProductDetail = reduxForm({
   form: 'Product'
-})(Product)
+})(ProductDetail)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 
 

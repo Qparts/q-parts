@@ -1,9 +1,9 @@
 .product-list-view {
   background: none;
   .list-group {
+    overflow: hidden;
     .list-group-item {
       background: $white;
-      overflow: hidden;
       display: flex;
       margin-bottom: 30px;
       @include padding-right(10px);

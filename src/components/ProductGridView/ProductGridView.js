@@ -2,56 +2,50 @@ import React, { Component, Fragment } from 'react';
 import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
-import update from 'immutability-helper';
 import Link from '../UI/Link';
 
 class ProductGridView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isProductsHovering: new Array(this.props.currentProducts.length).fill(false)
+			isHovering: false
 		};
 	}
 
-	handleMouseHover = (idx) => {
+	handleMouseHover = () => {
 		this.setState({
-			isProductsHovering: update(this.state.isProductsHovering, {
-				[idx]: { $set: !this.state.isProductsHovering[idx] }
-			})
+			isHovering: !this.state.isHovering
 		})
 	}
 	render() {
-		return this.props.currentProducts.map((product, idx) => {
-			return <Fragment key={idx}>
-				<div className="product-grid-view col-6 col-md-4" >
-					<div
-						className=" product-holder"
-						onMouseEnter={this.handleMouseHover.bind(this, idx)}
-						onMouseLeave={this.handleMouseHover.bind(this, idx)}>
-						<div className="image-container" align="center">
-							<img src={"/img/product-3.jpg"} alt="" />
-							{
-								this.state.isProductsHovering[idx] &&
-								<div className="product-buttons">
-									<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
-									<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
-								</div>
-							}
+		const { product } = this.props
+		return <div className="product-grid-view col-6 col-md-4" >
+			<div
+				className=" product-holder"
+				onMouseEnter={this.handleMouseHover}
+				onMouseLeave={this.handleMouseHover}>
+				<div className="image-container" align="center">
+					<img src={"/img/product-3.jpg"} alt="" />
+					{
+						this.state.isHovering &&
+						<div className="product-buttons">
+							<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
+							<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
 						</div>
-						<div className="details-holder">
-							<span className="part-text">{product.desc}</span><br />
-							<span className="manufacturer-text">{product.manufacturer.name}</span>
-							<div className="product-review_slide">
-								<Stars values={product.averageRating} {...starsRating} />
-								<span className="product-review">{getLength(product.reviews)} review</span>
-							</div>
-							<span className="product-price">{product.salesPrice.toFixed(2)}</span>
-							<span className="product-currency">SR</span>
-						</div>
-					</div>
+					}
 				</div>
-			</Fragment>
-		})
+				<div className="details-holder">
+					<span className="part-text">{product.desc}</span><br />
+					<span className="manufacturer-text">{product.manufacturer.name}</span>
+					<div className="product-review_slide">
+						<Stars values={product.averageRating} {...starsRating} />
+						<span className="product-review">{getLength(product.reviews)} review</span>
+					</div>
+					<span className="product-price">{product.salesPrice.toFixed(2)}</span>
+					<span className="product-currency">SR</span>
+				</div>
+			</div>
+		</div>
 	}
 }
 
