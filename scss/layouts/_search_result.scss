@@ -10,13 +10,19 @@
       background-color: $light-gray;
       border: none;
       height: 35px;
+      @include padding-left(28px);
       margin-bottom: 19px;
       @include boarder-left-radius(20px, 20px);
       @include boarder-right-radius(0, 20px);
+    }
 
-      &::placeholder {
-        font-family: 'q-parts-icons';
-      }
+    .icon-search {
+      position: absolute;
+      z-index: 10;
+      top: 19%;
+      @include padding-left(12px);
+      @extend .q-placeholder;
+      color: $black !important;
     }
 
     .search-box-min-container {
@@ -123,7 +129,7 @@
       label {
         position: relative;
         border: 1px solid $light-gray-2;
-        padding: side-values(15px 25px 15px 15px);
+        padding: side-values(9px 25px 15px 15px);
         @include margin-right(4px);
         margin-bottom: 0;
 
@@ -145,6 +151,7 @@
       }
       .btn-gray-secondary {
         @include margin-left(10px);
+        padding: inherit;
         text-transform: capitalize;
       }
     }

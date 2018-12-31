@@ -1,16 +1,19 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
 import Select from 'react-select';
+// import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
 import { styles as commonStyles, categorySortOptions } from '../../constants';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import queryString from 'qs';
-import { Collapse, Card, CardBody, CardTitle } from 'reactstrap';
+import {
+	Collapse, Card, CardBody, CardTitle, InputGroup, InputGroupAddon, Input
+} from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
 import ProductListView from '../../components/ProductListView/ProductListView';
@@ -125,7 +128,8 @@ class TyresSearch extends Component {
 				opacity: this.state.selectedView === LIST ? 1 : 0.3
 			},
 			show: {
-				display: 'flex'
+				display: 'flex',
+				height: '41px'
 			}
 		}
 		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
@@ -143,15 +147,20 @@ class TyresSearch extends Component {
 											<p>{filterObject.diameter.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse1')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
 												<i className={this.getCollapseIcon('collapse1')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse1}>
 										<Card className="filter-body">
 											<CardBody>
-												<input className="form-control search-box" type="text" placeholder="5" />
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
 												{renderSearch({ filtration: filterObject.diameter, key: diameter }, Checkbox, onFilter, isChecked)}
 											</CardBody>
 										</Card>
@@ -164,15 +173,20 @@ class TyresSearch extends Component {
 											<p>{filterObject.profile.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse2')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse2')}>
 												<i className={this.getCollapseIcon('collapse2')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse2}>
 										<Card className="filter-body">
-											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
 											<CardBody>
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
 												{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
 											</CardBody>
 										</Card>
@@ -184,15 +198,20 @@ class TyresSearch extends Component {
 											<p>{filterObject.width.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse3')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse3')}>
 												<i className={this.getCollapseIcon('collapse3')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse3}>
 										<Card className="filter-body">
 											<CardBody>
-												<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
 												{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
 											</CardBody>
 										</Card>
@@ -205,15 +224,20 @@ class TyresSearch extends Component {
 											<p>{filterObject.brand.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse4')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse4')}>
 												<i className={this.getCollapseIcon('collapse4')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse4}>
 										<Card className="filter-body">
 											<CardBody>
-												<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
 												{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
 											</CardBody>
 										</Card>
@@ -226,9 +250,9 @@ class TyresSearch extends Component {
 											<p>{filterObject.price.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse5')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse5')}>
 												<i className={this.getCollapseIcon('collapse5')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse5}>
@@ -257,9 +281,9 @@ class TyresSearch extends Component {
 											<p>{filterObject.rating.label}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
-											<a onClick={this.toggle.bind(this, 'collapse6')}>
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse6')}>
 												<i className={this.getCollapseIcon('collapse6')} />
-											</a>
+											</Link>
 										</div>
 									</div>
 									<Collapse isOpen={this.state.collapse6}>
