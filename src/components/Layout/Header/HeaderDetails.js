@@ -97,7 +97,7 @@ class HeaderDetails extends Component {
                       {translate("general.signin")} <i className="icon-arrow-right" />
                     </button>
                     <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
-                    <a href="#"><i className="icon-google-logo btn-facebook" /></a>
+                    <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
                     <a href="#"><i className="icon-twitter btn-twitter" style={{ color: "#03a9f4" }} /></a>
                   </div>
                   <br />

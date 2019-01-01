@@ -40,6 +40,9 @@ import SectionHeader from '../../components/UI/SectionHeader';
 import {
   quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia
 } from '../../constants';
+//Modal
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Title from '../../components/UI/Title';
 
 const name = 'name';
 const phone = 'phone';
@@ -60,7 +63,8 @@ class Setting extends Component {
       AddAdressType: "",
       defaultAddress: null,
       newOrOldVechile: TAB_ONE,
-      sectionHeader: ''
+      sectionHeader: '',
+      modal: false
     }
 
   }
@@ -68,7 +72,7 @@ class Setting extends Component {
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
   }
-  
+
 
   componentDidUpdate(prevProps, prevState) {
     const { location: { pathname } } = this.props;
@@ -194,34 +198,66 @@ class Setting extends Component {
         break;
     }
   }
+  togglePopup = () =>{
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+  getDialogProps = () => {
+    const { dialogType } = this.state;
+    const { translate } = this.props;
 
+    switch (dialogType) {
+      case 'password':
+        return {
+          header: <Title
+            header={translate("dialog.updatePassword.title")}  />
+        }
+        case 'email':
+          return {
+            header: <Title
+              header={translate("dialog.updateEmail.title")}  />
+          }
+      default:
+        break;
+    }
+  }
+  handleDialog = (dialogType) => {
+    this.setState({ dialogType });
+    this.togglePopup();
+  };
   render() {
     const { translate } = this.props;
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Dialog header={translate("dialog.updateEmail.title")} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
-        <EditInfo
-          name={"email"}
-          type="text"
-          placeholder={translate("dialog.updateEmail.placeholder")}
-          onHide={this.onHide}
-          cancel={translate("dialog.updateEmail.cancel")}
-          update={translate("dialog.updateEmail.update")}
-          onSubmit={this.onEdit.bind(this, email)}
-        />
-      </Dialog>
+      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+         <ModalBody>
+           <EditInfo
+             name={"email"}
+             type="text"
+             placeholder={translate("dialog.updateEmail.placeholder")}
+             onHide={this.onHide}
+             cancel={translate("dialog.updateEmail.cancel")}
+             update={translate("dialog.updateEmail.update")}
+             onSubmit={this.onEdit.bind(this, email)}
+           />
+         </ModalBody>
+       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Dialog header={translate("dialog.updatePassword.title")} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
-        <ResetPassword
-          translate={translate}
-          showPhoneNo={false}
-          onHide={this.onHide}
-          onSubmit={this.onEdit.bind(this, password)}
-        />
-      </Dialog>
+      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <ResetPassword
+            translate={translate}
+            showPhoneNo={false}
+            toggle={this.togglePopup}
+            onSubmit={this.onEdit.bind(this, password)}
+          />
+        </ModalBody>
+      </Modal>
     }
-
     const addressDialog =
       <Dialog
         header={translate("dialog.address.title")}
@@ -285,7 +321,7 @@ class Setting extends Component {
                         name="name"
                         email="email"
                         password="password"
-                        onShowEditDialog={this.handleShowDialog}
+                        onShowEditDialog={this.handleDialog}
                         onSubmit={this.onEdit.bind(this, name)}
                         {...this.props} />
                       {dialog}
