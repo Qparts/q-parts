@@ -1,0 +1,45 @@
+.product-list-view {
+  background: none;
+  .list-group {
+    overflow: hidden;
+    .list-group-item {
+      background: $white;
+      display: flex;
+      margin-bottom: 30px;
+      @include padding-right(10px);
+      border: 0;
+      .image-container {
+        @include padding-right(26px);
+      }
+      .last-col {
+        .price-container {
+          height: 75px;
+          background-color: #f8f8f8;
+          border-radius: corner-values(20px 0 20px 20px);
+          padding-top: 28px;
+          @include padding-left(15px);
+          @include padding-right(86px);
+          white-space: nowrap;
+        }
+        .product-buttons {
+          margin-top: 11px;
+          position: static;
+          transform: none;
+          justify-content: flex-end;
+
+          .btn-detail,
+          .btn-cart {
+            background: $basic-gray;
+          }
+          .btn-detail {
+            width: 100%;
+          }
+        }
+      }
+      .product-review_list {
+        padding-top: 0;
+        padding-bottom: 22px;
+      }
+    }
+  }
+}

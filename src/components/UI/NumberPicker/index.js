@@ -9,7 +9,7 @@ const INCREMENT = 'increment';
 
 class NumberPicker extends Component {
 
-    handleClick = (event) => {
+    handleClick = (action, event) => {
         event.preventDefault();
 
         const { value, onChange } = this.props.input;
@@ -17,7 +17,7 @@ class NumberPicker extends Component {
         const min = 1;
         let newQuanValue = parseInt(value, constant.RADIX);
 
-        if (event.target.value === DECREMENT) {
+        if (action === DECREMENT) {
             const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
             onChange(decQuantity);
         } else {
@@ -31,18 +31,17 @@ class NumberPicker extends Component {
             <Button
                 className="btn-positive margin-right-3"
                 text="+"
-                value={INCREMENT}
-                onClick={(value) => this.handleClick(value)} />
+                onClick={this.handleClick.bind(this, INCREMENT)} />
             <input
                 className="form-control margin-right-3"
                 readOnly
+                disabled
                 {...this.props.input}
             />
             <Button
                 className="btn-negative"
                 text="-"
-                value={DECREMENT}
-                onClick={(value) => this.handleClick(value)} />
+                onClick={this.handleClick.bind(this, DECREMENT)} />
         </div>
     }
 }

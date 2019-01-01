@@ -1,18 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
 import Select from 'react-select';
+// import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
 import { styles as commonStyles, categorySortOptions } from '../../constants';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import queryString from 'qs';
-import { Collapse, Card, CardBody, CardTitle } from 'reactstrap';
+import {
+	Collapse, Card, CardBody, CardTitle, ListGroup, InputGroup, InputGroupAddon, Input
+} from 'reactstrap';
 
 import { isEmpty, replaceAll } from '../../utils';
+import ProductListView from '../../components/ProductListView/ProductListView';
+import { MediumScreen, SmallScreen } from '../../components/Device';
 
 const diameter = 'diameter';
 const profile = 'profile';
@@ -88,6 +93,39 @@ class TyresSearch extends Component {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
 
+	renderProducts = () => (
+		this.props.currentProducts.map((product, idx) => (
+			this.state.selectedView === GRID ? (
+				<ProductGridView key={idx} product={product} />
+			)
+				:
+				<Card className="product-list-view col-12">
+					<ListGroup>
+						<ProductListView key={idx} product={product} />
+					</ListGroup>
+				</Card>
+		))
+	)
+
+	renderIcons = (styles) => (
+		<Fragment>
+			<MediumScreen>
+				<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} />
+				<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
+			</MediumScreen>
+			<SmallScreen>
+				{
+					this.state.selectedView === GRID ?
+						<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} /> :
+
+						<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
+				}
+				<span className="seperator" />
+				<i className="icon-filter" onClick={this.changeView.bind(this, GRID)} />
+			</SmallScreen>
+		</Fragment>
+	)
+
 	render() {
 		const styles = {
 			iconGrid: {
@@ -96,8 +134,9 @@ class TyresSearch extends Component {
 			iconList: {
 				opacity: this.state.selectedView === LIST ? 1 : 0.3
 			},
-			show : {
-				display: 'flex'
+			show: {
+				display: 'flex',
+				height: '41px'
 			}
 		}
 		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
@@ -107,149 +146,171 @@ class TyresSearch extends Component {
 			<Fragment>
 				<section id="results-container">
 					<div className="container-fluid d-flex">
-						<div className="filter-container col-3">
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.diameter.label}</p>
+						<MediumScreen>
+							<div className="filter-container col-3">
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.diameter.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
+												<i className={this.getCollapseIcon('collapse1')} />
+											</Link>
+										</div>
 									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse1')}>
-											<i className={this.getCollapseIcon('collapse1')} />
-										</a>
-									</div>
+									<Collapse isOpen={this.state.collapse1}>
+										<Card className="filter-body">
+											<CardBody>
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
+												{renderSearch({ filtration: filterObject.diameter, key: diameter }, Checkbox, onFilter, isChecked)}
+											</CardBody>
+										</Card>
+									</Collapse>
+									<span className="h-seperator" />
 								</div>
-								<Collapse isOpen={this.state.collapse1}>
-									<Card className="filter-body">
-										<CardBody>
-											<input className="form-control search-box" type="text" placeholder="5" />
-											{renderSearch({ filtration: filterObject.diameter, key: diameter }, Checkbox, onFilter, isChecked)}
-										</CardBody>
-									</Card>
-								</Collapse>
-								<span className="h-seperator" />
-							</div>
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.profile.label}</p>
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.profile.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse2')}>
+												<i className={this.getCollapseIcon('collapse2')} />
+											</Link>
+										</div>
 									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse2')}>
-											<i className={this.getCollapseIcon('collapse2')} />
-										</a>
-									</div>
+									<Collapse isOpen={this.state.collapse2}>
+										<Card className="filter-body">
+											<CardBody>
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
+												{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
+											</CardBody>
+										</Card>
+									</Collapse>
 								</div>
-								<Collapse isOpen={this.state.collapse2}>
-									<Card className="filter-body">
-										<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
-										<CardBody>
-											{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
-										</CardBody>
-									</Card>
-								</Collapse>
-							</div>
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.width.label}</p>
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.width.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse3')}>
+												<i className={this.getCollapseIcon('collapse3')} />
+											</Link>
+										</div>
 									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse3')}>
-											<i className={this.getCollapseIcon('collapse3')} />
-										</a>
-									</div>
+									<Collapse isOpen={this.state.collapse3}>
+										<Card className="filter-body">
+											<CardBody>
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
+												{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
+											</CardBody>
+										</Card>
+									</Collapse>
 								</div>
-								<Collapse isOpen={this.state.collapse3}>
-									<Card className="filter-body">
-										<CardBody>
-											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
-											{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
-										</CardBody>
-									</Card>
-								</Collapse>
-							</div>
 
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.brand.label}</p>
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.brand.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse4')}>
+												<i className={this.getCollapseIcon('collapse4')} />
+											</Link>
+										</div>
 									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse4')}>
-											<i className={this.getCollapseIcon('collapse4')} />
-										</a>
-									</div>
+									<Collapse isOpen={this.state.collapse4}>
+										<Card className="filter-body">
+											<CardBody>
+												<InputGroup>
+													<InputGroupAddon addonType="prepend">
+														<i className="icon-search" />
+													</InputGroupAddon>
+													<Input className="search-box" type="text" placeholder="Search" />
+												</InputGroup>
+												{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
+											</CardBody>
+										</Card>
+									</Collapse>
 								</div>
-								<Collapse isOpen={this.state.collapse4}>
-									<Card className="filter-body">
-										<CardBody>
-											<input className="form-control search-box" type="text" name="" id="" placeholder="Search" />
-											{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
-										</CardBody>
-									</Card>
-								</Collapse>
-							</div>
 
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.price.label}</p>
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.price.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse5')}>
+												<i className={this.getCollapseIcon('collapse5')} />
+											</Link>
+										</div>
 									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse5')}>
-											<i className={this.getCollapseIcon('collapse5')} />
-										</a>
-									</div>
-								</div>
-								<Collapse isOpen={this.state.collapse5}>
-									<Card className="filter-body">
-										<CardBody>
-											{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
-											<div className="row d-flex">
-												<div className="col-lg-4 col-md-6 search-box-min-container">
-													<input className="form-control search-box-min" type="text" placeholder="Min" name="" id="" />
+									<Collapse isOpen={this.state.collapse5}>
+										<Card className="filter-body">
+											<CardBody>
+												{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
+												<div className="row d-flex">
+													<div className="col-lg-4 col-md-6 search-box-min-container">
+														<input className="form-control search-box-min" type="text" placeholder="Min" name="" id="" />
+													</div>
+													<div className="col-lg-4 col-md-6 search-box-max-container">
+														<input className="form-control search-box-max" type="text" placeholder="Max" name="" id="" />
+													</div>
+													<div className="col-lg-4 col-md-12 search-box-btn-container">
+														<Button text="Go" className="btn btn-primary" />
+													</div>
 												</div>
-												<div className="col-lg-4 col-md-6 search-box-max-container">
-													<input className="form-control search-box-max" type="text" placeholder="Max" name="" id="" />
-												</div>
-												<div className="col-lg-4 col-md-12 search-box-btn-container">
-													<Button text="Go" className="btn btn-primary" />
-												</div>
-											</div>
-										</CardBody>
-									</Card>
-								</Collapse>
-							</div>
-
-							<div className="filter-category card col-12">
-								<div className="row">
-									<div className="col-9 title">
-										<p>{filterObject.rating.label}</p>
-									</div>
-									<div className="col-3 dropdown-icon">
-										<a onClick={this.toggle.bind(this, 'collapse6')}>
-											<i className={this.getCollapseIcon('collapse6')} />
-										</a>
-									</div>
+											</CardBody>
+										</Card>
+									</Collapse>
 								</div>
-								<Collapse isOpen={this.state.collapse6}>
-									<Card className="filter-body">
-										<CardBody>
-											{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
-										</CardBody>
-									</Card>
-								</Collapse>
-							</div>
-						</div>
 
-						<div className="products-container col-9">
+								<div className="filter-category card col-12">
+									<div className="row">
+										<div className="col-9 title">
+											<p>{filterObject.rating.label}</p>
+										</div>
+										<div className="col-3 dropdown-icon">
+											<Link to="#" onClick={this.toggle.bind(this, 'collapse6')}>
+												<i className={this.getCollapseIcon('collapse6')} />
+											</Link>
+										</div>
+									</div>
+									<Collapse isOpen={this.state.collapse6}>
+										<Card className="filter-body">
+											<CardBody>
+												{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
+											</CardBody>
+										</Card>
+									</Collapse>
+								</div>
+							</div>
+						</MediumScreen>
+						<div className="products-container col-12 col-md-9">
 							<div className="search-control-panel row">
 								<Card className="col-12">
 									<CardTitle className="d-flex justify-content-between">
-										<label htmlFor="">1 - 60 of 200 results</label>
-										<div className="right-side-selection">
-											<label htmlFor="">Sort by</label>
+										<MediumScreen>
+											<label htmlFor="">1 - 60 of 200 results</label>
+										</MediumScreen>
+										<SmallScreen>
 											<Select
 												className="select__container"
 												classNamePrefix="select"
@@ -257,8 +318,22 @@ class TyresSearch extends Component {
 												defaultValue={categorySortOptions[0]}
 												options={categorySortOptions}
 												onChange={this.props.handleSelectChange} />
-											<i style={styles.iconGrid} className="icon-list" onClick={this.changeView.bind(this, GRID)} />
-											<i style={styles.iconList} className="icon-grid" onClick={this.changeView.bind(this, LIST)} />
+										</SmallScreen>
+										<div className="right-side-selection">
+											<MediumScreen>
+												<label htmlFor="">Sort by</label>
+												<Select
+													className="select__container"
+													classNamePrefix="select"
+													isSearchable={false}
+													defaultValue={categorySortOptions[0]}
+													options={categorySortOptions}
+													onChange={this.props.handleSelectChange} />
+											</MediumScreen>
+											<SmallScreen>
+												<span className="seperator" />
+											</SmallScreen>
+											{this.renderIcons(styles)}
 										</div>
 									</CardTitle>
 								</Card>
@@ -267,14 +342,14 @@ class TyresSearch extends Component {
 								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : styles.show}>
 									{
 										filtration.map((item, index) => (
-											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)}/></label>
+											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
 										))
 									}
 									<Button text="Clear all" className="btn-gray-secondary" onClick={onClear} />
 								</div>
 							</div>
 							<div className="products-panel row">
-								<ProductGridView currentProducts={this.props.currentProducts} />
+								{this.renderProducts()}
 							</div>
 						</div>
 					</div>

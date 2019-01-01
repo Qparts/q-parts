@@ -4,6 +4,7 @@ import Lightbox from 'react-images';
 import { Field, reduxForm, getFormValues } from 'redux-form';
 import NumberPicker from '../../components/UI/NumberPicker';
 import Button from '../../components/UI/Button';
+import Link from '../../components/UI/Link';
 import CompareProducts from '../../components/CompareProducts/CompareProducts';
 import RenderField from '../../components/RenderField/RenderField';
 import RenderRating from '../../components/RenderRating/RenderRating';
@@ -41,7 +42,7 @@ import { fontSize } from '../../utils/font';
 import Title from '../../components/UI/Title';
 import { MediumScreen, SmallScreen } from '../../components/Device';
 
-class Product extends Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -236,7 +237,7 @@ class Product extends Component {
         </div>
       </div>
       <div className="col-3 btn-wishlist pt-18">
-        <Button className="btn-primary" icon="icon-heart" />
+        <Link to="#" className="btn-primary" icon="icon-heart" />
       </div>
     </div>
   }
@@ -325,17 +326,6 @@ class Product extends Component {
           goToProduct={this.goToProduct} />
       </SmallScreen>
     </Fragment>
-    let reviewsTest = _.isEmpty(product) ? [] : product.reviews;
-    reviewsTest.push({
-      id: 3,
-      customerId: 1,
-      customerName: "Fareed Rezaei",
-      rating: 4,
-      text: "This is a good product indeed",
-      productId: 1278,
-      created: 1540639115285,
-      status: "A"
-    })
 
     const renderRecentProduct = <Fragment>
       <RenderProducts
@@ -358,7 +348,7 @@ class Product extends Component {
                   <div className="row top-row">
                     <div className="col-5 group-header-opacity_first">
                       <div className="btn-back">
-                        <Button className="btn-primary" text={"back"} icon="icon-back" isReverseOrder={true} />
+                        <Link to="#" className="btn-primary" text={"back"} icon="icon-back" isReverseOrder={true} />
                       </div>
                     </div>
                     <div className="col-7">
@@ -368,7 +358,7 @@ class Product extends Component {
                 </MediumScreen>
                 <form className="row" onSubmit={this.props.handleSubmit(this.submit)}>
                   {
-                    this.props.product && <Fragment>
+                    product && <Fragment>
                       <div className="col-12 col-md-5 product-item_image">
                         <img
                           style={commonStyles.cursor}
@@ -411,6 +401,7 @@ class Product extends Component {
                             </div>
                             <div className="col-12 d-flex product-item_buttons">
                               <Field
+                                type="text"
                                 name="quantity"
                                 component={NumberPicker}
                               />
@@ -469,9 +460,10 @@ class Product extends Component {
                             </div>
                             <div style={styles.productReviews.btnLinkParent} className="btn-link_parent">
                               <span className={this.state.canWriteReview ? "h-seperator" : "sm-seperator"} />
-                              <Button
+                              <Link
+                                to="#"
                                 style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
-                                type="submit" className="btn-link"
+                                className="btn-link"
                                 text={translate("product.writeReview.title")}
                                 onClick={this.handleWriteReview.bind(this, true)}
                                 icon="icon-arrow-right" />
@@ -513,7 +505,7 @@ class Product extends Component {
                         <Card className="border customers-reviews-card">
                           <ListGroup>
                             {
-                              reviewsTest.map((review, idx) => {
+                              product.reviews.map((review, idx) => {
                                 return <ListGroupItem>
                                   <div className="customers-reviews" style={styles.customerReviews.div} key={idx}>
                                     <div className="d-flex flex-row">
@@ -589,11 +581,11 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-Product = reduxForm({
+ProductDetail = reduxForm({
   form: 'Product'
-})(Product)
+})(ProductDetail)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 
 

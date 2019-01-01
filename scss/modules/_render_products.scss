@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
 }
-.product-title{
+.product-title {
   @include font-size(15px);
   font-weight: normal;
   @include font-size(20px);
@@ -57,4 +57,71 @@
   font-weight: normal;
   line-height: normal;
   color: $dark-charcoal-grey;
+}
+
+.product-buttons {
+  position: absolute;
+  width: auto;
+  display: flex;
+  top: 50%;
+  #{$left}: 50%;
+  transform: translate(-50%, -50%);
+
+  .btn-detail {
+    @extend .btn-primary;
+    transition: none;
+    &:hover,
+    &:focus {
+      background: $dark-charcoal-grey;
+      opacity: 0.8;
+    }
+    white-space: nowrap;
+    border-radius: corner-values(0 0 0 20px) !important;
+    background: $charcoal-grey-80;
+    span {
+      @include font-size(15px);
+      font-weight: normal;
+      text-transform: capitalize;
+      color: $basic-dark-white-70;
+    }
+  }
+  .btn-cart {
+    @extend .btn-primary;
+    transition: none;
+    &:hover,
+    &:focus {
+      background: $dark-charcoal-grey;
+      opacity: 0.8;
+    }
+    position: relative;
+    @include margin-left(1px);
+    background: $charcoal-grey-80;
+    border-radius: corner-values(0 20px 20px 0) !important;
+    color: $white;
+
+    span {
+      position: relative;
+      .icon-cart {
+        position: relative;
+        top: 3px;
+        @include font-size(26px);
+      }
+      .icon-plus {
+        position: absolute;
+        background: $white;
+        border-radius: 20px;
+        padding: 3px;
+        width: 15px;
+        height: 15px;
+        @include font-size(9px);
+        #{$left}: 14px;
+        color: $brand-color;
+      }
+    }
+  }
+  .product-details {
+    @include font-size(14px);
+    font-weight: normal;
+    color: $dark-70;
+  }
 }

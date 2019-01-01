@@ -478,3 +478,9 @@
 .underline{
   text-decoration: underline;
 }
+
+.q-placeholder {
+  font-family: Roboto;
+  @include font-size(14px);
+  font-weight: normal !important;
+}

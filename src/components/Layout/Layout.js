@@ -37,7 +37,7 @@ class Layout extends Component {
     this.setState({ dialogType });
     this.togglePopup();
   };
-  togglePopup = () =>{
+  togglePopup = () => {
     this.setState({
       modal: !this.state.modal
     })
@@ -81,9 +81,9 @@ class Layout extends Component {
       case 'vehicle':
         return <Vehicles />
       case 'signin':
-        return <Login toggle={this.togglePopup}/>
+        return <Login toggle={this.togglePopup} />
       case 'search':
-        return <Search toggle={this.togglePopup}/>
+        return <Search toggle={this.togglePopup} />
 
       default:
         break;

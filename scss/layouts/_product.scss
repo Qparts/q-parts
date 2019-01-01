@@ -277,10 +277,12 @@
                   text-transform: capitalize;
                 }
                 .btn-primary {
+                  @include margin-left(5px);
                   border-radius: corner-values(0 0 20px 0) !important;
                 }
                 .btn-secondary {
                   border-radius: corner-values(0 0 0 20px) !important;
+                  border: 1px solid #f6f6f6;
                 }
               }
             }

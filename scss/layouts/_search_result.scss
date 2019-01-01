@@ -10,13 +10,25 @@
       background-color: $light-gray;
       border: none;
       height: 35px;
+      @include padding-left(28px);
       margin-bottom: 19px;
       @include boarder-left-radius(20px, 20px);
       @include boarder-right-radius(0, 20px);
 
       &::placeholder {
-        font-family: 'q-parts-icons';
+        opacity: 0.5;
+        color: $placeholder-color;
       }
+    }
+
+    .icon-search {
+      position: absolute;
+      z-index: 10;
+      top: 19%;
+      @include padding-left(12px);
+      @extend .q-placeholder;
+      opacity: 0.5;
+      color: $black !important;
     }
 
     .search-box-min-container {
@@ -91,8 +103,31 @@
     width: 100%;
     .search-control-panel {
       margin: side-values(20px 0 0px 0);
-      @include padding-right(30px);
       margin-bottom: 26px;
+      .select__container {
+        position: relative !important;
+        @include margin-left(10px);
+        @include margin-right(22px);
+        height: 35px;
+        background-color: #f6f6f6;
+        border-radius: side-values(20px 0 20px 20px);
+        .select__single-value {
+          font-family: Roboto;
+          @include font-size(15px);
+          font-weight: normal;
+          color: $dark-charcoal-grey;
+        }
+      }
+      .seperator {
+        position: absolute;
+        background: $light-gray;
+        top: 0;
+        height: 100%;
+
+        &:nth-of-type(2) {
+          #{$right}: 75px;
+        }
+      }
     }
     .selected-filters-panel {
       margin-bottom: 21px;
@@ -100,13 +135,13 @@
       label {
         position: relative;
         border: 1px solid $light-gray-2;
-        padding: side-values(15px 25px 15px 15px);
-        margin-right: 4px;
+        padding: side-values(9px 25px 15px 15px);
+        @include margin-right(4px);
         margin-bottom: 0;
 
         &:last-of-type {
           border-radius: corner-values(0 0 20px 0);
-          margin-right: 0;
+          @include margin-right(0);
         }
         &:first-child {
           border-radius: corner-values(20px 0 0 20px);
@@ -115,13 +150,14 @@
           position: absolute;
           cursor: pointer;
           @include font-size(8px);
-          right: 5px;
+          #{$right}: 5px;
           top: 5px;
           color: $light-gray-2;
         }
       }
       .btn-gray-secondary {
-        margin-left: 10px;
+        @include margin-left(10px);
+        padding: inherit;
         text-transform: capitalize;
       }
     }
@@ -145,25 +181,27 @@
         display: flex;
         align-items: center;
         @include font-size(14px);
-        .select__container {
-          position: relative !important;
-          margin-left: 10px;
-          margin-right: 22px;
-          height: 35px;
-          background-color: #f6f6f6;
-          border-radius: side-values(20px 0 20px 20px);
-          .select__single-value {
-            font-family: Roboto;
-            @include font-size(15px);
-            font-weight: normal;
-            color: $dark-charcoal-grey;
+        .icon-list {
+          @include margin-right(10px);
+          cursor: pointer;
+          @include small-screen {
+            opacity: 1 !important;
+            @include margin-right(20px);
           }
         }
-        .icon-list {
-          margin-right: 10px;
+        .icon-grid {
+          cursor: pointer;
+          @include small-screen {
+            opacity: 1 !important;
+          }
         }
         i {
-          font-size: 24px;
+          position: relative;
+          @include font-size(24px);
+          @include small-screen {
+            @include padding-left(19px);
+            @include margin-right(20px);
+          }
         }
       }
     }
