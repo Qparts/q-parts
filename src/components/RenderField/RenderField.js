@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import ReactPasswordStrength from 'react-password-strength'
+import ReactPasswordStrength from 'react-password-strength';
+import { InputGroup, InputGroupAddon } from 'reactstrap'
+import Link from '../UI/Link'
 import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
@@ -79,14 +81,24 @@ class RenderField extends Component {
               </Fragment>
           }
           {this.props.hasPasswordStrength &&
-            <ReactPasswordStrength
-              style={styles.border}
-              minLength={5}
-              minScore={2}
-              changeCallback={this.callback}
-              scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
-              inputProps={{ ...this.props.input, placeholder: this.props.placeholder }}
-              {...this.props} />
+            <InputGroup>
+              <ReactPasswordStrength
+                style={styles.border}
+                minLength={5}
+                minScore={2}
+                changeCallback={this.callback}
+                scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
+                inputProps={{ ...this.props.input, placeholder: this.props.placeholder }}
+                {...this.props} />
+              <InputGroupAddon addonType="append">
+                <Link
+                  className="password-visibility"
+                  to="#"
+                  text="Show"
+                  icon="icon-show-password"
+                  isReverseOrder />
+              </InputGroupAddon>
+            </InputGroup>
           }
           <Fragment>
             {this.props.meta.touched &&

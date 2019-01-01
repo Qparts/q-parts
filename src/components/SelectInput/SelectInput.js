@@ -17,8 +17,7 @@ export default class SelectInput extends Component {
             <label>{this.props.label}</label> <br />
                 <sub>{this.props.sub}</sub>
                 <Select
-                    className={css(style.border)}
-                    styles={styles.selectForm}
+                    className={`select ${css(style.border)}`}
                     classNamePrefix="select"
                     {...this.props}
                     {...this.props.input}
