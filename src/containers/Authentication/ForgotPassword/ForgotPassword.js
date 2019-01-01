@@ -83,9 +83,6 @@ class ForgotPassword extends Component {
                 <a className="bg-whatsapp">
                   <img src="/img/whatsapp-logo.svg" alt="whatsapp"/>
                 </a>
-                <a className="back-top" href="#forgot-password-mobile">
-                  <p><i className="icon-to-up" /></p>
-                </a>
               </section>
             </SmallScreen>
           </Fragment>

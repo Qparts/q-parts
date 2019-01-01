@@ -10,7 +10,7 @@ import Setting from '../containers/Setting/Setting'
 import QuotationRequest from '../components/QuotationRequest/QuotationRequest';
 import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import Checkout from '../components/Checkout/Checkout';
-import Product from '../containers/Product/Product';
+import ProductDetail from '../containers/Product/ProductDetail';
 import Accessories from '../components/Accessories/Accessories';
 import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
@@ -87,7 +87,7 @@ export const routes = (isAuth) => [
     },
     {
         path: "/products/:productId",
-        component: Product
+        component: ProductDetail
     },
     {
         path: "/accessories",

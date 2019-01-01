@@ -1,96 +1,42 @@
-.product-holder {
-  padding-top: 10px;
-  background-color: $white;
-  @include padding-left(0);
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-  @include box-shadow;
-
-  .image-container {
-    position: relative;
-    img {
-      max-width: 90%;
+.product-grid-view {
+  .product-holder {
+    padding-top: 10px;
+    background-color: $white;
+    @include padding-left(0);
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    @include box-shadow;
+    @include small-screen {
+      box-shadow: none;
     }
-  }
-
-  .details-holder {
-    padding-left: 12px;
-  }
-
-  .part-text {
-    text-transform: capitalize;
-    @include font-size(17px);
-  }
-  .manufacturer-text {
-    @include padding-right(11px);
-    @include font-size(15px);
-    font-weight: bold;
-  }
-
-  .sales-price {
-    @include font-size(20px);
-    font-weight: normal;
-  }
-  .currency {
-    @include font-size(15px);
-  }
-  .hover-buttons {
-    position: absolute;
-    width: auto;
-    display: flex;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    .btn-detail {
-      @extend .btn-primary;
-      transition: none;
-      &:hover,
-      &:focus {
-        background: $dark-charcoal-grey;
-        opacity: 0.8;
-      }
-      white-space: nowrap;
-      border-radius: corner-values(0 0 0 20px) !important;
-      background: $charcoal-grey-80;
-      span {
-        @include font-size(15px);
-        font-weight: normal;
-        text-transform: capitalize;
-        color: $basic-dark-white-70;
-      }
-    }
-    .btn-cart {
-      @extend .btn-primary;
-      transition: none;
-      &:hover,
-      &:focus {
-        background: $dark-charcoal-grey;
-        opacity: 0.8;
-      }
+  
+    .image-container {
       position: relative;
-      margin-left: 1px;
-      background: $charcoal-grey-80;
-      border-radius: corner-values(0 20px 20px 0) !important;
-      color: $white;
-
-      .icon-cart {
-        position: relative;
-        top: 3px;
-        @include font-size(26px);
+      img {
+        max-width: 90%;
       }
-      .icon-plus {
-        position: absolute;
-        background: $white;
-        border-radius: 20px;
-        padding: 3px;
-        width: 15px;
-        height: 15px;
-        @include font-size(9px);
-        top: 8px;
-        right: 13px;
-        color: $brand-color;
-      }
+    }
+  
+    .details-holder {
+      @include padding-left(12px);
+    }
+  
+    .part-text {
+      text-transform: capitalize;
+      @include font-size(17px);
+    }
+    .manufacturer-text {
+      @include padding-right(11px);
+      @include font-size(15px);
+      font-weight: bold;
+    }
+  
+    .sales-price {
+      @include font-size(20px);
+      font-weight: normal;
+    }
+    .currency {
+      @include font-size(15px);
     }
   }
 }

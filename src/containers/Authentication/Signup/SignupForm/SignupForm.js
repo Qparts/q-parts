@@ -44,7 +44,7 @@ class SignupForm extends Component {
             </div>
           </div>
         </div>
-        <div className="form-group">
+        <div className="one_shadow-input form-group">
           <Field
             label={translate("form.signup.email")}
             name="email"
@@ -83,7 +83,7 @@ class SignupForm extends Component {
         </div>
         {
           this.props.showPassword && (
-            <div className="form-group password-strength">
+            <div className="form-group one_shadow-input password-strength">
               <Field
                 hasPasswordStrength={true}
                 label={translate("form.signup.password")}

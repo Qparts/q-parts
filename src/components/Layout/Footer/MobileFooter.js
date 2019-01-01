@@ -1,11 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
+import ScrollToTop from '../../ScrollToTop';
 
 class Footer extends Component {
   render() {
     return (
       <section id="mobile-footer">
+        <ScrollToTop />
         <div className="container-fluid">
           <Accordion>
             <AccordionTab header="CUSTOMER SERVICE" headerClassName="accordion-header">
@@ -52,16 +54,16 @@ class Footer extends Component {
               </p>
                 </div>
                 <div className="col-12">
-                <form className="form-inline">
-                  <div className="col-6">
-                    <input type="text" className="form-control" placeholder="Enter Email" />
-                  </div>
-                  <div className="col-6">
-                  <button type="submit" className="btn-primary">
-                      Subscribe <i className="icon-arrow-right" />
+                  <form className="form-inline">
+                    <div className="col-6">
+                      <input type="text" className="form-control" placeholder="Enter Email" />
+                    </div>
+                    <div className="col-6">
+                      <button type="submit" className="btn-primary">
+                        Subscribe <i className="icon-arrow-right" />
                       </button>
-                  </div>
-                </form>
+                    </div>
+                  </form>
                 </div>
               </div>
             </AccordionTab>
