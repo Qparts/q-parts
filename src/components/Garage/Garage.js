@@ -12,16 +12,12 @@ class Garage extends Component {
  }
  render() {
   const { translate } = this.props;
-  const btn_add =<p><i className="icon-add-vehicle"/><p>{translate("setting.garage.add")}</p></p>
-  const btn_delete =<p><i className="icon-trash"/>{translate("setting.garage.delete")}</p>
-  const btn_edit =<p><i className="icon-edit"/>Edit</p>
-  const btn_add_vehivle =<p><i className="icon-add"/><p>{translate("setting.garage.add")}</p></p>
   let garage;
   if(this.props.vehiclesFormat.length>0){
     garage = <div id="Garage-container">
-     <div className="Garage-add">
+     <div className="Garage-add justify-content-between">
        <p>Add View, manage and find parts for the vehicles in your garage</p>
-      <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={btn_add} />
+      <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
      </div>
      <span class="seperator"></span>
      {
@@ -33,14 +29,14 @@ class Garage extends Component {
               check: !this.state.check
             })}
             checked={this.state.check}
-            label="Default Address"
+            label="Default Vehicles"
           />
         <div className="Garage-box_item-label">
           <p>{vehicle.label}</p>
           <p>{vehicle.vin}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text={btn_edit}  />
+          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
          </div>
         </div>
         <div className="col-1">
@@ -58,8 +54,8 @@ class Garage extends Component {
           <p>{vehicle.label}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text={btn_edit} />
-          <Button type="button" className="btn btn-delete" text={btn_delete} onClick={this.props.onDeleteVehicle.bind(this, vehicle)} />
+          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
          </div>
         </div>
        </div>
@@ -71,14 +67,17 @@ class Garage extends Component {
       <p>Store vehicles in your garage and Get product recommendations</p>
       <span class="seperator"></span>
       <div className="add-vehicle">
-        <i className="icon-add-vehicle main-icon"/>
+        <div className="icon-content">
+          <p className="icon-vehicle"/>
+          <span className="vehi-rotate"><span>Vehicle</span></span>
+        </div>
         <p className="vehicle-text">No Saved Vehicles</p>
-        <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={btn_add_vehivle} />
+        <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder />
       </div>
       </div>
   }
   return (
-   <div style={{width:'70%'}}>
+   <div className="col-10">
      {garage}
    </div>
   )

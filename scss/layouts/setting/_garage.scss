@@ -11,24 +11,21 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: $left;
-      margin-right: 100px;
       margin-bottom: 0px;
       margin-top: 20px;
     }
     Button{
       display: flex !important;
       background: $brand-color;
-      p{
-        display: flex;
-        margin: 0px !important;
-        color: $white !important;
-        i{
-          @include font-size(30px);
-        }
-        p{
-          line-height: 35px;
-          @include margin-left(5px !important);
-        }
+      display: flex;
+      margin: 0px !important;
+      color: $white !important;
+      .icon-add-vehicle{
+        @include font-size(30px);
+      }
+      span{
+        line-height: 41px;
+        @include margin-left(6px);
       }
     }
   }
@@ -84,32 +81,30 @@
         display: flex;
         margin-top: 18px;
         .btn-link{
-          display: grid !important;
           @include margin-left(20px);
           width: 66px;
           text-align: center;
           background: $light-gray !important;
-          @include font-size(13px);
           border-radius: side-values(0 20px 20px 20px) !important;
           margin-#{$right}: 10px;
           color: $black;
-          p{
-            margin-bottom: 0px;
-            i{
-              @include margin-right(5px);
-            }
+          .icon-edit{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(6px);
           }
         }
         .btn-delete{
-          display: grid !important;
-          @include font-size(13px);
           background: none;
           opacity: 0.6;
-          p{
-            margin-bottom: 0px;
-            i{
-              @include margin-right(2px);
-            }
+          .icon-trash{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(2px);
           }
         }
       }
@@ -218,10 +213,36 @@
   }
   .add-vehicle{
     text-align: center;
-    .main-icon{
-      @include font-size(100px);
-      margin-top: 20px;
-      opacity: 0.1;
+    .icon-content{
+      justify-content: center;
+      display: flex;
+      p{
+        text-align: center;
+        @include font-size(100px);
+        margin-top: 20px;
+        opacity: 0.1;
+      }
+      .vehi-rotate{
+        @include margin-left(-30px);
+        margin-top: 50px;
+        height: 30px;
+        width: 70px;
+        border: 3px solid #dbd6d6;
+        border-radius: 40%;
+        padding: 5px;
+        transform: rotate(90deg);
+        text-align: center;
+        span{
+          font-family: Roboto;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: #37363b;
+        }
+      }
     }
     .vehicle-text{
       opacity: 0.5;
@@ -239,15 +260,13 @@
       display: inline-flex !important;
       background: $brand-color;
       color: $white;
-      p{
-        display: flex;
-        i{
-          @include font-size(25px);
-        }
-        p{
-          line-height: 30px;
-          @include margin-left(5px);
-        }
+      margin-top: 16px;
+      .icon-add-vehicle{
+        @include font-size(30px);
+      }
+      span{
+        line-height: 41px;
+        @include margin-left(6px);
       }
     }
   }
