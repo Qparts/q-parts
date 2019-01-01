@@ -43,6 +43,8 @@ import {
 //Modal
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Title from '../../components/UI/Title';
+//whatsapp
+import CustomerService from '../../components/CustomerService/CustomerService';
 
 const name = 'name';
 const phone = 'phone';
@@ -418,6 +420,13 @@ class Setting extends Component {
                   redirectTo="/setting/profile" />
 
               </Switch>
+            </div>
+            <div className="row">
+              <a className="bg-whatsapp">
+                <CustomerService
+                  messages={["Have a Question?", "Ask a Special"]}
+                  url="" />
+              </a>
             </div>
           </section>
         </div>

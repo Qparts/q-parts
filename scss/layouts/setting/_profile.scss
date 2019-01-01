@@ -422,19 +422,6 @@ form{
         }
       }
     }
-    .bg-whatsapp{
-      margin-#{$left}: 77%;
-      width: 151px;
-      height: 46px;
-      background: linear-gradient(to top, #f9f9f9, $white);
-      text-transform: none;
-      color: black;
-      border-radius: side-values(20px 20px 0px 20px) !important;
-      span{
-        width: 90px;
-        text-align: $left;
-      }
-    }
   }
 }
 .component-background{
