@@ -48,6 +48,7 @@ const name = 'name';
 const phone = 'phone';
 const email = 'email';
 const password = 'password';
+const garage_pupop = 'garage';
 // const vehicle = 'vehicle';
 
 
@@ -128,7 +129,7 @@ class Setting extends Component {
   handleShowDialog = (type, event) => {
     event.preventDefault();
 
-    this.setState({ visible: true, dialogType: type });
+    this.setState({ modal: !this.state.modal, dialogType: type });
   }
 
   handleShowGoogleMap = () => {
@@ -218,6 +219,12 @@ class Setting extends Component {
             header: <Title
               header={translate("dialog.updateEmail.title")}  />
           }
+        case 'garage':
+          return {
+            header: <Title
+              header={translate("dialog.vehicle.title")}
+              subHeader={"Store vehicles in your garage and Get product recommendations"} />
+          }
       default:
         break;
     }
@@ -288,22 +295,19 @@ class Setting extends Component {
         />
       </Dialog>
 
-    const garageDialog =
-      <Dialog
-        header={translate("dialog.vehicle.title")}
-        maximizable={true}
-        visible={this.state.visible}
-        positionTop={0}
-        minWidth={1000}
-        modal={true}
-        onHide={this.onHide}>
+    let garageDialog;
+    if (this.state.dialogType === garage_pupop)
+    garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
         <Vehicles
           newOrOldVechile={this.state.newOrOldVechile}
           onTabChange={this.handleChange}
+          toggle={this.togglePopup}
           displayTwoTabs={false}
         />
-      </Dialog>
-
+        </ModalBody>
+      </Modal>
     return (
       <section id="setting">
         <SectionHeader text={this.state.sectionHeader} />
