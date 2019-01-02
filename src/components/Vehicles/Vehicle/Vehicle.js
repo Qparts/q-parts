@@ -15,13 +15,14 @@ import * as validations from '../../../utils';
 import { isAuth } from '../../../utils';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
+import Checkbox from '../../UI/Checkbox';
 
 class Vehicle extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      defaultVehicle: ''
+      check: false
     }
   }
 
@@ -40,10 +41,9 @@ class Vehicle extends Component {
     }
   }
 
-  handleDefaultVehicle = e => {
-    this.setState({ defaultVehicle: e.value })
+  onCancle = () =>{
+    this.props.toggle();
   }
-
 
   render() {
     const { handleSubmit, vehicles, translate } = this.props;
@@ -77,7 +77,7 @@ class Vehicle extends Component {
       <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="row">
           <div className="group-shadow-input" />
-          <div className="col-md-3 div-first-rounded m-sm">
+          <div className="col-md-12 div-first-rounded">
             <Field
               name="make"
               placeholder={translate("form.vehicle.make")}
@@ -85,7 +85,7 @@ class Vehicle extends Component {
               options={makeData}
               validate={[validations.required]} />
           </div>
-          <div className="col-md-3 m-sm">
+          <div className="col-md-12 div-rounded">
             <Field
               name="model"
               placeholder={translate("form.vehicle.model")}
@@ -93,7 +93,7 @@ class Vehicle extends Component {
               options={modelData}
               validate={[validations.required]} />
           </div>
-          <div className="col-md-3 m-sm">
+          <div className="col-md-12 div-rounded">
             <Field
               name="year"
               placeholder={translate("form.vehicle.year")}
@@ -101,7 +101,7 @@ class Vehicle extends Component {
               options={yearData}
               validate={[validations.required]} />
           </div>
-          <div className="col-md-3 div-last-rounded m-sm">
+          <div className="col-md-12 div-last-rounded">
             <Field
               name="vin"
               placeholder={translate("form.vehicle.vin")}
@@ -116,14 +116,18 @@ class Vehicle extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6 col-sm-12 align-self-end">
-            <div className="vehicle-radio">
-              <RadioButton value={true} name="defaultAddress" onChange={this.handleDefaultVehicle} checked={true === this.state.defaultVehicle} />
-              <label>{translate("form.signup.defaultVehicle")}</label>
-            </div>
+          <div className="col-md-12 align-self-end vehicle-radio">
+            <Checkbox
+              onChange={e => this.setState({
+                check: !this.state.check
+              })}
+              checked={this.state.check}
+              label={translate("form.signup.defaultVehicle")}
+            />
           </div>
-          <div className="col-md-6 col-sm-12 text-align">
-            <Button className="btn-primary" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
+          <div className="footer col-12">
+            <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
+            <Button className="btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
           </div>
         </div>
       </form>

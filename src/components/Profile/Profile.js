@@ -205,13 +205,6 @@ class profile extends Component {
             <button type="reset" className="btn btn-light"><p>{translate("setting.accountSetting.cancel")}</p></button>
             <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className="icon-arrow-right" /></p></button>
           </div>
-          <div className="row">
-            <a className="bg-whatsapp">
-              <CustomerService
-                messages={["Have a Question?", "Ask a Special"]}
-                url="" />
-            </a>
-          </div>
         </div>
       </form>
     );

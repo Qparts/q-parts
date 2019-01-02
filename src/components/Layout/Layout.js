@@ -57,7 +57,8 @@ class Layout extends Component {
         return {
           header: <Title
             header={translate("dialog.vehicle.title")}
-            subHeader={translate("dialog.vehicle.subTitle")} />
+            subHeader={translate("dialog.vehicle.subTitle")} />,
+          className: "garage-popup"
         }
       case 'signin':
         return {

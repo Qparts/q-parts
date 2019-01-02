@@ -209,32 +209,96 @@ export const clearAddress = () => {
 }
 
 export const login = (email, password, serverErrorField, currentLanguage) => {
-  return (dispatch) => {
-    let defaultLanguage = null;
-    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/email`, {
-      email, password
-    })
-      .then(res => {
-        defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
-        dispatch({
-          type: LOGIN_SUCCEEDED,
-          payload: {
-            data: res.data,
-          }
-        })
-        dispatch(changeDefaultLanguage(defaultLanguage))
-      })
-      .catch(error => {
-        dispatch({
-          type: REQUEST_FAILED,
-          payload: {
-            error: error.response.data,
-            field: serverErrorField,
-            currentLanguage,
-          }
-        })
-      })
+  // return (dispatch) => {
+  //   let defaultLanguage = null;
+  //   return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/email`, {
+  //     email, password
+  //   })
+  //     .then(res => {
+  //       defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+  //       dispatch({
+  //         type: LOGIN_SUCCEEDED,
+  //         payload: {
+  //           data: res.data,
+  //         }
+  //       })
+  //       dispatch(changeDefaultLanguage(defaultLanguage))
+  //     })
+  //     .catch(error => {
+  //       dispatch({
+  //         type: REQUEST_FAILED,
+  //         payload: {
+  //           error: error.response.data,
+  //           field: serverErrorField,
+  //           currentLanguage,
+  //         }
+  //       })
+  //     })
+  // }
+
+  // :TODO temp login should be removed once I get the backend working
+  const data = {
+    "customer": {
+      "id": 123,
+      "socialMedia": [],
+      "firstName": "Ahmed",
+      "lastName": "Shaaban",
+      "mobile": "0212116539",
+      "email": "ahmed.vuw@gmail.com",
+      "countryId": 1,
+      "addresses": [{
+        "firstName": "Ahmed",
+        "lastName": "Shaaban",
+        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
+        "country": "Saudi Arabia",
+        "city": "Dammam",
+        "region": "EP",
+        "zipCode": "1111"
+      },
+      {
+        "firstName": "Ahmed",
+        "lastName": "Shaaban",
+        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
+        "country": "Saudi Arabia",
+        "city": "Dammam",
+        "region": "EP",
+        "zipCode": "1111"
+      }
+      ],
+      "vehicles": [{
+        "id": 3,
+        "vehicleId": 502,
+        "customerId": 1,
+        "vin": "JM71234W678901M30",
+        "vehicle": {
+          "id": 502,
+          "model": {
+            "id": 43,
+            "name": "Tucson",
+            "nameAr": "توسان"
+          },
+          "make": {
+            "id": 4,
+            "name": "Hyundai",
+            "nameAr": "هيونداي"
+          },
+          "year": 2017
+        }
+      }],
+      "defaultLang": "en"
+    },
+    "token": "12345"
   }
+  return (dispatch) => {
+    dispatch({
+      type: LOGIN_SUCCEEDED,
+      payload: {
+        data: data,
+      }
+    })
+    dispatch(changeDefaultLanguage('en'));
+  }
+  // up to here
 }
 
 export const onSubmitSignup = (customer, currentLanguage) => {
