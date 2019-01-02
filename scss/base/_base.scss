@@ -85,6 +85,10 @@ label {
 img{
   max-width: 100%;
 }
+.section{
+  margin-bottom: $section-p-b;
+}
+
 /*
 .padding-md-left-6{
   @include large-medium-screens{

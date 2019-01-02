@@ -330,7 +330,7 @@ class Product extends Component {
           goToProduct={this.goToProduct} />
       </SmallScreen>
     </Fragment>
-    let reviewsTest = product ? product.reviews : null;
+    let reviewsTest = _.isEmpty(product) ? [] : product.reviews;
     reviewsTest.push({
       id: 3,
       customerId: 1,

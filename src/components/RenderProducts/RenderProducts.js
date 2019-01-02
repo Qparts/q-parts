@@ -146,8 +146,8 @@ export default class RenderProducts extends Component {
         <Slider {...constant.sliderSetting}>
           {
             data.map((product, idx) => (
-              <a href="" key={idx} className="card" onClick={this.props.goToProduct.bind(this, product)}>
-                <img className="card-img-top" src={"/img/product-1.jpg"} alt="product" />
+              <a href="" key={idx} className="card">
+                <img className="card-img-top" src={product.imageThumbnail} alt="product" />
                 <div className="card-body">
                   <h5 className="card-title">{product.desc}</h5>
                   <p className="product-brand">{product.manufacturer.name}</p>

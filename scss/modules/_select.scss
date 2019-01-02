@@ -21,9 +21,6 @@
     @extend .position-static;
     width: auto !important;
   }
-  .css-1rtrksz{
-    padding: 0;
-  }
   .select__single-value{
     position: static;
     max-width: 100%;
@@ -67,10 +64,12 @@
         cursor: pointer;
         @include font-size(13px);
         border-bottom: 1px solid $light-gray;
+        background: $white;
         &:last-child{
           border-bottom-width: 0;
         }
-        &:hover{
+        &:hover,
+        &:Focus{
           background: $light-gray !important;
         }
 
@@ -81,11 +80,8 @@
 .select__indicator-separator{
   display: none;
 }
-.css-1ep9fjw,
-.css-1sjym57{
-  padding: 0 !important;
-}
  .select__indicator{
+   padding: 0 !important;
   svg{
     width: 15px !important;
     height: 15px !important;

@@ -165,7 +165,7 @@
     > label{
       position: absolute;
       left: 20px;
-      top: 9px;
+      top: 11px;
       color: $white;
       @include font-size(15px);
       @include opacity(0.5);
@@ -301,10 +301,6 @@
   }
   .quantity{
 
-    .input-group-prepend,
-    input{
-
-    }
     input{
       height: 40px;
     }
@@ -318,11 +314,6 @@
         top: 0;
       }
     }
-    .minus{
-        width: 11px;
-        height: 2px;
-        background: $basic-gray;
-        @extend .d-block;
-    }
+
   }
 }

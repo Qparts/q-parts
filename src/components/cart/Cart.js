@@ -8,8 +8,8 @@ import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate } from 'react-localize-redux';
 import SectionHeader from '../UI/SectionHeader';
 
-import Slider from "react-slick";
 import Select from 'react-select';
+import RenderProducts from '../../components/RenderProducts/RenderProducts';
 
 class Cart extends Component {
 	handleSubmit = values => {
@@ -34,43 +34,7 @@ class Cart extends Component {
       { value: 2, label: "Egypt" },
       { value: 3, label: "Jordan" }
     ];
-		/*shaimaa*/
-		var settings = {
-      dots: true,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
-      initialSlide: 0,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            initialSlide: 2
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-    };
 
-		/*shaimaa*/
 		return (
 			<div id="cart">
 				<section className="default-header-bg">
@@ -95,7 +59,7 @@ class Cart extends Component {
 				</section>
 				<section className="component-background">
 					<div className="container-fluid">
-						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+						<form className="row section" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-md-9">
 								<ul className=" item-list list-unstyled">
 									<li>
@@ -250,37 +214,12 @@ class Cart extends Component {
 								</div>
 							</div>
 						</form>
-						<div className="row">
-							<div className="col">
+						<div className="row section">
+							<div className="col related-pro">
 								<header>
-									<h2>Products Related To Items In Your Cart</h2>
+									<h3>Products Related To Items In Your Cart</h3>
 								</header>
-								<div>
-				        	<h2> Responsive </h2>
-					        <Slider {...settings}>
-					          <div>
-					            <h3>2</h3>
-					          </div>
-					          <div>
-					            <h3>3</h3>
-					          </div>
-					          <div>
-					            <h3>4</h3>
-					          </div>
-					          <div>
-					            <h3>5</h3>
-					          </div>
-					          <div>
-					            <h3>6</h3>
-					          </div>
-					          <div>
-					            <h3>7</h3>
-					          </div>
-					          <div>
-					            <h3>8</h3>
-					          </div>
-					        </Slider>
-      					</div>
+									<RenderProducts/>
 							</div>
 						</div>
 					</div>

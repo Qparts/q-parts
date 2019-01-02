@@ -474,6 +474,12 @@
       }
     }
   }
+  .minus{
+      width: 11px;
+      height: 2px;
+      background: $basic-gray;
+      @extend .d-block;
+  }
 }
 .underline{
   text-decoration: underline;
