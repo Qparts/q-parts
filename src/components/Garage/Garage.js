@@ -48,7 +48,7 @@ class Garage extends Component {
               check: !this.state.check
             })}
             checked={this.state.check}
-            label="Default Address"
+            label="Default Vehicles"
           />
         <div className="Garage-box_item-label">
           <p>{vehicle.label}</p>
