@@ -88,15 +88,16 @@ class RenderField extends Component {
                 minScore={2}
                 changeCallback={this.callback}
                 scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
-                inputProps={{ ...this.props.input, placeholder: this.props.placeholder }}
-                {...this.props} />
+                inputProps={{ ...this.props.input, ...this.props }} />
               <InputGroupAddon addonType="append">
                 <Link
                   className="password-visibility"
                   to="#"
                   text="Show"
                   icon="icon-show-password"
-                  isReverseOrder />
+                  isReverseOrder 
+                  onClick={this.props.onTogglePassword}
+                  />
               </InputGroupAddon>
             </InputGroup>
           }

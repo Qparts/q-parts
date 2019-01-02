@@ -15,6 +15,20 @@ import './SignupForm.css';
 import Button from '../../../../components/UI/Button';
 
 class SignupForm extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       passwordType: 'password'
+    }
+  }
+
+  handleTogglePassword = () => {
+    this.setState({
+      passwordType: this.state.passwordType === 'password' ? 'text' : 'password'
+    });
+  }
+  
   render() {
     const { translate } = this.props;
     return (
@@ -89,7 +103,9 @@ class SignupForm extends Component {
                 label={translate("form.signup.password")}
                 name="password"
                 component={RenderField}
-                type="password" placeholder={translate("form.signup.placeholders.password")}
+                type={this.state.passwordType} 
+                placeholder={translate("form.signup.placeholders.password")}
+                onTogglePassword={this.handleTogglePassword}
                 validate={[validations.required]} />
               <label>Password Strength</label>
             </div>
