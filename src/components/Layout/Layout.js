@@ -13,6 +13,7 @@ import { TAB_ONE, styles, colors } from "../../constants";
 import { isEmpty } from "../../utils";
 
 import Title from '../UI/Title';
+import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
 
 class Layout extends Component {
   constructor(props) {
@@ -22,15 +23,6 @@ class Layout extends Component {
       dialogType: 'signin',
       modal: false
     };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
-    //   this.onHide();
-    // }
-    if (this.props.isLoggedIn && prevProps.isLoggedIn !== this.props.isLoggedIn) {
-      this.togglePopup();
-    }
   }
 
   handleDialog = (dialogType) => {
@@ -106,6 +98,7 @@ class Layout extends Component {
     )
     return (
       <Fragment>
+        <EmailVerification />
         <MobileHeader
           translate={translate}
           localize={localize}

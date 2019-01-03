@@ -6,7 +6,6 @@ import { Dialog } from 'primereact/components/dialog/Dialog';
 
 import SignupForm from './SignupForm/SignupForm';
 import SocialMedia from '../SocialMedia/SocialMedia';
-import VerificationNumber from '../../../components/VerificationNumber/VerificationNumber';
 import { getComponentName } from '../../../utils';
 import { getCountries } from '../../../actions/apiAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
@@ -36,12 +35,12 @@ class Signup extends Component {
   };
 
   handleSubmit = (values) => {
-    const { firstName, lastName, email, password, countryId: { countryCode }, mobile, platform, socialMediaId } = values;
-    const countryId = values.countryId.value;
+    const { firstName, lastName, email, password, platform, socialMediaId } = values;
+    const countryId = values.countryId.id;
 
-    return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, countryCode, mobile, platform, socialMediaId }, this.props.currentLanguage)
+    return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
-        this.props.onShowDialog();
+        this.props.history.push('/signup/successful');
       })
   }
 

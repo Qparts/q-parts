@@ -10,7 +10,6 @@ import Layout from '../../components/Layout/Layout';
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
 // import { changeDefaultDirection } from '../../actions/customerAction';
-import EmailVerification from '../Authentication/ForgotPassword/EmailVerification/EmailVerification'
 
 class Routes extends Component {
 
@@ -20,7 +19,6 @@ class Routes extends Component {
             <Router>
                 <Fragment>
                     <NetworkError error={this.props.error} />
-                    <EmailVerification />
                     <Layout
                         isLoggedIn={isAuth(this.props.token)}
                         fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}

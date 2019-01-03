@@ -18,7 +18,7 @@ import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
 import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
-
+import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 
 export const routes = (isAuth) => [
     {
@@ -50,7 +50,13 @@ export const routes = (isAuth) => [
         path: "/signup",
         component: Signup,
         isAuth: !isAuth,
-        redirectTo: '/'
+        redirectTo: '/',
+        exact: true,
+    },
+    {
+        path: "/signup/successful",
+        component: ConfirmSignUp,
+        exact: true,
     },
     {
         path: "/vehicles",

@@ -4,7 +4,7 @@ import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, EMAIL_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
-  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION
+  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED
 } from '../actions/customerAction';
 import { AR } from '../constants';
 import _ from 'lodash';
@@ -58,8 +58,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, address: initialState.address }
 
     case LOGIN_SUCCEEDED:
-      const { customer, token } = action.payload.data;
-      return { ...state, detail: customer, token, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
+      return getLoginObject(state, action);
 
     case LOGOUT:
       return {
@@ -94,7 +93,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, detail: newVehicle, vehiclesFormat: vehiclesFormat(newVehicle.vehicles) }
 
     case REGISTER_CUSTOMER_SUCCEEDED:
-      return { ...state };
+      return getLoginObject(state, action);
 
     case VERIFY_CODE_NO_SUCCEEDED:
       return { ...state, detail: action.payload.customer, token: action.payload.token };
@@ -170,6 +169,8 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, direction: newDirection }
 
+    case REGISTERED:
+      return { ...state, registered: true }
 
     default:
       return state;
@@ -184,6 +185,11 @@ const vehiclesFormat = (vehicles) => {
       label: `${veh.vehicle.year} ${veh.vehicle.make.nameAr} ${veh.vehicle.model.nameAr}`
     }
   });
+}
+
+const getLoginObject = (state, action) => {
+  const { customer, token } = action.payload;
+  return { ...state, detail: customer, token, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
 }
 
 const translate = (error, currentLanguage, defaultLang) => {

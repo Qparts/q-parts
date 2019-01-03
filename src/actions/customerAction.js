@@ -17,6 +17,7 @@ export const EDIT_USER_PASSWORD_SUCCEDED = 'EDIT_USER_PASSWORD_SUCCEDED';
 export const REQUEST_VERIFICATION_NO = 'REQUEST_VERIFICATION_NO';
 export const CONFIRM_USER_ADDRESS = 'CONFIRM_USER_ADDRESS';
 export const LOGOUT = 'LOGOUT';
+export const REGISTERED = 'REGISTERED';
 export const ADD_ADDRESS_SUCCEEDED = 'ADD_ADDRESS_SUCCEEDED';
 export const EDIT_ADDRESS_SUCCEEDED = 'EDIT_ADDRESS_SUCCEEDED';
 export const DELETE_ADDRESS_SUCCEEDED = 'DELETE_ADDRESS_SUCCEEDED';
@@ -211,16 +212,14 @@ export const clearAddress = () => {
 export const login = (email, password, serverErrorField, currentLanguage) => {
   // return (dispatch) => {
   //   let defaultLanguage = null;
-  //   return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/email`, {
+  //   return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login`, {
   //     email, password
   //   })
   //     .then(res => {
   //       defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
   //       dispatch({
   //         type: LOGIN_SUCCEEDED,
-  //         payload: {
-  //           data: res.data,
-  //         }
+  //         payload: res.data,
   //       })
   //       dispatch(changeDefaultLanguage(defaultLanguage))
   //     })
@@ -312,8 +311,8 @@ export const onSubmitSignup = (customer, currentLanguage) => {
           type: REGISTER_CUSTOMER_SUCCEEDED,
           payload: res.data
         })
-      })
-      .catch(error => {
+      }, error => {
+        handleNetworkError(dispatch, error);
         dispatch({
           type: REQUEST_FAILED,
           payload: {
@@ -321,8 +320,8 @@ export const onSubmitSignup = (customer, currentLanguage) => {
             field: error.response.data.field,
             currentLanguage
           }
-        })
-      })
+        });
+      });
   }
 }
 
@@ -562,5 +561,12 @@ export const changeDefaultDirection = (lang) => {
   return {
     type: CHANGE_DEFAULT_DIRECTION,
     payload: lang
+  }
+}
+
+export const onRegistered = () => {
+  return {
+    type: REGISTERED,
+    payload: true
   }
 }

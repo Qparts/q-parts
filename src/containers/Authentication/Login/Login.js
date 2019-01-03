@@ -37,7 +37,10 @@ class Login extends Component {
 
   handleSubmit = values => {
     const serverErrorField = "password"
-    return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage);
+    return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
+      .then(() => {
+        this.props.toggle()
+      });
   }
 
   handleChange = (event) => {
@@ -70,22 +73,22 @@ class Login extends Component {
     const { translate } = this.props;
 
     return <Fragment>
-            <div>
-              {login}
-              <SocialMedia
-                title={translate("form.signin.socialMedia")}
-                handleResponse={this.props.handleResponse}
-                handleFailure={this.props.handleFailure} />
-              <div id="sign-up-link">
-                <p>{translate("form.signin.signup")}</p>
-                <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
-                <p>{translate("form.signin.here")}</p>
-              </div>
-            </div>
-            {dialog}
-        </Fragment>
+      <div>
+        {login}
+        <SocialMedia
+          title={translate("form.signin.socialMedia")}
+          handleResponse={this.props.handleResponse}
+          handleFailure={this.props.handleFailure} />
+        <div id="sign-up-link">
+          <p>{translate("form.signin.signup")}</p>
+          <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
+          <p>{translate("form.signin.here")}</p>
+        </div>
+      </div>
+      {dialog}
+    </Fragment>
   }
-  forgotPassword = (event) =>{
+  forgotPassword = (event) => {
     this.props.history.push('/forgotPassword')
     this.props.toggle();
   }
@@ -93,37 +96,37 @@ class Login extends Component {
   render() {
     const { translate } = this.props;
     let login = (
-        <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-          <div className="form-group">
-            <Field
-              label={translate("form.signin.email")}
-              name="email"
-              component={RenderField}
-              type="text" placeholder={translate("form.signin.placeholders.email")}
-              validate={[validations.required, validations.email]} />
-          </div>
-          <div className="form-group">
-            <Field
-              label={translate("form.signin.password")}
-              name="password"
-              component={RenderField}
-              type="password" placeholder={translate("form.signin.placeholders.password")}
-              validate={[validations.required]} />
-          </div>
+      <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+        <div className="form-group">
+          <Field
+            label={translate("form.signin.email")}
+            name="email"
+            component={RenderField}
+            type="text" placeholder={translate("form.signin.placeholders.email")}
+            validate={[validations.required, validations.email]} />
+        </div>
+        <div className="form-group">
+          <Field
+            label={translate("form.signin.password")}
+            name="password"
+            component={RenderField}
+            type="password" placeholder={translate("form.signin.placeholders.password")}
+            validate={[validations.required]} />
+        </div>
+        <div>
           <div>
-            <div>
-              <RadioButton value={true} name="rememberMe" onChange={this.handleRememberMe} checked={true === this.state.rememberMe} />
-              <label>{translate("form.signin.rememberMe")}</label>
-            </div>
-            <button
-              onClick={this.forgotPassword}
-              type="button"
-              className="btn-link">
-              {translate("form.signin.forgotPassword")}
-            </button>
+            <RadioButton value={true} name="rememberMe" onChange={this.handleRememberMe} checked={true === this.state.rememberMe} />
+            <label>{translate("form.signin.rememberMe")}</label>
           </div>
-          <Button className="btn-primary" text={translate("form.signin.button")} icon="icon-arrow-right" />
-        </form>
+          <button
+            onClick={this.forgotPassword}
+            type="button"
+            className="btn-link">
+            {translate("form.signin.forgotPassword")}
+          </button>
+        </div>
+        <Button className="btn-primary" text={translate("form.signin.button")} icon="icon-arrow-right" />
+      </form>
     )
     const dialog =
       <Dialog header={translate("dialog.passwordRecovery.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
@@ -140,17 +143,17 @@ class Login extends Component {
     return (
       <Switch>
         <section id="login">
-            {
-              this.renderLogin(login, dialog)
-            }
-            <PrivateRoute
-              path="/login/reset-password"
-              fakeAuth={this.state.showResetPassword}
-              translate={translate}
-              component={ResetPassword}
-              showPhoneNo={true}
-              onSubmit={this.onResetPassword}
-              redirectTo="/login" />
+          {
+            this.renderLogin(login, dialog)
+          }
+          <PrivateRoute
+            path="/login/reset-password"
+            fakeAuth={this.state.showResetPassword}
+            translate={translate}
+            component={ResetPassword}
+            showPhoneNo={true}
+            onSubmit={this.onResetPassword}
+            redirectTo="/login" />
         </section>
       </Switch>
     )
