@@ -190,8 +190,8 @@
     .ReactPasswordStrength-strength-bar {
       position: absolute;
       height: 4px;
-      top: 97px;
-      #{$right}: initial;
+      top: 104px;
+      #{$left}: 0;
     }
 
     .ReactPasswordStrength-strength-desc {
