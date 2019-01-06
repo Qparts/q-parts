@@ -5,5 +5,6 @@ export const initialState = {
 	vehicles: [],
 	city: null,
 	products: [],
-	product: {}
+	product: {},
+	appVersion: 0
 }

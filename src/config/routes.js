@@ -86,6 +86,11 @@ export const routes = (isAuth) => [
         component: VerifyEmail,
     },
     {
+        path: "/qtest.fareed9.com/activate-email/:code?/:email?",
+        exact: true,
+        component: VerifyEmail,
+    },
+    {
         path: "/checkout",
         component: Checkout,
         isAuth: isAuth,

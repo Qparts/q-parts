@@ -14,6 +14,7 @@ export const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
+export const UPDATE_APP_VERSION = 'UPDATE_APP_VERSION';
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -124,12 +125,26 @@ export const getProduct = (productId) => {
   }
 }
 
-  export const getRecentlyViewedProducts = (products) => {
-    return {
-      type: GET_RECENTLY_VIEWED, payload: products
-    }
+export const getRecentlyViewedProducts = (products) => {
+  return {
+    type: GET_RECENTLY_VIEWED, payload: products
   }
+}
 
-  export const getSortedProducts = () => {
-    return { type: GET_SORTED_PRODUCTS }
+export const getSortedProducts = () => {
+  return { type: GET_SORTED_PRODUCTS }
+}
+
+export const updateAppVersion = () => {
+  return (dispatch) => {
+    axios.get(`${API_ROOT}/app-version`)
+      .then(res => {
+        dispatch({
+          type: UPDATE_APP_VERSION ,
+          payload: res.data
+        })
+      }, error => {
+        handleNetworkError(dispatch, error);
+      })
   }
+}

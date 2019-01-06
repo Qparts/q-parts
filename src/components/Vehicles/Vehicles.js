@@ -28,7 +28,6 @@ class Vehicles extends Component {
 
   render() {
     const { translate, match: { url } } = this.props;
-    console.log(this);
 
     return (
       <section id="vehicles">

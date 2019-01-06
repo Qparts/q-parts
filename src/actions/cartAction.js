@@ -17,7 +17,7 @@ export const addToCart = (item) => {
 
 export const addQuotationToCart = (data) => {
  return (dispatch) => {
-  return axios.post(`${API_ROOT}${CART_SERVICE}/quotation-cart`, data)
+  return axios.post(`${API_ROOT}/${CART_SERVICE}/quotation-cart`, data)
    .then(res => {
     dispatch({
      type: ADD_QUOTATION_TO_CART,
@@ -35,7 +35,7 @@ export const clearCart = () => {
 
 export const getQuotation = (customerId) => {
  return (dispatch) => {
-  return axios.get(`${API_ROOT}${CART_SERVICE}/quotation-carts/customer/${customerId}`)
+  return axios.get(`${API_ROOT}/${CART_SERVICE}/quotation-carts/customer/${customerId}`)
    .then(res => {
     dispatch({
      type: GET_QUOTATION,

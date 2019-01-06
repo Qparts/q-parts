@@ -12,7 +12,7 @@ export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SU
 export const EDIT_USER_NAME_SUCCEDED = 'EDIT_USER_NAME_SUCCEDED';
 export const EDIT_USER_PHONE_NO_SUCCEDED = 'EDIT_USER_PHONE_NO_SUCCEDED';
 export const EDIT_USER_EMAIL_SUCCEDED = 'EDIT_USER_EMAIL_SUCCEDED';
-export const EMAIL_VERIFIED_SUCCEDED = 'EMAIL_VERIFIED_SUCCEDED';
+export const ACCOUNT_VERIFIED_SUCCEDED = 'ACCOUNT_VERIFIED_SUCCEDED';
 export const EDIT_USER_PASSWORD_SUCCEDED = 'EDIT_USER_PASSWORD_SUCCEDED';
 export const REQUEST_VERIFICATION_NO = 'REQUEST_VERIFICATION_NO';
 export const CONFIRM_USER_ADDRESS = 'CONFIRM_USER_ADDRESS';
@@ -121,17 +121,17 @@ export const editEmail = (data, serverErrorField, currentLanguage) => {
   }
 }
 
-export const onChangeEmailVerify = (query) => {
+export const onAccountVerify = (query) => {
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/change-email`, query)
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/account-verify`, query)
       .then(res => {
         dispatch({
-          type: EMAIL_VERIFIED_SUCCEDED
+          type: ACCOUNT_VERIFIED_SUCCEDED,
+          payload: res.data
         })
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      }, error => {
+        handleNetworkError(dispatch, error);
+      });
   }
 }
 
@@ -210,94 +210,30 @@ export const clearAddress = () => {
 }
 
 export const login = (email, password, serverErrorField, currentLanguage) => {
-  // return (dispatch) => {
-  //   let defaultLanguage = null;
-  //   return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login`, {
-  //     email, password
-  //   })
-  //     .then(res => {
-  //       defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
-  //       dispatch({
-  //         type: LOGIN_SUCCEEDED,
-  //         payload: res.data,
-  //       })
-  //       dispatch(changeDefaultLanguage(defaultLanguage))
-  //     })
-  //     .catch(error => {
-  //       dispatch({
-  //         type: REQUEST_FAILED,
-  //         payload: {
-  //           error: error.response.data,
-  //           field: serverErrorField,
-  //           currentLanguage,
-  //         }
-  //       })
-  //     })
-  // }
-
-  // :TODO temp login should be removed once I get the backend working
-  const data = {
-    "customer": {
-      "id": 123,
-      "socialMedia": [],
-      "firstName": "Ahmed",
-      "lastName": "Shaaban",
-      "mobile": "0212116539",
-      "email": "ahmed.vuw@gmail.com",
-      "countryId": 1,
-      "addresses": [{
-        "firstName": "Ahmed",
-        "lastName": "Shaaban",
-        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
-        "country": "Saudi Arabia",
-        "city": "Dammam",
-        "region": "EP",
-        "zipCode": "1111"
-      },
-      {
-        "firstName": "Ahmed",
-        "lastName": "Shaaban",
-        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
-        "country": "Saudi Arabia",
-        "city": "Dammam",
-        "region": "EP",
-        "zipCode": "1111"
-      }
-      ],
-      "vehicles": [{
-        "id": 3,
-        "vehicleId": 502,
-        "customerId": 1,
-        "vin": "JM71234W678901M30",
-        "vehicle": {
-          "id": 502,
-          "model": {
-            "id": 43,
-            "name": "Tucson",
-            "nameAr": "توسان"
-          },
-          "make": {
-            "id": 4,
-            "name": "Hyundai",
-            "nameAr": "هيونداي"
-          },
-          "year": 2017
-        }
-      }],
-      "defaultLang": "en"
-    },
-    "token": "12345"
-  }
   return (dispatch) => {
-    dispatch({
-      type: LOGIN_SUCCEEDED,
-      payload: {
-        data: data,
-      }
+    let defaultLanguage = null;
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login`, {
+      email, password
     })
-    dispatch(changeDefaultLanguage('en'));
+      .then(res => {
+        defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+        dispatch({
+          type: LOGIN_SUCCEEDED,
+          payload: res.data,
+        })
+        dispatch(changeDefaultLanguage(defaultLanguage))
+      })
+      .catch(error => {
+        dispatch({
+          type: REQUEST_FAILED,
+          payload: {
+            error: error.response.data,
+            field: serverErrorField,
+            currentLanguage,
+          }
+        })
+      })
   }
-  // up to here
 }
 
 export const onSubmitSignup = (customer, currentLanguage) => {

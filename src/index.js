@@ -12,7 +12,7 @@ import 'primereact/resources/themes/omega/theme.css';
 import 'font-awesome/css/font-awesome.css';
 
 import store from './store';
-import { saveState, initialStoreLoad } from './localStorage';
+import { saveState, initialStoreLoad, clearState } from './localStorage';
 import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
@@ -43,6 +43,7 @@ class Root extends React.Component {
         direction: store.getState().customer.direction
       })
     });
+    // clearState();
   }
 
   /*

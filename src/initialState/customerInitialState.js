@@ -44,5 +44,5 @@ export const initialState = {
  recentViewedProducts: [],
  wishlist: [],
  direction: 'ltr',
- registered: null,
+ registered: null
 }
