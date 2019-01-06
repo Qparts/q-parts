@@ -1,7 +1,8 @@
 #Orders-container{
-#demo-2{
-  margin-left:0px;
+#search{
+  margin-left:-25px;
   input{
+    height: 20px;
     -webkit-appearance: textfield;
   	-webkit-box-sizing: content-box;
   	font-family: inherit;
@@ -132,9 +133,10 @@
       }
     }
     tbody{
-      background: $white;
     border-bottom-left-radius: 10px;
-      tr{
+      tr{      
+        background: $white;
+        border-bottom: 2px solid #f7f7f7;
         td{
           @include padding-left(5px);
           font-family: Roboto;
@@ -168,7 +170,7 @@
         }
         .icon{
           display: flex;
-          margin-top: 10px;
+          margin-top: 12px;
         }
         .icon-clear:before{
           @include margin-right(5px);
@@ -200,6 +202,9 @@
     }
     tr th{
       padding-bottom: 10px;
+    }
+    tr:last-child{
+      border-bottom:none !important;
     }
   }
 }

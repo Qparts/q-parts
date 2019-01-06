@@ -113,9 +113,9 @@ class Orders extends Component {
                   placeholder="Select Date"
                    onChange={this.handleSelectChange}/>
               </div>
-              <form id="demo-2" className="col-1">
+              <div id="search" className="col-1">
               	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
-              </form>
+              </div>
             </div>
             <div className="btn-div">
               <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
