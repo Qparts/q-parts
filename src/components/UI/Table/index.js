@@ -26,10 +26,19 @@ class Table extends Component {
     if ((this.props.searchByDate && dateDiff <= parseInt(findString, constant.RADIX)) ||
      column.orderNum.includes(findString) ||
      column.status.toLowerCase().includes(findString)) elements = column;
-    return keys.map((key, keyId) => elements[key] && <td key={keyId}>{elements[key]}</td>
-    )
-   } else {
-    return keys.map((element, keyId) => column[element] && <td key={keyId}>{column[element]}</td>
+    return keys.map((key, keyId) => {
+      if(elements[key] === "Shipped"){
+        return <td key={keyId} className="icon-shipping icon">{elements[key]}</td>
+      }else if(elements[key] === "Canceled"){
+        return <td key={keyId} className="icon-clear icon">{elements[key]}</td>
+      }else if(elements[key] === "Under processing"){
+        return <td key={keyId} className="icon-time icon">{elements[key]}</td>
+      }else if(elements[key] === "Returned"){
+        return <td key={keyId} className="icon-return icon">{elements[key]}</td>
+      }
+      return <td key={keyId}>{elements[key]}</td>
+
+    }
     )
    }
   };

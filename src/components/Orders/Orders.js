@@ -4,7 +4,12 @@ import Select from 'react-select';
 import Table from '../UI/Table';
 import Button from '../UI/Button';
 
-import './Orders.css'
+import { Field, reduxForm } from 'redux-form';
+import RenderField from '../RenderField/RenderField';
+import RenderFileInput from '../RenderFileInput/RenderFileInput';
+import SelectInput from '../SelectInput/SelectInput';
+import * as validations from '../../utils';
+import Link from "../UI/Link";
 
 class Orders extends Component {
   constructor(props) {
@@ -23,9 +28,9 @@ class Orders extends Component {
       date: '9/11/2018',
       quantity: 1,
       price: "200 SR",
-      status: "Shipped",
+      status: "Canceled",
       actions: [
-        <Button key={0} value={0} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} />,
+        <Button key={0} value={0} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     }, {
       orderNum: '0002',
@@ -34,8 +39,7 @@ class Orders extends Component {
       price: "200 SR",
       status: "Shipped",
       actions: [
-        <Button key={0} value={1} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} />,
-        <Button key={1} value={1} text={this.props.translate("setting.orders.table.buttons.reorder")} className="btn btn-light" />,
+        <Button key={0} value={1} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     }, {
       orderNum: '0003',
@@ -44,8 +48,16 @@ class Orders extends Component {
       price: "200 SR",
       status: "Under processing",
       actions: [
-        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} />,
-        <Button key={1} value={2} text={this.props.translate("setting.orders.table.buttons.reorder")} className="btn btn-light" />,
+        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+      ]
+    }, {
+      orderNum: '0003',
+      date: '6/15/2018',
+      quantity: 2,
+      price: "200 SR",
+      status: "Under processing",
+      actions: [
+        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     },
     ]
@@ -59,7 +71,7 @@ class Orders extends Component {
 
   handleFilter = e => {
     this.setState({
-      search: e.target.value,
+      search: e,
       searchByDate: false
     })
   }
@@ -85,20 +97,37 @@ class Orders extends Component {
       translate("setting.orders.table.items"),
       translate("setting.orders.table.totalAmount"),
       translate("setting.orders.table.orderStatus"),
-      translate("setting.orders.table.actions"),
     ]
 
     return (
-      <div className="Orders-container">
-        <h4>{translate("setting.orders.title")}</h4>
+      <div className="col-10" id="Orders-container">
         <div className="border rounded card">
-          <div className="Orders-search">
-            <Button value={"all"} text={translate("setting.orders.filter.all")} className="btn btn-light" onClick={this.handleFilter} />
-            <Button value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={this.handleFilter} />
-            <Button value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={this.handleFilter} />
-            <Select defaultValue={options[0]} options={options} onChange={this.handleSelectChange} />
-            <input className="form-control" placeholder={translate("setting.orders.filter.input")} value={this.state.orderNum} onChange={this.handleChange} />
+          <div className="Orders-search justify-content-between col-12">
+            <div style={{display:'flex'}}>
+              <div className="col-12">
+                <Field
+                  name="search-option"
+                  component={SelectInput}
+                  clearable={false}
+                  options={options}
+                  placeholder="Select Date"
+                   onChange={this.handleSelectChange}/>
+              </div>
+              <div id="search" className="col-1">
+              	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
+              </div>
+            </div>
+            <div className="btn-div">
+              <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
+              <span className="seperator"></span>
+              <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
+              <span className="seperator"></span>
+              <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
+              <span className="seperator"></span>
+              <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
+            </div>
           </div>
+          <span className="seperator"></span>
           <Table
             headers={headers}
             columns={this.state.mockItems}
@@ -110,5 +139,12 @@ class Orders extends Component {
     )
   }
 }
+
+// <input className="form-control" placeholder={translate("setting.orders.filter.input")} value={this.state.orderNum} onChange={this.handleChange} />
+// <Select defaultValue={options[0]} options={options} onChange={this.handleSelectChange} />
+
+Orders = reduxForm({
+  form: 'Orders'
+})(Orders)
 
 export default withRouter(Orders);
