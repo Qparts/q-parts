@@ -9,7 +9,7 @@ import RenderField from '../RenderField/RenderField';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import SelectInput from '../SelectInput/SelectInput';
 import * as validations from '../../utils';
-import { Link } from "react-router-dom";
+import Link from "../UI/Link";
 
 class Orders extends Component {
   constructor(props) {
@@ -50,6 +50,15 @@ class Orders extends Component {
       actions: [
         <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
+    }, {
+      orderNum: '0003',
+      date: '6/15/2018',
+      quantity: 2,
+      price: "200 SR",
+      status: "Under processing",
+      actions: [
+        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+      ]
     },
     ]
   )
@@ -62,7 +71,7 @@ class Orders extends Component {
 
   handleFilter = e => {
     this.setState({
-      search: e.target.value,
+      search: e,
       searchByDate: false
     })
   }
@@ -88,7 +97,6 @@ class Orders extends Component {
       translate("setting.orders.table.items"),
       translate("setting.orders.table.totalAmount"),
       translate("setting.orders.table.orderStatus"),
-      translate("setting.orders.table.actions"),
     ]
 
     return (
@@ -96,33 +104,27 @@ class Orders extends Component {
         <div className="border rounded card">
           <div className="Orders-search justify-content-between col-12">
             <div style={{display:'flex'}}>
-              <div className="col-9">
+              <div className="col-12">
                 <Field
                   name="search-option"
                   component={SelectInput}
                   clearable={false}
                   options={options}
                   placeholder="Select Date"
-                   onChange={this.handleSelectChange}
-                  validate={[validations.required]} />
+                   onChange={this.handleSelectChange}/>
               </div>
-                <Field
-                  name="search"
-                  component={RenderField}
-                  type="text"
-                  placeholder="search"
-                  onChange={this.handleChange}
-                  value={this.state.orderNum}
-                  validate={[validations.required]} />
+              <form id="demo-2" className="col-1">
+              	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
+              </form>
             </div>
             <div className="btn-div">
-              <Button value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={this.handleFilter} icon="icon-time" isReverseOrder/>
+              <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
               <span className="seperator"></span>
-              <Button value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={this.handleFilter} icon="icon-shipping" isReverseOrder/>
+              <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
               <span className="seperator"></span>
-              <Button value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={this.handleFilter} icon="icon-clear" isReverseOrder/>
+              <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
               <span className="seperator"></span>
-              <Button value={"Returned"} text={"Returned"} className="btn btn-light" onClick={this.handleFilter} icon="icon-return" isReverseOrder/>
+              <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
             </div>
           </div>
           <span className="seperator"></span>

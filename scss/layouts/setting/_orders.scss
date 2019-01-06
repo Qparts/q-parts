@@ -1,8 +1,52 @@
 #Orders-container{
+#demo-2{
+  margin-left:0px;
+  input{
+    -webkit-appearance: textfield;
+  	-webkit-box-sizing: content-box;
+  	font-family: inherit;
+  	font-size: 100%;
+    @include margin-right(100px);
+
+    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+  	border: solid 1px #ccc;
+  	padding: side-values(9px 15px 9px 40px);
+  	-webkit-border-radius: 10em;
+  	-moz-border-radius: 10em;
+  	border-radius: side-values(0 20px 20px 20px);
+    background-color: white;
+
+  	-webkit-transition: all .5s;
+  	-moz-transition: all .5s;
+  	transition: all .5s;
+    border: 0px;
+    width: 15px;
+  	@include padding-left(10px);
+  	color: transparent;
+  	cursor: pointer;
+  }
+  input:hover {
+  	background-color: #fff;
+  }
+  input:focus {
+  	width: 20px;
+  	@include padding-left(32px);
+  	color: #000;
+  	background-color: #fff;
+  	cursor: auto;
+  	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  	box-shadow: 0 0 5px rgba(109,207,246,.5);
+  }
+}
   .card{
     background: none;
   }
   .Orders-search{
+    margin-top: -15px;
+    .col-9{
+      @include padding-left(0px);
+    }
     @include padding-left(0px);
     display: flex;
     margin-bottom: 16px;
@@ -11,27 +55,28 @@
         width: 100%;
         background-color: $white;
         border-radius: side-values(20px 0 20px 20px) !important;
+        border: none !important;
         position: relative !important;
         padding: 10px;
         .select__value-container{
           width: 10px;
         }
       }
-      label
-      sub,
-      br{
+      label,
+      br,sub{
         display: none;
       }
     }
     .RenderField{
-      margin-top: 20px;
       border-radius: side-values(0 20px 20px 20px);
-      label{
+      border: none !important;
+      label,
+      br,sub{
         display: none;
       }
       input{
         border-radius: side-values(0 20px 20px 20px);
-        border: none;
+        border: none !important;
       }
     }
     .btn-div{
@@ -39,12 +84,10 @@
       .btn-light{
         padding: 0px;
         background: none;
+        display: flex !important;
         i{
           opacity: 0.5;
           font-size: 16px;
-        }
-        .icon-shipping{
-         font-size: 20px !important;
         }
         span{
           font-family: Roboto;
@@ -52,14 +95,13 @@
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
-          line-height: normal;
+          line-height: 20px;
           letter-spacing: normal;
           text-align: left;
           @include margin-left(3px);
         }
       }
       .seperator{
-        margin-top: 25px;
         width: 1px;
         height: 19px;
         @include margin-left(10px);
@@ -76,8 +118,8 @@
   .table{
     thead{
       tr{
-        text-align: center;
         th{
+          @include padding-left(5px);
           opacity: 0.7;
           font-family: Roboto;
           @include font-size(13px);
@@ -93,9 +135,8 @@
       background: $white;
     border-bottom-left-radius: 10px;
       tr{
-        text-align: center;
-        height: 2px;
         td{
+          @include padding-left(5px);
           font-family: Roboto;
           @include font-size(15px);
           font-weight: normal;
@@ -105,6 +146,7 @@
           letter-spacing: normal;
           color: $black;
           .btn-light{
+            @include padding-left(0px);
             background: none;
             i{
               opacity: 0.5;
@@ -127,7 +169,6 @@
         .icon{
           display: flex;
           margin-top: 10px;
-          @include margin-left(25%);
         }
         .icon-clear:before{
           @include margin-right(5px);
