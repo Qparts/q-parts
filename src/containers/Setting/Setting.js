@@ -31,6 +31,7 @@ import HelpCenter from '../../components/HelpCenter/HelpCenter';
 import Garage from '../../components/Garage/Garage';
 import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
+import Payment from '../../components/Payment/Payment';
 
 import {
   match
@@ -38,7 +39,7 @@ import {
 
 import SectionHeader from '../../components/UI/SectionHeader';
 import {
-  quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia
+  quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia, payment
 } from '../../constants';
 //Modal
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -196,6 +197,9 @@ class Setting extends Component {
 
       case 'connect':
         return this.setState({ sectionHeader: translate(`setting.links.${socialMedia}`) });
+
+      case 'payment':
+        return this.setState({ sectionHeader: payment });
 
       default:
         break;
@@ -405,6 +409,11 @@ class Setting extends Component {
                       deleteWishlist={this.props.deleteWishlist}
                       moveWishlistToCart={this.props.moveWishlistToCart}
                       translate={this.props.translate} />
+                  )
+                }} />
+              <Route path="/setting/payment/" exact={true} render={() => {
+                  return (
+                    <Payment translate={this.props.translate} />
                   )
                 }} />
                 <PrivateRoute

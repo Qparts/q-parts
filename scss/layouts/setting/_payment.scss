@@ -1,0 +1,192 @@
+#payment-container{
+  @include margin-left(10px);
+  .payment-header{
+    display: flex;
+    p{
+      font-family: Roboto;
+      @include font-size(17px);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: $left;
+      margin-top: 10px;
+    }
+    .payment-add{
+      display: flex;
+      p{
+        display: flex;
+        opacity: 0.5;
+        font-family: Roboto;
+        @include font-size(13px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.92;
+        letter-spacing: normal;
+        text-align: $left;
+        color: rgba(55, 54, 61, 0.5);
+        i{
+          @include font-size(22px);
+          line-height: 10px;
+          @include margin-left(5px);
+          @include margin-right(10px)
+          color: $black;
+        }
+      }
+      Button{
+        height: 41px;
+        margin-top: 10px;
+        display: flex !important;
+        background: $brand-color !important;
+        margin: 0px !important;
+        color: $white !important;
+        .icon-add{
+          @include font-size(23px);
+          margin-top: 5px;
+          @include margin-left(10px);
+        }
+        span{
+          @include margin-left(6px);
+          font-family: Roboto;
+          @include font-size(15px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 41px;
+          letter-spacing: normal;
+          text-align: $left;
+          color: #ffffff;
+          @include margin-right(10px);
+        }
+      }
+    }
+  }
+  .seperator{
+    height: 2px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .payment-box{
+    background: $white;
+    margin-bottom: 5px;
+    padding: side-values(10px);
+    padding-bottom: 50px;
+    border-radius: side-values(20px 0 20px 20px) !important;
+    label{
+      margin-bottom: 0px;
+      font-family: Roboto;
+      @include font-size(13px);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 2;
+      letter-spacing: normal;
+      opacity: 0.8;
+      .checkmark{
+        border-radius: 9px;
+      }
+    }
+    .seperator{
+      width: 1px;
+      height: 100%;
+      @include margin-left(100%);
+      margin-top: 0px;
+    }
+    .payment-box_item{
+      .payment-box_item-label{
+        display: flex;
+        @include margin-left(20px);
+        p{
+          margin-bottom: 0px;
+          font-family: Roboto;
+          @include font-size(17px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 28px;
+          letter-spacing: normal;
+          text-align: $left;
+          @include margin-left(4px);
+        }
+        img{
+          width: 25px;
+          height: 25px;
+        }
+      }
+      .visa-num{
+        @include margin-left(20px);
+        .end-number{
+          display: flex;
+          margin-bottom: 0px;
+          opacity: 0.6;
+          font-family: Roboto;
+          @include font-size(13px);
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: rgba(55, 54, 60, 0.6);
+          p{
+            @include margin-left(6px);
+            color: $black;
+          }
+        }
+        .expires-date{
+          display: flex;
+          opacity: 0.6;
+          margin-bottom: 0px;
+          font-family: Roboto;
+          @include font-size(13px);
+          font-weight: 500;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: rgba(55, 54, 60, 0.6);
+          p{
+            @include margin-left(6px);
+            color: $black;
+          }
+        }
+      }
+      .payment-footer{
+        height: 41px;
+        display: flex;
+        margin-top: 18px;
+        .btn-link{
+          @include margin-left(20px);
+          width: 66px;
+          text-align: center;
+          background: $light-gray !important;
+          border-radius: side-values(0 20px 20px 20px) !important;
+          margin-#{$right}: 10px;
+          color: $black;
+          .icon-edit{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(6px);
+          }
+        }
+        .btn-delete{
+          background: none;
+          padding-top: 0px;
+          opacity: 0.6;
+          .icon-trash{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(2px);
+          }
+        }
+      }
+    }
+  }
+}
