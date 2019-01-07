@@ -67,7 +67,8 @@ export default function reducer(state = initialState, action) {
         detail: initialState.detail,
         token: null,
         vehiclesFormat: initialState.vehiclesFormat,
-        selectedVehicle: initialState.selectedVehicle
+        selectedVehicle: initialState.selectedVehicle,
+        registered: initialState.registered
       }
 
     case REQUEST_FAILED:
@@ -169,7 +170,7 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, direction: newDirection }
 
-    case REGISTERED:
+      case REGISTERED:
       return { ...state, registered: true }
 
     default:

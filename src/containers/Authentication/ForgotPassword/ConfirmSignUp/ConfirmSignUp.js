@@ -16,7 +16,7 @@ class ConfirmSignUp extends Component {
     return (
       <Fragment>
         {
-          _.isNull(this.props.registered) ? (
+          this.props.token && _.isNull(!this.props.registered)? (
             <Fragment>
               <MediumScreen>
                 <section id="confirm-signup">
@@ -65,6 +65,7 @@ class ConfirmSignUp extends Component {
 
 const mapStateToProps = state => {
   return {
+    token: state.customer.token,
     registered: state.customer.registered
   }
 }

@@ -9,10 +9,19 @@ import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
+import { getVehicles, InitializeDefaultLang } from '../../actions/apiAction';
+import { LOCAL_LANGUAGES } from '../../constants';
 // import { changeDefaultDirection } from '../../actions/customerAction';
 
 class Routes extends Component {
 
+    componentWillMount = () => {
+        const defaultLanguage = this.props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+
+        this.props.InitializeDefaultLang(defaultLanguage);
+        this.props.getVehicles();
+    }
+    
 
     render() {
         return (
@@ -56,6 +65,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         // changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
+        InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
+        getVehicles: () => dispatch(getVehicles()),
     }
 }
 

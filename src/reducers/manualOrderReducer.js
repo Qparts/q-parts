@@ -1,5 +1,4 @@
 import { initialState } from '../initialState/baseFormInitialState';
-import { loadState } from '../localStorage';
 import {
   FIND_SELECTED_PART_SUCCEEDED, ADD_ID_PART, SET_CURRENT_VEHICLE_SEARCH
 } from '../actions/baseFormAction';
@@ -19,7 +18,7 @@ export default function reducer(state = initialState, action) {
       const makerId = parseInt(action.payload.makerId);
       if (state.part.makerId !== hasNoId) return state;
 
-      const cart = loadState().cart;
+      const cart = state.cart;
       const findProducts = cart.purchasedItems.filter(item => makerId === item.product.id);
       const matchPartNumber = findProducts.find(serverProduct => serverProduct.selectedPart.partNumber === action.payload.product);
       const id = matchPartNumber ? matchPartNumber.selectedPart.id : state.part.id;
