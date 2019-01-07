@@ -116,10 +116,9 @@
         }
       }
       .visa-num{
-        @include margin-left(20px);
+        @include margin-left(19px);
         .end-number{
           display: flex;
-          margin-bottom: 0px;
           opacity: 0.6;
           font-family: Roboto;
           @include font-size(13px);
@@ -130,7 +129,8 @@
           letter-spacing: normal;
           text-align: $left;
           color: rgba(55, 54, 60, 0.6);
-          p{
+          margin-bottom: 10px;
+          span{
             @include margin-left(6px);
             color: $black;
           }
@@ -148,7 +148,7 @@
           letter-spacing: normal;
           text-align: $left;
           color: rgba(55, 54, 60, 0.6);
-          p{
+          span{
             @include margin-left(6px);
             color: $black;
           }
@@ -177,6 +177,7 @@
         .btn-delete{
           background: none;
           padding-top: 0px;
+          padding-bottom: 0px;
           opacity: 0.6;
           .icon-trash{
             @include font-size(18px);
