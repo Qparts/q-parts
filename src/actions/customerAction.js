@@ -337,23 +337,16 @@ export const sendSmsCode = (values, currentLanguage) => {
   }
 }
 
-export const resetPassword = ({ code, mobile, password }, serverErrorField) => {
+export const resetPassword = (email) => {
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, { code, mobile, password })
-      .then(res => {
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, email)
+      .then(() => {
         dispatch({
           type: RESET_PASSWORD_SUCCEEDED
         })
-      })
-      .catch(error => {
-        dispatch({
-          type: REQUEST_FAILED,
-          payload: {
-            error: error.response.data,
-            field: serverErrorField
-          }
-        })
-      })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
   }
 }
 
