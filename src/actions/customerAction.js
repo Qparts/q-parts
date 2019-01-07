@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT, CUSTOMER_SERVICE } from '../actions/constants';
-import { ON_SOCIAL_MEDIA_LOGIN, ON_SOCIAL_MEDIA_SIGNUP, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
+import { ON_SOCIAL_MEDIA_AUTH, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import { initialize } from 'react-localize-redux';
 import globalTranslations from "../translations/translations.json";
@@ -31,6 +31,7 @@ export const VERIFY_CODE_NO_SUCCEEDED = 'VERIFY_CODE_NO_SUCCEEDED';
 export const VERIFY_MOBILE_NO_SUCCEEDED = 'VERIFY_MOBILE_NO_SUCCEEDED';
 export const RESET_PASSWORD_SUCCEEDED = 'RESET_PASSWORD_SUCCEEDED';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
+export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
 export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
@@ -363,13 +364,17 @@ export const selectVehicleGarage = (vehcile) => {
   }
 }
 
+export const selectCountry = (country) => {
+  return {
+    type: SELECT_COUNTRY,
+    payload: country
+  }
+}
+
 export const socialMediaButton = (data, type) => {
   switch (type) {
-    case ON_SOCIAL_MEDIA_LOGIN:
-      return socialMediaLogin(data);
-
-    case ON_SOCIAL_MEDIA_SIGNUP:
-      return socialMediaSignup(data);
+    case ON_SOCIAL_MEDIA_AUTH:
+      return socialMediaAuth(data);
 
     case ON_SOCIAL_MEDIA_LINK:
       return socialMediaLink(data);
@@ -379,28 +384,16 @@ export const socialMediaButton = (data, type) => {
   }
 }
 
-
-const socialMediaSignup = (data) => {
-  return {
-    type: SOCIAL_MEDIA_SIGNUP,
-    payload: data
-  }
-}
-
-const socialMediaLogin = (data) => {
+const socialMediaAuth = (data) => {
   return (dispatch) => {
-    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/social-media`, {
-      platform: data.platform,
-      socialMediaId: data.socialMediaId
-    })
+    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media-auth`, data)
       .then(res => {
         dispatch({
           type: LOGIN_SUCCEEDED,
           payload: res.data
         })
-      })
-      .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+      }, error => {
+        handleNetworkError(dispatch, error);
       })
   }
 }
@@ -417,7 +410,7 @@ const socialMediaLink = (data) => {
         })
       })
       .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+        handleNetworkError(dispatch, error);
       })
   }
 }

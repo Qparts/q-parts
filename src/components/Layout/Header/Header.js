@@ -9,24 +9,21 @@ class Header extends Component {
 
   render() {
     // TODO: Need to find a way to style the select component. To make it exactly like the design
-    const shipToOptions = [
-      { value: 1, label: "KSA" },
-      { value: 2, label: "Egypt" },
-      { value: 3, label: "Jordan" }
-    ];
     const formatGroupLabel = () => (
       <div className="placeholder">
-        <span >Select city</span>
+        <span>Select city</span>
       </div>
     );
     const groupedOptions = [
       {
-        label: 'Colours', // call this say ShipTo
-        options: shipToOptions,
+        options: this.props.countriesOnly,
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch } = this.props;
+    const {
+      translate, localize, isLoggedIn, fullName, vehicles, onAddVechile,
+      onSignin, changeDefaultDirection, onSearch, getCountriesOnly
+    } = this.props;
     return (
       <div className="main-header w3-hide-small w3-hide-medium">
         <div className=" header-first">
@@ -39,8 +36,8 @@ class Header extends Component {
                     classNamePrefix="select"
                     isSearchable={false}
                     styles={styles.select}
-                    defaultValue={shipToOptions[0]}
                     options={groupedOptions}
+                    onChange={this.props.selectCountry}
                     formatGroupLabel={formatGroupLabel} />
                 </div>
               </li>
@@ -51,7 +48,8 @@ class Header extends Component {
                 <LanguageToggle
                   localize={localize}
                   translate={translate}
-                  changeDefaultDirection={changeDefaultDirection} />
+                  changeDefaultDirection={changeDefaultDirection}
+                  getCountriesOnly={getCountriesOnly} />
               </li>
             </ul>
             <nav className="navbar">

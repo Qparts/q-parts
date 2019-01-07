@@ -86,7 +86,7 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      vehiclesFormat, selectedVehicle
+      vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry
     } = this.props;
     const dialog = (
       <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -108,7 +108,10 @@ class Layout extends Component {
           vehiclesFormat={vehiclesFormat}
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
           onSignin={this.handleDialog.bind(this, 'signin')}
-          onSearch={this.handleDialog.bind(this, 'search')} />
+          onSearch={this.handleDialog.bind(this, 'search')}
+          countriesOnly={countriesOnly}
+          getCountriesOnly={getCountriesOnly}
+          selectCountry={selectCountry} />
         <Header
           translate={translate}
           localize={localize}
@@ -118,7 +121,10 @@ class Layout extends Component {
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
           onSignin={this.handleDialog.bind(this, 'signin')}
           onSearch={this.handleDialog.bind(this, 'search')}
-          changeDefaultDirection={changeDefaultDirection} />
+          changeDefaultDirection={changeDefaultDirection}
+          countriesOnly={countriesOnly}
+          getCountriesOnly={getCountriesOnly}
+          selectCountry={selectCountry} />
         {dialog}
         {this.props.children}
         <Footer />

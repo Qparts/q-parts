@@ -9,6 +9,7 @@ import { initialize } from 'react-localize-redux';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const GET_COUNTRY_SUCCEEDED = 'GET_COUNTRY_SUCCEEDED';
 export const GET_COUNTRIES_SUCCEEDED = 'GET_COUNTRIES_SUCCEEDED';
+export const GET_COUNTRIES_ONLY_SUCCEEDED = 'GET_COUNTRIES_ONLY_SUCCEEDED';
 export const GET_COUNTRIES_REGIONS_SUCCEEDED = 'GET_COUNTRIES_REGIONS_SUCCEEDED';
 export const GET_VEHICLE_SUCCEEDED = 'GET_VEHICLE_SUCCEEDED';
 export const FIND_CITY_SUCCEEDED = 'FIND_CITY_SUCCEEDED';
@@ -43,6 +44,23 @@ export const getCountries = () => {
       }, error => {
         handleNetworkError(dispatch, error);
       })
+  }
+}
+
+export const getCountriesOnly = (currentLang) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${LOCATION_SERVICE}/countries-only`)
+      .then(res => {
+        dispatch({
+          type: GET_COUNTRIES_ONLY_SUCCEEDED,
+          payload: {
+            data: res.data,
+            currentLang
+          }
+        });
+      }, error => {
+        handleNetworkError(dispatch, error);
+      });
   }
 }
 
@@ -143,6 +161,6 @@ export const InitializeDefaultLang = (defaultLanguage) => {
       languages: LOCAL_LANGUAGES,
       translation: globalTranslations,
       options: { renderToStaticMarkup, defaultLanguage }
-  }))
+    }))
   }
 }

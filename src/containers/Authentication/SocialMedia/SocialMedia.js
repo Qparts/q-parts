@@ -28,7 +28,10 @@ class SocialMedia extends Component {
               fields="id, first_name, last_name, email"
               callback={this.props.handleResponse('facebook')}
               render={renderProps => (
-                <button disabled={this.props.facebook === DISCONNECT} className="btn-facebook" onClick={renderProps.onClick}>{this.props.facebook}</button>
+                <button
+                  className="btn-facebook"
+                  disabled={this.props.facebook === DISCONNECT}
+                  onClick={renderProps.onClick}>{this.props.facebook}</button>
               )} />
           </div>
           <div>

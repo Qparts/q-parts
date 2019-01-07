@@ -9,20 +9,22 @@ import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
 import NetworkError from '../../components/NetworkError';
-import { getVehicles, InitializeDefaultLang } from '../../actions/apiAction';
+import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
 import { LOCAL_LANGUAGES } from '../../constants';
+import { selectCountry } from '../../actions/customerAction';
 // import { changeDefaultDirection } from '../../actions/customerAction';
 
 class Routes extends Component {
+    constructor(props) {
+        super(props);
 
-    componentWillMount = () => {
-        const defaultLanguage = this.props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
 
-        this.props.InitializeDefaultLang(defaultLanguage);
-        this.props.getVehicles();
+        const defaultLanguage = props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+
+        props.InitializeDefaultLang(defaultLanguage);
+        props.getVehicles();
+        props.getCountriesOnly(defaultLanguage);
     }
-    
-
     render() {
         return (
             <Router>
@@ -36,6 +38,9 @@ class Routes extends Component {
                         translate={this.props.translate}
                         vehiclesFormat={this.props.vehiclesFormat}
                         selectedVehicle={this.props.selectedVehicle}
+                        countriesOnly={this.props.countriesOnly}
+                        getCountriesOnly={this.props.getCountriesOnly}
+                        selectCountry={this.props.selectCountry}
                     // changeDefaultDirection={this.props.changeDefaultDirection}
                     >
                         <Switch>
@@ -58,6 +63,7 @@ const mapStateToProps = state => {
         selectedVehicle: state.customer.selectedVehicle,
         localize: state.localize,
         translate: getTranslate(state.localize),
+        countriesOnly: state.api.countriesOnly,
         error: state.networkError.error,
     }
 }
@@ -67,6 +73,8 @@ const mapDispatchToProps = dispatch => {
         // changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
         InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
+        getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
+        selectCountry: (country) => dispatch(selectCountry(country))
     }
 }
 
