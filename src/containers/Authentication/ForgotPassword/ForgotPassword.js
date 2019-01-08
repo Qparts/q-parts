@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { SmallScreen, MediumScreen } from '../../../components/Device/index.js'
 import RenderField from '../../../components/RenderField/RenderField';
@@ -13,7 +14,7 @@ import ConfirmSignUp from './ConfirmSignUp/ConfirmSignUp'
 import CustomerService from '../../../components/CustomerService/CustomerService';
 import { resetPassword, updatePassword } from '../../../actions/customerAction.js';
 
-const forgotPasswordUrl = '/password/forgotpassword'
+const forgotPasswordUrl = '/password/forgot-password';
 
 class ForgotPassword extends Component {
   constructor(props) {
@@ -31,11 +32,16 @@ class ForgotPassword extends Component {
     const { match: { url } } = this.props;
 
     if (url === forgotPasswordUrl) {
-      this.props.resetPassword(values);
-      // this.props.history.push('/password/forgotPassword/confirm')
+      this.props.resetPassword(values)
+      .then(() => {
+        this.props.history.push('/');
+      });
     } else {
-      const data = {...values, query: getQuery(this.props.location)}
-      this.props.updatePassword(data);
+      const data = { ...values, query: getQuery(this.props.location) }
+      this.props.updatePassword(data)
+        .then(() => {
+          this.props.history.push('/');
+        })
     }
   }
 
@@ -106,14 +112,14 @@ class ForgotPassword extends Component {
   render() {
     return (
       <Switch>
-        <Route path={'/password/forgotPassword'} >
+        <Route path={'/password/forgot-password'} >
           {this.renderPageContent()}
         </Route>
-        <Route path={'/password/update-password'} >
+        <Route path={'/password/reset-password'} >
           {this.renderPageContent()}
         </Route>
         <PrivateRoute
-          path={'/password/forgotPassword/confirm'}
+          path={'/password/forgot-password/confirm'}
           component={ConfirmSignUp}
           exact
           fakeAuth={this.state.auth}
@@ -135,4 +141,4 @@ ForgotPassword = reduxForm({
   enableReinitialize: true
 })(ForgotPassword)
 
-export default connect(null, mapDispatchToProps)(ForgotPassword);
+export default connect(null, mapDispatchToProps)(withRouter(ForgotPassword));

@@ -91,11 +91,6 @@ export const routes = (isAuth) => [
         component: VerifyEmail,
     },
     {
-        path: "/reset-password/:code?",
-        exact: true,
-        component: VerifyEmail,
-    },
-    {
         path: "/checkout",
         component: Checkout,
         isAuth: isAuth,
@@ -126,13 +121,13 @@ export const routes = (isAuth) => [
         component: SearchResult
     },
     {
-        path: "/password/forgotPassword",
+        path: "/password/forgot-password",
         exact: true,
         component: ForgotPassword
     },
     {
-        path: "/password/update-password",
-        component: ForgotPassword,
+        path: "/password/reset-password/:token?",
         exact: true,
+        component: VerifyEmail,
     },
 ];
