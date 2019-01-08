@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { accountSetting, addressBook, garage, helpCenter, orders, quotations, socialMedia, wishlist } from '../../constants';
+import { accountSetting, addressBook, garage, helpCenter, orders, quotations, socialMedia, wishlist, payment } from '../../constants';
 
 const profileLinks = ({ match, translate }) => {
     const links = [
@@ -12,6 +12,7 @@ const profileLinks = ({ match, translate }) => {
         { url: 'profile', name: translate(`setting.links.${accountSetting}`) },
         { url: 'addresses', name: translate(`setting.links.${addressBook}`) },
         { url: 'connect', name: translate(`setting.links.${socialMedia}`) },
+        { url: 'payment', name: payment },
     ]
 
     return (
