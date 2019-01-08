@@ -30,6 +30,8 @@ export const REGISTER_CUSTOMER_SUCCEEDED = 'REGISTER_CUSTOMER_SUCCEEDED';
 export const VERIFY_CODE_NO_SUCCEEDED = 'VERIFY_CODE_NO_SUCCEEDED';
 export const VERIFY_MOBILE_NO_SUCCEEDED = 'VERIFY_MOBILE_NO_SUCCEEDED';
 export const RESET_PASSWORD_SUCCEEDED = 'RESET_PASSWORD_SUCCEEDED';
+export const RESET_PASSWORD_TOKEN_SUCCEEDED = 'RESET_PASSWORD_TOKEN_SUCCEEDED';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
 export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
@@ -341,9 +343,29 @@ export const resetPassword = (email) => {
   return (dispatch) => {
     return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, email)
       .then(() => {
-        dispatch({
-          type: RESET_PASSWORD_SUCCEEDED
-        })
+        dispatch({ type: RESET_PASSWORD_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const resetPasswordToken = ({ code }) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${code}`)
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const updatePassword = (data) => {
+  return (dispatch) => {
+    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
+      .then(() => {
+        dispatch({ type: UPDATE_PASSWORD })
       }, error => {
         handleNetworkError(dispatch, error)
       });

@@ -89,7 +89,7 @@ class Login extends Component {
     </Fragment>
   }
   forgotPassword = (event) => {
-    this.props.history.push('/forgotPassword')
+    this.props.history.push('/password/forgotPassword')
     this.props.toggle();
   }
 

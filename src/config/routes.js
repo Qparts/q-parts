@@ -86,7 +86,12 @@ export const routes = (isAuth) => [
         component: VerifyEmail,
     },
     {
-        path: "/qtest.fareed9.com/activate-email/:code?/:email?",
+        path: "/activate-email/:code?/:email?",
+        exact: true,
+        component: VerifyEmail,
+    },
+    {
+        path: "/reset-password/:code?",
         exact: true,
         component: VerifyEmail,
     },
@@ -121,7 +126,13 @@ export const routes = (isAuth) => [
         component: SearchResult
     },
     {
-        path: "/forgotPassword",
+        path: "/password/forgotPassword",
+        exact: true,
         component: ForgotPassword
+    },
+    {
+        path: "/password/update-password",
+        component: ForgotPassword,
+        exact: true,
     },
 ];

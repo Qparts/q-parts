@@ -1,4 +1,5 @@
 export { match } from './match';
+export { getQuery } from './querystring';
 export { generateQuantity } from './generator';
 export { parseGoogleResponse } from './google';
 export * from './validation';
