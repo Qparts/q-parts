@@ -42,3 +42,4 @@ export const garage = 'garage';
 export const accountSetting = 'accountSetting';
 export const addressBook = 'addressBook';
 export const socialMedia = 'socialMedia';
+export const payment = 'payment';
