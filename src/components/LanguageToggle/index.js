@@ -4,11 +4,12 @@ import { withLocalize } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import { changeDefaultLanguage } from "../../actions/customerAction";
 
-const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, translate, changeDefaultDirection }) => {
+const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, translate, changeDefaultDirection, getCountriesOnly }) => {
     const handleLanguage = (lang) => {
         setActiveLanguage(lang.code)
 
         changeDefaultLanguage(lang.code);
+        getCountriesOnly(lang.code);
         // changeDefaultDirection(lang.code);
     }
     return localize.languages.map(lang => (

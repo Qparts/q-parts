@@ -20,7 +20,7 @@ import * as validations from '../../../utils';
 import { getComponentName } from '../../../utils';
 
 
-import { ON_SOCIAL_MEDIA_LOGIN } from '../../../constants';
+import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 import Title from '../../../components/UI/Title';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
@@ -89,7 +89,7 @@ class Login extends Component {
     </Fragment>
   }
   forgotPassword = (event) => {
-    this.props.history.push('/forgotPassword')
+    this.props.history.push('/password/forgotPassword')
     this.props.toggle();
   }
 
@@ -164,8 +164,9 @@ const mapStateToProps = (state) => {
   return {
     token: state.customer.token,
     translate: getTranslate(state.localize),
-    component: getComponentName(ON_SOCIAL_MEDIA_LOGIN),
+    component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
+    selectedCountry: state.customer.selectedCountry
   }
 }
 

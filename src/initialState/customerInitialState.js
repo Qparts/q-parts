@@ -22,9 +22,9 @@ export const initialState = {
   longitude: null,
  },
  token: null,
- showPassword: true,
  vehiclesFormat: [],
  selectedVehicle: {},
+ selectedCountry: {},
  defaultAddress: {
   addressId: 1000,
   customerId: 12532,

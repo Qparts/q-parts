@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT, CUSTOMER_SERVICE } from '../actions/constants';
-import { ON_SOCIAL_MEDIA_LOGIN, ON_SOCIAL_MEDIA_SIGNUP, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
+import { ON_SOCIAL_MEDIA_AUTH, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import { initialize } from 'react-localize-redux';
 import globalTranslations from "../translations/translations.json";
@@ -30,7 +30,10 @@ export const REGISTER_CUSTOMER_SUCCEEDED = 'REGISTER_CUSTOMER_SUCCEEDED';
 export const VERIFY_CODE_NO_SUCCEEDED = 'VERIFY_CODE_NO_SUCCEEDED';
 export const VERIFY_MOBILE_NO_SUCCEEDED = 'VERIFY_MOBILE_NO_SUCCEEDED';
 export const RESET_PASSWORD_SUCCEEDED = 'RESET_PASSWORD_SUCCEEDED';
+export const RESET_PASSWORD_TOKEN_SUCCEEDED = 'RESET_PASSWORD_TOKEN_SUCCEEDED';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
+export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
 export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
@@ -336,23 +339,36 @@ export const sendSmsCode = (values, currentLanguage) => {
   }
 }
 
-export const resetPassword = ({ code, mobile, password }, serverErrorField) => {
+export const resetPassword = (email) => {
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, { code, mobile, password })
-      .then(res => {
-        dispatch({
-          type: RESET_PASSWORD_SUCCEEDED
-        })
-      })
-      .catch(error => {
-        dispatch({
-          type: REQUEST_FAILED,
-          payload: {
-            error: error.response.data,
-            field: serverErrorField
-          }
-        })
-      })
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, email)
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const resetPasswordToken = ({ code }) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${code}`)
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const updatePassword = (data) => {
+  return (dispatch) => {
+    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
+      .then(() => {
+        dispatch({ type: UPDATE_PASSWORD })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
   }
 }
 
@@ -363,13 +379,17 @@ export const selectVehicleGarage = (vehcile) => {
   }
 }
 
+export const selectCountry = (country) => {
+  return {
+    type: SELECT_COUNTRY,
+    payload: country
+  }
+}
+
 export const socialMediaButton = (data, type) => {
   switch (type) {
-    case ON_SOCIAL_MEDIA_LOGIN:
-      return socialMediaLogin(data);
-
-    case ON_SOCIAL_MEDIA_SIGNUP:
-      return socialMediaSignup(data);
+    case ON_SOCIAL_MEDIA_AUTH:
+      return socialMediaAuth(data);
 
     case ON_SOCIAL_MEDIA_LINK:
       return socialMediaLink(data);
@@ -379,28 +399,16 @@ export const socialMediaButton = (data, type) => {
   }
 }
 
-
-const socialMediaSignup = (data) => {
-  return {
-    type: SOCIAL_MEDIA_SIGNUP,
-    payload: data
-  }
-}
-
-const socialMediaLogin = (data) => {
+const socialMediaAuth = (data) => {
   return (dispatch) => {
-    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/social-media`, {
-      platform: data.platform,
-      socialMediaId: data.socialMediaId
-    })
+    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media-auth`, data)
       .then(res => {
         dispatch({
           type: LOGIN_SUCCEEDED,
           payload: res.data
         })
-      })
-      .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+      }, error => {
+        handleNetworkError(dispatch, error);
       })
   }
 }
@@ -417,7 +425,7 @@ const socialMediaLink = (data) => {
         })
       })
       .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+        handleNetworkError(dispatch, error);
       })
   }
 }

@@ -26,6 +26,7 @@ const WithSocialMedia = WrappedComponent => {
     }
 
     handleResponse = (type) => (response) => {
+      const { currentLanguage, selectedCountry, toggle } = this.props
       let data = {};
       switch (type) {
         case FACEBOOK:
@@ -36,8 +37,13 @@ const WithSocialMedia = WrappedComponent => {
             lastName: response.last_name,
             email: response.email,
             platform: FACEBOOK,
-          };
+            countryId: selectedCountry.id,
+            defaultLang: currentLanguage
 
+          };
+          if (toggle) {
+            toggle();
+          }
           return this.props.socialMediaButton(data, this.props.component);
 
         case GOOGLE:
@@ -47,9 +53,13 @@ const WithSocialMedia = WrappedComponent => {
             firstName: response.profileObj.givenName,
             lastName: response.profileObj.familyName,
             email: response.profileObj.email,
-            platform: GOOGLE
+            platform: GOOGLE,
+            countryId: selectedCountry.id,
+            defaultLang: currentLanguage
           }
-
+          if (toggle) {
+            toggle();
+          }
           return this.props.socialMediaButton(data, this.props.component);
 
         case TWITTER:
@@ -58,9 +68,13 @@ const WithSocialMedia = WrappedComponent => {
             firstName: response.name.split(' ')[0],
             lastName: response.name.split(' ')[1],
             email: response.email,
-            platform: TWITTER
+            platform: TWITTER,
+            countryId: selectedCountry.id,
+            defaultLang: currentLanguage
           };
-
+          if (toggle) {
+            toggle();
+          }
           return this.props.socialMediaButton(data, this.props.component);
 
         default:

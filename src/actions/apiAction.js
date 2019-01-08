@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { API_ROOT, VEHICLE_SERVICE, LOCATION_SERVICE, PRODUCT_SERVICE } from '../actions/constants';
 import { handleNetworkError } from '../utils';
-import { BEST_SELLER, OFFERS } from '../constants';
+import { BEST_SELLER, OFFERS, LOCAL_LANGUAGES } from '../constants';
+import { renderToStaticMarkup } from "react-dom/server";
+import globalTranslations from "../translations/translations.json";
+import { initialize } from 'react-localize-redux';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const GET_COUNTRY_SUCCEEDED = 'GET_COUNTRY_SUCCEEDED';
 export const GET_COUNTRIES_SUCCEEDED = 'GET_COUNTRIES_SUCCEEDED';
+export const GET_COUNTRIES_ONLY_SUCCEEDED = 'GET_COUNTRIES_ONLY_SUCCEEDED';
 export const GET_COUNTRIES_REGIONS_SUCCEEDED = 'GET_COUNTRIES_REGIONS_SUCCEEDED';
 export const GET_VEHICLE_SUCCEEDED = 'GET_VEHICLE_SUCCEEDED';
 export const FIND_CITY_SUCCEEDED = 'FIND_CITY_SUCCEEDED';
@@ -14,7 +18,6 @@ export const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
 export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
-export const UPDATE_APP_VERSION = 'UPDATE_APP_VERSION';
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -41,6 +44,23 @@ export const getCountries = () => {
       }, error => {
         handleNetworkError(dispatch, error);
       })
+  }
+}
+
+export const getCountriesOnly = (currentLang) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${LOCATION_SERVICE}/countries-only`)
+      .then(res => {
+        dispatch({
+          type: GET_COUNTRIES_ONLY_SUCCEEDED,
+          payload: {
+            data: res.data,
+            currentLang
+          }
+        });
+      }, error => {
+        handleNetworkError(dispatch, error);
+      });
   }
 }
 
@@ -135,16 +155,12 @@ export const getSortedProducts = () => {
   return { type: GET_SORTED_PRODUCTS }
 }
 
-export const updateAppVersion = () => {
+export const InitializeDefaultLang = (defaultLanguage) => {
   return (dispatch) => {
-    axios.get(`${API_ROOT}/app-version`)
-      .then(res => {
-        dispatch({
-          type: UPDATE_APP_VERSION ,
-          payload: res.data
-        })
-      }, error => {
-        handleNetworkError(dispatch, error);
-      })
+    dispatch(initialize({
+      languages: LOCAL_LANGUAGES,
+      translation: globalTranslations,
+      options: { renderToStaticMarkup, defaultLanguage }
+    }))
   }
 }

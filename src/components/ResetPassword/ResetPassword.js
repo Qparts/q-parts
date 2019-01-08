@@ -14,7 +14,7 @@ class resetPassword extends Component {
     super(props);
   }
   forgotPassword = (event) =>{
-    this.props.history.push('/forgotPassword')
+    this.props.history.push('/password/forgotPassword')
   }
   onCancle = () =>{
     this.props.toggle();
@@ -45,7 +45,7 @@ class resetPassword extends Component {
                   <Field name="oldPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.oldPassword")} validate={[validations.required]} />
                 </div>
                 <div>
-                  <Link className="btn-primary" to="/forgotPassword">Forgot it?</Link>
+                  <Link className="btn-primary" to="/password/forgotPassword">Forgot it?</Link>
                   <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required, validations.confirmPassword]} />
                 </div>
               </div>

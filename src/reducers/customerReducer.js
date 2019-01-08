@@ -4,7 +4,8 @@ import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
-  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED
+  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
+  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD
 } from '../actions/customerAction';
 import { AR } from '../constants';
 import _ from 'lodash';
@@ -67,7 +68,8 @@ export default function reducer(state = initialState, action) {
         detail: initialState.detail,
         token: null,
         vehiclesFormat: initialState.vehiclesFormat,
-        selectedVehicle: initialState.selectedVehicle
+        selectedVehicle: initialState.selectedVehicle,
+        registered: initialState.registered
       }
 
     case REQUEST_FAILED:
@@ -83,10 +85,10 @@ export default function reducer(state = initialState, action) {
         email: action.payload.email,
         platform: action.payload.platform
       }
-      return { ...state, detail: newSocialMediaSignup, showPassword: false };
+      return { ...state, detail: newSocialMediaSignup };
 
     case EMAIL_SIGNUP:
-      return { ...state, detail: initialState.detail, showPassword: true };
+      return { ...state, detail: initialState.detail };
 
     case ADD_VEHICLE_SUCCEEDED:
       const newVehicle = { ...state.detail, vehicles: [...state.detail.vehicles, action.payload] };
@@ -100,6 +102,9 @@ export default function reducer(state = initialState, action) {
 
     case SELECT_VEHICLE_FROM_GARAGE:
       return { ...state, selectedVehicle: action.payload };
+
+    case SELECT_COUNTRY:
+      return { ...state, selectedCountry: action.payload };
 
     case VERIFY_MOBILE_NO_SUCCEEDED:
       return { ...state }
@@ -171,6 +176,15 @@ export default function reducer(state = initialState, action) {
 
     case REGISTERED:
       return { ...state, registered: true }
+
+    case RESET_PASSWORD_SUCCEEDED:
+      return { ...state }
+
+    case RESET_PASSWORD_TOKEN_SUCCEEDED:
+      return { ...state }
+
+    case UPDATE_PASSWORD:
+      return getLoginObject(state, action);
 
     default:
       return state;

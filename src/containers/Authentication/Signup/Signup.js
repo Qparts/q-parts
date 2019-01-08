@@ -12,7 +12,7 @@ import WithSocialMedia from '../../../hoc/WithSocialMedia';
 import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo } from '../../../actions/customerAction';
-import { ON_SOCIAL_MEDIA_SIGNUP, colors } from '../../../constants';
+import { colors, ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 
 import Title from '../../../components/UI/Title';
 
@@ -51,7 +51,6 @@ class Signup extends Component {
   render() {
     const { translate, onShowDialog } = this.props;
     const signup = <SignupForm
-      showPassword={this.props.showPassword}
       onSubmit={this.handleSubmit}
       countries={this.props.countries} />
     // const dialog =
@@ -119,13 +118,13 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    showPassword: state.customer.showPassword,
     token: state.customer.token,
     countries: state.api.countries,
     platform: state.customer.detail.platform,
     translate: getTranslate(state.localize),
-    component: getComponentName(ON_SOCIAL_MEDIA_SIGNUP),
-    currentLanguage: getActiveLanguage(state.localize).code
+    component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
+    currentLanguage: getActiveLanguage(state.localize).code,
+    selectedCountry: state.customer.selectedCountry
   }
 }
 

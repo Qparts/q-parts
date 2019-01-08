@@ -478,6 +478,7 @@ const mapStateToProps = (state) => {
     connectedPlatforms: getConnectedPlatforms(customer.socialMedia),
     component: getComponentName(ON_SOCIAL_MEDIA_LINK),
     currentLanguage: getActiveLanguage(state.localize).code,
+    selectedCountry: state.customer.selectedCountry,
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist

@@ -17,9 +17,9 @@ import Button from '../../../../components/UI/Button';
 class SignupForm extends Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
-       passwordType: 'password'
+      passwordType: 'password'
     }
   }
 
@@ -28,7 +28,7 @@ class SignupForm extends Component {
       passwordType: this.state.passwordType === 'password' ? 'text' : 'password'
     });
   }
-  
+
   render() {
     const { translate } = this.props;
     return (
@@ -95,22 +95,18 @@ class SignupForm extends Component {
             </div>
           </div>
         </div>
-        {
-          this.props.showPassword && (
-            <div className="form-group one_shadow-input password-strength">
-              <Field
-                hasPasswordStrength={true}
-                label={translate("form.signup.password")}
-                name="password"
-                component={RenderField}
-                type={this.state.passwordType} 
-                placeholder={translate("form.signup.placeholders.password")}
-                onTogglePassword={this.handleTogglePassword}
-                validate={[validations.required]} />
-              <label>Password Strength</label>
-            </div>
-          )
-        }
+        <div className="form-group one_shadow-input password-strength">
+          <Field
+            hasPasswordStrength={true}
+            label={translate("form.signup.password")}
+            name="password"
+            component={RenderField}
+            type={this.state.passwordType}
+            placeholder={translate("form.signup.placeholders.password")}
+            onTogglePassword={this.handleTogglePassword}
+            validate={[validations.required]} />
+          <label>Password Strength</label>
+        </div>
         <div id="bottom">
           <p>By creating an account, you agree to
             <span>
