@@ -178,6 +178,7 @@
           background: none;
           padding-top: 0px;
           padding-bottom: 0px;
+          @include padding-left(0);
           opacity: 0.6;
           .icon-trash{
             @include font-size(18px);
