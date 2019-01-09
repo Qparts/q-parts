@@ -5,11 +5,11 @@ import { onAccountVerify, resetPasswordToken } from '../../actions/customerActio
 import { getQuery } from '../../utils';
 
 import './VerifyEmail.css';
+import ForgotPassword from '../../containers/Authentication/ForgotPassword/ForgotPassword';
 
 
 const verified = 'V';
 const activateAccountUrl = '/activate-email';
-const resetPasswordUrl = '/reset-password';
 
 class VerifyEmail extends Component {
     constructor(props) {
@@ -47,9 +47,7 @@ class VerifyEmail extends Component {
     renderAccountValidated = (verified) => {
         if (verified) {
             return (
-                <div className="VerifyEmail-container">
-                    <p>Your account has been successfully verified</p>
-                </div>
+                <ForgotPassword />
             );
         } else {
             return <Redirect to="/" />;
@@ -60,11 +58,11 @@ class VerifyEmail extends Component {
     render() {
         if (this.props.match.url === activateAccountUrl) {
             return (
-                this.hasValidKeys(['code', 'email']) ? this.renderAccountValidated(this.state.verified) : <Redirect to="/" />
+                this.hasValidKeys(['token', 'email']) ? this.renderAccountValidated(this.state.verified) : <Redirect to="/" />
             )
         } else {
             return (
-                this.hasValidKeys(['code']) ? this.renderAccountValidated(true) : <Redirect to="/" />
+                this.hasValidKeys(['token']) ? this.renderAccountValidated(true) : <Redirect to="/" />
             )
         }
     }

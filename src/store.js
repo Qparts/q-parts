@@ -11,6 +11,7 @@ const middleware = applyMiddleware(thunk, logger);
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ['networkError']
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

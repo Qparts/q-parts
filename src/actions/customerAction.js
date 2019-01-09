@@ -350,9 +350,9 @@ export const resetPassword = (email) => {
   }
 }
 
-export const resetPasswordToken = ({ code }) => {
+export const resetPasswordToken = ({ token }) => {
   return (dispatch) => {
-    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${code}`)
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${token}`)
       .then(() => {
         dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
       }, error => {
@@ -364,8 +364,13 @@ export const resetPasswordToken = ({ code }) => {
 export const updatePassword = (data) => {
   return (dispatch) => {
     return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
-      .then(() => {
-        dispatch({ type: UPDATE_PASSWORD })
+      .then((res) => {
+        dispatch(
+          {
+            type: UPDATE_PASSWORD,
+            payload: res.data
+          }
+        )
       }, error => {
         handleNetworkError(dispatch, error)
       });
