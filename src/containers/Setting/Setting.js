@@ -32,6 +32,7 @@ import Garage from '../../components/Garage/Garage';
 import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
 import Payment from '../../components/Payment/Payment';
+import PaymentPopup from '../../components/Payment/PaymentPopup';
 
 import {
   match
@@ -52,6 +53,7 @@ const phone = 'phone';
 const email = 'email';
 const password = 'password';
 const garage_pupop = 'garage';
+const payment_pupop = 'payment';
 // const vehicle = 'vehicle';
 
 
@@ -231,6 +233,12 @@ class Setting extends Component {
               header={translate("dialog.vehicle.title")}
               subHeader={"Store vehicles in your garage and Get product recommendations"} />
           }
+        case 'payment':
+          return {
+            header: <Title
+              header= "Ad Credit Card"
+              subHeader={"Secure Credit Card Payment"} />
+          }
       default:
         break;
     }
@@ -314,6 +322,19 @@ class Setting extends Component {
         />
         </ModalBody>
       </Modal>
+
+      let paymentDialog;
+      if (this.state.dialogType === payment_pupop)
+      paymentDialog = <Modal className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+          <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+          <ModalBody>
+          <PaymentPopup
+            onTabChange={this.handleChange}
+            toggle={this.togglePopup}
+            displayTwoTabs={false}
+          />
+          </ModalBody>
+        </Modal>
     return (
       <section id="setting">
         <SectionHeader text={this.state.sectionHeader} />
@@ -413,7 +434,13 @@ class Setting extends Component {
                 }} />
               <Route path="/setting/payment/" exact={true} render={() => {
                   return (
-                    <Payment translate={this.props.translate} />
+                    <Fragment>
+                      <Payment
+                        translate={this.props.translate}
+                        onShowEditDialog={this.handleDialog}
+                         />
+                      {paymentDialog}
+                    </Fragment>
                   )
                 }} />
                 <PrivateRoute
