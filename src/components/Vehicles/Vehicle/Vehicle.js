@@ -13,7 +13,6 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 import _ from 'lodash';
 import * as validations from '../../../utils';
 import { isAuth } from '../../../utils';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
 import Checkbox from '../../UI/Checkbox';
 
@@ -28,20 +27,17 @@ class Vehicle extends Component {
 
   handleSubmit = values => {
     this.props.saveFormDataToCache(values);
-    if (isAuth(this.props.token)) {
-      const vehicleId = values.year.id;
-      const vin = values.vin;
-      this.props.addVehcile({ vehicleId, vin })
+
+    const vehicleYearId = values.year.id;
+    const vin = values.vin;
+    this.props.addVehcile({ vehicleYearId, vin })
+    .then(() => {
       this.props.clearFormDataFromCache('vehicle')
-      this.props.history.push('/');
-
-    } else {
-      this.props.history.push('/login');
-
-    }
+      this.props.toggle();
+    });
   }
 
-  onCancle = () =>{
+  onCancle = () => {
     this.props.toggle();
   }
 
