@@ -422,7 +422,8 @@ const socialMediaLink = (data) => {
   return (dispatch) => {
     axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media`, {
       platform: data.platform,
-      socialMediaId: data.socialMediaId
+      socialMediaId: data.socialMediaId,
+      email: data.email
     })
       .then(res => {
         dispatch({
