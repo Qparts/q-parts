@@ -349,6 +349,9 @@
     }
     .modal-body{
       form{
+        .card-number{
+          width: 100%;
+        }
         .RenderField{
           .form-control{
             border-radius: side-values(20px 0 20px 20px) !important;
@@ -401,6 +404,7 @@
             }
           }
           .RenderField{
+            margin-top: 4px;
             .form-control{
               padding: 8px;
             }
