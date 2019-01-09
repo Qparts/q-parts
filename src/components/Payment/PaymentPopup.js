@@ -92,9 +92,13 @@ class PaymentPopup extends Component {
             label="Set as Default Address"
           />
         </div>
-        <div className="footer">
-          <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-          <Button className="btn-primary col-8" text="Add Card" icon={"icon-arrow-right"} />
+        <div className="footer col-12">
+          <div className="row">
+          <div className="col-3">
+            <Button className="btn btn-light" type="reset" text="Cancel" onClick={this.onCancle} />
+          </div>
+          <Button className="btn-primary col-9" text="Add Card" icon={"icon-arrow-right"} />
+          </div>
         </div>
       </form>
     )
