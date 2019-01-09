@@ -118,7 +118,12 @@ class Setting extends Component {
       .on(type => type === name, () => this.props.editName({ firstName: values.firstName, lastName: values.lastName, defaultLang: values.defaultLang ? values.defaultLang.value : currentLanguage }))
       .on(type => type === phone, () => this.props.editPhoneNo(type, values.mobile))
       .on(type => type === email, () => this.props.editEmail({ newEmail: values.email }, email, currentLanguage))
-      .on(type => type === password, () => this.props.editPassword({ oldPassword: values.oldPassword, newPassword: values.newPassword }, password, currentLanguage))
+      .on(type => type === password, () => (
+        this.props.editPassword({ oldPassword: values.oldPassword, newPassword: values.newPassword }, password, currentLanguage)
+          .then(() => (
+            this.togglePopup()
+          ))
+      ))
       .otherwise(type => type)
   }
 
@@ -207,7 +212,7 @@ class Setting extends Component {
         break;
     }
   }
-  togglePopup = () =>{
+  togglePopup = () => {
     this.setState({
       modal: !this.state.modal
     })
@@ -220,25 +225,25 @@ class Setting extends Component {
       case 'password':
         return {
           header: <Title
-            header={translate("dialog.updatePassword.title")}  />
+            header={translate("dialog.updatePassword.title")} />
         }
-        case 'email':
-          return {
-            header: <Title
-              header={translate("dialog.updateEmail.title")}  />
-          }
-        case 'garage':
-          return {
-            header: <Title
-              header={translate("dialog.vehicle.title")}
-              subHeader={"Store vehicles in your garage and Get product recommendations"} />
-          }
-        case 'payment':
-          return {
-            header: <Title
-              header= "Ad Credit Card"
-              subHeader={"Secure Credit Card Payment"} />
-          }
+      case 'email':
+        return {
+          header: <Title
+            header={translate("dialog.updateEmail.title")} />
+        }
+      case 'garage':
+        return {
+          header: <Title
+            header={translate("dialog.vehicle.title")}
+            subHeader={"Store vehicles in your garage and Get product recommendations"} />
+        }
+      case 'payment':
+        return {
+          header: <Title
+            header="Ad Credit Card"
+            subHeader={"Secure Credit Card Payment"} />
+        }
       default:
         break;
     }
@@ -253,19 +258,19 @@ class Setting extends Component {
 
     if (this.state.dialogType === email) {
       dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
-         <ModalBody>
-           <EditInfo
-             name={"email"}
-             type="text"
-             placeholder={translate("dialog.updateEmail.placeholder")}
-             onHide={this.onHide}
-             cancel={translate("dialog.updateEmail.cancel")}
-             update={translate("dialog.updateEmail.update")}
-             onSubmit={this.onEdit.bind(this, email)}
-           />
-         </ModalBody>
-       </Modal>
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <EditInfo
+            name={"email"}
+            type="text"
+            placeholder={translate("dialog.updateEmail.placeholder")}
+            onHide={this.onHide}
+            cancel={translate("dialog.updateEmail.cancel")}
+            update={translate("dialog.updateEmail.update")}
+            onSubmit={this.onEdit.bind(this, email)}
+          />
+        </ModalBody>
+      </Modal>
     } else if (this.state.dialogType === password) {
       dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
@@ -311,30 +316,30 @@ class Setting extends Component {
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-    garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
-        <Vehicles
-          newOrOldVechile={this.state.newOrOldVechile}
-          onTabChange={this.handleChange}
-          toggle={this.togglePopup}
-          displayTwoTabs={false}
-        />
+          <Vehicles
+            newOrOldVechile={this.state.newOrOldVechile}
+            onTabChange={this.handleChange}
+            toggle={this.togglePopup}
+            displayTwoTabs={false}
+          />
         </ModalBody>
       </Modal>
 
-      let paymentDialog;
-      if (this.state.dialogType === payment_pupop)
+    let paymentDialog;
+    if (this.state.dialogType === payment_pupop)
       paymentDialog = <Modal className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-          <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
-          <ModalBody>
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
           <PaymentPopup
             onTabChange={this.handleChange}
             toggle={this.togglePopup}
             displayTwoTabs={false}
           />
-          </ModalBody>
-        </Modal>
+        </ModalBody>
+      </Modal>
     return (
       <section id="setting">
         <SectionHeader text={this.state.sectionHeader} />
@@ -432,13 +437,13 @@ class Setting extends Component {
                       translate={this.props.translate} />
                   )
                 }} />
-              <Route path="/setting/payment/" exact={true} render={() => {
+                <Route path="/setting/payment/" exact={true} render={() => {
                   return (
                     <Fragment>
                       <Payment
                         translate={this.props.translate}
                         onShowEditDialog={this.handleDialog}
-                         />
+                      />
                       {paymentDialog}
                     </Fragment>
                   )

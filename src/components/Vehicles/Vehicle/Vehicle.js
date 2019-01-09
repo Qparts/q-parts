@@ -12,7 +12,6 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
-import { isAuth } from '../../../utils';
 
 import Checkbox from '../../UI/Checkbox';
 
