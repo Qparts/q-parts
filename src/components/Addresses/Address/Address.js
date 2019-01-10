@@ -54,22 +54,28 @@ class Address extends Component {
 
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <div className="form-group">
-          <label>{translate("form.address.region")}</label>
+        <div className="col-md-4 div-rounded">
           <Field
-            name="region"
-            component={SelectInput}
-            options={regionsData}
-            placeholder=""
-            validate={[validations.required]} />
-        </div>
-        <div className="form-group">
-          <label>{translate("form.address.city")}</label>
-          <Field
-            name="city"
+            name="country"
+            placeholder={translate("form.address.country")}
             component={SelectInput}
             options={citiesData}
-            placeholder=""
+            validate={[validations.required]} />
+        </div>
+        <div className="col-md-4 div-rounded">
+          <Field
+            name="city"
+            placeholder={translate("form.address.city")}
+            component={SelectInput}
+            options={citiesData}
+            validate={[validations.required]} />
+        </div>
+        <div className="col-md-4 div-rounded">
+          <Field
+            name="region"
+            placeholder={translate("form.address.region")}
+            component={SelectInput}
+            options={regionsData}
             validate={[validations.required]} />
         </div>
       </Fragment> :
@@ -113,29 +119,84 @@ class Address extends Component {
             </div>
           ) :
             <div className="Address-container">
-              <Button type="button" className="btn btn-light" text={translate("form.address.map")} onClick={onShowGoogleMap} />
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>{translate("form.address.title")}</label>
-                  <Field
-                    name="title"
-                    component={RenderField}
-                    type="text"
-                    placeholder=""
-                    validate={[validations.required]} />
-                </div>
-                {renderCityRegion}
-                <div className="form-group">
-                  <label>{translate("form.address.line1")}</label>
-                  <Field
-                    name="line1"
-                    component={RenderField}
-                    type="text"
-                    validate={[validations.required]} />
-                </div>
-                <div className="form-group">
-                  <label>{translate("form.address.line2")}</label>
-                  <Field name="line2" component={RenderField} type="text" />
+                <div className="row">
+                  <div className="col-6 first-Name">
+                    <Field
+                      label="First Name"
+                      name="firstName"
+                      component={RenderField}
+                      type="text"
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                  <div className="col-6 last-name">
+                    <Field
+                      label="Last Name"
+                      name="lastName"
+                      component={RenderField}
+                      type="text"
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                    <div className="col-12 google-map">
+                      <img className="main-img" alt="user" src="/img/google-map.svg" onClick={onShowGoogleMap}/>
+                      <p>{translate("form.address.selectAddress")}</p>
+                  </div>
+                  <div className="col-12 address-title">
+                    <Field
+                      label={`*${translate("form.address.title")}`}
+                      name="title"
+                      component={RenderField}
+                      type="text"
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                  <div className="col-12 address-title">
+                    <Field
+                      label={`${translate("form.address.title")} (${translate("form.address.line2")})`}
+                      name="title-line2"
+                      component={RenderField}
+                      type="text"
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                  {renderCityRegion}
+                  <div className="row phone-info">
+                    <p className="col-12">Alternate Phone Number</p>
+                    <div className="phone-number col-6">
+                      <div className="first">
+                        <Field
+                          name="phone"
+                          component={RenderField}
+                          clearable={false}
+                          placeholder="+966"
+                          validate={[validations.required]} />
+                      </div>
+                      <Field
+                        name="phone-number"
+                        component={RenderField}
+                        clearable={false}
+                        placeholder="Phone Number"
+                        validate={[validations.required]} />
+                    </div>
+                    <div className="alternate-phone-number col-6">
+                      <div className="first">
+                        <Field
+                          name="alternate-phone"
+                          component={RenderField}
+                          clearable={false}
+                          placeholder="+966"
+                          validate={[validations.required]} />
+                      </div>
+                      <Field
+                        name="alternate-phone-number"
+                        component={RenderField}
+                        clearable={false}
+                        placeholder="Phone Number"
+                        validate={[validations.required]} />
+                    </div>
+                  </div>
                 </div>
                 <div className="form-group">
                   <label>{translate("form.address.zipCode")}</label>
@@ -154,6 +215,7 @@ class Address extends Component {
     )
   }
 }
+// <Button type="button" className="btn btn-light" text={translate("form.address.map")} onClick={onShowGoogleMap} />
 
 Address = reduxForm({
   form: 'Address',

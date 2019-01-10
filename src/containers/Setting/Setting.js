@@ -54,6 +54,7 @@ const email = 'email';
 const password = 'password';
 const garage_pupop = 'garage';
 const payment_pupop = 'payment';
+const addresses_popup = 'addresses'
 // const vehicle = 'vehicle';
 
 
@@ -236,8 +237,14 @@ class Setting extends Component {
         case 'payment':
           return {
             header: <Title
-              header= "Ad Credit Card"
+              header="Ad Credit Card"
               subHeader={"Secure Credit Card Payment"} />
+          }
+        case 'addresses':
+          return {
+            header: <Title
+              header={translate("dialog.address.title")}
+              subHeader={"Where you would like your items shipped?"} />
           }
       default:
         break;
@@ -279,35 +286,36 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     }
-    const addressDialog =
-      <Dialog
-        header={translate("dialog.address.title")}
-        visible={this.state.visible}
-        width="800px"
-        height="800px"
-        modal={true}
-        onHide={this.onHide}>
-        <Address
-          address={this.props.address}
-          customer={this.props.customer}
-          getRegions={this.props.getRegions}
-          getCountry={this.props.getCountry}
-          regions={this.props.regions}
-          country={this.props.country}
-          confirmUserAddress={this.props.confirmUserAddress}
-          onSubmit={this.onSaveNewAddress}
-          onShowGoogleMap={this.handleShowGoogleMap}
-          onCityFound={this.handleCityFound}
-          showGoogleMap={this.state.showGoogleMap}
-          cityFound={this.state.cityFound}
-          city={this.props.city}
-          findCity={this.props.findCity}
-          translate={this.props.translate}
-          onHide={this.onHide}
-          defaultAddress={this.state.defaultAddress}
-          onDefaultAddress={this.handleChangeDefaultAddress}
-        />
-      </Dialog>
+
+    let addressDialog;
+    if(this.state.dialogType === addresses_popup){
+      addressDialog =<Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <Address
+            address={this.props.address}
+            customer={this.props.customer}
+            getRegions={this.props.getRegions}
+            getCountry={this.props.getCountry}
+            regions={this.props.regions}
+            country={this.props.country}
+            confirmUserAddress={this.props.confirmUserAddress}
+            onSubmit={this.onSaveNewAddress}
+            onShowGoogleMap={this.handleShowGoogleMap}
+            onCityFound={this.handleCityFound}
+            showGoogleMap={this.state.showGoogleMap}
+            cityFound={this.state.cityFound}
+            city={this.props.city}
+            findCity={this.props.findCity}
+            translate={this.props.translate}
+            onHide={this.onHide}
+            defaultAddress={this.state.defaultAddress}
+            onDefaultAddress={this.handleChangeDefaultAddress}
+          />
+
+        </ModalBody>
+      </Modal>
+    }
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
@@ -388,7 +396,7 @@ class Setting extends Component {
                     <Fragment>
                       <Addresses
                         customer={this.props.customer}
-                        onShowAdressDialog={this.handleShowDialog}
+                        onShowEditDialog={this.handleDialog}
                         onEditAddress={this.handleEditAddress}
                         translate={this.props.translate} />
                       {addressDialog}
