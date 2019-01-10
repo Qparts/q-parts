@@ -135,7 +135,7 @@ class Address extends Component {
                 <div className="row">
                   <div className="col-6 first-Name">
                     <Field
-                      label="First Name"
+                      label={translate("form.address.firstName")}
                       name="firstName"
                       component={RenderField}
                       type="text"
@@ -144,7 +144,7 @@ class Address extends Component {
                   </div>
                   <div className="col-6 last-name">
                     <Field
-                      label="Last Name"
+                      label={translate("form.address.lastName")}
                       name="lastName"
                       component={RenderField}
                       type="text"
@@ -175,7 +175,7 @@ class Address extends Component {
                   </div>
                   {renderCityRegion}
                   <div className="row phone-info col-12">
-                    <p className="col-12">Alternate Phone Number</p>
+                    <p className="col-12">{translate("form.address.alternatePhone")}</p>
                     <div className="phone-number col-6">
                       <div className="first">
                         <Field
@@ -189,7 +189,7 @@ class Address extends Component {
                         name="phone-number"
                         component={RenderField}
                         clearable={false}
-                        placeholder="Phone Number"
+                        placeholder={translate("form.address.phoneNumber")}
                         validate={[validations.required]} />
                     </div>
                     <div className="alternate-phone-number col-6">
@@ -205,7 +205,7 @@ class Address extends Component {
                         name="alternate-phone-number"
                         component={RenderField}
                         clearable={false}
-                        placeholder="Phone Number"
+                        placeholder={translate("form.address.phoneNumber")}
                         validate={[validations.required]} />
                     </div>
                   </div>
@@ -214,7 +214,7 @@ class Address extends Component {
                       name="shipping"
                       component={RenderField}
                       type="text"
-                      placeholder="Shipping note"
+                      placeholder={translate("form.address.shippingNote")}
                       validate={[validations.required]} />
                   </div>
                 </div>

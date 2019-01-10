@@ -244,7 +244,7 @@ class Setting extends Component {
           return {
             header: <Title
               header={translate("dialog.address.title")}
-              subHeader={"Where you would like your items shipped?"} />
+              subHeader={translate("setting.addressBook.shippingItem")} />
           }
       default:
         break;

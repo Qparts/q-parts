@@ -14,10 +14,10 @@ class Addresses extends Component {
  render() {
   const { translate } = this.props;
   let addresses;
-  if(false){
+  if(true){
     addresses = <div id="addresses-container">
      <div className="addresses-header justify-content-between">
-       <p> Where you would like your items shipped?</p>
+       <p>{translate("setting.addressBook.shippingItem")}</p>
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
      <span class="seperator"></span>
@@ -28,7 +28,7 @@ class Addresses extends Component {
             check: !this.state.check
           })}
           checked={this.state.check}
-          label="Default Addresses"
+          label={translate("setting.addressBook.defaultAddress")}
         />
       <div className="addresses-box_item-label">
          <p>Ahmed Mahmoud</p>
@@ -39,7 +39,7 @@ class Addresses extends Component {
          <p>(962) 770-2302</p>
        </div>
        <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
        </div>
       </div>
       <div className="col-1">
@@ -51,7 +51,7 @@ class Addresses extends Component {
             check: !this.state.check
           })}
           checked={this.state.check}
-          label="Default addresses"
+          label={translate("setting.addressBook.defaultAddress")}
         />
       <div className="addresses-box_item-label">
           <p>Ahmed Mahmoud</p>
@@ -62,8 +62,8 @@ class Addresses extends Component {
           <p>(962) 770-2302</p>
         </div>
        <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
-        <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
+        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
+        <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder/>
        </div>
       </div>
      </div>
@@ -71,12 +71,12 @@ class Addresses extends Component {
   }else{
     addresses = <div id="empty-addresses">
       <div className="addresses-header justify-content-between">
-        <p>Where you would like your items shipped?</p>
+        <p>{translate("setting.addressBook.shippingItem")}</p>
       </div>
       <span class="seperator"></span>
       <div className="add-addresses">
         <p className="icon-address"/>
-        <p className="addresses-text">NO SAVER ADDRESSES</p>
+        <p className="addresses-text">{translate("setting.addressBook.noAddress")}</p>
         <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
       </div>
       </div>
