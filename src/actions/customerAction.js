@@ -283,7 +283,7 @@ export const onLogout = () => {
 
 export const addVehcile = (values) => {
   return (dispatch) => {
-    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/vehicle`, values)
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/vehicle`, values)
       .then(res => {
         dispatch({
           type: ADD_VEHICLE_SUCCEEDED,
@@ -422,7 +422,8 @@ const socialMediaLink = (data) => {
   return (dispatch) => {
     axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media`, {
       platform: data.platform,
-      socialMediaId: data.socialMediaId
+      socialMediaId: data.socialMediaId,
+      email: data.email
     })
       .then(res => {
         dispatch({
