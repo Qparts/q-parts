@@ -439,16 +439,16 @@
         "deliver": [
           "التوصيل لهذا العنوان",
           "Deliver to this address"
-        ],
-        "country": [
-          "دولة",
-          "Country"
-        ],
-        "selectAddress": [
-          "حدد عنوانك من خلال الخريطة",
-          "Select your address by google mabs"
         ]
-      }
+      },
+      "country": [
+        "دولة",
+        "Country"
+      ],
+      "selectAddress": [
+        "حدد عنوانك من خلال الخريطة",
+        "Select your address by google mabs"
+      ]
     },
     "vendor": {
       "name": [

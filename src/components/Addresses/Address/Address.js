@@ -9,10 +9,17 @@ import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
+import Checkbox from '../../UI/Checkbox';
 
 import './Address.css';
 
 class Address extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      check: false
+    }
+  }
   componentWillMount() {
     this.props.getCountry(this.props.customer.countryId);
     this.props.getRegions(this.props.customer.countryId);
@@ -54,7 +61,7 @@ class Address extends Component {
 
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <div className="col-md-4 div-rounded">
+        <div className="col-md-4 div-rounded-first">
           <Field
             name="country"
             placeholder={translate("form.address.country")}
@@ -70,7 +77,7 @@ class Address extends Component {
             options={citiesData}
             validate={[validations.required]} />
         </div>
-        <div className="col-md-4 div-rounded">
+        <div className="col-md-4 div-rounded-last">
           <Field
             name="region"
             placeholder={translate("form.address.region")}
@@ -93,12 +100,17 @@ class Address extends Component {
     let renderButtons =
       <Fragment>
         <div>
-          <RadioButton value={true} name="defaultAddress" onChange={onDefaultAddress} checked={true === defaultAddress} />
-          <label className="p-radiobutton-label">{translate("form.address.buttons.defaultAddress")}</label>
+          <Checkbox
+            onChange={e => this.setState({
+              check: !this.state.check
+            })}
+            checked={this.state.check}
+            label={translate("form.address.buttons.defaultAddress")}
+          />
         </div>
-        <div>
+        <div className="footer">
           <Button onClick={onHide} type="reset" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
-          <Button type="submit" className="btn btn-secondary" text={translate("form.address.buttons.confirm")} />
+          <Button type="submit" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
         </div>
       </Fragment>
 
@@ -143,7 +155,7 @@ class Address extends Component {
                       <img className="main-img" alt="user" src="/img/google-map.svg" onClick={onShowGoogleMap}/>
                       <p>{translate("form.address.selectAddress")}</p>
                   </div>
-                  <div className="col-12 address-title">
+                  <div className="col-md-12 address-title">
                     <Field
                       label={`*${translate("form.address.title")}`}
                       name="title"
@@ -162,7 +174,7 @@ class Address extends Component {
                       validate={[validations.required]} />
                   </div>
                   {renderCityRegion}
-                  <div className="row phone-info">
+                  <div className="row phone-info col-12">
                     <p className="col-12">Alternate Phone Number</p>
                     <div className="phone-number col-6">
                       <div className="first">
@@ -197,15 +209,14 @@ class Address extends Component {
                         validate={[validations.required]} />
                     </div>
                   </div>
-                </div>
-                <div className="form-group">
-                  <label>{translate("form.address.zipCode")}</label>
-                  <Field
-                    name="zipCode"
-                    component={RenderField}
-                    type="text"
-                    placeholder="4435"
-                    validate={[validations.required]} />
+                  <div className="col-12 shipping-style">
+                    <Field
+                      name="shipping"
+                      component={RenderField}
+                      type="text"
+                      placeholder="Shipping note"
+                      validate={[validations.required]} />
+                  </div>
                 </div>
                 {renderButtons}
               </form>

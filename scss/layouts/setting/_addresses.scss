@@ -254,6 +254,7 @@
     .modal-body{
       .Address-container{
         form{
+          margin: 0px;
           .RenderField{
             height: 55px;
             input{
@@ -323,6 +324,7 @@
               background: $light-gray;
             }
             .RenderField{
+              @include padding-left(10px);
               border-radius: side-values(20px 0 20px 20px) !important;
               margin-left: -13px;
               input{
@@ -334,19 +336,34 @@
               }
             }
           }
-          .div-rounded{
+          .select-input{
+            .css-10nd86i{
+              width: 100%;
+              padding: 10px;
+              background: $light-gray;
+            }
+          }
+          .div-rounded-first{
             .select-input{
               .css-10nd86i{
-                width: 100%;
-                padding: 10px;
+                border-radius: side-values(20px 0 0 20px) !important;
+              }
+            }
+          }
+          .div-rounded-last{
+            .select-input{
+              .css-10nd86i{
+                border-radius: side-values(0 0 20px 0) !important;
               }
             }
           }
           .phone-info{
+            margin-top: 25px;
+            margin-bottom: 40px;
             p{
               text-align: $right;
               margin: 0px;
-              transform: translate(-25%, -0%);
+              transform: translate(-22%, -0%);
               opacity: 0.5;
               font-family: Roboto;
               @include font-size(13px);
@@ -396,12 +413,59 @@
                 border: none;
                 background: $light-gray;
                 height: 55px;
-                width: 110%;
+                width: 116%;
                 label,
                 sub,
                 br {
                   display: none;
                 }
+              }
+            }
+          }
+          .shipping-style{
+            margin-bottom: 20px;
+            .form-control{
+              padding-bottom: 20px;
+              border-radius: side-values(20px 0 20px 20px) !important;
+              background: $light-gray;
+            }
+            .RenderField{
+              @include padding-left(10px);
+              border-radius: side-values(20px 0 20px 20px) !important;
+              margin-left: -13px;
+              input{
+                margin-bottom: 0px;
+                border-bottom: none;
+              }
+            }
+          }
+          .checkmark{
+            border-radius: 9px;
+          }
+          .container{
+            margin-top: 10px;
+            margin-bottom: 0px;
+          }
+          .footer{
+            margin-top: 32px;
+            margin-bottom: 50px;
+            .btn-light{
+              height: auto;
+              background-color: $light-gray;
+              border-radius: side-values(0 0 0 20px) !important;
+              @extend .box-shadow;
+              width: 18%;
+            }
+            .btn-primary{
+              @include margin-left(5px);
+              width: 80%;
+              border-radius: side-values(0 20px 20px 0) !important;
+              height: auto;
+              @extend .box-shadow;
+              text-align: $right;
+              text-transform: none;
+              i{
+                @include margin-left(10px);
               }
             }
           }
