@@ -10,6 +10,7 @@ import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
 import Checkbox from '../../UI/Checkbox';
+import { Link } from "react-router-dom";
 
 import './Address.css';
 
@@ -154,8 +155,10 @@ class Address extends Component {
                       validate={[validations.required]} />
                   </div>
                     <div className="col-12 google-map">
-                      <img className="main-img" alt="user" src="/img/google-map.svg" onClick={onShowGoogleMap}/>
-                      <p>{translate("form.address.selectAddress")}</p>
+                      <Link to="#" onClick={onShowGoogleMap}>
+                        <img className="main-img" alt="user" src="/img/google-map.svg"/>
+                        <p>{translate("form.address.selectAddress")}</p>
+                      </Link>
                   </div>
                   <div className="col-md-12 address-title">
                     <Field
