@@ -139,6 +139,7 @@ class Address extends Component {
                       name="firstName"
                       component={RenderField}
                       type="text"
+                      placeholder={translate("form.address.firstName")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
@@ -148,6 +149,7 @@ class Address extends Component {
                       name="lastName"
                       component={RenderField}
                       type="text"
+                      placeholder={translate("form.address.lastName")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
@@ -161,6 +163,7 @@ class Address extends Component {
                       name="title"
                       component={RenderField}
                       type="text"
+                      placeholder={translate("form.address.title")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
@@ -170,6 +173,7 @@ class Address extends Component {
                       name="title-line2"
                       component={RenderField}
                       type="text"
+                      placeholder={`${translate("form.address.title")} (${translate("form.address.line2")})`}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>

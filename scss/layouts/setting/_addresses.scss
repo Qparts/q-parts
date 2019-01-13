@@ -256,12 +256,8 @@
         form{
           margin: 0px;
           .RenderField{
-            height: 55px;
-            input{
-              height: 47px
-            }
             label{
-              font-size: 10px;
+              top: 0px;
             }
           }
           .first-Name{
@@ -275,8 +271,8 @@
                 margin-bottom: 0px;
                 border-bottom: none;
               }
-              label{
-                top: 0px;
+              label:focus{
+                top: 10px;
               }
             }
           }
@@ -291,9 +287,6 @@
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
-              }
-              label{
-                top: 0px;
               }
             }
           }
@@ -324,7 +317,6 @@
               background: $light-gray;
             }
             .RenderField{
-              @include padding-left(10px);
               border-radius: side-values(20px 0 20px 20px) !important;
               margin-left: -13px;
               input{
