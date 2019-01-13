@@ -178,39 +178,41 @@ class Address extends Component {
                       validate={[validations.required]} />
                   </div>
                   {renderCityRegion}
-                  <div className="row phone-info col-12">
-                    <p className="col-12">{translate("form.address.alternatePhone")}</p>
-                    <div className="phone-number col-6">
-                      <div className="first">
+                  <div className="phone-info col-12">
+                    <div className="row">
+                      <p className="col-12">{translate("form.address.alternatePhone")}</p>
+                      <div className="phone-number col-6">
+                        <div className="first">
+                          <Field
+                            name="phone"
+                            component={RenderField}
+                            clearable={false}
+                            placeholder="+966"
+                            validate={[validations.required]} />
+                        </div>
                         <Field
-                          name="phone"
+                          name="phone-number"
                           component={RenderField}
                           clearable={false}
-                          placeholder="+966"
+                          placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
-                      <Field
-                        name="phone-number"
-                        component={RenderField}
-                        clearable={false}
-                        placeholder={translate("form.address.phoneNumber")}
-                        validate={[validations.required]} />
-                    </div>
-                    <div className="alternate-phone-number col-6">
-                      <div className="first">
+                      <div className="alternate-phone-number col-6">
+                        <div className="first">
+                          <Field
+                            name="alternate-phone"
+                            component={RenderField}
+                            clearable={false}
+                            placeholder="+966"
+                            validate={[validations.required]} />
+                        </div>
                         <Field
-                          name="alternate-phone"
+                          name="alternate-phone-number"
                           component={RenderField}
                           clearable={false}
-                          placeholder="+966"
+                          placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
-                      <Field
-                        name="alternate-phone-number"
-                        component={RenderField}
-                        clearable={false}
-                        placeholder={translate("form.address.phoneNumber")}
-                        validate={[validations.required]} />
                     </div>
                   </div>
                   <div className="col-12 shipping-style">

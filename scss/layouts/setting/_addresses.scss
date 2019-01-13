@@ -257,7 +257,7 @@
           margin: 0px;
           .RenderField{
             label{
-              top: 0px;
+              top: 6px;
             }
           }
           .first-Name{
@@ -270,9 +270,6 @@
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
-              }
-              label:focus{
-                top: 10px;
               }
             }
           }
@@ -318,13 +315,9 @@
             }
             .RenderField{
               border-radius: side-values(20px 0 20px 20px) !important;
-              margin-left: -13px;
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
-              }
-              label{
-                top: 0px;
               }
             }
           }
@@ -352,6 +345,12 @@
           .phone-info{
             margin-top: 25px;
             margin-bottom: 40px;
+            .RenderField{
+              width: 100%;
+              label{
+                display: none;
+              }
+            }
             p{
               text-align: $right;
               margin: 0px;
@@ -405,7 +404,6 @@
                 border: none;
                 background: $light-gray;
                 height: 55px;
-                width: 116%;
                 label,
                 sub,
                 br {
