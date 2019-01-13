@@ -107,6 +107,7 @@ class Signup extends Component {
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
               <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
+              <img src="/img/sign-up-image.png" alt="sign up"/>
             </div>
           </div>
         </div>

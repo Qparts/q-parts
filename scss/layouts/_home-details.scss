@@ -1,4 +1,7 @@
 #home-details {
+  > .row {
+    margin-top: 69px;
+  }
   @include large-medium-screens{
     margin-top: 77px;
   }

@@ -53,6 +53,7 @@ class SignupForm extends Component {
                 name="lastName"
                 component={RenderField}
                 type="text"
+                icon="icon-checked"
                 placeholder={translate("form.signup.placeholders.lastName")}
                 validate={[validations.required]} />
             </div>
@@ -63,13 +64,13 @@ class SignupForm extends Component {
             label={translate("form.signup.email")}
             name="email"
             type="email"
+            icon="icon-alert"
             component={RenderField}
             placeholder={translate("form.signup.placeholders.email")}
             validate={[validations.required, validations.email]} />
         </div>
         <div id="country-city" className="row signup-form__two-inputs">
-          <div className="group-shadow-input" />
-          <div className="col-6">
+          <div className="col-12">
             <div className="form-group">
               <Field
                 boxShadow={true}
@@ -79,18 +80,6 @@ class SignupForm extends Component {
                 clearable={false}
                 options={this.props.countries}
                 placeholder={translate("form.signup.placeholders.country")}
-                validate={[validations.required]} />
-            </div>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
-              <Field
-                label={translate("form.signup.city")}
-                name="city"
-                component={SelectInput}
-                clearable={false}
-                options={this.props.countries}
-                placeholder={translate("form.signup.placeholders.city")}
                 validate={[validations.required]} />
             </div>
           </div>
