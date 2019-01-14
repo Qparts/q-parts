@@ -48,7 +48,6 @@
   }
   .addresses-box{
     background: $white;
-    margin-bottom: 5px;
     padding: side-values(10px);
     padding-bottom: 50px;
     border-radius: side-values(20px 0 20px 20px) !important;
@@ -66,13 +65,8 @@
         border-radius: 9px;
       }
     }
-    .seperator{
-      width: 1px;
-      height: 100%;
-      @include margin-left(100%);
-      margin-top: 0px;
-    }
     .addresses-box_item{
+      margin-bottom: 40px;
       .addresses-box_item-label{
         display: flex;
         @include margin-left(20px);
@@ -136,6 +130,9 @@
             @include margin-left(2px);
           }
         }
+      }
+      &:nth-child(even) {
+        border-left: 1px solid #ebebeb;
       }
     }
   }

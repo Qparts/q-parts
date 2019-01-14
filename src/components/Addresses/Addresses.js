@@ -22,11 +22,10 @@ class Addresses extends Component {
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
      <span class="seperator"></span>
-     <div className="row">
+     <div className="addresses-box border rounded  row">
        {
          this.props.addresses.map((address, idx) =>{
-           return <div className="addresses-box border rounded col-6" key={idx}>
-            <div className="addresses-box_item">
+           return <div className="addresses-box_item col-6" key={idx}>
               <Checkbox
                 onChange={e => this.setState({
                   check: !this.state.check
@@ -46,7 +45,6 @@ class Addresses extends Component {
               <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder/>
              </div>
             </div>
-           </div>
          })}
      </div>
     </div>
