@@ -19,13 +19,17 @@ class SignupForm extends Component {
     super(props)
 
     this.state = {
-      passwordType: 'password'
+      passwordType: 'password',
+      passwordText: 'Show',
+      passwordIcon: 'icon-show-password'
     }
   }
 
   handleTogglePassword = () => {
     this.setState({
-      passwordType: this.state.passwordType === 'password' ? 'text' : 'password'
+      passwordType: this.state.passwordType === 'password' ? 'text' : 'password',
+      passwordText: this.state.passwordText === 'Show' ? 'Hide' : 'Show',
+      passwordIcon: this.state.passwordIcon === 'icon-show-password' ? 'icon-hide-password' : 'icon-show-password',
     });
   }
 
@@ -53,7 +57,6 @@ class SignupForm extends Component {
                 name="lastName"
                 component={RenderField}
                 type="text"
-                icon="icon-checked"
                 placeholder={translate("form.signup.placeholders.lastName")}
                 validate={[validations.required]} />
             </div>
@@ -64,7 +67,6 @@ class SignupForm extends Component {
             label={translate("form.signup.email")}
             name="email"
             type="email"
-            icon="icon-alert"
             component={RenderField}
             placeholder={translate("form.signup.placeholders.email")}
             validate={[validations.required, validations.email]} />
@@ -91,6 +93,8 @@ class SignupForm extends Component {
             name="password"
             component={RenderField}
             type={this.state.passwordType}
+            text={this.state.passwordText}
+            icon={this.state.passwordIcon}
             placeholder={translate("form.signup.placeholders.password")}
             onTogglePassword={this.handleTogglePassword}
             validate={[validations.required]} />

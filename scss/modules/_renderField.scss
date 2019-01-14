@@ -1,3 +1,31 @@
 .RenderField {
-    position: relative;
+  position: relative;
+  .input-group-append {
+    .input-icon {
+      display: flex;
+      position: absolute;
+      #{$right}: 20px;
+      bottom: 7px;
+      .icon-show-password,
+      .icon-hide-password {
+        @include font-size(20px);
+      }
+      span {
+        @include padding-left(5px);
+        opacity: 0.8;
+        font-family: Roboto;
+        @include font-size(15px);
+        font-style: normal;
+        color: $charcoal-grey-two;
+      }
+    }
+    .icon-checked {
+      top: 50%;
+      @include font-size(15px);
+    }
+    .icon-alert {
+      top: 40%;
+      @include font-size(22px);
+    }
+  }
 }
