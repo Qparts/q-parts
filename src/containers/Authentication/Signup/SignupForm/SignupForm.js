@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component, Fragment, createRef } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { getTranslate } from "react-localize-redux";
@@ -21,7 +21,8 @@ class SignupForm extends Component {
     this.state = {
       passwordType: 'password',
       passwordText: 'Show',
-      passwordIcon: 'icon-show-password'
+      passwordIcon: 'icon-show-password',
+      passwordScore: 0
     }
   }
 
@@ -31,6 +32,12 @@ class SignupForm extends Component {
       passwordText: this.state.passwordText === 'Show' ? 'Hide' : 'Show',
       passwordIcon: this.state.passwordIcon === 'icon-show-password' ? 'icon-hide-password' : 'icon-show-password',
     });
+  }
+
+  setPasswordScore = (score) => {
+    this.setState({
+      passwordScore: score
+    })
   }
 
   render() {
@@ -97,8 +104,8 @@ class SignupForm extends Component {
             icon={this.state.passwordIcon}
             placeholder={translate("form.signup.placeholders.password")}
             onTogglePassword={this.handleTogglePassword}
-            validate={[validations.required]} />
-          <label>Password Strength</label>
+            setPasswordScore={this.setPasswordScore}
+            validate={[validations.required, validations.passwordScore.bind(this, this.state.passwordScore)]} />
         </div>
         <div id="bottom">
           <p>By creating an account, you agree to

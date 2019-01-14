@@ -13,7 +13,7 @@
 }
 
 @mixin padding-left($size){
-  padding-#{$left}: $size;
+  padding-#{$left}: $size !important;
 }
 
 @mixin padding-right($size){

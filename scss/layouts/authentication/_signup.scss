@@ -206,11 +206,6 @@
       #{$left}: unset;
     }
   }
-  .password-strength {
-    > label {
-      margin-top: 20px;
-    }
-  }
   .one_shadow-input {
     input {
       @extend .box-shadow;

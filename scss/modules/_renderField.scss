@@ -28,4 +28,8 @@
       @include font-size(22px);
     }
   }
+  .password-label {
+    margin-top: 21px;
+    @include padding-left(4px);
+  }
 }

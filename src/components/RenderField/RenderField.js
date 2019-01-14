@@ -6,8 +6,9 @@ import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
 
-  callback = ({ password }) => {
+  callback = ({password, score}) => {
     this.props.input.onChange(password);
+    this.props.setPasswordScore(score);
   }
 
   invalidMessage = (styles) => {
@@ -27,13 +28,17 @@ class RenderField extends Component {
   );
 
   getIcon = () => {
-    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576':
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' :
       helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? '#856404' : 'none';
   }
 
   getIconClassName = () => {
     return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? 'icon-checked' :
       helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? 'icon-alert' : '';
+  }
+
+  displayPasswordLabel = () => {
+    return this.props.input.value ? { display: '' } : { display: 'none' };
   }
 
   render() {
@@ -103,25 +108,30 @@ class RenderField extends Component {
               </Fragment>
           }
           {this.props.hasPasswordStrength &&
-            <InputGroup>
-              <ReactPasswordStrength
-                style={styles.border}
-                minLength={5}
-                minScore={2}
-                changeCallback={this.callback}
-                scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
-                inputProps={{ ...this.props.input, ...this.props }} />
-              <InputGroupAddon addonType="append">
-                <Link
-                  className="input-icon"
-                  to="#"
-                  text={this.props.text}
-                  icon={this.props.icon}
-                  isReverseOrder
-                  onClick={this.props.onTogglePassword}
-                />
-              </InputGroupAddon>
-            </InputGroup>
+            <Fragment>
+              <InputGroup>
+                <ReactPasswordStrength
+                  style={styles.border}
+                  minLength={5}
+                  minScore={2}
+                  changeCallback={this.callback}
+                  scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
+                  inputProps={{ ...this.props.input, ...this.props }} />
+                <InputGroupAddon addonType="append">
+                  <Link
+                    className="input-icon"
+                    to="#"
+                    text={this.props.text}
+                    icon={this.props.icon}
+                    isReverseOrder
+                    onClick={this.props.onTogglePassword}
+                  />
+                </InputGroupAddon>
+              </InputGroup>
+              <label
+                style={this.displayPasswordLabel()}
+                className="password-label">Password Strength</label>
+            </Fragment>
           }
           <Fragment>
             {this.props.meta.touched &&
