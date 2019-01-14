@@ -124,9 +124,11 @@ class Setting extends Component {
   }
 
   onSaveNewAddress = values => {
-    const cityId = this.props.city ? this.props.city.id : values.city.id;
-    const { line1, line2, zipCode, title, latitude, longitude } = values;
-    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude })
+    const { line1, line2, zipCode, title, mobile, city } = values;
+    const latitude = city.latitude;
+    const longitude = city.longitude;
+    const cityId = city.id;
+    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile })
       .then(() => {
         this.onHide();
       });
@@ -398,7 +400,8 @@ class Setting extends Component {
                         customer={this.props.customer}
                         onShowEditDialog={this.handleDialog}
                         onEditAddress={this.handleEditAddress}
-                        translate={this.props.translate} />
+                        translate={this.props.translate}
+                        addresses={this.props.addresses} />
                       {addressDialog}
                     </Fragment>
                   )
@@ -516,7 +519,8 @@ const mapStateToProps = (state) => {
     selectedCountry: state.customer.selectedCountry,
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
-    wishlist: state.customer.wishlist
+    wishlist: state.customer.wishlist,
+    addresses: state.customer.detail.addresses
   }
 }
 

@@ -1088,6 +1088,18 @@
       "delete": [
         "حذف",
         "Delete"
+      ],
+      "addressLine1": [
+        "العنوان (خط عنوان 1)",
+        "Address (Line 1)"
+      ],
+      "addressLine2": [
+        "العنوان (خط عنوان 2)",
+        "Address (Line 2)"
+      ],
+      "zipCode": [
+        "الرمز البريدي",
+        "zipCode"
       ]
     },
     "order": {

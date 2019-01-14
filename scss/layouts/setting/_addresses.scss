@@ -260,27 +260,13 @@
               top: 6px;
             }
           }
-          .first-Name{
+          .title-address{
             .form-control{
               border-radius: side-values(20px 0 0 20px) !important;
               background: $light-gray;
             }
             .RenderField{
               border-radius: side-values(20px 0 0 20px) !important;
-              input{
-                margin-bottom: 0px;
-                border-bottom: none;
-              }
-            }
-          }
-          .last-name{
-            .form-control{
-              border-radius: side-values(0 0 20px 0) !important;
-              background: $light-gray;
-            }
-            .RenderField{
-              border-radius: side-values(0 0 20px 0) !important;
-              margin-left: -13px;
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
@@ -332,9 +318,12 @@
             }
           }
           .div-rounded-first{
-            .select-input{
-              .css-10nd86i{
+            .RenderField{
+              border: none;
+              input{
                 border-radius: side-values(20px 0 0 20px) !important;
+                background: $light-gray;
+                padding: 15px;
               }
             }
           }
@@ -353,21 +342,6 @@
               label{
                 display: none;
               }
-            }
-            p{
-              text-align: $right;
-              margin: 0px;
-              transform: translate(-22%, -0%);
-              opacity: 0.5;
-              font-family: Roboto;
-              @include font-size(13px);
-              font-weight: normal;
-              font-style: normal;
-              font-stretch: normal;
-              line-height: 1.92;
-              letter-spacing: normal;
-              color: rgba(55, 54, 61, 0.5);
-              top: 20%;
             }
             .phone-number{
               display: flex;
@@ -392,16 +366,7 @@
                 }
               }
             }
-            .alternate-phone-number{
-              display: flex;
-              .first{
-                margin-#{$right}: 5px;
-                .form-control{
-                  border-radius: 0 0 0 0 !important;
-                  width: 70px;
-                  text-align: center;
-                }
-              }
+            .zipCode{
               .form-control {
                 border-radius: side-values(0 0 20px 0) !important;
                 border: none;

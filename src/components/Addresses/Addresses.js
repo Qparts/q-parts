@@ -10,6 +10,7 @@ class Addresses extends Component {
     this.state = {
       check: false
     }
+    console.log('aaaaa',props.addresses)
   }
  render() {
   const { translate } = this.props;
@@ -21,51 +22,32 @@ class Addresses extends Component {
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
      <span class="seperator"></span>
-     <div className="addresses-box border rounded row">
-      <div className="addresses-box_item col-6">
-        <Checkbox
-          onChange={e => this.setState({
-            check: !this.state.check
-          })}
-          checked={this.state.check}
-          label={translate("setting.addressBook.defaultAddress")}
-        />
-      <div className="addresses-box_item-label">
-         <p>Ahmed Mahmoud</p>
-       </div>
-       <div className="about-the-person">
-         <p>7 Yaser Ben Amer Street</p>
-         <p>Amman, Jordan</p>
-         <p>(962) 770-2302</p>
-       </div>
-       <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
-       </div>
-      </div>
-      <div className="col-1">
-        <span class="seperator"></span>
-      </div>
-      <div className="addresses-box_item col-5">
-        <Checkbox
-          onChange={e => this.setState({
-            check: !this.state.check
-          })}
-          checked={this.state.check}
-          label={translate("setting.addressBook.defaultAddress")}
-        />
-      <div className="addresses-box_item-label">
-          <p>Ahmed Mahmoud</p>
-        </div>
-        <div className="about-the-person">
-          <p>7 Yaser Ben Amer Street</p>
-          <p>Amman, Jordan</p>
-          <p>(962) 770-2302</p>
-        </div>
-       <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
-        <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder/>
-       </div>
-      </div>
+     <div className="row">
+       {
+         this.props.addresses.map((address, idx) =>{
+           return <div className="addresses-box border rounded col-6" key={idx}>
+            <div className="addresses-box_item">
+              <Checkbox
+                onChange={e => this.setState({
+                  check: !this.state.check
+                })}
+                checked={this.state.check}
+                label={translate("setting.addressBook.defaultAddress")}
+              />
+            <div className="addresses-box_item-label">
+               <p>{address.title}</p>
+             </div>
+             <div className="about-the-person">
+               <p>{address.cityId} {address.line1} {address.line2}</p>
+               <p>{address.mobile}</p>
+             </div>
+             <div className="addresses-footer">
+              <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
+              <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder/>
+             </div>
+            </div>
+           </div>
+         })}
      </div>
     </div>
   }else{

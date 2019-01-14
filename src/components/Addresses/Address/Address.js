@@ -64,26 +64,26 @@ class Address extends Component {
       <Fragment>
         <div className="col-md-4 div-rounded-first">
           <Field
-            name="country"
+            disabled
+            name="name"
             placeholder={translate("form.address.country")}
-            component={SelectInput}
-            options={citiesData}
+            component={RenderField}
             validate={[validations.required]} />
         </div>
         <div className="col-md-4 div-rounded">
-          <Field
-            name="city"
-            placeholder={translate("form.address.city")}
-            component={SelectInput}
-            options={citiesData}
-            validate={[validations.required]} />
-        </div>
-        <div className="col-md-4 div-rounded-last">
           <Field
             name="region"
             placeholder={translate("form.address.region")}
             component={SelectInput}
             options={regionsData}
+            validate={[validations.required]} />
+        </div>
+        <div className="col-md-4 div-rounded-last">
+          <Field
+            name="city"
+            placeholder={translate("form.address.city")}
+            component={SelectInput}
+            options={citiesData}
             validate={[validations.required]} />
         </div>
       </Fragment> :
@@ -134,23 +134,13 @@ class Address extends Component {
             <div className="Address-container">
               <form onSubmit={handleSubmit}>
                 <div className="row">
-                  <div className="col-6 first-Name">
+                  <div className="col-12 title-address">
                     <Field
-                      label={translate("form.address.firstName")}
-                      name="firstName"
+                      label={translate("setting.addressBook.title")}
+                      name="title"
                       component={RenderField}
                       type="text"
-                      placeholder={translate("form.address.firstName")}
-                      hasFloatLabel
-                      validate={[validations.required]} />
-                  </div>
-                  <div className="col-6 last-name">
-                    <Field
-                      label={translate("form.address.lastName")}
-                      name="lastName"
-                      component={RenderField}
-                      type="text"
-                      placeholder={translate("form.address.lastName")}
+                      placeholder={translate("setting.addressBook.title")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
@@ -162,28 +152,27 @@ class Address extends Component {
                   </div>
                   <div className="col-md-12 address-title">
                     <Field
-                      label={`*${translate("form.address.title")}`}
-                      name="title"
+                      label={`*${translate("setting.addressBook.addressLine1")}`}
+                      name="line1"
                       component={RenderField}
                       type="text"
-                      placeholder={translate("form.address.title")}
+                      placeholder={translate("setting.addressBook.addressLine1")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
                   <div className="col-12 address-title">
                     <Field
-                      label={`${translate("form.address.title")} (${translate("form.address.line2")})`}
-                      name="title-line2"
+                      label={translate("setting.addressBook.addressLine2")}
+                      name="line2"
                       component={RenderField}
                       type="text"
-                      placeholder={`${translate("form.address.title")} (${translate("form.address.line2")})`}
+                      placeholder={translate("setting.addressBook.addressLine2")}
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
                   {renderCityRegion}
                   <div className="phone-info col-12">
                     <div className="row">
-                      <p className="col-12">{translate("form.address.alternatePhone")}</p>
                       <div className="phone-number col-6">
                         <div className="first">
                           <Field
@@ -194,26 +183,18 @@ class Address extends Component {
                             validate={[validations.required]} />
                         </div>
                         <Field
-                          name="phone-number"
+                          name="mobile"
                           component={RenderField}
                           clearable={false}
                           placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
-                      <div className="alternate-phone-number col-6">
-                        <div className="first">
-                          <Field
-                            name="alternate-phone"
-                            component={RenderField}
-                            clearable={false}
-                            placeholder="+966"
-                            validate={[validations.required]} />
-                        </div>
+                      <div className="zipCode col-6">
                         <Field
-                          name="alternate-phone-number"
+                          name="zipCode"
                           component={RenderField}
                           clearable={false}
-                          placeholder={translate("form.address.phoneNumber")}
+                          placeholder={translate("form.address.zipCode")}
                           validate={[validations.required]} />
                       </div>
                     </div>
@@ -245,7 +226,7 @@ Address = reduxForm({
 Address = connect(
   state => {
     return {
-      initialValues: state.customer.address,
+      initialValues: state.api.country,
       formValues: getFormValues('Address')(state),
     }
   }
