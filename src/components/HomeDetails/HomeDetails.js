@@ -172,10 +172,10 @@ class HomeDetails extends Component {
 								<div className="vendor-img" alt="vendor" />
 							</div>
 							<div className="d-flex justify-content-center">
-								<p>
+								<span>
 									OUR SALES MORE THAN 50,000 ITEM
-                  <h1>VENDOR ! Join Qetaa.com</h1>
-								</p>
+                  					<h1>VENDOR ! Join Qetaa.com</h1>
+								</span>
 								<Button
 									type="submit"
 									className="btn-primary"

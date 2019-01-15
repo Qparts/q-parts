@@ -8,8 +8,8 @@ export class CustomerService extends Component {
                 <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                 <div>
                     {
-                        this.props.messages.map(message => (
-                            <span>{message}</span>
+                        this.props.messages.map((message, idx) => (
+                            <span key={idx}>{message}</span>
                         ))
                     }
                 </div>

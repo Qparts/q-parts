@@ -19,7 +19,7 @@ class Garage extends Component {
        <p>Add View, manage and find parts for the vehicles in your garage</p>
       <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
      </div>
-     <span class="seperator"></span>
+     <span className="seperator"></span>
      {
       this.props.vehiclesFormat.map((vehicle, idx) => {
        return <div key={idx} className="Garage-box border rounded row">
@@ -40,7 +40,7 @@ class Garage extends Component {
          </div>
         </div>
         <div className="col-1">
-          <span class="seperator"></span>
+          <span className="seperator"></span>
         </div>
         <div className="Garage-box_item col-5">
           <Checkbox
@@ -65,7 +65,7 @@ class Garage extends Component {
   }else{
     garage = <div id="garage-no-vehicle">
       <p>Store vehicles in your garage and Get product recommendations</p>
-      <span class="seperator"></span>
+      <span className="seperator"></span>
       <div className="add-vehicle">
         <div className="icon-content">
           <p className="icon-vehicle"/>

@@ -1,15 +1,13 @@
 import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { Switch, withRouter, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Dialog } from 'primereact/components/dialog/Dialog';
 import Button from '../../../components/UI/Button';
 
 import RenderField from '../../../components/RenderField/RenderField';
 import SocialMedia from '../SocialMedia/SocialMedia';
-import VerificationNumber from '../../../components/VerificationNumber/VerificationNumber';
 import PrivateRoute from '../../../components/PrivateRoute';
 import ResetPassword from '../../../components/ResetPassword/ResetPassword';
 
@@ -126,21 +124,19 @@ class Login extends Component {
       </form>
     )
     return (
-      <Switch>
-        <section id="login">
-          {
-            this.renderLogin(login)
-          }
-          <PrivateRoute
-            path="/login/reset-password"
-            fakeAuth={this.state.showResetPassword}
-            translate={translate}
-            component={ResetPassword}
-            showPhoneNo={true}
-            onSubmit={this.onResetPassword}
-            redirectTo="/login" />
-        </section>
-      </Switch>
+      <section id="login">
+        {
+          this.renderLogin(login)
+        }
+        <PrivateRoute
+          path="/login/reset-password"
+          fakeAuth={this.state.showResetPassword}
+          translate={translate}
+          component={ResetPassword}
+          showPhoneNo={true}
+          onSubmit={this.onResetPassword}
+          redirectTo="/login" />
+      </section>
     )
   }
 }

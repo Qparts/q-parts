@@ -177,14 +177,12 @@ class Address extends Component {
                           <Field
                             name="phone"
                             component={RenderField}
-                            clearable={false}
                             placeholder="+966"
                             validate={[validations.required]} />
                         </div>
                         <Field
                           name="mobile"
                           component={RenderField}
-                          clearable={false}
                           placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
@@ -192,7 +190,6 @@ class Address extends Component {
                         <Field
                           name="zipCode"
                           component={RenderField}
-                          clearable={false}
                           placeholder={translate("form.address.zipCode")}
                           validate={[validations.required]} />
                       </div>

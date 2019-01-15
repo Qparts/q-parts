@@ -76,7 +76,7 @@ class Accessories extends Component {
             <Button text="Clear all" className="btn btn-secondary" />
           </div>
           <div className="Accessories-contents">
-            <ProductGridView currentProducts={this.props.currentProducts}/>
+            {/* <ProductGridView product={this.props.currentProducts}/> */}
             <div className="Accessories-footer">
               <Paginator
                 first={this.props.first}

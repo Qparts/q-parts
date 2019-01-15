@@ -86,7 +86,6 @@ class SignupForm extends Component {
                 label={translate("form.signup.country")}
                 name="countryId"
                 component={SelectInput}
-                clearable={false}
                 options={this.props.countries}
                 placeholder={translate("form.signup.placeholders.country")}
                 validate={[validations.required]} />

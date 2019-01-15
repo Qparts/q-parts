@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import _ from 'lodash'
 
-const Button = props => (
-    <button {...props}>
+const Button = props => {
+    const { isReverseOrder, ...buttonProps } = props;
+    return <button {...buttonProps}>
         {
             props.isReverseOrder ? <Fragment>
                 <i className={props.icon}></i>
@@ -21,7 +22,8 @@ const Button = props => (
                 </Fragment>
         }
     </button>
-)
+
+}
 
 Button.defaultProps = {
     icons: []

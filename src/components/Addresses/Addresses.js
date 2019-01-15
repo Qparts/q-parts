@@ -20,7 +20,7 @@ class Addresses extends Component {
        <p>{translate("setting.addressBook.shippingItem")}</p>
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
-     <span class="seperator"></span>
+     <span className="seperator"></span>
      <div className="addresses-box border rounded  row">
        {
          this.props.addresses.map((address, idx) =>{
@@ -52,7 +52,7 @@ class Addresses extends Component {
       <div className="addresses-header justify-content-between">
         <p>{translate("setting.addressBook.shippingItem")}</p>
       </div>
-      <span class="seperator"></span>
+      <span className="seperator"></span>
       <div className="add-addresses">
         <p className="icon-address"/>
         <p className="addresses-text">{translate("setting.addressBook.noAddress")}</p>

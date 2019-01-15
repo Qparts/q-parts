@@ -17,7 +17,7 @@ class Table extends Component {
 
   const renderColums = (column, idx) => {
    const dateNow = moment();
-   const past = moment(column.date);
+   const past = moment(column.date, 'MM/DD/YYYY');
    const dateDiff = dateNow.diff(past, 'months');
 
    if (!_.isEmpty(this.props.search) && this.props.search !== 'all') {

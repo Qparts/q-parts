@@ -29,7 +29,7 @@ const Radio = 'Radio'
 const GRID = 'GRID';
 const LIST = 'LIST';
 
-class TyresSearch extends Component {
+class SearchResult extends Component {
 
 	constructor(props) {
 		super(props);
@@ -99,9 +99,9 @@ class TyresSearch extends Component {
 				<ProductGridView key={idx} product={product} />
 			)
 				:
-				<Card className="product-list-view col-12">
+				<Card key={idx} className="product-list-view col-12">
 					<ListGroup>
-						<ProductListView key={idx} product={product} />
+						<ProductListView product={product} />
 					</ListGroup>
 				</Card>
 		))
@@ -372,7 +372,7 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-TyresSearch.defaultProps = {
+SearchResult.defaultProps = {
 	filterObject: {
 		[diameter]: {
 			componentType: 'Radio',
@@ -407,6 +407,6 @@ TyresSearch.defaultProps = {
 	}
 }
 
-const withTyresSearch = WithProductView(TyresSearch);
+const withTyresSearch = WithProductView(SearchResult);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);

@@ -21,7 +21,7 @@ class Payment extends Component {
          <Button type="button" className="btn btn-link" onClick={this.props.onShowEditDialog.bind(this, 'payment')} text="New Card" icon="icon-add" isReverseOrder/>
        </div>
      </div>
-     <span class="seperator"></span>
+     <span className="seperator"></span>
      <div className="payment-box border rounded row">
       <div className="payment-box_item col-6">
         <Checkbox
@@ -44,7 +44,7 @@ class Payment extends Component {
        </div>
       </div>
       <div className="col-1">
-        <span class="seperator"></span>
+        <span className="seperator"></span>
       </div>
       <div className="payment-box_item col-5">
         <Checkbox
@@ -75,7 +75,7 @@ class Payment extends Component {
         <p>Your credit cards</p>
         <p className="payment-secure">Secure Credit Card Payment <i className="icon-secure"/></p>
       </div>
-      <span class="seperator"></span>
+      <span className="seperator"></span>
       <div className="add-card">
         <p className="icon-debit-card"/>
         <p className="card-text">NO SAVER CARDS</p>

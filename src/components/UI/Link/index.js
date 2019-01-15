@@ -1,9 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import _ from 'lodash'
+import _ from 'lodash';
 
-const link = props => (
-    <Link {...props}>
+const link = props => {
+    const { isReverseOrder, ...linkProps } = props;
+
+    return <Link {...linkProps}>
         {
             props.isReverseOrder ? <Fragment>
                 <i className={props.icon}></i>
@@ -25,7 +27,7 @@ const link = props => (
                 </Fragment>
         }
     </Link>
-)
+}
 
 link.defaultProps = {
     icons: []

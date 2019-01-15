@@ -75,7 +75,7 @@ class Signup extends Component {
               <span className="seperator"></span>
               <div id="signin-link">
                 <span className="user-img">
-                  <img class="user" alt="user" src="/img/user.svg" />
+                  <img className="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
                   <Link to={"#"} className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
