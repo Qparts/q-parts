@@ -97,7 +97,6 @@ class HeaderDetails extends Component {
                     </button>
                     <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
                     <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
-                    <a href="#"><i className="icon-twitter btn-twitter" style={{ color: "#03a9f4" }} /></a>
                   </div>
                   <br />
                   <div style={styles.text}>
@@ -195,25 +194,4 @@ const styles = {
 
 };
 
-export default withStyles(styles)(HeaderDetails);;
-
-
-
-{/* <Nav id="secondNavBar">
-          {authOrNotAuthButtons}
-          <div>
-            <Button
-              component={Link}
-              to="/vendor_registration_form"
-              variant="outlined"
-              classes={{
-                label: classes.label
-              }}
-            >
-              {translate("navBar.joinUs")}
-            </Button>
-          </div>
-          <Link to="/cart">
-            <i className="fas fa-shopping-cart fa-2x" />
-          </Link>
-        </Nav> */}
+export default withStyles(styles)(HeaderDetails);
