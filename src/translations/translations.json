@@ -440,7 +440,35 @@
           "التوصيل لهذا العنوان",
           "Deliver to this address"
         ]
-      }
+      },
+      "country": [
+        "دولة",
+        "Country"
+      ],
+      "selectAddress": [
+        "حدد عنوانك من خلال الخريطة",
+        "Select your address by google mabs"
+      ],
+      "firstName": [
+        "الاسم الاول",
+        "First Name"
+      ],
+      "lastName": [
+        "الاسم الاخير",
+        "Last Name"
+      ],
+      "alternatePhone": [
+        "رقم هاتف بديل",
+        "Alternate Phone Number"
+      ],
+      "phoneNumber": [
+        "رقم الهاتف",
+        "Phone Number"
+      ],
+      "shippingNote": [
+        "ملاحظة الشحن",
+        "Shipping note"
+      ]
     },
     "vendor": {
       "name": [
@@ -1040,6 +1068,38 @@
       "add": [
         "اضف عنوان",
         "Add address"
+      ],
+      "noAddress": [
+        "لا يوجد عنوان",
+        "NO SAVED ADDRESS"
+      ],
+      "shippingItem": [
+        "اين تريد ان يتم شحن اغراض؟",
+        "Where you would like your items shipped?"
+      ],
+      "defaultAddress": [
+        "عنوان افتراضي",
+        "Default Addresses"
+      ],
+      "edit": [
+        "تعديل",
+        "edit"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ],
+      "addressLine1": [
+        "العنوان (خط عنوان 1)",
+        "Address (Line 1)"
+      ],
+      "addressLine2": [
+        "العنوان (خط عنوان 2)",
+        "Address (Line 2)"
+      ],
+      "zipCode": [
+        "الرمز البريدي",
+        "zipCode"
       ]
     },
     "order": {
