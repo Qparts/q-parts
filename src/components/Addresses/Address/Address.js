@@ -133,7 +133,7 @@ class Address extends Component {
           ) :
             <div className="Address-container">
               <form onSubmit={handleSubmit}>
-                <div className="row">
+                <div className="row no-gutters">
                   <div className="col-12 title-address">
                     <Field
                       label={translate("setting.addressBook.title")}
