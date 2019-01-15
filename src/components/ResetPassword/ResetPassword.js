@@ -43,7 +43,7 @@ class resetPassword extends Component {
                 </div>
                 <div>
                   <Link className="btn-primary" to="/password/forgot-password">Forgot it?</Link>
-                  <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required, validations.confirmPassword]} />
+                  <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required]} />
                 </div>
               </div>
             </Fragment>
