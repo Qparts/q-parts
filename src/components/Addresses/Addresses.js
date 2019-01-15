@@ -10,7 +10,6 @@ class Addresses extends Component {
     this.state = {
       check: false
     }
-    console.log('aaaaa',props.addresses)
   }
  render() {
   const { translate } = this.props;
