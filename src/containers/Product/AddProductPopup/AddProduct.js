@@ -39,7 +39,6 @@ class AddProduct extends Component {
                     boxShadow={true}
                     name="year"
                     component={SelectInput}
-                    clearable={false}
                     options={['1','2']}
                     placeholder="Select Year"
                     validate={[validations.required]} />
@@ -49,7 +48,6 @@ class AddProduct extends Component {
                   <Field
                     name="make"
                     component={SelectInput}
-                    clearable={false}
                     options={[{label:'1',value:'2'}]}
                     placeholder="Select Make"
                     validate={[validations.required]} />
@@ -58,7 +56,6 @@ class AddProduct extends Component {
                   <Field
                     name="modla"
                     component={SelectInput}
-                    clearable={false}
                     options={[1,2]}
                     placeholder="Select Modal"
                     validate={[validations.required]} />
@@ -137,7 +134,6 @@ class AddProduct extends Component {
                       boxShadow={true}
                       name="year"
                       component={SelectInput}
-                      clearable={false}
                       options={['1','2']}
                       placeholder="Select Year"
                       validate={[validations.required]} />
@@ -147,7 +143,6 @@ class AddProduct extends Component {
                     <Field
                       name="make"
                       component={SelectInput}
-                      clearable={false}
                       options={[{label:'1',value:'2'}]}
                       placeholder="Select Make"
                       validate={[validations.required]} />
@@ -156,7 +151,6 @@ class AddProduct extends Component {
                     <Field
                       name="modla"
                       component={SelectInput}
-                      clearable={false}
                       options={[1,2]}
                       placeholder="Select Modal"
                       validate={[validations.required]} />

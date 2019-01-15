@@ -141,7 +141,7 @@ export class MobileHeaderDetails extends Component {
                         <hr />
                         <Link className="w3-bar-item downloadApp" to="/"><p>Download Our App</p><i className="icon-apple" /> <i className="icon-play-store" /></Link>
                         <div className="footer-sideBar">
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link className="w3-bar-item" to="/" style={{display:'flex'}}><i className="icon-arrow-left" /><p>one of the incubated project</p></Link>
                           </li>
                         </div>
@@ -177,7 +177,7 @@ export class MobileHeaderDetails extends Component {
                                 </div>
                                 <br />
                                 <div className="join-us">
-                                  <p>{translate("dropdown.signup.message")}</p> <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+                                  <p>{translate("dropdown.signup.message")}</p> <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
                                   <i className="icon-arrow-right" style={styles.arrow_right}/>
                                 </div>
 

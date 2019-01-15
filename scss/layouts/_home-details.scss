@@ -275,7 +275,7 @@
     color: white;
     @include font-size(25px);
   }
-  p {
+  span {
     color: $basic-white;
     @include font-size(20px);
     margin: 0;
