@@ -786,6 +786,18 @@
     }
   },
   "setting": {
+    "signout":[
+      "تسجيل خروج",
+      "Sign Out"
+    ],
+    "vehicle": [
+      "مركبة",
+      "Vehicle"
+    ],
+    "request": [
+      "طلبات",
+      "Requests"
+    ],
     "links": {
       "quotations": [
         "الاقتباسات",
