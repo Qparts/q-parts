@@ -119,6 +119,9 @@
         text-align: $right;
       }
     }
+    i {
+      @include padding-left(10px);
+    }
 
     > p {
       @include font-size(15px);
@@ -130,6 +133,9 @@
       }
       span {
         display: block;
+        .btn-link {
+          color: $brand-color;
+        }
       }
     }
   }

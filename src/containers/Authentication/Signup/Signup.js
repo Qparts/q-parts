@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import SignupForm from './SignupForm/SignupForm';
 import SocialMedia from '../SocialMedia/SocialMedia';
@@ -77,7 +78,7 @@ class Signup extends Component {
                   <img class="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
-                  <span className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</span>
+                  <Link to={"#"} className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
                   {translate("form.signup.here")}
                 </span>
               </div>
