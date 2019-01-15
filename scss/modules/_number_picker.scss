@@ -1,17 +1,19 @@
 #number-picker {
   display: flex;
   .btn-positive {
-      @extend .btn-secondary;
-      border-radius: side-values(20px 0 0 20px) !important;
+    @include margin-right(3px);
+    @extend .btn-secondary;
+    border-radius: side-values(20px 0 0 20px) !important;
   }
   .btn-negative {
     @extend .btn-secondary;
     border-radius: side-values(0 0 20px 0) !important;
   }
   input {
-      @extend .btn-secondary;
-      text-align: center;
-      cursor: inherit;
-      border-radius: side-values(0 0 0 0) !important;
+    @include margin-right(3px);
+    @extend .btn-secondary;
+    text-align: center;
+    cursor: inherit;
+    border-radius: side-values(0 0 0 0) !important;
   }
 }

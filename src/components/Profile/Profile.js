@@ -30,7 +30,7 @@ class profile extends Component {
     ];
 
     return (
-      <form className="col-md-9 w3-hide-small w3-hide-medium"onSubmit={this.props.handleSubmit}>
+      <form className="profile col-md-9 w3-hide-small w3-hide-medium"onSubmit={this.props.handleSubmit}>
         <div className="Profile-container">
           <div className="Profile-info-box border rounded">
             <div className="info-title">

@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import GoogleLogin from 'react-google-login';
 import Twitter from './Twitter';
 import { DISCONNECT } from '../../../constants';
+import Button from '../../../components/UI/Button';
 
 
 class SocialMedia extends Component {
   static defaultProps = {
     facebook: <i className="icon-facebook-logo"></i>,
-    google: <i className="icon-google-logo"></i>,
+    google: <img src="/img/google-icon.svg" alt="google" />,
     twitter: <i className="icon-twitter"></i>,
   }
   render() {
@@ -19,7 +20,7 @@ class SocialMedia extends Component {
           <span className="solid-line" />
           <p>{this.props.title}</p>
         </div>
-        <div>
+        <div className="btn-social-media">
           <div>
             {this.props.facebookIcon}
             <FacebookLogin
@@ -37,23 +38,16 @@ class SocialMedia extends Component {
           <div>
             {this.props.googleIcon}
             <GoogleLogin
-              className="btn-google"
               clientId="743672676037-c9ls9ot3qh5rupohh1e15l51ohgl3h3t.apps.googleusercontent.com"
-              buttonText={this.props.google}
               onSuccess={this.props.handleResponse('google')}
               onFailure={this.props.handleFailure}
               disabled={this.props.google === DISCONNECT}
-            />
-          </div>
-          <div>
-            {this.props.twitterIcon}
-            <Twitter
-              buttonText={this.props.twitter}
-              className="btn-twitter"
-              onSuccess={this.props.handleResponse('twitter')}
-              onFailure={this.props.handleFailure}
-              disabled={this.props.twitter === DISCONNECT}
-            />
+              render={renderProps => (
+                <button
+                  className="btn-google"
+                  disabled={this.props.google === DISCONNECT}
+                  onClick={renderProps.onClick}>{this.props.google}</button>
+              )} />
           </div>
         </div>
       </div>

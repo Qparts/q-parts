@@ -1,16 +1,12 @@
 #login {
+  margin-top: 31px;
   background: $light-gray;
   .form-control {
-    background: inherit;
-    border: none;
-    padding: inherit;
+    @extend .rounded-rectangle;
+    @include boarder-right-radius(0, 20px);
+    height: 55px;
+    padding-left: 20px;
 
-    input {
-      @extend .rounded-rectangle;
-      @include boarder-right-radius(0, 20px);
-      height: 55px;
-      padding-left: 20px;
-    }
     input::placeholder {
       color: $charcoal-grey-two-40;
     }
@@ -39,14 +35,23 @@
     color: $charcoal-grey-two;
     @include font-size(15px);
   }
-  .btn-primary {
+  .btn-signin{
+    @extend .btn-primary;
     @extend .box-shadow;
     text-align: right;
     text-transform: capitalize;
+    font-weight: normal;
     @include font-size(20px);
+    i {
+      @include font-size(23px);
+      @include padding-left(10px);
+    }
   }
   form {
+    margin-left: 0;
     div:nth-child(3) {
+      margin-top: 10px;
+      margin-bottom: 22px;
       display: flex;
       justify-content: space-between;
       align-items: baseline;
@@ -54,9 +59,16 @@
         background: inherit;
       }
     }
-    .form-group:nth-child(2) {
-      label {
-      }
+    .label-form {
+      opacity: 0.8;
+      @include font-size(15px);
+      font-weight: normal;
+      color: $charcoal-grey-80;
+    }
+  }
+  .RenderField {
+    label {
+      @include padding-left(13px);
     }
   }
   #sign-up-link {

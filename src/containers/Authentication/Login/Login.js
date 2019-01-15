@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Switch, withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
@@ -21,7 +21,6 @@ import { getComponentName } from '../../../utils';
 
 
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
-import Title from '../../../components/UI/Title';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 
 class Login extends Component {
@@ -69,7 +68,7 @@ class Login extends Component {
         this.props.history.push('/');
       });
   }
-  renderLogin = (login, dialog) => {
+  renderLogin = (login) => {
     const { translate } = this.props;
 
     return <Fragment>
@@ -85,11 +84,9 @@ class Login extends Component {
           <p>{translate("form.signin.here")}</p>
         </div>
       </div>
-      {dialog}
     </Fragment>
   }
-  forgotPassword = (event) => {
-    this.props.history.push('/password/forgot-password')
+  handleForgotPassword = () => {
     this.props.toggle();
   }
 
@@ -116,35 +113,23 @@ class Login extends Component {
         <div>
           <div>
             <RadioButton value={true} name="rememberMe" onChange={this.handleRememberMe} checked={true === this.state.rememberMe} />
-            <label>{translate("form.signin.rememberMe")}</label>
+            <label className="label-form">{translate("form.signin.rememberMe")}</label>
           </div>
-          <button
-            onClick={this.forgotPassword}
-            type="button"
-            className="btn-link">
+          <Link
+            className="label-form"
+            to="/password/forgot-password"
+            onClick={this.handleForgotPassword}>
             {translate("form.signin.forgotPassword")}
-          </button>
+          </Link>
         </div>
-        <Button className="btn-primary" text={translate("form.signin.button")} icon="icon-arrow-right" />
+        <Button className="btn-signin" text={translate("form.signin.button")} icon="icon-arrow-right" />
       </form>
     )
-    const dialog =
-      <Dialog header={translate("dialog.passwordRecovery.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
-        <div className="Signup-verification_number">
-          <VerificationNumber
-            label={translate("dialog.passwordRecovery.subTitle")}
-            name="mobile"
-            placeholder="Mobile number"
-            submitButton={translate("general.buttons.confirm")}
-            onSubmit={this.onConfirmDialog}
-          />
-        </div>
-      </Dialog>
     return (
       <Switch>
         <section id="login">
           {
-            this.renderLogin(login, dialog)
+            this.renderLogin(login)
           }
           <PrivateRoute
             path="/login/reset-password"

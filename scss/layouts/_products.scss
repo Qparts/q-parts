@@ -8,6 +8,11 @@
 
   > div {
     background: $light-gray;
+    .container-fluid {
+      .row {
+        margin-top: 55px;
+      }
+    }
   }
 
   .tab-content {

@@ -6,8 +6,9 @@ import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
 
-  callback = ({ password }) => {
+  callback = ({password, score}) => {
     this.props.input.onChange(password);
+    this.props.setPasswordScore(score);
   }
 
   invalidMessage = (styles) => {
@@ -24,7 +25,21 @@ class RenderField extends Component {
 
   getFloatLabelStyle = () => (
     this.props.hasFloatLabel ? 'has-float-label' : ''
-  )
+  );
+
+  getIcon = () => {
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' :
+      helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? '#856404' : 'none';
+  }
+
+  getIconClassName = () => {
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? 'icon-checked' :
+      helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? 'icon-alert' : '';
+  }
+
+  displayPasswordLabel = () => {
+    return this.props.input.value ? { display: '' } : { display: 'none' };
+  }
 
   render() {
     const styles = {
@@ -45,7 +60,9 @@ class RenderField extends Component {
         border: this.getBorder(),
         display: 'block',
         position: 'relative',
-
+      },
+      icon: {
+        color: this.getIcon(),
       }
     }
     return (
@@ -59,47 +76,62 @@ class RenderField extends Component {
           {
             this.props.hasFloatLabel ?
               <Fragment>
-                <input
-                  className="form-control"
-                  type={this.props.type}
-                  placeholder={this.props.placeholder}
-                  {...this.props.input}
-                  {...this.props} />
-                <label>{this.props.label}</label>
+                <InputGroup>
+                  <input
+                    className="form-control"
+                    type={this.props.type}
+                    placeholder={this.props.placeholder}
+                    {...this.props.input}
+                    {...this.props} />
+                  <label>{this.props.label}</label>
+                  <InputGroupAddon addonType="append">
+                    <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
+                  </InputGroupAddon>
+                </InputGroup>
               </Fragment> :
               <Fragment>
                 <label>{this.props.label}</label>
                 <sub>{this.props.sub}</sub>
-                <input
-                  className="form-control"
-                  style={this.props.hasPasswordStrength ? { display: 'none' } :
-                    this.props.boxShadow ? styles.borderShadow : styles.border}
-                  type={this.props.type}
-                  placeholder={this.props.placeholder}
-                  {...this.props.input}
-                  {...this.props} />
+                <InputGroup style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}>
+                  <input
+                    className="form-control"
+                    style={this.props.hasPasswordStrength ? { display: 'none' } :
+                      this.props.boxShadow ? styles.borderShadow : styles.border}
+                    type={this.props.type}
+                    placeholder={this.props.placeholder}
+                    {...this.props.input}
+                    {...this.props} />
+                  <InputGroupAddon addonType="append">
+                    <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
+                  </InputGroupAddon>
+                </InputGroup>
               </Fragment>
           }
           {this.props.hasPasswordStrength &&
-            <InputGroup>
-              <ReactPasswordStrength
-                style={styles.border}
-                minLength={5}
-                minScore={2}
-                changeCallback={this.callback}
-                scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
-                inputProps={{ ...this.props.input, ...this.props }} />
-              <InputGroupAddon addonType="append">
-                <Link
-                  className="password-visibility"
-                  to="#"
-                  text="Show"
-                  icon="icon-show-password"
-                  isReverseOrder 
-                  onClick={this.props.onTogglePassword}
+            <Fragment>
+              <InputGroup>
+                <ReactPasswordStrength
+                  style={styles.border}
+                  minLength={5}
+                  minScore={2}
+                  changeCallback={this.callback}
+                  scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
+                  inputProps={{ ...this.props.input, ...this.props }} />
+                <InputGroupAddon addonType="append">
+                  <Link
+                    className="input-icon"
+                    to="#"
+                    text={this.props.text}
+                    icon={this.props.icon}
+                    isReverseOrder
+                    onClick={this.props.onTogglePassword}
                   />
-              </InputGroupAddon>
-            </InputGroup>
+                </InputGroupAddon>
+              </InputGroup>
+              <label
+                style={this.displayPasswordLabel()}
+                className="password-label">Password Strength</label>
+            </Fragment>
           }
           <Fragment>
             {this.props.meta.touched &&

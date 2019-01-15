@@ -29,11 +29,11 @@ class NumberPicker extends Component {
     render() {
         return <div id="number-picker" className={this.props.col}>
             <Button
-                className="btn-positive margin-right-3"
+                className="btn-positive"
                 text="+"
                 onClick={this.handleClick.bind(this, INCREMENT)} />
             <input
-                className="form-control margin-right-3"
+                className="form-control"
                 readOnly
                 disabled
                 {...this.props.input}

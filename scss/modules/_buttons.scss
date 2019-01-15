@@ -69,30 +69,27 @@
 
 .btn-facebook {
   @extend .btn-primary;
-  @extend .box-shadow;
   background: $white;
   border-radius: side-values(0 0 0 20px) !important;
+  &:hover,
+  &:focus {
+    background: none;
+  }
 }
 .btn-google {
   @extend .btn-primary;
-  @extend .box-shadow;
-  background: $white;
-  border-radius: side-values(0 0 0 0) !important;
-}
-.btn-twitter {
-  @extend .btn-primary;
-  @extend .box-shadow;
   background: $white;
   border-radius: side-values(0 0 20px 0) !important;
+  height: 100%;
+  img {
+    width: 25px;
+  }
+  &:hover,
+  &:focus {
+    background: none;
+  }
 }
 
-.footer-custom-btn {
-  padding: 10px 15px;
-  background: $light-gray;
-  @extend .link-border-radius;
-  text-transform: uppercase;
-  @include transition(all, 0.5s, ease);
-}
 .delete-btn {
   @include transition(all, 0.5s, ease);
   @include opacity(0.6);
