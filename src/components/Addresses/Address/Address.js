@@ -167,8 +167,7 @@ class Address extends Component {
                       component={RenderField}
                       type="text"
                       placeholder={translate("setting.addressBook.addressLine2")}
-                      hasFloatLabel
-                      validate={[validations.required]} />
+                      hasFloatLabel />
                   </div>
                   {renderCityRegion}
                   <div className="phone-info col-12">
@@ -204,8 +203,7 @@ class Address extends Component {
                       name="shipping"
                       component={RenderField}
                       type="text"
-                      placeholder={translate("form.address.shippingNote")}
-                      validate={[validations.required]} />
+                      placeholder={translate("form.address.shippingNote")} />
                   </div>
                 </div>
                 {renderButtons}

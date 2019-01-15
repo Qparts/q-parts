@@ -107,6 +107,7 @@ class Setting extends Component {
     this.setState({ visible: false, cityFound: false, showGoogleMap: false, defaultAddress: null, newOrOldVechile: TAB_ONE });
 
     this.props.clearAddress();
+    this.togglePopup();
   }
 
   onConfirmDialog = (values) => {
