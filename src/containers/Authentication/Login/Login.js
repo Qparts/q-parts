@@ -68,7 +68,7 @@ class Login extends Component {
         this.props.history.push('/');
       });
   }
-  renderLogin = (login, dialog) => {
+  renderLogin = (login) => {
     const { translate } = this.props;
 
     return <Fragment>
@@ -84,7 +84,6 @@ class Login extends Component {
           <p>{translate("form.signin.here")}</p>
         </div>
       </div>
-      {dialog}
     </Fragment>
   }
   handleForgotPassword = () => {
@@ -126,23 +125,11 @@ class Login extends Component {
         <Button className="btn-signin" text={translate("form.signin.button")} icon="icon-arrow-right" />
       </form>
     )
-    const dialog =
-      <Dialog header={translate("dialog.passwordRecovery.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
-        <div className="Signup-verification_number">
-          <VerificationNumber
-            label={translate("dialog.passwordRecovery.subTitle")}
-            name="mobile"
-            placeholder="Mobile number"
-            submitButton={translate("general.buttons.confirm")}
-            onSubmit={this.onConfirmDialog}
-          />
-        </div>
-      </Dialog>
     return (
       <Switch>
         <section id="login">
           {
-            this.renderLogin(login, dialog)
+            this.renderLogin(login)
           }
           <PrivateRoute
             path="/login/reset-password"

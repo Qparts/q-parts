@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'; // eslint-disable-line no-un
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Dialog } from 'primereact/components/dialog/Dialog';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import SignupForm from './SignupForm/SignupForm';
 import SocialMedia from '../SocialMedia/SocialMedia';
@@ -49,37 +49,16 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, onShowDialog } = this.props;
+    const { translate, togglePopup } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries} />
-    // const dialog =
-    //   <Dialog header={translate("dialog.signup.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
-    //     <div className="Signup-verification_number">
-    //       <VerificationNumber
-    //         label={translate("dialog.signup.label")}
-    //         name="code"
-    //         placeholder={translate("dialog.signup.placeholder")}
-    //         footer={translate("dialog.signup.footer")}
-    //         submitButton={translate("general.buttons.confirm")}
-    //         onSubmit={this.onConfirmDialog}
-    //       />
-    //       <p>{translate("dialog.signup.resendCode")}<button type="button" className="btn btn-sm btn-link">{translate("dialog.signup.resendCodeLink")}</button></p>
-    //     </div>
-    //   </Dialog>
-    const dialog = <Dialog
-      showHeader={true}
-      maximizable={true}
-      visible={this.props.visible}
-      positionTop={65}
-      modal={true}
-      onHide={this.props.onHide}
-      style={{
-        background: colors.lightGray
-      }}
-    >
-      <Login />
-    </Dialog>
+    const dialog = <Modal isOpen={this.props.modal} toggle={this.props.togglePopup} >
+      <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+      <ModalBody>
+        <Login toggle={this.props.togglePopup} />
+      </ModalBody>
+    </Modal>
     return (
       <section id="signup">
         <div className="container-fluid">
@@ -98,8 +77,8 @@ class Signup extends Component {
                   <img class="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
-                <span className="btn-link" onClick={onShowDialog}>{translate("form.signup.signinLink")}</span>
-                {translate("form.signup.here")}
+                  <span className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</span>
+                  {translate("form.signup.here")}
                 </span>
               </div>
               <SocialMedia
@@ -107,7 +86,7 @@ class Signup extends Component {
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
               <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
-              <img src="/img/sign-up-image.png" alt="sign up"/>
+              <img src="/img/sign-up-image.png" alt="sign up" />
             </div>
           </div>
         </div>
