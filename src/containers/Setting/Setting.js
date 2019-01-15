@@ -54,6 +54,7 @@ const email = 'email';
 const password = 'password';
 const garage_pupop = 'garage';
 const payment_pupop = 'payment';
+const addresses_popup = 'addresses'
 // const vehicle = 'vehicle';
 
 
@@ -106,6 +107,7 @@ class Setting extends Component {
     this.setState({ visible: false, cityFound: false, showGoogleMap: false, defaultAddress: null, newOrOldVechile: TAB_ONE });
 
     this.props.clearAddress();
+    this.togglePopup();
   }
 
   onConfirmDialog = (values) => {
@@ -128,9 +130,11 @@ class Setting extends Component {
   }
 
   onSaveNewAddress = values => {
-    const cityId = this.props.city ? this.props.city.id : values.city.id;
-    const { line1, line2, zipCode, title, latitude, longitude } = values;
-    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude })
+    const { line1, line2, zipCode, title, mobile, city } = values;
+    const latitude = city.latitude;
+    const longitude = city.longitude;
+    const cityId = city.id;
+    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile })
       .then(() => {
         this.onHide();
       });
@@ -244,6 +248,12 @@ class Setting extends Component {
             header="Ad Credit Card"
             subHeader={"Secure Credit Card Payment"} />
         }
+     case 'addresses':
+        return {
+          header: <Title
+            header={translate("dialog.address.title")}
+            subHeader={"Where you would like your items shipped?"} />
+        }
       default:
         break;
     }
@@ -284,35 +294,36 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     }
-    const addressDialog =
-      <Dialog
-        header={translate("dialog.address.title")}
-        visible={this.state.visible}
-        width="800px"
-        height="800px"
-        modal={true}
-        onHide={this.onHide}>
-        <Address
-          address={this.props.address}
-          customer={this.props.customer}
-          getRegions={this.props.getRegions}
-          getCountry={this.props.getCountry}
-          regions={this.props.regions}
-          country={this.props.country}
-          confirmUserAddress={this.props.confirmUserAddress}
-          onSubmit={this.onSaveNewAddress}
-          onShowGoogleMap={this.handleShowGoogleMap}
-          onCityFound={this.handleCityFound}
-          showGoogleMap={this.state.showGoogleMap}
-          cityFound={this.state.cityFound}
-          city={this.props.city}
-          findCity={this.props.findCity}
-          translate={this.props.translate}
-          onHide={this.onHide}
-          defaultAddress={this.state.defaultAddress}
-          onDefaultAddress={this.handleChangeDefaultAddress}
-        />
-      </Dialog>
+
+    let addressDialog;
+    if(this.state.dialogType === addresses_popup){
+      addressDialog =<Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <Address
+            address={this.props.address}
+            customer={this.props.customer}
+            getRegions={this.props.getRegions}
+            getCountry={this.props.getCountry}
+            regions={this.props.regions}
+            country={this.props.country}
+            confirmUserAddress={this.props.confirmUserAddress}
+            onSubmit={this.onSaveNewAddress}
+            onShowGoogleMap={this.handleShowGoogleMap}
+            onCityFound={this.handleCityFound}
+            showGoogleMap={this.state.showGoogleMap}
+            cityFound={this.state.cityFound}
+            city={this.props.city}
+            findCity={this.props.findCity}
+            translate={this.props.translate}
+            onHide={this.onHide}
+            defaultAddress={this.state.defaultAddress}
+            onDefaultAddress={this.handleChangeDefaultAddress}
+          />
+
+        </ModalBody>
+      </Modal>
+    }
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
@@ -393,9 +404,10 @@ class Setting extends Component {
                     <Fragment>
                       <Addresses
                         customer={this.props.customer}
-                        onShowAdressDialog={this.handleShowDialog}
+                        onShowEditDialog={this.handleDialog}
                         onEditAddress={this.handleEditAddress}
-                        translate={this.props.translate} />
+                        translate={this.props.translate}
+                        addresses={this.props.addresses} />
                       {addressDialog}
                     </Fragment>
                   )
@@ -513,7 +525,8 @@ const mapStateToProps = (state) => {
     selectedCountry: state.customer.selectedCountry,
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
-    wishlist: state.customer.wishlist
+    wishlist: state.customer.wishlist,
+    addresses: state.customer.detail.addresses
   }
 }
 
