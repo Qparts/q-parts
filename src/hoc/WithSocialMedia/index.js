@@ -62,21 +62,6 @@ const WithSocialMedia = WrappedComponent => {
           }
           return this.props.socialMediaButton(data, this.props.component);
 
-        case TWITTER:
-          data = {
-            socialMediaId: response.id,
-            firstName: response.name.split(' ')[0],
-            lastName: response.name.split(' ')[1],
-            email: response.email,
-            platform: TWITTER,
-            countryId: selectedCountry.id,
-            defaultLang: currentLanguage
-          };
-          if (toggle) {
-            toggle();
-          }
-          return this.props.socialMediaButton(data, this.props.component);
-
         default:
           break;
       }

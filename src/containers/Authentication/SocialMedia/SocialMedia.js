@@ -1,17 +1,14 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
 import GoogleLogin from 'react-google-login';
-import Twitter from './Twitter';
 import { DISCONNECT } from '../../../constants';
-import Button from '../../../components/UI/Button';
 
 
 class SocialMedia extends Component {
   static defaultProps = {
     facebook: <i className="icon-facebook-logo"></i>,
     google: <img src="/img/google-icon.svg" alt="google" />,
-    twitter: <i className="icon-twitter"></i>,
   }
   render() {
     return (

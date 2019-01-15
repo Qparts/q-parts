@@ -12,7 +12,6 @@ class SocialMediaLink extends Component {
      className="SocialMediaLink-container"
      facebook={smConnectionStatus(this.props.connectedPlatforms, 'facebook')}
      google={smConnectionStatus(this.props.connectedPlatforms, 'google')}
-     twitter={smConnectionStatus(this.props.connectedPlatforms, 'twitter')}
      handleResponse={this.props.handleResponse}
      handleFailure={this.props.handleFailure}
      facebookIcon={<i className="fab fa-facebook fa-3x"></i>}

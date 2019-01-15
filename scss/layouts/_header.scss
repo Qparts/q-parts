@@ -173,22 +173,13 @@
       background-color: $light-gray;
       color: #475993;
       line-height: 44px;
-      border-radius: side-values(0) !important;
+      border-radius: side-values(0px 20px 20px 0px) !important;
       box-shadow: none;
       img{
         height: 44px;
         max-width: none;
         width: 27px;
       }
-    }
-    .btn-twitter {
-      margin-#{$left}: 7px;
-      background-color: $light-gray;
-      color: #475993;
-      font-size: 19px;
-      line-height: 44px;
-      border-radius: side-values(0px 20px 20px 0px) !important;
-      box-shadow: none;
     }
   }
   .dropdown-footer {
@@ -534,22 +525,13 @@
       background-color: $light-gray;
       color: #475993;
       line-height: 48px;
-      border-radius: side-values(0) !important;
+      border-radius: side-values(0px 20px 20px 0px) !important;
       box-shadow: none;
       img{
         height: 48px;
         max-width: none;
         width: 30px;
       }
-    }
-    .btn-twitter {
-      margin-#{$left}: 3px;
-      background-color: $light-gray;
-      color: #475993;
-      font-size: 20px;
-      line-height: 48px;
-      border-radius: side-values(0px 20px 20px 0px) !important;
-      box-shadow: none;
     }
   }
   .dropdown-footer {
