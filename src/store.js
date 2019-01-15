@@ -20,9 +20,6 @@ if (process.env.NODE_ENV === 'development') {
     middleware = applyMiddleware(thunk, logger);
   }
 
-  console.log(process.env.NODE_ENV);
-  
-
 /* eslint-disable no-underscore-dangle */
 export const store = createStore(
     persistedReducer,
