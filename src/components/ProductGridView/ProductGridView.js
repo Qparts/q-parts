@@ -18,7 +18,7 @@ class ProductGridView extends Component {
 		})
 	}
 	render() {
-		const { product } = this.props
+		const { product } = this.props;
 		return <div className="product-grid-view col-6 col-md-4" >
 			<div
 				className=" product-holder"

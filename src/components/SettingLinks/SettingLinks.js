@@ -20,6 +20,7 @@ class profileLinks extends Component{
         { url: 'connect', name: translate(`setting.links.${socialMedia}`) },
         { url: 'payment', name: payment },
     ]
+
     return(
       <Fragment>
           <div className="col-md-2 w3-hide-small w3-hide-medium">

@@ -50,7 +50,6 @@ class PaymentPopup extends Component {
             label="* Expiration date"
             name="months"
             component={SelectInput}
-            clearable={false}
             options={[{ label: '1', value: '2' }]}
             placeholder="MM"
             validate={[validations.required]} />
@@ -59,7 +58,6 @@ class PaymentPopup extends Component {
           <Field
             name="years"
             component={SelectInput}
-            clearable={false}
             options={[{ label: '1', value: '2' }]}
             placeholder="YY"
             validate={[validations.required]} />

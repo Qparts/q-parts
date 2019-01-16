@@ -17,63 +17,43 @@ class Addresses extends Component {
   if(false){
     addresses = <div id="addresses-container">
      <div className="addresses-header justify-content-between">
-       <p> Where you would like your items shipped?</p>
+       <p> {translate("setting.addressBook.shippingItem")}</p>
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
-     <span class="seperator"></span>
-     <div className="addresses-box border rounded row">
-      <div className="addresses-box_item col-6">
-        <Checkbox
-          onChange={e => this.setState({
-            check: !this.state.check
-          })}
-          checked={this.state.check}
-          label="Default Addresses"
-        />
-      <div className="addresses-box_item-label">
-         <p>Ahmed Mahmoud</p>
-       </div>
-       <div className="about-the-person">
-         <p>7 Yaser Ben Amer Street</p>
-         <p>Amman, Jordan</p>
-         <p>(962) 770-2302</p>
-       </div>
-       <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
-       </div>
-      </div>
-      <div className="col-1">
-        <span class="seperator"></span>
-      </div>
-      <div className="addresses-box_item col-5">
-        <Checkbox
-          onChange={e => this.setState({
-            check: !this.state.check
-          })}
-          checked={this.state.check}
-          label="Default addresses"
-        />
-      <div className="addresses-box_item-label">
-          <p>Ahmed Mahmoud</p>
-        </div>
-        <div className="about-the-person">
-          <p>7 Yaser Ben Amer Street</p>
-          <p>Amman, Jordan</p>
-          <p>(962) 770-2302</p>
-        </div>
-       <div className="addresses-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
-        <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
-       </div>
-      </div>
+
+     <span className="seperator"></span>
+     <div className="addresses-box border rounded  row">
+       {
+         this.props.addresses.map((address, idx) =>{
+           return <div className="addresses-box_item col-6" key={idx}>
+              <Checkbox
+                onChange={e => this.setState({
+                  check: !this.state.check
+                })}
+                checked={this.state.check}
+                label={translate("setting.addressBook.defaultAddress")}
+              />
+            <div className="addresses-box_item-label">
+               <p>{address.title}</p>
+             </div>
+             <div className="about-the-person">
+               <p>{address.cityId} {address.line1} {address.line2}</p>
+               <p>{address.mobile}</p>
+             </div>
+             <div className="addresses-footer">
+              <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
+              <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder/>
+             </div>
+            </div>
+         })}
      </div>
     </div>
   }else{
     addresses = <div id="empty-addresses">
       <div className="addresses-header justify-content-between">
-        <p>Where you would like your items shipped?</p>
+        <p>{translate("setting.addressBook.shippingItem")}</p>
       </div>
-      <span class="seperator"></span>
+      <span className="seperator"></span>
       <div className="add-addresses">
         <p className="icon-address"/>
         <p className="addresses-text">NO SAVER ADDRESSES</p>

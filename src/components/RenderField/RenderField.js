@@ -6,7 +6,7 @@ import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
 
-  callback = ({password, score}) => {
+  callback = ({ password, score }) => {
     this.props.input.onChange(password);
     this.props.setPasswordScore(score);
   }
@@ -65,6 +65,7 @@ class RenderField extends Component {
         color: this.getIcon(),
       }
     }
+    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, ...renderFieldProps } = this.props;
     return (
       this.props.readOnly ?
         <Fragment>
@@ -82,7 +83,7 @@ class RenderField extends Component {
                     type={this.props.type}
                     placeholder={this.props.placeholder}
                     {...this.props.input}
-                    {...this.props} />
+                    {...renderFieldProps} />
                   <label>{this.props.label}</label>
                   <InputGroupAddon addonType="append">
                     <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
@@ -100,7 +101,7 @@ class RenderField extends Component {
                     type={this.props.type}
                     placeholder={this.props.placeholder}
                     {...this.props.input}
-                    {...this.props} />
+                    {...renderFieldProps} />
                   <InputGroupAddon addonType="append">
                     <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
                   </InputGroupAddon>
@@ -116,7 +117,7 @@ class RenderField extends Component {
                   minScore={2}
                   changeCallback={this.callback}
                   scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
-                  inputProps={{ ...this.props.input, ...this.props }} />
+                  inputProps={{ ...this.props.input, ...renderFieldProps }} />
                 <InputGroupAddon addonType="append">
                   <Link
                     className="input-icon"
@@ -144,7 +145,7 @@ class RenderField extends Component {
 }
 
 RenderField.defaultProps = {
-  hasFloatLabel: false,
+  hasPasswordStrength: false
 }
 
 export default RenderField;

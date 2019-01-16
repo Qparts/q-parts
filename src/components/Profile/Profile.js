@@ -78,7 +78,6 @@ class profile extends Component {
                   <Field
                     name="country"
                     component={SelectInput}
-                    clearable={false}
                     options={[{ label: '1', value: '2' }]}
                     placeholder="Select country"
                     validate={[validations.required]} />
@@ -90,14 +89,12 @@ class profile extends Component {
                       <Field
                         name="phone"
                         component={RenderField}
-                        clearable={false}
                         placeholder="+966"
                         validate={[validations.required]} />
                     </div>
                     <Field
                       name="phone-number"
                       component={RenderField}
-                      clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
                   </div>
@@ -106,14 +103,12 @@ class profile extends Component {
                       <Field
                         name="alternate-phone"
                         component={RenderField}
-                        clearable={false}
                         placeholder="+966"
                         validate={[validations.required]} />
                     </div>
                     <Field
                       name="alternate-phone-number"
                       component={RenderField}
-                      clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
                   </div>
@@ -152,7 +147,6 @@ class profile extends Component {
                   <Field
                     name="defaultLang"
                     component={SelectInput}
-                    clearable={false}
                     options={languagesOptions}
                     placeholder={translate("setting.accountSetting.notification.placeholder")}
                     validate={[validations.required]} />

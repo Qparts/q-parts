@@ -88,7 +88,6 @@ class HeaderDetails extends Component {
     ) : (
         <Fragment>
           <li className="user-account">
-            <a>
               <DropdownItem dropdownItemId="signin" header={signinJoinHeader}>
                 <div className="dropdown-header">
                   <p>Welcome Back</p>
@@ -98,31 +97,29 @@ class HeaderDetails extends Component {
                     </button>
                     <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
                     <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
-                    <a href="#"><i className="icon-twitter btn-twitter" style={{ color: "#03a9f4" }} /></a>
                   </div>
                   <br />
                   <div style={styles.text}>
                     <p>{translate("dropdown.signup.message")}</p>
-                    <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+                    <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
                     <i className="icon-arrow-right" style={styles.arrow_right} />
                   </div>
-                  <div class="dropdown-divider"  >
+                  <div className="dropdown-divider"  >
                   </div>
                   <div className="dropdown-footer">
-                    <li>
+                    <span>
                       <img alt="garage" src="/img/garage.svg" /> <p>Orders</p>
-                    </li>
-                    <li>
+                    </span>
+                    <span>
                       <img alt="garage" src="/img/request.svg" /> <p>Request</p>
-                    </li>
-                    <li>
+                    </span>
+                    <span>
                       <img alt="garage" src="/img/garage.svg" /> <p>My Garage</p>
-                    </li>
+                    </span>
                   </div>
                 </div>
 
               </DropdownItem>
-            </a>
           </li>
         </Fragment>
       );
@@ -146,24 +143,22 @@ class HeaderDetails extends Component {
               <span className="seperator" />
             </li>
             <li className="garage">
-              <a>
-                <DropdownItem dropdownItemId="garage" header={garageHeader}>
-                  <Fragment>
-                    {!isEmpty(vehicles) ? (
-                      <GaragePopup
-                        translate={translate}
-                        className=""
-                        onAddVechile={onAddVechile}
-                      />
-                    ) : (
-                        <ButtonCustom
-                          className="btn-primary"
-                          text={"Add a new vehicle"}
-                          onClick={onAddVechile} />
-                      )}
-                  </Fragment>
-                </DropdownItem>
-              </a>
+              <DropdownItem dropdownItemId="garage" header={garageHeader}>
+                <Fragment>
+                  {!isEmpty(vehicles) ? (
+                    <GaragePopup
+                      translate={translate}
+                      className=""
+                      onAddVechile={onAddVechile}
+                    />
+                  ) : (
+                      <ButtonCustom
+                        className="btn-primary"
+                        text={"Add a new vehicle"}
+                        onClick={onAddVechile} />
+                    )}
+                </Fragment>
+              </DropdownItem>
             </li>
             <li>
               <Link to="/wishlist">
@@ -199,25 +194,4 @@ const styles = {
 
 };
 
-export default withStyles(styles)(HeaderDetails);;
-
-
-
-{/* <Nav id="secondNavBar">
-          {authOrNotAuthButtons}
-          <div>
-            <Button
-              component={Link}
-              to="/vendor_registration_form"
-              variant="outlined"
-              classes={{
-                label: classes.label
-              }}
-            >
-              {translate("navBar.joinUs")}
-            </Button>
-          </div>
-          <Link to="/cart">
-            <i className="fas fa-shopping-cart fa-2x" />
-          </Link>
-        </Nav> */}
+export default withStyles(styles)(HeaderDetails);

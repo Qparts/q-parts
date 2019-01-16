@@ -79,9 +79,6 @@ class Footer extends Component {
                   <i className="icon-facebook-logo" />
                 </a>
                 <a href="#">
-                  <i className="icon-twitter" />
-                </a>
-                <a href="#">
                   <i className="icon-linked-in-logo" />
                 </a>
               </li>

@@ -108,7 +108,6 @@ class Orders extends Component {
                 <Field
                   name="search-option"
                   component={SelectInput}
-                  clearable={false}
                   options={options}
                   placeholder="Select Date"
                    onChange={this.handleSelectChange}/>
