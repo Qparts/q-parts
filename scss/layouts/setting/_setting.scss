@@ -55,6 +55,10 @@
         }
       }
   }
+  .header-setting-left{
+    @include margin-left(8%);
+    @include margin-right(5%);
+  }
   header{
     display: flex;
     .user-profile{
@@ -103,6 +107,9 @@
   }
   #setting-details {
     padding-top: 70px;
+    @include padding-left(0px);
+    @include margin-left(8%);
+    ma
     .wahtsapp-before-links{
       .bg-whatsapp{
         text-transform: none;
