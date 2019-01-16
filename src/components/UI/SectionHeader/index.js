@@ -6,7 +6,7 @@ class SectionHeader extends Component{
     const { translate } = this.props;
     return(
       <section className="d-h-bg default-header-bg">
-        <div className="header-setting-left">
+        <div className="container-fluid">
           <div className="row">
             <header className="col justify-content-between">
               <div className="user-profile">

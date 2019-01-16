@@ -1,8 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { accountSetting, addressBook, garage, helpCenter, orders, quotations, socialMedia, wishlist, payment } from '../../constants';
 
-const profileLinks = ({ match, translate }) => {
+class profileLinks extends Component{
+
+  settingLink = (link) =>{
+    this.props.history.push(`${this.props.match.url}/${link}`)
+  }
+  render(){
+    const { match, translate } = this.props;
     const links = [
         { url: 'quotations', name: translate(`setting.links.${quotations}`) },
         { url: 'orders', name: translate(`setting.links.${orders}`) },
@@ -14,25 +20,27 @@ const profileLinks = ({ match, translate }) => {
         { url: 'connect', name: translate(`setting.links.${socialMedia}`) },
         { url: 'payment', name: payment },
     ]
-
-    return (
-        <Fragment>
-            <div className="col-md-2 w3-hide-small w3-hide-medium">
-                <div class="list-group">
-                    {links.map((link, idx) => {
-                        return (
-                            <Link
-                                key={idx}
-                                className="list-group-item list-group-item-action"
-                                to={`${match.url}/${link.url}`}>
-                                {link.name}
-                            </Link>
-                        )
-                    })}
-                </div>
-            </div>
-        </Fragment>
+    return(
+      <Fragment>
+          <div className="col-md-2 w3-hide-small w3-hide-medium">
+              <div class="list-group">
+                  {links.map((link, idx) => {
+                      return (
+                          <Link
+                              key={idx}
+                              data-toggle="list"
+                              className="list-group-item list-group-item-action"
+                              to="#"
+                              onClick={() => this.settingLink(link.url)}>
+                              {link.name}
+                          </Link>
+                      )
+                  })}
+              </div>
+          </div>
+      </Fragment>
     )
+  }
 }
 
 export default profileLinks;

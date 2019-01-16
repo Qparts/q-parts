@@ -37,7 +37,7 @@
           color: #37363b;
           display: flex;
           p{
-            line-height: 64px;
+            line-height: 64px
           }
         }
 
@@ -54,10 +54,6 @@
           height: 60px;
         }
       }
-  }
-  .header-setting-left{
-    @include margin-left(8%);
-    @include margin-right(5%);
   }
   header{
     display: flex;
@@ -107,9 +103,6 @@
   }
   #setting-details {
     padding-top: 70px;
-    @include padding-left(0px);
-    @include margin-left(8%);
-    ma
     .wahtsapp-before-links{
       .bg-whatsapp{
         text-transform: none;
@@ -121,6 +114,29 @@
           text-align: $left;
         }
       }
+    }
+    .list-group{
+      .list-group-item{
+        border-left: none;
+        border-right: none;
+      }
+    }
+    .list-group:last-child {
+      .list-group-item:last-child {
+        border-bottom: none;
+      }
+    }
+    .list-group:first-child {
+      .list-group-item:first-child {
+        border-top: none;
+      }
+    }
+    .list-group-item.active{
+      background: #fdeceb;
+      border-right: 2px solid $brand-color;
+      color: $black;
+      border-top: none;
+      border-bottom: none;
     }
   }
   .bg-whatsapp{
