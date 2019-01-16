@@ -1,5 +1,97 @@
 #setting {
   position: relative;
+  .header-settings{
+    background: $light-gray;
+    float: right;
+    @include margin-right(-1px);
+    i{
+      display: flex;
+      div{
+        display: block;
+        padding: 0px;
+        background: none;
+        box-shadow: none;
+        @include margin-left(10px);
+        p{
+          opacity: 0.5;
+          font-family: Roboto;
+          @include font-size(13px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          @include margin-right(96px);
+          margin-bottom: 0px;
+        }
+        h1{
+          font-family: Roboto;
+          @include font-size(40px);
+          font-weight: 300;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: #37363b;
+          display: flex;
+          p{
+            line-height: 64px
+          }
+        }
+
+      }
+    }
+      div{
+        display: flex;
+        padding: side-values(21px 100px 0 31px);
+        background: $white;
+        @extend .box-shadow;
+        border-radius: side-values(0 0 0 20px);
+        img{
+          width: 60px;
+          height: 60px;
+        }
+      }
+  }
+  header{
+    display: flex;
+    .user-profile{
+      display: flex;
+      img{
+        @include margin-right(12px);
+        border-radius: 50px;
+        background: $light-gray;
+        width: 60px;
+        padding: 10px;
+        height: 75%;
+        margin-top: 20px;
+      }
+      h1{
+        font-family: Roboto;
+        font-size: 30px;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #fefeff;
+        text-transform: capitalize;
+        margin-top: 5px;
+      }
+    }
+    .signout{
+      margin-top: 25px;
+      .btn-primary{
+        background: $black;
+        text-transform: none;
+        span{
+          @include margin-right(10px);
+        }
+      }
+    }
+  }
   h1{
     font-family: Roboto;
     font-size: 30px;
@@ -11,6 +103,36 @@
   }
   #setting-details {
     padding-top: 70px;
+    .wahtsapp-before-links{
+      .bg-whatsapp{
+        text-transform: none;
+        color: black;
+        border-radius: side-values(20px 20px 0px 20px) !important;
+        span{
+          font-size: 9px;
+          width: fit-content !important;
+          text-align: $left;
+        }
+      }
+    }
+    .list-group{
+      .list-group-item{
+        border: none;
+        margin-top: 2px;
+      }
+    }
+    .list-group:first-child {
+      .list-group-item:first-child {
+        margin-top: 0px;;
+      }
+    }
+    .list-group-item.active{
+      background: #fdeceb;
+      border-right: 2px solid $brand-color;
+      color: $black;
+      border-top: none;
+      border-bottom: none;
+    }
   }
   .bg-whatsapp{
     margin-top: 100px;

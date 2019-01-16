@@ -14,12 +14,13 @@ class Addresses extends Component {
  render() {
   const { translate } = this.props;
   let addresses;
-  if(true){
+  if(false){
     addresses = <div id="addresses-container">
      <div className="addresses-header justify-content-between">
-       <p>{translate("setting.addressBook.shippingItem")}</p>
+       <p> {translate("setting.addressBook.shippingItem")}</p>
        <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
      </div>
+
      <span className="seperator"></span>
      <div className="addresses-box border rounded  row">
        {
@@ -55,7 +56,7 @@ class Addresses extends Component {
       <span className="seperator"></span>
       <div className="add-addresses">
         <p className="icon-address"/>
-        <p className="addresses-text">{translate("setting.addressBook.noAddress")}</p>
+        <p className="addresses-text">NO SAVER ADDRESSES</p>
         <Button type="button" className="btn btn-link" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
       </div>
       </div>

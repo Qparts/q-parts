@@ -252,7 +252,7 @@ class Setting extends Component {
         return {
           header: <Title
             header={translate("dialog.address.title")}
-            subHeader={"Where you would like your items shipped?"} />
+            subHeader={translate("setting.addressBook.shippingItem")} />
         }
       default:
         break;
@@ -353,9 +353,48 @@ class Setting extends Component {
       </Modal>
     return (
       <section id="setting">
-        <SectionHeader text={this.state.sectionHeader} />
+        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate}/>
+        <div className="header-settings row">
+          <div>
+            <i>
+              <img className="request" src="/img/request.svg" alt="request" />
+              <div>
+                <p>{translate('setting.request')}</p>
+                <h1>8</h1>
+              </div>
+            </i>
+            <i>
+              <img className="orders" src="/img/request.svg" alt="oreder" />
+              <div>
+                <p>{translate('setting.links.orders')}</p>
+                <h1>3</h1>
+              </div>
+            </i>
+            <i>
+              <img className="wishList" src="/img/request.svg" alt="wishList" />
+              <div>
+                <p>{translate('setting.links.wishlist')}</p>
+                <h1>1</h1>
+              </div>
+            </i>
+            <i>
+              <img className="garage" src="/img/request.svg" alt="garage" />
+              <div>
+                <p>{translate('setting.links.garage')}</p>
+                <h1>2<p>{translate('setting.vehicle')}</p></h1>
+              </div>
+            </i>
+          </div>
+        </div>
         <div className="component-background">
           <section id="setting-details" className="container-fluid">
+            <div className="wahtsapp-before-links">
+              <a className="bg-whatsapp">
+                <CustomerService
+                  messages={["Have a Question?", "Ask a Specialis, In-House Experts."]}
+                  url="" />
+              </a>
+            </div>
             <div className="row">
               <SettingLinks {...this.props} />
               <Switch>
