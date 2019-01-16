@@ -1,18 +1,8 @@
 @include font-face($icon-font-name, $icon-path);
-[data-icon]:before {
-  font-family: $icon-font-name !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 [class^='icon-']:before,
-[class*=' icon-']:before {
+[class*=' icon-']:before,
+.swiper-button-next::before,
+.swiper-button-prev::before{
   font-family: $icon-font-name !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -141,10 +131,11 @@
 .icon-alert:before {
   content: "\4d";
 }
-.icon-arrow-dwon:before {
+.icon-arrow-down:before {
   content: "\4e";
 }
-.icon-arrow-left:before {
+.icon-arrow-left:before,
+.swiper-button-prev::before {
   content: "\4f";
 }
 .icon-custom-order:before {
@@ -222,7 +213,8 @@
 .icon-delivery:before {
   content: "\24";
 }
-.icon-arrow-right:before {
+.icon-arrow-right:before,
+.swiper-button-next::before {
   content: "\25";
 }
 .icon-cart:before {
@@ -237,54 +229,7 @@
 .icon-facebook-logo:before {
   content: "\29";
 }
-//select2
-.select2-container--default .select2-selection--single {
-  border-width: 0;
-  .select2-selection__rendered {
-    @include font-size(12px);
-    padding: side-values(0 0 0 5px);
-    display: inline-block !important;
-    border-radius: 0;
-  }
-  .select2-selection__arrow {
-    position: relative;
-    display: inline-block;
-    b {
-      border-color: #ccc transparent transparent transparent;
-      margin-top: -3px;
-    }
-  }
-}
-.select2-container--default.select2-container--open
-  .select2-selection--single
-  .select2-selection__arrow
-  b {
-  border-color: transparent transparent #ccc transparent;
-}
-.select2-container {
-  width: auto !important;
-}
-.select2-container--open .select2-dropdown--below {
-  width: auto !important;
-}
-.select2-dropdown {
-  @extend .link-border-radius;
-  overflow: hidden;
-  border-width: 0;
-  @extend .box-shadow;
-}
-.select2-results__option {
-  padding: 5px 10px;
-  @include font-size(12px);
-  border-bottom: 1px solid $light-gray;
-  min-width: 100px;
-}
-.select2-container--default .select2-results__option[aria-selected='true'],
-.select2-container--default
-  .select2-results__option--highlighted[aria-selected] {
-  background-color: $light-gray;
-  color: $basic-gray;
-}
+
 .seperator {
   width: 1px;
   background: #ccc;
@@ -483,4 +428,58 @@
 }
 .underline{
   text-decoration: underline;
+}
+
+.q-placeholder {
+  font-family: Roboto;
+  @include font-size(14px);
+  font-weight: normal !important;
+}
+.default-header-bg{
+  background: linear-gradient(to #{$right}, #87363d, #37363a , #372628, #1e1b1e);
+  min-height: 105px;
+  header{
+    h1{
+      @include font-size(50px);
+      color: $white;
+      padding-top: 25px;
+      @extend .d-inline-block;
+    }
+  }
+}
+//dropdown
+.dropdown-toggle::after{
+border-top-width: 5px;
+border-right-width: 5px;
+border-left-width: 5px;
+color: $light-gray-2;
+@include opacity(0.6);
+}
+.dropdown-menu {
+  @extend .box-shadow;
+}
+//shaimaa Updates
+.sec-header{
+  @extend .artical-space;
+  h1{
+    font-weight: 500px;
+    @include font-size(40px);
+    color: $basic-gray;
+      > p{
+        @extend .float-#{$left};
+        @extend .d-inline-block;
+        border-bottom: 2px solid $brand-color;
+        padding-bottom: 10px;
+        margin-#{$right}: 10px;
+      }
+  }
+  > span{
+    @include font-size(15px);
+    @include opacity(0.6);
+    font-weight: 300;
+    @extend .position-relative;
+    @extend .text-capitalize;
+    top: -7px;
+    margin-left: -5px;
+  }
 }

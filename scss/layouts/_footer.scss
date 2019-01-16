@@ -89,14 +89,46 @@
   }
 }
 
-#footer {
-@include small-screen{
-  display: none;
-}
-
-  padding-top: 49px;
+.main-footer{
+  padding-top: 50px;
   background: $basic-gray;
-
+  .qparts-options{
+    @extend .list-unstyled;
+    @extend .row;
+    @extend .justify-content-center;
+    li{
+      @extend .col-auto;
+      @extend .align-items-center;
+      @extend .media;
+      i{
+        &.icon-pricing{
+          @include font-size(25px);
+        }
+        &.icon-whatsapp{
+          @include font-size(30px);
+        }
+        &.icon-delivery{
+          @include font-size(39px);
+        }
+        &.icon-wallet{
+          @include font-size(30px);
+        }
+      }
+      .media-body{
+        h5{
+          @include font-size(17px);
+          @extend .text-uppercase;
+          font-weight: 300;
+        }
+        p{
+          @include font-size(14px);
+          @extend .mb-0;
+          @include opacity(0.5);
+          ;
+        }
+      }
+    }
+  }
   a,
   p {
     color: $basic-dark-white;
@@ -143,17 +175,6 @@
         @include font-size(20px);
       }
     }
-  }
-
-  hr {
-    width: 1111px;
-    height: 1px;
-    opacity: 0.1;
-    background-color: $basic-white;
-  }
-
-  button {
-    text-transform: capitalize;
   }
 
   .media-body {

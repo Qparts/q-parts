@@ -1,23 +1,266 @@
-.nav-icon-pl {
-  @include large-medium-screens {
-    padding-#{$left}: 35px;
+.main-header{
+  @extend .position-relative;
+  z-index: 4;
+  background: $white;
+  border-bottom: 1px solid $light-gray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 65px;
+  .brand{
+    @extend .d-block;
+    img{
+      width: 117px;
+      @extend .d-block;
+      margin-top: -1px;
+    }
   }
-  @include small-screen {
-    padding-#{$left}: 1px;
+  .main-search{
+    margin-top: 2px;
+    @extend .input-group;
+    @extend .position-relative;
+    .form-control{
+      background: $light-gray;
+      height: 40px;
+      border-width: 0;
+      padding-#{$right}: 40px;
+      @extend .div-border-radius;
+      &:focus{
+        box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+      }
+    }
+    button{
+      @extend .position-absolute;
+      top: 0;
+      #{$right}: 0;
+      width: 35px;
+      height: 40px;
+      background: transparent;
+      border-width: 0;
+      z-index: 3;
+      @extend .p-0;
+      @extend .text-center;
+      .icon-search{
+        color: $basic-gray;
+        height: 21px;
+        @include font-size(20px);
+        margin-#{$right}: 15px;
+        margin-top: 1px;
+      }
+    }
+
+  }
+  .setting {
+    @extend .position-relative;
+    top: 10px;
+    z-index: 4;
+    .input-group {
+      @extend .position-relative;
+      .ship-to {
+        @include font-size(14px);
+      }
+      .select__value-container{
+        padding: 1px 5px;
+      }
+      .select__menu{
+        margin-top: 14px;
+        z-index: 100;
+      }
+    }
+    .seperator {
+      height: 20px;
+    }
+    .lang {
+      padding-#{$left}: 2px;
+      @include if-ltr {
+        font-family: 'Cairo', sans-serif;
+        //@include font-size(13px);
+        font-weight: 400;
+      }
+    }
+
   }
 }
+.user-actions{
+  @extend .float-#{$right};
+  margin-top: 13px;
+  @extend .col-auto;
+  > ul{
+    @extend .d-flex;
+    @extend .mb-0 ;
+    @extend .list-unstyled;
+    @extend .pb-0;
+    > li{
+      @extend .d-inline-block;
+      margin-#{$right}: 15px;
+      &:last-child{
+        margin-#{$right}: 0;
+      }
+    }
+  }
+  .user-account {
+    @include font-size(13.8px);
+    .user-img {
+      margin-#{$right}: 5px;
+      top: -1px;
+      @extend .position-relative;
+      @extend .d-inline-block;
+      width: 20px;
+      img {
+        max-width: 100%;
+      }
+    }
+    .seperator {
+      height: 12px;
+      margin: -1px 5px 0;
+    }
+    b {
+      font-weight: 500;
+    }
+  }
+  .icon-cart {
+    @include font-size(24px);
+    height: 24px;
+    &:before{
+      top: -2px;
+    }
+  }
+  .seperator {
+    height: 20px;
+    display: inline-table;
+  }
+  .dropdown-menu{
+    overflow: hidden;
+    border-radius: side-values(0px 0px 20px 20px);
+    #{$left}: auto !important;
+    #{$right}: 0 !important;
+    top: 15px !important;
+    border-top-width: 0;
+    @extend .pb-0;
+    > h6{
+      @extend .px-3;
+      color: $basic-gray;
+      @include font-size(16px);
+      @include opacity(0.4);
+      font-weight: 400;
+      @extend .text-capitalize;
+    }
+    .signin-list{
+      @extend .mx-3;
+      @extend .px-0;
+      @extend .d-flex;
+      @extend .flex-nowrap;
+      @extend .link-border-radius;
+      overflow: hidden;
+      margin-bottom: 17px;
+      li{
+        @extend .d-inline-block;
+        margin-#{$right}: 5px;
+        a{
+          @include transition(all, 0.5s, ease);
+          height: 40px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          @extend .text-center;
+          min-width: 40px;
+          background: $light-gray;
+          @extend .d-block;
+          .icon-facebook-logo{
+            @include font-size(19px);
+          }
+          .icon-twitter{
+            @include font-size(22px);
+
+          }
+          > img{
+            max-width: 18px;
+          }
+          &:hover{
+            background: darken($light-gray, 2%);
+          }
+        }
+        &:first-child{
+          a{
+            padding-top: 7px;
+            @extend .btn-primary;
+            white-space: nowrap;
+            border-radius: 0 !important;
+            @extend .text-capitalize;
+            @include font-size(18px);
+            i{
+              @include font-size(17px);
+              margin-#{$left}: 3px;
+              &:before{
+                top: 3px;
+              }
+            }
+          }
+        }
+        &:last-child{
+          margin-#{$right}: 0;
+        }
+      }
+    }
+    > p{
+      @extend .px-3;
+      @include font-size(15px);
+      color: $charcoal-grey-two-40;
+      a{
+        color: $basic-gray;
+        font-weight: 400;
+        padding-#{$left}: 5px;
+        i{
+          padding-#{$left}: 5px;
+          @include font-size(14px);
+
+          &:before{
+            top: 2px;
+          }
+        }
+        &:hover{
+          i{
+            margin-left: 5px;
+          }
+        }
+      }
+    }
+    .account-actions{
+      @extend .px-3;
+      background: $light-gray;
+      @extend .list-unstyled;
+      @extend .d-flex;
+      @extend .mb-0;
+      > li{
+        @extend .flex-fill;
+        a{
+          padding: 5px 0;
+          @include font-size(13px);
+          @extend .d-flex;
+          white-space: nowrap;
+          i{
+            padding-#{$right}: 5px;
+          }
+          .icon-shopping-bag{
+            @include font-size(17px);
+          }
+          .icon-send{
+            @include font-size(18px);
+          }
+          img{
+            max-width:18px;
+            height: 18.5px;
+            margin-#{$right}: 5px;
+
+          }
+        }
+
+      }
+    }
+  }
+}
+//END NEW HEADER
 
 .q-burger-btn {
   height: 50px;
-}
-
-.main-header {
-  .header-first {
-    padding: 10px 0;
-    @extend .border-bottom;
-    border-color: $light-gray;
-    @extend .nav-icon-pl;
-  }
 }
 .mobile-header {
   height: 50px;
@@ -35,305 +278,9 @@
     }
   }
 }
-.setting {
-  @extend .position-relative;
-  top: 8px;
-  .ship-country {
-    margin-#{$right}: 0 !important;
-  }
-  .input-group {
-    position: relative;
-    .ship-to {
-      @include font-size(14px);
-      margin-#{$right}: 5px;
-    }
-    .select__menu{
-      margin-top: 14px;
-    }
-  }
-  .seperator {
-    position: relative;
-    left: 8px;
-    height: 20px;
-  }
-  .lang {
-    @include if-ltr {
-      font-family: 'Cairo', sans-serif;
-      //@include font-size(13px);
-      font-weight: 400;
-      @extend .position-relative;
-      left: 11px;
-    }
-  }
-  .link {
-    cursor: pointer;
-  }
-}
-.custom-order {
-  padding: side-values(5px 10px 5px 5px);
-  height: 37px;
 
-  .icon-custom-order {
-    @extend .d-inline-block;
-    @include large-medium-screens {
-      color: $brand-color;
-      @include font-size(24px);
-      height: 27px;
-      margin-#{$right}: 5px;
-    }
-  }
-  > span {
-    position: relative;
-    top: -8px;
-  }
-  &:hover {
-    color: $brand-color;
-  }
-}
-.header-second {
-  padding: 10px 0;
-  .brand {
-    @extend .d-inline-block;
-    img {
-      width: 100px;
-      height: auto;
-      @extend .d-block;
-    }
-  }
-  .dropdown-toggle::after {
-    color: #ecebeb;
-    border-top-width: 5px;
-    border-right-width: 5px;
-    border-left-width: 5px;
-    margin-#{$left}: 0px;
-    @extend .position-relative;
-    top: 2px;
-  }
-  //header Sing In / Join
-  .dropdown-header {
-    p {
-      font-size: 15px;
-      text-align: $left;
-      display: inline-block;
-      text-transform: none;
-      opacity: 0.6;
-      font-family: Roboto;
-      font-weight: 500;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      margin: side-values(12px 0px 5px 0px);
-      color: rgba(55, 54, 61, 0.6);
-    }
-    div {
-      display: flex;
-      p {
-        margin: 0px;
-      }
-      .join-us-text {
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 500;
-        color: $basic-gray;
-        text-transform: none;
-        margin-#{$left}: 1px;
-      }
-      i {
-        line-height: 27px;
-        margin-#{$left}: 1px;
-      }
-    }
+//header Sing In / Join
 
-    .btn {
-      background: $light-gray;
-      @extend .link-border-radius-signIn;
-      text-transform: none;
-      @include transition(all, 0.5s, ease);
-      cursor: pointer;
-    }
-    .btn-primary {
-      @extend .btn;
-      border-style: none;
-      background: $brand-color;
-      color: $white;
-      font-size: 16px;
-    }
-    .btn-facebook {
-      margin-#{$left}: 7px;
-      background-color: $light-gray;
-      color: #475993;
-      font-size: 19px;
-      line-height: 44px;
-      border-radius: side-values(0) !important;
-      box-shadow: none;
-    }
-    .btn-twitter {
-      margin-#{$left}: 7px;
-      background-color: $light-gray;
-      color: #475993;
-      font-size: 19px;
-      line-height: 44px;
-      border-radius: side-values(0px 20px 20px 0px) !important;
-      box-shadow: none;
-    }
-  }
-  .dropdown-footer {
-    li {
-      background: $light-gray;
-    }
-    p {
-      opacity: 1;
-      width: 58px;
-      height: 12px;
-      margin: 0px;
-      font-family: Roboto;
-      font-size: 12px;
-      font-weight: 500;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: $left;
-      color: $basic-gray;
-      display: inline-block;
-      text-transform: none;
-    }
-    img {
-      width: 15px;
-      height: 15px;
-    }
-  }
-}
-.user-actions {
-  padding-bottom: 0;
-  li:not(:last-child) {
-    margin-#{$right}: 16px;
-  }
-  @include large-medium-screens {
-    margin-top: 7px;
-  }
-
-  @include small-screen {
-    margin-top: 15px;
-  }
-
-  li {
-    @extend .align-middle;
-    height: 24px;
-  }
-
-  a {
-    @extend .d-inline-block;
-  }
-
-  .icon-custom-order {
-    @include small-screen {
-      @include font-size(22px);
-      height: 24px;
-      display: block;
-    }
-  }
-  .icon-search {
-    line-height: 20px;
-    @include font-size(22px);
-    @extend .d-block;
-    &:before {
-      //top: -5px;
-    }
-  }
-  .seperator {
-    height: 15px;
-    display: inline-table;
-  }
-  .user-account {
-    @include font-size(13.8px);
-    .user-img {
-      margin-#{$right}: 7px;
-      display: inline-block;
-      width: 17px;
-      img {
-        max-width: 100%;
-        display: block;
-      }
-    }
-    .seperator {
-      height: 10px;
-      margin: 0 5px;
-    }
-    b {
-      font-weight: 500;
-    }
-  }
-  .garage {
-    .garage-img {
-      margin-#{$right}: 7px;
-      display: inline-block;
-      width: 20px;
-      @extend .position-relative;
-      top: 2px;
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      div {
-        display: inline-block;
-        background: red;
-        border-radius: 50%;
-        width: 15px;
-        height: 15px;
-        color: white;
-        text-align: center;
-        position: absolute;
-        top: 0;
-        #{$right}: 0;
-        margin-top: -5px;
-        margin-#{$right}: -5px;
-      }
-    }
-    .btn-primary {
-      color: $basic-gray;
-      border-radius: 0px 20px 20px 20px;
-      background-color: $light-gray;
-      font-size: 13px;
-    }
-  }
-  .icon-heart,
-  .icon-cart {
-    @include font-size(22px);
-    height: 24px;
-    display: block;
-  }
-}
-
-#garage {
-  a:focus,
-  a:active,
-  a:hover {
-    background-color: $light-gray;
-    border-radius: side-values(0px 20px 20px 20px);
-    padding: 0px;
-  }
-  .dropdown-menu {
-    right: 0 !important;
-    left: auto !important;
-    transform: translate3d(16%, 38px, 0px) !important;
-    border-radius: side-values(0px 0px 20px 20px);
-  }
-}
-#signin {
-  a:focus,
-  a:active,
-  a:hover {
-    background-color: $light-gray;
-    border-radius: side-values(0px 20px 20px 20px);
-    padding: 0px;
-  }
-  .dropdown-menu {
-    top: 19px !important;
-    border-radius: side-values(0px 0px 20px 20px);
-  }
-}
 
 #mobile-header-details {
   button {
@@ -394,7 +341,7 @@
     line-height: normal;
     letter-spacing: normal;
     text-align: $left;
-    color: var(--basic-gray);
+    color: $basic-gray;
   }
   .setting {
     padding: 0px;
@@ -495,7 +442,6 @@
     }
     .btn {
       background: $light-gray;
-      @extend .link-border-radius-signIn;
       text-transform: none;
       @include transition(all, 0.5s, ease);
       cursor: pointer;
@@ -506,22 +452,34 @@
       background: $brand-color;
       color: $white;
       font-size: 15px;
-      width: 100px;
     }
     .btn-facebook {
       margin-#{$left}: 3px;
       background-color: $light-gray;
       color: #475993;
-      font-size: 17px;
+      font-size: 20px;
       line-height: 48px;
       border-radius: side-values(0) !important;
       box-shadow: none;
+    }
+    .btn-google{
+      margin-#{$left}: 3px;
+      background-color: $light-gray;
+      color: #475993;
+      line-height: 48px;
+      border-radius: side-values(0) !important;
+      box-shadow: none;
+      img{
+        height: 48px;
+        max-width: none;
+        width: 30px;
+      }
     }
     .btn-twitter {
       margin-#{$left}: 3px;
       background-color: $light-gray;
       color: #475993;
-      font-size: 17px;
+      font-size: 20px;
       line-height: 48px;
       border-radius: side-values(0px 20px 20px 0px) !important;
       box-shadow: none;
@@ -573,41 +531,5 @@
   }
   .btn-primary {
     background: black;
-  }
-}
-
-#Search {
-  .form-row{
-    margin-bottom: 30px;
-  }
-  input {
-    border-radius: side-values(20px 0px 20px 20px) !important;
-    border-style: none;
-    height: 55px;
-    background: #f1f1f1;
-    display: inline;
-    text-transform: none;
-  }
-  button {
-    width: 62px;
-    height: 55px;
-    box-shadow: 0px 18px 18px 0 rgba(0, 0, 0, 0.07);
-    text-align: center;
-    i {
-      font-size: 25px;
-    }
-  }
-}
-
-.default-header-bg{
-  background: linear-gradient(to #{$right}, #87363d, #37363a , #372628, #1e1b1e);
-  min-height: 105px;
-  header{
-    h1{
-      @include font-size(50px);
-      color: $white;
-      padding-top: 25px;
-      @extend .d-inline-block;
-    }
   }
 }

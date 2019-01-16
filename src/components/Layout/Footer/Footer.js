@@ -4,35 +4,35 @@ import { Link, withRouter } from "react-router-dom";
 class Footer extends Component {
   render() {
     return (
-      <section id="footer">
+      <section className="main-footer">
         <div className="container-fluid">
-          <ul className="list-unstyled row">
-            <li className="media col">
+          <ul className="qparts-options">
+            <li>
               <i className="icon-pricing" />
               <div className="media-body">
-                <h5 className="mt-0 mb-1">Low Prices</h5>
-                Price match guarantee
+                <h5>Low Prices</h5>
+                <p>Price match guarantee</p>
             </div>
             </li>
-            <li className="media col">
+            <li>
               <i className="icon-whatsapp" />
               <div className="media-body">
-                <h5 className="mt-0 mb-1">In-House Experts</h5>
-                Have a Question? Ask a Specialis
+                <h5>In-House Experts</h5>
+                <p>Have a Question? Ask a Specialis</p>
             </div>
             </li>
-            <li className="media col">
+            <li>
               <i className="icon-delivery" />
               <div className="media-body">
-                <h5 className="mt-0 mb-1">Great Delivery</h5>
-                From one to three days
+                <h5>Great Delivery</h5>
+                <p>From one to three days</p>
             </div>
             </li>
-            <li className="media col">
+            <li>
               <i className="icon-wallet" />
               <div className="media-body">
-                <h5 className="mt-0 mb-1">Easy To Pay</h5>
-                Cash on dilevry, Credit Card and Bank transefear
+                <h5>Easy To Pay</h5>
+                <p>Cash on dilevry, Credit Card and Bank transefear</p>
             </div>
             </li>
           </ul>

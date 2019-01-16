@@ -59,6 +59,7 @@
 }
 
 //box shadow
+
 @mixin box-shadow($top, $left, $blur, $color) {
   -webkit-box-shadow: $top $left $blur $color;
   -moz-box-shadow: $top $left $blur $color;
@@ -67,9 +68,9 @@
 
 //box shadow
 @mixin box-shadow-size($left, $top, $blur, $size, $color) {
-  -webkit-box-shadow: $left, $top, $blur, $size, $color;
-  -moz-box-shadow: $left, $top, $blur, $size, $color;
-  box-shadow: $left, $top, $blur, $size, $color;
+  -webkit-box-shadow: $left $top $blur $size $color;
+  -moz-box-shadow: $left $top $blur $size $color;
+  box-shadow: $left $top $blur $size $color;
 }
 
 @mixin innerbox-shadow($top, $left, $blur, $color) {

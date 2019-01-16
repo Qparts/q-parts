@@ -40,11 +40,17 @@ import SectionHeader from '../../components/UI/SectionHeader';
 import {
   quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia
 } from '../../constants';
+//Modal
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Title from '../../components/UI/Title';
+//whatsapp
+import CustomerService from '../../components/CustomerService/CustomerService';
 
 const name = 'name';
 const phone = 'phone';
 const email = 'email';
 const password = 'password';
+const garage_pupop = 'garage';
 // const vehicle = 'vehicle';
 
 
@@ -60,7 +66,8 @@ class Setting extends Component {
       AddAdressType: "",
       defaultAddress: null,
       newOrOldVechile: TAB_ONE,
-      sectionHeader: ''
+      sectionHeader: '',
+      modal: false
     }
 
   }
@@ -68,7 +75,7 @@ class Setting extends Component {
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
   }
-  
+
 
   componentDidUpdate(prevProps, prevState) {
     const { location: { pathname } } = this.props;
@@ -124,7 +131,7 @@ class Setting extends Component {
   handleShowDialog = (type, event) => {
     event.preventDefault();
 
-    this.setState({ visible: true, dialogType: type });
+    this.setState({ modal: !this.state.modal, dialogType: type });
   }
 
   handleShowGoogleMap = () => {
@@ -194,34 +201,72 @@ class Setting extends Component {
         break;
     }
   }
+  togglePopup = () =>{
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+  getDialogProps = () => {
+    const { dialogType } = this.state;
+    const { translate } = this.props;
 
+    switch (dialogType) {
+      case 'password':
+        return {
+          header: <Title
+            header={translate("dialog.updatePassword.title")}  />
+        }
+        case 'email':
+          return {
+            header: <Title
+              header={translate("dialog.updateEmail.title")}  />
+          }
+        case 'garage':
+          return {
+            header: <Title
+              header={translate("dialog.vehicle.title")}
+              subHeader={"Store vehicles in your garage and Get product recommendations"} />
+          }
+      default:
+        break;
+    }
+  }
+  handleDialog = (dialogType) => {
+    this.setState({ dialogType });
+    this.togglePopup();
+  };
   render() {
     const { translate } = this.props;
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Dialog header={translate("dialog.updateEmail.title")} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
-        <EditInfo
-          name={"email"}
-          type="text"
-          placeholder={translate("dialog.updateEmail.placeholder")}
-          onHide={this.onHide}
-          cancel={translate("dialog.updateEmail.cancel")}
-          update={translate("dialog.updateEmail.update")}
-          onSubmit={this.onEdit.bind(this, email)}
-        />
-      </Dialog>
+      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+         <ModalBody>
+           <EditInfo
+             name={"email"}
+             type="text"
+             placeholder={translate("dialog.updateEmail.placeholder")}
+             onHide={this.onHide}
+             cancel={translate("dialog.updateEmail.cancel")}
+             update={translate("dialog.updateEmail.update")}
+             onSubmit={this.onEdit.bind(this, email)}
+           />
+         </ModalBody>
+       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Dialog header={translate("dialog.updatePassword.title")} visible={this.state.visible} width="350px" modal={true} onHide={this.onHide}>
-        <ResetPassword
-          translate={translate}
-          showPhoneNo={false}
-          onHide={this.onHide}
-          onSubmit={this.onEdit.bind(this, password)}
-        />
-      </Dialog>
+      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <ResetPassword
+            translate={translate}
+            showPhoneNo={false}
+            toggle={this.togglePopup}
+            onSubmit={this.onEdit.bind(this, password)}
+          />
+        </ModalBody>
+      </Modal>
     }
-
     const addressDialog =
       <Dialog
         header={translate("dialog.address.title")}
@@ -252,22 +297,19 @@ class Setting extends Component {
         />
       </Dialog>
 
-    const garageDialog =
-      <Dialog
-        header={translate("dialog.vehicle.title")}
-        maximizable={true}
-        visible={this.state.visible}
-        positionTop={0}
-        minWidth={1000}
-        modal={true}
-        onHide={this.onHide}>
+    let garageDialog;
+    if (this.state.dialogType === garage_pupop)
+    garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
         <Vehicles
           newOrOldVechile={this.state.newOrOldVechile}
           onTabChange={this.handleChange}
+          toggle={this.togglePopup}
           displayTwoTabs={false}
         />
-      </Dialog>
-
+        </ModalBody>
+      </Modal>
     return (
       <section id="setting">
         <SectionHeader text={this.state.sectionHeader} />
@@ -285,7 +327,7 @@ class Setting extends Component {
                         name="name"
                         email="email"
                         password="password"
-                        onShowEditDialog={this.handleShowDialog}
+                        onShowEditDialog={this.handleDialog}
                         onSubmit={this.onEdit.bind(this, name)}
                         {...this.props} />
                       {dialog}
@@ -378,6 +420,13 @@ class Setting extends Component {
                   redirectTo="/setting/profile" />
 
               </Switch>
+            </div>
+            <div className="row">
+              <a className="bg-whatsapp">
+                <CustomerService
+                  messages={["Have a Question?", "Ask a Special"]}
+                  url="" />
+              </a>
             </div>
           </section>
         </div>

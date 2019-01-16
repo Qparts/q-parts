@@ -20,7 +20,7 @@ export class MobileHeader extends Component {
 					vehiclesFormat={vehiclesFormat}
 					selectedVehicle={selectedVehicle}
 					changeDefaultDirection={changeDefaultDirection} />
-				<div className="mobile-header w3-hide-large">
+				<div id="top" className="mobile-header w3-hide-large">
 					<div className="d-flex justify-content-between container-fluid">
 						<div>
 							<button className="w3-button w3-white w3-xlarge q-burger-btn" onClick={onOpenNav}>&#9776;</button>

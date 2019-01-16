@@ -1,11 +1,11 @@
 /*FONT*/
-$title-font: 'Roboto';
 $button-font: 'Roboto';
 
 //COLOR
 $basic-gray: #37363c;
 $basic-black: #222222;
 $light-gray: #f8f8f8;
+$light-gray-2: #c7c7c9;
 $dark-gray: #efeeee;
 $very-light-grey: #e2e2e2;
 $brand-color: #ed4036;
@@ -13,12 +13,14 @@ $charcoal-grey: rgba(55, 54, 60, 0.6);
 $charcoal-grey-two: rgba(55, 54, 61, 0.8);
 $charcoal-grey-two-40: rgba(55, 54, 61, 0.4);
 $charcoal-grey-80: rgba(55, 54, 60, 0.8);
+$charcoal-grey-two-80: rgba(55, 54, 61, 0.8);
 $dark-charcoal-grey : #37363c;
 $light-charcoal-grey: rgba(55, 54, 60, 0.7);
 $lighter-grey: rgba(55, 54, 61, 0.5);
 $gainsboro-color: #DCDCDC;
 $basic-white: rgba(255, 255, 255, 0.8);
 $basic-dark-white: rgba(255, 255, 255, 0.5);
+$basic-dark-white-70: rgba(255, 255, 255, 0.7);
 $very-light-pink: rgba(235, 235, 235, 0.3);
 $facebook-color: #475993;
 $twitter-color: #03a9f4;
@@ -26,6 +28,7 @@ $dark-50: rgba(39, 39, 52, 0.5);
 $dark-70: rgba(39, 39, 52, 0.7);
 $dark-80: rgba(39, 39, 52, 0.8);
 $green: #24b450;
+$input-placeholder-color: rgba(55, 54, 60, 0.7);
 //img
 $img-path: "../public/img";
 

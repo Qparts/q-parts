@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="theme-color" content="#000000">
-  <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+
+  <script src="/js/modernizr.js"></script> <!-- Modernizr -->
+
   <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -16,7 +16,12 @@
   <!-- Latest compiled and minified CSS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
     crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/mega-nav.css"> <!-- Mega Nav Resource style -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/float-label-css/1.0.2/float-label.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/tonystar/bootstrap-float-label/v4.0.0/dist/bootstrap-float-label.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
+
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -27,7 +32,7 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
   <title>Q Parts</title>
- 
+
 </head>
 <body>
   <noscript>
@@ -44,5 +49,26 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+      <script src="/js/jquery-3.3.1.min.js"></script>
+      <script src="/js/jquery.mobile.custom.min.js"></script>
+      <script src="/js/popper.min.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/main.js"></script> <!-- MEGA MENU-->
+      <script>
+        $(document).ready(function() {
+          $('.has-children').hover(function(){
+              $('.overlay').addClass('is-visible');
+          },
+          function(){
+              $('.overlay').removeClass('is-visible');
+          });
+          //nav slider
+          var next = document.getElementsByClassName("swiper-button-next")[0];
+      		var prev = document.getElementsByClassName("swiper-button-prev")[0];
+          document.getElementsByClassName("slider-nav-container")[0].appendChild(next);
+      		document.getElementsByClassName("slider-nav-container")[0].appendChild(prev);
+        });
+
+      </script>
 </body>
 </html>

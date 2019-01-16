@@ -1,10 +1,128 @@
-#render-products {
-  h1 {
-    padding-bottom: 40px;
-    @include font-size(25px);
-    font-weight: 500;
-    color: $dark-charcoal-grey;
-    text-transform: capitalize;
+.product-seperator {
+  height: 10px;
+  margin: 0 9px;
+}
+.product-review_list {
+  padding-top: 21px;
+  display: flex;
+  align-items: center;
+}
+.product-review_slide {
+  padding-top: 7px;
+  display: flex;
+  align-items: center;
+}
+.product-title {
+  @include font-size(15px);
+  font-weight: normal;
+  @include font-size(20px);
+}
+
+.product-extras {
+  opacity: 0.7;
+  font-family: Roboto;
+  @include font-size(14px);
+  font-weight: normal;
+  color: $light-charcoal-grey;
+}
+
+.product-manufacturer {
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: bold;
+  color: $dark-charcoal-grey;
+}
+
+.product-review {
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: normal;
+  line-height: 1.31;
+  color: $basic-gray;
+  padding-#{$left}: 6px;
+}
+.product-price {
+  font-family: Roboto;
+  @include font-size(20px);
+  font-weight: normal;
+  line-height: normal;
+  color: $dark-charcoal-grey;
+}
+
+.product-currency {
+  width: 16px;
+  height: 11px;
+  font-family: Roboto;
+  @include font-size(13px);
+  font-weight: normal;
+  line-height: normal;
+  color: $dark-charcoal-grey;
+}
+
+.product-buttons {
+  position: absolute;
+  width: auto;
+  display: flex;
+  top: 50%;
+  #{$left}: 50%;
+  transform: translate(-50%, -50%);
+
+  .btn-detail {
+    @extend .btn-primary;
+    transition: none;
+    &:hover,
+    &:focus {
+      background: $dark-charcoal-grey;
+      opacity: 0.8;
+    }
+    white-space: nowrap;
+    border-radius: corner-values(0 0 0 20px) !important;
+    background: $charcoal-grey-80;
+    span {
+      @include font-size(15px);
+      font-weight: normal;
+      text-transform: capitalize;
+      color: $basic-dark-white-70;
+    }
+  }
+  .btn-cart {
+    @extend .btn-primary;
+    transition: none;
+    &:hover,
+    &:focus {
+      background: $dark-charcoal-grey;
+      opacity: 0.8;
+    }
+    position: relative;
+    @include margin-left(1px);
+    background: $charcoal-grey-80;
+    border-radius: corner-values(0 20px 20px 0) !important;
+    color: $white;
+
+    span {
+      position: relative;
+      .icon-cart {
+        position: relative;
+        top: 3px;
+        @include font-size(26px);
+      }
+      .icon-plus {
+        position: absolute;
+        background: $white;
+        border-radius: 20px;
+        padding: 3px;
+        width: 15px;
+        height: 15px;
+        @include font-size(9px);
+        #{$left}: 14px;
+        color: $brand-color;
+      }
+    }
+  }
+  .product-details {
+    @include font-size(14px);
+    font-weight: normal;
+    color: $dark-70;
   }
 }
 .related-pro{

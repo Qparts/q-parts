@@ -39,7 +39,7 @@ class Vehicles extends Component {
               subHeader={translate("dialog.vehicle.subTitle")} />
           ) : null
         }
-        <Vehicle translate={translate} />
+        <Vehicle translate={translate} toggle={this.props.toggle} />
       </section>
     )
   }

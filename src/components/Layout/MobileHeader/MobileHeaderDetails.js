@@ -10,7 +10,7 @@ import { isEmpty } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { styles } from "../../../constants";
 import Select from 'react-select';
-
+import { withRouter } from "react-router-dom";
 export class MobileHeaderDetails extends Component {
     constructor(props) {
         super(props);
@@ -32,6 +32,9 @@ export class MobileHeaderDetails extends Component {
     handleChange = (vehcile, e) => {
      this.props.selectVehicleGarage(vehcile)
 
+    }
+    onSignin = () => {
+      this.props.history.push('/login')
     }
     render() {
       const shipToOptions = [
@@ -163,10 +166,13 @@ export class MobileHeaderDetails extends Component {
                                         className="btn-primary"
                                         text={translate("general.signin")}
                                         icon="icon-arrow-right"
-                                        onClick={onSignin}
+                                        onClick={() => {
+                                            this.onSignin();
+                                            onCloseNav();
+                                        }}
                                         />
                                     <a><i className="icon-facebook-logo btn-facebook"/></a>
-                                    <a><i className="icon-google-logo btn-facebook" /></a>
+                                    <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
                                     <a><i className="icon-twitter btn-twitter" style={{color:"#03a9f4"}}/></a>
                                 </div>
                                 <br />
@@ -259,4 +265,5 @@ export class MobileHeaderDetails extends Component {
     }
 }
 
-export default MobileHeaderDetails;
+const WithLayout = withRouter(MobileHeaderDetails);
+export default WithLayout;

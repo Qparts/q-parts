@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import _ from 'lodash'
 
 const Button = props => (
     <button {...props}>
@@ -10,10 +11,20 @@ const Button = props => (
 
                 <Fragment>
                     <span>{props.text}</span>
-                    <i className={props.icon}></i>
+                    {
+                        _.isEmpty(props.icons) ?
+                            <i className={props.icon}></i> :
+                            props.icons.map((icon, idx) => (
+                                <i key={idx} className={icon}></i>
+                            ))
+                    }
                 </Fragment>
         }
     </button>
 )
+
+Button.defaultProps = {
+    icons: []
+}
 
 export default Button;

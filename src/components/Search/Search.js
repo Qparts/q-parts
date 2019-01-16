@@ -18,7 +18,7 @@ class Search extends React.Component {
     // })
 
     this.props.history.push(`/listing?search-key=${this.state.searchText}`);
-    this.props.onTogglePopup();
+    this.props.toggle();
 
   }
   onChangeSearch = e => {
