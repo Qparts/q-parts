@@ -7,7 +7,7 @@ import storage from 'redux-persist/lib/storage';
 
 import reducer from './reducers';
 
-const middleware = applyMiddleware(thunk, logger);
+let middleware = applyMiddleware(thunk);
 const persistConfig = {
     key: 'root',
     storage,
@@ -15,6 +15,10 @@ const persistConfig = {
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+if (process.env.NODE_ENV === 'development') {
+    middleware = applyMiddleware(thunk, logger);
+  }
 
 /* eslint-disable no-underscore-dangle */
 export const store = createStore(

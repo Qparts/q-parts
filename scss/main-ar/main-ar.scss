@@ -1,0 +1,111 @@
+/*Direction */
+// Override default value for $dir in directional
+$dir: rtl;
+
+// Import helpers from directional
+@import "../base/directional";
+
+@import "../base/variables";
+
+// Import helpers from bootestrap
+@import "bootstrap-rtl/functions";
+@import "bootstrap-rtl/variables";
+@import "bootstrap-rtl/mixins";
+@import "bootstrap-rtl/root";
+@import "bootstrap-rtl/reboot";
+@import "bootstrap-rtl/type";
+@import "bootstrap-rtl/images";
+//@import "bootstrap-rtl/code";
+@import "bootstrap-rtl/grid";
+//@import "bootstrap-rtl/tables";
+@import "bootstrap-rtl/forms";
+//@import "bootstrap-rtl/buttons";
+@import "bootstrap-rtl/transitions";
+@import "bootstrap-rtl/dropdown";
+@import "bootstrap-rtl/button-group";
+@import "bootstrap-rtl/input-group";
+@import "bootstrap-rtl/custom-forms";
+@import "bootstrap-rtl/nav";
+@import "bootstrap-rtl/navbar";
+@import "bootstrap-rtl/card";
+//@import "bootstrap-rtl/breadcrumb";
+//@import "bootstrap-rtl/pagination";
+//@import "bootstrap-rtl/badge";
+//@import "bootstrap-rtl/jumbotron";
+//@import "bootstrap-rtl/alert";
+//@import "bootstrap-rtl/progress";
+@import "bootstrap-rtl/media";
+@import "bootstrap-rtl/list-group";
+@import "bootstrap-rtl/close";
+@import "bootstrap-rtl/modal";
+//@import "bootstrap-rtl/tooltip";
+//@import "bootstrap-rtl/popover";
+@import "bootstrap-rtl/carousel";
+@import "bootstrap-rtl/utilities";
+//@import "bootstrap-rtl/print";
+
+//select2-develop
+@import "../select2-develop/core";
+
+/* slick slider component*/
+
+@import "../modules/slick";
+/* BASE - Base styles , variables, mixins, etc*/
+@import "../base/mixins";
+@import "../base/normalize";
+@import "../base/base";
+
+/*MODULES  - Individual site components */
+@import "../modules/typography";
+@import "../modules/blocks";
+@import "../modules/buttons";
+@import "../modules/checkbox";
+@import "../modules/list-group";
+@import "../modules/components";
+@import "../modules/select";
+@import "../modules/sections";
+@import "../modules/title";
+@import "../modules/dialog";
+@import "../modules/social-media";
+@import "../modules/renderField";
+@import "../modules/selectInput";
+@import "../modules/renderFileInput";
+@import "../modules/number_picker";
+@import "../modules/product_grid_view";
+@import "../modules/product_list_view";
+@import "../modules/customer_service";
+@import "../modules/render_products";
+@import "../modules/_scroll_to_top";
+/* LAYOUTS - page layout styles */
+
+@import "../layouts/nav";
+@import "../layouts/header";
+@import "../layouts/manual-form";
+@import "../layouts/home-details";
+@import "../layouts/products";
+@import "../layouts/product";
+@import "../layouts/apps-link";
+@import "../layouts/authentication/login";
+@import "../layouts/authentication/signup";
+@import "../layouts/tyres/tyres";
+@import "../layouts/category/motor-oil";
+@import "../layouts/tyres/tyres-search";
+@import "../layouts/vehicles/vehicles";
+@import "../layouts/setting/wish-list";
+@import "../layouts/setting/setting";
+@import "../layouts/garage-popup";
+@import "../state/checkout/cart";
+@import "../state/checkout/order_summary.scss";
+@import "../layouts/quotation-request";
+@import "../layouts/send-request";
+@import "../layouts/search_result";
+@import "../layouts/authentication/forgot-password";
+@import "../layouts/authentication/confirm-signup";
+@import "../layouts/authentication/email-verification";
+@import "../layouts/footer";
+@import "../layouts/setting/profile";
+@import "../layouts/setting/reset-password";
+@import "../layouts/setting/garage";
+@import "../layouts/setting/orders";
+@import "../layouts/setting/payment";
+@import "../layouts/setting/addresses";
