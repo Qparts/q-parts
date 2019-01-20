@@ -8,23 +8,31 @@ import RouteWithSubRoutes from '../../hoc/RouteWithSubRoutes';
 import Layout from '../../components/Layout/Layout';
 
 import { isAuth } from '../../utils'
+import loadStyle from '../../config/app-style';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
 import { LOCAL_LANGUAGES } from '../../constants';
 import { selectCountry } from '../../actions/customerAction';
-// import { changeDefaultDirection } from '../../actions/customerAction';
+import { changeDefaultDirection } from '../../actions/customerAction';
 
 class Routes extends Component {
     constructor(props) {
         super(props);
-
 
         const defaultLanguage = props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
 
         props.InitializeDefaultLang(defaultLanguage);
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
+        props.changeDefaultDirection(defaultLanguage);
+        loadStyle(this.props.direction);
     }
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.direction !== this.props.direction) {
+            loadStyle(this.props.direction);
+        }
+    }
+
     render() {
         return (
             <Router>
@@ -41,7 +49,7 @@ class Routes extends Component {
                         countriesOnly={this.props.countriesOnly}
                         getCountriesOnly={this.props.getCountriesOnly}
                         selectCountry={this.props.selectCountry}
-                    // changeDefaultDirection={this.props.changeDefaultDirection}
+                        changeDefaultDirection={this.props.changeDefaultDirection}
                     >
                         <Switch>
                             {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
@@ -70,7 +78,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        // changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang))
+        changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
         InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
