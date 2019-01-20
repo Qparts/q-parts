@@ -5,6 +5,7 @@ import { SmallScreen, MediumScreen } from '../../../components/Device/index.js'
 import RenderField from '../../../components/RenderField/RenderField';
 import { connect } from 'react-redux';
 import * as validations from '../../../utils';
+import { right } from '../../../utils';
 import { getQuery } from '../../../utils';
 //Router
 import PrivateRoute from '../../../components/PrivateRoute/index.js'
@@ -33,9 +34,9 @@ class ForgotPassword extends Component {
 
     if (url === forgotPasswordUrl) {
       this.props.resetPassword(values)
-      .then(() => {
-        this.props.history.push('/');
-      });
+        .then(() => {
+          this.props.history.push('/');
+        });
     } else {
       const data = { ...values, query: getQuery(this.props.location) }
       this.props.updatePassword(data)
@@ -68,7 +69,7 @@ class ForgotPassword extends Component {
                     type={this.getLabel('text', 'password')}
                     placeholder={this.getLabel('mail@user.com', 'new password')}
                     validate={[validations.required]} />
-                  <button type="submit" className="btn-primary">Send<i className="icon-arrow-right" /></button>
+                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                 </div>
               </form>
               <div>
@@ -97,7 +98,7 @@ class ForgotPassword extends Component {
                     type={this.getLabel('text', 'password')}
                     placeholder={this.getLabel('mail@user.com', 'new password')}
                     validate={[validations.required]} />
-                  <button type="submit" className="btn-primary">Send<i className="icon-arrow-right" /></button>
+                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                 </div>
               </form>
             </div>

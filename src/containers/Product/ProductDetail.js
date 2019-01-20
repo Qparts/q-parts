@@ -23,7 +23,7 @@ import {
 } from 'reactstrap';
 
 import * as validations from '../../utils';
-import * as directional from '../../utils';
+import { right } from '../../utils';
 import _ from 'lodash';
 
 //dialog
@@ -106,7 +106,7 @@ class ProductDetail extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} />
+        return <AddProduct data={this.state.data} direction={this.props.direction}/>
       default:
         break;
     }
@@ -289,7 +289,7 @@ class ProductDetail extends Component {
       },
       productReviews: {
         btnLinkParent: {
-          float: this.state.canWriteReview ? 'none' : directional.right(this.props.direction)
+          float: this.state.canWriteReview ? 'none' : right(this.props.direction)
         }
       }
     };
@@ -464,7 +464,7 @@ class ProductDetail extends Component {
                                 className="btn-link"
                                 text={translate("product.writeReview.title")}
                                 onClick={this.handleWriteReview.bind(this, true)}
-                                icon="icon-arrow-right" />
+                                icon={`icon-arrow-${right(this.props.direction)}`} />
                               {
                                 this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
                                   <div className="review-form_header">

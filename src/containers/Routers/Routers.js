@@ -50,9 +50,10 @@ class Routes extends Component {
                         getCountriesOnly={this.props.getCountriesOnly}
                         selectCountry={this.props.selectCountry}
                         changeDefaultDirection={this.props.changeDefaultDirection}
+                        direction={this.props.direction}
                     >
                         <Switch>
-                            {routes(isAuth(this.props.token)).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                            {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
                         </Switch>
                     </Layout>
                 </Fragment>
@@ -73,6 +74,7 @@ const mapStateToProps = state => {
         translate: getTranslate(state.localize),
         countriesOnly: state.api.countriesOnly,
         error: state.networkError.error,
+        direction: state.customer.direction,
     }
 }
 

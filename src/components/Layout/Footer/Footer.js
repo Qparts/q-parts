@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { right } from '../../../utils';
 
 class Footer extends Component {
   render() {
@@ -106,7 +107,7 @@ class Footer extends Component {
                       placeholder="Enter Email"
                     />
                     <button type="submit" className="btn-primary">
-                      Subscribe <i className="icon-arrow-right" />
+                      Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} />
                     </button>
                   </form>
                 </li>

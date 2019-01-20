@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Accordion, AccordionTab } from 'primereact/components/accordion/Accordion';
 import ScrollToTop from '../../ScrollToTop';
+import { right } from '../../../utils';
 
 class Footer extends Component {
   render() {
@@ -60,7 +61,7 @@ class Footer extends Component {
                     </div>
                     <div className="col-6">
                       <button type="submit" className="btn-primary">
-                        Subscribe <i className="icon-arrow-right" />
+                        Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} />
                       </button>
                     </div>
                   </form>

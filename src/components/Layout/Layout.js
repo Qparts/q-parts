@@ -72,7 +72,7 @@ class Layout extends Component {
 
     switch (dialogType) {
       case 'vehicle':
-        return <Vehicles />
+        return <Vehicles direction={this.props.direction} />
       case 'signin':
         return <Login toggle={this.togglePopup} />
       case 'search':
@@ -86,7 +86,7 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry
+      vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry, direction
     } = this.props;
     const dialog = (
       <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -111,7 +111,8 @@ class Layout extends Component {
           onSearch={this.handleDialog.bind(this, 'search')}
           countriesOnly={countriesOnly}
           getCountriesOnly={getCountriesOnly}
-          selectCountry={selectCountry} />
+          selectCountry={selectCountry}
+          direction={direction} />
         <Header
           translate={translate}
           localize={localize}
@@ -124,11 +125,12 @@ class Layout extends Component {
           changeDefaultDirection={changeDefaultDirection}
           countriesOnly={countriesOnly}
           getCountriesOnly={getCountriesOnly}
-          selectCountry={selectCountry} />
+          selectCountry={selectCountry}
+          direction={direction} />
         {dialog}
         {this.props.children}
-        <Footer />
-        <MobileFooter />
+        <Footer direction={direction} />
+        <MobileFooter direction={direction} />
       </Fragment>
     );
   }

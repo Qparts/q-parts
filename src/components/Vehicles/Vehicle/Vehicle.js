@@ -12,6 +12,7 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
+import { right } from '../../../utils';
 
 import Checkbox from '../../UI/Checkbox';
 
@@ -41,7 +42,7 @@ class Vehicle extends Component {
   }
 
   render() {
-    const { handleSubmit, vehicles, translate } = this.props;
+    const { handleSubmit, vehicles, translate, direction } = this.props;
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,
@@ -122,7 +123,7 @@ class Vehicle extends Component {
           </div>
           <div className="footer col-12">
             <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-            <Button className="btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
+            <Button className="btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
           </div>
         </div>
       </form>

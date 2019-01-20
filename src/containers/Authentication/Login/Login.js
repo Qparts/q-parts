@@ -15,7 +15,7 @@ import { login, sendSmsCode, resetPassword, socialMediaButton } from '../../../a
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 
 import * as validations from '../../../utils';
-import { getComponentName } from '../../../utils';
+import { getComponentName, right } from '../../../utils';
 
 
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
@@ -89,7 +89,7 @@ class Login extends Component {
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
     let login = (
       <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
         <div className="form-group">
@@ -120,7 +120,7 @@ class Login extends Component {
             {translate("form.signin.forgotPassword")}
           </Link>
         </div>
-        <Button className="btn-signin" text={translate("form.signin.button")} icon="icon-arrow-right" />
+        <Button className="btn-signin" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
       </form>
     )
     return (
@@ -147,7 +147,8 @@ const mapStateToProps = (state) => {
     translate: getTranslate(state.localize),
     component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
-    selectedCountry: state.customer.selectedCountry
+    selectedCountry: state.customer.selectedCountry,
+    direction: state.customer.direction
   }
 }
 

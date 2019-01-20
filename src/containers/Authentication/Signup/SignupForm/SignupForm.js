@@ -10,6 +10,7 @@ import RenderField from '../../../../components/RenderField/RenderField';
 import './SignupForm.css';
 
 import * as validations from '../../../../utils';
+import { right } from '../../../../utils';
 
 import './SignupForm.css';
 import Button from '../../../../components/UI/Button';
@@ -41,7 +42,7 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
     return (
       <form onSubmit={this.props.handleSubmit}>
         <div className="row signup-form__two-inputs">
@@ -116,7 +117,7 @@ class SignupForm extends Component {
             className="btn-primary"
             type="submit"
             text={translate("form.signup.button")}
-            icon="icon-arrow-right" />
+            icon={`icon-arrow-${right(direction)}`} />
         </div>
       </form>
     );

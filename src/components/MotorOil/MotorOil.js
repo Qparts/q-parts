@@ -15,6 +15,7 @@ import {
 import Button from '../UI/Button';
 
 import * as validations from "../../utils";
+import { right } from "../../utils";
 
 import SelectInput from '../SelectInput/SelectInput';
 import { getTranslate } from 'react-localize-redux';
@@ -33,7 +34,7 @@ class MotorOil extends Component {
 
 	}
 	render() {
-		const { translate, handleSubmit, products, viscosity, brand } = this.props;
+		const { translate, handleSubmit, products, viscosity, brand, direction } = this.props;
 		return (
 			<Fragment>
 				<section id="motor-oil">
@@ -85,7 +86,7 @@ class MotorOil extends Component {
 												text={
 													<Fragment>
 														<span>{translate("general.search")}</span>
-														<i className="icon-arrow-right"></i>
+														<i className={`icon-arrow-${right(direction)}`}></i>
 													</Fragment>
 												}
 											/>
@@ -170,6 +171,7 @@ const mapStateToProps = state => {
 	return {
 		products: state.api.products,
 		translate: getTranslate(state.localize),
+		direction: state.customer.direction,
 	}
 }
 
