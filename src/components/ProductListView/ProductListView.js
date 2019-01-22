@@ -19,7 +19,7 @@ class ProductListView extends Component {
 			<div className="col-9 col-md-5">
 				<h5 className="product-title">{product.desc}</h5>
 				<div>
-					<span className="product-manufacturer">{product.manufacturer.name}</span>
+					<span className="product-manufacturer">{product.brand.name}</span>
 				</div>
 				<div className="product-review_list">
 					<Stars values={product.averageRating} {...starsRating} />

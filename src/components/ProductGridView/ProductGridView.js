@@ -36,7 +36,7 @@ class ProductGridView extends Component {
 				</div>
 				<div className="details-holder">
 					<span className="part-text">{product.desc}</span><br />
-					<span className="manufacturer-text">{product.manufacturer.name}</span>
+					<span className="manufacturer-text">{product.brand.name}</span>
 					<div className="product-review_slide">
 						<Stars values={product.averageRating} {...starsRating} />
 						<span className="product-review">{getLength(product.reviews)} review</span>

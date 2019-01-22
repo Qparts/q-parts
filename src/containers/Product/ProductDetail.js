@@ -232,7 +232,7 @@ class ProductDetail extends Component {
         <span className="product-item_desc">{product.desc}</span>
         <div className="product-item_manufacturer">
           <span>By</span>
-          <span>{product.manufacturer.name}</span>
+          <span>{product.brand.name}</span>
           <span>{product.productNumber}</span>
         </div>
       </div>
@@ -362,7 +362,7 @@ class ProductDetail extends Component {
                       <div className="col-12 col-md-5 product-item_image">
                         <img
                           style={commonStyles.cursor}
-                          src={"/img/product-4.jpg"}
+                          src={product.image}
                           onClick={this.showLightbox}
                           alt=""
                         />

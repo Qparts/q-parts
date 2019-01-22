@@ -26,7 +26,7 @@ class Cart extends Component {
 				quantityLabel: 'quantity',
 				image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
 				productNumber: item.product.productNumber,
-				manufacturerName: item.product.manufacturer.name
+				manufacturerName: item.product.brand.name
 			}
 		});
 		const shipToOptions = [

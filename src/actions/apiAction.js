@@ -122,13 +122,13 @@ export const findCity = (city, country) => {
 export const getOffers = (offerType) => {
   return (dispatch) => {
     if (offerType === BEST_SELLER) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/best-sellers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
 
     } else if (offerType === OFFERS) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/offers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
