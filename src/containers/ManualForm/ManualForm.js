@@ -250,7 +250,7 @@ export class ManualForm extends Component {
 									text={
 										<Fragment>
 											<span>{translate("general.searchButton")}</span>
-											<i className="icon-arrow-right"></i>
+											{/* <i className={`icon-arrow-${right(direction)}`}></i> */}
 										</Fragment>
 									}
 								/>

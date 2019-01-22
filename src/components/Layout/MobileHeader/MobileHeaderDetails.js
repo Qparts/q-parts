@@ -6,7 +6,7 @@ import Button from '../../UI/Button';
 import { connect } from 'react-redux';
 import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import { selectVehicleGarage } from '../../../actions/customerAction';
-import { isEmpty } from "../../../utils";
+import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { styles } from "../../../constants";
 import Select from 'react-select';
@@ -43,7 +43,7 @@ export class MobileHeaderDetails extends Component {
         { value: 3, label: "Jordan" }
       ];
         const { translate, localize, changeDefaultDirection, onCloseNav, setSideBarRef, setOverLay, vehiclesFormat, onAddVechile, selectedVehicle, vehicles,
-        onSignin } = this.props
+        onSignin, direction } = this.props
         return (
             <section id="mobile-header-details">
                 {!this.state.check && !this.state.checkGar ? (
@@ -165,7 +165,7 @@ export class MobileHeaderDetails extends Component {
                                         type="submit"
                                         className="btn-primary"
                                         text={translate("general.signin")}
-                                        icon="icon-arrow-right"
+                                        icon={`icon-arrow-${right(direction)}`}
                                         onClick={() => {
                                             this.onSignin();
                                             onCloseNav();
@@ -177,7 +177,7 @@ export class MobileHeaderDetails extends Component {
                                 <br />
                                 <div className="join-us">
                                   <p>{translate("dropdown.signup.message")}</p> <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
-                                  <i className="icon-arrow-right" style={styles.arrow_right}/>
+                                  <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right}/>
                                 </div>
 
                             </div>

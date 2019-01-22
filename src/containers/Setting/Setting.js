@@ -248,7 +248,7 @@ class Setting extends Component {
             header="Ad Credit Card"
             subHeader={"Secure Credit Card Payment"} />
         }
-     case 'addresses':
+      case 'addresses':
         return {
           header: <Title
             header={translate("dialog.address.title")}
@@ -290,14 +290,15 @@ class Setting extends Component {
             showPhoneNo={false}
             toggle={this.togglePopup}
             onSubmit={this.onEdit.bind(this, password)}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
     }
 
     let addressDialog;
-    if(this.state.dialogType === addresses_popup){
-      addressDialog =<Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+    if (this.state.dialogType === addresses_popup) {
+      addressDialog = <Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Address
@@ -335,6 +336,7 @@ class Setting extends Component {
             onTabChange={this.handleChange}
             toggle={this.togglePopup}
             displayTwoTabs={false}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
@@ -348,12 +350,13 @@ class Setting extends Component {
             onTabChange={this.handleChange}
             toggle={this.togglePopup}
             displayTwoTabs={false}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
     return (
       <section id="setting">
-        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate}/>
+        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
         <div className="header-settings row">
           <div>
             <i>
@@ -409,6 +412,7 @@ class Setting extends Component {
                         password="password"
                         onShowEditDialog={this.handleDialog}
                         onSubmit={this.onEdit.bind(this, name)}
+                        direction={this.props.direction}
                         {...this.props} />
                       {dialog}
                     </Fragment>
@@ -565,7 +569,8 @@ const mapStateToProps = (state) => {
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
-    addresses: state.customer.detail.addresses
+    addresses: state.customer.detail.addresses,
+    direction: state.customer.direction
   }
 }
 

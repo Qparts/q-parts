@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Button from '../UI/Button';
+import { right } from '../../utils';
 
 class OrderSummary extends Component {
     render() {
@@ -44,7 +45,7 @@ class OrderSummary extends Component {
                             type="submit"
                             className={this.props.className}
                             text={this.props.submitButton}
-                            icon="icon-arrow-right" />
+                            icon={`icon-arrow-${right('rtl')}`} />
                     </Fragment>
                 }
             </section>

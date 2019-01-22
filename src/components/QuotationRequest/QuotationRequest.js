@@ -13,6 +13,7 @@ import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import { Dialog } from '../../../node_modules/primereact/components/dialog/Dialog';
 import ShippingCity from '../ShippingCity/ShippingCity';
 import * as validations from '../../utils';
+import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
 import { addQuotationToCart } from '../../actions/cartAction';
 import _ from 'lodash';
@@ -84,7 +85,7 @@ class QuotationRequest extends Component {
 	}
 
 	render() {
-		const { handleSubmit, selectedVehicle, translate } = this.props;
+		const { handleSubmit, selectedVehicle, translate, direction } = this.props;
 		const dialog = <Dialog header={translate("dialog.shippingCity.title")} visible={this.state.visible} minWidth={500} modal={true} onHide={this.onHide}>
 			<div className="Signup-verification_number">
 				<ShippingCity
@@ -284,9 +285,9 @@ class QuotationRequest extends Component {
 										<Button type="submit" className="btn btn-primary" text={
 											<Fragment>
 												<span>{translate("general.send")}</span>
-												<i className="icon-arrow-right"></i>
+												<i className={`icon-arrow-${right(direction)}`}></i>
 											</Fragment>
-										}	 />
+										} />
 									</div>
 								</div>
 							</div>
@@ -384,6 +385,7 @@ const mapStateToProps = (state) => {
 		regions: state.api.regions,
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
+		direction: state.customer.direction
 	}
 }
 
