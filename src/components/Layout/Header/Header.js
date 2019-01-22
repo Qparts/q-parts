@@ -22,7 +22,7 @@ class Header extends Component {
 
     const {
       translate, localize, isLoggedIn, fullName, vehicles, onAddVechile,
-      onSignin, changeDefaultDirection, onSearch, getCountriesOnly
+      onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction
     } = this.props;
     return (
       <div className="main-header w3-hide-small w3-hide-medium">
@@ -93,7 +93,8 @@ class Header extends Component {
           vehicles={vehicles}
           onAddVechile={onAddVechile}
           onSignin={onSignin}
-          onSearch={onSearch} />
+          onSearch={onSearch} 
+          direction={direction}/>
       </div>
     );
   }
