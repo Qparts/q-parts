@@ -96,6 +96,8 @@ $dir: ltr;
 @import "layouts/garage-popup";
 @import "state/checkout/cart";
 @import "state/checkout/order_summary.scss";
+@import "state/checkout/checkout-shipping";
+@import "state/checkout/checkout-payment";
 @import "layouts/quotation-request";
 @import "layouts/send-request";
 @import "layouts/search_result";

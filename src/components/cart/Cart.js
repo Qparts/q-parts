@@ -132,15 +132,14 @@ class Cart extends Component {
 													<div className="col-md-3 quantity-div">
 														<h5>Quantity</h5>
 														<div class="input-group quantity">
+															<div class="input-group-append">
+																<button type="button" ><i className="icon-plus"></i></button>
+															</div>
+															<input class="form-control" disabled value="1" type="text"/>
 															<div class="input-group-prepend">
 																<button type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
-															  </div>
 													</div>
-
 													</div>
 												</div>
 											</figcaption>
@@ -191,13 +190,13 @@ class Cart extends Component {
 													<div className="col-md-3 quantity-div">
 														<h5>Quantity</h5>
 														<div class="input-group quantity">
+															<div class="input-group-append">
+																<button type="button" ><i className="icon-plus"></i></button>
+															</div>
+															<input class="form-control" disabled value="1" type="text"/>
 															<div class="input-group-prepend">
 																<button type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
-															  </div>
 													</div>
 
 													</div>
@@ -231,7 +230,7 @@ class Cart extends Component {
 											<label>Total</label><p class>20700<span>SR</span></p>
 										</li>
 									</ul>
-									<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+									<button class="btn-primary" type="button" onClick={this.handleSubmit}>Check Out<i className="icon-arrow-right"></i></button>
 								</div>
 									<a href="#"  className="media chat-div">
 										<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
@@ -245,7 +244,7 @@ class Cart extends Component {
 								<div className="banner-250 d-sm-none d-md-table">
 									<p className="">
 										Google Ad<br/>
-										250x250
+									220x220
 									</p>
 								</div>
 							</div>

@@ -165,7 +165,7 @@
     > label{
       position: absolute;
       left: 20px;
-      top: 9px;
+      top: 10px;
       color: $white;
       @include font-size(15px);
       @include opacity(0.5);
@@ -185,6 +185,7 @@
       letter-spacing: 1px;
       color: $light-gray;
       margin-#{$right}: 20px;
+      opacity: .8;
     }
   }
   //
@@ -221,12 +222,22 @@
 
     }
   }
+  .product-options{
+    .d-table-cell{
+      width: 0px;;
+
+    }
+  }
+  .order-summery{
+    header{
+      padding-top: 10px;
+    }
+  }
   .product-price{
     margin-bottom: 18px;
     margin-top: 10px;
     p{
       margin-bottom: 0;
-
     }
     .price{
       @include font-size(30px);
@@ -262,7 +273,7 @@
       margin-#{$right}: 10px;
       span{
         @extend .position-relative;
-        top: -4px;
+        top: -5px;
       }
     }
     .icon-heart{
@@ -279,6 +290,7 @@
     padding-right: 20px;
     padding-left: 20px;
     @include font-size(20px);
+    margin-bottom: 72px;
     i{
       @include font-size(23px);
       margin-#{$left}: 10px;

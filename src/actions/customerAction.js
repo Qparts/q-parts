@@ -43,6 +43,7 @@ export const ADD_RECENT_VIEWED_PRODUCTS = 'ADD_RECENT_VIEWED_PRODUCTS';
 export const ADD_WISHLIST = 'ADD_WISHLIST';
 export const DELETE_WISHLIST = 'DELETE_WISHLIST';
 export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
+export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
@@ -518,5 +519,12 @@ export const onRegistered = () => {
   return {
     type: REGISTERED,
     payload: true
+  }
+}
+
+export const completeShipping = (isCompleted) => {
+  return {
+    type: COMPLETE_SHIPPING,
+    payload: isCompleted
   }
 }
