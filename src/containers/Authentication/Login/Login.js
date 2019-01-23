@@ -120,7 +120,7 @@ class Login extends Component {
             {translate("form.signin.forgotPassword")}
           </Link>
         </div>
-        <Button className="btn-signin" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
+        <Button className="btn btn-primary btn-signin" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
       </form>
     )
     return (

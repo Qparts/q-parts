@@ -28,7 +28,7 @@ button {
 }
 
 input::placeholder {
-  @extend .q-placeholder;
+  @include q-placeholder;
 }
 
 label {
@@ -89,29 +89,3 @@ label {
 img{
   max-width: 100%;
 }
-/*
-.padding-md-left-6{
-  @include large-medium-screens{
-    @include padding-left(6px);
-  }
-}
-.padding-left-6{
-  @include padding-left(6px);
-}
-
-.padding-left-0{
-  @include padding-left(0);
-}
-
-.padding-right-0{
-  @include padding-right(0);
-}
-
-.padding-md-right-0{
-  @include large-medium-screens {
-    @include padding-right(0);
-  }
-
-
-}
-*/

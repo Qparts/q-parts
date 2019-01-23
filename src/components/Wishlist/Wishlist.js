@@ -45,7 +45,7 @@ class Wishlist extends Component {
                 ],
                 image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
                 productNumber: list.productNumber,
-                manufacturerName: list.manufacturer.name
+                manufacturerName: list.brand.name
             }
             result.push(tempWishlist)
         });

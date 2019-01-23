@@ -43,7 +43,7 @@ class resetPassword extends Component {
                     <Field name="oldPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.oldPassword")} validate={[validations.required]} />
                   </div>
                   <div>
-                    <Link className="btn-primary" to="/password/forgot-password">Forgot it?</Link>
+                    <Link className="btn btn-primary" to="/password/forgot-password">Forgot it?</Link>
                     <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required]} />
                   </div>
                 </div>
@@ -52,7 +52,7 @@ class resetPassword extends Component {
         }
 
         <div className="footer-password row">
-          <div className="shadow">
+          <div className="shadow group-shadow-div">
           </div>
           {
             !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={this.onCancle} />

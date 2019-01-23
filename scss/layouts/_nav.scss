@@ -9,7 +9,7 @@
         &:hover,
         &.selected{
           background: $light-gray;
-          @extend .link-border-radius;
+          @include link-border-radius;
         }
       }
       .selected{

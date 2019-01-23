@@ -8,7 +8,6 @@ import '../scss/main/main.scss';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
 
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'

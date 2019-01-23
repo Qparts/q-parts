@@ -89,7 +89,7 @@ class Layout extends Component {
       vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry, direction
     } = this.props;
     const dialog = (
-      <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+      <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}

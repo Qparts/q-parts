@@ -19,7 +19,7 @@
     }
   }
   .btn-primary {
-    @extend .box-shadow;
+    @include box-shadow;
   }
   .btn-back {
     text-align: $left;
@@ -127,7 +127,7 @@
   .product-item_buttons {
     padding-top: 30px;
     #number-picker {
-      @extend .box-shadow;
+      @include box-shadow;
       border-radius: corner-values(20px 0 20px 20px);
       button,
       input {
@@ -220,7 +220,7 @@
             }
           }
           .sm-seperator {
-            @extend .seperator;
+            @include seperator;
             position: absolute;
             top: 0;
             height: 100%;
@@ -231,7 +231,7 @@
             }
           }
           .h-seperator {
-            @extend .h-seperator;
+            @include h-seperator;
             position: absolute;
             left: 0;
             background: $light-gray;
@@ -262,7 +262,6 @@
               }
             }
             .group-shadow-input {
-              @extend .group-shadow-div;
               position: static;
 
               .group-buttons {
@@ -389,7 +388,7 @@
   background: white;
   form {
     .vehicle-information {
-      @extend .box-shadow;
+      @include box-shadow;
       background: white;
       .form-group {
         .css-10nd86i {
@@ -629,7 +628,6 @@
         margin-#{$left}: 9px;
       }
       .group-shadow-input {
-        @extend .group-shadow-div;
         height: 10px;
         transform: translate(-5%, 400%);
         right: 0;
@@ -663,7 +661,7 @@
     }
   }
   .vehicle-information {
-    @extend .box-shadow;
+    @include box-shadow;
     padding: 10px;
     background: white;
     p {

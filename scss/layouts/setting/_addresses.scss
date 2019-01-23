@@ -412,7 +412,7 @@
               height: auto;
               background-color: $light-gray;
               border-radius: side-values(0 0 0 20px) !important;
-              @extend .box-shadow;
+              @include box-shadow;
               width: 18%;
             }
             .btn-primary{
@@ -420,7 +420,7 @@
               width: 80%;
               border-radius: side-values(0 20px 20px 0) !important;
               height: auto;
-              @extend .box-shadow;
+              @include box-shadow;
               text-align: $right;
               text-transform: none;
               i{

@@ -41,7 +41,6 @@
     }
     a {
       i[class*='icon-'] {
-        @extend .btn-primary;
         border-radius: side-values(20px 0 20px 20px) !important;
         background-color: $basic-gray;
         border: solid $very-light-pink;
@@ -134,7 +133,6 @@
     }
     a {
       i[class*='icon-'] {
-        @extend .btn-primary;
         border-radius: side-values(20px 0 20px 20px) !important;
         background-color: $basic-gray;
         border: solid $very-light-pink;

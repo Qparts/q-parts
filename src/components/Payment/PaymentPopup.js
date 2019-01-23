@@ -96,7 +96,7 @@ class PaymentPopup extends Component {
           <div className="col-3">
             <Button className="btn btn-light" type="reset" text="Cancel" onClick={this.onCancle} />
           </div>
-          <Button className="btn-primary col-9" text="Add Card" icon={`icon-arrow-${right(direction)}`} />
+          <Button className="btn btn-primary col-9" text="Add Card" icon={`icon-arrow-${right(direction)}`} />
           </div>
         </div>
       </form>

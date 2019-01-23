@@ -26,7 +26,7 @@ class Header extends Component {
     } = this.props;
     return (
       <div className="main-header w3-hide-small w3-hide-medium">
-        <div className=" header-first">
+        <div className=" header-first border-bottom nav-icon-pl">
           <div className="container-fluid d-flex justify-content-between">
             <ul className="nav-icon-pl setting list-inline ">
               <li className="ship-country">

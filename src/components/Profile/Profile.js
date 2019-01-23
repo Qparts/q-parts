@@ -134,7 +134,7 @@ class profile extends Component {
                 type="text"
                 placeholder={translate("setting.accountSetting.access.email")}
                 hasFloatLabel />
-              <Link to="#" className="btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className={`icon-arrow-${right(direction)}`} />{translate("setting.accountSetting.access.passwordButton")}</p></Link>
+              <Link to="#" className="btn btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className={`icon-arrow-${right(direction)}`} />{translate("setting.accountSetting.access.passwordButton")}</p></Link>
             </div>
           </div>
           <br />
@@ -196,7 +196,7 @@ class profile extends Component {
           </div>
           <br />
           <div className="Profile-footer">
-            <div className="shadow"></div>
+            <div className="shadow group-shadow-div"></div>
             <button type="reset" className="btn btn-light"><p>{translate("setting.accountSetting.cancel")}</p></button>
             <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className={`icon-arrow-${right(direction)}`} /></p></button>
           </div>

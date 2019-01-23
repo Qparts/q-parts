@@ -325,7 +325,6 @@
           }
           input {
             @include font-size(18px);
-            @extend .btn-secondary;
             padding: 0;
             height: 55px;
             text-align: center;

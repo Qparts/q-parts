@@ -60,7 +60,7 @@ class Footer extends Component {
                       <input type="text" className="form-control" placeholder="Enter Email" />
                     </div>
                     <div className="col-6">
-                      <button type="submit" className="btn-primary">
+                      <button type="submit" className="btn btn-primary">
                         Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} />
                       </button>
                     </div>
