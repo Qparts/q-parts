@@ -2,7 +2,6 @@ import App from '../components/App';
 import Cart from '../components/cart/Cart';
 import VendorForm from '../components/VendorForm/VendorForm'
 import ProductResult from '../containers/ManualForm/SearchResult/SearchResult';
-import Catalog from '../containers/Catalog/Catalog';
 import Login from '../containers/Authentication/Login/Login';
 import Signup from '../containers/Authentication/Signup/Signup'
 import Logout from '../containers/Logout/Logout';
@@ -61,10 +60,6 @@ export const routes = (isAuth, direction) => [
     {
         path: "/vehicles",
         component: Vehicles,
-    },
-    {
-        path: "/catalog",
-        component: Catalog
     },
     {
         path: "/cart",

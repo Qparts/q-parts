@@ -55,7 +55,7 @@ class Signup extends Component {
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
       direction={this.props.direction} />
-    const dialog = <Modal isOpen={this.props.modal} toggle={this.props.togglePopup} >
+    const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
         <Login toggle={this.props.togglePopup} />

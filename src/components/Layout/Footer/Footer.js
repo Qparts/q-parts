@@ -106,23 +106,23 @@ class Footer extends Component {
                       className="form-control"
                       placeholder="Enter Email"
                     />
-                    <button type="submit" className="btn-primary">
+                    <button type="submit" className="btn btn-primary">
                       Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} />
                     </button>
                   </form>
                 </li>
                 <li className="contact-us">
                   <a href="#">
-                    <i className="icon-email" />
+                    <i className="icon-email btn btn-primary" />
                   </a>
                   <a href="#">
-                    <i className="icon-facebook-logo" />
+                    <i className="icon-facebook-logo btn btn-primary" />
                   </a>
                   <a href="#">
-                    <i className="icon-twitter" />
+                    <i className="icon-twitter btn btn-primary" />
                   </a>
                   <a href="#">
-                    <i className="icon-linked-in-logo" />
+                    <i className="icon-linked-in-logo btn btn-primary" />
                   </a>
                 </li>
               </ul>

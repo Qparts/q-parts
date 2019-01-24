@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { TabView, TabPanel } from 'primereact/components/tabview/TabView';
 import Button from '../UI/Button';
 import { TAB_ONE } from '../../constants';
-
-import './HelpCenter.css'
 
 class HelpCenter extends Component {
  constructor(props) {
@@ -51,7 +48,7 @@ class HelpCenter extends Component {
  render() {
   return (
    <div className="HelpCenter-container">
-    <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
+    {/* <TabView activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
      {
       this.state.mockHelpCenter.map((helpCenter, helpCenterIdx) => {
        return <TabPanel key={helpCenterIdx} header={helpCenter.tab}>
@@ -71,7 +68,7 @@ class HelpCenter extends Component {
        </TabPanel>
       })
      }
-    </TabView>
+    </TabView> */}
    </div>
   )
  }

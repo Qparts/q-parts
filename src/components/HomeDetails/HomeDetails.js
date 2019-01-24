@@ -97,7 +97,7 @@ class HomeDetails extends Component {
 											<Link to='/send'>
 												<Button
 													type="submit"
-													className="btn-primary w-sm-100"
+													className="btn btn-primary w-sm-100"
 													text={
 														<Fragment>
 															<span>{translate("general.send")}</span>
@@ -179,7 +179,7 @@ class HomeDetails extends Component {
 								</span>
 								<Button
 									type="submit"
-									className="btn-primary"
+									className="btn btn-primary"
 									text={
 										<Fragment>
 											<span>{translate("general.join")}</span>

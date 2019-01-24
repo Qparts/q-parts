@@ -92,11 +92,11 @@ class HeaderDetails extends Component {
                 <div className="dropdown-header">
                   <p>Welcome Back</p>
                   <div style={styles.btn_social}>
-                    <button type="submit" className="btn-primary" onClick={onSignin}>
+                    <button type="submit" className="btn btn-primary" onClick={onSignin}>
                       {translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} />
                     </button>
-                    <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
-                    <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
+                    <a href="#"><i className="icon-facebook-logo btn btn-facebook" /></a>
+                    <a className="btn btn-google"><img src="/img/google-icon.svg"></img></a>
                   </div>
                   <br />
                   <div style={styles.text}>
@@ -153,7 +153,7 @@ class HeaderDetails extends Component {
                     />
                   ) : (
                       <ButtonCustom
-                        className="btn-primary"
+                        className="btn btn-primary"
                         text={"Add a new vehicle"}
                         onClick={onAddVechile} />
                     )}

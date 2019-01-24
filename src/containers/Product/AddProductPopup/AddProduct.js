@@ -87,7 +87,7 @@ class AddProduct extends Component {
                   </div>
                   <div style={{ display: 'inline-block' }}>
                     <span className="product-Name">By</span>
-                    <span className="product-Name"> {this.props.data.manufacturer.name} </span>
+                    <span className="product-Name"> {this.props.data.brand.name} </span>
                     <span className="product-Number"> #{this.props.data.productNumber} </span>
                     <div className="product-rate"> <Stars values={this.props.data.averageRating} {...constant.starsRating} /></div>
 
@@ -110,7 +110,7 @@ class AddProduct extends Component {
               <div className="btn-primary sale-price col-2-sm">{this.props.data.salesPrice.toFixed(2)}<sub>SR</sub></div>
 
               <div className="btn-footer col-12">
-                <div className="group-shadow-input"></div>
+                <div className="group-shadow-input group-shadow-div"></div>
                 <button className="check-out w3-right">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                 <button className="btn-primary w3-right">Continue Shopping</button>
               </div>
@@ -179,7 +179,7 @@ class AddProduct extends Component {
                         <div className="col-12">
                           <span className="product-item_desc">{dataMobile.location.state.data.desc}</span>
                           <div className="product-item_manufacturer">
-                            <span className="product-Name"> <b>{dataMobile.location.state.data.manufacturer.name}</b> </span>
+                            <span className="product-Name"> <b>{dataMobile.location.state.data.brand.name}</b> </span>
                             <span className="product-Name"> #{dataMobile.location.state.data.productNumber} </span>
                           </div>
                         </div>

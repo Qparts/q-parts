@@ -11,14 +11,14 @@
   text-transform: capitalize;
   display: inline-block;
   width: auto;
-  @extend .position-static;
+  position: static !important;
   margin-top: -2px;
   .select__control {
     border-style: none;
     background: none;
     box-shadow: none;
     cursor: pointer;
-    @extend .position-static;
+    position: static !important;
     width: auto !important;
   }
   .css-1rtrksz{
@@ -41,7 +41,7 @@
     height: auto;
     display: block;
     border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-    @extend .box-shadow;
+    @include box-shadow;
       &::after {
     	bottom: 100%;
     	right: 10px;

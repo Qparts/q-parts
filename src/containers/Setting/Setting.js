@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Dialog } from 'primereact/components/dialog/Dialog';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 
 import Profile from '../../components/Profile/Profile';
@@ -267,7 +266,7 @@ class Setting extends Component {
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <EditInfo
@@ -282,7 +281,7 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <ResetPassword
@@ -298,7 +297,7 @@ class Setting extends Component {
 
     let addressDialog;
     if (this.state.dialogType === addresses_popup) {
-      addressDialog = <Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      addressDialog = <Modal contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Address
@@ -328,7 +327,7 @@ class Setting extends Component {
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-      garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      garageDialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Vehicles
@@ -343,7 +342,7 @@ class Setting extends Component {
 
     let paymentDialog;
     if (this.state.dialogType === payment_pupop)
-      paymentDialog = <Modal className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      paymentDialog = <Modal contentClassName="container-fluid" className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <PaymentPopup

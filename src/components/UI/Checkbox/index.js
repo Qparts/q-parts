@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Button = props => (
-        <label className="container">
+const checkbox = props => (
+        <label className="checkbox-container">
             {props.label}
             <input type="checkbox" {...props} />
             <span className={props.checked ? 'checkmark icon-checked' : 'checkmark'} />
         </label>
 )
 
-export default Button;
+export default checkbox;

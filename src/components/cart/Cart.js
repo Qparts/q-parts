@@ -97,8 +97,8 @@ class Cart extends Component {
 					<div className="container-fluid">
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-md-9">
-								<ul className=" item-list list-unstyled">
-									<li>
+								<ul className=" item-list list-unstyled overflow-xy-h">
+									<li className="bg-white">
 										<figure className="row">
 											<a href="#" className="col-3 item-img">
 												<img src="/img/oil-img-3.jpg"/>
@@ -125,19 +125,19 @@ class Cart extends Component {
 															<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
 														</div>
 														<div className="actions">
-															<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+															<a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
 															<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 														</div>
 													</div>
 													<div className="col-md-3 quantity-div">
 														<h5>Quantity</h5>
-														<div class="input-group quantity">
-															<div class="input-group-prepend">
-																<button type="button" disabled><i className="minus"></i></button>
+														<div className="input-group quantity">
+															<div className="input-group-prepend">
+																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
+															<input className="form-control" disabled value="1" type="text"/>
+																<div className="input-group-append">
+															    <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
 															  </div>
 													</div>
 
@@ -146,7 +146,7 @@ class Cart extends Component {
 											</figcaption>
 										</figure>
 									</li>
-									<li>
+									<li className="bg-white">
 										<figure className="row">
 											<a href="#" className="col-3 item-img">
 												<img src="/img/product-1.jpg"/>
@@ -184,19 +184,19 @@ class Cart extends Component {
 															<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
 														</div>
 														<div className="actions">
-															<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+															<a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
 															<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 														</div>
 													</div>
 													<div className="col-md-3 quantity-div">
 														<h5>Quantity</h5>
-														<div class="input-group quantity">
-															<div class="input-group-prepend">
-																<button type="button" disabled><i className="minus"></i></button>
+														<div className="input-group quantity">
+															<div className="input-group-prepend">
+																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
+															<input className="form-control" disabled value="1" type="text"/>
+																<div className="input-group-append">
+															    <button className="btn btn-gray" type="button" ><i className="icon-plus"></i></button>
 															  </div>
 													</div>
 
@@ -208,18 +208,18 @@ class Cart extends Component {
 								</ul>
 								<div className="row">
 									<div className="col-md-6 ml-md-auto">
-										<a href="#" className="back-shop">Continue Shopping<i className="icon-arrow-right"></i></a>
+										<a href="#" className="btn btn-gray-secondary back-shop mt-2">Continue Shopping<i className="icon-arrow-right"></i></a>
 									</div>
 								</div>
 							</div>
 
 							<div className="col-md-3">
-								<div className="order-summery">
-									<header>
+								<div className="order-summery overflow-xy-h">
+									<header className="bg-white">
 										<h2>Order Summary</h2>
 										<span>2 items in your Cart</span>
 									</header>
-									<ul className="list-unstyled">
+									<ul className="list-unstyled bg-white">
 										<li>
 											<label>Subtotal</label>
 											<p>20700<span>SR</span></p>
@@ -228,22 +228,22 @@ class Cart extends Component {
 											<label>Shipping Cost</label><p>50<span>SR</span></p>
 										</li>
 										<li>
-											<label>Total</label><p class>20700<span>SR</span></p>
+											<label>Total</label><p>20700<span>SR</span></p>
 										</li>
 									</ul>
-									<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+									<button className="btn btn-primary mt-2" type="button">Check Out<i className="icon-arrow-right"></i></button>
 								</div>
 									<a href="#"  className="media chat-div">
 										<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
-									  <div class="media-body">
+									  <div className="media-body">
 											<p>
 												<span>Have a Question?</span>
 												Ask a Specialis, In-House Experts. We know our products
 										</p>
 									  </div>
 								</a>
-								<div className="banner-250 d-sm-none d-md-table">
-									<p className="">
+								<div className="banner-250 bg-white mx-auto d-sm-none d-md-table">
+									<p className="d-table-cell">
 										Google Ad<br/>
 										250x250
 									</p>

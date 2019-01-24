@@ -236,8 +236,8 @@ class ProductDetail extends Component {
           <span>{product.productNumber}</span>
         </div>
       </div>
-      <div className="col-3 btn-wishlist pt-18">
-        <Link to="#" className="btn-primary" icon="icon-heart" />
+      <div className="col-3 btn btn-wishlist pt-18">
+        <Link to="#" className="btn btn-primary" icon="icon-heart" />
       </div>
     </div>
   }
@@ -299,7 +299,7 @@ class ProductDetail extends Component {
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -347,8 +347,8 @@ class ProductDetail extends Component {
                 <MediumScreen>
                   <div className="row top-row">
                     <div className="col-5 group-header-opacity_first">
-                      <div className="btn-back">
-                        <Link to="#" className="btn-primary" text={"back"} icon="icon-back" isReverseOrder />
+                      <div className="btn btn-back">
+                        <Link to="#" className="btn btn-primary" text={"back"} icon="icon-back" isReverseOrder />
                       </div>
                     </div>
                     <div className="col-7">
@@ -407,7 +407,7 @@ class ProductDetail extends Component {
                               />
                               <Button
                                 type="submit"
-                                className="btn-primary"
+                                className="btn btn-primary"
                                 text={translate("product.buttons.addToCart")}
                                 icon="icon-cart" />
                             </div>
@@ -476,7 +476,7 @@ class ProductDetail extends Component {
                                       validate={[validations.required]}
                                     />
                                   </div>
-                                  <div className="group-shadow-input">
+                                  <div className="group-shadow-input group-shadow-div">
                                     <Field
                                       name="review"
                                       component={RenderField}
@@ -486,12 +486,12 @@ class ProductDetail extends Component {
                                     <div className="group-buttons">
                                       <Button
                                         type="reset"
-                                        className="btn-secondary"
+                                        className="btn btn-secondary"
                                         text={translate("product.writeReview.cancel")}
                                         onClick={this.handleWriteReview.bind(this, false)} />
                                       <Button
                                         type="submit"
-                                        className="btn-primary"
+                                        className="btn btn-primary"
                                         text={translate("product.writeReview.sumbit")} />
                                     </div>
                                   </div>

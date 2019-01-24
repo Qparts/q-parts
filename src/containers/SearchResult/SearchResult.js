@@ -345,7 +345,7 @@ class SearchResult extends Component {
 											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
 										))
 									}
-									<Button text="Clear all" className="btn-gray-secondary" onClick={onClear} />
+									<Button text="Clear all" className="btn btn-gray-secondary" onClick={onClear} />
 								</div>
 							</div>
 							<div className="products-panel row">

@@ -47,7 +47,7 @@
         display: flex;
         padding: side-values(21px 100px 0 31px);
         background: $white;
-        @extend .box-shadow;
+        @include box-shadow;
         border-radius: side-values(0 0 0 20px);
         img{
           width: 60px;

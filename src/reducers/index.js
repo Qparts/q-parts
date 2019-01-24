@@ -3,7 +3,6 @@ import { reducer as formReducer } from 'redux-form'
 
 import manualOrder from './manualOrderReducer';
 import blog from './blogReducer';
-import catalog from './catalogReducer';
 import customer from './customerReducer';
 import createCommonForm from './hoc/formReducer';
 import cart from './cartReducer';
@@ -16,7 +15,6 @@ const MANUAL_FORM = 'MANUAL_FORM';
 export default combineReducers({
  manualOrder,
  blog,
- catalog,
  customer,
  cart,
  api,

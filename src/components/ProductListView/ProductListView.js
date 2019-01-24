@@ -39,8 +39,8 @@ class ProductListView extends Component {
 				</div>
 				<MediumScreen>
 					<div className="product-buttons">
-						<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
-						<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
+						<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
+						<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 					</div>
 				</MediumScreen>
 			</div>

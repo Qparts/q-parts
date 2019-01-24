@@ -14,9 +14,7 @@
 .main-header {
   .header-first {
     padding: 10px 0;
-    @extend .border-bottom;
     border-color: $light-gray;
-    @extend .nav-icon-pl;
   }
 }
 .mobile-header {
@@ -36,7 +34,7 @@
   }
 }
 .setting {
-  @extend .position-relative;
+  position: relative;
   top: 8px;
   .ship-country {
     margin-#{$right}: 0 !important;
@@ -59,9 +57,8 @@
   .lang {
     @include if-ltr {
       font-family: 'Cairo', sans-serif;
-      //@include font-size(13px);
       font-weight: 400;
-      @extend .position-relative;
+      position: relative;
       left: 11px;
     }
   }
@@ -74,7 +71,7 @@
   height: 37px;
 
   .icon-custom-order {
-    @extend .d-inline-block;
+    display: inline-block;
     @include large-medium-screens {
       color: $brand-color;
       @include font-size(24px);
@@ -93,11 +90,11 @@
 .header-second {
   padding: 10px 0;
   .brand {
-    @extend .d-inline-block;
+    display: inline-block;
     img {
       width: 100px;
       height: auto;
-      @extend .d-block;
+      display: block;
     }
   }
   .dropdown-toggle::after {
@@ -106,7 +103,7 @@
     border-right-width: 5px;
     border-left-width: 5px;
     margin-#{$left}: 0px;
-    @extend .position-relative;
+    position: relative;
     top: 2px;
   }
   //header Sing In / Join
@@ -147,13 +144,17 @@
 
     .btn {
       background: $light-gray;
-      @extend .link-border-radius-signIn;
+      border-radius: side-values(0 0px 0px 20px) !important;
       text-transform: none;
       @include transition(all, 0.5s, ease);
       cursor: pointer;
     }
     .btn-primary {
-      @extend .btn;
+      background: $light-gray;
+      border-radius: side-values(0 0px 0px 20px) !important;
+      text-transform: none;
+      @include transition(all, 0.5s, ease);
+      cursor: pointer;
       border-style: none;
       background: $brand-color;
       color: $white;
@@ -223,12 +224,12 @@
   }
 
   li {
-    @extend .align-middle;
+    vertical-align: middle;
     height: 24px;
   }
 
   a {
-    @extend .d-inline-block;
+    display: inline-block;
   }
 
   .icon-custom-order {
@@ -241,7 +242,7 @@
   .icon-search {
     line-height: 20px;
     @include font-size(22px);
-    @extend .d-block;
+    display: block;
     &:before {
       //top: -5px;
     }
@@ -274,7 +275,7 @@
       margin-#{$right}: 7px;
       display: inline-block;
       width: 20px;
-      @extend .position-relative;
+      position: relative;
       top: 2px;
       img {
         max-width: 100%;
@@ -497,15 +498,12 @@
       text-transform: none;
       margin-#{$left}: 8px;
     }
-    .btn {
+    .btn-primary {
       background: $light-gray;
-      @extend .link-border-radius-signIn;
+      border-radius: side-values(0 0px 0px 20px) !important;
       text-transform: none;
       @include transition(all, 0.5s, ease);
       cursor: pointer;
-    }
-    .btn-primary {
-      @extend .btn;
       border-style: none;
       background: $brand-color;
       color: $white;
@@ -614,7 +612,7 @@
       @include font-size(50px);
       color: $white;
       padding-top: 25px;
-      @extend .d-inline-block;
+      display: inline-block;
     }
   }
 }

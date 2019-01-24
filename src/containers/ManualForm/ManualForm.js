@@ -10,7 +10,6 @@ import {
 	change as changeFieldValue
 } from "redux-form";
 import Button from "../../components/UI/Button";
-import { Dialog } from "primereact/components/dialog/Dialog";
 import SelectInput from "../../components/SelectInput/SelectInput";
 import RenderField from "../../components/RenderField/RenderField";
 import Vehicles from "../../components/Vehicles/Vehicles";
@@ -121,22 +120,6 @@ export class ManualForm extends Component {
 			)
 		});
 
-		const dialog = (
-			<Dialog
-				header={translate("dialog.vehicle.title")}
-				maximizable={true}
-				visible={this.state.visible}
-				positionTop={0}
-				minWidth={1000}
-				modal={true}
-				onHide={this.onHide}
-			>
-				<Vehicles
-					newOrOldVechile={this.state.newOrOldVechile}
-					onTabChange={this.handleChange}
-				/>
-			</Dialog>
-		);
 
 		const alertOrderCompleted = this.props.isOrderCompleted && (
 			<div className="alert alert-success" role="alert">
@@ -258,7 +241,6 @@ export class ManualForm extends Component {
 						</div>
 					</form>
 				</div>
-				{dialog}
 			</section>
 		);
 	}
