@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Dialog } from 'primereact/components/dialog/Dialog';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 
 import Profile from '../../components/Profile/Profile';

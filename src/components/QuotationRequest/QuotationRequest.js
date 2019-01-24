@@ -10,7 +10,6 @@ import Button from '../UI/Button';
 import SectionHeader from '../UI/SectionHeader';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
-import { Dialog } from '../../../node_modules/primereact/components/dialog/Dialog';
 import ShippingCity from '../ShippingCity/ShippingCity';
 import * as validations from '../../utils';
 import { right } from '../../utils';
@@ -86,17 +85,17 @@ class QuotationRequest extends Component {
 
 	render() {
 		const { handleSubmit, selectedVehicle, translate, direction } = this.props;
-		const dialog = <Dialog header={translate("dialog.shippingCity.title")} visible={this.state.visible} minWidth={500} modal={true} onHide={this.onHide}>
-			<div className="Signup-verification_number">
-				<ShippingCity
-					translate={translate}
-					label={translate("dialog.shippingCity.label")}
-					regions={this.props.regions}
-					onHide={this.onHide}
-					onSubmit={this.onConfirmDialog}
-				/>
-			</div>
-		</Dialog>
+		// const dialog = <Dialog header={translate("dialog.shippingCity.title")} visible={this.state.visible} minWidth={500} modal={true} onHide={this.onHide}>
+		// 	<div className="Signup-verification_number">
+		// 		<ShippingCity
+		// 			translate={translate}
+		// 			label={translate("dialog.shippingCity.label")}
+		// 			regions={this.props.regions}
+		// 			onHide={this.onHide}
+		// 			onSubmit={this.onConfirmDialog}
+		// 		/>
+		// 	</div>
+		// </Dialog>
 		return (
 			<Fragment>
 				<section id="custom-header">

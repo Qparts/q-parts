@@ -4,13 +4,13 @@ import LanguageToggle from '../../../components/LanguageToggle'
 import SideBar from '../../UI/SideBar';
 import Button from '../../UI/Button';
 import { connect } from 'react-redux';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import { selectVehicleGarage } from '../../../actions/customerAction';
 import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { styles } from "../../../constants";
 import Select from 'react-select';
 import { withRouter } from "react-router-dom";
+import Radio from '../../UI/Radio';
 export class MobileHeaderDetails extends Component {
     constructor(props) {
         super(props);
@@ -209,8 +209,12 @@ export class MobileHeaderDetails extends Component {
                                      <div className="d-flex justify-content-between">
                                        <div className="div-left">
                                         <div className="col-auto">
-                                             <RadioButton value={selectedVehicle} name="vehcile" onChange={this.handleChange.bind(this, vehicle)} checked={vehicle.id === selectedVehicle.id} />
-                                          <label htmlFor="rb1">{vehicle.label}</label>
+                                        <Radio 
+                                          value={selectedVehicle} 
+                                          name="vehcile" 
+                                          onChange={this.handleChange.bind(this, vehicle)}
+                                          checked={vehicle.id === selectedVehicle.id} 
+                                          label={vehicle.label}/>
                                         </div>
                                        </div>
                                        <div className="div-right">

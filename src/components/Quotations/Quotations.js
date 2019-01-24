@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { TabView, TabPanel } from 'primereact/components/tabview/TabView';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import _ from 'lodash';
@@ -56,7 +55,7 @@ class Quotations extends Component {
       <div>
         <p>{translate("setting.quotations.title")}</p>
         <div className="Quotations-container border rounded">
-          <TabView className="Quotations-tabview" activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
+          {/* <TabView className="Quotations-tabview" activeIndex={this.state.activeIndex} onTabChange={(e) => this.setState({ activeIndex: e.index })}>
             <TabPanel header={translate("setting.quotations.pendingRequest.tab")}>
               {
                 quotationsCart.map((quotationCart, quotationKey) => {
@@ -178,7 +177,7 @@ class Quotations extends Component {
                 })
               }
             </TabPanel>
-          </TabView>
+          </TabView> */}
         </div>
       </div>
     )

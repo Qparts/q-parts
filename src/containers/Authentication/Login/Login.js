@@ -19,7 +19,7 @@ import { getComponentName, right } from '../../../utils';
 
 
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
+import Radio from '../../../components/UI/Radio';
 
 class Login extends Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Login extends Component {
 
     this.state = {
       showResetPassword: false,
-      rememberMe: ''
+      rememberMe: false
     }
   }
 
@@ -56,7 +56,7 @@ class Login extends Component {
   }
 
   handleRememberMe = e => {
-    this.setState({ rememberMe: e.value })
+    this.setState({ rememberMe: !this.state.rememberMe })
   }
 
   onResetPassword = values => {
@@ -110,8 +110,13 @@ class Login extends Component {
         </div>
         <div>
           <div>
-            <RadioButton value={true} name="rememberMe" onChange={this.handleRememberMe} checked={true === this.state.rememberMe} />
-            <label className="label-form">{translate("form.signin.rememberMe")}</label>
+            <Radio
+              value={true}
+              label={translate("form.signin.rememberMe")}
+              labelClassName="label-form"
+              name="rememberMe"
+              onChange={this.handleRememberMe}
+              checked={true === this.state.rememberMe} />
           </div>
           <Link
             className="label-form"

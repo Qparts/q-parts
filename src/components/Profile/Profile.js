@@ -7,7 +7,6 @@ import SelectInput from '../SelectInput/SelectInput';
 import * as validations from '../../utils';
 import { right } from '../../utils';
 import { AR, EN } from '../../constants';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import CustomerService from '../CustomerService/CustomerService';
 import Checkbox from '../UI/Checkbox';
 import { Link } from "react-router-dom";

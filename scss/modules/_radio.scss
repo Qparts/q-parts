@@ -1,4 +1,4 @@
-.checkbox-container {
+.radio-container {
   display: block;
   position: relative;
   padding-#{$left}: 20px;
@@ -13,7 +13,7 @@
 }
 
 /* Hide the browser's default checkbox */
-.checkbox-container input {
+.radio-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -30,7 +30,7 @@
   height: 14px;
   color: $brand-color;
   border: 1px solid $very-light-grey;
-  border-radius: 5px;
+  border-radius: 9px;
 }
 
 .icon-checked:before {
@@ -46,7 +46,7 @@
 }
 
 /* Style the checkmark/indicator */
-.checkbox-container .checkmark:after {
+.radio-container .checkmark:after {
   left: 9px;
   top: 5px;
   width: 5px;

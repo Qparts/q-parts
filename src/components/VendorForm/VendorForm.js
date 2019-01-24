@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Field, reduxForm, getFormValues } from 'redux-form';
-import { Button } from 'primereact/components/button/Button';
 import { connect } from 'react-redux'
 import SelectInput from '../SelectInput/SelectInput';
-import SelectList from '../SelectList/SelectList';
 
 import { getCountriesRegions } from '../../actions/apiAction';
 import { getTranslate } from 'react-localize-redux';
@@ -12,6 +10,7 @@ import './VendorForm.css';
 
 import _ from 'lodash';
 import * as validations from '../../utils';
+import Button from '../UI/Button';
 
 class VendorForm extends Component {
   constructor(props) {
@@ -102,7 +101,7 @@ class VendorForm extends Component {
             <Field
               label={translate("form.vendor.businessType.title")}
               name="vendorType"
-              component={SelectList}
+              component={SelectInput}
               options={VendorTypeData}
               validate={[validations.required]} />
           </div>
@@ -119,7 +118,7 @@ class VendorForm extends Component {
             <Field
               label={translate("form.vendor.partType.title")}
               name="carPart"
-              component={SelectList}
+              component={SelectInput}
               options={carPartData}
               validate={[validations.required]} />
           </div>
@@ -161,7 +160,7 @@ class VendorForm extends Component {
             <Field
               label={translate("form.vendor.deliveryService.title")}
               name="vendorType"
-              component={SelectList}
+              component={SelectInput}
               options={yesNoOptions}
               validate={[validations.required]} />
           </div>
@@ -190,7 +189,7 @@ class VendorForm extends Component {
               component={this.renderField}
               validate={[validations.required, validations.email]} />
           </div>
-          <Button label={translate("form.vendor.submit")} type="submit" />
+          <Button text={translate("form.vendor.submit")} type="submit" />
         </form>
       </div>
     )

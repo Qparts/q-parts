@@ -186,7 +186,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract(
+            loader: mainCssStyle.extract(
               Object.assign(
                 {
                   fallback: {
@@ -204,6 +204,26 @@ module.exports = {
                         sourceMap: shouldUseSourceMap,
                       },
                     },
+                    {
+                      loader: require.resolve('postcss-loader'),
+                      options: {
+                        // Necessary for external CSS imports to work
+                        // https://github.com/facebookincubator/create-react-app/issues/2677
+                        ident: 'postcss',
+                        plugins: () => [
+                          require('postcss-flexbugs-fixes'),
+                          autoprefixer({
+                            browsers: [
+                              '>1%',
+                              'last 4 versions',
+                              'Firefox ESR',
+                              'not ie < 9', // React doesn't support IE8 anyway
+                            ],
+                            flexbox: 'no-2009',
+                          }),
+                        ],
+                      },
+                    },
                   ],
                 },
                 extractTextCssPluginOptions
@@ -213,7 +233,7 @@ module.exports = {
           },
           {
             test: /main\/.*\.scss$/,
-            loader: ExtractTextPlugin.extract(
+            loader: mainStyle.extract(
               Object.assign(
                 {
                   fallback: {
@@ -243,7 +263,7 @@ module.exports = {
           },
           {
             test: /main-ar\/.*\.scss$/,
-            loader: ExtractTextPlugin.extract(
+            loader: mainArStyle.extract(
               Object.assign(
                 {
                   fallback: {
