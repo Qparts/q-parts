@@ -101,9 +101,8 @@ class ProductDetail extends Component {
     switch (dialogType) {
       case 'addProduct':
         return {
-          minWidth: '80%',
           header:
-            <h1><span>{this.state.data.quantity} Item</span> Added To Cart</h1>
+            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
         }
       default:
         break;

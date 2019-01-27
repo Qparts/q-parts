@@ -30,52 +30,6 @@ class AddProduct extends Component {
         {width > 992 ? (
           <section id="AddProduct" className="container-fluid">
             <form className="row" onSubmit={this.props.handleSubmit}>
-              <div className="vehicle-information col-12">
-                <p> Vehicle Information </p>
-                <div className="row">
-                  <div className="form-group">
-                    <div className="first-formGroup">
-                      <Field
-                        boxShadow={true}
-                        name="year"
-                        component={SelectInput}
-                        options={['1', '2']}
-                        placeholder="Select Year"
-                        validate={[validations.required]} />
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <Field
-                      name="make"
-                      component={SelectInput}
-                      options={[{ label: '1', value: '2' }]}
-                      placeholder="Select Make"
-                      validate={[validations.required]} />
-                  </div>
-                  <div className="form-group">
-                    <Field
-                      name="modla"
-                      component={SelectInput}
-                      options={[1, 2]}
-                      placeholder="Select Modal"
-                      validate={[validations.required]} />
-                  </div>
-                  <div className="col-md-3 div-last-rounded m-sm">
-                    <Field
-                      name="vin"
-                      placeholder="Vin Number or Vehicle ID image"
-                      component={RenderField}
-                      type="text"
-                      validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
-                    <Field
-                      name="vinImage"
-                      component={RenderFileInput}
-                      image='image'
-                    />
-                  </div>
-                </div>
-              </div>
-
               {this.props.data ? (<div className="row item">
                 <img
                   src={"/img/product-4.jpg"}
@@ -111,8 +65,8 @@ class AddProduct extends Component {
 
               <div className="btn-footer col-12">
                 <div className="group-shadow-input group-shadow-div"></div>
-                <button className="check-out w3-right">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
-                <button className="btn-primary w3-right">Continue Shopping</button>
+                <button className="btn check-out w3-right">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                <button className="btn btn-primary w3-right">Continue Shopping</button>
               </div>
             </form>
           </section>
@@ -125,51 +79,6 @@ class AddProduct extends Component {
                 </div>
                 <form onSubmit={this.props.handleSubmit}>
                   <div className="row">
-                    <div className="vehicle-information col-12">
-                      <p > Vehicle Information </p>
-                      <div>
-                        <div className="form-group ">
-                          <div className="first-formGroup">
-                            <Field
-                              boxShadow={true}
-                              name="year"
-                              component={SelectInput}
-                              options={['1', '2']}
-                              placeholder="Select Year"
-                              validate={[validations.required]} />
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <Field
-                            name="make"
-                            component={SelectInput}
-                            options={[{ label: '1', value: '2' }]}
-                            placeholder="Select Make"
-                            validate={[validations.required]} />
-                        </div>
-                        <div className="form-group">
-                          <Field
-                            name="modla"
-                            component={SelectInput}
-                            options={[1, 2]}
-                            placeholder="Select Modal"
-                            validate={[validations.required]} />
-                        </div>
-                      </div>
-                      <div className="col-md-12 div-last-rounded m-sm">
-                        <Field
-                          name="vin"
-                          placeholder="Vin Number or Vehicle ID image"
-                          component={RenderField}
-                          type="text"
-                          validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
-                        <Field
-                          name="vinImage"
-                          component={RenderFileInput}
-                          image='image'
-                        />
-                      </div>
-                    </div>
                     <div className="row item">
                       <img
                         src={"/img/product-4.jpg"}
