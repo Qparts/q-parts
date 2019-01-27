@@ -2,7 +2,7 @@ import { initialState } from '../initialState/apiInitialState';
 
 import {
   GET_COUNTRY_SUCCEEDED, GET_COUNTRIES_SUCCEEDED, GET_COUNTRIES_REGIONS_SUCCEEDED, GET_VEHICLE_SUCCEEDED,
-  FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_RECOMMENDATION, GET_SORTED_PRODUCTS, GET_PRODUCT,
+  FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_RECOMMENDATION, GET_SORTED_PRODUCTS,
   GET_COUNTRIES_ONLY_SUCCEEDED
 } from '../actions/apiAction';
 import { AR } from '../constants';
@@ -53,9 +53,6 @@ export default function reducer(state = initialState, action) {
 
     case GET_RECOMMENDATION:
       return { ...state, products: action.payload }
-
-    case GET_PRODUCT:
-      return { ...state, product: action.payload }
 
     default:
       return state;
