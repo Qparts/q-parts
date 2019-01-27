@@ -30,28 +30,27 @@ class CheckoutConfirmation extends Component {
         price: "200 SR"
       }
     ];
-    const headers = [
-      translate("checkout.confirm.table.items"),
-      translate("checkout.confirm.table.quantity"),
-      translate("checkout.confirm.table.price"),
-    ]
     return (
       <Fragment>
-        <div className="border rounded card card-body">
+        <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
-            <DeliveryAddress 
-            title={translate("deliveryAddress.title")} 
-            change={translate("deliveryAddress.change")} deliveryAddress={checkout.deliveryAddress} />
-            
-            <PaymentMethod 
-            title={translate("paymentMethod.title")} 
-            change={translate("paymentMethod.change")} paymentMethod={checkout.paymentMethod} />
+            <div className="col-12">
+              <div className="row">
+                <div className="col-6 delivery-address">
+                  <DeliveryAddress
+                    title={translate("deliveryAddress.title")}
+                    change={translate("deliveryAddress.change")} deliveryAddress={checkout.deliveryAddress} translate={translate} />
+                </div>
+                  <div className="col-6 payment-method">
+                    <PaymentMethod
+                      title={translate("paymentMethod.title")}
+                      change={translate("paymentMethod.change")} paymentMethod={checkout.paymentMethod} translate={translate} />
+                  </div>
+              </div>
+            </div>
           </div>
           <div className="CheckoutConfirmation_items card">
-            <Table
-              headers={headers}
-              columns={[{}]}
-            />
+            <p className="title">{translate("checkout.confirm.table.items")}</p>
             <FieldArray
               deleteText={translate("cart.table.delete")}
               name="purchasedItems"
@@ -59,8 +58,9 @@ class CheckoutConfirmation extends Component {
               component={RenderCartItem}
             />
           </div>
-          <div>
-            <Button type="button" className="btn btn-secondary" text={translate("checkout.confirm.placeOrder")} onClick={this.handleClick} />
+          <div className="footer-delivery justify-content-between row">
+            <p>By placing your order, you agree to our <span>"Terms & Conditions"</span></p>
+            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}><p>Total<p>20700<sub>SR</sub></p></p><span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right"/></span></button>
           </div>
         </div>
       </Fragment>
