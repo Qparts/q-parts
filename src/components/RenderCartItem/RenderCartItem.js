@@ -6,6 +6,8 @@ import * as validations from '../../utils';
 import NumberPicker from '../UI/NumberPicker';
 import RenderImage from '../RenderImage/RenderImage';
 // import './RenderCartItem.css';
+import { getLength } from '../../utils/array';
+import * as constant from '../../constants'
 
 export default class extends Component {
 
@@ -36,91 +38,48 @@ export default class extends Component {
                 {submitFailed && error && <span>{error}</span>}
                 {fields.map((cartItem, idx) => {
                     return <div key={idx} className="border card">
-                        <div class="row">
-                            <div className="col-3 col-md-2">
-                                <Field
-                                    name={`${cartItem}.image`}
-                                    component={RenderImage}
-                                />
-                            </div>
-                            <div className="col-9 col-md-5 pt">
-                                <div className="cart_product-details">
-                                    <Field
-                                        className="part-text"
-                                        name={`${cartItem}.itemName`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <Field
-                                        className="manufacturer-text"
-                                        name={`${cartItem}.manufacturerName`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <Field
-                                        className="part-text w-sm-100"
-                                        name={`${cartItem}.productNumber`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <div className="q-display-small quantity-small">
-                                        <Field
-                                            className="part-text"
-                                            name={`${cartItem}.quantityLabel`}
-                                            type="text"
-                                            component={RenderField}
-                                            readOnly
-                                        />
-                                        <Field
-                                            name={`${cartItem}.quantity`}
-                                            component={NumberPicker}
-                                        />
-                                    </div>
-                                    <div className="w-100">
-                                        <Field
-                                            className="sales-price"
-                                            name={`${cartItem}.price`}
-                                            readOnly
-                                            component={RenderField}
-                                        />
-                                        <Field
-                                            className="currency"
-                                            name={`${cartItem}.currency`}
-                                            readOnly
-                                            component={RenderField}
-                                        />
-                                    </div>
-                                    <Button
-                                        isReverseOrder={true}
-                                        type="button"
-                                        className="btn-secondary"
-                                        text={"Move to wishlist"}
-                                        icon="icon-heart"
-                                    />
-                                    <Button
-                                        type="button"
-                                        className="btn-secondary"
-                                        text={deleteText}
-                                        onClick={() => fields.remove(idx)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="col-md-5 pt q-hide-small">
-                                <Field
-                                    className="part-text"
-                                    name={`${cartItem}.quantityLabel`}
-                                    type="text"
-                                    component={RenderField}
-                                    readOnly
-                                />
-                                <Field
-                                    name={`${cartItem}.quantity`}
-                                    component={NumberPicker}
-                                />
-                            </div>
+                        <div className="row item">
+                        <img
+                          src={"/img/product-4.jpg"}
+                          alt=""
+                        />
+                      <div className="text-item row">
+                        <div className="d-flex justify-content-between col-12" style={{display:'flex'}}>
+                          <div style={{display:'inline-block',paddingLeft:'0px'}} className="col-8">
+                            <span className="product-Name">By</span>
+                            <span className="product-Name"> {cartItem.name} </span>
+                            <span className="product-Number"> #{cartItem.productNumber} </span>
+                          </div>
+                          <div className="product-quantity col-4">
+                            <p>Quantity</p>
+                            <Field
+                                name={`${cartItem}.quantity`}
+                                component={NumberPicker}
+                            />
+                          </div>
+                          </div>
+                        <div className="col-12">
+                          <span className="product-price">{cartItem.salesPrice}</span>
+                          <sub className="product-price-sr">SR</sub>
+                          </div>
+                          <div className="col-12">
+                            <Button
+                                isReverseOrder={true}
+                                type="button"
+                                className="btn-secondary"
+                                text={"Move to wishlist"}
+                                icon="icon-heart"
+                            />
+                            <Button
+                                type="button"
+                                className="btn-delete"
+                                text={deleteText}
+                                onClick={() => fields.remove(idx)}
+                                icon="icon-trash"
+                                isReverseOrder
+                            />
+                          </div>
+                        </div>
                         </div>
                     </div>
                 }
