@@ -18,7 +18,8 @@ class CheckoutShipping extends Component {
   constructor(props){
     super(props);
     this.state = {
-      check: false
+      check: false,
+      hasNewAddress: false
     }
   }
   componentWillMount() {
@@ -46,6 +47,15 @@ class CheckoutShipping extends Component {
   this.props.addDeliveryAddress(submit);
   this.props.history.push('/checkout/payment');
 
+ }
+ handleAddNewAddress = () => {
+   this.setState({ hasNewAddress: true });
+ }
+ handleSubmit = () => {
+   this.setState({ hasNewAddress: false });
+ }
+ cancle = () => {
+   this.setState({ hasNewAddress: false });
  }
  render() {
    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, onHide, defaultAddress, onDefaultAddress, isDelivery, addresses } = this.props;
@@ -202,84 +212,87 @@ class CheckoutShipping extends Component {
              </div>
            ) :
              <div className="Address-container">
-                 <div className="addresses-header">
+                 <div className="addresses-header justify-content-between ">
                    <p>{translate("setting.addressBook.shippingItem")}</p>
+                   <Button type="button" className="btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder/>
                  </div>
-               <form onSubmit={handleSubmit}>
-                 <div className="row no-gutters">
-                   <div className="col-12 title-address">
-                     <Field
-                       label={translate("setting.addressBook.title")}
-                       name="title"
-                       component={RenderField}
-                       type="text"
-                       placeholder={translate("setting.addressBook.title")}
-                       hasFloatLabel
-                       validate={[validations.required]} />
-                   </div>
-                     <div className="col-12 google-map">
-                       <Link to="#" onClick={onShowGoogleMap}>
-                         <img className="main-img" alt="user" src="/img/google-map.svg"/>
-                         <p>{translate("form.address.selectAddress")}</p>
-                       </Link>
-                   </div>
-                   <div className="col-md-12 address-title">
-                     <Field
-                       label={`*${translate("setting.addressBook.addressLine1")}`}
-                       name="line1"
-                       component={RenderField}
-                       type="text"
-                       placeholder={translate("setting.addressBook.addressLine1")}
-                       hasFloatLabel
-                       validate={[validations.required]} />
-                   </div>
-                   <div className="col-12 address-title">
-                     <Field
-                       label={translate("setting.addressBook.addressLine2")}
-                       name="line2"
-                       component={RenderField}
-                       type="text"
-                       placeholder={translate("setting.addressBook.addressLine2")}
-                       hasFloatLabel />
-                   </div>
-                   {renderCityRegion}
-                   <div className="phone-info col-12">
-                     <div className="row">
-                       <div className="phone-number col-6">
-                         <div className="first">
+               <form onSubmit={handleSubmit(this.handleSubmit)}>
+                 {(
+                   this.state.hasNewAddress && <div className="row no-gutters">
+                     <div className="col-12 title-address">
+                       <Field
+                         label={translate("setting.addressBook.title")}
+                         name="title"
+                         component={RenderField}
+                         type="text"
+                         placeholder={translate("setting.addressBook.title")}
+                         hasFloatLabel
+                         validate={[validations.required]} />
+                     </div>
+                       <div className="col-12 google-map">
+                         <Link to="#" onClick={onShowGoogleMap}>
+                           <img className="main-img" alt="user" src="/img/google-map.svg"/>
+                           <p>{translate("form.address.selectAddress")}</p>
+                         </Link>
+                     </div>
+                     <div className="col-md-12 address-title">
+                       <Field
+                         label={`*${translate("setting.addressBook.addressLine1")}`}
+                         name="line1"
+                         component={RenderField}
+                         type="text"
+                         placeholder={translate("setting.addressBook.addressLine1")}
+                         hasFloatLabel
+                         validate={[validations.required]} />
+                     </div>
+                     <div className="col-12 address-title">
+                       <Field
+                         label={translate("setting.addressBook.addressLine2")}
+                         name="line2"
+                         component={RenderField}
+                         type="text"
+                         placeholder={translate("setting.addressBook.addressLine2")}
+                         hasFloatLabel />
+                     </div>
+                     {renderCityRegion}
+                     <div className="phone-info col-12">
+                       <div className="row">
+                         <div className="phone-number col-6">
+                           <div className="first">
+                             <Field
+                               name="phone"
+                               component={RenderField}
+                               placeholder="+966"
+                               validate={[validations.required]} />
+                           </div>
                            <Field
-                             name="phone"
+                             name="mobile"
                              component={RenderField}
-                             placeholder="+966"
+                             placeholder={translate("form.address.phoneNumber")}
                              validate={[validations.required]} />
                          </div>
-                         <Field
-                           name="mobile"
-                           component={RenderField}
-                           placeholder={translate("form.address.phoneNumber")}
-                           validate={[validations.required]} />
-                       </div>
-                       <div className="zipCode col-6">
-                         <Field
-                           name="zipCode"
-                           component={RenderField}
-                           placeholder={translate("form.address.zipCode")}
-                           validate={[validations.required]} />
+                         <div className="zipCode col-6">
+                           <Field
+                             name="zipCode"
+                             component={RenderField}
+                             placeholder={translate("form.address.zipCode")}
+                             validate={[validations.required]} />
+                         </div>
                        </div>
                      </div>
+                     <div className="col-12 shipping-style">
+                       <Field
+                         name="shipping"
+                         component={RenderField}
+                         type="text"
+                         placeholder={translate("form.address.shippingNote")} />
+                     </div>
+                     <div className="footer col-12">
+                       <Button type="submit" className="btn btn-primary col-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right"/>
+                       <Button onClick={onHide} type="reset" className="btn btn-light col-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
+                     </div>
                    </div>
-                   <div className="col-12 shipping-style">
-                     <Field
-                       name="shipping"
-                       component={RenderField}
-                       type="text"
-                       placeholder={translate("form.address.shippingNote")} />
-                   </div>
-                   <div className="footer col-12">
-                     <Button type="submit" className="btn btn-primary col-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right"/>
-                     <Button onClick={onHide} type="reset" className="btn btn-light col-4" text={translate("form.address.buttons.cancel")} />
-                   </div>
-                 </div>
+                 )}
                  {addressItem}
                  {renderButtons}
                </form>

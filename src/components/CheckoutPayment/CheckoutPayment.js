@@ -54,6 +54,7 @@ class CheckoutPayment extends Component {
   }
 
   handleProceed = () => {
+    this.props.completePayment(true);
     this.props.history.push('/checkout/confirm')
   }
 
@@ -89,7 +90,9 @@ class CheckoutPayment extends Component {
       active: value
     })
   }
-
+  componentWillMount = () => {
+    this.props.completePayment(false);
+  }
   render() {
     const { translate } = this.props;
     const styles = {
@@ -318,7 +321,7 @@ class CheckoutPayment extends Component {
           </div>
           <div className="justify-content-between footer-payment">
             <p>You can review this order before it's final.</p>
-            <Button type="button" className="btn btn-primary" text={translate("form.address.buttons.deliver")} icon="icon-arrow-right"/>
+            <Button type="button" className="btn btn-primary" text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleProceed}/>
           </div>
         </form>
       </div>

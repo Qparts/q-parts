@@ -15,11 +15,20 @@
     }
     .Address-container{
       .addresses-header{
+        display: flex;
         margin-right: 30px;
         margin-bottom: 3px;
         background: white;
         border-radius: side-values(20px 0 0 0) !important;
         padding: 10px;
+        .btn-primary{
+          background: $light-gray;
+          text-transform: capitalize;
+          color: $black;
+          span{
+            @include margin-left(5px);
+          }
+        }
         p{
           font-family: Roboto;
           @include font-size(17px);
@@ -281,6 +290,12 @@
           }
         }
       }
+      .paymentDone{
+        border-radius: side-values(0 !important);
+        div{
+          display: none !important;
+        }
+      }
       .shippingDone{
         border-radius: side-values(0 !important);
         div{
@@ -310,6 +325,25 @@
       }
       .order{
         border-radius: side-values(0 0 20px 0);
+        div{
+          display: none !important;
+        }
+      }
+      .orderActive{
+        background: $white !important;
+        border-radius: side-values(0 0 20px 0);
+        color: $black;
+        opacity: 1 !important;
+        div{
+          display: block !important;
+          color: red;
+          position: absolute;
+          margin-left: 5%;
+          i::before{
+            background: white;
+            border-radius: 50%;
+          }
+        }
       }
       Button{
         opacity: 0.7;

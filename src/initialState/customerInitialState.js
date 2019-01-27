@@ -45,5 +45,6 @@ export const initialState = {
  wishlist: [],
  direction: 'ltr',
  registered: null,
- isShippingCompleted: false
+ isShippingCompleted: false,
+ isPaymentCompleted: false
 }

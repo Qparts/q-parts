@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate } from 'react-localize-redux';
-import { confirmUserAddress, addDeliveryAddress, addPaymentMethod, completeOrder, addAddress, completeShipping } from '../../actions/customerAction';
+import { confirmUserAddress, addDeliveryAddress, addPaymentMethod, completeOrder, addAddress, completeShipping, completePayment } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
@@ -88,8 +88,11 @@ class Checkout extends Component {
 		if(this.props.isShippingCompleted){
 			paymentClass += " paymentActive"
 			shippingClass += " shippingDone"
-		}else {
-			paymentClass = "payment"
+		}
+
+		if(this.props.isPaymentCompleted){
+			orderClass += " orderActive"
+			paymentClass += " paymentDone"
 		}
 		return (
 			<section className="checkout-container-shipping">
@@ -105,7 +108,7 @@ class Checkout extends Component {
 											<Button type="button" className={signinClass} text="Sign In" icon="icon-user" isReverseOrder/>
 											<button type="button" className={shippingClass}><i className="icon-shipping"></i> Shipping <div><i className="icon-arrow-down"/></div></button>
 											<button type="button" className={paymentClass}><i className="icon-payment"></i> Payment <div><i className="icon-arrow-down"/></div></button>
-											<Button type="button" className={orderClass} text="Order Receipt" icon="icon-delivered-step" isReverseOrder/>
+											<button type="button" className={orderClass}><i className="icon-delivered-step"></i> Order Receipt <div><i className="icon-arrow-down"/></div></button>
 									</div>
   							</div>
   						</div>
@@ -138,7 +141,7 @@ class Checkout extends Component {
 				 		}} />
 
 				 		<Route path="/checkout/payment" exact={true} render={() => {
-				 			return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} />
+				 			return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} completePayment={this.props.completePayment}/>
 				 		}} />
 
 				 		<Route path="/checkout/confirm" exact={true} render={() => {
@@ -187,7 +190,7 @@ class Checkout extends Component {
 				 		}} />
 
 				 		<Route path="/checkout/payment" exact={true} render={() => {
-				 			return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} />
+				 			return <CheckoutPayment translate={translate} addPaymentMethod={this.props.addPaymentMethod} completePayment={this.props.completePayment}/>
 				 		}} />
 
 				 		<Route path="/checkout/confirm" exact={true} render={() => {
@@ -220,7 +223,8 @@ const mapStateToProps = state => ({
 	translate: getTranslate(state.localize),
 	checkout: state.customer.checkout,
 	addresses: state.customer.detail.addresses,
-	isShippingCompleted: state.customer.isShippingCompleted
+	isShippingCompleted: state.customer.isShippingCompleted,
+	isPaymentCompleted: state.customer.isPaymentCompleted
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -233,7 +237,8 @@ const mapDispatchToProps = (dispatch) => {
 		addPaymentMethod,
 		completeOrder,
 		addAddress,
-		completeShipping
+		completeShipping,
+		completePayment
 	}, dispatch)
 }
 
