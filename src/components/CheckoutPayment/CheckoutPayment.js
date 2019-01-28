@@ -43,7 +43,8 @@ class CheckoutPayment extends Component {
       defaultCreditCard: null,
       hasRadioButton: true,
       canProceed: false,
-      active: ''
+      active: '',
+      check: false
     }
   }
 

@@ -43,7 +43,7 @@ class CheckoutShipping extends Component {
  handleDelivery = values => {
 
   const submit = _.isEmpty(values) ? this.props.defaultAddress : values
-  this.props.completeShipping(true)
+  this.props.completeShipping(true);
   this.props.addDeliveryAddress(submit);
   this.props.history.push('/checkout/payment');
 
