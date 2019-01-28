@@ -59,8 +59,8 @@ class CheckoutConfirmation extends Component {
             />
           </div>
           <div className="footer-delivery justify-content-between row">
-            <p>By placing your order, you agree to our <span>"Terms & Conditions"</span></p>
-            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}><p>Total<p>20700<sub>SR</sub></p></p><span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right"/></span></button>
+            <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
+            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}><p>{translate("checkout.payment.cash.total")}<p>20700<sub>SR</sub></p></p><span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right"/></span></button>
           </div>
         </div>
       </Fragment>

@@ -94,7 +94,7 @@
        .payment-box_item{
          background: $white;
          padding: 20px;
-         padding-bottom: 85px;
+         padding-bottom: 32%;
          .payment-box_item-label{
            display: flex;
            @include margin-left(20px);
@@ -181,17 +181,12 @@
   }
 
   .CheckoutConfirmation_items{
-    @include padding-left(14px);
-    @include padding-right(14px)
     background: none;
     border: none;
-    img{
-      @include padding-left(13px);
-    }
     .title{
-      background: $white;
-      margin-bottom: 2px;
+      background: white;
       padding: 20px;
+      margin-bottom: 2px;
       font-family: Roboto;
       @include font-size(25px);
       font-weight: normal;
@@ -199,73 +194,18 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      text-align: $left;
+      text-align: left;
       color: #37363c;
     }
-    .card{
-      margin-bottom: 2px;
-      &:last-child {
-        border-radius: side-values(0 0 20px 20px);
-        margin-bottom: 20px;
-      }
-      .item{
-        .text-item{
-          padding: 10px;
-          width: 69%;
-          .product-item_desc{
-            @include padding-left(0);
-          }
-          .product-quantity{
-            p{
-              @include margin-left(50%);
-              margin-bottom: 0px;
-            }
-            .form-control{
-              padding: 0px;
-              width: 20%;
-            }
-            .btn-positive{
-              padding: side-values(5px 15px);
-              background: $light-gray;
-            }
-            .btn-negative{
-              padding: side-values(5px 15px);
-              background: $light-gray;
-            }
-          }
-          .btn-secondary{
-            background: $light-gray;
-            span{
-              font-family: Roboto;
-              @include font-size(13px);
-              font-weight: normal;
-              font-style: normal;
-              font-stretch: normal;
-              line-height: normal;
-              letter-spacing: normal;
-              text-align: $left;
-              color: #37363c;
-              @include margin-left(6px);
-            }
-            i{
-              color: #37363d;
-            }
-          }
-          .btn-delete{
-            background: none;
-            padding-top: 0px;
-            padding-bottom: 0px;
-            border: 0px;
-            @include padding-left(0);
-            @include margin-left(10px);
-            opacity: 0.6;
-            .icon-trash{
-              @include font-size(18px);
-            }
-            span{
-              @include font-size(13px);
-              @include margin-left(2px);
-            }
+    .item-list{
+      border: none;
+      li{
+        background: $white;
+        margin-bottom: 2px;
+        padding: 20px;
+        .quantity{
+          .form-control{
+            @include margin-left(3px);
           }
         }
       }

@@ -20,7 +20,7 @@ class PaymentMethod extends Component {
           <p className="expires-date">Expires<span>04/2023</span></p>
         </div>
         <div className="payment-footer">
-         <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+         <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
         </div>
        </div>
       </div>

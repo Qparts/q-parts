@@ -35,55 +35,114 @@ export default class extends Component {
         const { fields, meta: { error, submitFailed }, deleteText } = this.props;
         return (
             <Fragment>
-                {submitFailed && error && <span>{error}</span>}
-                {fields.map((cartItem, idx) => {
-                    return <div key={idx} className="border card">
-                        <div className="row item">
-                        <img
-                          src={"/img/product-4.jpg"}
-                          alt=""
-                        />
-                      <div className="text-item row">
-                        <div className="d-flex justify-content-between col-12" style={{display:'flex'}}>
-                          <div style={{display:'inline-block',paddingLeft:'0px'}} className="col-8">
-                            <span className="product-Name">By</span>
-                            <span className="product-Name"> {cartItem.name} </span>
-                            <span className="product-Number"> #{cartItem.productNumber} </span>
+              <ul className=" item-list list-unstyled">
+                <li>
+                  <figure className="row">
+                    <a href="#" className="col-3 item-img">
+                      <img src="/img/oil-img-3.jpg"/>
+                    </a>
+                    <figcaption className="col-9">
+                      <div className="row">
+                        <div className="col-md-9 item-dis">
+                          <header>
+                            <h3><a href="#">8100 synthetic motor oil</a></h3>
+                            <h4>Motul USA <span>#Part Number</span></h4>
+                          </header>
+                          <div className="d-table product-options">
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Viscosity Grade</span></div>
+                              <div className="d-table-cell">SAE -50</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Volume</span></div>
+                              <div className="d-table-cell">1.32 Gallon</div>
+                            </div>
                           </div>
-                          <div className="product-quantity col-4">
-                            <p>Quantity</p>
-                            <Field
-                                name={`${cartItem}.quantity`}
-                                component={NumberPicker}
-                            />
+                          <div className="product-price">
+                            <p className="price">11.19 <span>sr</span></p>
+                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
                           </div>
-                          </div>
-                        <div className="col-12">
-                          <span className="product-price">{cartItem.salesPrice}</span>
-                          <sub className="product-price-sr">SR</sub>
-                          </div>
-                          <div className="col-12">
-                            <Button
-                                isReverseOrder={true}
-                                type="button"
-                                className="btn-secondary"
-                                text={"Move to wishlist"}
-                                icon="icon-heart"
-                            />
-                            <Button
-                                type="button"
-                                className="btn-delete"
-                                text={deleteText}
-                                onClick={() => fields.remove(idx)}
-                                icon="icon-trash"
-                                isReverseOrder
-                            />
+                          <div className="actions">
+                            <a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
                           </div>
                         </div>
+                        <div className="col-md-3 quantity-div">
+                          <h5>Quantity</h5>
+                          <div class="input-group quantity">
+                            <div class="input-group-append">
+                              <button type="button" ><i className="icon-plus"></i></button>
+                            </div>
+                            <input class="form-control" disabled value="1" type="text"/>
+                            <div class="input-group-prepend">
+                              <button type="button" disabled><i className="minus"></i></button>
+                            </div>
                         </div>
-                    </div>
-                }
-                )}
+                        </div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+                <li>
+                  <figure className="row">
+                    <a href="#" className="col-3 item-img">
+                      <img src="/img/product-1.jpg"/>
+                    </a>
+                    <figcaption className="col-9">
+                      <div className="row">
+                        <div className="col-md-9 item-dis">
+                          <header>
+                            <h3><a href="#">#Part Number</a></h3>
+                            <h4>Product Brand <span>Product Name</span></h4>
+                          </header>
+                          <div className="d-table product-options">
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Vechile Info</span></div>
+                              <div className="d-table-cell">
+                                2015 Ford Focus<br/>
+                                VIN number (000 000 000 000 11)
+                              </div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Fitment</span></div>
+                              <div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Made in </span></div>
+                              <div className="d-table-cell">China</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Condition</span></div>
+                              <div className="d-table-cell">New</div>
+                            </div>
+                          </div>
+                          <div className="product-price">
+                            <p className="price">11.19 <span>sr</span></p>
+                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
+                          </div>
+                          <div className="actions">
+                            <a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                          </div>
+                        </div>
+                        <div className="col-md-3 quantity-div">
+                          <h5>Quantity</h5>
+                          <div class="input-group quantity">
+                            <div class="input-group-append">
+                              <button type="button" ><i className="icon-plus"></i></button>
+                            </div>
+                            <input class="form-control" disabled value="1" type="text"/>
+                            <div class="input-group-prepend">
+                              <button type="button" disabled><i className="minus"></i></button>
+                            </div>
+                        </div>
+
+                        </div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
             </Fragment>
         )
     }

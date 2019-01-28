@@ -22,7 +22,7 @@ class DeliveryAddress extends Component {
           <Button type="button" className="btn btn-link" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
          </div>
          <span className="seperator"></span>
-         <p className="footer-delivery">Estimated delivery:  6 Aug 2018</p>
+         <p className="footer-delivery">{translate("checkout.payment.cash.estimatedDelivery")}: 6 Aug 2018</p>
         </div>
     </div>
     <p>{this.props.deliveryAddress.title}</p>

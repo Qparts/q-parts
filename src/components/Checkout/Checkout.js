@@ -75,7 +75,10 @@ class Checkout extends Component {
 			active: value
 		})
 	}
-
+	componentWillMount() {
+    this.props.completeShipping(false);
+    this.props.completePayment(false);
+	}
 	render() {
 		const { pathname } = this.props.location;
 		const canSubmitOrder = pathname === confirmationStep;
@@ -105,10 +108,10 @@ class Checkout extends Component {
   							</header>
   							<div className="col-8">
 									<div className="header-options">
-											<Button type="button" className={signinClass} text="Sign In" icon="icon-user" isReverseOrder/>
-											<button type="button" className={shippingClass}><i className="icon-shipping"></i> Shipping <div><i className="icon-arrow-down"/></div></button>
-											<button type="button" className={paymentClass}><i className="icon-payment"></i> Payment <div><i className="icon-arrow-down"/></div></button>
-											<button type="button" className={orderClass}><i className="icon-delivered-step"></i> Order Receipt <div><i className="icon-arrow-down"/></div></button>
+											<Button type="button" className={signinClass} text={translate("checkout.singInTitle")} icon="icon-user" isReverseOrder/>
+											<button type="button" className={shippingClass}><i className="icon-shipping"></i> {translate("checkout.shippingTitle")} <div><i className="icon-arrow-down"/></div></button>
+											<button type="button" className={paymentClass}><i className="icon-payment"></i> {translate("checkout.paymentTitle")} <div><i className="icon-arrow-down"/></div></button>
+											<button type="button" className={orderClass}><i className="icon-delivered-step"></i> {translate("checkout.orderTitle")} <div><i className="icon-arrow-down"/></div></button>
 									</div>
   							</div>
   						</div>

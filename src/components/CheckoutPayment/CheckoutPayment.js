@@ -93,6 +93,9 @@ class CheckoutPayment extends Component {
   componentWillMount = () => {
     this.props.completePayment(false);
   }
+  onCancle = () => {
+    this.setState({ hasNewCard: false })
+  }
   render() {
     const { translate } = this.props;
     const styles = {
@@ -110,18 +113,19 @@ class CheckoutPayment extends Component {
               check: !this.state.check
             })}
             checked={this.state.check}
-            label="Default Payment"
+            label={translate("setting.addressBook.defaultAddress")}
           />
          <div className="payment-box_item-label">
            <img className="main-img" alt="user" src="/img/visa.svg" />
            <p>SHAIMAA AHMED M SOUDY</p>
          </div>
          <div className="visa-num">
-           <p className="end-number">Number Ending <span>4871</span></p>
-           <p className="expires-date">Expires<span>04/2023</span></p>
+           <p className="end-number">{translate("checkout.payment.creditCard.endNo")} <span>4871</span></p>
+           <p className="expires-date">{translate("checkout.payment.creditCard.expires")} <span>04/2023</span></p>
          </div>
          <div className="payment-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-link" text={translate("checkout.payment.creditCard.edit")} icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
          </div>
         </div>
         <div className="col-1">
@@ -133,18 +137,18 @@ class CheckoutPayment extends Component {
               check: !this.state.check
             })}
             checked={this.state.check}
-            label="Default Payemnt"
+            label={translate("setting.addressBook.defaultAddress")}
           />
           <div className="payment-box_item-label">
             <img className="main-img" alt="user" src="/img/visa.svg" />
             <p>SHAIMAA AHMED M SOUDY</p>
           </div>
           <div className="visa-num">
-            <p className="end-number">Number Ending <span>4871</span></p>
-            <p className="expires-date">Expires<span>04/2023</span></p>
+            <p className="end-number">{translate("checkout.payment.creditCard.endNo")} <span>4871</span></p>
+            <p className="expires-date">{translate("checkout.payment.creditCard.expires")} <span>04/2023</span></p>
           </div>
          <div className="payment-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-link" text={translate("checkout.payment.creditCard.edit")} icon="icon-edit" isReverseOrder/>
           <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
          </div>
         </div>
@@ -175,6 +179,10 @@ class CheckoutPayment extends Component {
     if(this.state.active === "cash"){
       cashClass += " active";
     }
+    let cardNumber= `* ${translate("checkout.payment.creditCard.newCard.cardNo")}`;
+    let expirationDate= `* ${translate("checkout.payment.creditCard.newCard.expiration")}`;
+    let securityCode= `* ${translate("checkout.payment.creditCard.newCard.securityCode")}`;
+    let nameCard= `* ${translate("checkout.payment.creditCard.newCard.name")}`;
     return (
       <div className="border rounded card card-body row" id="checkout-payment">
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
@@ -214,8 +222,8 @@ class CheckoutPayment extends Component {
                     <div>
                       <i className="icon-secure"/>
                       <div>
-                        <h1>Your credit cards</h1>
-                        <p>Secure Credit Card Payment</p>
+                        <h1>{translate("checkout.payment.creditCard.table.card")}</h1>
+                        <p>{translate("checkout.payment.creditCard.table.secure")}</p>
                       </div>
                     </div>
                     <Button type="button" className="btn btn-primary" text={translate("checkout.payment.buttons.newCard")} onClick={this.handleAddNewCard} icon="icon-add" isReverseOrder />
@@ -226,17 +234,17 @@ class CheckoutPayment extends Component {
                         <form>
                         <div className="col-12 card-number">
                           <Field
-                            label="* Card number"
+                            label={cardNumber}
                             name="CardNumber"
                             component={RenderField}
                             type="text"
-                            placeholder="Enter Card number"
+                            placeholder={translate("checkout.payment.creditCard.newCard.enterCardNo")}
                             validate={[validations.required]} />
                         </div>
                         <div className="card-date col-12">
                           <div className="col-4 months">
                             <Field
-                              label="* Expiration date"
+                              label={expirationDate}
                               name="months"
                               component={SelectInput}
                               options={[{ label: '1', value: '2' }]}
@@ -253,7 +261,7 @@ class CheckoutPayment extends Component {
                           </div>
                           <div className="col-4">
                             <Field
-                              label="* Security Code"
+                              label={securityCode}
                               name="SecurityCode"
                               component={RenderField}
                               type="text"
@@ -263,16 +271,16 @@ class CheckoutPayment extends Component {
                         </div>
                         <div className="col-12 card-name">
                           <Field
-                            label="* Name Of Card"
+                            label={nameCard}
                             name="NameCard"
                             component={RenderField}
                             type="text"
-                            placeholder="Enter Name OF Card"
+                            placeholder={translate("checkout.payment.creditCard.newCard.enterCardName")}
                             validate={[validations.required]} />
                         </div>
                           <div className="footer col-12">
-                              <Button className="btn-primary col-3" text="Add Card" icon={"icon-arrow-right"} />
-                              <Button className="btn btn-light col-2" type="reset" text="Cancel" onClick={this.onCancle} />
+                              <Button className="btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={"icon-arrow-right"} />
+                              <Button className="btn btn-light col-2" type="reset" text={translate("checkout.payment.creditCard.newCard.cancel")} onClick={this.onCancle} />
                           </div>
                         </form>
                     </Fragment>) || ((
@@ -292,35 +300,29 @@ class CheckoutPayment extends Component {
                   this.state.renderbankTransfer) && <Fragment>
                     <div id="bank-transfer">
                       <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
-                      <p className="dis-payment">Make your payment directly into your bank account. Please use your Order ID as the payment reference. Your order won&apos;t be shipped until the funds have cleared in your account</p>
+                      <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
                       <div>
-                        <table>
-                          <tbody>
-                          <tr>
-                            <td>{translate("checkout.payment.bankTransfer.name")}</td>
-                            <td>{this.state.bankTransferInfo.bankName}</td>
-                          </tr>
-                          <tr>
-                            <td>{translate("checkout.payment.bankTransfer.holderName")}</td>
-                            <td>{this.state.bankTransferInfo.accountName}</td>
-                          </tr>
-                          <tr>
-                            <td>{translate("checkout.payment.bankTransfer.number")} </td>
-                            <td>{this.state.bankTransferInfo.accountNumber}</td>
-                          </tr>
-                          <tr>
-                            <td>{translate("checkout.payment.bankTransfer.code")}</td>
-                            <td>{this.state.bankTransferInfo.swiftCode}</td>
-                          </tr>
-                          </tbody>
-                        </table>
+                        <div className="d-table product-options">
+                          <div className="d-table-row">
+                            <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
+                            <div className="d-table-cell">Qetaa.com</div>
+                          </div>
+                          <div className="d-table-row">
+                            <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
+                            <div className="d-table-cell">01000 000 00</div>
+                          </div>
+                          <div className="d-table-row">
+                            <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.code")}</span></div>
+                            <div className="d-table-cell">#01000 000 00</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </Fragment>
               )}
           </div>
           <div className="justify-content-between footer-payment">
-            <p>You can review this order before it's final.</p>
+            <p>{translate("checkout.payment.canReview")}</p>
             <Button type="button" className="btn btn-primary" text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleProceed}/>
           </div>
         </form>
