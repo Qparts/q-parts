@@ -8,7 +8,7 @@ import { DISCONNECT } from '../../../constants';
 
 class SocialMedia extends Component {
   static defaultProps = {
-    facebook: <i className="icon-facebook-logo"></i>,
+    facebook: <i className="icon-facebook"></i>,
     google: <i className="icon-google-logo"></i>,
     twitter: <i className="icon-twitter"></i>,
   }

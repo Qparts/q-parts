@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { reduxForm, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import Button from '../UI/Button';
 import OrderSummary from '../OrderSummary/OrderSummary';
-import { getTranslate } from 'react-localize-redux';
 import SectionHeader from '../UI/SectionHeader';
-
+import { getTranslate } from 'react-localize-redux';
+import Stars from 'react-stars';
+import Swiper from 'react-id-swiper';
+import {starsRating } from '../../constants';
 import Select from 'react-select';
 import RenderProducts from '../../components/RenderProducts/RenderProducts';
 
@@ -34,17 +36,48 @@ class Cart extends Component {
       { value: 2, label: "Egypt" },
       { value: 3, label: "Jordan" }
     ];
-
+		//related Products
+		const params = {
+			containerClass: `swiper-container products-list`,
+			slidesPerView: 5,
+			spaceBetween: 30,
+			grabCursor: true,
+			lazy: true,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			},
+			breakpoints: {
+				1200: {
+					slidesPerView: 4,
+					spaceBetween: 30
+				},
+				992: {
+					slidesPerView: 4,
+					spaceBetween: 15
+				},
+				768: {
+					slidesPerView: 3,
+					spaceBetween: 15
+				},
+				576: {
+					slidesPerView: 2,
+					spaceBetween: 15
+				},
+			}
+		}
 		return (
-			<div id="cart">
+			<section>
 				<section className="default-header-bg">
 					<div className="container-fluid">
 						<div className="row">
-							<header className="col">
-								<h1>Shopping Cart</h1>
+							<header className="col cart-header">
+								<h1>
+									<span>Shopping</span> Cart<label>2 Items</label>
+									</h1>
 							</header>
-							<div className="col">
-								<div className="ship-to">
+							<div className="col-auto">
+								<div className="cart-ship-to">
 									<label>Ship to</label>
 									<Select
 										classNamePrefix="select"
@@ -57,11 +90,18 @@ class Cart extends Component {
 						</div>
 					</div>
 				</section>
-				<section className="component-background">
+				<section className="gray-bg pt-sec">
 					<div className="container-fluid">
-						<form className="row section" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-							<div className="col-md-9">
-								<ul className=" item-list list-unstyled">
+						<div className="total-sm d-lg-none d-flex align-items-stretch">
+							<div>
+												<label>Totla</label>
+												<p>20700<span className="currency">SR</span></p>
+										</div>
+							<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+							</div>
+						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+							<div className="col-lg-9">
+								<ul className="cart-items list-unstyled">
 									<li>
 										<figure className="row">
 											<a href="#" className="col-3 item-img">
@@ -84,27 +124,40 @@ class Cart extends Component {
 																<div className="d-table-cell">1.32 Gallon</div>
 															</div>
 														</div>
-														<div className="product-price">
+														<div className="cart-quantity d-block d-lg-none">
+															<h5>Quantity</h5>
+															<div class="input-group quantity">
+																<div class="input-group-prepend">
+																	<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																</div>
+																<input class="form-control" disabled value="1" type="text"/>
+																<div class="input-group-append">
+																	<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																</div>
+															</div>
+														</div>
+														<div className="cart-product-price">
 															<p className="price">11.19 <span>sr</span></p>
 															<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
 														</div>
-														<div className="actions">
+														<div className="cart-actions">
 															<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
 															<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 														</div>
 													</div>
-													<div className="col-md-3 quantity-div">
-														<h5>Quantity</h5>
-														<div class="input-group quantity">
-															<div class="input-group-prepend">
-																<button type="button" disabled><i className="minus"></i></button>
-															</div>
-															<input class="form-control" disabled value="1" type="text"/>
+													<div className="col-md-3">
+														<div className="cart-quantity d-none d-lg-block">
+															<h5>Quantity</h5>
+															<div class="input-group quantity">
+																<div class="input-group-prepend">
+																	<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																</div>
+																<input class="form-control" disabled value="1" type="text"/>
 																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
-															  </div>
-													</div>
-
+																	<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																</div>
+															</div>
+														</div>
 													</div>
 												</div>
 											</figcaption>
@@ -127,106 +180,237 @@ class Cart extends Component {
 																<div className="d-table-cell"><span>Vechile Info</span></div>
 																<div className="d-table-cell">
 																	2015 Ford Focus<br/>
-																	VIN number (000 000 000 000 11)
-																</div>
-															</div>
-															<div className="d-table-row">
-																<div className="d-table-cell"><span>Fitment</span></div>
-																<div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
-															</div>
-															<div className="d-table-row">
-																<div className="d-table-cell"><span>Made in </span></div>
-																<div className="d-table-cell">China</div>
-															</div>
-															<div className="d-table-row">
-																<div className="d-table-cell"><span>Condition</span></div>
-																<div className="d-table-cell">New</div>
+																VIN number (000 000 000 000 11)
 															</div>
 														</div>
-														<div className="product-price">
-															<p className="price">11.19 <span>sr</span></p>
-															<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
+														<div className="d-table-row">
+															<div className="d-table-cell"><span>Fitment</span></div>
+															<div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
 														</div>
-														<div className="actions">
-															<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-															<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+														<div className="d-table-row">
+															<div className="d-table-cell"><span>Made in </span></div>
+															<div className="d-table-cell">China</div>
+														</div>
+														<div className="d-table-row">
+															<div className="d-table-cell"><span>Condition</span></div>
+															<div className="d-table-cell">New</div>
 														</div>
 													</div>
-													<div className="col-md-3 quantity-div">
+													<div className="cart-quantity d-block d-lg-none">
 														<h5>Quantity</h5>
 														<div class="input-group quantity">
 															<div class="input-group-prepend">
-																<button type="button" disabled><i className="minus"></i></button>
+																<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
 															<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
-															    <button type="button" ><i className="icon-plus"></i></button>
-															  </div>
+															<div class="input-group-append">
+																<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+															</div>
+														</div>
 													</div>
-
+													<div className="cart-product-price">
+														<p className="price">11.19 <span>sr</span></p>
+														<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
+													</div>
+													<div className="cart-actions">
+														<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+														<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 													</div>
 												</div>
-											</figcaption>
-										</figure>
-									</li>
-								</ul>
+												<div className="col-md-3">
+													<div className="cart-quantity d-none d-lg-block">
+														<h5>Quantity</h5>
+														<div class="input-group quantity">
+															<div class="input-group-prepend">
+																<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+															</div>
+															<input class="form-control" disabled value="1" type="text"/>
+															<div class="input-group-append">
+																<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</figcaption>
+									</figure>
+								</li>
+							</ul>
 								<div className="row">
 									<div className="col-md-6 ml-md-auto">
-										<a href="#" className="back-shop">Continue Shopping<i className="icon-arrow-right"></i></a>
+										<a href="#" className="cart-back">Continue Shopping<i className="icon-arrow-right"></i></a>
 									</div>
 								</div>
 							</div>
-
-							<div className="col-md-3">
-								<div className="order-summery">
-									<header>
-										<h2>Order Summary</h2>
-										<span>2 items in your Cart</span>
-									</header>
-									<ul className="list-unstyled">
-										<li>
-											<label>Subtotal</label>
-											<p>20700<span>SR</span></p>
-										</li>
-										<li>
-											<label>Shipping Cost</label><p>50<span>SR</span></p>
-										</li>
-										<li>
-											<label>Total</label><p class>20700<span>SR</span></p>
-										</li>
-									</ul>
-									<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
-								</div>
-									<a href="#"  className="media chat-div">
-										<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
-									  <div class="media-body">
-											<p>
-												<span>Have a Question?</span>
-												Ask a Specialis, In-House Experts. We know our products
-										</p>
-									  </div>
-								</a>
-								<div className="banner-250 d-sm-none d-md-table">
-									<p className="">
-										Google Ad<br/>
-										250x250
+							<div className="col-lg-3">
+						<div className="order-summery">
+								<header>
+									<h2>Order Summary</h2>
+									<span>2 items in your Cart</span>
+								</header>
+								<ul className="list-unstyled">
+									<li>
+										<label>Subtotal</label>
+										<p>20700<span>SR</span></p>
+									</li>
+									<li>
+										<label>Shipping Cost</label><p>50<span>SR</span></p>
+									</li>
+									<li>
+										<label>Total</label><p class>20700<span>SR</span></p>
+									</li>
+								</ul>
+								<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+							</div>
+						<a href="#"  className="media chat-div">
+								<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
+								<div class="media-body">
+									<p>
+										<span>Have a Question?</span>
+										Ask a Specialis, In-House Experts. We know our products
 									</p>
 								</div>
+							</a>
+						<div className="banner-250 d-none d-lg-table">
+								<p className="">
+										Google Ad<br/>
+									250x250
+								</p>
 							</div>
+					</div>
 						</form>
-						<div className="row section">
-							<div className="col related-pro">
-								<header>
-									<h3>Products Related To Items In Your Cart</h3>
-								</header>
-									<RenderProducts/>
+						<div className="row pt-sec">
+							<div className="col recommended-product">
+								<h3>Products Related To Items In Your Cart</h3>
+								<Swiper {...params}>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-1.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">Air Fuel Ratio Sensor</h5>
+												<ul className="list-inline product-info">
+													<li><strong>Bosch</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p className="price">20 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-2.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">8100 Synthetic Motor Oil</h5>
+													<ul className="list-inline product-info">
+														<li><strong>Motul USA</strong></li>
+														<li>#Part Num</li>
+													</ul>
+													<div className="rating">
+														<Stars values={1} {...starsRating} />
+														<span>0 review</span>
+													</div>
+												<p className="price">263 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-3.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">GM Original Equipment EGR....</h5>
+													<ul className="list-inline product-info">
+														<li><strong>ACDelco</strong></li>
+														<li>#Part Num</li>
+													</ul>
+													<div className="rating">
+														<Stars values={1} {...starsRating} />
+														<span>0 review</span>
+													</div>
+												<p className="price">263 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">NT05</h5>
+													<ul className="list-inline product-info">
+														<li><strong>NITTO</strong></li>
+														<li>#Part Num</li>
+													</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p className="price">500 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">NT05</h5>
+													<ul className="list-inline product-info">
+														<li><strong>NITTO</strong></li>
+														<li>#Part Num</li>
+													</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p className="price">500 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-1.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">Air Fuel Ratio Sensor</h5>
+												<ul className="list-inline product-info">
+													<li><strong>Bosch</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p className="price">20 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+									<div>
+										<Link to="/" class="card">
+											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
+											<div class="card-body">
+												<h5 class="card-title">NT05</h5>
+													<ul className="list-inline product-info">
+														<li><strong>NITTO</strong></li>
+														<li>#Part Num</li>
+													</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p className="price">500 <span>sr</span></p>
+											</div>
+										</Link>
+									</div>
+								</Swiper>
+								<div className="swiper-left"></div>
 							</div>
 						</div>
 					</div>
 				</section>
+			</section>
 
 
-			</div>
 		);
 	}
 }

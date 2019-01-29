@@ -1,114 +1,43 @@
-#mobile-footer{
-  @include large-screen {
-    display: none;
-  }
-  padding-top: 49px;
-  background: $basic-gray;
-
-  li{
-    @include font-size(16px);
-    padding-bottom: 5px;
-  }
-
-  a,
-  p {
-    color: $basic-dark-white;
-  }
-
-  h5,
-  span {
-    color: $basic-white;
-    @include font-size(15px);
-  }
-
-  .form-control {
-    background: $basic-gray;
-    color: $basic-white;
-    border-radius: 20px 0 20px 20px;
-    border-color: $very-light-pink;
-  }
-
-  .form-inline {
-    input {
-      width: 100%;
-      margin-right: 11px;
-    }
-  }
-
-  .list-unstyled {
-    .contact-us {
-      margin-top: 15px;
-    }
-    a {
-      i[class*='icon-'] {
-        @extend .btn-primary;
-        border-radius: side-values(20px 0 20px 20px) !important;
-        background-color: $basic-gray;
-        border: solid $very-light-pink;
-        opacity: 0.4;
-        margin-right: 10px;
-        @include font-size(20px);
-      }
-    }
-  }
-
-  hr {
-    width: 1111px;
-    height: 1px;
-    opacity: 0.1;
-    background-color: $basic-white;
-  }
-
-  button {
-    text-transform: capitalize;
-  }
-
-  .media-body {
-    margin-left: 11px;
-    color: $basic-dark-white;
-    @include font-size(14px);
-  }
-  .media {
-    color: $basic-dark-white;
-    i {
-      @include font-size(35px);
-    }
-  }
-
-  .apps-link {
-    i {
-      @include font-size(18px);
-      margin-left: 15px;
-    }
-  }
-
-
-  .accordion-header, .ui-accordion-content{
-    background: none;
-    border: none;
-  }
-}
-
 .main-footer{
   padding-top: 50px;
   background: $basic-gray;
-  .qparts-options{
+  color: $white;
+  @include media-breakpoint-down(md){
+    padding-top: 20px;
+  }
+  h5{
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+}
+.qparts-benefit{
     @extend .list-unstyled;
-    @extend .row;
     @extend .justify-content-center;
-    li{
-      @extend .col-auto;
-      @extend .align-items-center;
-      @extend .media;
-      i{
+    @include make-row();
+    padding-bottom: 20px;
+    @include media-breakpoint-down(md){
+      display: none;
+    };
+    i{
+        padding-#{$right}: 15px;
+        @include opacity(0.5);
         &.icon-pricing{
-          @include font-size(25px);
+          @include font-size(42px);
+          margin-right: -6px;
+          height: 40px;
+          &::before{
+            top: -1px;
+          }
         }
         &.icon-whatsapp{
           @include font-size(30px);
         }
         &.icon-delivery{
           @include font-size(39px);
+          height: 40px;
+          &::before{
+            top: -5px;
+          }
         }
         &.icon-wallet{
           @include font-size(30px);
@@ -117,82 +46,193 @@
       .media-body{
         h5{
           @include font-size(17px);
-          @extend .text-uppercase;
-          font-weight: 300;
+          text-transform: uppercase;
+          margin-bottom: 2px;
         }
         p{
           @include font-size(14px);
-          @extend .mb-0;
           @include opacity(0.5);
-          ;
+          margin-bottom: 0;
+          span{
+            @include nav-sm-media{
+              display: block;
+            };
+          }
+        }
+      }
+}
+  .site-map{
+    padding-top: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 25px;
+    margin-bottom: 0;
+      @include media-breakpoint-down(md){
+      border-top-width: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    ul li{
+      margin-bottom: 2px;
+    }
+    h5{
+      @include font-size(15px);
+      margin-bottom: 11px;
+    }
+    a{
+      color: $white;
+      @include font-size(14px);
+      @include opacity(0.5);
+      &:hover{
+        @include opacity(0.9);
+      }
+    }
+    .col-auto{
+      @include media-breakpoint-down(md){
+        display: none;
+      };
+    }
+  }
+  .subscribe {
+    margin-bottom: 25px;
+    p{
+      font-weight: 300;
+      @include font-size(14px);
+      @include opacity(0.5);
+      margin-bottom: 10px;
+      @include media-breakpoint-down(md){
+        display: none;
+      }
+    }
+    .form-control{
+        height: 50px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: $white;
+        background: transparent;
+        margin-#{$right}: 11px;
+        @extend .div-border-radius;
+        @include font-size(15px);
+        &:focus{
+          box-shadow: none;
+          border-color: rgba(255, 255, 255, 0.8);
+        }
+        &::placeholder {
+          @include font-size(15px);
+          color: $basic-dark-white;
+        }
+    }
+    .btn-primary{
+      .icon-email{
+        display: none !important;
+        min-height: 30px;
+        margin: 0;
+        &:before{
+          top: 2px;
+        }
+      }
+      @include media-breakpoint-down(md){
+        span{
+          display: none;
+        }
+        .icon-email{
+          display: block !important;
+        }
+      };
+      @include font-size(20px);
+      i{
+        height: 20px;
+        &:before{
+          top: 4px;
         }
       }
     }
-  }
-  a,
-  p {
-    color: $basic-dark-white;
-  }
 
-  h5,
-  span {
-    color: $basic-white;
-    @include font-size(15px);
   }
-
-  .form-control {
-    background: $basic-gray;
-    color: $basic-white;
-    border-radius: 20px 0 20px 20px;
-    border-color: $very-light-pink;
-  }
-
-  .form-inline {
-    input {
-      @include large-medium-screens {
-        width: 490px;
-      }
-      @include small-screen {
-        width: 490px;
-      }
-      margin-right: 11px;
-      width: auto;
+  .copy-rights{
+    padding-bottom: 10px;
+    p, a{
+      @include font-size(13px);
+      @include opacity(0.5);
+      margin-bottom: 0;
     }
-  }
-
-  .list-unstyled {
-    .contact-us {
-      margin-top: 15px;
+    a{
+      color: $white;
     }
-    a {
-      i[class*='icon-'] {
-        @extend .btn-primary;
-        border-radius: side-values(20px 0 20px 20px) !important;
-        background-color: $basic-gray;
-        border: solid $very-light-pink;
-        opacity: 0.4;
-        margin-right: 10px;
-        @include font-size(20px);
+    p{
+      @include media-breakpoint-down(md){
+        text-align: left !important;
+      }
+    }
+    .text-center{
+      margin-top: 17px;
+    }
+    .sponser{
+      @include media-breakpoint-down(md){
+        display: none;
       }
     }
   }
-
-  .media-body {
-    margin-left: 11px;
-    color: $basic-dark-white;
-    @include font-size(14px);
-  }
-  .media {
-    color: $basic-dark-white;
-    i {
-      @include font-size(35px);
+  .sponser{
+    @include nav-sm-media{
+      border-top: 1px solid $light-gray-2;
+      background: $light-gray;
+      margin-top: 20px !important;
+    };
+    > span{
+      border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+      display: inline-block;
+      background: $white;
+      padding: 5px 11px;
+      margin-#{$right}: 6px;
+      @include nav-sm-media{
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+      }
+    }
+    i{
+      width: 68px;
+      height: 29px;
+      @extend .sprite;
+      background-position: 0 0;
+      margin: 0;
+    }
+    p{
+      position: relative;
+      display: inline-block;
+      top: -4px;
+      @include nav-sm-media{
+        @include font-size(13px);
+        font-weight: 400 !important;
+        margin-bottom: 0;
+        white-space: normal;
+        top: 0;
+      }
     }
   }
-
-  .apps-link {
-    i {
-      @include font-size(18px);
-      margin-left: 15px;
+  .social-footer{
+    @extend .list-inline;
+    @extend .text-#{$right};
+    margin-top: 13px;
+    i{
+      color: $white;
+    }
+    .icon-twitter,
+    .icon-facebook{
+      @include font-size(24px);
+    }
+    .icon-twitter{
+      &:before{
+        top: 2px;
+      }
+    }
+    .icon-linked-in{
+      @include font-size(22px);
+      &:before{
+        top: 1px;
+      }
+    }
+    a:hover{
+      @include opacity(1);
     }
   }
-}

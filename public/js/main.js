@@ -18,10 +18,11 @@ jQuery(document).ready(function($){
 			$('.cd-primary-nav').addClass('nav-is-visible');
 			$('.cd-main-header').addClass('nav-is-visible');
 			$('.cd-main-content').addClass('nav-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-				$('body').addClass('overflow-hidden');
+				$('html').addClass('overflow-hidden');
 			});
 			toggleSearch('close');
 			$('.cd-overlay').addClass('is-visible');
+
 		}
 	});
 
@@ -85,7 +86,7 @@ jQuery(document).ready(function($){
 		$('.has-children a').removeClass('selected');
 		$('.moves-out').removeClass('moves-out');
 		$('.cd-main-content').removeClass('nav-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-			$('body').removeClass('overflow-hidden');
+			$('html').removeClass('overflow-hidden');
 		});
 	}
 
@@ -95,13 +96,15 @@ jQuery(document).ready(function($){
 			$('.cd-search').removeClass('is-visible');
 			$('.cd-search-trigger').removeClass('search-is-visible');
 			$('.cd-overlay').removeClass('search-is-visible');
+			$('html').removeClass('overflow-hidden-search');
 		} else {
 			//toggle search visibility
 			$('.cd-search').toggleClass('is-visible');
 			$('.cd-search-trigger').toggleClass('search-is-visible');
 			$('.cd-overlay').toggleClass('search-is-visible');
+			$('html').toggleClass('overflow-hidden-search');
 			if($(window).width() > MqL && $('.cd-search').hasClass('is-visible')) $('.cd-search').find('input[type="search"]').focus();
-			($('.cd-search').hasClass('is-visible')) ? $('.cd-overlay').addClass('is-visible') : $('.cd-overlay').removeClass('is-visible') ;
+			($('.cd-search').hasClass('is-visible')) ? $('.cd-overlay').addClass('is-visible') : $('.cd-overlay').removeClass('is-visible')  ;
 		}
 	}
 

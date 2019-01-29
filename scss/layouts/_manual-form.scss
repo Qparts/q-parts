@@ -26,13 +26,12 @@
     @include font-size(15px);
     font-family: 'Roboto';
   }
-
   .manual-form__dropdown {
     position: relative;
     background-color: $white;
     color: $basic-black;
     @include boarder-right-radius(0, 20px);
-    
+
     text-align: left;
 
     @include small-screen{
@@ -50,17 +49,17 @@
       }
       @include font-size(15px);
       font-family: 'Roboto';
-      .select__value-container {
-        width: 55px;
-      }
     }
-
+    .select__value-container {
+      width: 55px;
+      padding: 0;
+    }
     .select-input {
       position: relative;
       @include large-medium-screens{
         bottom: 9px;
       }
-      
+
     }
 
     .dropdown-label{
@@ -69,9 +68,9 @@
       font-weight: 500;
       font-family: 'Roboto';
       @include large-medium-screens{
-      
+
       }
-     
+
     }
 
     .dropdown-label-container{
@@ -95,7 +94,7 @@
             display: none;
           }
         }
-      
+
     }
   }
 
@@ -108,13 +107,13 @@
     color: $basic-black;
     @include large-medium-screens{
       @include boarder-left-radius;
-     
+
     }
     @include small-screen{
       @include boarder-left-radius(20px,0);
       margin-bottom: 5px;
     }
-   
+
 
     input {
       border-style: none;
@@ -130,7 +129,7 @@
       top: 161px;
       bottom: 261px;
     }
-    
+
     @include small-screen{
       top: -186px;
       bottom: -186px;
@@ -153,7 +152,7 @@
         font-weight: 500;
         font-family: 'Roboto';
       @include large-medium-screens{
-        
+
       }
       @include small-screen{
         margin-left: 10px;
@@ -175,7 +174,7 @@
   p {
     margin-bottom: 29px;
     @include large-medium-screens{
-      @include font-size(15px);  
+      @include font-size(15px);
     }
     @include small-screen{
       @include font-size(12px);
@@ -185,8 +184,8 @@
       height: 33px;
       margin-bottom: 23px;
     }
-    
-    
+
+
   }
 
   .seperator {

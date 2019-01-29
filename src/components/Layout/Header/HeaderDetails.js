@@ -30,7 +30,7 @@ class HeaderDetails extends Component {
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
-        <span className="user-img">
+        <span className="user-img position-relative d-inline-block">
           <img alt="user" src="/img/user.svg" />
         </span>
         <b>{translate("general.signin")}</b>
@@ -92,9 +92,8 @@ class HeaderDetails extends Component {
                 <h6>Welcome Back</h6>
                 <ul className="signin-list">
                   <li><a href="#" onClick={onSignin}>{translate("general.signin")} <i className="icon-arrow-right"/></a></li>
-                  <li><a href="#"><i className="icon-facebook-logo" /></a></li>
+                  <li><a href="#"><i className="icon-facebook" /></a></li>
                   <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
-                  <li><a href="#"><i className="icon-twitter"/></a></li>
                 </ul>
                 <p>
                   {translate("dropdown.signup.message")}
@@ -110,7 +109,6 @@ class HeaderDetails extends Component {
                 <li><a href="#"><i className="icon-send"></i>Requests</a></li>
                 <li><a href="#"><img alt="garage" src="/img/garage.svg"/>Garage</a></li>
               </ul>
-
           </DropdownItem>
 
           </li>
@@ -119,6 +117,7 @@ class HeaderDetails extends Component {
     return (
           <ul>
             {authOrNotAuthButtons}
+            <li className="search-sm"><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
             <li>
               <span className="seperator" />
             </li>

@@ -1,117 +1,58 @@
 /*container max width*/
-
 .container-fluid {
   max-width: $max-container;
 }
-
+a,input,button{
+  @include transition(all, 0.5s, ease);
+}
 a:focus,
 a:hover,
 a:active {
   text-decoration: none;
   outline: 0;
 }
-
 h1{
   @extend .text-uppercase;
-}
-
-
-button {
-  font-family: $button-font;
-  @include font-size($button-font-size);
-
-  i {
-    position: relative;
-    top: 3px;
-  }
 }
 .input{
   border: 0;
   background: $light-gray;
   min-height: 50px;
   &:focus{
+    background: $light-gray;
     box-shadow: 0 0 0 0.2rem rgba(237, 64, 54, 0.25);
   }
 }
 input::placeholder {
-  @extend .q-placeholder;
+  @include font-size(14px);
 }
-
 label {
   text-transform: capitalize;
-  @include font-size($bas-font-size);
-}
-
-.border {
-  border: 0 !important;
-}
-
-
-
-.upload-img {
-  width: 26px;
-  height: 23px;
-}
-
-.icon-facebook-logo {
-  @include font-size(32px);
-  color: $facebook-color;
-}
-.icon-twitter {
-  @include font-size(32px);
-  color: $twitter-color;
-}
-.q-display-small {
-  display: none;
-
-  @include small-screen {
-    display: block;
-  }
-}
-.q-hide-small {
-  display: block;
-  @include small-screen {
-    display: none;
-  }
 }
 img{
   max-width: 100%;
 }
-.section{
-  margin-bottom: $section-p-b;
-}
-.mt-sec{
-  margin-top: 80px;
+.pt-sec{
+  padding-top: 70px;
+  @include media-breakpoint-down(md){
+    padding-top: 40px;
+  };
+  &.gray-bg{
+    padding-bottom: 70px;
+    @include media-breakpoint-down(md){
+      padding-bottom: 40px;
+    };
+  }
 }
 .artical-space{
   margin-bottom: 40px;
+  @include media-breakpoint-down(lg){
+    margin-bottom: 10px;
+  };
 }
 .header-space{
   margin-bottom: 30px;
 }
-/*
-.padding-md-left-6{
-  @include large-medium-screens{
-    @include padding-left(6px);
-  }
+.cd-main-content{
+  overflow-x: hidden;
 }
-.padding-left-6{
-  @include padding-left(6px);
-}
-
-.padding-left-0{
-  @include padding-left(0);
-}
-
-.padding-right-0{
-  @include padding-right(0);
-}
-
-.padding-md-right-0{
-  @include large-medium-screens {
-    @include padding-right(0);
-  }
-
-
-}
-*/

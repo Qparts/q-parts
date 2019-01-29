@@ -1,13 +1,13 @@
 .btn {
   padding: 10px 15px;
   @extend .link-border-radius;
-  @include transition(all, 0.5s, ease);
   cursor: pointer;
   font-weight: 400;
   @extend .d-inline-block;
   border-width: 0;
   i {
     @extend .d-inline-block;
+    @include transition(all, 0.5s, ease);
   }
 }
 
@@ -23,7 +23,6 @@
   i{
     margin-#{$left}: 10px;
     @include font-size(23px);
-    @include transition(all, 0.5s, ease);
   }
   &:hover{
     color: $white;
@@ -52,34 +51,11 @@
   border-style: none;
 }
 
-.btn-link {
-  color: $charcoal-grey;
-  border-style: none;
-  background: none !important;
-  text-transform: capitalize;
-  padding: 0;
-  background: $light-gray;
-  &.selected {
-    color: $basic-black;
-    font-weight: 500;
-  }
-
-  &:focus,
-  &.focus {
-    border-color: transparent;
-    box-shadow: none;
-  }
-
-  &:hover {
-    color: $brand-color;
-  }
-}
-
 .btn-facebook {
   @extend .btn-primary;
   @extend .box-shadow;
   background: $white;
-  border-radius: side-values(0 0 0 20px) !important;
+  border-radius: side-values(0 0 0 $border-radius-base) !important;
 }
 .btn-google {
   @extend .btn-primary;
@@ -91,15 +67,7 @@
   @extend .btn-primary;
   @extend .box-shadow;
   background: $white;
-  border-radius: side-values(0 0 20px 0) !important;
-}
-
-.footer-custom-btn {
-  padding: 10px 15px;
-  background: $light-gray;
-  @extend .link-border-radius;
-  text-transform: uppercase;
-  @include transition(all, 0.5s, ease);
+  border-radius: side-values(0 0 $border-radius-base 0) !important;
 }
 .delete-btn {
   @include transition(all, 0.5s, ease);
