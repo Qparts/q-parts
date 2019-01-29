@@ -81,8 +81,7 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch } = this.props;
-console.log(this.state);
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly } = this.props;
     return (
       <Fragment>
         <div id="header-fixed" className="cd-main-header">
@@ -123,7 +122,8 @@ console.log(this.state);
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
-                        changeDefaultDirection={changeDefaultDirection} />
+                        changeDefaultDirection={changeDefaultDirection} 
+                        getCountriesOnly={getCountriesOnly}/>
                     </li>
                   </ul>
                 </div>
