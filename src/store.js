@@ -1,18 +1,29 @@
 import { applyMiddleware, createStore, compose } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist'
 import { logger } from 'redux-logger';
 import thunk from 'redux-thunk';
 
-import { loadState } from './localStorage';
+import storage from 'redux-persist/lib/storage';
 
 import reducer from './reducers';
 
-const middleware = applyMiddleware(thunk, logger);
-const persistedState = loadState();
+let middleware = applyMiddleware(thunk);
+const persistConfig = {
+    key: 'root',
+    storage,
+    blacklist: ['networkError']
+};
+const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+if (process.env.NODE_ENV === 'development') {
+    middleware = applyMiddleware(thunk, logger);
+  }
+
 /* eslint-disable no-underscore-dangle */
-export default createStore(
- reducer,
- persistedState,
- composeEnhancers(middleware));
+export const store = createStore(
+    persistedReducer,
+    composeEnhancers(middleware));
  /* eslint-enable */
+
+ export const persistor = persistStore(store);

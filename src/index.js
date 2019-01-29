@@ -3,17 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
-import { Link } from "react-router-dom";
+import '../scss/main/main.scss';
+// import '../scss/main-ar/main-ar.scss';
 
-
-
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
-
-import store from './store';
-import { saveState, initialStoreLoad } from './localStorage';
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react'
 import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
@@ -25,34 +19,15 @@ class Root extends React.Component {
     super(props);
 
     this.state = {
-      direction: store.getState().customer.direction
-    };
-
-    initialStoreLoad(store);
-    //loadStyle(this.state.direction);
-
-    store.subscribe(() => {
-      saveState({
-        manualForm: store.getState().manualForm,
-        cart: store.getState().cart,
-        customer: store.getState().customer,
-        localize: store.getState().localize,
-        manualOrder: store.getState().manualOrder,
-        api: store.getState().api
-      });
-      this.setState({
-        direction: store.getState().customer.direction
-      })
-    });
-  }
-
-  /*
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.direction !== this.state.direction) {
-      loadStyle(this.state.direction)
+      direction: 'ltr'
     }
+    // store.subscribe(() => {
+    //   this.setState({
+    //     direction: store.getState().customer.direction
+    //   })
+    // })
+
   }
-  */
 
   render() {
     return (
@@ -183,7 +158,6 @@ class Root extends React.Component {
             </a></li>
        		</ul>
        	</nav>
-
 
       </Fragment>
 

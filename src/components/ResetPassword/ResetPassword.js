@@ -4,66 +4,64 @@ import RenderField from '../RenderField/RenderField';
 import Button from '../UI/Button';
 
 import * as validations from '../../utils';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { right } from '../../utils';
+import { withRouter } from 'react-router-dom';
 
 import { Link } from "react-router-dom";
 
 import './ResetPassword.css';
 class resetPassword extends Component {
-  constructor(props) {
-    super(props);
+  forgotPassword = (event) => {
+    this.props.history.push('/password/forgot-password')
   }
-  forgotPassword = (event) =>{
-    this.props.history.push('/forgotPassword')
-  }
-  onCancle = () =>{
+  onCancle = () => {
     this.props.toggle();
   }
- render() {
-  const { handleSubmit, showPhoneNo, translate } = this.props;
-  const updateBtn = <p>{translate("resetPassword.update")}<i className="icon-arrow-right"></i></p>
-  const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
-  return (
-    <form className="ResetPassword-container" onSubmit={handleSubmit}>
-      {
-        showPhoneNo ? (
-          <Fragment>
-            <div>
-              <Field name="mobile" component={RenderField} type="text" placeholder={translate("resetPassword.placeholder.mobile")} validate={[validations.required]} />
-            </div>
-            <div>
-              <Field name="code" component={RenderField} type="text" placeholder={translate("resetPassword.placeholder.code")} validate={[validations.required]} />
-            </div>
-            <div>
-              <Field name="password" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.newPassword")} validate={[validations.required]} />
-            </div>
-          </Fragment>
-        ) : (
+  render() {
+    const { handleSubmit, showPhoneNo, translate, direction } = this.props;
+    const updateBtn = <p>{translate("resetPassword.update")}<i className={`icon-arrow-${right(direction)}`}></i></p>
+    const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
+    return (
+      <form className="ResetPassword-container" onSubmit={handleSubmit}>
+        {
+          showPhoneNo ? (
             <Fragment>
-              <div className="content-password">
-                <div>
-                  <Field name="oldPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.oldPassword")} validate={[validations.required]} />
-                </div>
-                <div>
-                  <Link className="btn-primary" to="/forgotPassword">Forgot it?</Link>
-                  <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required, validations.confirmPassword]} />
-                </div>
+              <div>
+                <Field name="mobile" component={RenderField} type="text" placeholder={translate("resetPassword.placeholder.mobile")} validate={[validations.required]} />
+              </div>
+              <div>
+                <Field name="code" component={RenderField} type="text" placeholder={translate("resetPassword.placeholder.code")} validate={[validations.required]} />
+              </div>
+              <div>
+                <Field name="password" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.newPassword")} validate={[validations.required]} />
               </div>
             </Fragment>
-          )
-      }
+          ) : (
+              <Fragment>
+                <div className="content-password">
+                  <div>
+                    <Field name="oldPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.oldPassword")} validate={[validations.required]} />
+                  </div>
+                  <div>
+                    <Link className="btn btn-primary" to="/password/forgot-password">Forgot it?</Link>
+                    <Field name="newPassword" component={RenderField} type="password" placeholder={translate("resetPassword.placeholder.confirmPassword")} validate={[validations.required]} />
+                  </div>
+                </div>
+              </Fragment>
+            )
+        }
 
-      <div className="footer-password row">
-        <div className="shadow">
-        </div>
+        <div className="footer-password row">
+          <div className="shadow group-shadow-div">
+          </div>
           {
             !showPhoneNo && <Button className="btn btn-light col-3" type="reset" text={cancelBtn} onClick={this.onCancle} />
           }
-          <Button className="btn btn-secondary col-8" text={updateBtn}/>
-      </div>
-    </form>
-  )
-}
+          <Button className="btn btn-secondary col-8" text={updateBtn} />
+        </div>
+      </form>
+    )
+  }
 }
 
 resetPassword = reduxForm({

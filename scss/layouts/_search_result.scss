@@ -26,7 +26,7 @@
       z-index: 10;
       top: 19%;
       @include padding-left(12px);
-      @extend .q-placeholder;
+      @include q-placeholder;
       opacity: 0.5;
       color: $black !important;
     }

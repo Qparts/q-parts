@@ -6,13 +6,20 @@ import { connect } from 'react-redux'
 import SelectInput from '../../SelectInput/SelectInput';
 import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
+import Checkbox from '../../UI/Checkbox';
+import { Link } from "react-router-dom";
 
 import './Address.css';
 
 class Address extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      check: false
+    }
+  }
   componentWillMount() {
     this.props.getCountry(this.props.customer.countryId);
     this.props.getRegions(this.props.customer.countryId);
@@ -54,22 +61,28 @@ class Address extends Component {
 
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <div className="form-group">
-          <label>{translate("form.address.region")}</label>
+        <div className="col-md-4 div-rounded-first">
           <Field
-            name="region"
-            component={SelectInput}
-            options={regionsData}
-            placeholder=""
+            disabled
+            name="name"
+            placeholder={translate("form.address.country")}
+            component={RenderField}
             validate={[validations.required]} />
         </div>
-        <div className="form-group">
-          <label>{translate("form.address.city")}</label>
+        <div className="col-md-4 div-rounded">
+          <Field
+            name="region"
+            placeholder={translate("form.address.region")}
+            component={SelectInput}
+            options={regionsData}
+            validate={[validations.required]} />
+        </div>
+        <div className="col-md-4 div-rounded-last">
           <Field
             name="city"
+            placeholder={translate("form.address.city")}
             component={SelectInput}
             options={citiesData}
-            placeholder=""
             validate={[validations.required]} />
         </div>
       </Fragment> :
@@ -87,12 +100,17 @@ class Address extends Component {
     let renderButtons =
       <Fragment>
         <div>
-          <RadioButton value={true} name="defaultAddress" onChange={onDefaultAddress} checked={true === defaultAddress} />
-          <label className="p-radiobutton-label">{translate("form.address.buttons.defaultAddress")}</label>
+          <Checkbox
+            onChange={e => this.setState({
+              check: !this.state.check
+            })}
+            checked={this.state.check}
+            label={translate("form.address.buttons.defaultAddress")}
+          />
         </div>
-        <div>
+        <div className="footer">
           <Button onClick={onHide} type="reset" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
-          <Button type="submit" className="btn btn-secondary" text={translate("form.address.buttons.confirm")} />
+          <Button type="submit" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
         </div>
       </Fragment>
 
@@ -113,38 +131,76 @@ class Address extends Component {
             </div>
           ) :
             <div className="Address-container">
-              <Button type="button" className="btn btn-light" text={translate("form.address.map")} onClick={onShowGoogleMap} />
               <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label>{translate("form.address.title")}</label>
-                  <Field
-                    name="title"
-                    component={RenderField}
-                    type="text"
-                    placeholder=""
-                    validate={[validations.required]} />
-                </div>
-                {renderCityRegion}
-                <div className="form-group">
-                  <label>{translate("form.address.line1")}</label>
-                  <Field
-                    name="line1"
-                    component={RenderField}
-                    type="text"
-                    validate={[validations.required]} />
-                </div>
-                <div className="form-group">
-                  <label>{translate("form.address.line2")}</label>
-                  <Field name="line2" component={RenderField} type="text" />
-                </div>
-                <div className="form-group">
-                  <label>{translate("form.address.zipCode")}</label>
-                  <Field
-                    name="zipCode"
-                    component={RenderField}
-                    type="text"
-                    placeholder="4435"
-                    validate={[validations.required]} />
+                <div className="row no-gutters">
+                  <div className="col-12 title-address">
+                    <Field
+                      label={translate("setting.addressBook.title")}
+                      name="title"
+                      component={RenderField}
+                      type="text"
+                      placeholder={translate("setting.addressBook.title")}
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                    <div className="col-12 google-map">
+                      <Link to="#" onClick={onShowGoogleMap}>
+                        <img className="main-img" alt="user" src="/img/google-map.svg"/>
+                        <p>{translate("form.address.selectAddress")}</p>
+                      </Link>
+                  </div>
+                  <div className="col-md-12 address-title">
+                    <Field
+                      label={`*${translate("setting.addressBook.addressLine1")}`}
+                      name="line1"
+                      component={RenderField}
+                      type="text"
+                      placeholder={translate("setting.addressBook.addressLine1")}
+                      hasFloatLabel
+                      validate={[validations.required]} />
+                  </div>
+                  <div className="col-12 address-title">
+                    <Field
+                      label={translate("setting.addressBook.addressLine2")}
+                      name="line2"
+                      component={RenderField}
+                      type="text"
+                      placeholder={translate("setting.addressBook.addressLine2")}
+                      hasFloatLabel />
+                  </div>
+                  {renderCityRegion}
+                  <div className="phone-info col-12">
+                    <div className="row">
+                      <div className="phone-number col-6">
+                        <div className="first">
+                          <Field
+                            name="phone"
+                            component={RenderField}
+                            placeholder="+966"
+                            validate={[validations.required]} />
+                        </div>
+                        <Field
+                          name="mobile"
+                          component={RenderField}
+                          placeholder={translate("form.address.phoneNumber")}
+                          validate={[validations.required]} />
+                      </div>
+                      <div className="zipCode col-6">
+                        <Field
+                          name="zipCode"
+                          component={RenderField}
+                          placeholder={translate("form.address.zipCode")}
+                          validate={[validations.required]} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-12 shipping-style">
+                    <Field
+                      name="shipping"
+                      component={RenderField}
+                      type="text"
+                      placeholder={translate("form.address.shippingNote")} />
+                  </div>
                 </div>
                 {renderButtons}
               </form>
@@ -154,6 +210,7 @@ class Address extends Component {
     )
   }
 }
+// <Button type="button" className="btn btn-light" text={translate("form.address.map")} onClick={onShowGoogleMap} />
 
 Address = reduxForm({
   form: 'Address',
@@ -163,7 +220,7 @@ Address = reduxForm({
 Address = connect(
   state => {
     return {
-      initialValues: state.customer.address,
+      initialValues: state.api.country,
       formValues: getFormValues('Address')(state),
     }
   }

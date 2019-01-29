@@ -1,0 +1,210 @@
+#Orders-container{
+#search{
+  margin-left:-25px;
+  input{
+    height: 20px;
+    -webkit-appearance: textfield;
+  	-webkit-box-sizing: content-box;
+  	font-family: inherit;
+  	font-size: 100%;
+    @include margin-right(100px);
+
+    background: #ededed url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
+  	border: solid 1px #ccc;
+  	padding: side-values(9px 15px 9px 40px);
+  	-webkit-border-radius: 10em;
+  	-moz-border-radius: 10em;
+  	border-radius: side-values(0 20px 20px 20px);
+    background-color: white;
+
+  	-webkit-transition: all .5s;
+  	-moz-transition: all .5s;
+  	transition: all .5s;
+    border: 0px;
+    width: 15px;
+  	@include padding-left(10px);
+  	color: transparent;
+  	cursor: pointer;
+  }
+  input:hover {
+  	background-color: #fff;
+  }
+  input:focus {
+  	width: 20px;
+  	@include padding-left(32px);
+  	color: #000;
+  	background-color: #fff;
+  	cursor: auto;
+  	-webkit-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
+  	box-shadow: 0 0 5px rgba(109,207,246,.5);
+  }
+}
+  .card{
+    background: none;
+  }
+  .Orders-search{
+    margin-top: -15px;
+    .col-9{
+      @include padding-left(0px);
+    }
+    @include padding-left(0px);
+    display: flex;
+    margin-bottom: 16px;
+    .select-input{
+      .css-10nd86i {
+        width: 100%;
+        background-color: $white;
+        border-radius: side-values(20px 0 20px 20px) !important;
+        border: none !important;
+        position: relative !important;
+        padding: 10px;
+        .select__value-container{
+          width: 10px;
+        }
+      }
+      label,
+      br,sub{
+        display: none;
+      }
+    }
+    .RenderField{
+      border-radius: side-values(0 20px 20px 20px);
+      border: none !important;
+      label,
+      br,sub{
+        display: none;
+      }
+      input{
+        border-radius: side-values(0 20px 20px 20px);
+        border: none !important;
+      }
+    }
+    .btn-div{
+      display: flex;
+      .btn-light{
+        padding: 0px;
+        background: none;
+        display: flex !important;
+        i{
+          opacity: 0.5;
+          font-size: 16px;
+        }
+        span{
+          font-family: Roboto;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 20px;
+          letter-spacing: normal;
+          text-align: left;
+          @include margin-left(3px);
+        }
+      }
+      .seperator{
+        width: 1px;
+        height: 19px;
+        @include margin-left(10px);
+        @include margin-right(10px);
+      }
+    }
+  }
+  .seperator{
+    width: 100%;
+    height: 2px;
+    opacity: 0.2;
+    margin-bottom: 26px;
+  }
+  .table{
+    thead{
+      tr{
+        th{
+          @include padding-left(5px);
+          opacity: 0.7;
+          font-family: Roboto;
+          @include font-size(13px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+        }
+      }
+    }
+    tbody{
+    border-bottom-left-radius: 10px;
+      tr{      
+        background: $white;
+        border-bottom: 2px solid #f7f7f7;
+        td{
+          @include padding-left(5px);
+          font-family: Roboto;
+          @include font-size(15px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: $black;
+          .btn-light{
+            @include padding-left(0px);
+            background: none;
+            i{
+              opacity: 0.5;
+              @include font-size(15px);
+            }
+            span{
+              @include margin-left(5px);
+              opacity: 0.5;
+              font-family: Roboto;
+              @include font-size(13px);
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              text-align: left;
+            }
+          }
+        }
+        .icon{
+          display: flex;
+          margin-top: 12px;
+        }
+        .icon-clear:before{
+          @include margin-right(5px);
+          @include font-size(16px);
+        }
+        .icon-time:before{
+          @include margin-right(5px);
+          @include font-size(16px);
+        }
+        .icon-return:before{
+          @include margin-right(5px);
+          @include font-size(16px);
+        }
+        .icon-shipping:before{
+          @include margin-right(5px);
+          @include font-size(22px);
+        }
+      }
+    }
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 20px;
+    }
+
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 20px;
+    }
+    tr:first-child td:first-child{
+      border-top-left-radius: 20px
+    }
+    tr th{
+      padding-bottom: 10px;
+    }
+    tr:last-child{
+      border-bottom:none !important;
+    }
+  }
+}

@@ -233,8 +233,37 @@
   width: 1px;
   background: #ccc;
   display: inline-block;
-  @extend .align-middle;
+  vertical-align: middle;
 }
+
+.h-seperator {
+  width: 100%;
+  background: #ccc;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.ellipse {
+  border-radius: 20px;
+  width: 34px;
+  height: 34px;
+  @include box-shadow;
+  background-color: $white;
+}
+
+
+.rounded-rectangle {
+  border-radius: side-values(20px 0 20px 20px) !important;
+  @include box-shadow;
+}
+
+.group-shadow-div {
+  position: absolute;
+  width: 100%;
+  #{$right}: 0;
+  @include rounded-rectangle;
+}
+
 .radio-button {
   width: 20px;
   height: 20px;
@@ -243,13 +272,32 @@
 }
 .border-radius-div{
   border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+
+.boarder-left-radius {
+  @include boarder-left-radius;
+}
+
+.boarder-right-radius {
+  @include boarder-right-radius;
+}
+
+.boarder-right-top-radius {
+  @include boarder-right-radius(20px, 0);
+}
+.boarder-right-bottom-radius {
+  @include boarder-right-radius(0, 20px);
+}
+.component-background {
+  background: $light-gray;
+  padding-top: 70px;
+  padding-bottom: 70px;
 }
 .overflow-xy-h{
   overflow: hidden;
 }
 
 .quantity{
-  @extend .border-radius-div;
+  @include border-radius-div;
   overflow: hidden;
   @include media-breakpoint-down(md){
     max-width: 200px;
@@ -310,6 +358,7 @@
 }
 .underline{
   text-decoration: underline;
+
 }
 .default-header-bg{
   @extend .d-flex;
@@ -515,3 +564,5 @@
   background:  url("#{$img-path}/sprite.png") no-repeat transparent;
   display: block;
 }
+}
+

@@ -59,3 +59,7 @@ export const allUpperCase = value => {
     ? 'Must contain only upper case letters'
     : undefined;
 }
+
+export const passwordScore = (score, value) => {
+  return value && score >= 2 ? undefined : 'Required';
+}

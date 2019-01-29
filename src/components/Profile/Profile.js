@@ -5,8 +5,8 @@ import RenderField from '../RenderField/RenderField';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import SelectInput from '../SelectInput/SelectInput';
 import * as validations from '../../utils';
+import { right } from '../../utils';
 import { AR, EN } from '../../constants';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import CustomerService from '../CustomerService/CustomerService';
 import Checkbox from '../UI/Checkbox';
 import { Link } from "react-router-dom";
@@ -14,15 +14,15 @@ import { Link } from "react-router-dom";
 class profile extends Component {
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       checkNotif_email: false,
       checkNotif_phone: false,
       checkRecive_email: false
     }
   }
-  render(){
-        const { translate } = this.props;
-      const editEmail = 'email'
+  render() {
+    const { translate, direction } = this.props;
+    const editEmail = 'email'
     const editPassword = 'password'
     const languagesOptions = [
       { value: AR, label: translate("setting.accountSetting.arabic") },
@@ -30,7 +30,7 @@ class profile extends Component {
     ];
 
     return (
-      <form className="col-md-9 w3-hide-small w3-hide-medium"onSubmit={this.props.handleSubmit}>
+      <form className="profile col-md-9 w3-hide-small w3-hide-medium" onSubmit={this.props.handleSubmit}>
         <div className="Profile-container">
           <div className="Profile-info-box border rounded">
             <div className="info-title">
@@ -78,7 +78,6 @@ class profile extends Component {
                   <Field
                     name="country"
                     component={SelectInput}
-                    clearable={false}
                     options={[{ label: '1', value: '2' }]}
                     placeholder="Select country"
                     validate={[validations.required]} />
@@ -90,14 +89,12 @@ class profile extends Component {
                       <Field
                         name="phone"
                         component={RenderField}
-                        clearable={false}
                         placeholder="+966"
                         validate={[validations.required]} />
                     </div>
                     <Field
                       name="phone-number"
                       component={RenderField}
-                      clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
                   </div>
@@ -106,14 +103,12 @@ class profile extends Component {
                       <Field
                         name="alternate-phone"
                         component={RenderField}
-                        clearable={false}
                         placeholder="+966"
                         validate={[validations.required]} />
                     </div>
                     <Field
                       name="alternate-phone-number"
                       component={RenderField}
-                      clearable={false}
                       placeholder="Phone Number"
                       validate={[validations.required]} />
                   </div>
@@ -137,8 +132,8 @@ class profile extends Component {
                 component={RenderField}
                 type="text"
                 placeholder={translate("setting.accountSetting.access.email")}
-                hasFloatLabel/>
-              <Link to="#" className="btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className="icon-arrow-right" />{translate("setting.accountSetting.access.passwordButton")}</p></Link>
+                hasFloatLabel />
+              <Link to="#" className="btn btn-secondary col-7" onClick={this.props.onShowEditDialog.bind(this, editPassword)} ><p><i className={`icon-arrow-${right(direction)}`} />{translate("setting.accountSetting.access.passwordButton")}</p></Link>
             </div>
           </div>
           <br />
@@ -152,30 +147,29 @@ class profile extends Component {
                   <Field
                     name="defaultLang"
                     component={SelectInput}
-                    clearable={false}
                     options={languagesOptions}
                     placeholder={translate("setting.accountSetting.notification.placeholder")}
                     validate={[validations.required]} />
                 </div>
                 <div className="col-12 notification">
-                    <Checkbox
-                      name="check-email"
-                      onChange={e => this.setState({
-                        checkNotif_email: !this.state.checkNotif_email
-                      })}
-                      checked={this.state.checkNotif_email}
-                      label="Send Notification by E-mail"
-                      />
+                  <Checkbox
+                    name="check-email"
+                    onChange={e => this.setState({
+                      checkNotif_email: !this.state.checkNotif_email
+                    })}
+                    checked={this.state.checkNotif_email}
+                    label="Send Notification by E-mail"
+                  />
                 </div>
                 <div className="col-12 notification">
-                    <Checkbox
-                      name="check-phone"
-                      onChange={e => this.setState({
-                        checkNotif_phone: !this.state.checkNotif_phone
-                      })}
-                      checked={this.state.checkNotif_phone}
-                      label="Send Notification by phone number"
-                      />
+                  <Checkbox
+                    name="check-phone"
+                    onChange={e => this.setState({
+                      checkNotif_phone: !this.state.checkNotif_phone
+                    })}
+                    checked={this.state.checkNotif_phone}
+                    label="Send Notification by phone number"
+                  />
                 </div>
               </div>
             </div>
@@ -201,9 +195,9 @@ class profile extends Component {
           </div>
           <br />
           <div className="Profile-footer">
-            <div className="shadow"></div>
+            <div className="shadow group-shadow-div"></div>
             <button type="reset" className="btn btn-light"><p>{translate("setting.accountSetting.cancel")}</p></button>
-            <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className="icon-arrow-right" /></p></button>
+            <button type="submit" className="btn btn-secondary"><p>{translate("setting.accountSetting.save")}<i className={`icon-arrow-${right(direction)}`} /></p></button>
           </div>
         </div>
       </form>

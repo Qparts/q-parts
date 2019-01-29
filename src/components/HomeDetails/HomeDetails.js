@@ -2,11 +2,12 @@ import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
 import Button from "../UI/Button";
 import Title from '../UI/Title';
+import { right } from '../../utils';
 
 class HomeDetails extends Component {
 
 	render() {
-		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate } = this.props;
+		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
@@ -90,9 +91,9 @@ class HomeDetails extends Component {
 											</div>
 										</div>
 										<div className="col-auto">
-											<button type="submit"className="btn-primary">
+											<button type="submit"className="btn btn-primary">
 												<span>{translate("general.send")}</span>
-												<i className="icon-arrow-right"></i>
+												<i className={`icon-arrow-${right(direction)}`}></i>
 											</button>
 										</div>
 									</div>
@@ -206,7 +207,7 @@ class HomeDetails extends Component {
 											<span>OUR SALES MORE THAN 50,000 ITEM</span>
 											VENDOR ! Join Qetaa.com
 										</h1>
-										<a className="btn-primary" href="#"><span>{translate("general.join")}</span><i className="icon-arrow-right"></i></a>
+										<a className="btn btn-primary" href="#"><span>{translate("general.join")}</span><i className={`icon-arrow-${right(direction)}`}></i></a>
 									</div>
 								</div>
 

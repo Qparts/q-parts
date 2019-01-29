@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import _ from 'lodash';
 import moment from 'moment';
 import * as constant from '../../../constants';
+import Radio from '../Radio';
 
 class Table extends Component {
  render() {
@@ -11,13 +11,13 @@ class Table extends Component {
   const keys = columns ? Object.keys(columns[0]) : [];
   const renderRadioButton = (idx) => (
    this.props.hasRadioButton && <td>
-    <RadioButton value={idx} name={this.props.radioName} onChange={this.props.onSelecteRadioButton} checked={idx === this.props.radioButton} />
+    <Radio value={idx} name={this.props.radioName} onChange={this.props.onSelecteRadioButton} checked={idx === this.props.radioButton} />
    </td>
   )
 
   const renderColums = (column, idx) => {
    const dateNow = moment();
-   const past = moment(column.date);
+   const past = moment(column.date, 'MM/DD/YYYY');
    const dateDiff = dateNow.diff(past, 'months');
 
    if (!_.isEmpty(this.props.search) && this.props.search !== 'all') {
@@ -26,10 +26,19 @@ class Table extends Component {
     if ((this.props.searchByDate && dateDiff <= parseInt(findString, constant.RADIX)) ||
      column.orderNum.includes(findString) ||
      column.status.toLowerCase().includes(findString)) elements = column;
-    return keys.map((key, keyId) => elements[key] && <td key={keyId}>{elements[key]}</td>
-    )
-   } else {
-    return keys.map((element, keyId) => column[element] && <td key={keyId}>{column[element]}</td>
+    return keys.map((key, keyId) => {
+      if(elements[key] === "Shipped"){
+        return <td key={keyId} className="icon-shipping icon">{elements[key]}</td>
+      }else if(elements[key] === "Canceled"){
+        return <td key={keyId} className="icon-clear icon">{elements[key]}</td>
+      }else if(elements[key] === "Under processing"){
+        return <td key={keyId} className="icon-time icon">{elements[key]}</td>
+      }else if(elements[key] === "Returned"){
+        return <td key={keyId} className="icon-return icon">{elements[key]}</td>
+      }
+      return <td key={keyId}>{elements[key]}</td>
+
+    }
     )
    }
   };

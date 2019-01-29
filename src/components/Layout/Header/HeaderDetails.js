@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
 import GaragePopup from "../../../containers/GaragePopup/GaragePopup";
-import { isEmpty } from "../../../utils";
+import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 
@@ -26,7 +26,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
@@ -91,7 +91,7 @@ class HeaderDetails extends Component {
             <DropdownItem header={signinJoinHeader}>
                 <h6>Welcome Back</h6>
                 <ul className="signin-list">
-                  <li><a href="#" onClick={onSignin}>{translate("general.signin")} <i className="icon-arrow-right"/></a></li>
+                  <li><a href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
                   <li><a href="#"><i className="icon-facebook" /></a></li>
                   <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
                 </ul>
@@ -99,7 +99,7 @@ class HeaderDetails extends Component {
                   {translate("dropdown.signup.message")}
                   <Link to="/signup">
                     {translate("dropdown.signup.link")}
-                    <i className="icon-arrow-right" style={styles.arrow_right} />
+                    <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right} />
                   </Link>
                 </p>
               <ul className="account-actions">
@@ -148,69 +148,4 @@ const styles = {
 
 };
 
-export default withStyles(styles)(HeaderDetails);;
-
-
-
-// { <Nav id="secondNavBar">
-//           {authOrNotAuthButtons}
-//           <div>
-//             <Button
-//               component={Link}
-//               to="/vendor_registration_form"
-//               variant="outlined"
-//               classes={{
-//                 label: classes.label
-//               }}
-//             >
-//               {translate("navBar.joinUs")}
-//             </Button>
-//           </div>
-//           <Link to="/cart">
-//             <i className="fas fa-shopping-cart fa-2x" />
-//           </Link>
-//         </Nav> }
-        // <ul className="list-inline user-actions">
-        //   <li className="search">
-        //     <a onClick={onSearch}>
-        //       <i className="icon-search" />
-        //     </a>
-        //   </li>
-        //   <li>
-        //     <span className="seperator" />
-        //   </li>
-        //   {authOrNotAuthButtons}
-        //   <li>
-        //     <span className="seperator" />
-        //   </li>
-        //   <li className="garage">
-        //     <a>
-        //       <DropdownItem dropdownItemId="garage" header={garageHeader}>
-        //         <Fragment>
-        //           {!isEmpty(vehicles) ? (
-        //             <GaragePopup
-        //               translate={translate}
-        //               className=""
-        //               onAddVechile={onAddVechile}
-        //             />
-        //           ) : (
-        //               <ButtonCustom
-        //                 className="btn-primary"
-        //                 text={"Add a new vehicle"}
-        //                 onClick={onAddVechile} />
-        //             )}
-        //         </Fragment>
-        //       </DropdownItem>
-        //     </a>
-        //   </li>
-        //   <li>
-        //     <Link to="/wishlist">
-        //       <i className="icon-heart" />
-        //     </Link>
-        //   </li>
-        //   <li>
-        //     <Link to="/cart">
-        //       <i className="icon-cart" />
-        //     </Link>
-        //   </li>
-        // </ul>
+export default withStyles(styles)(HeaderDetails);

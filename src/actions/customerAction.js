@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_ROOT, CUSTOMER_SERVICE } from '../actions/constants';
-import { ON_SOCIAL_MEDIA_LOGIN, ON_SOCIAL_MEDIA_SIGNUP, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
+import { ON_SOCIAL_MEDIA_AUTH, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import { initialize } from 'react-localize-redux';
 import globalTranslations from "../translations/translations.json";
@@ -12,11 +12,12 @@ export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SU
 export const EDIT_USER_NAME_SUCCEDED = 'EDIT_USER_NAME_SUCCEDED';
 export const EDIT_USER_PHONE_NO_SUCCEDED = 'EDIT_USER_PHONE_NO_SUCCEDED';
 export const EDIT_USER_EMAIL_SUCCEDED = 'EDIT_USER_EMAIL_SUCCEDED';
-export const EMAIL_VERIFIED_SUCCEDED = 'EMAIL_VERIFIED_SUCCEDED';
+export const ACCOUNT_VERIFIED_SUCCEDED = 'ACCOUNT_VERIFIED_SUCCEDED';
 export const EDIT_USER_PASSWORD_SUCCEDED = 'EDIT_USER_PASSWORD_SUCCEDED';
 export const REQUEST_VERIFICATION_NO = 'REQUEST_VERIFICATION_NO';
 export const CONFIRM_USER_ADDRESS = 'CONFIRM_USER_ADDRESS';
 export const LOGOUT = 'LOGOUT';
+export const REGISTERED = 'REGISTERED';
 export const ADD_ADDRESS_SUCCEEDED = 'ADD_ADDRESS_SUCCEEDED';
 export const EDIT_ADDRESS_SUCCEEDED = 'EDIT_ADDRESS_SUCCEEDED';
 export const DELETE_ADDRESS_SUCCEEDED = 'DELETE_ADDRESS_SUCCEEDED';
@@ -29,7 +30,10 @@ export const REGISTER_CUSTOMER_SUCCEEDED = 'REGISTER_CUSTOMER_SUCCEEDED';
 export const VERIFY_CODE_NO_SUCCEEDED = 'VERIFY_CODE_NO_SUCCEEDED';
 export const VERIFY_MOBILE_NO_SUCCEEDED = 'VERIFY_MOBILE_NO_SUCCEEDED';
 export const RESET_PASSWORD_SUCCEEDED = 'RESET_PASSWORD_SUCCEEDED';
+export const RESET_PASSWORD_TOKEN_SUCCEEDED = 'RESET_PASSWORD_TOKEN_SUCCEEDED';
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
+export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
 export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
@@ -39,6 +43,8 @@ export const ADD_RECENT_VIEWED_PRODUCTS = 'ADD_RECENT_VIEWED_PRODUCTS';
 export const ADD_WISHLIST = 'ADD_WISHLIST';
 export const DELETE_WISHLIST = 'DELETE_WISHLIST';
 export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
+export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
+export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
@@ -120,17 +126,17 @@ export const editEmail = (data, serverErrorField, currentLanguage) => {
   }
 }
 
-export const onChangeEmailVerify = (query) => {
+export const onAccountVerify = (query) => {
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/change-email`, query)
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/account-verify`, query)
       .then(res => {
         dispatch({
-          type: EMAIL_VERIFIED_SUCCEDED
+          type: ACCOUNT_VERIFIED_SUCCEDED,
+          payload: res.data
         })
-      })
-      .catch(error => {
-        console.log(error);
-      })
+      }, error => {
+        handleNetworkError(dispatch, error);
+      });
   }
 }
 
@@ -209,96 +215,30 @@ export const clearAddress = () => {
 }
 
 export const login = (email, password, serverErrorField, currentLanguage) => {
-  // return (dispatch) => {
-  //   let defaultLanguage = null;
-  //   return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/email`, {
-  //     email, password
-  //   })
-  //     .then(res => {
-  //       defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
-  //       dispatch({
-  //         type: LOGIN_SUCCEEDED,
-  //         payload: {
-  //           data: res.data,
-  //         }
-  //       })
-  //       dispatch(changeDefaultLanguage(defaultLanguage))
-  //     })
-  //     .catch(error => {
-  //       dispatch({
-  //         type: REQUEST_FAILED,
-  //         payload: {
-  //           error: error.response.data,
-  //           field: serverErrorField,
-  //           currentLanguage,
-  //         }
-  //       })
-  //     })
-  // }
-
-  // :TODO temp login should be removed once I get the backend working
-  const data = {
-    "customer": {
-      "id": 123,
-      "socialMedia": [],
-      "firstName": "Ahmed",
-      "lastName": "Shaaban",
-      "mobile": "0212116539",
-      "email": "ahmed.vuw@gmail.com",
-      "countryId": 1,
-      "addresses": [{
-        "firstName": "Ahmed",
-        "lastName": "Shaaban",
-        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
-        "country": "Saudi Arabia",
-        "city": "Dammam",
-        "region": "EP",
-        "zipCode": "1111"
-      },
-      {
-        "firstName": "Ahmed",
-        "lastName": "Shaaban",
-        "addressLine1": "3634 Bahran, Qurtubah, Riyadh 13244 6746, Saudi Arabia",
-        "country": "Saudi Arabia",
-        "city": "Dammam",
-        "region": "EP",
-        "zipCode": "1111"
-      }
-      ],
-      "vehicles": [{
-        "id": 3,
-        "vehicleId": 502,
-        "customerId": 1,
-        "vin": "JM71234W678901M30",
-        "vehicle": {
-          "id": 502,
-          "model": {
-            "id": 43,
-            "name": "Tucson",
-            "nameAr": "توسان"
-          },
-          "make": {
-            "id": 4,
-            "name": "Hyundai",
-            "nameAr": "هيونداي"
-          },
-          "year": 2017
-        }
-      }],
-      "defaultLang": "en"
-    },
-    "token": "12345"
-  }
   return (dispatch) => {
-    dispatch({
-      type: LOGIN_SUCCEEDED,
-      payload: {
-        data: data,
-      }
+    let defaultLanguage = null;
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login`, {
+      email, password
     })
-    dispatch(changeDefaultLanguage('en'));
+      .then(res => {
+        defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+        dispatch({
+          type: LOGIN_SUCCEEDED,
+          payload: res.data,
+        })
+        dispatch(changeDefaultLanguage(defaultLanguage))
+      })
+      .catch(error => {
+        dispatch({
+          type: REQUEST_FAILED,
+          payload: {
+            error: error.response.data,
+            field: serverErrorField,
+            currentLanguage,
+          }
+        })
+      })
   }
-  // up to here
 }
 
 export const onSubmitSignup = (customer, currentLanguage) => {
@@ -312,8 +252,8 @@ export const onSubmitSignup = (customer, currentLanguage) => {
           type: REGISTER_CUSTOMER_SUCCEEDED,
           payload: res.data
         })
-      })
-      .catch(error => {
+      }, error => {
+        handleNetworkError(dispatch, error);
         dispatch({
           type: REQUEST_FAILED,
           payload: {
@@ -321,8 +261,8 @@ export const onSubmitSignup = (customer, currentLanguage) => {
             field: error.response.data.field,
             currentLanguage
           }
-        })
-      })
+        });
+      });
   }
 }
 
@@ -345,7 +285,7 @@ export const onLogout = () => {
 
 export const addVehcile = (values) => {
   return (dispatch) => {
-    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/vehicle`, values)
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/vehicle`, values)
       .then(res => {
         dispatch({
           type: ADD_VEHICLE_SUCCEEDED,
@@ -401,23 +341,41 @@ export const sendSmsCode = (values, currentLanguage) => {
   }
 }
 
-export const resetPassword = ({ code, mobile, password }, serverErrorField) => {
+export const resetPassword = (email) => {
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, { code, mobile, password })
-      .then(res => {
-        dispatch({
-          type: RESET_PASSWORD_SUCCEEDED
-        })
-      })
-      .catch(error => {
-        dispatch({
-          type: REQUEST_FAILED,
-          payload: {
-            error: error.response.data,
-            field: serverErrorField
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, email)
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const resetPasswordToken = ({ token }) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${token}`)
+      .then(() => {
+        dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const updatePassword = (data) => {
+  return (dispatch) => {
+    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
+      .then((res) => {
+        dispatch(
+          {
+            type: UPDATE_PASSWORD,
+            payload: res.data
           }
-        })
-      })
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
   }
 }
 
@@ -428,13 +386,17 @@ export const selectVehicleGarage = (vehcile) => {
   }
 }
 
+export const selectCountry = (country) => {
+  return {
+    type: SELECT_COUNTRY,
+    payload: country
+  }
+}
+
 export const socialMediaButton = (data, type) => {
   switch (type) {
-    case ON_SOCIAL_MEDIA_LOGIN:
-      return socialMediaLogin(data);
-
-    case ON_SOCIAL_MEDIA_SIGNUP:
-      return socialMediaSignup(data);
+    case ON_SOCIAL_MEDIA_AUTH:
+      return socialMediaAuth(data);
 
     case ON_SOCIAL_MEDIA_LINK:
       return socialMediaLink(data);
@@ -444,28 +406,16 @@ export const socialMediaButton = (data, type) => {
   }
 }
 
-
-const socialMediaSignup = (data) => {
-  return {
-    type: SOCIAL_MEDIA_SIGNUP,
-    payload: data
-  }
-}
-
-const socialMediaLogin = (data) => {
+const socialMediaAuth = (data) => {
   return (dispatch) => {
-    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/login/social-media`, {
-      platform: data.platform,
-      socialMediaId: data.socialMediaId
-    })
+    axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media-auth`, data)
       .then(res => {
         dispatch({
           type: LOGIN_SUCCEEDED,
           payload: res.data
         })
-      })
-      .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+      }, error => {
+        handleNetworkError(dispatch, error);
       })
   }
 }
@@ -474,7 +424,8 @@ const socialMediaLink = (data) => {
   return (dispatch) => {
     axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/social-media`, {
       platform: data.platform,
-      socialMediaId: data.socialMediaId
+      socialMediaId: data.socialMediaId,
+      email: data.email
     })
       .then(res => {
         dispatch({
@@ -482,7 +433,7 @@ const socialMediaLink = (data) => {
         })
       })
       .catch(error => {
-        dispatch({ type: REQUEST_FAILED })
+        handleNetworkError(dispatch, error);
       })
   }
 }
@@ -562,5 +513,26 @@ export const changeDefaultDirection = (lang) => {
   return {
     type: CHANGE_DEFAULT_DIRECTION,
     payload: lang
+  }
+}
+
+export const onRegistered = () => {
+  return {
+    type: REGISTERED,
+    payload: true
+  }
+}
+
+export const completeShipping = (isCompleted) => {
+  return {
+    type: COMPLETE_SHIPPING,
+    payload: isCompleted
+  }
+}
+
+export const completePayment = (isCompleted) => {
+  return {
+    type: COMPLETE_PAYMENT,
+    payload: isCompleted
   }
 }

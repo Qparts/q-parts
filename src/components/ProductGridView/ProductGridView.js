@@ -18,25 +18,25 @@ class ProductGridView extends Component {
 		})
 	}
 	render() {
-		const { product } = this.props
+		const { product } = this.props;
 		return <div className="product-grid-view col-6 col-md-4" >
 			<div
 				className=" product-holder"
 				onMouseEnter={this.handleMouseHover}
 				onMouseLeave={this.handleMouseHover}>
 				<div className="image-container" align="center">
-					<img src={"/img/product-3.jpg"} alt="" />
+					<img src={product.image} alt="no product" />
 					{
 						this.state.isHovering &&
 						<div className="product-buttons">
-							<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
-							<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
+							<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
+							<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 						</div>
 					}
 				</div>
 				<div className="details-holder">
 					<span className="part-text">{product.desc}</span><br />
-					<span className="manufacturer-text">{product.manufacturer.name}</span>
+					<span className="manufacturer-text">{product.brand.name}</span>
 					<div className="product-review_slide">
 						<Stars values={product.averageRating} {...starsRating} />
 						<span className="product-review">{getLength(product.reviews)} review</span>

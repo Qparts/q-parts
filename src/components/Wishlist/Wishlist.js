@@ -45,7 +45,7 @@ class Wishlist extends Component {
                 ],
                 image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
                 productNumber: list.productNumber,
-                manufacturerName: list.manufacturer.name
+                manufacturerName: list.brand.name
             }
             result.push(tempWishlist)
         });
@@ -63,11 +63,11 @@ class Wishlist extends Component {
         return (
             <section id="wish-list" className="col-md-10 col-12">
                 {
-                    this.state.wishlist.map(item => (
-                        <div className="border rounded card">
+                    this.state.wishlist.map((item, idx) => (
+                        <div key={idx} className="border rounded card">
                             <div className="row">
                                 <div className="col-5 col-md-2">
-                                    <img style={{ height: '165px' }} src={item.image} alt="no vehicle found" />
+                                    <img style={{ height: '165px' }} src={item.image} alt="no wish list found" />
                                 </div>
                                 <div className="col-7 col-md-3 pt">
                                     <div className="wish-list_product-details">

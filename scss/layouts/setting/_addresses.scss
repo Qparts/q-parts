@@ -1,0 +1,435 @@
+#addresses-container{
+  @include margin-left(10px);
+  .addresses-header{
+    display: flex;
+    margin-bottom: 10px;
+    p{
+      font-family: Roboto;
+      @include font-size(17px);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: $left;
+      margin-top: 10px;
+    }
+    .btn-link{
+      height: 41px;
+      margin-top: 10px;
+      display: flex !important;
+      background: $brand-color !important;
+      margin: 0px !important;
+      color: $white !important;
+      .icon-add{
+        @include font-size(23px);
+        margin-top: 5px;
+        @include margin-left(10px);
+      }
+      span{
+        @include margin-left(6px);
+        font-family: Roboto;
+        @include font-size(15px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 41px;
+        letter-spacing: normal;
+        text-align: $left;
+        color: #ffffff;
+        @include margin-right(10px);
+      }
+    }
+  }
+  .seperator{
+    height: 2px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .addresses-box{
+    background: $white;
+    padding: side-values(10px);
+    padding-bottom: 0;
+    border-radius: side-values(20px 0 20px 20px) !important;
+    label{
+      margin-bottom: 0px;
+      font-family: Roboto;
+      @include font-size(13px);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 2;
+      letter-spacing: normal;
+      opacity: 0.8;
+      .checkmark{
+        border-radius: 9px;
+      }
+    }
+    .addresses-box_item{
+      margin-bottom: 25px;
+      .addresses-box_item-label{
+        display: flex;
+        @include margin-left(20px);
+        p{
+          margin-bottom: 0px;
+          font-family: Roboto;
+          @include font-size(17px);
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 28px;
+          letter-spacing: normal;
+          text-align: $left;
+          font-weight: bold;
+        }
+      }
+      .about-the-person{
+        @include margin-left(20px);
+        p{
+          font-family: Roboto;
+          @include font-size(15px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.53;
+          letter-spacing: normal;
+          text-align: $left;
+          margin: 0px;
+        }
+      }
+      .addresses-footer{
+        height: 41px;
+        display: flex;
+        margin-top: 18px;
+        .btn-link{
+          @include margin-left(20px);
+          width: 66px;
+          text-align: center;
+          background: $light-gray !important;
+          border-radius: side-values(0 20px 20px 20px) !important;
+          margin-#{$right}: 10px;
+          color: $black;
+          .icon-edit{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(6px);
+          }
+        }
+        .btn-delete{
+          background: none;
+          padding-top: 0px;
+          padding-bottom: 0px;
+          @include padding-left(0);
+          opacity: 0.6;
+          .icon-trash{
+            @include font-size(18px);
+          }
+          span{
+            @include font-size(13px);
+            @include margin-left(2px);
+          }
+        }
+      }
+      &:nth-child(even) {
+        border-left: 1px solid #ebebeb;
+      }
+    }
+  }
+}
+
+#empty-addresses{
+  .addresses-header{
+    p{
+      font-family: Roboto;
+      @include font-size(17px);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: $left;
+      margin-top: 10px;
+    }
+  }
+  p{
+    font-family: Roboto;
+    @include font-size(17px);
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: $left;
+    margin-bottom: 0px;
+  }
+  .seperator{
+    height: 2px;
+    width: 100%;
+  }
+  .add-addresses{
+    text-align: center;
+    .icon-address{
+      text-align: center;
+      @include font-size(100px);
+      margin-top: 10px;
+      opacity: 0.1;
+    }
+    .addresses-text{
+      opacity: 0.5;
+      font-family: Roboto;
+      font-size: 30px;
+      font-weight: 300;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: rgba(55, 54, 60, 0.5);
+      margin-bottom: 16px;
+    }
+    Button{
+      display: inline-flex !important;
+      height: 41px;
+      background: $brand-color !important;
+      margin: 0px !important;
+      color: $white !important;
+      .icon-add{
+        @include font-size(23px);
+        margin-top: 5px;
+        @include margin-left(10px);
+      }
+      span{
+        @include margin-left(6px);
+        font-family: Roboto;
+        @include font-size(15px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 41px;
+        letter-spacing: normal;
+        color: #ffffff;
+        @include margin-right(10px);
+      }
+    }
+  }
+}
+.addresses-popup{
+  width: 650px;
+  .modal-content{
+    background: $white;
+    .modal-header{
+      .modal-title{
+        #title{
+          h1{
+            font-family: Roboto;
+            @include font-size(30px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: $left;
+            color: #37363d;
+          }
+          p{
+            @include margin-left(5px);
+            opacity: 0.6;
+            font-family: Roboto;
+            @include font-size(13px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.92;
+            letter-spacing: normal;
+            text-align: $left;
+            color: rgba(55, 54, 61, 0.6);
+          }
+        }
+      }
+    }
+    .modal-body{
+      .Address-container{
+        form{
+          margin: 0px;
+          .RenderField{
+            label{
+              top: 6px;
+            }
+          }
+          .title-address{
+            .form-control{
+              border-radius: side-values(20px 0 0 20px) !important;
+              background: $light-gray;
+            }
+            .RenderField{
+              border-radius: side-values(20px 0 0 20px) !important;
+              input{
+                margin-bottom: 0px;
+                border-bottom: none;
+              }
+            }
+          }
+          .google-map{
+            display: flex;
+            margin-top: 30px;
+            margin-bottom: 10px;
+            a{
+              display: flex;
+            }
+            img{
+              height: 28px;
+            }
+            p{
+              font-family: Roboto;
+              @include font-size(15px);
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: 43px;
+              letter-spacing: normal;
+              text-align: $left;
+              margin-bottom: 0px;
+              color: $brand-color;
+            }
+          }
+          .address-title{
+            margin-bottom: 20px;
+            .form-control{
+              border-radius: side-values(20px 0 20px 20px) !important;
+              background: $light-gray;
+            }
+            .RenderField{
+              border-radius: side-values(20px 0 20px 20px) !important;
+              input{
+                margin-bottom: 0px;
+                border-bottom: none;
+              }
+            }
+          }
+          .select-input{
+            .css-10nd86i{
+              width: 100%;
+              padding: 10px;
+              background: $light-gray;
+            }
+          }
+          .div-rounded-first{
+            .RenderField{
+              border: none;
+              input{
+                border-radius: side-values(20px 0 0 20px) !important;
+                background: $light-gray;
+                padding: 12px;
+              }
+            }
+          }
+          .div-rounded-last{
+            .select-input{
+              .css-10nd86i{
+                border-radius: side-values(0 0 20px 0) !important;
+              }
+            }
+          }
+          .div-rounded{
+            @include padding-left(5px);
+            @include padding-right(5px);
+          }
+          .phone-info{
+            margin-top: 25px;
+            margin-bottom: 40px;
+            .RenderField{
+              width: 100%;
+              label{
+                display: none;
+              }
+            }
+            .phone-number{
+              display: flex;
+              .first{
+                margin-#{$right}: 5px;
+                .form-control{
+                  border-radius: side-values(20px 0 0 20px) !important;
+                  width: 70px;
+                  text-align: center;
+                }
+              }
+              .form-control {
+                border-radius: 0 0 0 0 !important;
+                border: none;
+                background: $light-gray;
+                height: 55px;
+                width: 110%;
+                label,
+                sub,
+                br {
+                  display: none;
+                }
+              }
+            }
+            .zipCode{
+              .form-control {
+                border-radius: side-values(0 0 20px 0) !important;
+                border: none;
+                background: $light-gray;
+                height: 55px;
+                label,
+                sub,
+                br {
+                  display: none;
+                }
+              }
+            }
+          }
+          .shipping-style{
+            margin-bottom: 20px;
+            .form-control{
+              padding-bottom: 20px;
+              border-radius: side-values(20px 0 20px 20px) !important;
+              background: $light-gray;
+            }
+            .RenderField{
+              @include padding-left(10px);
+              border-radius: side-values(20px 0 20px 20px) !important;
+              margin-left: -13px;
+              input{
+                margin-bottom: 0px;
+                border-bottom: none;
+              }
+            }
+          }
+          .checkmark{
+            border-radius: 9px;
+          }
+          .container{
+            margin-top: 10px;
+            margin-bottom: 0px;
+          }
+          .footer{
+            margin-top: 32px;
+            margin-bottom: 50px;
+            .btn-light{
+              height: auto;
+              background-color: $light-gray;
+              border-radius: side-values(0 0 0 20px) !important;
+              @include box-shadow;
+              width: 18%;
+            }
+            .btn-primary{
+              @include margin-left(5px);
+              width: 80%;
+              border-radius: side-values(0 20px 20px 0) !important;
+              height: auto;
+              @include box-shadow;
+              text-align: $right;
+              text-transform: none;
+              i{
+                @include margin-left(10px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

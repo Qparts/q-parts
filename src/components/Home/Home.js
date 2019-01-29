@@ -24,6 +24,7 @@ export class Home extends Component {
                     addRecentViewedProducts={this.props.addRecentViewedProducts}
                     onRecentlyViewedProducts={this.getRecentlyViewedProducts}
                     translate={this.props.translate}
+                    direction={this.props.direction}
                 />
             </Fragment>
         )
@@ -34,7 +35,8 @@ const mapStateToProps = state => {
     return {
         products: state.api.products,
         translate: getTranslate(state.localize),
-        recentViewedProducts: state.customer.recentViewedProducts
+        recentViewedProducts: state.customer.recentViewedProducts,
+        direction: state.customer.direction
     }
 }
 

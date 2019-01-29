@@ -2,7 +2,6 @@
     @extend .border-radius-div;
     overflow: hidden;
     li{
-      @extend .bg-white;
       padding: 20px 15px;
       figure{
         margin-bottom: 0;
@@ -12,7 +11,7 @@
         @include font-size(17px);
         text-transform: capitalize;
           a:hover{
-            @extend .underline;
+            text-decoration: underline;
           }
       }
       h4{
@@ -91,6 +90,7 @@
     padding-right: 20px;
     padding-left: 20px;
     @include font-size(20px);
+    margin-bottom: 72px;
     i{
       @include font-size(23px);
       margin-#{$left}: 10px;

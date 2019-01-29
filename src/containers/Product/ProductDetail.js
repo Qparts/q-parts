@@ -5,25 +5,22 @@ import { Field, reduxForm, getFormValues } from 'redux-form';
 import NumberPicker from '../../components/UI/NumberPicker';
 import Button from '../../components/UI/Button';
 import Link from '../../components/UI/Link';
-import CompareProducts from '../../components/CompareProducts/CompareProducts';
 import RenderField from '../../components/RenderField/RenderField';
 import RenderRating from '../../components/RenderRating/RenderRating';
 import RenderProducts from '../../components/RenderProducts/RenderProducts';
-import RecentViewedProducts from '../../components/RecentViewedProducts/RecentViewedProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { getProduct } from '../../actions/apiAction';
 import { addRecentViewedProducts, addWishlist } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
 import {
-  Card, CardText, CardBody,
+  Card, CardBody,
   CardTitle, ListGroupItem, ListGroup
 } from 'reactstrap';
 
 import * as validations from '../../utils';
-import * as directional from '../../utils';
+import { right } from '../../utils';
 import _ from 'lodash';
 
 //dialog
@@ -39,8 +36,9 @@ import { colors } from '../../constants';
 import { styles as commonStyles } from '../../constants';
 import { getLength } from '../../utils/array';
 import { fontSize } from '../../utils/font';
-import Title from '../../components/UI/Title';
 import { MediumScreen, SmallScreen } from '../../components/Device';
+import { ClipLoader } from 'react-spinners';
+import { getProduct } from '../../utils/api';
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -70,8 +68,18 @@ class ProductDetail extends Component {
       dialogType: 'addProduct',
       data: [],
       auth: false,
-      modal: false
+      modal: false,
+      loading: true,
+      product: {}
     }
+
+    getProduct(this.props)
+      .then(res => {
+        this.setState({
+          product: res.data,
+          loading: false
+        });
+      })
   }
   handleDialog = (dialogType, data) => {
     this.setState({
@@ -92,9 +100,8 @@ class ProductDetail extends Component {
     switch (dialogType) {
       case 'addProduct':
         return {
-          minWidth: '80%',
           header:
-            <h1><span>{this.state.data.quantity} Item</span> Added To Cart</h1>
+            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
         }
       default:
         break;
@@ -106,33 +113,39 @@ class ProductDetail extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} />
+        return <AddProduct data={this.state.data} direction={this.props.direction} />
       default:
         break;
     }
   }
 
   componentDidMount = () => {
-    const { match: { params } } = this.props
-
-    this.props.getProduct(params.productId)
     this.setState({
       auth: !this.state.auth
     })
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { match: { params: { productId } }, products } = this.props;
+    const { match: { params: { productId } } } = this.props;
     const nextProductId = prevProps.match.params.productId;
 
     if (nextProductId !== productId) {
-      this.props.getProduct(productId);
+      getProduct(this.props)
+        .then(res => {
+          this.setState({
+            product: res.data,
+            loading: false
+          });
+        })
     }
   }
   componentWillMount() {
-    this.setState({
-      data: this.props.product
-    })
+    getProduct(this.props)
+      .then(res => {
+        this.setState({
+          data: res.data
+        })
+      })
   }
 
   closeLightbox = () => {
@@ -144,7 +157,7 @@ class ProductDetail extends Component {
   submit = ({ quantity }) => {
     //width screen
     let width = window.innerWidth;
-    const item = { ...this.props.product, quantity };
+    const item = { ...this.state.product, quantity };
     this.props.addToCart(item);
     if (width > 992) {
       this.handleDialog('addProduct', item)
@@ -184,60 +197,49 @@ class ProductDetail extends Component {
   handleAddWishlist = () => {
     const newDate = moment();
     const { quantity } = this.props.formValues;
-    const item = { ...this.props.product, quantity, created: newDate };
+    const item = { ...this.state.product, quantity, created: newDate };
 
     this.props.addWishlist(item);
   }
 
   renderSpecs = (isList = false) => {
-    const data = [
-      { key: 'Tire Type', value: 'Truck / SUV' },
-      { key: 'Tire Size', value: '245 / 60 R18' },
-      { key: 'Speed Rating', value: 'H = 130 mph' },
-      { key: 'Load Index', value: '109 = 2271 lbs/tire' },
-    ]
+    const { specs } = this.state.product;
     let Component = isList ? ListGroupItem : Fragment;
-    // const keys = this.props.currentLanguage === constant.EN ?
-    //   Object.keys(this.props.product.specs) : Object.keys(this.props.product.specsAr);
-    // const specs = this.props.currentLanguage === constant.EN ?
-    //   this.props.product.specs : this.props.product.specsAr;
-    // return (
-    //   <Fragment>
-    //     {
-    //       keys.map((key, idx) => (
-    //         <div key={idx} className="Product-item_specs">
-    //           <span>{key}</span>:
-    //             <span style={commonStyles.rightSpace}>{specs[key]}</span>
-    //         </div>
-    //       ))
-    //     }
-    //   </Fragment>
-    // )
-    return <div>
-      {
-        data.map((item, idx) => (
-          <Component key={idx}>
-            <span className="specs-key">{item.key}:</span>
-            <span className="specs-value">{item.value}</span>
-          </Component>
-        ))
-      }
+
+    if (specs.length < 1) return <div>
+      <span>no spec for this product</span>
     </div>
+
+    else {
+      const key = this.props.currentLanguage === constant.EN ? 'specKey' : 'specKeyAr';
+      const value = this.props.currentLanguage === constant.EN ? 'specValue' : 'specValueAr';
+      return <div>
+        {
+          specs.map((item, idx) => (
+            <Component key={idx}>
+              <span className="specs-key">{item[key]}:</span>
+              <span className="specs-value">{item[value]}</span>
+            </Component>
+          ))
+        }
+      </div>
+
+    }
   }
 
   renderTopRow = () => {
-    const { product } = this.props
+    const { product } = this.state;
     return <div className="row group-header-opacity_second">
       <div className="col-9 pt-18">
         <span className="product-item_desc">{product.desc}</span>
         <div className="product-item_manufacturer">
           <span>By</span>
-          <span>{product.manufacturer.name}</span>
+          <span>{product.brand.name}</span>
           <span>{product.productNumber}</span>
         </div>
       </div>
-      <div className="col-3 btn-wishlist pt-18">
-        <Link to="#" className="btn-primary" icon="icon-heart" />
+      <div className="col-3 btn btn-wishlist pt-18">
+        <Link to="#" className="btn btn-primary" icon="icon-heart" />
       </div>
     </div>
   }
@@ -289,17 +291,21 @@ class ProductDetail extends Component {
       },
       productReviews: {
         btnLinkParent: {
-          float: this.state.canWriteReview ? 'none' : directional.right(this.props.direction)
+          float: this.state.canWriteReview ? 'none' : right(this.props.direction)
         }
+      },
+      loading: {
+        textAlign: 'center'
       }
     };
-    const { translate, product, match: { params } } = this.props;
+    const { translate, match: { params } } = this.props;
+    const { product } = this.state;
     const compareHeaders = [
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -335,8 +341,21 @@ class ProductDetail extends Component {
         products={this.props.products}
         goToProduct={this.goToProduct} />
     </Fragment>
-
-    if (_.isEmpty(this.props.product)) return null;
+    const override = `
+            border-color: ${colors.brandColor} !important;
+            border-bottom-color: transparent !important;
+        `;
+    if (_.isEmpty(this.state.product))
+      return (
+        <div className="container-fluid" style={styles.loading}>
+          <ClipLoader
+            css={override}
+            sizeUnit={"px"}
+            size={150}
+            loading={this.state.loading}
+          />
+        </div>
+      )
 
     return (
       <Switch>
@@ -347,8 +366,8 @@ class ProductDetail extends Component {
                 <MediumScreen>
                   <div className="row top-row">
                     <div className="col-5 group-header-opacity_first">
-                      <div className="btn-back">
-                        <Link to="#" className="btn-primary" text={"back"} icon="icon-back" isReverseOrder={true} />
+                      <div className="btn btn-back">
+                        <Link to="#" className="btn btn-primary" text={"back"} icon="icon-back" isReverseOrder />
                       </div>
                     </div>
                     <div className="col-7">
@@ -362,7 +381,7 @@ class ProductDetail extends Component {
                       <div className="col-12 col-md-5 product-item_image">
                         <img
                           style={commonStyles.cursor}
-                          src={"/img/product-4.jpg"}
+                          src={product.image}
                           onClick={this.showLightbox}
                           alt=""
                         />
@@ -407,7 +426,7 @@ class ProductDetail extends Component {
                               />
                               <Button
                                 type="submit"
-                                className="btn-primary"
+                                className="btn btn-primary"
                                 text={translate("product.buttons.addToCart")}
                                 icon="icon-cart" />
                             </div>
@@ -434,11 +453,9 @@ class ProductDetail extends Component {
                               RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
                               This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
                           </CardTitle>
-                            <CardText>
-                              <ListGroup className="product-details-specs">
-                                {this.renderSpecs(true)}
-                              </ListGroup>
-                            </CardText>
+                            <ListGroup className="product-details-specs">
+                              {this.renderSpecs(true)}
+                            </ListGroup>
                           </CardBody>
                         </Card>
                       </div>
@@ -466,7 +483,7 @@ class ProductDetail extends Component {
                                 className="btn-link"
                                 text={translate("product.writeReview.title")}
                                 onClick={this.handleWriteReview.bind(this, true)}
-                                icon="icon-arrow-right" />
+                                icon={`icon-arrow-${right(this.props.direction)}`} />
                               {
                                 this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
                                   <div className="review-form_header">
@@ -478,7 +495,7 @@ class ProductDetail extends Component {
                                       validate={[validations.required]}
                                     />
                                   </div>
-                                  <div className="group-shadow-input">
+                                  <div className="group-shadow-input group-shadow-div">
                                     <Field
                                       name="review"
                                       component={RenderField}
@@ -488,12 +505,12 @@ class ProductDetail extends Component {
                                     <div className="group-buttons">
                                       <Button
                                         type="reset"
-                                        className="btn-secondary"
+                                        className="btn btn-secondary"
                                         text={translate("product.writeReview.cancel")}
                                         onClick={this.handleWriteReview.bind(this, false)} />
                                       <Button
                                         type="submit"
-                                        className="btn-primary"
+                                        className="btn btn-primary"
                                         text={translate("product.writeReview.sumbit")} />
                                     </div>
                                   </div>
@@ -561,7 +578,6 @@ class ProductDetail extends Component {
 const mapStateToProps = state => {
   return {
     initialValues: { quantity: 1 },
-    product: state.api.product,
     products: state.api.products,
     recentViewedProducts: state.customer.recentViewedProducts,
     customer: state.customer.detail,
@@ -577,7 +593,6 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
-    getProduct: (productId) => dispatch(getProduct(productId))
   }
 }
 
@@ -586,72 +601,3 @@ ProductDetail = reduxForm({
 })(ProductDetail)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
-
-
-
-
-{/* <h4>{translate("product.compare")}</h4> */ }
-{/* <CompareProducts
-          headers={compareHeaders}
-          products={this.props.products}
-          goToProduct={this.goToProduct}
-          reviewText={translate("compareProduct.customerRating.review")} /> */}
-{/* <div>
-          {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
-          <h4>{translate("product.detail")}</h4>
-          {
-            this.props.product && <div className="Product-item">
-              <span>{this.props.product.desc}</span>
-            </div>
-          }
-          <div className="border rounded">
-            {this.renderSpecs()}
-          </div>
-          <div>
-            <h4>{translate("product.reviews")}({getLength(this.props.product.reviews)})</h4>
-            <div className="Product-reviews_header">
-              <Rating value={5} readonly cancel={false} />
-              <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: 5 ${translate("product.ratingRange")} 5`}</span>
-            </div>
-            <Button style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show} type="submit" className="btn btn-secondary" text={translate("product.writeReview.title")} onClick={this.handleWriteReview.bind(this, true)} />
-            {
-              this.state.canWriteReview && <form onSubmit={this.props.handleSubmit(this.submitReview)}>
-                <Field
-                  name="rating"
-                  cancel={false}
-                  component={RenderRating}
-                  validate={[validations.required]}
-                />
-                <Field
-                  name="review"
-                  component={RenderField}
-                  type="text"
-                  placeholder={translate("product.writeReview.placeholder")}
-                  validate={[validations.required]} />
-                <Button type="reset" className="btn btn-light" text={translate("product.writeReview.cancel")} onClick={this.handleWriteReview.bind(this, false)} />
-                <Button type="submit" className="btn btn-secondary" text={translate("product.writeReview.sumbit")} />
-              </form>
-            }
-            <hr />
-          </div>
-          {
-            this.props.product.reviews.map((review, idx) => {
-              return <div key={idx}>
-                <div className="Product-reviews">
-                  <span>{review.customerName}</span>
-                  <p style={commonStyles.rightSpace}>{moment(review.created).format('MM/DD/YYYY')}</span>
-                </div>
-                <div className="Product-reviews">
-                  <Rating value={review.rating} readonly cancel={false} />
-                  <p style={commonStyles.rightSpace}>{`${translate("product.rating")}: ${review.rating} ${translate("product.ratingRange")} ${this.props.products.averageRating}`}</span>
-                </div>
-                <p style={commonStyles.grey}>{review.text}</span>
-                <hr />
-              </div>
-            })
-          }
-        </div> */}
-{/* <RecentViewedProducts
-          title={translate("product.recentViewed")}
-          products={this.props.recentViewedProducts}
-          goToProduct={this.goToProduct} /> */}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button } from 'primereact/components/button/Button';
+import Button from '../UI/Button';
 import RenderField from '../RenderField/RenderField';
 
 import * as validations from '../../utils';
@@ -20,7 +20,7 @@ let verificationNumber = props => {
      type="text"
      placeholder={placeholder}
      validate={[validations.required]} />
-    <Button label={submitButton} />
+    <Button text={submitButton} />
     <div>
      {error && <strong>{error}</strong>}
     </div>

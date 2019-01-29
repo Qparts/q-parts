@@ -9,6 +9,7 @@ import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
 
 import Title from '../UI/Title';
+import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
 
 class Layout extends Component {
   constructor(props) {
@@ -18,15 +19,6 @@ class Layout extends Component {
       dialogType: 'signin',
       modal: false
     };
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevProps.vehicles !== this.props.vehicles && this.state.visible) {
-    //   this.onHide();
-    // }
-    if (this.props.isLoggedIn && prevProps.isLoggedIn !== this.props.isLoggedIn) {
-      this.togglePopup();
-    }
   }
 
   handleDialog = (dialogType) => {
@@ -76,7 +68,7 @@ class Layout extends Component {
 
     switch (dialogType) {
       case 'vehicle':
-        return <Vehicles />
+        return <Vehicles direction={this.props.direction} />
       case 'signin':
         return <Login toggle={this.togglePopup} />
       case 'search':
@@ -90,10 +82,10 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      vehiclesFormat, selectedVehicle
+      vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry, direction
     } = this.props;
     const dialog = (
-      <Modal className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+      <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -111,7 +103,11 @@ class Layout extends Component {
           onAddVechile={this.handleDialog.bind(this, 'vehicle')}
           onSignin={this.handleDialog.bind(this, 'signin')}
           onSearch={this.handleDialog.bind(this, 'search')}
-          changeDefaultDirection={changeDefaultDirection} />
+          changeDefaultDirection={changeDefaultDirection}
+          countriesOnly={countriesOnly}
+          getCountriesOnly={getCountriesOnly}
+          selectCountry={selectCountry}
+          direction={direction} />
         {dialog}
         <div className="cd-main-content">
           {this.props.children}

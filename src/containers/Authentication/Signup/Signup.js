@@ -2,18 +2,18 @@ import React, { Component, Fragment } from 'react'; // eslint-disable-line no-un
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Dialog } from 'primereact/components/dialog/Dialog';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 import SignupForm from './SignupForm/SignupForm';
 import SocialMedia from '../SocialMedia/SocialMedia';
-import VerificationNumber from '../../../components/VerificationNumber/VerificationNumber';
 import { getComponentName } from '../../../utils';
 import { getCountries } from '../../../actions/apiAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo } from '../../../actions/customerAction';
-import { ON_SOCIAL_MEDIA_SIGNUP, colors } from '../../../constants';
+import { colors, ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 
 import Title from '../../../components/UI/Title';
 
@@ -36,12 +36,12 @@ class Signup extends Component {
   };
 
   handleSubmit = (values) => {
-    const { firstName, lastName, email, password, countryId: { countryCode }, mobile, platform, socialMediaId } = values;
-    const countryId = values.countryId.value;
+    const { firstName, lastName, email, password, platform, socialMediaId } = values;
+    const countryId = values.countryId.id;
 
-    return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, countryCode, mobile, platform, socialMediaId }, this.props.currentLanguage)
+    return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
-        this.props.onShowDialog();
+        this.props.history.push('/signup/successful');
       })
   }
 
@@ -50,38 +50,17 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, onShowDialog } = this.props;
+    const { translate, togglePopup } = this.props;
     const signup = <SignupForm
-      showPassword={this.props.showPassword}
       onSubmit={this.handleSubmit}
-      countries={this.props.countries} />
-    // const dialog =
-    //   <Dialog header={translate("dialog.signup.title")} visible={this.props.visible} minWidth={500} modal={true} onHide={this.props.onHide}>
-    //     <div className="Signup-verification_number">
-    //       <VerificationNumber
-    //         label={translate("dialog.signup.label")}
-    //         name="code"
-    //         placeholder={translate("dialog.signup.placeholder")}
-    //         footer={translate("dialog.signup.footer")}
-    //         submitButton={translate("general.buttons.confirm")}
-    //         onSubmit={this.onConfirmDialog}
-    //       />
-    //       <p>{translate("dialog.signup.resendCode")}<button type="button" className="btn btn-sm btn-link">{translate("dialog.signup.resendCodeLink")}</button></p>
-    //     </div>
-    //   </Dialog>
-    const dialog = <Dialog
-      showHeader={true}
-      maximizable={true}
-      visible={this.props.visible}
-      positionTop={65}
-      modal={true}
-      onHide={this.props.onHide}
-      style={{
-        background: colors.lightGray
-      }}
-    >
-      <Login />
-    </Dialog>
+      countries={this.props.countries}
+      direction={this.props.direction} />
+    const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
+      <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+      <ModalBody>
+        <Login toggle={this.props.togglePopup} />
+      </ModalBody>
+    </Modal>
     return (
       <section id="signup">
         <div className="container-fluid">
@@ -97,11 +76,11 @@ class Signup extends Component {
               <span className="seperator"></span>
               <div id="signin-link">
                 <span className="user-img">
-                  <img class="user" alt="user" src="/img/user.svg" />
+                  <img className="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
-                <span className="btn-link" onClick={onShowDialog}>{translate("form.signup.signinLink")}</span>
-                {translate("form.signup.here")}
+                  <Link to={"#"} className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
+                  {translate("form.signup.here")}
                 </span>
               </div>
               <SocialMedia
@@ -109,6 +88,7 @@ class Signup extends Component {
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
               <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
+              <img src="/img/sign-up-image.png" alt="sign up" />
             </div>
           </div>
         </div>
@@ -120,13 +100,14 @@ class Signup extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    showPassword: state.customer.showPassword,
     token: state.customer.token,
     countries: state.api.countries,
     platform: state.customer.detail.platform,
     translate: getTranslate(state.localize),
-    component: getComponentName(ON_SOCIAL_MEDIA_SIGNUP),
-    currentLanguage: getActiveLanguage(state.localize).code
+    component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
+    currentLanguage: getActiveLanguage(state.localize).code,
+    selectedCountry: state.customer.selectedCountry,
+    direction: state.customer.direction
   }
 }
 

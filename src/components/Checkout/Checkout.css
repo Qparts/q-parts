@@ -12,7 +12,6 @@
 }
 
 .Checkout-Order_summary {
- display: flex;
  flex-direction: row;
  height: 27em;
 }

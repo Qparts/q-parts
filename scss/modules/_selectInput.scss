@@ -1,0 +1,12 @@
+.select-input {
+  .input-icon {
+    display: flex;
+    position: absolute;
+    #{$right}: 20px;
+    bottom: 7px;
+  }
+  .icon-checked {
+    top: 40%;
+    @include font-size(15px);
+  }
+}

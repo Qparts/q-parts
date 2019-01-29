@@ -2,8 +2,10 @@ import { initialState } from '../initialState/apiInitialState';
 
 import {
   GET_COUNTRY_SUCCEEDED, GET_COUNTRIES_SUCCEEDED, GET_COUNTRIES_REGIONS_SUCCEEDED, GET_VEHICLE_SUCCEEDED,
-  FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_RECOMMENDATION, GET_SORTED_PRODUCTS, GET_PRODUCT
+  FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_RECOMMENDATION, GET_SORTED_PRODUCTS,
+  GET_COUNTRIES_ONLY_SUCCEEDED
 } from '../actions/apiAction';
+import { AR } from '../constants';
 
 
 export default function reducer(state = initialState, action) {
@@ -26,6 +28,14 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, countries: newCountries }
 
+    case GET_COUNTRIES_ONLY_SUCCEEDED:
+      const countryLabel = action.payload.currentLang === AR ? 'nameAr' : 'name';
+      const newCountriesOnly = action.payload.data.map(country => {
+        return { ...country, label: country[countryLabel], value: country.id }
+      });
+
+      return { ...state, countriesOnly: newCountriesOnly }
+
     case GET_VEHICLE_SUCCEEDED:
       return { ...state, vehicles: action.payload }
 
@@ -36,16 +46,13 @@ export default function reducer(state = initialState, action) {
       return { ...state, regions: action.payload }
 
     case GET_SORTED_PRODUCTS:
-      return { ...state }  
+      return { ...state }
 
     case GET_RECENTLY_VIEWED:
       return { ...state, products: action.payload }
 
     case GET_RECOMMENDATION:
       return { ...state, products: action.payload }
-
-    case GET_PRODUCT:
-      return { ...state, product: action.payload }
 
     default:
       return state;

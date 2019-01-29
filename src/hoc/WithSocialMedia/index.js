@@ -5,10 +5,10 @@ import { FACEBOOK, GOOGLE, TWITTER } from '../../containers/Authentication/const
 const WithSocialMedia = WrappedComponent => {
   return class extends Component {
     constructor(props) {
-      super(props);
+      super(props)
 
       this.state = {
-        visible: false
+        modal: false
       }
     }
 
@@ -16,16 +16,17 @@ const WithSocialMedia = WrappedComponent => {
       WrappedComponent.name})`;
 
     onHide = (event) => {
-      this.setState({ visible: false });
+      this.setState({ modal: false });
     }
 
-    handleShowDialog = () => {
+    togglePopup = () => {
       this.setState({
-        visible: true
+        modal: !this.state.modal
       })
     }
 
     handleResponse = (type) => (response) => {
+      const { currentLanguage, selectedCountry, toggle } = this.props
       let data = {};
       switch (type) {
         case FACEBOOK:
@@ -36,8 +37,13 @@ const WithSocialMedia = WrappedComponent => {
             lastName: response.last_name,
             email: response.email,
             platform: FACEBOOK,
-          };
+            countryId: selectedCountry.id,
+            defaultLang: currentLanguage
 
+          };
+          if (toggle) {
+            toggle();
+          }
           return this.props.socialMediaButton(data, this.props.component);
 
         case GOOGLE:
@@ -47,20 +53,13 @@ const WithSocialMedia = WrappedComponent => {
             firstName: response.profileObj.givenName,
             lastName: response.profileObj.familyName,
             email: response.profileObj.email,
-            platform: GOOGLE
+            platform: GOOGLE,
+            countryId: selectedCountry.id,
+            defaultLang: currentLanguage
           }
-
-          return this.props.socialMediaButton(data, this.props.component);
-
-        case TWITTER:
-          data = {
-            socialMediaId: response.id,
-            firstName: response.name.split(' ')[0],
-            lastName: response.name.split(' ')[1],
-            email: response.email,
-            platform: TWITTER
-          };
-
+          if (toggle) {
+            toggle();
+          }
           return this.props.socialMediaButton(data, this.props.component);
 
         default:
@@ -77,8 +76,8 @@ const WithSocialMedia = WrappedComponent => {
         handleResponse={this.handleResponse}
         handleFailure={this.handleFailure}
         onHide={this.onHide}
-        onShowDialog={this.handleShowDialog}
-        visible={this.state.visible}
+        togglePopup={this.togglePopup}
+        modal={this.state.modal}
         {...this.props} />
     }
   }

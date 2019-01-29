@@ -1,7 +1,6 @@
 .order-summery{
-  @extend .border-radius-div;
-  @extend .overflow-xy-h;
-  @extend .box-shadow;
+  @include border-radius-div;
+  @include box-shadow;
   margin-bottom: 40px;
   @include media-breakpoint-down(md){
     margin-top: 40px;
@@ -91,7 +90,7 @@
   &:hover{
     p{
       span{
-        @extend .underline;
+        text-decoration: underline;
       }
     }
   }
@@ -100,13 +99,10 @@
 .banner-250{
   width: 250px;
   height: 250px;
-  @extend .bg-white;
-  @extend .text-center;
-  @extend .mx-auto;
+  text-align: center;
   margin-top: 30px;
   p{
-    @extend .d-table-cell;
-    @extend .align-middle;
+    vertical-align: middle
   }
 }
 .live-chat{

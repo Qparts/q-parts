@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { right } from '../../../utils';
 
 class Footer extends Component {
   render() {
@@ -97,9 +98,9 @@ class Footer extends Component {
               </p>
               <form className="form-inline">
                 <input type="text" className="form-control col"   placeholder="Enter Email" />
-                <button type="submit col-auto" className="btn-primary">
+                <button type="submit col-auto" className="btn btn-primary">
                   <i className="icon-email"></i>
-                  <span>Subscribe <i className="icon-arrow-right" /></span>
+                  <span>Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} /></span>
                 </button>
               </form>
             </li>

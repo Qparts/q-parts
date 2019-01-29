@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
-import { Button } from 'primereact/components/button/Button';
-
+import Radio from '../../components/UI/Radio';
+import Button from '../../components/UI/Button';
 import { selectVehicleGarage } from '../../actions/customerAction';
 
 import './GaragePopup.css';
@@ -37,11 +36,15 @@ class GaragePopup extends Component {
                 <div className="garage-content">
                   <div className="d-flex justify-content-between">
                     <div className="div-left">
-                      <RadioButton value={selectedVehicle} name="vehcile" onChange={this.handleChange.bind(this, vehicle)} checked={vehicle.id === selectedVehicle.id} />
-                      <label htmlFor="rb1">{vehicle.label}</label>
+                      <Radio
+                        value={selectedVehicle}
+                        label={vehicle.label}
+                        name="vehcile"
+                        onChange={this.handleChange.bind(this, vehicle)}
+                        checked={vehicle.id === selectedVehicle.id} />
                     </div>
                     <div className="div-right">
-                      <Button className="btn-primary" label="Save" />
+                      <Button className="btn btn-primary" text="Save" />
                       <a className="circle">
                         <i className="icon-close" />
                       </a>

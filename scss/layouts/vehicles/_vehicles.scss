@@ -4,7 +4,6 @@
     background: $light-gray;
   }
   .group-shadow-input {
-    @extend .group-shadow-div;
     height: 55px;
     top: 9px;
     background: $white;
@@ -17,7 +16,6 @@
   form {
     > .row {
       position: relative;
-      @extend .no-gutters;
 
       .col-md-3 {
         padding-right: 6px;
@@ -79,7 +77,7 @@
     padding-top: 11px;
     border-radius: inherit;
     .select__control {
-      @extend .w-100;
+      width: 100%;
     }
   }
   .select-input {
@@ -99,8 +97,8 @@
   .btn-primary {
     @include font-size(20px);
     height: 55px;
-    @extend .box-shadow;
-    @extend .w-sm-100;
+    @include box-shadow;
+    @include w-sm-100;
     text-transform: capitalize;
     text-align: $right;
 

@@ -68,7 +68,6 @@
   transform: translate(-50%, -50%);
 
   .btn-detail {
-    @extend .btn-primary;
     transition: none;
     &:hover,
     &:focus {
@@ -86,7 +85,6 @@
     }
   }
   .btn-cart {
-    @extend .btn-primary;
     transition: none;
     &:hover,
     &:focus {

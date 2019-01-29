@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
-import { Paginator } from 'primereact/components/paginator/Paginator';
 import Select from 'react-select';
 import Button from '../UI/Button';
 import { styles, categorySortOptions } from '../../constants';
@@ -76,16 +75,7 @@ class Accessories extends Component {
             <Button text="Clear all" className="btn btn-secondary" />
           </div>
           <div className="Accessories-contents">
-            <ProductGridView currentProducts={this.props.currentProducts}/>
-            <div className="Accessories-footer">
-              <Paginator
-                first={this.props.first}
-                rows={this.props.rows}
-                totalRecords={this.props.products.length}
-                onPageChange={this.props.onPageChange.bind(this)}
-                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
-              </Paginator>
-            </div>
+            {/* <ProductGridView product={this.props.currentProducts}/> */}
           </div>
         </div>
       </Fragment >

@@ -4,13 +4,13 @@ import LanguageToggle from '../../../components/LanguageToggle'
 import SideBar from '../../UI/SideBar';
 import Button from '../../UI/Button';
 import { connect } from 'react-redux';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import { selectVehicleGarage } from '../../../actions/customerAction';
-import { isEmpty } from "../../../utils";
+import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { styles } from "../../../constants";
 import Select from 'react-select';
 import { withRouter } from "react-router-dom";
+import Radio from '../../UI/Radio';
 export class MobileHeaderDetails extends Component {
     constructor(props) {
         super(props);
@@ -43,7 +43,7 @@ export class MobileHeaderDetails extends Component {
         { value: 3, label: "Jordan" }
       ];
         const { translate, localize, changeDefaultDirection, onCloseNav, setSideBarRef, setOverLay, vehiclesFormat, onAddVechile, selectedVehicle, vehicles,
-        onSignin } = this.props
+        onSignin, direction } = this.props
         return (
             <section id="mobile-header-details">
                 {!this.state.check && !this.state.checkGar ? (
@@ -141,7 +141,7 @@ export class MobileHeaderDetails extends Component {
                         <hr />
                         <Link className="w3-bar-item downloadApp" to="/"><p>Download Our App</p><i className="icon-apple" /> <i className="icon-play-store" /></Link>
                         <div className="footer-sideBar">
-                          <li class="nav-item">
+                          <li className="nav-item">
                             <Link className="w3-bar-item" to="/" style={{display:'flex'}}><i className="icon-arrow-left" /><p>one of the incubated project</p></Link>
                           </li>
                         </div>
@@ -165,20 +165,25 @@ export class MobileHeaderDetails extends Component {
                                         type="submit"
                                         className="btn-primary"
                                         text={translate("general.signin")}
-                                        icon="icon-arrow-right"
+                                        icon={`icon-arrow-${right(direction)}`}
                                         onClick={() => {
                                             this.onSignin();
                                             onCloseNav();
                                         }}
                                         />
+<<<<<<< HEAD
                                     <a><i className="icon-facebook btn-facebook"/></a>
                                     <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
                                     <a><i className="icon-twitter btn-twitter" style={{color:"#03a9f4"}}/></a>
+=======
+                                    <a><i className="icon-facebook-logo btn-facebook"/></a>
+                                    <a className="btn-google"><img src="/img/google-icon.svg" alt="google"></img></a>
+>>>>>>> 8cee09db740ac07c1a9444e600f0c6e1cfe8e7c8
                                 </div>
                                 <br />
                                 <div className="join-us">
-                                  <p>{translate("dropdown.signup.message")}</p> <Link class="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
-                                  <i className="icon-arrow-right" style={styles.arrow_right}/>
+                                  <p>{translate("dropdown.signup.message")}</p> <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+                                  <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right}/>
                                 </div>
 
                             </div>
@@ -210,8 +215,12 @@ export class MobileHeaderDetails extends Component {
                                      <div className="d-flex justify-content-between">
                                        <div className="div-left">
                                         <div className="col-auto">
-                                             <RadioButton value={selectedVehicle} name="vehcile" onChange={this.handleChange.bind(this, vehicle)} checked={vehicle.id === selectedVehicle.id} />
-                                          <label htmlFor="rb1">{vehicle.label}</label>
+                                        <Radio 
+                                          value={selectedVehicle} 
+                                          name="vehcile" 
+                                          onChange={this.handleChange.bind(this, vehicle)}
+                                          checked={vehicle.id === selectedVehicle.id} 
+                                          label={vehicle.label}/>
                                         </div>
                                        </div>
                                        <div className="div-right">

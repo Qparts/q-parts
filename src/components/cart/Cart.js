@@ -28,7 +28,7 @@ class Cart extends Component {
 				quantityLabel: 'quantity',
 				image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
 				productNumber: item.product.productNumber,
-				manufacturerName: item.product.manufacturer.name
+				manufacturerName: item.product.brand.name
 			}
 		});
 		const shipToOptions = [
@@ -97,7 +97,7 @@ class Cart extends Component {
 												<label>Totla</label>
 												<p>20700<span className="currency">SR</span></p>
 										</div>
-							<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+							<button class="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
 							</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-lg-9">
@@ -128,11 +128,11 @@ class Cart extends Component {
 															<h5>Quantity</h5>
 															<div class="input-group quantity">
 																<div class="input-group-prepend">
-																	<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																	<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 																</div>
 																<input class="form-control" disabled value="1" type="text"/>
 																<div class="input-group-append">
-																	<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																	<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 																</div>
 															</div>
 														</div>
@@ -141,7 +141,7 @@ class Cart extends Component {
 															<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
 														</div>
 														<div className="cart-actions">
-															<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+															<a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
 															<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 														</div>
 													</div>
@@ -150,11 +150,11 @@ class Cart extends Component {
 															<h5>Quantity</h5>
 															<div class="input-group quantity">
 																<div class="input-group-prepend">
-																	<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																	<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 																</div>
 																<input class="form-control" disabled value="1" type="text"/>
 																<div class="input-group-append">
-																	<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																	<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 																</div>
 															</div>
 														</div>
@@ -163,7 +163,7 @@ class Cart extends Component {
 											</figcaption>
 										</figure>
 									</li>
-									<li>
+									<li className="bg-white">
 										<figure className="row">
 											<a href="#" className="col-3 item-img">
 												<img src="/img/product-1.jpg"/>
@@ -200,11 +200,11 @@ class Cart extends Component {
 														<h5>Quantity</h5>
 														<div class="input-group quantity">
 															<div class="input-group-prepend">
-																<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
 															<input class="form-control" disabled value="1" type="text"/>
 															<div class="input-group-append">
-																<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 															</div>
 														</div>
 													</div>
@@ -213,7 +213,7 @@ class Cart extends Component {
 														<p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
 													</div>
 													<div className="cart-actions">
-														<a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+														<a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
 														<a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
 													</div>
 												</div>
@@ -222,11 +222,11 @@ class Cart extends Component {
 														<h5>Quantity</h5>
 														<div class="input-group quantity">
 															<div class="input-group-prepend">
-																<button className="btn-gray" type="button" disabled><i className="minus"></i></button>
+																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
 															<input class="form-control" disabled value="1" type="text"/>
 															<div class="input-group-append">
-																<button className="btn-gray" type="button"><i className="icon-plus"></i></button>
+																<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 															</div>
 														</div>
 													</div>
@@ -260,7 +260,7 @@ class Cart extends Component {
 										<label>Total</label><p class>20700<span>SR</span></p>
 									</li>
 								</ul>
-								<button class="btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+								<button class="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
 							</div>
 						<a href="#"  className="media chat-div">
 								<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>

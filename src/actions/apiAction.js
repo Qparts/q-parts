@@ -1,17 +1,20 @@
 import axios from 'axios';
 import { API_ROOT, VEHICLE_SERVICE, LOCATION_SERVICE, PRODUCT_SERVICE } from '../actions/constants';
 import { handleNetworkError } from '../utils';
-import { BEST_SELLER, OFFERS } from '../constants';
+import { BEST_SELLER, OFFERS, LOCAL_LANGUAGES } from '../constants';
+import { renderToStaticMarkup } from "react-dom/server";
+import globalTranslations from "../translations/translations.json";
+import { initialize } from 'react-localize-redux';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const GET_COUNTRY_SUCCEEDED = 'GET_COUNTRY_SUCCEEDED';
 export const GET_COUNTRIES_SUCCEEDED = 'GET_COUNTRIES_SUCCEEDED';
+export const GET_COUNTRIES_ONLY_SUCCEEDED = 'GET_COUNTRIES_ONLY_SUCCEEDED';
 export const GET_COUNTRIES_REGIONS_SUCCEEDED = 'GET_COUNTRIES_REGIONS_SUCCEEDED';
 export const GET_VEHICLE_SUCCEEDED = 'GET_VEHICLE_SUCCEEDED';
 export const FIND_CITY_SUCCEEDED = 'FIND_CITY_SUCCEEDED';
 export const GET_REGIONS_SUCCEEDED = 'GET_REGIONS_SUCCEEDED';
 export const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
-export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 
@@ -40,6 +43,23 @@ export const getCountries = () => {
       }, error => {
         handleNetworkError(dispatch, error);
       })
+  }
+}
+
+export const getCountriesOnly = (currentLang) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${LOCATION_SERVICE}/countries-only`)
+      .then(res => {
+        dispatch({
+          type: GET_COUNTRIES_ONLY_SUCCEEDED,
+          payload: {
+            data: res.data,
+            currentLang
+          }
+        });
+      }, error => {
+        handleNetworkError(dispatch, error);
+      });
   }
 }
 
@@ -101,13 +121,13 @@ export const findCity = (city, country) => {
 export const getOffers = (offerType) => {
   return (dispatch) => {
     if (offerType === BEST_SELLER) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/best-sellers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
 
     } else if (offerType === OFFERS) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/offers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
@@ -115,21 +135,22 @@ export const getOffers = (offerType) => {
   }
 }
 
-export const getProduct = (productId) => {
-  return (dispatch) => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`)
-      .then(res => {
-        dispatch({ type: GET_PRODUCT, payload: res.data })
-      })
+export const getRecentlyViewedProducts = (products) => {
+  return {
+    type: GET_RECENTLY_VIEWED, payload: products
   }
 }
 
-  export const getRecentlyViewedProducts = (products) => {
-    return {
-      type: GET_RECENTLY_VIEWED, payload: products
-    }
-  }
+export const getSortedProducts = () => {
+  return { type: GET_SORTED_PRODUCTS }
+}
 
-  export const getSortedProducts = () => {
-    return { type: GET_SORTED_PRODUCTS }
+export const InitializeDefaultLang = (defaultLanguage) => {
+  return (dispatch) => {
+    dispatch(initialize({
+      languages: LOCAL_LANGUAGES,
+      translation: globalTranslations,
+      options: { renderToStaticMarkup, defaultLanguage }
+    }))
   }
+}

@@ -9,7 +9,7 @@ const RouteWithSubRoutes = route => (
   render={props => (
    // pass the sub-routes down to keep nesting
    route.isAuth || route.isAuth === undefined ? (
-    <route.component {...props} routes={route.routes} />
+    <route.component {...props} {...route} routes={route.routes} />
    ) : (
      <Redirect to={{
       pathname: route.redirectTo,

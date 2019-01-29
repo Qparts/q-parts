@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Dialog } from 'primereact/components/dialog/Dialog';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 
 import Profile from '../../components/Profile/Profile';
@@ -31,6 +30,8 @@ import HelpCenter from '../../components/HelpCenter/HelpCenter';
 import Garage from '../../components/Garage/Garage';
 import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
+import Payment from '../../components/Payment/Payment';
+import PaymentPopup from '../../components/Payment/PaymentPopup';
 
 import {
   match
@@ -38,7 +39,7 @@ import {
 
 import SectionHeader from '../../components/UI/SectionHeader';
 import {
-  quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia
+  quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia, payment
 } from '../../constants';
 //Modal
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -51,6 +52,8 @@ const phone = 'phone';
 const email = 'email';
 const password = 'password';
 const garage_pupop = 'garage';
+const payment_pupop = 'payment';
+const addresses_popup = 'addresses'
 // const vehicle = 'vehicle';
 
 
@@ -103,6 +106,7 @@ class Setting extends Component {
     this.setState({ visible: false, cityFound: false, showGoogleMap: false, defaultAddress: null, newOrOldVechile: TAB_ONE });
 
     this.props.clearAddress();
+    this.togglePopup();
   }
 
   onConfirmDialog = (values) => {
@@ -115,14 +119,21 @@ class Setting extends Component {
       .on(type => type === name, () => this.props.editName({ firstName: values.firstName, lastName: values.lastName, defaultLang: values.defaultLang ? values.defaultLang.value : currentLanguage }))
       .on(type => type === phone, () => this.props.editPhoneNo(type, values.mobile))
       .on(type => type === email, () => this.props.editEmail({ newEmail: values.email }, email, currentLanguage))
-      .on(type => type === password, () => this.props.editPassword({ oldPassword: values.oldPassword, newPassword: values.newPassword }, password, currentLanguage))
+      .on(type => type === password, () => (
+        this.props.editPassword({ oldPassword: values.oldPassword, newPassword: values.newPassword }, password, currentLanguage)
+          .then(() => (
+            this.togglePopup()
+          ))
+      ))
       .otherwise(type => type)
   }
 
   onSaveNewAddress = values => {
-    const cityId = this.props.city ? this.props.city.id : values.city.id;
-    const { line1, line2, zipCode, title, latitude, longitude } = values;
-    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude })
+    const { line1, line2, zipCode, title, mobile, city } = values;
+    const latitude = city.latitude;
+    const longitude = city.longitude;
+    const cityId = city.id;
+    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile })
       .then(() => {
         this.onHide();
       });
@@ -197,11 +208,14 @@ class Setting extends Component {
       case 'connect':
         return this.setState({ sectionHeader: translate(`setting.links.${socialMedia}`) });
 
+      case 'payment':
+        return this.setState({ sectionHeader: payment });
+
       default:
         break;
     }
   }
-  togglePopup = () =>{
+  togglePopup = () => {
     this.setState({
       modal: !this.state.modal
     })
@@ -214,19 +228,31 @@ class Setting extends Component {
       case 'password':
         return {
           header: <Title
-            header={translate("dialog.updatePassword.title")}  />
+            header={translate("dialog.updatePassword.title")} />
         }
-        case 'email':
-          return {
-            header: <Title
-              header={translate("dialog.updateEmail.title")}  />
-          }
-        case 'garage':
-          return {
-            header: <Title
-              header={translate("dialog.vehicle.title")}
-              subHeader={"Store vehicles in your garage and Get product recommendations"} />
-          }
+      case 'email':
+        return {
+          header: <Title
+            header={translate("dialog.updateEmail.title")} />
+        }
+      case 'garage':
+        return {
+          header: <Title
+            header={translate("dialog.vehicle.title")}
+            subHeader={"Store vehicles in your garage and Get product recommendations"} />
+        }
+      case 'payment':
+        return {
+          header: <Title
+            header="Ad Credit Card"
+            subHeader={"Secure Credit Card Payment"} />
+        }
+      case 'addresses':
+        return {
+          header: <Title
+            header={translate("dialog.address.title")}
+            subHeader={translate("setting.addressBook.shippingItem")} />
+        }
       default:
         break;
     }
@@ -240,22 +266,22 @@ class Setting extends Component {
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
-         <ModalBody>
-           <EditInfo
-             name={"email"}
-             type="text"
-             placeholder={translate("dialog.updateEmail.placeholder")}
-             onHide={this.onHide}
-             cancel={translate("dialog.updateEmail.cancel")}
-             update={translate("dialog.updateEmail.update")}
-             onSubmit={this.onEdit.bind(this, email)}
-           />
-         </ModalBody>
-       </Modal>
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <EditInfo
+            name={"email"}
+            type="text"
+            placeholder={translate("dialog.updateEmail.placeholder")}
+            onHide={this.onHide}
+            cancel={translate("dialog.updateEmail.cancel")}
+            update={translate("dialog.updateEmail.update")}
+            onSubmit={this.onEdit.bind(this, email)}
+          />
+        </ModalBody>
+      </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <ResetPassword
@@ -263,58 +289,114 @@ class Setting extends Component {
             showPhoneNo={false}
             toggle={this.togglePopup}
             onSubmit={this.onEdit.bind(this, password)}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
     }
-    const addressDialog =
-      <Dialog
-        header={translate("dialog.address.title")}
-        visible={this.state.visible}
-        width="800px"
-        height="800px"
-        modal={true}
-        onHide={this.onHide}>
-        <Address
-          address={this.props.address}
-          customer={this.props.customer}
-          getRegions={this.props.getRegions}
-          getCountry={this.props.getCountry}
-          regions={this.props.regions}
-          country={this.props.country}
-          confirmUserAddress={this.props.confirmUserAddress}
-          onSubmit={this.onSaveNewAddress}
-          onShowGoogleMap={this.handleShowGoogleMap}
-          onCityFound={this.handleCityFound}
-          showGoogleMap={this.state.showGoogleMap}
-          cityFound={this.state.cityFound}
-          city={this.props.city}
-          findCity={this.props.findCity}
-          translate={this.props.translate}
-          onHide={this.onHide}
-          defaultAddress={this.state.defaultAddress}
-          onDefaultAddress={this.handleChangeDefaultAddress}
-        />
-      </Dialog>
+
+    let addressDialog;
+    if (this.state.dialogType === addresses_popup) {
+      addressDialog = <Modal contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <Address
+            address={this.props.address}
+            customer={this.props.customer}
+            getRegions={this.props.getRegions}
+            getCountry={this.props.getCountry}
+            regions={this.props.regions}
+            country={this.props.country}
+            confirmUserAddress={this.props.confirmUserAddress}
+            onSubmit={this.onSaveNewAddress}
+            onShowGoogleMap={this.handleShowGoogleMap}
+            onCityFound={this.handleCityFound}
+            showGoogleMap={this.state.showGoogleMap}
+            cityFound={this.state.cityFound}
+            city={this.props.city}
+            findCity={this.props.findCity}
+            translate={this.props.translate}
+            onHide={this.onHide}
+            defaultAddress={this.state.defaultAddress}
+            onDefaultAddress={this.handleChangeDefaultAddress}
+          />
+
+        </ModalBody>
+      </Modal>
+    }
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-    garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      garageDialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
-        <Vehicles
-          newOrOldVechile={this.state.newOrOldVechile}
-          onTabChange={this.handleChange}
-          toggle={this.togglePopup}
-          displayTwoTabs={false}
-        />
+          <Vehicles
+            newOrOldVechile={this.state.newOrOldVechile}
+            onTabChange={this.handleChange}
+            toggle={this.togglePopup}
+            displayTwoTabs={false}
+            direction={this.props.direction}
+          />
+        </ModalBody>
+      </Modal>
+
+    let paymentDialog;
+    if (this.state.dialogType === payment_pupop)
+      paymentDialog = <Modal contentClassName="container-fluid" className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          <PaymentPopup
+            onTabChange={this.handleChange}
+            toggle={this.togglePopup}
+            displayTwoTabs={false}
+            direction={this.props.direction}
+          />
         </ModalBody>
       </Modal>
     return (
       <section id="setting">
-        <SectionHeader text={this.state.sectionHeader} />
+        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
+        <div className="header-settings row">
+          <div>
+            <i>
+              <img className="request" src="/img/request.svg" alt="request" />
+              <div>
+                <p>{translate('setting.request')}</p>
+                <h1>8</h1>
+              </div>
+            </i>
+            <i>
+              <img className="orders" src="/img/request.svg" alt="oreder" />
+              <div>
+                <p>{translate('setting.links.orders')}</p>
+                <h1>3</h1>
+              </div>
+            </i>
+            <i>
+              <img className="wishList" src="/img/request.svg" alt="wishList" />
+              <div>
+                <p>{translate('setting.links.wishlist')}</p>
+                <h1>1</h1>
+              </div>
+            </i>
+            <i>
+              <img className="garage" src="/img/request.svg" alt="garage" />
+              <div>
+                <p>{translate('setting.links.garage')}</p>
+                <h1>2<p>{translate('setting.vehicle')}</p></h1>
+              </div>
+            </i>
+          </div>
+        </div>
         <div className="component-background">
           <section id="setting-details" className="container-fluid">
+            <div className="wahtsapp-before-links">
+              <a className="bg-whatsapp">
+                <CustomerService
+                  messages={["Have a Question?", "Ask a Specialis, In-House Experts."]}
+                  url="" />
+              </a>
+            </div>
             <div className="row">
               <SettingLinks {...this.props} />
               <Switch>
@@ -329,6 +411,7 @@ class Setting extends Component {
                         password="password"
                         onShowEditDialog={this.handleDialog}
                         onSubmit={this.onEdit.bind(this, name)}
+                        direction={this.props.direction}
                         {...this.props} />
                       {dialog}
                     </Fragment>
@@ -363,9 +446,10 @@ class Setting extends Component {
                     <Fragment>
                       <Addresses
                         customer={this.props.customer}
-                        onShowAdressDialog={this.handleShowDialog}
+                        onShowEditDialog={this.handleDialog}
                         onEditAddress={this.handleEditAddress}
-                        translate={this.props.translate} />
+                        translate={this.props.translate}
+                        addresses={this.props.addresses} />
                       {addressDialog}
                     </Fragment>
                   )
@@ -405,6 +489,17 @@ class Setting extends Component {
                       deleteWishlist={this.props.deleteWishlist}
                       moveWishlistToCart={this.props.moveWishlistToCart}
                       translate={this.props.translate} />
+                  )
+                }} />
+                <Route path="/setting/payment/" exact={true} render={() => {
+                  return (
+                    <Fragment>
+                      <Payment
+                        translate={this.props.translate}
+                        onShowEditDialog={this.handleDialog}
+                      />
+                      {paymentDialog}
+                    </Fragment>
                   )
                 }} />
                 <PrivateRoute
@@ -469,9 +564,12 @@ const mapStateToProps = (state) => {
     connectedPlatforms: getConnectedPlatforms(customer.socialMedia),
     component: getComponentName(ON_SOCIAL_MEDIA_LINK),
     currentLanguage: getActiveLanguage(state.localize).code,
+    selectedCountry: state.customer.selectedCountry,
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
-    wishlist: state.customer.wishlist
+    wishlist: state.customer.wishlist,
+    addresses: state.customer.detail.addresses,
+    direction: state.customer.direction
   }
 }
 

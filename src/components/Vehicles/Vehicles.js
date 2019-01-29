@@ -28,7 +28,6 @@ class Vehicles extends Component {
 
   render() {
     const { translate, match: { url } } = this.props;
-    console.log(this);
 
     return (
       <section id="vehicles">
@@ -39,7 +38,7 @@ class Vehicles extends Component {
               subHeader={translate("dialog.vehicle.subTitle")} />
           ) : null
         }
-        <Vehicle translate={translate} toggle={this.props.toggle} />
+        <Vehicle translate={translate} toggle={this.props.toggle} direction={this.props.direction} />
       </section>
     )
   }

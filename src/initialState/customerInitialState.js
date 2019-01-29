@@ -22,9 +22,9 @@ export const initialState = {
   longitude: null,
  },
  token: null,
- showPassword: true,
  vehiclesFormat: [],
  selectedVehicle: {},
+ selectedCountry: {},
  defaultAddress: {
   addressId: 1000,
   customerId: 12532,
@@ -43,5 +43,8 @@ export const initialState = {
  isOrderCompleted: false,
  recentViewedProducts: [],
  wishlist: [],
- direction: 'ltr'
+ direction: 'ltr',
+ registered: null,
+ isShippingCompleted: false,
+ isPaymentCompleted: false
 }

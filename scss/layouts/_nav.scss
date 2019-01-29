@@ -71,7 +71,7 @@
     &:hover{
       > a{
         background: $light-gray;
-        @extend .link-border-radius;
+        @include link-border-radius;
         @include nav-sm-media{
           border-radius: 0 !important;
         };
@@ -90,7 +90,7 @@
     &.selected{
       a{
         background: $light-gray;
-        @extend .link-border-radius;
+        @include link-border-radius;
         @include nav-sm-media{
           border-radius: 0 !important;
         };
