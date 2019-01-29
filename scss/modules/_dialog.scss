@@ -31,10 +31,10 @@
     background: white;
   }
   .modal-title {
-    h1 {
+    > span {
       height: 24px;
       font-family: Roboto;
-      size: 20px;
+      @include font-size(30px);
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
