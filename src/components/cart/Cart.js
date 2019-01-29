@@ -140,7 +140,6 @@ class Cart extends Component {
 															    <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
 															  </div>
 													</div>
-
 													</div>
 												</div>
 											</figcaption>
@@ -245,7 +244,7 @@ class Cart extends Component {
 								<div className="banner-250 bg-white mx-auto d-sm-none d-md-table">
 									<p className="d-table-cell">
 										Google Ad<br/>
-										250x250
+									220x220
 									</p>
 								</div>
 							</div>

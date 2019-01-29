@@ -163,11 +163,13 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /main\/.*\.scss$/,
+            test: /\.scss$/,
+            include: path.resolve(__dirname, '../scss/main'),
             loader: 'style-loader!css-loader!sass-loader'
           },
           {
-            test: /main-ar\/.*\.scss$/,
+            test: /\.scss$/,
+            include: path.resolve(__dirname, '../scss/main-ar'),
             loader: 'style-loader!css-loader!sass-loader'
           },
           {

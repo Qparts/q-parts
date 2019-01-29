@@ -1368,6 +1368,10 @@
           "expiration": [
             "انتهاء الصلاحية",
             "Expiration"
+          ],
+          "secure": [
+            "الدفع عن طريق بطاقة الائتمان امنه",
+            "Secure Credit Card Payment"
           ]
         },
         "newCard": {
@@ -1386,8 +1390,36 @@
           "add": [
             "أضف بطاقتك",
             "Add your card"
+          ],
+          "enterCardNo": [
+            "ادخل رقم البطاقة",
+            "Enter Card number"
+          ],
+          "securityCode": [
+            "رمز الحماية",
+            "Security Code"
+          ],
+          "enterCardName": [
+            "ادخل اسم البطاقة",
+            "Enter The Card Name"
+          ],
+          "cancel": [
+            "إلغاء",
+            "Cancel"
           ]
-        }
+        },
+        "endNo": [
+          "رقم الانتهاء",
+          "Number Ending"
+        ],
+        "expires": [
+          "تنتهي",
+          "Expires"
+        ],
+        "edit": [
+          "تعديل",
+          "Edit"
+        ]
       },
       "bankTransfer": {
         "title": [
@@ -1409,14 +1441,38 @@
         "code": [
           "رقم التحويل المالي",
           "SWIFT code"
+        ],
+        "transferText": [
+          "قم بالدفع مباشرة في حسابك . يرجى استخدام معرّف الطلب الخاص بك كمرجع للدفع. لا يمكن شحن طلبك حتى يتم مسح الأموال في حسابك",
+          "Make your payment directly into your bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have cleared in your account"
         ]
       },
       "cash": {
         "title": [
           "ادفع نقدًا عند الاستلام",
           "Pay with cash upon delivery"
+        ],
+        "placeOrder": [
+          "عن طريق وضع النظام الخاص بك ، فإنك توافق على موقعنا",
+          "By placing your order, you agree to our"
+        ],
+        "terms": [
+          "البنود والشروط",
+          "Terms & Conditions"
+        ],
+        "total": [
+          "مجموع",
+          "Total"
+        ],
+        "estimatedDelivery": [
+          "التسليم المقدر",
+          "Estimated delivery"
         ]
-      }
+      },
+      "canReview": [
+        "يمكنك مراجعة الطلب قبل الإنتهاء.",
+        "You can review this order before it's final."
+      ]
     },
     "confirm": {
       "table": {
@@ -1437,7 +1493,19 @@
         "ضع طلبك",
         "Place your order"
       ]
-    }
+    },
+    "shippingTitle": [
+      "الشحن",
+      "Shipping"
+    ],
+    "orderTitle": [
+      "استلام الطلب",
+      "Order Receipt"
+    ],
+    "singInTitle": [
+      "تسجيل الدخول",
+      "Sign In"
+    ]
   },
   "shippingAddress": {
     "title": [

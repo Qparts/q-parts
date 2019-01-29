@@ -6,6 +6,8 @@ import * as validations from '../../utils';
 import NumberPicker from '../UI/NumberPicker';
 import RenderImage from '../RenderImage/RenderImage';
 // import './RenderCartItem.css';
+import { getLength } from '../../utils/array';
+import * as constant from '../../constants'
 
 export default class extends Component {
 
@@ -33,98 +35,113 @@ export default class extends Component {
         const { fields, meta: { error, submitFailed }, deleteText } = this.props;
         return (
             <Fragment>
-                {submitFailed && error && <span>{error}</span>}
-                {fields.map((cartItem, idx) => {
-                    return <div key={idx} className="border card">
-                        <div class="row">
-                            <div className="col-3 col-md-2">
-                                <Field
-                                    name={`${cartItem}.image`}
-                                    component={RenderImage}
-                                />
+              <ul className=" item-list list-unstyled">
+                <li>
+                  <figure className="row">
+                    <a href="#" className="col-3 item-img">
+                      <img src="/img/oil-img-3.jpg"/>
+                    </a>
+                    <figcaption className="col-9">
+                      <div className="row">
+                        <div className="col-md-9 item-dis">
+                          <header>
+                            <h3><a href="#">8100 synthetic motor oil</a></h3>
+                            <h4>Motul USA <span>#Part Number</span></h4>
+                          </header>
+                          <div className="d-table product-options">
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Viscosity Grade</span></div>
+                              <div className="d-table-cell">SAE -50</div>
                             </div>
-                            <div className="col-9 col-md-5 pt">
-                                <div className="cart_product-details">
-                                    <Field
-                                        className="part-text"
-                                        name={`${cartItem}.itemName`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <Field
-                                        className="manufacturer-text"
-                                        name={`${cartItem}.manufacturerName`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <Field
-                                        className="part-text w-sm-100"
-                                        name={`${cartItem}.productNumber`}
-                                        type="text"
-                                        component={RenderField}
-                                        readOnly
-                                    />
-                                    <div className="q-display-small quantity-small">
-                                        <Field
-                                            className="part-text"
-                                            name={`${cartItem}.quantityLabel`}
-                                            type="text"
-                                            component={RenderField}
-                                            readOnly
-                                        />
-                                        <Field
-                                            name={`${cartItem}.quantity`}
-                                            component={NumberPicker}
-                                        />
-                                    </div>
-                                    <div className="w-100">
-                                        <Field
-                                            className="sales-price"
-                                            name={`${cartItem}.price`}
-                                            readOnly
-                                            component={RenderField}
-                                        />
-                                        <Field
-                                            className="currency"
-                                            name={`${cartItem}.currency`}
-                                            readOnly
-                                            component={RenderField}
-                                        />
-                                    </div>
-                                    <Button
-                                        isReverseOrder={true}
-                                        type="button"
-                                        className="btn-secondary"
-                                        text={"Move to wishlist"}
-                                        icon="icon-heart"
-                                    />
-                                    <Button
-                                        type="button"
-                                        className="btn-secondary"
-                                        text={deleteText}
-                                        onClick={() => fields.remove(idx)}
-                                    />
-                                </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Volume</span></div>
+                              <div className="d-table-cell">1.32 Gallon</div>
                             </div>
-                            <div className="col-md-5 pt q-hide-small">
-                                <Field
-                                    className="part-text"
-                                    name={`${cartItem}.quantityLabel`}
-                                    type="text"
-                                    component={RenderField}
-                                    readOnly
-                                />
-                                <Field
-                                    name={`${cartItem}.quantity`}
-                                    component={NumberPicker}
-                                />
-                            </div>
+                          </div>
+                          <div className="product-price">
+                            <p className="price">11.19 <span>sr</span></p>
+                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
+                          </div>
+                          <div className="actions">
+                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                          </div>
                         </div>
-                    </div>
-                }
-                )}
+                        <div className="col-md-3 quantity-div">
+                          <h5>Quantity</h5>
+                          <div className="input-group quantity">
+                            <div className="input-group-prepend">
+                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
+                            </div>
+                            <input className="form-control" disabled value="1" type="text"/>
+                              <div className="input-group-append">
+                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
+                              </div>
+                        </div>
+                        </div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+                <li>
+                  <figure className="row">
+                    <a href="#" className="col-3 item-img">
+                      <img src="/img/product-1.jpg"/>
+                    </a>
+                    <figcaption className="col-9">
+                      <div className="row">
+                        <div className="col-md-9 item-dis">
+                          <header>
+                            <h3><a href="#">#Part Number</a></h3>
+                            <h4>Product Brand <span>Product Name</span></h4>
+                          </header>
+                          <div className="d-table product-options">
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Vechile Info</span></div>
+                              <div className="d-table-cell">
+                                2015 Ford Focus<br/>
+                                VIN number (000 000 000 000 11)
+                              </div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Fitment</span></div>
+                              <div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Made in </span></div>
+                              <div className="d-table-cell">China</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>Condition</span></div>
+                              <div className="d-table-cell">New</div>
+                            </div>
+                          </div>
+                          <div className="product-price">
+                            <p className="price">11.19 <span>sr</span></p>
+                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
+                          </div>
+                          <div className="actions">
+                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                          </div>
+                        </div>
+                        <div className="col-md-3 quantity-div">
+                          <h5>Quantity</h5>
+                          <div className="input-group quantity">
+                            <div className="input-group-prepend">
+                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
+                            </div>
+                            <input className="form-control" disabled value="1" type="text"/>
+                              <div className="input-group-append">
+                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
+                              </div>
+                        </div>
+                        </div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </li>
+              </ul>
             </Fragment>
         )
     }

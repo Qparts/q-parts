@@ -6,7 +6,7 @@ class OrderSummary extends Component {
     render() {
         const { translate } = this.props;
         const renderHeader = !this.props.removeHeader && <div className="order-summary__header">
-        
+
             <div>
                 <h5 className="card-title">{translate("orderSummary.title")}</h5>
             </div>
@@ -60,7 +60,7 @@ const styles = {
 }
 
 OrderSummary.defaultProps = {
-    className: 'btn-primary'
+    className: 'btn btn-primary'
 }
 
 export default OrderSummary;
