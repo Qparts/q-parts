@@ -14,7 +14,7 @@ class ProductListView extends Component {
 		const { product } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
-				<CardImg src="/img/product-2.jpg" alt="car image" />
+				<CardImg src={product.image} alt="no product" />
 			</div>
 			<div className="col-9 col-md-5">
 				<h5 className="product-title">{product.desc}</h5>

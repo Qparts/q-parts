@@ -38,9 +38,7 @@ import { getLength } from '../../utils/array';
 import { fontSize } from '../../utils/font';
 import { MediumScreen, SmallScreen } from '../../components/Device';
 import { ClipLoader } from 'react-spinners';
-import { API_ROOT } from '../../config/api';
-import { PRODUCT_SERVICE } from '../../actions/constants';
-import axios from 'axios';
+import { getProduct } from '../../utils/api';
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -75,9 +73,10 @@ class ProductDetail extends Component {
       product: {}
     }
 
-    this.getProduct()
-      .then(() => {
+    getProduct(this.props)
+      .then(res => {
         this.setState({
+          product: res.data,
           loading: false
         });
       })
@@ -126,33 +125,27 @@ class ProductDetail extends Component {
     })
   }
 
-  getProduct = () => {
-    const { match: { params: { productId } } } = this.props;
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`)
-      .then(res => {
-        this.setState({
-          product: res.data
-        })
-      })
-  }
-
   componentDidUpdate(prevProps, prevState) {
     const { match: { params: { productId } } } = this.props;
     const nextProductId = prevProps.match.params.productId;
 
     if (nextProductId !== productId) {
-      this.getProduct()
-        .then(() => {
+      getProduct(this.props)
+        .then(res => {
           this.setState({
+            product: res.data,
             loading: false
           });
         })
     }
   }
   componentWillMount() {
-    this.setState({
-      data: this.getProduct()
-    })
+    getProduct(this.props)
+      .then(res => {
+        this.setState({
+          data: res.data
+        })
+      })
   }
 
   closeLightbox = () => {
@@ -212,7 +205,7 @@ class ProductDetail extends Component {
   renderSpecs = (isList = false) => {
     const { specs } = this.state.product;
     let Component = isList ? ListGroupItem : Fragment;
-  
+
     if (specs.length < 1) return <div>
       <span>no spec for this product</span>
     </div>

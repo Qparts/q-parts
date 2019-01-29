@@ -25,7 +25,7 @@ class ProductGridView extends Component {
 				onMouseEnter={this.handleMouseHover}
 				onMouseLeave={this.handleMouseHover}>
 				<div className="image-container" align="center">
-					<img src={"/img/product-3.jpg"} alt="" />
+					<img src={product.image} alt="no product" />
 					{
 						this.state.isHovering &&
 						<div className="product-buttons">

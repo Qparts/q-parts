@@ -10,14 +10,8 @@ class Search extends React.Component {
   }
   handleSubmit = e => {
     e.preventDefault();
-    // this.props.history.push(`search-key=${this.state.searchText}`);
-    //  this.props.history.push({
-    //   pathname: '/search',
-    //   search: `search-key:${this.state.searchText}`,
-    //   state: { query: this.state.searchText }
-    // })
 
-    this.props.history.push(`/listing?search-key=${this.state.searchText}`);
+    this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
     this.props.toggle();
 
   }
@@ -45,8 +39,3 @@ class Search extends React.Component {
 const withSearch = withRouter(Search)
 
 export default (withSearch);
-//path for SearchResult Component
-// {
-//   path: "/search?search-key:value",
-//   component: SearchResult
-// }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { upperCaseFirstChar } from '../../utils'
+import * as constant from '../../constants';
 
 const rows = 12;
 const recommended = 'recommended';
@@ -138,16 +139,21 @@ const WithProductView = WrappedComponent => {
 			return check ? true : false;
 		}
 
-		renderSearch = ({ filtration, key }, Component, handleChange, isChecked) => {
-			return filtration.values.map((value, index) => (
-				<div key={index}>
+		renderSearch = (filtration, Component, handleChange, isChecked, currentLanguage) => {
+
+			return filtration.options.map((data, index) => {
+				const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+				const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
+				const value = data[option];
+				
+				return <div key={index}>
 					<Component
 						onChange={handleChange.bind(this, { key, value })}
-						value={`${filtration.label} ${value}`}
-						checked={isChecked(`${filtration.label} ${value}`)}
+						value={`${filtration[key]} ${value}`}
+						checked={isChecked(`${filtration[key]} ${value}`)}
 						label={value} />
 				</div>
-			))
+			})
 		}
 
 		handleClear = () => {

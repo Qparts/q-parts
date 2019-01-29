@@ -4,7 +4,7 @@ const proxyHost = 'qtest.fareed9.com';
 const hostname = window && window.location && window.location.hostname;
 
 if (true) {
- backendHost = `http://${proxyHost}`
+ backendHost = `http://${proxyHost}`;
 } else {
  backendHost = 'http://localhost:8000';
 }
