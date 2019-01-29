@@ -41,10 +41,8 @@ class CheckoutShipping extends Component {
     }
   }
  handleDelivery = values => {
-
-  const submit = _.isEmpty(values) ? this.props.defaultAddress : values
+   values.preventDefault();
   this.props.completeShipping(true);
-  this.props.addDeliveryAddress(submit);
   this.props.history.push('/checkout/payment');
 
  }
@@ -189,8 +187,8 @@ class CheckoutShipping extends Component {
          />
        </div>
        <div className="footer">
-         <Button onClick={onHide} type="reset" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
-         <Button type="submit" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
+         <Button onClick={onHide} type="button" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
+         <Button type="button" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
        </div>
      </Fragment>
 
@@ -216,7 +214,7 @@ class CheckoutShipping extends Component {
                    <p>{translate("setting.addressBook.shippingItem")}</p>
                    <Button type="button" className="btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder/>
                  </div>
-               <form onSubmit={handleSubmit(this.handleSubmit)}>
+               <form onSubmit={this.handleDelivery}>
                  {(
                    this.state.hasNewAddress && <div className="row no-gutters">
                      <div className="col-12 title-address">
@@ -288,7 +286,7 @@ class CheckoutShipping extends Component {
                          placeholder={translate("form.address.shippingNote")} />
                      </div>
                      <div className="footer col-12">
-                       <Button type="submit" className="btn btn-primary col-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right"/>
+                       <Button type="button" className="btn btn-primary col-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" onClick={this.props.onSubmit}/>
                        <Button onClick={onHide} type="reset" className="btn btn-light col-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
                      </div>
                    </div>

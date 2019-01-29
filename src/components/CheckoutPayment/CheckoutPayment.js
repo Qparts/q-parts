@@ -54,7 +54,8 @@ class CheckoutPayment extends Component {
     this.props.addPaymentMethod({ type: 'Credit Card', creditCard });
   }
 
-  handleProceed = () => {
+  handleProceed = (e) => {
+    e.preventDefault();
     this.props.completePayment(true);
     this.props.history.push('/checkout/confirm')
   }
