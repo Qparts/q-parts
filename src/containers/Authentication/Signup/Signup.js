@@ -53,8 +53,9 @@ class Signup extends Component {
     const { translate, togglePopup } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
-      countries={this.props.countries} />
-    const dialog = <Modal isOpen={this.props.modal} toggle={this.props.togglePopup} >
+      countries={this.props.countries}
+      direction={this.props.direction} />
+    const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
         <Login toggle={this.props.togglePopup} />
@@ -105,7 +106,8 @@ const mapStateToProps = (state) => {
     translate: getTranslate(state.localize),
     component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
-    selectedCountry: state.customer.selectedCountry
+    selectedCountry: state.customer.selectedCountry,
+    direction: state.customer.direction
   }
 }
 

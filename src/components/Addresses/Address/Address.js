@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import SelectInput from '../../SelectInput/SelectInput';
 import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
 import Checkbox from '../../UI/Checkbox';

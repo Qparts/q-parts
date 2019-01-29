@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Dialog } from 'primereact/components/dialog/Dialog';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 
 import Profile from '../../components/Profile/Profile';
@@ -248,7 +247,7 @@ class Setting extends Component {
             header="Ad Credit Card"
             subHeader={"Secure Credit Card Payment"} />
         }
-     case 'addresses':
+      case 'addresses':
         return {
           header: <Title
             header={translate("dialog.address.title")}
@@ -267,7 +266,7 @@ class Setting extends Component {
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <EditInfo
@@ -282,7 +281,7 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Modal className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <ResetPassword
@@ -290,14 +289,15 @@ class Setting extends Component {
             showPhoneNo={false}
             toggle={this.togglePopup}
             onSubmit={this.onEdit.bind(this, password)}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
     }
 
     let addressDialog;
-    if(this.state.dialogType === addresses_popup){
-      addressDialog =<Modal className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+    if (this.state.dialogType === addresses_popup) {
+      addressDialog = <Modal contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Address
@@ -327,7 +327,7 @@ class Setting extends Component {
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-      garageDialog = <Modal className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      garageDialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Vehicles
@@ -335,25 +335,27 @@ class Setting extends Component {
             onTabChange={this.handleChange}
             toggle={this.togglePopup}
             displayTwoTabs={false}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
 
     let paymentDialog;
     if (this.state.dialogType === payment_pupop)
-      paymentDialog = <Modal className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      paymentDialog = <Modal contentClassName="container-fluid" className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <PaymentPopup
             onTabChange={this.handleChange}
             toggle={this.togglePopup}
             displayTwoTabs={false}
+            direction={this.props.direction}
           />
         </ModalBody>
       </Modal>
     return (
       <section id="setting">
-        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate}/>
+        <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
         <div className="header-settings row">
           <div>
             <i>
@@ -409,6 +411,7 @@ class Setting extends Component {
                         password="password"
                         onShowEditDialog={this.handleDialog}
                         onSubmit={this.onEdit.bind(this, name)}
+                        direction={this.props.direction}
                         {...this.props} />
                       {dialog}
                     </Fragment>
@@ -565,7 +568,8 @@ const mapStateToProps = (state) => {
     checkout: state.customer.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
-    addresses: state.customer.detail.addresses
+    addresses: state.customer.detail.addresses,
+    direction: state.customer.direction
   }
 }
 

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
-import { Paginator } from 'primereact/components/paginator/Paginator';
 import Select from 'react-select';
 import Button from '../UI/Button';
 import { styles, categorySortOptions } from '../../constants';
@@ -77,15 +76,6 @@ class Accessories extends Component {
           </div>
           <div className="Accessories-contents">
             {/* <ProductGridView product={this.props.currentProducts}/> */}
-            <div className="Accessories-footer">
-              <Paginator
-                first={this.props.first}
-                rows={this.props.rows}
-                totalRecords={this.props.products.length}
-                onPageChange={this.props.onPageChange.bind(this)}
-                template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink">
-              </Paginator>
-            </div>
           </div>
         </div>
       </Fragment >

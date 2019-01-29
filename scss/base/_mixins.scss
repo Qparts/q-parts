@@ -12,21 +12,97 @@
   font-size: calculateRem($size);
 }
 
-@mixin padding-left($size){
+@mixin padding-left($size) {
   padding-#{$left}: $size !important;
 }
 
-@mixin padding-right($size){
+@mixin padding-right($size) {
   padding-#{$right}: $size;
 }
 
-@mixin margin-right($size){
+@mixin margin-right($size) {
   margin-#{$right}: $size;
 }
 
-@mixin margin-left($size){
+@mixin margin-left($size) {
   margin-#{$left}: $size;
 }
+
+@mixin link-border-radius {
+  border-radius: side-values(0 20px 20px 20px) !important;
+}
+
+@mixin rounded-rectangle {
+  border-radius: side-values(20px 0 20px 20px) !important;
+  @include box-shadow;
+}
+
+@mixin container-fluid {
+  max-width: $max-container;
+}
+
+@mixin seperator {
+  width: 1px;
+  background: #ccc;
+  display: inline-block;
+  vertical-align: middle;
+}
+@mixin h-seperator {
+  width: 100%;
+  background: #ccc;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+@mixin q-placeholder {
+  font-family: Roboto;
+  @include font-size(14px);
+  font-weight: normal !important;
+}
+
+@mixin w-100 {
+  width: 100%;
+}
+@mixin w-sm-100 {
+  @include small-screen {
+    width: 100%;
+  }
+}
+
+@mixin w-md-100 {
+  @include medium-screen {
+    width: 100%;
+  }
+}
+
+@mixin border-radius-div {
+  border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+}
+
+@mixin text-capitalize {
+  text-transform: capitalize;
+}
+
+@mixin text-uppercase {
+  text-transform: uppercase;
+}
+
+@mixin text-right {
+  text-align: $right;
+}
+
+@mixin d-inline{
+  display: inline;
+}
+
+@mixin d-block{
+  display: block;
+}
+
+@mixin d-inline-block{
+  display: inline-block;
+}
+
 
 //@include font
 

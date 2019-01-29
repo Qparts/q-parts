@@ -74,7 +74,7 @@ class Products extends Component {
                                                     <img className="card-img-top" src="/img/product-2.jpg" alt="product" />
                                                     <div className="card-body">
                                                         <h5 className="card-title">{product.desc}</h5>
-                                                        <p className="product-brand">{product.manufacturer.name}</p>
+                                                        <p className="product-brand">{product.brand.name}</p>
                                                         <div className="product-review">
                                                             <Stars values={product.averageRating} {...starsRating} />
                                                             <span className="total-review">{this.getReviewsLength(product.reviews)} review</span>

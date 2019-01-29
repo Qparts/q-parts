@@ -41,7 +41,7 @@ class CheckoutShipping extends Component {
     }
   }
  handleDelivery = values => {
-   values.preventDefault();
+  values.preventDefault();
   this.props.completeShipping(true);
   this.props.history.push('/checkout/payment');
 
@@ -212,7 +212,7 @@ class CheckoutShipping extends Component {
              <div className="Address-container">
                  <div className="addresses-header justify-content-between ">
                    <p>{translate("setting.addressBook.shippingItem")}</p>
-                   <Button type="button" className="btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder/>
+                   <Button type="button" className="btn btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder/>
                  </div>
                <form onSubmit={this.handleDelivery}>
                  {(

@@ -4,11 +4,12 @@ import Products from "../Products/Products";
 import AppsLink from '../AppsLink/AppsLink';
 import Button from "../UI/Button";
 import Title from '../UI/Title';
+import { right } from '../../utils';
 
 class HomeDetails extends Component {
 
 	render() {
-		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate } = this.props;
+		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
 		return (
 			<Fragment>
 				<section id="home-details" className="container-fluid">
@@ -96,11 +97,11 @@ class HomeDetails extends Component {
 											<Link to='/send'>
 												<Button
 													type="submit"
-													className="btn-primary w-sm-100"
+													className="btn btn-primary w-sm-100"
 													text={
 														<Fragment>
 															<span>{translate("general.send")}</span>
-															<i className="icon-arrow-right"></i>
+															<i className={`icon-arrow-${right(direction)}`}></i>
 														</Fragment>
 													}
 												/>
@@ -178,11 +179,11 @@ class HomeDetails extends Component {
 								</span>
 								<Button
 									type="submit"
-									className="btn-primary"
+									className="btn btn-primary"
 									text={
 										<Fragment>
 											<span>{translate("general.join")}</span>
-											<i className="icon-arrow-right"></i>
+											<i className={`icon-arrow-${right(direction)}`}></i>
 										</Fragment>
 									}
 								/>

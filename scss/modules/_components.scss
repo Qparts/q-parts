@@ -22,7 +22,7 @@
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  @extend .position-relative;
+  position: relative;
 }
 .icon-add:before {
   content: "\61";
@@ -268,10 +268,10 @@
   width: auto !important;
 }
 .select2-dropdown {
-  @extend .link-border-radius;
+  @include link-border-radius;
   overflow: hidden;
   border-width: 0;
-  @extend .box-shadow;
+  @include box-shadow;
 }
 .select2-results__option {
   padding: 5px 10px;
@@ -289,21 +289,21 @@
   width: 1px;
   background: #ccc;
   display: inline-block;
-  @extend .align-middle;
+  vertical-align: middle;
 }
 
 .h-seperator {
   width: 100%;
   background: #ccc;
   display: inline-block;
-  @extend .align-middle;
+  vertical-align: middle;
 }
 
 .ellipse {
   border-radius: 20px;
   width: 34px;
   height: 34px;
-  @extend .box-shadow;
+  @include box-shadow;
   background-color: $white;
 }
 
@@ -329,15 +329,15 @@
 }
 
 .rounded-rectangle {
-  @extend .div-border-radius;
-  @extend .box-shadow;
+  border-radius: side-values(20px 0 20px 20px) !important;
+  @include box-shadow;
 }
 
 .group-shadow-div {
   position: absolute;
-  @extend .w-100;
+  width: 100%;
   #{$right}: 0;
-  @extend .rounded-rectangle;
+  @include rounded-rectangle;
 }
 
 .radio-button {
@@ -409,9 +409,6 @@
   padding-top: 70px;
   padding-bottom: 70px;
 }
-.border-radius-div{
-  border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-}
 .overflow-xy-h{
   overflow: hidden;
 }
@@ -444,7 +441,7 @@
 }
 
 .quantity{
-  @extend .border-radius-div;
+  @include border-radius-div;
   overflow: hidden;
   .input-group-prepend,
   input{
@@ -462,7 +459,6 @@
     @include font-size(17px);
   }
   button{
-    @extend .btn-gray;
     border-radius: 0 !important ;
     &:disabled{
       i{
@@ -477,10 +473,4 @@
 }
 .underline{
   text-decoration: underline;
-}
-
-.q-placeholder {
-  font-family: Roboto;
-  @include font-size(14px);
-  font-weight: normal !important;
 }

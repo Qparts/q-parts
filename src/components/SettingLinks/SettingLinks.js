@@ -24,7 +24,7 @@ class profileLinks extends Component{
     return(
       <Fragment>
           <div className="col-md-2 w3-hide-small w3-hide-medium">
-              <div class="list-group">
+              <div className="list-group">
                   {links.map((link, idx) => {
                       return (
                           <Link

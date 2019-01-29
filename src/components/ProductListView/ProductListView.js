@@ -14,12 +14,12 @@ class ProductListView extends Component {
 		const { product } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
-				<CardImg src="/img/product-2.jpg" alt="car image" />
+				<CardImg src={product.image} alt="no product" />
 			</div>
 			<div className="col-9 col-md-5">
 				<h5 className="product-title">{product.desc}</h5>
 				<div>
-					<span className="product-manufacturer">{product.manufacturer.name}</span>
+					<span className="product-manufacturer">{product.brand.name}</span>
 				</div>
 				<div className="product-review_list">
 					<Stars values={product.averageRating} {...starsRating} />
@@ -39,8 +39,8 @@ class ProductListView extends Component {
 				</div>
 				<MediumScreen>
 					<div className="product-buttons">
-						<Link to={`products/${product.id}`} className="btn-detail" text="View Details" />
-						<Link to='#' className="btn-cart" icons={["icon-cart", "icon-plus"]} />
+						<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
+						<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 					</div>
 				</MediumScreen>
 			</div>

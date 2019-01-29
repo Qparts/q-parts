@@ -281,7 +281,7 @@ class CheckoutPayment extends Component {
                             validate={[validations.required]} />
                         </div>
                           <div className="footer col-12">
-                              <Button className="btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={"icon-arrow-right"} />
+                              <Button className="btn btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={"icon-arrow-right"} />
                               <Button className="btn btn-light col-2" type="reset" text={translate("checkout.payment.creditCard.newCard.cancel")} onClick={this.onCancle} />
                           </div>
                         </form>

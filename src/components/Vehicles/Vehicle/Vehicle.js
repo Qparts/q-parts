@@ -12,6 +12,7 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
+import { right } from '../../../utils';
 
 import Checkbox from '../../UI/Checkbox';
 
@@ -41,7 +42,7 @@ class Vehicle extends Component {
   }
 
   render() {
-    const { handleSubmit, vehicles, translate } = this.props;
+    const { handleSubmit, vehicles, translate, direction } = this.props;
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,
@@ -70,8 +71,8 @@ class Vehicle extends Component {
 
     return (
       <form onSubmit={handleSubmit(this.handleSubmit)}>
-        <div className="row">
-          <div className="group-shadow-input" />
+        <div className="row no-gutters">
+          <div className="group-shadow-input group-shadow-div" />
           <div className="col-md-12 div-first-rounded">
             <Field
               name="make"
@@ -110,7 +111,7 @@ class Vehicle extends Component {
             />
           </div>
         </div>
-        <div className="row">
+        <div className="row no-gutters">
           <div className="col-md-12 align-self-end vehicle-radio">
             <Checkbox
               onChange={e => this.setState({
@@ -122,7 +123,7 @@ class Vehicle extends Component {
           </div>
           <div className="footer col-12">
             <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-            <Button className="btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} />
+            <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
           </div>
         </div>
       </form>

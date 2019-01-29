@@ -2,7 +2,6 @@ import App from '../components/App';
 import Cart from '../components/cart/Cart';
 import VendorForm from '../components/VendorForm/VendorForm'
 import ProductResult from '../containers/ManualForm/SearchResult/SearchResult';
-import Catalog from '../containers/Catalog/Catalog';
 import Login from '../containers/Authentication/Login/Login';
 import Signup from '../containers/Authentication/Signup/Signup'
 import Logout from '../containers/Logout/Logout';
@@ -20,7 +19,7 @@ import SearchResult from '../containers/SearchResult/SearchResult'
 import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 
-export const routes = (isAuth) => [
+export const routes = (isAuth, direction) => [
     {
         path: "/",
         exact: true,
@@ -63,10 +62,6 @@ export const routes = (isAuth) => [
         component: Vehicles,
     },
     {
-        path: "/catalog",
-        component: Catalog
-    },
-    {
         path: "/cart",
         component: Cart
     },
@@ -84,11 +79,13 @@ export const routes = (isAuth) => [
         path: "/qtest.fareed9.com/change-email/",
         exact: true,
         component: VerifyEmail,
+        direction: direction,
     },
     {
         path: "/activate-email/:code?/:email?",
         exact: true,
         component: VerifyEmail,
+        direction: direction,
     },
     {
         path: "/checkout",
@@ -114,7 +111,8 @@ export const routes = (isAuth) => [
     },
     {
         path: "/send",
-        component: SendRequest
+        component: SendRequest,
+        direction: direction
     },
     {
         path: "/listing",

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
 import GaragePopup from "../../../containers/GaragePopup/GaragePopup";
-import { isEmpty } from "../../../utils";
+import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 
@@ -26,7 +26,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
@@ -92,17 +92,17 @@ class HeaderDetails extends Component {
                 <div className="dropdown-header">
                   <p>Welcome Back</p>
                   <div style={styles.btn_social}>
-                    <button type="submit" className="btn-primary" onClick={onSignin}>
-                      {translate("general.signin")} <i className="icon-arrow-right" />
+                    <button type="submit" className="btn btn-primary" onClick={onSignin}>
+                      {translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} />
                     </button>
-                    <a href="#"><i className="icon-facebook-logo btn-facebook" /></a>
-                    <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
+                    <a href="#"><i className="icon-facebook-logo btn btn-facebook" /></a>
+                    <a className="btn btn-google"><img src="/img/google-icon.svg"></img></a>
                   </div>
                   <br />
                   <div style={styles.text}>
                     <p>{translate("dropdown.signup.message")}</p>
                     <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
-                    <i className="icon-arrow-right" style={styles.arrow_right} />
+                    <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right} />
                   </div>
                   <div className="dropdown-divider"  >
                   </div>
@@ -153,7 +153,7 @@ class HeaderDetails extends Component {
                     />
                   ) : (
                       <ButtonCustom
-                        className="btn-primary"
+                        className="btn btn-primary"
                         text={"Add a new vehicle"}
                         onClick={onAddVechile} />
                     )}

@@ -47,7 +47,7 @@ class VerifyEmail extends Component {
     renderAccountValidated = (verified) => {
         if (verified) {
             return (
-                <ForgotPassword />
+                <ForgotPassword direction={this.props.direction} />
             );
         } else {
             return <Redirect to="/" />;

@@ -9,6 +9,14 @@ const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeM
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const mainCss = new ExtractTextPlugin({
+  filename: 'static/css/main.css'
+});
+const mainArCss = new ExtractTextPlugin({
+  filename: 'static/css/main-ar.css'
+});
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -156,18 +164,17 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.scss$/,
-            loaders: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              require.resolve('fast-sass-loader')
-            ]
+            include: path.resolve(__dirname, '../scss/main'),
+            loader: 'style-loader!css-loader!sass-loader'
+          },
+          {
+            test: /\.scss$/,
+            include: path.resolve(__dirname, '../scss/main-ar'),
+            loader: 'style-loader!css-loader!sass-loader'
           },
           {
             test: /\.css$/,
-            loaders: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-            ]
+            use: ['style-loader', 'css-loader'],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
@@ -229,6 +236,8 @@ module.exports = {
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
     }),
+    mainCss,
+    mainArCss
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

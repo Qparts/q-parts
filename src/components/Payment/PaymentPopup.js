@@ -9,6 +9,7 @@ import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 
 import * as validations from '../../utils';
+import { right } from '../../utils';
 
 class PaymentPopup extends Component {
 
@@ -27,7 +28,7 @@ class PaymentPopup extends Component {
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
     const options = [
       { value: '3', label: "rae" },
       { value: '6', label: "aww" },
@@ -95,7 +96,7 @@ class PaymentPopup extends Component {
           <div className="col-3">
             <Button className="btn btn-light" type="reset" text="Cancel" onClick={this.onCancle} />
           </div>
-          <Button className="btn-primary col-9" text="Add Card" icon={"icon-arrow-right"} />
+          <Button className="btn btn-primary col-9" text="Add Card" icon={`icon-arrow-${right(direction)}`} />
           </div>
         </div>
       </form>

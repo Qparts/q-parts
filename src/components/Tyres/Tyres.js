@@ -16,6 +16,7 @@ import Button from '../UI/Button';
 import WithProductView from '../../hoc/WithProductView';
 
 import * as validations from "../../utils";
+import { right } from "../../utils";
 
 import SelectInput from '../SelectInput/SelectInput';
 import { getTranslate } from 'react-localize-redux';
@@ -102,7 +103,7 @@ class Tyres extends Component {
 												text={
 													<Fragment>
 														<span>{translate("general.search")}</span>
-														<i className="icon-arrow-right"></i>
+														<i className={`icon-arrow-${right(this.props.direction)}`}></i>
 													</Fragment>
 												}
 											/>
@@ -127,7 +128,7 @@ class Tyres extends Component {
 										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
 										<div className="card-body">
 											<h5 className="card-title">{product.desc}</h5>
-											<p className="product-brand">{product.manufacturer.name}</p>
+											<p className="product-brand">{product.brand.name}</p>
 											<div className="product-review">
 												<Stars values={product.averageRating} {...starsRating} />
 												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
@@ -152,30 +153,30 @@ class Tyres extends Component {
 						<Ads />
 					</section>
 					<section id="tyres-sizes" className="container-fluid">
-							<Title
-								header={translate("tyresPage.popularSizes")}
-								subHeader={translate("offers.subTitle")}
-							/>
-							<Slider {...sliderSetting}>
-								{
-									this.props.products.map((product, idx) => (
-										<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
-											<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
-											<div className="card-body">
-												<h5 className="card-title">{product.desc}</h5>
-												<p className="product-brand">{product.manufacturer.name}</p>
-												<div className="product-review">
-													<Stars values={product.averageRating} {...starsRating} />
-													<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
-												</div>
-												<p className="price">
-													{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
-												</p>
+						<Title
+							header={translate("tyresPage.popularSizes")}
+							subHeader={translate("offers.subTitle")}
+						/>
+						<Slider {...sliderSetting}>
+							{
+								this.props.products.map((product, idx) => (
+									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
+										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
+										<div className="card-body">
+											<h5 className="card-title">{product.desc}</h5>
+											<p className="product-brand">{product.brand.name}</p>
+											<div className="product-review">
+												<Stars values={product.averageRating} {...starsRating} />
+												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
 											</div>
-										</a>
-									))
-								}
-							</Slider>
+											<p className="price">
+												{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
+											</p>
+										</div>
+									</a>
+								))
+							}
+						</Slider>
 					</section>
 				</div>
 			</Fragment>
@@ -187,6 +188,7 @@ const mapStateToProps = state => {
 	return {
 		products: state.api.products,
 		translate: getTranslate(state.localize),
+		direction: state.customer.direction
 	}
 }
 

@@ -27,7 +27,7 @@ class SocialMedia extends Component {
               callback={this.props.handleResponse('facebook')}
               render={renderProps => (
                 <button
-                  className="btn-facebook"
+                  className="btn btn-primary btn-facebook"
                   disabled={this.props.facebook === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.facebook}</button>
               )} />
@@ -41,7 +41,7 @@ class SocialMedia extends Component {
               disabled={this.props.google === DISCONNECT}
               render={renderProps => (
                 <button
-                  className="btn-google"
+                  className="btn btn-primary btn-google"
                   disabled={this.props.google === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.google}</button>
               )} />

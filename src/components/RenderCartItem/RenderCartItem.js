@@ -63,20 +63,20 @@ export default class extends Component {
                             <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
                           </div>
                           <div className="actions">
-                            <a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
                           </div>
                         </div>
                         <div className="col-md-3 quantity-div">
                           <h5>Quantity</h5>
-                          <div class="input-group quantity">
-                            <div class="input-group-append">
-                              <button type="button" ><i className="icon-plus"></i></button>
+                          <div className="input-group quantity">
+                            <div className="input-group-prepend">
+                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
                             </div>
-                            <input class="form-control" disabled value="1" type="text"/>
-                            <div class="input-group-prepend">
-                              <button type="button" disabled><i className="minus"></i></button>
-                            </div>
+                            <input className="form-control" disabled value="1" type="text"/>
+                              <div className="input-group-append">
+                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
+                              </div>
                         </div>
                         </div>
                       </div>
@@ -121,22 +121,21 @@ export default class extends Component {
                             <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
                           </div>
                           <div className="actions">
-                            <a href="#" className="btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
+                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
                           </div>
                         </div>
                         <div className="col-md-3 quantity-div">
                           <h5>Quantity</h5>
-                          <div class="input-group quantity">
-                            <div class="input-group-append">
-                              <button type="button" ><i className="icon-plus"></i></button>
+                          <div className="input-group quantity">
+                            <div className="input-group-prepend">
+                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
                             </div>
-                            <input class="form-control" disabled value="1" type="text"/>
-                            <div class="input-group-prepend">
-                              <button type="button" disabled><i className="minus"></i></button>
-                            </div>
+                            <input className="form-control" disabled value="1" type="text"/>
+                              <div className="input-group-append">
+                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
+                              </div>
                         </div>
-
                         </div>
                       </div>
                     </figcaption>

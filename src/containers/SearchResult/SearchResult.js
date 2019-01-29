@@ -7,25 +7,23 @@ import { getSortedProducts } from '../../actions/apiAction';
 import Select from 'react-select';
 // import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
-import { styles as commonStyles, categorySortOptions } from '../../constants';
+import { styles as commonStyles, categorySortOptions, colors } from '../../constants';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import {
 	Collapse, Card, CardBody, CardTitle, ListGroup, InputGroup, InputGroupAddon, Input
 } from 'reactstrap';
+import { ClipLoader } from 'react-spinners';
 
 import { isEmpty, replaceAll } from '../../utils';
+import * as constant from '../../constants';
+import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { MediumScreen, SmallScreen } from '../../components/Device';
+import { getGeneralSearch } from '../../utils/api';
+import { getActiveLanguage } from 'react-localize-redux';
 
-const diameter = 'diameter';
-const profile = 'profile';
-const width = 'width';
-const brand = 'brand';
-const price = 'price';
-const rating = 'rating';
-const Radio = 'Radio'
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -40,8 +38,19 @@ class SearchResult extends Component {
 			collapse4: false,
 			collapse5: false,
 			collapse6: false,
-			selectedView: GRID
+			selectedView: GRID,
+			searchGeneral: [],
+			loading: true,
 		};
+	}
+
+	setGeneralSearch = (search) => {
+		getGeneralSearch(search).then(res => {
+			this.setState({
+				searchGeneral: res.data,
+				loading: false
+			})
+		});
 	}
 
 	toggle = (collapse) => {
@@ -53,30 +62,33 @@ class SearchResult extends Component {
 	}
 
 	componentDidMount() {
-		const { location: { search }, filterObject } = this.props;
-		const query = queryString.parse(search.slice(1));
-		const keys = Object.keys(query);
+		const { location: { search } } = this.props;
+		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+		this.setGeneralSearch(search);
+		
+		const { searchGeneral: {filterObjects} } = this.state;
 
-		const filters = keys.map(key => {
-			const componentType = filterObject[key] ? filterObject[key].componentType : null;
+		const query = queryString.parse(search.slice(1));
+		// const keys = Object.keys(query);
+
+		const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
 			const lastIndex = query[key].length - 1;
 			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
 			const queryValues = replaceAll(newArray, '_', ' ');
-			const values = queryValues.length > 1 && componentType === Radio ? [query[key][lastIndex]] : [...new Set(queryValues)];
+			const values = queryValues.length > 1 ? [...new Set(queryValues)] : [];
 
 			return {
-				label: key,
-				componentType,
+				filterTitle: key,
+				Checkbox,
 				values
 			}
-		});
+		}) : [];
 
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 
 		this.props.onSetParams(newParams)
 		this.props.onSetRadioButton(filters)
-		return this.props.onAddToFilter(filters, filterObject);
-
+		return this.props.onAddToFilter(filters);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -94,7 +106,7 @@ class SearchResult extends Component {
 	}
 
 	renderProducts = () => (
-		this.props.currentProducts.map((product, idx) => (
+		this.state.searchGeneral.products.map((product, idx) => (
 			this.state.selectedView === GRID ? (
 				<ProductGridView key={idx} product={product} />
 			)
@@ -137,21 +149,74 @@ class SearchResult extends Component {
 			show: {
 				display: 'flex',
 				height: '41px'
+			},
+			loading: {
+				textAlign: 'center'
 			}
 		}
-		const { filterObject, isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio } = this.props;
+		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { searchGeneral: { filterObjects } } = this.state;
+		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+		
+
+		const override = `
+            border-color: ${colors.brandColor} !important;
+            border-bottom-color: transparent !important;
+        `;
+		if (_.isEmpty(filterObjects))
+			return (
+				<div className="container-fluid" style={styles.loading}>
+					<ClipLoader
+						css={override}
+						sizeUnit={"px"}
+						size={150}
+						loading={this.state.loading}
+					/>
+				</div>
+			)
+
 
 		return (
-
 			<Fragment>
 				<section id="results-container">
 					<div className="container-fluid d-flex">
 						<MediumScreen>
+
 							<div className="filter-container col-3">
-								<div className="filter-category card col-12">
+								{
+									filterObjects.map((filterObject, idx) => {
+										return <div key={idx} className="filter-category card col-12">
+											<div className="row">
+												<div className="col-9 title">
+													<p>{filterObject[key]}</p>
+												</div>
+												<div className="col-3 dropdown-icon">
+													<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
+														<i className={this.getCollapseIcon('collapse1')} />
+													</Link>
+												</div>
+											</div>
+											<Collapse isOpen={this.state.collapse1}>
+												<Card className="filter-body">
+													<CardBody>
+														<InputGroup>
+															<InputGroupAddon addonType="prepend">
+																<i className="icon-search" />
+															</InputGroupAddon>
+															<Input className="search-box" type="text" placeholder="Search" />
+														</InputGroup>
+														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
+													</CardBody>
+												</Card>
+											</Collapse>
+											<span className="h-seperator" />
+										</div>
+									})
+								}
+								{/* <div className="filter-category card col-12">
 									<div className="row">
 										<div className="col-9 title">
-											<p>{filterObject.diameter.label}</p>
+											<p>{filterObject['price']}</p>
 										</div>
 										<div className="col-3 dropdown-icon">
 											<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
@@ -168,120 +233,12 @@ class SearchResult extends Component {
 													</InputGroupAddon>
 													<Input className="search-box" type="text" placeholder="Search" />
 												</InputGroup>
-												{renderSearch({ filtration: filterObject.diameter, key: diameter }, Checkbox, onFilter, isChecked)}
+												{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
 											</CardBody>
 										</Card>
 									</Collapse>
 									<span className="h-seperator" />
 								</div>
-								<div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject.profile.label}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse2')}>
-												<i className={this.getCollapseIcon('collapse2')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse2}>
-										<Card className="filter-body">
-											<CardBody>
-												<InputGroup>
-													<InputGroupAddon addonType="prepend">
-														<i className="icon-search" />
-													</InputGroupAddon>
-													<Input className="search-box" type="text" placeholder="Search" />
-												</InputGroup>
-												{renderSearch({ filtration: filterObject.profile, key: profile }, Checkbox, onFilter, isChecked)}
-											</CardBody>
-										</Card>
-									</Collapse>
-								</div>
-								<div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject.width.label}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse3')}>
-												<i className={this.getCollapseIcon('collapse3')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse3}>
-										<Card className="filter-body">
-											<CardBody>
-												<InputGroup>
-													<InputGroupAddon addonType="prepend">
-														<i className="icon-search" />
-													</InputGroupAddon>
-													<Input className="search-box" type="text" placeholder="Search" />
-												</InputGroup>
-												{renderSearch({ filtration: filterObject.width, key: width }, Checkbox, onFilter, isChecked)}
-											</CardBody>
-										</Card>
-									</Collapse>
-								</div>
-
-								<div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject.brand.label}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse4')}>
-												<i className={this.getCollapseIcon('collapse4')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse4}>
-										<Card className="filter-body">
-											<CardBody>
-												<InputGroup>
-													<InputGroupAddon addonType="prepend">
-														<i className="icon-search" />
-													</InputGroupAddon>
-													<Input className="search-box" type="text" placeholder="Search" />
-												</InputGroup>
-												{renderSearch({ filtration: filterObject.brand, key: brand }, Checkbox, onFilter, isChecked)}
-											</CardBody>
-										</Card>
-									</Collapse>
-								</div>
-
-								<div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject.price.label}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse5')}>
-												<i className={this.getCollapseIcon('collapse5')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse5}>
-										<Card className="filter-body">
-											<CardBody>
-												{renderSearch({ filtration: filterObject.price, key: price }, Checkbox, onFilter, isChecked)}
-												<div className="row d-flex">
-													<div className="col-lg-4 col-md-6 search-box-min-container">
-														<input className="form-control search-box-min" type="text" placeholder="Min" name="" id="" />
-													</div>
-													<div className="col-lg-4 col-md-6 search-box-max-container">
-														<input className="form-control search-box-max" type="text" placeholder="Max" name="" id="" />
-													</div>
-													<div className="col-lg-4 col-md-12 search-box-btn-container">
-														<Button text="Go" className="btn btn-primary" />
-													</div>
-												</div>
-											</CardBody>
-										</Card>
-									</Collapse>
-								</div>
-
 								<div className="filter-category card col-12">
 									<div className="row">
 										<div className="col-9 title">
@@ -301,6 +258,7 @@ class SearchResult extends Component {
 										</Card>
 									</Collapse>
 								</div>
+							 */}
 							</div>
 						</MediumScreen>
 						<div className="products-container col-12 col-md-9">
@@ -345,7 +303,7 @@ class SearchResult extends Component {
 											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
 										))
 									}
-									<Button text="Clear all" className="btn-gray-secondary" onClick={onClear} />
+									<Button text="Clear all" className="btn btn-gray-secondary" onClick={onClear} />
 								</div>
 							</div>
 							<div className="products-panel row">
@@ -361,7 +319,8 @@ class SearchResult extends Component {
 
 const mapStateToProps = state => {
 	return {
-		products: state.api.products
+		products: state.api.products,
+		currentLanguage: getActiveLanguage(state.localize).code,
 	}
 }
 
@@ -369,41 +328,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
 		getSortedProducts: () => dispatch(getSortedProducts())
-	}
-}
-
-SearchResult.defaultProps = {
-	filterObject: {
-		[diameter]: {
-			componentType: 'Radio',
-			label: 'Diameter',
-			values: ['10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
-		},
-		[profile]: {
-			componentType: 'Checkbox',
-			label: 'Profile',
-			values: ['35', '40', '45', '50', '55', '60', '65', '70', '75', '80']
-		},
-		[width]: {
-			componentType: 'Checkbox',
-			label: 'Tyre width',
-			values: ['165', '175', '185', '205', '215', '225', '235', '245', '255']
-		},
-		[brand]: {
-			componentType: 'Checkbox',
-			label: 'Brand',
-			values: ['Nexen', 'Toyo']
-		},
-		[price]: {
-			componentType: 'Checkbox',
-			label: 'Price',
-			values: ['> 50', '50-100', '100-300']
-		},
-		[rating]: {
-			componentType: 'Checkbox',
-			label: 'Rating',
-			values: ['4 and up more', '3 and up more', 'Not yet rated']
-		}
 	}
 }
 

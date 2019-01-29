@@ -15,7 +15,6 @@ export const GET_VEHICLE_SUCCEEDED = 'GET_VEHICLE_SUCCEEDED';
 export const FIND_CITY_SUCCEEDED = 'FIND_CITY_SUCCEEDED';
 export const GET_REGIONS_SUCCEEDED = 'GET_REGIONS_SUCCEEDED';
 export const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
-export const GET_PRODUCT = 'GET_PRODUCT';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 
@@ -122,26 +121,17 @@ export const findCity = (city, country) => {
 export const getOffers = (offerType) => {
   return (dispatch) => {
     if (offerType === BEST_SELLER) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/best-sellers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
 
     } else if (offerType === OFFERS) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/offers`)
+      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
         .then(res => {
           dispatch({ type: GET_RECOMMENDATION, payload: res.data })
         })
     }
-  }
-}
-
-export const getProduct = (productId) => {
-  return (dispatch) => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`)
-      .then(res => {
-        dispatch({ type: GET_PRODUCT, payload: res.data })
-      })
   }
 }
 

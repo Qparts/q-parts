@@ -1,6 +1,3 @@
-#cart {
-  position: relative;
-
   .RenderImage {
     padding-top: 15px;
     padding-#{$left}: 15px;
@@ -174,7 +171,7 @@
     .select__control{
       padding: side-values(10px 20px 13px 70px);
       background: rgba(0, 0, 0, 0.6);
-      @extend .border-radius-div;
+      @include border-radius-div;
     }
     .select__single-value{
       color: $white;
@@ -188,12 +185,9 @@
       opacity: .8;
     }
   }
-  //
   .item-list{
-    @extend .border-radius-div;
-    @extend .overflow-xy-h;
+    @include border-radius-div;
     li{
-      @extend .bg-white;
       padding: 20px 15px;
       figure{
         margin-bottom: 0;
@@ -203,7 +197,7 @@
         @include font-size(17px);
         text-transform: capitalize;
           a:hover{
-            @extend .underline;
+            text-decoration: underline;
           }
       }
       h4{
@@ -259,9 +253,9 @@
         height: 6px;
         background-color: $green;
         border-radius: 100px;
-        @extend .d-inline-block;
+        @include d-inline-block;
         margin-right: 5px;
-        @extend .position-relative;
+        position: relative;
         top: -2px;
       }
     }
@@ -269,11 +263,11 @@
   .actions{
     .btn-gray{
       padding: 9px 15px 4px;
-      @extend .d-inline-block;
+      @include d-inline-block;
       margin-#{$right}: 10px;
       span{
-        @extend .position-relative;
-        top: -5px;
+        position: relative;
+        top: -4px;
       }
     }
     .icon-heart{
@@ -283,10 +277,8 @@
     }
   }
   .back-shop{
-    @extend .btn-gray-secondary;
-    @extend .d-block;
-    @extend .text-right;
-    @extend .mt-2;
+    @include d-block;
+    @include text-right;
     padding-right: 20px;
     padding-left: 20px;
     @include font-size(20px);
@@ -302,21 +294,16 @@
       padding-#{$right}: 30px;
     }
   }
-}
+
 .quantity-div{
   padding-#{$left}: 0;
   h5{
     font-weight: 400;
     @include font-size(15px);
-    @extend .text-#{$right};
+    @include text-right;
     @include opacity(0.8);
   }
   .quantity{
-
-    .input-group-prepend,
-    input{
-
-    }
     input{
       height: 40px;
     }
@@ -334,7 +321,7 @@
         width: 11px;
         height: 2px;
         background: $basic-gray;
-        @extend .d-block;
+        @include d-block;
     }
   }
 }

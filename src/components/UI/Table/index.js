@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
-import { RadioButton } from 'primereact/components/radiobutton/RadioButton';
 import _ from 'lodash';
 import moment from 'moment';
 import * as constant from '../../../constants';
+import Radio from '../Radio';
 
 class Table extends Component {
  render() {
@@ -11,7 +11,7 @@ class Table extends Component {
   const keys = columns ? Object.keys(columns[0]) : [];
   const renderRadioButton = (idx) => (
    this.props.hasRadioButton && <td>
-    <RadioButton value={idx} name={this.props.radioName} onChange={this.props.onSelecteRadioButton} checked={idx === this.props.radioButton} />
+    <Radio value={idx} name={this.props.radioName} onChange={this.props.onSelecteRadioButton} checked={idx === this.props.radioButton} />
    </td>
   )
 

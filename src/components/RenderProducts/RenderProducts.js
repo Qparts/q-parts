@@ -39,7 +39,7 @@ export default class RenderProducts extends Component {
                         <div>
                           <h5 className="product-title">{product.desc}</h5>
                           <div>
-                            <span className="product-manufacturer">{product.manufacturer.name}</span>
+                            <span className="product-manufacturer">{product.brand.name}</span>
                             {this.extras(product)}
                           </div>
                           <div className="product-review_list">
@@ -65,7 +65,7 @@ export default class RenderProducts extends Component {
                       <CardImg top src="/img/product-2.jpg" alt="car image" />
                       <CardTitle className="product-title">{product.desc}</CardTitle>
                       <div>
-                        <span className="product-manufacturer">{product.manufacturer.name}</span>
+                        <span className="product-manufacturer">{product.brand.name}</span>
                         {this.extras(product)}
                       </div>
                       <div className="product-review_slide">

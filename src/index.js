@@ -3,13 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
-//import loadStyle from './config/app-style';
-import '../scss/app.scss';
-
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
+import '../scss/main/main.scss';
+// import '../scss/main-ar/main-ar.scss';
 
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
@@ -24,20 +19,15 @@ class Root extends React.Component {
     super(props);
 
     this.state = {
-      direction: store.getState().customer.direction
-    };
-
-    //loadStyle(this.state.direction);
-
-  }
-
-  /*
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.direction !== this.state.direction) {
-      loadStyle(this.state.direction)
+      direction: 'ltr'
     }
+    // store.subscribe(() => {
+    //   this.setState({
+    //     direction: store.getState().customer.direction
+    //   })
+    // })
+
   }
-  */
 
   render() {
     return (
@@ -46,7 +36,7 @@ class Root extends React.Component {
           <DirectionProvider direction={this.state.direction}>
             <LocalizeProvider store={store}>
               <ErrorBoundary>
-                <Routes />
+                <Routes direction={this.state.direction} />
               </ErrorBoundary>
             </LocalizeProvider>
           </DirectionProvider>
