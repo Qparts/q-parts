@@ -1,18 +1,8 @@
 @include font-face($icon-font-name, $icon-path);
-[data-icon]:before {
-  font-family: $icon-font-name !important;
-  content: attr(data-icon);
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  speak: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 [class^='icon-']:before,
-[class*=' icon-']:before {
+[class*=' icon-']:before,
+.swiper-button-next::before,
+.swiper-button-prev::before{
   font-family: $icon-font-name !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -144,7 +134,8 @@
 .icon-arrow-down:before {
   content: "\4e";
 }
-.icon-arrow-left:before {
+.icon-arrow-left:before,
+.swiper-button-prev::before {
   content: "\4f";
 }
 .icon-custom-order:before {
@@ -213,7 +204,7 @@
 .icon-list:before {
   content: "\21";
 }
-.icon-linked-in-logo:before {
+.icon-linked-in:before {
   content: "\22";
 }
 .icon-email:before {
@@ -222,7 +213,8 @@
 .icon-delivery:before {
   content: "\24";
 }
-.icon-arrow-right:before {
+.icon-arrow-right:before,
+.swiper-button-next::before {
   content: "\25";
 }
 .icon-cart:before {
@@ -234,56 +226,8 @@
 .icon-filter:before {
   content: "\28";
 }
-.icon-facebook-logo:before {
+.icon-facebook:before {
   content: "\29";
-}
-//select2
-.select2-container--default .select2-selection--single {
-  border-width: 0;
-  .select2-selection__rendered {
-    @include font-size(12px);
-    padding: side-values(0 0 0 5px);
-    display: inline-block !important;
-    border-radius: 0;
-  }
-  .select2-selection__arrow {
-    position: relative;
-    display: inline-block;
-    b {
-      border-color: #ccc transparent transparent transparent;
-      margin-top: -3px;
-    }
-  }
-}
-.select2-container--default.select2-container--open
-  .select2-selection--single
-  .select2-selection__arrow
-  b {
-  border-color: transparent transparent #ccc transparent;
-}
-.select2-container {
-  width: auto !important;
-}
-.select2-container--open .select2-dropdown--below {
-  width: auto !important;
-}
-.select2-dropdown {
-  @include link-border-radius;
-  overflow: hidden;
-  border-width: 0;
-  @include box-shadow;
-}
-.select2-results__option {
-  padding: 5px 10px;
-  @include font-size(12px);
-  border-bottom: 1px solid $light-gray;
-  min-width: 100px;
-}
-.select2-container--default .select2-results__option[aria-selected='true'],
-.select2-container--default
-  .select2-results__option--highlighted[aria-selected] {
-  background-color: $light-gray;
-  color: $basic-gray;
 }
 .seperator {
   width: 1px;
@@ -307,26 +251,6 @@
   background-color: $white;
 }
 
-.red-line {
-  width: 157px;
-  height: 2px;
-  border-radius: 1px;
-  background-color: $brand-color;
-}
-
-.dotted-line {
-  width: 11px;
-  height: 1px;
-  border: solid 0.7px #ededed;
-  background-color: #ededed;
-}
-
-.solid-line {
-  display: inline-block;
-  width: 412px;
-  height: 1px;
-  background-color: $very-light-grey;
-}
 
 .rounded-rectangle {
   border-radius: side-values(20px 0 20px 20px) !important;
@@ -346,6 +270,8 @@
   border-radius: 9px;
   background-color: $white;
 }
+.border-radius-div{
+  border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 
 .boarder-left-radius {
   @include boarder-left-radius;
@@ -361,49 +287,6 @@
 .boarder-right-bottom-radius {
   @include boarder-right-radius(0, 20px);
 }
-
-.slick-slider {
-  .slick-prev,
-  .slick-next {
-    @include font-size(23px);
-    cursor: pointer;
-  }
-
-  .slick-next {
-    position: absolute;
-    bottom: 96%;
-    left: 98%;
-    transform: translate(-50%, -50%);
-
-    @include small-screen {
-      bottom: 100%;
-      left: 89%;
-    }
-  }
-
-  .slick-prev {
-    position: absolute;
-    bottom: 96%;
-    left: 95%;
-    transform: translate(-50%, -50%);
-
-    @include small-screen {
-      bottom: 100%;
-      left: 80%;
-    }
-  }
-
-  .slick-slide {
-    margin-left: 30px;
-    .card {
-      border-style: none;
-      border-radius: 20px;
-    }
-  }
-  .slick-disabled {
-    opacity: 0.2;
-  }
-}
 .component-background {
   background: $light-gray;
   padding-top: 70px;
@@ -412,37 +295,18 @@
 .overflow-xy-h{
   overflow: hidden;
 }
-.bg-white{
-  background: $white;
-}
-.product-options{
-  margin-top: 15px;
-  border-bottom: 1px solid $dark-gray;
-  width: 100%;
-  .d-table-row{
-    .d-table-cell{
-      padding: 5px 10px;
-      @include font-size(15px);
-      border-top: 1px solid $dark-gray;
-      .icon-checked:before{
-        color: $brand-color;
-        top: 3px;
-      }
-      &:first-child{
-        text-transform: capitalize;
-        border-#{$right}: 1px solid $dark-gray;
-        width: 30%;
-        span{
-          @include opacity(0.5);
-        }
-      }
-    }
-  }
-}
 
 .quantity{
   @include border-radius-div;
   overflow: hidden;
+  @include media-breakpoint-down(md){
+    max-width: 200px;
+    display: inline-flex;
+    margin-top: 10px;
+  };
+  @include media-breakpoint-down(xs){
+    max-width: 150px;
+  };
   .input-group-prepend,
   input{
     margin-#{$right}: 3px;
@@ -455,22 +319,250 @@
     border-width: 0;
     text-align: center;
     box-shadow: none;
+    height: 40px;
     color: $basic-gray;
     @include font-size(17px);
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
   }
   button{
+    width: 41px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
     border-radius: 0 !important ;
+    i{
+      @include font-size(12px);
+      position: absolute;
+      #{$left}: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
     &:disabled{
+      cursor: not-allowed;
       i{
        @include opacity(0.8);
       }
-      cursor: default;
       &:hover{
         background: $light-gray;
       }
     }
   }
+  .minus{
+      width: 11px;
+      height: 2px;
+      background: $basic-gray;
+      display: block;
+  }
 }
 .underline{
   text-decoration: underline;
+
 }
+.default-header-bg{
+  @extend .d-flex;
+  @extend .align-items-center;
+  background: $default-header-bg;
+  min-height: 105px;
+  header{
+    h1{
+      @include font-size(50px);
+      color: $white;
+      display: inline-block;
+      margin-bottom: 0;
+      @include media-breakpoint-down(lg){
+        @include font-size(40px);
+        span{
+          display: none;
+        }
+      }
+      @include media-breakpoint-down(sm){
+        @include font-size(35px);
+      }
+    }
+  }
+}
+//dropdown
+.dropdown-toggle::after{
+  border-top-width: 5px;
+  border-right-width: 5px;
+  border-left-width: 5px;
+  color: $light-gray-2;
+  @include opacity(0.6);
+}
+.dropdown-menu {
+  @extend .box-shadow;
+}
+//shaimaa Updates
+.sec-header{
+  @extend .artical-space;
+  h1{
+    font-weight: 500px;
+    color: $basic-gray;
+    @include font-size(40px);
+    @include media-breakpoint-down(lg){
+      @include font-size(30px);
+    };
+      > p{
+        float: #{$left};
+        display: inline-block;
+        border-bottom: 2px solid $brand-color;
+        padding-bottom: 10px;
+        margin-#{$right}: 10px;
+      }
+  }
+  > span{
+    @include font-size(15px);
+    @include opacity(0.6);
+    font-weight: 300;
+    position: relative;
+    text-transform: capitalize;
+    top: -7px;
+    margin-left: -5px;
+    @include media-breakpoint-down(lg){
+      font-weight: 500;
+    };
+  }
+}
+.swiper-button-prev,
+.swiper-button-next{
+  background-image: none !important;
+}
+//product list swiper-slide
+.recommended-product{
+  h3{
+    @include font-size(20px);
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    font-weight: 400;
+    @include media-breakpoint-up(lg){
+      @include font-size(25px);
+    };
+  }
+  .swiper-container{
+    overflow: visible !important;
+  }
+  .swiper-wrapper,
+  .swiper-slide{
+      display: flex;
+      align-items: stretch;
+      height: auto;
+    }
+  .swiper-slide{
+      &:first-child{
+        border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+        overflow: hidden;
+      }
+      &:last-child{
+        border-radius: side-values(0 $border-radius-base $border-radius-base 0 );
+        overflow: hidden;
+      }
+    }
+  .card{
+      border-width: 0;
+      overflow: hidden;
+      background: $white;
+      border-radius: 0;
+    }
+  .card-img-top{
+      border-radius: 0;
+    }
+  h5{
+        @include font-size(15px);
+        font-weight: 400;
+        height: 19px;
+        overflow: hidden;
+        margin-bottom: 5px;
+      }
+  .product-info{
+      margin-bottom: 5px;
+      li{
+        @include font-size(14px);
+        color: $light-charcoal-grey;
+        border-left: 1px solid darken($light-gray, 10%);
+        line-height: 15px;
+        padding-#{$left}: 0.5rem;
+        strong{
+          font-weight: 500;
+          @include font-size(13px);
+          color: $basic-gray;
+        }
+        &:first-child{
+          padding-#{$left}: 0;
+          border-#{$left}-width: 0;
+        }
+      }
+    }
+  .rating{
+      > div:first-child{
+        display: inline-block;
+        line-height: 11px;
+      }
+      >span{
+        @include font-size(13px);
+        padding-#{$left}: 5px;
+
+      }
+    }
+  .price{
+      margin-top: 5px;
+      margin-bottom: 0;
+      @include font-size(22px);
+      span{
+        @include font-size(13px);
+        margin-#{$left}: -3px;
+        text-transform: uppercase;
+      }
+    }
+  .swiper-button-next,
+  .swiper-button-prev{
+        top: -18px;
+        left: auto;
+        @include font-size(26px);
+        @include media-breakpoint-down(sm){
+          margin-top: -24px;
+        };
+  }
+  .swiper-button-next{
+      right: -2px;
+    }
+  .swiper-button-prev{
+      right: 30px;
+    }
+  .swiper-left{
+    top: 0;
+    left: -500%;
+    width: 500%;
+    height: 100%;
+    background: $white;
+    position: absolute;
+    z-index: 1;
+  }
+}
+.gray-bg{
+  background: $light-gray;
+  .swiper-left{
+    background: $light-gray;
+  }
+}
+//upload input
+.upload-img {
+  width: 26px;
+  height: 23px;
+}
+//socila icons
+.icon-facebook {
+  color: #475993;
+}
+.icon-twitter {
+  color: #03a9f4;
+}
+//sprite
+.sprite{
+  position: relative;
+  background:  url("#{$img-path}/sprite.png") no-repeat transparent;
+  display: block;
+}
+}
+

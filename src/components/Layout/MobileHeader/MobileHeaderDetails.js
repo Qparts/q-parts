@@ -171,8 +171,14 @@ export class MobileHeaderDetails extends Component {
                                             onCloseNav();
                                         }}
                                         />
+<<<<<<< HEAD
+                                    <a><i className="icon-facebook btn-facebook"/></a>
+                                    <a className="btn-google"><img src="/img/google-icon.svg"></img></a>
+                                    <a><i className="icon-twitter btn-twitter" style={{color:"#03a9f4"}}/></a>
+=======
                                     <a><i className="icon-facebook-logo btn-facebook"/></a>
                                     <a className="btn-google"><img src="/img/google-icon.svg" alt="google"></img></a>
+>>>>>>> 8cee09db740ac07c1a9444e600f0c6e1cfe8e7c8
                                 </div>
                                 <br />
                                 <div className="join-us">

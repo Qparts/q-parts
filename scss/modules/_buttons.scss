@@ -8,17 +8,25 @@
   border-width: 0;
   i {
     display: inline-block;
+    @include transition(all, 0.5s, ease);
   }
 }
 
 .btn-primary {
   border-style: none;
   background: $brand-color;
-  text-transform: uppercase;
   color: $white;
   &:hover,
   &:focus {
     background: darken($brand-color, 10%);
+  }
+  i{
+    margin-#{$left}: 10px;
+    @include font-size(23px);
+  }
+  &:hover{
+    color: $white;
+
   }
 }
 .btn-gray {
@@ -40,40 +48,13 @@
   border-style: none;
 }
 
-.btn-link {
-  color: $charcoal-grey;
-  border-style: none;
-  background: none !important;
-  text-transform: capitalize;
-  padding: 0;
-  background: $light-gray;
-  &.selected {
-    color: $basic-black;
-    font-weight: 500;
-  }
-
-  &:focus,
-  &.focus {
-    border-color: transparent;
-    box-shadow: none;
-  }
-
-  &:hover {
-    color: $brand-color;
-  }
-}
-
 .btn-facebook {
   background: $white;
-  border-radius: side-values(0 0 0 20px) !important;
-  &:hover,
-  &:focus {
-    background: none;
-  }
+  border-radius: side-values(0 0 0 $border-radius-base) !important;
 }
 .btn-google {
   background: $white;
-  border-radius: side-values(0 0 20px 0) !important;
+  border-radius: side-values(0 0 $border-radius-base 0) !important;
   height: 100%;
   img {
     width: 25px;

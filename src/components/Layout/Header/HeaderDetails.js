@@ -30,7 +30,7 @@ class HeaderDetails extends Component {
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const signinJoinHeader =
       <Fragment>
-        <span className="user-img">
+        <span className="user-img position-relative d-inline-block">
           <img alt="user" src="/img/user.svg" />
         </span>
         <b>{translate("general.signin")}</b>
@@ -88,82 +88,38 @@ class HeaderDetails extends Component {
     ) : (
         <Fragment>
           <li className="user-account">
-              <DropdownItem dropdownItemId="signin" header={signinJoinHeader}>
-                <div className="dropdown-header">
-                  <p>Welcome Back</p>
-                  <div style={styles.btn_social}>
-                    <button type="submit" className="btn btn-primary" onClick={onSignin}>
-                      {translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} />
-                    </button>
-                    <a href="#"><i className="icon-facebook-logo btn btn-facebook" /></a>
-                    <a className="btn btn-google"><img src="/img/google-icon.svg"></img></a>
-                  </div>
-                  <br />
-                  <div style={styles.text}>
-                    <p>{translate("dropdown.signup.message")}</p>
-                    <Link className="join-us-text" to="/signup">{translate("dropdown.signup.link")}</Link>
+            <DropdownItem header={signinJoinHeader}>
+                <h6>Welcome Back</h6>
+                <ul className="signin-list">
+                  <li><a href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
+                  <li><a href="#"><i className="icon-facebook" /></a></li>
+                  <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
+                </ul>
+                <p>
+                  {translate("dropdown.signup.message")}
+                  <Link to="/signup">
+                    {translate("dropdown.signup.link")}
                     <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right} />
-                  </div>
-                  <div className="dropdown-divider"  >
-                  </div>
-                  <div className="dropdown-footer">
-                    <span>
-                      <img alt="garage" src="/img/garage.svg" /> <p>Orders</p>
-                    </span>
-                    <span>
-                      <img alt="garage" src="/img/request.svg" /> <p>Request</p>
-                    </span>
-                    <span>
-                      <img alt="garage" src="/img/garage.svg" /> <p>My Garage</p>
-                    </span>
-                  </div>
-                </div>
+                  </Link>
+                </p>
+              <ul className="account-actions">
+                <li>
+                  <a href="#"><i className="icon-shopping-bag"></i>Orders</a>
+                </li>
+                <li><a href="#"><i className="icon-send"></i>Requests</a></li>
+                <li><a href="#"><img alt="garage" src="/img/garage.svg"/>Garage</a></li>
+              </ul>
+          </DropdownItem>
 
-              </DropdownItem>
           </li>
         </Fragment>
       );
     return (
-      <div className="header-second">
-        <div className="d-flex justify-content-between container-fluid">
-          <Link className="brand nav-icon-pl" to="/">
-            <img alt="qParts" src="/img/qParts-logo.svg" />
-          </Link>
-          <ul className="list-inline user-actions">
-            <li className="search">
-              <a onClick={onSearch}>
-                <i className="icon-search" />
-              </a>
-            </li>
-            <li>
-              <span className="seperator" />
-            </li>
+          <ul>
             {authOrNotAuthButtons}
+            <li className="search-sm"><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
             <li>
               <span className="seperator" />
-            </li>
-            <li className="garage">
-              <DropdownItem dropdownItemId="garage" header={garageHeader}>
-                <Fragment>
-                  {!isEmpty(vehicles) ? (
-                    <GaragePopup
-                      translate={translate}
-                      className=""
-                      onAddVechile={onAddVechile}
-                    />
-                  ) : (
-                      <ButtonCustom
-                        className="btn btn-primary"
-                        text={"Add a new vehicle"}
-                        onClick={onAddVechile} />
-                    )}
-                </Fragment>
-              </DropdownItem>
-            </li>
-            <li>
-              <Link to="/wishlist">
-                <i className="icon-heart" />
-              </Link>
             </li>
             <li>
               <Link to="/cart">
@@ -171,8 +127,6 @@ class HeaderDetails extends Component {
               </Link>
             </li>
           </ul>
-        </div>
-      </div>
     );
   }
 }

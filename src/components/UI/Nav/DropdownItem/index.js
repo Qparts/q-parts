@@ -6,7 +6,7 @@ const DropdownItem = props => {
     return (
         <Fragment>
             <div className="dropdown" id={props.dropdownItemId}>
-                <a className="dropdown-toggle" href="" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a className="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {props.header}
                 </a>
                 <DropdownMenu>

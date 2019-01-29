@@ -4,13 +4,9 @@ import { withRouter } from "react-router-dom";
 import Vehicles from "../Vehicles/Vehicles";
 import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
-import MobileHeader from "./MobileHeader/MobileHeader";
-import MobileFooter from "./Footer/MobileFooter";
-import { TAB_ONE, styles, colors } from "../../constants";
-import { isEmpty } from "../../utils";
 
 import Title from '../UI/Title';
 import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
@@ -98,21 +94,6 @@ class Layout extends Component {
     )
     return (
       <Fragment>
-        <EmailVerification />
-        <MobileHeader
-          translate={translate}
-          localize={localize}
-          selectedVehicle={selectedVehicle}
-          changeDefaultDirection={changeDefaultDirection}
-          vehicles={this.props.vehicles}
-          vehiclesFormat={vehiclesFormat}
-          onAddVechile={this.handleDialog.bind(this, 'vehicle')}
-          onSignin={this.handleDialog.bind(this, 'signin')}
-          onSearch={this.handleDialog.bind(this, 'search')}
-          countriesOnly={countriesOnly}
-          getCountriesOnly={getCountriesOnly}
-          selectCountry={selectCountry}
-          direction={direction} />
         <Header
           translate={translate}
           localize={localize}
@@ -128,9 +109,11 @@ class Layout extends Component {
           selectCountry={selectCountry}
           direction={direction} />
         {dialog}
-        {this.props.children}
-        <Footer direction={direction} />
-        <MobileFooter direction={direction} />
+        <div className="cd-main-content">
+          {this.props.children}
+          <Footer />
+          <div class="cd-overlay"></div>
+        </div>
       </Fragment>
     );
   }

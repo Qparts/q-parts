@@ -47,9 +47,6 @@ $dir: ltr;
 //select2-develop
 @import "select2-develop/core";
 
-/* slick slider component*/
-
-@import "modules/slick";
 /* BASE - Base styles , variables, mixins, etc*/
 @import "base/mixins";
 @import "base/normalize";
@@ -58,9 +55,6 @@ $dir: ltr;
 /*MODULES  - Individual site components */
 @import "modules/typography";
 @import "modules/blocks";
-@import "modules/buttons";
-@import "modules/checkbox";
-@import "modules/list-group";
 @import "modules/components";
 @import "modules/select";
 @import "modules/sections";
