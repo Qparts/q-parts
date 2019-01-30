@@ -73,10 +73,10 @@ class Products extends Component {
                       <h3>Best Seller</h3>
                       <Swiper {...params}>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-1.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">Air Fuel Ratio Sensor</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">Air Fuel Ratio Sensor</h5>
                               <ul className="list-inline product-info">
                                 <li><strong>Bosch</strong></li>
                                 <li>#Part Num</li>
@@ -90,10 +90,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-2.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">8100 Synthetic Motor Oil</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-2.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">8100 Synthetic Motor Oil</h5>
                                 <ul className="list-inline product-info">
                                   <li><strong>Motul USA</strong></li>
                                   <li>#Part Num</li>
@@ -107,10 +107,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-3.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">GM Original Equipment EGR....</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">GM Original Equipment EGR....</h5>
                                 <ul className="list-inline product-info">
                                   <li><strong>ACDelco</strong></li>
                                   <li>#Part Num</li>
@@ -124,10 +124,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">NT05</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">NT05</h5>
                                 <ul className="list-inline product-info">
                                   <li><strong>NITTO</strong></li>
                                   <li>#Part Num</li>
@@ -141,10 +141,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">NT05</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">NT05</h5>
                                 <ul className="list-inline product-info">
                                   <li><strong>NITTO</strong></li>
                                   <li>#Part Num</li>
@@ -158,10 +158,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-1.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">Air Fuel Ratio Sensor</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">Air Fuel Ratio Sensor</h5>
                               <ul className="list-inline product-info">
                                 <li><strong>Bosch</strong></li>
                                 <li>#Part Num</li>
@@ -175,10 +175,10 @@ class Products extends Component {
                           </Link>
                         </div>
                         <div>
-                          <Link to="/" class="card">
-                            <img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-                            <div class="card-body">
-                              <h5 class="card-title">NT05</h5>
+                          <Link to="/" className="card">
+                            <img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+                            <div className="card-body">
+                              <h5 className="card-title">NT05</h5>
                                 <ul className="list-inline product-info">
                                   <li><strong>NITTO</strong></li>
                                   <li>#Part Num</li>

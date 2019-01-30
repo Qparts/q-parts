@@ -77,14 +77,14 @@ class HomeDetails extends Component {
 								<form className="col-lg-10 offset-lg-1 box-shadow">
 									<div className="form-row ">
 										<div className="col">
-											<input type="text" class="form-control input" placeholder="Part Name, Number or image" />
+											<input type="text" className="form-control input" placeholder="Part Name, Number or image" />
 											<div className="input-group-prepend">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col">
-											<input type="text" class="form-control input" placeholder="Vin Number or Vechile ID image" />
+											<input type="text" className="form-control input" placeholder="Vin Number or Vechile ID image" />
 											<div className="input-group-prepend">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
@@ -167,7 +167,7 @@ class HomeDetails extends Component {
 							<li className="oil col-md-4 col-lg-auto">
 								<a href="#">
 									<img src="/img/oil-filter.svg" alt="Premium quality oil for your engine"/>
-									<div class="media-body">
+									<div className="media-body">
 										<h5>Oil Filter</h5>
 										<p>Premium quality oil for your engine</p>
 									</div>
@@ -176,7 +176,7 @@ class HomeDetails extends Component {
 							<li className="air col-md-4 col col-lg-auto">
 								<a href="#">
 									<img src="/img/air-filter.svg" alt="Maximize engine  performance"/>
-									<div class="media-body">
+									<div className="media-body">
 										<h5>Air Filters</h5>
 										<p>Maximize engine  performance</p>
 									</div>
@@ -185,7 +185,7 @@ class HomeDetails extends Component {
 							<li className="brake col-md-4 col-lg-auto">
 								<a href="#">
 									<img src="/img/disc-brake.svg" alt="Get trusted stopping  power"/>
-									<div class="media-body">
+									<div className="media-body">
 										<h5>Brake Parts</h5>
 										<p>Get trusted stopping  power</p>
 									</div>
@@ -198,8 +198,8 @@ class HomeDetails extends Component {
 							<div className="col-12">
 								<div className="vendor-details">
 									<picture>
-										<source media="(max-width: 991px)" srcset="/img/vendor-xs.jpg" />
-										<source media="(max-width: 992px)" srcset="/img/vendor.png" />
+										<source media="(max-width: 991px)" srcSet="/img/vendor-xs.jpg" />
+										<source media="(max-width: 992px)" srcSet="/img/vendor.png" />
 										<img src="/img/vendor.png" alt="OUR SALES MORE THAN 50,000 ITEM" />
 									</picture>
 									<div className="d-flex justify-content-center">
