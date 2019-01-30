@@ -118,7 +118,9 @@
       }
     }
     i {
-      @include padding-left(10px);
+      &:before{
+        top: 4px;
+      }
     }
 
     > p {

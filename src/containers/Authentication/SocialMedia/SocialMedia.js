@@ -7,7 +7,7 @@ import { DISCONNECT } from '../../../constants';
 
 class SocialMedia extends Component {
   static defaultProps = {
-    facebook: <i className="icon-facebook-logo"></i>,
+    facebook: <i className="icon-facebook"></i>,
     google: <img src="/img/google-icon.svg" alt="google" />,
   }
   render() {
@@ -27,7 +27,7 @@ class SocialMedia extends Component {
               callback={this.props.handleResponse('facebook')}
               render={renderProps => (
                 <button
-                  className="btn btn-primary btn-facebook"
+                  className="btn btn-facebook"
                   disabled={this.props.facebook === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.facebook}</button>
               )} />
@@ -41,7 +41,7 @@ class SocialMedia extends Component {
               disabled={this.props.google === DISCONNECT}
               render={renderProps => (
                 <button
-                  className="btn btn-primary btn-google"
+                  className="btn btn-google"
                   disabled={this.props.google === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.google}</button>
               )} />
