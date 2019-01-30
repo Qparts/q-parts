@@ -7,6 +7,7 @@ import {
   ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
   RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT
 } from '../actions/customerAction';
+import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR } from '../constants';
 import _ from 'lodash';
 
@@ -191,6 +192,9 @@ export default function reducer(state = initialState, action) {
 
     case COMPLETE_PAYMENT:
       return { ...state, isPaymentCompleted: action.payload }
+
+    case SET_DEFAULT_LANG:
+      return { ...state, defaultLang: action.payload }
 
     default:
       return state;

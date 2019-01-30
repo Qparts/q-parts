@@ -1,5 +1,5 @@
   .cart-items{
-    @extend .border-radius-div;
+    @include border-radius-div;
     overflow: hidden;
     li{
       padding: 20px 15px;
@@ -141,7 +141,7 @@
   .select__control{
     padding: side-values(10px 20px 13px 70px);
     background: rgba(0, 0, 0, 0.6);
-    @extend .border-radius-div;
+    @include border-radius-div;
     @include media-breakpoint-down(md){
       padding: side-values(8px 10px 10px 60px);
     };
@@ -174,7 +174,7 @@
 }
 .total-sm{
   background: $white;
-  @extend .border-radius-div;
+  @include border-radius-div;
   overflow: hidden;
   margin-bottom: 20px;
   margin-top: -20px;

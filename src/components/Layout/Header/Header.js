@@ -94,9 +94,9 @@ class Header extends Component {
                   </Link>
                 </div>
                 <div className="col" id="search-lg">
-                  <div class="main-search">
-                      <input type="text" class="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" />
-                      <button class="btn" type="submit"><i className="icon-search"></i></button>
+                  <div className="main-search">
+                      <input type="text" className="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" />
+                      <button className="btn" type="submit"><i className="icon-search"></i></button>
 
                     </div>
 
@@ -133,12 +133,12 @@ class Header extends Component {
           <nav className="main-nav ">
             <div className="container-fluid">
               <div className="row">
-                <div class="col">
+                <div className="col">
                   <Link className="scroll-dwon-brand" to="/">
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
-                    <ul class="cd-header-buttons">
-                      <li><a class="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
+                    <ul className="cd-header-buttons">
+                      <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
                     </ul>
                 </div>
                 <div className="user-actions col-auto">
@@ -154,7 +154,7 @@ class Header extends Component {
               </div>
             </div>
             <div className="sub-nav"></div>
-              <div id="cd-search" class="cd-search">
+              <div id="cd-search" className="cd-search">
 
             	</div>
           </nav>

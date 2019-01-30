@@ -7,7 +7,7 @@
     border-radius: inherit;
     .modal-header {
       border-bottom: 0;
-      #title {
+      .sec-header {
         h1 {
           font-family: Roboto;
           @include font-size(50px);

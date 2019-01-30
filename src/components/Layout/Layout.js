@@ -112,7 +112,7 @@ class Layout extends Component {
         <div className="cd-main-content">
           {this.props.children}
           <Footer />
-          <div class="cd-overlay"></div>
+          <div className="cd-overlay"></div>
         </div>
       </Fragment>
     );

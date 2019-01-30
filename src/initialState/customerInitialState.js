@@ -46,5 +46,6 @@ export const initialState = {
  direction: 'ltr',
  registered: null,
  isShippingCompleted: false,
- isPaymentCompleted: false
+ isPaymentCompleted: false,
+ defaultLang: 'ar'
 }
