@@ -97,7 +97,7 @@ class Cart extends Component {
 												<label>Totla</label>
 												<p>20700<span className="currency">SR</span></p>
 										</div>
-							<button class="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+							<button className="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
 							</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<div className="col-lg-9">
@@ -126,12 +126,12 @@ class Cart extends Component {
 														</div>
 														<div className="cart-quantity d-block d-lg-none">
 															<h5>Quantity</h5>
-															<div class="input-group quantity">
-																<div class="input-group-prepend">
+															<div className="input-group quantity">
+																<div className="input-group-prepend">
 																	<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 																</div>
-																<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
+																<input className="form-control" disabled value="1" type="text"/>
+																<div className="input-group-append">
 																	<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 																</div>
 															</div>
@@ -148,12 +148,12 @@ class Cart extends Component {
 													<div className="col-md-3">
 														<div className="cart-quantity d-none d-lg-block">
 															<h5>Quantity</h5>
-															<div class="input-group quantity">
-																<div class="input-group-prepend">
+															<div className="input-group quantity">
+																<div className="input-group-prepend">
 																	<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 																</div>
-																<input class="form-control" disabled value="1" type="text"/>
-																<div class="input-group-append">
+																<input className="form-control" disabled value="1" type="text"/>
+																<div className="input-group-append">
 																	<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 																</div>
 															</div>
@@ -198,12 +198,12 @@ class Cart extends Component {
 													</div>
 													<div className="cart-quantity d-block d-lg-none">
 														<h5>Quantity</h5>
-														<div class="input-group quantity">
-															<div class="input-group-prepend">
+														<div className="input-group quantity">
+															<div className="input-group-prepend">
 																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-															<div class="input-group-append">
+															<input className="form-control" disabled value="1" type="text"/>
+															<div className="input-group-append">
 																<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 															</div>
 														</div>
@@ -220,12 +220,12 @@ class Cart extends Component {
 												<div className="col-md-3">
 													<div className="cart-quantity d-none d-lg-block">
 														<h5>Quantity</h5>
-														<div class="input-group quantity">
-															<div class="input-group-prepend">
+														<div className="input-group quantity">
+															<div className="input-group-prepend">
 																<button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
 															</div>
-															<input class="form-control" disabled value="1" type="text"/>
-															<div class="input-group-append">
+															<input className="form-control" disabled value="1" type="text"/>
+															<div className="input-group-append">
 																<button className="btn btn-gray" type="button"><i className="icon-plus"></i></button>
 															</div>
 														</div>
@@ -260,11 +260,11 @@ class Cart extends Component {
 										<label>Total</label><p class>20700<span>SR</span></p>
 									</li>
 								</ul>
-								<button class="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+								<button className="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
 							</div>
 						<a href="#"  className="media chat-div">
 								<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
-								<div class="media-body">
+								<div className="media-body">
 									<p>
 										<span>Have a Question?</span>
 										Ask a Specialis, In-House Experts. We know our products
@@ -284,10 +284,10 @@ class Cart extends Component {
 								<h3>Products Related To Items In Your Cart</h3>
 								<Swiper {...params}>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-1.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">Air Fuel Ratio Sensor</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
 												<ul className="list-inline product-info">
 													<li><strong>Bosch</strong></li>
 													<li>#Part Num</li>
@@ -301,10 +301,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-2.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">8100 Synthetic Motor Oil</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">8100 Synthetic Motor Oil</h5>
 													<ul className="list-inline product-info">
 														<li><strong>Motul USA</strong></li>
 														<li>#Part Num</li>
@@ -318,10 +318,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-3.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">GM Original Equipment EGR....</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">GM Original Equipment EGR....</h5>
 													<ul className="list-inline product-info">
 														<li><strong>ACDelco</strong></li>
 														<li>#Part Num</li>
@@ -335,10 +335,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">NT05</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">NT05</h5>
 													<ul className="list-inline product-info">
 														<li><strong>NITTO</strong></li>
 														<li>#Part Num</li>
@@ -352,10 +352,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">NT05</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">NT05</h5>
 													<ul className="list-inline product-info">
 														<li><strong>NITTO</strong></li>
 														<li>#Part Num</li>
@@ -369,10 +369,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-1.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">Air Fuel Ratio Sensor</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
 												<ul className="list-inline product-info">
 													<li><strong>Bosch</strong></li>
 													<li>#Part Num</li>
@@ -386,10 +386,10 @@ class Cart extends Component {
 										</Link>
 									</div>
 									<div>
-										<Link to="/" class="card">
-											<img src="/img/product-4.jpg" class="card-img-top" alt="..." />
-											<div class="card-body">
-												<h5 class="card-title">NT05</h5>
+										<Link to="/" className="card">
+											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">NT05</h5>
 													<ul className="list-inline product-info">
 														<li><strong>NITTO</strong></li>
 														<li>#Part Num</li>

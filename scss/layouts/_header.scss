@@ -225,7 +225,7 @@
       @extend .d-flex;
       @extend .mb-0;
       > li{
-        @extend .flex-fill;
+        //@extend .flex-fill;
         a{
           padding: 5px 10px;
           @include font-size(13px);

@@ -113,7 +113,7 @@
       display: none;
     }
   }
-  #title {
+  .sec-header {
     @include small-screen {
       h1 {
         text-transform: capitalize;

@@ -36,9 +36,9 @@ class Root extends React.Component {
           <DirectionProvider direction={this.state.direction}>
             <LocalizeProvider store={store}>
               <ErrorBoundary>
-                <main class="nav-on-left">
+                <main className="nav-on-left">
                   <Routes />
-                  <div class="overlay-lg"></div>
+                  <div className="overlay-lg"></div>
                   <a href="#" className="live-chat">
                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                     <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
@@ -143,7 +143,7 @@ class Root extends React.Component {
                         <li><a href="#">Cairo</a></li>
                       </ul>
                     </li>
-                    <li className="nav-sm"><a class="lang" href="#">العربية</a></li>
+                    <li className="nav-sm"><a className="lang" href="#">العربية</a></li>
                     <li className="sep"></li>
                     <li className="nav-sm"><a href="#">Shipping & Delivery</a></li>
                     <li className="nav-sm"><a href="#">Returns</a></li>

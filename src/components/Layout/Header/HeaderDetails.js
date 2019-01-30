@@ -117,7 +117,7 @@ class HeaderDetails extends Component {
     return (
           <ul>
             {authOrNotAuthButtons}
-            <li className="search-sm"><a class="cd-search-trigger" href="#cd-search"><span></span></a></li>
+            <li className="search-sm"><a className="cd-search-trigger" href="#cd-search"><span></span></a></li>
             <li>
               <span className="seperator" />
             </li>

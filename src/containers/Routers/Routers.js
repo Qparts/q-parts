@@ -11,7 +11,6 @@ import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
-import { LOCAL_LANGUAGES } from '../../constants';
 import { selectCountry } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
 
@@ -19,7 +18,8 @@ class Routes extends Component {
     constructor(props) {
         super(props);
 
-        const defaultLanguage = props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+        const defaultLanguage = props.defaultLang || props.customer.defaultLang ;
+        
 
         props.InitializeDefaultLang(defaultLanguage);
         props.getVehicles();
@@ -70,6 +70,7 @@ const mapStateToProps = state => {
         vehicles: customer.vehicles,
         vehiclesFormat: state.customer.vehiclesFormat,
         selectedVehicle: state.customer.selectedVehicle,
+        defaultLang: state.customer.defaultLang,
         localize: state.localize,
         translate: getTranslate(state.localize),
         countriesOnly: state.api.countriesOnly,

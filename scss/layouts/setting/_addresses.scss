@@ -220,7 +220,7 @@
     background: $white;
     .modal-header{
       .modal-title{
-        #title{
+        .sec-header{
           h1{
             font-family: Roboto;
             @include font-size(30px);
