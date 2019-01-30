@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
-import '../scss/main/main.scss';
+//import '../scss/main/main.scss';
 // import '../scss/main-ar/main-ar.scss';
 
 import { store, persistor } from './store';

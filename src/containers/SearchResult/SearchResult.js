@@ -65,7 +65,7 @@ class SearchResult extends Component {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
-		
+
 		const { searchGeneral: {filterObjects} } = this.state;
 
 		const query = queryString.parse(search.slice(1));
@@ -157,7 +157,7 @@ class SearchResult extends Component {
 		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		
+
 
 		const override = `
             border-color: ${colors.brandColor} !important;
@@ -178,12 +178,36 @@ class SearchResult extends Component {
 
 		return (
 			<Fragment>
-				<section id="results-container">
-					<div className="container-fluid d-flex">
-						<MediumScreen>
+				<section className="results-container gray-bg">
+					<div className="container-fluid">
+						<div className="row">
+							<div className="col-lg-3">
+								<ul className="filter">
+									<li>
+										<h5><Link to="/">Viscosity Grade <i className="minus"></i></Link></h5>
+											<div class="input-group">
+											  <div class="input-group-prepend">
+											    <span class="input-group-text"><i className="icon-search"></i></span>
+											  </div>
+											  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+											</div>
+											<ul className="list-unstyled">
+												<li className="form-check">
+													<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+												  <label class="form-check-label" for="defaultCheck1">
+												    Default checkbox
+												  </label>
+												</li>
+											</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div className="row invisible" >
+							<div className="col-lg-3">
+								<div className="filter">
 
-							<div className="filter-container col-3">
-								{
+									{
 									filterObjects.map((filterObject, idx) => {
 										return <div key={idx} className="filter-category card col-12">
 											<div className="row">
@@ -213,55 +237,10 @@ class SearchResult extends Component {
 										</div>
 									})
 								}
-								{/* <div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject['price']}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
-												<i className={this.getCollapseIcon('collapse1')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse1}>
-										<Card className="filter-body">
-											<CardBody>
-												<InputGroup>
-													<InputGroupAddon addonType="prepend">
-														<i className="icon-search" />
-													</InputGroupAddon>
-													<Input className="search-box" type="text" placeholder="Search" />
-												</InputGroup>
-												{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
-											</CardBody>
-										</Card>
-									</Collapse>
-									<span className="h-seperator" />
 								</div>
-								<div className="filter-category card col-12">
-									<div className="row">
-										<div className="col-9 title">
-											<p>{filterObject.rating.label}</p>
-										</div>
-										<div className="col-3 dropdown-icon">
-											<Link to="#" onClick={this.toggle.bind(this, 'collapse6')}>
-												<i className={this.getCollapseIcon('collapse6')} />
-											</Link>
-										</div>
-									</div>
-									<Collapse isOpen={this.state.collapse6}>
-										<Card className="filter-body">
-											<CardBody>
-												{renderSearch({ filtration: filterObject.rating, key: rating }, Checkbox, onFilter, isChecked)}
-											</CardBody>
-										</Card>
-									</Collapse>
-								</div>
-							 */}
+
 							</div>
-						</MediumScreen>
-						<div className="products-container col-12 col-md-9">
+							<div className="products-container col col-lg-9">
 							<div className="search-control-panel row">
 								<Card className="col-12">
 									<CardTitle className="d-flex justify-content-between">
@@ -309,6 +288,7 @@ class SearchResult extends Component {
 							<div className="products-panel row">
 								{this.renderProducts()}
 							</div>
+						</div>
 						</div>
 					</div>
 				</section>

@@ -44,6 +44,10 @@ img{
     };
   }
 }
+.p-inner-sec{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 .artical-space{
   margin-bottom: 40px;
   @include media-breakpoint-down(lg){

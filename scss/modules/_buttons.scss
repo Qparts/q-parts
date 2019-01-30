@@ -16,6 +16,7 @@
   border-style: none;
   background: $brand-color;
   color: $white;
+  @include font-size(19px);
   &:hover,
   &:focus {
     background: darken($brand-color, 10%);
