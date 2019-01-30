@@ -332,11 +332,9 @@
     margin-top: 35px;
     margin-bottom: 1018px;
     overflow: hidden;
-    #title {
-      .d-inline-flex {
-        position: absolute;
-      }
+    .sec-header {
       padding: side-values(30px 50px 30px 20px);
+      margin-bottom: 0;
       h1 {
         font-family: Roboto;
         @include font-size(30px);

@@ -270,8 +270,6 @@
   border-radius: 9px;
   background-color: $white;
 }
-.border-radius-div{
-  border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 
 .boarder-left-radius {
   @include boarder-left-radius;
@@ -564,5 +562,7 @@
   background:  url("#{$img-path}/sprite.png") no-repeat transparent;
   display: block;
 }
+ // override the default border
+ .border {
+  border: 0 !important;
 }
-
