@@ -106,7 +106,7 @@
           .product-price{
             display: flex;
             .quantity{
-              @include margin-left(14px)
+              @include margin-left(14px);
               opacity: 0.8;
               font-family: Roboto;
               @include font-size(15px);
@@ -409,10 +409,11 @@
         margin-top: 0px;
         padding: 20px;
         .quantity-div {
+          margin-top: 20px;
           .product-price{
             display: flex;
             .quantity{
-              @include margin-left(14px)
+              @include margin-left(14px);
               opacity: 0.8;
               font-family: Roboto;
               @include font-size(15px);

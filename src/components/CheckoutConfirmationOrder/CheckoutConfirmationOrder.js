@@ -196,7 +196,7 @@ class CheckoutConfirmation extends Component {
                                 </div>
                               </div>
                             </div>
-                            <div className="quantity-div col-3">
+                            <div className="quantity-div col-12">
                               <div className="product-price">
                                 <p className="price">11.19 <span>SR</span></p>
                                 <p className="quantity">Quantity <span>4</span></p>
@@ -240,7 +240,7 @@ class CheckoutConfirmation extends Component {
                                 </div>
                               </div>
                             </div>
-                            <div className="quantity-div col-3">
+                            <div className="quantity-div col-12">
                               <div className="product-price">
                                 <p className="price">11.19 <span>SR</span></p>
                                 <p className="quantity">Quantity <span>4</span></p>
