@@ -47,5 +47,5 @@ export const initialState = {
  registered: null,
  isShippingCompleted: false,
  isPaymentCompleted: false,
- defaultLang: 'ar'
+ defaultLang: 'en'
 }
