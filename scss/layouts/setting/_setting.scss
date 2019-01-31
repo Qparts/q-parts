@@ -155,15 +155,10 @@
   max-width: 696px !important;
   .modal-title{
     margin-#{$left}: 37px;
-    #title{
+    .sec-header{
+      margin-bottom: 0; 
       h1{
-      font-family: Roboto;
-      font-size: 30px !important;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
+      @include text-capitalize;
       }
     }
   }

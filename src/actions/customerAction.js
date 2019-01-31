@@ -6,6 +6,7 @@ import { initialize } from 'react-localize-redux';
 import globalTranslations from "../translations/translations.json";
 import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
+import { SET_DEFAULT_LANG } from './apiAction';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -221,7 +222,7 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
       email, password
     })
       .then(res => {
-        defaultLanguage = res.data.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+        defaultLanguage = currentLanguage || res.data.customer.defaultLang;
         dispatch({
           type: LOGIN_SUCCEEDED,
           payload: res.data,
@@ -439,11 +440,15 @@ const socialMediaLink = (data) => {
 }
 
 export const changeDefaultLanguage = (defaultLanguage) => {
-  return initialize({
-    languages: LOCAL_LANGUAGES,
-    translation: globalTranslations,
-    options: { renderToStaticMarkup, defaultLanguage }
-  });
+  return (dispatch) => {
+    dispatch(initialize({
+      languages: LOCAL_LANGUAGES,
+      translation: globalTranslations,
+      options: { renderToStaticMarkup, defaultLanguage }
+    }))
+    dispatch({type: SET_DEFAULT_LANG, payload: defaultLanguage})
+  }
+  
 }
 
 export const addDeliveryAddress = (address) => {

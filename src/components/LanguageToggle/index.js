@@ -14,7 +14,7 @@ const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, tr
     }
     return localize.languages.map(lang => (
         !lang.active && (
-            <a className="lang link" key={lang.code} onClick={handleLanguage.bind(this, lang)}>
+            <a className="lang" href="#" key={lang.code} onClick={handleLanguage.bind(this, lang)}>
                 {translate(`general.${lang.name}`)}
             </a>
         )

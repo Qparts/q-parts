@@ -1,5 +1,4 @@
 /*FONT*/
-$title-font: 'Roboto';
 $button-font: 'Roboto';
 
 //COLOR
@@ -23,13 +22,11 @@ $basic-white: rgba(255, 255, 255, 0.8);
 $basic-dark-white: rgba(255, 255, 255, 0.5);
 $basic-dark-white-70: rgba(255, 255, 255, 0.7);
 $very-light-pink: rgba(235, 235, 235, 0.3);
-$facebook-color: #475993;
-$twitter-color: #03a9f4;
 $dark-50: rgba(39, 39, 52, 0.5);
 $dark-70: rgba(39, 39, 52, 0.7);
 $dark-80: rgba(39, 39, 52, 0.8);
 $green: #24b450;
-$placeholder-color: rgba(55, 54, 60, 0.5);
+$input-placeholder-color: rgba(55, 54, 60, 0.7);
 //img
 $img-path: "../../public/img";
 
@@ -43,7 +40,7 @@ $title-font-size: 55px;
 $down-arrow-font-size: 25px;
 
 //container width
-$max-container : 1170px;
+$max-container : 1300px;
 $max-container-popup : 900px;
 
 // PADDING
@@ -52,16 +49,13 @@ $padding-left: 128px;
 //ICON
 $icon-path: "../../public/icon";
 $icon-font-name: "q-parts-icons";
-//sprite
-.sprite{
-  position: relative;
-  background:  url("#{$img-path}/sprite.png") no-repeat transparent;
-  display: block;
-}
+
+$section-p-b : 70px;
 
 //bootstrap
 $link-color : $basic-gray;
-//$link-hover-decoration : none;
-//$link-hover-color : ;
 $font-family-base : 'Roboto', sans-serif;
-//$border-radius : 10px;
+//header-height
+$header-height: 114px;
+//defult -gradient
+$default-header-bg: linear-gradient(to #{$right}, #87363d, #37363a , #372628, #1e1b1e);

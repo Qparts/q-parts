@@ -1,91 +1,58 @@
 /*container max width*/
-
 .container-fluid {
   max-width: $max-container;
 }
-
+a,input,button{
+  @include transition(all, 0.5s, ease);
+}
 a:focus,
 a:hover,
 a:active {
   text-decoration: none;
   outline: 0;
 }
-
-h1,
-h3 {
-  font-family: $title-font;
-  text-transform: uppercase;
+h1{
+  @extend .text-uppercase;
 }
-
-button {
-  font-family: $button-font;
-  @include font-size($button-font-size);
-
-  i {
-    position: relative;
-    top: 3px;
+.input{
+  border: 0;
+  background: $light-gray;
+  min-height: 50px;
+  &:focus{
+    background: $light-gray;
+    box-shadow: 0 0 0 0.2rem rgba(237, 64, 54, 0.25);
   }
 }
-
 input::placeholder {
-  @include q-placeholder;
+  @include font-size(14px);
 }
-
 label {
   text-transform: capitalize;
-  @include font-size($bas-font-size);
-}
-
-.border {
-  border: 0 !important;
-}
-
-.request {
-  width: 73px;
-  height: 81px;
-}
-
-.check-price {
-  width: 113px;
-  height: 71px;
-}
-
-.add-to-cart {
-  width: 77px;
-  height: 77px;
-}
-
-.delivery-product {
-  width: 106px;
-  height: 88px;
-}
-
-.upload-img {
-  width: 26px;
-  height: 23px;
-}
-
-.icon-facebook-logo {
-  @include font-size(32px);
-  color: $facebook-color;
-}
-.icon-twitter {
-  @include font-size(32px);
-  color: $twitter-color;
-}
-.q-display-small {
-  display: none;
-
-  @include small-screen {
-    display: block;
-  }
-}
-.q-hide-small {
-  display: block;
-  @include small-screen {
-    display: none;
-  }
 }
 img{
   max-width: 100%;
+}
+.pt-sec{
+  padding-top: 70px;
+  @include media-breakpoint-down(md){
+    padding-top: 40px;
+  };
+  &.gray-bg{
+    padding-bottom: 70px;
+    @include media-breakpoint-down(md){
+      padding-bottom: 40px;
+    };
+  }
+}
+.artical-space{
+  margin-bottom: 40px;
+  @include media-breakpoint-down(lg){
+    margin-bottom: 10px;
+  };
+}
+.header-space{
+  margin-bottom: 30px;
+}
+.cd-main-content{
+  overflow-x: hidden;
 }

@@ -1,7 +1,6 @@
 import App from '../components/App';
 import Cart from '../components/cart/Cart';
 import VendorForm from '../components/VendorForm/VendorForm'
-import ProductResult from '../containers/ManualForm/SearchResult/SearchResult';
 import Login from '../containers/Authentication/Login/Login';
 import Signup from '../containers/Authentication/Signup/Signup'
 import Logout from '../containers/Logout/Logout';
@@ -25,10 +24,6 @@ export const routes = (isAuth, direction) => [
         path: "/",
         exact: true,
         component: App,
-    },
-    {
-        path: "/order/part/:partNo/makeId/:makeId",
-        component: ProductResult,
     },
     {
         path: "/order/quotation-request",

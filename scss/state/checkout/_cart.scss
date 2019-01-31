@@ -1,192 +1,6 @@
-  .RenderImage {
-    padding-top: 15px;
-    padding-#{$left}: 15px;
-
-    img {
-      height: 100px !important;
-    }
-  }
-
-  #cart-details {
-    padding-top: 70px;
-
-    @include small-screen {
-      padding-top: 29px;
-    }
-  }
-
-
-  .cart_product-details {
-    display: flex;
-    flex-wrap: wrap;
-
-    span:first-child {
-      width: 100%;
-    }
-  }
-  .part-text {
-    text-transform: capitalize;
-    @include font-size(17px);
-  }
-  .manufacturer-text {
-    padding-#{$right}: 11px;
-    @include font-size(15px);
-    font-weight: bold;
-  }
-  .sales-price {
-    @include font-size(30px);
-    font-weight: 300;
-  }
-  .currency {
-    @include font-size(15px);
-  }
-  .btn-secondary {
-    text-transform: capitalize;
-    @include font-size(14px);
-  }
-  .pt {
-    padding-top: 20px;
-  }
-  .row {
-    .col-md-5:nth-child(3) {
-      text-align: $right;
-      padding-#{$right}: 33px;
-
-      .part-text {
-        opacity: 0.8;
-        @include font-size(15px);
-        font-family: Roboto;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.13;
-        letter-spacing: normal;
-        text-align: $left;
-        color: $dark-80;
-      }
-      #number-picker {
-        justify-content: flex-end;
-        input {
-          max-width: 55px;
-        }
-      }
-    }
-  }
-
-  .col-md-9 {
-    .btn-shopping {
-      background: $dark-gray;
-      text-align: $right;
-      width: 50%;
-      @include small-screen {
-        width: 100%;
-
-        margin-bottom: 50px;
-      }
-      i {
-        padding-#{$left}: 10px;
-      }
-    }
-    .quantity-small {
-      @include small-screen {
-        display: flex;
-        align-items: baseline;
-        .part-text {
-          width: auto;
-          padding-#{$right}: 11px;
-          opacity: 0.8;
-          @include font-size(15px);
-          font-family: Roboto;
-          line-height: 1.13;
-          letter-spacing: normal;
-          color: $dark-80;
-        }
-      }
-    }
-  }
-  .checkout-sm-container {
-    display: flex;
-
-    .column {
-      flex: 50%;
-      padding-#{$left}: 15px;
-
-      .item-key {
-        padding-top: 15px;
-        display: block;
-        opacity: 0.7;
-        font-family: Roboto;
-        @include font-size(13px);
-        line-height: 1.31;
-        letter-spacing: normal;
-        text-align: $left;
-        color: $dark-70;
-      }
-
-      .item-value {
-        font-family: Roboto;
-        @include font-size(17px);
-        line-height: 1;
-        text-align: $left;
-        color: $black;
-        > span {
-          font-family: Roboto;
-          @include font-size(11px);
-          text-align: $left;
-          color: $charcoal-grey;
-          padding-#{$left}: 3px;
-        }
-      }
-
-      .btn-primary {
-        @include font-size(20px);
-        width: 100%;
-        height: 100%;
-        border-radius: side-values(0 0 20px 20px) !important;
-        text-align: $right;
-        text-transform: capitalize;
-        i {
-          padding-#{$left}: 7px;
-          padding-#{$right}: 0;
-        }
-      }
-    }
-    .column:first-child {
-      padding-bottom: 13px;
-    }
-  }
-  .ship-to{
-    float: right;
-    position: relative;
-    margin-top: 32px;
-    > label{
-      position: absolute;
-      left: 20px;
-      top: 10px;
-      color: $white;
-      @include font-size(15px);
-      @include opacity(0.5);
-      text-transform: none;
-    }
-    .select__control{
-      padding: side-values(10px 20px 13px 70px);
-      background: rgba(0, 0, 0, 0.6);
-      @include border-radius-div;
-    }
-    .select__single-value{
-      color: $white;
-    }
-    .css-10nd86i .select__single-value{
-      font-weight: normal;
-      @include font-size(17px);
-      letter-spacing: 1px;
-      color: $light-gray;
-      margin-#{$right}: 20px;
-      opacity: .8;
-    }
-  }
-  .item-list{
+  .cart-items{
     @include border-radius-div;
+    overflow: hidden;
     li{
       padding: 20px 15px;
       figure{
@@ -213,21 +27,9 @@
     }
     .item-dis{
       padding-#{$right}: 30px;
-
     }
   }
-  .product-options{
-    .d-table-cell{
-      width: 0px;;
-
-    }
-  }
-  .order-summery{
-    header{
-      padding-top: 10px;
-    }
-  }
-  .product-price{
+  .cart-product-price{
     margin-bottom: 18px;
     margin-top: 10px;
     p{
@@ -248,22 +50,26 @@
     .availability{
       @include font-size(15px);
       margin-top: -5px;
+      @include media-breakpoint-down(xs){
+        @include font-size(14px);
+
+      };
       .in-icon{
         width: 6px;
         height: 6px;
         background-color: $green;
         border-radius: 100px;
-        @include d-inline-block;
+        display: inline-block;
         margin-right: 5px;
         position: relative;
         top: -2px;
       }
     }
   }
-  .actions{
+  .cart-actions{
     .btn-gray{
       padding: 9px 15px 4px;
-      @include d-inline-block;
+      display: inline-block;
       margin-#{$right}: 10px;
       span{
         position: relative;
@@ -276,9 +82,11 @@
       height: 18px;
     }
   }
-  .back-shop{
-    @include d-block;
-    @include text-right;
+.cart-back{
+    @extend .btn-gray-secondary;
+    @extend .d-block;
+    @extend .text-right;
+    @extend .mt-2;
     padding-right: 20px;
     padding-left: 20px;
     @include font-size(20px);
@@ -294,34 +102,118 @@
       padding-#{$right}: 30px;
     }
   }
-
-.quantity-div{
+.cart-quantity{
   padding-#{$left}: 0;
+  @include media-breakpoint-down(md){
+    margin-top: 10px;
+  }
   h5{
     font-weight: 400;
     @include font-size(15px);
-    @include text-right;
     @include opacity(0.8);
-  }
-  .quantity{
-    input{
-      height: 40px;
+    text-align: #{$right};
+    @include media-breakpoint-down(md){
+        text-align: #{$left};
+        display: inline-block;
+        margin-bottom: 0;
+        margin-#{$right}: 10px;
     }
-    button{
-      width: 41px;
-      height: 40px;
-      padding: 0;
-      text-align: center;
-      i{
-        margin: 0 auto;
-        top: 0;
+  }
+
+}
+.cart-ship-to{
+  float: #{$right};
+  position: relative;
+  > label{
+    position: absolute;
+    #{$left}: 20px;
+    top: 11px;
+    color: $white;
+    @include font-size(15px);
+    @include opacity(0.5);
+    text-transform: none;
+    margin-bottom: 0;
+    @include media-breakpoint-down(md){
+      #{$left}: 13px;
+      top: 9px;
+    }
+  }
+  .select__control{
+    padding: side-values(10px 20px 13px 70px);
+    background: rgba(0, 0, 0, 0.6);
+    @include border-radius-div;
+    @include media-breakpoint-down(md){
+      padding: side-values(8px 10px 10px 60px);
+    };
+  }
+  .select__single-value{
+    color: $white;
+  }
+  .select__single-value{
+    font-weight: normal;
+    @include font-size(17px);
+    letter-spacing: 1px;
+    color: $light-gray;
+    margin-#{$right}: 10px;
+    margin-top: 2px;
+  }
+  .select__value-container{
+    padding: 0;
+  }
+}
+.cart-header{
+  padding-#{$right}: 0;
+  label{
+    font-weight: 400;
+    @include font-size(14px);
+    margin-bottom: 0;
+    @include media-breakpoint-up(lg){
+      display: none;
+    };
+  }
+}
+.total-sm{
+  background: $white;
+  @include border-radius-div;
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  div:first-child{
+    width: 50%;
+    padding-#{$left}: 15px;
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .btn-primary{
+    width: 100%;
+    text-align: #{$right};
+    text-transform: capitalize;
+    @include font-size(19px);
+    line-height: 27px;
+    border-top-#{$right}-radius: 0 !important;
+    width: 50%;
+    float: #{$right};
+    i{
+      height: 23px;
+      margin-#{$left}: 10px;
+      &:before{
+        @include font-size(23px);
+        top: 2px;
       }
     }
-    .minus{
-        width: 11px;
-        height: 2px;
-        background: $basic-gray;
-        @include d-block;
-    }
+  }
+  p,label{
+    margin-bottom: 0;
+  }
+  label{
+    @include font-size(13px);
+    @include opacity(0.7);
+  }
+  p{
+    @include font-size(17px);
+  }
+  .currency{
+    @include font-size(13px);
   }
 }

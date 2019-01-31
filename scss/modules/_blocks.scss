@@ -2,11 +2,15 @@
   @include border-radius-div;
   @include box-shadow;
   margin-bottom: 40px;
+  @include media-breakpoint-down(md){
+    margin-top: 40px;
+  }
   > header{
     padding: 20px 20px 15px;
+    background: $white;
     margin-bottom: 2px;
     h2{
-      @include font-size(25px);
+      @include font-size(26px);
       margin-bottom: 2px;
       font-weight: 400;
     }
@@ -16,6 +20,7 @@
     }
   }
   > ul{
+    background: $white;
     margin: 0;
     padding: 0 20px;
     li{
@@ -23,18 +28,18 @@
       padding: 15px 0;
       line-height: 15px;
       label{
-        @include opacity(0.7);
-        @include d-inline-block;
-        @include text-capitalize;
         @include font-size(13px);
+        @include opacity(0.7);
+        display: inline-block;
+        text-transform: capitalize;
         margin-bottom: 0;
       }
       p{
-        @include font-size(17px);
-        float: $right;
+        @include font-size(18px);
+        float: #{$right};
         margin-bottom: 0;
         span{
-          @extend .text-uppercase;
+          text-transform: uppercase;
           @include font-size(12px);
           margin-#{$left}: 2px;
         }
@@ -45,10 +50,11 @@
     }
   }
   > .btn-primary{
-    @include w-100;
-    @include text-right;
+    width: 100%;
+    text-align: #{$right};
+    text-transform: capitalize;
+    @extend .mt-2;
     @include font-size(19px);
-    @include text-capitalize;
     line-height: 27px;
     border-top-#{$right}-radius: 0 !important;
     i{
@@ -65,6 +71,7 @@
     }
   }
 }
+//move to check out oage
 .chat-div{
   padding: 0 10px;
   img{
@@ -76,7 +83,7 @@
       margin-top: 2px;
       span{
         @include font-size(14px);
-        @include d-block;
+        display: block;
       }
     }
   }
@@ -88,6 +95,7 @@
     }
   }
 }
+// end moving
 .banner-250{
   width: 250px;
   height: 250px;
@@ -96,4 +104,68 @@
   p{
     vertical-align: middle
   }
+}
+.live-chat{
+  background: $light-gray;
+  @extend .position-fixed;
+  bottom: 0;
+  right: 50px;
+  z-index: 999;
+  width: 151px;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  @include transition(all, 0.3s, ease);
+  @include nav-sm-media{
+    width: 48px;
+    background: transparent;
+    right: 15px;
+  }
+  img{
+    max-width: 48px;
+    display: inline-block;
+  }
+  p{
+    display: inline-block;
+    @include font-size(12px);
+    position: relative;
+    margin-bottom: 0;
+    top: 7px;
+    @include nav-sm-media{
+      display: none;
+    };
+    span{
+      display: block;
+    }
+  }
+}
+.overflow-hidden,
+.overflow-hidden-search{
+  .live-chat{
+    @include opacity(0);
+  }
+}
+.product-options{
+  margin-top: 15px;
+  border-bottom: 1px solid $dark-gray;
+  width: 100%;
+  .d-table-cell{
+      padding: 5px 10px;
+      @include font-size(15px);
+      border-top: 1px solid $dark-gray;
+      @include media-breakpoint-down(xs){
+        @include font-size(14px);
+
+      };
+      .icon-checked:before{
+        color: $brand-color;
+        top: 3px;
+      }
+      &:first-child{
+        text-transform: capitalize;
+        border-#{$right}: 1px solid $dark-gray;
+        width: 30%;
+        span{
+          @include opacity(0.5);
+        }
+      }
+    }
 }

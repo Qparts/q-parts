@@ -123,3 +123,10 @@
     color: $dark-70;
   }
 }
+.related-pro{
+  h3{
+    @include font-size(25px);
+    font-weight: 400;
+    @extend .text-capitalize;
+  }
+}

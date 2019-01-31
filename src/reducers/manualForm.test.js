@@ -1,8 +1,6 @@
 import reducer from './manualOrderReducer';
-
 import { initialState } from '../initialState/baseFormInitialState';
 import * as actions from '../actions/baseFormAction';
-
 describe('manual form reducer', () => {
  it('should return the initial state', () => {
   expect(reducer(undefined, {})).toEqual(initialState)

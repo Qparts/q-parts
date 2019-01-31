@@ -11,17 +11,18 @@ import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
-import { LOCAL_LANGUAGES } from '../../constants';
 import { selectCountry } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
+import RouterScrollToTop from '../../components/RouterScrollToTop';
 
 class Routes extends Component {
     constructor(props) {
         super(props);
 
-        const defaultLanguage = props.customer.defaultLang || LOCAL_LANGUAGES[0].code;
+        const defaultLanguage = props.defaultLang || props.customer.defaultLang;
 
-        props.InitializeDefaultLang(defaultLanguage);
+
+        // props.InitializeDefaultLang(defaultLanguage);
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
@@ -36,27 +37,29 @@ class Routes extends Component {
     render() {
         return (
             <Router>
-                <Fragment>
-                    <NetworkError error={this.props.error} />
-                    <Layout
-                        isLoggedIn={isAuth(this.props.token)}
-                        fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
-                        vehicles={this.props.vehicles}
-                        localize={this.props.localize}
-                        translate={this.props.translate}
-                        vehiclesFormat={this.props.vehiclesFormat}
-                        selectedVehicle={this.props.selectedVehicle}
-                        countriesOnly={this.props.countriesOnly}
-                        getCountriesOnly={this.props.getCountriesOnly}
-                        selectCountry={this.props.selectCountry}
-                        changeDefaultDirection={this.props.changeDefaultDirection}
-                        direction={this.props.direction}
-                    >
-                        <Switch>
-                            {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-                        </Switch>
-                    </Layout>
-                </Fragment>
+                <RouterScrollToTop>
+                    <Fragment>
+                        <NetworkError error={this.props.error} />
+                        <Layout
+                            isLoggedIn={isAuth(this.props.token)}
+                            fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
+                            vehicles={this.props.vehicles}
+                            localize={this.props.localize}
+                            translate={this.props.translate}
+                            vehiclesFormat={this.props.vehiclesFormat}
+                            selectedVehicle={this.props.selectedVehicle}
+                            countriesOnly={this.props.countriesOnly}
+                            getCountriesOnly={this.props.getCountriesOnly}
+                            selectCountry={this.props.selectCountry}
+                            changeDefaultDirection={this.props.changeDefaultDirection}
+                            direction={this.props.direction}
+                        >
+                            <Switch>
+                                {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                            </Switch>
+                        </Layout>
+                    </Fragment>
+                </RouterScrollToTop>
             </Router>
         )
     }
@@ -70,6 +73,7 @@ const mapStateToProps = state => {
         vehicles: customer.vehicles,
         vehiclesFormat: state.customer.vehiclesFormat,
         selectedVehicle: state.customer.selectedVehicle,
+        defaultLang: state.customer.defaultLang,
         localize: state.localize,
         translate: getTranslate(state.localize),
         countriesOnly: state.api.countriesOnly,
@@ -81,7 +85,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
-        InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
+        // InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country))
