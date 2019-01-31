@@ -130,7 +130,7 @@ export const routes = (isAuth, direction) => [
         component: VerifyEmail,
     },
     {
-        path: "/confirm",
+        path: "/confirmOrder",
         exact: true,
         component: CheckoutConfirmationOrder,
     },

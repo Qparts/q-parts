@@ -14,7 +14,7 @@ class CheckoutConfirmation extends Component {
 
   handleClick = () => {
     this.props.completeOrder(true);
-    this.props.history.push('/');
+    this.props.history.push('/confirmOrder');
   }
 
   render() {
