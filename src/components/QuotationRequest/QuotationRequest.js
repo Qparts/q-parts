@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import {
 	Field, reduxForm, change as changeFieldValue, FieldArray, getFormValues
 } from 'redux-form';
+import Link from '../../components/UI/Link';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import RenderField from '../RenderField/RenderField';
@@ -19,13 +21,15 @@ import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
 import Title from '../UI/Title';
+import OrderSteps from '../OrderSteps';
+import Vehicles from '../Vehicles/Vehicles';
 
 class QuotationRequest extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			visible: false,
+			modal: false,
 		}
 	}
 
@@ -62,6 +66,17 @@ class QuotationRequest extends Component {
 		})
 	}
 
+	handleClick = (event) => {
+		event.preventDefault();
+		this.togglePopup();
+	}
+
+	togglePopup = () => {
+		this.setState({
+			modal: !this.state.modal
+		})
+	}
+
 	onConfirmDialog = values => {
 		const { vehicleForm: {
 			customerId, vehicle: {
@@ -75,16 +90,29 @@ class QuotationRequest extends Component {
 				return { ...quotationCartItem, imageAttached: quotationCartItem.image ? true : false }
 			}) : undefined;
 
-		return this.props.addQuotationToCart(
-			{ customerVehicleId, vinImage, customerId, cityId, imageAttached, makeId, modelYearId, vin, quotationCartItems })
-			.then(() => {
-				this.onHide();
-			});
+		// return this.props.addQuotationToCart(
+		// 	{ customerVehicleId, vinImage, customerId, cityId, imageAttached, makeId, modelYearId, vin, quotationCartItems })
+		// 	.then(() => {
+		// 		this.onHide();
+		// 	});
 
 	}
 
 	render() {
 		const { handleSubmit, selectedVehicle, translate, direction } = this.props;
+		const dialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+			<ModalHeader toggle={this.togglePopup}>
+				<Title
+					header={translate("dialog.vehicle.title")}
+					subHeader={"Store vehicles in your garage and Get product recommendations"} />
+			</ModalHeader>
+			<ModalBody>
+				<Vehicles
+					toggle={this.togglePopup}
+					direction={this.props.direction}
+				/>
+			</ModalBody>
+		</Modal>
 		// const dialog = <Dialog header={translate("dialog.shippingCity.title")} visible={this.state.visible} minWidth={500} modal={true} onHide={this.onHide}>
 		// 	<div className="Signup-verification_number">
 		// 		<ShippingCity
@@ -121,44 +149,7 @@ class QuotationRequest extends Component {
 						</div>
 					</div>
 				</section>
-				<section id="custom-steps">
-					<div className="container-fluid">
-						<div className="row steps-container" align="center">
-							<div className="col-12">
-								<div className="row text-center">
-									<div className="col-3">
-										<img className="request" src="/img/request.svg" alt="request" />
-										<figcaption className="clearfix">
-											<h3>Request</h3>
-											<p>Fill in your vehicle data and the <span>parts you want</span></p>
-										</figcaption>
-									</div>
-									<div className="col-3 disabled">
-										<img className="check-price" src="/img/check-price.svg" alt="check-price" />
-										<figcaption>
-											<h3>Check Price</h3>
-											<p>The price will deliver to you <span>within 24 hours</span></p>
-										</figcaption>
-									</div>
-									<div className="col-3 disabled">
-										<img className="add-to-cart" src="/img/add-to-cart.svg" alt="add-to-cart" />
-										<figcaption>
-											<h3>Add To Cart</h3>
-											<p>choose Sipping Address <span>and payment method</span></p>
-										</figcaption>
-									</div>
-									<div className="col-3 disabled">
-										<img className="delivery-product" src="/img/delivery-product.svg" alt="delivery-product" />
-										<figcaption>
-											<h3>Receive Order</h3>
-											<p>Your order for your workshop or <span>anywher you love</span></p>
-										</figcaption>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				<OrderSteps grey="-gs" />
 				<section id="custom-details">
 					<div className="container-fluid">
 						<div className="title-container">
@@ -172,7 +163,14 @@ class QuotationRequest extends Component {
 										<h3>Vehicle Information</h3>
 									</div>
 									<div className="col-6 garage-btn-container">
-										Button
+										<Link
+											to={'#'}
+											isReverseOrder
+											className='btn btn-gray'
+											text='Garage'
+											icon='icon-vehicle'
+											onClick={this.handleClick}
+										/>
 									</div>
 								</div>
 								<div className="row">
@@ -277,7 +275,7 @@ class QuotationRequest extends Component {
 
 							<div className="col-12 padding-right-0">
 								<div className="row d-flex">
-									<div className="col-6">
+									<div className="col-6 links">
 										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
 									</div>
 									<div className="col-6 garage-btn-container padding-md-right-0">
@@ -293,6 +291,7 @@ class QuotationRequest extends Component {
 						</form>
 					</div>
 				</section>
+				{dialog}
 			</Fragment>
 
 			/*

@@ -117,28 +117,12 @@
     background: $white !important;
     .modal-header{
       .sec-header{
-        h1{
-          font-family: Roboto;
-          font-size: 30px !important;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          text-align: $left;
+        h1 {
+          @include text-capitalize;
         }
-        p{
-          opacity: 0.6;
-          font-family: Roboto;
-          @include font-size(13px);
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: 1.92;
-          letter-spacing: normal;
-          text-align: $left;
-          margin-bottom: 0px;
-        }
+       span {
+        top: -12px;
+       }
       }
     }
   }
