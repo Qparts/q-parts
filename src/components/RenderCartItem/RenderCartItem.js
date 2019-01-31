@@ -64,7 +64,7 @@ export default class extends Component {
                           </div>
                           <div className="actions">
                             <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
                           </div>
                         </div>
                         <div className="col-md-3 quantity-div">
@@ -122,7 +122,7 @@ export default class extends Component {
                           </div>
                           <div className="actions">
                             <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
+                            <a href="#" className="delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
                           </div>
                         </div>
                         <div className="col-md-3 quantity-div">

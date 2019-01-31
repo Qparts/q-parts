@@ -12,13 +12,73 @@ import Swiper from 'react-id-swiper';
 import {starsRating } from '../../constants';
 import Select from 'react-select';
 import RenderProducts from '../../components/RenderProducts/RenderProducts';
+import { isAuth } from '../../utils'
+import Login from "../../containers/Authentication/Login/Login";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Title from '../UI/Title';
 
+import Slider from "react-slick";
 class Cart extends Component {
+	constructor(props) {
+    super(props);
+
+    this.state = {
+      dialogType: 'signin',
+      modal: false
+    };
+  }
+	togglePopup = () => {
+    this.setState({
+      modal: !this.state.modal
+    })
+  }
+	getDialogProps = () => {
+		const { dialogType } = this.state;
+		const { translate } = this.props;
+
+		switch (dialogType) {
+			case 'signin':
+				return {
+					header: <Title header={translate("dialog.signin.title")} />
+				}
+			default:
+				break;
+		}
+	}
+	getDialogComponent = () => {
+    const { vehicles } = this.props;
+    const { dialogType } = this.state;
+
+    switch (dialogType) {
+      case 'signin':
+        return <Login toggle={this.togglePopup} />
+
+      default:
+        break;
+    }
+  }
 	handleSubmit = values => {
-		this.props.history.push('/checkout');
+		if(isAuth(this.props.token)){
+			this.props.history.push('/checkout');
+		}else{
+			if(window.innerWidth < 950){
+				this.props.history.push('/login')
+			}else{
+				this.setState({ dialogType: 'signin' });
+		    this.togglePopup();
+			}
+		}
 	}
 	render() {
 		const { translate } = this.props;
+		const dialog = (
+      <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalBody>
+          {this.getDialogComponent()}
+        </ModalBody>
+      </Modal>
+    )
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
 				desc: item.product.desc,
@@ -260,7 +320,7 @@ class Cart extends Component {
 										<label>Total</label><p class>20700<span>SR</span></p>
 									</li>
 								</ul>
-								<button className="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+								<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Check Out<i className="icon-arrow-right"></i></button>
 							</div>
 						<a href="#"  className="media chat-div">
 								<img  src="/img/whatsapp-logo.svg" alt="whatsapp"/>
@@ -408,6 +468,7 @@ class Cart extends Component {
 						</div>
 					</div>
 				</section>
+				{dialog}
 			</section>
 
 
@@ -419,6 +480,7 @@ const mapStateToProps = (state) => {
 	return {
 		purchasedItems: state.cart.purchasedItems,
 		translate: getTranslate(state.localize),
+		token: state.customer.token
 	}
 }
 
