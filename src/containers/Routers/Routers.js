@@ -22,7 +22,7 @@ class Routes extends Component {
         const defaultLanguage = props.defaultLang || props.customer.defaultLang;
 
 
-        props.InitializeDefaultLang(defaultLanguage);
+        // props.InitializeDefaultLang(defaultLanguage);
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
@@ -85,7 +85,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
-        InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
+        // InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country))

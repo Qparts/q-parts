@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Nav = props => {
+const Nav = ({ translate }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
@@ -33,7 +33,7 @@ const Nav = props => {
   </a>
                 </li>
                 <li className="sep"></li>
-                <li><a href="#">Custom Order</a></li>
+                <li><a href="#">{translate("navBar.vehiclePart")}</a></li>
                 <li className="has-children">
                     <a href="#">Vehicle Part</a>
                     <ul className="cd-secondary-nav is-hidden">
