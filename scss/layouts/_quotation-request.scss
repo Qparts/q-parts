@@ -118,8 +118,19 @@
     padding-top: 79px;
   }
 
-  a {
-    color: $brand-color;
+  .links {
+    a {
+      color: $brand-color;
+    }
+  }
+
+  .btn-gray {
+    @include font-size(20px);
+    i {
+      &::before {
+        top: 4px;
+      }
+    }
   }
 
   h3 {
@@ -204,7 +215,7 @@
       }
     }
 
-    .vin-field-container{
+    .vin-field-container {
       @include large-medium-screens {
         @include padding-left(6px);
       }
@@ -215,22 +226,20 @@
       }
 
       .vin-field {
-        @include large-medium-screens{
+        @include large-medium-screens {
           @include boarder-right-radius(0, 20px);
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-right-radius(0, 20px);
           @include boarder-left-radius(0, 20px);
         }
-        
+
         background: $light-gray;
         height: 55px;
       }
-
     }
 
-
-    .select-country-field-container{
+    .select-country-field-container {
       @include large-medium-screens {
         @include padding-right(0);
       }
@@ -240,11 +249,11 @@
         padding-top: 10px;
       }
 
-      .select-country-field{
-        @include large-medium-screens{
+      .select-country-field {
+        @include large-medium-screens {
           @include boarder-left-radius;
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-left-radius(20px, 0);
         }
         background: $light-gray;
@@ -252,7 +261,7 @@
       }
     }
 
-    .select-city-field-container{
+    .select-city-field-container {
       @include large-medium-screens {
         @include padding-left(6px);
       }
@@ -262,11 +271,11 @@
         padding-top: 10px;
       }
 
-      .select-city-field{
-        @include large-medium-screens{
+      .select-city-field {
+        @include large-medium-screens {
           @include boarder-right-radius(0, 20px);
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-right-radius(0, 20px);
           @include boarder-left-radius(0, 20px);
         }
@@ -285,12 +294,11 @@
       }
 
       .part-desc-field {
-        padding-left:10px;
+        padding-left: 10px;
         width: 100%;
         height: 55px;
         background: $light-gray;
         @include font-size(16px);
-
 
         @include small-screen {
           @include boarder-left-radius(20px, 0);
@@ -301,12 +309,12 @@
         }
       }
 
-      .number-picker-container{
-        @include large-medium-screens{
+      .number-picker-container {
+        @include large-medium-screens {
           padding-left: 0;
         }
 
-        @include small-screen{
+        @include small-screen {
           padding-bottom: 10px;
           padding-top: 10px;
         }
@@ -332,36 +340,31 @@
             border-radius: side-values(0 0 0 0) !important;
           }
         }
-
       }
 
-      .delete-btn-container{
-
-        @include small-screen{
+      .delete-btn-container {
+        @include small-screen {
           text-align: right;
           padding-bottom: 10px;
           padding-top: 10px;
         }
-        @include large-medium-screens{
+        @include large-medium-screens {
           text-align: $right;
           @include padding-left(0);
         }
         .btn {
           border: none;
           width: 100%;
-          @include small-screen{
+          @include small-screen {
             width: 50%;
             border-radius: side-values(0 0 20px 0) !important;
           }
           height: 55px;
           left: 0;
-          
+
           @include font-size(15px);
         }
       }
-      
-
-      
     }
     .add-part-btn-container {
       text-align: $right;

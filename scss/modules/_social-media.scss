@@ -30,4 +30,10 @@
   .btn-social-media {
     // @include box-shadow;
   }
+  .solid-line {
+    display: inline-block;
+    width: 412px;
+    height: 1px;
+    background-color: $very-light-grey;
+  }
 }
