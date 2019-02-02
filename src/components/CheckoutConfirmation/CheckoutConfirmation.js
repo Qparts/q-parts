@@ -12,14 +12,6 @@ import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
 
 class CheckoutConfirmation extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      secureCreditCardUrl: ''
-    }
-  }
-
 
   handleClick = () => {
     const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
@@ -51,8 +43,6 @@ class CheckoutConfirmation extends Component {
 
   render() {
     const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity } = this.props;
-    console.log(incrementQuantity);
-
     return (
       <Fragment>
         <MediumScreen>
