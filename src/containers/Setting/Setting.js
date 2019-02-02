@@ -10,10 +10,10 @@ import SettingLinks from '../../components/SettingLinks/SettingLinks';
 import {
   loadCurrentUser, editName, editPhoneNo, editEmail, editPassword,
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
-  deleteVehicle, moveWishlistToCart, deleteWishlist
+  deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests, getCompletedRequests
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { getQuotation, getRepliedQuotation, addToCart } from '../../actions/cartAction';
+import { addToCart, decrementQuantity, incrementQuantity } from '../../actions/cartAction';
 import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import EditInfo from '../../components/EditInfo/EditInfo';
 import Addresses from '../../components/Addresses/Addresses';
@@ -422,11 +422,14 @@ class Setting extends Component {
                   return (
                     <Fragment>
                       <Quotations
+                        getPendingRequests={this.props.getPendingRequests}
+                        getCompletedRequests={this.props.getCompletedRequests}
                         customer={this.props.customer}
-                        getQuotation={this.props.getQuotation}
-                        getRepliedQuotation={this.props.getRepliedQuotation}
+                        quotations={this.props.quotations}
                         translate={this.props.translate}
-                        addToCart={this.props.addToCart} />
+                        addToCart={this.props.addToCart}
+                        incrementQuantity={this.props.incrementQuantity}
+                        decrementQuantity={this.props.decrementQuantity} />
                     </Fragment>
                   )
                 }} />
@@ -555,6 +558,7 @@ const mapStateToProps = (state) => {
   const customer = state.customer.detail;
   return {
     customer,
+    quotations: state.customer.quotations,
     address: state.customer.address,
     regions: state.api.regions,
     country: state.api.country,
@@ -586,13 +590,15 @@ const mapDispatchToProps = (dispatch) => {
     findCity,
     socialMediaButton,
     addAddress,
-    getQuotation,
-    getRepliedQuotation,
     clearAddress,
     deleteVehicle,
     addToCart,
     moveWishlistToCart,
-    deleteWishlist
+    deleteWishlist,
+    incrementQuantity,
+    decrementQuantity,
+    getPendingRequests,
+    getCompletedRequests
   }, dispatch)
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ROOT, CUSTOMER_SERVICE } from '../actions/constants';
+import { API_ROOT, CUSTOMER_SERVICE, QUOTATION_SERVICE } from '../actions/constants';
 import { ON_SOCIAL_MEDIA_AUTH, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import { initialize } from 'react-localize-redux';
@@ -44,6 +44,8 @@ export const DELETE_WISHLIST = 'DELETE_WISHLIST';
 export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
 export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
+export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
+export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
@@ -523,5 +525,37 @@ export const completePayment = (isCompleted) => {
   return {
     type: COMPLETE_PAYMENT,
     payload: isCompleted
+  }
+}
+
+export const getPendingRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/pending`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_PENDING_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const getCompletedRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/completed`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_COMPLETED_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
   }
 }

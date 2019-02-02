@@ -77,3 +77,5 @@ export const accountSetting = 'accountSetting';
 export const addressBook = 'addressBook';
 export const socialMedia = 'socialMedia';
 export const payment = 'payment';
+export const PENDING = 'pending';
+export const REPLIED = 'replied';
