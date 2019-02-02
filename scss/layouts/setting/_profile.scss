@@ -426,3 +426,391 @@
 .component-background{
   padding-bottom: 0px !important;
 }
+.profile-mobile{
+  .Profile-container {
+    .Profile-info-box{
+      @include padding-left(20px);
+      @include padding-right(20px);
+      .info-title{
+        height: 55px;
+        background: $white;
+        text-transform: none;
+        border-radius: side-values(20px 0px 0px 0px) !important;
+        padding: side-values(18px 0px 20px 20px) !important;
+        margin-bottom: 3px;
+        p{
+          margin: 0px;
+          font-family: Roboto;
+          @include font-size(20px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: #37363d;
+        }
+      }
+      .info-body{
+        padding: 10px;
+        background: $white;
+        .user-img {
+          text-align: center;
+          margin-bottom: 20px;
+          .div-last-rounded {
+            display: inline-block;
+            padding: 0px;
+            .form-control {
+              border-radius: side-values(20px 0 20px 20px) !important;
+              border: none;
+              background: $light-gray;
+              padding: inherit;
+              label,
+              sub,
+              br {
+                display: none;
+              }
+            }
+            input {
+              text-align: $right;
+              border-radius: inherit;
+              height: 44px;
+              width: 171px;
+              padding-#{$right}: 10px !important;
+            }
+          }
+          .input-group-prepend {
+            width: 30% !important;
+            #{$left}: 10px !important;
+            .ellipse {
+              background: none;
+            }
+            img{
+              margin-top: 20px !important;
+              margin-#{$left}: 15px !important;
+            }
+          }
+          .main-img{
+            margin-#{$right}: 20px;
+            border-radius: 50px;
+            background: $light-gray;
+            width: 60px;
+            padding: 10px;
+          }
+        }
+
+        .Profile-info-box_item{
+          .first-Name{
+            margin-bottom: 20px;
+            .form-control{
+              border-radius: side-values(20px 0 20px 20px) !important;
+            }
+            .RenderField{
+              border-radius: side-values(20px 0 20px 20px) !important;
+              input{
+                margin-bottom: 0px;
+              }
+              label{
+                top: 0px;
+              }
+            }
+          }
+          .last-name{
+            .form-control{
+              border-radius: side-values(20px 0 20px 20px) !important;
+            }
+            .RenderField{
+              border-radius: side-values(20px 0 20px 20px) !important;
+              width: 100%;
+              input{
+                margin-bottom: 0px;
+                width: 100%;
+              }
+              label{
+                top: 0px;
+              }
+            }
+          }
+          .form-control{
+            border: none;
+            background: $light-gray;
+            sub,
+            br {
+              display: none;
+            }
+          input {
+            border-radius: inherit;
+          }
+          label{
+            height: 10px;
+            opacity: 0.6;
+            font-family: Roboto;
+            @include font-size(13px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.92;
+            letter-spacing: normal;
+            text-align: $left;
+            color: rgba(55, 54, 61, 0.6);
+            }
+          }
+          .country {
+            .css-10nd86i {
+              width: 100%;
+              height: 55px;
+              border-radius: 0px;
+              background-color: #f7f7f7;
+              border-radius: side-values(20px 0 20px 20px) !important;
+              position: relative !important;
+            }
+            .select__control{
+              margin-top: 15px;
+            }
+          }
+          .phone-info{
+            display: flex;
+            .first{
+              padding: 0px;
+              .form-control{
+                border-radius: side-values(20px 0 0 20px) !important;
+                width: 100px;
+                text-align: center;
+                padding: 0px;
+              }
+            }
+            .phone-number{
+              @include margin-left(3px);
+              @include padding-right(5px);
+            }
+            .form-control {
+              border-radius: side-values(0 0 20px 0) !important;
+              border: none;
+              background: $light-gray;
+              height: 55px;
+              label,
+              sub,
+              br {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+    .Profile-access-box{
+      @include padding-left(20px);
+      @include padding-right(20px);
+      .access-title{
+        height: 55px;
+        background: $white;
+        text-transform: none;
+        padding: side-values(18px 0px 20px 20px) !important;
+        margin-bottom: 3px;
+        p{
+          width: 143px;
+          height: 15px;
+          font-family: Roboto;
+          @include font-size(20px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: #37363d;
+        }
+      }
+      .Profile-access-box_item{
+        background: white;
+        padding: side-values(10px) !important;
+        .form-control{
+          border: none;
+          height: 55px;
+          background: $light-gray;
+          border-radius: side-values(20px 0 20px 20px) !important;
+          margin-bottom: 15px;
+          sub,
+          br {
+            display: none;
+          }
+        }
+        .RenderField{
+          border-radius: none;
+          border: none !important;
+          margin-bottom: 13px;
+          input{
+            margin-bottom: 0px;
+            width: 100%;
+          }
+          label{
+            top: 0px;
+          }
+        }
+        .btn-secondary{
+          text-align: center;
+          background: $light-gray;
+          height: 55px;
+          margin-bottom: 30px;
+          p{
+            font-family: Roboto;
+            @include font-size(16px);
+            margin-top: 10px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            i{
+              margin-#{$right}: 5px;
+            }
+          }
+        }
+      }
+    }
+    .Profile-notification-box{
+      @include padding-left(20px);
+      @include padding-right(20px);
+      .notification-title{
+        height: 55px;
+        background: $white;
+        text-transform: none;
+        padding: side-values(18px 0px 20px 20px) !important;
+        margin-bottom: 3px;
+        p{
+          font-family: Roboto;
+          @include font-size(20px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: #37363d;
+        }
+      }
+      .Profile-notification-box_item{
+        background: white;
+        padding: 10px;
+        .languages {
+          margin-bottom: 38px;
+          .css-10nd86i {
+            width: 100%;
+            height: 55px;
+            background-color: #f7f7f7;
+            border-radius: side-values(20px 0 20px 20px) !important;
+            position: relative !important;
+          }
+          .select__control{
+            margin-top: 10px;
+          }
+        }
+        .notification{
+          margin-bottom: 27px;
+          label{
+            margin-bottom: 0px;
+            font-family: Roboto;
+            @include font-size(16px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.56;
+            letter-spacing: normal;
+            text-align: $left;
+            color: #37363d;
+          }
+          .checkmark{
+            border-radius: 9px;
+          }
+        }
+      }
+    }
+    .Profile-email-box{
+      @include padding-left(20px);
+      @include padding-right(20px);
+      .email-title{
+        height: 55px;
+        background: $white;
+        text-transform: none;
+        padding: side-values(18px 0px 20px 20px) !important;
+        margin-bottom: 3px;
+        p{
+          font-family: Roboto;
+          @include font-size(20px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          color: #37363d;
+        }
+      }
+      .Profile-email-box_item{
+        background: white;
+        padding: side-values(20px 20px 20px 10px)!important;
+        border-radius: side-values(0 0 0 20px) !important;
+        .email-check{
+          label{
+            margin-bottom: 0px;
+            font-family: Roboto;
+            @include font-size(16px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.56;
+            letter-spacing: normal;
+            text-align: $left;
+            color: #37363d;
+          }
+          .checkmark{
+            border-radius: 9px;
+          }
+        }
+      }
+    }
+    .Profile-footer{
+      text-align: $right;
+      margin-bottom: 60px;
+      padding-left: 20px;
+      padding-right: 20px;
+      .btn-light{
+        width: 90px;
+        height: 50px;
+        background: $white;
+        border-radius: side-values(0 0 0 20px) !important;
+        margin-#{$right}: 10px;
+        p{
+          font-family: Roboto;
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+        }
+      }
+      .btn-secondary{
+        height: 50px;
+        background: $brand-color;
+        color: $white;
+        text-align: $right;
+        border-radius: side-values(0 20px 20px 0) !important;
+        p{
+          font-family: Roboto;
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: $white;
+          i{
+            margin-#{$left}: 10px;
+            margin-#{$right}: 10px;
+          }
+        }
+      }
+    }
+  }
+}

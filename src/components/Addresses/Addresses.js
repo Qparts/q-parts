@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import './Addresses.css';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Addresses extends Component {
   constructor(props){
@@ -14,7 +15,7 @@ class Addresses extends Component {
  render() {
   const { translate } = this.props;
   let addresses;
-  if(false){
+  if(true){
     addresses = <div id="addresses-container">
      <div className="addresses-header justify-content-between">
        <p> {translate("setting.addressBook.shippingItem")}</p>
@@ -62,9 +63,18 @@ class Addresses extends Component {
       </div>
   }
   return (
-   <div className="col-10">
-      {addresses}
-   </div>
+    <Fragment>
+      <MediumScreen>
+       <div className="col-10">
+          {addresses}
+       </div>
+      </MediumScreen>
+      <SmallScreen>
+       <div className="col-12 adresses-mobile">
+          {addresses}
+       </div>
+      </SmallScreen>
+    </Fragment>
   )
  }
 }
