@@ -6,7 +6,7 @@ import Table from '../UI/Table';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
-import { SmallScreen, MediumScreen } from '../Device/index.js'
+import { SmallScreen, MediumScreen } from '../Device/index.js';
 
 import './CheckoutConfirmation.css';
 
