@@ -1,5 +1,5 @@
 let backendHost;
-const proxyHost = 'qtest.fareed9.com';
+const proxyHost = 'q.parts';
 
 const hostname = window && window.location && window.location.hostname;
 
