@@ -3,7 +3,7 @@ const proxyHost = 'q.parts';
 
 const hostname = window && window.location && window.location.hostname;
 
-if (true) {
+if (false) {
  backendHost = `http://${proxyHost}`;
 } else {
  backendHost = 'http://localhost:8000';

@@ -5,7 +5,7 @@ import Button from '../UI/Button';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
-import { SmallScreen, MediumScreen } from '../Device/index.js'
+import { SmallScreen, MediumScreen } from '../Device/index.js';
 
 import './CheckoutConfirmation.css';
 import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';

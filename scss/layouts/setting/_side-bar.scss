@@ -1,0 +1,32 @@
+.side-bar{
+  div{
+    div{
+      padding: 20px;
+      padding-top: 15%;
+      padding-left: 0px;
+      padding-right: 0px;
+      &:first-child{
+        background: $white;
+      }
+      .list-group-items{
+        padding: 0px;
+        padding-top: 0px;
+        .list-group{
+          padding: 0px;
+          padding-top: 0px;
+        }
+      }
+      .btn-back{
+        background: none;
+        border: 0px;
+        width: 100%;
+        border-bottom: 1px solid #c5c5c5;
+        padding: 20px;
+        text-align: $left;
+        span{
+          @include margin-left(5px);
+        }
+      }
+    }
+  }
+}

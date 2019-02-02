@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Payment extends Component {
  constructor(props){
@@ -84,9 +85,18 @@ class Payment extends Component {
       </div>
   }
   return (
-   <div className="col-10">
-      {payment}
-   </div>
+     <Fragment>
+       <MediumScreen>
+         <div className="col-10">
+            {payment}
+         </div>
+       </MediumScreen>
+       <SmallScreen>
+         <div className="col-12 payment-mobile">
+            {payment}
+         </div>
+       </SmallScreen>
+     </Fragment>
   )
  }
 }

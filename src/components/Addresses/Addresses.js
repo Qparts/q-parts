@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import './Addresses.css';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Addresses extends Component {
   constructor(props) {
@@ -63,9 +64,18 @@ class Addresses extends Component {
   }
   render() {
     return (
-      <div className="col-10">
-        {this.renderAddresses()}
-      </div>
+      <Fragment>
+        <MediumScreen>
+          <div className="col-10">
+            {this.renderAddresses()}
+          </div>
+        </MediumScreen>
+        <SmallScreen>
+          <div className="col-12 adresses-mobile">
+            {this.renderAddresses()}
+          </div>
+        </SmallScreen>
+      </Fragment>
     )
   }
 }
