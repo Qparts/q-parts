@@ -85,10 +85,10 @@ class Order extends Component {
       title={translate("deliveryAddress.title")}
       change={translate("deliveryAddress.change")} />
 
-     <PaymentMethod
+     {/* <PaymentMethod
       paymentMethod={checkout.paymentMethod}
       title={translate("paymentMethod.title")}
-      change={translate("paymentMethod.change")} />
+      change={translate("paymentMethod.change")} /> */}
     </div>
    </div>
   )

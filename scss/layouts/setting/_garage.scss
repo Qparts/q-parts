@@ -80,14 +80,9 @@
         height: 41px;
         display: flex;
         margin-top: 18px;
-        .btn-link{
+        .btn-gray{
           @include margin-left(20px);
-          width: 66px;
-          text-align: center;
-          background: $light-gray !important;
-          border-radius: side-values(0 20px 20px 20px) !important;
           margin-#{$right}: 10px;
-          color: $black;
           .icon-edit{
             @include font-size(18px);
           }

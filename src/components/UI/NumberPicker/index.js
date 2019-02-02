@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import Button from '../Button';
 import * as constant from '../../../constants';
 
-const DECREMENT = 'decrement';
-const INCREMENT = 'increment';
-
 class NumberPicker extends Component {
 
     handleClick = (action, event) => {
@@ -17,7 +14,7 @@ class NumberPicker extends Component {
         const min = 1;
         let newQuanValue = parseInt(value, constant.RADIX);
 
-        if (action === DECREMENT) {
+        if (action === constant.DECREMENT) {
             const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
             onChange(decQuantity);
         } else {
@@ -31,7 +28,7 @@ class NumberPicker extends Component {
             <Button
                 className="btn btn-secondary btn-positive"
                 text="+"
-                onClick={this.handleClick.bind(this, INCREMENT)} />
+                onClick={this.handleClick.bind(this, constant.INCREMENT)} />
             <input
                 className="form-control btn btn-secondary"
                 readOnly
@@ -41,7 +38,7 @@ class NumberPicker extends Component {
             <Button
                 className="btn btn-secondary btn-negative"
                 text="-"
-                onClick={this.handleClick.bind(this, DECREMENT)} />
+                onClick={this.handleClick.bind(this, constant.DECREMENT)} />
         </div>
     }
 }

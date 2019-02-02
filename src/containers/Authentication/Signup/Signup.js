@@ -79,7 +79,7 @@ class Signup extends Component {
                   <img className="user" alt="user" src="/img/user.svg" />
                 </span>
                 <span>{translate("form.signup.haveAccount")}
-                  <Link to={"#"} className="btn-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
+                  <Link to={"#"} className="btn-gray" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
                   {translate("form.signup.here")}
                 </span>
               </div>

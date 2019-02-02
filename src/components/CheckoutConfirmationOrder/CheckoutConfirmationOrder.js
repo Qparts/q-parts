@@ -1,20 +1,25 @@
 import React, { Component, Fragment } from 'react';
-import { reduxForm, FieldArray } from 'redux-form';
-import { withRouter } from 'react-router-dom';
-import Button from '../UI/Button';
-import Table from '../UI/Table';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { SmallScreen, MediumScreen } from '../Device/index.js'
 import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
-import CustomerService from '../CustomerService/CustomerService';
-import { onRegistered } from '../../actions/customerAction.js';
 
 import _ from 'lodash';
-import { right } from '../../utils/index.js';
+import {  getQuery } from '../../utils/index.js';
+import { paymentResponse } from '../../utils/api';
+import { CREDIT_CARD } from '../../constants';
 class CheckoutConfirmation extends Component {
+
+  constructor(props) {
+    super(props)
+
+    if(props.checkout.paymentMethod === CREDIT_CARD) {
+      paymentResponse(this.props.location.search);
+    }
+  }
+  
 
   handleClick = () => {
     this.props.completeOrder(true);
@@ -22,19 +27,10 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate } = this.props;
-    const mockCart = [
-      {
-        name: "Test from the client",
-        quantity: 1,
-        price: "200 SR"
-      },
-      {
-        name: "Test from the client",
-        quantity: 2,
-        price: "200 SR"
-      }
-    ];
+    const { checkout, translate, location } = this.props;
+    const params = getQuery(location);
+    
+   
     return (
       <Fragment>
         <MediumScreen>
@@ -42,7 +38,7 @@ class CheckoutConfirmation extends Component {
             <div className="content">
               <i className="icon-delivered-step upload-img" />
               <p className="p"><span>Thank </span>You!</p>
-              <h5>Your order has been placed <br />Please check your email for order confirmation and detailed delivery information.</h5>
+              <h5>Your order number #{params.cartId} has been placed <br />Please check your email for order confirmation and detailed delivery information.</h5>
               <button className="btn btn-open-G">Track You Order<i className={'icon-arrow-right'} /></button>
             </div>
             <div className="CheckoutConfirmation_items card">
@@ -151,12 +147,16 @@ class CheckoutConfirmation extends Component {
                     <div className="col-6 delivery-address">
                       <DeliveryAddress
                         title={translate("deliveryAddress.title")}
-                        change={translate("deliveryAddress.change")} deliveryAddress={checkout.deliveryAddress} translate={translate} />
+                        change={translate("deliveryAddress.change")} 
+                        deliveryAddress={checkout.deliveryAddress} 
+                        translate={translate} />
                     </div>
                       <div className="col-6 payment-method">
                         <PaymentMethod
                           title={translate("paymentMethod.title")}
-                          change={translate("paymentMethod.change")} paymentMethod={checkout.paymentMethod} translate={translate} />
+                          change={translate("paymentMethod.change")} 
+                          checkout={checkout} 
+                          translate={translate} />
                       </div>
                   </div>
             </div>
@@ -281,7 +281,9 @@ class CheckoutConfirmation extends Component {
                       <div className="col-12 payment-method">
                         <PaymentMethod
                           title={translate("paymentMethod.title")}
-                          change={translate("paymentMethod.change")} paymentMethod={checkout.paymentMethod} translate={translate} />
+                          change={translate("paymentMethod.change")} 
+                          checkout={checkout} 
+                          translate={translate} />
                       </div>
                   </div>
             </div>
@@ -292,13 +294,9 @@ class CheckoutConfirmation extends Component {
   }
 }
 
-CheckoutConfirmation = reduxForm({
-  form: 'CheckoutConfirmation',
-})(CheckoutConfirmation)
-
 const mapStateToProps = state => ({
 	translate: getTranslate(state.localize),
-  checkout: state.customer.checkout,
+  checkout: state.cart.checkout,
 });
 
 

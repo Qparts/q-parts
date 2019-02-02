@@ -23,7 +23,7 @@ class Routes extends Component {
 
 
         // props.InitializeDefaultLang(defaultLanguage);
-        props.getVehicles();
+        // props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
         loadStyle(this.props.direction);

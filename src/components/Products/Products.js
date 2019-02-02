@@ -220,7 +220,7 @@ export default withRouter(Products);
 //     <li>
 //         <Button
 //             type="button"
-//             className="btn-link selected"
+//             className="btn-gray selected"
 //             text={translate("offers.recommendation.bestSeller")}
 //             onClick={this.props.getOffers.bind(this, BEST_SELLER)} />
 //     </li>
@@ -230,7 +230,7 @@ export default withRouter(Products);
 //     <li>
 //         <Button
 //             type="button"
-//             className="btn-link"
+//             className="btn-gray"
 //             text={translate("offers.recommendation.offers")}
 //             onClick={this.props.getOffers.bind(this, OFFERS)} />
 //     </li>
@@ -240,7 +240,7 @@ export default withRouter(Products);
 //     <li>
 //         <Button
 //             type="button"
-//             className="btn-link"
+//             className="btn-gray"
 //             text={translate("offers.recommendation.recentViewed")}
 //             onClick={this.props.onRecentlyViewedProducts} />
 //     </li>
