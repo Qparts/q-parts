@@ -480,7 +480,7 @@ class ProductDetail extends Component {
                               <Link
                                 to="#"
                                 style={this.state.canWriteReview ? commonStyles.hide : commonStyles.show}
-                                className="btn-link"
+                                className="btn-add_review"
                                 text={translate("product.writeReview.title")}
                                 onClick={this.handleWriteReview.bind(this, true)}
                                 icon={`icon-arrow-${right(this.props.direction)}`} />

@@ -36,7 +36,7 @@ class Garage extends Component {
           <p>{vehicle.vin}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
          </div>
         </div>
         <div className="col-1">
@@ -54,7 +54,7 @@ class Garage extends Component {
           <p>{vehicle.label}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
           <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
          </div>
         </div>

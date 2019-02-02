@@ -125,7 +125,7 @@ export const routes = (isAuth, direction) => [
         component: VerifyEmail,
     },
     {
-        path: "/confirmOrder",
+        path: "/payment-response:cartId?/:id?/:status?/:message?",
         exact: true,
         component: CheckoutConfirmationOrder,
     },

@@ -36,8 +36,6 @@ export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
 export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
-export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
-export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
 export const COMPLETE_ORDER = 'COMPLETE_ORDER';
 export const DELETE_VEHICLE = 'DELETE_VEHICLE';
 export const ADD_RECENT_VIEWED_PRODUCTS = 'ADD_RECENT_VIEWED_PRODUCTS';
@@ -449,20 +447,6 @@ export const changeDefaultLanguage = (defaultLanguage) => {
     dispatch({type: SET_DEFAULT_LANG, payload: defaultLanguage})
   }
   
-}
-
-export const addDeliveryAddress = (address) => {
-  return {
-    type: ADD_DELIVERY_ADDRESS,
-    payload: address
-  }
-}
-
-export const addPaymentMethod = (payment) => {
-  return {
-    type: ADD_PAYMENT_METHOD,
-    payload: payment
-  }
 }
 
 export const completeOrder = (isCompleted) => {

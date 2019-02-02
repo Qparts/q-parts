@@ -565,7 +565,7 @@ const mapStateToProps = (state) => {
     component: getComponentName(ON_SOCIAL_MEDIA_LINK),
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
-    checkout: state.customer.checkout,
+    checkout: state.cart.checkout,
     vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
     addresses: state.customer.detail.addresses,

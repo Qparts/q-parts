@@ -18,7 +18,7 @@ class Payment extends Component {
        <p>Your credit cards</p>
        <div className="payment-add">
          <p>Secure Credit Card Payment <i className="icon-secure"/></p>
-         <Button type="button" className="btn btn-link" onClick={this.props.onShowEditDialog.bind(this, 'payment')} text="New Card" icon="icon-add" isReverseOrder/>
+         <Button type="button" className="btn btn-gray" onClick={this.props.onShowEditDialog.bind(this, 'payment')} text="New Card" icon="icon-add" isReverseOrder/>
        </div>
      </div>
      <span className="seperator"></span>
@@ -40,7 +40,7 @@ class Payment extends Component {
          <p className="expires-date">Expires<span>04/2023</span></p>
        </div>
        <div className="payment-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+        <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
        </div>
       </div>
       <div className="col-1">
@@ -63,7 +63,7 @@ class Payment extends Component {
           <p className="expires-date">Expires<span>04/2023</span></p>
         </div>
        <div className="payment-footer">
-        <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+        <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
         <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
        </div>
       </div>
@@ -79,7 +79,7 @@ class Payment extends Component {
       <div className="add-card">
         <p className="icon-debit-card"/>
         <p className="card-text">NO SAVER CARDS</p>
-        <Button type="button" className="btn btn-link" text="New Card" onClick={this.props.onShowEditDialog.bind(this, 'payment')} icon="icon-add" isReverseOrder/>
+        <Button type="button" className="btn btn-gray" text="New Card" onClick={this.props.onShowEditDialog.bind(this, 'payment')} icon="icon-add" isReverseOrder/>
       </div>
       </div>
   }
