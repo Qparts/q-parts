@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const Nav = ({ translate }) => {
     return (
@@ -33,68 +34,69 @@ const Nav = ({ translate }) => {
   </a>
                 </li>
                 <li className="sep"></li>
-                <li><a href="#">{translate("navBar.vehiclePart")}</a></li>
+                <li><a href="#">{translate("nav.quotationOrder")}</a></li>
                 <li className="has-children">
-                    <a href="#">Vehicle Part</a>
+                    <a href="#">{translate("nav.consumableParts")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <li><a href="#">Oil Filter</a></li>
-                        <li><a href="#">Air Filters</a></li>
-                        <li><a href="#">Brake Parts</a></li>
+                        <li><a href="#">{translate("nav.oilFilter")}</a></li>
+                        <li><a href="#">{translate("nav.airFilter")}</a></li>
+                        <li><a href="#">{translate("nav.brakePads")}</a></li>
                     </ul>
                 </li>
                 <li className="has-children">
-                    <a href="#">Oil</a>
+                    {/* <a href="#">{translate("nav.oil")}</a> */}
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <li><a href="#">Motor Oil</a></li>
-                        <li><a href="#">Gear Oil</a></li>
-                        <li><a href="#">Grease</a></li>
+                        <li><a href="#">{translate("nav.motorOil")}</a></li>
+                        <li><a href="#">{translate("nav.gearOil")}</a></li>
+                        <li><a href="#">{translate("nav.grease")}</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Tires</a></li>
                 <li className="has-children">
-                    <a href="#">Tools</a>
+                    <a href="#">{translate("nav.tools")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <li><a href="#">Hand tools</a></li>
-                        <li><a href="#">Electrical tools</a></li>
-                        <li><a href="#">Tyre Inflator</a></li>
-                        <li><a href="#">Repair Equipments</a></li>
+                        <li><a href="#">{translate("nav.handTools")}</a></li>
+                        <li><a href="#">{translate("nav.electricalTools")}</a></li>
+                        <li><a href="#">{translate("nav.tyreInflator")}</a></li>
+                        <li><a href="#">{translate("nav.repairEquipment")}</a></li>
                     </ul>
                 </li>
                 <li className="has-children">
-                    <a href="#">Accessorise </a>
+                    <a href="#">{translate("nav.accessorise")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <li><a href="#">Car electronics</a></li>
-                        <li><a href="#">Exterior accessories</a></li>
-                        <li><a href="#">Car mats</a></li>
-                        <li><a href="#">Wires and cables</a></li>
-                        <li><a href="#">Covers</a></li>
-                        <li><a href="#">Car first aid kit</a></li>
-                        <li><a href="#">Internal light</a></li>
-                        <li><a href="#">Tool kits</a></li>
-                        <li><a href="#">Sun curtains</a></li>
-                        <li><a href="#">Car sunshade</a></li>
-                        <li><a href="#">Towing Tools</a></li>
-                        <li><a href="#">Bodywork Cleaning & Care</a></li>
-                        <li><a href="#">Car refrigerator</a></li>
-                        <li><a href="#">Child seat</a></li>
+                        <li><a href="#">{translate("nav.carAccessorise")}</a></li>
+                        <li><a href="#">{translate("nav.exteriorAccessorise")}</a></li>
+                        <li><a href="#">{translate("nav.carMats")}</a></li>
+                        <li><a href="#">{translate("nav.wiresAndCables")}</a></li>
+                        <li><a href="#">{translate("nav.Covers")}</a></li>
+                        <li><a href="#">{translate("nav.carFirstAidKit")}</a></li>
+                        <li><a href="#">{translate("nav.InternalLights")}</a></li>
+                        <li><a href="#">{translate("nav.toolKits")}</a></li>
+                        <li><a href="#">{translate("nav.sunCurtains")}</a></li>
+                        <li><a href="#">{translate("nav.carSunShade")}</a></li>
+                        <li><a href="#">{translate("nav.towingTools")}</a></li>
+                        <li><a href="#">{translate("nav.bodyworkCleaningAndCare")}</a></li>
+                        <li><a href="#">{translate("nav.carRefrigerator")}</a></li>
+                        <li><a href="#">{translate("nav.childSeat")}</a></li>
                     </ul>
                 </li>
                 <li className="has-children">
-                    <a href="#">Car Care</a>
+                    <a href="#">{translate("nav.carCare")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <li><a href="#">Motor care liquids</a></li>
-                        <li><a href="#">Wash cleaners and polishes</a></li>
+                        <li><a href="#">{translate("nav.motorCareLiquids")}</a></li>
+                        <li><a href="#">{translate("nav.washCleanersAndPolishers")}</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Sports & Outdoors </a></li>
+
+                <li><a href="#">{translate("nav.sportsAndOutdoors")}</a></li>
                 <li className="sep"></li>
                 <li className="nav-sm has-children">
-                    <a href="#">Ship To</a>
+                    <a href="#">{translate("nav.country")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
                         <li><a href="#">KSA</a></li>
@@ -103,13 +105,13 @@ const Nav = ({ translate }) => {
                 </li>
                 <li className="nav-sm"><a className="lang" href="#">العربية</a></li>
                 <li className="sep"></li>
-                <li className="nav-sm"><a href="#">Shipping & Delivery</a></li>
-                <li className="nav-sm"><a href="#">Returns</a></li>
-                <li className="nav-sm"><a href="#">Contact Us</a></li>
-                <li className="nav-sm"><a href="#">Privacy Policy</a></li>
-                <li className="nav-sm"><a href="#">Terms & Conditions</a></li>
+                <li className="nav-sm"><a href="#">{translate("nav.shippingAndDelivery")}</a></li>
+                <li className="nav-sm"><a href="#">{translate("nav.returns")}</a></li>
+                <li className="nav-sm"><a href="#">{translate("nav.contactUs")}</a></li>
+                <li className="nav-sm"><a href="#">{translate("nav.privacyPolicy")}</a></li>
+                <li className="nav-sm"><a href="#">{translate("nav.termsAndConditions")}</a></li>
                 <li className="nav-sm"><a href="#" className="sponser">
-                    <span><i></i></span><p>One of the incubated proiects</p>
+                    <span><i></i></span><p>{translate("nav.oneOfTheIncubatedProjects")}</p>
                 </a></li>
             </ul>
         </nav>

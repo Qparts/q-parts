@@ -77,6 +77,253 @@
       "Popular Viscosity Grades"
     ]
   },
+
+  "nav":{
+    "quotationOrder": [
+      "طلب تسعيرة",
+      "Quotation Order"
+    ],
+    "consumableParts":[
+      "القطع الاستهلاكية",
+      "Consumable Parts"
+    ],
+    "oilFilter":[
+      "فلاتر الزيت",
+      "Oil Filters"
+    ],
+    "airFilter":[
+      "فلاتر الهواء",
+      "Air Filters"
+    ],
+    "brakePads":[
+      "فحمات فرامل",
+      "Brake Pads"
+    ],
+    "oil":[
+      "الزيوت و السوائل",
+      "Oils"
+    ],
+    "motorOil":[
+      "زيوت المحرك",
+      "Motor Oils"
+    ],
+    "gearOil":[
+      "زيوت التروس",
+      "Gear Oils"
+    ],
+    "grease":[
+      "زيوت التشحيم",
+      "Grease"
+    ],
+    "tools":[
+      "معدات",
+      "Tools"
+    ],
+    "handTools":[
+      "معدات يدوية",
+      "Hand Tools"
+    ],
+    "electricalTools":[
+      "معدات كهربائية",
+      "Electrical Tools"
+    ],
+    "tyreInflator":[
+      "منفاخ اطارات",
+      "Tyre Inflators"
+    ],
+    "repairEquipment":[
+      "معدات تصليح",
+      "Repair Equipment"
+    ],
+    "accessorise":[
+      "اكسسوارات",
+      "Accessorise"
+    ],
+    "carAccessorise":[
+      "اكسسوارات السيارة",
+      "Car Accessorise"
+    ],
+    "exteriorAccessorise":[
+      "اكسسوارات خارجية",
+      "Exterior Accessorise"
+    ],
+    "carMats":[
+      "سجادات السيارة",
+      "Car Mats"
+    ],
+    "wiresAndCables":[
+      "اسلاك",
+      "Wires and Cables"
+    ],
+    "Covers":[
+      "اغطية",
+      "Covers"
+    ],
+    "carFirstAidKit":[
+      "عدة الاسعافات الأولية",
+      "Car First Aid Kits"
+    ],
+    "InternalLights":[
+      "الانوار الداخلية",
+      "Internal Lights"
+    ],
+    "toolKits":[
+      "طقم معدات",
+      "Tool Kits"
+    ],
+    "sunCurtains":[
+      "ستائر الشمس",
+      "Sun Curtains"
+    ],
+    "carSunShade":[
+      "مظلات الشمس",
+      "Car Sun Shades"
+    ],
+    "towingTools":[
+      "ادوات القطر",
+      "Towing Tools"
+    ],
+    "bodyworkCleaningAndCare":[
+      "التنظيف و العناية بالسيارة",
+      "Bodywork Cleaning and Care"
+    ],
+    "carRefrigerator":[
+      "ثلاجات السيارة",
+      "Car Refrigerators"
+    ],
+    "childSeat":[
+      "مقاعد الاطفال",
+      "Children Seats"
+    ],
+    "carCare":[
+      "العناية بالسيارة",
+      "Car Care"
+    ],
+    "motorCareLiquids":[
+      "زيوت العناية بالمحرك",
+      "Motor Care Liquids"
+    ], 
+    "washCleanersAndPolishers":[
+      "معدات تنظيف و تلميع السيارة",
+      "Wash Cleaners and Polishers"
+    ],
+    "sportsAndOutdoors":[
+      "الرياضات و الأنشطة الخارجية",
+      "Sports and Outdoors"
+    ],
+    "country":[
+      "البلد",
+      "Country"
+    ],
+    "shippingAndDelivery":[
+      "الشحن و التوصيل",
+      "Shipping and Delivery"
+    ],
+    "returns":[
+      "الاسترجاع",
+      "Returns"
+    ],
+    "contactUs":[
+      "اتصل بنا",
+      "Contact Us"
+    ],
+    "privacyPolicy":[
+      "سياسة الخصوصية",
+      "Privacy Policy"
+    ],
+    "termsAndConditions":[
+      "الشروط و الاحكام",
+      "Terms and Conditions"
+    ],
+    "oneOfTheIncubatedProjects":[
+      "واحد من المشاريع المحتضنة",
+      "One of the Incubated Projects"
+    ]
+  },
+  "quotationOrder":{
+    "title" :[
+      "طلب تسعيرة",
+      "Qutation Order"
+    ],
+    "weMoveFast" :[
+      "نحن نتحرك بسرعة",
+      "We Move Fast"
+    ],
+    "request" :[
+      "أرسل لنا طلبك و سوف نرسل لك الأسعار و جميع التفاصيل الأخرى",
+      "Send Us Your Request and We Will Respond With the Prices and All Other Details" 
+    ],
+    "parts" :[
+      "اسم, رقم أو صورة القطعة",
+      "Part Name, Number or image" 
+    ],
+    "vin" :[
+      "رقم الشاصي أو صورة الاستمارة",
+      "Vin Number or Vechile ID image"
+    ],
+    "shopNow" :[
+      "تسوق الان",
+      "Shop Now"
+    ],
+    "tires" :[
+      "الاطارات",
+      "Tires"
+    ],
+    "tools" :[
+      "معدات",
+      "Tools"
+    ],
+    "accessories" :[
+      "اكسسوارات السيارة",
+      "Accessories"
+    ],
+    "outdoors" :[
+      "في الهواء الطلق",
+      "Outdoors"
+    ],
+    "carCare" :[
+      "العناية بالسيارة",
+      "Car Care"
+    ],
+    "mustHaves" :[
+      "ما تحتاجه كل سيارة",
+      "Must Have for Every Car"
+    ],
+    "oilFilter":[
+      "فلاتر الزيت",
+      "Oil Filters"
+    ],
+    "premium" :[
+      "زيت فاخر لمحرك سيارتك",
+      "Premium Quality Oil for Your Engine"
+    ],
+    "airFilter":[
+      "فلاتر الهواء",
+      "Air Filters"
+    ],
+    "max" :[
+      "احصل على أفضل أداء لمحرك سيارتك",
+      "Maximize Engine Performance"
+    ],
+    "brakePads":[
+      "فحمات فرامل",
+      "Brake Pads"
+    ],
+    "trusted" :[
+      "احصل على قوة التسوق الموثوق",
+      "Get trusted shopping power"
+    ],
+    "items" :[
+      "نوفر أكثر من ٥٠٠٠٠ قطعة",
+      "We offer more than 50000 different items"
+    ],
+    "oil":[
+      "الزيوت و السوائل",
+      "Oils"
+    ]
+
+
+  },
   "navBar": {
     "vehiclePart": [
       "جزء السيارة",
