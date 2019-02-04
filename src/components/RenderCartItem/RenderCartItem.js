@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom'
 import { Field } from 'redux-form'
 import RenderField from '../RenderField/RenderField';
 import Button from '../UI/Button';
@@ -10,139 +11,137 @@ import { getLength } from '../../utils/array';
 import * as constant from '../../constants'
 
 export default class extends Component {
+  static defaultProps = {
+    divCol: 'col-lg-9'
+}
 
-    componentWillMount() {
-        const { fields, purchasedItems } = this.props;
-        console.log(purchasedItems);
+  componentWillMount() {
+    // const { fields, purchasedItems } = this.props;
+    // console.log(purchasedItems);
 
 
-        purchasedItems.map(cartItem => {
-            return fields.push({
-                itemName: cartItem.desc,
-                quantity: cartItem.quantity,
-                quantityLabel: cartItem.quantityLabel,
-                price: cartItem.price,
-                currency: cartItem.currency,
-                image: cartItem.image,
-                productNumber: cartItem.productNumber,
-                manufacturerName: cartItem.manufacturerName
-            })
-        })
+    // purchasedItems.map(cartItem => {
+    //   return fields.push({
+    //     itemName: cartItem.desc,
+    //     quantity: cartItem.quantity,
+    //     quantityLabel: cartItem.quantityLabel,
+    //     price: cartItem.price,
+    //     currency: cartItem.currency,
+    //     image: cartItem.image,
+    //     productNumber: cartItem.productNumber,
+    //     manufacturerName: cartItem.manufacturerName
+    //   })
+    // })
+  }
+
+  handleClick = (action, value, purchasedItem, event) => {
+    event.preventDefault();
+
+    console.log(action === constant.DECREMENT);
+    
+
+    const { incrementQuantity, decrementQuantity } = this.props;
+    const max = 20;
+    const min = 1;
+    let newQuanValue = parseInt(value, constant.RADIX);
+
+    if (action === constant.DECREMENT) {
+      const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
+      decrementQuantity({purchasedItem, decQuantity});
+    } else {
+      const incQuantity = newQuanValue !== max ? newQuanValue += 1 : newQuanValue;
+      incrementQuantity({purchasedItem, incQuantity});
     }
+  }
 
 
-    render() {
-        const { fields, meta: { error, submitFailed }, deleteText } = this.props;
-        return (
-            <Fragment>
-              <ul className=" item-list list-unstyled">
-                <li>
+  render() {
+    const { purchasedItems, deleteText, divCol } = this.props;
+    console.log(purchasedItems);
+    
+    return (
+      <Fragment>
+        <div className={divCol}>
+          <ul className="cart-items list-unstyled">
+            {
+              purchasedItems.map((purchasedItem, idx) => {
+                return <li key={idx} className="bg-white">
                   <figure className="row">
-                    <a href="#" className="col-3 item-img">
-                      <img src="/img/oil-img-3.jpg"/>
-                    </a>
+                    <Link to="#" className="col-3 item-img">
+                      <img src={purchasedItem.image} alt="no item" />
+                    </Link>
                     <figcaption className="col-9">
                       <div className="row">
                         <div className="col-md-9 item-dis">
                           <header>
-                            <h3><a href="#">8100 synthetic motor oil</a></h3>
-                            <h4>Motul USA <span>#Part Number</span></h4>
+                            <h3><Link to="#">{purchasedItem.desc}</Link></h3>
+                            <h4>{purchasedItem.brand.name} <span>{purchasedItem.productNumber}</span></h4>
                           </header>
-                          <div className="d-table product-options">
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Viscosity Grade</span></div>
-                              <div className="d-table-cell">SAE -50</div>
-                            </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Volume</span></div>
-                              <div className="d-table-cell">1.32 Gallon</div>
-                            </div>
-                          </div>
-                          <div className="product-price">
-                            <p className="price">11.19 <span>sr</span></p>
-                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
-                          </div>
-                          <div className="actions">
-                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
-                          </div>
-                        </div>
-                        <div className="col-md-3 quantity-div">
-                          <h5>Quantity</h5>
-                          <div className="input-group quantity">
-                            <div className="input-group-prepend">
-                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
-                            </div>
-                            <input className="form-control" disabled value="1" type="text"/>
-                              <div className="input-group-append">
-                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
+                          <div className="cart-quantity d-block d-lg-none">
+                            <h5>Quantity</h5>
+                            <div className="input-group quantity">
+                              <div className="input-group-prepend">
+                                <button
+                                  className="btn btn-gray"
+                                  type="button"
+                                  onClick={this.handleClick.bind(this, constant.DECREMENT, purchasedItem.quantity, purchasedItem)}>
+                                  <i className="minus"></i></button>
                               </div>
+                              <input disabled className="form-control" value={purchasedItem.quantity} type="text" />
+                              <div className="input-group-append">
+                                <button
+                                  className="btn btn-gray" type="button"
+                                  onClick={this.handleClick.bind(this, constant.INCREMENT, purchasedItem.quantity, purchasedItem)}>
+                                  <i className="icon-plus"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="cart-product-price">
+                            <p className="price">{purchasedItem.salesPrice} <span>sr</span></p>
+                          </div>
+                          <div className="cart-actions">
+                            <Link to="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
+                            <Link to="#" className="delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
+                          </div>
                         </div>
+                        <div className="col-md-3">
+                          <div className="cart-quantity d-none d-lg-block">
+                            <h5>Quantity</h5>
+                            <div className="input-group quantity">
+                              <div className="input-group-prepend">
+                                <button
+                                  className="btn btn-gray"
+                                  type="button"
+                                  onClick={this.handleClick.bind(this, constant.DECREMENT, purchasedItem.quantity, purchasedItem)}>
+                                  <i className="minus"></i></button>
+                              </div>
+                              <input disabled className="form-control" value={purchasedItem.quantity} type="text" />
+                              <div className="input-group-append">
+                                <button
+                                  className="btn btn-gray"
+                                  type="button"
+                                  onClick={this.handleClick.bind(this, constant.INCREMENT, purchasedItem.quantity, purchasedItem)}>
+                                  <i className="icon-plus" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </figcaption>
                   </figure>
                 </li>
-                <li>
-                  <figure className="row">
-                    <a href="#" className="col-3 item-img">
-                      <img src="/img/product-1.jpg"/>
-                    </a>
-                    <figcaption className="col-9">
-                      <div className="row">
-                        <div className="col-md-9 item-dis">
-                          <header>
-                            <h3><a href="#">#Part Number</a></h3>
-                            <h4>Product Brand <span>Product Name</span></h4>
-                          </header>
-                          <div className="d-table product-options">
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Vechile Info</span></div>
-                              <div className="d-table-cell">
-                                2015 Ford Focus<br/>
-                                VIN number (000 000 000 000 11)
-                              </div>
-                            </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Fitment</span></div>
-                              <div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
-                            </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Made in </span></div>
-                              <div className="d-table-cell">China</div>
-                            </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>Condition</span></div>
-                              <div className="d-table-cell">New</div>
-                            </div>
-                          </div>
-                          <div className="product-price">
-                            <p className="price">11.19 <span>sr</span></p>
-                            <p className="availability"><i className="in-icon"></i>In Stock (16) - Ships in 24 to 48 hrs </p>
-                          </div>
-                          <div className="actions">
-                            <a href="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></a>
-                            <a href="#" className="btn delete-btn"><i className="icon-trash"></i><span>Delet</span></a>
-                          </div>
-                        </div>
-                        <div className="col-md-3 quantity-div">
-                          <h5>Quantity</h5>
-                          <div className="input-group quantity">
-                            <div className="input-group-prepend">
-                              <button className="btn btn-gray" type="button" disabled><i className="minus"></i></button>
-                            </div>
-                            <input className="form-control" disabled value="1" type="text"/>
-                              <div className="input-group-append">
-                                <button className="btn btn-gray"  type="button" ><i className="icon-plus"></i></button>
-                              </div>
-                        </div>
-                        </div>
-                      </div>
-                    </figcaption>
-                  </figure>
-                </li>
-              </ul>
-            </Fragment>
-        )
-    }
+              })
+            }
+          </ul>
+          <div className="row">
+            <div className="col-md-6 ml-md-auto">
+              <Link to="#" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
+            </div>
+          </div>
+        </div>
+      </Fragment>
+    )
+  }
 }

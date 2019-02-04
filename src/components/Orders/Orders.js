@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment,Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Select from 'react-select';
 import Table from '../UI/Table';
@@ -10,6 +10,8 @@ import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import SelectInput from '../SelectInput/SelectInput';
 import * as validations from '../../utils';
 import Link from "../UI/Link";
+
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Orders extends Component {
   constructor(props) {
@@ -100,41 +102,81 @@ class Orders extends Component {
     ]
 
     return (
-      <div className="col-10" id="Orders-container">
-        <div className="border rounded card">
-          <div className="Orders-search justify-content-between col-12">
-            <div style={{display:'flex'}}>
-              <div className="col-12">
-                <Field
-                  name="search-option"
-                  component={SelectInput}
-                  options={options}
-                  placeholder="Select Date"
-                   onChange={this.handleSelectChange}/>
+      <Fragment>
+        <MediumScreen>
+          <div className="col-10" id="Orders-container">
+            <div className="border rounded card">
+              <div className="Orders-search justify-content-between col-12">
+                <div style={{display:'flex'}}>
+                  <div className="col-12">
+                    <Field
+                      name="search-option"
+                      component={SelectInput}
+                      options={options}
+                      placeholder="Select Date"
+                       onChange={this.handleSelectChange}/>
+                  </div>
+                  <div id="search" className="col-1">
+                  	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
+                  </div>
+                </div>
+                <div className="btn-div">
+                  <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
+                  <span className="seperator"></span>
+                  <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
+                  <span className="seperator"></span>
+                  <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
+                  <span className="seperator"></span>
+                  <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
+                </div>
               </div>
-              <div id="search" className="col-1">
-              	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
-              </div>
-            </div>
-            <div className="btn-div">
-              <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
               <span className="seperator"></span>
-              <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
-              <span className="seperator"></span>
-              <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
-              <span className="seperator"></span>
-              <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
+              <Table
+                headers={headers}
+                columns={this.state.mockItems}
+                search={this.state.search}
+                searchByDate={this.state.searchByDate}
+              />
             </div>
           </div>
-          <span className="seperator"></span>
-          <Table
-            headers={headers}
-            columns={this.state.mockItems}
-            search={this.state.search}
-            searchByDate={this.state.searchByDate}
-          />
-        </div>
-      </div>
+        </MediumScreen>
+        <SmallScreen>
+          <div className="col-12" id="Orders-container-mobile">
+            <div className="border rounded card">
+              <div className="Orders-search justify-content-between row">
+                <div style={{display:'flex'}} className="col-12">
+                  <div className="col-9">
+                    <Field
+                      name="search-option"
+                      component={SelectInput}
+                      options={options}
+                      placeholder="Select Date"
+                       onChange={this.handleSelectChange}/>
+                  </div>
+                  <div id="search" className="col-3">
+                  	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
+                  </div>
+                </div>
+                <div className="btn-div col-12">
+                  <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light col-6" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
+                  <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light col-6" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
+                </div>
+                <div className="btn-div col-12">
+                  <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light col-6" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
+                  <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light col-6" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
+                </div>
+              </div>
+              <span className="seperator"></span>
+              <Table
+                headers={headers}
+                columns={this.state.mockItems}
+                search={this.state.search}
+                searchByDate={this.state.searchByDate}
+              />
+            </div>
+          </div>
+        </SmallScreen>
+      </Fragment>
     )
   }
 }

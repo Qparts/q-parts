@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 import './Garage.css'
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Garage extends Component {
  constructor(props){
@@ -36,13 +37,10 @@ class Garage extends Component {
           <p>{vehicle.vin}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
          </div>
         </div>
-        <div className="col-1">
-          <span className="seperator"></span>
-        </div>
-        <div className="Garage-box_item col-5">
+        <div className="Garage-box_item col-6">
           <Checkbox
             onChange={e => this.setState({
               check: !this.state.check
@@ -54,7 +52,7 @@ class Garage extends Component {
           <p>{vehicle.label}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
           <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
          </div>
         </div>
@@ -77,9 +75,18 @@ class Garage extends Component {
       </div>
   }
   return (
-   <div className="col-10">
-     {garage}
-   </div>
+    <Fragment>
+      <MediumScreen>
+       <div className="col-10">
+         {garage}
+       </div>
+      </MediumScreen>
+      <SmallScreen>
+       <div className="col-12 garage-mobile">
+         {garage}
+       </div>
+      </SmallScreen>
+    </Fragment>
   )
  }
 }

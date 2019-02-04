@@ -156,7 +156,7 @@
   .modal-title{
     margin-#{$left}: 37px;
     .sec-header{
-      margin-bottom: 0; 
+      margin-bottom: 0;
       h1{
       @include text-capitalize;
       }
@@ -164,5 +164,142 @@
   }
   .modal-content{
     background: $white !important;
+  }
+}
+#setting-mobile{
+  padding-bottom: 30px;
+  background: $light-gray;
+  .header-settings{
+    background: $light-gray;
+    float: right;
+    @include margin-right(-1px);
+    i{
+      display: flex;
+      div{
+        display: block;
+        padding: 0px;
+        background: none;
+        box-shadow: none;
+        @include margin-left(10px);
+        p{
+          opacity: 0.5;
+          font-family: Roboto;
+          @include font-size(13px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: $left;
+          @include margin-right(96px);
+          margin-bottom: 0px;
+        }
+        h1{
+          font-family: Roboto;
+          @include font-size(40px);
+          font-weight: 300;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: #37363b;
+          display: flex;
+          p{
+            line-height: 64px
+          }
+        }
+
+      }
+    }
+      div{
+        display: flex;
+        padding: side-values(21px 100px 0 31px);
+        background: $white;
+        @include box-shadow;
+        border-radius: side-values(0 0 0 20px);
+        img{
+          width: 60px;
+          height: 60px;
+        }
+      }
+  }
+  header{
+    display: flex;
+    .user-profile{
+      display: flex;
+      img{
+        @include margin-right(5px);
+        border-radius: 50px;
+        background: $light-gray;
+        width: 50px;
+        padding: 5px;
+        height: 90%;
+      }
+      h1{
+        font-family: Roboto;
+        font-size: 30px;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #fefeff;
+        text-transform: capitalize !important;
+        margin-top: 5px;
+      }
+    }
+    .signout{
+      .btn-primary{
+        background: $black;
+        text-transform: none;
+        span{
+          @include margin-right(10px);
+        }
+      }
+    }
+  }
+  h1{
+    font-family: Roboto;
+    font-size: 30px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+  }
+  .list-group{
+    .list-group-item{
+      border-left: none;
+      margin-top: 2px;
+      border-top: none;
+      border-radius: 0px;
+    }
+  }
+  .list-group:first-child {
+    .list-group-item:first-child {
+      margin-top: 0px;;
+    }
+  }
+  .list-group-item.active{
+    background: #fdeceb;
+    border-right: 2px solid $brand-color;
+    color: $black;
+    border-top: none;
+    border-bottom: none;
+  }
+  .bg-whatsapp{
+    margin-top: 100px;
+    margin-#{$left}: 77%;
+    width: 151px;
+    height: 46px;
+    background: linear-gradient(to top, #f9f9f9, $white);
+    text-transform: none;
+    color: black;
+    border-radius: side-values(20px 20px 0px 20px) !important;
+    span{
+      width: 90px;
+      text-align: $left;
+    }
   }
 }

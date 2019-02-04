@@ -80,14 +80,9 @@
         height: 41px;
         display: flex;
         margin-top: 18px;
-        .btn-link{
+        .btn-gray{
           @include margin-left(20px);
-          width: 66px;
-          text-align: center;
-          background: $light-gray !important;
-          border-radius: side-values(0 20px 20px 20px) !important;
           margin-#{$right}: 10px;
-          color: $black;
           .icon-edit{
             @include font-size(18px);
           }
@@ -252,6 +247,133 @@
       span{
         line-height: 41px;
         @include margin-left(6px);
+      }
+    }
+  }
+}
+
+.garage-mobile{
+  #garage-no-vehicle{
+    margin-top: 20px;
+    @include margin-left(0px);
+  }
+  #Garage-container{
+    @include margin-left(0px);
+    margin-top: 20px;
+    .Garage-add{
+      display: block;
+      p{
+        font-family: Roboto;
+        @include font-size(17px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: $left;
+        margin-bottom: 10px;
+        margin-top: 0px;
+      }
+      Button{
+        display: flex !important;
+        background: $brand-color;
+        margin: 0px !important;
+        color: $white !important;
+        width: 100%;
+        .icon-add-vehicle{
+          @include font-size(30px);
+        }
+        span{
+          line-height: 41px;
+          @include margin-left(6px);
+        }
+      }
+    }
+    .seperator{
+      height: 2px;
+      width: 100%;
+      margin-bottom: 30px;
+      margin-top: 10px;
+    }
+    .Garage-box{
+      background: $white;
+      margin-bottom: 5px;
+      padding: side-values(10px);
+      border-radius: side-values(20px 0 20px 20px) !important;
+      @include margin-right(0px);
+      @include margin-left(0px);
+      label{
+        margin-bottom: 0px;
+        font-family: Roboto;
+        @include font-size(13px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 2;
+        letter-spacing: normal;
+        opacity: 0.8;
+        .checkmark{
+          border-radius: 9px;
+        }
+      }
+      .seperator{
+        width: 1px;
+        height: 100%;
+        @include margin-left(100%);
+        margin-top: 0px;
+      }
+      .Garage-box_item{
+        .Garage-box_item-label{
+          p{
+            margin-bottom: 0px;
+            font-family: Roboto;
+            @include font-size(17px);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            text-align: $left;
+            @include margin-left(20px);
+          }
+        }
+        .Garage-footer{
+          height: 41px;
+          display: flex;
+          margin-top: 18px;
+          .btn-link{
+            @include margin-left(20px);
+            width: 66px;
+            text-align: center;
+            background: $light-gray !important;
+            border-radius: side-values(0 20px 20px 20px) !important;
+            margin-#{$right}: 10px;
+            color: $black;
+            display: flex;
+            .icon-edit{
+              @include font-size(18px);
+            }
+            span{
+              @include font-size(13px);
+              @include margin-left(6px);
+            }
+          }
+          .btn-delete{
+            background: none;
+            opacity: 0.6;
+            display: flex;
+            .icon-trash{
+              @include font-size(18px);
+            }
+            span{
+              @include font-size(13px);
+              @include margin-left(2px);
+            }
+          }
+        }
+        &:nth-child(even) {
+          border-left: 1px solid #ebebeb;
+        }
       }
     }
   }

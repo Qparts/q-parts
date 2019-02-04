@@ -17,6 +17,7 @@ import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
 import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
+import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
 export const routes = (isAuth, direction) => [
     {
@@ -122,5 +123,10 @@ export const routes = (isAuth, direction) => [
         path: "/password/reset-password/:token?",
         exact: true,
         component: VerifyEmail,
+    },
+    {
+        path: "/payment-response:cartId?/:id?/:status?/:message?",
+        exact: true,
+        component: CheckoutConfirmationOrder,
     },
 ];

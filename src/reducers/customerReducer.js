@@ -4,11 +4,11 @@ import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
-  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
-  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT
+  COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
+  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
-import { AR } from '../constants';
+import { AR, quotations } from '../constants';
 import _ from 'lodash';
 
 export default function reducer(state = initialState, action) {
@@ -113,13 +113,6 @@ export default function reducer(state = initialState, action) {
     case LINK_SOCIAL_MEDIA_SUCCEEDED:
       return state
 
-    case ADD_DELIVERY_ADDRESS:
-      const newDeliveryAddress = { ...state.checkout, deliveryAddress: action.payload }
-      return { ...state, checkout: newDeliveryAddress }
-
-    case ADD_PAYMENT_METHOD:
-      const newPaymentMethod = { ...state.checkout, paymentMethod: action.payload }
-      return { ...state, checkout: newPaymentMethod }
 
     case COMPLETE_ORDER:
       return { ...state, isOrderCompleted: action.payload }
@@ -195,6 +188,16 @@ export default function reducer(state = initialState, action) {
 
     case SET_DEFAULT_LANG:
       return { ...state, defaultLang: action.payload }
+
+    case GET_PENDING_REQUESTS:
+      const pending = { ...state.quotations, pending: action.payload };
+
+      return { ...state, quotations: pending }
+
+    case GET_COMPLETED_REQUESTS:
+      const completed = { ...state.quotations, completed: action.payload };
+
+      return { ...state, quotations: completed }
 
     default:
       return state;
