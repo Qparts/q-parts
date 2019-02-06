@@ -15,7 +15,7 @@ class Addresses extends Component {
  render() {
   const { translate } = this.props;
   let addresses;
-  if(true){
+  if(this.props.addresses.length>0){
     addresses = <div id="addresses-container">
      <div className="addresses-header justify-content-between">
        <p> {translate("setting.addressBook.shippingItem")}</p>
