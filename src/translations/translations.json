@@ -79,13 +79,29 @@
   },
 
   "nav":{
+    "tires" :[
+      "الاطارات",
+      "Tires"
+    ],
     "quotationOrder": [
       "طلب تسعيرة",
       "Quotation Order"
     ],
+    "coolant":[
+      "سوائل التبريد",
+      "Coolant"
+    ],
     "consumableParts":[
       "القطع الاستهلاكية",
       "Consumable Parts"
+    ],
+    "acFilter":[
+      "فلاتر المكيف",
+      "AC Filters"
+    ],
+    "sparkPlugs":[
+      "بواجي",
+      "Spark Plugs"
     ],
     "oilFilter":[
       "فلاتر الزيت",
@@ -101,7 +117,7 @@
     ],
     "oil":[
       "الزيوت و السوائل",
-      "Oils"
+      "Oils and Fluids"
     ],
     "motorOil":[
       "زيوت المحرك",
@@ -205,7 +221,7 @@
     ], 
     "washCleanersAndPolishers":[
       "معدات تنظيف و تلميع السيارة",
-      "Wash Cleaners and Polishers"
+      "Cleaners and Polishers"
     ],
     "sportsAndOutdoors":[
       "الرياضات و الأنشطة الخارجية",
@@ -239,6 +255,7 @@
       "واحد من المشاريع المحتضنة",
       "One of the Incubated Projects"
     ]
+
   },
   "quotationOrder":{
     "title" :[

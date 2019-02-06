@@ -26,7 +26,7 @@ export const routes = (isAuth, direction) => [
         component: App,
     },
     {
-        path: "/order/quotation-request",
+        path: "/quotation-order",
         component: QuotationRequest,
         isAuth: isAuth,
         redirectTo: '/'

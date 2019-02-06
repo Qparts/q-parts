@@ -4,6 +4,7 @@ import Button from "../UI/Button";
 import Title from '../UI/Title';
 import { right } from '../../utils';
 import OrderSteps from '../OrderSteps';
+import { Link } from "react-router-dom";
 
 class HomeDetails extends Component {
 
@@ -50,25 +51,25 @@ class HomeDetails extends Component {
 					</section>
 					<section className="main-cat container-fluid">
 						<div className="row">
-							<a href="#" className="col-lg-4 col-6">
+							<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/motor-oil.png" alt="Oil" />
 									<figcaption>
-										<h4>{translate("quotationOrder.shopNow")}</h4>
+										<h4>{translate("nav.oil")}</h4>
 									</figcaption>
-									<span>{translate("quotationOrder.shopNow")}</span>
+									<span>{translate("nav.oil")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/tyres.png" alt="Tires" />
 									<figcaption>
-										<h4>{translate("quotationOrder.tires")}</h4>
+										<h4>{translate("nav.tires")}</h4>
 									</figcaption>
-									<span>{translate("quotationOrder.shopNow")}</span>
+									<span>{translate("nav.tires")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/tools.png" alt="Tools" />
 									<figcaption>
@@ -76,8 +77,8 @@ class HomeDetails extends Component {
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=10" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/accessories.png" alt="Accessories" />
 									<figcaption>
@@ -85,8 +86,8 @@ class HomeDetails extends Component {
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=36" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/outdoor-cat.jpg" alt="Outdoors" />
 									<figcaption>
@@ -94,8 +95,8 @@ class HomeDetails extends Component {
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=26" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/car-care.jpg" alt=" Car Care" />
 									<figcaption>
@@ -103,7 +104,7 @@ class HomeDetails extends Component {
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
+							</Link>
 						</div>
 					</section>
 					<section className="main-parts container-fluid">
