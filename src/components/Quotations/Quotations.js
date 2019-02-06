@@ -9,7 +9,6 @@ import ListGroupCollapse from '../UI/ListGroupCollapse';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
-import { ClipLoader } from 'react-spinners';
 
 class Quotations extends Component {
   constructor(props) {
@@ -111,30 +110,10 @@ class Quotations extends Component {
       }
     </Fragment>
   }
-  
+
   render() {
-    
-    const { quotationsCart, repliedQuotations, translate, quotations } = this.props;
-    const styles = {
-      loading: {
-        textAlign: 'center'
-      }
-    }
-    const override = `
-            border-color: ${colors.brandColor} !important;
-            border-bottom-color: transparent !important;
-        `;
-    if (_.isEmpty(quotations))
-      return (
-        <div className="container-fluid" style={styles.loading}>
-          <ClipLoader
-            css={override}
-            sizeUnit={"px"}
-            size={150}
-            loading={this.state.loading}
-          />
-        </div>
-      )
+
+    const { quotations } = this.props;
 
     return (
       <div className="Quotations-container col-10">
@@ -191,10 +170,5 @@ class Quotations extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  quotationsCart: state.cart.quotationsCart,
-  repliedQuotations: state.cart.repliedQuotations
-});
 
-
-export default connect(mapStateToProps, null)(Quotations);
+export default Quotations;
