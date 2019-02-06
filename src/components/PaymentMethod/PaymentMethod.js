@@ -31,10 +31,15 @@ class PaymentMethod extends Component {
     } else {
       return (
         <div>
-        <div className="PaymentMethod_subheader">
-          <span>Bank Tansfer</span>
+          <div className="PaymentMethod_subheader">
+            <h4>{this.props.title}</h4>
+            <div className="payment-box_item">
+              <div className="payment-box_item-label">
+                <p>Bank Tansfer</p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       )
     }
   }

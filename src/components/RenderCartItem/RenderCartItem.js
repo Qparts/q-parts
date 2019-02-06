@@ -13,7 +13,7 @@ import * as constant from '../../constants'
 export default class extends Component {
   static defaultProps = {
     divCol: 'col-lg-9'
-}
+  }
 
   componentWillMount() {
     // const { fields, purchasedItems } = this.props;
@@ -38,7 +38,7 @@ export default class extends Component {
     event.preventDefault();
 
     console.log(action === constant.DECREMENT);
-    
+
 
     const { incrementQuantity, decrementQuantity } = this.props;
     const max = 20;
@@ -47,18 +47,17 @@ export default class extends Component {
 
     if (action === constant.DECREMENT) {
       const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
-      decrementQuantity({purchasedItem, decQuantity});
+      decrementQuantity({ purchasedItem, decQuantity });
     } else {
       const incQuantity = newQuanValue !== max ? newQuanValue += 1 : newQuanValue;
-      incrementQuantity({purchasedItem, incQuantity});
+      incrementQuantity({ purchasedItem, incQuantity });
     }
   }
 
 
   render() {
-    const { purchasedItems, deleteText, divCol } = this.props;
-    console.log(purchasedItems);
-    
+    const { purchasedItems, removeButton, divCol } = this.props;
+
     return (
       <Fragment>
         <div className={divCol}>
@@ -137,7 +136,9 @@ export default class extends Component {
           </ul>
           <div className="row">
             <div className="col-md-6 ml-md-auto">
-              <Link to="#" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
+              {
+                !removeButton && <Link to="#" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
+              }
             </div>
           </div>
         </div>

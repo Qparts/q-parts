@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 class HomeDetails extends Component {
 
 	render() {
-		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
+		const { addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
@@ -163,8 +163,6 @@ class HomeDetails extends Component {
 						</div>
 					</section>
 					<Products
-						products={products}
-						getOffers={getOffers}
 						addRecentViewedProducts={addRecentViewedProducts}
 						onRecentlyViewedProducts={onRecentlyViewedProducts}
 						translate={translate}

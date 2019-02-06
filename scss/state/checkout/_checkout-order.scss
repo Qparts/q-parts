@@ -223,8 +223,8 @@
     }
     .btn-primary{
       display: flex !important;
-      p{
-        margin-top: -8px;
+      div{
+        margin-top: 12px;
         @include margin-right(100px);
         margin-bottom: 0px;
         line-height: 30px;

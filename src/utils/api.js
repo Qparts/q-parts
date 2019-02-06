@@ -22,3 +22,11 @@ export const postWireTransfer = (data) => {
 export const paymentResponse = (query) => {    
     return axios.get(`${API_ROOT}${CART_SERVICE}/payment/3dsecure-response${query}`)
 }
+
+export const getBestSeller = () => {
+    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
+}
+
+export const getOffers = () => {
+    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
+}
