@@ -1,10 +1,10 @@
 let backendHost;
-const proxyHost = 'www.q.parts';
+const proxyHost = 'qtest.fareed9.com';
 
 const hostname = window && window.location && window.location.hostname;
 
 if (true) {
- backendHost = `https://${proxyHost}`;
+ backendHost = `http://${proxyHost}`;
 } else {
  backendHost = 'http://localhost:8000';
 }

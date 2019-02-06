@@ -345,17 +345,17 @@ class ProductDetail extends Component {
             border-color: ${colors.brandColor} !important;
             border-bottom-color: transparent !important;
         `;
-    // if (_.isEmpty(this.state.product))
-    //   return (
-    //     <div className="container-fluid" style={styles.loading}>
-    //       <ClipLoader
-    //         css={override}
-    //         sizeUnit={"px"}
-    //         size={150}
-    //         loading={this.state.loading}
-    //       />
-    //     </div>
-    //   )
+    if (_.isEmpty(this.state.product))
+      return (
+        <div className="container-fluid" style={styles.loading}>
+          <ClipLoader
+            css={override}
+            sizeUnit={"px"}
+            size={150}
+            loading={this.state.loading}
+          />
+        </div>
+      )
 
     return (
       <Switch>

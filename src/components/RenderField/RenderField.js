@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import ReactPasswordStrength from 'react-password-strength';
 import { InputGroup, InputGroupAddon } from 'reactstrap'
 import Link from '../UI/Link'
@@ -6,8 +6,17 @@ import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
 
+  componentDidMount = () => {
+    const strengthBar = document.getElementsByClassName('ReactPasswordStrength-strength-bar')[0];
+    const strengthDesc = document.getElementsByClassName('ReactPasswordStrength-strength-desc')[0];
+    if (strengthBar) {
+      strengthBar.classList.add('d-none');
+      strengthDesc.classList.add('d-none');
+    }
+  }
+
+
   callback = ({ password, score }) => {
-    this.props.input.onChange(password);
     this.props.setPasswordScore(score);
   }
 
@@ -38,6 +47,16 @@ class RenderField extends Component {
   }
 
   displayPasswordLabel = () => {
+    const strengthBar = document.getElementsByClassName('ReactPasswordStrength-strength-bar')[0];
+    const strengthDesc = document.getElementsByClassName('ReactPasswordStrength-strength-desc')[0];
+    if (strengthBar) {
+      strengthBar.classList.add('d-none');
+      strengthDesc.classList.add('d-none');
+    }
+    if (this.props.input.value) {
+      strengthBar.classList.remove('d-none');
+      strengthDesc.classList.remove('d-none');
+    }
     return this.props.input.value ? { display: '' } : { display: 'none' };
   }
 
@@ -112,6 +131,7 @@ class RenderField extends Component {
             <Fragment>
               <InputGroup>
                 <ReactPasswordStrength
+                  ref={this.passwordStrenthRef}
                   style={styles.border}
                   minLength={5}
                   minScore={2}
