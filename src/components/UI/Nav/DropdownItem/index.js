@@ -17,8 +17,5 @@ const DropdownItem = props => {
     );
 }
 
-DropdownItem.propTypes = {
-    children: propTypes.element.isRequired
-}
 
 export default DropdownItem;

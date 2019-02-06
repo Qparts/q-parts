@@ -14,6 +14,7 @@ import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../acti
 import { selectCountry } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
 import RouterScrollToTop from '../../components/RouterScrollToTop';
+import Nav from '../../components/UI/Nav';
 
 class Routes extends Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class Routes extends Component {
 
 
         // props.InitializeDefaultLang(defaultLanguage);
-        props.getVehicles();
+        // props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
         loadStyle(this.props.direction);
@@ -40,24 +41,32 @@ class Routes extends Component {
                 <RouterScrollToTop>
                     <Fragment>
                         <NetworkError error={this.props.error} />
-                        <Layout
-                            isLoggedIn={isAuth(this.props.token)}
-                            fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
-                            vehicles={this.props.vehicles}
-                            localize={this.props.localize}
-                            translate={this.props.translate}
-                            vehiclesFormat={this.props.vehiclesFormat}
-                            selectedVehicle={this.props.selectedVehicle}
-                            countriesOnly={this.props.countriesOnly}
-                            getCountriesOnly={this.props.getCountriesOnly}
-                            selectCountry={this.props.selectCountry}
-                            changeDefaultDirection={this.props.changeDefaultDirection}
-                            direction={this.props.direction}
-                        >
-                            <Switch>
-                                {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-                            </Switch>
-                        </Layout>
+                        <main className="nav-on-left">
+                            <Layout
+                                isLoggedIn={isAuth(this.props.token)}
+                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
+                                vehicles={this.props.vehicles}
+                                localize={this.props.localize}
+                                translate={this.props.translate}
+                                vehiclesFormat={this.props.vehiclesFormat}
+                                selectedVehicle={this.props.selectedVehicle}
+                                countriesOnly={this.props.countriesOnly}
+                                getCountriesOnly={this.props.getCountriesOnly}
+                                selectCountry={this.props.selectCountry}
+                                changeDefaultDirection={this.props.changeDefaultDirection}
+                                direction={this.props.direction}
+                            >
+                                <Switch>
+                                    {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                                </Switch>
+                            </Layout>
+                            <div className="overlay-lg"></div>
+                            <a href="#" className="live-chat">
+                                <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
+                                <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
+                            </a>
+                        </main>
+                        <Nav translate={this.props.translate}  />
                     </Fragment>
                 </RouterScrollToTop>
             </Router>

@@ -110,8 +110,8 @@ class SignupForm extends Component {
         <div id="bottom">
           <p>By creating an account, you agree to
             <span>
-              <Link className="btn-link" to="/">Qetaa's Conditions of Use</Link> and
-              <Link className="btn-link" to="/"> Privacy Notice.</Link></span>
+              <Link className="btn-gray" to="/">Qetaa's Conditions of Use</Link> and
+              <Link className="btn-gray" to="/"> Privacy Notice.</Link></span>
           </p>
           <Button
             className="btn btn-primary"

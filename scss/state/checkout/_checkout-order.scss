@@ -2,6 +2,7 @@
   background: none;
   padding-top: 0px;
   .CheckoutConfirmation-container{
+    margin-bottom: 30px;
     .delivery-address{
       .DeliveryAddress_subheader{
         h4{
@@ -46,13 +47,8 @@
             display: flex;
             margin-top: 18px;
             margin-bottom: 18px;
-            .btn-link{
-              width: 66px;
-              text-align: center;
-              background: $light-gray !important;
-              border-radius: side-values(0 20px 20px 20px) !important;
+            .btn-gray{
               margin-#{$right}: 10px;
-              color: $black;
               .icon-edit{
                 @include font-size(18px);
               }
@@ -94,7 +90,6 @@
        .payment-box_item{
          background: $white;
          padding: 20px;
-         padding-bottom: 32%;
          .payment-box_item-label{
            display: flex;
            @include margin-left(20px);
@@ -158,12 +153,8 @@
            height: 41px;
            display: flex;
            margin-top: 18px;
-           .btn-link{
+           .btn-gray{
              @include margin-left(20px);
-             width: 66px;
-             text-align: center;
-             background: $light-gray !important;
-             border-radius: side-values(0 20px 20px 20px) !important;
              margin-#{$right}: 10px;
              color: $black;
              .icon-edit{
@@ -266,6 +257,7 @@
   background: none;
   padding-top: 0px;
   .CheckoutConfirmation-container{
+    margin-bottom: 30px;
     .delivery-address{
       padding: 0px;
       .DeliveryAddress_subheader{
@@ -311,13 +303,8 @@
             display: flex;
             margin-top: 18px;
             margin-bottom: 18px;
-            .btn-link{
-              width: 66px;
-              text-align: center;
-              background: $light-gray !important;
-              border-radius: side-values(0 20px 20px 20px) !important;
+            .btn-gray{
               margin-#{$right}: 10px;
-              color: $black;
               .icon-edit{
                 @include font-size(18px);
               }
@@ -424,14 +411,9 @@
            height: 41px;
            display: flex;
            margin-top: 18px;
-           .btn-link{
+           .btn-gray{
              @include margin-left(20px);
-             width: 66px;
-             text-align: center;
-             background: $light-gray !important;
-             border-radius: side-values(0 20px 20px 20px) !important;
              margin-#{$right}: 10px;
-             color: $black;
              .icon-edit{
                @include font-size(18px);
              }

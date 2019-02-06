@@ -1,0 +1,16 @@
+.Quotations-container {
+    .nav-tabs {
+        margin-bottom: 20px;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+    .cart-quantity {
+        display: inline-flex !important;
+    }
+    #number-picker {
+        input {
+            background: #fff;
+        }
+    }
+}

@@ -36,10 +36,6 @@ export const initialState = {
   latitude: 123323.4,
   longitude: 231233.5
  },
- checkout: {
-  deliveryAddress: {},
-  paymentMethod: {}
- },
  isOrderCompleted: false,
  recentViewedProducts: [],
  wishlist: [],
@@ -47,5 +43,9 @@ export const initialState = {
  registered: null,
  isShippingCompleted: false,
  isPaymentCompleted: false,
- defaultLang: 'en'
+ defaultLang: 'en',
+ quotations: {
+     pending:[],
+     completed: []
+ }
 }

@@ -21,7 +21,7 @@ class SocialMedia extends Component {
           <div>
             {this.props.facebookIcon}
             <FacebookLogin
-              appId="428174590941945"
+              appId="353292675264880"
               autoLoad={false}
               fields="id, first_name, last_name, email"
               callback={this.props.handleResponse('facebook')}
@@ -35,7 +35,7 @@ class SocialMedia extends Component {
           <div>
             {this.props.googleIcon}
             <GoogleLogin
-              clientId="743672676037-c9ls9ot3qh5rupohh1e15l51ohgl3h3t.apps.googleusercontent.com"
+              clientId="34659009780-ihp11tqqdgs10hq8sef3f9aohjmt8728.apps.googleusercontent.com"
               onSuccess={this.props.handleResponse('google')}
               onFailure={this.props.handleFailure}
               disabled={this.props.google === DISCONNECT}

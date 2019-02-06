@@ -133,7 +133,7 @@
       }
       span {
         display: block;
-        .btn-link {
+        .btn-gray {
           color: $brand-color;
         }
       }
@@ -155,7 +155,7 @@
       padding-#{$left}: 4px;
       @include font-size(18px);
     }
-    .btn-link {
+    .btn-gray {
       position: relative;
       color: $brand-color;
       padding: 4px 4px;

@@ -13,7 +13,6 @@ import { LocalizeProvider, getTranslate } from 'react-localize-redux';
 import Routes from './containers/Routers/Routers';
 
 import ErrorBoundary from './components/ErrorBoundary';
-import Nav from './components/UI/Nav';
 import { InitializeDefaultLang } from './actions/apiAction';
 
 class Root extends React.Component {
@@ -47,15 +46,7 @@ class Root extends React.Component {
           <DirectionProvider direction={this.state.direction}>
             <LocalizeProvider store={store}>
               <ErrorBoundary>
-                <main className="nav-on-left">
                   <Routes />
-                  <div className="overlay-lg"></div>
-                  <a href="#" className="live-chat">
-                    <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
-                    <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
-                  </a>
-                </main>
-                <Nav translate={this.state.translate}/>
               </ErrorBoundary>
             </LocalizeProvider>
           </DirectionProvider>

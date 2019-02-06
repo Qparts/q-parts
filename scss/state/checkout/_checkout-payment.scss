@@ -1,7 +1,7 @@
 #checkout-payment{
   background: none;
   padding-top: 0px;
-  form{
+  .payment_option{
     .Checkout-shipping_address-footer{
       background: $white;
       margin-bottom: 3px;
@@ -77,6 +77,7 @@
       background: $white;
       @include padding-left(20px);
       @include padding-right(20px);
+      padding-bottom: 30px;
       .header-credit{
         display: flex;
         margin-bottom: 20px;
@@ -212,14 +213,9 @@
               height: 41px;
               display: flex;
               margin-top: 18px;
-              .btn-link{
+              .btn-gray{
                 @include margin-left(20px);
-                width: 66px;
-                text-align: center;
-                background: $light-gray !important;
-                border-radius: side-values(0 20px 20px 20px) !important;
                 margin-#{$right}: 10px;
-                color: $black;
                 .icon-edit{
                   @include font-size(18px);
                 }
@@ -423,7 +419,7 @@
 #checkout-payment-mobile{
   background: none;
   padding-top: 0px;
-  form{
+  .payment_option{
     .Checkout-shipping_address-footer{
       background: $white;
       margin-bottom: 3px;
@@ -502,6 +498,7 @@
       background: $white;
       @include padding-left(20px);
       @include padding-right(20px);
+      padding-bottom: 30px;
       .header-credit{
         display: flex;
         margin-bottom: 20px;
@@ -637,14 +634,9 @@
               height: 41px;
               display: flex;
               margin-top: 18px;
-              .btn-link{
+              .btn-gray{
                 @include margin-left(20px);
-                width: 66px;
-                text-align: center;
-                background: $light-gray !important;
-                border-radius: side-values(0 20px 20px 20px) !important;
                 margin-#{$right}: 10px;
-                color: $black;
                 .icon-edit{
                   @include font-size(18px);
                 }
