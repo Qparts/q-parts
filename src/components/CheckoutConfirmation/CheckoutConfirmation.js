@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { reduxForm, FieldArray } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import Button from '../UI/Button';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
@@ -34,8 +33,6 @@ class CheckoutConfirmation extends Component {
       const data = { cartItems, addressId }
       postWireTransfer(data)
       .then(res => {
-        console.log(res);
-        
         history.push(`/payment-response?cartId=${res.data.cartId}`)
       })
     }
@@ -71,14 +68,13 @@ class CheckoutConfirmation extends Component {
               <div className="col-12">
                 <p className="title">{translate("checkout.confirm.table.items")}</p>
               </div>
-              <FieldArray
+              <RenderCartItem
                 deleteText={translate("cart.table.delete")}
                 name="purchasedItems"
                 purchasedItems={purchasedItems}
                 incrementQuantity={incrementQuantity}
                 decrementQuantity={decrementQuantity}
                 divCol='col-lg-12'
-                component={RenderCartItem}
               />
             </div>
             <div className="footer-delivery justify-content-between row">
@@ -113,14 +109,13 @@ class CheckoutConfirmation extends Component {
               <div className="col-12">
                 <p className="title">{translate("checkout.confirm.table.items")}</p>
               </div>
-              <FieldArray
+              <RenderCartItem
                 deleteText={translate("cart.table.delete")}
                 name="purchasedItems"
                 purchasedItems={purchasedItems}
                 incrementQuantity={incrementQuantity}
                 decrementQuantity={decrementQuantity}
                 divCol='col-lg-12'
-                component={RenderCartItem}
               />
             </div>
             <div className="footer-delivery row">
@@ -133,9 +128,5 @@ class CheckoutConfirmation extends Component {
     )
   }
 }
-
-CheckoutConfirmation = reduxForm({
-  form: 'CheckoutConfirmation',
-})(CheckoutConfirmation)
 
 export default withRouter(CheckoutConfirmation);

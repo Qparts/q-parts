@@ -60,6 +60,6 @@ export const allUpperCase = value => {
     : undefined;
 }
 
-export const passwordScore = (score, value) => {
-  return value && score >= 2 ? undefined : 'Required';
+export const passwordScore = (value, allValues, {passwordScore}) => {
+  return value && passwordScore >= 2 ? undefined : 'Required';
 }

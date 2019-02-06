@@ -1,6 +1,9 @@
 .Quotations-container {
     .nav-tabs {
         margin-bottom: 20px;
+        .nav-item {
+            cursor: pointer;
+        }
     }
     li {
         margin-bottom: 10px;

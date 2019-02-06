@@ -12,7 +12,7 @@ import { getCountries } from '../../../actions/apiAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 import Login from '../Login/Login';
 
-import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo } from '../../../actions/customerAction';
+import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore } from '../../../actions/customerAction';
 import { colors, ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 
 import Title from '../../../components/UI/Title';
@@ -50,11 +50,14 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
-      direction={this.props.direction} />
+      direction={this.props.direction} 
+      translate={translate}
+      passwordScore={passwordScore}
+      setPasswordScore={setPasswordScore}/>
     const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
@@ -101,6 +104,7 @@ class Signup extends Component {
 const mapStateToProps = (state) => {
   return {
     token: state.customer.token,
+    passwordScore: state.customer.passwordScore,
     countries: state.api.countries,
     platform: state.customer.detail.platform,
     translate: getTranslate(state.localize),
@@ -117,7 +121,8 @@ const mapDispatchToProps = (dispatch) => {
     socialMediaButton,
     onSubmitSignup,
     verifyCodeNo,
-    getCountries
+    getCountries,
+    setPasswordScore
   }, dispatch)
 }
 
