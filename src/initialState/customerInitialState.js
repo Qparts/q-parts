@@ -10,6 +10,7 @@ export const initialState = {
   platform: null,
   vehicles: []
  },
+ passwordScore: 0,
  address: {
   addressId: '',
   customerId: '',

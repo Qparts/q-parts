@@ -23,7 +23,6 @@ class SignupForm extends Component {
       passwordType: 'password',
       passwordText: 'Show',
       passwordIcon: 'icon-show-password',
-      passwordScore: 0
     }
   }
 
@@ -35,14 +34,8 @@ class SignupForm extends Component {
     });
   }
 
-  setPasswordScore = (score) => {
-    this.setState({
-      passwordScore: score
-    })
-  }
-
   render() {
-    const { translate, direction } = this.props;
+    const { translate, direction, setPasswordScore } = this.props;
     return (
       <form onSubmit={this.props.handleSubmit}>
         <div className="row signup-form__two-inputs no-gutters">
@@ -104,8 +97,8 @@ class SignupForm extends Component {
             icon={this.state.passwordIcon}
             placeholder={translate("form.signup.placeholders.password")}
             onTogglePassword={this.handleTogglePassword}
-            setPasswordScore={this.setPasswordScore}
-            validate={[validations.required, validations.passwordScore.bind(this, this.state.passwordScore)]} />
+            setPasswordScore={setPasswordScore}
+            validate={[validations.required, validations.passwordScore]} />
         </div>
         <div id="bottom">
           <p>By creating an account, you agree to
@@ -131,8 +124,7 @@ SignupForm = reduxForm({
 
 SignupForm = connect(
   state => ({
-    initialValues: state.customer.detail,
-    translate: getTranslate(state.localize),
+    passwordScore: state.customer.passwordScore
   })
 )(SignupForm)
 

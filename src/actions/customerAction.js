@@ -46,6 +46,7 @@ export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
+export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
@@ -557,5 +558,12 @@ export const getCompletedRequests = (customerId) => {
       }, error => {
         handleNetworkError(dispatch, error)
       });
+  }
+}
+
+export const setPasswordScore = (score) => {
+  return {
+    type: SET_PASSWORD_SCORE,
+    payload: score
   }
 }
