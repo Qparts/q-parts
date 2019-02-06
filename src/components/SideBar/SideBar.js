@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Fragment} from "react";
 import Sidebar from "react-sidebar";
 import SettingLinks from '../SettingLinks/SettingLinks';
 import { getTranslate } from "react-localize-redux";
@@ -38,26 +38,25 @@ class SideBar extends React.Component {
     const sidebarStyles = {
   sidebar: {
     width: 300
-  },
-  div: {
-    width: 0
   }
 };
-const sidebarStylesNone = {
-sidebar: {
-width: 0
-}
-};
     return (
-      <div className="side-bar">
+      <Fragment>
+      <div className="col">
+       <button className="btn btn-primary" onClick={()=> this.setState({sidebarDocked: !this.state.sidebarDocked})}>open</button>
+      </div>
+      <div className={this.state.sidebarDocked ? "side-bar" :"none-active" }>
         <Sidebar
-          styles={this.state.sidebarDocked ? sidebarStyles :sidebarStylesNone }
-          sidebar={<b><Button text="back" className="btn-back" icon="icon-arrow-left" onClick={this.handleClick} isReverseOrder/><SettingLinks {...this.props} /></b>}
+          sidebarClassName="Sidebar"
+          styles={ sidebarStyles }
+          sidebar={<b><Button text="back" className="btn-back" icon="icon-arrow-left" onClick={()=> this.setState({sidebarDocked: !this.state.sidebarDocked})} isReverseOrder/><SettingLinks {...this.props} /></b>}
           open={this.state.sidebarDocked}
+          onClick={this.handleClick}
           pullRight={true}
         >
         </Sidebar>
       </div>
+      </Fragment>
     );
   }
 }

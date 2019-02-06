@@ -1,6 +1,9 @@
 .side-bar{
   div{
     div{
+      .btn-primary{
+        display: none;
+      }
       padding: 20px;
       padding-top: 15%;
       padding-left: 0px;
@@ -26,6 +29,21 @@
         span{
           @include margin-left(5px);
         }
+      }
+    }
+  }
+}
+
+.none-active{
+  div{
+    display: none;
+    div{
+      .btn-primary{
+        display: block;
+      }
+      padding-top: 15%;
+      div{
+        width: 0px !important;
       }
     }
   }
