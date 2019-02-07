@@ -1,12 +1,13 @@
 let backendHost;
-const proxyHost = 'www.q.parts';
+let proxyHost = 'www.q.parts';
 
-const hostname = window && window.location && window.location.hostname;
+const isProduction = process.env.NODE_ENV === 'production';
 
-if (true) {
- backendHost = `https://${proxyHost}`;
+if (isProduction) {
+    backendHost = `https://${proxyHost}`;
 } else {
- backendHost = 'http://localhost:8000';
+    proxyHost = 'qtest.fareed9.com'
+    backendHost = `http://${proxyHost}`;
 }
 
 export const API_ROOT = `${backendHost}/api`;

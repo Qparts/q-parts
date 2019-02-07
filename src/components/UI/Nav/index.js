@@ -1,17 +1,35 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { styles } from '../../../constants';
+import Button from '../Button';
 
 const Nav = ({ translate }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
-                <li className="nav-sm">
+                <li className="nav-sm has-children">
                     <a className="user-account-sm" href="#">
                         <span className="rounded-circle ">
                             <img alt="user" src="/img/user.svg" />
                         </span>
                         <p>Sign in<i></i>Join</p>
                     </a>
+                    <ul className="cd-secondary-nav is-hidden">
+                        <li className="go-back"><a href="#0">Back</a></li>
+                        <h6>Welcome Back</h6>
+                        <div className="signin-list">
+                            <li><a className="btn" href="#" >{translate("general.signin")} <i className={`icon-arrow-right`} /></a></li>
+                            <li><a href="#"><i className="icon-facebook" /></a></li>
+                            <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
+                        </div>
+                        <p>
+                            {translate("dropdown.signup.message")}
+                            <Link to="/signup">
+                                {translate("dropdown.signup.link")}
+                                <i className={`icon-arrow-right`} style={styles.arrow_right} />
+                            </Link>
+                        </p>
+                    </ul>
                 </li>
                 <li className="nav-sm">
                     <a href="#">
@@ -36,9 +54,9 @@ const Nav = ({ translate }) => {
                 <li className="sep"></li>
                 <li>
                     <Link to="/quotation-order">
-                   {translate("nav.quotationOrder")}
+                        {translate("nav.quotationOrder")}
                     </Link>
-                    
+
                 </li>
                 <li className="has-children">
                     <a href="#">{translate("nav.consumableParts")}</a>
@@ -52,10 +70,10 @@ const Nav = ({ translate }) => {
                     </ul>
                 </li>
                 <li className="has-children">
-                 
-                <Link to="/setting/addresses">
-                    {translate("nav.oil")}
-                </Link> 
+
+                    <Link to="/setting/addresses">
+                        {translate("nav.oil")}
+                    </Link>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">Back</a></li>
                         <li><Link to="/listing?query=&page=1&category=7">{translate("nav.motorOil")}</Link></li>
@@ -63,7 +81,7 @@ const Nav = ({ translate }) => {
                         <li><Link to="/listing?query=&page=1&category=27">{translate("nav.coolant")}</Link></li>
                     </ul>
                 </li>
-                
+
                 <li><Link to="/listing?query=&page=1&category=13">{translate("nav.tires")}</Link></li>
                 <li className="has-children">
                     <ul className="cd-secondary-nav is-hidden">
@@ -92,7 +110,7 @@ const Nav = ({ translate }) => {
                         <li><Link to="/listing?query=&page=1&category=16">{translate("nav.bodyworkCleaningAndCare")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=14">{translate("nav.carRefrigerator")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=15">{translate("nav.childSeat")}</Link></li>
-                        
+
                     </ul>
                 </li>
                 <li className="has-children">
