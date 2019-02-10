@@ -57,7 +57,7 @@ class ForgotPassword extends Component {
         <MediumScreen>
           <section id="forgot-password">
             <div className="content">
-              <img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />
+              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
               <p className="p"><span>Password </span> Recovery</p>
               <h5>You can recover your lost account information using the form below.Please enter <br />valid e-mail address, your account information will be mailed to you shortly</h5>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
@@ -91,7 +91,7 @@ class ForgotPassword extends Component {
         <SmallScreen>
           <section id="forgot-password-mobile">
             <div className="content">
-              <img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />
+              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
               <p className="p"><span>Password </span> Recovery</p>
               <h5>You can recover your lost account information using the form below.Please enter valid e-mail address, your account information will be mailed to you shortly</h5>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
