@@ -61,7 +61,8 @@ class ForgotPassword extends Component {
               <p className="p"><span>Password </span> Recovery</p>
               <h5>You can recover your lost account information using the form below.Please enter <br />valid e-mail address, your account information will be mailed to you shortly</h5>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
-                <div className="form-group">
+                <div className="form-group row">
+                  <div className="col-10">
                   <Field
                     label={this.getLabel('Email', 'Password')}
                     name={this.getLabel('email', 'password')}
@@ -69,7 +70,11 @@ class ForgotPassword extends Component {
                     type={this.getLabel('text', 'password')}
                     placeholder={this.getLabel('mail@user.com', 'new password')}
                     validate={[validations.required]} />
+                  </div>
+                  <div className="col-2">
                   <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+
+                  </div>
                 </div>
               </form>
               <div>
