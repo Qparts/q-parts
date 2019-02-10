@@ -72,7 +72,7 @@ class ForgotPassword extends Component {
                     validate={[validations.required]} />
                   </div>
                   <div className="col-2">
-                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
 
                   </div>
                 </div>
@@ -103,7 +103,7 @@ class ForgotPassword extends Component {
                     type={this.getLabel('text', 'password')}
                     placeholder={this.getLabel('mail@user.com', 'new password')}
                     validate={[validations.required]} />
-                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                 </div>
               </form>
             </div>
