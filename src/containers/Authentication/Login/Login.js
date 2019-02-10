@@ -34,10 +34,16 @@ class Login extends Component {
 
   handleSubmit = values => {
     const serverErrorField = "password"
-    return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
-      .then(() => {
-        this.props.toggle()
-      });
+    const { match } = this.props;
+
+    if (match.url !== '/login') {
+      return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
+        .then(() => {
+          this.props.toggle()
+        });
+    } else {
+      return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage);
+    }
   }
 
   handleChange = (event) => {

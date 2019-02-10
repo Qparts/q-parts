@@ -5,6 +5,7 @@ import GaragePopup from "../../../containers/GaragePopup/GaragePopup";
 import { isEmpty, right } from "../../../utils";
 import ButtonCustom from "../../UI/Button";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
+import { NavLg } from '../../Device';
 
 class HeaderDetails extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class HeaderDetails extends Component {
       </Fragment>
 
     const authOrNotAuthButtons = isLoggedIn ? (
-      <Fragment>
+      <NavLg>
         <Button
           aria-owns={anchorEl ? "menu" : null}
           aria-haspopup="true"
@@ -84,7 +85,7 @@ class HeaderDetails extends Component {
             <Link to="/logout">{translate("navBar.menu.menuItem.logout")}</Link>
           </MenuItem>
         </Menu>
-      </Fragment>
+      </NavLg>
     ) : (
         <Fragment>
           <li className="user-account">

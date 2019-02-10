@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 
-const Nav = ({ translate }) => {
+const Nav = ({ translate, isLoggedIn, fullName }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
@@ -10,30 +10,43 @@ const Nav = ({ translate }) => {
                         <span className="rounded-circle ">
                             <img alt="user" src="/img/user.svg" />
                         </span>
-                        <p>Sign in<i></i>Join</p>
+                        {
+                            isLoggedIn ?
+                                <p>{fullName}</p> :
+                                <p>Sign in<i></i>Join</p>
+                        }
                     </a>
                     <ul className="cd-secondary-nav is-hidden user-account-sidebar">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <div>
-                            <div className="user mx-3">
-                                <img alt="user" src="img/user.svg" />
-                                <h6>Welcome Back</h6>
-                            </div>
-                            <div>
-                                <div className="signin-list">
-                                    <li><Link className="btn" to="/login" >{translate("general.signin")} <i className={`icon-arrow-right`} /></Link></li>
-                                    <li><Link to="#"><i className="icon-facebook" /></Link></li>
-                                    <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
+                        {
+                            isLoggedIn ?
+                                <Fragment>
+                                    <li><Link to="/setting/addresses">{translate("navBar.menu.menuItem.address")}</Link></li>
+                                    <li><Link to="/setting/quotations">{translate("navBar.menu.menuItem.quotations")}</Link></li>
+                                    <li><Link to="/setting">{translate("navBar.menu.menuItem.setting")}</Link></li>
+                                    <li><Link to="/logout">{translate("navBar.menu.menuItem.logout")}</Link></li>
+                                </Fragment> :
+                                <div>
+                                    <div className="user mx-3">
+                                        <img alt="user" src="img/user.svg" />
+                                        <h6>Welcome Back</h6>
+                                    </div>
+                                    <div>
+                                        <div className="signin-list">
+                                            <li><Link className="btn" to="/login" >{translate("general.signin")} <i className={`icon-arrow-right`} /></Link></li>
+                                            <li><Link to="#"><i className="icon-facebook" /></Link></li>
+                                            <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
+                                        </div>
+                                    </div>
+                                    <p className="px-3">
+                                        {translate("dropdown.signup.message")}
+                                        <Link to="/signup">
+                                            {translate("dropdown.signup.link")}
+                                            <i className={`icon-arrow-right`} />
+                                        </Link>
+                                    </p>
                                 </div>
-                            </div>
-                            <p className="px-3">
-                                {translate("dropdown.signup.message")}
-                                <Link to="/signup">
-                                    {translate("dropdown.signup.link")}
-                                    <i className={`icon-arrow-right`} />
-                                </Link>
-                            </p>
-                        </div>
+                        }
                     </ul>
                 </li>
                 <li className="nav-sm">
