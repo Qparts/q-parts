@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { styles } from '../../../constants';
-import Button from '../Button';
 
 const Nav = ({ translate }) => {
     return (
@@ -14,27 +12,34 @@ const Nav = ({ translate }) => {
                         </span>
                         <p>Sign in<i></i>Join</p>
                     </a>
-                    <ul className="cd-secondary-nav is-hidden">
+                    <ul className="cd-secondary-nav is-hidden user-account-sidebar">
                         <li className="go-back"><a href="#0">Back</a></li>
-                        <h6>Welcome Back</h6>
-                        <div className="signin-list">
-                            <li><a className="btn" href="#" >{translate("general.signin")} <i className={`icon-arrow-right`} /></a></li>
-                            <li><a href="#"><i className="icon-facebook" /></a></li>
-                            <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
+                        <div>
+                            <div className="user mx-3">
+                                <img alt="user" src="img/user.svg" />
+                                <h6>Welcome Back</h6>
+                            </div>
+                            <div>
+                                <div className="signin-list">
+                                    <li><Link className="btn" to="/login" >{translate("general.signin")} <i className={`icon-arrow-right`} /></Link></li>
+                                    <li><Link to="#"><i className="icon-facebook" /></Link></li>
+                                    <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
+                                </div>
+                            </div>
+                            <p className="px-3">
+                                {translate("dropdown.signup.message")}
+                                <Link to="/signup">
+                                    {translate("dropdown.signup.link")}
+                                    <i className={`icon-arrow-right`} />
+                                </Link>
+                            </p>
                         </div>
-                        <p>
-                            {translate("dropdown.signup.message")}
-                            <Link to="/signup">
-                                {translate("dropdown.signup.link")}
-                                <i className={`icon-arrow-right`} style={styles.arrow_right} />
-                            </Link>
-                        </p>
                     </ul>
                 </li>
                 <li className="nav-sm">
-                    <a href="#">
+                    <Link to="/">
                         <i className="icon-home"></i> home
-  </a>
+  </Link>
                 </li>
                 <li className="nav-sm">
                     <a href="#">
