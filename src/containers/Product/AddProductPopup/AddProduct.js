@@ -35,7 +35,8 @@ class AddProduct extends Component {
       pathname: `/products/${params.productId}`,
     })
   }
-  continueShopping = () =>{
+  continueShopping = (values) =>{
+    values.preventDefault();
     this.props.modalAddToCart(false);
   }
   handleSubmit = values => {
