@@ -58,12 +58,12 @@ class CheckoutPayment extends Component {
   // }
 
   handleProceed = values => {
-    
+
     if(values.ccMonth) {
       const ccMonth = values.ccMonth.value;
       const ccYear = values.ccYear.value;
       const sendValues = {...values, ccMonth, ccYear};
-      
+
       this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: sendValues});
       this.props.completePayment(true);
       this.props.history.push('/checkout/confirm')
@@ -237,199 +237,102 @@ class CheckoutPayment extends Component {
     }
     return (
       <Fragment>
-        <MediumScreen>
-          <div className="border rounded card card-body row" id="checkout-payment">
-            <div className="payment_option" onClick={this.handlePaymentClick}>
-              <div className="Checkout-shipping_address-footer">
-                <h4>{translate("checkout.payment.title")}</h4>
-              </div>
-              <div className="checkout-payment-container">
-                <div className="col-12">
-                  <div className="payment-methods row">
-                    <div className="col-4 credit-card">
-                      <Button type="button" className={creditClass} text={translate("checkout.payment.buttons.creditCard")} onClick={() => {
-                        this.activeButton('credit');
-                        this.handleCreditCardOpt();
-                      }} icon="icon-credit-card" isReverseOrder />
-                    </div>
-                    <div className="col-4">
-                      <Button type="button" className={banckClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
-                        this.activeButton('banck');
-                        this.handleBankTransferOpt();
-                      }} icon="icon-bank" isReverseOrder />
-                    </div>
-                    <div className="col-4 cash">
-                      <Button type="button" className={cashClass} text={translate("checkout.payment.buttons.cash")} onClick={() => {
-                        this.activeButton('cash');
-                        this.handleCashOpt();
-                      }} icon="icon-cash" isReverseOrder />
-                    </div>
+        <div className="border rounded card card-body row" id="checkout-payment">
+          <div className="payment_option" onClick={this.handlePaymentClick}>
+            <div className="Checkout-shipping_address-footer">
+              <h4>{translate("checkout.payment.title")}</h4>
+            </div>
+            <div className="checkout-payment-container">
+              <div className="col-12">
+                <div className="payment-methods row">
+                  <div className="col-4 credit-card">
+                    <Button type="button" className={creditClass} text={translate("checkout.payment.buttons.creditCard")} onClick={() => {
+                      this.activeButton('credit');
+                      this.handleCreditCardOpt();
+                    }} icon="icon-credit-card" isReverseOrder />
+                  </div>
+                  <div className="col-4">
+                    <Button type="button" className={banckClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
+                      this.activeButton('banck');
+                      this.handleBankTransferOpt();
+                    }} icon="icon-bank" isReverseOrder />
+                  </div>
+                  <div className="col-4 cash">
+                    <Button type="button" className={cashClass} text={translate("checkout.payment.buttons.cash")} onClick={() => {
+                      this.activeButton('cash');
+                      this.handleCashOpt();
+                    }} icon="icon-cash" isReverseOrder />
                   </div>
                 </div>
               </div>
-              <div>
-                {(
-                  this.state.renderCreditCard &&
-                  <Fragment>
-                    <div className="credit-container">
-                      <div className="header-credit justify-content-between">
-                        <div>
-                          <i className="icon-secure" />
-                          <div>
-                            <h1>{translate("checkout.payment.creditCard.table.card")}</h1>
-                            <p>{translate("checkout.payment.creditCard.table.secure")}</p>
-                          </div>
-                        </div>
-                        {/* <Button type="button" className="btn btn-primary" text={translate("checkout.payment.buttons.newCard")} onClick={this.handleAddNewCard} icon="icon-add" isReverseOrder /> */}
-                      </div>
-
-                      {(
-                        // this.state.hasNewCard && 
-                        <Fragment>
-                          {this.renderCCform()}
-                        </Fragment>) || ((
-                          this.state.canProceed) && <Button type="button" className="btn btn-secondary" text={translate("checkout.payment.buttons.continue")} onClick={this.handleProceed} />
-                        )
-                      }
-                      {/* <span className="seperator"/> */}
-                      {/* {payment} */}
-                    </div>
-                  </Fragment>) || ((
-                    this.state.renderCash) && <Fragment>
-                      <div id="cash-delivery">
-                        <i className="icon-cash-payment" />
-                        <p>{translate("checkout.payment.cash.title")}</p>
-                      </div>
-                    </Fragment>) || ((
-                      this.state.renderbankTransfer) && <Fragment>
-                        <div id="bank-transfer">
-                          <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
-                          <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
-                          <div>
-                            <div className="d-table product-options">
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
-                                <div className="d-table-cell">Qetaa.com</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
-                                <div className="d-table-cell">01000 000 00</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.code")}</span></div>
-                                <div className="d-table-cell">#01000 000 00</div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </Fragment>
-                  )}
-              </div>
-              <div className="justify-content-between footer-payment">
-                <p>{translate("checkout.payment.canReview")}</p>
-                {
-                  this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
-                    <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
-                }
-              </div>
             </div>
-          </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="border rounded card card-body row" id="checkout-payment-mobile">
-            <div className="payment_option" onClick={this.handlePaymentClick}>
-              <div className="Checkout-shipping_address-footer">
-                <h4>{translate("checkout.payment.title")}</h4>
-              </div>
-              <div className="checkout-payment-container">
-                <div className="col-12">
-                  <div className="payment-methods row">
-                    <div className="col-4 credit-card">
-                      <Button type="button" className={creditClass} text={translate("checkout.payment.buttons.creditCard")} onClick={() => {
-                        this.activeButton('credit');
-                        this.handleCreditCardOpt();
-                      }} icon="icon-credit-card" isReverseOrder />
+            <div>
+              {(
+                this.state.renderCreditCard &&
+                <Fragment>
+                  <div className="credit-container">
+                    <div className="header-credit justify-content-between">
+                      <div>
+                        <i className="icon-secure" />
+                        <div>
+                          <h1>{translate("checkout.payment.creditCard.table.card")}</h1>
+                          <p>{translate("checkout.payment.creditCard.table.secure")}</p>
+                        </div>
+                      </div>
+                      {/* <Button type="button" className="btn btn-primary" text={translate("checkout.payment.buttons.newCard")} onClick={this.handleAddNewCard} icon="icon-add" isReverseOrder /> */}
                     </div>
-                    <div className="col-4">
-                      <Button type="button" className={banckClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
-                        this.activeButton('banck');
-                        this.handleBankTransferOpt();
-                      }} icon="icon-bank" isReverseOrder />
-                    </div>
-                    <div className="col-4 cash">
-                      <Button type="button" className={cashClass} text={translate("checkout.payment.buttons.cash")} onClick={() => {
-                        this.activeButton('cash');
-                        this.handleCashOpt();
-                      }} icon="icon-cash" isReverseOrder />
-                    </div>
+
+                    {(
+                      // this.state.hasNewCard &&
+                      <Fragment>
+                        {this.renderCCform()}
+                      </Fragment>) || ((
+                        this.state.canProceed) && <Button type="button" className="btn btn-secondary" text={translate("checkout.payment.buttons.continue")} onClick={this.handleProceed} />
+                      )
+                    }
+                    {/* <span className="seperator"/> */}
+                    {/* {payment} */}
                   </div>
-                </div>
-              </div>
-              <div>
-                {(
-                  this.state.renderCreditCard &&
-                  <Fragment>
-                    <div className="credit-container">
-                      <div className="header-credit justify-content-between">
-                        <div>
-                          <i className="icon-secure" />
-                          <div>
-                            <h1>{translate("checkout.payment.creditCard.table.card")}</h1>
-                            <p>{translate("checkout.payment.creditCard.table.secure")}</p>
-                          </div>
-                        </div>
-                        {/* <Button type="button" className="btn btn-primary" text={translate("checkout.payment.buttons.newCard")} onClick={this.handleAddNewCard} icon="icon-add" isReverseOrder /> */}
-                      </div>
-
-                      {(
-                        // this.state.hasNewCard && 
-                        <Fragment>
-                          {this.renderCCform()}
-                        </Fragment>) || ((
-                          this.state.canProceed) && <Button type="button" className="btn btn-secondary" text={translate("checkout.payment.buttons.continue")} onClick={this.handleProceed} />
-                        )
-                      }
-                      {/* <span className="seperator"/> */}
-                      {/* {payment} */}
+                </Fragment>) || ((
+                  this.state.renderCash) && <Fragment>
+                    <div id="cash-delivery">
+                      <i className="icon-cash-payment" />
+                      <p>{translate("checkout.payment.cash.title")}</p>
                     </div>
                   </Fragment>) || ((
-                    this.state.renderCash) && <Fragment>
-                      <div id="cash-delivery">
-                        <i className="icon-cash-payment" />
-                        <p>{translate("checkout.payment.cash.title")}</p>
-                      </div>
-                    </Fragment>) || ((
-                      this.state.renderbankTransfer) && <Fragment>
-                        <div id="bank-transfer">
-                          <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
-                          <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
-                          <div>
-                            <div className="d-table product-options">
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
-                                <div className="d-table-cell">Qetaa.com</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
-                                <div className="d-table-cell">01000 000 00</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.code")}</span></div>
-                                <div className="d-table-cell">#01000 000 00</div>
-                              </div>
+                    this.state.renderbankTransfer) && <Fragment>
+                      <div id="bank-transfer">
+                        <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
+                        <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
+                        <div>
+                          <div className="d-table product-options">
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
+                              <div className="d-table-cell">Qetaa.com</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
+                              <div className="d-table-cell">01000 000 00</div>
+                            </div>
+                            <div className="d-table-row">
+                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.code")}</span></div>
+                              <div className="d-table-cell">#01000 000 00</div>
                             </div>
                           </div>
                         </div>
-                      </Fragment>
-                  )}
-              </div>
-              <div className="justify-content-between footer-payment">
-                <p>{translate("checkout.payment.canReview")}</p>
-                <Button type="button" className="btn btn-primary" text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleProceed} />
-              </div>
+                      </div>
+                    </Fragment>
+                )}
+            </div>
+            <div className="justify-content-between footer-payment">
+              <p>{translate("checkout.payment.canReview")}</p>
+              {
+                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
+                  <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
+              }
             </div>
           </div>
-        </SmallScreen>
+        </div>
       </Fragment>
     )
   }
