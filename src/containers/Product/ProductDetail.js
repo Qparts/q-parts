@@ -112,7 +112,7 @@ class ProductDetail extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token}/>
+        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
       default:
         break;
     }

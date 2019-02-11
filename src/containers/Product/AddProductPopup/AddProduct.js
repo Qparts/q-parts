@@ -37,7 +37,7 @@ class AddProduct extends Component {
   }
   continueShopping = (values) =>{
     values.preventDefault();
-    this.props.modalAddToCart(false);
+    this.props.togglePopup();
   }
   handleSubmit = values => {
     values.preventDefault();
