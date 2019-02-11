@@ -1,14 +1,18 @@
 import React, { Component, Fragment, createRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import Select from 'react-select';
 import LanguageToggle from '../../../components/LanguageToggle'
 import { styles } from "../../../constants";
 import Nav from '../../UI/Nav';
+import { toggleSearch } from '../../../utils';
 
 class Header extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {
+      searchText: ''
+    }
     this.header = createRef();
     this.searchDiv = createRef();
     this.searchLg = createRef();
@@ -71,6 +75,16 @@ class Header extends Component {
     });
   }
 
+  handleClick = (e) => {
+    e.preventDefault();
+    toggleSearch('close');
+    this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
+  }
+
+  handleChange = e => {
+    this.setState({ searchText: e.target.value })
+  }
+
   render() {
     const shipToOptions = [
       { value: 1, label: "KSA" },
@@ -102,8 +116,8 @@ class Header extends Component {
                 </div>
                 <div className="col" id="search-lg" ref={this.searchLg}>
                   <div className="main-search" ref={this.searchDiv}>
-                    <input type="text" className="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" />
-                    <button className="btn" type="submit"><i className="icon-search"></i></button>
+                    <input type="text" className="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" onChange={this.handleChange}/>
+                    <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
 
                   </div>
 
@@ -173,7 +187,7 @@ class Header extends Component {
     );
   }
 }
-export default Header;
+export default withRouter(Header);
 
 
 // const {

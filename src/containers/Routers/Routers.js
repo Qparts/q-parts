@@ -66,7 +66,10 @@ class Routes extends Component {
                                 <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
                             </a>
                         </main>
-                        <Nav translate={this.props.translate}  />
+                        <Nav
+                            translate={this.props.translate}
+                            isLoggedIn={isAuth(this.props.token)}
+                            fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
                     </Fragment>
                 </RouterScrollToTop>
             </Router>
