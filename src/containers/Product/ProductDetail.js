@@ -11,7 +11,7 @@ import RenderProducts from '../../components/RenderProducts/RenderProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { addRecentViewedProducts, addWishlist } from '../../actions/customerAction';
+import { addRecentViewedProducts, addWishlist, modalAddToCart } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
 import {
@@ -68,7 +68,7 @@ class ProductDetail extends Component {
       dialogType: 'addProduct',
       data: [],
       auth: false,
-      modal: false,
+      modal: true,
       loading: true,
       product: {}
     }
@@ -90,9 +90,8 @@ class ProductDetail extends Component {
   };
 
   togglePopup = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
+    this.props.modalAddToCart(this.state.modal);
+    this.setState({modal:!this.state.modal})
   }
 
   getDialogProps = () => {
@@ -113,7 +112,7 @@ class ProductDetail extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} />
+        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
       default:
         break;
     }
@@ -146,6 +145,7 @@ class ProductDetail extends Component {
           data: res.data
         })
       })
+      this.props.modalAddToCart(false);
   }
 
   closeLightbox = () => {
@@ -305,7 +305,7 @@ class ProductDetail extends Component {
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -585,6 +585,8 @@ const mapStateToProps = state => {
     translate: getTranslate(state.localize),
     currentLanguage: getActiveLanguage(state.localize).code,
     direction: state.customer.direction,
+    isModalAddToCart: state.customer.isModalAddToCart,
+    token: state.customer.token
   }
 }
 
@@ -593,6 +595,7 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
+    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
   }
 }
 
