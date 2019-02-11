@@ -198,6 +198,7 @@ class Checkout extends Component {
 								return <CheckoutShipping
 									address={this.props.address}
 									customer={this.props.customer}
+									checkout={this.props.checkout}
 									getRegions={this.props.getRegions}
 									getCountry={this.props.getCountry}
 									regions={this.props.regions}
