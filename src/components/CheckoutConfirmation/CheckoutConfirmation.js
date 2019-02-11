@@ -42,94 +42,50 @@ class CheckoutConfirmation extends Component {
     const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity } = this.props;
     return (
       <Fragment>
-        <MediumScreen>
-          <div className="border rounded card card-body row" id="checkout-order">
-            <div className="CheckoutConfirmation-container">
-              <div className="col-12">
-                <div className="row">
-                  <div className="col-6 delivery-address">
-                    <DeliveryAddress
-                      title={translate("deliveryAddress.title")}
-                      change={translate("deliveryAddress.change")}
-                      deliveryAddress={checkout.deliveryAddress}
-                      translate={translate} />
-                  </div>
-                  <div className="col-6 payment-method">
-                    <PaymentMethod
-                      title={translate("paymentMethod.title")}
-                      change={translate("paymentMethod.change")}
-                      checkout={checkout}
-                      translate={translate} />
-                  </div>
+        <div className="border rounded card card-body row" id="checkout-order">
+          <div className="CheckoutConfirmation-container">
+            <div className="col-12">
+              <div className="row">
+                <div className="col-12 col-md-6 delivery-address">
+                  <DeliveryAddress
+                    title={translate("deliveryAddress.title")}
+                    change={translate("deliveryAddress.change")}
+                    deliveryAddress={checkout.deliveryAddress}
+                    translate={translate} />
+                </div>
+                <div className="col-12 col-md-6 payment-method">
+                  <PaymentMethod
+                    title={translate("paymentMethod.title")}
+                    change={translate("paymentMethod.change")}
+                    checkout={checkout}
+                    translate={translate} />
                 </div>
               </div>
-            </div>
-            <div className="CheckoutConfirmation_items card">
-              <div className="col-12">
-                <p className="title">{translate("checkout.confirm.table.items")}</p>
-              </div>
-              <RenderCartItem
-                deleteText={translate("cart.table.delete")}
-                name="purchasedItems"
-                purchasedItems={purchasedItems}
-                incrementQuantity={incrementQuantity}
-                decrementQuantity={decrementQuantity}
-                divCol='col-lg-12'
-                removeButton={true}
-              />
-            </div>
-            <div className="footer-delivery justify-content-between row">
-              <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
-              <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
-                <div><p>{translate("checkout.payment.cash.total")}</p>
-                  <p>20700<sub>SR</sub></p>
-                </div>
-                <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
             </div>
           </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="border rounded card card-body row" id="checkout-order-mobile">
-            <div className="CheckoutConfirmation-container">
-              <div className="col-12">
-                <div className="row">
-                  <div className="col-12 delivery-address">
-                    <DeliveryAddress
-                      title={translate("deliveryAddress.title")}
-                      change={translate("deliveryAddress.change")}
-                      deliveryAddress={checkout.deliveryAddress}
-                      translate={translate} />
-                  </div>
-                  <div className="col-12 payment-method">
-                    <PaymentMethod
-                      title={translate("paymentMethod.title")}
-                      change={translate("paymentMethod.change")}
-                      checkout={checkout}
-                      translate={translate} />
-                  </div>
-                </div>
-              </div>
+          <div className="CheckoutConfirmation_items card">
+            <div className="col-12">
+              <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
-            <div className="CheckoutConfirmation_items card">
-              <div className="col-12">
-                <p className="title">{translate("checkout.confirm.table.items")}</p>
-              </div>
-              <RenderCartItem
-                deleteText={translate("cart.table.delete")}
-                name="purchasedItems"
-                purchasedItems={purchasedItems}
-                incrementQuantity={incrementQuantity}
-                decrementQuantity={decrementQuantity}
-                divCol='col-lg-12'
-                removeButton={true}
-              />
-            </div>
-            <div className="footer-delivery row">
-              <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
-              <Button type="button" className="btn btn-primary col-12" onClick={this.handleClick} text={translate("checkout.confirm.placeOrder")} icon="icon-arrow-right" />
-            </div>
+            <RenderCartItem
+              deleteText={translate("cart.table.delete")}
+              name="purchasedItems"
+              purchasedItems={purchasedItems}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
+              divCol='col-lg-12'
+              removeButton={true}
+            />
           </div>
-        </SmallScreen>
+          <div className="footer-delivery justify-content-between row">
+            <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
+            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
+              <div><p>{translate("checkout.payment.cash.total")}</p>
+                <p>20700<sub>SR</sub></p>
+              </div>
+              <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
+          </div>
+        </div>
       </Fragment>
     )
   }
