@@ -10,18 +10,42 @@ import { getLength } from '../../../utils/array';
 import Stars from 'react-stars';
 import * as constant from '../../../constants';
 
+import { isAuth } from '../../../utils'
+import { withRouter } from 'react-router-dom';
+
+import Login from "../../Authentication/Login/Login";
+import { getTranslate } from 'react-localize-redux';
+
 class AddProduct extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: []
+      data: [],
     }
+    console.log(isAuth(this.props.token))
   }
   componentDidMount() {
     this.setState({
       data: this.props.data
     })
   }
+  continueShoppingMoblile = () =>{
+    const { match: { params } } = this.props
+    this.props.history.push({
+      pathname: `/products/${params.productId}`,
+    })
+  }
+  continueShopping = () =>{
+    this.props.modalAddToCart(false);
+  }
+  handleSubmit = values => {
+    values.preventDefault();
+    if (isAuth(this.props.token)) {
+      this.props.history.push('/checkout');
+    } else {
+      this.props.history.push('/login')
+    }
+	}
   render() {
     const dataMobile = this.props;
     const width = window.innerWidth;
@@ -29,10 +53,10 @@ class AddProduct extends Component {
       <Fragment>
         {width > 992 ? (
           <section id="AddProduct" className="container-fluid">
-            <form className="row" onSubmit={this.props.handleSubmit}>
+            <form className="row">
               {this.props.data ? (<div className="row item">
                 <img
-                  src={"/img/product-4.jpg"}
+                  src={this.props.data.image}
                   alt=""
                 />
                 <div className="text-item">
@@ -65,8 +89,8 @@ class AddProduct extends Component {
 
               <div className="btn-footer col-12">
                 <div className="group-shadow-input group-shadow-div"></div>
-                <button className="btn check-out w3-right">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
-                <button className="btn btn-primary w3-right">Continue Shopping</button>
+                <button onClick={this.handleSubmit} className="btn check-out w3-right">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                <button className="btn btn-primary w3-right" onClick={this.continueShopping}>Continue Shopping</button>
               </div>
             </form>
           </section>
@@ -77,11 +101,11 @@ class AddProduct extends Component {
 
                   <p><span><i className="icon-heart" />{dataMobile.location.state.data.quantity} Item </span>Added To Cart</p>
                 </div>
-                <form onSubmit={this.props.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                   <div className="row">
                     <div className="row item">
                       <img
-                        src={"/img/product-4.jpg"}
+                        src={dataMobile.location.state.data.image}
                         alt=""
                       />
                       <div className="text-item">
@@ -112,8 +136,8 @@ class AddProduct extends Component {
                     <div className="btn-primary sale-price"><span className="w3-left">{dataMobile.location.state.data.salesPrice.toFixed(2)} <sub>SR</sub></span></div>
                   </div>
                   <div className="btn-footer col-12">
-                    <button className="continue ">Continue Shopping</button>
-                    <button className="check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                    <button className="continue" onClick={this.continueShoppingMoblile}>Continue Shopping</button>
+                    <button  type="submit" className="check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                   </div>
                 </form>
               </div>
@@ -125,4 +149,12 @@ AddProduct = reduxForm({
   form: 'AddProduct',
   enableReinitialize: true
 })(AddProduct)
-export default AddProduct;
+
+const mapStateToProps = state => {
+  return {
+    translate: getTranslate(state.localize),
+  }
+}
+const withAddProduct = withRouter(AddProduct);
+
+export default withAddProduct;
