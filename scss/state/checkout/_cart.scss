@@ -217,3 +217,8 @@
     @include font-size(13px);
   }
 }
+.order-summery{
+  .btn-primary{
+    margin-top: 0px !important;
+  }
+}

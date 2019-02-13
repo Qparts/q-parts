@@ -81,7 +81,7 @@ class CheckoutConfirmation extends Component {
             <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
             <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
               <div><p>{translate("checkout.payment.cash.total")}</p>
-                <p>20700<sub>SR</sub></p>
+                <p>{this.props.total}<sub>SR</sub></p>
               </div>
               <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
           </div>

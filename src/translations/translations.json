@@ -218,7 +218,7 @@
     "motorCareLiquids":[
       "زيوت العناية بالمحرك",
       "Motor Care Liquids"
-    ], 
+    ],
     "washCleanersAndPolishers":[
       "معدات تنظيف و تلميع السيارة",
       "Cleaners and Polishers"
@@ -268,11 +268,11 @@
     ],
     "request" :[
       "أرسل لنا طلبك و سوف نرسل لك الأسعار و جميع التفاصيل الأخرى",
-      "Send Us Your Request and We Will Respond With the Prices and All Other Details" 
+      "Send Us Your Request and We Will Respond With the Prices and All Other Details"
     ],
     "parts" :[
       "اسم, رقم أو صورة القطعة",
-      "Part Name, Number or image" 
+      "Part Name, Number or image"
     ],
     "vin" :[
       "رقم الشاصي أو صورة الاستمارة",
@@ -1569,6 +1569,10 @@
     "placeOrder": [
       "ضع طلبك",
       "Place your order"
+    ],
+    "vat": [
+      "ضريبة الشراء",
+      "Vat"
     ]
   },
   "checkout": {

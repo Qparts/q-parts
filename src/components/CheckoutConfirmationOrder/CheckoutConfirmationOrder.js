@@ -5,11 +5,13 @@ import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { SmallScreen, MediumScreen } from '../Device/index.js'
 import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
-
 import _ from 'lodash';
 import {  getQuery } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
+import * as constant from '../../constants'
+
+import { withRouter, Link } from 'react-router-dom';
 class CheckoutConfirmation extends Component {
 
   constructor(props) {
@@ -27,9 +29,28 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate, location } = this.props;
+    const { checkout, translate, location, purchasedItems } = this.props;
     const params = getQuery(location);
 
+    const checkoutData = purchasedItems.map(item => {
+			return {
+				...item.product,
+				desc: item.product.desc,
+				salesPrice: item.product.salesPrice.toFixed(2),
+				currency: 'SR',
+				quantity: item.quantity,
+				quantityLabel: 'quantity',
+				image: item.product.image,
+				productNumber: item.product.productNumber,
+				brand: item.product.brand,
+				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
+			}
+		});
+    let subtotal=0;
+		for(var i = 0 ; i<checkoutData.length ; i++){
+			subtotal +=checkoutData[i].subtotal;
+		}
+		const total = subtotal + 35;
 
     return (
       <Fragment>
@@ -38,106 +59,82 @@ class CheckoutConfirmation extends Component {
             <i className="icon-delivered-step upload-img" />
             <p className="p"><span>Thank </span>You!</p>
             <h5>Your order number #{params.cartId} has been placed <br />Please check your email for order confirmation and detailed delivery information.</h5>
-            <button className="btn btn-open-G">Track You Order<i className={'icon-arrow-right'} /></button>
+            <button className="btn btn-open-G" style={{display:"none"}}>Track You Order<i className={'icon-arrow-right'} /></button>
           </div>
           <div className="CheckoutConfirmation_items card">
             <p className="title">{translate("checkout.confirm.table.items")}</p>
-                <ul className=" item-list list-unstyled">
-                  <li>
-                    <figure className="row">
-                      <a href="#" className="col-3 item-img">
-                        <img src="/img/oil-img-3.jpg"/>
-                      </a>
-                      <figcaption className="col-9">
-                        <div className="row">
-                          <div className="col-md-9 item-dis">
-                            <header>
-                              <h3><a href="#">8100 synthetic motor oil</a></h3>
-                              <h4>Motul USA <span>#Part Number</span></h4>
-                            </header>
-                            <div className="d-table product-options">
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Viscosity Grade</span></div>
-                                <div className="d-table-cell">SAE -50</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Volume</span></div>
-                                <div className="d-table-cell">1.32 Gallon</div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="quantity-div col-3">
-                            <div className="product-price">
-                              <p className="price">11.19 <span>SR</span></p>
-                              <p className="quantity">Quantity <span>4</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </li>
-                  <li>
-                    <figure className="row">
-                      <a href="#" className="col-3 item-img">
-                        <img src="/img/product-1.jpg"/>
-                      </a>
-                      <figcaption className="col-9">
-                        <div className="row">
-                          <div className="col-md-9 item-dis">
-                            <header>
-                              <h3><a href="#">#Part Number</a></h3>
-                              <h4>Product Brand <span>Product Name</span></h4>
-                            </header>
-                            <div className="d-table product-options">
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Vechile Info</span></div>
-                                <div className="d-table-cell">
-                                  2015 Ford Focus<br/>
-                                  VIN number (000 000 000 000 11)
+                <ul className="cart-items list-unstyled">
+                  {
+                    purchasedItems.map((purchasedItem, idx) => {
+                      return <li key={idx} className="bg-white">
+                        <figure className="row">
+                          <Link to="#" className="col-3 item-img">
+                            <img src={purchasedItem.product.image} alt="no item" />
+                          </Link>
+                          <figcaption className="col-9">
+                            <div className="row">
+                              <div className="col-md-9 item-dis">
+                                <header>
+                                  <h3><Link to="#">{purchasedItem.desc}</Link></h3>
+                                  <h4>{purchasedItem.product.brand.name} <span>{purchasedItem.productNumber}</span></h4>
+                                </header>
+                                <div className="cart-quantity d-block d-lg-none">
+                                  <h5>Quantity</h5>
+                                  <div className="input-group quantity">
+                                    <div className="input-group-prepend">
+                                      <button
+                                        className="btn btn-gray"
+                                        type="button"
+                                        onClick={this.handleClick.bind(this, constant.DECREMENT, purchasedItem.quantity, purchasedItem)}>
+                                        <i className="minus"></i></button>
+                                    </div>
+                                    <input disabled className="form-control" value={purchasedItem.quantity} type="text" />
+                                    <div className="input-group-append">
+                                      <button
+                                        className="btn btn-gray" type="button"
+                                        onClick={this.handleClick.bind(this, constant.INCREMENT, purchasedItem.quantity, purchasedItem)}>
+                                        <i className="icon-plus"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="cart-product-price">
+                                  <p className="price">{purchasedItem.salesPrice} <span>sr</span></p>
+                                </div>
+                                <div className="cart-actions">
+                                  <Link to="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
+                                  <Link to="#" className="delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
                                 </div>
                               </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Fitment</span></div>
-                                <div className="d-table-cell"><i className="icon-checked"></i> Verified</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Made in </span></div>
-                                <div className="d-table-cell">China</div>
-                              </div>
-                              <div className="d-table-row">
-                                <div className="d-table-cell"><span>Condition</span></div>
-                                <div className="d-table-cell">New</div>
+                              <div className="col-md-3">
+                                <div className="cart-quantity d-none d-lg-block">
+                                  <h5>Quantity {purchasedItem.quantity} </h5>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                          <div className="quantity-div col-3">
-                            <div className="product-price">
-                              <p className="price">11.19 <span>SR</span></p>
-                              <p className="quantity">Quantity <span>4</span></p>
-                            </div>
-                          </div>
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </li>
+                          </figcaption>
+                        </figure>
+                      </li>
+                    })
+                  }
                 </ul>
                 <div className="estimation">
                   <p className="title">Estimation</p>
                   <div className="estimation-table">
                     <div className="d-table product-options">
                       <div className="d-table-row">
-                        <div className="d-table-cell first-row"><span>Subtotal</span></div>
+                        <div className="d-table-cell first-row"><span>{translate("orderSummary.subtotal")}</span></div>
                         <div className="d-table-cell first-row">
-                          11.19 <span>SR</span>
+                          {subtotal} <span>SR</span>
                         </div>
                       </div>
                       <div className="d-table-row">
-                        <div className="d-table-cell"><span>Shipping Cost</span></div>
-                        <div className="d-table-cell">11.19 <span>SR</span></div>
+                        <div className="d-table-cell"><span>{translate("orderSummary.shippingCost")}</span></div>
+                        <div className="d-table-cell">35 <span>SR</span></div>
                       </div>
                       <div className="d-table-row">
-                        <div className="d-table-cell"><span>Total</span></div>
-                        <div className="d-table-cell">11.19 <span>SR</span></div>
+                        <div className="d-table-cell"><span>{translate("orderSummary.total")}</span></div>
+                        <div className="d-table-cell">{total} <span>SR</span></div>
                       </div>
                     </div>
                   </div>
@@ -168,6 +165,7 @@ class CheckoutConfirmation extends Component {
 const mapStateToProps = state => ({
 	translate: getTranslate(state.localize),
   checkout: state.cart.checkout,
+  purchasedItems: state.cart.purchasedItems,
 });
 
 

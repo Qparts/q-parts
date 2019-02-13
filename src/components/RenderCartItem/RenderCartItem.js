@@ -137,7 +137,7 @@ export default class extends Component {
           <div className="row">
             <div className="col-md-6 ml-md-auto">
               {
-                !removeButton && <Link to="#" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
+                !removeButton && <Link to="/" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
               }
             </div>
           </div>

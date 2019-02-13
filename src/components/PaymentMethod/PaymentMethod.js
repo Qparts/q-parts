@@ -35,7 +35,7 @@ class PaymentMethod extends Component {
             <h4>{this.props.title}</h4>
             <div className="payment-box_item">
               <div className="payment-box_item-label">
-                <p>Bank Tansfer</p>
+                <p>{checkout.paymentMethod}</p>
               </div>
             </div>
           </div>

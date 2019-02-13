@@ -91,9 +91,16 @@ class Cart extends Component {
 				quantityLabel: 'quantity',
 				image: item.product.image,
 				productNumber: item.product.productNumber,
-				brand: item.product.brand
+				brand: item.product.brand,
+				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
+		var subtotal=0;
+		var quantity=0;
+		for(var i = 0 ; i<checkoutData.length ; i++){
+			subtotal +=checkoutData[i].subtotal;
+			quantity +=checkoutData[i].quantity;
+		}
 		const shipToOptions = [
 			{ value: 1, label: "KSA" },
 			{ value: 2, label: "Egypt" },
@@ -136,7 +143,7 @@ class Cart extends Component {
 						<div className="row">
 							<header className="col cart-header">
 								<h1>
-									<span>Shopping</span> Cart<label>2 Items</label>
+									<span>Shopping</span> Cart<label>{quantity} Items</label>
 								</h1>
 							</header>
 							<div className="col-auto">
@@ -157,10 +164,10 @@ class Cart extends Component {
 					<div className="container-fluid">
 						<div className="total-sm d-lg-none d-flex align-items-stretch">
 							<div>
-								<label>Totla</label>
-								<p>20700<span className="currency">SR</span></p>
+								<label>{translate("orderSummary.total")}</label>
+								<p>{subtotal + 50}<span className="currency">SR</span></p>
 							</div>
-							<button className="btn btn-primary" type="button">Check Out<i className="icon-arrow-right"></i></button>
+							<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 						</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<RenderCartItem
@@ -170,23 +177,14 @@ class Cart extends Component {
 							/>
 							<div className="col-lg-3">
 								<div className="order-summery">
-									<header>
-										<h2>Order Summary</h2>
-										<span>2 items in your Cart</span>
-									</header>
-									<ul className="list-unstyled">
-										<li>
-											<label>Subtotal</label>
-											<p>20700<span>SR</span></p>
-										</li>
-										<li>
-											<label>Shipping Cost</label><p>50<span>SR</span></p>
-										</li>
-										<li>
-											<label>Total</label><p>20700<span>SR</span></p>
-										</li>
-									</ul>
-									<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>Check Out<i className="icon-arrow-right"></i></button>
+									<OrderSummary
+										translate={translate}
+										checkoutData={checkoutData}
+										subtotal={subtotal}
+										submitButton={translate("orderSummary.placeOrder")} />
+									{quantity>0 &&
+										<button className="btn btn-primary" style={{marginTop:"0px;"}}type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
+									}
 								</div>
 								<a href="#" className="media chat-div">
 									<img src="/img/whatsapp-logo.svg" alt="whatsapp" />
