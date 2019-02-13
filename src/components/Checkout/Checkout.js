@@ -129,6 +129,18 @@ class Checkout extends Component {
 							</div>
 						</div>
 					</section>
+				</MediumScreen>
+				<SmallScreen>
+					<section className="default-header-bg">
+						<div className="container-fluid">
+							<div className="row">
+								<header className="col-4">
+									<h1>{this.state.header}</h1>
+								</header>
+							</div>
+						</div>
+					</section>
+				</SmallScreen>
 					<div className="Checkout-container container-fluid">
 						<Switch>
 							<Route path="/checkout" exact={true} render={() => {
@@ -174,83 +186,13 @@ class Checkout extends Component {
 									decrementQuantity={this.props.decrementQuantity} />
 							}} />
 						</Switch>
-						<div className="Checkout-Order_summary col-3">
+						<div className="Checkout-Order_summary col-12 col-md-3">
 							<OrderSummary
 								translate={translate}
 								isDelivery={canSubmitOrder}
 								submitButton={translate("orderSummary.placeOrder")} />
 						</div>
 					</div>
-				</MediumScreen>
-				<SmallScreen>
-					<section className="default-header-bg">
-						<div className="container-fluid">
-							<div className="row">
-								<header className="col-4">
-									<h1>{this.state.header}</h1>
-								</header>
-							</div>
-						</div>
-					</section>
-					<div className="Checkout-container-mobile container-fluid">
-						<Switch>
-							<Route path="/checkout" exact={true} render={() => {
-								return <CheckoutShipping
-									address={this.props.address}
-									customer={this.props.customer}
-									checkout={this.props.checkout}
-									getRegions={this.props.getRegions}
-									getCountry={this.props.getCountry}
-									regions={this.props.regions}
-									country={this.props.country}
-									confirmUserAddress={this.props.confirmUserAddress}
-									onShowGoogleMap={this.handleShowGoogleMap}
-									onCityFound={this.handleCityFound}
-									showGoogleMap={this.state.showGoogleMap}
-									cityFound={this.state.cityFound}
-									city={this.props.city}
-									findCity={this.props.findCity}
-									translate={this.props.translate}
-									isDelivery={this.state.isDelivery}
-									defaultAddress={this.props.defaultAddress}
-									addDeliveryAddress={this.props.addDeliveryAddress}
-									onSubmit={this.onSaveNewAddress}
-									addresses={this.props.addresses}
-									completeShipping={this.props.completeShipping} />
-							}} />
-
-							<Route path="/checkout/payment" exact={true} render={() => {
-								return <CheckoutPayment
-									translate={translate}
-									addPaymentMethod={this.props.addPaymentMethod}
-									completePayment={this.props.completePayment} />
-							}} />
-
-							<Route path="/checkout/confirm" exact={true} render={() => {
-								return <CheckoutConfirmation
-									translate={translate}
-									checkout={this.props.checkout}
-									completeOrder={this.props.completeOrder}
-									purchasedItems={checkoutData}
-									incrementQuantity={this.props.incrementQuantity}
-									decrementQuantity={this.props.decrementQuantity} />
-							}} />
-						</Switch>
-						<div className="Checkout-Order_summary">
-							<OrderSummary
-								translate={translate}
-								isDelivery={canSubmitOrder}
-								submitButton={translate("orderSummary.placeOrder")} />
-							<div className="wahtsapp" style={{ marginTop: "20px" }}>
-								<a className="bg-whatsapp">
-									<CustomerService
-										messages={["Have a Question?", "Ask a Specialis, In-House Experts."]}
-										url="" />
-								</a>
-							</div>
-						</div>
-					</div>
-				</SmallScreen>
 			</section>
 		)
 	}

@@ -115,8 +115,7 @@ class CheckoutShipping extends Component {
     }
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <MediumScreen>
-          <div className="col-md-4 div-rounded-first">
+          <div className="col-6 col-md-4 div-rounded-first">
             <Field
               disabled
               name="name"
@@ -124,7 +123,7 @@ class CheckoutShipping extends Component {
               component={RenderField}
               validate={[validations.required]} />
           </div>
-          <div className="col-md-4 div-rounded">
+          <div className="col-6 col-md-4 div-rounded">
             <Field
               name="region"
               placeholder={translate("form.address.region")}
@@ -132,7 +131,7 @@ class CheckoutShipping extends Component {
               options={regionsData}
               validate={[validations.required]} />
           </div>
-          <div className="col-md-4 div-rounded-last">
+          <div className="col-12 col-md-4 div-rounded-last">
             <Field
               name="city"
               placeholder={translate("form.address.city")}
@@ -140,35 +139,6 @@ class CheckoutShipping extends Component {
               options={regionsData}
               validate={[validations.required]} />
           </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div style={{ display: "flex", paddingLeft: "0px" }} className="col-12">
-            <div className="col-md-6 div-rounded-first">
-              <Field
-                disabled
-                name="name"
-                placeholder={translate("form.address.country")}
-                component={RenderField}
-                validate={[validations.required]} />
-            </div>
-            <div className="col-md-6 div-rounded">
-              <Field
-                name="region"
-                placeholder={translate("form.address.region")}
-                component={SelectInput}
-                options={regionsData}
-                validate={[validations.required]} />
-            </div>
-          </div>
-          <div className="col-md-12 div-rounded-last">
-            <Field
-              name="city"
-              placeholder={translate("form.address.city")}
-              component={SelectInput}
-              options={citiesData}
-              validate={[validations.required]} />
-          </div>
-        </SmallScreen>
       </Fragment> :
       <Fragment>
         <div>
@@ -204,7 +174,6 @@ class CheckoutShipping extends Component {
 
     return (
       <Fragment>
-        <MediumScreen>
           {
             this.props.showGoogleMap ? (
               <div className="Address-map">
@@ -292,8 +261,8 @@ class CheckoutShipping extends Component {
                           placeholder={translate("form.address.shippingNote")} />
                       </div>
                       <div className="footer col-12">
-                        <Button type="submit" className="btn btn-primary col-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" />
-                        <Button type="reset" className="btn btn-light col-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
+                        <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" />
+                        <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
                       </div>
                     </div>
                   )}
@@ -302,98 +271,6 @@ class CheckoutShipping extends Component {
                 </form>
               </div>
           }
-        </MediumScreen>
-        <SmallScreen>
-          {
-            this.props.showGoogleMap ? (
-              <div className="Address-map">
-                <Map className="map" google={this.props.google} visible={false}>
-                  {
-                    this.props.country && <AutoComplete onAddressSelected={this.onAddressSelected} {...this.props} />
-                  }
-                </Map>
-              </div>
-            ) :
-              <div className="Address-container">
-                <div className="addresses-header">
-                  <p>{translate("setting.addressBook.shippingItem")}</p>
-                </div>
-                <form onSubmit={handleSubmit(this.handleDelivery)}>
-                  <div className="row no-gutters">
-                    <div className="col-12 title-address">
-                      <Field
-                        label={translate("setting.addressBook.title")}
-                        name="title"
-                        component={RenderField}
-                        type="text"
-                        placeholder={translate("setting.addressBook.title")}
-                        hasFloatLabel
-                        validate={[validations.required]} />
-                    </div>
-                    <div className="col-12 google-map">
-                      <Link to="#" onClick={onShowGoogleMap}>
-                        <img className="main-img" alt="user" src="/img/google-map.svg" />
-                        <p>{translate("form.address.selectAddress")}</p>
-                      </Link>
-                    </div>
-                    <div className="col-md-12 address-title">
-                      <Field
-                        label={`*${translate("setting.addressBook.addressLine1")}`}
-                        name="line1"
-                        component={RenderField}
-                        type="text"
-                        placeholder={translate("setting.addressBook.addressLine1")}
-                        hasFloatLabel
-                        validate={[validations.required]} />
-                    </div>
-                    <div className="col-12 address-title">
-                      <Field
-                        label={translate("setting.addressBook.addressLine2")}
-                        name="line2"
-                        component={RenderField}
-                        type="text"
-                        placeholder={translate("setting.addressBook.addressLine2")}
-                        hasFloatLabel />
-                    </div>
-                    {renderCityRegion}
-                    <div className="phone-info col-12">
-                      <div className="row">
-                        <div className="phone-number col-12">
-                          <div className="first">
-                            <Field
-                              name="phone"
-                              component={RenderField}
-                              placeholder="+966"
-                              validate={[validations.required]} />
-                          </div>
-                          <Field
-                            name="mobile"
-                            component={RenderField}
-                            placeholder={translate("form.address.phoneNumber")}
-                            validate={[validations.required]} />
-                        </div>
-                        <div className="zipCode col-12">
-                          <Field
-                            name="zipCode"
-                            component={RenderField}
-                            placeholder={translate("form.address.zipCode")}
-                            validate={[validations.required]} />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 shipping-style">
-                      <Field
-                        name="shipping"
-                        component={RenderField}
-                        type="text"
-                        placeholder={translate("form.address.shippingNote")} />
-                    </div>
-                  </div>
-                  {renderButtons}
-                </form>
-              </div>
-          }
-        </SmallScreen>
       </Fragment>
     )
   }
