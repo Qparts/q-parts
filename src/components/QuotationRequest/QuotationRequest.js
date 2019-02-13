@@ -20,6 +20,10 @@ import './QuotationRequest.css';
 import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
 import Vehicles from '../Vehicles/Vehicles';
+import Login from '../../containers/Authentication/Login/Login';
+
+const vehicles = 'vehicles';
+const signin = 'signin';
 
 class QuotationRequest extends Component {
 	constructor(props) {
@@ -27,28 +31,31 @@ class QuotationRequest extends Component {
 
 		this.state = {
 			modal: false,
+			dialogType: signin
 		}
 
-		if (isAuth(this.props.customer.token)) {
+		if (isAuth(this.props.token)) {
 			this.props.getRegions(this.props.customer.countryId);
 		}
 	}
 
 	handleSubmit = values => {
 		const { vehicleForm: {
-			vehicle: { make: { id: makeId } } }, quotationItems: quotationItemsTemp, city: { id: cityId } } = values;
-		const vinImage = "";
+			vehicle: { make: { id: makeId } }, id: customerVehicleId }, quotationItems: quotationItemsTemp, city: { id: cityId } } = values;
 
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
-				return { ...quotationCartItem, image: quotationCartItem.image ? quotationCartItem.image : "" }
+				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
 
-		return this.props.postQuotation({ cityId, makeId, vinImage, quotationItems });
+		return this.props.postQuotation({ cityId, makeId, customerVehicleId, quotationItems });
 	}
 
-	handleClick = (event) => {
+	handleVehicle = (event) => {
 		event.preventDefault();
+		this.setState({
+			dialogType: vehicles
+		});
 		this.togglePopup();
 	}
 
@@ -58,28 +65,69 @@ class QuotationRequest extends Component {
 		})
 	}
 
-	render() {
-		const { handleSubmit, translate, direction } = this.props;
-		const dialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-			<ModalHeader toggle={this.togglePopup}>
-				<Title
-					header={translate("dialog.vehicle.title")}
-					subHeader={"Store vehicles in your garage and Get product recommendations"} />
-			</ModalHeader>
-			<ModalBody>
-				<Vehicles
+	handleLogin = e => {
+		e.preventDefault();
+		this.setState({
+			dialogType: signin
+		});
+		this.togglePopup();
+	}
+
+	getDialogProps = () => {
+		const { translate } = this.props;
+		const { dialogType } = this.state;
+
+		switch (dialogType) {
+			case vehicles:
+				return {
+					header: <Title
+						header={translate("dialog.vehicle.title")}
+						subHeader={"Store vehicles in your garage and Get product recommendations"} />,
+					className: 'garage-popup'
+				}
+			case signin:
+				return {
+					header: <Title header={translate("dialog.signin.title")} />,
+					className: ''
+				}
+			default:
+				break;
+		}
+	}
+	getDialogComponent = () => {
+		const { dialogType } = this.state;
+
+		switch (dialogType) {
+			case vehicles:
+				return <Vehicles
 					toggle={this.togglePopup}
 					direction={this.props.direction}
 				/>
+
+			case signin:
+				return <Login toggle={this.togglePopup} />
+
+			default:
+				break;
+		}
+	}
+
+	render() {
+		const { handleSubmit, translate, direction } = this.props;
+		const dialog = <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+			<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+			<ModalBody>
+				{this.getDialogComponent()}
 			</ModalBody>
 		</Modal>
-		const regions = this.props.regions.map(region => {
+
+		const regions = this.props.regions ? this.props.regions.map(region => {
 			return {
 				...region,
 				value: region.id,
 				label: region.name
 			}
-		});
+		}) : [];
 		const cities = _.has(this.props.formValues, 'region.cities') ?
 			this.props.formValues.region.cities.map(city => {
 				return {
@@ -88,6 +136,12 @@ class QuotationRequest extends Component {
 					value: city.id
 				}
 			}) : [];
+
+		const styles = {
+			footer: {
+				marginTop: isAuth(this.props.token) ? '' : '56px'
+			}
+		}
 		return (
 			<Fragment>
 				<section id="custom-header">
@@ -121,35 +175,37 @@ class QuotationRequest extends Component {
 								subHeader="Fill in your vehicle data and the parts you want" />
 						</div>
 						<form onSubmit={handleSubmit(this.handleSubmit)}>
-							<div className="custom-container col-12">
-								<div className="row d-flex">
-									<div className="col-6">
-										<h3>Vehicle Information</h3>
+							{
+								isAuth(this.props.token) &&
+								<div className="custom-container col-12">
+									<div className="row d-flex">
+										<div className="col-6">
+											<h3>Vehicle Information</h3>
+										</div>
+										<div className="col-6 garage-btn-container">
+											<Link
+												to={'#'}
+												isReverseOrder
+												className='btn btn-gray'
+												text='Garage'
+												icon='icon-vehicle'
+												onClick={this.handleVehicle}
+											/>
+										</div>
 									</div>
-									<div className="col-6 garage-btn-container">
-										<Link
-											to={'#'}
-											isReverseOrder
-											className='btn btn-gray'
-											text='Garage'
-											icon='icon-vehicle'
-											onClick={this.handleClick}
-										/>
+									<div className="row">
+										<div className="col-12 select-field-make-container">
+											<Field
+												name="vehicleForm"
+												component={SelectInput}
+												options={this.props.vehiclesFormat}
+												validate={[validations.required]}
+											/>
+
+										</div>
 									</div>
 								</div>
-								<div className="row">
-									<div className="col-12 select-field-make-container">
-										<Field
-											name="vehicleForm"
-											component={SelectInput}
-											options={this.props.vehiclesFormat}
-											validate={[validations.required]}
-										/>
-
-									</div>
-								</div>
-							</div>
-
+							}
 
 							<div className="custom-container col-12">
 								<div className="row d-flex">
@@ -165,49 +221,60 @@ class QuotationRequest extends Component {
 									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
 								/>
 							</div>
+							{
+								isAuth(this.props.token) &&
+								<div className="custom-container col-12">
+									<div className="row d-flex">
+										<div className="col-6">
+											<h3>Shipping Information</h3>
+										</div>
+									</div>
+									<div className="row">
+										<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
+											<Field
+												name="region"
+												component={SelectInput}
+												options={regions}
+												validate={[validations.required]}
+											/>
 
-							<div className="custom-container col-12">
-								<div className="row d-flex">
-									<div className="col-6">
-										<h3>Shipping Information</h3>
+										</div>
+										<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
+											<Field
+												name="city"
+												component={SelectInput}
+												options={cities}
+												validate={[validations.required]}
+											/>
+
+										</div>
 									</div>
 								</div>
+							}
 
-								<div className="row">
-									<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
-										<Field
-											name="region"
-											component={SelectInput}
-											options={regions}
-											validate={[validations.required]}
-										/>
-
-									</div>
-									<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
-										<Field
-											name="city"
-											component={SelectInput}
-											options={cities}
-											validate={[validations.required]}
-										/>
-
-									</div>
-								</div>
-							</div>
-
-							<div className="col-12 padding-right-0">
+							<div className="col-12 padding-right-0" style={styles.footer}>
 								<div className="row d-flex">
 									<div className="col-md-6 col-12 links">
 										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
 									</div>
-									<div className="col-md-6 col-12 garage-btn-container padding-md-right-0">
-										<Button type="submit" className="btn btn-primary" text={
-											<Fragment>
-												<span>{translate("general.send")}</span>
-												<i className={`icon-arrow-${right(direction)}`}></i>
-											</Fragment>
-										} />
-									</div>
+									{
+										isAuth(this.props.token) ?
+											<div className="col-md-6 col-12 garage-btn-container padding-md-right-0">
+												<Button type="submit" className="btn btn-primary btn-footer" text={
+													<Fragment>
+														<span>{translate("general.send")}</span>
+														<i className={`icon-arrow-${right(direction)}`}></i>
+													</Fragment>
+												} />
+											</div> :
+											<div className="col-md-6 col-12 btn-continue">
+												<Link
+													to={"#"}
+													className="btn btn-primary btn-footer"
+													text={translate("dialog.continue")}
+													onClick={this.handleLogin} />
+											</div>
+									}
 								</div>
 							</div>
 						</form>
@@ -228,6 +295,7 @@ const mapStateToProps = (state) => {
 
 	return {
 		customer: customerObj.detail,
+		token: state.customer.token,
 		vehiclesFormat: customerObj.vehiclesFormat,
 		selectedVehicle: customerObj.selectedVehicle,
 		regions: state.api.regions,

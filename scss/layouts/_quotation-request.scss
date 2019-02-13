@@ -143,12 +143,6 @@
   .garage-btn-container {
     @include text-right;
 
-    button {
-      @include small-screen {
-        @include text-right;
-        width: 100%;
-      }
-    }
   }
 
   .custom-container {
@@ -378,6 +372,17 @@
       i {
         @include padding-right(6px);
       }
+    }
+  }
+
+  .btn-continue {
+    @include text-right;
+  }
+
+  .btn-footer {
+    @include small-screen {
+      @include text-right;
+      width: 100%;
     }
   }
 }

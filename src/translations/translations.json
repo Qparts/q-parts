@@ -959,7 +959,11 @@
         "أضف مدينة الشحن",
         "Add shipping city"
       ]
-    }
+    },
+    "continue": [
+      "استمر",
+      "Continue"
+    ]
   },
   "shippingCity": {
     "placeholder": {
