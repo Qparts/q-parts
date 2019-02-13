@@ -14,7 +14,8 @@ export default class SelectInput extends Component {
             border: {
                 border: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.success}` :
                     helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.invalid}` :
-                        helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : 'none'
+                        helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : 'none',
+                borderRadius: 'inherit'
             },
             icon: {
                 color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' : 'none'

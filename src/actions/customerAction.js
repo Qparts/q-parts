@@ -47,7 +47,8 @@ export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
-export const MODAL_ADD_TO_CART = "MODAL_ADD_TO_CART"
+export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
+export const POST_QUOTATION = 'POST_QUOTATION';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -447,7 +448,7 @@ export const changeDefaultLanguage = (defaultLanguage) => {
       translation: globalTranslations,
       options: { renderToStaticMarkup, defaultLanguage }
     }))
-    dispatch({type: SET_DEFAULT_LANG, payload: defaultLanguage})
+    dispatch({ type: SET_DEFAULT_LANG, payload: defaultLanguage })
   }
 
 }
@@ -572,5 +573,19 @@ export const modalAddToCart = (isCompleted) => {
   return {
     type: MODAL_ADD_TO_CART,
     payload: isCompleted
+  }
+}
+
+export const postQuotation = (data) => {
+  return (dispatch) => {
+    return axios.post(`${API_ROOT}${QUOTATION_SERVICE}`, data)
+      .then(res => {
+        dispatch({
+          type: POST_QUOTATION,
+          payload: res.data
+        })
+      }, error => {
+        handleNetworkError(dispatch, error);
+      })
   }
 }

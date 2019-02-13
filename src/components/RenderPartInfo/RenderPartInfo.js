@@ -23,8 +23,8 @@ class RenderPartInfo extends Component {
             <div>
                 {submitFailed && error && <span>{error}</span>}
                 {fields.map((partInfo, idx) => (
-                    <Fragment>
-                        <div key={idx} className="row parts-container">
+                    <Fragment key={idx}>
+                        <div className="row parts-container">
                             <div className="col-md-8 col-12">
                                 <Field
                                     className="part-desc-field"
@@ -41,42 +41,32 @@ class RenderPartInfo extends Component {
                                     component={RenderFileInput}
                                 />
                             </div>
-
-                            {/* <Field
-     name={`${partInfo}.condition`}
-     className="QuotationRequest-selectInput"
-     component={SelectInput}
-     options={[
-      { value: 'genuine', label: 'Genuine' },
-      { value: 'nonGenuine ', label: 'Non-genuine' },
-      { value: 'all ', label: 'All' }
-     ]}
-    /> */}
-                            <div className="col-6 col-md-3 number-picker-container">
+                            <div className="col-10 col-md-3 number-picker-container">
                                 <Field
                                     name={`${partInfo}.quantity`}
+                                    btnGray="btn-gray"
                                     component={NumberPicker}
                                 />
                             </div>
-                            <div className="col-md-1 col-6 delete-btn-container">
+                            <div className="col-md-1 col-1 delete-btn-container">
                                 <Button
-                                    type="button"
-                                    className="btn btn-light"
-                                    text={this.props.deleteButton}
+                                    type="reset"
+                                    disabled={idx === 0}
+                                    className="btn"
+                                    icon={this.props.deleteIcon}
                                     onClick={() => fields.remove(idx)}
                                 />
                             </div>
                         </div>
-                        
+
                     </Fragment>
 
                 ))}
                 <div className="add-part-btn-container">
-                    <Button type="reset" className="btn" text={this.props.add}
+                    <Button isReverseOrder type="reset" className="btn" text={this.props.add} icon="icon-plus"
                         onClick={() => fields.push({
                             itemName: '',
                             image: '',
-                            // condition: '',
                             quantity: 1
                         })}
                     />

@@ -1,6 +1,6 @@
 import { initialState, } from '../initialState/cartInitialState';
 import {
-  ADD_TO_CART, CLEAR_CART, ADD_QUOTATION_TO_CART, GET_QUOTATION, GET_REPLIED_QUOTATION, INCREMENRT_CART_PRODUCT_QUANTITY,
+  ADD_TO_CART, CLEAR_CART, GET_QUOTATION, GET_REPLIED_QUOTATION, INCREMENRT_CART_PRODUCT_QUANTITY,
   DECREMENRT_CART_PRODUCT_QUANTITY, ADD_PAYMENT_METHOD, ADD_DELIVERY_ADDRESS, POST_CREDIT_CARD
 } from '../actions/cartAction';
 
@@ -31,9 +31,6 @@ export default function reducer(state = initialState, action) {
 
     case CLEAR_CART:
       return { ...state, purchasedItems: initialState.purchasedItems }
-
-    case ADD_QUOTATION_TO_CART:
-      return { ...state, cartId: action.payload.cartId }
 
     case GET_QUOTATION:
 

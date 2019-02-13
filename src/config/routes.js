@@ -28,7 +28,6 @@ export const routes = (isAuth, direction) => [
     {
         path: "/quotation-order",
         component: QuotationRequest,
-        isAuth: isAuth,
         redirectTo: '/'
     },
     {

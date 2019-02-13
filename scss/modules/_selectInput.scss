@@ -9,4 +9,14 @@
     top: 40%;
     @include font-size(15px);
   }
+  .select {
+    width: 100%;
+    .select__control {
+      padding-top: 15px;
+    }
+  }
+  .input-group {
+    border-radius: inherit;
+    height: 100%;
+  }
 }

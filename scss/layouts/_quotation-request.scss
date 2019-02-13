@@ -115,7 +115,7 @@
 #custom-details {
   padding-bottom: 87px;
   .title-container {
-    padding-top: 79px;
+    padding-top: 66px;
   }
 
   .links {
@@ -141,7 +141,14 @@
     text-transform: none;
   }
   .garage-btn-container {
-    text-align: right;
+    @include text-right;
+
+    button {
+      @include small-screen {
+        @include text-right;
+        width: 100%;
+      }
+    }
   }
 
   .custom-container {
@@ -159,16 +166,15 @@
     }
 
     .select-field-make-container {
-      @include large-medium-screens {
-        @include padding-right(0);
-      }
+      margin-top: 9px;
 
       @include small-screen {
         padding-bottom: 10px;
         padding-top: 10px;
       }
 
-      .select-field-make {
+      .select-input {
+        width: 100%;
         height: 55px;
         background: $light-gray;
         @include small-screen {
@@ -239,17 +245,13 @@
       }
     }
 
-    .select-country-field-container {
-      @include large-medium-screens {
-        @include padding-right(0);
-      }
-
+    .select-region-field-container {
       @include small-screen {
         padding-bottom: 10px;
         padding-top: 10px;
       }
 
-      .select-country-field {
+      .select-input {
         @include large-medium-screens {
           @include boarder-left-radius;
         }
@@ -271,7 +273,7 @@
         padding-top: 10px;
       }
 
-      .select-city-field {
+      .select-input {
         @include large-medium-screens {
           @include boarder-right-radius(0, 20px);
         }
@@ -313,6 +315,7 @@
         @include large-medium-screens {
           padding-left: 0;
         }
+        @include padding-right(5px);
 
         @include small-screen {
           padding-bottom: 10px;
@@ -322,17 +325,17 @@
         #number-picker {
           .btn-positive {
             @include font-size(18px);
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: side-values(0) !important;
             height: 55px;
           }
           .btn-negative {
             @include font-size(18px);
-            border-radius: side-values(0 0 0 0) !important;
+            border-radius: side-values(0 0 $border-radius-base 0) !important;
             height: 55px;
-            @include boarder-right-radius(0, 20px);
           }
           input {
             @include font-size(18px);
+            background: $light-gray !important;
             padding: 0;
             height: 55px;
             text-align: center;
@@ -343,26 +346,18 @@
       }
 
       .delete-btn-container {
+        button {
+          background: inherit;
+        }
         @include small-screen {
-          text-align: right;
-          padding-bottom: 10px;
           padding-top: 10px;
         }
-        @include large-medium-screens {
-          text-align: $right;
-          @include padding-left(0);
-        }
-        .btn {
-          border: none;
-          width: 100%;
-          @include small-screen {
-            width: 50%;
-            border-radius: side-values(0 0 20px 0) !important;
+        @include padding-left(0);
+        i {
+          @include opacity(0.6);
+          &::before {
+            @include font-size(22px);
           }
-          height: 55px;
-          left: 0;
-
-          @include font-size(15px);
         }
       }
     }
@@ -379,6 +374,9 @@
         top: 11px;
         background: $white;
         border-top-right-radius: 0 !important;
+      }
+      i {
+        @include padding-right(6px);
       }
     }
   }

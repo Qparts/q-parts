@@ -5,6 +5,9 @@ import Button from '../Button';
 import * as constant from '../../../constants';
 
 class NumberPicker extends Component {
+    static defaultProps = {
+        btnGray: 'btn-secondary'
+    }
 
     handleClick = (action, event) => {
         event.preventDefault();
@@ -26,18 +29,18 @@ class NumberPicker extends Component {
     render() {
         return <div id="number-picker" className={this.props.col}>
             <Button
-                className="btn btn-secondary btn-positive"
-                text="+"
+                className={`btn ${this.props.btnGray} btn-positive`}
+                icon="icon-plus"
                 onClick={this.handleClick.bind(this, constant.INCREMENT)} />
             <input
-                className="form-control btn btn-secondary"
+                className={`form-control btn ${this.props.btnGray}`}
                 readOnly
                 disabled
                 {...this.props.input}
             />
             <Button
-                className="btn btn-secondary btn-negative"
-                text="-"
+                className={`btn ${this.props.btnGray} btn-negative`}
+                icon="icon-minus"
                 onClick={this.handleClick.bind(this, constant.DECREMENT)} />
         </div>
     }
