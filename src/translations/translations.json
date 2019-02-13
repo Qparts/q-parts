@@ -1573,6 +1573,10 @@
     "vat": [
       "ضريبة الشراء",
       "Vat"
+    ],
+    "grandTotal": [
+      "المجموع الكلي",
+      "Grand Total"
     ]
   },
   "checkout": {

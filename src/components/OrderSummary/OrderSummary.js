@@ -48,7 +48,7 @@ class OrderSummary extends Component {
     		}
         const total = subtotal + 35;
         const vat = total * 0.05;
-
+        const grandTotal = total + vat;
         const renderHeader = !this.props.removeHeader && <div className="order-summary__header">
             <div>
                 <h5 className="card-title">{translate("orderSummary.title")}</h5>
@@ -84,7 +84,13 @@ class OrderSummary extends Component {
                           <div style={styles.secondSperator} className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.vat")}</span>
                           <span className="item-value">
-                              {vat}
+                              {vat.toFixed(2)}
+                              <span>SR</span>
+                          </span>
+                          <div style={styles.secondSperator} className="h-seperator" />
+                          <span className="item-key">{translate("orderSummary.grandTotal")}</span>
+                          <span className="item-value">
+                              {grandTotal.toFixed(2)}
                               <span>SR</span>
                           </span>
                       </div>

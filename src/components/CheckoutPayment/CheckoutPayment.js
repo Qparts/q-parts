@@ -58,18 +58,19 @@ class CheckoutPayment extends Component {
   // }
 
   handleProceed = values => {
+    if(Object.keys(this.props.checkout.paymentMethod).length>0){
+      if(values.ccMonth) {
+        const ccMonth = values.ccMonth.value;
+        const ccYear = values.ccYear.value;
+        const sendValues = {...values, ccMonth, ccYear};
 
-    if(values.ccMonth) {
-      const ccMonth = values.ccMonth.value;
-      const ccYear = values.ccYear.value;
-      const sendValues = {...values, ccMonth, ccYear};
-
-      this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: sendValues});
-      this.props.completePayment(true);
-      this.props.history.push('/checkout/confirm')
-    } else {
-      this.props.completePayment(true);
-      this.props.history.push('/checkout/confirm')
+        this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: sendValues});
+        this.props.completePayment(true);
+        this.props.history.push('/checkout/confirm')
+      } else {
+        this.props.completePayment(true);
+        this.props.history.push('/checkout/confirm')
+      }
     }
   }
 

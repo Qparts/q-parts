@@ -10,8 +10,10 @@ import {  getQuery } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
-
+import { clearCart } from '../../actions/cartAction';
 import { withRouter, Link } from 'react-router-dom';
+
+import { bindActionCreators } from 'redux';
 class CheckoutConfirmation extends Component {
 
   constructor(props) {
@@ -21,7 +23,9 @@ class CheckoutConfirmation extends Component {
       paymentResponse(this.props.location.search);
     }
   }
-
+  componentWillUnmount(){
+    this.props.clearCart();
+  }
 
   handleClick = () => {
     this.props.completeOrder(true);
@@ -51,6 +55,8 @@ class CheckoutConfirmation extends Component {
 			subtotal +=checkoutData[i].subtotal;
 		}
 		const total = subtotal + 35;
+    const vat = total + 0.05;
+    const grandTotal = total + vat;
 
     return (
       <Fragment>
@@ -98,15 +104,11 @@ class CheckoutConfirmation extends Component {
                                     </div>
                                   </div>
                                 </div>
-                                <div className="cart-product-price">
-                                  <p className="price">{purchasedItem.salesPrice} <span>sr</span></p>
-                                </div>
-                                <div className="cart-actions">
-                                  <Link to="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
-                                  <Link to="#" className="delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
-                                </div>
                               </div>
-                              <div className="col-md-3">
+                              <div className="col-md-3 div-price-quantity">
+                                <div className="cart-product-price">
+                                  <p className="price">{purchasedItem.product.salesPrice} <span>sr</span></p>
+                                </div>
                                 <div className="cart-quantity d-none d-lg-block">
                                   <h5>Quantity {purchasedItem.quantity} </h5>
                                 </div>
@@ -135,6 +137,14 @@ class CheckoutConfirmation extends Component {
                       <div className="d-table-row">
                         <div className="d-table-cell"><span>{translate("orderSummary.total")}</span></div>
                         <div className="d-table-cell">{total} <span>SR</span></div>
+                      </div>
+                      <div className="d-table-row">
+                        <div className="d-table-cell"><span>{translate("orderSummary.vat")}</span></div>
+                        <div className="d-table-cell">{vat} <span>SR</span></div>
+                      </div>
+                      <div className="d-table-row">
+                        <div className="d-table-cell"><span>{translate("orderSummary.grandTotal")}</span></div>
+                        <div className="d-table-cell">{grandTotal} <span>SR</span></div>
                       </div>
                     </div>
                   </div>
@@ -168,5 +178,10 @@ const mapStateToProps = state => ({
   purchasedItems: state.cart.purchasedItems,
 });
 
+const mapDispatchToProps = (dispatch) => {
+	return bindActionCreators({
+		clearCart,
+	}, dispatch)
+}
 
-export default connect(mapStateToProps, null)(CheckoutConfirmation);
+export default connect(mapStateToProps, mapDispatchToProps)(CheckoutConfirmation);

@@ -306,5 +306,14 @@
        }
      }
     }
+    .div-price-quantity{
+      display: flex;
+      .cart-quantity{
+        h5{
+          line-height: 70px;
+          @include margin-left(14px);
+        }
+      }
+    }
   }
 }

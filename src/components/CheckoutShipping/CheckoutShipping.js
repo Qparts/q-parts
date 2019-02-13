@@ -45,7 +45,7 @@ class CheckoutShipping extends Component {
   handleDelivery = values => {
     const { deliveryAddress } = this.props.checkout;
 
-    if (deliveryAddress) {
+    if (Object.keys(deliveryAddress).length>0) {
       this.props.completeShipping(true);
       this.props.history.push('/checkout/payment');
     }

@@ -183,7 +183,7 @@ class Cart extends Component {
 										subtotal={subtotal}
 										submitButton={translate("orderSummary.placeOrder")} />
 									{quantity>0 &&
-										<button className="btn btn-primary" style={{marginTop:"0px;"}}type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
+										<button className="btn btn-primary" style={{marginTop:"0px"}}type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 									}
 								</div>
 								<a href="#" className="media chat-div">
