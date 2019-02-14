@@ -27,8 +27,12 @@ class CheckoutConfirmation extends Component {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
         .then(res => {
-          window.location = res.data.transactionUrl;
-        })
+          if (res.status === 201) {
+            history.push(`/payment-response?cartId=${res.data.cartId}`)
+          } else if(res.status === 202) {
+            window.location = res.data.transactionUrl;
+          }
+        });
     } else if (paymentMethod === BANK_TRANSFER) {
       const data = { cartItems, addressId }
       postWireTransfer(data)
@@ -64,7 +68,7 @@ class CheckoutConfirmation extends Component {
             </div>
           </div>
           <div className="CheckoutConfirmation_items card">
-            <div className="col-12">
+            <div className="div-title">
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
             <RenderCartItem
@@ -81,7 +85,7 @@ class CheckoutConfirmation extends Component {
             <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
             <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
               <div><p>{translate("checkout.payment.cash.total")}</p>
-                <p>20700<sub>SR</sub></p>
+                <p>{this.props.total}<sub>SR</sub></p>
               </div>
               <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
           </div>

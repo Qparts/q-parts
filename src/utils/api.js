@@ -35,3 +35,7 @@ export const paymentResponse = (query) => {
 export const postQuotation = (data) => {
     return axios.post(`${API_ROOT}${QUOTATION_SERVICE}`, data);
 }
+
+export const getBanks = () => {
+    return axios.get(`${API_ROOT}${CART_SERVICE}/banks`)
+}

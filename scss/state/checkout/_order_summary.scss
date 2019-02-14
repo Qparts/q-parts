@@ -34,8 +34,8 @@
       > span {
         font-family: Roboto;
         @include font-size(11px);
-        color: $charcoal-grey;
-        padding-#{$left}: 5px;
+        color: $black;
+        padding-#{$left}: 3px;
       }
     }
 

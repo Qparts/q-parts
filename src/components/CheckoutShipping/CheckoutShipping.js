@@ -45,7 +45,7 @@ class CheckoutShipping extends Component {
   handleDelivery = values => {
     const { deliveryAddress } = this.props.checkout;
 
-    if (deliveryAddress) {
+    if (Object.keys(deliveryAddress).length>0) {
       this.props.completeShipping(true);
       this.props.history.push('/checkout/payment');
     }
@@ -83,6 +83,15 @@ class CheckoutShipping extends Component {
           label: city.name
         }
       }) : [];
+
+      let canSubmit = Object.keys(this.props.checkout.deliveryAddress).length>0;
+      const styles = {
+        disable: {
+         opacity: '0.6',
+         cursor: 'default'
+       }
+      }
+
     let addressItem;
     if (true) {
       addressItem = <div id="addresses-container">
@@ -169,7 +178,7 @@ class CheckoutShipping extends Component {
       </Fragment>
 
     if (isDelivery) {
-      renderButtons = <Button type="button" className="btn btn-secondary" text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleDelivery}/>
+      renderButtons = <Button type="button" className="btn btn-secondary" style={canSubmit? {} : styles.disable} text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleDelivery}/>
     }
 
     return (

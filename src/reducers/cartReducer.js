@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
       }
 
     case CLEAR_CART:
-      return { ...state, purchasedItems: initialState.purchasedItems }
+      return { ...state, purchasedItems: initialState.purchasedItems, cartId: null, checkout: initialState.checkout }
 
     case GET_QUOTATION:
 

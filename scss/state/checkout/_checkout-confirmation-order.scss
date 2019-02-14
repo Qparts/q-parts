@@ -235,7 +235,7 @@
          border-radius: side-values(0 0 20px 0);
          background: $white;
          padding: 10px;
-         padding-bottom: 95px;
+         padding-bottom: 20px;
          .payment-box_item-label{
            display: flex;
            @include margin-left(20px);
@@ -305,6 +305,15 @@
          }
        }
      }
+    }
+    .div-price-quantity{
+      display: flex;
+      .cart-quantity{
+        h5{
+          line-height: 70px;
+          @include margin-left(14px);
+        }
+      }
     }
   }
 }
