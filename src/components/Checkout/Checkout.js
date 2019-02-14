@@ -96,9 +96,16 @@ class Checkout extends Component {
 				quantityLabel: 'quantity',
 				image: item.product.image,
 				productNumber: item.product.productNumber,
-				brand: item.product.brand
+				brand: item.product.brand,
+				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
+
+		let subtotal=0;
+		for(var i = 0 ; i<checkoutData.length ; i++){
+			subtotal +=checkoutData[i].subtotal;
+		}
+		const total = subtotal + 35;
 
 		if (this.props.isShippingCompleted) {
 			paymentClass += " paymentActive"
@@ -183,14 +190,18 @@ class Checkout extends Component {
 									completeOrder={this.props.completeOrder}
 									purchasedItems={checkoutData}
 									incrementQuantity={this.props.incrementQuantity}
-									decrementQuantity={this.props.decrementQuantity} />
+									decrementQuantity={this.props.decrementQuantity}
+									total={total} />
 							}} />
 						</Switch>
 						<div className="Checkout-Order_summary col-12 col-md-3">
 							<OrderSummary
 								translate={translate}
 								isDelivery={canSubmitOrder}
-								submitButton={translate("orderSummary.placeOrder")} />
+								submitButton={translate("orderSummary.placeOrder")}
+								checkoutData={checkoutData}
+								purchasedItems={checkoutData}
+								checkout={this.props.checkout} />
 						</div>
 					</div>
 			</section>

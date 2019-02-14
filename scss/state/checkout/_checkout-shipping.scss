@@ -1,5 +1,6 @@
 .checkout-container-shipping{
   background: $light-gray;
+  padding-bottom: 20%;
   .Checkout-container{
     @include large-medium-screens {
       display: flex;

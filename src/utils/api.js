@@ -8,7 +8,7 @@ export const getProduct = (props) => {
     return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`)
 }
 
-export const getGeneralSearch = (query) => {    
+export const getGeneralSearch = (query) => {
      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/search/general${query}`)
 }
 
@@ -19,7 +19,7 @@ export const postWireTransfer = (data) => {
     return axios.post(`${API_ROOT}${CART_SERVICE}/cart/wire-transfer`, data)
 }
 
-export const paymentResponse = (query) => {    
+export const paymentResponse = (query) => {
     return axios.get(`${API_ROOT}${CART_SERVICE}/payment/3dsecure-response${query}`)
 }
 
@@ -29,4 +29,8 @@ export const getBestSeller = () => {
 
 export const getOffers = () => {
     return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
+}
+
+export const getBanks = () => {
+    return axios.get(`${API_ROOT}${CART_SERVICE}/banks`)
 }
