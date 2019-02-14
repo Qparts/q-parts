@@ -27,7 +27,15 @@ export const routes = (isAuth, direction) => [
     },
     {
         path: "/quotation-order",
+        exact: true,
         component: QuotationRequest,
+        redirectTo: '/'
+    },
+    {
+        path: "/quotation-order/confirmation:quotationId?",
+        component: SendRequest,
+        direction: direction,
+        isAuth: isAuth,
         redirectTo: '/'
     },
     {
@@ -103,11 +111,6 @@ export const routes = (isAuth, direction) => [
     {
         path: "/motor-oil",
         component: MotorOil
-    },
-    {
-        path: "/send",
-        component: SendRequest,
-        direction: direction
     },
     {
         path: "/listing",

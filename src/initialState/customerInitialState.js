@@ -49,6 +49,5 @@ export const initialState = {
         pending: [],
         completed: []
     },
-    quotationId: null,
     isModalAddToCart: false
 }

@@ -13,7 +13,6 @@ import * as validations from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
-import { postQuotation } from '../../actions/customerAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
@@ -21,6 +20,7 @@ import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
 import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
+import { postQuotation } from '../../utils/api';
 
 const vehicles = 'vehicles';
 const signin = 'signin';
@@ -48,7 +48,10 @@ class QuotationRequest extends Component {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
 
-		return this.props.postQuotation({ cityId, makeId, customerVehicleId, quotationItems });
+		postQuotation({ cityId, makeId, customerVehicleId, quotationItems })
+			.then(res => {
+				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
+			})
 	}
 
 	handleVehicle = (event) => {
@@ -309,7 +312,6 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		changeFieldValue,
 		getRegions,
-		postQuotation
 	}, dispatch)
 }
 

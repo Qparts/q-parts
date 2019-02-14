@@ -49,6 +49,10 @@
   border-style: none;
 }
 
+.btn-light{
+  background-color: $basic-white;
+}
+
 .btn-facebook {
   background: $white;
   border-radius: side-values(0 0 0 $border-radius-base) !important;
