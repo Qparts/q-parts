@@ -10,6 +10,7 @@ import './CheckoutPayment.css';
 import Table from '../UI/Table';
 import { SmallScreen, MediumScreen } from '../Device/index.js'
 import { years, months, BANK_TRANSFER, CREDIT_CARD, RADIX } from '../../constants';
+import { getBanks } from '../../utils/api';
 
 class CheckoutPayment extends Component {
   constructor(props) {
@@ -46,8 +47,16 @@ class CheckoutPayment extends Component {
       hasRadioButton: true,
       canProceed: false,
       active: '',
-      check: false
+      check: false,
+      banks: []
     }
+    getBanks()
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          banks: res.data
+        });
+      })
     this.submitForm = createRef();
   }
 
@@ -294,27 +303,37 @@ class CheckoutPayment extends Component {
                     </div>
                   </Fragment>) || ((
                     this.state.renderbankTransfer) && <Fragment>
-                      <div id="bank-transfer">
-                        <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
-                        <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
-                        <div>
-                          <div className="d-table product-options">
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
-                              <div className="d-table-cell">Qetaa.com</div>
+                        <div id="bank-transfer">
+                          <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
+                          <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
+                    {this.state.banks.map((item,idx) => {
+                      return <Fragment key={idx}>
+                            <div>
+                              <div className="d-table product-options">
+                                <div className="d-table-row">
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
+                                  <div className="d-table-cell">{item.name}({item.nameAr})</div>
+                                </div>
+                                <div className="d-table-row">
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
+                                  <div className="d-table-cell">{item.account}</div>
+                                </div>
+                                <div className="d-table-row">
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.iban")}</span></div>
+                                  <div className="d-table-cell">{item.iban}</div>
+                                </div>
+                                <div className="d-table-row">
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.owner")}</span></div>
+                                  <div className="d-table-cell">{item.owner}</div>
+                                </div>
+                              </div>
                             </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.number")}</span></div>
-                              <div className="d-table-cell">01000 000 00</div>
-                            </div>
-                            <div className="d-table-row">
-                              <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.code")}</span></div>
-                              <div className="d-table-cell">#01000 000 00</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        </Fragment>
+                      })
+                  }
+                </div>
                     </Fragment>
+
                 )}
             </div>
             <div className="justify-content-between footer-payment">

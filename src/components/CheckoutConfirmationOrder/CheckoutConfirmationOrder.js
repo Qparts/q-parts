@@ -22,7 +22,6 @@ class CheckoutConfirmation extends Component {
     if(props.checkout.paymentMethod === CREDIT_CARD) {
       paymentResponse(this.props.location.search);
     }
-    console.log("aaaaaaaaaaaaaaaaaaaaa",props.purchasedItems)
   }
   componentWillUnmount(){
     this.props.clearCart();
