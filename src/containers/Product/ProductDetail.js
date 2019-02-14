@@ -22,6 +22,7 @@ import {
 import * as validations from '../../utils';
 import { right } from '../../utils';
 import _ from 'lodash';
+import parse from 'html-react-parser';
 
 //dialog
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -385,14 +386,14 @@ class ProductDetail extends Component {
                           onClick={this.showLightbox}
                           alt=""
                         />
-                        <Lightbox
+                        {/* <Lightbox
                           currentImage={this.state.currentImage}
                           images={[{ src: "/img/product-4.jpg" }, { src: "/img/product-3.jpg" }]}
                           isOpen={this.state.lightboxIsOpen}
                           onClose={this.closeLightbox}
                           onClickNext={this.goToNext}
                           onClickPrev={this.gotoPrevious}
-                        />
+                        /> */}
                       </div>
                       <div className="col-12 col-md-7">
                         <div className="product-item_detail">
@@ -450,7 +451,7 @@ class ProductDetail extends Component {
                         <Card className="border">
                           <CardBody>
                             <CardTitle>
-                              {product.details}
+                              {parse(product.details)}
                           </CardTitle>
                             <ListGroup className="product-details-specs">
                               {this.renderSpecs(true)}

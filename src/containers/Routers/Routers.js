@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTranslate } from "react-localize-redux";
 
@@ -11,10 +11,12 @@ import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
-import { selectCountry } from '../../actions/customerAction';
+import { selectCountry, onLogout } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
 import RouterScrollToTop from '../../components/RouterScrollToTop';
 import Nav from '../../components/UI/Nav';
+import moment from 'moment';
+import { clearCart } from '../../actions/cartAction';
 
 class Routes extends Component {
     constructor(props) {
@@ -22,17 +24,28 @@ class Routes extends Component {
 
         const defaultLanguage = props.defaultLang || props.customer.defaultLang;
 
-
-        // props.InitializeDefaultLang(defaultLanguage);
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
         loadStyle(this.props.direction);
     }
     componentDidUpdate = (prevProps, prevState) => {
+        const dateNow = moment();
+        const expireHours = moment(this.props.tokenExpire);
+        const dateDiff = expireHours.diff(dateNow);
+        const hoursLeft = moment(dateDiff).format("h");
+        const oneHourLeft = 1;
+
+        if (hoursLeft === oneHourLeft) {
+            this.props.onLogout();
+            this.props.clearCart();
+        }        
+
         if (prevProps.direction !== this.props.direction) {
             loadStyle(this.props.direction);
         }
+
+
     }
 
     render() {
@@ -82,6 +95,7 @@ const mapStateToProps = state => {
     return {
         customer,
         token: state.customer.token,
+        tokenExpire: state.customer.tokenExpire,
         vehicles: customer.vehicles,
         vehiclesFormat: state.customer.vehiclesFormat,
         selectedVehicle: state.customer.selectedVehicle,
@@ -100,7 +114,9 @@ const mapDispatchToProps = dispatch => {
         // InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
-        selectCountry: (country) => dispatch(selectCountry(country))
+        selectCountry: (country) => dispatch(selectCountry(country)),
+        onLogout: () => dispatch(onLogout()),
+        clearCart: () => dispatch(clearCart()),
     }
 }
 

@@ -5,7 +5,7 @@ import {
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
   COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
-  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART
+  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR, quotations } from '../constants';
@@ -68,6 +68,7 @@ export default function reducer(state = initialState, action) {
         address: initialState.address,
         detail: initialState.detail,
         token: null,
+        tokenExpire: null,
         vehiclesFormat: initialState.vehiclesFormat,
         selectedVehicle: initialState.selectedVehicle,
         registered: initialState.registered
@@ -205,6 +206,9 @@ export default function reducer(state = initialState, action) {
     case MODAL_ADD_TO_CART:
       return { ...state, isModalAddToCart: action.payload }
 
+    case SET_QUOTATION_ORDER:
+      return { ...state, isQuotationorderCompleted: action.payload }
+
     default:
       return state;
   }
@@ -221,8 +225,8 @@ const vehiclesFormat = (vehicles) => {
 }
 
 const getLoginObject = (state, action) => {
-  const { customer, token } = action.payload;
-  return { ...state, detail: customer, token, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
+  const { customer, token, tokenExpire } = action.payload;
+  return { ...state, detail: customer, token, tokenExpire, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
 }
 
 const translate = (error, currentLanguage, defaultLang) => {

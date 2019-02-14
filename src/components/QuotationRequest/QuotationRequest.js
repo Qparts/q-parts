@@ -13,6 +13,7 @@ import * as validations from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
+import { setQuotationOrder } from '../../actions/customerAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
@@ -50,6 +51,7 @@ class QuotationRequest extends Component {
 
 		postQuotation({ cityId, makeId, customerVehicleId, quotationItems })
 			.then(res => {
+				this.props.setQuotationOrder(false);
 				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
 			})
 	}
@@ -312,6 +314,7 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		changeFieldValue,
 		getRegions,
+		setQuotationOrder
 	}, dispatch)
 }
 

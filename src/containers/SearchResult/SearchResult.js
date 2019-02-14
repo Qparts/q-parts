@@ -65,8 +65,8 @@ class SearchResult extends Component {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
-		
-		const { searchGeneral: {filterObjects} } = this.state;
+
+		const { searchGeneral: { filterObjects } } = this.state;
 
 		const query = queryString.parse(search.slice(1));
 		// const keys = Object.keys(query);
@@ -95,6 +95,7 @@ class SearchResult extends Component {
 		const { location: { search }, history, match } = this.props;
 
 		if (search !== prevProps.location.search) {
+			this.setGeneralSearch(search);
 
 		} else if (this.props.params !== prevProps.params) {
 			history.push(`${match.url}${this.props.params}`);
@@ -157,7 +158,7 @@ class SearchResult extends Component {
 		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		
+
 
 		const override = `
             border-color: ${colors.brandColor} !important;

@@ -6,6 +6,7 @@ import Link from '../UI/Link';
 import {
 	ListGroupItem, CardImg
 } from 'reactstrap';
+import parse from 'html-react-parser';
 import { MediumScreen } from '../Device';
 
 class ProductListView extends Component {
@@ -27,8 +28,7 @@ class ProductListView extends Component {
 				</div>
 				<div>
 					<span className="product-details">
-						Motor Oil by ACDelco®. Hot, cold, hard, gentle, fast or slow, ACDelco Engine Oils protect engines under many driving conditions.
-						Using quality base stocks and adhering to the latest American Petroleum Institute (API) more details on - https://www.carid.com/search/motor+oil/code-2d47a51285c634127181a1b18e15919f?queryId=#products
+					{parse(product.details)}
 				</span>
 				</div>
 			</div>

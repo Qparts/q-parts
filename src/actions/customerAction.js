@@ -48,6 +48,7 @@ export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
+export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -571,6 +572,13 @@ export const setPasswordScore = (score) => {
 export const modalAddToCart = (isCompleted) => {
   return {
     type: MODAL_ADD_TO_CART,
+    payload: isCompleted
+  }
+}
+
+export const setQuotationOrder = (isCompleted) => {
+  return {
+    type: SET_QUOTATION_ORDER,
     payload: isCompleted
   }
 }

@@ -50,5 +50,6 @@ export const initialState = {
         pending: [],
         completed: []
     },
-    isModalAddToCart: false
+    isModalAddToCart: false,
+    isQuotationorderCompleted: true
 }
