@@ -45,32 +45,14 @@
             }
           }
         }
-        .btn-primary{
-          background: $light-gray;
-          border-radius: side-values(0 !important);
-          padding: 20px;
-          width: 100%;
-          color: $black;
-          span{
-            @include margin-left(5px);
-            text-transform: capitalize;
-            @include small-screen {
-              display: none;
-              @include font-size(12px);
-            }
-          }
-          i{
-            @include font-size(25px);
-            margin: 0px;
-          }
-        }
-        .cash{
-          padding: 0px;
-          .btn-secondary{
+        .bank-transfer{
+          @include padding-right(0px !important);
+          .btn-primary{
             background: $light-gray;
             border-radius: side-values(0 0 20px 0 !important);
             padding: 20px;
             width: 100%;
+            color: $black;
             span{
               @include margin-left(5px);
               text-transform: capitalize;
@@ -81,6 +63,7 @@
             }
             i{
               @include font-size(25px);
+              margin: 0px;
             }
           }
         }

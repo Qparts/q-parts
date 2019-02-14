@@ -64,7 +64,7 @@ class CheckoutConfirmation extends Component {
             </div>
           </div>
           <div className="CheckoutConfirmation_items card">
-            <div className="col-12">
+            <div className="div-title">
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
             <RenderCartItem

@@ -93,11 +93,6 @@ class CheckoutPayment extends Component {
     this.props.addPaymentMethod({ type: BANK_TRANSFER });
   }
 
-  handleCashOpt = () => {
-    this.setState({ hasNewCard: false, renderCash: true, renderCreditCard: false, canProceed: true })
-    this.props.addPaymentMethod({ type: 'Cash on delivery' });
-  }
-
   handleAddNewCard = () => {
     this.setState({ hasNewCard: true })
   }
@@ -179,10 +174,16 @@ class CheckoutPayment extends Component {
   }
   render() {
     const { translate } = this.props;
+
+    let canSubmit = Object.keys(this.props.checkout.paymentMethod).length>0;
     const styles = {
       grey: {
         backgroundColor: '#f8f9fa'
-      }
+      },
+      disable: {
+       opacity: '0.6',
+       cursor: 'default'
+     }
     }
     // let payment;
     // if(true){
@@ -226,15 +227,11 @@ class CheckoutPayment extends Component {
     ]
     let creditClass = "btn btn-light";
     let banckClass = "btn btn-primary"
-    let cashClass = "btn btn-secondary"
     if (this.state.active === "credit") {
       creditClass += " active";
     }
     if (this.state.active === "banck") {
       banckClass += " active";
-    }
-    if (this.state.active === "cash") {
-      cashClass += " active";
     }
     return (
       <Fragment>
@@ -246,23 +243,17 @@ class CheckoutPayment extends Component {
             <div className="checkout-payment-container">
               <div className="col-12">
                 <div className="payment-methods row">
-                  <div className="col-4 credit-card">
+                  <div className="col-6 credit-card">
                     <Button type="button" className={creditClass} text={translate("checkout.payment.buttons.creditCard")} onClick={() => {
                       this.activeButton('credit');
                       this.handleCreditCardOpt();
                     }} icon="icon-credit-card" isReverseOrder />
                   </div>
-                  <div className="col-4">
+                  <div className="col-6 bank-transfer">
                     <Button type="button" className={banckClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
                       this.activeButton('banck');
                       this.handleBankTransferOpt();
                     }} icon="icon-bank" isReverseOrder />
-                  </div>
-                  <div className="col-4 cash">
-                    <Button type="button" className={cashClass} text={translate("checkout.payment.buttons.cash")} onClick={() => {
-                      this.activeButton('cash');
-                      this.handleCashOpt();
-                    }} icon="icon-cash" isReverseOrder />
                   </div>
                 </div>
               </div>
@@ -329,7 +320,7 @@ class CheckoutPayment extends Component {
               <p>{translate("checkout.payment.canReview")}</p>
               {
                 this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
-                  <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
+                  <Button type="button" style={canSubmit? {} : styles.disable} className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
               }
             </div>
           </div>
