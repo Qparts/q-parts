@@ -6,23 +6,24 @@ import Link from '../../components/UI/Link';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
-import RenderField from '../RenderField/RenderField';
 import SelectInput from '../SelectInput/SelectInput';
 import Button from '../UI/Button';
-import SectionHeader from '../UI/SectionHeader';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
-import RenderFileInput from '../RenderFileInput/RenderFileInput';
-import ShippingCity from '../ShippingCity/ShippingCity';
 import * as validations from '../../utils';
+import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
-import { addQuotationToCart } from '../../actions/cartAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
 import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
 import Vehicles from '../Vehicles/Vehicles';
+import Login from '../../containers/Authentication/Login/Login';
+import { postQuotation } from '../../utils/api';
+
+const vehicles = 'vehicles';
+const signin = 'signin';
 
 class QuotationRequest extends Component {
 	constructor(props) {
@@ -30,44 +31,34 @@ class QuotationRequest extends Component {
 
 		this.state = {
 			modal: false,
+			dialogType: signin
+		}
+
+		if (isAuth(this.props.token)) {
+			this.props.getRegions(this.props.customer.countryId);
 		}
 	}
 
-	componentWillMount() {
-		this.props.getRegions(this.props.customer.countryId);
-		this.handleFillValues(this.props.selectedVehicle);
-	}
-
 	handleSubmit = values => {
-		this.onShowDialog()
+		const { vehicleForm: {
+			vehicle: { make: { id: makeId } }, id: customerVehicleId }, quotationItems: quotationItemsTemp, city: { id: cityId } } = values;
+
+		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
+			quotationItemsTemp.map(quotationCartItem => {
+				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
+			}) : undefined;
+
+		postQuotation({ cityId, makeId, customerVehicleId, quotationItems })
+			.then(res => {
+				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
+			})
 	}
 
-	handleFillValues = (value) => {
-		const make = value.vehicle ? value.vehicle.make.nameAr : '';
-		const model = value.vehicle ? value.vehicle.model.nameAr : '';
-		const year = value.vehicle ? value.vehicle.year : '';
-		const vin = value.vin ? value.vin : '';
-
-		this.props.changeFieldValue('QuotationRequest', 'make', make);
-		this.props.changeFieldValue('QuotationRequest', 'model', model);
-		this.props.changeFieldValue('QuotationRequest', 'year', year);
-		this.props.changeFieldValue('QuotationRequest', 'vin', vin);
-	}
-
-	onHide = (event) => {
-		this.setState({
-			visible: false,
-		});
-	}
-
-	onShowDialog = () => {
-		this.setState({
-			visible: true
-		})
-	}
-
-	handleClick = (event) => {
+	handleVehicle = (event) => {
 		event.preventDefault();
+		this.setState({
+			dialogType: vehicles
+		});
 		this.togglePopup();
 	}
 
@@ -77,53 +68,83 @@ class QuotationRequest extends Component {
 		})
 	}
 
-	onConfirmDialog = values => {
-		const { vehicleForm: {
-			customerId, vehicle: {
-				id: customerVehicleId, make: { id: makeId }, model: { id: modelYearId }
-			} }, vin, vinImage, quotationCartItems: quotationCartItemsTemp } = this.props.formValues;
-		const { city: { id: cityId } } = values;
-		const imageAttached = vinImage ? true : false;
-
-		const quotationCartItems = !_.isEmpty(quotationCartItemsTemp) ?
-			quotationCartItemsTemp.map(quotationCartItem => {
-				return { ...quotationCartItem, imageAttached: quotationCartItem.image ? true : false }
-			}) : undefined;
-
-		// return this.props.addQuotationToCart(
-		// 	{ customerVehicleId, vinImage, customerId, cityId, imageAttached, makeId, modelYearId, vin, quotationCartItems })
-		// 	.then(() => {
-		// 		this.onHide();
-		// 	});
-
+	handleLogin = e => {
+		e.preventDefault();
+		this.setState({
+			dialogType: signin
+		});
+		this.togglePopup();
 	}
 
-	render() {
-		const { handleSubmit, selectedVehicle, translate, direction } = this.props;
-		const dialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-			<ModalHeader toggle={this.togglePopup}>
-				<Title
-					header={translate("dialog.vehicle.title")}
-					subHeader={"Store vehicles in your garage and Get product recommendations"} />
-			</ModalHeader>
-			<ModalBody>
-				<Vehicles
+	getDialogProps = () => {
+		const { translate } = this.props;
+		const { dialogType } = this.state;
+
+		switch (dialogType) {
+			case vehicles:
+				return {
+					header: <Title
+						header={translate("dialog.vehicle.title")}
+						subHeader={"Store vehicles in your garage and Get product recommendations"} />,
+					className: 'garage-popup'
+				}
+			case signin:
+				return {
+					header: <Title header={translate("dialog.signin.title")} />,
+					className: ''
+				}
+			default:
+				break;
+		}
+	}
+	getDialogComponent = () => {
+		const { dialogType } = this.state;
+
+		switch (dialogType) {
+			case vehicles:
+				return <Vehicles
 					toggle={this.togglePopup}
 					direction={this.props.direction}
 				/>
+
+			case signin:
+				return <Login toggle={this.togglePopup} />
+
+			default:
+				break;
+		}
+	}
+
+	render() {
+		const { handleSubmit, translate, direction } = this.props;
+		const dialog = <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+			<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+			<ModalBody>
+				{this.getDialogComponent()}
 			</ModalBody>
 		</Modal>
-		// const dialog = <Dialog header={translate("dialog.shippingCity.title")} visible={this.state.visible} minWidth={500} modal={true} onHide={this.onHide}>
-		// 	<div className="Signup-verification_number">
-		// 		<ShippingCity
-		// 			translate={translate}
-		// 			label={translate("dialog.shippingCity.label")}
-		// 			regions={this.props.regions}
-		// 			onHide={this.onHide}
-		// 			onSubmit={this.onConfirmDialog}
-		// 		/>
-		// 	</div>
-		// </Dialog>
+
+		const regions = this.props.regions ? this.props.regions.map(region => {
+			return {
+				...region,
+				value: region.id,
+				label: region.name
+			}
+		}) : [];
+		const cities = _.has(this.props.formValues, 'region.cities') ?
+			this.props.formValues.region.cities.map(city => {
+				return {
+					...city,
+					label: city.name,
+					value: city.id
+				}
+			}) : [];
+
+		const styles = {
+			footer: {
+				marginTop: isAuth(this.props.token) ? '' : '56px'
+			}
+		}
 		return (
 			<Fragment>
 				<section id="custom-header">
@@ -149,78 +170,45 @@ class QuotationRequest extends Component {
 						</div>
 					</div>
 				</section>
-				<OrderSteps grey="-gs" />
 				<section id="custom-details">
 					<div className="container-fluid">
+						<OrderSteps grey="-gs" />
 						<div className="title-container">
 							<Title header="Parts Request"
 								subHeader="Fill in your vehicle data and the parts you want" />
 						</div>
 						<form onSubmit={handleSubmit(this.handleSubmit)}>
-							<div className="custom-container col-12">
-								<div className="row d-flex">
-									<div className="col-6">
-										<h3>Vehicle Information</h3>
+							{
+								isAuth(this.props.token) &&
+								<div className="custom-container col-12">
+									<div className="row d-flex">
+										<div className="col-6">
+											<h3>Vehicle Information</h3>
+										</div>
+										<div className="col-6 garage-btn-container">
+											<Link
+												to={'#'}
+												isReverseOrder
+												className='btn btn-gray'
+												text='Garage'
+												icon='icon-vehicle'
+												onClick={this.handleVehicle}
+											/>
+										</div>
 									</div>
-									<div className="col-6 garage-btn-container">
-										<Link
-											to={'#'}
-											isReverseOrder
-											className='btn btn-gray'
-											text='Garage'
-											icon='icon-vehicle'
-											onClick={this.handleClick}
-										/>
+									<div className="row">
+										<div className="col-12 select-field-make-container">
+											<Field
+												name="vehicleForm"
+												component={SelectInput}
+												options={this.props.vehiclesFormat}
+												validate={[validations.required]}
+											/>
+
+										</div>
 									</div>
 								</div>
-								<div className="row">
-									<div className="col-12 col-md-3 select-field-make-container">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="select-field-make"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-
-									</div>
-									<div className="col-12 col-md-3 select-field-model-container">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="select-field-model"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-
-									</div>
-									<div className="col-12 col-md-2 select-field-year-container">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="select-field-year"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-
-									</div>
-									<div className="col-12 col-md-4 vin-field-container padding-md-left-6">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="vin-field"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-
-									</div>
-								</div>
-							</div>
-
+							}
 
 							<div className="custom-container col-12">
 								<div className="row d-flex">
@@ -229,63 +217,67 @@ class QuotationRequest extends Component {
 									</div>
 								</div>
 								<FieldArray
-									name="quotationCartItems"
+									name="quotationItems"
 									component={RenderPartInfo}
 									add={translate("quotationRequest.partInfo.add")}
-									deleteButton={
-										<Fragment>
-											<i className="icon-close"></i>
-										</Fragment>
-									}
+									deleteIcon="icon-trash"
 									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
 								/>
 							</div>
+							{
+								isAuth(this.props.token) &&
+								<div className="custom-container col-12">
+									<div className="row d-flex">
+										<div className="col-6">
+											<h3>Shipping Information</h3>
+										</div>
+									</div>
+									<div className="row">
+										<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
+											<Field
+												name="region"
+												component={SelectInput}
+												options={regions}
+												validate={[validations.required]}
+											/>
 
-							<div className="custom-container col-12">
-								<div className="row d-flex">
-									<div className="col-6">
-										<h3>Shipping Information</h3>
+										</div>
+										<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
+											<Field
+												name="city"
+												component={SelectInput}
+												options={cities}
+												validate={[validations.required]}
+											/>
+
+										</div>
 									</div>
 								</div>
+							}
 
-								<div className="row">
-									<div className="col-md-6 col-12 select-country-field-container padding-md-right-0">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="select-country-field"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-
-									</div>
-									<div className="col-md-6 col-12 select-city-field-container padding-md-left-6">
-										<Field
-											defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-											name="vehicleForm"
-											className="select-city-field"
-											component={SelectInput}
-											onChange={(value) => this.handleFillValues(value)}
-											options={this.props.vehiclesFormat}
-										/>
-									</div>
-								</div>
-							</div>
-
-							<div className="col-12 padding-right-0">
+							<div className="col-12 padding-right-0" style={styles.footer}>
 								<div className="row d-flex">
-									<div className="col-6 links">
+									<div className="col-md-6 col-12 links">
 										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
 									</div>
-									<div className="col-6 garage-btn-container padding-md-right-0">
-										<Button type="submit" className="btn btn-primary" text={
-											<Fragment>
-												<span>{translate("general.send")}</span>
-												<i className={`icon-arrow-${right(direction)}`}></i>
-											</Fragment>
-										} />
-									</div>
+									{
+										isAuth(this.props.token) ?
+											<div className="col-md-6 col-12 garage-btn-container padding-md-right-0">
+												<Button type="submit" className="btn btn-primary btn-footer" text={
+													<Fragment>
+														<span>{translate("general.send")}</span>
+														<i className={`icon-arrow-${right(direction)}`}></i>
+													</Fragment>
+												} />
+											</div> :
+											<div className="col-md-6 col-12 btn-continue">
+												<Link
+													to={"#"}
+													className="btn btn-primary btn-footer"
+													text={translate("dialog.continue")}
+													onClick={this.handleLogin} />
+											</div>
+									}
 								</div>
 							</div>
 						</form>
@@ -293,75 +285,6 @@ class QuotationRequest extends Component {
 				</section>
 				{dialog}
 			</Fragment>
-
-			/*
-			<div className="QuotationRequest-container">
-					<p>{translate("quotationRequest.subTitle")}</p>
-					<div className="border rounded">
-						<div className="QuotationRequest-box bg-light navbar-nav">
-							<p>{translate("quotationRequest.carInfo.title")}</p>
-							<div className="QuotationRequest-box_item">
-								<p>{translate("quotationRequest.carInfo.select")}</p>
-								<Field
-									defaultValue={!_.isEmpty(selectedVehicle) ? selectedVehicle : ''}
-									name="vehicleForm"
-									className="QuotationRequest-selectInput"
-									component={SelectInput}
-									onChange={(value) => this.handleFillValues(value)}
-									options={this.props.vehiclesFormat}
-								/>
-							</div>
-							<div className="QuotationRequest-box_item form-group">
-								<Field
-									name="make"
-									component={RenderField}
-									type="text"
-									placeholder={translate("quotationRequest.placeholder.carInfo.vehicle")}
-									validate={[validations.required]}
-								/>
-								<Field
-									name="model"
-									component={RenderField}
-									type="text"
-									placeholder={translate("quotationRequest.placeholder.carInfo.model")}
-									validate={[validations.required]}
-								/>
-								<Field
-									name="year"
-									component={RenderField}
-									type="text"
-									placeholder={translate("quotationRequest.placeholder.carInfo.year")}
-									validate={[validations.required]}
-								/>
-								<Field
-									name="vin"
-									component={RenderField}
-									type="text"
-									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
-								/>
-								<Field
-									name="vinImage"
-									component={RenderFileInput}
-									image='image'
-								/>
-							</div>
-						</div>
-						<div className="QuotationRequest-box bg-light navbar-nav">
-							<p>{translate("quotationRequest.partInfo.title")}</p>
-							<FieldArray
-								name="quotationCartItems"
-								component={RenderPartInfo}
-								add={translate("quotationRequest.partInfo.add")}
-								deleteButton={translate("quotationRequest.partInfo.delete")}
-								placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
-							/>
-						</div>
-					</div>
-					<div className="QuotationRequest-footer">
-						<Button type="submit" className="btn btn-secondary" text={translate("quotationRequest.send")} />
-					</div>
-			</div>
-			*/
 		)
 	}
 }
@@ -374,12 +297,10 @@ const mapStateToProps = (state) => {
 	const customerObj = state.customer;
 
 	return {
-		initialValues: state.manualOrder,
 		customer: customerObj.detail,
+		token: state.customer.token,
 		vehiclesFormat: customerObj.vehiclesFormat,
 		selectedVehicle: customerObj.selectedVehicle,
-		itemName: state.manualOrder.itemName,
-		partsSelected: state.manualOrder.partsSelected,
 		regions: state.api.regions,
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
@@ -391,7 +312,6 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		changeFieldValue,
 		getRegions,
-		addQuotationToCart
 	}, dispatch)
 }
 

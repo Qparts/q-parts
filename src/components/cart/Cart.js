@@ -102,7 +102,7 @@ class Cart extends Component {
 		for(var i = 0 ; i<checkoutData.length ; i++){
 			subtotal +=checkoutData[i].subtotal;
 			quantity +=checkoutData[i].quantity;
-			divItemMovile ="totalFoundData d-lg-none d-flex align-items-stretch"
+			divItemMovile ="totalFoundData d-block d-lg-none d-flex align-items-stretch"
 		}
 		const shipToOptions = [
 			{ value: 1, label: "KSA" },

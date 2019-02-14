@@ -396,7 +396,7 @@
 .sec-header{
   @extend .artical-space;
   h1{
-    font-weight: 500px;
+    font-weight: 500;
     color: $basic-gray;
     @include font-size(40px);
     @include media-breakpoint-down(lg){

@@ -204,6 +204,7 @@ export default function reducer(state = initialState, action) {
 
     case MODAL_ADD_TO_CART:
       return { ...state, isModalAddToCart: action.payload }
+
     default:
       return state;
   }
@@ -214,7 +215,7 @@ const vehiclesFormat = (vehicles) => {
     return {
       ...veh,
       value: veh.id,
-      label: `${veh.vehicle.year} ${veh.vehicle.make.nameAr} ${veh.vehicle.model.nameAr}`
+      label: `${veh.vehicle.year} ${veh.vehicle.make.name} ${veh.vehicle.model.name}`
     }
   });
 }
