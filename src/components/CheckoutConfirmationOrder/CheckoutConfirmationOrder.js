@@ -22,6 +22,7 @@ class CheckoutConfirmation extends Component {
     if(props.checkout.paymentMethod === CREDIT_CARD) {
       paymentResponse(this.props.location.search);
     }
+    console.log("aaaaaaaaaaaaaaaaaaaaa",props.purchasedItems)
   }
   componentWillUnmount(){
     this.props.clearCart();
@@ -35,7 +36,6 @@ class CheckoutConfirmation extends Component {
   render() {
     const { checkout, translate, location, purchasedItems } = this.props;
     const params = getQuery(location);
-
     const checkoutData = purchasedItems.map(item => {
 			return {
 				...item.product,
@@ -50,6 +50,7 @@ class CheckoutConfirmation extends Component {
 				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
+
     let subtotal=0;
 		for(var i = 0 ; i<checkoutData.length ; i++){
 			subtotal +=checkoutData[i].subtotal;
@@ -71,18 +72,18 @@ class CheckoutConfirmation extends Component {
             <p className="title">{translate("checkout.confirm.table.items")}</p>
                 <ul className="cart-items list-unstyled">
                   {
-                    purchasedItems.map((purchasedItem, idx) => {
+                    checkoutData.map((checkoutData, idx) => {
                       return <li key={idx} className="bg-white">
                         <figure className="row">
                           <Link to="#" className="col-3 item-img">
-                            <img src={purchasedItem.product.image} alt="no item" />
+                            <img src={checkoutData.image} alt="no item" />
                           </Link>
                           <figcaption className="col-9">
                             <div className="row">
                               <div className="col-md-9 item-dis">
                                 <header>
-                                  <h3><Link to="#">{purchasedItem.desc}</Link></h3>
-                                  <h4>{purchasedItem.product.brand.name} <span>{purchasedItem.productNumber}</span></h4>
+                                  <h3><Link to="#">{checkoutData.desc}</Link></h3>
+                                  <h4>{checkoutData.brand.name} <span>{checkoutData.productNumber}</span></h4>
                                 </header>
                                 <div className="cart-quantity d-block d-lg-none">
                                   <h5>Quantity</h5>
@@ -91,14 +92,14 @@ class CheckoutConfirmation extends Component {
                                       <button
                                         className="btn btn-gray"
                                         type="button"
-                                        onClick={this.handleClick.bind(this, constant.DECREMENT, purchasedItem.quantity, purchasedItem)}>
+                                        onClick={this.handleClick.bind(this, constant.DECREMENT, checkoutData.quantity, checkoutData)}>
                                         <i className="minus"></i></button>
                                     </div>
-                                    <input disabled className="form-control" value={purchasedItem.quantity} type="text" />
+                                    <input disabled className="form-control" value={checkoutData.quantity} type="text" />
                                     <div className="input-group-append">
                                       <button
                                         className="btn btn-gray" type="button"
-                                        onClick={this.handleClick.bind(this, constant.INCREMENT, purchasedItem.quantity, purchasedItem)}>
+                                        onClick={this.handleClick.bind(this, constant.INCREMENT, checkoutData.quantity, checkoutData)}>
                                         <i className="icon-plus"></i>
                                       </button>
                                     </div>
@@ -107,10 +108,10 @@ class CheckoutConfirmation extends Component {
                               </div>
                               <div className="col-md-3 div-price-quantity">
                                 <div className="cart-product-price">
-                                  <p className="price">{purchasedItem.product.salesPrice} <span>sr</span></p>
+                                  <p className="price">{checkoutData.salesPrice} <span>sr</span></p>
                                 </div>
                                 <div className="cart-quantity d-none d-lg-block">
-                                  <h5>Quantity {purchasedItem.quantity} </h5>
+                                  <h5>Quantity {checkoutData.quantity} </h5>
                                 </div>
                               </div>
                             </div>
