@@ -27,8 +27,12 @@ class CheckoutConfirmation extends Component {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
         .then(res => {
-          window.location = res.data.transactionUrl;
-        })
+          if (res.status === 201) {
+            history.push(`/payment-response?cartId=${res.data.cartId}`)
+          } else if(res.status === 202) {
+            window.location = res.data.transactionUrl;
+          }
+        });
     } else if (paymentMethod === BANK_TRANSFER) {
       const data = { cartItems, addressId }
       postWireTransfer(data)

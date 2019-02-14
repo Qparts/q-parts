@@ -7,10 +7,6 @@ import { postCreditCard, postWireTransfer } from '../../utils/api';
 import { withRouter } from 'react-router-dom';
 
 class OrderSummary extends Component {
-  constructor(props){
-    super(props)
-    console.log
-  }
   handleClick = () => {
     const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
     const addressId = deliveryAddress.id;
@@ -25,9 +21,13 @@ class OrderSummary extends Component {
     if (paymentMethod === CREDIT_CARD) {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
-        .then(res => {
+      .then(res => {
+        if (res.status === 201) {
+          history.push(`/payment-response?cartId=${res.data.cartId}`)
+        } else if(res.status === 202) {
           window.location = res.data.transactionUrl;
-        })
+        }
+      });
     } else if (paymentMethod === BANK_TRANSFER) {
       const data = { cartItems, addressId }
       postWireTransfer(data)

@@ -80,6 +80,7 @@ class CheckoutPayment extends Component {
 
   handleCreditCardOpt = () => {
     const creditCardSelected = this.state.defaultCreditCard !== null ? true : false;
+    this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: null});
     this.setState({ renderCreditCard: true, canProceed: creditCardSelected })
 
     // if (creditCardSelected) {
