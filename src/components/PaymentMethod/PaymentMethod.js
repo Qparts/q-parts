@@ -18,8 +18,8 @@ class PaymentMethod extends Component {
                 <p>{checkout.creditCard.ccName}</p>
               </div>
               <div className="visa-num">
-                <p className="end-number">Number Ending <span>4871</span></p>
-                <p className="expires-date">Expires<span>04/2023</span></p>
+                <p className="end-number">Number Ending <span>{checkout.creditCard.ccNumber.toString().substr(-4)}</span></p>
+                <p className="expires-date">Expires<span>{checkout.creditCard.ccMonth}/{checkout.creditCard.ccYear}</span></p>
               </div>
               <div className="payment-footer">
                 <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
