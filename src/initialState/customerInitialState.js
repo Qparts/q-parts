@@ -23,6 +23,7 @@ export const initialState = {
         longitude: null,
     },
     token: null,
+    tokenExpire: null,
     vehiclesFormat: [],
     selectedVehicle: {},
     selectedCountry: {},
@@ -49,5 +50,6 @@ export const initialState = {
         pending: [],
         completed: []
     },
-    isModalAddToCart: false
+    isModalAddToCart: false,
+    isQuotationorderCompleted: true
 }

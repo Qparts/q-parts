@@ -198,7 +198,7 @@
   }
 }
 .addresses-popup{
-  width: 650px;
+  // width: 650px;
   .modal-content{
     background: $white;
     .modal-header{
@@ -216,6 +216,7 @@
     }
     .modal-body{
       .Address-container{
+        margin-bottom: 44px;
         form{
           margin: 0px;
           .RenderField{
@@ -371,28 +372,25 @@
             margin-top: 10px;
             margin-bottom: 0px;
           }
-          .footer{
-            margin-top: 32px;
-            margin-bottom: 50px;
-            .btn-light{
-              height: auto;
-              background-color: $light-gray;
-              border-radius: side-values(0 0 0 20px) !important;
-              @include box-shadow;
-              width: 18%;
+          .btn-light{
+            height: auto;
+            background-color: $light-gray;
+            border-radius: side-values(0 0 0 20px) !important;
+            @include box-shadow;
+          }
+          .btn-primary{
+            @include margin-left(5px);
+            border-radius: side-values(0 20px 20px 0) !important;
+            height: auto;
+            @include box-shadow;
+            text-align: $right;
+            text-transform: none;
+            i{
+              @include margin-left(10px);
             }
-            .btn-primary{
-              @include margin-left(5px);
-              width: 80%;
-              border-radius: side-values(0 20px 20px 0) !important;
-              height: auto;
-              @include box-shadow;
-              text-align: $right;
-              text-transform: none;
-              i{
-                @include margin-left(10px);
-              }
-            }
+          }
+          .Checkbox{
+            margin-bottom: 30px;
           }
         }
       }
@@ -624,7 +622,7 @@
     }
   }
   .addresses-popup{
-    width: 650px;
+    // width: 650px;
     .modal-content{
       background: $white;
       .modal-header{
@@ -805,11 +803,9 @@
                 background-color: $light-gray;
                 border-radius: side-values(0 0 0 20px) !important;
                 @include box-shadow;
-                width: 18%;
               }
               .btn-primary{
                 @include margin-left(5px);
-                width: 80%;
                 border-radius: side-values(0 20px 20px 0) !important;
                 height: auto;
                 @include box-shadow;

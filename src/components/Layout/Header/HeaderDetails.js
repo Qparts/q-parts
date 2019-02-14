@@ -93,8 +93,8 @@ class HeaderDetails extends Component {
                 <h6>Welcome Back</h6>
                 <ul className="signin-list">
                   <li><a className="btn" href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
-                  <li><a href="#"><i className="icon-facebook" /></a></li>
-                  <li><a href="#"><img src="/img/google-icon.svg"></img></a></li>
+                  {/* <li><a href="#"><i className="icon-facebook" /></a></li>
+                  <li><a href="#"><img src="/img/google-icon.svg"></img></a></li> */}
                 </ul>
                 <p>
                   {translate("dropdown.signup.message")}

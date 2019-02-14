@@ -151,7 +151,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                         <li><a href="#">Cairo</a></li>
                     </ul>
                 </li>
-                <li className="nav-sm"><a className="lang" href="#">العربية</a></li>
+                {/* <li className="nav-sm"><a className="lang" href="#">العربية</a></li> */}
                 <li className="sep"></li>
                 <li className="nav-sm"><a href="#">{translate("nav.shippingAndDelivery")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.returns")}</a></li>

@@ -86,11 +86,6 @@ class Header extends Component {
   }
 
   render() {
-    const shipToOptions = [
-      { value: 1, label: "KSA" },
-      { value: 2, label: "Egypt" },
-      { value: 3, label: "Jordan" }
-    ];
     const formatGroupLabel = () => (
       <div className="placeholder">
         <span>Select city</span>
@@ -124,28 +119,28 @@ class Header extends Component {
                 </div>
                 <div className="col-auto">
                   <ul className="data-setting list-inline ">
-                    <li className="ship-country">
+                    {/* <li className="ship-country">
                       <div className="input-group">
                         <span className="ship-to">Ship to</span>
                         <Select
                           classNamePrefix="select"
                           isSearchable={false}
                           styles={styles.select}
-                          defaultValue={shipToOptions[0]}
+                          defaultValue={"Saudi Arabia"}
                           options={groupedOptions}
                           formatGroupLabel={formatGroupLabel} />
                       </div>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <span className="seperator" />
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
                         changeDefaultDirection={changeDefaultDirection}
                         getCountriesOnly={getCountriesOnly} />
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>

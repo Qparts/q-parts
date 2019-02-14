@@ -66,6 +66,7 @@ class Products extends Component {
       spaceBetween: 30,
       grabCursor: true,
       lazy: true,
+      rebuildOnUpdate: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'

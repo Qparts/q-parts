@@ -107,7 +107,7 @@
   }
 }
 .garage-popup{
-  width: 700px;
+  // width: 700px;
   .modal-content{
     background: $white !important;
     .modal-header{
@@ -123,6 +123,7 @@
   }
   .modal-body{
     #vehicles{
+      margin-bottom: 50px;
       background: $white;
       form{
         .group-shadow-input{
@@ -156,19 +157,16 @@
         .vehicle-radio{
           margin-bottom: 20px;
         }
-        .footer{
-          margin-bottom: 50px;
-          .btn-light{
-            height: auto;
-            background-color: $light-gray;
-            border-radius: side-values(0 0 0 20px) !important;
-            box-shadow: 0px 18px 18px 0px rgba(0, 0, 0, 0.07);
-          }
-          .btn-primary{
-            @include margin-left(5px);
-            border-radius: side-values(0 20px 20px 0) !important;
-            height: auto;
-          }
+        .btn-light{
+          height: auto;
+          background-color: $light-gray;
+          border-radius: side-values(0 0 0 20px) !important;
+          box-shadow: 0px 18px 18px 0px rgba(0, 0, 0, 0.07);
+        }
+        .btn-primary{
+          @include margin-left(5px);
+          border-radius: side-values(0 20px 20px 0) !important;
+          height: auto;
         }
       }
     }

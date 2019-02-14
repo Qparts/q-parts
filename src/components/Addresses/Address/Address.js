@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import './Address.css';
 
 class Address extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       check: false
@@ -99,7 +99,7 @@ class Address extends Component {
 
     let renderButtons =
       <Fragment>
-        <div>
+        <div className="Checkbox">
           <Checkbox
             onChange={e => this.setState({
               check: !this.state.check
@@ -108,9 +108,9 @@ class Address extends Component {
             label={translate("form.address.buttons.defaultAddress")}
           />
         </div>
-        <div className="footer">
-          <Button onClick={onHide} type="reset" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
-          <Button type="submit" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
+        <div className="row">
+          <Button onClick={onHide} type="reset" className="btn btn-light col-3" text={translate("form.address.buttons.cancel")} />
+          <Button type="submit" className="btn btn-primary col-8" text={translate("form.address.buttons.confirm")} />
         </div>
       </Fragment>
 
@@ -143,12 +143,12 @@ class Address extends Component {
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
-                    <div className="col-12 google-map">
-                      <Link to="#" onClick={onShowGoogleMap}>
-                        <img className="main-img" alt="user" src="/img/google-map.svg"/>
-                        <p>{translate("form.address.selectAddress")}</p>
-                      </Link>
-                  </div>
+                  {/* <div className="col-12 google-map">
+                    <Link to="#" onClick={onShowGoogleMap}>
+                      <img className="main-img" alt="user" src="/img/google-map.svg" />
+                      <p>{translate("form.address.selectAddress")}</p>
+                    </Link>
+                  </div> */}
                   <div className="col-md-12 address-title">
                     <Field
                       label={`*${translate("setting.addressBook.addressLine1")}`}

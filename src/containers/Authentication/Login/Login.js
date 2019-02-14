@@ -47,6 +47,7 @@ class Login extends Component {
   }
 
   handleChange = (event) => {
+    this.props.toggle();
     this.props.history.push('/signup')
   };
 

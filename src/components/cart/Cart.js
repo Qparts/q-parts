@@ -149,7 +149,7 @@ class Cart extends Component {
 									<span>Shopping</span> Cart<label>{quantity} Items</label>
 								</h1>
 							</header>
-							<div className="col-auto">
+							{/* <div className="col-auto">
 								<div className="cart-ship-to">
 									<label>Ship to</label>
 									<Select
@@ -159,7 +159,7 @@ class Cart extends Component {
 										defaultValue={shipToOptions[0]}
 										options={shipToOptions} />
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</section>
@@ -207,7 +207,7 @@ class Cart extends Component {
 							</div>
 						</form>
 						<div className="row pt-sec">
-							<div className="col recommended-product">
+							{/* <div className="col recommended-product">
 								<h3>Products Related To Items In Your Cart</h3>
 								<Swiper {...params}>
 									<div>
@@ -331,7 +331,7 @@ class Cart extends Component {
 									</div>
 								</Swiper>
 								<div className="swiper-left"></div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</section>

@@ -1,6 +1,6 @@
 .modal-dialog {
   border-radius: side-values(20px 0 20px 20px) !important;
-  max-width: $max-container-popup;
+  // max-width: $max-container-popup;
   .modal-content {
     @include container-fluid;
     background: $light-gray;
