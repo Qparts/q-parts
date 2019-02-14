@@ -233,6 +233,7 @@
     }
     .btn-primary{
       display: flex !important;
+      z-index: 10;
       div{
         margin-top: 12px;
         @include margin-right(100px);
