@@ -365,28 +365,28 @@ class Setting extends Component {
                   <img className="request" src="/img/request.svg" alt="request" />
                   <div>
                     <p>{translate('setting.request')}</p>
-                    <h1>8</h1>
+                    <h1>{this.props.requests.length}</h1>
                   </div>
                 </i>
                 <i>
                   <img className="orders" src="/img/request.svg" alt="oreder" />
                   <div>
-                    <p>{translate('setting.links.orders')}</p>
-                    <h1>3</h1>
+                    <p>{translate('setting.links.requestCompleted')}</p>
+                    <h1>{this.props.requestCompleted.length}</h1>
                   </div>
                 </i>
                 <i>
                   <img className="wishList" src="/img/request.svg" alt="wishList" />
                   <div>
                     <p>{translate('setting.links.wishlist')}</p>
-                    <h1>1</h1>
+                    <h1>{this.props.wishlist.length}</h1>
                   </div>
                 </i>
                 <i>
                   <img className="garage" src="/img/request.svg" alt="garage" />
                   <div>
                     <p>{translate('setting.links.garage')}</p>
-                    <h1>2<p>{translate('setting.vehicle')}</p></h1>
+                    <h1>{this.props.vehiclesFormat.length}<p>{translate('setting.vehicle')}</p></h1>
                   </div>
                 </i>
               </div>
@@ -699,7 +699,9 @@ const mapStateToProps = (state) => {
     vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
     addresses: state.customer.detail.addresses,
-    direction: state.customer.direction
+    direction: state.customer.direction,
+    requests: state.customer.quotations.pending,
+    requestCompleted: state.customer.quotations.completed
   }
 }
 
