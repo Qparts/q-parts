@@ -97,9 +97,12 @@ class Cart extends Component {
 		});
 		var subtotal=0;
 		var quantity=0;
+		var divItemMovile ="total-sm d-lg-none d-flex align-items-stretch";
+
 		for(var i = 0 ; i<checkoutData.length ; i++){
 			subtotal +=checkoutData[i].subtotal;
 			quantity +=checkoutData[i].quantity;
+			divItemMovile ="totalFoundData d-lg-none d-flex align-items-stretch"
 		}
 		const shipToOptions = [
 			{ value: 1, label: "KSA" },
@@ -162,7 +165,7 @@ class Cart extends Component {
 				</section>
 				<section className="gray-bg pt-sec">
 					<div className="container-fluid">
-						<div className="total-sm d-lg-none d-flex align-items-stretch">
+						<div className={divItemMovile}>
 							<div>
 								<label>{translate("orderSummary.total")}</label>
 								<p>{subtotal + 50}<span className="currency">SR</span></p>

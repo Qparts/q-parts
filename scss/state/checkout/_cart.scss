@@ -172,12 +172,59 @@
     };
   }
 }
+.totalFoundData{
+  background: $white;
+  @include border-radius-div;
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  display: block !important;
+  div:first-child{
+    width: 50%;
+    padding-#{$left}: 15px;
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .btn-primary{
+    width: 100%;
+    text-align: #{$right};
+    text-transform: capitalize;
+    @include font-size(19px);
+    line-height: 27px;
+    border-top-#{$right}-radius: 0 !important;
+    width: 50%;
+    float: #{$right};
+    i{
+      height: 23px;
+      margin-#{$left}: 10px;
+      &:before{
+        @include font-size(23px);
+        top: 2px;
+      }
+    }
+  }
+  p,label{
+    margin-bottom: 0;
+  }
+  label{
+    @include font-size(13px);
+    @include opacity(0.7);
+  }
+  p{
+    @include font-size(17px);
+  }
+  .currency{
+    @include font-size(13px);
+  }
+}
 .total-sm{
   background: $white;
   @include border-radius-div;
   overflow: hidden;
   margin-bottom: 20px;
   margin-top: -20px;
+  display: none !important;
   div:first-child{
     width: 50%;
     padding-#{$left}: 15px;
