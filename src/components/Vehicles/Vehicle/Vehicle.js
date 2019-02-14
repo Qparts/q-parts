@@ -31,10 +31,10 @@ class Vehicle extends Component {
     const vehicleYearId = values.year.id;
     const vin = values.vin;
     this.props.addVehcile({ vehicleYearId, vin })
-    .then(() => {
-      this.props.clearFormDataFromCache('vehicle')
-      this.props.toggle();
-    });
+      .then(() => {
+        this.props.clearFormDataFromCache('vehicle')
+        this.props.toggle();
+      });
   }
 
   onCancle = () => {
@@ -46,7 +46,7 @@ class Vehicle extends Component {
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,
-        label: vehicle.nameAr,
+        label: vehicle.name,
         value: vehicle.id
       }
     });
@@ -55,7 +55,7 @@ class Vehicle extends Component {
       this.props.formValues.make.models.map(model => {
         return {
           ...model,
-          label: model.nameAr,
+          label: model.name,
           value: model.id
         }
       }) : [];
@@ -103,7 +103,9 @@ class Vehicle extends Component {
               placeholder={translate("form.vehicle.vin")}
               component={RenderField}
               type="text"
-              validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
+              maxLength="17"
+              textTransform="uppercase"
+              validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]} />
             <Field
               name="vinImage"
               component={RenderFileInput}
@@ -121,10 +123,8 @@ class Vehicle extends Component {
               label={translate("form.signup.defaultVehicle")}
             />
           </div>
-          <div className="footer col-12">
-            <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-            <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
-          </div>
+          <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
+          <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
         </div>
       </form>
     )

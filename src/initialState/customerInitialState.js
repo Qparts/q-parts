@@ -23,6 +23,7 @@ export const initialState = {
         longitude: null,
     },
     token: null,
+    tokenExpire: null,
     vehiclesFormat: [],
     selectedVehicle: {},
     selectedCountry: {},

@@ -21,7 +21,7 @@ class HomeDetails extends Component {
 									<span className="arrow"><i className="icon-arrow-down" /></span>Start Now
 								</h2>
 							</header>
-							<div className="form-details">
+							{/* <div className="form-details">
 								<form className="col-lg-10 offset-lg-1 box-shadow">
 									<div className="form-row ">
 										<div className="col">
@@ -47,6 +47,7 @@ class HomeDetails extends Component {
 									</div>
 								</form>
 							</div>
+						 */}
 						</div>
 					</section>
 					<section className="main-cat container-fluid">

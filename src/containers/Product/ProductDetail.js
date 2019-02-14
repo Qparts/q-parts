@@ -449,10 +449,9 @@ class ProductDetail extends Component {
                         <h4>{translate("product.detail")}</h4>
                         <Card className="border">
                           <CardBody>
-                            {/* <CardTitle>
-                              RPX800 Tires by Radar®. Season: Summer. Type: Performance, Truck / SUV. The RPX 800/800+ is a sport touring tire that has been designed for compact and mid-size cars.
-                              This range offers drivers good control on both dry and wet roads, ensuring a comfortable driving experience. It combines real-world performance
-                          </CardTitle> */}
+                            <CardTitle>
+                              {product.details}
+                          </CardTitle>
                             <ListGroup className="product-details-specs">
                               {this.renderSpecs(true)}
                             </ListGroup>

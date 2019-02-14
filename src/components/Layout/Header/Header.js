@@ -136,16 +136,16 @@ class Header extends Component {
                           formatGroupLabel={formatGroupLabel} />
                       </div>
                     </li>
-                    <li>
+                    {/* <li>
                       <span className="seperator" />
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
                         changeDefaultDirection={changeDefaultDirection}
                         getCountriesOnly={getCountriesOnly} />
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
               </div>

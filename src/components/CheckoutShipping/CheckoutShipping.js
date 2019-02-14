@@ -211,12 +211,12 @@ class CheckoutShipping extends Component {
                           hasFloatLabel
                           validate={[validations.required]} />
                       </div>
-                      <div className="col-12 google-map">
+                      {/* <div className="col-12 google-map">
                         <Link to="#" onClick={onShowGoogleMap}>
                           <img className="main-img" alt="user" src="/img/google-map.svg" />
                           <p>{translate("form.address.selectAddress")}</p>
                         </Link>
-                      </div>
+                      </div> */}
                       <div className="col-md-12 address-title">
                         <Field
                           label={`*${translate("setting.addressBook.addressLine1")}`}
