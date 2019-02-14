@@ -1071,6 +1071,10 @@
         "أوامر",
         "Orders"
       ],
+      "requestCompleted": [
+        "اكتمل الطلب",
+        "Request Completed"
+      ],
       "helpCenter": [
         "مركز المساعدة",
         "Help center"
