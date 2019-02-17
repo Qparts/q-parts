@@ -46,8 +46,9 @@ class SearchResult extends Component {
 			startSize: 1,
 			endSize: 18,
 		};
-	}
 
+
+	}
 	setGeneralSearch = (search) => {
 		getGeneralSearch(search).then(res => {
 			if(res.data.products.length<18){
@@ -71,36 +72,34 @@ class SearchResult extends Component {
 
 	nextPage = (e) => {
     const params = getQuery(this.props.location);
-		let pagemNumber =Number(params.page);
+		let pageNumber =Number(params.page);
 
 
 		if(this.state.startSize === this.state.resultSize){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
-			pagemNumber += 1;
-			let size = pagemNumber * 18 - 17
+			pageNumber += 1;
+			let size = pageNumber * 18 - 17
 			this.setState({
 				startSize: size,
 				endSize: size + 18 - 1
 			})
 		}
 
-		this.props.history.push(`/listing?query=&page=${pagemNumber}&category=${params.category}`);
-
-		console.log(this.state.searchGeneral.products.length)
+		this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
 	}
 	prevPage = (e) =>{
     const params = getQuery(this.props.location);
-		let pagemNumber = Number(params.page)-1;
-		if(pagemNumber <1 ){
-			pagemNumber =1;
+		let pageNumber = Number(params.page)-1;
+		if(pageNumber <1 ){
+			pageNumber =1;
 		}
-		let size = pagemNumber * 18 - 17
+		let size = pageNumber * 18 - 17
 			this.setState({
 				startSize: size,
 				endSize: size + 18 - 1
 			})
-		this.props.history.push(`/listing?query=&page=${pagemNumber}&category=${params.category}`);
+		this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
 	}
 	componentDidMount() {
 		const { location: { search } } = this.props;
@@ -124,6 +123,19 @@ class SearchResult extends Component {
 				values
 			}
 		}) : [];
+
+		const params = getQuery(this.props.location);
+		let pageNumber =Number(params.page);
+		console.log(this.state.resultSize,this.state.endSize)
+		if(this.state.endSize === this.state.resultSize){
+			this.setState({ startSize:  this.state.resultSize})
+		}else{
+			let size = pageNumber * 18 - 17
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		}
 
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 
@@ -217,13 +229,20 @@ class SearchResult extends Component {
 				</div>
 			)
 
-			let prevBtn = <button className="btn btn-primary col-6 col-md-3" onClick={this.prevPage}>
-				<i className="icon-arrow-left"/>
-				<span>Previous Page</span>
+			let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
+					<span>Next Page</span>
+					<i className="icon-arrow-right"/>
+			</button>
+			let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
+					<i className="icon-arrow-left"/>
+					<span>Previous Page</span>
 			</button>
 
 			if(this.state.startSize <=1){
-				prevBtn ="";
+				btnPrev ="";
+			}
+			if(this.state.endSize === this.state.resultSize){
+				btnNext ="";
 			}
 		return (
 			<Fragment>
@@ -328,14 +347,16 @@ class SearchResult extends Component {
 										</SmallScreen>
 										<div className="right-side-selection">
 											<MediumScreen>
-												<label htmlFor="">Sort by</label>
-												<Select
-													className="select__container"
-													classNamePrefix="select"
-													isSearchable={false}
-													defaultValue={categorySortOptions[0]}
-													options={categorySortOptions}
-													onChange={this.props.handleSelectChange} />
+												<div style={{display: "none"}}>
+													<label htmlFor="">Sort by</label>
+													<Select
+														className="select__container"
+														classNamePrefix="select"
+														isSearchable={false}
+														defaultValue={categorySortOptions[0]}
+														options={categorySortOptions}
+														onChange={this.props.handleSelectChange} />
+												</div>
 											</MediumScreen>
 											<SmallScreen>
 												<span className="seperator" />
@@ -358,11 +379,8 @@ class SearchResult extends Component {
 							<div className="products-panel row">
 								{this.renderProducts()}
 								<div className="footer-button col-12">
-									{prevBtn}
-									<button className="btn btn-primary btn-next col-6 col-md-3" onClick={this.nextPage}>
-										<span>Next Page</span>
-											<i className="icon-arrow-right"/>
-									</button>
+									{btnPrev}
+									{btnNext}
 								</div>
 							</div>
 						</div>
