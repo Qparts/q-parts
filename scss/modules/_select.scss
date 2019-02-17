@@ -57,7 +57,6 @@
     .select__menu-list {
       padding-bottom: 0;
       border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-      @extend .overflow-xy-h;
       .select__option {
         color: $basic-black;
         text-align: $left;

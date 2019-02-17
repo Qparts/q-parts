@@ -9,6 +9,10 @@ export default class SelectInput extends Component {
     getIconClassName = () => {
         return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? 'icon-checked' : '';
     }
+    handleChange = (value) => {
+        this.props.input.onChange(value);
+        this.props.input.onBlur(value);
+    }
     render() {
         const style = StyleSheet.create({
             border: {
@@ -34,8 +38,8 @@ export default class SelectInput extends Component {
                         indicatorSeparator={false}
                         isSearchable={false}
                         value={this.props.input.value || this.props.defaultValue}
-                        onChange={(value) => this.props.input.onChange(value)}
-                        onBlur={() => this.props.input.onBlur(this.props.input.value)}
+                        onChange={this.handleChange}
+                        onBlur={event => event.preventDefault()}
                         options={this.props.options}
                     />
                     <InputGroupAddon addonType="append">

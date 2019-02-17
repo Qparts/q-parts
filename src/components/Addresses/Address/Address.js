@@ -4,12 +4,11 @@ import _ from 'lodash';
 import Button from '../../UI/Button';
 import { connect } from 'react-redux'
 import SelectInput from '../../SelectInput/SelectInput';
+import RenderCheckboxField from '../../UI/RenderCheckboxField';
 import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
-import Checkbox from '../../UI/Checkbox';
-import { Link } from "react-router-dom";
 
 import './Address.css';
 
@@ -46,7 +45,7 @@ class Address extends Component {
         return {
           ...region,
           value: region.id,
-          label: region.nameAr
+          label: region.name
         }
       }) : [];
 
@@ -55,7 +54,7 @@ class Address extends Component {
         return {
           ...city,
           value: city.id,
-          label: city.nameAr
+          label: city.name
         }
       }) : [];
 
@@ -100,11 +99,10 @@ class Address extends Component {
     let renderButtons =
       <Fragment>
         <div className="Checkbox">
-          <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
+          <Field
+            name="defaultAddress"
+            id="defaultAddress"
+            component={RenderCheckboxField}
             label={translate("form.address.buttons.defaultAddress")}
           />
         </div>

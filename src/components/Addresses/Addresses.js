@@ -6,15 +6,13 @@ import Checkbox from '../UI/Checkbox';
 import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Addresses extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      check: false
-    }
+  handleChange = (index, e) => {
+    this.props.changeDefaultAddress(index);
   }
+
   renderAddresses = () => {
     const { translate, addresses } = this.props;
-    if (addresses) {
+    if (addresses.length) {
       return <div id="addresses-container">
         <div className="addresses-header justify-content-between">
           <p> {translate("setting.addressBook.shippingItem")}</p>
@@ -27,10 +25,8 @@ class Addresses extends Component {
             this.props.addresses.map((address, idx) => {
               return <div className="addresses-box_item col-6" key={idx}>
                 <Checkbox
-                  onChange={e => this.setState({
-                    check: !this.state.check
-                  })}
-                  checked={this.state.check}
+                  onChange={this.handleChange.bind(this, idx)}
+                  checked={address.default}
                   label={translate("setting.addressBook.defaultAddress")}
                 />
                 <div className="addresses-box_item-label">

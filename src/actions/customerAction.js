@@ -49,6 +49,7 @@ export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
 export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
+export const CHANGE_DEFAULT_ADDRESS = 'CHANGE_DEFAULT_ADDRESS';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -214,6 +215,13 @@ export const deleteAddress = (values) => {
 export const clearAddress = () => {
   return {
     type: CLEAR_ADDRESS
+  }
+}
+
+export const changeDefaultAddress = (index) => {
+  return {
+    type: CHANGE_DEFAULT_ADDRESS,
+    payload: index
   }
 }
 

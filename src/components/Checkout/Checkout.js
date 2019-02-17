@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -13,8 +13,8 @@ import CheckoutConfirmation from '../CheckoutConfirmation/CheckoutConfirmation';
 import Button from '../UI/Button';
 
 import { SmallScreen, MediumScreen } from '../Device/index.js'
-import CustomerService from '../CustomerService/CustomerService';
-import './Checkout.css';
+
+import _ from 'lodash';
 
 const shippingStep = '/checkout';
 const paymentStep = '/checkout/payment';
@@ -39,12 +39,12 @@ class Checkout extends Component {
 		else if (pathname === shippingStep) this.setState({ header: this.props.translate("checkout.customerTitle") })
 	}
 	onSaveNewAddress = values => {
-		const { line1, line2, zipCode, title, mobile, city } = values;
+		const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
 		const latitude = city.latitude;
 		const longitude = city.longitude;
 		const cityId = city.id;
-		this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile });
-	}
+		this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
+	  }
 
 	componentDidUpdate(prevProps, prevState) {
 		const { pathname } = this.props.location;
@@ -167,12 +167,12 @@ class Checkout extends Component {
 									city={this.props.city}
 									findCity={this.props.findCity}
 									translate={this.props.translate}
-									isDelivery={this.state.isDelivery}
 									defaultAddress={this.props.defaultAddress}
 									addDeliveryAddress={this.props.addDeliveryAddress}
 									onSubmit={this.onSaveNewAddress}
 									addresses={this.props.addresses}
-									completeShipping={this.props.completeShipping} />
+									completeShipping={this.props.completeShipping} 
+									changeDefaultAddress={this.props.changeDefaultAddress}/>
 							}} />
 
 							<Route path="/checkout/payment" exact={true} render={() => {
@@ -238,6 +238,7 @@ const mapDispatchToProps = (dispatch) => {
 		completePayment,
 		incrementQuantity,
 		decrementQuantity,
+		changeDefaultAddress
 	}, dispatch)
 }
 

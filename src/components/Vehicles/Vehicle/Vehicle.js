@@ -14,7 +14,7 @@ import _ from 'lodash';
 import * as validations from '../../../utils';
 import { right } from '../../../utils';
 
-import Checkbox from '../../UI/Checkbox';
+import RenderCheckboxField from '../../UI/RenderCheckboxField';
 
 class Vehicle extends Component {
 
@@ -30,7 +30,8 @@ class Vehicle extends Component {
 
     const vehicleYearId = values.year.id;
     const vin = values.vin;
-    this.props.addVehcile({ vehicleYearId, vin })
+    const defaultVehicle = _.isUndefined(values.defaultVehicle) ? false : values.defaultVehicle;
+    this.props.addVehcile({ vehicleYearId, vin, defaultVehicle })
       .then(() => {
         this.props.clearFormDataFromCache('vehicle')
         this.props.toggle();
@@ -115,16 +116,15 @@ class Vehicle extends Component {
         </div>
         <div className="row no-gutters">
           <div className="col-md-12 align-self-end vehicle-radio">
-            <Checkbox
-              onChange={e => this.setState({
-                check: !this.state.check
-              })}
-              checked={this.state.check}
+            <Field
+              name="defaultVehicle"
+              id="defaultVehicle"
+              component={RenderCheckboxField}
               label={translate("form.signup.defaultVehicle")}
             />
           </div>
           <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-          <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
+          <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} />
         </div>
       </form>
     )

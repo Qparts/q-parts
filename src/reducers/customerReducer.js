@@ -1,11 +1,13 @@
 import { initialState } from '../initialState/customerInitialState';
 import { SubmissionError } from 'redux-form';
+import update from 'immutability-helper';
 import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
   COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
-  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER
+  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER,
+  CHANGE_DEFAULT_ADDRESS
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR, quotations } from '../constants';
@@ -58,6 +60,20 @@ export default function reducer(state = initialState, action) {
 
     case CLEAR_ADDRESS:
       return { ...state, address: initialState.address }
+
+    case CHANGE_DEFAULT_ADDRESS:
+
+      let cloneAddresses = [...state.detail.addresses];
+
+      cloneAddresses.forEach((address, index) => {
+        if (address.default) cloneAddresses[index].default = false;
+      });
+
+      const newDefaultAddress = update(cloneAddresses, {
+        [action.payload]: { default: { $set: true } }
+      })
+
+      return { ...state, detail: { ...state.detail, addresses: newDefaultAddress } }
 
     case LOGIN_SUCCEEDED:
       return getLoginObject(state, action);

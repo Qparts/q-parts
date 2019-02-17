@@ -10,7 +10,8 @@ import SettingLinks from '../../components/SettingLinks/SettingLinks';
 import {
   loadCurrentUser, editName, editPhoneNo, editEmail, editPassword,
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
-  deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests, getCompletedRequests
+  deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests, 
+  getCompletedRequests, changeDefaultAddress
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart, decrementQuantity, incrementQuantity } from '../../actions/cartAction';
@@ -36,13 +37,14 @@ import SideBar from '../../components/SideBar/SideBar';
 import {
   match
 } from '../../utils';
+import _ from 'lodash';
 
 import SectionHeader from '../../components/UI/SectionHeader';
 import {
   quotations, orders, helpCenter, wishlist, garage, accountSetting, addressBook, socialMedia, payment
 } from '../../constants';
 //Modal
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../../components/UI/Title';
 //whatsapp
 import CustomerService from '../../components/CustomerService/CustomerService';
@@ -130,11 +132,11 @@ class Setting extends Component {
   }
 
   onSaveNewAddress = values => {
-    const { line1, line2, zipCode, title, mobile, city } = values;
+    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
     const latitude = city.latitude;
     const longitude = city.longitude;
     const cityId = city.id;
-    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile })
+    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
       .then(() => {
         this.onHide();
       });
@@ -453,7 +455,8 @@ class Setting extends Component {
                             onShowEditDialog={this.handleDialog}
                             onEditAddress={this.handleEditAddress}
                             translate={this.props.translate}
-                            addresses={this.props.addresses} />
+                            addresses={this.props.addresses} 
+                            changeDefaultAddress={this.props.changeDefaultAddress} />
                           {addressDialog}
                         </Fragment>
                       )
@@ -726,7 +729,8 @@ const mapDispatchToProps = (dispatch) => {
     incrementQuantity,
     decrementQuantity,
     getPendingRequests,
-    getCompletedRequests
+    getCompletedRequests,
+    changeDefaultAddress
   }, dispatch)
 }
 
