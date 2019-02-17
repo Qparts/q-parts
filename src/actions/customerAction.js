@@ -50,6 +50,7 @@ export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
 export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
 export const CHANGE_DEFAULT_ADDRESS = 'CHANGE_DEFAULT_ADDRESS';
+export const CHANGE_DEFAULT_VEHICLE = 'CHANGE_DEFAULT_VEHICLE';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -225,6 +226,13 @@ export const changeDefaultAddress = (index) => {
   }
 }
 
+export const changeDefaultVehicle = (index) => {
+  return {
+    type: CHANGE_DEFAULT_VEHICLE,
+    payload: index
+  }
+}
+
 export const login = (email, password, serverErrorField, currentLanguage) => {
   return (dispatch) => {
     let defaultLanguage = null;
@@ -363,9 +371,9 @@ export const resetPassword = (email) => {
   }
 }
 
-export const resetPasswordToken = ({ token }) => {
+export const resetPasswordToken = ({ code }) => {
   return (dispatch) => {
-    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${token}`)
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${code}`)
       .then(() => {
         dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
       }, error => {
@@ -375,8 +383,10 @@ export const resetPasswordToken = ({ token }) => {
 }
 
 export const updatePassword = (data) => {
+  const password = data.password;
+  const token = data.query.code;
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
+    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, { password, token })
       .then((res) => {
         dispatch(
           {

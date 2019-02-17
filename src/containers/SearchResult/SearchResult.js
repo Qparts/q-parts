@@ -62,7 +62,9 @@ class SearchResult extends Component {
 	}
 
 	componentDidMount() {
+		
 		const { location: { search } } = this.props;
+		
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
 
@@ -156,6 +158,7 @@ class SearchResult extends Component {
 			}
 		}
 		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 
@@ -192,7 +195,7 @@ class SearchResult extends Component {
 													<p>{filterObject[key]}</p>
 												</div>
 												<div className="col-3 dropdown-icon">
-													<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
+													<Link to={`${pathname}${search}`} onClick={this.toggle.bind(this, 'collapse1')}>
 														<i className={this.getCollapseIcon('collapse1')} />
 													</Link>
 												</div>

@@ -21,11 +21,6 @@ class Vehicles extends Component {
     this.props.history.push(`${url}/new_vehicle`);
   }
 
-  handleSubmit = values => {
-
-  }
-
-
   render() {
     const { translate, match: { url } } = this.props;
 

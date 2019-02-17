@@ -79,16 +79,15 @@ export const routes = (isAuth, direction) => [
         component: VendorForm,
     },
     {
-        path: "/qtest.fareed9.com/change-email/",
+        path: "/activate-email/:code?/:email?",
         exact: true,
         component: VerifyEmail,
         direction: direction,
     },
     {
-        path: "/activate-email/:code?/:email?",
+        path: "/password/reset-password/:code?/:email?",
         exact: true,
         component: VerifyEmail,
-        direction: direction,
     },
     {
         path: "/checkout",
@@ -120,11 +119,6 @@ export const routes = (isAuth, direction) => [
         path: "/password/forgot-password",
         exact: true,
         component: ForgotPassword
-    },
-    {
-        path: "/password/reset-password/:token?",
-        exact: true,
-        component: VerifyEmail,
     },
     {
         path: "/payment-response:cartId?/:id?/:status?/:message?",

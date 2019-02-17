@@ -3,6 +3,7 @@ import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import Link from '../UI/Link';
+import { handleImageFallback } from '../../utils';
 
 class ProductGridView extends Component {
 	constructor(props) {
@@ -25,7 +26,7 @@ class ProductGridView extends Component {
 				onMouseEnter={this.handleMouseHover}
 				onMouseLeave={this.handleMouseHover}>
 				<div className="image-container" align="center">
-					<img src={product.image} alt="no product" />
+					<img onError={handleImageFallback} src={product.image} alt="no product" />
 					{
 						this.state.isHovering &&
 						<div className="product-buttons">

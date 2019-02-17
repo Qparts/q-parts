@@ -216,6 +216,9 @@
     }
     .modal-body{
       .Address-container{
+        .form-control {
+          height: 55px;
+        }
         margin-bottom: 44px;
         form{
           margin: 0px;
@@ -225,6 +228,7 @@
             }
           }
           .title-address{
+            margin-bottom: 20px;
             .form-control{
               border-radius: side-values(20px 0 0 20px) !important;
               background: $light-gray;
@@ -277,8 +281,12 @@
           .select-input{
             .css-10nd86i{
               width: 100%;
-              padding: 10px;
+              margin-top: auto;
+              padding-bottom: 6px;
               background: $light-gray;
+            }
+            .select__value-container {
+              height: 34px;
             }
           }
           .div-rounded-first{
@@ -304,7 +312,6 @@
           }
           .phone-info{
             margin-top: 25px;
-            margin-bottom: 40px;
             .RenderField{
               width: 100%;
               label{
@@ -648,6 +655,7 @@
               }
             }
             .title-address{
+              margin-bottom: 20px;
               .form-control{
                 border-radius: side-values(20px 0 0 20px) !important;
                 background: $light-gray;
@@ -700,7 +708,7 @@
             .select-input{
               .css-10nd86i{
                 width: 100%;
-                padding: 10px;
+                padding-bottom: 6px;
                 background: $light-gray;
               }
             }
@@ -727,7 +735,6 @@
             }
             .phone-info{
               margin-top: 25px;
-              margin-bottom: 40px;
               .RenderField{
                 width: 100%;
                 label{

@@ -7,8 +7,8 @@ import * as validations from '../../utils';
 import NumberPicker from '../UI/NumberPicker';
 import RenderImage from '../RenderImage/RenderImage';
 // import './RenderCartItem.css';
-import { getLength } from '../../utils/array';
-import * as constant from '../../constants'
+import { getLength, handleImageFallback } from '../../utils';
+import * as constant from '../../constants';
 
 export default class extends Component {
   static defaultProps = {
@@ -67,7 +67,7 @@ export default class extends Component {
                 return <li key={idx} className="bg-white">
                   <figure className="row">
                     <Link to="#" className="col-3 item-img">
-                      <img src={purchasedItem.image} alt="no item" />
+                      <img onError={handleImageFallback} src={purchasedItem.image} alt="no item" />
                     </Link>
                     <figcaption className="col-9">
                       <div className="row">
@@ -100,8 +100,8 @@ export default class extends Component {
                             <p className="price">{purchasedItem.salesPrice} <span>sr</span></p>
                           </div>
                           <div className="cart-actions">
-                            <Link to="#" className="btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
-                            <Link to="#" className="delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
+                            <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
+                            <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
                           </div>
                         </div>
                         <div className="col-md-3">
