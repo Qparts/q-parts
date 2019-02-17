@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
+import { withRouter } from 'react-router-dom';
 import Link from '../UI/Link';
 import {
 	ListGroupItem, CardImg
@@ -13,7 +14,7 @@ import { handleImageFallback } from '../../utils';
 class ProductListView extends Component {
 
 	render() {
-		const { product } = this.props
+		const { product, location:{pathname, search} } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
 				<CardImg onError={handleImageFallback} src={product.image} alt="no product" />
@@ -41,7 +42,7 @@ class ProductListView extends Component {
 				<MediumScreen>
 					<div className="product-buttons">
 						<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
-						<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
+						<Link to={`${pathname}${search}`} className="btn btn-primary btn-cart isDisabled" icons={["icon-cart", "icon-plus"]} />
 					</div>
 				</MediumScreen>
 			</div>
@@ -49,4 +50,4 @@ class ProductListView extends Component {
 	}
 }
 
-export default ProductListView;
+export default withRouter(ProductListView);

@@ -24,7 +24,7 @@ class ProductGridView extends Component {
 		this.props.history.push(`/products/${productId}`)
 	}
 	render() {
-		const { product } = this.props;
+		const { product, location:{pathname, search} } = this.props;
 		return(
 			<Fragment>
 				<MediumScreen>
@@ -39,7 +39,7 @@ class ProductGridView extends Component {
 									this.state.isHovering &&
 									<div className="product-buttons">
 										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
-										<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
+										<Link to={`${pathname}${search}`} className="btn btn-primary btn-cart isDisabled" icons={["icon-cart", "icon-plus"]} />
 									</div>
 								}
 							</div>
