@@ -3,6 +3,7 @@ import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import Link from '../UI/Link';
+import { handleImageFallback } from '../../utils';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ class ProductGridView extends Component {
 							onMouseEnter={this.handleMouseHover}
 							onMouseLeave={this.handleMouseHover}>
 							<div className="image-container" align="center">
-								<img src={product.image} alt="no product" />
+								<img onError={handleImageFallback} src={product.image} alt="no product" />
 								{
 									this.state.isHovering &&
 									<div className="product-buttons">
@@ -61,7 +62,7 @@ class ProductGridView extends Component {
 							className=" product-holder"
 							onClick={() => this.handleClick(product.id)}>
 							<div className="image-container" align="center">
-								<img src={product.image} alt="no product" />
+								<img onError={handleImageFallback} src={product.image} alt="no product" />
 							</div>
 							<div className="details-holder">
 								<span className="part-text">{product.desc}</span><br />

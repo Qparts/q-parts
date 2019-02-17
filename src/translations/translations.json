@@ -1089,7 +1089,7 @@
       ],
       "garage": [
         "مرآبك",
-        "Your garage"
+        "Garage"
       ],
       "accountSetting": [
         "إعدادات الحساب",
@@ -1346,8 +1346,8 @@
     },
     "addressBook": {
       "title": [
-        "دليل العناوين",
-        "Address Book"
+        "عنوان",
+        "Title"
       ],
       "add": [
         "اضف عنوان",

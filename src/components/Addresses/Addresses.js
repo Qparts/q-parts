@@ -26,7 +26,7 @@ class Addresses extends Component {
               return <div className="addresses-box_item col-6" key={idx}>
                 <Checkbox
                   onChange={this.handleChange.bind(this, idx)}
-                  checked={address.default}
+                  checked={address.defaultAddress}
                   label={translate("setting.addressBook.defaultAddress")}
                 />
                 <div className="addresses-box_item-label">
@@ -37,8 +37,8 @@ class Addresses extends Component {
                   <p>{address.mobile}</p>
                 </div>
                 <div className="addresses-footer">
-                  <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
-                  <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder />
+                  <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
+                  <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder />
                 </div>
               </div>
             })}

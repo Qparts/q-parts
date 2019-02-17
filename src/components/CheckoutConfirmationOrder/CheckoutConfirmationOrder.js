@@ -6,7 +6,7 @@ import { SmallScreen, MediumScreen } from '../Device/index.js'
 import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 import _ from 'lodash';
-import { getQuery } from '../../utils/index.js';
+import { getQuery, handleImageFallback } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
@@ -78,7 +78,7 @@ class CheckoutConfirmation extends Component {
                   return <li key={idx} className="bg-white">
                     <figure className="row">
                       <Link to="#" className="col-3 item-img">
-                        <img src={checkoutData.image} alt="no item" />
+                        <img onError={handleImageFallback} src={checkoutData.image} alt="no item" />
                       </Link>
                       <figcaption className="col-9">
                         <div className="row">

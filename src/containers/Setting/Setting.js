@@ -10,8 +10,8 @@ import SettingLinks from '../../components/SettingLinks/SettingLinks';
 import {
   loadCurrentUser, editName, editPhoneNo, editEmail, editPassword,
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
-  deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests, 
-  getCompletedRequests, changeDefaultAddress
+  deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
+  getCompletedRequests, changeDefaultAddress, changeDefaultVehicle
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart, decrementQuantity, incrementQuantity } from '../../actions/cartAction';
@@ -455,7 +455,7 @@ class Setting extends Component {
                             onShowEditDialog={this.handleDialog}
                             onEditAddress={this.handleEditAddress}
                             translate={this.props.translate}
-                            addresses={this.props.addresses} 
+                            addresses={this.props.addresses}
                             changeDefaultAddress={this.props.changeDefaultAddress} />
                           {addressDialog}
                         </Fragment>
@@ -481,9 +481,10 @@ class Setting extends Component {
                       return (
                         <Fragment>
                           <Garage
-                            vehiclesFormat={this.props.vehiclesFormat}
+                            vehicles={this.props.vehicles}
                             onShowVehicleDialog={this.handleShowDialog}
                             onDeleteVehicle={this.handleDeleteVehicle}
+                            changeDefaultVehicle={this.props.changeDefaultVehicle}
                             translate={this.props.translate} />
                           {garageDialog}
                         </Fragment>
@@ -589,7 +590,8 @@ class Setting extends Component {
                       onShowEditDialog={this.handleDialog}
                       onEditAddress={this.handleEditAddress}
                       translate={this.props.translate}
-                      addresses={this.props.addresses} />
+                      addresses={this.props.addresses}
+                      changeDefaultAddress={this.props.changeDefaultAddress} />
                     {addressDialog}
                   </Fragment>
                 )
@@ -614,10 +616,11 @@ class Setting extends Component {
                 return (
                   <Fragment>
                     <Garage
-                      vehiclesFormat={this.props.vehiclesFormat}
+                      vehicles={this.props.vehicles}
                       onShowVehicleDialog={this.handleShowDialog}
                       onDeleteVehicle={this.handleDeleteVehicle}
-                      translate={this.props.translate} />
+                      translate={this.props.translate}
+                      changeDefaultVehicle={this.props.changeDefaultVehicle} />
                     {garageDialog}
                   </Fragment>
                 )
@@ -691,7 +694,7 @@ const mapStateToProps = (state) => {
     address: state.customer.address,
     regions: state.api.regions,
     country: state.api.country,
-    vehicles: state.api.vehicles,
+    vehicles: customer.vehicles,
     city: state.api.city,
     translate: getTranslate(state.localize),
     connectedPlatforms: getConnectedPlatforms(customer.socialMedia),
@@ -730,7 +733,8 @@ const mapDispatchToProps = (dispatch) => {
     decrementQuantity,
     getPendingRequests,
     getCompletedRequests,
-    changeDefaultAddress
+    changeDefaultAddress,
+    changeDefaultVehicle
   }, dispatch)
 }
 

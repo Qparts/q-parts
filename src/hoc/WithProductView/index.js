@@ -69,11 +69,11 @@ const WithProductView = WrappedComponent => {
 			const itemValue = item.value.replace(/ /, '_');
 
 			if (checked && index === -1) {
-				const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
+				// const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
 
 				this.setState({
 					filtration: [...this.state.filtration, value],
-					params: newParams
+					// params: newParams
 				});
 			} else if (index !== -1) {
 				const clone = [...this.state.filtration];
@@ -83,7 +83,7 @@ const WithProductView = WrappedComponent => {
 				newParams.splice(index, 1);
 				this.setState({
 					filtration: clone,
-					params: fixParamsFormat(newParams)
+					// params: fixParamsFormat(newParams)
 				});
 			}
 		}

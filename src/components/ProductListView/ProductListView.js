@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import parse from 'html-react-parser';
 import { MediumScreen } from '../Device';
+import { handleImageFallback } from '../../utils';
 
 class ProductListView extends Component {
 
@@ -15,7 +16,7 @@ class ProductListView extends Component {
 		const { product } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
-				<CardImg src={product.image} alt="no product" />
+				<CardImg onError={handleImageFallback} src={product.image} alt="no product" />
 			</div>
 			<div className="col-9 col-md-5">
 				<h5 className="product-title">{product.desc}</h5>
@@ -28,8 +29,8 @@ class ProductListView extends Component {
 				</div>
 				<div>
 					<span className="product-details">
-					{parse(product.details)}
-				</span>
+						{parse(product.details)}
+					</span>
 				</div>
 			</div>
 			<div className="col-9 offset-3 col-md-4 offset-md-0 last-col">

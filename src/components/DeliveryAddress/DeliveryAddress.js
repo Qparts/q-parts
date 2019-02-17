@@ -19,7 +19,7 @@ class DeliveryAddress extends Component {
            <p>{deliveryAddress.mobile}</p>
          </div>
          <div className="addresses-footer">
-          <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
+          <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder/>
          </div>
          {/* <span className="seperator"></span>
          <p className="footer-delivery">{translate("checkout.payment.cash.estimatedDelivery")}: 6 Aug 2018</p> */}

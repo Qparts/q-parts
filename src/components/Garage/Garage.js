@@ -5,16 +5,14 @@ import './Garage.css'
 import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Garage extends Component {
- constructor(props){
-   super(props);
-   this.state={
-     check: false
-   }
- }
+  handleChange = (index, e) => {
+    this.props.changeDefaultVehicle(index);
+  }
+
  render() {
-  const { translate } = this.props;
+  const { translate, vehicles } = this.props;
   let garage;
-  if(this.props.vehiclesFormat.length>0){
+  if(vehicles.length>0){
     garage = <div id="Garage-container">
      <div className="Garage-add justify-content-between">
        <p>Add View, manage and find parts for the vehicles in your garage</p>
@@ -22,14 +20,12 @@ class Garage extends Component {
      </div>
      <span className="seperator"></span>
      {
-      this.props.vehiclesFormat.map((vehicle, idx) => {
+      this.props.vehicles.map((vehicle, idx) => {
        return <div key={idx} className="Garage-box border rounded row">
-        <div className="Garage-box_item col-6">
+        <div className="Garage-box_item col-12">
           <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
+             onChange={this.handleChange.bind(this, idx)}
+             checked={vehicle.defaultVehicle}
             label="Default Vehicles"
           />
         <div className="Garage-box_item-label">
@@ -37,23 +33,8 @@ class Garage extends Component {
           <p>{vehicle.vin}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
-         </div>
-        </div>
-        <div className="Garage-box_item col-6">
-          <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
-            label="Default Vehicles"
-          />
-        <div className="Garage-box_item-label">
-          <p>{vehicle.label}</p>
-         </div>
-         <div className="Garage-footer">
-          <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
-          <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
+          <Button disabled type="button" className="isDisabled btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
+          <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
          </div>
         </div>
        </div>

@@ -22,7 +22,7 @@ class PaymentMethod extends Component {
                 <p className="expires-date">Expires<span>{checkout.creditCard.ccMonth}/{checkout.creditCard.ccYear}</span></p>
               </div>
               <div className="payment-footer">
-                <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
+                <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
               </div>
             </div>
           </div>
