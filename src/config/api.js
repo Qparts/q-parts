@@ -7,8 +7,7 @@ if (isProduction) {
     backendHost = `https://${proxyHost}`;
 } else {
     proxyHost = 'qtest.fareed9.com'
-    // backendHost = `http://${proxyHost}`;
-    backendHost = `http://localhost:8000`;
+    backendHost = `http://${proxyHost}`;
 }
 
 export const API_ROOT = `${backendHost}/api`;
