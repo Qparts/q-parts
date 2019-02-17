@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react"; // eslint-disable-line no-unused-vars
+import { Link } from "react-router-dom";
 import Swiper from 'react-id-swiper';
+
 export class ManualForm extends Component {
 	componentDidMount = () => {
 		//nav slider
@@ -33,9 +35,23 @@ export class ManualForm extends Component {
 				<Swiper {...params}>
 					<div>
 						<div>
-							<a href="#">
+							<Link to="/listing/query=&page=1&category=9">
 								<img src="/img/slide-1.jpg" />
-							</a>
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div>
+						<Link to="/listing/query=&page=1&category=10">
+								<img src="/img/slide-2.jpg" />
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div>
+							<Link to="/listing/query=&page=1&category=9">
+								<img src="/img/slide-3.jpg" />
+							</Link>
 						</div>
 					</div>
 				</Swiper>
