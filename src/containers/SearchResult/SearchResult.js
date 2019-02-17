@@ -24,6 +24,7 @@ import { MediumScreen, SmallScreen } from '../../components/Device';
 import { getGeneralSearch } from '../../utils/api';
 import { getActiveLanguage } from 'react-localize-redux';
 
+import { right, getQuery } from '../../utils';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -41,14 +42,21 @@ class SearchResult extends Component {
 			selectedView: GRID,
 			searchGeneral: [],
 			loading: true,
+			resultSize: 0,
+			startSize: 1,
+			endSize: 18,
 		};
 	}
 
 	setGeneralSearch = (search) => {
 		getGeneralSearch(search).then(res => {
+			if(res.data.products.length<18){
+				this.setState({endSize: res.data.resultSize})
+			}
 			this.setState({
 				searchGeneral: res.data,
-				loading: false
+				loading: false,
+				resultSize: res.data.resultSize,
 			})
 		});
 	}
@@ -61,6 +69,39 @@ class SearchResult extends Component {
 		this.setState({ selectedView })
 	}
 
+	nextPage = (e) => {
+    const params = getQuery(this.props.location);
+		let pagemNumber =Number(params.page);
+
+
+		if(this.state.startSize === this.state.resultSize){
+			this.setState({ startSize:  this.state.resultSize})
+		}else{
+			pagemNumber += 1;
+			let size = pagemNumber * 18 - 17
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		}
+
+		this.props.history.push(`/listing?query=&page=${pagemNumber}&category=${params.category}`);
+
+		console.log(this.state.searchGeneral.products.length)
+	}
+	prevPage = (e) =>{
+    const params = getQuery(this.props.location);
+		let pagemNumber = Number(params.page)-1;
+		if(pagemNumber <1 ){
+			pagemNumber =1;
+		}
+		let size = pagemNumber * 18 - 17
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		this.props.history.push(`/listing?query=&page=${pagemNumber}&category=${params.category}`);
+	}
 	componentDidMount() {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -176,7 +217,14 @@ class SearchResult extends Component {
 				</div>
 			)
 
+			let prevBtn = <button className="btn btn-primary col-6 col-md-3" onClick={this.prevPage}>
+				<i className="icon-arrow-left"/>
+				<span>Previous Page</span>
+			</button>
 
+			if(this.state.startSize <=1){
+				prevBtn ="";
+			}
 		return (
 			<Fragment>
 				<section id="results-container">
@@ -267,7 +315,7 @@ class SearchResult extends Component {
 								<Card className="col-12">
 									<CardTitle className="d-flex justify-content-between">
 										<MediumScreen>
-											<label htmlFor="">1 - 60 of 200 results</label>
+											<label htmlFor="">{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</label>
 										</MediumScreen>
 										<SmallScreen>
 											<Select
@@ -309,6 +357,13 @@ class SearchResult extends Component {
 							</div>
 							<div className="products-panel row">
 								{this.renderProducts()}
+								<div className="footer-button col-12">
+									{prevBtn}
+									<button className="btn btn-primary btn-next col-6 col-md-3" onClick={this.nextPage}>
+										<span>Next Page</span>
+											<i className="icon-arrow-right"/>
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>

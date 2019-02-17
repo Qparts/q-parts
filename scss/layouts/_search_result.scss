@@ -205,5 +205,34 @@
         }
       }
     }
+    .products-panel{
+      .footer-button{
+        display: flex;
+        .btn-primary{
+          display: flex;
+          text-align: center;
+          border-radius: side-values(20px 0 20px 20px) !important;
+          margin-bottom: 20px;
+          display: block;
+          span{
+            line-height: 25px;
+          }
+          i{
+            @include margin-right(5px);
+            @include margin-left(5px);
+          }
+        }
+        .btn-next{
+          @include margin-left(10px);
+          border-radius: side-values(0 20px 20px 20px) !important;
+          span{
+            @include margin-left(20%);
+          }
+        }
+        .hide-btn{
+          display: none;
+        }
+      }
+    }
   }
 }
