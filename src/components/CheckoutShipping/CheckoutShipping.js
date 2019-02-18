@@ -27,7 +27,7 @@ class CheckoutShipping extends Component {
   }
 
   getDefaultAddress = () => {
-    const findAddress = this.props.addresses.filter(address => address.default);
+    const findAddress = this.props.addresses.filter(address => address.defaultAddress);
 
     return findAddress[0] ? findAddress[0] : {};
   }
@@ -63,6 +63,16 @@ class CheckoutShipping extends Component {
     this.props.changeDefaultAddress(index);
     this.props.addDeliveryAddress(address);
   }
+  handleSubmit = values => {
+		const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+		const latitude = city.latitude;
+		const longitude = city.longitude;
+		const cityId = city.id;
+    this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
+    .then(() => {
+      this.setState({ hasNewAddress: false });
+    })
+	  }
   render() {
     const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses } = this.props;
 
@@ -101,7 +111,7 @@ class CheckoutShipping extends Component {
               return <div className="addresses-box_item col-6" key={idx}>
                 <Radio
                   onChange={this.handleChange.bind(this, address, idx)}
-                  checked={address.default}
+                  checked={address.defaultAddress}
                   label={translate("setting.addressBook.defaultAddress")}
                 />
                 <div className="addresses-box_item-label">
@@ -112,8 +122,8 @@ class CheckoutShipping extends Component {
                   <p>{address.mobile}</p>
                 </div>
                 <div className="addresses-footer">
-                  <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
-                  <Button type="button" className="btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder />
+                  <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
+                  <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder />
                 </div>
               </div>
             })}
@@ -172,12 +182,12 @@ class CheckoutShipping extends Component {
               </Map>
             </div>
           ) :
-            <div className="Address-container">
+            <div className="Address-container col-12 col-md-8">
               <div className="addresses-header justify-content-between ">
                 <p>{translate("setting.addressBook.shippingItem")}</p>
                 <Button type="button" className="btn btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder />
               </div>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(this.handleSubmit)}>
                 {(
                   this.state.hasNewAddress && <div className="row no-gutters">
                     <div className="col-12 title-address">
@@ -198,7 +208,7 @@ class CheckoutShipping extends Component {
                   </div> */}
                     <div className="col-md-12 address-title">
                       <Field
-                        label={`*${translate("setting.addressBook.addressLine1")}`}
+                        label={translate("setting.addressBook.addressLine1")}
                         name="line1"
                         component={RenderField}
                         type="text"
@@ -218,13 +228,13 @@ class CheckoutShipping extends Component {
                     {renderCityRegion}
                     <div className="phone-info col-12">
                       <div className="row">
-                        <div className="phone-number col-6">
+                        <div className="phone-number col-12">
                           <div className="first">
-                            <Field
-                              name="phone"
-                              component={RenderField}
-                              placeholder="+966"
-                              validate={[validations.required]} />
+                            <input
+                              className="form-control"
+                              value={"+966"}
+                              type="text"
+                              readOnly />
                           </div>
                           <Field
                             name="mobile"
@@ -232,12 +242,16 @@ class CheckoutShipping extends Component {
                             placeholder={translate("form.address.phoneNumber")}
                             validate={[validations.required]} />
                         </div>
-                        <div className="zipCode col-6">
-                          <Field
-                            name="zipCode"
-                            component={RenderField}
-                            placeholder={translate("form.address.zipCode")}
-                            validate={[validations.required]} />
+                      </div>
+                      <div className="phone-info col-12">
+                        <div className="row">
+                          <div className="zipCode col-12">
+                            <Field
+                              name="zipCode"
+                              component={RenderField}
+                              placeholder={translate("form.address.zipCode")}
+                              validate={[validations.required]} />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -249,9 +263,9 @@ class CheckoutShipping extends Component {
                         placeholder={translate("form.address.shippingNote")} />
                     </div>
                     <div className="footer col-12">
-                        <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" />
-                        <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
-                      </div>
+                      <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" />
+                      <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
+                    </div>
                   </div>
                 )}
                 {addressItem}

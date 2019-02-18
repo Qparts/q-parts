@@ -21,12 +21,15 @@
       }
     }
     .Address-container{
+      .form-control {
+        height: 55px;
+      }
       .addresses-header{
         display: flex;
         margin-bottom: 3px;
         background: white;
         border-radius: side-values(20px 0 0 0) !important;
-        padding: 10px;
+        padding-bottom: 8px;
         @include large-medium-screens {
           @include margin-right(30px);
         }
@@ -85,6 +88,7 @@
           }
         }
         .title-address{
+          margin-bottom: 20px;
           .form-control{
             border-radius: side-values(20px 0 0 20px) !important;
             background: $light-gray;
@@ -137,8 +141,11 @@
         .select-input{
           .css-10nd86i{
             width: 100%;
-            padding: 10px;
+            padding-bottom: 6px;
             background: $light-gray;
+          }
+          .select__value-container {
+            height: 34px;
           }
         }
         .div-rounded-first{
@@ -148,6 +155,10 @@
               border-radius: side-values(20px 0 0 20px) !important;
               background: $light-gray;
               padding: 12px;
+            }
+            .input-group {
+              height: 49px;
+              top: -2px;
             }
           }
         }
@@ -164,7 +175,6 @@
         }
         .phone-info{
           margin-top: 25px;
-          margin-bottom: 40px;
           .RenderField{
             width: 100%;
             label{

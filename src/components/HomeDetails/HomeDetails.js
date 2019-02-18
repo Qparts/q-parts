@@ -114,31 +114,31 @@ class HomeDetails extends Component {
 						</header>
 						<ul className="list-unstyled row">
 							<li className="oil col-md-4 col-lg-auto">
-								<a href="#">
+								<Link to="/listing?query=&page=1&category=2" >
 									<img src="/img/oil-filter.svg" alt="Premium quality oil for your engine"/>
 									<div className="media-body">
 										<h5>{translate("quotationOrder.oilFilter")}</h5>
 										<p>{translate("quotationOrder.premium")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 							<li className="air col-md-4 col col-lg-auto">
-								<a href="#">
+							<Link to="/listing?query=&page=1&category=3" >
 									<img src="/img/air-filter.svg" alt="Maximize engine  performance"/>
 									<div className="media-body">
 										<h5>{translate("quotationOrder.airFilter")}</h5>
 										<p>{translate("quotationOrder.max")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 							<li className="brake col-md-4 col-lg-auto">
-								<a href="#">
+								<Link to="/listing?query=&page=1&category=6" >
 									<img src="/img/disc-brake.svg" alt="Get trusted stopping  power"/>
 									<div className="media-body">
 										<h5>{translate("quotationOrder.brakePads")}</h5>
 										<p>{translate("quotationOrder.trusted")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</section>

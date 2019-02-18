@@ -38,13 +38,6 @@ class Checkout extends Component {
 		if (pathname === paymentStep) this.setState({ header: this.props.translate("checkout.paymentTitle") })
 		else if (pathname === shippingStep) this.setState({ header: this.props.translate("checkout.customerTitle") })
 	}
-	onSaveNewAddress = values => {
-		const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
-		const latitude = city.latitude;
-		const longitude = city.longitude;
-		const cityId = city.id;
-		this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
-	  }
 
 	componentDidUpdate(prevProps, prevState) {
 		const { pathname } = this.props.location;
@@ -101,9 +94,9 @@ class Checkout extends Component {
 			}
 		});
 
-		let subtotal=0;
-		for(var i = 0 ; i<checkoutData.length ; i++){
-			subtotal +=checkoutData[i].subtotal;
+		let subtotal = 0;
+		for (var i = 0; i < checkoutData.length; i++) {
+			subtotal += checkoutData[i].subtotal;
 		}
 		const total = subtotal + 35;
 
@@ -148,62 +141,62 @@ class Checkout extends Component {
 						</div>
 					</section>
 				</SmallScreen>
-					<div className="Checkout-container container-fluid">
-						<Switch>
-							<Route path="/checkout" exact={true} render={() => {
-								return <CheckoutShipping
-									address={this.props.address}
-									customer={this.props.customer}
-									checkout={this.props.checkout}
-									getRegions={this.props.getRegions}
-									getCountry={this.props.getCountry}
-									regions={this.props.regions}
-									country={this.props.country}
-									confirmUserAddress={this.props.confirmUserAddress}
-									onShowGoogleMap={this.handleShowGoogleMap}
-									onCityFound={this.handleCityFound}
-									showGoogleMap={this.state.showGoogleMap}
-									cityFound={this.state.cityFound}
-									city={this.props.city}
-									findCity={this.props.findCity}
-									translate={this.props.translate}
-									defaultAddress={this.props.defaultAddress}
-									addDeliveryAddress={this.props.addDeliveryAddress}
-									onSubmit={this.onSaveNewAddress}
-									addresses={this.props.addresses}
-									completeShipping={this.props.completeShipping} 
-									changeDefaultAddress={this.props.changeDefaultAddress}/>
-							}} />
+				<div className="Checkout-container container-fluid">
+					<Switch>
+						<Route path="/checkout" exact={true} render={() => {
+							return <CheckoutShipping
+								addAddress={this.props.addAddress}
+								address={this.props.address}
+								customer={this.props.customer}
+								checkout={this.props.checkout}
+								getRegions={this.props.getRegions}
+								getCountry={this.props.getCountry}
+								regions={this.props.regions}
+								country={this.props.country}
+								confirmUserAddress={this.props.confirmUserAddress}
+								onShowGoogleMap={this.handleShowGoogleMap}
+								onCityFound={this.handleCityFound}
+								showGoogleMap={this.state.showGoogleMap}
+								cityFound={this.state.cityFound}
+								city={this.props.city}
+								findCity={this.props.findCity}
+								translate={this.props.translate}
+								defaultAddress={this.props.defaultAddress}
+								addDeliveryAddress={this.props.addDeliveryAddress}
+								addresses={this.props.addresses}
+								completeShipping={this.props.completeShipping}
+								changeDefaultAddress={this.props.changeDefaultAddress} />
+						}} />
 
-							<Route path="/checkout/payment" exact={true} render={() => {
-								return <CheckoutPayment
-									translate={translate}
-									addPaymentMethod={this.props.addPaymentMethod}
-									completePayment={this.props.completePayment}
-									checkout={this.props.checkout} />
-							}} />
-
-							<Route path="/checkout/confirm" exact={true} render={() => {
-								return <CheckoutConfirmation
-									translate={translate}
-									checkout={this.props.checkout}
-									completeOrder={this.props.completeOrder}
-									purchasedItems={checkoutData}
-									incrementQuantity={this.props.incrementQuantity}
-									decrementQuantity={this.props.decrementQuantity}
-									total={total} />
-							}} />
-						</Switch>
-						<div className="Checkout-Order_summary col-12 col-md-3">
-							<OrderSummary
+						<Route path="/checkout/payment" exact={true} render={() => {
+							return <CheckoutPayment
 								translate={translate}
-								isDelivery={canSubmitOrder}
-								submitButton={translate("orderSummary.placeOrder")}
-								checkoutData={checkoutData}
-								purchasedItems={checkoutData}
+								addPaymentMethod={this.props.addPaymentMethod}
+								completePayment={this.props.completePayment}
 								checkout={this.props.checkout} />
-						</div>
+						}} />
+
+						<Route path="/checkout/confirm" exact={true} render={() => {
+							return <CheckoutConfirmation
+								translate={translate}
+								checkout={this.props.checkout}
+								completeOrder={this.props.completeOrder}
+								purchasedItems={checkoutData}
+								incrementQuantity={this.props.incrementQuantity}
+								decrementQuantity={this.props.decrementQuantity}
+								total={total} />
+						}} />
+					</Switch>
+					<div className="Checkout-Order_summary col-12 col-md-3">
+						<OrderSummary
+							translate={translate}
+							isDelivery={canSubmitOrder}
+							submitButton={translate("orderSummary.placeOrder")}
+							checkoutData={checkoutData}
+							purchasedItems={checkoutData}
+							checkout={this.props.checkout} />
 					</div>
+				</div>
 			</section>
 		)
 	}

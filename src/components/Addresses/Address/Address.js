@@ -149,7 +149,7 @@ class Address extends Component {
                   </div> */}
                   <div className="col-md-12 address-title">
                     <Field
-                      label={`*${translate("setting.addressBook.addressLine1")}`}
+                      label={translate("setting.addressBook.addressLine1")}
                       name="line1"
                       component={RenderField}
                       type="text"
@@ -169,13 +169,13 @@ class Address extends Component {
                   {renderCityRegion}
                   <div className="phone-info col-12">
                     <div className="row">
-                      <div className="phone-number col-6">
+                      <div className="phone-number col-12">
                         <div className="first">
-                          <Field
-                            name="phone"
-                            component={RenderField}
-                            placeholder="+966"
-                            validate={[validations.required]} />
+                          <input
+                            className="form-control"
+                            value={"+966"}
+                            type="text"
+                            readOnly />
                         </div>
                         <Field
                           name="mobile"
@@ -183,7 +183,12 @@ class Address extends Component {
                           placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
-                      <div className="zipCode col-6">
+
+                    </div>
+                  </div>
+                  <div className="phone-info col-12">
+                    <div className="row">
+                      <div className="zipCode col-12">
                         <Field
                           name="zipCode"
                           component={RenderField}

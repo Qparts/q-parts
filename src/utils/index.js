@@ -9,3 +9,4 @@ export { upperCaseFirstChar, lowerCaseFirstChar } from './string';
 export { getComponentName } from './components';
 export { left, right, paddingLeft, paddingRight, sideValues } from './directional';
 export { closeNav, toggleSearch } from './nav';
+export { handleImageFallback } from './image';

@@ -13,9 +13,9 @@ class SectionHeader extends Component{
                 <img className="main-img" alt="user" src="/img/user.svg" />
                 <h1>{this.props.text}</h1>
               </div>
-              <div className="signout">
+              {/* <div className="signout">
                 <Button type="submit" className="btn btn-primary" text={translate("setting.signout")} icon="icon-sign-out"/>
-              </div>
+              </div> */}
             </header>
           </div>
         </div>

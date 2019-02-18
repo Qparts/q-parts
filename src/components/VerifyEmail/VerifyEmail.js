@@ -8,8 +8,8 @@ import './VerifyEmail.css';
 import ForgotPassword from '../../containers/Authentication/ForgotPassword/ForgotPassword';
 
 
-const verified = 'V';
 const activateAccountUrl = '/activate-email';
+const resetPasswordUrl = '/password/reset-password';
 
 class VerifyEmail extends Component {
     constructor(props) {
@@ -17,23 +17,22 @@ class VerifyEmail extends Component {
 
         this.state = {
             paramsKeys: Object.keys(getQuery(this.props.location)),
-            verified: null
         }
 
-        if (this.props.match.url === activateAccountUrl) {
+        if (this.isActivateAccountUrl()) {
             this.props.onAccountVerify(getQuery(this.props.location));
-        } else {
+        } else if (this.isResetPasswordUrl()) {
             this.props.resetPasswordToken(getQuery(this.props.location));
         }
 
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (this.props.customer.status !== prevProps.customer.status) {
-            this.setState({
-                verified: this.props.customer.status === verified
-            })
-        }
+    isActivateAccountUrl = () => {
+        return this.props.match.url === activateAccountUrl ? this.hasValidKeys(['code', 'email']) : false;
+    }
+
+    isResetPasswordUrl = () => {
+        return this.props.match.url === resetPasswordUrl ? this.hasValidKeys(['code', 'email']) : false;
     }
 
     hasValidKeys = (keys) => {
@@ -44,41 +43,23 @@ class VerifyEmail extends Component {
         return bool;
     }
 
-    renderAccountValidated = (verified) => {
-        if (verified) {
-            return (
-                <ForgotPassword direction={this.props.direction} />
-            );
-        } else {
-            return <Redirect to="/" />;
-        }
-
-    };
-
     render() {
-        if (this.props.match.url === activateAccountUrl) {
-            return (
-                this.hasValidKeys(['token', 'email']) ? this.renderAccountValidated(this.state.verified) : <Redirect to="/" />
-            )
+        
+        if (this.isActivateAccountUrl()) {
+            return <Redirect to="/" />
+        } else if (this.isResetPasswordUrl()) {
+            return <ForgotPassword direction={this.props.direction} />
         } else {
-            return (
-                this.hasValidKeys(['token']) ? this.renderAccountValidated(true) : <Redirect to="/" />
-            )
+            return <Redirect to="/" />
         }
-    }
-}
-
-const mapStateToProps = state => {
-    return {
-        customer: state.customer.detail
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         onAccountVerify: (query) => dispatch(onAccountVerify(query)),
-        resetPasswordToken: (token) => dispatch(resetPasswordToken(token))
+        resetPasswordToken: (code) => dispatch(resetPasswordToken(code))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(VerifyEmail);
+export default connect(null, mapDispatchToProps)(VerifyEmail);

@@ -9,6 +9,7 @@ import { BEST_SELLER, OFFERS } from '../../constants';
 import Swiper from 'react-id-swiper';
 import { getLength } from '../../utils/array';
 import { getBestSeller, getOffers } from '../../utils/api';
+import { handleImageFallback } from '../../utils';
 
 class Products extends Component {
   constructor(props) {
@@ -114,7 +115,7 @@ class Products extends Component {
                   bestSeller.map((product, idx) => (
                     <div key={idx}>
                       <Link to={`/products/${product.id}`} className="card">
-                        <img src={product.image} className="card-img-top" alt="no product" />
+                        <img onError={handleImageFallback} src={product.image} className="card-img-top" alt="no product" />
                         <div className="card-body">
                           <h5 className="card-title">{product.desc}</h5>
                           <ul className="list-inline product-info">

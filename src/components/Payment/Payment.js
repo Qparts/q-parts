@@ -41,7 +41,7 @@ class Payment extends Component {
          <p className="expires-date">Expires<span>04/2023</span></p>
        </div>
        <div className="payment-footer">
-        <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
+        <Button disabled type="button" className="isDisabled btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
        </div>
       </div>
       <div className="col-1">
@@ -64,8 +64,8 @@ class Payment extends Component {
           <p className="expires-date">Expires<span>04/2023</span></p>
         </div>
        <div className="payment-footer">
-        <Button type="button" className="btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
-        <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
+        <Button disabled type="button" className="isDisabled btn btn-gray" text="Edit" icon="icon-edit" isReverseOrder/>
+        <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
        </div>
       </div>
      </div>

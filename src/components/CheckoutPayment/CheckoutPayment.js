@@ -133,6 +133,7 @@ class CheckoutPayment extends Component {
         <Field
           label={cardNumber}
           name="ccNumber"
+          maxLength="16"
           component={RenderField}
           type="text"
           placeholder={translate("checkout.payment.creditCard.newCard.enterCardNo")}
