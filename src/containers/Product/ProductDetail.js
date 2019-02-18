@@ -159,6 +159,7 @@ class ProductDetail extends Component {
     //width screen
     let width = window.innerWidth;
     const item = { ...this.state.product, quantity };
+    console.log(item)
     this.props.addToCart(item);
     if (width > 992) {
       this.handleDialog('addProduct', item)

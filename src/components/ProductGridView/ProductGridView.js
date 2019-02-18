@@ -5,13 +5,19 @@ import { getLength } from '../../utils/array';
 import Link from '../UI/Link';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
+import { getProduct } from '../../utils/api';
+import { addToCart } from '../../actions/cartAction';
+import { connect } from 'react-redux';
 
 class ProductGridView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isHovering: false
-		};
+			isHovering: false,
+      product: {},
+			loading: true,
+    }
+
 	}
 
 	handleMouseHover = () => {
@@ -22,6 +28,12 @@ class ProductGridView extends Component {
 	handleClick = (productId) => {
 		this.props.history.push(`/products/${productId}`)
 	}
+	submit = (product) => {
+		var  quantity  = this.props.initialValues.quantity;
+    const item = { product, quantity };
+		console.log(item)
+    this.props.addToCart(item);
+  }
 	render() {
 		const { product } = this.props;
 		return(
@@ -38,7 +50,7 @@ class ProductGridView extends Component {
 									this.state.isHovering &&
 									<div className="product-buttons">
 										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
-										<Link to='#' className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
+										<i className="btn btn-primary btn-cart" onClick={()=>this.submit(product)}><i className="icon-cart"/><i className="icon-plus"/></i>
 									</div>
 								}
 							</div>
@@ -81,4 +93,19 @@ class ProductGridView extends Component {
 	}
 }
 
-export default withRouter(ProductGridView);
+const mapStateToProps = state => {
+  return {
+    initialValues: { quantity: 1 },
+    products: state.api.products,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (item) => dispatch(addToCart(item)),
+  }
+}
+
+ProductGridView = withRouter(ProductGridView);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductGridView);
