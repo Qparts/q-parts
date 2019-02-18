@@ -453,7 +453,7 @@ class ProductDetail extends Component {
                         <Card className="border">
                           <CardBody>
                             <CardTitle>
-                              {parse(product.details)}
+                              {parse(_.isNull(null)? "" : product.detail)}
                             </CardTitle>
                             <ListGroup className="product-details-specs">
                               {this.renderSpecs(true)}

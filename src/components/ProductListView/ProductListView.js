@@ -10,11 +10,12 @@ import {
 import parse from 'html-react-parser';
 import { MediumScreen } from '../Device';
 import { handleImageFallback } from '../../utils';
+import _ from 'lodash';
 
 class ProductListView extends Component {
 
 	render() {
-		const { product, location:{pathname, search} } = this.props
+		const { product, location: { pathname, search } } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
 				<CardImg onError={handleImageFallback} src={product.image} alt="no product" />
@@ -30,7 +31,7 @@ class ProductListView extends Component {
 				</div>
 				<div>
 					<span className="product-details">
-						{parse(product.details)}
+						{parse(_.isNull(product.details) ? "" : product.detail)}
 					</span>
 				</div>
 			</div>
