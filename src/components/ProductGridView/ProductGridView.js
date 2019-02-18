@@ -6,14 +6,68 @@ import Link from '../UI/Link';
 import { handleImageFallback } from '../../utils';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
+import { getProduct } from '../../utils/api';
+import { addToCart } from '../../actions/cartAction';
+import { connect } from 'react-redux';
+
+//dialog
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import AddProduct from "../../containers/Product/AddProductPopup/AddProduct";
+import { modalAddToCart } from '../../actions/customerAction';
 
 class ProductGridView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isHovering: false
-		};
+			isHovering: false,
+      product: {},
+			loading: true,
+			modal: true,
+      data: [],
+			dialogType: "addProduct"
+    }
+
 	}
+	componentWillMount() {
+      this.props.modalAddToCart(false);
+  }
+	handleDialog = (dialogType, data) => {
+    this.setState({
+      dialogType,
+      data: data
+    });
+    this.togglePopup(data);
+  };
+
+  togglePopup = (data) => {
+    this.props.modalAddToCart(this.state.modal);
+    this.setState({modal:!this.state.modal})
+
+  }
+
+  getDialogProps = () => {
+    const { dialogType } = this.state;
+    switch (dialogType) {
+      case 'addProduct':
+        return {
+          header:
+            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
+        }
+      default:
+        break;
+    }
+  }
+
+  getDialogComponent = () => {
+    const { dialogType } = this.state;
+
+    switch (dialogType) {
+      case 'addProduct':
+        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
+      default:
+        break;
+    }
+  }
 
 	handleMouseHover = () => {
 		this.setState({
@@ -23,8 +77,26 @@ class ProductGridView extends Component {
 	handleClick = (productId) => {
 		this.props.history.push(`/products/${productId}`)
 	}
+	submit = (product) => {
+		var  quantity  = this.props.initialValues.quantity;
+    const item = { ...product, quantity };
+    this.props.addToCart(item);
+		this.handleDialog('addProduct', item)
+  }
 	render() {
 		const { product, location:{pathname, search} } = this.props;
+		let header = <span><span> Item</span> Added To Cart</span>
+			let dialog;
+			if(this.state.data.quantity){
+				dialog = (
+		      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+		        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+		        <ModalBody>
+		          {this.getDialogComponent()}
+		        </ModalBody>
+		      </Modal>
+		    );
+			}
 		return(
 			<Fragment>
 				<MediumScreen>
@@ -39,7 +111,7 @@ class ProductGridView extends Component {
 									this.state.isHovering &&
 									<div className="product-buttons">
 										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
-										<Link to={`${pathname}${search}`} className="btn btn-primary btn-cart isDisabled" icons={["icon-cart", "icon-plus"]} />
+										<Link to={`${pathname}${search}`} onClick={()=>this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 									</div>
 								}
 							</div>
@@ -54,6 +126,7 @@ class ProductGridView extends Component {
 								<span className="product-currency">SR</span>
 							</div>
 						</div>
+						{dialog}
 					</div>
 				</MediumScreen>
 				<SmallScreen>
@@ -82,4 +155,22 @@ class ProductGridView extends Component {
 	}
 }
 
-export default withRouter(ProductGridView);
+const mapStateToProps = state => {
+  return {
+    initialValues: { quantity: 1 },
+    direction: state.customer.direction,
+    isModalAddToCart: state.customer.isModalAddToCart,
+    token: state.customer.token
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: (item) => dispatch(addToCart(item)),
+    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+  }
+}
+
+ProductGridView = withRouter(ProductGridView);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductGridView);
