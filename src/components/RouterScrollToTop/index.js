@@ -9,8 +9,9 @@ class RouterScrollToTop extends Component {
         }
     }
 
-    componentDidUpdate(nextProps) {
-        if(this.props.location.pathname !== nextProps.location.pathname) {
+    componentDidUpdate(prevProps) {
+        const { location: { search } } = this.props;
+        if(this.props.location.pathname !== prevProps.location.pathname || search !== prevProps.location.search) {
             window.scrollTo(0, 0);
         }
     }
