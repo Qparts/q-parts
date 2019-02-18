@@ -23,7 +23,7 @@ class ProductGridView extends Component {
       product: {},
 			loading: true,
 			modal: true,
-      product: [],
+      data: [],
 			dialogType: "addProduct"
     }
 
@@ -34,7 +34,7 @@ class ProductGridView extends Component {
 	handleDialog = (dialogType, data) => {
     this.setState({
       dialogType,
-      product: data
+      data: data
     });
     this.togglePopup(data);
   };
@@ -43,7 +43,6 @@ class ProductGridView extends Component {
     this.props.modalAddToCart(this.state.modal);
     this.setState({modal:!this.state.modal})
 
-			console.log(data,this.state.product)
   }
 
   getDialogProps = () => {
@@ -52,7 +51,7 @@ class ProductGridView extends Component {
       case 'addProduct':
         return {
           header:
-            <span><span>{this.state.product.quantity} Item</span> Added To Cart</span>
+            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
         }
       default:
         break;
@@ -64,7 +63,7 @@ class ProductGridView extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.product} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
+        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
       default:
         break;
     }
@@ -88,7 +87,7 @@ class ProductGridView extends Component {
 		const { product, location:{pathname, search} } = this.props;
 		let header = <span><span> Item</span> Added To Cart</span>
 			let dialog;
-			if(this.state.product.quantity){
+			if(this.state.data.quantity){
 				dialog = (
 		      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
 		        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>

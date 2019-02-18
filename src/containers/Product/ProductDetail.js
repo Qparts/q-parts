@@ -20,6 +20,7 @@ import {
 } from 'reactstrap';
 
 import * as validations from '../../utils';
+import { handleImageFallback } from '../../utils';
 import { right } from '../../utils';
 import _ from 'lodash';
 import parse from 'html-react-parser';
@@ -92,7 +93,7 @@ class ProductDetail extends Component {
 
   togglePopup = () => {
     this.props.modalAddToCart(this.state.modal);
-    this.setState({modal:!this.state.modal})
+    this.setState({ modal: !this.state.modal })
   }
 
   getDialogProps = () => {
@@ -113,7 +114,7 @@ class ProductDetail extends Component {
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
+        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup} />
       default:
         break;
     }
@@ -146,7 +147,7 @@ class ProductDetail extends Component {
           data: res.data
         })
       })
-      this.props.modalAddToCart(false);
+    this.props.modalAddToCart(false);
   }
 
   closeLightbox = () => {
@@ -240,7 +241,7 @@ class ProductDetail extends Component {
         </div>
       </div>
       <div className="col-3 btn btn-wishlist pt-18">
-        <Link to="#" className="btn btn-primary" icon="icon-heart" />
+        <Link to="#" className="isDisabled btn btn-primary" icon="icon-heart" />
       </div>
     </div>
   }
@@ -384,6 +385,7 @@ class ProductDetail extends Component {
                           style={commonStyles.cursor}
                           src={product.image}
                           onClick={this.showLightbox}
+                          onError={handleImageFallback}
                           alt=""
                         />
                         {/* <Lightbox
@@ -452,7 +454,7 @@ class ProductDetail extends Component {
                           <CardBody>
                             <CardTitle>
                               {parse(product.details)}
-                          </CardTitle>
+                            </CardTitle>
                             <ListGroup className="product-details-specs">
                               {this.renderSpecs(true)}
                             </ListGroup>
@@ -552,7 +554,7 @@ class ProductDetail extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="col-12 col-md-4" style={{display:"none"}}>
+                  <div className="col-12 col-md-4" style={{ display: "none" }}>
                     {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
                   </div>
                   <div className="col-12 q-display-small">
