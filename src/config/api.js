@@ -1,7 +1,7 @@
 let backendHost;
 let proxyHost = 'www.q.parts';
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.REACT_APP_NODE_ENV === 'production';
 
 if (isProduction) {
     backendHost = `https://${proxyHost}`;

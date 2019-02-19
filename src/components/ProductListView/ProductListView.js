@@ -31,7 +31,7 @@ class ProductListView extends Component {
 				</div>
 				<div>
 					<span className="product-details">
-						{parse(_.isNull(product.details) ? "" : product.detail)}
+						{parse(_.isNull(product.details) ? "" : product.details)}
 					</span>
 				</div>
 			</div>

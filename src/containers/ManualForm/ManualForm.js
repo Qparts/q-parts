@@ -35,21 +35,21 @@ export class ManualForm extends Component {
 				<Swiper {...params}>
 					<div>
 						<div>
-							<Link to="/listing/query=&page=1&category=9">
+							<Link to="/listing?query=&page=1&category=9">
 								<img src="/img/slide-1.jpg" />
 							</Link>
 						</div>
 					</div>
 					<div>
 						<div>
-						<Link to="/listing/query=&page=1&category=10">
+						<Link to="/listing?query=&page=1&category=10">
 								<img src="/img/slide-2.jpg" />
 							</Link>
 						</div>
 					</div>
 					<div>
 						<div>
-							<Link to="/listing/query=&page=1&category=9">
+							<Link to="/listing?query=&page=1&category=9">
 								<img src="/img/slide-3.jpg" />
 							</Link>
 						</div>
