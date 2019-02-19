@@ -49,7 +49,21 @@ class SearchResult extends Component {
 
 
 	}
+	quantityProducts = () => {
+		const params = getQuery(this.props.location);
+		let pageNumber =Number(params.page);
+		if(this.state.endSize === this.state.resultSize && this.state.startSize !==1){
+			this.setState({ startSize:  this.state.resultSize})
+		}else{
+			let size = pageNumber * 18 - 17
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		}
+	}
 	setGeneralSearch = (search) => {
+		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if(res.data.products.length<18){
 				this.setState({endSize: res.data.resultSize})
@@ -74,7 +88,6 @@ class SearchResult extends Component {
     const params = getQuery(this.props.location);
 		let pageNumber =Number(params.page);
 
-
 		if(this.state.startSize === this.state.resultSize){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
@@ -85,8 +98,11 @@ class SearchResult extends Component {
 				endSize: size + 18 - 1
 			})
 		}
-
-		this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
+		if(params.category !== undefined){
+			this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
+		}else{
+			this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
+		}
 	}
 	prevPage = (e) =>{
     const params = getQuery(this.props.location);
@@ -99,12 +115,16 @@ class SearchResult extends Component {
 				startSize: size,
 				endSize: size + 18 - 1
 			})
-		this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
+			if(params.category !== undefined){
+				this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
+			}else{
+				this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
+			}
 	}
 	componentDidMount() {
-		
+
 		const { location: { search } } = this.props;
-		
+
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
 
@@ -126,18 +146,7 @@ class SearchResult extends Component {
 			}
 		}) : [];
 
-		const params = getQuery(this.props.location);
-		let pageNumber =Number(params.page);
-		console.log(this.state.resultSize,this.state.endSize)
-		if(this.state.endSize === this.state.resultSize){
-			this.setState({ startSize:  this.state.resultSize})
-		}else{
-			let size = pageNumber * 18 - 17
-			this.setState({
-				startSize: size,
-				endSize: size + 18 - 1
-			})
-		}
+		this.quantityProducts();
 
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 
