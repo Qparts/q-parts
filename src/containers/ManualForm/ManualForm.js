@@ -36,21 +36,35 @@ export class ManualForm extends Component {
 					<div>
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
-								<img src="/img/slide-1.jpg" />
+								<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1.jpg" />
 							</Link>
 						</div>
 					</div>
 					<div>
 						<div>
 						<Link to="/listing?query=&page=1&category=10">
-								<img src="/img/slide-2.jpg" />
+								<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2.jpg" />
 							</Link>
 						</div>
 					</div>
 					<div>
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
-								<img src="/img/slide-3.jpg" />
+								<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3.jpg" />
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div>
+							<Link to="/quotation-order">
+								<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4.jpg" />
+							</Link>
+						</div>
+					</div>
+					<div>
+						<div>
+							<Link to="/listing?query=&page=1&category=1">
+								<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5.jpg" />
 							</Link>
 						</div>
 					</div>
