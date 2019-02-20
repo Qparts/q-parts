@@ -134,13 +134,13 @@ class Header extends Component {
                     {/* <li>
                       <span className="seperator" />
                     </li> */}
-                    {/* <li>
+                    <li>
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
                         changeDefaultDirection={changeDefaultDirection}
                         getCountriesOnly={getCountriesOnly} />
-                    </li> */}
+                    </li>
                   </ul>
                 </div>
               </div>

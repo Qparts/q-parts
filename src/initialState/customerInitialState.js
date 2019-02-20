@@ -45,7 +45,7 @@ export const initialState = {
     registered: null,
     isShippingCompleted: false,
     isPaymentCompleted: false,
-    defaultLang: 'en',
+    defaultLang: 'ar',
     quotations: {
         pending: [],
         completed: []

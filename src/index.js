@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
-import '../scss/main/main.scss';
-// import '../scss/main-ar/main-ar.scss';
+// import '../scss/main/main.scss';
+import '../scss/main-ar/main-ar.scss';
 
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
@@ -19,10 +19,10 @@ class Root extends React.Component {
   constructor(props) {
     super(props);
 
-    store.dispatch(InitializeDefaultLang('en'))
+    store.dispatch(InitializeDefaultLang(store.getState().customer.defaultLang))
 
     this.state = {
-      direction: 'ltr',
+      direction: store.getState().customer.direction,
       customer: store.getState().customer,
       defaultLang: store.getState().customer.defaultLang,
       translate: getTranslate(store.getState().localize),
@@ -46,7 +46,7 @@ class Root extends React.Component {
           <DirectionProvider direction={this.state.direction}>
             <LocalizeProvider store={store}>
               <ErrorBoundary>
-                  <Routes />
+                  <Routes direction={this.state.direction}/>
               </ErrorBoundary>
             </LocalizeProvider>
           </DirectionProvider>

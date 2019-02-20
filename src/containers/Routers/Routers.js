@@ -39,7 +39,7 @@ class Routes extends Component {
         if (hoursLeft === oneHourLeft) {
             this.props.onLogout();
             this.props.clearCart();
-        }        
+        }
 
         if (prevProps.direction !== this.props.direction) {
             loadStyle(this.props.direction);
@@ -111,7 +111,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
-        // InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
+        InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country)),
