@@ -24,7 +24,7 @@ import { MediumScreen, SmallScreen } from '../../components/Device';
 import { getGeneralSearch } from '../../utils/api';
 import { getActiveLanguage } from 'react-localize-redux';
 
-import { right, getQuery } from '../../utils';
+import { right, getQuery, replaceQuery} from '../../utils';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -51,7 +51,7 @@ class SearchResult extends Component {
 	}
 	quantityProducts = () => {
 		const params = getQuery(this.props.location);
-		let pageNumber =Number(params.page);
+		let pageNumber = Number(params.page);
 		if(this.state.endSize === this.state.resultSize && this.state.startSize !==1){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
@@ -86,40 +86,30 @@ class SearchResult extends Component {
 
 	nextPage = (e) => {
     const params = getQuery(this.props.location);
-		let pageNumber =Number(params.page);
-
+		let pageNumber = Number(params.page) + 1;
 		if(this.state.startSize === this.state.resultSize){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
-			pageNumber += 1;
-			let size = pageNumber * 18 - 17
+			let size = pageNumber * 18 - 17;
 			this.setState({
 				startSize: size,
 				endSize: size + 18 - 1
 			})
 		}
-		if(params.category !== undefined){
-			this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
-		}else{
-			this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
-		}
+			this.props.history.push(replaceQuery(this.props.location,"nextPage"));
 	}
 	prevPage = (e) =>{
     const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page)-1;
-		if(pageNumber <1 ){
-			pageNumber =1;
+		if(pageNumber <= 1 ){
+			pageNumber = 1;
 		}
 		let size = pageNumber * 18 - 17
 			this.setState({
 				startSize: size,
 				endSize: size + 18 - 1
 			})
-			if(params.category !== undefined){
-				this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
-			}else{
-				this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
-			}
+				this.props.history.push(replaceQuery(this.props.location,"prePage"));
 	}
 	componentDidMount() {
 
