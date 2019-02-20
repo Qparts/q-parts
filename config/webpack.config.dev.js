@@ -162,17 +162,15 @@ module.exports = {
           // "style" loader turns CSS into JS modules that inject <style> tags.
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
-          // {
-          //   test: /\.scss$/i,
-          //   include: path.resolve(__dirname, '../scss/main'),
-          //   loader: mainCss.extract({
-          //     fallback: 'style-loader',
-          //     use: ['css-loader', 'sass-loader']
-          //   })
-          // },
           {
-            test: /\.scss$/,
-            include: path.resolve(__dirname, '../scss/main-ar'),
+            test: /main\/.*\.scss$/,
+            loader: mainCss.extract({
+              fallback: 'style-loader',
+              use: ['css-loader', 'sass-loader']
+            })
+          },
+          {
+            test: /main-ar\/.*\.scss$/,
             loader: mainArCss.extract({
               fallback: 'style-loader',
               use: ['css-loader', 'sass-loader']

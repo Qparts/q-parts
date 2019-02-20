@@ -41,7 +41,7 @@ export const initialState = {
     isOrderCompleted: false,
     recentViewedProducts: [],
     wishlist: [],
-    direction: 'ltr',
+    direction: 'rtl',
     registered: null,
     isShippingCompleted: false,
     isPaymentCompleted: false,

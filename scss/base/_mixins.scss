@@ -17,15 +17,15 @@
 }
 
 @mixin padding-right($size) {
-  padding-#{$right}: $size;
+  padding-#{$right}: $size !important;
 }
 
 @mixin margin-right($size) {
-  margin-#{$right}: $size;
+  margin-#{$right}: $size !important;
 }
 
 @mixin margin-left($size) {
-  margin-#{$left}: $size;
+  margin-#{$left}: $size !important;
 }
 
 @mixin link-border-radius {
@@ -84,11 +84,15 @@
 }
 
 @mixin text-uppercase {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 
 @mixin text-right {
-  text-align: $right;
+  text-align: $right !important;
+}
+
+@mixin text-left {
+  text-align: $left !important;
 }
 
 @mixin d-inline{

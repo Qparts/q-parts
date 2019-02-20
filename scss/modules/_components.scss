@@ -393,36 +393,6 @@
   @extend .box-shadow;
 }
 //shaimaa Updates
-.sec-header{
-  @extend .artical-space;
-  h1{
-    font-weight: 500;
-    color: $basic-gray;
-    @include font-size(40px);
-    @include media-breakpoint-down(lg){
-      @include font-size(30px);
-    };
-      > p{
-        float: #{$left};
-        display: inline-block;
-        border-bottom: 2px solid $brand-color;
-        padding-bottom: 10px;
-        margin-#{$right}: 10px;
-      }
-  }
-  > span{
-    @include font-size(15px);
-    @include opacity(0.6);
-    font-weight: 300;
-    position: relative;
-    text-transform: capitalize;
-    top: -7px;
-    margin-left: -5px;
-    @include media-breakpoint-down(lg){
-      font-weight: 500;
-    };
-  }
-}
 .swiper-button-prev,
 .swiper-button-next{
   background-image: none !important;
