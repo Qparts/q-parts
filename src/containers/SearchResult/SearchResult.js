@@ -51,7 +51,7 @@ class SearchResult extends Component {
 	}
 	quantityProducts = () => {
 		const params = getQuery(this.props.location);
-		let pageNumber = replaceQuery(this.props.location,'');
+		let pageNumber = Number(params.page);
 		if(this.state.endSize === this.state.resultSize && this.state.startSize !==1){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
@@ -86,7 +86,7 @@ class SearchResult extends Component {
 
 	nextPage = (e) => {
     const params = getQuery(this.props.location);
-		let pageNumber = replaceQuery(this.props.location,'nextPage') + 1;
+		let pageNumber = Number(params.page) + 1;
 		if(this.state.startSize === this.state.resultSize){
 			this.setState({ startSize:  this.state.resultSize})
 		}else{
@@ -96,15 +96,11 @@ class SearchResult extends Component {
 				endSize: size + 18 - 1
 			})
 		}
-		if(params.category !== undefined){
-			this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
-		}else{
-			this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
-		}
+			this.props.history.push(replaceQuery(this.props.location,"nextPage"));
 	}
 	prevPage = (e) =>{
     const params = getQuery(this.props.location);
-		let pageNumber = replaceQuery(this.props.location,'') - 1;
+		let pageNumber = Number(params.page)-1;
 		if(pageNumber <= 1 ){
 			pageNumber = 1;
 		}
@@ -113,11 +109,7 @@ class SearchResult extends Component {
 				startSize: size,
 				endSize: size + 18 - 1
 			})
-			if(params.category !== undefined){
-				this.props.history.push(`/listing?query=&page=${pageNumber}&category=${params.category}`);
-			}else{
-				this.props.history.push(`/listing?query=${params.query}&page=${pageNumber}`);
-			}
+				this.props.history.push(replaceQuery(this.props.location,"prePage"));
 	}
 	componentDidMount() {
 
