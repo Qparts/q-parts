@@ -1,18 +1,17 @@
 import queryString from 'qs';
 
 export const getQuery = (location) => (
-    queryString.parse(location.search.slice(1))
+  queryString.parse(location.search.slice(1))
 );
 
-export const replaceQuery = (location,str) => {
+export const replaceQuery = (location, str) => {
   let obj = queryString.parse(location.search.slice(1));
   let newPageNumber;
-  if(str === "nextPage"){
+  if (str === "nextPage") {
     newPageNumber = Number(obj.page) + 1;
-  }else if(str === "prePage"){
-    console.log(str)
+  } else if (str === "prePage") {
     newPageNumber = Number(obj.page) - 1;
-  }else{
+  } else {
     newPageNumber = Number(obj.page);
   }
 
@@ -20,5 +19,5 @@ export const replaceQuery = (location,str) => {
   var url = location.search;
 
   var newUrl = url.replace(regex, "page=" + newPageNumber);
-  return location.pathname+newUrl;
+  return location.pathname + newUrl;
 };
