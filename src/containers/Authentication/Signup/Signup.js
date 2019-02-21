@@ -50,7 +50,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
@@ -58,7 +58,7 @@ class Signup extends Component {
       translate={translate}
       passwordScore={passwordScore}
       setPasswordScore={setPasswordScore}/>
-    const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
+    const dialog = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
         <Login toggle={this.props.togglePopup} />

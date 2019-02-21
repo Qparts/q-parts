@@ -79,6 +79,10 @@
   border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 }
 
+@mixin fill-border-left($size) {
+  border-#{$left}: $size white solid;
+}
+
 @mixin text-capitalize {
   text-transform: capitalize !important;
 }

@@ -20,24 +20,10 @@
 .product-checkout_popup {
   .modal-content {
     background: white;
-    width: 120%;
   }
-  .modal-title {
-    > span {
-      height: 24px;
-      font-family: Roboto;
-      @include font-size(30px);
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: $left;
-      text-transform: none;
-      span {
-        border-bottom: 2px solid #ee4036;
-      }
-      margin-bottom: 53px;
+  .sec-header{
+    h1 {
+      @include text-capitalize;
     }
   }
 }

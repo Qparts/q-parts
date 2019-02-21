@@ -20,6 +20,7 @@ import {
 } from 'reactstrap';
 
 import * as validations from '../../utils';
+import { getTranslatedString } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import { right } from '../../utils';
 import _ from 'lodash';
@@ -41,6 +42,7 @@ import { fontSize } from '../../utils/font';
 import { MediumScreen, SmallScreen } from '../../components/Device';
 import { ClipLoader } from 'react-spinners';
 import { getProduct } from '../../utils/api';
+import Title from '../../components/UI/Title';
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -98,11 +100,12 @@ class ProductDetail extends Component {
 
   getDialogProps = () => {
     const { dialogType } = this.state;
+    const { translate } = this.props;
     switch (dialogType) {
       case 'addProduct':
         return {
           header:
-            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
+            <Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
         }
       default:
         break;
@@ -111,10 +114,18 @@ class ProductDetail extends Component {
 
   getDialogComponent = () => {
     const { dialogType } = this.state;
+    const { translate, currentLanguage } = this.props
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup} />
+        return <AddProduct
+          data={this.state.data}
+          direction={this.props.direction}
+          modalAddToCart={this.props.modalAddToCart}
+          token={this.props.token}
+          togglePopup={this.togglePopup}
+          translate={translate}
+          currentLanguage={currentLanguage} />
       default:
         break;
     }
@@ -165,10 +176,10 @@ class ProductDetail extends Component {
       this.handleDialog('addProduct', item)
     } else {
       const { match: { params } } = this.props
-      this.props.history.push({
-        pathname: `/products/${params.productId}/AddProduct`,
-        state: { data: item }
-      })
+      this.setState({
+        data: item
+      });
+      this.props.history.push(`/products/${params.productId}/AddProduct`)
     }
   }
 
@@ -231,12 +242,13 @@ class ProductDetail extends Component {
 
   renderTopRow = () => {
     const { product } = this.state;
+    const { translate, currentLanguage } = this.props
     return <div className="row group-header-opacity_second">
       <div className="col-9 pt-18">
         <span className="product-item_desc">{product.desc}</span>
         <div className="product-item_manufacturer">
-          <span>By</span>
-          <span>{product.brand.name}</span>
+          <span>{translate("general.by")}</span>
+          <span>{getTranslatedString(product.brand, currentLanguage, 'name', 'nameAr')}</span>
           <span>{product.productNumber}</span>
         </div>
       </div>
@@ -300,14 +312,14 @@ class ProductDetail extends Component {
         textAlign: 'center'
       }
     };
-    const { translate, match: { params } } = this.props;
+    const { translate, match: { params }, direction, currentLanguage } = this.props;
     const { product } = this.state;
     const compareHeaders = [
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+      <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -407,12 +419,12 @@ class ProductDetail extends Component {
                             </SmallScreen>
                             <div className="col-12 product-review_list">
                               <Stars value={getLength(product.reviews)} {...constant.starsRating} />
-                              <span>{getLength(product.reviews)} review</span>
+                              <span>{getLength(product.reviews)} {translate("product.reviews")}</span>
                             </div>
 
                             <div className="col-12 product-item_sales-price">
                               <span>{product.salesPrice.toFixed(2)}</span>
-                              <span>SR</span>
+                              <span>{translate("general.currency")}</span>
                             </div>
                             <div className="col-12">
                               <span className="h-seperator" />
@@ -570,6 +582,12 @@ class ProductDetail extends Component {
           path={'/products/:productId/AddProduct'}
           component={AddProduct}
           exact
+          translate={translate}
+          currentLanguage={currentLanguage}
+          data={this.state.data}
+          direction={this.props.direction}
+          modalAddToCart={this.props.modalAddToCart}
+          token={this.props.token}
           fakeAuth={this.state.auth}
           redirectTo="/" />
       </Switch >

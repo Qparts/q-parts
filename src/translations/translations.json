@@ -55,6 +55,22 @@
     "english": [
       "English",
       "الإنجليزية"
+    ],
+    "currency": [
+      "ريال",
+      "SR"
+    ],
+    "by": [
+      "من",
+      "by"
+    ],
+    "quantity": [
+      "كمية",
+      "Quantity"
+    ],
+    "subtotal": [
+      "حاصل الجمع",
+      "Subtotal"
     ]
   },
   "tyresPage": {
@@ -963,7 +979,17 @@
     "continue": [
       "استمر",
       "Continue"
-    ]
+    ],
+    "addToCart": {
+      "title": [
+        "تمت إضافة المنتج إلى العربة",
+        "Item added to cart"
+      ],
+      "items": [
+        "المنتج في السلة",
+        "item(s) in cart"
+      ]
+    }
   },
   "shippingCity": {
     "placeholder": {

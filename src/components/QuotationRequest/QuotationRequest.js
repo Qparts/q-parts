@@ -119,7 +119,7 @@ class QuotationRequest extends Component {
 
 	render() {
 		const { handleSubmit, translate, direction } = this.props;
-		const dialog = <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+		const dialog = <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
 			<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
 			<ModalBody>
 				{this.getDialogComponent()}
