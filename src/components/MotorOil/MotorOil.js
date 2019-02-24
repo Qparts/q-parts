@@ -76,8 +76,8 @@ class MotorOil extends Component {
 		return (
 			<Fragment>
 				<section id="motor-oil">
-					<div className="oil-img">
-						<section className="main-cat container-fluid">
+					<div className="oil-img container-fluid">
+						<section className="main-cat">
 							<div className="row">
 								<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 									<figure>
@@ -109,11 +109,11 @@ class MotorOil extends Component {
 							</div>
 						</section>
 					</div>
-					<div className="popular-oil">
+					<div className="popular-oil container-fluid">
 						<header>
 							<h1>Popular Oil Brands</h1>
 						</header>
-						<section className="main-cat container-fluid">
+						<section className="main-cat">
 							<div>
 								<Link to="/listing?query=&page=1&category=9">
 										<img src="/img/motor-oil.png" alt="Oil" />
@@ -139,7 +139,7 @@ class MotorOil extends Component {
 					<div className="poster">
 						<img src="/img/motor-oil.png" alt="poster" />
 					</div>
-					<div className="best-seller">
+					<div className="best-seller container-fluid">
 						<header>
 							<h1>
 								Oil Bestseller
@@ -147,7 +147,7 @@ class MotorOil extends Component {
 						</header>
 
 						<section className="products-sec">
-			        <div className="container-fluid">
+			        <div>
 			          <div className="tab-content">
 			            <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
 			              <h3>Best Seller</h3>

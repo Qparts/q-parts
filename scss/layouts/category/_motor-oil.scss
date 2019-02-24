@@ -1,5 +1,7 @@
 #motor-oil{
   background: $light-gray;
+  margin-right: auto;
+  margin-left: auto;
   .main-cat{
     margin-top: 0px;
   }
@@ -25,16 +27,6 @@
       letter-spacing: normal;
       text-align: $left;
       color: #37363c;
-    }
-  }
-  @media (min-width: 1300.98px) {
-     header {
-         @include margin-left(130px);
-    }
-  }
-  @media (max-width: 1300.98px) {
-     header {
-         @include margin-left(20px);
     }
   }
   .popular-oil{
