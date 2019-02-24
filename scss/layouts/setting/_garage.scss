@@ -143,12 +143,12 @@
         .div-rounded{
           margin-bottom: 20px;
           .select-input{
-            border-radius: side-values(20px 0 20px 20px !important);
+            border-radius: side-values(20px 0 20px 20px) !important;
           }
         }
         .div-last-rounded{
           input{
-            border-radius: side-values(20px 0 20px 20px !important);
+            border-radius: side-values(20px 0 20px 20px) !important;
           }
           .input-group-prepend{
             margin-top: 10px;

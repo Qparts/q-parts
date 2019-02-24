@@ -174,6 +174,7 @@ class Cart extends Component {
 						</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<RenderCartItem
+								direction={direction}
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}

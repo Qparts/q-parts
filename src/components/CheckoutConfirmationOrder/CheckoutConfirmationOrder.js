@@ -12,6 +12,7 @@ import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
 import { clearCart } from '../../actions/cartAction';
 import { withRouter, Link, Redirect } from 'react-router-dom';
+import Title from '../UI/Title';
 
 import { bindActionCreators } from 'redux';
 class CheckoutConfirmation extends Component {
@@ -66,7 +67,7 @@ class CheckoutConfirmation extends Component {
         <section id="confirm-order">
           <div className="content">
             <i className="icon-delivered-step upload-img" />
-            <p className="p"><span>Thank </span>You!</p>
+            <Title header={translate("general.thankYou")}/>
             <h5>Your order number #{params.cartId} has been placed <br />Please check your email for order confirmation and detailed delivery information.</h5>
             <button className="btn btn-open-G" style={{ display: "none" }}>Track You Order<i className={'icon-arrow-right'} /></button>
           </div>

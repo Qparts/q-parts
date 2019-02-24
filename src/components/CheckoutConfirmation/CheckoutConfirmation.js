@@ -43,7 +43,7 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity } = this.props;
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction } = this.props;
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
@@ -72,6 +72,7 @@ class CheckoutConfirmation extends Component {
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
             <RenderCartItem
+              direction={direction}
               deleteText={translate("cart.table.delete")}
               name="purchasedItems"
               purchasedItems={purchasedItems}

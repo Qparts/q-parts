@@ -179,6 +179,7 @@ class Checkout extends Component {
 						<Route path="/checkout/confirm" exact={true} render={() => {
 							return <CheckoutConfirmation
 								translate={translate}
+								direction={this.props.direction}
 								checkout={this.props.checkout}
 								completeOrder={this.props.completeOrder}
 								purchasedItems={checkoutData}
@@ -205,6 +206,7 @@ const mapStateToProps = state => ({
 	customer: state.customer.detail,
 	defaultAddress: state.customer.defaultAddress,
 	address: state.customer.address,
+	direction: state.customer.direction,
 	regions: state.api.regions,
 	country: state.api.country,
 	city: state.api.city,

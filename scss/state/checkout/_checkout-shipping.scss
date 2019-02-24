@@ -1,4 +1,5 @@
 .checkout-container-shipping{
+  @include text-left;
   background: $light-gray;
   padding-bottom: 20%;
   .Checkout-container{
@@ -12,7 +13,7 @@
       .bg-whatsapp{
         text-transform: none;
         color: black;
-        border-radius: side-values(20px 20px 0px 20px) !important;
+        border-radius: corner-values(20px 20px 0px 20px) !important;
         span{
           font-size: 9px;
           width: fit-content !important;
@@ -28,7 +29,7 @@
         display: flex;
         margin-bottom: 3px;
         background: white;
-        border-radius: side-values(20px 0 0 0) !important;
+        border-radius: corner-values(20px 0 0 0) !important;
         padding-bottom: 8px;
         @include large-medium-screens {
           @include margin-right(30px);
@@ -69,6 +70,7 @@
         }
       }
       #addresses-container{
+        @include text-left;
         margin-top: 3px;
       }
       form{
@@ -82,19 +84,14 @@
           background: $white;
           padding: 20px;
         }
-        .RenderField{
-          label{
-            top: 6px;
-          }
-        }
         .title-address{
           margin-bottom: 20px;
           .form-control{
-            border-radius: side-values(20px 0 0 20px) !important;
+            border-radius: corner-values(20px 0 0 20px) !important;
             background: $light-gray;
           }
           .RenderField{
-            border-radius: side-values(20px 0 0 20px) !important;
+            border-radius: corner-values(20px 0 0 20px) !important;
             input{
               margin-bottom: 0px;
               border-bottom: none;
@@ -127,11 +124,11 @@
         .address-title{
           margin-bottom: 20px;
           .form-control{
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             background: $light-gray;
           }
           .RenderField{
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             input{
               margin-bottom: 0px;
               border-bottom: none;
@@ -152,7 +149,7 @@
           .RenderField{
             border: none;
             input{
-              border-radius: side-values(20px 0 0 20px) !important;
+              border-radius: corner-values(20px 0 0 20px) !important;
               background: $light-gray;
               padding: 12px;
             }
@@ -165,7 +162,7 @@
         .div-rounded-last{
           .select-input{
             .css-10nd86i{
-              border-radius: side-values(0 0 20px 0) !important;
+              border-radius: corner-values(0 0 20px 0) !important;
             }
           }
         }
@@ -186,7 +183,7 @@
             .first{
               margin-#{$right}: 5px;
               .form-control{
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
                 width: 70px;
                 text-align: center;
               }
@@ -206,7 +203,7 @@
           }
           .zipCode{
             .form-control {
-              border-radius: side-values(0 0 20px 0) !important;
+              border-radius: corner-values(0 0 20px 0) !important;
               border: none;
               background: $light-gray;
               height: 55px;
@@ -222,12 +219,12 @@
           margin-bottom: 20px;
           .form-control{
             padding-bottom: 20px;
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             background: $light-gray;
           }
           .RenderField{
             @include padding-left(10px);
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             @include margin-left(-13px);
             input{
               margin-bottom: 0px;
@@ -249,7 +246,7 @@
             float: $right;
             height: auto;
             background-color: $light-gray;
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: corner-values(0 0 0 20px) !important;
             @include large-medium-screens {
               width: 18%;
               @include box-shadow;
@@ -263,7 +260,7 @@
             float: $right;
             @include margin-left(5px);
             width: 80%;
-            border-radius: side-values(0 20px 20px 0) !important;
+            border-radius: corner-values(0 20px 20px 0) !important;
             height: auto;
             text-align: $right;
             text-transform: none;
@@ -283,7 +280,7 @@
         .btn-secondary{
           @include margin-left(5px);
           background: $brand-color;
-          border-radius: side-values(0 20px 20px 0) !important;
+          border-radius: corner-values(0 20px 20px 0) !important;
           height: auto;
           @include box-shadow;
           text-align: $right;
@@ -318,7 +315,7 @@
       }
       .paymentActive{
         background: $white !important;
-        border-radius: side-values(0 0 20px 0);
+        border-radius: corner-values(0 0 20px 0);
         color: $black;
         opacity: 1 !important;
         div{
@@ -333,26 +330,26 @@
         }
       }
       .paymentDone{
-        border-radius: side-values(0 !important);
+        border-radius: corner-values(0) !important;
         div{
           display: none !important;
         }
       }
       .shippingDone{
-        border-radius: side-values(0 !important);
+        border-radius: corner-values(0) !important;
         div{
           display: none !important;
         }
       }
       .signin{
         background: $white !important;
-        border-radius: side-values(20px 0 0 20px);
+        border-radius: corner-values(20px 0 0 20px);
         color: $black;
         opacity: 1 !important;
       }
       .shipping{
         background: $white !important;
-        border-radius: side-values(0 0 20px 0);
+        border-radius: corner-values(0 0 20px 0);
         color: $black;
         opacity: 1 !important;
         div{
@@ -366,14 +363,14 @@
         }
       }
       .order{
-        border-radius: side-values(0 0 20px 0);
+        border-radius: corner-values(0 0 20px 0);
         div{
           display: none !important;
         }
       }
       .orderActive{
         background: $white !important;
-        border-radius: side-values(0 0 20px 0);
+        border-radius: corner-values(0 0 20px 0);
         color: $black;
         opacity: 1 !important;
         div{

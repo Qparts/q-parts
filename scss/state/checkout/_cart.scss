@@ -1,6 +1,7 @@
   .cart-items{
     @include border-radius-div;
     overflow: hidden;
+    @include padding-left(0);
     li{
       padding: 20px 15px;
       figure{
@@ -139,11 +140,11 @@
     }
   }
   .select__control{
-    padding: side-values(10px 20px 13px 70px);
+    padding: corner-values(10px 20px 13px 70px);
     background: rgba(0, 0, 0, 0.6);
     @include border-radius-div;
     @include media-breakpoint-down(md){
-      padding: side-values(8px 10px 10px 60px);
+      padding: corner-values(8px 10px 10px 60px);
     };
   }
   .select__single-value{

@@ -182,7 +182,7 @@ class CheckoutShipping extends Component {
               </Map>
             </div>
           ) :
-            <div className="Address-container col-12 col-md-8">
+            <div className="Address-container col-12 col-md-9">
               <div className="addresses-header justify-content-between ">
                 <p>{translate("setting.addressBook.shippingItem")}</p>
                 <Button type="button" className="btn btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder />

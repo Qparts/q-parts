@@ -236,8 +236,8 @@ class CheckoutPayment extends Component {
       translate("checkout.payment.creditCard.table.expiration"),
 
     ]
-    let creditClass = "btn btn-light";
-    let banckClass = "btn btn-primary"
+    let creditClass = "btn btn-light text-center";
+    let banckClass = "btn btn-primary text-center"
     if (this.state.active === "credit") {
       creditClass += " active";
     }
