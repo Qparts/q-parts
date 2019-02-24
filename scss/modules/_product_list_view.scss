@@ -1,4 +1,5 @@
 .product-list-view {
+  @include text-left;
   background: none;
   .list-group {
     overflow: hidden;
@@ -29,6 +30,7 @@
 
           .btn-detail,
           .btn-cart {
+            @include text-left;
             background: $basic-gray;
           }
           .btn-detail {
