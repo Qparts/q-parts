@@ -3,6 +3,7 @@
   @include link-border-radius;
   @include transition(all, 0.5s, ease);
   @include font-size(20px);
+  @include text-right;
   cursor: pointer;
   font-weight: 400;
   display: inline-block;

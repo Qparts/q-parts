@@ -95,14 +95,14 @@ class Cart extends Component {
 				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
-		var subtotal=0;
-		var quantity=0;
-		var divItemMovile ="total-sm d-lg-none d-flex align-items-stretch";
+		var subtotal = 0;
+		var quantity = 0;
+		var divItemMovile = "total-sm d-lg-none d-flex align-items-stretch";
 
-		for(var i = 0 ; i<checkoutData.length ; i++){
-			subtotal +=checkoutData[i].subtotal;
-			quantity +=checkoutData[i].quantity;
-			divItemMovile ="totalFoundData d-block d-lg-none d-flex align-items-stretch"
+		for (var i = 0; i < checkoutData.length; i++) {
+			subtotal += checkoutData[i].subtotal;
+			quantity += checkoutData[i].quantity;
+			divItemMovile = "totalFoundData d-block d-lg-none d-flex align-items-stretch"
 		}
 		const shipToOptions = [
 			{ value: 1, label: "KSA" },
@@ -149,7 +149,7 @@ class Cart extends Component {
 									<span>Shopping</span> Cart<label>{quantity} Items</label>
 								</h1>
 							</header>
-							{/* <div className="col-auto">
+							<div className="col-auto">
 								<div className="cart-ship-to">
 									<label>Ship to</label>
 									<Select
@@ -159,7 +159,7 @@ class Cart extends Component {
 										defaultValue={shipToOptions[0]}
 										options={shipToOptions} />
 								</div>
-							</div> */}
+							</div>
 						</div>
 					</div>
 				</section>
@@ -185,8 +185,8 @@ class Cart extends Component {
 										checkoutData={checkoutData}
 										subtotal={subtotal}
 										submitButton={translate("orderSummary.placeOrder")} />
-									{quantity>0 &&
-										<button className="btn btn-primary" style={{marginTop:"0px"}}type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
+									{quantity > 0 &&
+										<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 									}
 								</div>
 								<a href="#" className="media chat-div">

@@ -29,7 +29,7 @@ class CheckoutConfirmation extends Component {
         .then(res => {
           if (res.status === 201) {
             history.push(`/payment-response?cartId=${res.data.cartId}`)
-          } else if(res.status === 202) {
+          } else if (res.status === 202) {
             window.location = res.data.transactionUrl;
           }
         });

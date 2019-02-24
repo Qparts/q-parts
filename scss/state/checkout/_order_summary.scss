@@ -1,9 +1,9 @@
 #order-summary {
+  @include text-left;
   h5 {
     font-family: Roboto;
     @include font-size(25px);
     text-transform: capitalize;
-    text-align: $left;
     color: $basic-gray;
   }
   .order-summary__text-muted,

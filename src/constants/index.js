@@ -79,3 +79,5 @@ export const socialMedia = 'socialMedia';
 export const payment = 'payment';
 export const PENDING = 'pending';
 export const REPLIED = 'replied';
+export const rtl = 'rtl';
+export const ltr = 'ltr';

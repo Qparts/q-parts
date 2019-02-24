@@ -66,7 +66,8 @@ export const routes = (isAuth, direction) => [
     },
     {
         path: "/cart",
-        component: Cart
+        component: Cart,
+        direction: direction
     },
     {
         path: "/setting",

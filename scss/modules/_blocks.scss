@@ -109,7 +109,7 @@
   background: $light-gray;
   @extend .position-fixed;
   bottom: 0;
-  right: 50px;
+  #{$right}: 50px;
   z-index: 999;
   width: 151px;
   border-radius: $border-radius-base $border-radius-base 0 0;
@@ -117,7 +117,7 @@
   @include nav-sm-media{
     width: 48px;
     background: transparent;
-    right: 15px;
+    #{$right}: 15px;
   }
   img{
     max-width: 48px;

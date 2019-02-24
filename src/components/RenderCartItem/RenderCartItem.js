@@ -56,7 +56,7 @@ export default class extends Component {
 
 
   render() {
-    const { purchasedItems, removeButton, divCol } = this.props;
+    const { purchasedItems, removeButton, divCol, direction } = this.props;
 
     return (
       <Fragment>
@@ -135,7 +135,7 @@ export default class extends Component {
             }
           </ul>
           <div className="row">
-            <div className="col-md-6 ml-md-auto">
+            <div className={`col-md-6 ${direction === constant.ltr ? 'ml-md-auto' : 'mr-md-auto'}`}>
               {
                 !removeButton && <Link to="/" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
               }
