@@ -76,8 +76,8 @@ class MotorOil extends Component {
 		return (
 			<Fragment>
 				<section id="motor-oil">
-					<div className="oil-img container-fluid">
-						<section className="main-cat">
+					<div className="oil-img">
+						<section className="main-cat container-fluid">
 							<div className="row">
 								<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 									<figure>
@@ -114,23 +114,23 @@ class MotorOil extends Component {
 							<h1>Popular Oil Brands</h1>
 						</header>
 						<section className="main-cat">
-							<div>
-								<Link to="/listing?query=&page=1&category=9">
+							<div className="row">
+								<Link to="/listing?query=&page=1&category=9" className="col-2">
 										<img src="/img/motor-oil.png" alt="Oil" />
 								</Link>
-								<Link to="/listing?query=&page=1&category=13">
+								<Link to="/listing?query=&page=1&category=13" className="col-2">
 										<img src="/img/tyres.png" alt="Tires" />
 								</Link>
-								<Link to="/listing?query=&page=1&category=28">
+								<Link to="/listing?query=&page=1&category=28" className="col-2">
 										<img src="/img/tools.png" alt="Tools" />
 								</Link>
-								<Link to="/listing?query=&page=1&category=9">
+								<Link to="/listing?query=&page=1&category=9" className="col-2">
 										<img src="/img/motor-oil.png" alt="Oil" />
 								</Link>
-								<Link to="/listing?query=&page=1&category=13">
+								<Link to="/listing?query=&page=1&category=13" className="col-2">
 										<img src="/img/tyres.png" alt="Tires" />
 								</Link>
-								<Link to="/listing?query=&page=1&category=28">
+								<Link to="/listing?query=&page=1&category=28" className="col-2">
 										<img src="/img/tools.png" alt="Tools" />
 								</Link>
 							</div>
