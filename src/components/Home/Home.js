@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getRecentlyViewedProducts } from "../../actions/apiAction";
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import ManualForm from '../../containers/ManualForm/ManualForm';
 import HomeDetails from '../HomeDetails/HomeDetails';
 export class Home extends Component {
@@ -20,6 +20,7 @@ export class Home extends Component {
                     onRecentlyViewedProducts={this.getRecentlyViewedProducts}
                     translate={this.props.translate}
                     direction={this.props.direction}
+                    currentLanguage={this.props.currentLanguage}
                 />
             </Fragment>
         )
@@ -30,7 +31,8 @@ const mapStateToProps = state => {
     return {
         translate: getTranslate(state.localize),
         recentViewedProducts: state.customer.recentViewedProducts,
-        direction: state.customer.direction
+        direction: state.customer.direction,
+        currentLanguage: getActiveLanguage(state.localize).code,
     }
 }
 

@@ -350,16 +350,24 @@
       "احصل على قوة التسوق الموثوق",
       "Get trusted shopping power"
     ],
-    "items" :[
-      "نوفر أكثر من ٥٠٠٠٠ قطعة",
-      "We offer more than 50000 different items"
-    ],
+    "vendor": {
+      "items" :[
+        "نوفر أكثر من ٥٠٠٠٠ قطعة",
+        "We offer more than 50000 different items"
+      ],
+      "joinUs": [
+        "بائع! انضم إلى q.parts.com",
+        "VENDOR! Join q.parts.com"
+      ]
+    },
     "oil":[
       "الزيوت و السوائل",
       "Oils"
+    ],
+    "startNow": [
+      "ابدأ الآن",
+      "Start now"
     ]
-
-
   },
   "navBar": {
     "vehiclePart": [
@@ -1928,5 +1936,63 @@
       "رفع ملف",
       "Upload file"
     ]
+  },
+  "orderSteps": {
+    "request": {
+      "title": [
+        "طلب",
+        "Request"
+      ],
+      "subtitle": [
+        "املأ بيانات سيارتك",
+        "Fill in your vehicle data"
+      ],
+      "subtitleSpan": [
+        "والأجزاء التي تريدها",
+        "and the parts you want"
+      ]
+    },
+    "price": {
+      "title": [
+        "سعر الاختيار",
+        "Check price"
+      ],
+      "subtitle": [
+        "وسيدفع لك السعر في غضون 24 ساعة",
+        "The price will deliver to you"
+      ],
+      "subtitleSpan": [
+        "خلال 24 ساعة",
+        "within 24 hours"
+      ]
+    },
+    "cart": {
+      "title": [
+        "أضف إلى السلة",
+        "Add to cart"
+      ],
+      "subtitle": [
+        "اختر عنوان الشحن",
+        "Choose a shipping address"
+      ],
+      "subtitleSpan": [
+        "وطريقة الدفع",
+        "and payment method"
+      ]
+    },
+    "receive": {
+      "title": [
+        "إستقبال الأوامر",
+        "Add to cart"
+      ],
+      "subtitle": [
+        "طلبك لورشة العمل الخاصة بك أو",
+        "Your order for your workshop or"
+      ],
+      "subtitleSpan": [
+        "في أي مكان تحب",
+        "anywhere you love"
+      ]
+    }
   }
 }

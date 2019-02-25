@@ -459,6 +459,7 @@
         }
         &:first-child{
           padding-#{$left}: 0;
+          @include margin-left(0);
           border-#{$left}-width: 0;
         }
       }

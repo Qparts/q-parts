@@ -9,16 +9,17 @@ import { Link } from "react-router-dom";
 class HomeDetails extends Component {
 
 	render() {
-		const { addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
+		const { addRecentViewedProducts, onRecentlyViewedProducts, translate, direction, currentLanguage } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
 						<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")}/>
-						<OrderSteps/>
+						<OrderSteps translate={translate} direction={direction}/>
 						<div className="order-form">
 							<header className="row">
 								<h2 className="col col-10 mx-auto">
-									<span className="arrow"><i className="icon-arrow-down" /></span>Start Now
+									<span className="arrow"><i className="icon-arrow-down" /></span>
+									{translate("quotationOrder.startNow")}
 								</h2>
 							</header>
 							{/* <div className="form-details">
@@ -153,8 +154,8 @@ class HomeDetails extends Component {
 									</picture>
 									<div className="d-flex justify-content-center">
 										<h1>
-											<span>{translate("quotationOrder.items")}</span>
-											VENDOR ! Join Qetaa.com
+											<span>{translate("quotationOrder.vendor.items")}</span>
+											{translate("quotationOrder.vendor.joinUs")}
 										</h1>
 										<a className="btn btn-primary" href="#"><span>{translate("general.join")}</span><i className={`icon-arrow-${right(direction)}`}></i></a>
 									</div>
@@ -168,6 +169,7 @@ class HomeDetails extends Component {
 						onRecentlyViewedProducts={onRecentlyViewedProducts}
 						translate={translate}
 						direction={direction}
+						currentLanguage={currentLanguage}
 						/>
 			</Fragment>
 		);
