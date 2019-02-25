@@ -27,7 +27,7 @@ import _ from 'lodash';
 import parse from 'html-react-parser';
 
 //dialog
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from "./AddProductPopup/AddProduct"
 
 //Router
@@ -253,7 +253,7 @@ class ProductDetail extends Component {
         </div>
       </div>
       <div className="col-3 btn btn-wishlist pt-18">
-        <Link to="#" className="isDisabled btn btn-primary" icon="icon-heart" />
+        <Link to="#" className="btn btn-primary" icon="icon-heart" onClick={this.handleAddWishlist}/>
       </div>
     </div>
   }

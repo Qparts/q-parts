@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Table from '../UI/Table';
 import Button from '../UI/Button';
 import moment from 'moment';
 import { colors } from '../../constants';
+import { handleImageFallback } from '../../utils';
 
 class Wishlist extends Component {
     constructor(props) {
@@ -23,27 +23,28 @@ class Wishlist extends Component {
     getWishlist = () => {
         let result = [];
 
-        this.props.wishlist.forEach(list => {
+        this.props.wishlist.forEach((list, idx) => {
             const tempWishlist = {
+                ...list,
                 desc: list.desc,
                 salesPrice: list.salesPrice.toFixed(2),
                 currency: 'SR',
                 created: `Added: ${moment(list.created).format('MM/DD/YYYY')}`,
                 actions: [
-                    <Button
-                        key={0}
-                        isReverseOrder={true}
-                        className="btn-secondary"
-                        icon="icon-cart"
-                        text={this.props.translate("setting.wishlist.table.addToCart")}
-                        onClick={this.props.moveWishlistToCart.bind(this, list)} />,
-                    <Button
-                        key={1}
-                        className="btn btn-light"
-                        text="X"
-                        onClick={this.props.deleteWishlist.bind(this, list)} />
+                    <div key={idx} className="cart-actions">
+                        <Button
+                            isReverseOrder={true}
+                            className="btn btn-gray"
+                            icon="icon-cart"
+                            text={this.props.translate("setting.wishlist.table.addToCart")}
+                            onClick={this.props.moveWishlistToCart.bind(this, list)} />
+                        <Button
+                            className="btn delete-btn"
+                            icon="icon-trash"
+                            onClick={this.props.deleteWishlist.bind(this, list)} />
+                    </div>
                 ],
-                image: 'https://images-na.ssl-images-amazon.com/images/I/61z0QXd06sL._SL1024_.jpg',
+                image: list.image,
                 productNumber: list.productNumber,
                 manufacturerName: list.brand.name
             }
@@ -67,14 +68,18 @@ class Wishlist extends Component {
                         <div key={idx} className="border rounded card">
                             <div className="row">
                                 <div className="col-5 col-md-2">
-                                    <img style={{ height: '165px' }} src={item.image} alt="no wish list found" />
+                                    <img 
+                                    style={{ height: '165px' }} 
+                                    src={item.image} 
+                                    onError={handleImageFallback}
+                                    alt="no wish list found" />
                                 </div>
                                 <div className="col-7 col-md-3 pt">
                                     <div className="wish-list_product-details">
                                         <span className="part-text" style={styles}>{item.desc}</span>
                                         <span className="manufacturer-text">{item.manufacturerName}</span>
                                         <span className="part-text">{item.productNumber}</span>
-                                        <div className="w-sm-100">
+                                        <div className="w-100">
                                             <span className="sales-price">{item.salesPrice}</span>
                                             <span className="currency">{item.currency}</span>
                                         </div>
