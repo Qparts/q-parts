@@ -15,6 +15,8 @@ import { withRouter } from 'react-router-dom';
 
 import Login from "../../Authentication/Login/Login";
 import { getTranslate } from 'react-localize-redux';
+import { styles as commonStyles } from '../../../constants';
+import { handleImageFallback } from '../../../utils';
 
 class AddProduct extends Component {
   constructor(props) {
@@ -57,7 +59,10 @@ class AddProduct extends Component {
             <form className="row">
               {this.props.data ? (<div className="row item">
                 <img
+                  style={commonStyles.cursor}
                   src={this.props.data.image}
+                  onClick={this.showLightbox}
+                  onError={handleImageFallback}
                   alt=""
                 />
                 <div className="text-item">
@@ -85,8 +90,8 @@ class AddProduct extends Component {
                   <div>
                   </div>
                 )}
-              <div className="btn-primary col-10"><span className="w3-right">Subtotal ({this.props.data.quantity} items in cart)</span></div>
-              <div className="btn-primary sale-price col-2-sm">{this.props.data.salesPrice.toFixed(2)}<sub>SR</sub></div>
+              <div className="btn-primary col-9"><span className="w3-right">Subtotal ({this.props.data.quantity} items in cart)</span></div>
+              <div className="btn-primary sale-price col-3-sm">{this.props.data.salesPrice.toFixed(2)}<sub>SR</sub></div>
 
               <div className="btn-footer col-12">
                 <div className="group-shadow-input group-shadow-div"></div>
@@ -106,9 +111,12 @@ class AddProduct extends Component {
                   <div className="row">
                     <div className="row item">
                       <img
+                        style={commonStyles.cursor}
                         src={dataMobile.location.state.data.image}
+                        onClick={this.showLightbox}
+                        onError={handleImageFallback}
                         alt=""
-                      />
+                        />
                       <div className="text-item">
                         <div className="col-12">
                           <span className="product-item_desc">{dataMobile.location.state.data.desc}</span>
@@ -138,7 +146,7 @@ class AddProduct extends Component {
                   </div>
                   <div className="btn-footer col-12">
                     <button className="continue" onClick={this.continueShoppingMoblile}>Continue Shopping</button>
-                    <button  type="submit" className="check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                    <button  type="submit" className="check-out">Check Out<i className="icon-arrow-right" /></button>
                   </div>
                 </form>
               </div>

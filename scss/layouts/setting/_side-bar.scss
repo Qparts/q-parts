@@ -38,13 +38,21 @@
   div{
     display: none;
     div{
-      .btn-primary{
-        display: block;
-      }
       padding-top: 15%;
       div{
         width: 0px !important;
       }
     }
   }
+}
+
+.side-bar-compnent-btn{
+
+    .btn-primary{
+      display: block;
+    }
+
+      .none-active-btn{
+        display: none;
+      }
 }
