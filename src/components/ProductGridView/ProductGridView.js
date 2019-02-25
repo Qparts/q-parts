@@ -11,63 +11,73 @@ import { addToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux';
 
 //dialog
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from "../../containers/Product/AddProductPopup/AddProduct";
 import { modalAddToCart } from '../../actions/customerAction';
+import Title from '../UI/Title';
 
 class ProductGridView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isHovering: false,
-      product: {},
+			product: {},
 			loading: true,
 			modal: true,
-      data: [],
+			data: [],
 			dialogType: "addProduct"
-    }
+		}
 
 	}
 	componentWillMount() {
-      this.props.modalAddToCart(false);
-  }
+		this.props.modalAddToCart(false);
+	}
 	handleDialog = (dialogType, data) => {
-    this.setState({
-      dialogType,
-      data: data
-    });
-    this.togglePopup(data);
-  };
+		this.setState({
+			dialogType,
+			data: data
+		});
+		this.togglePopup(data);
+	};
 
-  togglePopup = (data) => {
-    this.props.modalAddToCart(this.state.modal);
-    this.setState({modal:!this.state.modal})
+	togglePopup = (data) => {
+		this.props.modalAddToCart(this.state.modal);
+		this.setState({ modal: !this.state.modal })
 
-  }
+	}
 
-  getDialogProps = () => {
-    const { dialogType } = this.state;
-    switch (dialogType) {
-      case 'addProduct':
-        return {
-          header:
-            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
-        }
-      default:
-        break;
-    }
-  }
+	getDialogProps = () => {
+		const { dialogType } = this.state;
+		const { translate } = this.props
+		switch (dialogType) {
+			case 'addProduct':
+				return {
+					header:
+					<Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
+				}
+			default:
+				break;
+		}
+	}
 
-  getDialogComponent = () => {
-    const { dialogType } = this.state;
+	getDialogComponent = () => {
+		const { dialogType } = this.state;
+		const { translate, currentLanguage } = this.props
 
-    switch (dialogType) {
-      case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} modalAddToCart={this.props.modalAddToCart} token={this.props.token} togglePopup={this.togglePopup}/>
-      default:
-        break;
-    }
-  }
+		switch (dialogType) {
+			case 'addProduct':
+				return <AddProduct
+					data={this.state.data}
+					direction={this.props.direction}
+					modalAddToCart={this.props.modalAddToCart}
+					token={this.props.token}
+					togglePopup={this.togglePopup}
+					translate={translate}
+					currentLanguage={currentLanguage} />
+			default:
+				break;
+		}
+	}
 
 	handleMouseHover = () => {
 		this.setState({
@@ -78,26 +88,25 @@ class ProductGridView extends Component {
 		this.props.history.push(`/products/${productId}`)
 	}
 	submit = (product) => {
-		var  quantity  = this.props.initialValues.quantity;
-    const item = { ...product, quantity };
-    this.props.addToCart(item);
+		var quantity = this.props.initialValues.quantity;
+		const item = { ...product, quantity };
+		this.props.addToCart(item);
 		this.handleDialog('addProduct', item)
-  }
+	}
 	render() {
-		const { product, location:{pathname, search}, direction } = this.props;
-		let header = <span><span> Item</span> Added To Cart</span>
-			let dialog;
-			if(this.state.data.quantity){
-				dialog = (
-		      <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
-		        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
-		        <ModalBody>
-		          {this.getDialogComponent()}
-		        </ModalBody>
-		      </Modal>
-		    );
-			}
-		return(
+		const { product, location: { pathname, search }, direction } = this.props;
+		let dialog;
+		if (this.state.data.quantity) {
+			dialog = (
+				<Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+					<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+					<ModalBody>
+						{this.getDialogComponent()}
+					</ModalBody>
+				</Modal>
+			);
+		}
+		return (
 			<Fragment>
 				<MediumScreen>
 					<div className="product-grid-view col-6 col-md-4" >
@@ -111,7 +120,7 @@ class ProductGridView extends Component {
 									this.state.isHovering &&
 									<div className="product-buttons">
 										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
-										<Link to={`${pathname}${search}`} onClick={()=>this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
+										<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 									</div>
 								}
 							</div>
@@ -156,19 +165,19 @@ class ProductGridView extends Component {
 }
 
 const mapStateToProps = state => {
-  return {
-    initialValues: { quantity: 1 },
-    direction: state.customer.direction,
-    isModalAddToCart: state.customer.isModalAddToCart,
-    token: state.customer.token
-  }
+	return {
+		initialValues: { quantity: 1 },
+		direction: state.customer.direction,
+		isModalAddToCart: state.customer.isModalAddToCart,
+		token: state.customer.token
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: (item) => dispatch(addToCart(item)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
-  }
+	return {
+		addToCart: (item) => dispatch(addToCart(item)),
+		modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+	}
 }
 
 ProductGridView = withRouter(ProductGridView);

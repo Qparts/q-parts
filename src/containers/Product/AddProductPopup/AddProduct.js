@@ -18,7 +18,6 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { MediumScreen, SmallScreen } from '../../../components/Device';
 
 import Login from "../../Authentication/Login/Login";
-import { getTranslate } from 'react-localize-redux';
 import Title from '../../../components/UI/Title';
 
 class AddProduct extends Component {
