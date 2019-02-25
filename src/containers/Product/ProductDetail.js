@@ -102,7 +102,7 @@ class ProductDetail extends Component {
       case 'addProduct':
         return {
           header:
-            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
+            <div className="title"><p><span className="span-parent"><span><i className="icon-checked" /></span><span>{this.state.data.quantity} Item </span></span>Added To Cart</p></div>
         }
       default:
         break;
