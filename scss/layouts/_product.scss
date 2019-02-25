@@ -182,7 +182,7 @@
       margin-bottom: 28px;
       border-radius: corner-values(20px 0 0 0);
       .average-rating {
-        padding: corner-values(24px 15px 13px 15px);
+        padding: side-values(24px 15px 13px 15px);
         .average-rating_count {
           opacity: 0.5;
           font-family: Roboto;
@@ -304,13 +304,13 @@
           max-width: 100%;
           border-radius: 20px;
           background: $dark-gray;
-          padding: corner-values(14px 14px 13px 14px);
+          padding: side-values(14px 14px 13px 14px);
         }
       }
       .list-group {
         .list-group-item {
           border: inherit;
-          padding: corner-values(14px 22px 20px 21px);
+          padding: side-values(14px 22px 20px 21px);
           &:last-child {
             border-radius: corner-values(0 0 20px 20px);
           }
@@ -331,7 +331,7 @@
     margin-bottom: 1018px;
     overflow: hidden;
     .sec-header {
-      padding: corner-values(30px 50px 30px 20px);
+      padding: side-values(30px 50px 30px 20px);
       margin-bottom: 0;
       h1 {
         font-family: Roboto;

@@ -73,7 +73,7 @@
     margin-bottom: 5px;
     padding: side-values(10px);
     padding-bottom: 50px;
-    border-radius: side-values(20px 0 20px 20px) !important;
+    border-radius: corner-values(20px 0 20px 20px) !important;
     label{
       margin-bottom: 0px;
       font-family: Roboto;
@@ -331,7 +331,7 @@
         }
         .RenderField{
           .form-control{
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             border: none;
             background: $light-gray;
           }
@@ -357,7 +357,7 @@
               width: 100%;
               border-radius: 0px;
               background-color: $light-gray;
-              border-radius: side-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px) !important;
               position: relative !important;
             }
           }
@@ -369,14 +369,14 @@
             .select-input{
               margin-top: 13px;
               .css-10nd86i {
-                border-radius: side-values(0 0 20px 0) !important;
+                border-radius: corner-values(0 0 20px 0) !important;
               }
             }
           }
           .months{
             .select-input{
               .css-10nd86i {
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
               }
             }
           }
@@ -417,13 +417,13 @@
           .btn-light{
             height: auto;
             background-color: $light-gray;
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: corner-values(0 0 0 20px) !important;
             @include box-shadow;
             width: 100%;
           }
           .btn-primary{
             width: 100%;
-            border-radius: side-values(0 20px 20px 0) !important;
+            border-radius: corner-values(0 20px 20px 0) !important;
             height: auto;
             @include box-shadow;
             text-align: $right;
@@ -515,7 +515,7 @@
     margin-bottom: 5px;
     padding: side-values(10px);
     padding-bottom: 50px;
-    border-radius: side-values(20px 0 20px 20px) !important;
+    border-radius: corner-values(20px 0 20px 20px) !important;
     @include margin-right(0px);
     @include margin-left(0px);
     label{
@@ -607,7 +607,7 @@
           width: 66px;
           text-align: center;
           background: $light-gray !important;
-          border-radius: side-values(0 20px 20px 20px) !important;
+          border-radius: corner-values(0 20px 20px 20px) !important;
           margin-#{$right}: 10px;
           color: $black;
           .icon-edit{

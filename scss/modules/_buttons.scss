@@ -55,11 +55,11 @@
 
 .btn-facebook {
   background: $white;
-  border-radius: side-values(0 0 0 $border-radius-base) !important;
+  border-radius: corner-values(0 0 0 $border-radius-base) !important;
 }
 .btn-google {
   background: $white;
-  border-radius: side-values(0 0 $border-radius-base 0) !important;
+  border-radius: corner-values(0 0 $border-radius-base 0) !important;
   height: 100%;
   img {
     width: 25px;

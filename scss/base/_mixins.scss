@@ -33,7 +33,7 @@
 }
 
 @mixin rounded-rectangle {
-  border-radius: side-values(20px 0 20px 20px) !important;
+  border-radius: corner-values(20px 0 20px 20px) !important;
   @include box-shadow;
 }
 

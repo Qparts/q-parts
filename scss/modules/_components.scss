@@ -253,7 +253,7 @@
 
 
 .rounded-rectangle {
-  border-radius: side-values(20px 0 20px 20px) !important;
+  border-radius: corner-values(20px 0 20px 20px) !important;
   @include box-shadow;
 }
 
@@ -420,11 +420,11 @@
     }
   .swiper-slide{
       &:first-child{
-        border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+        border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
         overflow: hidden;
       }
       &:last-child{
-        border-radius: side-values(0 $border-radius-base $border-radius-base 0 );
+        border-radius: corner-values(0 $border-radius-base $border-radius-base 0 );
         overflow: hidden;
       }
     }
