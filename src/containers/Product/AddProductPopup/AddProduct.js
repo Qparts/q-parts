@@ -105,7 +105,7 @@ class AddProduct extends Component {
               <div id="product" className="container-fluid">
                 <div className="title">
 
-                  <p><span><i className="icon-heart" />{dataMobile.location.state.data.quantity} Item </span>Added To Cart</p>
+                  <p><span className="span-parent"><span><i className="icon-checked" /></span><span>{dataMobile.location.state.data.quantity} Item </span></span>Added To Cart</p>
                 </div>
                 <form onSubmit={this.handleSubmit}>
                   <div className="row">

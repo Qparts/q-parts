@@ -637,11 +637,16 @@
   padding-bottom: 50px;
   .title {
     margin-bottom: 36px;
-    span {
+    .span-parent {
       border-bottom: 2px solid red;
+      display: flex;
+      @include margin-right(8px);
+      line-height: 21px;
     }
     i {
-      font-size: 20px;
+      font-size: 30px;
+      color: $brand-color;
+      @include margin-right(10px);
     }
     p {
       font-family: Roboto;
@@ -652,6 +657,7 @@
       line-height: 20px;
       letter-spacing: normal;
       text-align: $left;
+      display: flex;
     }
   }
   .vehicle-information {
@@ -835,6 +841,34 @@
       margin-left: 10px;
       i{
         @include margin-left(6px);
+      }
+    }
+  }
+}
+.modal-header{
+  .modal-title{
+    .title{
+      .span-parent {
+        border-bottom: 2px solid red;
+        display: flex;
+        @include margin-right(8px);
+        line-height: 21px;
+      }
+      i {
+        font-size: 30px;
+        color: $brand-color;
+        @include margin-right(10px);
+      }
+      p {
+        font-family: Roboto;
+        font-size: 30px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 20px;
+        letter-spacing: normal;
+        text-align: $left;
+        display: flex;
       }
     }
   }
