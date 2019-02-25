@@ -79,8 +79,20 @@
   border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 }
 
-@mixin fill-border-left($size) {
-  border-#{$left}: $size white solid;
+@mixin fill-border-right($size, $color) {
+  @if $size == none {
+    border-#{$right}: none;
+  } @else {
+    border-#{$right}: $size $color solid;
+  }
+}
+
+@mixin fill-border-left($size, $color: $white) {
+  @if $size == none {
+    border-#{$left}: none;
+  } @else {
+    border-#{$left}: $size $color solid;
+  }
 }
 
 @mixin text-capitalize {
@@ -99,18 +111,17 @@
   text-align: $left !important;
 }
 
-@mixin d-inline{
+@mixin d-inline {
   display: inline;
 }
 
-@mixin d-block{
+@mixin d-block {
   display: block;
 }
 
-@mixin d-inline-block{
+@mixin d-inline-block {
   display: inline-block;
 }
-
 
 //@include font
 
@@ -121,8 +132,7 @@
     font-style: $style;
 
     src: url('#{$file-path}/#{$font-family}.eot');
-    src: url('#{$file-path}/#{$font-family}.eot?#iefix')
-        format('embedded-opentype'),
+    src: url('#{$file-path}/#{$font-family}.eot?#iefix') format('embedded-opentype'),
       url('#{$file-path}/#{$font-family}.woff') format('woff'),
       url('#{$file-path}/#{$font-family}.ttf') format('truetype'),
       url('#{$file-path}/#{$font-family}.svg##{$font-family}') format('svg');
@@ -179,22 +189,13 @@
   animation-delay: $delay;
 }
 
-@mixin gradient-vertical(
-  $start-color: #555,
-  $end-color: #333,
-  $start-percent: 0%,
-  $end-percent: 100%
-) {
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
   background-image: -webkit-linear-gradient(
     top,
     $start-color $start-percent,
     $end-color $end-percent
   ); // Safari 5.1-6, Chrome 10+
-  background-image: -o-linear-gradient(
-    top,
-    $start-color $start-percent,
-    $end-color $end-percent
-  ); // Opera 12
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // Opera 12
   background-image: linear-gradient(
     to bottom,
     $start-color $start-percent,

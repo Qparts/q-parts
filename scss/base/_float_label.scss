@@ -12,9 +12,8 @@
   @mixin float-label {
     label, > span {
       position: absolute;
-      @include margin-left(15px);
       z-index: 10;
-      #{$left}: 0;
+      #{$left}: 15px;
       top: 0;
       cursor: text;
       font-size: 75%;

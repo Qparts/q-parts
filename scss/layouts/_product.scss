@@ -599,7 +599,7 @@
       line-height: normal;
       letter-spacing: -3px;
       @include padding-left(2px);
-      @include fill-border-left(2px);
+      @include fill-border-left(2px, $white);
 
       span {
         @include font-size(30px);

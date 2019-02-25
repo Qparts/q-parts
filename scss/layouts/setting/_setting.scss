@@ -2,7 +2,7 @@
   position: relative;
   .header-settings{
     background: $light-gray;
-    float: right;
+    float: $right;
     @include margin-right(-1px);
     i{
       display: flex;
@@ -33,7 +33,7 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: normal;
-          text-align: left;
+          text-align: $left;
           color: #37363b;
           display: flex;
           p{
@@ -45,10 +45,10 @@
     }
       div{
         display: flex;
-        padding: side-values(21px 100px 0 31px);
+        padding: 21px 100px 0 31px;
         background: $white;
         @include box-shadow;
-        border-radius: side-values(0 0 0 20px);
+        border-radius: corner-values(0 0 0 20px);
         img{
           width: 60px;
           height: 60px;
@@ -59,6 +59,7 @@
     display: flex;
     .user-profile{
       display: flex;
+      align-items: center;
       img{
         @include margin-right(12px);
         border-radius: 50px;
@@ -75,7 +76,7 @@
         font-style: normal;
         font-stretch: normal;
         letter-spacing: normal;
-        text-align: left;
+        text-align: $left;
         color: #fefeff;
         text-transform: capitalize;
         margin-top: 5px;
@@ -102,12 +103,13 @@
     letter-spacing: normal;
   }
   #setting-details {
+    @include text-left;
     padding-top: 70px;
     .wahtsapp-before-links{
       .bg-whatsapp{
         text-transform: none;
         color: black;
-        border-radius: side-values(20px 20px 0px 20px) !important;
+        border-radius: corner-values(20px 20px 0px 20px) !important;
         span{
           font-size: 9px;
           width: fit-content !important;
@@ -123,12 +125,15 @@
     }
     .list-group:first-child {
       .list-group-item:first-child {
-        margin-top: 0px;;
+        margin-top: 0px;
+      }
+      .list-group-item:last-child {
+        border-radius: inherit;
       }
     }
     .list-group-item.active{
       background: #fdeceb;
-      border-right: 2px solid $brand-color;
+      @include fill-border-right(2px, $brand-color);
       color: $black;
       border-top: none;
       border-bottom: none;
@@ -142,7 +147,7 @@
     background: linear-gradient(to top, #f9f9f9, $white);
     text-transform: none;
     color: black;
-    border-radius: side-values(20px 20px 0px 20px) !important;
+    border-radius: corner-values(20px 20px 0px 20px) !important;
     span{
       width: 90px;
       text-align: $left;
@@ -167,11 +172,12 @@
   }
 }
 #setting-mobile{
+  @include text-left;
   padding-bottom: 30px;
   background: $light-gray;
   .header-settings{
     background: $light-gray;
-    float: right;
+    float: $right;
     @include margin-right(-1px);
     i{
       display: flex;
@@ -202,7 +208,7 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: normal;
-          text-align: left;
+          text-align: $left;
           color: #37363b;
           display: flex;
           p{
@@ -214,10 +220,10 @@
     }
       div{
         display: flex;
-        padding: side-values(21px 100px 0 31px);
+        padding: 21px 100px 0 31px;
         background: $white;
         @include box-shadow;
-        border-radius: side-values(0 0 0 20px);
+        border-radius: corner-values(0 0 0 20px);
         img{
           width: 60px;
           height: 60px;
@@ -243,7 +249,7 @@
         font-style: normal;
         font-stretch: normal;
         letter-spacing: normal;
-        text-align: left;
+        text-align: $left;
         color: #fefeff;
         text-transform: capitalize !important;
         margin-top: 5px;
@@ -270,7 +276,7 @@
   }
   .list-group{
     .list-group-item{
-      border-left: none;
+      @include fill-border-left(none);
       margin-top: 2px;
       border-top: none;
       border-radius: 0px;
@@ -283,7 +289,7 @@
   }
   .list-group-item.active{
     background: #fdeceb;
-    border-right: 2px solid $brand-color;
+    @include fill-border-right(2px, $brand-color);
     color: $black;
     border-top: none;
     border-bottom: none;
@@ -296,7 +302,7 @@
     background: linear-gradient(to top, #f9f9f9, $white);
     text-transform: none;
     color: black;
-    border-radius: side-values(20px 20px 0px 20px) !important;
+    border-radius: corner-values(20px 20px 0px 20px) !important;
     span{
       width: 90px;
       text-align: $left;
