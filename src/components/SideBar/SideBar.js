@@ -11,7 +11,7 @@ class SideBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebarDocked: false,
+      sidebarOpen: false,
     };
 
     this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
@@ -19,7 +19,7 @@ class SideBar extends React.Component {
 
   componentWillMount() {
     mql.addListener(this.mediaQueryChanged);
-    this.setState({ sidebarDocked: this.props.sidebarDocked});
+    this.setState({ sidebarOpen: this.props.sidebarDocked});
   }
 
   componentWillUnmount() {
@@ -28,30 +28,34 @@ class SideBar extends React.Component {
 
 
   mediaQueryChanged() {
-    this.setState({ sidebarDocked: !this.props.open});
+    this.setState({ sidebarOpen: !this.props.open});
   }
   handleClick = () =>{
-    this.setState({ sidebarDocked: !this.props.sidebarDocked});
+    this.setState({ sidebarOpen: !this.props.sidebarOpen});
+  }
+  onSetSidebarOpen = (close) => {
+    this.setState({ sidebarOpen: close })
   }
 
   render() {
     const sidebarStyles = {
-  sidebar: {
-    width: 300
-  }
-};
+      sidebar: {
+        width: 300
+    }
+    };
     return (
       <Fragment>
-      <div className="col">
-       <button className="btn btn-primary" onClick={()=> this.setState({sidebarDocked: !this.state.sidebarDocked})}>open</button>
+      <div className="side-bar-compnent-btn">
+       <button className={this.state.sidebarOpen ? "none-active-btn" :"btn btn-primary" } onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>open sidebar</button>
       </div>
-      <div className={this.state.sidebarDocked ? "side-bar" :"none-active" }>
+      <div className={this.state.sidebarOpen ? "side-bar" :"none-active" }>
         <Sidebar
           sidebarClassName="Sidebar"
           styles={ sidebarStyles }
-          sidebar={<b><Button text="back" className="btn-back" icon="icon-arrow-left" onClick={()=> this.setState({sidebarDocked: !this.state.sidebarDocked})} isReverseOrder/><SettingLinks {...this.props} /></b>}
-          open={this.state.sidebarDocked}
+          sidebar={<b><Button text="back" className="btn-back" icon="icon-arrow-left" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})} isReverseOrder/><SettingLinks {...this.props} /></b>}
+          open={this.state.sidebarOpen}
           onClick={this.handleClick}
+          onSetOpen={this.onSetSidebarOpen}
           pullRight={true}
         >
         </Sidebar>
