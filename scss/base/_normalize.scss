@@ -16,6 +16,7 @@ color: $basic-gray;
   };
 }
 .list-inline{
+  @include padding-left(0);
   li{
     @extend .list-inline-item;
   }

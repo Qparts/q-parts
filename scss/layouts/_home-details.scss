@@ -62,12 +62,12 @@
       &.swiper-button-next{
         background-color: $brand-color;
         top: -305px;
-        border-radius: side-values($border-radius-base 0 0 0);
+        border-radius: corner-values($border-radius-base 0 0 0);
       }
       &.swiper-button-prev{
         background-color: $basic-gray;
         top: -162.5px;
-        border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+        border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
       }
       &:before{
         color: $white;
@@ -301,17 +301,17 @@
         }
         &:first-child{
           .form-control{
-            border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+            border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
             @include media-breakpoint-down(md){
-              border-radius: side-values($border-radius-base 0 0 0);
+              border-radius: corner-values($border-radius-base 0 0 0);
             }
           }
         }
       }
         .form-control{
-          border-radius: side-values(0 0 $border-radius-base 0);
+          border-radius: corner-values(0 0 $border-radius-base 0);
           @include media-breakpoint-down(md){
-            border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+            border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
             margin-bottom: 5px;
           }
         }
@@ -390,21 +390,21 @@
     &:first-child{
       @include media-breakpoint-up(lg){
         figure{
-          border-radius: side-values($border-radius-base 0 0 0);
+          border-radius: corner-values($border-radius-base 0 0 0);
         }
       };
     }
     &:last-child{
       @include media-breakpoint-up(lg){
         figure{
-          border-radius: side-values(0 0 $border-radius-base 0);
+          border-radius: corner-values(0 0 $border-radius-base 0);
         }
       }
     }
     &:nth-child(4){
         @include media-breakpoint-up(lg){
           figure{
-            border-radius: side-values(0 0 0 $border-radius-base);
+            border-radius: corner-values(0 0 0 $border-radius-base);
           }
         }
     }
@@ -489,17 +489,17 @@
       }
     &:first-child{
       a{
-        border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+        border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
         @include media-breakpoint-down(sm){
-          border-radius: side-values($border-radius-base 0 0 0);
+          border-radius: corner-values($border-radius-base 0 0 0);
         }
       }
     }
     &:last-child{
       a{
-        border-radius: side-values(0 $border-radius-base $border-radius-base 0);
+        border-radius: corner-values(0 $border-radius-base $border-radius-base 0);
         @include media-breakpoint-down(sm){
-          border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+          border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
         }
       }
     }
@@ -639,6 +639,7 @@
     };
   }
   .nav{
+    @include padding-left(0);
     margin-bottom: 25px;
     @include media-breakpoint-down(sm){
       display: none;

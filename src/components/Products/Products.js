@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Stars from 'react-stars';
-import { sliderSetting, starsRating } from '../../constants';
+import { sliderSetting, starsRating, params } from '../../constants';
 import Title from '../UI/Title';
 
 import './Products.css';
@@ -59,38 +59,8 @@ class Products extends Component {
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
     const { bestSeller, offers } = this.state
-    const params = {
-      containerClass: `swiper-container products-list`,
-      slidesPerView: 5,
-      spaceBetween: 30,
-      grabCursor: true,
-      lazy: true,
-      rebuildOnUpdate: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 30
-        },
-        992: {
-          slidesPerView: 4,
-          spaceBetween: 15
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 15
-        },
-        576: {
-          slidesPerView: 2,
-          spaceBetween: 15
-        },
-      }
-    }
     return (
       <section className="products-sec">
         <div className="container-fluid">
@@ -109,7 +79,7 @@ class Products extends Component {
           <div className="tab-content">
             <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
               <h3>Best Seller</h3>
-              <Swiper {...params}>
+              <Swiper {...params(direction)}>
                 {
                   
                   bestSeller.map((product, idx) => (

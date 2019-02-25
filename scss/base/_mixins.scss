@@ -123,6 +123,22 @@
   display: inline-block;
 }
 
+@mixin swiper-button-next {
+  @if ($dir == ltr) {
+    #{$right}: -2px;
+  } @else {
+    #{$right}: 30px;
+  }
+}
+
+@mixin swiper-button-prev {
+  @if ($dir == ltr) {
+    #{$right}: 30px;
+  } @else {
+    #{$right}: -2px;
+  }
+}
+
 //@include font
 
 @mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {

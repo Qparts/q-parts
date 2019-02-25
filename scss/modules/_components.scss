@@ -409,6 +409,7 @@
     };
   }
   .swiper-container{
+    @include text-left;
     overflow: visible !important;
   }
   .swiper-wrapper,
@@ -448,7 +449,7 @@
       li{
         @include font-size(14px);
         color: $light-charcoal-grey;
-        border-left: 1px solid darken($light-gray, 10%);
+        @include fill-border-left(1px, darken($light-gray, 10%));
         line-height: 15px;
         padding-#{$left}: 0.5rem;
         strong{
@@ -486,21 +487,21 @@
   .swiper-button-next,
   .swiper-button-prev{
         top: -18px;
-        left: auto;
+        #{$left}: auto;
         @include font-size(26px);
         @include media-breakpoint-down(sm){
           margin-top: -24px;
         };
   }
   .swiper-button-next{
-      right: -2px;
+    @include swiper-button-next;
     }
   .swiper-button-prev{
-      right: 30px;
+    @include swiper-button-prev;
     }
   .swiper-left{
     top: 0;
-    left: -500%;
+    #{$left}: -500%;
     width: 500%;
     height: 100%;
     background: $white;

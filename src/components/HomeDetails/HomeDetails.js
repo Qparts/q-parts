@@ -17,7 +17,7 @@ class HomeDetails extends Component {
 						<OrderSteps/>
 						<div className="order-form">
 							<header className="row">
-								<h2 className="col col-10 offset-lg-1">
+								<h2 className="col col-10 mx-auto">
 									<span className="arrow"><i className="icon-arrow-down" /></span>Start Now
 								</h2>
 							</header>
@@ -167,6 +167,7 @@ class HomeDetails extends Component {
 						addRecentViewedProducts={addRecentViewedProducts}
 						onRecentlyViewedProducts={onRecentlyViewedProducts}
 						translate={translate}
+						direction={direction}
 						/>
 			</Fragment>
 		);
