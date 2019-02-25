@@ -217,10 +217,11 @@ class ProductDetail extends Component {
 
   renderSpecs = (isList = false) => {
     const { specs } = this.state.product;
+    const { translate } = this.props
     let Component = isList ? ListGroupItem : Fragment;
 
     if (specs.length < 1) return <div>
-      <span>no spec for this product</span>
+      <span>{translate("product.specs.noSpecs")}</span>
     </div>
 
     else {
@@ -253,7 +254,7 @@ class ProductDetail extends Component {
         </div>
       </div>
       <div className="col-3 btn btn-wishlist pt-18">
-        <Link to="#" className="btn btn-primary" icon="icon-heart" onClick={this.handleAddWishlist}/>
+        <Link to="#" className="btn btn-primary" icon="icon-heart" onClick={this.handleAddWishlist} />
       </div>
     </div>
   }
@@ -371,6 +372,11 @@ class ProductDetail extends Component {
         </div>
       )
 
+    const chatMessages = [
+      translate("customerService.product.whatsApp.header"),
+      translate("customerService.product.whatsApp.subHeader")
+    ];
+
     return (
       <Switch>
         <Route path={'/products/:productId'} exact >
@@ -381,7 +387,10 @@ class ProductDetail extends Component {
                   <div className="row top-row">
                     <div className="col-5 group-header-opacity_first">
                       <div className="btn btn-back">
-                        <Link to="#" className="btn btn-primary" text={"back"} icon="icon-back" isReverseOrder />
+                        <Link to="#"
+                          className="btn btn-primary"
+                          text={translate("product.buttons.back")}
+                          icon="icon-back" isReverseOrder />
                       </div>
                     </div>
                     <div className="col-7">
@@ -430,7 +439,7 @@ class ProductDetail extends Component {
                               <span className="h-seperator" />
                             </div>
                             <div className="col-12 product-item_specs">
-                              <span>Specifications</span>
+                              <span>{translate("product.specs.title")}</span>
                               {this.renderSpecs()}
                             </div>
                             <div className="col-12 d-flex product-item_buttons">
@@ -448,7 +457,7 @@ class ProductDetail extends Component {
                             <div className="col-12 product-item_detail_footer">
                               <span className="h-seperator" />
                               <CustomerService
-                                messages={["Have a Question? Ask a Specialis, In-House Experts.", "We know our products"]}
+                                messages={chatMessages}
                                 url="" />
                             </div>
                           </div>

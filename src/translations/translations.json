@@ -4,7 +4,7 @@
       "بحث",
       "find"
     ],
-    "search" : [
+    "search": [
       "بحث",
       "Search"
     ],
@@ -46,6 +46,14 @@
       "send": [
         "إرسال",
         "Send"
+      ],
+      "checkout": [
+        "الدفع",
+        "Checkout"
+      ],
+      "continueShopping": [
+        "مواصلة التسوق",
+        "Continue Shopping"
       ]
     },
     "arabic": [
@@ -82,24 +90,23 @@
       "اختر المقاس",
       "Select Size"
     ],
-    "popularSizes":[
+    "popularSizes": [
       "المقاسات الأكثر طلبا",
       "Popular Tyre Sizes"
     ]
   },
   "motorOilPage": {
-    "selectViscosity":[
+    "selectViscosity": [
       "اختر درجة اللزوجة",
       "Select Viscosity Grade"
     ],
-    "popularGrades":[
+    "popularGrades": [
       "الدرجات الأكثر طلبا",
       "Popular Viscosity Grades"
     ]
   },
-
-  "nav":{
-    "tires" :[
+  "nav": {
+    "tires": [
       "الاطارات",
       "Tires"
     ],
@@ -107,251 +114,250 @@
       "طلب تسعيرة",
       "Quotation Order"
     ],
-    "coolant":[
+    "coolant": [
       "سوائل التبريد",
       "Coolant"
     ],
-    "consumableParts":[
+    "consumableParts": [
       "القطع الاستهلاكية",
       "Consumable Parts"
     ],
-    "acFilter":[
+    "acFilter": [
       "فلاتر المكيف",
       "AC Filters"
     ],
-    "sparkPlugs":[
+    "sparkPlugs": [
       "بواجي",
       "Spark Plugs"
     ],
-    "oilFilter":[
+    "oilFilter": [
       "فلاتر الزيت",
       "Oil Filters"
     ],
-    "airFilter":[
+    "airFilter": [
       "فلاتر الهواء",
       "Air Filters"
     ],
-    "brakePads":[
+    "brakePads": [
       "فحمات فرامل",
       "Brake Pads"
     ],
-    "oil":[
+    "oil": [
       "الزيوت و السوائل",
       "Oils and Fluids"
     ],
-    "motorOil":[
+    "motorOil": [
       "زيوت المحرك",
       "Motor Oils"
     ],
-    "gearOil":[
+    "gearOil": [
       "زيوت التروس",
       "Gear Oils"
     ],
-    "grease":[
+    "grease": [
       "زيوت التشحيم",
       "Grease"
     ],
-    "tools":[
+    "tools": [
       "معدات",
       "Tools"
     ],
-    "handTools":[
+    "handTools": [
       "معدات يدوية",
       "Hand Tools"
     ],
-    "electricalTools":[
+    "electricalTools": [
       "معدات كهربائية",
       "Electrical Tools"
     ],
-    "tyreInflator":[
+    "tyreInflator": [
       "منفاخ اطارات",
       "Tyre Inflators"
     ],
-    "repairEquipment":[
+    "repairEquipment": [
       "معدات تصليح",
       "Repair Equipment"
     ],
-    "accessorise":[
+    "accessorise": [
       "اكسسوارات",
       "Accessorise"
     ],
-    "carAccessorise":[
+    "carAccessorise": [
       "اكسسوارات السيارة",
       "Car Accessorise"
     ],
-    "exteriorAccessorise":[
+    "exteriorAccessorise": [
       "اكسسوارات خارجية",
       "Exterior Accessorise"
     ],
-    "carMats":[
+    "carMats": [
       "سجادات السيارة",
       "Car Mats"
     ],
-    "wiresAndCables":[
+    "wiresAndCables": [
       "اسلاك",
       "Wires and Cables"
     ],
-    "Covers":[
+    "Covers": [
       "اغطية",
       "Covers"
     ],
-    "carFirstAidKit":[
+    "carFirstAidKit": [
       "عدة الاسعافات الأولية",
       "Car First Aid Kits"
     ],
-    "InternalLights":[
+    "InternalLights": [
       "الانوار الداخلية",
       "Internal Lights"
     ],
-    "toolKits":[
+    "toolKits": [
       "طقم معدات",
       "Tool Kits"
     ],
-    "sunCurtains":[
+    "sunCurtains": [
       "ستائر الشمس",
       "Sun Curtains"
     ],
-    "carSunShade":[
+    "carSunShade": [
       "مظلات الشمس",
       "Car Sun Shades"
     ],
-    "towingTools":[
+    "towingTools": [
       "ادوات القطر",
       "Towing Tools"
     ],
-    "bodyworkCleaningAndCare":[
+    "bodyworkCleaningAndCare": [
       "التنظيف و العناية بالسيارة",
       "Bodywork Cleaning and Care"
     ],
-    "carRefrigerator":[
+    "carRefrigerator": [
       "ثلاجات السيارة",
       "Car Refrigerators"
     ],
-    "childSeat":[
+    "childSeat": [
       "مقاعد الاطفال",
       "Children Seats"
     ],
-    "carCare":[
+    "carCare": [
       "العناية بالسيارة",
       "Car Care"
     ],
-    "motorCareLiquids":[
+    "motorCareLiquids": [
       "زيوت العناية بالمحرك",
       "Motor Care Liquids"
     ],
-    "washCleanersAndPolishers":[
+    "washCleanersAndPolishers": [
       "معدات تنظيف و تلميع السيارة",
       "Cleaners and Polishers"
     ],
-    "sportsAndOutdoors":[
+    "sportsAndOutdoors": [
       "الرياضات و الأنشطة الخارجية",
       "Sports and Outdoors"
     ],
-    "country":[
+    "country": [
       "البلد",
       "Country"
     ],
-    "shippingAndDelivery":[
+    "shippingAndDelivery": [
       "الشحن و التوصيل",
       "Shipping and Delivery"
     ],
-    "returns":[
+    "returns": [
       "الاسترجاع",
       "Returns"
     ],
-    "contactUs":[
+    "contactUs": [
       "اتصل بنا",
       "Contact Us"
     ],
-    "privacyPolicy":[
+    "privacyPolicy": [
       "سياسة الخصوصية",
       "Privacy Policy"
     ],
-    "termsAndConditions":[
+    "termsAndConditions": [
       "الشروط و الاحكام",
       "Terms and Conditions"
     ],
-    "oneOfTheIncubatedProjects":[
+    "oneOfTheIncubatedProjects": [
       "واحد من المشاريع المحتضنة",
       "One of the Incubated Projects"
     ]
-
   },
-  "quotationOrder":{
-    "title" :[
+  "quotationOrder": {
+    "title": [
       "طلب تسعيرة",
       "Qutation Order"
     ],
-    "weMoveFast" :[
+    "weMoveFast": [
       "نحن نتحرك بسرعة",
       "We Move Fast"
     ],
-    "request" :[
+    "request": [
       "أرسل لنا طلبك و سوف نرسل لك الأسعار و جميع التفاصيل الأخرى",
       "Send Us Your Request and We Will Respond With the Prices and All Other Details"
     ],
-    "parts" :[
+    "parts": [
       "اسم, رقم أو صورة القطعة",
       "Part Name, Number or image"
     ],
-    "vin" :[
+    "vin": [
       "رقم الشاصي أو صورة الاستمارة",
       "Vin Number or Vechile ID image"
     ],
-    "shopNow" :[
+    "shopNow": [
       "تسوق الان",
       "Shop Now"
     ],
-    "tires" :[
+    "tires": [
       "الاطارات",
       "Tires"
     ],
-    "tools" :[
+    "tools": [
       "معدات",
       "Tools"
     ],
-    "accessories" :[
+    "accessories": [
       "اكسسوارات السيارة",
       "Accessories"
     ],
-    "outdoors" :[
+    "outdoors": [
       "في الهواء الطلق",
       "Outdoors"
     ],
-    "carCare" :[
+    "carCare": [
       "العناية بالسيارة",
       "Car Care"
     ],
-    "mustHaves" :[
+    "mustHaves": [
       "ما تحتاجه كل سيارة",
       "Must Have for Every Car"
     ],
-    "oilFilter":[
+    "oilFilter": [
       "فلاتر الزيت",
       "Oil Filters"
     ],
-    "premium" :[
+    "premium": [
       "زيت فاخر لمحرك سيارتك",
       "Premium Quality Oil for Your Engine"
     ],
-    "airFilter":[
+    "airFilter": [
       "فلاتر الهواء",
       "Air Filters"
     ],
-    "max" :[
+    "max": [
       "احصل على أفضل أداء لمحرك سيارتك",
       "Maximize Engine Performance"
     ],
-    "brakePads":[
+    "brakePads": [
       "فحمات فرامل",
       "Brake Pads"
     ],
-    "trusted" :[
+    "trusted": [
       "احصل على قوة التسوق الموثوق",
       "Get trusted shopping power"
     ],
     "vendor": {
-      "items" :[
+      "items": [
         "نوفر أكثر من ٥٠٠٠٠ قطعة",
         "We offer more than 50000 different items"
       ],
@@ -360,7 +366,7 @@
         "VENDOR! Join q.parts.com"
       ]
     },
-    "oil":[
+    "oil": [
       "الزيوت و السوائل",
       "Oils"
     ],
@@ -889,7 +895,7 @@
         "شوهدت مؤخرا",
         "Recently viewed"
       ],
-      "topBrands":[
+      "topBrands": [
         "أفضل الماركات",
         "Top Brands"
       ]
@@ -1092,7 +1098,7 @@
     }
   },
   "setting": {
-    "signout":[
+    "signout": [
       "تسجيل خروج",
       "Sign Out"
     ],
@@ -1490,6 +1496,10 @@
       "addToCart": [
         "أضف إلى السلة",
         "Add to cart"
+      ],
+      "back": [
+        "الى الخلف",
+        "back"
       ]
     },
     "compare": [
@@ -1504,6 +1514,16 @@
       "تفاصيل المنتج",
       "Product details"
     ],
+    "specs": {
+      "title": [
+        "مواصفات",
+        "Specifications"
+      ],
+      "noSpecs": [
+        "لا توجد مواصفات لهذا المنتج",
+        "There is no spec for this product"
+      ]
+    },
     "titleReviews": [
       "تعليقات المنتج",
       "Product reviews"
@@ -1993,6 +2013,20 @@
         "في أي مكان تحب",
         "anywhere you love"
       ]
+    }
+  },
+  "customerService": {
+    "product": {
+      "whatsApp": {
+        "header": [
+          "لدي سؤال؟ اسأل اختصاصي ، خبراء داخلي.",
+          "Have A Question? Ask A Specialist, In-House Experts."
+        ],
+        "subHeader": [
+          "نحن نعرف منتجاتنا",
+          "We Know Our Products"
+        ]
+      }
     }
   }
 }

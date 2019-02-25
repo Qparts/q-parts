@@ -1,13 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { Field, reduxForm, getFormValues } from 'redux-form';
-import Button from '../../../components/UI/Button';
-import RenderFileInput from '../../../components/RenderFileInput/RenderFileInput';
-import RenderField from '../../../components/RenderField/RenderField';
-import * as validations from '../../../utils';
+import React, { Component} from 'react';
 import { getTranslatedString } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
 import { right } from '../../../utils';
-import SelectInput from '../../../components/SelectInput/SelectInput';
 import { getLength } from '../../../utils/array';
 import Stars from 'react-stars';
 import * as constant from '../../../constants';
@@ -90,12 +84,12 @@ class AddProduct extends Component {
       <div className="btn-footer col-12">
         <div className="group-shadow-input group-shadow-div"></div>
         <MediumScreen>
-          <button className="btn btn-primary" onClick={this.continueShopping}>Continue Shopping</button>
-          <button onClick={this.handleSubmit} className="btn check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+          <button className="btn btn-primary" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
+          <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
         </MediumScreen>
         <SmallScreen>
-          <button className="btn btn-primary" onClick={this.continueShoppingMoblile}>Continue Shopping</button>
-          <button onClick={this.handleSubmit} className="btn check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+          <button className="btn btn-primary" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
+          <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
         </SmallScreen>
       </div>
     </form>
@@ -150,22 +144,18 @@ class AddProduct extends Component {
         <div className="btn-footer col-12">
           <div className="group-shadow-input group-shadow-div"></div>
           <MediumScreen>
-            <button className="btn btn-primary" onClick={this.continueShopping}>Continue Shopping</button>
-            <button onClick={this.handleSubmit} className="btn check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button className="btn btn-primary" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </MediumScreen>
           <SmallScreen>
-            <button className="btn btn-primary" onClick={this.continueShoppingMoblile}>Continue Shopping</button>
-            <button onClick={this.handleSubmit} className="btn check-out">Check Out<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button className="btn btn-primary" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </SmallScreen>
         </div>
       </form>
     </section>
   }
 }
-AddProduct = reduxForm({
-  form: 'AddProduct',
-  enableReinitialize: true
-})(AddProduct)
 
 const withAddProduct = withRouter(AddProduct);
 

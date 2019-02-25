@@ -1,3 +1,7 @@
+.list-group {
+  @include padding-left(0);
+}
+
 .list-group-item {
     position: relative;
     display: block;
