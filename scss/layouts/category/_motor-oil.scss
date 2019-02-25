@@ -10,11 +10,6 @@
     background: white;
     margin-bottom: 50px;
   }
-  @media (min-width: 992px) {
-    .main-cat a:first-child figure {
-      border-radius: 20px 0 0 20px;
-    }
-  }
   header{
     padding-bottom: 20px;
     h1{
@@ -65,6 +60,54 @@
     }
     .products-sec{
       margin-top: 0px;
+    }
+  }
+  .oil-img{
+    @media (min-width: 992px) {
+      .main-cat li:first-child img {
+        border-radius: 20px 0 0 20px;
+      }
+    }
+    @media (min-width: 992px) {
+      .main-cat li:last-child img {
+        border-radius: 0 0 20px 0;
+      }
+    }
+    .main-cat{
+      ul{
+        list-style-type: none;
+        padding-bottom: 40px;
+        @include padding-left(0px);
+        li{
+          position: relative;
+          margin-bottom: 5px;
+          span{
+            position: absolute;
+            top: 50%;
+            #{$left}: 50%;
+            transform: translate(-50%,-50%);
+            text-transform: uppercase;
+            .btn-primary{
+              background-color: rgba(237, 64, 54, 0.8);
+              margin-bottom: 0px;
+            }
+            h4{
+              font-family: Roboto;
+              font-size: 40px;
+              font-weight: 300;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              text-align: $left;
+              color: $white;
+            }
+          }
+          img{
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }

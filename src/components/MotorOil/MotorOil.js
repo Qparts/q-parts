@@ -78,35 +78,11 @@ class MotorOil extends Component {
 				<section id="motor-oil">
 					<div className="oil-img">
 						<section className="main-cat container-fluid">
-							<div className="row">
-								<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
-									<figure>
-										<img src="/img/motor-oil.png" alt="Oil" />
-										<figcaption>
-											<h4>{translate("navBar.motorOil")}</h4>
-										</figcaption>
-										<span>{translate("quotationOrder.shopNow")}</span>
-									</figure>
-								</Link>
-								<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
-									<figure>
-										<img src="/img/tyres.png" alt="Tires" />
-										<figcaption>
-											<h4>Gear Oil</h4>
-										</figcaption>
-										<span>{translate("quotationOrder.shopNow")}</span>
-									</figure>
-								</Link>
-								<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
-									<figure>
-										<img src="/img/tools.png" alt="Tools" />
-										<figcaption>
-											<h4>Grease</h4>
-										</figcaption>
-										<span>{translate("quotationOrder.shopNow")}</span>
-									</figure>
-								</Link>
-							</div>
+							<ul className="row">
+								<li className="col-lg-4 col-6"><div><img src="/img/motor-oill.jpg" alt="Oil"/> <span><h4>{translate("navBar.motorOil")}</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/motor-oill.jpg" alt="Oil"/> <span><h4>Gear Oil</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/motor-oill.jpg" alt="Oil"/> <span><h4>Grease</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+							</ul>
 						</section>
 					</div>
 					<div className="popular-oil container-fluid">
