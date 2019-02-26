@@ -46,6 +46,22 @@
       "send": [
         "إرسال",
         "Send"
+      ],
+      "checkout": [
+        "الدفع",
+        "Checkout"
+      ],
+      "continueShopping": [
+        "مواصلة التسوق",
+        "Continue Shopping"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ],
+      "wishlist": [
+        "الأماني",
+        "Wishlist"
       ]
     },
     "arabic": [
@@ -1526,27 +1542,27 @@
     }
   },
   "cart": {
-    "table": {
-      "items": [
-        "العناصر",
-        "Items"
-      ],
-      "quantity": [
-        "كمية",
-        "Quantity"
-      ],
-      "price": [
-        "السعر",
-        "price"
-      ],
-      "delete": [
-        "حذف",
-        "Delete"
-      ]
-    },
     "keepShopping": [
       "حافظ على التسوق",
       "Keep shopping"
+    ],
+    "shoppingCart": {
+      "header": [
+        "عربة التسوق",
+        "shopping cart"
+      ],
+      "subHeader": [
+        "عربة",
+        "cart"
+      ]
+    },
+    "shipTo": [
+      "ارسل إلى",
+      "Ship to"
+    ],
+    "item": [
+      "المنتج",
+      "Item(s)"
     ]
   },
   "orderSummary": {
