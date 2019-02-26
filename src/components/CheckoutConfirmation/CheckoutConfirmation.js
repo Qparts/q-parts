@@ -43,7 +43,7 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction } = this.props;
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage } = this.props;
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
@@ -59,6 +59,7 @@ class CheckoutConfirmation extends Component {
                 </div>
                 <div className="col-12 col-md-6 payment-method">
                   <PaymentMethod
+                    currentLanguage={currentLanguage}
                     title={translate("paymentMethod.title")}
                     change={translate("paymentMethod.change")}
                     checkout={checkout}
@@ -72,6 +73,8 @@ class CheckoutConfirmation extends Component {
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
             <RenderCartItem
+              currentLanguage={currentLanguage}
+              translate={translate}
               direction={direction}
               deleteText={translate("cart.table.delete")}
               name="purchasedItems"
@@ -86,7 +89,7 @@ class CheckoutConfirmation extends Component {
             <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
             <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
               <div><p>{translate("checkout.payment.cash.total")}</p>
-                <p>{this.props.total}<sub>SR</sub></p>
+                <p>{this.props.total}<sub>{translate("general.currency")}</sub></p>
               </div>
               <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
           </div>

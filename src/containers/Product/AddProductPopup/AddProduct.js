@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { getTranslatedString } from '../../../utils';
+import { getTranslatedObject } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
 import { right } from '../../../utils';
 import { getLength } from '../../../utils/array';
@@ -60,7 +60,7 @@ class AddProduct extends Component {
           </div>
           <div>
             <span className="product-Name">{translate("general.by")}</span>
-            <span className="product-Name">{getTranslatedString(this.props.data.brand, currentLanguage, 'name', 'nameAr')}</span>
+            <span className="product-Name">{getTranslatedObject(this.props.data.brand, currentLanguage, 'name', 'nameAr')}</span>
             <span className="product-Number"> {this.props.data.productNumber} </span>
             <div className="product-rate">
               <Stars values={this.props.data.averageRating} {...constant.starsRating} />
@@ -120,7 +120,7 @@ class AddProduct extends Component {
             </div>
             <div>
               <span className="product-Name">{translate("general.by")}</span>
-              <span className="product-Name">{getTranslatedString(this.props.data.brand, currentLanguage, 'name', 'nameAr')}</span>
+              <span className="product-Name">{getTranslatedObject(this.props.data.brand, currentLanguage, 'name', 'nameAr')}</span>
               <span className="product-Number"> {this.props.data.productNumber} </span>
               <div className="product-rate">
                 <Stars values={this.props.data.averageRating} {...constant.starsRating} />

@@ -20,7 +20,7 @@ import {
 } from 'reactstrap';
 
 import * as validations from '../../utils';
-import { getTranslatedString } from '../../utils';
+import { getTranslatedObject } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import { right } from '../../utils';
 import _ from 'lodash';
@@ -249,7 +249,7 @@ class ProductDetail extends Component {
         <span className="product-item_desc">{product.desc}</span>
         <div className="product-item_manufacturer">
           <span>{translate("general.by")}</span>
-          <span>{getTranslatedString(product.brand, currentLanguage, 'name', 'nameAr')}</span>
+          <span>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
           <span>{product.productNumber}</span>
         </div>
       </div>

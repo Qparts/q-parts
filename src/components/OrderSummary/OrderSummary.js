@@ -67,31 +67,31 @@ class OrderSummary extends Component {
                           <span className="item-key">{translate("orderSummary.subtotal")}</span>
                           <span className="item-value">
                               {subtotal}
-                              <span>SR</span>
+                              <span>{checkoutData[0].currency}</span>
                           </span>
                           <div className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.shippingCost")}</span>
                           <span className="item-value">
                               35
-                              <span>SR</span>
+                              <span>{checkoutData[0].currency}</span>
                           </span>
                           <div style={styles.secondSperator} className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.total")}</span>
                           <span className="item-value">
                               {total}
-                              <span>SR</span>
+                              <span>{checkoutData[0].currency}</span>
                           </span>
                           <div style={styles.secondSperator} className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.vat")}</span>
                           <span className="item-value">
                               {vat.toFixed(2)}
-                              <span>SR</span>
+                              <span>{checkoutData[0].currency}</span>
                           </span>
                           <div style={styles.secondSperator} className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.grandTotal")}</span>
                           <span className="item-value">
                               {grandTotal.toFixed(2)}
-                              <span>SR</span>
+                              <span>{checkoutData[0].currency}</span>
                           </span>
                       </div>
                   </div>

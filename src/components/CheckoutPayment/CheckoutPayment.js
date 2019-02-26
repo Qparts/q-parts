@@ -340,8 +340,8 @@ class CheckoutPayment extends Component {
             <div className="justify-content-between footer-payment">
               <p>{translate("checkout.payment.canReview")}</p>
               {
-                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
-                  <Button type="button" style={canSubmit? {} : styles.disable} className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
+                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
+                  <Button type="button" style={canSubmit? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon="icon-arrow-right" onClick={this.handleProceed} />
               }
             </div>
           </div>

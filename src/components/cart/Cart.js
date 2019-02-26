@@ -8,7 +8,7 @@ import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import Button from '../UI/Button';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import SectionHeader from '../UI/SectionHeader';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import Stars from 'react-stars';
 import Swiper from 'react-id-swiper';
 import { starsRating } from '../../constants';
@@ -20,6 +20,8 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Title from '../UI/Title';
 
 import Slider from "react-slick";
+import { CustomScreen } from '../Device';
+import CustomerService from '../CustomerService/CustomerService';
 class Cart extends Component {
 	constructor(props) {
 		super(props);
@@ -86,9 +88,9 @@ class Cart extends Component {
 				...item.product,
 				desc: item.product.desc,
 				salesPrice: item.product.salesPrice.toFixed(2),
-				currency: 'SR',
+				currency: translate("general.currency"),
 				quantity: item.quantity,
-				quantityLabel: 'quantity',
+				quantityLabel: translate("general.quantity"),
 				image: item.product.image,
 				productNumber: item.product.productNumber,
 				brand: item.product.brand,
@@ -98,6 +100,11 @@ class Cart extends Component {
 		var subtotal = 0;
 		var quantity = 0;
 		var divItemMovile = "total-sm d-lg-none d-flex align-items-stretch";
+
+		const chatMessages = [
+			translate("customerService.cart.whatsApp.header"),
+			translate("customerService.cart.whatsApp.subHeader")
+		  ];
 
 		for (var i = 0; i < checkoutData.length; i++) {
 			subtotal += checkoutData[i].subtotal;
@@ -146,12 +153,14 @@ class Cart extends Component {
 						<div className="row">
 							<header className="col cart-header">
 								<h1>
-									<span>Shopping</span> Cart<label>{quantity} Items</label>
+									<span>{translate("cart.shoppingCart.header")}</span>
+									<CustomScreen maxWidth={1199.98}>{translate("general.cart")}</CustomScreen>
+									<label>{quantity} {translate("general.item")}</label>
 								</h1>
 							</header>
 							<div className="col-auto">
 								<div className="cart-ship-to">
-									<label>Ship to</label>
+									<label>{translate("cart.shipTo")}</label>
 									<Select
 										classNamePrefix="select"
 										isSearchable={false}
@@ -168,12 +177,14 @@ class Cart extends Component {
 						<div className={divItemMovile}>
 							<div>
 								<label>{translate("orderSummary.total")}</label>
-								<p>{subtotal + 50}<span className="currency">SR</span></p>
+								<p>{subtotal + 50}<span className="currency">{translate("general.currency")}</span></p>
 							</div>
 							<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 						</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<RenderCartItem
+								currentLanguage={this.props.currentLanguage}
+								translate={translate}
 								direction={direction}
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
@@ -190,15 +201,9 @@ class Cart extends Component {
 										<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 									}
 								</div>
-								<a href="#" className="media chat-div">
-									<img src="/img/whatsapp-logo.svg" alt="whatsapp" />
-									<div className="media-body">
-										<p>
-											<span>Have a Question?</span>
-											Ask a Specialis, In-House Experts. We know our products
-									</p>
-									</div>
-								</a>
+								<CustomerService
+									messages={chatMessages}
+									url="" />
 								<div className="banner-250 d-none d-lg-table bg-white">
 									<p className="">
 										Google Ad<br />
@@ -348,7 +353,8 @@ const mapStateToProps = (state) => {
 	return {
 		purchasedItems: state.cart.purchasedItems,
 		translate: getTranslate(state.localize),
-		token: state.customer.token
+		token: state.customer.token,
+		currentLanguage: getActiveLanguage(state.localize).code,
 	}
 }
 const mapDispatchToProps = (dispatch) => {

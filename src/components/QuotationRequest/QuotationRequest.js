@@ -174,7 +174,7 @@ class QuotationRequest extends Component {
 				</section>
 				<section id="custom-details">
 					<div className="container-fluid">
-						<OrderSteps grey="-gs" />
+						<OrderSteps grey="-gs" translate={translate} direction={direction}/>
 						<div className="title-container">
 							<Title header="Parts Request"
 								subHeader="Fill in your vehicle data and the parts you want" />

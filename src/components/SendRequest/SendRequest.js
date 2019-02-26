@@ -5,6 +5,7 @@ import { right, getQuery } from '../../utils';
 import { setQuotationOrder } from '../../actions/customerAction';
 import Title from '../UI/Title';
 import Link from '../UI/Link';
+import { getTranslate } from 'react-localize-redux';
 
 class SendRequest extends Component {
   componentWillUnmount() {
@@ -25,7 +26,7 @@ class SendRequest extends Component {
                 <Title
                   header={"Thank You"} />
                 <h5>Your Request Price number is <b>{params.quotationId}</b> has been sent,<span>we will reply as soon as possible</span></h5>
-                <Link to="/setting/quotations" className="btn btn-light" text="Continue Shopping" />
+                <Link to="/setting/quotations" className="btn btn-light" text={this.props.translate("general.buttons.continueShopping")} />
                 <Link to="/" className="btn btn-primary" text="Requests" icon={`icon-arrow-${right(this.props.direction)}`} />
               </div>
             </div>
@@ -38,7 +39,8 @@ class SendRequest extends Component {
 
 const mapStateToProps = state => {
   return {
-    isQuotationorderCompleted: state.customer.isQuotationorderCompleted
+    isQuotationorderCompleted: state.customer.isQuotationorderCompleted,
+    translate: getTranslate(state.localize),
   }
 }
 

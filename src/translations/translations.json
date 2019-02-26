@@ -54,6 +54,14 @@
       "continueShopping": [
         "مواصلة التسوق",
         "Continue Shopping"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ],
+      "wishlist": [
+        "الانتقال إلى قائمة الرغبات",
+        "Move to wishlist"
       ]
     },
     "arabic": [
@@ -83,6 +91,18 @@
     "thankYou": [
       "شكرا جزيلا !",
       "Thank you !"
+    ],
+    "trackOrder": [
+      "تتبع طلبك",
+      "Track You Order"
+    ],
+    "cart": [
+      "العربة",
+      "cart"
+    ],
+    "item": [
+      "المنتج",
+      "Item(s)"
     ]
   },
   "tyresPage": {
@@ -1584,27 +1604,27 @@
     }
   },
   "cart": {
-    "table": {
-      "items": [
-        "العناصر",
-        "Items"
-      ],
-      "quantity": [
-        "كمية",
-        "Quantity"
-      ],
-      "price": [
-        "السعر",
-        "price"
-      ],
-      "delete": [
-        "حذف",
-        "Delete"
-      ]
-    },
     "keepShopping": [
       "حافظ على التسوق",
       "Keep shopping"
+    ],
+    "shoppingCart": {
+      "header": [
+        "عربة التسوق",
+        "shopping cart"
+      ],
+      "subHeader": [
+        "عربة",
+        "cart"
+      ]
+    },
+    "shipTo": [
+      "ارسل إلى",
+      "Ship to"
+    ],
+    "item": [
+      "المنتج",
+      "Item(s)"
     ]
   },
   "orderSummary": {
@@ -1847,7 +1867,25 @@
     "singInTitle": [
       "تسجيل الدخول",
       "Sign In"
-    ]
+    ],
+    "estimation": [
+      "تقدير",
+      "Estimation"
+    ],
+    "orderNumber": {
+      "textOne": [
+        "رقم طلبك #",
+        "Your order number #"
+      ],
+      "textTwo": [
+        "تم وضعه",
+        "has been placed"
+      ],
+      "textThree": [
+        "يرجى التحقق من بريدك الإلكتروني للحصول على تأكيد الطلب ومعلومات التسليم التفصيلية.",
+        "Please check your email for order confirmation and detailed delivery information."
+      ]
+    }
   },
   "shippingAddress": {
     "title": [
@@ -2025,6 +2063,18 @@
         "subHeader": [
           "نحن نعرف منتجاتنا",
           "We Know Our Products"
+        ]
+      }
+    },
+    "cart": {
+      "whatsApp": {
+        "header": [
+          "لدي سؤال؟",
+          "Have A Question?"
+        ],
+        "subHeader": [
+          " اسأل اختصاصي ، خبراء داخلي. نحن نعرف منتجاتنا",
+          "Ask A Specialist, In-House Experts. We Know Our Products"
         ]
       }
     }

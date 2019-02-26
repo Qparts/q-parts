@@ -1,3 +1,6 @@
+  .render-cart-item {
+    @include text-left;
+  }
   .cart-items{
     @include border-radius-div;
     overflow: hidden;

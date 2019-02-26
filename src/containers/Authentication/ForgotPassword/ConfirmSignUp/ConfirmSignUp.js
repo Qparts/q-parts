@@ -8,6 +8,7 @@ import { onRegistered } from '../../../../actions/customerAction.js';
 
 import _ from 'lodash';
 import { right } from '../../../../utils/index.js';
+import { getTranslate } from 'react-localize-redux';
 
 class ConfirmSignUp extends Component {
   componentWillUnmount() {
@@ -25,7 +26,7 @@ class ConfirmSignUp extends Component {
                     <img className="upload-img" src="/img/user.svg" alt="upload-img" />
                     <p className="p"><span>Thank </span>You!</p>
                     <h5>We&apos;ve sent an email to <span>your@domain.com</span> <br />Please click the link in that message to activate your account</h5>
-                    <button className="btn-primary">Continue Shopping</button>
+                    <button className="btn-primary">{this.props.translate("general.buttons.continueShopping")}</button>
                     <button className="btn btn-open-G">Open In GMAIL<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                     <div>
                       <a className="bg-whatsapp">
@@ -43,7 +44,7 @@ class ConfirmSignUp extends Component {
                     <img className="upload-img" src="/img/user.svg" alt="upload-img" />
                     <p className="p"><span>Thank </span>You!</p>
                     <h5>We&apos;ve sent an email to <span>your@domain.com</span> <br />Please click the link in that message to activate your account</h5>
-                    <button className="btn-primary">Continue Shopping</button>
+                    <button className="btn-primary">{this.props.translate("general.buttons.continueShopping")}</button>
                     <button className="btn btn-open-G">Open In GMAIL<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                     <div>
                       <a className="bg-whatsapp">
@@ -68,7 +69,8 @@ const mapStateToProps = state => {
   return {
     token: state.customer.token,
     registered: state.customer.registered,
-    direction: state.customer.direction
+    direction: state.customer.direction,
+    translate: getTranslate(state.localize),
   }
 }
 

@@ -1,5 +1,6 @@
 const arabic = 'arabic';
 const english = 'english';
+const BANK_TRANSFER_AR = 'التحويل المصرفي';
 
 export const RADIX = 10;
 export const TAB_ONE = 0;
@@ -81,3 +82,8 @@ export const PENDING = 'pending';
 export const REPLIED = 'replied';
 export const rtl = 'rtl';
 export const ltr = 'ltr';
+
+export const paymentMethod = {
+	name: BANK_TRANSFER,
+	nameAr: BANK_TRANSFER_AR
+}

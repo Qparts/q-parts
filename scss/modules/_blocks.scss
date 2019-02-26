@@ -71,31 +71,7 @@
     }
   }
 }
-//move to check out oage
-.chat-div{
-  padding: 0 10px;
-  img{
-    max-width: 40px;
-  }
-  .media-body{
-    P{
-      @include font-size(13px);
-      margin-top: 2px;
-      span{
-        @include font-size(14px);
-        display: block;
-      }
-    }
-  }
-  &:hover{
-    p{
-      span{
-        text-decoration: underline;
-      }
-    }
-  }
-}
-// end moving
+
 .banner-250{
   width: 250px;
   height: 250px;

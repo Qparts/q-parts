@@ -8,6 +8,7 @@ import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../containers/Autocomplete/Autocomplete';
 import RenderField from '../RenderField/RenderField';
 import * as validations from '../../utils';
+import { getTranslatedObject, getTranslatedString } from '../../utils';
 import Radio from '../UI/Radio';
 import { connect } from 'react-redux';
 
@@ -64,24 +65,24 @@ class CheckoutShipping extends Component {
     this.props.addDeliveryAddress(address);
   }
   handleSubmit = values => {
-		const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
-		const latitude = city.latitude;
-		const longitude = city.longitude;
-		const cityId = city.id;
+    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+    const latitude = city.latitude;
+    const longitude = city.longitude;
+    const cityId = city.id;
     this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
-    .then(() => {
-      this.setState({ hasNewAddress: false });
-    })
-	  }
+      .then(() => {
+        this.setState({ hasNewAddress: false });
+      })
+  }
   render() {
-    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses } = this.props;
+    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses, currentLanguage } = this.props;
 
     const regionsData = regions ?
       regions.map(region => {
         return {
           ...region,
           value: region.id,
-          label: region.name
+          label: getTranslatedObject(region, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -90,7 +91,7 @@ class CheckoutShipping extends Component {
         return {
           ...city,
           value: city.id,
-          label: city.name
+          label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -137,7 +138,7 @@ class CheckoutShipping extends Component {
         <div className="col-6 col-md-4 div-rounded-first">
           <Field
             disabled
-            name="name"
+            name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
             placeholder={translate("form.address.country")}
             component={RenderField}
             validate={[validations.required]} />

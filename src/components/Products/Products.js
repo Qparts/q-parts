@@ -9,7 +9,7 @@ import { BEST_SELLER, OFFERS } from '../../constants';
 import Swiper from 'react-id-swiper';
 import { getLength } from '../../utils/array';
 import { getBestSeller, getOffers } from '../../utils/api';
-import { handleImageFallback, getTranslatedString } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 
 class Products extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ class Products extends Component {
                         <div className="card-body">
                           <h5 className="card-title">{product.desc}</h5>
                           <ul className="list-inline product-info">
-                            <li><strong>{getTranslatedString(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+                            <li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                             <li>{product.number}</li>
                           </ul>
                           <div className="rating">

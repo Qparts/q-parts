@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
@@ -84,9 +84,9 @@ class Checkout extends Component {
 				...item.product,
 				desc: item.product.desc,
 				salesPrice: item.product.salesPrice.toFixed(2),
-				currency: 'SR',
+				currency: translate("general.currency"),
 				quantity: item.quantity,
-				quantityLabel: 'quantity',
+				quantityLabel: translate("general.quantity"),
 				image: item.product.image,
 				productNumber: item.product.productNumber,
 				brand: item.product.brand,
@@ -145,6 +145,7 @@ class Checkout extends Component {
 					<Switch>
 						<Route path="/checkout" exact={true} render={() => {
 							return <CheckoutShipping
+								currentLanguage={this.props.currentLanguage}
 								addAddress={this.props.addAddress}
 								address={this.props.address}
 								customer={this.props.customer}
@@ -179,6 +180,7 @@ class Checkout extends Component {
 						<Route path="/checkout/confirm" exact={true} render={() => {
 							return <CheckoutConfirmation
 								translate={translate}
+								currentLanguage={this.props.currentLanguage}
 								direction={this.props.direction}
 								checkout={this.props.checkout}
 								completeOrder={this.props.completeOrder}
@@ -211,6 +213,7 @@ const mapStateToProps = state => ({
 	country: state.api.country,
 	city: state.api.city,
 	translate: getTranslate(state.localize),
+	currentLanguage: getActiveLanguage(state.localize).code,
 	checkout: state.cart.checkout,
 	cartId: state.cart.cartId,
 	addresses: state.customer.detail.addresses,
