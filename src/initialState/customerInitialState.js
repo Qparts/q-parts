@@ -41,7 +41,6 @@ export const initialState = {
     recentViewedProducts: [],
     wishlist: [],
     direction: 'rtl',
-    registered: null,
     isShippingCompleted: false,
     isPaymentCompleted: false,
     defaultLang: 'ar',

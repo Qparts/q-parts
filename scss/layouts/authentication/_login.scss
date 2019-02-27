@@ -1,4 +1,5 @@
 #login {
+  @include text-left;
   padding: 20px;
   background: $light-gray;
   .form-control {

@@ -41,7 +41,10 @@ class Signup extends Component {
 
     return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
-        this.props.history.push('/signup/successful');
+        this.props.history.push({
+          pathname: '/signup/successful',
+          state: { isRegistered: false, email }
+        });
       })
   }
 

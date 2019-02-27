@@ -58,6 +58,10 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/signup/successful",
         component: ConfirmSignUp,
+        isAuth: isAuth,
+        direction: direction,
+        translate,
+        redirectTo: '/',
         exact: true,
     },
     {

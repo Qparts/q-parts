@@ -70,6 +70,10 @@
       "edit": [
         "تعديل",
         "edit"
+      ],
+      "back": [
+        "الى الخلف",
+        "back"
       ]
     },
     "arabic": [
@@ -2400,5 +2404,15 @@
         "New password"
       ]
     }
+  },
+  "confirmSignUp": {
+    "emailSent": [
+      "لقد أرسلنا رسالة إلكترونية إلى",
+      "We've sent an email to"
+    ],
+    "activateAccount": [
+      "الرجاء النقر فوق الارتباط الموجود في هذه الرسالة لتنشيط حسابك",
+      "Please click the link in that message to activate your account"
+    ]
   }
 }

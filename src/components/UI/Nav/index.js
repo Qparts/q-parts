@@ -14,11 +14,11 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                         {
                             isLoggedIn ?
                                 <p>{fullName}</p> :
-                                <p>Sign in<i></i>Join</p>
+                                <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                         }
                     </a>
                     <ul className="cd-secondary-nav is-hidden user-account-sidebar">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         {
                             isLoggedIn ?
                                 <Fragment>
@@ -30,7 +30,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                                 <div>
                                     <div className="user mx-3">
                                         <img alt="user" src="img/user.svg" />
-                                        <h6>Welcome Back</h6>
+                                        <h6>{translate("dialog.signin.title")}</h6>
                                     </div>
                                     <div>
                                         <div className="signin-list">
@@ -80,7 +80,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="has-children">
                     <a href="#">{translate("nav.consumableParts")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=2" onClick={close}>{translate("nav.oilFilter")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=3" onClick={close}>{translate("nav.airFilter")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=6" onClick={close}>{translate("nav.brakePads")}</Link></li>
@@ -94,7 +94,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                         {translate("nav.oil")}
                     </Link>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=7" onClick={close}>{translate("nav.motorOil")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=8" onClick={close}>{translate("nav.gearOil")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=27" onClick={close}>{translate("nav.coolant")}</Link></li>
@@ -104,7 +104,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li><Link to="/listing?query=&page=1&category=13" onClick={close}>{translate("nav.tires")}</Link></li>
                 <li className="has-children">
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=29" onClick={close}>{translate("nav.handTools")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=30" onClick={close}>{translate("nav.electricalTools")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=31" onClick={close}>{translate("nav.tyreInflator")}</Link></li>
@@ -114,7 +114,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="has-children">
                     <a href="#">{translate("nav.accessorise")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=11" onClick={close}>{translate("nav.carAccessorise")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=20" onClick={close}>{translate("nav.exteriorAccessorise")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=17" onClick={close}>{translate("nav.carMats")}</Link></li>
@@ -135,7 +135,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="has-children">
                     <a href="#">{translate("nav.carCare")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.motorCareLiquids")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
                     </ul>
@@ -146,7 +146,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="nav-sm has-children">
                     <a href="#">{translate("nav.country")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><a href="#">KSA</a></li>
                         <li><a href="#">Cairo</a></li>
                     </ul>
