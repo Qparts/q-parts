@@ -43,7 +43,7 @@ class Garage extends Component {
     </div>
   }else{
     garage = <div id="garage-no-vehicle">
-      <p>Store vehicles in your garage and Get product recommendations</p>
+      <p>{translate("dialog.vehicle.subTitle")}</p>
       <span className="seperator"></span>
       <div className="add-vehicle">
         <div className="icon-content">

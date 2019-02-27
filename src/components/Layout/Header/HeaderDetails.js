@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
-import GaragePopup from "../../../containers/GaragePopup/GaragePopup";
 import { isEmpty, right } from "../../../utils";
-import ButtonCustom from "../../UI/Button";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
 

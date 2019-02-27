@@ -56,3 +56,7 @@ img{
 .cd-main-content{
   overflow-x: hidden;
 }
+
+.list-unstyled {
+  @include padding-left(0);
+}

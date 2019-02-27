@@ -10,18 +10,20 @@ import SelectInput from '../SelectInput/SelectInput';
 import Button from '../UI/Button';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
 import * as validations from '../../utils';
+import { getTranslatedObject } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
 import { setQuotationOrder } from '../../actions/customerAction';
 import _ from 'lodash';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import './QuotationRequest.css';
 import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
 import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
 import { postQuotation } from '../../utils/api';
+import { getFormattedVehicles } from '../../utils/components';
 
 const vehicles = 'vehicles';
 const signin = 'signin';
@@ -87,7 +89,7 @@ class QuotationRequest extends Component {
 				return {
 					header: <Title
 						header={translate("dialog.vehicle.title")}
-						subHeader={"Store vehicles in your garage and Get product recommendations"} />,
+						subHeader={translate("dialog.vehicle.subTitle")} />,
 					className: 'garage-popup'
 				}
 			case signin:
@@ -101,12 +103,14 @@ class QuotationRequest extends Component {
 	}
 	getDialogComponent = () => {
 		const { dialogType } = this.state;
+		const { direction, defaultLang } = this.props
 
 		switch (dialogType) {
 			case vehicles:
 				return <Vehicles
 					toggle={this.togglePopup}
-					direction={this.props.direction}
+					direction={direction}
+					defaultLang={defaultLang}
 				/>
 
 			case signin:
@@ -118,7 +122,7 @@ class QuotationRequest extends Component {
 	}
 
 	render() {
-		const { handleSubmit, translate, direction } = this.props;
+		const { handleSubmit, translate, direction, defaultLang, vehicles } = this.props;
 		const dialog = <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
 			<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
 			<ModalBody>
@@ -126,18 +130,19 @@ class QuotationRequest extends Component {
 			</ModalBody>
 		</Modal>
 
+		const vehiclesFormat = getFormattedVehicles(vehicles, defaultLang);
 		const regions = this.props.regions ? this.props.regions.map(region => {
 			return {
 				...region,
 				value: region.id,
-				label: region.name
+				label: getTranslatedObject(region, defaultLang, 'name', 'nameAr'),
 			}
 		}) : [];
 		const cities = _.has(this.props.formValues, 'region.cities') ?
 			this.props.formValues.region.cities.map(city => {
 				return {
 					...city,
-					label: city.name,
+					label: getTranslatedObject(city, defaultLang, 'name', 'nameAr'),
 					value: city.id
 				}
 			}) : [];
@@ -153,8 +158,8 @@ class QuotationRequest extends Component {
 					<div className="container-fluid custom-header-content">
 						<div className="row custom-header-title">
 							<header className="col">
-								<h1>Custom Order</h1>
-								<p>We move fast. Send us request and we will reply by price and all details</p>
+								<h1>{translate("quotationOrder.title")}</h1>
+								<p>{translate("quotationOrder.title")} {translate("quotationOrder.request")}</p>
 							</header>
 						</div>
 					</div>
@@ -166,18 +171,18 @@ class QuotationRequest extends Component {
 								<h1>3</h1>
 							</div>
 							<div className="col-md-6 col-9 title-right">
-								<h1>STEPS</h1>
-								<p>To get your parts anywhere you like</p>
+								<h1>{translate("quotationOrder.steps.title")}</h1>
+								<p>{translate("quotationOrder.steps.subTitle")}</p>
 							</div>
 						</div>
 					</div>
 				</section>
 				<section id="custom-details">
 					<div className="container-fluid">
-						<OrderSteps grey="-gs" translate={translate} direction={direction}/>
+						<OrderSteps grey="-gs" translate={translate} direction={direction} />
 						<div className="title-container">
-							<Title header="Parts Request"
-								subHeader="Fill in your vehicle data and the parts you want" />
+							<Title header={translate("quotationOrder.steps.requestParts.title")}
+								subHeader={translate("quotationOrder.steps.requestParts.subTitle")} />
 						</div>
 						<form onSubmit={handleSubmit(this.handleSubmit)}>
 							{
@@ -185,14 +190,14 @@ class QuotationRequest extends Component {
 								<div className="custom-container col-12">
 									<div className="row d-flex">
 										<div className="col-6">
-											<h3>Vehicle Information</h3>
+											<h3>{translate("quotationOrder.vehicle.title")}</h3>
 										</div>
 										<div className="col-6 garage-btn-container">
 											<Link
 												to={'#'}
 												isReverseOrder
 												className='btn btn-gray'
-												text='Garage'
+												text={translate("form.vehicle.title")}
 												icon='icon-vehicle'
 												onClick={this.handleVehicle}
 											/>
@@ -202,8 +207,9 @@ class QuotationRequest extends Component {
 										<div className="col-12 select-field-make-container">
 											<Field
 												name="vehicleForm"
+												placeholder={translate("form.select")}
 												component={SelectInput}
-												options={this.props.vehiclesFormat}
+												options={vehiclesFormat}
 												validate={[validations.required]}
 											/>
 
@@ -231,13 +237,14 @@ class QuotationRequest extends Component {
 								<div className="custom-container col-12">
 									<div className="row d-flex">
 										<div className="col-6">
-											<h3>Shipping Information</h3>
+											<h3>{translate("quotationOrder.shipping.title")}</h3>
 										</div>
 									</div>
 									<div className="row">
 										<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
 											<Field
 												name="region"
+												placeholder={translate("form.select")}
 												component={SelectInput}
 												options={regions}
 												validate={[validations.required]}
@@ -247,6 +254,7 @@ class QuotationRequest extends Component {
 										<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
 											<Field
 												name="city"
+												placeholder={translate("form.select")}
 												component={SelectInput}
 												options={cities}
 												validate={[validations.required]}
@@ -260,7 +268,7 @@ class QuotationRequest extends Component {
 							<div className="col-12 padding-right-0" style={styles.footer}>
 								<div className="row d-flex">
 									<div className="col-md-6 col-12 links">
-										<p>By clicking on send button you agree to <a href="#">Qetaa Usage Agreement</a> and <a href="#">Privacy Policies</a>.</p>
+										<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <a href="#">{translate("quotationOrder.agreement.linkTwo")}</a>.</p>
 									</div>
 									{
 										isAuth(this.props.token) ?
@@ -301,12 +309,12 @@ const mapStateToProps = (state) => {
 	return {
 		customer: customerObj.detail,
 		token: state.customer.token,
-		vehiclesFormat: customerObj.vehiclesFormat,
+		vehicles: customerObj.detail.vehicles,
 		selectedVehicle: customerObj.selectedVehicle,
 		regions: state.api.regions,
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
-		direction: state.customer.direction
+		direction: state.customer.direction,
 	}
 }
 

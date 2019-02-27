@@ -19,7 +19,7 @@ import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPa
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
-export const routes = (isAuth, direction) => [
+export const routes = (isAuth, direction, defaultLang) => [
     {
         path: "/",
         exact: true,
@@ -29,7 +29,7 @@ export const routes = (isAuth, direction) => [
         path: "/quotation-order",
         exact: true,
         component: QuotationRequest,
-        redirectTo: '/'
+        defaultLang
     },
     {
         path: "/quotation-order/confirmation:quotationId?",
@@ -63,6 +63,7 @@ export const routes = (isAuth, direction) => [
     {
         path: "/vehicles",
         component: Vehicles,
+        defaultLang
     },
     {
         path: "/cart",

@@ -24,7 +24,6 @@ export const initialState = {
     },
     token: null,
     tokenExpire: null,
-    vehiclesFormat: [],
     selectedVehicle: {},
     selectedCountry: {},
     defaultAddress: {

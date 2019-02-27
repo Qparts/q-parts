@@ -41,6 +41,7 @@
 }
 
 #custom-title {
+  @include text-left;
   .title-left {
     @include boarder-right-radius(0, 20px);
     background-color: $light-gray;

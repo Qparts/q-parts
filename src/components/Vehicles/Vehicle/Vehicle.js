@@ -12,6 +12,7 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
+import { getTranslatedObject } from '../../../utils';
 import { right } from '../../../utils';
 
 import RenderCheckboxField from '../../UI/RenderCheckboxField';
@@ -43,20 +44,20 @@ class Vehicle extends Component {
   }
 
   render() {
-    const { handleSubmit, vehicles, translate, direction } = this.props;
+    const { handleSubmit, vehicles, translate, direction, defaultLang } = this.props;
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,
-        label: vehicle.name,
+        label: getTranslatedObject(vehicle, defaultLang, 'name', 'nameAr'),
         value: vehicle.id
       }
-    });
+    });    
 
     const modelData = _.has(this.props.formValues, 'make.models') ?
       this.props.formValues.make.models.map(model => {
         return {
           ...model,
-          label: model.name,
+          label: getTranslatedObject(model, defaultLang, 'name', 'nameAr'),
           value: model.id
         }
       }) : [];
@@ -123,7 +124,7 @@ class Vehicle extends Component {
               label={translate("form.signup.defaultVehicle")}
             />
           </div>
-          <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
+          <Button className="btn btn-light col-3" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
           <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} />
         </div>
       </form>

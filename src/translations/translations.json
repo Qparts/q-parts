@@ -103,6 +103,10 @@
     "item": [
       "المنتج",
       "Item(s)"
+    ],
+    "and": [
+      "و",
+      "and"
     ]
   },
   "tyresPage": {
@@ -309,13 +313,59 @@
       "Qutation Order"
     ],
     "weMoveFast": [
-      "نحن نتحرك بسرعة",
-      "We Move Fast"
+      ".نحن نتحرك بسرعة",
+      "We Move Fast."
     ],
     "request": [
       "أرسل لنا طلبك و سوف نرسل لك الأسعار و جميع التفاصيل الأخرى",
       "Send Us Your Request and We Will Respond With the Prices and All Other Details"
     ],
+    "steps": {
+      "title": [
+        "خطوات",
+        "steps"
+      ],
+      "subTitle": [
+        "للحصول على قطع الغيار الخاصة بك في أي مكان تريد",
+        "To get your parts anywhere you like"
+      ],
+      "requestParts": {
+        "title": [
+          "طلب قطع",
+          "Request parts"
+        ],
+        "subTitle": [
+          "املأ بيانات سيارتك والقطع التي تريدها",
+          "Fill in your vehicle data and the parts you want"
+        ]
+      }
+    },
+    "agreement": {
+      "title": [
+        "من خلال النقر على زر الإرسال ، فإنك توافق على",
+        "By clicking on the send button, you agree to"
+      ],
+      "linkOne": [
+        "Qetaa اتفاقية الاستخدام",
+        "Qetaa Usage Agreement"
+      ],
+      "linkTwo": [
+        "سياسات الخصوصية",
+        "Privacy Policies"
+      ]
+    },
+    "vehicle": {
+      "title": [
+        "معلومات السيارة",
+        "Vehicle Information"
+      ]
+    },
+    "shipping": {
+      "title": [
+        "معلومات الشحن",
+        "Shipping Information"
+      ]
+    },
     "parts": [
       "اسم, رقم أو صورة القطعة",
       "Part Name, Number or image"
@@ -669,6 +719,10 @@
       ]
     },
     "vehicle": {
+      "title": [
+        "كراج",
+        "Garage"
+      ],
       "make": [
         "اختر السيارة",
         "Choose a car"
@@ -689,6 +743,14 @@
         "vin": [
           "أدخل رقم الهيكل الخاص بك",
           "Enter your Vin number"
+        ],
+        "addNew": [
+          "إضافة سيارة جديدة",
+          "Add a new vehicle"
+        ],
+        "select": [
+          "اختر من المركبات المحفوظة الخاصة بك",
+          "Select from your saved vehicles"
         ]
       },
       "buttons": {
@@ -699,16 +761,6 @@
         "select": [
           "اختار",
           "Select"
-        ]
-      },
-      "tabs": {
-        "tabOne": [
-          "إضافة سيارة جديدة",
-          "Add a new vehicle"
-        ],
-        "tabTwo": [
-          "اختر من المركبات المحفوظة الخاصة بك",
-          "Select from your saved vehicles"
         ]
       }
     },
@@ -891,7 +943,11 @@
         "ارسل طلب التسجيل",
         "Submit"
       ]
-    }
+    },
+    "select": [
+      "اختر",
+      "Select"
+    ]
   },
   "offers": {
     "title": [

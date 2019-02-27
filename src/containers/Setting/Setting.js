@@ -242,7 +242,7 @@ class Setting extends Component {
         return {
           header: <Title
             header={translate("dialog.vehicle.title")}
-            subHeader={"Store vehicles in your garage and Get product recommendations"} />
+            subHeader={translate("dialog.vehicle.subTitle")} />
         }
       case 'payment':
         return {
@@ -388,7 +388,7 @@ class Setting extends Component {
                   <img className="garage" src="/img/request.svg" alt="garage" />
                   <div>
                     <p>{translate('setting.links.garage')}</p>
-                    <h1>{this.props.vehiclesFormat.length}<p>{translate('setting.vehicle')}</p></h1>
+                    <h1>{this.props.vehicles.length}<p>{translate('setting.vehicle')}</p></h1>
                   </div>
                 </i>
               </div>
@@ -702,7 +702,6 @@ const mapStateToProps = (state) => {
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
     checkout: state.cart.checkout,
-    vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
     addresses: state.customer.detail.addresses,
     direction: state.customer.direction,

@@ -64,7 +64,6 @@ class Routes extends Component {
                                     vehicles={this.props.vehicles}
                                     localize={this.props.localize}
                                     translate={this.props.translate}
-                                    vehiclesFormat={this.props.vehiclesFormat}
                                     selectedVehicle={this.props.selectedVehicle}
                                     countriesOnly={this.props.countriesOnly}
                                     getCountriesOnly={this.props.getCountriesOnly}
@@ -73,7 +72,7 @@ class Routes extends Component {
                                     direction={this.props.direction}
                                 >
                                     <Switch>
-                                        {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                                        {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
@@ -101,7 +100,6 @@ const mapStateToProps = state => {
         token: state.customer.token,
         tokenExpire: state.customer.tokenExpire,
         vehicles: customer.vehicles,
-        vehiclesFormat: state.customer.vehiclesFormat,
         selectedVehicle: state.customer.selectedVehicle,
         defaultLang: state.customer.defaultLang,
         localize: state.localize,
