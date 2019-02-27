@@ -107,7 +107,7 @@ class Layout extends Component {
         {dialog}
         <div className="cd-main-content">
           {this.props.children}
-          <Footer />
+          <Footer translate={translate}/>
           <div className="cd-overlay"></div>
         </div>
       </Fragment>

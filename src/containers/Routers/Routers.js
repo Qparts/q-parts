@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTranslate } from "react-localize-redux";
 
@@ -51,6 +51,7 @@ class Routes extends Component {
     }
 
     render() {
+        const { translate } = this.props
         return (
             <Router>
                 <DirectionProvider direction={this.props.direction}>
@@ -76,10 +77,10 @@ class Routes extends Component {
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
-                                <a href="#" className="live-chat">
+                                <Link to="#" className="live-chat">
                                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
-                                    <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
-                                </a>
+                                    <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
+                                </Link>
                             </main>
                             <Nav
                                 translate={this.props.translate}

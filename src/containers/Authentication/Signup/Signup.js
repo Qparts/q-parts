@@ -50,11 +50,12 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore, direction } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
-      direction={this.props.direction} 
+      direction={this.props.direction}
+      currentLanguage={currentLanguage}
       translate={translate}
       passwordScore={passwordScore}
       setPasswordScore={setPasswordScore}/>

@@ -111,7 +111,7 @@ class Header extends Component {
                 </div>
                 <div className="col" id="search-lg" ref={this.searchLg}>
                   <div className="main-search" ref={this.searchDiv}>
-                    <input type="text" className="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" onChange={this.handleChange}/>
+                    <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange}/>
                     <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
 
                   </div>

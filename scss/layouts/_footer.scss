@@ -1,4 +1,5 @@
 .main-footer{
+  @include text-left;
   padding-top: 50px;
   background: $basic-gray;
   color: $white;
@@ -149,6 +150,7 @@
 
   }
   .copy-rights{
+    @include text-left;
     padding-bottom: 10px;
     p, a{
       @include font-size(13px);

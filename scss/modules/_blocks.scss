@@ -82,6 +82,7 @@
   }
 }
 .live-chat{
+  @include text-left;
   background: $light-gray;
   @extend .position-fixed;
   bottom: 0;

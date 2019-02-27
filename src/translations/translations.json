@@ -525,7 +525,11 @@
           "Quotations"
         ]
       }
-    }
+    },
+    "search": [
+      "البحث عن طريق رقم الجزء ، اسم المنتج",
+      "Search by Part Number,  Product Name"
+    ]
   },
   "dropdown": {
     "signup": {
@@ -724,7 +728,49 @@
       "defaultVehicle": [
         "تعيين كمركبة افتراضية",
         "Set as default Vehicle"
-      ]
+      ],
+      "cp": {
+        "title": [
+          "عن طريق إنشاء حساب ، فإنك توافق على",
+          "By creating an account, you agree to"
+        ],
+        "linkOne": [
+          "شروط استخدام Qetaa",
+          "Qetaa's Conditions of Use"
+        ],
+        "linkTwo": [
+          "إشعار الخصوصية",
+          "Privacy Notice"
+        ]
+      },
+      "passwordStrength": {
+        "title": [
+          "قوة كلمة المرور",
+          "Password Strength"
+        ],
+        "scoreWords": {
+          "tooShort": [
+            "قصيرة جدا",
+            "too short"
+          ],
+          "weak": [
+            "ضعيف",
+            "weak"
+          ],
+          "okay": [
+            "على ما يرام",
+            "okay"
+          ],
+          "good": [
+            "جيد",
+            "good"
+          ],
+          "strong": [
+            "قوي",
+            "strong"
+          ]
+        }
+      }
     },
     "vehicle": {
       "title": [
@@ -2163,6 +2209,18 @@
           "Ask a Specialis, In-House Experts."
         ]
       }
+    },
+    "root": {
+      "whatsApp": {
+        "header": [
+          "لدي سؤال؟",
+          "Have A Question?"
+        ],
+        "subHeader": [
+          "اسأل متخصص",
+          "Ask a Specialis"
+        ]
+      }
     }
   },
   "sendRequest": {
@@ -2178,6 +2236,138 @@
       "textThree": [
         "وسوف نقوم بالرد في أقرب وقت ممكن",
         "we will reply as soon as possible"
+      ]
+    }
+  },
+  "footer": {
+    "pricing": {
+      "header": [
+        "أسعار منخفضة",
+        "Low Prices"
+      ],
+      "subHeader": [
+        "ضمان مطابقة السعر",
+        "Price match guarantee"
+      ]
+    },
+    "whatsApp": {
+     "header": [
+       "الخبراء الداخليون",
+       "In-House Experts"
+     ],
+     "subHeader": [
+       "لدي سؤال؟ اسأل متخصص",
+       "Have a Question? Ask a Specialist"
+     ]
+    },
+    "delivery": {
+      "header": [
+        "تسليم عظيم",
+        "Great Delivery"
+      ],
+      "subHeader": [
+        "من يوم واحد إلى ثلاثة أيام",
+        "From one to three days"
+      ]
+    },
+    "wallet": {
+      "header": [
+        "السهل الدفع",
+        "Easy To Pay"
+      ],
+      "subHeader": [
+        "الدفع عند الاستلام ، بطاقة الائتمان",
+        "Cash on delivery, Credit Card"
+      ],
+      "span": [
+        "ونقل البنك",
+        "and Bank transfer"
+      ]
+    },
+    "customerService": {
+      "title": [
+        "خدمة العملاء",
+        "CUSTOMER SERVICE"
+      ],
+      "linkOne": [
+        "الشحن و التسليم",
+        "Shipping & Delivery"
+      ],
+      "linkTwo": [
+        "عائدات",
+        "Returns"
+      ],
+      "linkThree": [
+        "أسئلة وأجوبة",
+        "FAQs"
+      ],
+      "linkFour": [
+        "اتصل بنا",
+        "Contact Us"
+      ],
+      "linkFive": [
+        "اتبع طلب",
+        "Track order"
+      ]
+    },
+    "info": {
+      "title": [
+        "معلومات",
+        "INFORMATION"
+      ],
+      "linkOne": [
+        "معلومات عنا",
+        "About Us"
+      ],
+      "linkTwo": [
+        "مدونة",
+        "Blog"
+      ],
+      "linkThree": [
+        "وظائف",
+        "Careers"
+      ]
+    },
+    "pt": {
+      "title": [
+        "السياسات والبنود",
+        "POLICIES & TERMS"
+      ],
+      "linkOne": [
+        "سياسة خاصة",
+        "Privacy Policy"
+      ],
+      "linkTwo": [
+        "البنود و الظروف",
+        "Terms & Conditions"
+      ]
+    },
+    "newsLetter": {
+      "header": [
+        "سجل للحصول على اخر اخبارنا",
+        "Sign Up FOR OUR NEWSLETTER"
+      ],
+      "subHeader": [
+        "للبقاء على اطلاع على عروضك الترويجية وخصوماتك ومبيعاتك والعروض الخاصة والمزيد",
+        "to stay up-to-date on your promotions, discounts, sales, special offers and more"
+      ],
+      "subscribe": [
+        "الاشتراك",
+        "Subscribe"
+      ],
+      "placeholder": [
+        "أدخل البريد الإلكتروني",
+        "Enter Email"
+      ]
+    },
+    "copyRight": {
+      "header": [
+        "واحدة من",
+        "One of the"
+      ],
+      "subHeader": [
+        "مشاريع حضانة",
+        "incubated projects"
       ]
     }
   }

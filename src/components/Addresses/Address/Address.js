@@ -9,6 +9,7 @@ import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
+import { getTranslatedObject, getTranslatedString } from '../../../utils';
 
 import './Address.css';
 
@@ -38,14 +39,17 @@ class Address extends Component {
   }
 
   render() {
-    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, onHide, defaultAddress, onDefaultAddress, isDelivery } = this.props;
+    const {
+      handleSubmit, regions, formValues, translate, currentLanguage, onShowGoogleMap,
+      address, onHide, defaultAddress, onDefaultAddress, isDelivery
+    } = this.props;
 
     const regionsData = regions ?
       regions.map(region => {
         return {
           ...region,
           value: region.id,
-          label: region.name
+          label: getTranslatedObject(region, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -54,7 +58,7 @@ class Address extends Component {
         return {
           ...city,
           value: city.id,
-          label: city.name
+          label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -63,7 +67,7 @@ class Address extends Component {
         <div className="col-md-4 div-rounded-first">
           <Field
             disabled
-            name="name"
+            name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
             placeholder={translate("form.address.country")}
             component={RenderField}
             validate={[validations.required]} />

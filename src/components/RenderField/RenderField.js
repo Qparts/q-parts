@@ -68,7 +68,7 @@ class RenderField extends Component {
         textTransform: this.props.textTransform ?  this.props.textTransform : {}
       }
     }
-    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, ...renderFieldProps } = this.props;
+    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, scoreWords, title, ...renderFieldProps } = this.props;
     return (
       this.props.readOnly ?
         <Fragment>
@@ -119,7 +119,7 @@ class RenderField extends Component {
                   minLength={5}
                   minScore={2}
                   changeCallback={this.callback}
-                  scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
+                  scoreWords={scoreWords}
                   inputProps={{ ...this.props.input, ...renderFieldProps }} />
                 <InputGroupAddon addonType="append">
                   <Link
@@ -134,7 +134,7 @@ class RenderField extends Component {
               </InputGroup>
               <label
                 style={this.displayPasswordLabel()}
-                className="password-label">Password Strength</label>
+                className="password-label">{title}</label>
             </Fragment>
           }
           <Fragment>

@@ -304,6 +304,7 @@ class Setting extends Component {
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Address
+            currentLanguage={this.props.currentLanguage}
             address={this.props.address}
             customer={this.props.customer}
             getRegions={this.props.getRegions}
