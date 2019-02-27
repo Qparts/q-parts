@@ -2370,5 +2370,35 @@
         "incubated projects"
       ]
     }
+  },
+  "forgotPassword": {
+    "title": [
+      "استعادة كلمة السر",
+      "Password Recovery"
+    ],
+    "textOne": [
+      "يمكنك استرداد معلومات حسابك المفقودة باستخدام النموذج أدناه. تفضل",
+      "You can recover your lost account information using the form below. Please enter"
+    ],
+    "textTwo": [
+      "عنوان بريد إلكتروني صالح ، سيتم إرسال معلومات حسابك إليك بعد قليل",
+      "valid e-mail address, your account information will be mailed to you shortly"
+    ],
+    "labels": {
+      "email": [
+        "البريد الإلكتروني",
+        "Email"
+      ],
+      "password": [
+        "كلمه السر",
+        "Password"
+      ]
+    },
+    "placeholder": {
+      "password": [
+        "كلمة السر الجديدة",
+        "New password"
+      ]
+    }
   }
 }

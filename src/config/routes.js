@@ -127,5 +127,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         path: "/payment-response:cartId?/:id?/:status?/:message?",
         exact: true,
         component: CheckoutConfirmationOrder,
+        translate,
+        direction
     },
 ];

@@ -9,18 +9,13 @@
       opacity: .1;
       margin-bottom: 23px;
     }
-    p{
-      font-family: Roboto;
-      @include font-size(50px);
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      color: $basic-gray;
-      margin-bottom: 40px;
-      span{
-        border-bottom:1px solid red;
+    .sec-header{
+      text-align: unset !important;
+      h1 {
+        @include text-capitalize;
+        p {
+          float: none;
+        }
       }
     }
     h5{
@@ -33,7 +28,6 @@
       letter-spacing: normal;
       text-align: center;
       margin-bottom: 40px;
-      color: var(--dark-charcoal-grey);
       span{
         color: #ee4036;
       }
@@ -109,18 +103,13 @@
       opacity: .1;
       margin-bottom: 28px;
     }
-    p{
-      font-family: Roboto;
-      @include font-size(50px);
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      color: $basic-gray;
-      margin-bottom: 40px;
-      span{
-        border-bottom:1px solid red;
+    .sec-header{
+      text-align: unset !important;
+      h1 {
+        @include text-capitalize;
+        p {
+          float: none;
+        }
       }
     }
     h5{
@@ -135,10 +124,6 @@
       letter-spacing: normal;
       text-align: center;
       margin-bottom: 30px;
-      color: var(--dark-charcoal-grey);
-      span{
-        color: #ee4036;
-      }
     }
     .btn-primary{
      border-style: none;
