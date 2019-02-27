@@ -62,6 +62,10 @@
       "wishlist": [
         "الانتقال إلى قائمة الرغبات",
         "Move to wishlist"
+      ],
+      "requests": [
+        "طلبات",
+        "Requests"
       ]
     },
     "arabic": [
@@ -2133,6 +2137,22 @@
           "Ask A Specialist, In-House Experts. We Know Our Products"
         ]
       }
+    }
+  },
+  "sendRequest": {
+    "confirmation": {
+      "textOne": [
+        "رقم طلب السعر الخاص بك هو",
+        "Your Request Price number is"
+      ],
+      "textTwo": [
+        "وقد تم إرسالها ،",
+        "has been sent,"
+      ],
+      "textThree": [
+        "وسوف نقوم بالرد في أقرب وقت ممكن",
+        "we will reply as soon as possible"
+      ]
     }
   }
 }

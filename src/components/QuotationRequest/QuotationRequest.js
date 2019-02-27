@@ -16,7 +16,7 @@ import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
 import { setQuotationOrder } from '../../actions/customerAction';
 import _ from 'lodash';
-import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
 import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
