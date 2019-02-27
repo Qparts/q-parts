@@ -173,7 +173,9 @@ class SearchResult extends Component {
 				:
 				<Card key={idx} className="product-list-view col-12">
 					<ListGroup>
-						<ProductListView product={product} />
+						<ProductListView product={product}
+							currentLanguage={currentLanguage}
+							translate={translate} />
 					</ListGroup>
 				</Card>
 		));
@@ -214,7 +216,7 @@ class SearchResult extends Component {
 				textAlign: 'center'
 			}
 		}
-		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -237,12 +239,12 @@ class SearchResult extends Component {
 			)
 
 		let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
-			<span>Next Page</span>
+			<span>{translate("general.buttons.nextPage")}</span>
 			<i className="icon-arrow-right" />
 		</button>
 		let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
 			<i className="icon-arrow-left" />
-			<span>Previous Page</span>
+			<span>{translate("general.buttons.prevPage")}</span>
 		</button>
 
 		if (this.state.startSize <= 1) {
@@ -278,7 +280,7 @@ class SearchResult extends Component {
 															<InputGroupAddon addonType="prepend">
 																<i className="icon-search" />
 															</InputGroupAddon>
-															<Input className="search-box" type="text" placeholder="Search" />
+															<Input className="search-box" type="text" placeholder={translate("general.search")} />
 														</InputGroup>
 														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
 													</CardBody>
@@ -341,7 +343,7 @@ class SearchResult extends Component {
 								<Card className="col-12">
 									<CardTitle className="d-flex justify-content-between">
 										<MediumScreen>
-											<label htmlFor="">{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</label>
+											<label htmlFor="">{this.state.startSize} - {this.state.endSize} {translate("general.of")} {this.state.resultSize} {translate("general.results")}</label>
 										</MediumScreen>
 										<SmallScreen>
 											<Select
@@ -355,7 +357,7 @@ class SearchResult extends Component {
 										<div className="right-side-selection">
 											<MediumScreen>
 												<div style={{ display: "none" }}>
-													<label htmlFor="">Sort by</label>
+													<label htmlFor="">{translate("general.sortBy")}</label>
 													<Select
 														className="select__container"
 														classNamePrefix="select"

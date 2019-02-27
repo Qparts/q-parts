@@ -18,6 +18,7 @@
   background: $default-header-bg;
 }
 .cd-nav {
+  @include text-left;
   @include transition(all, 0.3s, ease);
   ul {
     @extend .list-unstyled;

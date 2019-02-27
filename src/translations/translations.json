@@ -74,6 +74,14 @@
       "back": [
         "الى الخلف",
         "back"
+      ],
+      "nextPage": [
+        "الصفحة التالية",
+        "Next Page"
+      ],
+      "prevPage": [
+        "الصفحة السابقة",
+        "Previous Page"
       ]
     },
     "arabic": [
@@ -119,6 +127,22 @@
     "and": [
       "و",
       "and"
+    ],
+    "of": [
+      "من",
+      "of"
+    ],
+    "results": [
+      "نتائج",
+      "results"
+    ],
+    "sortby": [
+      "ترتيب حسب",
+      "Sort by"
+    ],
+    "viewDetails": [
+      "عرض التفاصيل",
+      "View Details"
     ]
   },
   "tyresPage": {
@@ -533,6 +557,22 @@
     "search": [
       "البحث عن طريق رقم الجزء ، اسم المنتج",
       "Search by Part Number,  Product Name"
+    ],
+    "home": [
+      "الصفحة الرئيسية",
+      "home"
+    ],
+    "quotations": [
+      "الاقتباسات",
+      "Quotations"
+    ],
+    "orders": [
+      "طلبات",
+      "Orders"
+    ],
+    "wishlist": [
+      "الأماني",
+      "Wishlist"
     ]
   },
   "dropdown": {

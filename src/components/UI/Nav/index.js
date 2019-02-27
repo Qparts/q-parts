@@ -51,24 +51,24 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                     </ul>
                 </li>
                 <li className="nav-sm">
-                    <Link to="/">
-                        <i className="icon-home"></i> home
-  </Link>
+                    <Link to="/" onClick={close}>
+                        <i className="icon-home"></i> {translate("navBar.home")}
+                    </Link>
                 </li>
                 <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-send"></i> Requests
-  </a>
+                    <Link to="/setting/quotations" onClick={close}>
+                        <i className="icon-send"></i> {translate("navBar.quotations")}
+                    </Link>
                 </li>
+                {/* <li className="nav-sm">
+                    <Link to="/setting/orders" onClick={close}>
+                        <i className="icon-delivered-step"></i> {translate("navBar.orders")}
+                    </Link>
+                </li> */}
                 <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-delivered-step"></i> Orders
-  </a>
-                </li>
-                <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-heart"></i> Wish List
-  </a>
+                    <Link to="/setting/wishlist" onClick={close}>
+                        <i className="icon-heart"></i> {translate("navBar.wishlist")}
+                    </Link>
                 </li>
                 <li className="sep"></li>
                 <li>
@@ -78,7 +78,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
 
                 </li>
                 <li className="has-children">
-                    <a href="#">{translate("nav.consumableParts")}</a>
+                    <Link to="#">{translate("nav.consumableParts")}</Link>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=2" onClick={close}>{translate("nav.oilFilter")}</Link></li>

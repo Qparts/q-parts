@@ -3,10 +3,9 @@ import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import Link from '../UI/Link';
-import { handleImageFallback } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
-import { getProduct } from '../../utils/api';
 import { addToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux';
 
@@ -94,7 +93,7 @@ class ProductGridView extends Component {
 		this.handleDialog('addProduct', item)
 	}
 	render() {
-		const { product, location: { pathname, search }, direction } = this.props;
+		const { product, location: { pathname, search }, direction, translate, currentLanguage } = this.props;
 		let dialog;
 		if (this.state.data.quantity) {
 			dialog = (
@@ -119,20 +118,20 @@ class ProductGridView extends Component {
 								{
 									this.state.isHovering &&
 									<div className="product-buttons">
-										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text="View Details" />
+										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text={translate("general.viewDetails")} />
 										<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
 									</div>
 								}
 							</div>
 							<div className="details-holder">
 								<span className="part-text">{product.desc}</span><br />
-								<span className="manufacturer-text">{product.brand.name}</span>
+								<span className="manufacturer-text">{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
 								<div className="product-review_slide">
 									<Stars values={product.averageRating} {...starsRating} />
-									<span className="product-review">{getLength(product.reviews)} review</span>
+									<span className="product-review">{getLength(product.reviews)} {translate("product.reviews")}</span>
 								</div>
 								<span className="product-price">{product.salesPrice.toFixed(2)}</span>
-								<span className="product-currency">SR</span>
+								<span className="product-currency">{translate("general.currency")}</span>
 							</div>
 						</div>
 						{dialog}
@@ -148,13 +147,13 @@ class ProductGridView extends Component {
 							</div>
 							<div className="details-holder">
 								<span className="part-text">{product.desc}</span><br />
-								<span className="manufacturer-text">{product.brand.name}</span>
+								<span className="manufacturer-text">{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
 								<div className="product-review_slide">
 									<Stars values={product.averageRating} {...starsRating} />
-									<span className="product-review">{getLength(product.reviews)} review</span>
+									<span className="product-review">{getLength(product.reviews)} {translate("product.reviews")}</span>
 								</div>
 								<span className="product-price">{product.salesPrice.toFixed(2)}</span>
-								<span className="product-currency">SR</span>
+								<span className="product-currency">{translate("general.currency")}</span>
 							</div>
 						</div>
 					</div>
