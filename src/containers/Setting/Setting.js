@@ -334,11 +334,9 @@ class Setting extends Component {
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Vehicles
-            newOrOldVechile={this.state.newOrOldVechile}
-            onTabChange={this.handleChange}
             toggle={this.togglePopup}
-            displayTwoTabs={false}
             direction={this.props.direction}
+            defaultLang={this.props.currentLanguage}
           />
         </ModalBody>
       </Modal>
@@ -356,6 +354,12 @@ class Setting extends Component {
           />
         </ModalBody>
       </Modal>
+
+    const chatMessages = [
+      translate("customerService.setting.whatsApp.header"),
+      translate("customerService.setting.whatsApp.subHeader")
+    ];
+
     return (
       <Fragment>
         <MediumScreen>
@@ -396,11 +400,9 @@ class Setting extends Component {
             <div className="component-background">
               <section id="setting-details" className="container-fluid">
                 <div className="wahtsapp-before-links">
-                  <a className="bg-whatsapp">
-                    <CustomerService
-                      messages={["Have a Question?", "Ask a Specialis, In-House Experts."]}
-                      url="" />
-                  </a>
+                  <CustomerService
+                    messages={chatMessages}
+                    url="" />
                 </div>
                 <div className="row">
                   <SettingLinks {...this.props} />
@@ -493,6 +495,8 @@ class Setting extends Component {
                     <Route path="/setting/wishlist" exact={true} render={() => {
                       return (
                         <Wishlist
+                          currentLanguage={this.props.currentLanguage}
+                          direction={this.props.direction}
                           wishlist={this.props.wishlist}
                           deleteWishlist={this.props.deleteWishlist}
                           moveWishlistToCart={this.props.moveWishlistToCart}
@@ -523,13 +527,6 @@ class Setting extends Component {
                       redirectTo="/setting/profile" />
 
                   </Switch>
-                </div>
-                <div className="row">
-                  <a className="bg-whatsapp">
-                    <CustomerService
-                      messages={["Have a Question?", "Ask a Special"]}
-                      url="" />
-                  </a>
                 </div>
               </section>
             </div>
@@ -628,6 +625,8 @@ class Setting extends Component {
               <Route path="/setting/wishlist" exact={true} render={() => {
                 return (
                   <Wishlist
+                    currentLanguage={this.props.currentLanguage}
+                    direction={this.props.direction}
                     wishlist={this.props.wishlist}
                     deleteWishlist={this.props.deleteWishlist}
                     moveWishlistToCart={this.props.moveWishlistToCart}

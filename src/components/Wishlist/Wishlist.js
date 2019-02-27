@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '../UI/Button';
 import moment from 'moment';
 import { colors } from '../../constants';
-import { handleImageFallback } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 
 class Wishlist extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Wishlist extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.wishlist !== this.props.wishlist) {
+        if (prevProps.direction !== this.props.direction) {
             this.setState({
                 wishlist: this.getWishlist()
             })
@@ -22,31 +22,32 @@ class Wishlist extends Component {
 
     getWishlist = () => {
         let result = [];
+        const { translate, moveWishlistToCart, deleteWishlist } = this.props
 
         this.props.wishlist.forEach((list, idx) => {
             const tempWishlist = {
                 ...list,
                 desc: list.desc,
                 salesPrice: list.salesPrice.toFixed(2),
-                currency: 'SR',
-                created: `Added: ${moment(list.created).format('MM/DD/YYYY')}`,
+                currency: translate("general.currency"),
+                created: `${translate("setting.wishlist.date")}: ${moment(list.created).format('MM/DD/YYYY')}`,
                 actions: [
                     <div key={idx} className="cart-actions">
                         <Button
                             isReverseOrder={true}
                             className="btn btn-gray"
                             icon="icon-cart"
-                            text={this.props.translate("setting.wishlist.table.addToCart")}
-                            onClick={this.props.moveWishlistToCart.bind(this, list)} />
+                            text={translate("setting.wishlist.addToCart")}
+                            onClick={moveWishlistToCart.bind(this, list)} />
                         <Button
                             className="btn delete-btn"
                             icon="icon-trash"
-                            onClick={this.props.deleteWishlist.bind(this, list)} />
+                            onClick={deleteWishlist.bind(this, list)} />
                     </div>
                 ],
                 image: list.image,
                 productNumber: list.productNumber,
-                manufacturerName: list.brand.name
+                brand: list.brand
             }
             result.push(tempWishlist)
         });
@@ -55,12 +56,7 @@ class Wishlist extends Component {
 
     render() {
 
-        const { translate } = this.props;
-        const headers = [
-            translate("setting.wishlist.table.item"),
-            translate("setting.wishlist.table.price"),
-            translate("setting.wishlist.table.date"),
-        ];
+        const { currentLanguage } = this.props;
         return (
             <section id="wish-list" className="col-md-10 col-12">
                 {
@@ -77,7 +73,7 @@ class Wishlist extends Component {
                                 <div className="col-7 col-md-3 pt">
                                     <div className="wish-list_product-details">
                                         <span className="part-text" style={styles}>{item.desc}</span>
-                                        <span className="manufacturer-text">{item.manufacturerName}</span>
+                                        <span className="manufacturer-text">{getTranslatedObject(item.brand, currentLanguage, 'name', 'nameAr')}</span>
                                         <span className="part-text">{item.productNumber}</span>
                                         <div className="w-100">
                                             <span className="sales-price">{item.salesPrice}</span>

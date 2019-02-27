@@ -8,7 +8,7 @@ export const lowerCaseFirstChar = (string) => {
 	return string.replace(/^\w/, c => c.toLowerCase());
 }
 
-export const getTranslatedObject = (object, language, name, nameAr) => {
+export const getTranslatedObject = (object = {}, language, name, nameAr) => {
 	return language === AR ? object[nameAr] : object[name];
 }
 

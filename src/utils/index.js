@@ -6,7 +6,7 @@ export * from './validation';
 export { isAuth, handleNetworkError } from './auth';
 export { isEmpty, filterObject, toUpperCaseForEach, replaceAll } from './array';
 export { upperCaseFirstChar, lowerCaseFirstChar, getTranslatedObject, getTranslatedString } from './string';
-export { getComponentName } from './components';
+export { getComponentName, getFormattedVehicles } from './components';
 export { left, right, paddingLeft, paddingRight, sideValues } from './directional';
 export { closeNav, toggleSearch } from './nav';
 export { handleImageFallback } from './image';

@@ -66,6 +66,10 @@
       "requests": [
         "طلبات",
         "Requests"
+      ],
+      "edit": [
+        "تعديل",
+        "edit"
       ]
     },
     "arabic": [
@@ -1363,33 +1367,31 @@
       ]
     },
     "wishlist": {
-      "table": {
-        "item": [
-          "بند",
-          "Item"
-        ],
-        "price": [
-          "السعر",
-          "price"
-        ],
-        "date": [
-          "وأضاف",
-          "Added"
-        ],
-        "addToCart": [
-          "أضف إلى السلة",
-          "Add to cart"
-        ],
-        "delete": [
-          "حذف",
-          "Delete"
-        ]
-      }
+      "item": [
+        "بند",
+        "Item"
+      ],
+      "price": [
+        "السعر",
+        "price"
+      ],
+      "date": [
+        "وأضاف",
+        "Added"
+      ],
+      "addToCart": [
+        "أضف إلى السلة",
+        "Add to cart"
+      ],
+      "delete": [
+        "حذف",
+        "Delete"
+      ]
     },
     "garage": {
       "title": [
-        "كراج",
-        "Garage"
+        "إضافة عرض وإدارة وإيجاد أجزاء للسيارات في المرآب الخاص بك",
+        "Add View, manage and find parts for the vehicles in your garage"
       ],
       "add": [
         "إضافة مركبة",
@@ -1398,6 +1400,18 @@
       "delete": [
         "حذف",
         "Delete"
+      ],
+      "vehicle": [
+        "مركبة",
+        "Vehicle"
+      ],
+      "noVehicle": [
+        "لا توجد سيارات محفوظة",
+        "No Saved Vehicles"
+      ],
+      "defaultVehicle": [
+        "مركبة افتراضي",
+        "Default vehicle"
       ]
     },
     "accountSetting": {
@@ -2135,6 +2149,18 @@
         "subHeader": [
           " اسأل اختصاصي ، خبراء داخلي. نحن نعرف منتجاتنا",
           "Ask A Specialist, In-House Experts. We Know Our Products"
+        ]
+      }
+    },
+    "setting": {
+      "whatsApp": {
+        "header": [
+          "لدي سؤال؟",
+          "Have A Question?"
+        ],
+        "subHeader": [
+          "اسأل اختصاصي ، خبراء داخلي.",
+          "Ask a Specialis, In-House Experts."
         ]
       }
     }

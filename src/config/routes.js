@@ -19,7 +19,7 @@ import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPa
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
-export const routes = (isAuth, direction, defaultLang) => [
+export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/",
         exact: true,
@@ -120,7 +120,8 @@ export const routes = (isAuth, direction, defaultLang) => [
     {
         path: "/password/forgot-password",
         exact: true,
-        component: ForgotPassword
+        component: ForgotPassword,
+        translate
     },
     {
         path: "/payment-response:cartId?/:id?/:status?/:message?",

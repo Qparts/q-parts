@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import Vehicles from "../Vehicles/Vehicles";
 import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -63,12 +62,9 @@ class Layout extends Component {
   }
 
   getDialogComponent = () => {
-    const { vehicles } = this.props;
     const { dialogType } = this.state;
 
     switch (dialogType) {
-      case 'vehicle':
-        return <Vehicles direction={this.props.direction} />
       case 'signin':
         return <Login toggle={this.togglePopup} />
       case 'search':

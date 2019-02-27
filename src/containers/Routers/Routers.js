@@ -72,7 +72,7 @@ class Routes extends Component {
                                     direction={this.props.direction}
                                 >
                                     <Switch>
-                                        {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                                        {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang, this.props.translate).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
