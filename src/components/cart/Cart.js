@@ -120,7 +120,7 @@ class Cart extends Component {
 									<label>{quantity} {translate("general.item")}</label>
 								</h1>
 							</header>
-							<div className="col-auto">
+							{/* <div className="col-auto">
 								<div className="cart-ship-to">
 									<label>{translate("cart.shipTo")}</label>
 									<Select
@@ -130,7 +130,7 @@ class Cart extends Component {
 										defaultValue={shipToOptions[0]}
 										options={shipToOptions} />
 								</div>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</section>
