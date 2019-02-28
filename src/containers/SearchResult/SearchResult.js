@@ -141,8 +141,6 @@ class SearchResult extends Component {
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 
 		this.props.onSetParams(newParams)
-		this.props.onSetRadioButton(filters)
-		return this.props.onAddToFilter(filters);
 	}
 
 	componentDidUpdate(prevProps, prevState) {

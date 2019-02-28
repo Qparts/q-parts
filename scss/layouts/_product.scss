@@ -537,30 +537,22 @@
         .product-price {
           height: 22px;
           font-family: Roboto;
-          font-size: 30px;
-          font-weight: 300;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: -3px;
-          @include text-left;
+          text-align: $left;
+          @include font-size(39px);
+          color: $dark-charcoal-grey;
         }
         .product-price-sr {
           height: 12px;
-          font-family: Roboto;
-          font-size: 15px;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          @include text-left;
+          @include font-size(18px);
+          text-align: $left;
+          color: $dark-charcoal-grey;
+          @include margin-left(3px);
         }
         .product-quantity {
           height: 14px;
           opacity: 0.8;
           font-family: Roboto;
-          font-size: 15px;
+          @include font-size(15px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -582,6 +574,7 @@
       @include text-right;
       height: 52px;
       color: black;
+      padding-top: 10px;
       span {
         font-family: Roboto;
         font-size: 20px;
@@ -592,29 +585,18 @@
       border-radius: corner-values(0px 0px 20px 0px) !important;
       height: 52px;
       font-family: Roboto;
-      font-size: 30px;
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: -3px;
-      @include padding-left(2px);
-      @include fill-border-left(2px, $white);
-
-      span {
-        @include font-size(30px);
-      }
-
+      @include font-size(30px);
+      color: $dark-charcoal-grey;
+      @include margin-left(2px);
+      padding-top: 7px;
+      @include padding-left(6px);
       sub {
         height: 12px;
         font-family: Roboto;
-        font-size: 15px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        @include text-left;
+        @include font-size(16px);
+        text-align: $left;
+        @include margin-left(3px);
+        @include margin-right(10px);
         color: $dark-charcoal-grey;
       }
     }
@@ -641,6 +623,9 @@
         border-radius: corner-values(0px 20px 20px 0px) !important;
         font-size: 20px;
         margin-#{$left}: 9px;
+        i{
+          @include margin-left(6px);
+        }
       }
       .group-shadow-input {
         height: 10px;

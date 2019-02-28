@@ -7,161 +7,158 @@ import Stars from 'react-stars';
 import Title from '../UI/Title';
 import Manufacturers from '../Manufacturers/Manufacturers';
 import Ads from '../Ads/Ads';
-import {
-	Field,
-	reduxForm,
-	getFormValues,
-} from "redux-form";
-import Button from '../UI/Button';
 
-import * as validations from "../../utils";
-import { right } from "../../utils";
-
-import SelectInput from '../SelectInput/SelectInput';
+import { Link } from "react-router-dom";
+import {	reduxForm } from "redux-form";
 import { getTranslate } from 'react-localize-redux';
-import { sliderSetting, starsRating } from '../../constants';
+
+
+import { BEST_SELLER } from '../../constants';
+import Swiper from 'react-id-swiper';
+import { getBestSeller } from '../../utils/api';
+import { starsRating } from '../../constants';
+import { getLength } from '../../utils/array';
+import { handleImageFallback } from '../../utils';
 
 class MotorOil extends Component {
-	handleSubmit = values => {
+	constructor(props) {
+    super(props)
 
-	}
+    this.state = {
+      bestSeller: []
+    }
 
-	goToProduct = () => {
+    this.loadBestSeller()
+  }
 
-	}
-
-	getReviewsLength = () => {
-
-	}
+  loadBestSeller = () => {
+    getBestSeller()
+      .then(res => {
+        this.setState({
+          bestSeller: res.data,
+          isLoading: true
+        })
+      });
+  }
 	render() {
-		const { translate, handleSubmit, products, viscosity, brand, direction } = this.props;
+		const { translate } = this.props;
+    const { bestSeller } = this.state
+		const params = {
+      containerClass: `swiper-container products-list`,
+      slidesPerView: 5,
+      spaceBetween: 30,
+      grabCursor: true,
+      lazy: true,
+      rebuildOnUpdate: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      breakpoints: {
+        1200: {
+          slidesPerView: 4,
+          spaceBetween: 30
+        },
+        992: {
+          slidesPerView: 4,
+          spaceBetween: 15
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 15
+        },
+        576: {
+          slidesPerView: 2,
+          spaceBetween: 15
+        },
+      }
+    }
 		return (
 			<Fragment>
 				<section id="motor-oil">
-					<div className="oil-image" />
-					<div className="container-fluid oil-content">
-						<div className="row oil-title">
-							<header className="col">
-								<h1>{translate("navBar.motorOil")}</h1>
-							</header>
-						</div>
-						<form onSubmit={handleSubmit(this.handleSubmit)}>
-							<div className="row no-gutters">
-								<div className="col-12 subtitle-container">
-									<h2>{translate("motorOilPage.selectViscosity")}</h2>
-									<p>Make sure it fits! Search by viscosity grade</p>
-								</div>
-								<div className="col-12 oil-dropdown">
-									<div className="form-inline">
-										<div className="col-md-8 size-selection-container">
-											<div className="row">
-												<div className="col-md-6 viscosity-field-container">
-													<Field
-														name="viscosity"
-														className="form-control viscosity-field"
-														placeholder="viscosity"
-														component={SelectInput}
-														options={viscosity}
-														validate={[validations.required]}
-													/>
-												</div>
-												<div className="col-12 w3-hide-large w3-hide-medium">
-													<div className="h-seperator" />
-												</div>
-												<div className="col-md-6 brand-field-container">
-													<Field
-														name="brand"
-														className="form-control brand-field"
-														placeholder="brand"
-														component={SelectInput}
-														options={brand}
-														validate={[validations.required]}
-													/>
-												</div>
-											</div>
-										</div>
-										<div className="col-md-3 btn-container">
-											<Button type="submit"
-												className="btn-primary"
-												text={
-													<Fragment>
-														<span>{translate("general.search")}</span>
-														<i className={`icon-arrow-${right(direction)}`}></i>
-													</Fragment>
-												}
-											/>
-										</div>
-									</div>
-								</div>
-
+					<div className="oil-img">
+						<section className="main-cat container-fluid">
+							<ul className="row">
+								<li className="col-lg-4 col-6"><div><img src="/img/motor-oill.jpg" alt="Oil"/> <span><h4>{translate("navBar.motorOil")}</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/gear-oil.jpg" alt="gear"/> <span><h4>Gear Oil</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/grease.jpg" alt="grease"/> <span><h4>Grease</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+							</ul>
+						</section>
+					</div>
+					<div className="popular-oil container-fluid">
+						<header>
+							<h1>Popular Oil Brands</h1>
+						</header>
+						<section className="main-cat">
+							<div className="row">
+								<Link to="/listing?query=&page=1&category=9" className="col-2">
+										<img src="/img/motor-oil.png" alt="Oil" />
+								</Link>
+								<Link to="/listing?query=&page=1&category=13" className="col-2">
+										<img src="/img/tyres.png" alt="Tires" />
+								</Link>
+								<Link to="/listing?query=&page=1&category=28" className="col-2">
+										<img src="/img/tools.png" alt="Tools" />
+								</Link>
+								<Link to="/listing?query=&page=1&category=9" className="col-2">
+										<img src="/img/motor-oil.png" alt="Oil" />
+								</Link>
+								<Link to="/listing?query=&page=1&category=13" className="col-2">
+										<img src="/img/tyres.png" alt="Tires" />
+								</Link>
+								<Link to="/listing?query=&page=1&category=28" className="col-2">
+										<img src="/img/tools.png" alt="Tools" />
+								</Link>
 							</div>
-						</form>
+						</section>
+					</div>
+					<div className="poster">
+						<img src="/img/motor-oil.png" alt="poster" />
+					</div>
+					<div className="best-seller container-fluid">
+						<header>
+							<h1>
+								Oil Bestseller
+							</h1>
+						</header>
+
+						<section className="products-sec">
+			        <div>
+			          <div className="tab-content">
+			            <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
+			              <h3>Best Seller</h3>
+			              <Swiper {...params}>
+			                {
+
+			                  bestSeller.map((product, idx) => (
+			                    <div key={idx}>
+			                      <Link to={`/products/${product.id}`} className="card">
+			                        <img onError={handleImageFallback} src={product.image} className="card-img-top" alt="no product" />
+			                        <div className="card-body">
+			                          <h5 className="card-title">{product.desc}</h5>
+			                          <ul className="list-inline product-info">
+			                            <li><strong>{product.brand.name}</strong></li>
+			                            <li>{product.number}</li>
+			                          </ul>
+			                          <div className="rating">
+			                            <Stars values={product.averageRating ? product.averageRating : 0} {...starsRating} />
+			                            <span>{getLength(product.reviews)} review</span>
+			                          </div>
+			                          <p className="price">{product.salesPrice.toFixed(2)} <span>sr</span></p>
+			                        </div>
+			                      </Link>
+			                    </div>
+			                  ))
+			                }
+			              </Swiper>
+			              <div className="swiper-left"></div>
+			            </div>
+			          </div>
+			        </div>
+
+			      </section>
 					</div>
 				</section>
-				<div className="component-background">
-					<section id="oil-best-sellers" className="container-fluid">
-						<Title
-							header={translate("offers.recommendation.bestSeller")}
-							subHeader={translate("offers.subTitle")}
-						/>
-						<Slider {...sliderSetting}>
-							{
-								this.props.products.map((product, idx) => (
-									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
-										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
-										<div className="card-body">
-											<h5 className="card-title">{product.desc}</h5>
-											<p className="product-brand">{product.brand.name}</p>
-											<div className="product-review">
-												<Stars values={product.averageRating} {...starsRating} />
-												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
-											</div>
-											<p className="price">
-												{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
-											</p>
-										</div>
-									</a>
-								))
-							}
-						</Slider>
-					</section>
-					<section id="oil-top-brands" className="container-fluid">
-						<Title
-							header={translate("offers.recommendation.topBrands")}
-							subHeader={translate("offers.subTitle")}
-						/>
-						<Manufacturers products={products} />
-					</section>
-					<section id="oil-ads" className="container-fluid">
-						<Ads />
-					</section>
-					<section id="oil-grades" className="container-fluid">
-						<Title
-							header={translate("motorOilPage.popularGrades")}
-							subHeader={translate("offers.subTitle")}
-						/>
-						<Slider {...sliderSetting}>
-							{
-								this.props.products.map((product, idx) => (
-									<a href="" key={idx} className="card" onClick={this.goToProduct.bind(this, product)}>
-										<img className="card-img-top" src="/img/product-2.jpg" alt="product" />
-										<div className="card-body">
-											<h5 className="card-title">{product.desc}</h5>
-											<p className="product-brand">{product.brand.name}</p>
-											<div className="product-review">
-												<Stars values={product.averageRating} {...starsRating} />
-												<span className="total-review">{this.getReviewsLength(product.reviews)} review</span>
-											</div>
-											<p className="price">
-												{product.salesPrice.toFixed(2)} <span className="currency">SR</span>
-											</p>
-										</div>
-									</a>
-								))
-							}
-						</Slider>
-					</section>
-				</div>
 			</Fragment>
 		)
 	}
@@ -186,17 +183,5 @@ MotorOil = reduxForm({
 	form: "MotorOil"
 })(MotorOil);
 
-MotorOil.defaultProps = {
-	viscosity: [
-		{ value: 'SAE_OW', label: 'SAE OW' },
-		{ value: 'SAE_OW-5', label: 'SAE OW-5' },
-		{ value: 'SAE_OW-10', label: 'SAE OW-10' }
-	],
-	brand: [
-		{ value: 'ACDelco', label: 'ACDelco' },
-		{ value: 'Amalie_oil', label: 'Amalie oil' },
-		{ value: 80, label: '80' }
-	]
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MotorOil);

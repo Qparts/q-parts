@@ -20,7 +20,6 @@ class Header extends Component {
   }
 
   componentDidMount() {
-
     var new_scroll_position = 0;
     var last_scroll_position;
     var sm = window.matchMedia("(max-width: 1169px)");
@@ -73,6 +72,11 @@ class Header extends Component {
 
       new_scroll_position = last_scroll_position;
     });
+
+      for (let x in this.refs) {
+        this.refs[x].onkeypress = (e) =>
+          this._handleKeyPress(e);
+      }
   }
 
   handleClick = (e) => {
@@ -85,6 +89,12 @@ class Header extends Component {
     this.setState({ searchText: e.target.value })
   }
 
+    _handleKeyPress = (e) => {
+      if (e.keyCode === 13) {
+          toggleSearch('close');
+          this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
+      }
+    }
   render() {
     const formatGroupLabel = () => (
       <div className="placeholder">
