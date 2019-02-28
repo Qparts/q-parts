@@ -131,9 +131,6 @@ export const starsRating = {
 }
 
 export const params = (direction) => {
-
-  console.log(direction);
-  
   return {
     containerClass: `swiper-container products-list`,
     slidesPerView: 5,

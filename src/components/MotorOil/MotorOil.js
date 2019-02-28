@@ -2,18 +2,14 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts } from '../../actions/apiAction';
-import Slider from 'react-slick';
 import Stars from 'react-stars';
-import Title from '../UI/Title';
-import Manufacturers from '../Manufacturers/Manufacturers';
-import Ads from '../Ads/Ads';
 
 import { Link } from "react-router-dom";
 import {	reduxForm } from "redux-form";
 import { getTranslate } from 'react-localize-redux';
 
 
-import { BEST_SELLER } from '../../constants';
+import { params } from '../../constants';
 import Swiper from 'react-id-swiper';
 import { getBestSeller } from '../../utils/api';
 import { starsRating } from '../../constants';
@@ -41,38 +37,8 @@ class MotorOil extends Component {
       });
   }
 	render() {
-		const { translate } = this.props;
+		const { translate, direction } = this.props;
     const { bestSeller } = this.state
-		const params = {
-      containerClass: `swiper-container products-list`,
-      slidesPerView: 5,
-      spaceBetween: 30,
-      grabCursor: true,
-      lazy: true,
-      rebuildOnUpdate: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 30
-        },
-        992: {
-          slidesPerView: 4,
-          spaceBetween: 15
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 15
-        },
-        576: {
-          slidesPerView: 2,
-          spaceBetween: 15
-        },
-      }
-    }
 		return (
 			<Fragment>
 				<section id="motor-oil">
@@ -80,14 +46,14 @@ class MotorOil extends Component {
 						<section className="main-cat container-fluid">
 							<ul className="row">
 								<li className="col-lg-4 col-6"><div><img src="/img/motor-oill.jpg" alt="Oil"/> <span><h4>{translate("navBar.motorOil")}</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
-								<li className="col-lg-4 col-6"><div><img src="/img/gear-oil.jpg" alt="gear"/> <span><h4>Gear Oil</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
-								<li className="col-lg-4 col-6"><div><img src="/img/grease.jpg" alt="grease"/> <span><h4>Grease</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/gear-oil.jpg" alt="gear"/> <span><h4>{translate("nav.gearOil")}</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
+								<li className="col-lg-4 col-6"><div><img src="/img/grease.jpg" alt="grease"/> <span><h4>{translate("nav.grease")}</h4><Link to="/listing?query=&page=1&category=9" className="btn btn-primary">{translate("quotationOrder.shopNow")}</Link></span></div></li>
 							</ul>
 						</section>
 					</div>
 					<div className="popular-oil container-fluid">
 						<header>
-							<h1>Popular Oil Brands</h1>
+							<h1>{translate("motorOil.popularBrands")}</h1>
 						</header>
 						<section className="main-cat">
 							<div className="row">
@@ -118,7 +84,7 @@ class MotorOil extends Component {
 					<div className="best-seller container-fluid">
 						<header>
 							<h1>
-								Oil Bestseller
+							{translate("motorOil.oilBestSeller")}
 							</h1>
 						</header>
 
@@ -126,8 +92,8 @@ class MotorOil extends Component {
 			        <div>
 			          <div className="tab-content">
 			            <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
-			              <h3>Best Seller</h3>
-			              <Swiper {...params}>
+			              <h3>{translate("offers.recommendation.bestSeller")}</h3>
+			              <Swiper {...params(direction)}>
 			                {
 
 			                  bestSeller.map((product, idx) => (
@@ -142,9 +108,9 @@ class MotorOil extends Component {
 			                          </ul>
 			                          <div className="rating">
 			                            <Stars values={product.averageRating ? product.averageRating : 0} {...starsRating} />
-			                            <span>{getLength(product.reviews)} review</span>
+			                            <span>{getLength(product.reviews)} {translate("product.reviews")}</span>
 			                          </div>
-			                          <p className="price">{product.salesPrice.toFixed(2)} <span>sr</span></p>
+			                          <p className="price">{product.salesPrice.toFixed(2)} <span>{translate("general.currency")}</span></p>
 			                        </div>
 			                      </Link>
 			                    </div>

@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 import { closeNav, right } from '../../../utils';
+import LanguageToggle from '../../LanguageToggle';
 
-const Nav = ({ translate, direction, isLoggedIn, fullName }) => {
+const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection, getCountriesOnly }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
@@ -151,7 +152,14 @@ const Nav = ({ translate, direction, isLoggedIn, fullName }) => {
                         <li><a href="#">Cairo</a></li>
                     </ul>
                 </li>
-                {/* <li className="nav-sm"><a className="lang" href="#">العربية</a></li> */}
+                <li className="nav-sm">
+                    <LanguageToggle
+                        closeNav={close}
+                        width={'100%'}
+                        localize={localize}
+                        translate={translate}
+                        changeDefaultDirection={changeDefaultDirection}
+                        getCountriesOnly={getCountriesOnly} /></li>
                 <li className="sep"></li>
                 <li className="nav-sm"><a href="#">{translate("nav.shippingAndDelivery")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.returns")}</a></li>

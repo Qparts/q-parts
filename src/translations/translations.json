@@ -2454,5 +2454,15 @@
       "الرجاء النقر فوق الارتباط الموجود في هذه الرسالة لتنشيط حسابك",
       "Please click the link in that message to activate your account"
     ]
+  },
+  "motorOil": {
+    "popularBrands": [
+      "ماركات زيت شعبية",
+      "Popular Oil Brands"
+    ],
+    "oilBestSeller": [
+      "زيت أفضل بائع",
+      "Oil Best Seller"
+    ]
   }
 }

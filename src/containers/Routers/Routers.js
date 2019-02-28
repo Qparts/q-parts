@@ -83,6 +83,9 @@ class Routes extends Component {
                                 </Link>
                             </main>
                             <Nav
+                                localize={this.props.localize}
+                                changeDefaultDirection={this.props.changeDefaultDirection}
+                                getCountriesOnly={this.props.getCountriesOnly}
                                 direction={this.props.direction}
                                 translate={this.props.translate}
                                 isLoggedIn={isAuth(this.props.token)}
