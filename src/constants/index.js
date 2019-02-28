@@ -1,5 +1,6 @@
 const arabic = 'arabic';
 const english = 'english';
+const BANK_TRANSFER_AR = 'التحويل المصرفي';
 
 export const RADIX = 10;
 export const TAB_ONE = 0;
@@ -27,7 +28,7 @@ export const serverErrorField = {
 export const BEST_SELLER = 'Best Seller';
 export const OFFERS = 'Offers';
 export const RECENT_VIEWED = 'Recent Viewed';
-export { styles, colors, helpers, sliderSetting, starsRating } from './styles';
+export { styles, colors, helpers, sliderSetting, starsRating, params } from './styles';
 export const categorySortOptions = [
 	{ value: 'recommended', label: 'Recommended' },
 	{ value: 'lPrice', label: 'Lowest price' },
@@ -79,3 +80,10 @@ export const socialMedia = 'socialMedia';
 export const payment = 'payment';
 export const PENDING = 'pending';
 export const REPLIED = 'replied';
+export const rtl = 'rtl';
+export const ltr = 'ltr';
+
+export const paymentMethod = {
+	name: BANK_TRANSFER,
+	nameAr: BANK_TRANSFER_AR
+}

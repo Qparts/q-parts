@@ -18,6 +18,7 @@
     }
   
     .details-holder {
+      @include text-left;
       @include padding-left(12px);
     }
   

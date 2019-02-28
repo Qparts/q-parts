@@ -1,6 +1,10 @@
+  .render-cart-item {
+    @include text-left;
+  }
   .cart-items{
     @include border-radius-div;
     overflow: hidden;
+    @include padding-left(0);
     li{
       padding: 20px 15px;
       figure{
@@ -60,7 +64,7 @@
         background-color: $green;
         border-radius: 100px;
         display: inline-block;
-        margin-right: 5px;
+        @include margin-right(5px);
         position: relative;
         top: -2px;
       }
@@ -87,8 +91,8 @@
     @extend .d-block;
     @extend .text-right;
     @extend .mt-2;
-    padding-right: 20px;
-    padding-left: 20px;
+    @include padding-right(20px);
+    @include padding-left(20px);
     @include font-size(20px);
     margin-bottom: 72px;
     i{
@@ -162,7 +166,7 @@
   }
 }
 .cart-header{
-  padding-#{$right}: 0;
+  @include text-left;
   label{
     font-weight: 400;
     @include font-size(14px);

@@ -18,6 +18,7 @@
   background: $default-header-bg;
 }
 .cd-nav {
+  @include text-left;
   @include transition(all, 0.3s, ease);
   ul {
     @extend .list-unstyled;
@@ -35,7 +36,7 @@
     }
     margin-bottom: 0;
     position: relative;
-    > a {
+    > a, button {
       margin: 8px 0;
       padding: 10px;
       font-weight: 500;
@@ -66,7 +67,7 @@
       }
     }
     &:hover {
-      > a {
+      > a, button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -83,7 +84,7 @@
       }
     }
     &.selected {
-      a {
+      a, button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -102,7 +103,7 @@
     @include nav-sm-media {
       display: block;
     }
-    a {
+    a, button {
       margin-bottom: 5px;
       > i {
         @include font-size(25px);
@@ -150,7 +151,7 @@ ul.cd-secondary-nav {
   }
   > li {
     border-bottom: 1px solid $light-gray;
-    > a {
+    > a, button {
       @include font-size(14px);
       padding: 8px 15px;
       text-transform: capitalize;
@@ -161,11 +162,11 @@ ul.cd-secondary-nav {
     &:last-child {
       border-bottom-width: 0;
       border-bottom-left-radius: 20px;
-      border-bottom-#{$right}-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
   }
   .go-back {
-    a {
+    a, button {
       padding-#{$left}: 35px;
       &::before,
       &::after {
@@ -335,7 +336,7 @@ ul.cd-secondary-nav {
     display: flex;
     align-items: baseline;
     color: $charcoal-grey-two-40;
-    a{
+    a, button{
       color: $basic-gray;
       font-weight: 400;
       padding-#{$left}: 5px;

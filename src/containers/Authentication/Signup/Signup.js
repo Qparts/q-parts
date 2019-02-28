@@ -41,7 +41,10 @@ class Signup extends Component {
 
     return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
-        this.props.history.push('/signup/successful');
+        this.props.history.push({
+          pathname: '/signup/successful',
+          state: { isRegistered: false, email }
+        });
       })
   }
 
@@ -50,15 +53,16 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
-      direction={this.props.direction} 
+      direction={this.props.direction}
+      currentLanguage={currentLanguage}
       translate={translate}
       passwordScore={passwordScore}
       setPasswordScore={setPasswordScore}/>
-    const dialog = <Modal contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
+    const dialog = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
         <Login toggle={this.props.togglePopup} />

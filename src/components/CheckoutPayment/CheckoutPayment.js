@@ -4,6 +4,7 @@ import RenderField from '../RenderField/RenderField';
 import { withRouter } from 'react-router-dom';
 import Button from '../UI/Button';
 import * as validations from '../../utils';
+import { right } from '../../utils';
 import SelectInput from '../SelectInput/SelectInput';
 import Checkbox from '../UI/Checkbox';
 import './CheckoutPayment.css';
@@ -21,22 +22,6 @@ class CheckoutPayment extends Component {
       renderCash: false,
       renderbankTransfer: false,
       hasNewCard: true,
-      creditCard: [
-        {
-          CardType: 'Master Card',
-          cardName: 'Ahmed S Shaaban',
-          cardNumber: '0000000000',
-          cardExpirationMonth: '11',
-          cardNacardExpirationYEar: '2018',
-        },
-        {
-          CardType: 'Master Card',
-          cardName: 'Ahmed S Shaaban',
-          cardNumber: '0000000000',
-          cardExpirationMonth: '11',
-          cardNacardExpirationYEar: '2018',
-        }
-      ],
       bankTransferInfo: {
         bankName: 'Qetaa',
         accountName: 'Qetaa.com',
@@ -67,13 +52,13 @@ class CheckoutPayment extends Component {
   // }
 
   handleProceed = values => {
-    if(Object.keys(this.props.checkout.paymentMethod).length>0){
-      if(values.ccMonth) {
+    if (Object.keys(this.props.checkout.paymentMethod).length > 0) {
+      if (values.ccMonth) {
         const ccMonth = values.ccMonth.value;
         const ccYear = values.ccYear.value;
-        const sendValues = {...values, ccMonth, ccYear};
+        const sendValues = { ...values, ccMonth, ccYear };
 
-        this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: sendValues});
+        this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: sendValues });
         this.props.completePayment(true);
         this.props.history.push('/checkout/confirm')
       } else {
@@ -89,7 +74,7 @@ class CheckoutPayment extends Component {
 
   handleCreditCardOpt = () => {
     const creditCardSelected = this.state.defaultCreditCard !== null ? true : false;
-    this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: null});
+    this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: null });
     this.setState({ renderCreditCard: true, canProceed: creditCardSelected })
 
     // if (creditCardSelected) {
@@ -177,67 +162,28 @@ class CheckoutPayment extends Component {
           validate={[validations.required]} />
       </div>
       {/* <div className="footer col-12">
-            <Button className="btn btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={"icon-arrow-right"} />
+            <Button className="btn btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={{`icon-arrow-${right(direction)}`}} />
             <Button className="btn btn-light col-2" type="reset" text={translate("checkout.payment.creditCard.newCard.cancel")} onClick={this.onCancle} />
         </div> */}
       <input type="submit" ref={this.submitForm} style={{ display: 'none' }} />
     </form>
   }
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
 
-    let canSubmit = Object.keys(this.props.checkout.paymentMethod).length>0;
+    let canSubmit = Object.keys(this.props.checkout.paymentMethod).length > 0;
     const styles = {
       grey: {
         backgroundColor: '#f8f9fa'
       },
       disable: {
-       opacity: '0.6',
-       cursor: 'default'
-     }
+        opacity: '0.6',
+        cursor: 'default'
+      }
     }
-    // let payment;
-    // if(true){
-    //   payment = <div className="payment-container">
-    //    <div className="payment-box border rounded row">
-    //     <div className="payment-box_item col-9">
-    //       <Checkbox
-    //         onChange={e => this.setState({
-    //           check: !this.state.check
-    //         })}
-    //         checked={this.state.check}
-    //         label={translate("setting.addressBook.defaultAddress")}
-    //       />
-    //      <div className="payment-box_item-label">
-    //        <img className="main-img" alt="user" src="/img/visa.svg" />
-    //        <p>SHAIMAA AHMED M SOUDY</p>
-    //      </div>
-    //      <div className="visa-num">
-    //        <p className="end-number">{translate("checkout.payment.creditCard.endNo")} <span>4871</span></p>
-    //        <p className="expires-date">{translate("checkout.payment.creditCard.expires")} <span>04/2023</span></p>
-    //      </div>
-    //      <div className="payment-footer">
-    //       <Button type="button" className="btn btn-link" text={translate("checkout.payment.creditCard.edit")} icon="icon-edit" isReverseOrder/>
-    //       <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
-    //      </div>
-    //     </div>
-    //    </div>
-    //   </div>
-    // }else{
-    //   payment = <div id="payment-no-card">
-    //     </div>
-    // }
 
-    const creditCardHeaders = [
-      "",
-      translate("checkout.payment.creditCard.table.card"),
-      translate("checkout.payment.creditCard.table.name"),
-      translate("checkout.payment.creditCard.table.cardNo"),
-      translate("checkout.payment.creditCard.table.expiration"),
-
-    ]
-    let creditClass = "btn btn-light";
-    let banckClass = "btn btn-primary"
+    let creditClass = "btn btn-light text-center";
+    let banckClass = "btn btn-primary text-center"
     if (this.state.active === "credit") {
       creditClass += " active";
     }
@@ -304,11 +250,11 @@ class CheckoutPayment extends Component {
                     </div>
                   </Fragment>) || ((
                     this.state.renderbankTransfer) && <Fragment>
-                        <div id="bank-transfer">
-                          <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
-                          <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
-                    {this.state.banks.map((item,idx) => {
-                      return <Fragment key={idx}>
+                      <div id="bank-transfer">
+                        <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
+                        <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
+                        {this.state.banks.map((item, idx) => {
+                          return <Fragment key={idx}>
                             <div>
                               <div className="d-table product-options">
                                 <div className="d-table-row">
@@ -329,10 +275,10 @@ class CheckoutPayment extends Component {
                                 </div>
                               </div>
                             </div>
-                        </Fragment>
-                      })
-                  }
-                </div>
+                          </Fragment>
+                        })
+                        }
+                      </div>
                     </Fragment>
 
                 )}
@@ -340,8 +286,8 @@ class CheckoutPayment extends Component {
             <div className="justify-content-between footer-payment">
               <p>{translate("checkout.payment.canReview")}</p>
               {
-                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleSubmit} /> :
-                  <Button type="button" style={canSubmit? {} : styles.disable} className="btn btn-primary" text={"Place Your Order"} icon="icon-arrow-right" onClick={this.handleProceed} />
+                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleSubmit} /> :
+                  <Button type="button" style={canSubmit ? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleProceed} />
               }
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import Stars from 'react-stars';
-import { sliderSetting, starsRating } from '../../constants';
+import { sliderSetting, starsRating, params } from '../../constants';
 import Title from '../UI/Title';
 
 import './Products.css';
@@ -9,7 +9,7 @@ import { BEST_SELLER, OFFERS } from '../../constants';
 import Swiper from 'react-id-swiper';
 import { getLength } from '../../utils/array';
 import { getBestSeller, getOffers } from '../../utils/api';
-import { handleImageFallback } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 
 class Products extends Component {
   constructor(props) {
@@ -59,57 +59,29 @@ class Products extends Component {
   }
 
   render() {
-    const { translate } = this.props;
+    const { translate, direction, currentLanguage } = this.props;
     const { bestSeller, offers } = this.state
-    const params = {
-      containerClass: `swiper-container products-list`,
-      slidesPerView: 5,
-      spaceBetween: 30,
-      grabCursor: true,
-      lazy: true,
-      rebuildOnUpdate: true,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      breakpoints: {
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 30
-        },
-        992: {
-          slidesPerView: 4,
-          spaceBetween: 15
-        },
-        768: {
-          slidesPerView: 3,
-          spaceBetween: 15
-        },
-        576: {
-          slidesPerView: 2,
-          spaceBetween: 15
-        },
-      }
-    }
     return (
       <section className="products-sec">
         <div className="container-fluid">
           <Title header={translate("offers.title")} subHeader={translate("offers.subTitle")} />
           <ul className="nav">
             <li>
-              <a className="active" data-toggle="tab" href="#best-seller" role="tab" aria-controls="best-seller" aria-selected="true">Best Seller</a>
+              <a className="active" data-toggle="tab" href="#best-seller" role="tab" aria-controls="best-seller" aria-selected="true">
+              {translate("offers.recommendation.bestSeller")}</a>
             </li>
             <li>
-              <a data-toggle="tab" href="#offers" role="tab" aria-controls="offers" aria-selected="false">Offers</a>
+              <a data-toggle="tab" href="#offers" role="tab" aria-controls="offers" aria-selected="false">{translate("offers.recommendation.offers")}</a>
             </li>
             <li>
-              <a data-toggle="tab" href="#recently-viewed" role="tab" aria-controls="recently-viewed" aria-selected="false">Recently Viewed</a>
+              <a data-toggle="tab" href="#recently-viewed" role="tab" aria-controls="recently-viewed" aria-selected="false">
+              {translate("offers.recommendation.recentViewed")}</a>
             </li>
           </ul>
           <div className="tab-content">
             <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
-              <h3>Best Seller</h3>
-              <Swiper {...params}>
+              <h3>{translate("offers.recommendation.bestSeller")}</h3>
+              <Swiper {...params(direction)}>
                 {
                   
                   bestSeller.map((product, idx) => (
@@ -119,14 +91,14 @@ class Products extends Component {
                         <div className="card-body">
                           <h5 className="card-title">{product.desc}</h5>
                           <ul className="list-inline product-info">
-                            <li><strong>{product.brand.name}</strong></li>
+                            <li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                             <li>{product.number}</li>
                           </ul>
                           <div className="rating">
                             <Stars values={product.averageRating ? product.averageRating : 0} {...starsRating} />
-                            <span>{getLength(product.reviews)} review</span>
+                            <span>{getLength(product.reviews)} {translate("product.reviews")}</span>
                           </div>
-                          <p className="price">{product.salesPrice.toFixed(2)} <span>sr</span></p>
+                          <p className="price">{product.salesPrice.toFixed(2)} <span>{translate("general.currency")}</span></p>
                         </div>
                       </Link>
                     </div>
@@ -136,10 +108,10 @@ class Products extends Component {
               <div className="swiper-left"></div>
             </div>
             <div className="tab-pane fade" id="offers" role="tabpanel" >
-              <h3>Offers</h3>
+              <h3>{translate("offers.recommendation.offers")}</h3>
             </div>
             <div className="tab-pane fade" id="recently-viewed" role="tabpanel">
-              <h3>recently-viewed</h3>
+              <h3>{translate("offers.recommendation.recentViewed")}</h3>
             </div>
           </div>
         </div>

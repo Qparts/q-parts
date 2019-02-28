@@ -4,6 +4,7 @@ import { right } from '../../../utils';
 
 class Footer extends Component {
   render() {
+    const { translate } = this.props
     return (
 
       <section className="main-footer">
@@ -13,29 +14,29 @@ class Footer extends Component {
             <li className="col-auto media">
               <i className="icon-pricing" />
               <div className="media-body">
-                <h5>Low Prices</h5>
-                <p>Price match guarantee</p>
+                <h5>{translate("footer.pricing.header")}</h5>
+                <p>{translate("footer.pricing.subHeader")}</p>
             </div>
             </li>
             <li className="col-auto media">
               <i className="icon-whatsapp" />
               <div className="media-body">
-                <h5>In-House Experts</h5>
-                <p>Have a Question? Ask a Specialis</p>
+                <h5>{translate("footer.whatsApp.header")}</h5>
+                <p>{translate("footer.whatsApp.subHeader")}</p>
             </div>
             </li>
             <li className="col-auto media">
               <i className="icon-delivery" />
               <div className="media-body">
-                <h5>Great Delivery</h5>
-                <p>From one to three days</p>
+                <h5>{translate("footer.delivery.header")}</h5>
+                <p>{translate("footer.delivery.subHeader")}</p>
             </div>
             </li>
             <li className="col-auto media">
               <i className="icon-wallet" />
               <div className="media-body">
-                <h5>Easy To Pay</h5>
-                <p>Cash on dilevry, Credit Card <span>and Bank transefear</span></p>
+                <h5>{translate("footer.wallet.header")}</h5>
+                <p>{translate("footer.wallet.subHeader")} <span>{translate("footer.wallet.span")}</span></p>
             </div>
             </li>
           </ul>
@@ -43,64 +44,64 @@ class Footer extends Component {
             <li className="col-auto">
               <ul className="list-unstyled">
                 <li>
-                  <h5>CUSTOMER SERVICE</h5>
+                  <h5>{translate("footer.customerService.title")}</h5>
                 </li>
                 <li>
-                  <a href="#">Shipping & Delivery</a>
+                  <a href="#">{translate("footer.customerService.linkOne")}</a>
                 </li>
                 <li>
-                  <a href="#">Returns</a>
+                  <a href="#">{translate("footer.customerService.linkTwo")}</a>
                 </li>
                 <li>
-                  <a href="#">FAQs</a>
+                  <a href="#">{translate("footer.customerService.linkThree")}</a>
                 </li>
                 <li>
-                  <a href="#">Contact Us</a>
+                  <a href="#">{translate("footer.customerService.linkFour")}</a>
                 </li>
                 <li>
-                  <a href="#">Track Order</a>
-                </li>
-              </ul>
-            </li>
-            <li className="col-auto">
-              <ul className="list-unstyled">
-                <li>
-                  <h5>INFORMATION</h5>
-                </li>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Careers</a>
+                  <a href="#">{translate("footer.customerService.linkFive")}</a>
                 </li>
               </ul>
             </li>
             <li className="col-auto">
               <ul className="list-unstyled">
                 <li>
-                  <h5>POLICIES & TERMS</h5>
+                  <h5>{translate("footer.info.title")}</h5>
                 </li>
                 <li>
-                  <a href="#">Privacy Policy</a>
+                  <a href="#">{translate("footer.info.linkOne")}</a>
                 </li>
                 <li>
-                  <a href="#">Terms & Conditions</a>
+                  <a href="#">{translate("footer.info.linkTwo")}</a>
+                </li>
+                <li>
+                  <a href="#">{translate("footer.info.linkThree")}</a>
+                </li>
+              </ul>
+            </li>
+            <li className="col-auto">
+              <ul className="list-unstyled">
+                <li>
+                  <h5>{translate("footer.pt.title")}</h5>
+                </li>
+                <li>
+                  <a href="#">{translate("footer.pt.linkOne")}</a>
+                </li>
+                <li>
+                  <a href="#">{translate("footer.pt.linkTwo")}</a>
                 </li>
               </ul>
             </li>
             <li className="col subscribe">
-              <h5>Sign Up FOR OUR NEWSLETTER</h5>
+              <h5>{translate("footer.newsLetter.header")}</h5>
                 <p>
-                  to stay up-to-date on our promotions, discounts, sales, special offers and more
+                {translate("footer.newsLetter.subHeader")}
               </p>
               <form className="form-inline">
-                <input type="text" className="form-control col"   placeholder="Enter Email" />
+                <input type="text" className="form-control col"   placeholder={translate("footer.newsLetter.placeholder")} />
                 <button type="submit col-auto" className="btn btn-primary">
                   <i className="icon-email"></i>
-                  <span>Subscribe <i className={`icon-arrow-${right(this.props.direction)}`} /></span>
+                  <span>{translate("footer.newsLetter.subscribe")} <i className={`icon-arrow-${right(this.props.direction)}`} /></span>
                 </button>
               </form>
             </li>
@@ -109,8 +110,8 @@ class Footer extends Component {
             <div className="col sponser">
               <span><i/></span>
               <p>
-                One of the <br/>
-                incubated proiects
+              {translate("footer.copyRight.header")} <br/>
+              {translate("footer.copyRight.subHeader")}
             </p>
             </div>
             <div className="col ">

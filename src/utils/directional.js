@@ -13,6 +13,10 @@ export const paddingRight = (direction) => {
     return direction === 'ltr' ? 'padding-right' : 'padding-left'
 }
 
+export const l = (direction) => {
+    return direction === 'ltr' ? 'l' : 'r';
+}
+
 export const sideValues = (direction, values) => {
     const unite = 'px';
     return direction === 'ltr' ?

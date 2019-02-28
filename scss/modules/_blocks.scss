@@ -71,31 +71,7 @@
     }
   }
 }
-//move to check out oage
-.chat-div{
-  padding: 0 10px;
-  img{
-    max-width: 40px;
-  }
-  .media-body{
-    P{
-      @include font-size(13px);
-      margin-top: 2px;
-      span{
-        @include font-size(14px);
-        display: block;
-      }
-    }
-  }
-  &:hover{
-    p{
-      span{
-        text-decoration: underline;
-      }
-    }
-  }
-}
-// end moving
+
 .banner-250{
   width: 250px;
   height: 250px;
@@ -106,10 +82,11 @@
   }
 }
 .live-chat{
+  @include text-left;
   background: $light-gray;
   @extend .position-fixed;
   bottom: 0;
-  right: 50px;
+  #{$right}: 50px;
   z-index: 999;
   width: 151px;
   border-radius: $border-radius-base $border-radius-base 0 0;
@@ -117,7 +94,7 @@
   @include nav-sm-media{
     width: 48px;
     background: transparent;
-    right: 15px;
+    #{$right}: 15px;
   }
   img{
     max-width: 48px;

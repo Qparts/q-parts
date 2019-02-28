@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getTranslate } from 'react-localize-redux';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
@@ -84,9 +84,9 @@ class Checkout extends Component {
 				...item.product,
 				desc: item.product.desc,
 				salesPrice: item.product.salesPrice.toFixed(2),
-				currency: 'SR',
+				currency: translate("general.currency"),
 				quantity: item.quantity,
-				quantityLabel: 'quantity',
+				quantityLabel: translate("general.quantity"),
 				image: item.product.image,
 				productNumber: item.product.productNumber,
 				brand: item.product.brand,
@@ -145,6 +145,8 @@ class Checkout extends Component {
 					<Switch>
 						<Route path="/checkout" exact={true} render={() => {
 							return <CheckoutShipping
+								direction={this.props.direction}
+								currentLanguage={this.props.currentLanguage}
 								addAddress={this.props.addAddress}
 								address={this.props.address}
 								customer={this.props.customer}
@@ -170,6 +172,7 @@ class Checkout extends Component {
 
 						<Route path="/checkout/payment" exact={true} render={() => {
 							return <CheckoutPayment
+								direction={this.props.direction}
 								translate={translate}
 								addPaymentMethod={this.props.addPaymentMethod}
 								completePayment={this.props.completePayment}
@@ -179,6 +182,8 @@ class Checkout extends Component {
 						<Route path="/checkout/confirm" exact={true} render={() => {
 							return <CheckoutConfirmation
 								translate={translate}
+								currentLanguage={this.props.currentLanguage}
+								direction={this.props.direction}
 								checkout={this.props.checkout}
 								completeOrder={this.props.completeOrder}
 								purchasedItems={checkoutData}
@@ -189,6 +194,7 @@ class Checkout extends Component {
 					</Switch>
 					<div className="Checkout-Order_summary col-12 col-md-3">
 						<OrderSummary
+							direction={this.props.direction}
 							translate={translate}
 							isDelivery={canSubmitOrder}
 							submitButton={translate("orderSummary.placeOrder")}
@@ -205,10 +211,12 @@ const mapStateToProps = state => ({
 	customer: state.customer.detail,
 	defaultAddress: state.customer.defaultAddress,
 	address: state.customer.address,
+	direction: state.customer.direction,
 	regions: state.api.regions,
 	country: state.api.country,
 	city: state.api.city,
 	translate: getTranslate(state.localize),
+	currentLanguage: getActiveLanguage(state.localize).code,
 	checkout: state.cart.checkout,
 	cartId: state.cart.cartId,
 	addresses: state.customer.detail.addresses,

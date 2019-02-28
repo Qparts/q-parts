@@ -7,11 +7,12 @@
   .CheckoutConfirmation-container{
     margin-bottom: 30px;
     .delivery-address{
+      @include text-left;
       .DeliveryAddress_subheader{
         h4{
           padding: 20px;
           background: $white;
-          border-radius: side-values(20px 0 0 0);
+          border-radius: corner-values(20px 0 0 0);
           margin-bottom: 2px;
         }
         .addresses-box_item{
@@ -83,6 +84,7 @@
       }
     }
     .payment-method{
+      @include text-left;
       background: none !important;
      .PaymentMethod_subheader{
        h4{
@@ -183,13 +185,6 @@
       margin-bottom: 2px;
       font-family: Roboto;
       @include font-size(25px);
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: left;
-      color: #37363c;
     }
     .div-title{
       @include margin-left(15px);

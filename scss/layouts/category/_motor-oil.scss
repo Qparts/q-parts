@@ -28,12 +28,12 @@
     padding-bottom: 40px;
     @media (min-width: 992px) {
       .main-cat a:first-child img {
-        border-radius: 20px 0 0 20px;
+        border-radius: corner-values(20px 0 0 20px);
       }
     }
     @media (min-width: 992px) {
       .main-cat a:last-child img {
-        border-radius: 0 0 20px 0;
+        border-radius: corner-values(0 0 20px 0);
       }
     }
     img{
@@ -65,12 +65,12 @@
   .oil-img{
     @media (min-width: 992px) {
       .main-cat li:first-child img {
-        border-radius: 20px 0 0 20px;
+        border-radius: corner-values(20px 0 0 20px);
       }
     }
     @media (min-width: 992px) {
       .main-cat li:last-child img {
-        border-radius: 0 0 20px 0;
+        border-radius: corner-values(0 0 20px 0);
       }
     }
     .main-cat{
@@ -84,7 +84,7 @@
           span{
             position: absolute;
             top: 50%;
-            #{$left}: 50%;
+            left: 50%;
             transform: translate(-50%,-50%);
             text-transform: uppercase;
             .btn-primary{

@@ -19,7 +19,7 @@ import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPa
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
-export const routes = (isAuth, direction) => [
+export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/",
         exact: true,
@@ -29,7 +29,7 @@ export const routes = (isAuth, direction) => [
         path: "/quotation-order",
         exact: true,
         component: QuotationRequest,
-        redirectTo: '/'
+        defaultLang
     },
     {
         path: "/quotation-order/confirmation:quotationId?",
@@ -58,15 +58,21 @@ export const routes = (isAuth, direction) => [
     {
         path: "/signup/successful",
         component: ConfirmSignUp,
+        isAuth: isAuth,
+        direction: direction,
+        translate,
+        redirectTo: '/',
         exact: true,
     },
     {
         path: "/vehicles",
         component: Vehicles,
+        defaultLang
     },
     {
         path: "/cart",
-        component: Cart
+        component: Cart,
+        direction: direction
     },
     {
         path: "/setting",
@@ -118,11 +124,14 @@ export const routes = (isAuth, direction) => [
     {
         path: "/password/forgot-password",
         exact: true,
-        component: ForgotPassword
+        component: ForgotPassword,
+        translate
     },
     {
         path: "/payment-response:cartId?/:id?/:status?/:message?",
         exact: true,
         component: CheckoutConfirmationOrder,
+        translate,
+        direction
     },
 ];

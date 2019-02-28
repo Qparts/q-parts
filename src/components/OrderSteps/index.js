@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { right } from '../../utils';
 
 export class OrderSteps extends Component {
     static defaultProps = {
@@ -6,7 +7,7 @@ export class OrderSteps extends Component {
     }
 
     render() {
-        const { grey } = this.props;
+        const { grey, translate, direction } = this.props;
         const styles = {
             greyImage: {
                 color: grey ? '#a9a9ab' : null
@@ -18,11 +19,11 @@ export class OrderSteps extends Component {
                     <figure>
                         <div className="position-relative">
                             <div className="figure request"><img src="/img/request.svg" alt="request" /></div>
-                            <span><i className="icon-arrow-right"></i></span>
+                            <span><i className={`icon-arrow-${right(direction)}`}></i></span>
                         </div>
                         <figcaption>
-                            <h3>Request</h3>
-                            <p>Fill in your vehicle data and the <span>parts you want</span></p>
+                            <h3>{translate("orderSteps.request.title")}</h3>
+                            <p>{translate("orderSteps.request.subtitle")} <span>{translate("orderSteps.request.subtitleSpan")}</span></p>
                         </figcaption>
                         <i className="icon-arrow-down"></i>
                     </figure>
@@ -32,11 +33,11 @@ export class OrderSteps extends Component {
                         <div className="position-relative">
                             <span></span>
                             <div className="figure price"><img src={`/img/check-price${grey}.svg`} alt="check-price" /></div>
-                            <span><i className="icon-arrow-right"></i></span>
+                            <span><i className={`icon-arrow-${right(direction)}`}></i></span>
                         </div>
                         <figcaption>
-                            <h3>Check Price</h3>
-                            <p>The price will deliver to you <span>within 24 hours</span></p>
+                            <h3>{translate("orderSteps.price.title")}</h3>
+                            <p>{translate("orderSteps.price.subtitle")} <span>{translate("orderSteps.price.subtitleSpan")}</span></p>
                         </figcaption>
                     </figure>
                     <i className="icon-arrow-down"></i>
@@ -49,8 +50,8 @@ export class OrderSteps extends Component {
                             <span><i className="icon-checked"></i></span>
                         </div>
                         <figcaption>
-                            <h3>Add To Cart</h3>
-                            <p>choose Sipping Address <span>and payment method</span></p>
+                            <h3>{translate("orderSteps.cart.title")}</h3>
+                            <p>{translate("orderSteps.cart.subtitle")} <span>{translate("orderSteps.cart.subtitleSpan")}</span></p>
                         </figcaption>
                     </figure>
                     <i className="icon-checked done-xs"></i>
@@ -62,8 +63,8 @@ export class OrderSteps extends Component {
                             <div className="figure delivery"><img src={`/img/delivery-product${grey}.svg`} alt="delivery-product" /></div>
                         </div>
                         <figcaption>
-                            <h3>Receive Order</h3>
-                            <p>Your order for your workshop or <span>anywher you love</span></p>
+                            <h3>{translate("orderSteps.receive.title")}</h3>
+                            <p>{translate("orderSteps.receive.subtitle")} <span>{translate("orderSteps.receive.subtitleSpan")}</span></p>
                         </figcaption>
                     </figure>
                 </li>

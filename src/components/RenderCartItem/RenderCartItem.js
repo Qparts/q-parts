@@ -1,37 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import { Field } from 'redux-form'
-import RenderField from '../RenderField/RenderField';
-import Button from '../UI/Button';
-import * as validations from '../../utils';
-import NumberPicker from '../UI/NumberPicker';
-import RenderImage from '../RenderImage/RenderImage';
-// import './RenderCartItem.css';
-import { getLength, handleImageFallback } from '../../utils';
+import { getTranslatedObject, l, right } from '../../utils';
+import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
 
 export default class extends Component {
   static defaultProps = {
     divCol: 'col-lg-9'
-  }
-
-  componentWillMount() {
-    // const { fields, purchasedItems } = this.props;
-    // console.log(purchasedItems);
-
-
-    // purchasedItems.map(cartItem => {
-    //   return fields.push({
-    //     itemName: cartItem.desc,
-    //     quantity: cartItem.quantity,
-    //     quantityLabel: cartItem.quantityLabel,
-    //     price: cartItem.price,
-    //     currency: cartItem.currency,
-    //     image: cartItem.image,
-    //     productNumber: cartItem.productNumber,
-    //     manufacturerName: cartItem.manufacturerName
-    //   })
-    // })
   }
 
   handleClick = (action, value, purchasedItem, event) => {
@@ -56,11 +31,11 @@ export default class extends Component {
 
 
   render() {
-    const { purchasedItems, removeButton, divCol } = this.props;
+    const { purchasedItems, removeButton, divCol, direction, translate, currentLanguage } = this.props;
 
     return (
       <Fragment>
-        <div className={divCol}>
+        <div className={`render-cart-item ${divCol}`}>
           <ul className="cart-items list-unstyled">
             {
               purchasedItems.map((purchasedItem, idx) => {
@@ -74,10 +49,10 @@ export default class extends Component {
                         <div className="col-md-9 item-dis">
                           <header>
                             <h3><Link to="#">{purchasedItem.desc}</Link></h3>
-                            <h4>{purchasedItem.brand.name} <span>{purchasedItem.productNumber}</span></h4>
+                            <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
                           </header>
                           <div className="cart-quantity d-block d-lg-none">
-                            <h5>Quantity</h5>
+                            <h5>{translate("general.quantity")}</h5>
                             <div className="input-group quantity">
                               <div className="input-group-prepend">
                                 <button
@@ -97,16 +72,16 @@ export default class extends Component {
                             </div>
                           </div>
                           <div className="cart-product-price">
-                            <p className="price">{purchasedItem.salesPrice} <span>sr</span></p>
+                            <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
                           </div>
                           <div className="cart-actions">
-                            <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>Move to Wishlist</span></Link>
-                            <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>Delete</span></Link>
+                            <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
+                            <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
                           </div>
                         </div>
                         <div className="col-md-3">
                           <div className="cart-quantity d-none d-lg-block">
-                            <h5>Quantity</h5>
+                            <h5>{translate("general.quantity")}</h5>
                             <div className="input-group quantity">
                               <div className="input-group-prepend">
                                 <button
@@ -135,9 +110,9 @@ export default class extends Component {
             }
           </ul>
           <div className="row">
-            <div className="col-md-6 ml-md-auto">
+            <div className={`col-md-6 m${l(direction)}-md-auto`}>
               {
-                !removeButton && <Link to="/" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></Link>
+                !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className={`icon-arrow-${right(direction)}`}></i></Link>
               }
             </div>
           </div>

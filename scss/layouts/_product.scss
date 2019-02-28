@@ -1,4 +1,5 @@
 #product {
+  @include text-left;
   .group-header-opacity_first {
     background: #f5f5f5;
     border-radius: corner-values(20px 0 0 20px);
@@ -15,14 +16,14 @@
   .btn-primary {
     text-align: $right;
     i {
-      padding-left: 6px;
+      @include padding-left(6px);
     }
   }
   .btn-primary {
     @include box-shadow;
   }
   .btn-back {
-    text-align: $left;
+    @include text-left;
     margin-top: 16px;
     .btn-primary {
       text-transform: capitalize;
@@ -33,14 +34,14 @@
       background: #ffffff;
       color: $black;
       .icon-back {
-        padding-right: 4px;
+        @include padding-right(4px);
         @include font-size(10px);
         top: auto;
       }
     }
   }
   .btn-wishlist {
-    text-align: right;
+    @include text-right;
     .btn-primary {
       .icon-heart {
         @include font-size(25px);
@@ -66,10 +67,10 @@
     @include font-size(18px);
     color: $charcoal-grey-80;
     span:nth-child(1) {
-      padding-right: 5px;
+      @include padding-right(5px);
     }
     span:nth-child(2) {
-      padding-right: 11px;
+      @include padding-right(11px);
     }
   }
   .product-item_sales-price {
@@ -78,7 +79,7 @@
       color: $dark-charcoal-grey;
     }
     span:nth-child(2) {
-      padding-left: 6px;
+      @include padding-left(6px);
       @include font-size(18px);
     }
   }
@@ -136,7 +137,7 @@
     }
     .btn-primary {
       width: 100%;
-      margin-left: 10px;
+      @include margin-left(10px);
     }
   }
   .product-details {
@@ -173,9 +174,6 @@
     color: $basic-gray;
     text-transform: capitalize;
   }
-  > div > div > .row:nth-child(2) {
-    // margin-top: 99px;
-  }
   .product-reviews {
     margin-top: 81px;
     margin-bottom: 102px;
@@ -192,10 +190,10 @@
           line-height: 1.13;
           color: $dark-50;
           text-transform: lowercase;
-          padding-left: 6px;
+          @include padding-left(6px);
 
           span:nth-child(2) {
-            padding-left: 2px;
+            @include padding-left(2px);
           }
         }
         .average-rating_header {
@@ -203,7 +201,7 @@
           padding-bottom: 22px;
         }
         .average-rating_stars {
-          padding-right: 6px;
+          @include padding-right(6px);
           align-self: center;
         }
         .btn-link_parent {
@@ -213,10 +211,10 @@
             color: $black;
             font-weight: normal;
             @include medium-screen {
-              padding-left: 20px;
+              @include padding-left(20px);
             }
             span {
-              padding-right: 5px;
+              @include padding-right(5px);
             }
           }
           .sm-seperator {
@@ -233,7 +231,7 @@
           .h-seperator {
             @include h-seperator;
             position: absolute;
-            left: 0;
+            #{$left}: 0;
             background: $light-gray;
             height: 2px;
           }
@@ -258,7 +256,7 @@
               align-items: center;
 
               > span {
-                padding-right: 5px;
+                @include padding-right(5px);
               }
             }
             .group-shadow-input {
@@ -268,7 +266,7 @@
                 text-align: $right;
                 padding-top: 5px;
                 padding-bottom: 13px;
-                padding-right: 11px;
+                @include padding-right(11px);
                 button {
                   @include font-size(16px);
                   font-weight: normal;
@@ -363,7 +361,7 @@
         border: 1px solid $light-gray;
         border-radius: corner-values(20px 0 20px 20px);
         overflow: hidden;
-        margin-right: 17px;
+        @include margin-right(17px);
         img {
           width: 75px;
           height: 75px;
@@ -390,6 +388,10 @@
 
 #AddProduct {
   background: white;
+  @include small-screen {
+    background: $light-gray;
+  }
+  @include text-left;
   form {
     .vehicle-information {
       @include box-shadow;
@@ -398,7 +400,7 @@
         .css-10nd86i {
           width: 200px;
           height: 55px;
-          margin-left: 10px;
+          @include margin-left(10px);
           border-radius: 0px;
           background-color: #f7f7f7;
           .select__control {
@@ -410,7 +412,7 @@
         }
         .first-formGroup {
           .css-10nd86i {
-            border-radius: side-values(20px 0px 0px 20px) !important;
+            border-radius: corner-values(20px 0px 0px 20px) !important;
             width: 160px;
             height: 55px;
             .select__placeholder {
@@ -456,7 +458,7 @@
         font-stretch: normal;
         line-height: normal;
         letter-spacing: normal;
-        text-align: $left;
+        @include text-left;
         margin-#{$left}: 10px;
         margin-bottom: 0px;
       }
@@ -491,7 +493,7 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: normal;
-          text-align: left;
+          @include text-left;
         }
         .product-Name {
           height: 12px;
@@ -502,7 +504,7 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: normal;
-          text-align: left;
+          @include text-left;
         }
         .product-Number {
           height: 12px;
@@ -513,11 +515,11 @@
           font-stretch: normal;
           line-height: 1.13;
           letter-spacing: normal;
-          text-align: left;
+          @include text-left;
           color: #272734;
         }
         .product-rate {
-          display: inline-block;
+          display: flex;
           line-height: 12px;
         }
         .product-reviews {
@@ -529,7 +531,7 @@
           font-stretch: normal;
           line-height: 1.31;
           letter-spacing: normal;
-          text-align: left;
+          @include text-left;
           color: #272734;
         }
         .product-price {
@@ -555,7 +557,7 @@
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
-          text-align: $left;
+          @include text-left;
           color: rgba(39, 39, 52, 0.8);
         }
       }
@@ -568,7 +570,8 @@
     }
     .btn-primary {
       background-color: $light-gray;
-      border-radius: side-values(20px 0px 0px 20px) !important;
+      border-radius: corner-values(20px 0px 0px 20px) !important;
+      @include text-right;
       height: 52px;
       color: black;
       padding-top: 10px;
@@ -579,7 +582,7 @@
       }
     }
     .sale-price {
-      border-radius: side-values(0px 0px 20px 0px) !important;
+      border-radius: corner-values(0px 0px 20px 0px) !important;
       height: 52px;
       font-family: Roboto;
       @include font-size(30px);
@@ -600,8 +603,11 @@
     .btn-footer {
       margin-top: 30px;
       margin-bottom: 30px;
+      @include text-right;
+      display: flex;
+      white-space: nowrap;
       .btn-primary {
-        border-radius: side-values(0px 0px 0px 20px) !important;
+        border-radius: corner-values(0px 0px 0px 20px) !important;
         width: 207px;
         height: 55px;
         color: $black;
@@ -614,7 +620,7 @@
         height: 55px;
         background: $brand-color;
         color: white;
-        border-radius: side-values(0px 20px 20px 0px) !important;
+        border-radius: corner-values(0px 20px 20px 0px) !important;
         font-size: 20px;
         margin-#{$left}: 9px;
         i{
@@ -624,251 +630,8 @@
       .group-shadow-input {
         height: 10px;
         transform: translate(-5%, 400%);
-        right: 0;
+        #{$right}: 0;
         width: 30% !important;
-      }
-    }
-  }
-}
-
-#AddProduct-mobile {
-  background: $light-gray;
-  padding-top: 36px;
-  padding-bottom: 50px;
-  .title {
-    margin-bottom: 36px;
-    .span-parent {
-      border-bottom: 2px solid red;
-      display: flex;
-      @include margin-right(8px);
-      line-height: 21px;
-    }
-    i {
-      font-size: 30px;
-      color: $brand-color;
-      @include margin-right(10px);
-    }
-    p {
-      font-family: Roboto;
-      font-size: 30px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 20px;
-      letter-spacing: normal;
-      text-align: $left;
-      display: flex;
-    }
-  }
-  .vehicle-information {
-    @include box-shadow;
-    padding: 10px;
-    background: white;
-    p {
-      font-family: Roboto;
-      font-size: 20px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: $left;
-      margin-#{$left}: 10px;
-    }
-    .css-10nd86i {
-      height: 55px;
-      border-radius: 0px;
-      background-color: #f7f7f7;
-      margin-#{$right}: 10px;
-    }
-    .form-group {
-      .first-formGroup {
-        .css-10nd86i {
-          border-radius: side-values(20px 0px 0px 0px) !important;
-        }
-      }
-      .select__control {
-        margin-#{$left}: 5px;
-      }
-      .select-input {
-        margin-#{$left}: 10px;
-      }
-    }
-    .div-last-rounded {
-      .form-control {
-        border: none;
-        margin: 0px;
-        padding-top: 0px;
-        padding-#{$left}: 5px;
-        input {
-          height: 55px;
-          background: $light-gray;
-          border-radius: side-values(0px 0px 20px 20px) !important;
-        }
-      }
-    }
-    .input-group-prepend {
-      .ellipse {
-        margin-top: 15px;
-      }
-    }
-  }
-  .item {
-    margin-top: 50px;
-    .text-item {
-      display: inline-block;
-      .product-item_desc {
-        height: 17px;
-        font-family: Roboto;
-        font-size: 17px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: left;
-        color: $dark-charcoal-grey;
-      }
-      .product-Name {
-        width: 71px;
-        height: 12px;
-        font-family: Roboto;
-        @include font-size(15px);
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: $left;
-        color: #272734;
-      }
-      .product-review {
-        height: 10px;
-        font-family: Roboto;
-        @include font-size(13px);
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.31;
-        letter-spacing: normal;
-        text-align: $left;
-        color: #272734;
-        margin-bottom: 17px;
-      }
-      .product-item_sales-price {
-        font-family: Roboto;
-        @include font-size(30px);
-        text-align: $left;
-        color: #37363c;
-        .SR {
-          font-family: Roboto;
-          font-size: 15px;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: normal;
-          text-align: $left;
-        }
-      }
-      .product-quantity {
-        height: 14px;
-        opacity: 0.8;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.13;
-        letter-spacing: normal;
-        text-align: $left;
-        color: rgba(39, 39, 52, 0.8);
-      }
-    }
-    img {
-      width: 135px;
-      height: 135px;
-      mix-blend-mode: multiply;
-    }
-  }
-  .subTotal {
-    display: flex;
-    div.sale-price {
-      border-radius: side-values(0px 0px 20px 0px) !important;
-      margin-#{$left}: 3px;
-      width: 25%;
-      @include padding-left(5px);
-      span {
-        font-family: Roboto;
-        font-size: 17px;
-        text-align: $left;
-      }
-    }
-    .btn-primary {
-      background-color: $white;
-      border-radius: side-values(20px 0px 0px 20px) !important;
-      margin-top: 32px;
-      height: 55px;
-      color: $black;
-      width: 75%;
-      text-transform: none;
-      padding-top: 13px;
-      @include padding-right(6px);
-      span {
-        font-family: Roboto;
-        font-size: 17px;
-        text-align: $left;
-      }
-    }
-  }
-  .btn-footer {
-    display: flex;
-    margin-top: 32px;
-    .continue {
-      border-radius: side-values(0px 0px 0px 20px) !important;
-      width: 43%;
-      height: 55px;
-      color: $black;
-      background: $white;
-      border: none;
-    }
-    .check-out {
-      border-style: none;
-      width: 54%;
-      height: 55px;
-      background: $brand-color;
-      color: white;
-      border-radius: side-values(0px 20px 20px 0px) !important;
-      margin-left: 10px;
-      i{
-        @include margin-left(6px);
-      }
-    }
-  }
-}
-.modal-header{
-  .modal-title{
-    .title{
-      .span-parent {
-        border-bottom: 2px solid red;
-        display: flex;
-        @include margin-right(8px);
-        line-height: 21px;
-      }
-      i {
-        font-size: 30px;
-        color: $brand-color;
-        @include margin-right(10px);
-      }
-      p {
-        font-family: Roboto;
-        font-size: 30px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 20px;
-        letter-spacing: normal;
-        text-align: $left;
-        display: flex;
       }
     }
   }

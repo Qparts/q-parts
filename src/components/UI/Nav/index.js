@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
-import { closeNav } from '../../../utils';
+import { closeNav, right } from '../../../utils';
+import LanguageToggle from '../../LanguageToggle';
 
-const Nav = ({ translate, isLoggedIn, fullName }) => {
+const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection, getCountriesOnly }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
@@ -14,11 +15,11 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                         {
                             isLoggedIn ?
                                 <p>{fullName}</p> :
-                                <p>Sign in<i></i>Join</p>
+                                <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                         }
                     </a>
                     <ul className="cd-secondary-nav is-hidden user-account-sidebar">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         {
                             isLoggedIn ?
                                 <Fragment>
@@ -30,11 +31,11 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                                 <div>
                                     <div className="user mx-3">
                                         <img alt="user" src="img/user.svg" />
-                                        <h6>Welcome Back</h6>
+                                        <h6>{translate("dialog.signin.title")}</h6>
                                     </div>
                                     <div>
                                         <div className="signin-list">
-                                            <li><Link className="btn" to="/login" onClick={close}>{translate("general.signin")} <i className={`icon-arrow-right`} /></Link></li>
+                                            <li><Link className="btn" to="/login" onClick={close}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
                                             <li><Link to="#"><i className="icon-facebook" /></Link></li>
                                             <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
                                         </div>
@@ -43,7 +44,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                                         {translate("dropdown.signup.message")}
                                         <Link to="/signup" onClick={close}>
                                             {translate("dropdown.signup.link")}
-                                            <i className={`icon-arrow-right`} />
+                                            <i className={`icon-arrow-${right(direction)}`} />
                                         </Link>
                                     </p>
                                 </div>
@@ -51,24 +52,24 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                     </ul>
                 </li>
                 <li className="nav-sm">
-                    <Link to="/">
-                        <i className="icon-home"></i> home
-  </Link>
+                    <Link to="/" onClick={close}>
+                        <i className="icon-home"></i> {translate("navBar.home")}
+                    </Link>
                 </li>
                 <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-send"></i> Requests
-  </a>
+                    <Link to="/setting/quotations" onClick={close}>
+                        <i className="icon-send"></i> {translate("navBar.quotations")}
+                    </Link>
                 </li>
+                {/* <li className="nav-sm">
+                    <Link to="/setting/orders" onClick={close}>
+                        <i className="icon-delivered-step"></i> {translate("navBar.orders")}
+                    </Link>
+                </li> */}
                 <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-delivered-step"></i> Orders
-  </a>
-                </li>
-                <li className="nav-sm">
-                    <a href="#">
-                        <i className="icon-heart"></i> Wish List
-  </a>
+                    <Link to="/setting/wishlist" onClick={close}>
+                        <i className="icon-heart"></i> {translate("navBar.wishlist")}
+                    </Link>
                 </li>
                 <li className="sep"></li>
                 <li>
@@ -78,9 +79,9 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
 
                 </li>
                 <li className="has-children">
-                    <a href="#">{translate("nav.consumableParts")}</a>
+                    <Link to="#">{translate("nav.consumableParts")}</Link>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=2" onClick={close}>{translate("nav.oilFilter")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=3" onClick={close}>{translate("nav.airFilter")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=6" onClick={close}>{translate("nav.brakePads")}</Link></li>
@@ -94,7 +95,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                         {translate("nav.oil")}
                     </Link>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=7" onClick={close}>{translate("nav.motorOil")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=8" onClick={close}>{translate("nav.gearOil")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=27" onClick={close}>{translate("nav.coolant")}</Link></li>
@@ -104,7 +105,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li><Link to="/listing?query=&page=1&category=13" onClick={close}>{translate("nav.tires")}</Link></li>
                 <li className="has-children">
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=29" onClick={close}>{translate("nav.handTools")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=30" onClick={close}>{translate("nav.electricalTools")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=31" onClick={close}>{translate("nav.tyreInflator")}</Link></li>
@@ -114,7 +115,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="has-children">
                     <a href="#">{translate("nav.accessorise")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=11" onClick={close}>{translate("nav.carAccessorise")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=20" onClick={close}>{translate("nav.exteriorAccessorise")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=17" onClick={close}>{translate("nav.carMats")}</Link></li>
@@ -135,7 +136,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="has-children">
                     <a href="#">{translate("nav.carCare")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.motorCareLiquids")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
                     </ul>
@@ -146,12 +147,19 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                 <li className="nav-sm has-children">
                     <a href="#">{translate("nav.country")}</a>
                     <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">Back</a></li>
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><a href="#">KSA</a></li>
                         <li><a href="#">Cairo</a></li>
                     </ul>
                 </li>
-                {/* <li className="nav-sm"><a className="lang" href="#">العربية</a></li> */}
+                <li className="nav-sm">
+                    <LanguageToggle
+                        closeNav={close}
+                        width={'100%'}
+                        localize={localize}
+                        translate={translate}
+                        changeDefaultDirection={changeDefaultDirection}
+                        getCountriesOnly={getCountriesOnly} /></li>
                 <li className="sep"></li>
                 <li className="nav-sm"><a href="#">{translate("nav.shippingAndDelivery")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.returns")}</a></li>

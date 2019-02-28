@@ -5,7 +5,7 @@
     .Checkout-shipping_address-footer{
       background: $white;
       margin-bottom: 3px;
-      border-radius: side-values(20px 0 0 0);
+      border-radius: corner-values(20px 0 0 0);
       padding: 20px;
     }
     .checkout-payment-container{
@@ -15,7 +15,7 @@
         margin-bottom: 60px;
         @include box-shadow;
         padding: 5px;
-        border-radius: side-values(0 0 20px 20px);
+        border-radius: corner-values(0 0 20px 20px);
         .active{
           background: #37363c !important;
           color: $white !important;
@@ -29,7 +29,7 @@
           padding: 0px;
           .btn-light{
             background: $light-gray;
-            border-radius: side-values(20px 0 0 20px !important);
+            border-radius: corner-values(20px 0 0 20px) !important;
             padding: 20px;
             width: 100%;
             span{
@@ -49,7 +49,7 @@
           @include padding-right(0px !important);
           .btn-primary{
             background: $light-gray;
-            border-radius: side-values(0 0 20px 0 !important);
+            border-radius: corner-values(0 0 20px 0) !important;
             padding: 20px;
             width: 100%;
             color: $black;
@@ -249,7 +249,7 @@
         }
         .RenderField{
           .form-control{
-            border-radius: side-values(20px 0 20px 20px) !important;
+            border-radius: corner-values(20px 0 20px 20px) !important;
             border: none;
             background: $light-gray;
           }
@@ -275,7 +275,7 @@
               width: 100%;
               border-radius: 0px;
               background-color: $light-gray;
-              border-radius: side-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px) !important;
               position: relative !important;
             }
           }
@@ -287,14 +287,14 @@
             .select-input{
               margin-top: 13px;
               .css-10nd86i {
-                border-radius: side-values(0 0 20px 0) !important;
+                border-radius: corner-values(0 0 20px 0) !important;
               }
             }
           }
           .months{
             .select-input{
               .css-10nd86i {
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
               }
             }
           }
@@ -336,13 +336,13 @@
           .btn-light{
             height: auto;
             background-color: $light-gray;
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: corner-values(0 0 0 20px) !important;
             width: 100%;
             float: $right;
           }
           .btn-primary{
             width: 100%;
-            border-radius: side-values(0 20px 20px 0) !important;
+            border-radius: corner-values(0 20px 20px 0) !important;
             height: auto;
             text-align: $right;
             text-transform: none;
@@ -362,7 +362,7 @@
         color: #0c5460;
         background: #bee5eb;
         padding: 10px;
-        border-radius: side-values(20px 0 20px 20px);
+        border-radius: corner-values(20px 0 20px 20px);
         font-family: Roboto;
         @include font-size(15px);
         font-weight: normal;
@@ -380,7 +380,7 @@
       background: $white;
       display: flex;
       @include padding-left(20px);
-      border-radius: side-values(0 0 20px 20px);
+      border-radius: corner-values(0 0 20px 20px);
       i{
        opacity: 0.35;
        @include font-size(60px);

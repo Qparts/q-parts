@@ -33,7 +33,7 @@ class Vehicles extends Component {
               subHeader={translate("dialog.vehicle.subTitle")} />
           ) : null
         }
-        <Vehicle translate={translate} toggle={this.props.toggle} direction={this.props.direction} />
+        <Vehicle translate={translate} toggle={this.props.toggle} direction={this.props.direction} defaultLang={this.props.defaultLang} />
       </section>
     )
   }
@@ -41,7 +41,7 @@ class Vehicles extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vehiclesFormat: state.customer.vehiclesFormat,
+    vehicles: state.customer.detail.vehicles,
     token: state.customer.token,
     translate: getTranslate(state.localize)
   }

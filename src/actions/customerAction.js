@@ -527,13 +527,6 @@ export const changeDefaultDirection = (lang) => {
   }
 }
 
-export const onRegistered = () => {
-  return {
-    type: REGISTERED,
-    payload: true
-  }
-}
-
 export const completeShipping = (isCompleted) => {
   return {
     type: COMPLETE_SHIPPING,

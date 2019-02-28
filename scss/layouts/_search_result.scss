@@ -102,7 +102,7 @@
   .products-container {
     width: 100%;
     .search-control-panel {
-      margin: side-values(20px 0 0px 0);
+      margin: 20px 0 0px 0;
       margin-bottom: 26px;
       .select__container {
         position: relative !important;
@@ -110,7 +110,7 @@
         @include margin-right(22px);
         height: 35px;
         background-color: #f6f6f6;
-        border-radius: side-values(20px 0 20px 20px);
+        border-radius: corner-values(20px 0 20px 20px);
         .select__single-value {
           font-family: Roboto;
           @include font-size(15px);
@@ -135,7 +135,7 @@
       label {
         position: relative;
         border: 1px solid $light-gray-2;
-        padding: side-values(9px 25px 15px 15px);
+        padding: 9px 25px 15px 15px;
         @include margin-right(4px);
         margin-bottom: 0;
 
@@ -211,7 +211,7 @@
         .btn-primary{
           display: flex;
           text-align: center;
-          border-radius: side-values(20px 0 20px 20px) !important;
+          border-radius: corner-values(20px 0 20px 20px) !important;
           margin-bottom: 20px;
           display: block;
           span{
@@ -224,7 +224,7 @@
         }
         .btn-next{
           @include margin-left(10px);
-          border-radius: side-values(0 20px 20px 20px) !important;
+          border-radius: corner-values(0 20px 20px 20px) !important;
           span{
             @include margin-left(20%);
           }

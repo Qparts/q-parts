@@ -1,9 +1,9 @@
 #order-summary {
+  @include text-left;
   h5 {
     font-family: Roboto;
     @include font-size(25px);
     text-transform: capitalize;
-    text-align: $left;
     color: $basic-gray;
   }
   .order-summary__text-muted,
@@ -57,7 +57,7 @@
   }
   .btn-primary {
     width: 100%;
-    border-radius: side-values(0 0 20px 20px) !important;
+    border-radius: corner-values(0 0 20px 20px) !important;
     text-align: $right;
     text-transform: capitalize;
   }

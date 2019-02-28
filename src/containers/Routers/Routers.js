@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTranslate } from "react-localize-redux";
 
 import { routes } from '../../config/routes';
 import RouteWithSubRoutes from '../../hoc/RouteWithSubRoutes';
 import Layout from '../../components/Layout/Layout';
+import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
 
 import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
@@ -24,6 +25,7 @@ class Routes extends Component {
 
         const defaultLanguage = props.defaultLang || props.customer.defaultLang;
 
+        props.InitializeDefaultLang(defaultLanguage)
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
@@ -39,7 +41,7 @@ class Routes extends Component {
         if (hoursLeft === oneHourLeft) {
             this.props.onLogout();
             this.props.clearCart();
-        }        
+        }
 
         if (prevProps.direction !== this.props.direction) {
             loadStyle(this.props.direction);
@@ -49,42 +51,48 @@ class Routes extends Component {
     }
 
     render() {
+        const { translate } = this.props
         return (
             <Router>
-                <RouterScrollToTop>
-                    <Fragment>
-                        <NetworkError error={this.props.error} />
-                        <main className="nav-on-left">
-                            <Layout
-                                isLoggedIn={isAuth(this.props.token)}
-                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
-                                vehicles={this.props.vehicles}
+                <DirectionProvider direction={this.props.direction}>
+                    <RouterScrollToTop>
+                        <Fragment>
+                            <NetworkError error={this.props.error} />
+                            <main className="nav-on-left">
+                                <Layout
+                                    isLoggedIn={isAuth(this.props.token)}
+                                    fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
+                                    vehicles={this.props.vehicles}
+                                    localize={this.props.localize}
+                                    translate={this.props.translate}
+                                    selectedVehicle={this.props.selectedVehicle}
+                                    countriesOnly={this.props.countriesOnly}
+                                    getCountriesOnly={this.props.getCountriesOnly}
+                                    selectCountry={this.props.selectCountry}
+                                    changeDefaultDirection={this.props.changeDefaultDirection}
+                                    direction={this.props.direction}
+                                >
+                                    <Switch>
+                                        {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang, this.props.translate).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+                                    </Switch>
+                                </Layout>
+                                <div className="overlay-lg"></div>
+                                <Link to="#" className="live-chat">
+                                    <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
+                                    <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
+                                </Link>
+                            </main>
+                            <Nav
                                 localize={this.props.localize}
-                                translate={this.props.translate}
-                                vehiclesFormat={this.props.vehiclesFormat}
-                                selectedVehicle={this.props.selectedVehicle}
-                                countriesOnly={this.props.countriesOnly}
-                                getCountriesOnly={this.props.getCountriesOnly}
-                                selectCountry={this.props.selectCountry}
                                 changeDefaultDirection={this.props.changeDefaultDirection}
+                                getCountriesOnly={this.props.getCountriesOnly}
                                 direction={this.props.direction}
-                            >
-                                <Switch>
-                                    {routes(isAuth(this.props.token), this.props.direction).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
-                                </Switch>
-                            </Layout>
-                            <div className="overlay-lg"></div>
-                            <a href="#" className="live-chat">
-                                <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
-                                <p className="media-body">Have a Question? <span>Ask a Specialis</span></p>
-                            </a>
-                        </main>
-                        <Nav
-                            translate={this.props.translate}
-                            isLoggedIn={isAuth(this.props.token)}
-                            fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
-                    </Fragment>
-                </RouterScrollToTop>
+                                translate={this.props.translate}
+                                isLoggedIn={isAuth(this.props.token)}
+                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
+                        </Fragment>
+                    </RouterScrollToTop>
+                </DirectionProvider>
             </Router>
         )
     }
@@ -97,7 +105,6 @@ const mapStateToProps = state => {
         token: state.customer.token,
         tokenExpire: state.customer.tokenExpire,
         vehicles: customer.vehicles,
-        vehiclesFormat: state.customer.vehiclesFormat,
         selectedVehicle: state.customer.selectedVehicle,
         defaultLang: state.customer.defaultLang,
         localize: state.localize,
@@ -111,7 +118,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
-        // InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
+        InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country)),

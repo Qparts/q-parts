@@ -1,18 +1,19 @@
 #login {
+  @include text-left;
   padding: 20px;
   background: $light-gray;
   .form-control {
     @include rounded-rectangle;
     @include boarder-right-radius(0, 20px);
     height: 55px;
-    padding-left: 20px;
+    @include padding-left(20px);
 
     input::placeholder {
       color: $charcoal-grey-two-40;
     }
     label {
       @include font-size(16px);
-      padding-left: 13px;
+      @include padding-left(13px);
     }
   }
   .btn-gray {

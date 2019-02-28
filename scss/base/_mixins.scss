@@ -17,23 +17,23 @@
 }
 
 @mixin padding-right($size) {
-  padding-#{$right}: $size;
+  padding-#{$right}: $size !important;
 }
 
 @mixin margin-right($size) {
-  margin-#{$right}: $size;
+  margin-#{$right}: $size !important;
 }
 
 @mixin margin-left($size) {
-  margin-#{$left}: $size;
+  margin-#{$left}: $size !important;
 }
 
 @mixin link-border-radius {
-  border-radius: side-values(0 20px 20px 20px) !important;
+  border-radius: corner-values(0 20px 20px 20px) !important;
 }
 
 @mixin rounded-rectangle {
-  border-radius: side-values(20px 0 20px 20px) !important;
+  border-radius: corner-values(20px 0 20px 20px) !important;
   @include box-shadow;
 }
 
@@ -79,30 +79,65 @@
   border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 }
 
+@mixin fill-border-right($size, $color) {
+  @if $size == none {
+    border-#{$right}: none;
+  } @else {
+    border-#{$right}: $size $color solid;
+  }
+}
+
+@mixin fill-border-left($size, $color: $white) {
+  @if $size == none {
+    border-#{$left}: none;
+  } @else {
+    border-#{$left}: $size $color solid;
+  }
+}
+
 @mixin text-capitalize {
   text-transform: capitalize !important;
 }
 
 @mixin text-uppercase {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
 
 @mixin text-right {
-  text-align: $right;
+  text-align: $right !important;
 }
 
-@mixin d-inline{
+@mixin text-left {
+  text-align: $left !important;
+}
+
+@mixin d-inline {
   display: inline;
 }
 
-@mixin d-block{
+@mixin d-block {
   display: block;
 }
 
-@mixin d-inline-block{
+@mixin d-inline-block {
   display: inline-block;
 }
 
+@mixin swiper-button-next {
+  @if ($dir == ltr) {
+    #{$right}: -2px;
+  } @else {
+    #{$right}: 30px;
+  }
+}
+
+@mixin swiper-button-prev {
+  @if ($dir == ltr) {
+    #{$right}: 30px;
+  } @else {
+    #{$right}: -2px;
+  }
+}
 
 //@include font
 
@@ -113,8 +148,7 @@
     font-style: $style;
 
     src: url('#{$file-path}/#{$font-family}.eot');
-    src: url('#{$file-path}/#{$font-family}.eot?#iefix')
-        format('embedded-opentype'),
+    src: url('#{$file-path}/#{$font-family}.eot?#iefix') format('embedded-opentype'),
       url('#{$file-path}/#{$font-family}.woff') format('woff'),
       url('#{$file-path}/#{$font-family}.ttf') format('truetype'),
       url('#{$file-path}/#{$font-family}.svg##{$font-family}') format('svg');
@@ -171,22 +205,13 @@
   animation-delay: $delay;
 }
 
-@mixin gradient-vertical(
-  $start-color: #555,
-  $end-color: #333,
-  $start-percent: 0%,
-  $end-percent: 100%
-) {
+@mixin gradient-vertical($start-color: #555, $end-color: #333, $start-percent: 0%, $end-percent: 100%) {
   background-image: -webkit-linear-gradient(
     top,
     $start-color $start-percent,
     $end-color $end-percent
   ); // Safari 5.1-6, Chrome 10+
-  background-image: -o-linear-gradient(
-    top,
-    $start-color $start-percent,
-    $end-color $end-percent
-  ); // Opera 12
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // Opera 12
   background-image: linear-gradient(
     to bottom,
     $start-color $start-percent,
@@ -206,13 +231,13 @@
 }
 
 @mixin boarder-left-radius($top: 20px, $bottom: 20px) {
-  border-top-left-radius: $top;
-  border-bottom-left-radius: $bottom;
+  border-top-#{$left}-radius: $top;
+  border-bottom-#{$left}-radius: $bottom;
 }
 
 @mixin boarder-right-radius($top: 20px, $bottom: 20px) {
-  border-top-right-radius: $top;
-  border-bottom-right-radius: $bottom;
+  border-top-#{$right}-radius: $top;
+  border-bottom-#{$right}-radius: $bottom;
 }
 
 @mixin large-medium-screens {

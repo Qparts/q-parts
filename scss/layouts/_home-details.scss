@@ -51,23 +51,23 @@
   }
     position: relative;
     > div{
-      left: auto;
+      #{$left}: auto;
       width: 60px;
       height: 142.5px;
       background-image: none;
-      right: 15px;
+      #{$right}: 15px;
       margin-top: 0;
       text-align: center;
       z-index: 1;
       &.swiper-button-next{
         background-color: $brand-color;
         top: -305px;
-        border-radius: side-values($border-radius-base 0 0 0);
+        border-radius: corner-values($border-radius-base 0 0 0);
       }
       &.swiper-button-prev{
         background-color: $basic-gray;
         top: -162.5px;
-        border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+        border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
       }
       &:before{
         color: $white;
@@ -124,7 +124,7 @@
             top: 50%;
             transform: translate(0, -50%);
             border-top: 2px dashed $dark-gray;
-            text-align: right;
+            text-align: $right;
             z-index: -1;
             height: 3px;
           };
@@ -238,6 +238,7 @@
       margin-bottom: 15px;
       @include font-size(25px);
       text-transform: uppercase;
+      @include text-left;
       @include media-breakpoint-down(md){
         margin-bottom: 0;
       };
@@ -255,7 +256,7 @@
         @include media-breakpoint-up(lg){
           position: absolute;
           top: -13px;
-          left: -40px;
+          #{$left}: -40px;
           padding: 7px;
           height: 50px;
         };
@@ -300,17 +301,17 @@
         }
         &:first-child{
           .form-control{
-            border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+            border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
             @include media-breakpoint-down(md){
-              border-radius: side-values($border-radius-base 0 0 0);
+              border-radius: corner-values($border-radius-base 0 0 0);
             }
           }
         }
       }
         .form-control{
-          border-radius: side-values(0 0 $border-radius-base 0);
+          border-radius: corner-values(0 0 $border-radius-base 0);
           @include media-breakpoint-down(md){
-            border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+            border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
             margin-bottom: 5px;
           }
         }
@@ -389,21 +390,21 @@
     &:first-child{
       @include media-breakpoint-up(lg){
         figure{
-          border-radius: side-values($border-radius-base 0 0 0);
+          border-radius: corner-values($border-radius-base 0 0 0);
         }
       };
     }
     &:last-child{
       @include media-breakpoint-up(lg){
         figure{
-          border-radius: side-values(0 0 $border-radius-base 0);
+          border-radius: corner-values(0 0 $border-radius-base 0);
         }
       }
     }
     &:nth-child(4){
         @include media-breakpoint-up(lg){
           figure{
-            border-radius: side-values(0 0 0 $border-radius-base);
+            border-radius: corner-values(0 0 0 $border-radius-base);
           }
         }
     }
@@ -444,7 +445,7 @@
         width: 100%;
         padding: 10px;
         @include transition(all, 0.5s, ease);
-        left: 0;
+        #{$left}: 0;
         font-weight: 300;
         @extend .text-uppercase;
       }
@@ -488,24 +489,24 @@
       }
     &:first-child{
       a{
-        border-radius: side-values($border-radius-base 0 0 $border-radius-base);
+        border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
         @include media-breakpoint-down(sm){
-          border-radius: side-values($border-radius-base 0 0 0);
+          border-radius: corner-values($border-radius-base 0 0 0);
         }
       }
     }
     &:last-child{
       a{
-        border-radius: side-values(0 $border-radius-base $border-radius-base 0);
+        border-radius: corner-values(0 $border-radius-base $border-radius-base 0);
         @include media-breakpoint-down(sm){
-          border-radius: side-values(0 0 $border-radius-base $border-radius-base);
+          border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
         }
       }
     }
     &.oil{
       img{
         width: 35px;
-        @position: relative;
+        position: relative;
         @include media-breakpoint-down(sm){
           width: 25px;
         }
@@ -541,7 +542,7 @@
     }
   }
   .media-body{
-    padding-#{$left}: 15px;
+    @include padding-left(15px);
     h5{
       @include font-size(20px);
       font-weight: 400;
@@ -606,7 +607,7 @@
         @include font-size(20px);
         max-height: 50px;
         margin-top: 3px;
-        margin-#{$left}: 15px;
+        @include margin-left(15px);
         display: flex;
         @include media-breakpoint-down(sm){
           display: inline-block;
@@ -638,6 +639,7 @@
     };
   }
   .nav{
+    @include padding-left(0);
     margin-bottom: 25px;
     @include media-breakpoint-down(sm){
       display: none;

@@ -2,15 +2,16 @@
   display: flex;
   .btn-positive {
     @include margin-right(3px);
-    border-radius: side-values(20px 0 0 20px) !important;
+    border-radius: corner-values(20px 0 0 20px) !important;
   }
   .btn-negative {
-    border-radius: side-values(0 0 20px 0) !important;
+    border-radius: corner-values(0 0 20px 0) !important;
   }
   input {
     @include margin-right(3px);
+    height: auto;
     text-align: center;
     cursor: inherit;
-    border-radius: side-values(0 0 0 0) !important;
+    border-radius: corner-values(0 0 0 0) !important;
   }
 }

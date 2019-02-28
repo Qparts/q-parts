@@ -16,15 +16,15 @@ import {
 } from 'reactstrap';
 import { ClipLoader } from 'react-spinners';
 
-import { isEmpty, replaceAll } from '../../utils';
+import { isEmpty, replaceAll, left } from '../../utils';
 import * as constant from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { MediumScreen, SmallScreen } from '../../components/Device';
 import { getGeneralSearch } from '../../utils/api';
-import { getActiveLanguage } from 'react-localize-redux';
+import { getActiveLanguage, getTranslate } from 'react-localize-redux';
 
-import { right, getQuery, replaceQuery} from '../../utils';
+import { right, getQuery, replaceQuery } from '../../utils';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -52,9 +52,9 @@ class SearchResult extends Component {
 	quantityProducts = () => {
 		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page);
-		if(this.state.endSize === this.state.resultSize && this.state.startSize !==1){
-			this.setState({ startSize:  this.state.resultSize})
-		}else{
+		if (this.state.endSize === this.state.resultSize && this.state.startSize !== 1) {
+			this.setState({ startSize: this.state.resultSize })
+		} else {
 			let size = pageNumber * 18 - 17
 			this.setState({
 				startSize: size,
@@ -65,8 +65,8 @@ class SearchResult extends Component {
 	setGeneralSearch = (search) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
-			if(res.data.products.length<18){
-				this.setState({endSize: res.data.resultSize})
+			if (res.data.products.length < 18) {
+				this.setState({ endSize: res.data.resultSize })
 			}
 			this.setState({
 				searchGeneral: res.data,
@@ -85,31 +85,31 @@ class SearchResult extends Component {
 	}
 
 	nextPage = (e) => {
-    const params = getQuery(this.props.location);
+		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page) + 1;
-		if(this.state.startSize === this.state.resultSize){
-			this.setState({ startSize:  this.state.resultSize})
-		}else{
+		if (this.state.startSize === this.state.resultSize) {
+			this.setState({ startSize: this.state.resultSize })
+		} else {
 			let size = pageNumber * 18 - 17;
 			this.setState({
 				startSize: size,
 				endSize: size + 18 - 1
 			})
 		}
-			this.props.history.push(replaceQuery(this.props.location,"nextPage"));
+		this.props.history.push(replaceQuery(this.props.location, "nextPage"));
 	}
-	prevPage = (e) =>{
-    const params = getQuery(this.props.location);
-		let pageNumber = Number(params.page)-1;
-		if(pageNumber <= 1 ){
+	prevPage = (e) => {
+		const params = getQuery(this.props.location);
+		let pageNumber = Number(params.page) - 1;
+		if (pageNumber <= 1) {
 			pageNumber = 1;
 		}
 		let size = pageNumber * 18 - 17
-			this.setState({
-				startSize: size,
-				endSize: size + 18 - 1
-			})
-				this.props.history.push(replaceQuery(this.props.location,"prePage"));
+		this.setState({
+			startSize: size,
+			endSize: size + 18 - 1
+		})
+		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
 	componentDidMount() {
 
@@ -158,19 +158,27 @@ class SearchResult extends Component {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
 
-	renderProducts = () => (
-		this.state.searchGeneral.products.map((product, idx) => (
+	renderProducts = () => {
+		const { translate, currentLanguage, direction } = this.props;
+		return this.state.searchGeneral.products.map((product, idx) => (
 			this.state.selectedView === GRID ? (
-				<ProductGridView key={idx} product={product} />
+				<ProductGridView
+					key={idx}
+					product={product}
+					currentLanguage={currentLanguage}
+					translate={translate} />
 			)
 				:
 				<Card key={idx} className="product-list-view col-12">
 					<ListGroup>
-						<ProductListView product={product} />
+						<ProductListView product={product}
+							currentLanguage={currentLanguage}
+							translate={translate}
+							direction={direction} />
 					</ListGroup>
 				</Card>
-		))
-	)
+		));
+	}
 
 	renderIcons = (styles) => (
 		<Fragment>
@@ -207,7 +215,7 @@ class SearchResult extends Component {
 				textAlign: 'center'
 			}
 		}
-		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate, direction } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -229,21 +237,21 @@ class SearchResult extends Component {
 				</div>
 			)
 
-			let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
-					<span>Next Page</span>
-					<i className="icon-arrow-right"/>
-			</button>
-			let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
-					<i className="icon-arrow-left"/>
-					<span>Previous Page</span>
-			</button>
+		let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
+			<span>{translate("general.buttons.nextPage")}</span>
+			<i className={`icon-arrow-${right(direction)}`} />
+		</button>
+		let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
+			<i className={`icon-arrow-${left(direction)}`} />
+			<span>{translate("general.buttons.prevPage")}</span>
+		</button>
 
-			if(this.state.startSize <=1){
-				btnPrev ="";
-			}
-			if(this.state.endSize === this.state.resultSize){
-				btnNext ="";
-			}
+		if (this.state.startSize <= 1) {
+			btnPrev = "";
+		}
+		if (this.state.endSize === this.state.resultSize) {
+			btnNext = "";
+		}
 		return (
 			<Fragment>
 				<section id="results-container">
@@ -271,7 +279,7 @@ class SearchResult extends Component {
 															<InputGroupAddon addonType="prepend">
 																<i className="icon-search" />
 															</InputGroupAddon>
-															<Input className="search-box" type="text" placeholder="Search" />
+															<Input className="search-box" type="text" placeholder={translate("general.search")} />
 														</InputGroup>
 														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
 													</CardBody>
@@ -334,7 +342,7 @@ class SearchResult extends Component {
 								<Card className="col-12">
 									<CardTitle className="d-flex justify-content-between">
 										<MediumScreen>
-											<label htmlFor="">{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</label>
+											<label htmlFor="">{this.state.startSize} - {this.state.endSize} {translate("general.of")} {this.state.resultSize} {translate("general.results")}</label>
 										</MediumScreen>
 										<SmallScreen>
 											<Select
@@ -347,8 +355,8 @@ class SearchResult extends Component {
 										</SmallScreen>
 										<div className="right-side-selection">
 											<MediumScreen>
-												<div style={{display: "none"}}>
-													<label htmlFor="">Sort by</label>
+												<div style={{ display: "none" }}>
+													<label htmlFor="">{translate("general.sortBy")}</label>
 													<Select
 														className="select__container"
 														classNamePrefix="select"
@@ -395,6 +403,8 @@ const mapStateToProps = state => {
 	return {
 		products: state.api.products,
 		currentLanguage: getActiveLanguage(state.localize).code,
+		translate: getTranslate(state.localize),
+		direction: state.customer.direction
 	}
 }
 

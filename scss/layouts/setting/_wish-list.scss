@@ -29,7 +29,7 @@
       @include medium-screen {
         position: relative;
         display: block;
-        right: 53px;
+        #{$right}: 53px;
       }
     }
   }
@@ -59,7 +59,7 @@
   button {
     height: 40px;
     i {
-      padding-right: 5px;
+      @include padding-right(5px);
     }
   }
 }

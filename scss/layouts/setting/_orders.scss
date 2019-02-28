@@ -55,7 +55,7 @@
       .css-10nd86i {
         width: 100%;
         background-color: $white;
-        border-radius: side-values(20px 0 20px 20px) !important;
+        border-radius: corner-values(20px 0 20px 20px) !important;
         border: none !important;
         position: relative !important;
         padding: 10px;
@@ -69,14 +69,14 @@
       }
     }
     .RenderField{
-      border-radius: side-values(0 20px 20px 20px);
+      border-radius: corner-values(0 20px 20px 20px);
       border: none !important;
       label,
       br,sub{
         display: none;
       }
       input{
-        border-radius: side-values(0 20px 20px 20px);
+        border-radius: corner-values(0 20px 20px 20px);
         border: none !important;
       }
     }
@@ -264,7 +264,7 @@
       .css-10nd86i {
         width: 100%;
         background-color: $white;
-        border-radius: side-values(20px 0 20px 20px) !important;
+        border-radius: corner-values(20px 0 20px 20px) !important;
         border: none !important;
         position: relative !important;
         padding: 10px;
@@ -278,14 +278,14 @@
       }
     }
     .RenderField{
-      border-radius: side-values(0 20px 20px 20px);
+      border-radius: corner-values(0 20px 20px 20px);
       border: none !important;
       label,
       br,sub{
         display: none;
       }
       input{
-        border-radius: side-values(0 20px 20px 20px);
+        border-radius: corner-values(0 20px 20px 20px);
         border: none !important;
       }
     }

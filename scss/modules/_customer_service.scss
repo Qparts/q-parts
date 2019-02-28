@@ -1,19 +1,24 @@
-#customer-service {
-    align-items: center;
-    span {
-        text-transform: capitalize;
-        color: $basic-black;
-        @include font-size(12px);
-        line-height: 1.17;
+.chat-div{
+  @include text-left;
+  padding: 0 10px;
+  img{
+    max-width: 40px;
+  }
+  .media-body{
+    P{
+      @include font-size(13px);
+      margin-top: 2px;
+      span{
+        @include font-size(14px);
+        display: block;
       }
-
-      .whatsapp {
-        height: 45px;
+    }
+  }
+  &:hover{
+    p{
+      span{
+        text-decoration: underline;
       }
-
-      > div {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-      }
+    }
+  }
 }

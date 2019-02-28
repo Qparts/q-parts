@@ -1,3 +1,7 @@
+.list-group {
+  @include padding-left(0);
+}
+
 .list-group-item {
     position: relative;
     display: block;
@@ -7,12 +11,12 @@
     background-color: $list-group-bg;
   
     &:first-child {
-      border-radius: side-values(20px 0 0 0);
+      border-radius: corner-values(20px 0 0 0);
     }
   
     &:last-child {
       margin-bottom: 0;
-      border-radius: side-values(0 0 20px 20px);
+      border-radius: corner-values(0 0 20px 20px);
     }
   
     @include hover-focus {

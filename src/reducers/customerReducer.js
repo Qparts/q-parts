@@ -99,7 +99,7 @@ export default function reducer(state = initialState, action) {
         detail: initialState.detail,
         token: null,
         tokenExpire: null,
-        vehiclesFormat: initialState.vehiclesFormat,
+
         selectedVehicle: initialState.selectedVehicle,
         registered: initialState.registered
       }
@@ -124,7 +124,7 @@ export default function reducer(state = initialState, action) {
 
     case ADD_VEHICLE_SUCCEEDED:
       const newVehicle = { ...state.detail, vehicles: [...state.detail.vehicles, action.payload] };
-      return { ...state, detail: newVehicle, vehiclesFormat: vehiclesFormat(newVehicle.vehicles) }
+      return { ...state, detail: newVehicle }
 
     case REGISTER_CUSTOMER_SUCCEEDED:
       return getLoginObject(state, action);
@@ -151,7 +151,7 @@ export default function reducer(state = initialState, action) {
     case DELETE_VEHICLE:
       const removedVehicle = state.detail.vehicles.filter(vehicle => vehicle.id !== action.payload.id)
 
-      return { ...state, detail: { ...state.detail, vehicles: removedVehicle }, vehiclesFormat: vehiclesFormat(removedVehicle) };
+      return { ...state, detail: { ...state.detail, vehicles: removedVehicle } };
 
     case ADD_RECENT_VIEWED_PRODUCTS:
       let found = false;
@@ -244,21 +244,9 @@ export default function reducer(state = initialState, action) {
   }
 }
 
-const vehiclesFormat = (vehicles) => {
-  console.log(vehicles);
-  
-  return vehicles.map(veh => {
-    return {
-      ...veh,
-      value: veh.id,
-      label: `${veh.vehicle.year} ${veh.vehicle.make.name} ${veh.vehicle.model.name}`
-    }
-  });
-}
-
 const getLoginObject = (state, action) => {
   const { customer, token, tokenExpire } = action.payload;
-  return { ...state, detail: customer, token, tokenExpire, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
+  return { ...state, detail: customer, token, tokenExpire }
 }
 
 const translate = (error, currentLanguage, defaultLang) => {

@@ -1,4 +1,5 @@
 #addresses-container{
+  @include text-left;
   @include margin-left(10px);
   .addresses-header{
     display: flex;
@@ -37,7 +38,7 @@
     background: $white;
     padding: side-values(10px);
     padding-bottom: 0;
-    border-radius: side-values(20px 0 20px 20px) !important;
+    border-radius: corner-values(20px 0 20px 20px) !important;
     label{
       margin-bottom: 0px;
       font-family: Roboto;
@@ -199,6 +200,7 @@
 }
 .addresses-popup{
   // width: 650px;
+  @include text-left;
   .modal-content{
     background: $white;
     .modal-header{
@@ -222,19 +224,14 @@
         margin-bottom: 44px;
         form{
           margin: 0px;
-          .RenderField{
-            label{
-              top: 6px;
-            }
-          }
           .title-address{
             margin-bottom: 20px;
             .form-control{
-              border-radius: side-values(20px 0 0 20px) !important;
+              border-radius: corner-values(20px 0 0 20px) !important;
               background: $light-gray;
             }
             .RenderField{
-              border-radius: side-values(20px 0 0 20px) !important;
+              border-radius: corner-values(20px 0 0 20px) !important;
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
@@ -267,11 +264,11 @@
           .address-title{
             margin-bottom: 20px;
             .form-control{
-              border-radius: side-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px) !important;
               background: $light-gray;
             }
             .RenderField{
-              border-radius: side-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px) !important;
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
@@ -293,7 +290,7 @@
             .RenderField{
               border: none;
               input{
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
                 background: $light-gray;
                 padding: 12px;
               }
@@ -302,7 +299,7 @@
           .div-rounded-last{
             .select-input{
               .css-10nd86i{
-                border-radius: side-values(0 0 20px 0) !important;
+                border-radius: corner-values(0 0 20px 0) !important;
               }
             }
           }
@@ -323,7 +320,7 @@
               .first{
                 margin-#{$right}: 5px;
                 .form-control{
-                  border-radius: side-values(20px 0 0 20px) !important;
+                  border-radius: corner-values(20px 0 0 20px) !important;
                   width: 70px;
                   text-align: center;
                 }
@@ -343,7 +340,7 @@
             }
             .zipCode{
               .form-control {
-                border-radius: side-values(0 0 20px 0) !important;
+                border-radius: corner-values(0 0 20px 0) !important;
                 border: none;
                 background: $light-gray;
                 height: 55px;
@@ -359,13 +356,13 @@
             margin-bottom: 20px;
             .form-control{
               padding-bottom: 20px;
-              border-radius: side-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px) !important;
               background: $light-gray;
             }
             .RenderField{
               @include padding-left(10px);
-              border-radius: side-values(20px 0 20px 20px) !important;
-              margin-left: -13px;
+              border-radius: corner-values(20px 0 20px 20px) !important;
+              @include margin-left(-13px);
               input{
                 margin-bottom: 0px;
                 border-bottom: none;
@@ -382,12 +379,12 @@
           .btn-light{
             height: auto;
             background-color: $light-gray;
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: corner-values(0 0 0 20px) !important;
             @include box-shadow;
           }
           .btn-primary{
             @include margin-left(5px);
-            border-radius: side-values(0 20px 20px 0) !important;
+            border-radius: corner-values(0 20px 20px 0) !important;
             height: auto;
             @include box-shadow;
             text-align: $right;
@@ -407,10 +404,11 @@
 
 .adresses-mobile{
   #addresses-container{
+    @include text-left;
     margin: 0px;
     .row{
-      margin-left: 0px;
-      margin-right: 0px;
+      @include margin-left(0);
+      @include margin-right(0);
     }
     .addresses-header{
       display: flex;
@@ -462,7 +460,7 @@
       background: $white;
       padding: side-values(10px);
       padding-bottom: 0;
-      border-radius: side-values(20px 0 20px 20px) !important;
+      border-radius: corner-values(20px 0 20px 20px) !important;
       label{
         margin-bottom: 0px;
         font-family: Roboto;
@@ -517,7 +515,7 @@
             width: 66px;
             text-align: center;
             background: $light-gray !important;
-            border-radius: side-values(0 20px 20px 20px) !important;
+            border-radius: corner-values(0 20px 20px 20px) !important;
             margin-#{$right}: 10px;
             color: $black;
             display: flex;
@@ -546,7 +544,7 @@
           }
         }
         &:nth-child(even) {
-          border-left: 1px solid #ebebeb;
+          @include fill-border-left(1px, #ebebeb);
         }
       }
     }
@@ -630,6 +628,7 @@
   }
   .addresses-popup{
     // width: 650px;
+    @include text-left;
     .modal-content{
       background: $white;
       .modal-header{
@@ -649,19 +648,14 @@
         .Address-container{
           form{
             margin: 0px;
-            .RenderField{
-              label{
-                top: 6px;
-              }
-            }
             .title-address{
               margin-bottom: 20px;
               .form-control{
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
                 background: $light-gray;
               }
               .RenderField{
-                border-radius: side-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px) !important;
                 input{
                   margin-bottom: 0px;
                   border-bottom: none;
@@ -694,11 +688,11 @@
             .address-title{
               margin-bottom: 20px;
               .form-control{
-                border-radius: side-values(20px 0 20px 20px) !important;
+                border-radius: corner-values(20px 0 20px 20px) !important;
                 background: $light-gray;
               }
               .RenderField{
-                border-radius: side-values(20px 0 20px 20px) !important;
+                border-radius: corner-values(20px 0 20px 20px) !important;
                 input{
                   margin-bottom: 0px;
                   border-bottom: none;
@@ -716,7 +710,7 @@
               .RenderField{
                 border: none;
                 input{
-                  border-radius: side-values(20px 0 0 20px) !important;
+                  border-radius: corner-values(20px 0 0 20px) !important;
                   background: $light-gray;
                   padding: 12px;
                 }
@@ -725,7 +719,7 @@
             .div-rounded-last{
               .select-input{
                 .css-10nd86i{
-                  border-radius: side-values(0 0 20px 0) !important;
+                  border-radius: corner-values(0 0 20px 0) !important;
                 }
               }
             }
@@ -746,7 +740,7 @@
                 .first{
                   margin-#{$right}: 5px;
                   .form-control{
-                    border-radius: side-values(20px 0 0 20px) !important;
+                    border-radius: corner-values(20px 0 0 20px) !important;
                     width: 70px;
                     text-align: center;
                   }
@@ -766,7 +760,7 @@
               }
               .zipCode{
                 .form-control {
-                  border-radius: side-values(0 0 20px 0) !important;
+                  border-radius: corner-values(0 0 20px 0) !important;
                   border: none;
                   background: $light-gray;
                   height: 55px;
@@ -782,12 +776,12 @@
               margin-bottom: 20px;
               .form-control{
                 padding-bottom: 20px;
-                border-radius: side-values(20px 0 20px 20px) !important;
+                border-radius: corner-values(20px 0 20px 20px) !important;
                 background: $light-gray;
               }
               .RenderField{
                 @include padding-left(10px);
-                border-radius: side-values(20px 0 20px 20px) !important;
+                border-radius: corner-values(20px 0 20px 20px) !important;
                 margin-left: -13px;
                 input{
                   margin-bottom: 0px;
@@ -808,12 +802,12 @@
               .btn-light{
                 height: auto;
                 background-color: $light-gray;
-                border-radius: side-values(0 0 0 20px) !important;
+                border-radius: corner-values(0 0 0 20px) !important;
                 @include box-shadow;
               }
               .btn-primary{
                 @include margin-left(5px);
-                border-radius: side-values(0 20px 20px 0) !important;
+                border-radius: corner-values(0 20px 20px 0) !important;
                 height: auto;
                 @include box-shadow;
                 text-align: $right;
