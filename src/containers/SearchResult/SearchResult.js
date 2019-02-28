@@ -16,7 +16,7 @@ import {
 } from 'reactstrap';
 import { ClipLoader } from 'react-spinners';
 
-import { isEmpty, replaceAll } from '../../utils';
+import { isEmpty, replaceAll, left } from '../../utils';
 import * as constant from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
@@ -161,7 +161,7 @@ class SearchResult extends Component {
 	}
 
 	renderProducts = () => {
-		const { translate, currentLanguage } = this.props;
+		const { translate, currentLanguage, direction } = this.props;
 		return this.state.searchGeneral.products.map((product, idx) => (
 			this.state.selectedView === GRID ? (
 				<ProductGridView
@@ -175,7 +175,8 @@ class SearchResult extends Component {
 					<ListGroup>
 						<ProductListView product={product}
 							currentLanguage={currentLanguage}
-							translate={translate} />
+							translate={translate}
+							direction={direction} />
 					</ListGroup>
 				</Card>
 		));
@@ -216,7 +217,7 @@ class SearchResult extends Component {
 				textAlign: 'center'
 			}
 		}
-		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate } = this.props;
+		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate, direction } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -240,10 +241,10 @@ class SearchResult extends Component {
 
 		let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
 			<span>{translate("general.buttons.nextPage")}</span>
-			<i className="icon-arrow-right" />
+			<i className={`icon-arrow-${right(direction)}`} />
 		</button>
 		let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
-			<i className="icon-arrow-left" />
+			<i className={`icon-arrow-${left(direction)}`} />
 			<span>{translate("general.buttons.prevPage")}</span>
 		</button>
 
@@ -404,7 +405,8 @@ const mapStateToProps = state => {
 	return {
 		products: state.api.products,
 		currentLanguage: getActiveLanguage(state.localize).code,
-		translate: getTranslate(state.localize)
+		translate: getTranslate(state.localize),
+		direction: state.customer.direction
 	}
 }
 

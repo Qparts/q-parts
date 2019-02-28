@@ -31,11 +31,8 @@
         background: white;
         border-radius: corner-values(20px 0 0 0) !important;
         padding-bottom: 8px;
-        @include large-medium-screens {
-          @include margin-right(30px);
-        }
+
         @include small-screen {
-          @include margin-right(0px);
           display: block;
           @include padding-left(20px);
           @include padding-right(20px);
@@ -70,16 +67,16 @@
         }
       }
       #addresses-container{
+        background: white;
+        .addresses-box {
+          background: none;
+        }
         @include text-left;
         margin-top: 3px;
+        @include margin-left(0);
+        border-radius: corner-values(0 0 $border-radius-base $border-radius-base) !important;
       }
       form{
-        @include large-medium-screens {
-          @include margin-right(30px);
-        }
-        @include small-screen {
-          @include margin-right(0px);
-        }
         .no-gutters{
           background: $white;
           padding: 20px;

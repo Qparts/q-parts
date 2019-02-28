@@ -9,13 +9,13 @@ import {
 } from 'reactstrap';
 import parse from 'html-react-parser';
 import { MediumScreen } from '../Device';
-import { handleImageFallback, getTranslatedObject } from '../../utils';
+import { handleImageFallback, getTranslatedObject, l } from '../../utils';
 import _ from 'lodash';
 
 class ProductListView extends Component {
 
 	render() {
-		const { product, location: { pathname, search }, translate, currentLanguage } = this.props
+		const { product, location: { pathname, search }, translate, currentLanguage, direction } = this.props
 		return <ListGroupItem className="row">
 			<div className="col-3">
 				<CardImg onError={handleImageFallback} src={product.image} alt="no product" />
@@ -35,7 +35,7 @@ class ProductListView extends Component {
 					</span>
 				</div>
 			</div>
-			<div className="col-9 offset-3 col-md-4 offset-md-0 last-col">
+			<div className={`col-9 col-md-4 m${l(direction)}-auto last-col`}>
 				<div className="price-container">
 					<span className="product-price">{product.salesPrice.toFixed(2)}</span>
 					<span className="product-currency">{translate("general.currency")}</span>

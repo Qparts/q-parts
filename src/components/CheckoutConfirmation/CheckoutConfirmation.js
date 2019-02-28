@@ -9,6 +9,7 @@ import { SmallScreen, MediumScreen } from '../Device/index.js';
 import './CheckoutConfirmation.css';
 import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
+import { right } from '../../utils';
 
 class CheckoutConfirmation extends Component {
 
@@ -91,7 +92,7 @@ class CheckoutConfirmation extends Component {
               <div><p>{translate("checkout.payment.cash.total")}</p>
                 <p>{this.props.total}<sub>{translate("general.currency")}</sub></p>
               </div>
-              <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
+              <span>{translate("checkout.confirm.placeOrder")} <i className={`icon-arrow-${right(direction)}`} /></span></button>
           </div>
         </div>
       </Fragment>

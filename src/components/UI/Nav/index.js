@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
-import { closeNav } from '../../../utils';
+import { closeNav, right } from '../../../utils';
 
-const Nav = ({ translate, isLoggedIn, fullName }) => {
+const Nav = ({ translate, direction, isLoggedIn, fullName }) => {
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
@@ -34,7 +34,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                                     </div>
                                     <div>
                                         <div className="signin-list">
-                                            <li><Link className="btn" to="/login" onClick={close}>{translate("general.signin")} <i className={`icon-arrow-right`} /></Link></li>
+                                            <li><Link className="btn" to="/login" onClick={close}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
                                             <li><Link to="#"><i className="icon-facebook" /></Link></li>
                                             <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
                                         </div>
@@ -43,7 +43,7 @@ const Nav = ({ translate, isLoggedIn, fullName }) => {
                                         {translate("dropdown.signup.message")}
                                         <Link to="/signup" onClick={close}>
                                             {translate("dropdown.signup.link")}
-                                            <i className={`icon-arrow-right`} />
+                                            <i className={`icon-arrow-${right(direction)}`} />
                                         </Link>
                                     </p>
                                 </div>

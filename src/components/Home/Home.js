@@ -13,7 +13,7 @@ export class Home extends Component {
     render() {
         return (
             <Fragment>
-                <ManualForm />
+                <ManualForm direction={this.props.direction}/>
                 <HomeDetails
                     products={this.props.products}
                     addRecentViewedProducts={this.props.addRecentViewedProducts}

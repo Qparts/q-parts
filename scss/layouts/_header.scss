@@ -123,6 +123,7 @@
     display: inline-table;
   }
   .dropdown-menu{
+    @include text-left;
     overflow: hidden;
     border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;

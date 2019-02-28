@@ -51,11 +51,6 @@ class Layout extends Component {
         return {
           header: <Title header={translate("dialog.signin.title")} />
         }
-      case 'search':
-        return {
-          header: <p>All auo parts in one place - choose yours among 1.000.000 of spare parts</p>,
-          className: "search-popup"
-        }
       default:
         break;
     }
@@ -67,8 +62,6 @@ class Layout extends Component {
     switch (dialogType) {
       case 'signin':
         return <Login toggle={this.togglePopup} />
-      case 'search':
-        return <Search toggle={this.togglePopup} />
 
       default:
         break;

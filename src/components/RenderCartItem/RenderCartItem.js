@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom'
-import { getTranslatedObject } from '../../utils';
+import { getTranslatedObject, l, right } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
 
@@ -110,9 +110,9 @@ export default class extends Component {
             }
           </ul>
           <div className="row">
-            <div className={`col-md-6 ${direction === constant.ltr ? 'ml-md-auto' : 'mr-md-auto'}`}>
+            <div className={`col-md-6 m${l(direction)}-md-auto`}>
               {
-                !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className="icon-arrow-right"></i></Link>
+                !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className={`icon-arrow-${right(direction)}`}></i></Link>
               }
             </div>
           </div>

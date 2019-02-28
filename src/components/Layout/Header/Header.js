@@ -97,7 +97,7 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction } = this.props;
     return (
       <Fragment>
         <div id="header-fixed" className="cd-main-header" ref={this.header}>
@@ -111,7 +111,7 @@ class Header extends Component {
                 </div>
                 <div className="col" id="search-lg" ref={this.searchLg}>
                   <div className="main-search" ref={this.searchDiv}>
-                    <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange}/>
+                    <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} />
                     <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
 
                   </div>
@@ -159,6 +159,7 @@ class Header extends Component {
                 </div>
                 <div className="user-actions col-auto">
                   <HeaderDetails
+                    direction={direction}
                     translate={translate}
                     isLoggedIn={isLoggedIn}
                     fullName={fullName}

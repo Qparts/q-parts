@@ -1,17 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
-import { SmallScreen, MediumScreen } from '../Device/index.js'
 import { connect } from 'react-redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import _ from 'lodash';
-import { getQuery, handleImageFallback, getTranslatedObject } from '../../utils/index.js';
+import { getQuery, handleImageFallback, getTranslatedObject, right } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
 import { clearCart } from '../../actions/cartAction';
-import { withRouter, Link, Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Title from '../UI/Title';
 
 import { bindActionCreators } from 'redux';
@@ -69,7 +67,7 @@ class CheckoutConfirmation extends Component {
             <i className="icon-delivered-step upload-img" />
             <Title header={translate("general.thankYou")} />
             <h5>{translate("checkout.orderNumber.textOne")}{params.cartId} {translate("checkout.orderNumber.textTwo")} <br />{translate("checkout.orderNumber.textThree")}</h5>
-            <button className="btn btn-open-G" style={{ display: "none" }}>{translate("general.trackOrder")}<i className={'icon-arrow-right'} /></button>
+            <button className="btn btn-open-G" style={{ display: "none" }}>{translate("general.trackOrder")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </div>
           <div className="CheckoutConfirmation_items card">
             <p className="title">{translate("checkout.confirm.table.items")}</p>
@@ -182,6 +180,7 @@ const mapStateToProps = state => ({
   checkout: state.cart.checkout,
   purchasedItems: state.cart.purchasedItems,
   currentLanguage: getActiveLanguage(state.localize).code,
+  direction: state.customer.direction
 });
 
 const mapDispatchToProps = (dispatch) => {

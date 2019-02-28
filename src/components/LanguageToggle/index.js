@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { withLocalize } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import { changeDefaultLanguage } from "../../actions/customerAction";
@@ -14,9 +14,9 @@ const LanguageToggle = ({ localize, setActiveLanguage, changeDefaultLanguage, tr
     }
     return localize.languages.map(lang => (
         !lang.active && (
-            <a className="lang" href="#" key={lang.code} onClick={handleLanguage.bind(this, lang)}>
+            <button className="btn-link lang" key={lang.code} onClick={handleLanguage.bind(this, lang)}>
                 {translate(`general.${lang.name}`)}
-            </a>
+            </button>
         )
     ))
 }

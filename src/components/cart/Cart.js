@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { incrementQuantity, decrementQuantity } from '../../actions/cartAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
-import Button from '../UI/Button';
 import OrderSummary from '../OrderSummary/OrderSummary';
-import SectionHeader from '../UI/SectionHeader';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import Stars from 'react-stars';
-import Swiper from 'react-id-swiper';
-import { starsRating } from '../../constants';
 import Select from 'react-select';
-import RenderProducts from '../../components/RenderProducts/RenderProducts';
-import { isAuth } from '../../utils'
+import { isAuth, right } from '../../utils'
 import Login from "../../containers/Authentication/Login/Login";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../UI/Title';
 
-import Slider from "react-slick";
 import { CustomScreen } from '../Device';
 import CustomerService from '../CustomerService/CustomerService';
 class Cart extends Component {
@@ -50,7 +43,6 @@ class Cart extends Component {
 		}
 	}
 	getDialogComponent = () => {
-		const { vehicles } = this.props;
 		const { dialogType } = this.state;
 
 		switch (dialogType) {
@@ -116,36 +108,6 @@ class Cart extends Component {
 			{ value: 2, label: "Egypt" },
 			{ value: 3, label: "Jordan" }
 		];
-		//related Products
-		const params = {
-			containerClass: `swiper-container products-list`,
-			slidesPerView: 5,
-			spaceBetween: 30,
-			grabCursor: true,
-			lazy: true,
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev'
-			},
-			breakpoints: {
-				1200: {
-					slidesPerView: 4,
-					spaceBetween: 30
-				},
-				992: {
-					slidesPerView: 4,
-					spaceBetween: 15
-				},
-				768: {
-					slidesPerView: 3,
-					spaceBetween: 15
-				},
-				576: {
-					slidesPerView: 2,
-					spaceBetween: 15
-				},
-			}
-		}
 		return (
 			<section>
 				<section className="default-header-bg">
@@ -179,7 +141,7 @@ class Cart extends Component {
 								<label>{translate("orderSummary.total")}</label>
 								<p>{subtotal + 50}<span className="currency">{translate("general.currency")}</span></p>
 							</div>
-							<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
+							<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
 						</div>
 						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 							<RenderCartItem
@@ -198,7 +160,7 @@ class Cart extends Component {
 										subtotal={subtotal}
 										submitButton={translate("orderSummary.placeOrder")} />
 									{quantity > 0 &&
-										<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
+										<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
 									}
 								</div>
 								<CustomerService
@@ -212,133 +174,6 @@ class Cart extends Component {
 								</div>
 							</div>
 						</form>
-						<div className="row pt-sec">
-							{/* <div className="col recommended-product">
-								<h3>Products Related To Items In Your Cart</h3>
-								<Swiper {...params}>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
-												<ul className="list-inline product-info">
-													<li><strong>Bosch</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">20 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">8100 Synthetic Motor Oil</h5>
-												<ul className="list-inline product-info">
-													<li><strong>Motul USA</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">263 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">GM Original Equipment EGR....</h5>
-												<ul className="list-inline product-info">
-													<li><strong>ACDelco</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">263 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">NT05</h5>
-												<ul className="list-inline product-info">
-													<li><strong>NITTO</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">500 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">NT05</h5>
-												<ul className="list-inline product-info">
-													<li><strong>NITTO</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">500 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
-												<ul className="list-inline product-info">
-													<li><strong>Bosch</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">20 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-									<div>
-										<Link to="/" className="card">
-											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">NT05</h5>
-												<ul className="list-inline product-info">
-													<li><strong>NITTO</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p className="price">500 <span>sr</span></p>
-											</div>
-										</Link>
-									</div>
-								</Swiper>
-								<div className="swiper-left"></div>
-							</div> */}
-						</div>
 					</div>
 				</section>
 				{dialog}
@@ -378,43 +213,3 @@ const styles = {
 const withCart = withRouter(Cart);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withCart);
-/*<div >
-	<dir className="container-fluid" id="cart-details">
-		<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-			<div className="col-md-9">
-				<div className="border card q-display-small">
-					<div className="checkout-sm-container">
-						<div className="column">
-							<span className="item-key">{translate("orderSummary.total")}</span>
-							<span className="item-value">
-								2050
-								<span>SR</span>
-							</span>
-						</div>
-						<div className="column">
-							<Button
-								type="submit"
-								className="btn-primary"
-								text={"Checkout"}
-								icon="icon-arrow-right" />
-						</div>
-					</div>
-				</div>
-				<FieldArray
-					name="purchasedItems"
-					deleteText={translate("cart.table.delete")}
-					purchasedItems={checkoutData}
-					component={RenderCartItem}
-				/>
-				<div style={styles.divBtn}>
-					<Button
-						type="reset"
-						className="btn-secondary btn-shopping"
-						text={translate("cart.keepShopping")}
-						icon="icon-arrow-right" />
-				</div>
-			</div>
-			<OrderSummary col="col-md-3" translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
-		</form>
-	</dir>
-</div>*/

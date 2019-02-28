@@ -83,6 +83,7 @@ class Routes extends Component {
                                 </Link>
                             </main>
                             <Nav
+                                direction={this.props.direction}
                                 translate={this.props.translate}
                                 isLoggedIn={isAuth(this.props.token)}
                                 fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
