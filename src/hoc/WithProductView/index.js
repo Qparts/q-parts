@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { upperCaseFirstChar } from '../../utils'
 import * as constant from '../../constants';
+import {addQuery} from '../../utils';
 
 const WithProductView = WrappedComponent => {
 	return class extends Component {
@@ -11,12 +12,13 @@ const WithProductView = WrappedComponent => {
 				filtration: [],
 				params: '',
 			}
+
 		}
 
 		static displayName = `WithProductView(${WrappedComponent.displayName ||
 			WrappedComponent.name})`;
 
-	
+
 
 		addToFilter = (filters, filterObject) => {
 			let params = [];
@@ -43,19 +45,22 @@ const WithProductView = WrappedComponent => {
 			if (checked && index === -1) {
 				// const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
 
-				this.setState({
-					filtration: [...this.state.filtration, value],
-					// params: newParams
-				});
+				this.setState({ filtration: [...this.state.filtration, value], }, function () {
+						this.props.history.push(addQuery(this.state.filtration, ''));
+				 })
 			} else if (index !== -1) {
 				const clone = [...this.state.filtration];
+
 				const newParams = this.state.params.slice(1).split(/[&]/);
 
-				clone.splice(index, 1);
+				const elementRemoved = clone.splice(index, 1);
+
 				newParams.splice(index, 1);
 				this.setState({
 					filtration: clone,
 					// params: fixParamsFormat(newParams)
+				}, function () {
+					this.props.history.push(addQuery(this.state.filtration,elementRemoved));
 				});
 			}
 		}
@@ -80,13 +85,14 @@ const WithProductView = WrappedComponent => {
 			return check ? true : false;
 		}
 
+
 		renderSearch = (filtration, Component, handleChange, isChecked, currentLanguage) => {
 
 			return filtration.options.map((data, index) => {
 				const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 				const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
 				const value = data[option];
-				
+
 				return <div key={index}>
 					<Component
 						onChange={handleChange.bind(this, { key, value })}
