@@ -69,7 +69,7 @@ const isRequired = (error, touched) => {
 }
 
 const isInvalid = (error, touched) => {
-  return touched && error.includes('Invalid');
+  return touched && (error.includes('Invalid') || error.includes('غير'));
 }
 
 export const styles = {

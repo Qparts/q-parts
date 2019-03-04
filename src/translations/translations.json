@@ -2468,5 +2468,11 @@
       "زيت أفضل بائع",
       "Oil Best Seller"
     ]
+  },
+  "validation": {
+    "email": [
+      "عنوان البريد الإلكتروني غير صالح",
+      "Invalid email address"
+    ]
   }
 }

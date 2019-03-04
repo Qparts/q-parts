@@ -98,6 +98,7 @@ class SignupForm extends Component {
             hasPasswordStrength={true}
             title={translate("form.signup.passwordStrength.title")}
             scoreWords={scoreWords}
+            tooShortWord={translate("form.signup.passwordStrength.scoreWords.tooShort")}
             label={translate("form.signup.password")}
             name="password"
             component={RenderField}
