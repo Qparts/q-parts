@@ -30,6 +30,7 @@ class Root extends React.Component {
   }
 
   render() {
+
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -37,6 +38,7 @@ class Root extends React.Component {
             <LocalizeProvider store={store}>
               <ErrorBoundary>
                 <main className="nav-on-left">
+
                   <Routes />
                   <div className="overlay-lg"></div>
                   <a href="#" className="live-chat">
@@ -57,22 +59,22 @@ class Root extends React.Component {
                     <li className="nav-sm">
                       <a href="#">
                         <i className="icon-home"></i> home
-                </a>
+                      </a>
                     </li>
                     <li className="nav-sm">
                       <a href="#">
                         <i className="icon-send"></i> Requests
-                </a>
+                      </a>
                     </li>
                     <li className="nav-sm">
                       <a href="#">
                         <i className="icon-delivered-step"></i> Orders
-                </a>
+                      </a>
                     </li>
                     <li className="nav-sm">
                       <a href="#">
                         <i className="icon-heart"></i> Wish List
-                </a>
+                      </a>
                     </li>
                     <li className="sep"></li>
                     <li><a href="#">Custom Order</a></li>

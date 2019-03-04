@@ -45,9 +45,15 @@
   }
 }
 
-.btn-secondary {
-  border-style: none;
-}
+  .btn-secondary {
+    border-style: none;
+    border: 1px solid darken($light-gray, 3%);
+    background: $white;
+    color: $basic-gray;
+    &:hover{
+      background: $light-gray;
+    }
+  }
 
 .btn-facebook {
   background: $white;

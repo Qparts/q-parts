@@ -41,14 +41,28 @@ export class ManualForm extends Component {
 	      <div>
 					<div>
 						<a href="#">
-							<img src="/img/hero-lg.jpg"/>
+							<img src="/img/slide-2.jpg"/>
 						</a>
 					</div>
 				</div>
 	      <div>
 					<div>
 						<a href="#">
-							<img src="/img/tyers-lg.jpg"/>
+							<img src="/img/slide-4.jpg"/>
+						</a>
+					</div>
+				</div>
+				<div>
+					<div>
+						<a href="#">
+							<img src="/img/slide-5.jpg"/>
+						</a>
+					</div>
+				</div>
+				<div>
+					<div>
+						<a href="#">
+							<img src="/img/slide-3.jpg"/>
 						</a>
 					</div>
 				</div>

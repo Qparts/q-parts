@@ -163,7 +163,7 @@ class Cart extends Component {
 											</figcaption>
 										</figure>
 									</li>
-									<li className="bg-white">
+									<li>
 										<figure className="row">
 											<a href="#" className="col-3 item-img">
 												<img src="/img/product-1.jpg"/>
@@ -238,7 +238,7 @@ class Cart extends Component {
 							</ul>
 								<div className="row">
 									<div className="col-md-6 ml-md-auto">
-										<a href="#" className="cart-back">Continue Shopping<i className="icon-arrow-right"></i></a>
+										<a href="#" className="btn cart-back">Continue Shopping<i className="icon-arrow-right"></i></a>
 									</div>
 								</div>
 							</div>
@@ -280,7 +280,7 @@ class Cart extends Component {
 					</div>
 						</form>
 						<div className="row pt-sec">
-							<div className="col recommended-product">
+							<div className="col products-list">
 								<h3>Products Related To Items In Your Cart</h3>
 								<Swiper {...params}>
 									<div>
@@ -409,8 +409,6 @@ class Cart extends Component {
 					</div>
 				</section>
 			</section>
-
-
 		);
 	}
 }
@@ -436,43 +434,3 @@ const styles = {
 const withCart = withRouter(Cart);
 
 export default connect(mapStateToProps, null)(withCart);
-/*<div >
-	<dir className="container-fluid" id="cart-details">
-		<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-			<div className="col-md-9">
-				<div className="border card q-display-small">
-					<div className="checkout-sm-container">
-						<div className="column">
-							<span className="item-key">{translate("orderSummary.total")}</span>
-							<span className="item-value">
-								2050
-								<span>SR</span>
-							</span>
-						</div>
-						<div className="column">
-							<Button
-								type="submit"
-								className="btn-primary"
-								text={"Checkout"}
-								icon="icon-arrow-right" />
-						</div>
-					</div>
-				</div>
-				<FieldArray
-					name="purchasedItems"
-					deleteText={translate("cart.table.delete")}
-					purchasedItems={checkoutData}
-					component={RenderCartItem}
-				/>
-				<div style={styles.divBtn}>
-					<Button
-						type="reset"
-						className="btn-secondary btn-shopping"
-						text={translate("cart.keepShopping")}
-						icon="icon-arrow-right" />
-				</div>
-			</div>
-			<OrderSummary col="col-md-3" translate={this.props.translate} isDelivery={true} submitButton={translate("orderSummary.checkout")} />
-		</form>
-	</dir>
-</div>*/

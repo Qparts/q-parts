@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
@@ -7,28 +7,82 @@ import { getSortedProducts } from '../../actions/apiAction';
 import Select from 'react-select';
 // import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
-import { styles as commonStyles, categorySortOptions, colors } from '../../constants';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
-import {
-	Collapse, Card, CardBody, CardTitle, ListGroup, InputGroup, InputGroupAddon, Input
-} from 'reactstrap';
-import { ClipLoader } from 'react-spinners';
-
-import { isEmpty, replaceAll } from '../../utils';
+import { Card, ListGroup} from 'reactstrap';
+import { replaceAll } from '../../utils';
 import * as constant from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
-import { MediumScreen, SmallScreen } from '../../components/Device';
 import { getGeneralSearch } from '../../utils/api';
 import { getActiveLanguage } from 'react-localize-redux';
 
+//mobile filter
+import { LargeScreen, DownLargeScreen } from '../../components/Device';
+import Sidebar from "react-sidebar";
+
+//HTML Component
+import Stars from 'react-stars';
+import {starsRating } from '../../constants';
+
+const sortOptions = [
+	{ value: 1, label: "Best Match" },
+	{ value: 2, label: "Price: Low to High" },
+	{ value: 3, label: "Price: High to Low" }
+];
+const tireWidth = [
+	{ value: 1, label: "15" },
+	{ value: 2, label: "115" },
+	{ value: 3, label: "125" },
+	{ value: 4, label: "15" },
+	{ value: 5, label: "115" },
+	{ value: 6, label: "125" }
+];
+const groupedWidthTiresOptions = [
+	{
+		options: tireWidth,
+	},
+];
+const formatWidthTiresGroupLabel = () => (
+	<div className="placeholder">
+		<span>Select Width</span>
+	</div>
+);
+const tireHeight = [
+	{ value: 1, label: "35" },
+	{ value: 2, label: "40" },
+	{ value: 3, label: "45" }
+];
+const groupedHeightTiresOptions = [
+	{
+		options: tireHeight,
+	},
+];
+const formatHeightTiresGroupLabel = () => (
+	<div className="placeholder">
+		<span>Select Height</span>
+	</div>
+);
+
+const tireDiameter = [
+	{ value: 1, label: "14" },
+	{ value: 2, label: "15" },
+	{ value: 3, label: "16" }
+];
+const groupedDiameterTiresOptions = [
+	{
+		options: tireDiameter,
+	},
+];
+const formatDiameterTiresGroupLabel = () => (
+	<div className="placeholder">
+		<span>Select Diameter</span>
+	</div>
+);
+//END HTML Component
 const GRID = 'GRID';
-const LIST = 'LIST';
-
 class SearchResult extends Component {
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -41,9 +95,15 @@ class SearchResult extends Component {
 			selectedView: GRID,
 			searchGeneral: [],
 			loading: true,
+			isHidden: 'is-hidden',
+			movesOut: ''
 		};
+		this.header = createRef();
+		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 	}
-
+	onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
+  }
 	setGeneralSearch = (search) => {
 		getGeneralSearch(search).then(res => {
 			this.setState({
@@ -52,40 +112,30 @@ class SearchResult extends Component {
 			})
 		});
 	}
-
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
 	}
-
 	changeView = (selectedView) => {
 		this.setState({ selectedView })
 	}
-
 	componentDidMount() {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
-
 		const { searchGeneral: {filterObjects} } = this.state;
-
 		const query = queryString.parse(search.slice(1));
 		// const keys = Object.keys(query);
-
-		const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
-			const lastIndex = query[key].length - 1;
+			const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
 			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
 			const queryValues = replaceAll(newArray, '_', ' ');
 			const values = queryValues.length > 1 ? [...new Set(queryValues)] : [];
-
 			return {
 				filterTitle: key,
 				Checkbox,
 				values
 			}
 		}) : [];
-
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
-
 		this.props.onSetParams(newParams)
 		this.props.onSetRadioButton(filters)
 		return this.props.onAddToFilter(filters);
@@ -93,18 +143,14 @@ class SearchResult extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search }, history, match } = this.props;
-
 		if (search !== prevProps.location.search) {
-
 		} else if (this.props.params !== prevProps.params) {
 			history.push(`${match.url}${this.props.params}`);
 		}
 	}
-
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
-
 	renderProducts = () => (
 		this.state.searchGeneral.products.map((product, idx) => (
 			this.state.selectedView === GRID ? (
@@ -119,198 +165,648 @@ class SearchResult extends Component {
 		))
 	)
 
-	renderIcons = (styles) => (
-		<Fragment>
-			<MediumScreen>
-				<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} />
-				<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
-			</MediumScreen>
-			<SmallScreen>
-				{
-					this.state.selectedView === GRID ?
-						<i style={styles.iconList} className="icon-list" onClick={this.changeView.bind(this, LIST)} /> :
-
-						<i style={styles.iconGrid} className="icon-grid" onClick={this.changeView.bind(this, GRID)} />
-				}
-				<span className="seperator" />
-				<i className="icon-filter" onClick={this.changeView.bind(this, GRID)} />
-			</SmallScreen>
-		</Fragment>
-	)
-
-	render() {
-		const styles = {
-			iconGrid: {
-				opacity: this.state.selectedView === GRID ? 1 : 0.3
-			},
-			iconList: {
-				opacity: this.state.selectedView === LIST ? 1 : 0.3
-			},
-			show: {
-				display: 'flex',
-				height: '41px'
-			},
-			loading: {
-				textAlign: 'center'
-			}
-		}
-		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
-		const { searchGeneral: { filterObjects } } = this.state;
-		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-
-
-		const override = `
-            border-color: ${colors.brandColor} !important;
-            border-bottom-color: transparent !important;
-        `;
-		if (_.isEmpty(filterObjects))
-			return (
-				<div className="container-fluid" style={styles.loading}>
-					<ClipLoader
-						css={override}
-						sizeUnit={"px"}
-						size={150}
-						loading={this.state.loading}
-					/>
-				</div>
-			)
-
-
-		return (
-			<Fragment>
-				<section className="results-container gray-bg">
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-lg-3">
-								<ul className="filter">
-									<li>
-										<h5><Link to="/">Viscosity Grade <i className="minus"></i></Link></h5>
-											<div class="input-group">
-											  <div class="input-group-prepend">
-											    <span class="input-group-text"><i className="icon-search"></i></span>
-											  </div>
-											  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
-											</div>
-											<ul className="list-unstyled">
-												<li className="form-check">
-													<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-												  <label class="form-check-label" for="defaultCheck1">
-												    Default checkbox
-												  </label>
-												</li>
-											</ul>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div className="row invisible" >
-							<div className="col-lg-3">
-								<div className="filter">
-
-									{
-									filterObjects.map((filterObject, idx) => {
-										return <div key={idx} className="filter-category card col-12">
-											<div className="row">
-												<div className="col-9 title">
-													<p>{filterObject[key]}</p>
-												</div>
-												<div className="col-3 dropdown-icon">
-													<Link to="#" onClick={this.toggle.bind(this, 'collapse1')}>
-														<i className={this.getCollapseIcon('collapse1')} />
-													</Link>
-												</div>
-											</div>
-											<Collapse isOpen={this.state.collapse1}>
-												<Card className="filter-body">
-													<CardBody>
-														<InputGroup>
-															<InputGroupAddon addonType="prepend">
-																<i className="icon-search" />
-															</InputGroupAddon>
-															<Input className="search-box" type="text" placeholder="Search" />
-														</InputGroup>
-														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
-													</CardBody>
-												</Card>
-											</Collapse>
-											<span className="h-seperator" />
-										</div>
-									})
-								}
-								</div>
-
-							</div>
-							<div className="products-container col col-lg-9">
-							<div className="search-control-panel row">
-								<Card className="col-12">
-									<CardTitle className="d-flex justify-content-between">
-										<MediumScreen>
-											<label htmlFor="">1 - 60 of 200 results</label>
-										</MediumScreen>
-										<SmallScreen>
-											<Select
-												className="select__container"
-												classNamePrefix="select"
-												isSearchable={false}
-												defaultValue={categorySortOptions[0]}
-												options={categorySortOptions}
-												onChange={this.props.handleSelectChange} />
-										</SmallScreen>
-										<div className="right-side-selection">
-											<MediumScreen>
-												<label htmlFor="">Sort by</label>
-												<Select
-													className="select__container"
-													classNamePrefix="select"
-													isSearchable={false}
-													defaultValue={categorySortOptions[0]}
-													options={categorySortOptions}
-													onChange={this.props.handleSelectChange} />
-											</MediumScreen>
-											<SmallScreen>
-												<span className="seperator" />
-											</SmallScreen>
-											{this.renderIcons(styles)}
-										</div>
-									</CardTitle>
-								</Card>
-							</div>
-							<div className="selected-filters-panel row">
-								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : styles.show}>
-									{
-										filtration.map((item, index) => (
-											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
-										))
-									}
-									<Button text="Clear all" className="btn btn-gray-secondary" onClick={onClear} />
-								</div>
-							</div>
-							<div className="products-panel row">
-								{this.renderProducts()}
-							</div>
-						</div>
-						</div>
-					</div>
-				</section>
-			</Fragment>
-		)
+//filters
+setFilter = (filter) => {
+        console.log(filter);
+    }
+//END Filter
+handleClick = () => {
+	if(this.state.isHidden === 'is-hidden') {
+		this.setState({
+			isHidden: '',
+			movesOut: 'moves-out'
+		})
 	}
 }
 
+handleBack = () => {
+		this.setState({
+			isHidden: 'is-hidden',
+			movesOut: ''
+		})
+}
+	render() {
+			//sidebar
+			const params = {
+				rootClassName: `sidebar-main`,
+				sidebarClassName: `sidebar-content`,
+				overlayClassName: "sidebar-overlay",
+				pullRight: "true",
+			}
+			//END sidebar
+		return (
+				<section className="results-container gray-bg">
+					<DownLargeScreen>
+						<div className={this.state.sidebarOpen ? "sidebar-container" :"none-active" }>
+								<Sidebar
+									sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
+									sidebar={
+									<aside>
+										<header>
+											<div className="row">
+												<div className="col-auto">
+													<button type="button" className="btn reset" disabled>
+														<i className="icon-reset"></i>
+													</button>
+												</div>
+												<div className="col">
+													<h3>Filter <span>200 results</span></h3>
+												</div>
+												<div className="col-auto">
+													<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+												</div>
+											</div>
+										</header>
+										<ul className="filter" ref={this.setFilter}>
+												<li onClick={this.handleClick} className="have-child" >
+															<div className="row">
+																<label className="col-auto">Tyer Size</label>
+																<p className="col">255, 55, 16 <i className="icon-arrow-right"></i></p>
+															</div>
+															<div className={`d-none filte-items ${this.state.isHidden}`}>
+																<header>
+																	<div className="row">
+																		<div className="col-auto">
+																			<button type="button" onClick={this.handleBack} className="btn reset">
+																				<i className="icon-arrow-left"></i>
+
+																			</button>
+																		</div>
+																		<div className="col">
+																			<h4>Tyer Size</h4>
+																		</div>
+																		<div className="col-auto">
+																			<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+																		</div>
+																	</div>
+																</header>
+																<div>
+																	<div className="tires-filte">
+																	<form>
+																		<div className="d-table">
+																			<div className="d-table-row">
+																				<label>width</label>
+																				<div className="select-main">
+																					<Select
+																						className="select"
+																						classNamePrefix="select"
+																						isSearchable={false}
+																						defaultValue={tireWidth[0]}
+																						options={groupedWidthTiresOptions}
+																						formatGroupLabel={formatWidthTiresGroupLabel}
+																						/>
+																				</div>
+
+																			</div>
+																			<div className="d-table-row">
+																				<label>Height</label>
+																				<div className="select-main">
+																					<Select
+																						className="select"
+																						defaultValue={tireHeight[0]}
+																						classNamePrefix="select"
+																						isSearchable={false}
+																						options={groupedHeightTiresOptions}
+																						formatGroupLabel={formatHeightTiresGroupLabel}
+																						/>
+																				</div>
+																			</div>
+																			<div className="d-table-row">
+																				<label>Diameter</label>
+																				<div className="select-main">
+																					<Select
+																						className="select"
+																						defaultValue={tireDiameter[0]}
+																						classNamePrefix="select"
+																						isSearchable={false}
+																						options={groupedDiameterTiresOptions}
+																						formatGroupLabel={formatDiameterTiresGroupLabel}
+																						/>
+																				</div>
+																			</div>
+																		</div>
+																	</form>
+																</div>
+																</div>
+															</div>
+												</li>
+												<li onClick={this.handleClick} className="have-child">
+													<div className="row">
+														<label  className="col-auto">Viscosity Grade</label>
+														<p className="col">SAE 0W-15, SAE.... <a href="#" className="clear"><i className="icon-close"></i></a></p>
+													</div>
+													<div className={`d-none filte-items ${this.state.isHidden}`}>
+														<header>
+															<div className="row">
+																<div className="col-auto">
+																	<button type="button" onClick={this.handleBack} className="btn reset">
+																		<i className="icon-arrow-left"></i>
+																	</button>
+																</div>
+																<div className="col">
+																	<h4>Viscosity Grade</h4>
+																</div>
+																<div className="col-auto">
+																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+																</div>
+															</div>
+														</header>
+														<div>
+															<div className="filter-search">
+																<i class="icon-search"></i>
+															  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+															</div>
+															<ul className="options-list">
+																<li>
+																	<div class="checkbox">
+																     <input type="checkbox" id="O1" />
+																     <label for="O1">Option 1</label>
+																   </div>
+																</li>
+																<li>
+																	<div class="checkbox">
+																     <input type="checkbox" id="O2" />
+																     <label for="O2">Option 2</label>
+																   </div>
+																</li>
+																<li>
+																	<div class="checkbox">
+																     <input type="checkbox" id="O3" />
+																     <label for="O3">Option 3</label>
+																   </div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+												<li onClick={this.handleClick} className="have-child">
+													<div className="row">
+														<label  className="col-auto">Volume</label>
+														<p className="col">All</p>
+													</div>
+													<div className={`d-none filte-items ${this.state.isHidden}`}>
+														<header>
+															<div className="row">
+																<div className="col-auto">
+																	<button type="button" onClick={this.handleBack} className="btn reset">
+																		<i className="icon-arrow-left"></i>
+																	</button>
+																</div>
+																<div className="col">
+																	<h4>Volume</h4>
+																</div>
+																<div className="col-auto">
+																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+																</div>
+															</div>
+														</header>
+														<div>
+															<div className="filter-search">
+																<i class="icon-search"></i>
+																<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+															</div>
+															<ul className="options-list">
+																<li className="radio-custom">
+																		<input type="radio" id="test1" name="radio-group"  />
+																		<label for="test1">Apple</label>
+																</li>
+																<li className="radio-custom">
+																			<input type="radio" id="test2" name="radio-group"/>
+																			<label for="test2">Peach</label>
+																</li>
+																<li className="radio-custom">
+																		<input type="radio" id="test3" name="radio-group" />
+																		<label for="test3">Orange</label>
+																</li>
+															</ul>
+														</div>
+													</div>
+
+												</li>
+												<li>
+													<div className="row">
+														<label  className="col-auto">Price</label>
+														<div className="col">
+															<form class="form-row price-filter">
+																<div className="col">
+																	<input type="text" class="form-control" placeholder="From" />
+																</div>
+																<div className="col">
+																	<input type="text" class="form-control" placeholder="To" />
+																</div>
+															</form>
+														</div>
+													</div>
+												</li>
+												<li onClick={this.handleClick} className="have-child">
+													<div className="row">
+														<label  className="col-auto">Rating</label>
+														<p className="col">
+															<div className="rating">
+															 	<Stars values={1} {...starsRating} />
+															 </div> & Up
+													 	</p>
+													</div>
+													<div className={`filte-items ${this.state.isHidden}`}>
+														<header>
+															<div className="row">
+																<div className="col-auto">
+																	<button type="button" onClick={this.handleBack} className="btn reset">
+																		<i className="icon-arrow-left"></i>
+																	</button>
+																</div>
+																<div className="col">
+																	<h4>Rating
+
+																	</h4>
+																</div>
+																<div className="col-auto">
+																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+																</div>
+															</div>
+														</header>
+														<div>
+															<ul className="options-list">
+																<li>
+																	<div class="checkbox">
+																		 <input type="checkbox" id="O10" />
+																		 <label for="O10">
+																			 <div className="rating">
+				 																<Stars values={1} {...starsRating} />
+				 															</div>
+																			3 review
+																		 </label>
+																	 </div>
+																</li>
+																<li>
+																	<div class="checkbox">
+																		 <input type="checkbox" id="O10" />
+																		 <label for="O10">Not Yet Rated</label>
+																	 </div>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</li>
+											</ul>
+								</aside>
+							}
+									open={this.state.sidebarOpen}
+									onClick={this.handleClick}
+									onSetOpen={this.onSetSidebarOpen}
+									pullRight={true}
+								>
+								</Sidebar>
+						</div>
+					</DownLargeScreen>
+
+
+					<div className="container-fluid">
+						<div className="row">
+							<LargeScreen>
+								<div className="filter-col">
+								<ul className="filter" ref={this.setFilter}>
+									<li className="tires-filte">
+										<h5>
+											Tyer Search
+										</h5>
+										<form>
+											<div className="d-table">
+												<div className="d-table-row">
+													<label>width</label>
+													<div className="select-main">
+														<Select
+															className="select"
+															classNamePrefix="select"
+															isSearchable={false}
+															defaultValue={tireWidth[0]}
+															options={groupedWidthTiresOptions}
+															formatGroupLabel={formatWidthTiresGroupLabel}
+															/>
+													</div>
+
+												</div>
+												<div className="d-table-row">
+													<label>Height</label>
+													<div className="select-main">
+														<Select
+															className="select"
+															defaultValue={tireHeight[0]}
+															classNamePrefix="select"
+															isSearchable={false}
+															options={groupedHeightTiresOptions}
+															formatGroupLabel={formatHeightTiresGroupLabel}
+															/>
+													</div>
+												</div>
+												<div className="d-table-row">
+													<label>Diameter</label>
+													<div className="select-main">
+														<Select
+															className="select"
+															defaultValue={tireDiameter[0]}
+															classNamePrefix="select"
+															isSearchable={false}
+															options={groupedDiameterTiresOptions}
+															formatGroupLabel={formatDiameterTiresGroupLabel}
+															/>
+													</div>
+												</div>
+											</div>
+												<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
+										</form>
+									</li>
+									<li>
+										<h5>
+											<a href="#Viscosity" data-toggle="collapse" role="button" aria-expanded="false">Viscosity Grade <span className="minus"></span></a>
+										</h5>
+										<div class="collapse show" id="Viscosity">
+											<ul className="options-list">
+												<li>
+													<div class="checkbox">
+												     <input type="checkbox" id="O1" />
+												     <label for="O1">Option 1</label>
+												   </div>
+												</li>
+												<li>
+													<div class="checkbox">
+												     <input type="checkbox" id="O2" />
+												     <label for="O2">Option 2</label>
+												   </div>
+												</li>
+												<li>
+													<div class="checkbox">
+												     <input type="checkbox" id="O3" />
+												     <label for="O3">Option 3</label>
+												   </div>
+												</li>
+											</ul>
+											<a href="#" className="btn btn-gray">
+												View More <i className="icon-plus"></i>
+											</a>
+										</div>
+									</li>
+									<li>
+										<h5>
+											<a href="#Volume" data-toggle="collapse" role="button" aria-expanded="false">Volume<span className="minus"></span></a>
+										</h5>
+										<div class="collapse show" id="Volume">
+											<div className="filter-search">
+												<i class="icon-search"></i>
+											  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+											</div>
+											<ul className="options-list">
+												<li className="radio-custom">
+												    <input type="radio" id="test1" name="radio-group"  />
+												    <label for="test1">Apple</label>
+												</li>
+												<li className="radio-custom">
+													    <input type="radio" id="test2" name="radio-group"/>
+															<label for="test2">Peach</label>
+												</li>
+												<li className="radio-custom">
+												    <input type="radio" id="test3" name="radio-group" />
+												    <label for="test3">Orange</label>
+												</li>
+											</ul>
+											<a href="#" className="btn btn-gray">
+												View less <i className="minus"></i>
+											</a>
+										</div>
+									</li>
+									<li>
+										<h5>
+											<a href="#price" data-toggle="collapse" role="button" aria-expanded="false">Price<span className="minus"></span></a>
+										</h5>
+										<div class="collapse show" id="price">
+											<ul className="options-list">
+												<li>
+													<div class="checkbox">
+														 <input type="checkbox" id="O7" />
+														 <label for="O7">> 50</label>
+													 </div>
+												</li>
+												<li>
+													<div class="checkbox">
+														 <input type="checkbox" id="O8" />
+														 <label for="O8">500-700</label>
+													 </div>
+												</li>
+												<li>
+													<form class="form-row price-filter">
+														<div className="col">
+															<input type="text" class="form-control" placeholder="From" />
+														</div>
+														<div className="col">
+															<input type="text" class="form-control" placeholder="To" />
+														</div>
+														<div className="col-auto">
+															<button type="submit" class="btn btn-primary">Go</button>
+														</div>
+													</form>
+												</li>
+											</ul>
+										</div>
+									</li>
+									<li>
+										<h5>
+											<a href="#rating" data-toggle="collapse" role="button" aria-expanded="false">Rating<span className="minus"></span></a>
+										</h5>
+										<div class="collapse show" id="rating">
+											<ul className="options-list">
+												<li>
+													<div class="checkbox">
+														 <input type="checkbox" id="O10" />
+														 <label for="O10">
+															 <div className="rating">
+ 																<Stars values={1} {...starsRating} />
+ 															</div>
+															3 review
+														 </label>
+													 </div>
+												</li>
+												<li>
+													<div class="checkbox">
+														 <input type="checkbox" id="O10" />
+														 <label for="O10">Not Yet Rated</label>
+													 </div>
+												</li>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							</LargeScreen>
+							<div className="col">
+								<div className="search-result">
+									<div className="total-result row">
+										<h2 className="col">Motor Oil <span>(200 results)</span></h2>
+										<div className="col-auto">
+											<div className="result-sort">
+												<LargeScreen><label>Sort by</label></LargeScreen>
+												<DownLargeScreen>
+													<i className="icon-sorting"></i>
+												</DownLargeScreen>
+												<Select
+													classNamePrefix="select"
+													isSearchable={false}
+													defaultValue={sortOptions[0]}
+													options={sortOptions} />
+											</div>
+											<DownLargeScreen>
+												<div className="side-bar-compnent-btn">
+													<button className="btn filter-btn" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>
+														<i className="icon-filter"></i>
+													</button>
+												</div>
+											</DownLargeScreen>
+										</div>
+									</div>
+									<LargeScreen>
+										<div className="filter-result">
+											<ul className="list-inline">
+												<li>option1 <a href="#"><i className="icon-close"></i></a></li>
+												<li>option2 <a href="#"><i className="icon-close"></i></a></li>
+												<li>option3 <a href="#"><i className="icon-close"></i></a></li>
+											</ul>
+											<a className="btn btn-gray">Clear All</a>
+										</div>
+									</LargeScreen>
+									<ul className="result-list products-list row">
+										<li className="col-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+												<div className="card-body">
+													<h5 className="card-title">Air Fuel Ratio Sensor</h5>
+													<ul className="list-inline product-info">
+														<li><strong>Bosch</strong></li>
+														<li>#Part Num</li>
+													</ul>
+													<div className="rating">
+														<Stars values={1} {...starsRating} />
+														<span>0 review</span>
+													</div>
+													<p>Made in Germany</p>
+													<p className="price">20 <span>sr</span></p>
+												</div>
+											</Link>
+											<Link to="/" className="in-cart">
+												<i className="icon-cart"></i>
+												<i className="icon-plus"></i>
+											</Link>
+										</li>
+										<li className="col-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
+												<div className="card-body">
+													<h5 className="card-title">8100 Synthetic Motor Oil</h5>
+														<ul className="list-inline product-info">
+															<li><strong>Motul USA</strong></li>
+															<li>#Part Num</li>
+														</ul>
+														<div className="rating">
+															<Stars values={1} {...starsRating} />
+															<span>0 review</span>
+														</div>
+														<p>Made in Coria</p>
+													<p className="price">263 <span>sr</span></p>
+												</div>
+											</Link>
+											<Link to="/" className="in-cart">
+												<i className="icon-cart"></i>
+												<i className="icon-plus"></i>
+											</Link>
+										</li>
+										<li className="col-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+												<div className="card-body">
+													<h5 className="card-title">GM Original Equipment EGR....</h5>
+														<ul className="list-inline product-info">
+															<li><strong>ACDelco</strong></li>
+															<li>#Part Num</li>
+														</ul>
+														<div className="rating">
+															<Stars values={1} {...starsRating} />
+															<span>0 review</span>
+														</div>
+														<p>Made in Coria</p>
+													<p className="price">263 <span>sr</span></p>
+												</div>
+											</Link>
+											<Link to="/" className="in-cart">
+												<i className="icon-cart"></i>
+												<i className="icon-plus"></i>
+											</Link>
+										</li>
+										<li className="col-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+												<div className="card-body">
+													<h5 className="card-title">NT05</h5>
+														<ul className="list-inline product-info">
+															<li><strong>NITTO</strong></li>
+															<li>#Part Num</li>
+														</ul>
+													<div className="rating">
+														<Stars values={1} {...starsRating} />
+														<span>0 review</span>
+													</div>
+													<p>Made in china</p>
+													<p className="price">
+														<p>Price not available <a href="#">Send request</a></p>
+													</p>
+												</div>
+											</Link>
+										</li>
+										<li className="col-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+												<div className="card-body">
+													<h5 className="card-title">GM Original Equipment EGR....</h5>
+														<ul className="list-inline product-info">
+															<li><strong>ACDelco</strong></li>
+															<li>#Part Num</li>
+														</ul>
+														<div className="rating">
+															<Stars values={1} {...starsRating} />
+															<span>0 review</span>
+														</div>
+														<p>Made in Coria</p>
+													<p className="price">263 <span>sr</span></p>
+												</div>
+											</Link>
+											<Link to="/" className="in-cart">
+												<i className="icon-cart"></i>
+												<i className="icon-plus"></i>
+											</Link>
+										</li>
+									</ul>
+								</div>
+								<div className="row justify-content-center">
+									<div className="col-lg-6 col more-result">
+										<a href="#" className="btn btn-primary ">More <i className="icon-add"></i></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+		)
+	}
+}
 const mapStateToProps = state => {
 	return {
 		products: state.api.products,
 		currentLanguage: getActiveLanguage(state.localize).code,
 	}
 }
-
 const mapDispatchToProps = dispatch => {
 	return {
 		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
 		getSortedProducts: () => dispatch(getSortedProducts())
 	}
 }
-
 const withTyresSearch = WithProductView(SearchResult);
-
 export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);

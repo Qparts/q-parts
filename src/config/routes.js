@@ -13,6 +13,7 @@ import ProductDetail from '../containers/Product/ProductDetail';
 import Accessories from '../components/Accessories/Accessories';
 import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
+import Tires from '../components/Tires/Tires';
 import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
@@ -108,6 +109,10 @@ export const routes = (isAuth, direction) => [
     {
         path: "/motor-oil",
         component: MotorOil
+    },
+    {
+        path: "/tires",
+        component: Tires
     },
     {
         path: "/send",

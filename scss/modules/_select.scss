@@ -30,34 +30,34 @@
     margin: 0;
   }
   .select__menu {
-    position: absolute;
-    min-width: 100%;
-    width: auto;
-    left: 0;
-    margin-top: 0 !important;
-    height: auto;
-    display: block;
-    border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-    @include box-shadow;
+      position: absolute;
+      min-width: 100%;
+      width: auto;
+      left: 0;
+      margin-top: 0 !important;
+      height: auto;
+      display: block;
+      border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+      @include box-shadow;
       &::after {
-    	bottom: 100%;
-    	right: 10px;
-    	border: solid transparent;
-    	content: " ";
-    	height: 0;
-    	width: 0;
-    	position: absolute;
-    	pointer-events: none;
-    	border-color: rgba(213, 210, 204, 0);
-    	border-bottom-color: $light-gray;
-    	border-width: 7px;
-    	margin-left: -4px;
-      margin-bottom: -4px;
+      	bottom: 100%;
+      	right: 10px;
+      	border: solid transparent;
+      	content: " ";
+      	height: 0;
+      	width: 0;
+      	position: absolute;
+      	pointer-events: none;
+      	border-color: rgba(213, 210, 204, 0);
+      	border-bottom-color: $light-gray;
+      	border-width: 7px;
+      	margin-left: -4px;
+        margin-bottom: -4px;
     }
     .select__menu-list {
       padding-bottom: 0;
       border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-      @extend .overflow-xy-h;
+      overflow-x: hidden;
       .select__option {
         color: $basic-black;
         text-align: $left;
@@ -65,6 +65,7 @@
         @include font-size(13px);
         border-bottom: 1px solid $light-gray;
         background: $white;
+        white-space: nowrap;
         &:last-child{
           border-bottom-width: 0;
         }

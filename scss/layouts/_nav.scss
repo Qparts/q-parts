@@ -152,7 +152,7 @@ ul.cd-secondary-nav{
         pointer-events: none;
         border-color: rgba(0, 0, 0, 0);
         border-bottom-color: $basic-gray;
-        border-width: 7px;
+        border-width: 8px;
       }
 
     };
@@ -255,6 +255,11 @@ ul.cd-secondary-nav{
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0s, -webkit-transform 0.3s 0s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s, -moz-transform 0.3s 0s;
   transition: opacity 0.3s 0s, visibility 0s 0s, transform 0.3s 0s;
+}
+.cd-overlay{
+  @include nav-lg-media{
+    display: none;
+  };
 }
 .overflow-hidden,
 .overflow-hidden-search{

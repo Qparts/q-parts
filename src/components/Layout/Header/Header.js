@@ -24,7 +24,7 @@ class Header extends Component {
       }
     }
     moveSearch();
-    window.onresize= function() {
+    window.onresize= function(){
       moveSearch();
     };
     window.addEventListener('scroll', function(e) {
@@ -58,8 +58,6 @@ class Header extends Component {
             }
 
           }
-
-
       new_scroll_position = last_scroll_position;
     });
   }
@@ -122,7 +120,7 @@ class Header extends Component {
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
-                        changeDefaultDirection={changeDefaultDirection} 
+                        changeDefaultDirection={changeDefaultDirection}
                         getCountriesOnly={getCountriesOnly}/>
                     </li>
                   </ul>

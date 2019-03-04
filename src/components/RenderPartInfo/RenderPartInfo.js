@@ -67,7 +67,7 @@ class RenderPartInfo extends Component {
                                 />
                             </div>
                         </div>
-                        
+
                     </Fragment>
 
                 ))}
