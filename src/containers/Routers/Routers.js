@@ -36,9 +36,9 @@ class Routes extends Component {
         const expireHours = moment(this.props.tokenExpire);
         const dateDiff = expireHours.diff(dateNow);
         const hoursLeft = moment(dateDiff).format("h");
-        const oneHourLeft = 1;
+        const oneHour = 1;
 
-        if (hoursLeft === oneHourLeft) {
+        if (hoursLeft <= oneHour) {
             this.props.onLogout();
             this.props.clearCart();
         }
