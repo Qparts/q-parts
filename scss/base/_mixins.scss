@@ -75,6 +75,23 @@
   }
 }
 
+@mixin nav-link {
+  padding: 0 15px;
+  @include font-size(17px);
+  @include opacity(0.6);
+  text-transform: capitalize;
+  line-height: 15px;
+  &.active,
+  &:hover,
+  &:focus {
+    @include opacity(1);
+    @include transition(all, 0.3s, ease);
+  }
+  &.active {
+    font-weight: 500;
+  }
+}
+
 @mixin border-radius-div {
   border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
 }

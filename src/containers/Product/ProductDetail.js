@@ -157,6 +157,7 @@ class ProductDetail extends Component {
         this.setState({
           data: res.data
         })
+        this.props.addRecentViewedProducts(res.data);
       })
     this.props.modalAddToCart(false);
   }
@@ -327,26 +328,26 @@ class ProductDetail extends Component {
         </ModalBody>
       </Modal>
     );
-    const renderRelatedProduct = <Fragment>
-      <MediumScreen>
-        <RenderProducts
-          cardClass="border related-products"
-          imageClass="img-container"
-          isListView={true}
-          className="product-related_list"
-          header={translate("product.related")}
-          products={this.props.products}
-          goToProduct={this.goToProduct} />
-      </MediumScreen>
-      <SmallScreen>
-        <RenderProducts
-          isListView={false}
-          className="product-related_list"
-          header={translate("product.related")}
-          products={this.props.products}
-          goToProduct={this.goToProduct} />
-      </SmallScreen>
-    </Fragment>
+    // const renderRelatedProduct = <Fragment>
+    //   <MediumScreen>
+    //     <RenderProducts
+    //       cardClass="border related-products"
+    //       imageClass="img-container"
+    //       isListView={true}
+    //       className="product-related_list"
+    //       header={translate("product.related")}
+    //       products={this.props.products}
+    //       goToProduct={this.goToProduct} />
+    //   </MediumScreen>
+    //   <SmallScreen>
+    //     <RenderProducts
+    //       isListView={false}
+    //       className="product-related_list"
+    //       header={translate("product.related")}
+    //       products={this.props.products}
+    //       goToProduct={this.goToProduct} />
+    //   </SmallScreen>
+    // </Fragment>
 
     const renderRecentProduct = <Fragment>
       <RenderProducts
@@ -570,17 +571,17 @@ class ProductDetail extends Component {
                           </ListGroup>
                         </Card>
                       </div>
-                      <div className="col-12 q-hide-small">
+                      {/* <div className="col-12 q-hide-small">
                         {!_.isEmpty(this.state.relatedProduct) && renderRecentProduct}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
-                  <div className="col-12 col-md-4" style={{ display: "none" }}>
+                  {/* <div className="col-12 col-md-4" style={{ display: "none" }}>
                     {!_.isEmpty(this.state.relatedProduct) && renderRelatedProduct}
-                  </div>
-                  <div className="col-12 q-display-small">
+                  </div> */}
+                  {/* <div className="col-12 q-display-small">
                     {!_.isEmpty(this.state.relatedProduct) && renderRecentProduct}
-                  </div>
+                  </div> */}
                 </div>
                 {dialog}
               </div>

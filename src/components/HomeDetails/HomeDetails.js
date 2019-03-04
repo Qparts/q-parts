@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
-import Button from "../UI/Button";
 import Title from '../UI/Title';
 import { right } from '../../utils';
 import OrderSteps from '../OrderSteps';
@@ -9,7 +8,7 @@ import { Link } from "react-router-dom";
 class HomeDetails extends Component {
 
 	render() {
-		const { addRecentViewedProducts, onRecentlyViewedProducts, translate, direction, currentLanguage } = this.props;
+		const { recentViewedProducts, translate, direction, currentLanguage } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
@@ -165,8 +164,7 @@ class HomeDetails extends Component {
 						</div>
 					</section>
 					<Products
-						addRecentViewedProducts={addRecentViewedProducts}
-						onRecentlyViewedProducts={onRecentlyViewedProducts}
+						recentViewedProducts={recentViewedProducts}
 						translate={translate}
 						direction={direction}
 						currentLanguage={currentLanguage}
