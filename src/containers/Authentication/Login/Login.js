@@ -92,7 +92,7 @@ class Login extends Component {
           handleFailure={this.props.handleFailure} />
         <div id="sign-up-link">
           <p>{translate("form.signin.signup")}</p>
-          <Button className="btn-gray" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
+          <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
           <p>{translate("form.signin.here")}</p>
         </div>
       </div>
