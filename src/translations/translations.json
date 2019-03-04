@@ -1476,6 +1476,10 @@
       "delete": [
         "حذف",
         "Delete"
+      ],
+      "noWishlist": [
+        "لا توجد قائمة مفضلة محفوظة",
+        "no saved wishlist"
       ]
     },
     "garage": {

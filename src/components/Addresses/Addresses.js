@@ -52,7 +52,7 @@ class Addresses extends Component {
         <span className="seperator"></span>
         <div className="add-addresses">
           <p className="icon-address" />
-          <p className="addresses-text">NO SAVER ADDRESSES</p>
+          <p className="addresses-text">{translate("setting.addressBook.noAddresses")}</p>
           <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder />
         </div>
       </div>
