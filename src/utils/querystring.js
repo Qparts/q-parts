@@ -23,28 +23,50 @@ export const replaceQuery = (location, str) => {
 };
 
 export const addQuery = (array,element) => {
+  // const newArray=[];
+  // for(var i = 0 ; i<array.length;i++){
+  //   newArray.push(array[i].replace(/\s/g, ""))
+  // }
+  // if(newArray.length === 0){
+  //   var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
+  //   var url = window.location.search;
+  //   console.log(url)
+  //   var newUrl = url.replace(regex, "");
+  //
+  //   return newUrl;
+  // }else{
+  //
+  //     let newUrl=window.location.origin+ '&'+'brands='+newArray
+  //     let obj = queryString.parse(window.location.search.slice(1));
+  //     console.log(obj);
+  //     //let url = new URL(newUrl);
+  //   if(element.length !== 0){
+  //     var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
+  //     //let options = url.searchParams.getAll("brands");
+  //     var newUrl =  window.location.search.replace(regex, "raed");
+  //     console.log(newUrl)
+  //   }else{
+  //       return "listing?"+window.location.search.slice(1)+'&'+'brands='+newArray;
+  //   }
+  //
+
+  // }
   const newArray=[];
   for(var i = 0 ; i<array.length;i++){
     newArray.push(array[i].replace(/\s/g, ""))
   }
-  if(newArray.length === 0){
-    var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
+ if(element.length !== 0){
+   var regex = new RegExp(`&brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
+   var url = window.location.search;
+   var newUrl = url.replace(regex, "");
+   return window.location.pathname + newUrl;
+ }
+
+  const arr = newArray.map(encodeURIComponent);
+  for(var i =0;i<arr.length;i++){
+    var regex = new RegExp(`&brands=${arr[i]}`, "gi");
     var url = window.location.search;
-    console.log(url)
     var newUrl = url.replace(regex, "");
-
-    return newUrl;
-  }else{
-    let obj = queryString.parse(window.location.search.slice(1));
-
-      let newUrl=window.location.origin+ '?'+'brands='+newArray
-      let url = new URL(newUrl);
-    if(element.length !== 0){
-      var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
-      let options = url.searchParams.getAll("brands");
-      //var newUrl =  window.location.search.replace(regex, url.search);
-    }
-
-    return "listing?"+window.location.search.slice(1)+'?'+'brands='+newArray;
   }
+  return window.location.pathname + newUrl +'&'+'brands'+'=' + arr.join('&'+'brands'+'=')
 }
