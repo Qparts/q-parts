@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getFormSubmitErrors } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Alert } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import SignupForm from './SignupForm/SignupForm';
@@ -13,7 +14,7 @@ import WithSocialMedia from '../../../hoc/WithSocialMedia';
 import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore } from '../../../actions/customerAction';
-import { colors, ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
+import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 
 import Title from '../../../components/UI/Title';
 
@@ -45,7 +46,7 @@ class Signup extends Component {
           pathname: '/signup/successful',
           state: { isRegistered: false, email }
         });
-      })
+      });
   }
 
   onConfirmDialog = values => {
@@ -53,7 +54,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage, submitErrors } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
@@ -61,15 +62,22 @@ class Signup extends Component {
       currentLanguage={currentLanguage}
       translate={translate}
       passwordScore={passwordScore}
-      setPasswordScore={setPasswordScore}/>
+      setPasswordScore={setPasswordScore} />
     const dialog = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modal} toggle={this.props.togglePopup} >
       <ModalHeader toggle={this.props.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
       <ModalBody>
         <Login toggle={this.props.togglePopup} />
       </ModalBody>
     </Modal>
+    if (this.props.submitErrors.email) window.scrollTo(0, 0);
     return (
       <section id="signup">
+        {
+          submitErrors.email &&
+          <Alert color="danger">
+            {submitErrors.email}
+          </Alert>
+        }
         <div className="container-fluid">
           <Title
             header={translate("form.signup.title")}
@@ -115,7 +123,8 @@ const mapStateToProps = (state) => {
     component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
-    direction: state.customer.direction
+    direction: state.customer.direction,
+    submitErrors: getFormSubmitErrors('SignupForm')(state),
   }
 }
 

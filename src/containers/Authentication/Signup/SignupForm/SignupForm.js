@@ -127,8 +127,7 @@ class SignupForm extends Component {
 }
 
 SignupForm = reduxForm({
-  form: 'SignupForm',
-  enableReinitialize: true
+  form: 'SignupForm'
 })(SignupForm)
 
 SignupForm = connect(
