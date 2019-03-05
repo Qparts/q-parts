@@ -163,19 +163,20 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /main\/.*\.scss$/,
+            test: /main[\\\/].*\.scss$/,
             loader: mainCss.extract({
               fallback: 'style-loader',
               use: ['css-loader', 'sass-loader']
             })
           },
           {
-            test: /main-ar\/.*\.scss$/,
+            test: /main-ar[\\\/].*\.scss$/,
             loader: mainArCss.extract({
               fallback: 'style-loader',
               use: ['css-loader', 'sass-loader']
             })
           },
+          
           {
             test: /\.css$/,
             use: ['style-loader', 'css-loader'],

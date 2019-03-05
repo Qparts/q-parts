@@ -178,8 +178,6 @@ class Cart extends Component {
 				</section>
 				{dialog}
 			</section>
-
-
 		);
 	}
 }

@@ -4,7 +4,8 @@
     margin-top: 50px;
   }
 }
-.swiper-container{
+.tab-pane .swiper-container,
+.main-slider .swiper-container{
   padding-bottom: 20px
 }
 .main-slider{
@@ -83,7 +84,7 @@
 
   }
   .swiper-pagination-bullet{
-    height: 1px;
+    height: 2px;
     width: 10px;
     border-radius: 0;
     @include transition(all, 0.5s, ease);
@@ -355,6 +356,9 @@
         }
         i{
           @include font-size(23px);
+          &:before{
+            top: 3px;
+          }
         }
       }
   }
@@ -628,7 +632,7 @@
   }
 .products-sec{
   @extend .gray-bg;
-  @extend .recommended-product;
+  @extend .products-list;
   padding-top: 50px;
   padding-bottom: 50px;
   margin-top: 50px;

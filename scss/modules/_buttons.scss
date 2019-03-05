@@ -17,6 +17,7 @@
   border-style: none;
   background: $brand-color;
   color: $white;
+  @include font-size(19px);
   &:hover,
   &:focus {
     background: darken($brand-color, 10%);
@@ -45,9 +46,15 @@
   }
 }
 
-.btn-secondary {
-  border-style: none;
-}
+  .btn-secondary {
+    border-style: none;
+    border: 1px solid darken($light-gray, 3%);
+    background: $white;
+    color: $basic-gray;
+    &:hover{
+      background: $light-gray;
+    }
+  }
 
 .btn-light{
   background-color: $basic-white;

@@ -16,6 +16,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 class Root extends React.Component {
 
   render() {
+
     return (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

@@ -1,17 +1,1 @@
-#number-picker {
-  display: flex;
-  .btn-positive {
-    @include margin-right(3px);
-    border-radius: corner-values(20px 0 0 20px) !important;
-  }
-  .btn-negative {
-    border-radius: corner-values(0 0 20px 0) !important;
-  }
-  input {
-    @include margin-right(3px);
-    height: auto;
-    text-align: center;
-    cursor: inherit;
-    border-radius: corner-values(0 0 0 0) !important;
-  }
-}
+

@@ -9,4 +9,12 @@ const XLargeScreen = props => <Responsive {...props} minWidth={1200} />;
 const NavSm = props => <Responsive {...props} maxWidth={1169} />;
 const NavLg = props => <Responsive {...props} minWidth={1170} />;
 
-export { SmallScreen, MediumScreen, LargeScreen, XLargeScreen, CustomScreen, NavSm, NavLg }
+
+
+const DownSmallScreen = props => <Responsive {...props} maxWidth={576} />;
+const UpSmallScreen = props => <Responsive {...props} minWidth={576} />;
+
+const DownMediumScreen = props => <Responsive {...props} maxWidth={768} />;
+
+const DownLargeScreen = props => <Responsive {...props} maxWidth={992} />;
+export {DownSmallScreen, UpSmallScreen, DownMediumScreen,  SmallScreen, MediumScreen, LargeScreen, XLargeScreen, DownLargeScreen, CustomScreen, NavSm, NavLg}

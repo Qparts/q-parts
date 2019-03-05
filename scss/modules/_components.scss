@@ -2,7 +2,8 @@
 [class^='icon-']:before,
 [class*=' icon-']:before,
 .swiper-button-next::before,
-.swiper-button-prev::before{
+.swiper-button-prev::before,
+.breadcrumb-item + .breadcrumb-item::before{
   font-family: $icon-font-name !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -29,7 +30,7 @@
 .icon-arrow-d:before {
   content: "\65";
 }
-.icon-arrow-down:before {
+.icon-arrow-dropdwon:before {
   content: "\66";
 }
 .icon-arrow-l:before {
@@ -214,7 +215,7 @@
   content: "\24";
 }
 .icon-arrow-right:before,
-.swiper-button-next::before {
+.swiper-button-next::before  {
   content: "\25";
 }
 .icon-cart:before {
@@ -228,6 +229,15 @@
 }
 .icon-facebook:before {
   content: "\29";
+}
+.icon-sorting:before {
+  content: "\2a";
+}
+.minus{
+    width: 11px;
+    height: 2px;
+    background: $basic-gray;
+    display: block;
 }
 .seperator {
   width: 1px;
@@ -300,7 +310,7 @@
   @include media-breakpoint-down(md){
     max-width: 200px;
     display: inline-flex;
-    margin-top: 10px;
+
   };
   @include media-breakpoint-down(xs){
     max-width: 150px;
@@ -347,12 +357,6 @@
       }
     }
   }
-  .minus{
-      width: 11px;
-      height: 2px;
-      background: $basic-gray;
-      display: block;
-  }
 }
 .underline{
   text-decoration: underline;
@@ -398,7 +402,7 @@
   background-image: none !important;
 }
 //product list swiper-slide
-.recommended-product{
+.products-list{
   h3{
     @include font-size(20px);
     text-transform: capitalize;
@@ -433,9 +437,22 @@
       overflow: hidden;
       background: $white;
       border-radius: 0;
+      display: block;
+      width: 100%;
+      padding: 1.25rem
     }
   .card-img-top{
-      border-radius: 0;
+    max-width: 100%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    }
+    .card-body{
+      padding-bottom: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
   h5{
         @include font-size(15px);
@@ -483,6 +500,16 @@
         @include font-size(13px);
         margin-#{$left}: -3px;
         text-transform: uppercase;
+      }
+      p{
+        @include font-size(13px);
+        margin-bottom: 0;
+        a{
+          color: $brand-color;
+          &:hover{
+            text-decoration: underline;
+          }
+        }
       }
     }
   .swiper-button-next,
@@ -537,6 +564,171 @@
  // override the default border
  .border {
   border: 0 !important;
+}
+.checkbox{
+  // hides the actual checkbox
+    input[type="checkbox"] {
+      display: none;
+      // Label text
+      + label {
+        display: inline;
+        position: relative;
+        @include font-size(14px);
+        cursor: pointer;
+        // Unchecked checkbox box border
+        &::before {
+          display: inline-block;
+          width: 13px;
+          height: 13px;
+          content: ' ';
+          border: 1px solid #e2e2e2;
+          border-radius: 4px;
+          vertical-align: middle;
+          cursor: pointer;
+          z-index: 10;
+          top: -2px;
+          position: relative;
+          margin-#{$right}: 6px;
+        }
+        // Checkmark
+        &::after {
+          @include opacity(0);
+          width: 6px;
+          height: 12px;
+          border: 2px solid $brand-color;
+          border-#{$left}: none;
+          border-top: none;
+          content: " ";
+          position: absolute;
+          #{$left}: 6px;
+          bottom: 7px;
+          transform: rotatez(45deg);
+          z-index: 20;
+          @include transition(all, 0.5s, ease);
+        }
+      }
+
+      // Checked checkbox box border
+      &:checked + label {
+        &::after{
+          @include opacity(1);
+        }
+      }
+    }
+}
+.list-inline{
+  > li{
+    @extend .list-inline-item;
+  }
+}
+
+
+//radio-group
+.radio-custom{
+  [type="radio"]:checked,
+  [type="radio"]:not(:checked) {
+      position: absolute;
+      left: -9999px;
+  }
+  [type="radio"]:checked + label,
+  [type="radio"]:not(:checked) + label
+  {
+      position: relative;
+      padding-#{$left}: 18px;
+      cursor: pointer;
+      line-height: 13px;
+      display: inline-block;
+      @include font-size(14px);
+  }
+  [type="radio"]:checked + label:before,
+  [type="radio"]:not(:checked) + label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 13px;
+      height: 13px;
+      border: 1px solid #e2e2e2;
+      border-radius: 100%;
+      background: #fff;
+  }
+  [type="radio"]:checked + label:after,
+  [type="radio"]:not(:checked) + label:after {
+      content: '';
+      width: 6.5px;
+      height: 6.5px;
+      background: $brand-color;
+      position: absolute;
+      top: 3px;
+      #{$left}: 3.5px;
+      border-radius: 100%;
+      -webkit-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+  }
+  [type="radio"]:not(:checked) + label:after {
+      opacity: 0;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+  }
+  [type="radio"]:checked + label:after {
+      opacity: 1;
+      -webkit-transform: scale(1);
+      transform: scale(1);
+  }
+}
+//sidebar
+.sidebar-main{
+  z-index: 5;
+}
+//breadcrumb
+.breadcrumb{
+  padding-top: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 0;
+}
+.breadcrumb-item{
+  a{
+    @include opacity(0.5);
+  }
+  + .breadcrumb-item{
+    &::before{
+      @include font-size(8px);
+      @include opacity(0.5);
+    }
+    &:hover{
+      a{
+        @include opacity(1);
+      }
+    }
+  }
+}
+
+//Availability
+
+.availability{
+  @include font-size(15px);
+  margin-top: -5px;
+  @include media-breakpoint-down(xs){
+    @include font-size(14px);
+
+  };
+  .in-icon{
+    width: 5.5px;
+    height: 6px;
+    background-color: $green;
+    border-radius: 100px;
+    display: inline-block;
+    margin-right: 5px;
+    position: relative;
+    top: -2px;
+  }
+}
+//filter-mobile
+
+.sidebar{
+  background: $white;
+  width: 85%;
+  overflow-x: hidden;
 }
 .isDisabled {
   color: currentColor;

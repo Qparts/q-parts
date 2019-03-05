@@ -77,8 +77,13 @@
   height: 250px;
   text-align: center;
   margin-top: 30px;
+  background: $white;
+  position: relative;
   p{
-    vertical-align: middle
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 .live-chat{
@@ -145,4 +150,59 @@
         }
       }
     }
+}
+.products-brand{
+  ul{
+    margin-top: -15px;
+    margin-bottom: 0;
+    @include media-breakpoint-down(md){
+      margin-top: -2px;
+      margin-right: -2px;
+      margin-left: -2px;
+    }
+  }
+  h3{
+    @include font-size(20px);
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    font-weight: 400;
+    @include media-breakpoint-up(lg){
+      @include font-size(25px);
+    };
+  }
+  li{
+    margin-top: 15px;
+    @include media-breakpoint-down(md){
+      padding: 0 2px;
+      margin-top: 2px;
+    };
+  }
+  a{
+    display: block;
+    padding: 10px 20px;
+    background: $white;
+    @include media-breakpoint-down(md){
+      padding: 5px 10px;
+    }
+    &:hover{
+      background: $light-gray;
+    }
+  }
+}
+.banner{
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  margin: 0 auto;
+}
+.banner-728{
+  max-width: 728px;
+  height: 90px;
+  background: $white;
+  text-align: center;
+}
+.div-style{
+  @include border-radius-div();
+  overflow: hidden;
+
 }
