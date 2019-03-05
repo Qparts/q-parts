@@ -10,7 +10,6 @@ import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import Checkout from '../components/Checkout/Checkout';
 import ProductDetail from '../containers/Product/ProductDetail';
 import Accessories from '../components/Accessories/Accessories';
-import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
 import Tires from '../components/Tires/Tires';
 import Vehicles from '../components/Vehicles/Vehicles';
@@ -111,8 +110,8 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         component: Accessories
     },
     {
-        path: "/tyres",
-        component: Tyres
+        path: "/tires",
+        component: Tires
     },
     {
         path: "/motor-oil",
