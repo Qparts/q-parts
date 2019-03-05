@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react'; // eslint-disable-line no-un
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, getFormSubmitErrors } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import Button from '../../../components/UI/Button';
+import { Alert } from 'reactstrap';
 
 import RenderField from '../../../components/RenderField/RenderField';
 import SocialMedia from '../SocialMedia/SocialMedia';
@@ -34,13 +35,20 @@ class Login extends Component {
 
   handleSubmit = values => {
     const serverErrorField = "password"
-    return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
-      .then(() => {
-        this.props.toggle()
-      });
+    const { match } = this.props;
+
+    if (match.url !== '/login') {
+      return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
+        .then(() => {
+          this.props.toggle()
+        });
+    } else {
+      return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage);
+    }
   }
 
   handleChange = (event) => {
+    this.props.toggle();
     this.props.history.push('/signup')
   };
 
@@ -67,10 +75,16 @@ class Login extends Component {
       });
   }
   renderLogin = (login) => {
-    const { translate } = this.props;
+    const { translate, submitErrors } = this.props;
 
     return <Fragment>
       <div>
+        {
+          submitErrors.password &&
+          <Alert color="danger">
+            {submitErrors.password}
+          </Alert>
+        }
         {login}
         <SocialMedia
           title={translate("form.signin.socialMedia")}
@@ -153,7 +167,8 @@ const mapStateToProps = (state) => {
     component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
-    direction: state.customer.direction
+    direction: state.customer.direction,
+    submitErrors: getFormSubmitErrors('Login')(state),
   }
 }
 

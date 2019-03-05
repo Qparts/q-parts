@@ -10,21 +10,25 @@ import Button from '../../components/UI/Button';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
-import { Card, ListGroup} from 'reactstrap';
-import { replaceAll } from '../../utils';
+import { Card, ListGroup } from 'reactstrap';
+import {replaceAll } from '../../utils';
 import * as constant from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { getGeneralSearch } from '../../utils/api';
-import { getActiveLanguage } from 'react-localize-redux';
+import { getActiveLanguage, getTranslate } from 'react-localize-redux';
 
 //mobile filter
 import { LargeScreen, DownLargeScreen } from '../../components/Device';
 import Sidebar from "react-sidebar";
-
+import { right, getQuery, replaceQuery } from '../../utils';
 //HTML Component
 import Stars from 'react-stars';
-import {starsRating } from '../../constants';
+import { starsRating } from '../../constants';
+const GRID = 'GRID';
+const LIST = 'LIST';
+
+
 
 const sortOptions = [
 	{ value: 1, label: "Best Match" },
@@ -81,7 +85,6 @@ const formatDiameterTiresGroupLabel = () => (
 	</div>
 );
 //END HTML Component
-const GRID = 'GRID';
 class SearchResult extends Component {
 	constructor(props) {
 		super(props);
@@ -96,19 +99,41 @@ class SearchResult extends Component {
 			searchGeneral: [],
 			loading: true,
 			isHidden: 'is-hidden',
-			movesOut: ''
+			movesOut: '',
+			resultSize: 0,
+			startSize: 1,
+			endSize: 18,
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 	}
+
 	onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
+		this.setState({ sidebarOpen: open });
+	}
+	quantityProducts = () => {
+		const params = getQuery(this.props.location);
+		let pageNumber = Number(params.page);
+		if (this.state.endSize === this.state.resultSize && this.state.startSize !== 1) {
+			this.setState({ startSize: this.state.resultSize })
+		} else {
+			let size = pageNumber * 18 - 17
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		}
+	}
 	setGeneralSearch = (search) => {
+		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
+			if (res.data.products.length < 18) {
+				this.setState({ endSize: res.data.resultSize })
+			}
 			this.setState({
 				searchGeneral: res.data,
-				loading: false
+				loading: false,
+				resultSize: res.data.resultSize,
 			})
 		});
 	}
@@ -118,14 +143,46 @@ class SearchResult extends Component {
 	changeView = (selectedView) => {
 		this.setState({ selectedView })
 	}
+
+	nextPage = (e) => {
+		const params = getQuery(this.props.location);
+		let pageNumber = Number(params.page) + 1;
+		if (this.state.startSize === this.state.resultSize) {
+			this.setState({ startSize: this.state.resultSize })
+		} else {
+			let size = pageNumber * 18 - 17;
+			this.setState({
+				startSize: size,
+				endSize: size + 18 - 1
+			})
+		}
+		this.props.history.push(replaceQuery(this.props.location, "nextPage"));
+	}
+	prevPage = (e) => {
+		const params = getQuery(this.props.location);
+		let pageNumber = Number(params.page) - 1;
+		if (pageNumber <= 1) {
+			pageNumber = 1;
+		}
+		let size = pageNumber * 18 - 17
+		this.setState({
+			startSize: size,
+			endSize: size + 18 - 1
+		})
+		this.props.history.push(replaceQuery(this.props.location, "prePage"));
+	}
 	componentDidMount() {
+
 		const { location: { search } } = this.props;
+
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
-		const { searchGeneral: {filterObjects} } = this.state;
+
+		const { searchGeneral: { filterObjects } } = this.state;
+
 		const query = queryString.parse(search.slice(1));
 		// const keys = Object.keys(query);
-			const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
+		const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
 			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
 			const queryValues = replaceAll(newArray, '_', ' ');
 			const values = queryValues.length > 1 ? [...new Set(queryValues)] : [];
@@ -135,15 +192,18 @@ class SearchResult extends Component {
 				values
 			}
 		}) : [];
+
+		this.quantityProducts();
+
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 		this.props.onSetParams(newParams)
-		this.props.onSetRadioButton(filters)
-		return this.props.onAddToFilter(filters);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search }, history, match } = this.props;
 		if (search !== prevProps.location.search) {
+			this.setGeneralSearch(search);
+
 		} else if (this.props.params !== prevProps.params) {
 			history.push(`${match.url}${this.props.params}`);
 		}
@@ -151,320 +211,329 @@ class SearchResult extends Component {
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
 	}
-	renderProducts = () => (
-		this.state.searchGeneral.products.map((product, idx) => (
+
+	renderProducts = () => {
+		const { translate, currentLanguage, direction } = this.props;
+		return this.state.searchGeneral.products.map((product, idx) => (
 			this.state.selectedView === GRID ? (
-				<ProductGridView key={idx} product={product} />
+				<ProductGridView
+					key={idx}
+					product={product}
+					currentLanguage={currentLanguage}
+					translate={translate} />
 			)
 				:
 				<Card key={idx} className="product-list-view col-12">
 					<ListGroup>
-						<ProductListView product={product} />
+						<ProductListView product={product}
+							currentLanguage={currentLanguage}
+							translate={translate}
+							direction={direction} />
 					</ListGroup>
 				</Card>
-		))
-	)
-
-//filters
-setFilter = (filter) => {
-        console.log(filter);
-    }
-//END Filter
-handleClick = () => {
-	if(this.state.isHidden === 'is-hidden') {
-		this.setState({
-			isHidden: '',
-			movesOut: 'moves-out'
-		})
+		));
 	}
-}
 
-handleBack = () => {
+	//filters
+	setFilter = (filter) => {
+		console.log(filter);
+	}
+	//END Filter
+	handleClick = () => {
+		if (this.state.isHidden === 'is-hidden') {
+			this.setState({
+				isHidden: '',
+				movesOut: 'moves-out'
+			})
+		}
+	}
+
+	handleBack = () => {
 		this.setState({
 			isHidden: 'is-hidden',
 			movesOut: ''
 		})
-}
+	}
 	render() {
-			//sidebar
-			const params = {
-				rootClassName: `sidebar-main`,
-				sidebarClassName: `sidebar-content`,
-				overlayClassName: "sidebar-overlay",
-				pullRight: "true",
-			}
-			//END sidebar
+		//sidebar
+		const params = {
+			rootClassName: `sidebar-main`,
+			sidebarClassName: `sidebar-content`,
+			overlayClassName: "sidebar-overlay",
+			pullRight: "true",
+		}
+		//END sidebar
 		return (
-				<section className="results-container gray-bg">
-					<DownLargeScreen>
-						<div className={this.state.sidebarOpen ? "sidebar-container" :"none-active" }>
-								<Sidebar
-									sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
-									sidebar={
-									<aside>
-										<header>
+			<section className="results-container gray-bg">
+				<DownLargeScreen>
+					<div className={this.state.sidebarOpen ? "sidebar-container" : "none-active"}>
+						<Sidebar
+							sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
+							sidebar={
+								<aside>
+									<header>
+										<div className="row">
+											<div className="col-auto">
+												<button type="button" className="btn reset" disabled>
+													<i className="icon-reset"></i>
+												</button>
+											</div>
+											<div className="col">
+												<h3>Filter <span>200 results</span></h3>
+											</div>
+											<div className="col-auto">
+												<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+											</div>
+										</div>
+									</header>
+									<ul className="filter" ref={this.setFilter}>
+										<li onClick={this.handleClick} className="have-child" >
 											<div className="row">
-												<div className="col-auto">
-													<button type="button" className="btn reset" disabled>
-														<i className="icon-reset"></i>
-													</button>
-												</div>
-												<div className="col">
-													<h3>Filter <span>200 results</span></h3>
-												</div>
-												<div className="col-auto">
-													<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
+												<label className="col-auto">Tyer Size</label>
+												<p className="col">255, 55, 16 <i className="icon-arrow-right"></i></p>
+											</div>
+											<div className={`d-none filte-items ${this.state.isHidden}`}>
+												<header>
+													<div className="row">
+														<div className="col-auto">
+															<button type="button" onClick={this.handleBack} className="btn reset">
+																<i className="icon-arrow-left"></i>
+
+															</button>
+														</div>
+														<div className="col">
+															<h4>Tyer Size</h4>
+														</div>
+														<div className="col-auto">
+															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+														</div>
+													</div>
+												</header>
+												<div>
+													<div className="tires-filte">
+														<form>
+															<div className="d-table">
+																<div className="d-table-row">
+																	<label>width</label>
+																	<div className="select-main">
+																		<Select
+																			className="select"
+																			classNamePrefix="select"
+																			isSearchable={false}
+																			defaultValue={tireWidth[0]}
+																			options={groupedWidthTiresOptions}
+																			formatGroupLabel={formatWidthTiresGroupLabel}
+																		/>
+																	</div>
+
+																</div>
+																<div className="d-table-row">
+																	<label>Height</label>
+																	<div className="select-main">
+																		<Select
+																			className="select"
+																			defaultValue={tireHeight[0]}
+																			classNamePrefix="select"
+																			isSearchable={false}
+																			options={groupedHeightTiresOptions}
+																			formatGroupLabel={formatHeightTiresGroupLabel}
+																		/>
+																	</div>
+																</div>
+																<div className="d-table-row">
+																	<label>Diameter</label>
+																	<div className="select-main">
+																		<Select
+																			className="select"
+																			defaultValue={tireDiameter[0]}
+																			classNamePrefix="select"
+																			isSearchable={false}
+																			options={groupedDiameterTiresOptions}
+																			formatGroupLabel={formatDiameterTiresGroupLabel}
+																		/>
+																	</div>
+																</div>
+															</div>
+														</form>
+													</div>
 												</div>
 											</div>
-										</header>
-										<ul className="filter" ref={this.setFilter}>
-												<li onClick={this.handleClick} className="have-child" >
-															<div className="row">
-																<label className="col-auto">Tyer Size</label>
-																<p className="col">255, 55, 16 <i className="icon-arrow-right"></i></p>
-															</div>
-															<div className={`d-none filte-items ${this.state.isHidden}`}>
-																<header>
-																	<div className="row">
-																		<div className="col-auto">
-																			<button type="button" onClick={this.handleBack} className="btn reset">
-																				<i className="icon-arrow-left"></i>
-
-																			</button>
-																		</div>
-																		<div className="col">
-																			<h4>Tyer Size</h4>
-																		</div>
-																		<div className="col-auto">
-																			<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
-																		</div>
-																	</div>
-																</header>
-																<div>
-																	<div className="tires-filte">
-																	<form>
-																		<div className="d-table">
-																			<div className="d-table-row">
-																				<label>width</label>
-																				<div className="select-main">
-																					<Select
-																						className="select"
-																						classNamePrefix="select"
-																						isSearchable={false}
-																						defaultValue={tireWidth[0]}
-																						options={groupedWidthTiresOptions}
-																						formatGroupLabel={formatWidthTiresGroupLabel}
-																						/>
-																				</div>
-
-																			</div>
-																			<div className="d-table-row">
-																				<label>Height</label>
-																				<div className="select-main">
-																					<Select
-																						className="select"
-																						defaultValue={tireHeight[0]}
-																						classNamePrefix="select"
-																						isSearchable={false}
-																						options={groupedHeightTiresOptions}
-																						formatGroupLabel={formatHeightTiresGroupLabel}
-																						/>
-																				</div>
-																			</div>
-																			<div className="d-table-row">
-																				<label>Diameter</label>
-																				<div className="select-main">
-																					<Select
-																						className="select"
-																						defaultValue={tireDiameter[0]}
-																						classNamePrefix="select"
-																						isSearchable={false}
-																						options={groupedDiameterTiresOptions}
-																						formatGroupLabel={formatDiameterTiresGroupLabel}
-																						/>
-																				</div>
-																			</div>
-																		</div>
-																	</form>
-																</div>
-																</div>
-															</div>
-												</li>
-												<li onClick={this.handleClick} className="have-child">
+										</li>
+										<li onClick={this.handleClick} className="have-child">
+											<div className="row">
+												<label className="col-auto">Viscosity Grade</label>
+												<p className="col">SAE 0W-15, SAE.... <a href="#" className="clear"><i className="icon-close"></i></a></p>
+											</div>
+											<div className={`d-none filte-items ${this.state.isHidden}`}>
+												<header>
 													<div className="row">
-														<label  className="col-auto">Viscosity Grade</label>
-														<p className="col">SAE 0W-15, SAE.... <a href="#" className="clear"><i className="icon-close"></i></a></p>
-													</div>
-													<div className={`d-none filte-items ${this.state.isHidden}`}>
-														<header>
-															<div className="row">
-																<div className="col-auto">
-																	<button type="button" onClick={this.handleBack} className="btn reset">
-																		<i className="icon-arrow-left"></i>
-																	</button>
-																</div>
-																<div className="col">
-																	<h4>Viscosity Grade</h4>
-																</div>
-																<div className="col-auto">
-																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
-																</div>
-															</div>
-														</header>
-														<div>
-															<div className="filter-search">
-																<i class="icon-search"></i>
-															  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
-															</div>
-															<ul className="options-list">
-																<li>
-																	<div class="checkbox">
-																     <input type="checkbox" id="O1" />
-																     <label for="O1">Option 1</label>
-																   </div>
-																</li>
-																<li>
-																	<div class="checkbox">
-																     <input type="checkbox" id="O2" />
-																     <label for="O2">Option 2</label>
-																   </div>
-																</li>
-																<li>
-																	<div class="checkbox">
-																     <input type="checkbox" id="O3" />
-																     <label for="O3">Option 3</label>
-																   </div>
-																</li>
-															</ul>
+														<div className="col-auto">
+															<button type="button" onClick={this.handleBack} className="btn reset">
+																<i className="icon-arrow-left"></i>
+															</button>
 														</div>
-													</div>
-												</li>
-												<li onClick={this.handleClick} className="have-child">
-													<div className="row">
-														<label  className="col-auto">Volume</label>
-														<p className="col">All</p>
-													</div>
-													<div className={`d-none filte-items ${this.state.isHidden}`}>
-														<header>
-															<div className="row">
-																<div className="col-auto">
-																	<button type="button" onClick={this.handleBack} className="btn reset">
-																		<i className="icon-arrow-left"></i>
-																	</button>
-																</div>
-																<div className="col">
-																	<h4>Volume</h4>
-																</div>
-																<div className="col-auto">
-																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
-																</div>
-															</div>
-														</header>
-														<div>
-															<div className="filter-search">
-																<i class="icon-search"></i>
-																<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
-															</div>
-															<ul className="options-list">
-																<li className="radio-custom">
-																		<input type="radio" id="test1" name="radio-group"  />
-																		<label for="test1">Apple</label>
-																</li>
-																<li className="radio-custom">
-																			<input type="radio" id="test2" name="radio-group"/>
-																			<label for="test2">Peach</label>
-																</li>
-																<li className="radio-custom">
-																		<input type="radio" id="test3" name="radio-group" />
-																		<label for="test3">Orange</label>
-																</li>
-															</ul>
-														</div>
-													</div>
-
-												</li>
-												<li>
-													<div className="row">
-														<label  className="col-auto">Price</label>
 														<div className="col">
-															<form class="form-row price-filter">
-																<div className="col">
-																	<input type="text" class="form-control" placeholder="From" />
-																</div>
-																<div className="col">
-																	<input type="text" class="form-control" placeholder="To" />
-																</div>
-															</form>
+															<h4>Viscosity Grade</h4>
+														</div>
+														<div className="col-auto">
+															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
 														</div>
 													</div>
-												</li>
-												<li onClick={this.handleClick} className="have-child">
-													<div className="row">
-														<label  className="col-auto">Rating</label>
-														<p className="col">
-															<div className="rating">
-															 	<Stars values={1} {...starsRating} />
-															 </div> & Up
-													 	</p>
+												</header>
+												<div>
+													<div className="filter-search">
+														<i class="icon-search"></i>
+														<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
 													</div>
-													<div className={`filte-items ${this.state.isHidden}`}>
-														<header>
-															<div className="row">
-																<div className="col-auto">
-																	<button type="button" onClick={this.handleBack} className="btn reset">
-																		<i className="icon-arrow-left"></i>
-																	</button>
-																</div>
-																<div className="col">
-																	<h4>Rating
-
-																	</h4>
-																</div>
-																<div className="col-auto">
-																	<button type="button" className="btn btn-primary" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>Done</button>
-																</div>
+													<ul className="options-list">
+														<li>
+															<div class="checkbox">
+																<input type="checkbox" id="O1" />
+																<label for="O1">Option 1</label>
 															</div>
-														</header>
-														<div>
-															<ul className="options-list">
-																<li>
-																	<div class="checkbox">
-																		 <input type="checkbox" id="O10" />
-																		 <label for="O10">
-																			 <div className="rating">
-				 																<Stars values={1} {...starsRating} />
-				 															</div>
-																			3 review
-																		 </label>
-																	 </div>
-																</li>
-																<li>
-																	<div class="checkbox">
-																		 <input type="checkbox" id="O10" />
-																		 <label for="O10">Not Yet Rated</label>
-																	 </div>
-																</li>
-															</ul>
+														</li>
+														<li>
+															<div class="checkbox">
+																<input type="checkbox" id="O2" />
+																<label for="O2">Option 2</label>
+															</div>
+														</li>
+														<li>
+															<div class="checkbox">
+																<input type="checkbox" id="O3" />
+																<label for="O3">Option 3</label>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li onClick={this.handleClick} className="have-child">
+											<div className="row">
+												<label className="col-auto">Volume</label>
+												<p className="col">All</p>
+											</div>
+											<div className={`d-none filte-items ${this.state.isHidden}`}>
+												<header>
+													<div className="row">
+														<div className="col-auto">
+															<button type="button" onClick={this.handleBack} className="btn reset">
+																<i className="icon-arrow-left"></i>
+															</button>
+														</div>
+														<div className="col">
+															<h4>Volume</h4>
+														</div>
+														<div className="col-auto">
+															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
 														</div>
 													</div>
-												</li>
-											</ul>
+												</header>
+												<div>
+													<div className="filter-search">
+														<i class="icon-search"></i>
+														<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+													</div>
+													<ul className="options-list">
+														<li className="radio-custom">
+															<input type="radio" id="test1" name="radio-group" />
+															<label for="test1">Apple</label>
+														</li>
+														<li className="radio-custom">
+															<input type="radio" id="test2" name="radio-group" />
+															<label for="test2">Peach</label>
+														</li>
+														<li className="radio-custom">
+															<input type="radio" id="test3" name="radio-group" />
+															<label for="test3">Orange</label>
+														</li>
+													</ul>
+												</div>
+											</div>
+
+										</li>
+										<li>
+											<div className="row">
+												<label className="col-auto">Price</label>
+												<div className="col">
+													<form class="form-row price-filter">
+														<div className="col">
+															<input type="text" class="form-control" placeholder="From" />
+														</div>
+														<div className="col">
+															<input type="text" class="form-control" placeholder="To" />
+														</div>
+													</form>
+												</div>
+											</div>
+										</li>
+										<li onClick={this.handleClick} className="have-child">
+											<div className="row">
+												<label className="col-auto">Rating</label>
+												<p className="col">
+													<div className="rating">
+														<Stars values={1} {...starsRating} />
+													</div> & Up
+													 	</p>
+											</div>
+											<div className={`filte-items ${this.state.isHidden}`}>
+												<header>
+													<div className="row">
+														<div className="col-auto">
+															<button type="button" onClick={this.handleBack} className="btn reset">
+																<i className="icon-arrow-left"></i>
+															</button>
+														</div>
+														<div className="col">
+															<h4>Rating
+	
+																	</h4>
+														</div>
+														<div className="col-auto">
+															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+														</div>
+													</div>
+												</header>
+												<div>
+													<ul className="options-list">
+														<li>
+															<div class="checkbox">
+																<input type="checkbox" id="O10" />
+																<label for="O10">
+																	<div className="rating">
+																		<Stars values={1} {...starsRating} />
+																	</div>
+																	3 review
+																		 </label>
+															</div>
+														</li>
+														<li>
+															<div class="checkbox">
+																<input type="checkbox" id="O10" />
+																<label for="O10">Not Yet Rated</label>
+															</div>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</li>
+									</ul>
 								</aside>
 							}
-									open={this.state.sidebarOpen}
-									onClick={this.handleClick}
-									onSetOpen={this.onSetSidebarOpen}
-									pullRight={true}
-								>
-								</Sidebar>
-						</div>
-					</DownLargeScreen>
+							open={this.state.sidebarOpen}
+							onClick={this.handleClick}
+							onSetOpen={this.onSetSidebarOpen}
+							pullRight={true}
+						>
+						</Sidebar>
+					</div>
+				</DownLargeScreen>
 
 
-					<div className="container-fluid">
-						<div className="row">
-							<LargeScreen>
-								<div className="filter-col">
+				<div className="container-fluid">
+					<div className="row">
+						<LargeScreen>
+							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									<li className="tires-filte">
 										<h5>
@@ -482,7 +551,7 @@ handleBack = () => {
 															defaultValue={tireWidth[0]}
 															options={groupedWidthTiresOptions}
 															formatGroupLabel={formatWidthTiresGroupLabel}
-															/>
+														/>
 													</div>
 
 												</div>
@@ -496,7 +565,7 @@ handleBack = () => {
 															isSearchable={false}
 															options={groupedHeightTiresOptions}
 															formatGroupLabel={formatHeightTiresGroupLabel}
-															/>
+														/>
 													</div>
 												</div>
 												<div className="d-table-row">
@@ -509,11 +578,11 @@ handleBack = () => {
 															isSearchable={false}
 															options={groupedDiameterTiresOptions}
 															formatGroupLabel={formatDiameterTiresGroupLabel}
-															/>
+														/>
 													</div>
 												</div>
 											</div>
-												<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
+											<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
 										</form>
 									</li>
 									<li>
@@ -524,21 +593,21 @@ handleBack = () => {
 											<ul className="options-list">
 												<li>
 													<div class="checkbox">
-												     <input type="checkbox" id="O1" />
-												     <label for="O1">Option 1</label>
-												   </div>
+														<input type="checkbox" id="O1" />
+														<label for="O1">Option 1</label>
+													</div>
 												</li>
 												<li>
 													<div class="checkbox">
-												     <input type="checkbox" id="O2" />
-												     <label for="O2">Option 2</label>
-												   </div>
+														<input type="checkbox" id="O2" />
+														<label for="O2">Option 2</label>
+													</div>
 												</li>
 												<li>
 													<div class="checkbox">
-												     <input type="checkbox" id="O3" />
-												     <label for="O3">Option 3</label>
-												   </div>
+														<input type="checkbox" id="O3" />
+														<label for="O3">Option 3</label>
+													</div>
 												</li>
 											</ul>
 											<a href="#" className="btn btn-gray">
@@ -553,20 +622,20 @@ handleBack = () => {
 										<div class="collapse show" id="Volume">
 											<div className="filter-search">
 												<i class="icon-search"></i>
-											  <input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+												<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
 											</div>
 											<ul className="options-list">
 												<li className="radio-custom">
-												    <input type="radio" id="test1" name="radio-group"  />
-												    <label for="test1">Apple</label>
+													<input type="radio" id="test1" name="radio-group" />
+													<label for="test1">Apple</label>
 												</li>
 												<li className="radio-custom">
-													    <input type="radio" id="test2" name="radio-group"/>
-															<label for="test2">Peach</label>
+													<input type="radio" id="test2" name="radio-group" />
+													<label for="test2">Peach</label>
 												</li>
 												<li className="radio-custom">
-												    <input type="radio" id="test3" name="radio-group" />
-												    <label for="test3">Orange</label>
+													<input type="radio" id="test3" name="radio-group" />
+													<label for="test3">Orange</label>
 												</li>
 											</ul>
 											<a href="#" className="btn btn-gray">
@@ -582,15 +651,15 @@ handleBack = () => {
 											<ul className="options-list">
 												<li>
 													<div class="checkbox">
-														 <input type="checkbox" id="O7" />
-														 <label for="O7">> 50</label>
-													 </div>
+														<input type="checkbox" id="O7" />
+														<label for="O7">> 50</label>
+													</div>
 												</li>
 												<li>
 													<div class="checkbox">
-														 <input type="checkbox" id="O8" />
-														 <label for="O8">500-700</label>
-													 </div>
+														<input type="checkbox" id="O8" />
+														<label for="O8">500-700</label>
+													</div>
 												</li>
 												<li>
 													<form class="form-row price-filter">
@@ -616,20 +685,20 @@ handleBack = () => {
 											<ul className="options-list">
 												<li>
 													<div class="checkbox">
-														 <input type="checkbox" id="O10" />
-														 <label for="O10">
-															 <div className="rating">
- 																<Stars values={1} {...starsRating} />
- 															</div>
+														<input type="checkbox" id="O10" />
+														<label for="O10">
+															<div className="rating">
+																<Stars values={1} {...starsRating} />
+															</div>
 															3 review
 														 </label>
-													 </div>
+													</div>
 												</li>
 												<li>
 													<div class="checkbox">
-														 <input type="checkbox" id="O10" />
-														 <label for="O10">Not Yet Rated</label>
-													 </div>
+														<input type="checkbox" id="O10" />
+														<label for="O10">Not Yet Rated</label>
+													</div>
 												</li>
 											</ul>
 										</div>
@@ -637,176 +706,179 @@ handleBack = () => {
 								</ul>
 							</div>
 
-							</LargeScreen>
-							<div className="col">
-								<div className="search-result">
-									<div className="total-result row">
-										<h2 className="col">Motor Oil <span>(200 results)</span></h2>
-										<div className="col-auto">
-											<div className="result-sort">
-												<LargeScreen><label>Sort by</label></LargeScreen>
-												<DownLargeScreen>
-													<i className="icon-sorting"></i>
-												</DownLargeScreen>
-												<Select
-													classNamePrefix="select"
-													isSearchable={false}
-													defaultValue={sortOptions[0]}
-													options={sortOptions} />
-											</div>
+						</LargeScreen>
+						<div className="col">
+							<div className="search-result">
+								<div className="total-result row">
+									<h2 className="col">Motor Oil <span>(200 results)</span></h2>
+									<div className="col-auto">
+										<div className="result-sort">
+											<LargeScreen><label>Sort by</label></LargeScreen>
 											<DownLargeScreen>
-												<div className="side-bar-compnent-btn">
-													<button className="btn filter-btn" onClick={()=> this.setState({sidebarOpen: !this.state.sidebarOpen})}>
-														<i className="icon-filter"></i>
-													</button>
-												</div>
+												<i className="icon-sorting"></i>
 											</DownLargeScreen>
+											<Select
+												classNamePrefix="select"
+												isSearchable={false}
+												defaultValue={sortOptions[0]}
+												options={sortOptions} />
 										</div>
+										<DownLargeScreen>
+											<div className="side-bar-compnent-btn">
+												<button className="btn filter-btn" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>
+													<i className="icon-filter"></i>
+												</button>
+											</div>
+										</DownLargeScreen>
 									</div>
-									<LargeScreen>
-										<div className="filter-result">
-											<ul className="list-inline">
-												<li>option1 <a href="#"><i className="icon-close"></i></a></li>
-												<li>option2 <a href="#"><i className="icon-close"></i></a></li>
-												<li>option3 <a href="#"><i className="icon-close"></i></a></li>
-											</ul>
-											<a className="btn btn-gray">Clear All</a>
-										</div>
-									</LargeScreen>
-									<ul className="result-list products-list row">
-										<li className="col-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
-												<div className="card-body">
-													<h5 className="card-title">Air Fuel Ratio Sensor</h5>
-													<ul className="list-inline product-info">
-														<li><strong>Bosch</strong></li>
-														<li>#Part Num</li>
-													</ul>
-													<div className="rating">
-														<Stars values={1} {...starsRating} />
-														<span>0 review</span>
-													</div>
-													<p>Made in Germany</p>
-													<p className="price">20 <span>sr</span></p>
-												</div>
-											</Link>
-											<Link to="/" className="in-cart">
-												<i className="icon-cart"></i>
-												<i className="icon-plus"></i>
-											</Link>
-										</li>
-										<li className="col-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
-												<div className="card-body">
-													<h5 className="card-title">8100 Synthetic Motor Oil</h5>
-														<ul className="list-inline product-info">
-															<li><strong>Motul USA</strong></li>
-															<li>#Part Num</li>
-														</ul>
-														<div className="rating">
-															<Stars values={1} {...starsRating} />
-															<span>0 review</span>
-														</div>
-														<p>Made in Coria</p>
-													<p className="price">263 <span>sr</span></p>
-												</div>
-											</Link>
-											<Link to="/" className="in-cart">
-												<i className="icon-cart"></i>
-												<i className="icon-plus"></i>
-											</Link>
-										</li>
-										<li className="col-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
-												<div className="card-body">
-													<h5 className="card-title">GM Original Equipment EGR....</h5>
-														<ul className="list-inline product-info">
-															<li><strong>ACDelco</strong></li>
-															<li>#Part Num</li>
-														</ul>
-														<div className="rating">
-															<Stars values={1} {...starsRating} />
-															<span>0 review</span>
-														</div>
-														<p>Made in Coria</p>
-													<p className="price">263 <span>sr</span></p>
-												</div>
-											</Link>
-											<Link to="/" className="in-cart">
-												<i className="icon-cart"></i>
-												<i className="icon-plus"></i>
-											</Link>
-										</li>
-										<li className="col-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
-												<div className="card-body">
-													<h5 className="card-title">NT05</h5>
-														<ul className="list-inline product-info">
-															<li><strong>NITTO</strong></li>
-															<li>#Part Num</li>
-														</ul>
-													<div className="rating">
-														<Stars values={1} {...starsRating} />
-														<span>0 review</span>
-													</div>
-													<p>Made in china</p>
-													<p className="price">
-														<p>Price not available <a href="#">Send request</a></p>
-													</p>
-												</div>
-											</Link>
-										</li>
-										<li className="col-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
-												<div className="card-body">
-													<h5 className="card-title">GM Original Equipment EGR....</h5>
-														<ul className="list-inline product-info">
-															<li><strong>ACDelco</strong></li>
-															<li>#Part Num</li>
-														</ul>
-														<div className="rating">
-															<Stars values={1} {...starsRating} />
-															<span>0 review</span>
-														</div>
-														<p>Made in Coria</p>
-													<p className="price">263 <span>sr</span></p>
-												</div>
-											</Link>
-											<Link to="/" className="in-cart">
-												<i className="icon-cart"></i>
-												<i className="icon-plus"></i>
-											</Link>
-										</li>
-									</ul>
 								</div>
-								<div className="row justify-content-center">
-									<div className="col-lg-6 col more-result">
-										<a href="#" className="btn btn-primary ">More <i className="icon-add"></i></a>
+								<LargeScreen>
+									<div className="filter-result">
+										<ul className="list-inline">
+											<li>option1 <a href="#"><i className="icon-close"></i></a></li>
+											<li>option2 <a href="#"><i className="icon-close"></i></a></li>
+											<li>option3 <a href="#"><i className="icon-close"></i></a></li>
+										</ul>
+										<a className="btn btn-gray">Clear All</a>
 									</div>
+								</LargeScreen>
+								<ul className="result-list products-list row">
+									<li className="col-xl-3 col-md-4 col-6">
+										<Link to="/" className="card">
+											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
+												<ul className="list-inline product-info">
+													<li><strong>Bosch</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p>Made in Germany</p>
+												<p className="price">20 <span>sr</span></p>
+											</div>
+										</Link>
+										<Link to="/" className="in-cart">
+											<i className="icon-cart"></i>
+											<i className="icon-plus"></i>
+										</Link>
+									</li>
+									<li className="col-xl-3 col-md-4 col-6">
+										<Link to="/" className="card">
+											<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">8100 Synthetic Motor Oil</h5>
+												<ul className="list-inline product-info">
+													<li><strong>Motul USA</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p>Made in Coria</p>
+												<p className="price">263 <span>sr</span></p>
+											</div>
+										</Link>
+										<Link to="/" className="in-cart">
+											<i className="icon-cart"></i>
+											<i className="icon-plus"></i>
+										</Link>
+									</li>
+									<li className="col-xl-3 col-md-4 col-6">
+										<Link to="/" className="card">
+											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">GM Original Equipment EGR....</h5>
+												<ul className="list-inline product-info">
+													<li><strong>ACDelco</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p>Made in Coria</p>
+												<p className="price">263 <span>sr</span></p>
+											</div>
+										</Link>
+										<Link to="/" className="in-cart">
+											<i className="icon-cart"></i>
+											<i className="icon-plus"></i>
+										</Link>
+									</li>
+									<li className="col-xl-3 col-md-4 col-6">
+										<Link to="/" className="card">
+											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">NT05</h5>
+												<ul className="list-inline product-info">
+													<li><strong>NITTO</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p>Made in china</p>
+												<p className="price">
+													<p>Price not available <a href="#">Send request</a></p>
+												</p>
+											</div>
+										</Link>
+									</li>
+									<li className="col-xl-3 col-md-4 col-6">
+										<Link to="/" className="card">
+											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
+											<div className="card-body">
+												<h5 className="card-title">GM Original Equipment EGR....</h5>
+												<ul className="list-inline product-info">
+													<li><strong>ACDelco</strong></li>
+													<li>#Part Num</li>
+												</ul>
+												<div className="rating">
+													<Stars values={1} {...starsRating} />
+													<span>0 review</span>
+												</div>
+												<p>Made in Coria</p>
+												<p className="price">263 <span>sr</span></p>
+											</div>
+										</Link>
+										<Link to="/" className="in-cart">
+											<i className="icon-cart"></i>
+											<i className="icon-plus"></i>
+										</Link>
+									</li>
+								</ul>
+							</div>
+							<div className="row justify-content-center">
+								<div className="col-lg-6 col more-result">
+									<a href="#" className="btn btn-primary ">More <i className="icon-add"></i></a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</section>
+				</div>
+			</section>
 		)
 	}
 }
-const mapStateToProps = state => {
-	return {
-		products: state.api.products,
-		currentLanguage: getActiveLanguage(state.localize).code,
+
+	const mapStateToProps = state => {
+		return {
+			products: state.api.products,
+			currentLanguage: getActiveLanguage(state.localize).code,
+			translate: getTranslate(state.localize),
+			direction: state.customer.direction
+		}
 	}
-}
-const mapDispatchToProps = dispatch => {
-	return {
-		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-		getSortedProducts: () => dispatch(getSortedProducts())
+	const mapDispatchToProps = dispatch => {
+		return {
+			addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
+			getSortedProducts: () => dispatch(getSortedProducts())
+		}
 	}
-}
-const withTyresSearch = WithProductView(SearchResult);
-export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);
+	const withTyresSearch = WithProductView(SearchResult);
+	export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);

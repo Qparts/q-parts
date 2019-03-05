@@ -12,8 +12,8 @@ import PrivateRoute from '../../../components/PrivateRoute/index.js'
 import { Switch, Route } from 'react-router-dom';
 
 import ConfirmSignUp from './ConfirmSignUp/ConfirmSignUp'
-import CustomerService from '../../../components/CustomerService/CustomerService';
 import { resetPassword, updatePassword } from '../../../actions/customerAction.js';
+import Title from '../../../components/UI/Title/index.js';
 
 const forgotPasswordUrl = '/password/forgot-password';
 
@@ -52,59 +52,54 @@ class ForgotPassword extends Component {
   }
 
   renderPageContent = () => {
+    const { translate } = this.props
     return (
       <Fragment>
         <MediumScreen>
           <section id="forgot-password">
             <div className="content">
-              <img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />
-              <p className="p"><span>Password </span> Recovery</p>
-              <h5>You can recover your lost account information using the form below.Please enter <br />valid e-mail address, your account information will be mailed to you shortly</h5>
+              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
+              <Title header={translate("forgotPassword.title")} />
+              <h5>{translate("forgotPassword.textOne")} <br />{translate("forgotPassword.textTwo")}</h5>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
-                <div className="form-group">
+                <div className="form-group row">
+                  <div className="col-10">
                   <Field
-                    label={this.getLabel('Email', 'Password')}
-                    name={this.getLabel('email', 'password')}
+                    label={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
+                    name={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
                     component={RenderField}
-                    type={this.getLabel('text', 'password')}
-                    placeholder={this.getLabel('mail@user.com', 'new password')}
+                    type={this.getLabel('text', translate("forgotPassword.labels.password"))}
+                    placeholder={this.getLabel('mail@user.com', translate("forgotPassword.placeholders.password"))}
                     validate={[validations.required]} />
-                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  </div>
+                  <div className="col-2">
+                  <button type="submit" className="btn btn-primary">{translate("general.buttons.send")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+
+                  </div>
                 </div>
               </form>
-              <div>
-                <a className="bg-whatsapp">
-                  <CustomerService
-                    messages={["Have a Question?", "Ask a Special"]}
-                    url="" />
-                </a>
-
-              </div>
             </div>
           </section>
         </MediumScreen>
         <SmallScreen>
           <section id="forgot-password-mobile">
             <div className="content">
-              <img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />
-              <p className="p"><span>Password </span> Recovery</p>
-              <h5>You can recover your lost account information using the form below.Please enter valid e-mail address, your account information will be mailed to you shortly</h5>
+              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
+              <Title header={translate("forgotPassword.title")} />
+              <h5>{translate("forgotPassword.textOne")} {translate("forgotPassword.textTwo")}</h5>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
                 <div className="form-group">
                   <Field
-                    label={this.getLabel('Email', 'Password')}
-                    name={this.getLabel('email', 'password')}
+                    label={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
+                    name={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
                     component={RenderField}
-                    type={this.getLabel('text', 'password')}
-                    placeholder={this.getLabel('mail@user.com', 'new password')}
+                    type={this.getLabel('text', translate("forgotPassword.labels.password"))}
+                    placeholder={this.getLabel('mail@user.com', )}
                     validate={[validations.required]} />
-                  <button type="submit" className="btn-primary">Send<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary">{translate("forgotPassword.title")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
                 </div>
               </form>
             </div>
-            <a className="bg-whatsapp">
-              <img src="/img/whatsapp-logo.svg" alt="whatsapp" />
-            </a>
           </section>
         </SmallScreen>
       </Fragment>

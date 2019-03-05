@@ -1,39 +1,41 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { reduxForm } from 'redux-form';
+import { Redirect, Link } from 'react-router-dom';
 import { SmallScreen, MediumScreen } from '../../../../components/Device/index.js';
-import CustomerService from '../../../../components/CustomerService/CustomerService';
-import { onRegistered } from '../../../../actions/customerAction.js';
 
 import _ from 'lodash';
-import { right } from '../../../../utils/index.js';
+import Title from '../../../../components/UI/Title/index.js';
 
 class ConfirmSignUp extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       isRegistered: _.has(this.props.location.state, 'isRegistered') ? true : false,
+       email: _.has(this.props.location.state, 'email') ? this.props.location.state.email : false
+    }
+  }
+
   componentWillUnmount() {
-    this.props.onRegistered();
-   }
+    this.setState({
+      isRegistered: false
+    })
+  }
+  
   render() {
+    const { translate } = this.props
+    const { email } = this.state
     return (
       <Fragment>
         {
-          this.props.token && _.isNull(!this.props.registered)? (
+          this.state.isRegistered ? (
             <Fragment>
               <MediumScreen>
                 <section id="confirm-signup">
                   <div className="content">
                     <img className="upload-img" src="/img/user.svg" alt="upload-img" />
-                    <p className="p"><span>Thank </span>You!</p>
-                    <h5>We&apos;ve sent an email to <span>your@domain.com</span> <br />Please click the link in that message to activate your account</h5>
-                    <button className="btn-primary">Continue Shopping</button>
-                    <button className="btn btn-open-G">Open In GMAIL<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
-                    <div>
-                      <a className="bg-whatsapp">
-                        <CustomerService
-                          messages={["Have a Question?", "Ask a Special"]}
-                          url="" />
-                      </a>
-                    </div>
+                    <Title header={translate("general.thankYou")} />
+                    <h5>{translate("confirmSignUp.emailSent")} <span>{email}</span> <br />{translate("confirmSignUp.activateAccount")}</h5>
+                    <Link to="/" className="btn btn-primary">{this.props.translate("general.buttons.continueShopping")}</Link>
                   </div>
                 </section>
               </MediumScreen>
@@ -41,17 +43,9 @@ class ConfirmSignUp extends Component {
                 <section id="confirm-signup-mobile">
                   <div className="content">
                     <img className="upload-img" src="/img/user.svg" alt="upload-img" />
-                    <p className="p"><span>Thank </span>You!</p>
-                    <h5>We&apos;ve sent an email to <span>your@domain.com</span> <br />Please click the link in that message to activate your account</h5>
-                    <button className="btn-primary">Continue Shopping</button>
-                    <button className="btn btn-open-G">Open In GMAIL<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
-                    <div>
-                      <a className="bg-whatsapp">
-                        <CustomerService
-                          messages={["Have a Question?", "Ask a Special"]}
-                          url="" />
-                      </a>
-                    </div>
+                    <Title header={translate("general.thankYou")} />
+                    <h5>{translate("confirmSignUp.emailSent")} <span>{email}</span> <br />{translate("confirmSignUp.activateAccount")}</h5>
+                    <Link to="/" className="btn btn-primary">{this.props.translate("general.buttons.continueShopping")}</Link>
                   </div>
                 </section>
               </SmallScreen>
@@ -64,22 +58,4 @@ class ConfirmSignUp extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    token: state.customer.token,
-    registered: state.customer.registered,
-    direction: state.customer.direction
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-   onRegistered: () => dispatch(onRegistered())
-  }
- }
-
-ConfirmSignUp = reduxForm({
-  form: 'ForgotPassword',
-  enableReinitialize: true
-})(ConfirmSignUp)
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmSignUp);
+export default ConfirmSignUp;

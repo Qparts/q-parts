@@ -1,84 +1,47 @@
-.send-content {
-  text-align: center;
+.send-request {
   background-color: #f6f6f6;
+
+  .sec-header{
+    text-align: unset !important;
+    h1 {
+      @include text-capitalize;
+      p {
+        float: none;
+      }
+    }
+  }
+  .d-flex  {
+    text-align: center;
+  }
 
   img {
     margin-top: 74px;
     margin-bottom: 20px;
     width: 74px;
     height: 96px;
-    background-color: #e0e0e0;
-  }
-  p {
-    font-family: Roboto;
-    font-size: 50px;
-    font-weight: 300;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    color: $basic-gray;
-
-    span {
-      border-bottom: 1px solid red;
-    }
   }
   h5 {
     height: 48px;
     font-family: Roboto;
-    font-size: 18px;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.67;
-    letter-spacing: normal;
+    @include font-size(18px);
     margin-bottom: 33px;
+    span {
+      display: block;
+    }
   }
-  .btn-primary {
-    width: 207px;
-    height: 55px;
-    background: $white;
-    text-transform: none;
-    color: black;
-    margin-right: 4px;
+  .send-request_content{
     margin-bottom: 216px;
   }
-  .btn-req {
-    border-style: none;
-    width: 153px;
-    height: 55px;
-    background: $brand-color;
-    color: white;
-    border-radius: side-values(0px 20px 20px 0px) !important;
+  .btn-primary {
+    border-radius: corner-values(0 $border-radius-base $border-radius-base 0) !important;
+    i {
+      &::before {
+        top: 4px;
+      }
+    }
   }
-  div {
-    text-align: right;
-    margin: side-values(0px 127px 0px 0px) !important;
-    img {
-      background: none;
-      margin: 0px;
-      width: 50px;
-      height: 50px;
-    }
-    a, span {
-      margin: 0px;
-      font-family: Roboto;
-      font-size: 12px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: 1.17;
-      letter-spacing: normal;
-      display: inline-block;
-      text-align: center;
-    }
-    .bg-whatsapp {
-      width: 151px;
-      height: 46px;
-      background: $white;
-      text-transform: none;
-      color: black;
-      border-radius: side-values(0px 20px 20px 20px) !important;
-    }
+  .btn-light {
+    border-radius: corner-values(0 0 0 $border-radius-base) !important;
+    @include margin-right(4px);
   }
 }

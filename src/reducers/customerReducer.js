@@ -1,14 +1,16 @@
 import { initialState } from '../initialState/customerInitialState';
 import { SubmissionError } from 'redux-form';
+import update from 'immutability-helper';
 import {
   REQUEST_FAILED, LOAD_CURRENT_USER_DEATILS_SUCCEEDED, EDIT_USER_NAME_SUCCEDED, EDIT_USER_PHONE_NO_SUCCEDED, EDIT_USER_PASSWORD_SUCCEDED,
   EDIT_USER_EMAIL_SUCCEDED, REQUEST_VERIFICATION_NO, CONFIRM_USER_ADDRESS, LOGIN_SUCCEEDED, LOGOUT, SOCIAL_MEDIA_SIGNUP, EMAIL_SIGNUP, ADD_VEHICLE_SUCCEEDED, REGISTER_CUSTOMER_SUCCEEDED,
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
-  ADD_DELIVERY_ADDRESS, ADD_PAYMENT_METHOD, COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
-  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT
+  COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
+  RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER,
+  CHANGE_DEFAULT_ADDRESS, CHANGE_DEFAULT_VEHICLE
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
-import { AR } from '../constants';
+import { AR, quotations } from '../constants';
 import _ from 'lodash';
 
 export default function reducer(state = initialState, action) {
@@ -59,6 +61,34 @@ export default function reducer(state = initialState, action) {
     case CLEAR_ADDRESS:
       return { ...state, address: initialState.address }
 
+    case CHANGE_DEFAULT_ADDRESS:
+
+      let cloneAddresses = [...state.detail.addresses];
+
+      cloneAddresses.forEach((address, index) => {
+        if (address.defaultAddress) cloneAddresses[index].defaultAddress = false;
+      });
+
+      const newDefaultAddress = update(cloneAddresses, {
+        [action.payload]: { defaultAddress: { $set: true } }
+      })
+
+      return { ...state, detail: { ...state.detail, addresses: newDefaultAddress } }
+
+    case CHANGE_DEFAULT_VEHICLE:
+
+      let cloneVehicles = [...state.detail.vehicles];
+
+      cloneVehicles.forEach((vehicle, index) => {
+        if (vehicle.defaultVehicle) cloneVehicles[index].defaultVehicle = false;
+      });
+
+      const newDefaultVehicle = update(cloneVehicles, {
+        [action.payload]: { defaultVehicle: { $set: true } }
+      })
+
+      return { ...state, detail: { ...state.detail, vehicles: newDefaultVehicle } }
+
     case LOGIN_SUCCEEDED:
       return getLoginObject(state, action);
 
@@ -68,7 +98,8 @@ export default function reducer(state = initialState, action) {
         address: initialState.address,
         detail: initialState.detail,
         token: null,
-        vehiclesFormat: initialState.vehiclesFormat,
+        tokenExpire: null,
+
         selectedVehicle: initialState.selectedVehicle,
         registered: initialState.registered
       }
@@ -93,7 +124,7 @@ export default function reducer(state = initialState, action) {
 
     case ADD_VEHICLE_SUCCEEDED:
       const newVehicle = { ...state.detail, vehicles: [...state.detail.vehicles, action.payload] };
-      return { ...state, detail: newVehicle, vehiclesFormat: vehiclesFormat(newVehicle.vehicles) }
+      return { ...state, detail: newVehicle }
 
     case REGISTER_CUSTOMER_SUCCEEDED:
       return getLoginObject(state, action);
@@ -113,13 +144,6 @@ export default function reducer(state = initialState, action) {
     case LINK_SOCIAL_MEDIA_SUCCEEDED:
       return state
 
-    case ADD_DELIVERY_ADDRESS:
-      const newDeliveryAddress = { ...state.checkout, deliveryAddress: action.payload }
-      return { ...state, checkout: newDeliveryAddress }
-
-    case ADD_PAYMENT_METHOD:
-      const newPaymentMethod = { ...state.checkout, paymentMethod: action.payload }
-      return { ...state, checkout: newPaymentMethod }
 
     case COMPLETE_ORDER:
       return { ...state, isOrderCompleted: action.payload }
@@ -127,7 +151,7 @@ export default function reducer(state = initialState, action) {
     case DELETE_VEHICLE:
       const removedVehicle = state.detail.vehicles.filter(vehicle => vehicle.id !== action.payload.id)
 
-      return { ...state, detail: { ...state.detail, vehicles: removedVehicle }, vehiclesFormat: vehiclesFormat(removedVehicle) };
+      return { ...state, detail: { ...state.detail, vehicles: removedVehicle } };
 
     case ADD_RECENT_VIEWED_PRODUCTS:
       let found = false;
@@ -196,24 +220,33 @@ export default function reducer(state = initialState, action) {
     case SET_DEFAULT_LANG:
       return { ...state, defaultLang: action.payload }
 
+    case GET_PENDING_REQUESTS:
+      const pending = { ...state.quotations, pending: action.payload };
+
+      return { ...state, quotations: pending }
+
+    case GET_COMPLETED_REQUESTS:
+      const completed = { ...state.quotations, completed: action.payload };
+
+      return { ...state, quotations: completed }
+
+    case SET_PASSWORD_SCORE:
+      return { ...state, passwordScore: action.payload }
+
+    case MODAL_ADD_TO_CART:
+      return { ...state, isModalAddToCart: action.payload }
+
+    case SET_QUOTATION_ORDER:
+      return { ...state, isQuotationorderCompleted: action.payload }
+
     default:
       return state;
   }
 }
 
-const vehiclesFormat = (vehicles) => {
-  return vehicles.map(veh => {
-    return {
-      ...veh,
-      value: veh.id,
-      label: `${veh.vehicle.year} ${veh.vehicle.make.nameAr} ${veh.vehicle.model.nameAr}`
-    }
-  });
-}
-
 const getLoginObject = (state, action) => {
-  const { customer, token } = action.payload;
-  return { ...state, detail: customer, token, vehiclesFormat: vehiclesFormat(customer.vehicles || []) }
+  const { customer, token, tokenExpire } = action.payload;
+  return { ...state, detail: customer, token, tokenExpire }
 }
 
 const translate = (error, currentLanguage, defaultLang) => {

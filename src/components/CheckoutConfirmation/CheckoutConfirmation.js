@@ -1,75 +1,103 @@
 import React, { Component, Fragment } from 'react';
-import { reduxForm, FieldArray } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import Button from '../UI/Button';
-import Table from '../UI/Table';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
+import { SmallScreen, MediumScreen } from '../Device/index.js';
 
 import './CheckoutConfirmation.css';
+import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
+import { postCreditCard, postWireTransfer } from '../../utils/api';
+import { right } from '../../utils';
 
 class CheckoutConfirmation extends Component {
 
   handleClick = () => {
-    this.props.completeOrder(true);
-    this.props.history.push('/');
+    const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
+    const addressId = deliveryAddress.id;
+    const cartItems = purchasedItems.map(purchasedItem => {
+      return {
+        productId: purchasedItem.id,
+        quantity: purchasedItem.quantity,
+        salesPrice: purchasedItem.salesPrice
+      }
+    });
+
+    if (paymentMethod === CREDIT_CARD) {
+      const data = { cartItems, addressId, creditCard }
+      postCreditCard(data)
+        .then(res => {
+          if (res.status === 201) {
+            history.push(`/payment-response?cartId=${res.data.cartId}`)
+          } else if (res.status === 202) {
+            window.location = res.data.transactionUrl;
+          }
+        });
+    } else if (paymentMethod === BANK_TRANSFER) {
+      const data = { cartItems, addressId }
+      postWireTransfer(data)
+        .then(res => {
+          history.push(`/payment-response?cartId=${res.data.cartId}`)
+        })
+    }
   }
 
   render() {
-    const { checkout, translate } = this.props;
-    const mockCart = [
-      {
-        name: "Test from the client",
-        quantity: 1,
-        price: "200 SR"
-      },
-      {
-        name: "Test from the client",
-        quantity: 2,
-        price: "200 SR"
-      }
-    ];
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage } = this.props;
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
             <div className="col-12">
               <div className="row">
-                <div className="col-6 delivery-address">
+                <div className="col-12 col-md-6 delivery-address">
                   <DeliveryAddress
                     title={translate("deliveryAddress.title")}
-                    change={translate("deliveryAddress.change")} deliveryAddress={checkout.deliveryAddress} translate={translate} />
+                    change={translate("deliveryAddress.change")}
+                    deliveryAddress={checkout.deliveryAddress}
+                    translate={translate} />
                 </div>
-                  <div className="col-6 payment-method">
-                    <PaymentMethod
-                      title={translate("paymentMethod.title")}
-                      change={translate("paymentMethod.change")} paymentMethod={checkout.paymentMethod} translate={translate} />
-                  </div>
+                <div className="col-12 col-md-6 payment-method">
+                  <PaymentMethod
+                    currentLanguage={currentLanguage}
+                    title={translate("paymentMethod.title")}
+                    change={translate("paymentMethod.change")}
+                    checkout={checkout}
+                    translate={translate} />
+                </div>
               </div>
             </div>
           </div>
           <div className="CheckoutConfirmation_items card">
-            <p className="title">{translate("checkout.confirm.table.items")}</p>
-            <FieldArray
+            <div className="div-title">
+              <p className="title">{translate("checkout.confirm.table.items")}</p>
+            </div>
+            <RenderCartItem
+              currentLanguage={currentLanguage}
+              translate={translate}
+              direction={direction}
               deleteText={translate("cart.table.delete")}
               name="purchasedItems"
-              purchasedItems={mockCart}
-              component={RenderCartItem}
+              purchasedItems={purchasedItems}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
+              divCol='col-lg-12'
+              removeButton={true}
             />
           </div>
           <div className="footer-delivery justify-content-between row">
             <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
-            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}><p>{translate("checkout.payment.cash.total")}<p>20700<sub>SR</sub></p></p><span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right"/></span></button>
+            <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
+              <div><p>{translate("checkout.payment.cash.total")}</p>
+                <p>{this.props.total}<sub>{translate("general.currency")}</sub></p>
+              </div>
+              <span>{translate("checkout.confirm.placeOrder")} <i className={`icon-arrow-${right(direction)}`} /></span></button>
           </div>
         </div>
       </Fragment>
     )
   }
 }
-
-CheckoutConfirmation = reduxForm({
-  form: 'CheckoutConfirmation',
-})(CheckoutConfirmation)
 
 export default withRouter(CheckoutConfirmation);

@@ -2,6 +2,7 @@
   padding: 10px 15px;
   @include link-border-radius;
   @include transition(all, 0.5s, ease);
+  @include font-size(20px);
   cursor: pointer;
   font-weight: 400;
   display: inline-block;
@@ -55,21 +56,30 @@
     }
   }
 
+.btn-light{
+  background-color: $basic-white;
+}
+
 .btn-facebook {
   background: $white;
-  border-radius: side-values(0 0 0 $border-radius-base) !important;
+  border-radius: corner-values(0 0 0 $border-radius-base) !important;
 }
 .btn-google {
   background: $white;
-  border-radius: side-values(0 0 $border-radius-base 0) !important;
+  border-radius: corner-values(0 0 $border-radius-base 0) !important;
   height: 100%;
   img {
     width: 25px;
   }
-  &:hover,
-  &:focus {
-    background: none;
-  }
+}
+
+.btn-link {
+  color: #37363c;
+  text-decoration: none;
+  background-color: transparent;
+  border: 0;
+  @include padding-right(0);
+  cursor: pointer;
 }
 
 .delete-btn {

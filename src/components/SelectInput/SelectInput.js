@@ -9,12 +9,17 @@ export default class SelectInput extends Component {
     getIconClassName = () => {
         return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? 'icon-checked' : '';
     }
+    handleChange = (value) => {
+        this.props.input.onChange(value);
+        this.props.input.onBlur(value);
+    }
     render() {
         const style = StyleSheet.create({
             border: {
                 border: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.success}` :
                     helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.invalid}` :
-                        helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : 'none'
+                        helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : 'none',
+                borderRadius: 'inherit'
             },
             icon: {
                 color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' : 'none'
@@ -33,8 +38,8 @@ export default class SelectInput extends Component {
                         indicatorSeparator={false}
                         isSearchable={false}
                         value={this.props.input.value || this.props.defaultValue}
-                        onChange={(value) => this.props.input.onChange(value)}
-                        onBlur={() => this.props.input.onBlur(this.props.input.value)}
+                        onChange={this.handleChange}
+                        onBlur={event => event.preventDefault()}
                         options={this.props.options}
                     />
                     <InputGroupAddon addonType="append">

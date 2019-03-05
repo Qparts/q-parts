@@ -9,7 +9,7 @@ import reducer from './reducers';
 
 let middleware = applyMiddleware(thunk);
 const persistConfig = {
-    key: 'root',
+    key: 'vBeta1.0',
     storage,
     blacklist: ['networkError']
 };

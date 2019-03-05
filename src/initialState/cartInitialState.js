@@ -1,6 +1,8 @@
 export const initialState = {
- purchasedItems: [],
- cartId: null,
- quotationsCart: [],
- repliedQuotations: []
+    purchasedItems: [],
+    cartId: null,
+    checkout: {
+        deliveryAddress: {},
+        paymentMethod: {}
+    },
 }

@@ -1,73 +1,101 @@
-import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Component, Fragment, createRef } from "react";
+import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import Select from 'react-select';
 import LanguageToggle from '../../../components/LanguageToggle'
 import { styles } from "../../../constants";
+import Nav from '../../UI/Nav';
+import { toggleSearch } from '../../../utils';
 
 class Header extends Component {
-  componentDidMount(){
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchText: ''
+    }
+    this.header = createRef();
+    this.searchDiv = createRef();
+    this.searchLg = createRef();
+    this.cdSearch = createRef();
+  }
 
+  componentDidMount() {
     var new_scroll_position = 0;
     var last_scroll_position;
-    var header = document.getElementById("header-fixed");
     var sm = window.matchMedia("(max-width: 1169px)");
     var lg = window.matchMedia("(min-width: 1170px)");
-    var searchDiv = document.getElementsByClassName("main-search")[0];
-    var moveSearch = function(){
-      if (lg.matches){
+    var moveSearch = () => {
+      if (lg.matches) {
         //move search
-        document.getElementById("search-lg").appendChild(searchDiv);
-      }else if (sm.matches){
+        this.searchLg.current.appendChild(this.searchDiv.current);
+      } else if (sm.matches) {
         //move search input
-        document.getElementById("cd-search").appendChild(searchDiv);
+        this.cdSearch.current.appendChild(this.searchDiv.current);
       }
     }
     moveSearch();
-    window.onresize= function(){
+    window.onresize = () => {
       moveSearch();
     };
-    window.addEventListener('scroll', function(e) {
+    window.addEventListener('scroll', (e) => {
       last_scroll_position = window.scrollY;
       if (lg.matches) { // If media query matches
         // Scrolling down
-          if (new_scroll_position < last_scroll_position && last_scroll_position > 80) {
-            // header.removeClass('slideDown').addClass('slideUp');
-            header.classList.remove("slideDown");
-            header.classList.add("slideUp");
+        if (new_scroll_position < last_scroll_position && last_scroll_position > 80) {
+          // header.removeClass('slideDown').addClass('slideUp');
+          this.header.current.classList.remove("slideDown");
+          this.header.current.classList.add("slideUp");
+
           // Scrolling up
         } else if (new_scroll_position < 80) {
-            // header.removeClass('slideUp').addClass('slideDown');
-            header.classList.remove("slideUp");
-            header.classList.add("slideDown");
-          }
-
-
+          // header.removeClass('slideUp').addClass('slideDown');
+          this.header.current.classList.remove("slideUp");
+          this.header.current.classList.add("slideDown");
         }
-        if (sm.matches) { // If media query matches
-          // Scrolling down
-            if (new_scroll_position < last_scroll_position && last_scroll_position > 80) {
-              // header.removeClass('slideDown').addClass('slideUp');
-              header.classList.remove("slideDown");
-              header.classList.add("slideUp");
-            // Scrolling up
-          } else if (new_scroll_position > last_scroll_position) {
-              // header.removeClass('slideUp').addClass('slideDown');
-              header.classList.remove("slideUp");
-              header.classList.add("slideDown");
-            }
 
-          }
+      }
+      if (sm.matches) { // If media query matches
+        // Scrolling down
+        if (new_scroll_position < last_scroll_position && last_scroll_position > 80) {
+          // header.removeClass('slideDown').addClass('slideUp');
+          this.header.current.classList.remove("slideDown");
+          this.header.current.classList.add("slideUp");
+          // Scrolling up
+        } else if (new_scroll_position > last_scroll_position) {
+          // header.removeClass('slideUp').addClass('slideDown');
+          this.header.current.classList.remove("slideUp");
+          this.header.current.classList.add("slideDown");
+        }
+
+      }
+
+
       new_scroll_position = last_scroll_position;
     });
+
+      for (let x in this.refs) {
+        this.refs[x].onkeypress = (e) =>
+          this._handleKeyPress(e);
+      }
   }
 
+  handleClick = (e) => {
+    e.preventDefault();
+    toggleSearch('close');
+    this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
+  }
+
+  handleChange = e => {
+    this.setState({ searchText: e.target.value })
+  }
+
+    _handleKeyPress = (e) => {
+      if (e.keyCode === 13) {
+          toggleSearch('close');
+          this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
+      }
+    }
   render() {
-    const shipToOptions = [
-      { value: 1, label: "KSA" },
-      { value: 2, label: "Egypt" },
-      { value: 3, label: "Jordan" }
-    ];
     const formatGroupLabel = () => (
       <div className="placeholder">
         <span>Select city</span>
@@ -79,10 +107,10 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction } = this.props;
     return (
       <Fragment>
-        <div id="header-fixed" className="cd-main-header">
+        <div id="header-fixed" className="cd-main-header" ref={this.header}>
           <header className="main-header ">
             <div className="container-fluid">
               <div className="row">
@@ -91,37 +119,37 @@ class Header extends Component {
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
                 </div>
-                <div className="col" id="search-lg">
-                  <div className="main-search">
-                      <input type="text" className="form-control" placeholder="Search by Part Number,  Product Name" aria-describedby="search input" />
-                      <button className="btn" type="submit"><i className="icon-search"></i></button>
+                <div className="col" id="search-lg" ref={this.searchLg}>
+                  <div className="main-search" ref={this.searchDiv}>
+                    <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} />
+                    <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
 
-                    </div>
+                  </div>
 
                 </div>
                 <div className="col-auto">
                   <ul className="data-setting list-inline ">
-                    <li className="ship-country">
+                    {/* <li className="ship-country">
                       <div className="input-group">
                         <span className="ship-to">Ship to</span>
                         <Select
                           classNamePrefix="select"
                           isSearchable={false}
                           styles={styles.select}
-                          defaultValue={shipToOptions[0]}
+                          defaultValue={"Saudi Arabia"}
                           options={groupedOptions}
                           formatGroupLabel={formatGroupLabel} />
                       </div>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                       <span className="seperator" />
-                    </li>
+                    </li> */}
                     <li>
                       <LanguageToggle
                         localize={localize}
                         translate={translate}
                         changeDefaultDirection={changeDefaultDirection}
-                        getCountriesOnly={getCountriesOnly}/>
+                        getCountriesOnly={getCountriesOnly} />
                     </li>
                   </ul>
                 </div>
@@ -135,12 +163,13 @@ class Header extends Component {
                   <Link className="scroll-dwon-brand" to="/">
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
-                    <ul className="cd-header-buttons">
-                      <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
-                    </ul>
+                  <ul className="cd-header-buttons">
+                    <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
+                  </ul>
                 </div>
                 <div className="user-actions col-auto">
                   <HeaderDetails
+                    direction={direction}
                     translate={translate}
                     isLoggedIn={isLoggedIn}
                     fullName={fullName}
@@ -152,19 +181,19 @@ class Header extends Component {
               </div>
             </div>
             <div className="sub-nav"></div>
-              <div id="cd-search" className="cd-search">
+            <div id="cd-search" className="cd-search" ref={this.cdSearch}>
 
-            	</div>
+            </div>
           </nav>
 
         </div>
 
-    </Fragment>
+      </Fragment>
 
     );
   }
 }
-export default Header;
+export default withRouter(Header);
 
 
 // const {

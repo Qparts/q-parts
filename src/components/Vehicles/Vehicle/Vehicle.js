@@ -12,9 +12,10 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 
 import _ from 'lodash';
 import * as validations from '../../../utils';
+import { getTranslatedObject } from '../../../utils';
 import { right } from '../../../utils';
 
-import Checkbox from '../../UI/Checkbox';
+import RenderCheckboxField from '../../UI/RenderCheckboxField';
 
 class Vehicle extends Component {
 
@@ -30,11 +31,12 @@ class Vehicle extends Component {
 
     const vehicleYearId = values.year.id;
     const vin = values.vin;
-    this.props.addVehcile({ vehicleYearId, vin })
-    .then(() => {
-      this.props.clearFormDataFromCache('vehicle')
-      this.props.toggle();
-    });
+    const defaultVehicle = _.isUndefined(values.defaultVehicle) ? false : values.defaultVehicle;
+    this.props.addVehcile({ vehicleYearId, vin, defaultVehicle })
+      .then(() => {
+        this.props.clearFormDataFromCache('vehicle')
+        this.props.toggle();
+      });
   }
 
   onCancle = () => {
@@ -42,20 +44,20 @@ class Vehicle extends Component {
   }
 
   render() {
-    const { handleSubmit, vehicles, translate, direction } = this.props;
+    const { handleSubmit, vehicles, translate, direction, defaultLang } = this.props;
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,
-        label: vehicle.nameAr,
+        label: getTranslatedObject(vehicle, defaultLang, 'name', 'nameAr'),
         value: vehicle.id
       }
-    });
+    });    
 
     const modelData = _.has(this.props.formValues, 'make.models') ?
       this.props.formValues.make.models.map(model => {
         return {
           ...model,
-          label: model.nameAr,
+          label: getTranslatedObject(model, defaultLang, 'name', 'nameAr'),
           value: model.id
         }
       }) : [];
@@ -103,7 +105,9 @@ class Vehicle extends Component {
               placeholder={translate("form.vehicle.vin")}
               component={RenderField}
               type="text"
-              validate={[validations.vin, validations.match17Digits, validations.allUpperCase]} />
+              maxLength="17"
+              textTransform="uppercase"
+              validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]} />
             <Field
               name="vinImage"
               component={RenderFileInput}
@@ -113,18 +117,15 @@ class Vehicle extends Component {
         </div>
         <div className="row no-gutters">
           <div className="col-md-12 align-self-end vehicle-radio">
-            <Checkbox
-              onChange={e => this.setState({
-                check: !this.state.check
-              })}
-              checked={this.state.check}
+            <Field
+              name="defaultVehicle"
+              id="defaultVehicle"
+              component={RenderCheckboxField}
               label={translate("form.signup.defaultVehicle")}
             />
           </div>
-          <div className="footer col-12">
-            <Button className="btn btn-light col-3" type="reset" text="Cancel" onClick={this.onCancle} />
-            <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right()}`} />
-          </div>
+          <Button className="btn btn-light col-3" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
+          <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} />
         </div>
       </form>
     )

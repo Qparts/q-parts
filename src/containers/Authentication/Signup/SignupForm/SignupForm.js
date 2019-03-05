@@ -1,7 +1,6 @@
 import React, { Component, Fragment, createRef } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { getTranslate } from "react-localize-redux";
 import { Link } from "react-router-dom";
 
 import SelectInput from '../../../../components/SelectInput/SelectInput';
@@ -23,7 +22,6 @@ class SignupForm extends Component {
       passwordType: 'password',
       passwordText: 'Show',
       passwordIcon: 'icon-show-password',
-      passwordScore: 0
     }
   }
 
@@ -35,14 +33,16 @@ class SignupForm extends Component {
     });
   }
 
-  setPasswordScore = (score) => {
-    this.setState({
-      passwordScore: score
-    })
-  }
-
   render() {
-    const { translate, direction } = this.props;
+    const { translate, direction, setPasswordScore, currentLanguage } = this.props;
+    const scoreWords = [
+      translate("form.signup.passwordStrength.scoreWords.tooShort"),
+      translate("form.signup.passwordStrength.scoreWords.weak"),
+      translate("form.signup.passwordStrength.scoreWords.okay"),
+      translate("form.signup.passwordStrength.scoreWords.good"),
+      translate("form.signup.passwordStrength.scoreWords.strong"),
+    ];
+
     return (
       <form onSubmit={this.props.handleSubmit}>
         <div className="row signup-form__two-inputs no-gutters">
@@ -87,7 +87,7 @@ class SignupForm extends Component {
                 label={translate("form.signup.country")}
                 name="countryId"
                 component={SelectInput}
-                options={this.props.countries}
+                options={validations.getFormattedSelect(this.props.countries, currentLanguage)}
                 placeholder={translate("form.signup.placeholders.country")}
                 validate={[validations.required]} />
             </div>
@@ -96,6 +96,9 @@ class SignupForm extends Component {
         <div className="form-group one_shadow-input password-strength">
           <Field
             hasPasswordStrength={true}
+            title={translate("form.signup.passwordStrength.title")}
+            scoreWords={scoreWords}
+            tooShortWord={translate("form.signup.passwordStrength.scoreWords.tooShort")}
             label={translate("form.signup.password")}
             name="password"
             component={RenderField}
@@ -104,14 +107,14 @@ class SignupForm extends Component {
             icon={this.state.passwordIcon}
             placeholder={translate("form.signup.placeholders.password")}
             onTogglePassword={this.handleTogglePassword}
-            setPasswordScore={this.setPasswordScore}
-            validate={[validations.required, validations.passwordScore.bind(this, this.state.passwordScore)]} />
+            setPasswordScore={setPasswordScore}
+            validate={[validations.required, validations.passwordScore]} />
         </div>
         <div id="bottom">
-          <p>By creating an account, you agree to
+          <p>{translate("form.signup.cp.title")}
             <span>
-              <Link className="btn-link" to="/">Qetaa's Conditions of Use</Link> and
-              <Link className="btn-link" to="/"> Privacy Notice.</Link></span>
+              <Link className="btn-gray" to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")}
+              <Link className="btn-gray" to="/"> {translate("form.signup.cp.linkTwo")}.</Link></span>
           </p>
           <Button
             className="btn btn-primary"
@@ -125,14 +128,12 @@ class SignupForm extends Component {
 }
 
 SignupForm = reduxForm({
-  form: 'SignupForm',
-  enableReinitialize: true
+  form: 'SignupForm'
 })(SignupForm)
 
 SignupForm = connect(
   state => ({
-    initialValues: state.customer.detail,
-    translate: getTranslate(state.localize),
+    passwordScore: state.customer.passwordScore
   })
 )(SignupForm)
 

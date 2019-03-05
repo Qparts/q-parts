@@ -2,14 +2,14 @@
   .input-group-prepend {
     position: absolute;
     top: 50%;
-    right: 13px;
+    #{$right}: 13px;
     transform: translate(0%,-50%);
     z-index: 10;
     .ellipse {
       box-shadow: none;
       min-width: 43px;
       min-height: 43px;
-      margin-right: 10px;
+      @include margin-right(10px);
     }
 
     button {
@@ -31,7 +31,7 @@
     height: 60px;
   }
   .upload-img {
-    margin-left: 4px;
+    @include margin-left(4px);
     margin-top: 9px;
   }
 }

@@ -1,90 +1,38 @@
 import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
-import Button from "../UI/Button";
 import Title from '../UI/Title';
 import { right } from '../../utils';
+import OrderSteps from '../OrderSteps';
+import { Link } from "react-router-dom";
 
 class HomeDetails extends Component {
 
 	render() {
-		const { products, getOffers, addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
+		const { recentViewedProducts, translate, direction, currentLanguage } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
-						<Title header="Custom order"subHeader="We move fast. " caption="Send us request and we will reply by price and all details"/>
-						<ul className=" order-steps list-unstyled row">
-							<li className="col-lg-3">
-								<figure>
-									<div className="position-relative">
-										<div className="figure request"><img src="/img/request.svg" alt="request" /></div>
-										<span><i className="icon-arrow-right"></i></span>
-									</div>
-									<figcaption>
-										<h3>Request</h3>
-										<p>Fill in your vehicle data and the <span>parts you want</span></p>
-									</figcaption>
-									<i className="icon-arrow-down"></i>
-								</figure>
-							</li>
-							<li className="col-lg-3">
-								<figure>
-									<div className="position-relative">
-										<span></span>
-										<div className="figure price"><img src="/img/check-price.svg" alt="check-price" /></div>
-										<span><i className="icon-arrow-right"></i></span>
-									</div>
-									<figcaption>
-										<h3>Check Price</h3>
-										<p>The price will deliver to you <span>within 24 hours</span></p>
-									</figcaption>
-								</figure>
-								<i className="icon-arrow-down"></i>
-							</li>
-							<li className="col-lg-3">
-								<figure>
-									<div className="position-relative">
-										<span></span>
-										<div className="figure cart"><img src="/img/add-to-cart.svg" alt="add-to-cart" /></div>
-										<span><i className="icon-checked"></i></span>
-									</div>
-									<figcaption>
-										<h3>Add To Cart</h3>
-										<p>choose Sipping Address <span>and payment method</span></p>
-									</figcaption>
-								</figure>
-								<i className="icon-checked done-xs"></i>
-							</li>
-							<li className="col-lg-3">
-								<figure>
-									<div className="position-relative">
-										<span></span>
-										<div className="figure delivery"><img src="/img/delivery-product.svg" alt="delivery-product" /></div>
-									</div>
-									<figcaption>
-										<h3>Receive Order</h3>
-										<p>Your order for your workshop or <span>anywher you love</span></p>
-									</figcaption>
-								</figure>
-							</li>
-						</ul>
+						<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")}/>
+						<OrderSteps translate={translate} direction={direction}/>
 						<div className="order-form">
 							<header className="row">
-								<h2 className="col col-10 offset-lg-1">
-									<span className="arrow"><i className="icon-arrow-down" /></span>Start Now
+								<h2 className="col col-10 mx-auto">
+									<span className="arrow"><i className="icon-arrow-down" /></span>
+									{translate("quotationOrder.startNow")}
 								</h2>
 							</header>
-							<div className="form-details">
+							{/* <div className="form-details">
 								<form className="col-lg-10 offset-lg-1 box-shadow">
 									<div className="form-row ">
 										<div className="col">
-											<input type="text" className="form-control input" placeholder="Part Name, Number or image" />
+											<input type="text" className="form-control input" placeholder={translate("quotationOrder.parts")} />
 											<div className="input-group-prepend">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col">
-											<input type="text" className="form-control input" placeholder="Vin Number or Vechile ID image" />
+											<input type="text" className="form-control input" placeholder={translate("quotationOrder.vin")}/>
 											<div className="input-group-prepend">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
@@ -99,97 +47,98 @@ class HomeDetails extends Component {
 									</div>
 								</form>
 							</div>
+						 */}
 						</div>
 					</section>
 					<section className="main-cat container-fluid">
 						<div className="row">
-							<a href="#" className="col-lg-4 col-6">
+							<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/motor-oil.png" alt="Oil" />
 									<figcaption>
-										<h4>Oil</h4>
+										<h4>{translate("nav.oil")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("nav.oil")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/tyres.png" alt="Tires" />
 									<figcaption>
-										<h4>Tires</h4>
+										<h4>{translate("nav.tires")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("nav.tires")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/tools.png" alt="Tools" />
 									<figcaption>
-										<h4>Tools</h4>
+										<h4>{translate("quotationOrder.tools")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=10" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/accessories.png" alt="Accessories" />
 									<figcaption>
-										<h4>Accessories</h4>
+										<h4>{translate("quotationOrder.accessories")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=36" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/outdoor-cat.jpg" alt="Outdoors" />
 									<figcaption>
-										<h4>Outdoors</h4>
+										<h4>{translate("quotationOrder.outdoors")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
-							<a href="#" className="col-lg-4 col-6">
+							</Link>
+							<Link to="/listing?query=&page=1&category=26" className="col-lg-4 col-6">
 								<figure>
 									<img src="/img/car-care.jpg" alt=" Car Care" />
 									<figcaption>
-										<h4> Car Care </h4>
+										<h4>{translate("quotationOrder.carCare")}</h4>
 									</figcaption>
-									<span>Shop Now</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
-							</a>
+							</Link>
 						</div>
 					</section>
 					<section className="main-parts container-fluid">
 						<header className="row">
-							<h1 className="col">MUST HAVES FOR EVERY CAR</h1>
+							<h1 className="col">{translate("quotationOrder.mustHaves")}</h1>
 						</header>
 						<ul className="list-unstyled row">
 							<li className="oil col-md-4 col-lg-auto">
-								<a href="#">
+								<Link to="/listing?query=&page=1&category=2" >
 									<img src="/img/oil-filter.svg" alt="Premium quality oil for your engine"/>
 									<div className="media-body">
-										<h5>Oil Filter</h5>
-										<p>Premium quality oil for your engine</p>
+										<h5>{translate("quotationOrder.oilFilter")}</h5>
+										<p>{translate("quotationOrder.premium")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 							<li className="air col-md-4 col col-lg-auto">
-								<a href="#">
+							<Link to="/listing?query=&page=1&category=3" >
 									<img src="/img/air-filter.svg" alt="Maximize engine  performance"/>
 									<div className="media-body">
-										<h5>Air Filters</h5>
-										<p>Maximize engine  performance</p>
+										<h5>{translate("quotationOrder.airFilter")}</h5>
+										<p>{translate("quotationOrder.max")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 							<li className="brake col-md-4 col-lg-auto">
-								<a href="#">
+								<Link to="/listing?query=&page=1&category=6" >
 									<img src="/img/disc-brake.svg" alt="Get trusted stopping  power"/>
 									<div className="media-body">
-										<h5>Brake Parts</h5>
-										<p>Get trusted stopping  power</p>
+										<h5>{translate("quotationOrder.brakePads")}</h5>
+										<p>{translate("quotationOrder.trusted")}</p>
 									</div>
-								</a>
+								</Link>
 							</li>
 						</ul>
 					</section>
@@ -204,8 +153,8 @@ class HomeDetails extends Component {
 									</picture>
 									<div className="d-flex justify-content-center">
 										<h1>
-											<span>OUR SALES MORE THAN 50,000 ITEM</span>
-											VENDOR ! Join Qetaa.com
+											<span>{translate("quotationOrder.vendor.items")}</span>
+											{translate("quotationOrder.vendor.joinUs")}
 										</h1>
 										<a className="btn btn-primary" href="#"><span>{translate("general.join")}</span><i className={`icon-arrow-${right(direction)}`}></i></a>
 									</div>
@@ -215,11 +164,10 @@ class HomeDetails extends Component {
 						</div>
 					</section>
 					<Products
-						products={products}
-						getOffers={getOffers}
-						addRecentViewedProducts={addRecentViewedProducts}
-						onRecentlyViewedProducts={onRecentlyViewedProducts}
+						recentViewedProducts={recentViewedProducts}
 						translate={translate}
+						direction={direction}
+						currentLanguage={currentLanguage}
 						/>
 			</Fragment>
 		);

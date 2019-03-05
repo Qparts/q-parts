@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import Button from '../Button';
 import * as constant from '../../../constants';
 
-const DECREMENT = 'decrement';
-const INCREMENT = 'increment';
-
 class NumberPicker extends Component {
+    static defaultProps = {
+        btnGray: 'btn-secondary'
+    }
 
     handleClick = (action, event) => {
         event.preventDefault();
@@ -17,7 +17,7 @@ class NumberPicker extends Component {
         const min = 1;
         let newQuanValue = parseInt(value, constant.RADIX);
 
-        if (action === DECREMENT) {
+        if (action === constant.DECREMENT) {
             const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
             onChange(decQuantity);
         } else {
@@ -29,11 +29,11 @@ class NumberPicker extends Component {
     render() {
         return <div className="input-group quantity">
             <div className="input-group-prepend">
-              <button className="btn btn-gray" type="button" onClick={this.handleClick.bind(this, DECREMENT)}><i className="minus"></i></button>
+              <button className="btn btn-gray" type="button" onClick={this.handleClick.bind(this, constant.DECREMENT)}><i className="minus"></i></button>
             </div>
             <input className="form-control" readOnly disabled {...this.props.input}/>
             <div className="input-group-append">
-              <button className="btn btn-gray" type="button" onClick={this.handleClick.bind(this, INCREMENT)}><i className="icon-plus"></i></button>
+              <button className="btn btn-gray" type="button" onClick={this.handleClick.bind(this,  constant.INCREMENT)}><i className="icon-plus"></i></button>
             </div>
           </div>
     }

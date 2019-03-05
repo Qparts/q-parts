@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_ROOT, VEHICLE_SERVICE, LOCATION_SERVICE, PRODUCT_SERVICE } from '../actions/constants';
 import { handleNetworkError } from '../utils';
-import { BEST_SELLER, OFFERS, LOCAL_LANGUAGES } from '../constants';
+import { LOCAL_LANGUAGES } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import globalTranslations from "../translations/translations.json";
 import { initialize } from 'react-localize-redux';
@@ -14,7 +14,6 @@ export const GET_COUNTRIES_REGIONS_SUCCEEDED = 'GET_COUNTRIES_REGIONS_SUCCEEDED'
 export const GET_VEHICLE_SUCCEEDED = 'GET_VEHICLE_SUCCEEDED';
 export const FIND_CITY_SUCCEEDED = 'FIND_CITY_SUCCEEDED';
 export const GET_REGIONS_SUCCEEDED = 'GET_REGIONS_SUCCEEDED';
-export const GET_RECOMMENDATION = 'GET_RECOMMENDATION';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 export const SET_DEFAULT_LANG = 'SET_DEFAULT_LANG';
@@ -116,23 +115,6 @@ export const findCity = (city, country) => {
       }, error => {
         handleNetworkError(dispatch, error);
       })
-  }
-}
-
-export const getOffers = (offerType) => {
-  return (dispatch) => {
-    if (offerType === BEST_SELLER) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
-        .then(res => {
-          dispatch({ type: GET_RECOMMENDATION, payload: res.data })
-        })
-
-    } else if (offerType === OFFERS) {
-      return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
-        .then(res => {
-          dispatch({ type: GET_RECOMMENDATION, payload: res.data })
-        })
-    }
   }
 }
 

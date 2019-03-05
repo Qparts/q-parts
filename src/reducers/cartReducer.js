@@ -1,6 +1,7 @@
 import { initialState, } from '../initialState/cartInitialState';
 import {
-  ADD_TO_CART, CLEAR_CART, ADD_QUOTATION_TO_CART, GET_QUOTATION, GET_REPLIED_QUOTATION
+  ADD_TO_CART, CLEAR_CART, GET_QUOTATION, GET_REPLIED_QUOTATION, INCREMENRT_CART_PRODUCT_QUANTITY,
+  DECREMENRT_CART_PRODUCT_QUANTITY, ADD_PAYMENT_METHOD, ADD_DELIVERY_ADDRESS, POST_CREDIT_CARD
 } from '../actions/cartAction';
 
 export default function reducer(state = initialState, action) {
@@ -29,10 +30,7 @@ export default function reducer(state = initialState, action) {
       }
 
     case CLEAR_CART:
-      return { ...state, purchasedItems: initialState.purchasedItems }
-
-    case ADD_QUOTATION_TO_CART:
-      return { ...state, cartId: action.payload.cartId }
+      return { ...state, purchasedItems: initialState.purchasedItems, cartId: null, checkout: initialState.checkout }
 
     case GET_QUOTATION:
 
@@ -40,6 +38,44 @@ export default function reducer(state = initialState, action) {
 
     case GET_REPLIED_QUOTATION:
       return { ...state, repliedQuotations: action.payload };
+
+    case INCREMENRT_CART_PRODUCT_QUANTITY:
+      const { incQuantity } = action.payload;
+
+      const incCartItem = state.purchasedItems.map(oldItem => {
+        const newQuantity = oldItem.product.id === action.payload.purchasedItem.id ? incQuantity : oldItem.quantity
+        return {
+          ...oldItem, quantity: newQuantity
+        }
+      });
+
+      return { ...state, purchasedItems: incCartItem }
+
+    case DECREMENRT_CART_PRODUCT_QUANTITY:
+      const { decQuantity } = action.payload;
+
+      const decCartItem = state.purchasedItems.map(oldItem => {
+        const newQuantity = oldItem.product.id === action.payload.purchasedItem.id ? decQuantity : oldItem.quantity
+        return {
+          ...oldItem, quantity: newQuantity
+        }
+      });
+      return { ...state, purchasedItems: decCartItem }
+
+    case ADD_DELIVERY_ADDRESS:
+      const newDeliveryAddress = { ...state.checkout, deliveryAddress: action.payload }
+      return { ...state, checkout: newDeliveryAddress }
+
+    case ADD_PAYMENT_METHOD:
+
+      const { type, creditCard } = action.payload;
+
+      let newPaymentMethod = { ...state.checkout, paymentMethod: type }
+      if (creditCard) newPaymentMethod = { ...newPaymentMethod, paymentMethod: type, creditCard }
+      return { ...state, checkout: newPaymentMethod }
+
+    case POST_CREDIT_CARD:
+      return { ...state, ...action.payload }
 
     default:
       return state;

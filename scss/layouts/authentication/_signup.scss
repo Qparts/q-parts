@@ -118,7 +118,9 @@
       }
     }
     i {
-      @include padding-left(10px);
+      &:before{
+        top: 4px;
+      }
     }
 
     > p {
@@ -131,7 +133,7 @@
       }
       span {
         display: block;
-        .btn-link {
+        .btn-gray {
           color: $brand-color;
         }
       }
@@ -153,7 +155,8 @@
       padding-#{$left}: 4px;
       @include font-size(18px);
     }
-    .btn-link {
+    .signin-link {
+      @include font-size(13px);
       position: relative;
       color: $brand-color;
       padding: 4px 4px;

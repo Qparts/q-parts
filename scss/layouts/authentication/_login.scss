@@ -1,21 +1,22 @@
 #login {
-  margin-top: 31px;
+  @include text-left;
+  padding: 20px;
   background: $light-gray;
   .form-control {
     @include rounded-rectangle;
     @include boarder-right-radius(0, 20px);
     height: 55px;
-    padding-left: 20px;
+    @include padding-left(20px);
 
     input::placeholder {
       color: $charcoal-grey-two-40;
     }
     label {
       @include font-size(16px);
-      padding-left: 13px;
+      @include padding-left(13px);
     }
   }
-  .btn-link {
+  .btn-gray {
     color: $charcoal-grey-two;
   }
   h1 {
@@ -54,7 +55,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      .btn-link {
+      .btn-gray {
         background: inherit;
       }
     }

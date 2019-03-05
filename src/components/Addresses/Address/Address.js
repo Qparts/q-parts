@@ -4,17 +4,17 @@ import _ from 'lodash';
 import Button from '../../UI/Button';
 import { connect } from 'react-redux'
 import SelectInput from '../../SelectInput/SelectInput';
+import RenderCheckboxField from '../../UI/RenderCheckboxField';
 import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
-import Checkbox from '../../UI/Checkbox';
-import { Link } from "react-router-dom";
+import { getTranslatedObject, getTranslatedString } from '../../../utils';
 
 import './Address.css';
 
 class Address extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       check: false
@@ -39,14 +39,17 @@ class Address extends Component {
   }
 
   render() {
-    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, onHide, defaultAddress, onDefaultAddress, isDelivery } = this.props;
+    const {
+      handleSubmit, regions, formValues, translate, currentLanguage, onShowGoogleMap,
+      address, onHide, defaultAddress, onDefaultAddress, isDelivery
+    } = this.props;
 
     const regionsData = regions ?
       regions.map(region => {
         return {
           ...region,
           value: region.id,
-          label: region.nameAr
+          label: getTranslatedObject(region, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -55,7 +58,7 @@ class Address extends Component {
         return {
           ...city,
           value: city.id,
-          label: city.nameAr
+          label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -64,7 +67,7 @@ class Address extends Component {
         <div className="col-md-4 div-rounded-first">
           <Field
             disabled
-            name="name"
+            name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
             placeholder={translate("form.address.country")}
             component={RenderField}
             validate={[validations.required]} />
@@ -99,18 +102,17 @@ class Address extends Component {
 
     let renderButtons =
       <Fragment>
-        <div>
-          <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
+        <div className="Checkbox">
+          <Field
+            name="defaultAddress"
+            id="defaultAddress"
+            component={RenderCheckboxField}
             label={translate("form.address.buttons.defaultAddress")}
           />
         </div>
-        <div className="footer">
-          <Button onClick={onHide} type="reset" className="btn btn-light" text={translate("form.address.buttons.cancel")} />
-          <Button type="submit" className="btn btn-primary" text={translate("form.address.buttons.confirm")} />
+        <div className="row">
+          <Button onClick={onHide} type="reset" className="btn btn-light col-3" text={translate("form.address.buttons.cancel")} />
+          <Button type="submit" className="btn btn-primary col-8" text={translate("form.address.buttons.confirm")} />
         </div>
       </Fragment>
 
@@ -143,15 +145,15 @@ class Address extends Component {
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
-                    <div className="col-12 google-map">
-                      <Link to="#" onClick={onShowGoogleMap}>
-                        <img className="main-img" alt="user" src="/img/google-map.svg"/>
-                        <p>{translate("form.address.selectAddress")}</p>
-                      </Link>
-                  </div>
+                  {/* <div className="col-12 google-map">
+                    <Link to="#" onClick={onShowGoogleMap}>
+                      <img className="main-img" alt="user" src="/img/google-map.svg" />
+                      <p>{translate("form.address.selectAddress")}</p>
+                    </Link>
+                  </div> */}
                   <div className="col-md-12 address-title">
                     <Field
-                      label={`*${translate("setting.addressBook.addressLine1")}`}
+                      label={translate("setting.addressBook.addressLine1")}
                       name="line1"
                       component={RenderField}
                       type="text"
@@ -171,13 +173,13 @@ class Address extends Component {
                   {renderCityRegion}
                   <div className="phone-info col-12">
                     <div className="row">
-                      <div className="phone-number col-6">
+                      <div className="phone-number col-12">
                         <div className="first">
-                          <Field
-                            name="phone"
-                            component={RenderField}
-                            placeholder="+966"
-                            validate={[validations.required]} />
+                          <input
+                            className="form-control"
+                            value={"+966"}
+                            type="text"
+                            readOnly />
                         </div>
                         <Field
                           name="mobile"
@@ -185,7 +187,12 @@ class Address extends Component {
                           placeholder={translate("form.address.phoneNumber")}
                           validate={[validations.required]} />
                       </div>
-                      <div className="zipCode col-6">
+
+                    </div>
+                  </div>
+                  <div className="phone-info col-12">
+                    <div className="row">
+                      <div className="zipCode col-12">
                         <Field
                           name="zipCode"
                           component={RenderField}

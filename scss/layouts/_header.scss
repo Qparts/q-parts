@@ -123,8 +123,9 @@
     display: inline-table;
   }
   .dropdown-menu{
+    @include text-left;
     overflow: hidden;
-    border-radius: side-values(0px 0px $border-radius-base $border-radius-base);
+    border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;
     #{$right}: 0 !important;
     top: 15px !important;
@@ -157,7 +158,7 @@
         }
         &:hover{
           i{
-            margin-left: 5px;
+            @include margin-left(5px);
           }
         }
       }
@@ -198,7 +199,7 @@
             @extend .btn-primary;
             padding-top: 7px;
             white-space: nowrap;
-            border-radius: side-values(0 0 0 $border-radius-base) !important;
+            border-radius: corner-values(0 0 0 $border-radius-base) !important;
             text-transform: capitalize;
             @include font-size(18px);
             padding-left: 15px;
@@ -215,7 +216,7 @@
         &:last-child{
           margin-#{$right}: 0;
           a{
-            border-radius: side-values(0 0 $border-radius-base 0);
+            border-radius: corner-values(0 0 $border-radius-base 0);
 
           }
         }

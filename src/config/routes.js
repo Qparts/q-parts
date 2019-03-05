@@ -1,7 +1,6 @@
 import App from '../components/App';
 import Cart from '../components/cart/Cart';
 import VendorForm from '../components/VendorForm/VendorForm'
-import ProductResult from '../containers/ManualForm/SearchResult/SearchResult';
 import Login from '../containers/Authentication/Login/Login';
 import Signup from '../containers/Authentication/Signup/Signup'
 import Logout from '../containers/Logout/Logout';
@@ -19,20 +18,24 @@ import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
 import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
+import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
-export const routes = (isAuth, direction) => [
+export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/",
         exact: true,
         component: App,
     },
     {
-        path: "/order/part/:partNo/makeId/:makeId",
-        component: ProductResult,
+        path: "/quotation-order",
+        exact: true,
+        component: QuotationRequest,
+        defaultLang
     },
     {
-        path: "/order/quotation-request",
-        component: QuotationRequest,
+        path: "/quotation-order/confirmation:quotationId?",
+        component: SendRequest,
+        direction: direction,
         isAuth: isAuth,
         redirectTo: '/'
     },
@@ -56,15 +59,21 @@ export const routes = (isAuth, direction) => [
     {
         path: "/signup/successful",
         component: ConfirmSignUp,
+        isAuth: isAuth,
+        direction: direction,
+        translate,
+        redirectTo: '/',
         exact: true,
     },
     {
         path: "/vehicles",
         component: Vehicles,
+        defaultLang
     },
     {
         path: "/cart",
-        component: Cart
+        component: Cart,
+        direction: direction
     },
     {
         path: "/setting",
@@ -77,16 +86,15 @@ export const routes = (isAuth, direction) => [
         component: VendorForm,
     },
     {
-        path: "/qtest.fareed9.com/change-email/",
+        path: "/activate-email/:code?/:email?",
         exact: true,
         component: VerifyEmail,
         direction: direction,
     },
     {
-        path: "/activate-email/:code?/:email?",
+        path: "/password/reset-password/:code?/:email?",
         exact: true,
         component: VerifyEmail,
-        direction: direction,
     },
     {
         path: "/checkout",
@@ -111,26 +119,20 @@ export const routes = (isAuth, direction) => [
         component: MotorOil
     },
     {
-        path: "/tires",
-        component: Tires
-    },
-    {
-        path: "/send",
-        component: SendRequest,
-        direction: direction
-    },
-    {
         path: "/listing",
         component: SearchResult
     },
     {
         path: "/password/forgot-password",
         exact: true,
-        component: ForgotPassword
+        component: ForgotPassword,
+        translate
     },
     {
-        path: "/password/reset-password/:token?",
+        path: "/payment-response:cartId?/:id?/:status?/:message?",
         exact: true,
-        component: VerifyEmail,
+        component: CheckoutConfirmationOrder,
+        translate,
+        direction
     },
 ];

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import Vehicles from "../Vehicles/Vehicles";
 import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -52,27 +51,17 @@ class Layout extends Component {
         return {
           header: <Title header={translate("dialog.signin.title")} />
         }
-      case 'search':
-        return {
-          header: <p>All auo parts in one place - choose yours among 1.000.000 of spare parts</p>,
-          className: "search-popup"
-        }
       default:
         break;
     }
   }
 
   getDialogComponent = () => {
-    const { vehicles } = this.props;
     const { dialogType } = this.state;
 
     switch (dialogType) {
-      case 'vehicle':
-        return <Vehicles direction={this.props.direction} />
       case 'signin':
         return <Login toggle={this.togglePopup} />
-      case 'search':
-        return <Search toggle={this.togglePopup} />
 
       default:
         break;
@@ -82,10 +71,10 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      vehiclesFormat, selectedVehicle, countriesOnly, getCountriesOnly, selectCountry, direction
+      countriesOnly, getCountriesOnly, selectCountry, direction
     } = this.props;
     const dialog = (
-      <Modal contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+      <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -111,7 +100,7 @@ class Layout extends Component {
         {dialog}
         <div className="cd-main-content">
           {this.props.children}
-          <Footer />
+          <Footer translate={translate}/>
           <div className="cd-overlay"></div>
         </div>
       </Fragment>

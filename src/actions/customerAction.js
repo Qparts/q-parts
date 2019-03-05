@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ROOT, CUSTOMER_SERVICE } from '../actions/constants';
+import { API_ROOT, CUSTOMER_SERVICE, QUOTATION_SERVICE } from '../actions/constants';
 import { ON_SOCIAL_MEDIA_AUTH, ON_SOCIAL_MEDIA_LINK, LOCAL_LANGUAGES, serverErrorField } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";
 import { initialize } from 'react-localize-redux';
@@ -36,8 +36,6 @@ export const UPDATE_PASSWORD = 'UPDATE_PASSWORD';
 export const SELECT_VEHICLE_FROM_GARAGE = 'SELECT_VEHICLE_FROM_GARAGE';
 export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 export const CLEAR_ADDRESS = 'CLEAR_ADDRESS';
-export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
-export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
 export const COMPLETE_ORDER = 'COMPLETE_ORDER';
 export const DELETE_VEHICLE = 'DELETE_VEHICLE';
 export const ADD_RECENT_VIEWED_PRODUCTS = 'ADD_RECENT_VIEWED_PRODUCTS';
@@ -46,7 +44,13 @@ export const DELETE_WISHLIST = 'DELETE_WISHLIST';
 export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
 export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
-
+export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
+export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
+export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
+export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
+export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
+export const CHANGE_DEFAULT_ADDRESS = 'CHANGE_DEFAULT_ADDRESS';
+export const CHANGE_DEFAULT_VEHICLE = 'CHANGE_DEFAULT_VEHICLE';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -215,6 +219,20 @@ export const clearAddress = () => {
   }
 }
 
+export const changeDefaultAddress = (index) => {
+  return {
+    type: CHANGE_DEFAULT_ADDRESS,
+    payload: index
+  }
+}
+
+export const changeDefaultVehicle = (index) => {
+  return {
+    type: CHANGE_DEFAULT_VEHICLE,
+    payload: index
+  }
+}
+
 export const login = (email, password, serverErrorField, currentLanguage) => {
   return (dispatch) => {
     let defaultLanguage = null;
@@ -353,9 +371,9 @@ export const resetPassword = (email) => {
   }
 }
 
-export const resetPasswordToken = ({ token }) => {
+export const resetPasswordToken = ({ code }) => {
   return (dispatch) => {
-    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${token}`)
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password/token/${code}`)
       .then(() => {
         dispatch({ type: RESET_PASSWORD_TOKEN_SUCCEEDED })
       }, error => {
@@ -365,8 +383,10 @@ export const resetPasswordToken = ({ token }) => {
 }
 
 export const updatePassword = (data) => {
+  const password = data.password;
+  const token = data.query.code;
   return (dispatch) => {
-    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, data)
+    return axios.put(`${API_ROOT}${CUSTOMER_SERVICE}/reset-password`, { password, token })
       .then((res) => {
         dispatch(
           {
@@ -446,23 +466,9 @@ export const changeDefaultLanguage = (defaultLanguage) => {
       translation: globalTranslations,
       options: { renderToStaticMarkup, defaultLanguage }
     }))
-    dispatch({type: SET_DEFAULT_LANG, payload: defaultLanguage})
+    dispatch({ type: SET_DEFAULT_LANG, payload: defaultLanguage })
   }
-  
-}
 
-export const addDeliveryAddress = (address) => {
-  return {
-    type: ADD_DELIVERY_ADDRESS,
-    payload: address
-  }
-}
-
-export const addPaymentMethod = (payment) => {
-  return {
-    type: ADD_PAYMENT_METHOD,
-    payload: payment
-  }
 }
 
 export const completeOrder = (isCompleted) => {
@@ -521,13 +527,6 @@ export const changeDefaultDirection = (lang) => {
   }
 }
 
-export const onRegistered = () => {
-  return {
-    type: REGISTERED,
-    payload: true
-  }
-}
-
 export const completeShipping = (isCompleted) => {
   return {
     type: COMPLETE_SHIPPING,
@@ -538,6 +537,59 @@ export const completeShipping = (isCompleted) => {
 export const completePayment = (isCompleted) => {
   return {
     type: COMPLETE_PAYMENT,
+    payload: isCompleted
+  }
+}
+
+export const getPendingRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/pending`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_PENDING_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const getCompletedRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/completed`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_COMPLETED_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const setPasswordScore = (score) => {
+  return {
+    type: SET_PASSWORD_SCORE,
+    payload: score
+  }
+}
+
+export const modalAddToCart = (isCompleted) => {
+  return {
+    type: MODAL_ADD_TO_CART,
+    payload: isCompleted
+  }
+}
+
+export const setQuotationOrder = (isCompleted) => {
+  return {
+    type: SET_QUOTATION_ORDER,
     payload: isCompleted
   }
 }

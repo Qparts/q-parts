@@ -12,7 +12,7 @@ class RenderField extends Component {
   }
 
   invalidMessage = (styles) => {
-    if (this.props.meta.error.includes('Invalid')) {
+    if (this.props.meta.error.includes('Invalid') || this.props.meta.error.includes('غير')) {
       return <span style={styles.invalidMessage}>{this.props.meta.error}</span>
     }
   }
@@ -63,9 +63,12 @@ class RenderField extends Component {
       },
       icon: {
         color: this.getIcon(),
+      },
+      textTransform: {
+        textTransform: this.props.textTransform ?  this.props.textTransform : {}
       }
     }
-    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, ...renderFieldProps } = this.props;
+    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, scoreWords, tooShortWord, title, ...renderFieldProps } = this.props;
     return (
       this.props.readOnly ?
         <Fragment>
@@ -96,8 +99,8 @@ class RenderField extends Component {
                 <InputGroup style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}>
                   <input
                     className="form-control"
-                    style={this.props.hasPasswordStrength ? { display: 'none' } :
-                      this.props.boxShadow ? styles.borderShadow : styles.border}
+                    style={Object.assign(this.props.hasPasswordStrength ? { display: 'none' } :
+                      this.props.boxShadow ? styles.borderShadow : styles.border, styles.textTransform)}
                     type={this.props.type}
                     placeholder={this.props.placeholder}
                     {...this.props.input}
@@ -116,7 +119,8 @@ class RenderField extends Component {
                   minLength={5}
                   minScore={2}
                   changeCallback={this.callback}
-                  scoreWords={['too short', 'weak', 'okay', 'good', 'strong']}
+                  scoreWords={scoreWords}
+                  tooShortWord={tooShortWord}
                   inputProps={{ ...this.props.input, ...renderFieldProps }} />
                 <InputGroupAddon addonType="append">
                   <Link
@@ -131,7 +135,7 @@ class RenderField extends Component {
               </InputGroup>
               <label
                 style={this.displayPasswordLabel()}
-                className="password-label">Password Strength</label>
+                className="password-label">{title}</label>
             </Fragment>
           }
           <Fragment>

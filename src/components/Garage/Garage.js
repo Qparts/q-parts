@@ -1,61 +1,40 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 import './Garage.css'
+import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Garage extends Component {
- constructor(props){
-   super(props);
-   this.state={
-     check: false
-   }
- }
+  handleChange = (index, e) => {
+    this.props.changeDefaultVehicle(index);
+  }
+
  render() {
-  const { translate } = this.props;
+  const { translate, vehicles } = this.props;
   let garage;
-  if(this.props.vehiclesFormat.length>0){
+  if(vehicles.length>0){
     garage = <div id="Garage-container">
      <div className="Garage-add justify-content-between">
-       <p>Add View, manage and find parts for the vehicles in your garage</p>
+       <p>{translate("setting.garage.title")}</p>
       <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
      </div>
      <span className="seperator"></span>
      {
-      this.props.vehiclesFormat.map((vehicle, idx) => {
+      this.props.vehicles.map((vehicle, idx) => {
        return <div key={idx} className="Garage-box border rounded row">
-        <div className="Garage-box_item col-6">
+        <div className="Garage-box_item col-12">
           <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
-            label="Default Vehicles"
+             onChange={this.handleChange.bind(this, idx)}
+             checked={vehicle.defaultVehicle}
+            label={translate("setting.garage.defaultVehicle")}
           />
         <div className="Garage-box_item-label">
           <p>{vehicle.label}</p>
           <p>{vehicle.vin}</p>
          </div>
          <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
-         </div>
-        </div>
-        <div className="col-1">
-          <span className="seperator"></span>
-        </div>
-        <div className="Garage-box_item col-5">
-          <Checkbox
-            onChange={e => this.setState({
-              check: !this.state.check
-            })}
-            checked={this.state.check}
-            label="Default Vehicles"
-          />
-        <div className="Garage-box_item-label">
-          <p>{vehicle.label}</p>
-         </div>
-         <div className="Garage-footer">
-          <Button type="button" className="btn btn-link" text="Edit" icon="icon-edit" isReverseOrder/>
-          <Button type="button" className="btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
+          <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
+          <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.garage.delete")} icon="icon-trash" onClick={this.props.onDeleteVehicle.bind(this, vehicle)} isReverseOrder/>
          </div>
         </div>
        </div>
@@ -64,22 +43,31 @@ class Garage extends Component {
     </div>
   }else{
     garage = <div id="garage-no-vehicle">
-      <p>Store vehicles in your garage and Get product recommendations</p>
+      <p>{translate("dialog.vehicle.subTitle")}</p>
       <span className="seperator"></span>
       <div className="add-vehicle">
         <div className="icon-content">
           <p className="icon-vehicle"/>
-          <span className="vehi-rotate"><span>Vehicle</span></span>
+          <span className="vehi-rotate"><span>{translate("setting.garage.vehicle")}</span></span>
         </div>
-        <p className="vehicle-text">No Saved Vehicles</p>
+        <p className="vehicle-text">{translate("setting.garage.noVehicle")}</p>
         <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder />
       </div>
       </div>
   }
   return (
-   <div className="col-10">
-     {garage}
-   </div>
+    <Fragment>
+      <MediumScreen>
+       <div className="col-10">
+         {garage}
+       </div>
+      </MediumScreen>
+      <SmallScreen>
+       <div className="col-12 garage-mobile">
+         {garage}
+       </div>
+      </SmallScreen>
+    </Fragment>
   )
  }
 }

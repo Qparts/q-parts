@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class CustomerService extends Component {
 
     render() {
         return (
-            <div className="d-flex flex-row" id="customer-service">
-                <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
-                <div>
-                    {
-                        this.props.messages.map((message, idx) => (
-                            <span key={idx}>{message}</span>
-                        ))
-                    }
+            <Link to="#" className="media chat-div">
+                <img src="/img/whatsapp-logo.svg" alt="whatsapp" />
+                <div className="media-body">
+                    <p>
+                        <span>{this.props.messages[0]}</span>
+                        {this.props.messages[1]}
+                    </p>
                 </div>
-            </div>
+            </Link>
         )
     }
 }

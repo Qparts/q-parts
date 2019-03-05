@@ -32,7 +32,7 @@ $dir: rtl;
 //@import "bootstrap-rtl/pagination";
 //@import "bootstrap-rtl/badge";
 //@import "bootstrap-rtl/jumbotron";
-//@import "bootstrap-rtl/alert";
+@import "bootstrap-rtl/alert";
 //@import "bootstrap-rtl/progress";
 @import "bootstrap-rtl/media";
 @import "bootstrap-rtl/list-group";
@@ -44,8 +44,6 @@ $dir: rtl;
 @import "bootstrap-rtl/utilities";
 //@import "bootstrap-rtl/print";
 
-//select2-develop
-@import "../select2-develop/core";
 
 /* slick slider component*/
 
@@ -54,6 +52,7 @@ $dir: rtl;
 @import "../base/mixins";
 @import "../base/normalize";
 @import "../base/base";
+@import "../base/float_label";
 
 /*MODULES  - Individual site components */
 @import "../modules/typography";
@@ -80,7 +79,6 @@ $dir: rtl;
 
 @import "../layouts/nav";
 @import "../layouts/header";
-@import "../layouts/manual-form";
 @import "../layouts/home-details";
 @import "../layouts/products";
 @import "../layouts/product";
@@ -96,6 +94,7 @@ $dir: rtl;
 @import "../layouts/garage-popup";
 @import "../state/checkout/cart";
 @import "../state/checkout/order_summary.scss";
+@import "../state/quotations";
 @import "../layouts/quotation-request";
 @import "../layouts/send-request";
 @import "../layouts/search_result";
@@ -109,3 +108,10 @@ $dir: rtl;
 @import "../layouts/setting/orders";
 @import "../layouts/setting/payment";
 @import "../layouts/setting/addresses";
+@import "../layouts/setting/side-bar";
+
+@import "../state/checkout/checkout-shipping";
+@import "../state/checkout/checkout-payment";
+@import "../state/checkout/checkout-order";
+@import "../state/checkout/checkout-confirmation-order";
+@import "../state/tires.scss";

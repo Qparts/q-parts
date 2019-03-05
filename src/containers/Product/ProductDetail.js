@@ -11,20 +11,24 @@ import RenderProducts from '../../components/RenderProducts/RenderProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { addRecentViewedProducts, addWishlist } from '../../actions/customerAction';
+import { addRecentViewedProducts, addWishlist, modalAddToCart } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
+import Title from "../../components/UI/Title";
 import {
   Card, CardBody,
   CardTitle, ListGroupItem, ListGroup
 } from 'reactstrap';
 
 import * as validations from '../../utils';
+import { getTranslatedObject } from '../../utils';
+import { handleImageFallback } from '../../utils';
 import { right } from '../../utils';
 import _ from 'lodash';
+import parse from 'html-react-parser';
 
 //dialog
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from "./AddProductPopup/AddProduct"
 
 //Router
@@ -69,7 +73,7 @@ class ProductDetail extends Component {
       dialogType: 'addProduct',
       data: [],
       auth: false,
-      modal: false,
+      modal: true,
       loading: true,
       product: {}
     }
@@ -91,18 +95,18 @@ class ProductDetail extends Component {
   };
 
   togglePopup = () => {
-    this.setState({
-      modal: !this.state.modal
-    })
+    this.props.modalAddToCart(this.state.modal);
+    this.setState({ modal: !this.state.modal })
   }
 
   getDialogProps = () => {
     const { dialogType } = this.state;
+    const { translate } = this.props;
     switch (dialogType) {
       case 'addProduct':
         return {
           header:
-            <span><span>{this.state.data.quantity} Item</span> Added To Cart</span>
+            <Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
         }
       default:
         break;
@@ -111,10 +115,18 @@ class ProductDetail extends Component {
 
   getDialogComponent = () => {
     const { dialogType } = this.state;
+    const { translate, currentLanguage } = this.props
 
     switch (dialogType) {
       case 'addProduct':
-        return <AddProduct data={this.state.data} direction={this.props.direction} />
+        return <AddProduct
+          data={this.state.data}
+          direction={this.props.direction}
+          modalAddToCart={this.props.modalAddToCart}
+          token={this.props.token}
+          togglePopup={this.togglePopup}
+          translate={translate}
+          currentLanguage={currentLanguage} />
       default:
         break;
     }
@@ -146,7 +158,9 @@ class ProductDetail extends Component {
         this.setState({
           data: res.data
         })
+        this.props.addRecentViewedProducts(res.data);
       })
+    this.props.modalAddToCart(false);
   }
 
   closeLightbox = () => {
@@ -164,10 +178,10 @@ class ProductDetail extends Component {
       this.handleDialog('addProduct', item)
     } else {
       const { match: { params } } = this.props
-      this.props.history.push({
-        pathname: `/products/${params.productId}/AddProduct`,
-        state: { data: item }
-      })
+      this.setState({
+        data: item
+      });
+      this.props.history.push(`/products/${params.productId}/AddProduct`)
     }
   }
 
@@ -205,10 +219,11 @@ class ProductDetail extends Component {
 
   renderSpecs = (isList = false) => {
     const { specs } = this.state.product;
+    const { translate } = this.props
     let Component = isList ? ListGroupItem : Fragment;
 
     if (specs.length < 1) return <div>
-      <span>no spec for this product</span>
+      <span>{translate("product.specs.noSpecs")}</span>
     </div>
 
     else {
@@ -230,17 +245,18 @@ class ProductDetail extends Component {
 
   renderTopRow = () => {
     const { product } = this.state;
+    const { translate, currentLanguage } = this.props
     return <div className="row group-header-opacity_second">
       <div className="col-9 pt-18">
         <span className="product-item_desc">{product.desc}</span>
         <div className="product-item_manufacturer">
-          <span>By</span>
-          <span>{product.brand.name}</span>
+          <span>{translate("general.by")}</span>
+          <span>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
           <span>{product.productNumber}</span>
         </div>
       </div>
       <div className="col-3 btn btn-wishlist pt-18">
-        <Link to="#" className="btn btn-primary" icon="icon-heart" />
+        <Link to="#" className="btn btn-primary" icon="icon-heart" onClick={this.handleAddWishlist} />
       </div>
     </div>
   }
@@ -299,14 +315,14 @@ class ProductDetail extends Component {
         textAlign: 'center'
       }
     };
-    const { translate, match: { params } } = this.props;
+    const { translate, match: { params }, direction, currentLanguage } = this.props;
     const { product } = this.state;
     const compareHeaders = [
       translate("compareProduct.prices"),
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+      <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
@@ -800,14 +816,22 @@ class ProductDetail extends Component {
   								</Swiper>
   								<div className="swiper-left"></div>
   							</div>
+                {dialog}
   						</div>
             </div>
+            
           </section>
         </Route>
         <PrivateRoute
           path={'/products/:productId/AddProduct'}
           component={AddProduct}
           exact
+          translate={translate}
+          currentLanguage={currentLanguage}
+          data={this.state.data}
+          direction={this.props.direction}
+          modalAddToCart={this.props.modalAddToCart}
+          token={this.props.token}
           fakeAuth={this.state.auth}
           redirectTo="/" />
       </Switch >
@@ -825,6 +849,8 @@ const mapStateToProps = state => {
     translate: getTranslate(state.localize),
     currentLanguage: getActiveLanguage(state.localize).code,
     direction: state.customer.direction,
+    isModalAddToCart: state.customer.isModalAddToCart,
+    token: state.customer.token
   }
 }
 
@@ -833,6 +859,7 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
+    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
   }
 }
 

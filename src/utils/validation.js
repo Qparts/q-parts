@@ -25,10 +25,11 @@ export const number = value =>
 export const minValue = min => value =>
   value && value < min ? `Must be at least ${min}` : undefined
 export const minValue18 = minValue(18)
-export const email = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
+export const email = (value, props, allProps) => {
+  return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? allProps.translate("validation.email")
     : undefined
+}
 
 export const phoneNumber = value =>
   value && !/^(0|[1-9][0-9]{9})$/i.test(value)
@@ -60,6 +61,6 @@ export const allUpperCase = value => {
     : undefined;
 }
 
-export const passwordScore = (score, value) => {
-  return value && score >= 2 ? undefined : 'Required';
+export const passwordScore = (value, allValues, {passwordScore}) => {
+  return value && passwordScore >= 2 ? undefined : 'Required';
 }

@@ -41,6 +41,7 @@
 }
 
 #custom-title {
+  @include text-left;
   .title-left {
     @include boarder-right-radius(0, 20px);
     background-color: $light-gray;
@@ -113,13 +114,25 @@
 }
 
 #custom-details {
+  @include text-left;
   padding-bottom: 87px;
   .title-container {
-    padding-top: 79px;
+    padding-top: 66px;
   }
 
-  a {
-    color: $brand-color;
+  .links {
+    a {
+      color: $brand-color;
+    }
+  }
+
+  .btn-gray {
+    @include font-size(20px);
+    i {
+      &::before {
+        top: 4px;
+      }
+    }
   }
 
   h3 {
@@ -130,13 +143,14 @@
     text-transform: none;
   }
   .garage-btn-container {
-    text-align: right;
+    @include text-right;
+
   }
 
   .custom-container {
     @include box-shadow;
     @include boarder-left-radius;
-    margin-left: 11px;
+    @include margin-left(11px);
     padding-bottom: 10px;
     margin-bottom: 30px;
 
@@ -148,16 +162,15 @@
     }
 
     .select-field-make-container {
-      @include large-medium-screens {
-        @include padding-right(0);
-      }
+      margin-top: 9px;
 
       @include small-screen {
         padding-bottom: 10px;
         padding-top: 10px;
       }
 
-      .select-field-make {
+      .select-input {
+        width: 100%;
         height: 55px;
         background: $light-gray;
         @include small-screen {
@@ -204,7 +217,7 @@
       }
     }
 
-    .vin-field-container{
+    .vin-field-container {
       @include large-medium-screens {
         @include padding-left(6px);
       }
@@ -215,36 +228,30 @@
       }
 
       .vin-field {
-        @include large-medium-screens{
+        @include large-medium-screens {
           @include boarder-right-radius(0, 20px);
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-right-radius(0, 20px);
           @include boarder-left-radius(0, 20px);
         }
-        
+
         background: $light-gray;
         height: 55px;
       }
-
     }
 
-
-    .select-country-field-container{
-      @include large-medium-screens {
-        @include padding-right(0);
-      }
-
+    .select-region-field-container {
       @include small-screen {
         padding-bottom: 10px;
         padding-top: 10px;
       }
 
-      .select-country-field{
-        @include large-medium-screens{
+      .select-input {
+        @include large-medium-screens {
           @include boarder-left-radius;
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-left-radius(20px, 0);
         }
         background: $light-gray;
@@ -252,7 +259,7 @@
       }
     }
 
-    .select-city-field-container{
+    .select-city-field-container {
       @include large-medium-screens {
         @include padding-left(6px);
       }
@@ -262,11 +269,11 @@
         padding-top: 10px;
       }
 
-      .select-city-field{
-        @include large-medium-screens{
+      .select-input {
+        @include large-medium-screens {
           @include boarder-right-radius(0, 20px);
         }
-        @include small-screen{
+        @include small-screen {
           @include boarder-right-radius(0, 20px);
           @include boarder-left-radius(0, 20px);
         }
@@ -285,12 +292,11 @@
       }
 
       .part-desc-field {
-        padding-left:10px;
+        @include padding-left(10px);
         width: 100%;
         height: 55px;
         background: $light-gray;
         @include font-size(16px);
-
 
         @include small-screen {
           @include boarder-left-radius(20px, 0);
@@ -301,12 +307,13 @@
         }
       }
 
-      .number-picker-container{
-        @include large-medium-screens{
-          padding-left: 0;
+      .number-picker-container {
+        @include large-medium-screens {
+          @include padding-left(0);
         }
+        @include padding-right(5px);
 
-        @include small-screen{
+        @include small-screen {
           padding-bottom: 10px;
           padding-top: 10px;
         }
@@ -314,54 +321,41 @@
         #number-picker {
           .btn-positive {
             @include font-size(18px);
-            border-radius: side-values(0 0 0 20px) !important;
+            border-radius: corner-values(0) !important;
             height: 55px;
           }
           .btn-negative {
             @include font-size(18px);
-            border-radius: side-values(0 0 0 0) !important;
+            border-radius: corner-values(0 0 $border-radius-base 0) !important;
             height: 55px;
-            @include boarder-right-radius(0, 20px);
           }
           input {
             @include font-size(18px);
+            background: $light-gray !important;
             padding: 0;
             height: 55px;
             text-align: center;
             cursor: inherit;
-            border-radius: side-values(0 0 0 0) !important;
+            border-radius: corner-values(0 0 0 0) !important;
           }
         }
-
       }
 
-      .delete-btn-container{
-
-        @include small-screen{
-          text-align: right;
-          padding-bottom: 10px;
+      .delete-btn-container {
+        button {
+          background: inherit;
+        }
+        @include small-screen {
           padding-top: 10px;
         }
-        @include large-medium-screens{
-          text-align: $right;
-          @include padding-left(0);
-        }
-        .btn {
-          border: none;
-          width: 100%;
-          @include small-screen{
-            width: 50%;
-            border-radius: side-values(0 0 20px 0) !important;
+        @include padding-left(0);
+        i {
+          @include opacity(0.6);
+          &::before {
+            @include font-size(22px);
           }
-          height: 55px;
-          left: 0;
-          
-          @include font-size(15px);
         }
       }
-      
-
-      
     }
     .add-part-btn-container {
       text-align: $right;
@@ -372,11 +366,25 @@
         @include font-size(15px);
         position: absolute;
         width: inherit;
-        right: -16px;
+        #{$right}: -16px;
         top: 11px;
         background: $white;
-        border-top-right-radius: 0 !important;
+        border-top-#{$right}-radius: 0 !important;
       }
+      i {
+        @include padding-right(6px);
+      }
+    }
+  }
+
+  .btn-continue {
+    @include text-right;
+  }
+
+  .btn-footer {
+    @include small-screen {
+      @include text-right;
+      width: 100%;
     }
   }
 }
