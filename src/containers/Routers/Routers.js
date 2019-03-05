@@ -10,6 +10,7 @@ import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
 
 import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
+import { loadGoogleAnalytics } from '../../config/google';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
 import { selectCountry, onLogout } from '../../actions/customerAction';
@@ -30,6 +31,7 @@ class Routes extends Component {
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
         loadStyle(this.props.direction);
+        loadGoogleAnalytics();
     }
     componentDidUpdate = (prevProps, prevState) => {
         const dateNow = moment();
