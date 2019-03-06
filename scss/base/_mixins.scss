@@ -122,6 +122,10 @@
   text-transform: uppercase !important;
 }
 
+@mixin text-lowercase {
+  text-transform: lowercase !important;
+}
+
 @mixin text-right {
   text-align: $right !important;
 }

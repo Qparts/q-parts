@@ -153,7 +153,7 @@ class Cart extends Component {
 								decrementQuantity={this.props.decrementQuantity}
 							/>
 							<div className="col-lg-3">
-								<div className="order-summery">
+								<div className="order-summary">
 									<OrderSummary
 										translate={translate}
 										checkoutData={checkoutData}

@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
-import { params } from '../../constants';
+import { swiperParams } from '../../constants';
 import Title from '../UI/Title';
 import { Tabs, Tab } from 'react-bootstrap';
 
@@ -73,7 +73,7 @@ class Products extends Component {
           <Tabs defaultActiveKey="best-seller" id="uncontrolled-tab-example">
             <Tab eventKey="best-seller" title={translate("offers.recommendation.bestSeller")}>
               <h3>{translate("offers.recommendation.bestSeller")}</h3>
-              <Swiper {...params(direction)} ref={this.bestSeller}>
+              <Swiper {...swiperParams(direction)} ref={this.bestSeller}>
                 {
 
                   bestSeller.map((product, idx) => (
@@ -90,7 +90,7 @@ class Products extends Component {
             </Tab>
             <Tab eventKey="offers" title={translate("offers.recommendation.offers")}>
               <h3>{translate("offers.recommendation.offers")}</h3>
-              <Swiper {...params(direction)} ref={this.offers}>
+              <Swiper {...swiperParams(direction)} ref={this.offers}>
                 {
 
                   offers.map((product, idx) => (
@@ -107,7 +107,7 @@ class Products extends Component {
             </Tab>
             <Tab eventKey="recently-viewed" title={translate("offers.recommendation.recentViewed")}>
               <h3>{translate("offers.recommendation.recentViewed")}</h3>
-              <Swiper {...params(direction)} ref={this.recentViewed}>
+              <Swiper {...swiperParams(direction)} ref={this.recentViewed}>
                 {
 
                   recentViewedProducts.map((product, idx) => (

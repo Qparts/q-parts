@@ -9,7 +9,7 @@ import {	reduxForm } from "redux-form";
 import { getTranslate } from 'react-localize-redux';
 
 
-import { params } from '../../constants';
+import { swiperParams } from '../../constants';
 import Swiper from 'react-id-swiper';
 import { getBestSeller } from '../../utils/api';
 import { starsRating } from '../../constants';
@@ -93,7 +93,7 @@ class MotorOil extends Component {
 			          <div className="tab-content">
 			            <div className="tab-pane fade show active" id="best-seller" role="tabpanel">
 			              <h3>{translate("offers.recommendation.bestSeller")}</h3>
-			              <Swiper {...params(direction)}>
+			              <Swiper {...swiperParams(direction)}>
 			                {
 
 			                  bestSeller.map((product, idx) => (

@@ -130,7 +130,7 @@ export const starsRating = {
   color2: '#fabb12'
 }
 
-export const params = (direction) => {
+export const swiperParams = (direction) => {
   return {
     containerClass: `swiper-container products-list`,
     slidesPerView: 5,

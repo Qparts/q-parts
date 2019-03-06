@@ -1753,6 +1753,10 @@
     "recentViewed": [
       "منتجاتك التي تم عرضها مؤخرًا",
       "Your recently viewed products"
+    ],
+    "number": [
+      "رقم المنتج: #",
+      "Product Number: #"
     ]
   },
   "compareProduct": {

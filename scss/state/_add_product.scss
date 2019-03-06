@@ -1,0 +1,246 @@
+.add-product {
+  background: white;
+  @include small-screen {
+    background: $light-gray;
+  }
+  @include text-left;
+  form {
+    .vehicle-information {
+      @include box-shadow;
+      background: white;
+      .form-group {
+        .css-10nd86i {
+          width: 200px;
+          height: 55px;
+          @include margin-left(10px);
+          border-radius: 0px;
+          background-color: #f7f7f7;
+          .select__control {
+            margin-#{$left}: 20px;
+          }
+          .select-input {
+            margin-#{$left}: 10px;
+          }
+        }
+        .first-formGroup {
+          .css-10nd86i {
+            border-radius: corner-values(20px 0px 0px 20px) !important;
+            width: 160px;
+            height: 55px;
+            .select__placeholder {
+              width: 81px;
+            }
+          }
+        }
+        display: inline-block;
+      }
+      .div-last-rounded {
+        height: 72.6px;
+        margin-bottom: 0px;
+        .form-control {
+          border-radius: 0 0 20px 0 !important;
+          border: none;
+          background: $light-gray;
+          padding: inherit;
+          padding-#{$left}: 13px;
+
+          label,
+          sub,
+          br {
+            display: none;
+          }
+        }
+        input {
+          margin-top: 17px;
+          border-radius: inherit;
+          height: 55px;
+        }
+      }
+      .input-group-prepend {
+        .ellipse {
+          margin-top: 15px;
+          opacity: 0.7;
+        }
+      }
+      p {
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        @include text-left;
+        margin-#{$left}: 10px;
+        margin-bottom: 0px;
+      }
+      span {
+        opacity: 0.5;
+      }
+      select {
+        border: none;
+        width: 100%;
+        background: none;
+      }
+      .select-make {
+        width: 250px;
+        height: 55px;
+        border-radius: 0px;
+      }
+      .select-modal {
+        width: 250px;
+        height: 55px;
+        border-radius: 0px;
+      }
+    }
+    .item {
+      .text-item {
+        margin-top: 55px;
+        .product-item_desc {
+          height: 20px;
+          font-family: Roboto;
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          @include text-left;
+        }
+        .product-Name {
+          height: 12px;
+          font-family: Roboto;
+          font-size: 15px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          @include text-left;
+        }
+        .product-Number {
+          height: 12px;
+          font-family: Roboto;
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.13;
+          letter-spacing: normal;
+          @include text-left;
+          color: #272734;
+        }
+        .product-rate {
+          display: flex;
+          line-height: 12px;
+        }
+        .product-reviews {
+          height: 10px;
+          font-family: Roboto;
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.31;
+          letter-spacing: normal;
+          @include text-left;
+          color: #272734;
+        }
+        .product-price {
+            height: 22px;
+            font-family: Roboto;
+            text-align: $left;
+            @include font-size(39px);
+            color: $dark-charcoal-grey;
+          }
+          .product-price-sr {
+            height: 12px;
+            @include font-size(18px);
+            text-align: $left;
+            color: $dark-charcoal-grey;
+            @include margin-left(3px);
+          }
+        .product-quantity {
+          height: 14px;
+          opacity: 0.8;
+          font-family: Roboto;
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: normal;
+          @include text-left;
+          color: rgba(39, 39, 52, 0.8);
+        }
+      }
+      img {
+        width: 150px;
+        height: 150px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+      }
+    }
+    .btn-primary {
+      background-color: $light-gray;
+      border-radius: corner-values(20px 0px 0px 20px) !important;
+      @include text-right;
+      height: 52px;
+      color: black;
+      span {
+        font-family: Roboto;
+        font-size: 20px;
+        text-transform: none;
+      }
+    }
+    .sale-price {
+        border-radius: corner-values(0px 0px 20px 0px) !important;
+        height: 52px;
+        font-family: Roboto;
+        @include font-size(30px);
+        color: $dark-charcoal-grey;
+        @include margin-left(2px);
+        padding-top: 7px;
+        @include padding-left(6px);
+        sub {
+          height: 12px;
+          font-family: Roboto;
+          @include font-size(16px);
+          text-align: $left;
+          @include margin-left(3px);
+          @include margin-right(10px);
+          color: $dark-charcoal-grey;
+        }
+      }
+    .btn-footer {
+      margin-top: 30px;
+      margin-bottom: 30px;
+      @include text-right;
+      display: flex;
+      white-space: nowrap;
+      .btn-primary {
+        border-radius: corner-values(0px 0px 0px 20px) !important;
+        width: 207px;
+        height: 55px;
+        color: $black;
+        font-size: 20px;
+        text-transform: none;
+      }
+      .check-out {
+        border-style: none;
+        width: 163px;
+        height: 55px;
+        background: $brand-color;
+        color: white;
+        border-radius: corner-values(0px 20px 20px 0px) !important;
+        font-size: 20px;
+        margin-#{$left}: 9px;
+      }
+      .group-shadow-input {
+        height: 10px;
+        transform: translate(-5%, 400%);
+        #{$right}: 0;
+        width: 30% !important;
+      }
+    }
+  }
+}

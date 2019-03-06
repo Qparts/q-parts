@@ -61,7 +61,7 @@ class AddProduct extends Component {
 
     const { translate, currentLanguage } = this.props;
 
-    return <section id="AddProduct" className="container-fluid">
+    return <section className="add-product container-fluid">
       <SmallScreen>
         <Title number={this.props.data.quantity} header={translate("dialog.addToCart.title")} />
       </SmallScreen>
