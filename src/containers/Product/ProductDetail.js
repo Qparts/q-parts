@@ -214,6 +214,14 @@ class ProductDetail extends Component {
     }
   }
 
+  getWishlistActive = () => {
+    const { wishlist } = this.props;
+    const { product } = this.state;
+    const wishlistMatch = wishlist.find(wishlist => wishlist.id === product.id);
+
+    return wishlistMatch ? 'active' : '';
+  }
+
   render() {
     const styles = {
       loading: {
@@ -292,7 +300,7 @@ class ProductDetail extends Component {
                                 </ul>
                               </div>
                               <div className="col-auto">
-                                <a href="#" className="btn add-fav"><i className="icon-heart"></i></a>
+                                <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
                               </div>
                             </div>
                           </div>
@@ -321,7 +329,7 @@ class ProductDetail extends Component {
                           </div>
                           <UpSmallScreen>
                             <div className="col-auto">
-                              <Link to="#" className="btn add-fav"><i className="icon-heart"></i></Link>
+                              <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
                             </div>
 
                           </UpSmallScreen>
@@ -359,7 +367,7 @@ class ProductDetail extends Component {
                           </div>
                           <DownSmallScreen>
                             <div className="col-auto fav-mob">
-                              <a href="#" className="btn add-fav"><i className="icon-heart"></i></a>
+                              <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
                             </div>
                           </DownSmallScreen>
                           <div className="col">
@@ -540,6 +548,7 @@ const mapStateToProps = state => {
     products: state.api.products,
     recentViewedProducts: state.customer.recentViewedProducts,
     customer: state.customer.detail,
+    wishlist: state.customer.wishlist,
     formValues: getFormValues('Product')(state),
     translate: getTranslate(state.localize),
     currentLanguage: getActiveLanguage(state.localize).code,
