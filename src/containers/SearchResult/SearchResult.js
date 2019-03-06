@@ -29,7 +29,37 @@ const GRID = 'GRID';
 const LIST = 'LIST';
 
 class SearchResult extends Component {
-
+	static defaultProps = {
+	        filterObjects: [
+	            {
+	                filterTitle: "Brands",
+	                filterTitleAr: "الماركة",
+	                options: [
+	                    {
+	                        id: 1,
+	                        value: "Toyota",
+	                        valueAr: "تويوتا"
+	                    },
+	                    {
+	                        id: 2,
+	                        value: "kia",
+	                        valueAr: "تويوتا"
+	                    }
+	                ]
+	            },
+	            {
+	                filterTitle: "Volume",
+	                filterTitleAr: "الماركة",
+	                options: [
+	                    {
+	                        id: 1,
+	                        value: "8 oz",
+	                        valueAr: "8 oz"
+	                    }
+	                ]
+	            }
+	        ]
+	    }
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -207,7 +237,7 @@ class SearchResult extends Component {
 				textAlign: 'center'
 			}
 		}
-		const { isChecked, renderSearch, filtration, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -252,7 +282,7 @@ class SearchResult extends Component {
 
 							<div className="filter-container col-3">
 								{
-									filterObjects.map((filterObject, idx) => {
+									this.props.filterObjects.map((filterObject, idx) => {
 										return <div key={idx} className="filter-category card col-12">
 											<div className="row">
 												<div className="col-9 title">
@@ -367,9 +397,9 @@ class SearchResult extends Component {
 								</Card>
 							</div>
 							<div className="selected-filters-panel row">
-								<div className="col-12" style={isEmpty(filtration) ? commonStyles.hide : styles.show}>
+								<div className="col-12" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
 									{
-										filtration.map((item, index) => (
+										filtrationChecked.map((item, index) => (
 											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
 										))
 									}

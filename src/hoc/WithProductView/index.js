@@ -10,6 +10,7 @@ const WithProductView = WrappedComponent => {
 
 			this.state = {
 				filtration: [],
+				filtrationChecked: [],
 				params: '',
 			}
 
@@ -39,28 +40,29 @@ const WithProductView = WrappedComponent => {
 
 		filter = (item, event) => {
 			const { value, checked } = event.target;
-			const index = this.state.filtration.indexOf(value);
-			const itemValue = item.value.replace(/ /, '_');
-
+			const index = this.state.filtrationChecked.indexOf(value);
+			// const itemValue = item.value.replace(/ /, '_');
 			if (checked && index === -1) {
 				// const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
 
-				this.setState({ filtration: [...this.state.filtration, value], }, function () {
-						this.props.history.push(addQuery(this.state.filtration, ''));
+				this.setState({ filtration: [...this.state.filtration, item['id']],filtrationChecked: [...this.state.filtrationChecked, value] }, function () {
+						this.props.history.push(addQuery(item['id'],item['filterTitle'], ''));
 				 })
 			} else if (index !== -1) {
 				const clone = [...this.state.filtration];
+				const removeChecked =[...this.state.filtrationChecked];
 
 				const newParams = this.state.params.slice(1).split(/[&]/);
 
 				const elementRemoved = clone.splice(index, 1);
-
+				removeChecked.splice(index,1)
 				newParams.splice(index, 1);
 				this.setState({
 					filtration: clone,
+					filtrationChecked: removeChecked,
 					// params: fixParamsFormat(newParams)
 				}, function () {
-					this.props.history.push(addQuery(this.state.filtration,elementRemoved));
+					this.props.history.push(addQuery(this.state.filtration,item['filterTitle'],elementRemoved));
 				});
 			}
 		}
@@ -80,7 +82,7 @@ const WithProductView = WrappedComponent => {
 		}
 
 		isChecked = (value) => {
-			const check = this.state.filtration.find(result => result === value);
+			const check = this.state.filtrationChecked.find(result => result === value);
 
 			return check ? true : false;
 		}
@@ -92,10 +94,11 @@ const WithProductView = WrappedComponent => {
 				const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 				const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
 				const value = data[option];
-
+				const id = data['id'];
+				const filterTitle = filtration['filterTitle'];
 				return <div key={index}>
 					<Component
-						onChange={handleChange.bind(this, { key, value })}
+						onChange={handleChange.bind(this, { key,value,id,filterTitle })}
 						value={`${filtration[key]} ${value}`}
 						checked={isChecked(`${filtration[key]} ${value}`)}
 						label={value} />
