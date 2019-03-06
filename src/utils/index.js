@@ -10,4 +10,4 @@ export { getComponentName } from './components';
 export { left, right, paddingLeft, paddingRight, sideValues } from './directional';
 export { closeNav, toggleSearch } from './nav';
 export { handleImageFallback } from './image';
-export { replaceQuery, addQuery } from './querystring';
+export { replaceQuery, addQuery, clearQuery } from './querystring';

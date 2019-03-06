@@ -400,7 +400,7 @@ class SearchResult extends Component {
 								<div className="col-12" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
 									{
 										filtrationChecked.map((item, index) => (
-											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index)} /></label>
+											<label key={index}>{item}<i className="icon-close" onClick={onRemoveItem.bind(this, index,item)} /></label>
 										))
 									}
 									<Button text="Clear all" className="btn btn-gray-secondary" onClick={onClear} />

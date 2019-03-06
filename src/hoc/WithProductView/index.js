@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { upperCaseFirstChar } from '../../utils'
 import * as constant from '../../constants';
-import {addQuery} from '../../utils';
+import {addQuery,clearQuery} from '../../utils';
 
 const WithProductView = WrappedComponent => {
 	return class extends Component {
@@ -54,7 +54,7 @@ const WithProductView = WrappedComponent => {
 
 				const newParams = this.state.params.slice(1).split(/[&]/);
 
-				const elementRemoved = clone.splice(index, 1);
+				const removeItem = clone.splice(index, 1);
 				removeChecked.splice(index,1)
 				newParams.splice(index, 1);
 				this.setState({
@@ -62,22 +62,34 @@ const WithProductView = WrappedComponent => {
 					filtrationChecked: removeChecked,
 					// params: fixParamsFormat(newParams)
 				}, function () {
-					this.props.history.push(addQuery(this.state.filtration,item['filterTitle'],elementRemoved));
+					this.props.history.push(addQuery(this.state.filtration,item['filterTitle'],removeItem));
 				});
 			}
 		}
 
-		removeItem = (index, event) => {
+		removeItem = (index,item, event) => {
 			event.preventDefault();
 			const clone = [...this.state.filtration];
-			const newParams = this.state.params.slice(1).split(/[&]/);
+			const removeChecked = [...this.state.filtrationChecked];
+			//const newParams = this.state.params.slice(1).split(/[&]/);
+			let title;
+			for(var i=0;i<this.state.filtrationChecked.length;i++){
+				if(this.state.filtrationChecked[i] === item){
+					title = this.state.filtrationChecked[i].substring(0, this.state.filtrationChecked[i].indexOf(' '));
+				}
+			}
 
-			clone.splice(index, 1);
-			newParams.splice(index, 1);
+			const removeItem = clone.splice(index, 1);
 
+			removeChecked.splice(index,1);
+
+		//newParams.splice(index, 1);
 			this.setState({
 				filtration: clone,
-				params: fixParamsFormat(newParams)
+				filtrationChecked: removeChecked,
+			//params: fixParamsFormat(newParams)
+			}, function () {
+				this.props.history.push(addQuery(this.state.filtration,title,removeItem));
 			});
 		}
 
@@ -107,8 +119,10 @@ const WithProductView = WrappedComponent => {
 		}
 
 		handleClear = () => {
+			this.props.history.push(clearQuery(this.state.filtrationChecked,this.state.filtration));
 			this.setState({
-				filtration: []
+				filtration: [],
+				filtrationChecked: []
 			})
 		}
 

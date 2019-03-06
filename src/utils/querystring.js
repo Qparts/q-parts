@@ -78,6 +78,19 @@ export const addQuery = (array,title,element) => {
       return window.location.pathname + newUrl;
   }
   // return '?'+key+'[]=' + arr.join('&'+key+'[]=')
-  console.log(window.location.pathname)
   return "listing?"+window.location.search.slice(1) + '&'+`${title}`+'=' + array;
+}
+export const clearQuery = (titleArray,idArray) => {
+  let regex;
+  let url = window.location.search;
+  let newUrl;
+  for(var i = 0; i < titleArray.length ; i++){
+    for(var j = 0 ; j < idArray.length ; j++){
+      regex = new RegExp(`&${titleArray[i].substring(0, titleArray[i].indexOf(' '))}=${idArray[j]}`, "gi");
+      newUrl = url.replace(regex, "");
+      url=newUrl;
+    }
+  }
+
+  return window.location.pathname + newUrl;
 }
