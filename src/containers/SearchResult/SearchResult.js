@@ -293,7 +293,7 @@ class SearchResult extends Component {
 	}
 	render() {
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -324,6 +324,7 @@ class SearchResult extends Component {
 				Previous Page
 				<i className="icon-arrow-left"></i>
 			</a>
+
 			if(this.state.startSize <=1){
 				btnPrev ="";
 			}
@@ -354,7 +355,7 @@ class SearchResult extends Component {
 												</button>
 											</div>
 											<div className="col">
-												<h3>Filter <span>200 results</span></h3>
+												<h3>Filter <span><h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h2></span></h3>
 											</div>
 											<div className="col-auto">
 												<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
@@ -785,7 +786,7 @@ class SearchResult extends Component {
 						<div className="col">
 							<div className="search-result">
 								<div className="total-result row">
-									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h2>
+									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} </span></h2>
 									<div className="col-auto">
 										<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
@@ -822,35 +823,16 @@ class SearchResult extends Component {
 									</div>
 								</LargeScreen>
 								<ul className="result-list products-list row">
-									{this.state.searchGeneral.products.map((product, idx) => (
-										<li className="product-grid-viewcol-xl-3 col-md-4 col-6">
-											<Link to="/" className="card">
-												<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
-												<div className="card-body">
-													<h5 className="card-title">{product.desc}</h5>
-													<ul className="list-inline product-info">
-														<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
-														<li>#Part Num</li>
-													</ul>
-													<div className="rating">
-														<Stars values={product.averageRating} {...starsRating} />
-														<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
-													</div>
-													<p>Made in Germany</p>
-													<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
-												</div>
-											</Link>
-										</li>
-									))}
+									{this.renderProducts()}
 								</ul>
-							</div>
-							<div className="row justify-content-center">
-								<div className="col-12 more-result">
-									<div className="col-lg-5 col">
-										{btnPrev}
-									</div>
-									<div className="col-lg-5 col">
-										{btnNext}
+								<div className="row justify-content-center">
+									<div className="col-12 more-result">
+										<div className="col-lg-5 col">
+											{btnPrev}
+										</div>
+										<div className="col-lg-5 col">
+											{btnNext}
+										</div>
 									</div>
 								</div>
 							</div>
