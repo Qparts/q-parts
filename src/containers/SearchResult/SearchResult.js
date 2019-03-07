@@ -11,9 +11,9 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
-import {replaceAll } from '../../utils';
+import { isEmpty, replaceAll } from '../../utils';
 import * as constant from '../../constants';
-import { colors, styles } from '../../constants';
+import { colors, styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { getGeneralSearch } from '../../utils/api';
@@ -26,7 +26,11 @@ import { right, getQuery, replaceQuery } from '../../utils';
 //HTML Component
 import Stars from 'react-stars';
 import { starsRating } from '../../constants';
-import { ClipLoader } from "react-spinners"
+import { ClipLoader } from "react-spinners";
+
+import { handleImageFallback, getTranslatedObject } from '../../utils';
+import { getLength } from '../../utils/array';
+
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -289,7 +293,7 @@ class SearchResult extends Component {
 	}
 	render() {
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, translate } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -311,15 +315,15 @@ class SearchResult extends Component {
 				</div>
 			)
 
-			let btnNext = <button onClick={this.nextPage} className="btn btn-primary btn-next col-6 col-md-3">
-					<span>Next Page</span>
-					<i className="icon-arrow-right"/>
-			</button>
-			let btnPrev = <button onClick={this.prevPage} className="btn btn-primary col-6 col-md-3">
-					<i className="icon-arrow-left"/>
-					<span>Previous Page</span>
-			</button>
+			let btnNext = <a href="#" onClick={this.nextPage} className="btn btn-primary ">
+				Next Page
+				<i className="icon-arrow-right"></i>
+			</a>
 
+			let btnPrev = <a href="#" onClick={this.prevPage} className="btn btn-primary ">
+				Previous Page
+				<i className="icon-arrow-left"></i>
+			</a>
 			if(this.state.startSize <=1){
 				btnPrev ="";
 			}
@@ -781,7 +785,7 @@ class SearchResult extends Component {
 						<div className="col">
 							<div className="search-result">
 								<div className="total-result row">
-									<h2 className="col">Motor Oil <span>(200 results)</span></h2>
+									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h2>
 									<div className="col-auto">
 										<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
@@ -804,129 +808,50 @@ class SearchResult extends Component {
 									</div>
 								</div>
 								<LargeScreen>
-									<div className="filter-result">
+									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
-											<li>option1 <a href="#"><i className="icon-close"></i></a></li>
-											<li>option2 <a href="#"><i className="icon-close"></i></a></li>
-											<li>option3 <a href="#"><i className="icon-close"></i></a></li>
+												{
+													filtrationChecked.map((item, index) => (
+
+														<li key={index}>{item} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></li>
+													))
+												}
+												<a className="btn btn-gray" onClick={onClear}>Clear All</a>
 										</ul>
 										<a className="btn btn-gray">Clear All</a>
 									</div>
 								</LargeScreen>
 								<ul className="result-list products-list row">
-									<li className="col-xl-3 col-md-4 col-6">
-										<Link to="/" className="card">
-											<img src="/img/product-1.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">Air Fuel Ratio Sensor</h5>
-												<ul className="list-inline product-info">
-													<li><strong>Bosch</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
+									{this.state.searchGeneral.products.map((product, idx) => (
+										<li className="product-grid-viewcol-xl-3 col-md-4 col-6">
+											<Link to="/" className="card">
+												<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
+												<div className="card-body">
+													<h5 className="card-title">{product.desc}</h5>
+													<ul className="list-inline product-info">
+														<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+														<li>#Part Num</li>
+													</ul>
+													<div className="rating">
+														<Stars values={product.averageRating} {...starsRating} />
+														<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
+													</div>
+													<p>Made in Germany</p>
+													<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
 												</div>
-												<p>Made in Germany</p>
-												<p className="price">20 <span>sr</span></p>
-											</div>
-										</Link>
-										<Link to="/" className="in-cart">
-											<i className="icon-cart"></i>
-											<i className="icon-plus"></i>
-										</Link>
-									</li>
-									<li className="col-xl-3 col-md-4 col-6">
-										<Link to="/" className="card">
-											<img src="/img/product-2.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">8100 Synthetic Motor Oil</h5>
-												<ul className="list-inline product-info">
-													<li><strong>Motul USA</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p>Made in Coria</p>
-												<p className="price">263 <span>sr</span></p>
-											</div>
-										</Link>
-										<Link to="/" className="in-cart">
-											<i className="icon-cart"></i>
-											<i className="icon-plus"></i>
-										</Link>
-									</li>
-									<li className="col-xl-3 col-md-4 col-6">
-										<Link to="/" className="card">
-											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">GM Original Equipment EGR....</h5>
-												<ul className="list-inline product-info">
-													<li><strong>ACDelco</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p>Made in Coria</p>
-												<p className="price">263 <span>sr</span></p>
-											</div>
-										</Link>
-										<Link to="/" className="in-cart">
-											<i className="icon-cart"></i>
-											<i className="icon-plus"></i>
-										</Link>
-									</li>
-									<li className="col-xl-3 col-md-4 col-6">
-										<Link to="/" className="card">
-											<img src="/img/product-4.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">NT05</h5>
-												<ul className="list-inline product-info">
-													<li><strong>NITTO</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p>Made in china</p>
-												<p className="price">
-													<p>Price not available <a href="#">Send request</a></p>
-												</p>
-											</div>
-										</Link>
-									</li>
-									<li className="col-xl-3 col-md-4 col-6">
-										<Link to="/" className="card">
-											<img src="/img/product-3.jpg" className="card-img-top" alt="..." />
-											<div className="card-body">
-												<h5 className="card-title">GM Original Equipment EGR....</h5>
-												<ul className="list-inline product-info">
-													<li><strong>ACDelco</strong></li>
-													<li>#Part Num</li>
-												</ul>
-												<div className="rating">
-													<Stars values={1} {...starsRating} />
-													<span>0 review</span>
-												</div>
-												<p>Made in Coria</p>
-												<p className="price">263 <span>sr</span></p>
-											</div>
-										</Link>
-										<Link to="/" className="in-cart">
-											<i className="icon-cart"></i>
-											<i className="icon-plus"></i>
-										</Link>
-									</li>
+											</Link>
+										</li>
+									))}
 								</ul>
 							</div>
 							<div className="row justify-content-center">
-								<div className="col-lg-6 col more-result">
-									<a href="#" className="btn btn-primary ">More <i className="icon-add"></i></a>
+								<div className="col-12 more-result">
+									<div className="col-lg-5 col">
+										{btnPrev}
+									</div>
+									<div className="col-lg-5 col">
+										{btnNext}
+									</div>
 								</div>
 							</div>
 						</div>

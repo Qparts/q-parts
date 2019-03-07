@@ -105,6 +105,31 @@ class ProductGridView extends Component {
 				</Modal>
 			);
 		}
+		// <ul className="result-list products-list row">
+		// 	<li className="col-xl-3 col-md-4 col-6">
+		// 		<Link to="/" className="card">
+		// 			<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
+		// 			<div className="card-body">
+		// 				<h5 className="card-title">{product.desc}</h5>
+		// 				<ul className="list-inline product-info">
+		// 					<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+		// 					<li>#Part Num</li>
+		// 				</ul>
+		// 				<div className="rating">
+		// 					<Stars values={product.averageRating} {...starsRating} />
+		// 					<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
+		// 				</div>
+		// 				<p>Made in Germany</p>
+		// 				<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
+		// 			</div>
+		// 		</Link>
+		// 	</li>
+		// </ul>
+		//
+		// 	<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text={translate("general.viewDetails")} />
+		// 	<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
+		//
+		// 		{dialog}
 		return (
 			<Fragment>
 				<MediumScreen>
