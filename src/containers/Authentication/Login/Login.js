@@ -2,9 +2,10 @@ import React, { Component, Fragment } from 'react'; // eslint-disable-line no-un
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, getFormSubmitErrors } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import Button from '../../../components/UI/Button';
+import { Alert } from 'reactstrap';
 
 import RenderField from '../../../components/RenderField/RenderField';
 import SocialMedia from '../SocialMedia/SocialMedia';
@@ -74,10 +75,16 @@ class Login extends Component {
       });
   }
   renderLogin = (login) => {
-    const { translate } = this.props;
+    const { translate, submitErrors } = this.props;
 
     return <Fragment>
       <div>
+        {
+          submitErrors.password &&
+          <Alert color="danger">
+            {submitErrors.password}
+          </Alert>
+        }
         {login}
         <SocialMedia
           title={translate("form.signin.socialMedia")}
@@ -85,7 +92,7 @@ class Login extends Component {
           handleFailure={this.props.handleFailure} />
         <div id="sign-up-link">
           <p>{translate("form.signin.signup")}</p>
-          <Button className="btn-gray" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
+          <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
           <p>{translate("form.signin.here")}</p>
         </div>
       </div>
@@ -160,7 +167,8 @@ const mapStateToProps = (state) => {
     component: getComponentName(ON_SOCIAL_MEDIA_AUTH),
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
-    direction: state.customer.direction
+    direction: state.customer.direction,
+    submitErrors: getFormSubmitErrors('Login')(state),
   }
 }
 

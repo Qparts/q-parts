@@ -2,6 +2,7 @@
   background-color: #f6f6f6;
 
   .sec-header{
+    text-align: unset !important;
     h1 {
       @include text-capitalize;
       p {

@@ -1,8 +1,13 @@
+  .render-cart-item {
+    @include text-left;
+  }
   .cart-items{
     @include border-radius-div;
     overflow: hidden;
+    @include padding-left(0);
     li{
       padding: 20px 15px;
+      background: $white;
       figure{
         margin-bottom: 0;
       }
@@ -47,24 +52,7 @@
         margin-#{$left}: 2px;
       }
     }
-    .availability{
-      @include font-size(15px);
-      margin-top: -5px;
-      @include media-breakpoint-down(xs){
-        @include font-size(14px);
 
-      };
-      .in-icon{
-        width: 6px;
-        height: 6px;
-        background-color: $green;
-        border-radius: 100px;
-        display: inline-block;
-        margin-right: 5px;
-        position: relative;
-        top: -2px;
-      }
-    }
   }
   .cart-actions{
     .btn-gray{
@@ -87,10 +75,9 @@
     @extend .d-block;
     @extend .text-right;
     @extend .mt-2;
-    padding-right: 20px;
-    padding-left: 20px;
+    @include padding-right(20px);
+    @include padding-left(20px);
     @include font-size(20px);
-    margin-bottom: 72px;
     i{
       @include font-size(23px);
       margin-#{$left}: 10px;
@@ -106,6 +93,9 @@
   padding-#{$left}: 0;
   @include media-breakpoint-down(md){
     margin-top: 10px;
+    .quantity{
+      margin-top: 10px;
+    }
   }
   h5{
     font-weight: 400;
@@ -162,7 +152,7 @@
   }
 }
 .cart-header{
-  padding-#{$right}: 0;
+  @include text-left;
   label{
     font-weight: 400;
     @include font-size(14px);
@@ -245,7 +235,7 @@
       margin-#{$left}: 10px;
       &:before{
         @include font-size(23px);
-        top: 2px;
+        top: 5px;
       }
     }
   }
@@ -263,7 +253,7 @@
     @include font-size(13px);
   }
 }
-.order-summery{
+.order-summary{
   .btn-primary{
     margin-top: 0px !important;
   }

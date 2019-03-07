@@ -77,7 +77,7 @@ class GaragePopup extends Component {
 
 const mapStateToProps = state => {
   return {
-    vehiclesFormat: state.customer.vehiclesFormat,
+    vehicles: state.customer.detail.vehicles,
     selectedVehicle: state.customer.selectedVehicle,
   }
 }

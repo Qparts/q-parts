@@ -155,7 +155,8 @@
       padding-#{$left}: 4px;
       @include font-size(18px);
     }
-    .btn-gray {
+    .signin-link {
+      @include font-size(13px);
       position: relative;
       color: $brand-color;
       padding: 4px 4px;

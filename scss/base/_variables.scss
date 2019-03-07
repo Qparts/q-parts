@@ -26,9 +26,9 @@ $dark-50: rgba(39, 39, 52, 0.5);
 $dark-70: rgba(39, 39, 52, 0.7);
 $dark-80: rgba(39, 39, 52, 0.8);
 $green: #24b450;
-$input-placeholder-color: rgba(55, 54, 60, 0.7);
+$input-placeholder-color: $light-charcoal-grey;
 //img
-$img-path: "../../public/img";
+$img-path: "/img";
 
 //border-radius-base
 $border-radius-base: 20px;
@@ -47,7 +47,7 @@ $max-container-popup : 900px;
 $padding-left: 128px;
 
 //ICON
-$icon-path: "../../public/icon";
+$icon-path: "/icon";
 $icon-font-name: "q-parts-icons";
 
 $section-p-b : 70px;
@@ -59,3 +59,7 @@ $font-family-base : 'Roboto', sans-serif;
 $header-height: 114px;
 //defult -gradient
 $default-header-bg: linear-gradient(to #{$right}, #87363d, #37363a , #372628, #1e1b1e);
+
+//breadcrumb
+$breadcrumb-bg: transparent;
+$breadcrumb-divider: "\68";

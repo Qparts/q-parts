@@ -5,7 +5,6 @@ import {
   FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_SORTED_PRODUCTS,
   GET_COUNTRIES_ONLY_SUCCEEDED
 } from '../actions/apiAction';
-import { AR } from '../constants';
 
 
 export default function reducer(state = initialState, action) {
@@ -15,26 +14,15 @@ export default function reducer(state = initialState, action) {
       return { ...state, country: action.payload }
 
     case GET_COUNTRIES_REGIONS_SUCCEEDED:
-      const newCountriesRegions = action.payload.map(country => {
-        return { ...country, label: country.nameAr, value: country.id }
-      });
 
-      return { ...state, countriesRegions: newCountriesRegions }
+      return { ...state, countriesRegions: action.payload }
 
     case GET_COUNTRIES_SUCCEEDED:
-      const newCountries = action.payload.map(country => {
-        return { ...country, label: country.name, value: country.id }
-      });
 
-      return { ...state, countries: newCountries }
+      return { ...state, countries: action.payload }
 
     case GET_COUNTRIES_ONLY_SUCCEEDED:
-      const countryLabel = action.payload.currentLang === AR ? 'nameAr' : 'name';
-      const newCountriesOnly = action.payload.data.map(country => {
-        return { ...country, label: country[countryLabel], value: country.id }
-      });
-
-      return { ...state, countriesOnly: newCountriesOnly }
+      return { ...state, countriesOnly: action.payload.data }
 
     case GET_VEHICLE_SUCCEEDED:
       return { ...state, vehicles: action.payload }

@@ -1,0 +1,171 @@
+.tires-hero{
+  @extend .position-relative;
+}
+.tire-set{
+  @extend .position-absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  @include media-breakpoint-down(sm){
+    bottom: 1px;
+  };
+  h1{
+    color: $white;
+    @include font-size(55px);
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    line-height: 38px;
+    margin-bottom: 40px;
+    @include media-breakpoint-down(lg){
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    };
+  }
+  h5{
+    color: $white;
+    @include font-size(25px);
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 8px;
+    padding-#{$left}: 8px;
+
+    p{
+      margin-bottom: 0;
+      display: inline-block;
+      @include opacity(0.7);
+      @include font-size(15px);
+      text-transform: capitalize;
+    }
+    span{
+      display: none;
+      margin-#{$right}: 5px;
+      @include media-breakpoint-up(md){
+        display: inline-block;
+      };
+      @include media-breakpoint-up(lg){
+        display: none;
+      };
+    }
+    @include media-breakpoint-down(sm){
+      background: $white;
+      color: $basic-gray;
+      text-transform: uppercase;
+      font-size: 1.5625rem;
+      padding: 15px;
+      margin-bottom: 0;
+      height: 75px;
+      display: flex;
+      align-items: center;
+      border-top-#{$left}-radius: $border-radius-base;
+      p{
+        display: none;
+      }
+    };
+  }
+  .icon-arrow-right{
+    height: 22px;
+    &:before{
+      top: -2px;
+    }
+  }
+  .btn-primary{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    @include font-size(20px);
+  }
+  .tires-set-form{
+    margin-bottom: 30px;
+    [class*=' col']{
+      padding-#{$right}: 0;
+      &:first-child{
+        .select{
+          border-top-#{$left}-radius: $border-radius-base;
+          border-bottom-#{$left}-radius: $border-radius-base;
+        }
+      }
+      &:nth-child(3){
+        padding-#{$right}: 5px;
+        .select{
+          border-bottom-#{$right}-radius: $border-radius-base;
+        }
+      }
+      &:not(:first-child){
+        padding-#{$left}: 1px;
+      }
+    }
+  }
+}
+.tires-set-form{
+    .select{
+      margin-top: 0;
+      position: relative !important;
+      background: $white;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      padding: 0 15px;
+    }
+    .select__control{
+      width: 100% !important;
+    }
+    .select__value-container{
+      padding-#{$left}: 0;
+    }
+    .select__menu{
+      border-top-#{$left}-radius: 0 !important;
+        &::after {
+        	display: none;
+      }
+    }
+    .placeholder{
+      border-top-#{$left}-radius: 0 ;
+      border-top: 1px solid $very-light-grey ;
+
+    }
+    .select__menu-list{
+      border-top-#{$left}-radius: 0 !important;
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+  }
+.tire-set-xs{
+  form{
+    position: relative;
+    z-index: 2;
+    padding-bottom: 70px;
+  }
+  .input-container{
+    border-bottom-#{$left}-radius: $border-radius-base;
+    border-bottom-#{$right}-radius: $border-radius-base;
+    @include box-shadow;
+  }
+  .select:last-child{
+    border-bottom-#{$left}-radius: $border-radius-base;
+    border-bottom-#{$right}-radius: $border-radius-base;
+  }
+  .select__control{
+    border-bottom: 1px solid $dark-gray;
+    border-radius: 0;
+  }
+  .select__menu{
+    margin-top: -1px !important;
+  }
+  .btn{
+    position: absolute;
+    bottom: 0 ;
+    width: 150%;
+    #{$left}: 15px;
+    text-align: #{$left};
+    height: 50px;
+    display: flex;
+    align-items: center;
+    @include font-size(20px);
+    i{
+      height: 22px;
+    }
+  }
+}

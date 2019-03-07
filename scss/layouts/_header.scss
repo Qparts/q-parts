@@ -123,13 +123,14 @@
     display: inline-table;
   }
   .dropdown-menu{
+    @include text-left;
     overflow: hidden;
-    border-radius: side-values(0px 0px $border-radius-base $border-radius-base);
+    border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;
     #{$right}: 0 !important;
     top: 15px !important;
-    border-top-width: 0;
-    @extend .pb-0;
+    border-width: 0;
+    padding-bottom: 0;
     > h6{
       @extend .px-3;
       color: $basic-gray;
@@ -157,7 +158,7 @@
         }
         &:hover{
           i{
-            margin-left: 5px;
+            @include margin-left(5px);
           }
         }
       }
@@ -166,21 +167,22 @@
 }
 .signin-list{
       @extend .mx-3;
-      @extend .px-0;
+      padding-left: 0;
+      padding-right: 0;
       @extend .d-flex;
       @extend .flex-nowrap;
       margin-bottom: 17px;
       li{
-        @extend .d-inline-block;
+        display: inline-block;
         margin-#{$right}: 5px;
         a{
           height: 40px;
           padding-top: 10px;
           padding-bottom: 10px;
-          @extend .text-center;
+          text-align: center;
           min-width: 40px;
           background: $light-gray;
-          @extend .d-block;
+          display: block;
           .icon-facebook{
             @include font-size(19px);
           }
@@ -194,12 +196,14 @@
         }
         &:first-child{
           a{
-            padding-top: 7px;
             @extend .btn-primary;
+            padding-top: 7px;
             white-space: nowrap;
-            border-radius: side-values(0 0 0 $border-radius-base) !important;
-            @extend .text-capitalize;
+            border-radius: corner-values(0 0 0 $border-radius-base) !important;
+            text-transform: capitalize;
             @include font-size(18px);
+            padding-left: 15px;
+            padding-right: 15px;
             i{
               @include font-size(17px);
               margin-#{$left}: 3px;
@@ -212,7 +216,7 @@
         &:last-child{
           margin-#{$right}: 0;
           a{
-            border-radius: side-values(0 0 $border-radius-base 0);
+            border-radius: corner-values(0 0 $border-radius-base 0);
 
           }
         }
@@ -225,7 +229,7 @@
       @extend .d-flex;
       @extend .mb-0;
       > li{
-        @extend .flex-fill;
+        //@extend .flex-fill;
         a{
           padding: 5px 10px;
           @include font-size(13px);

@@ -16,18 +16,19 @@ color: $basic-gray;
   };
 }
 .list-inline{
+  @include padding-left(0);
   li{
     @extend .list-inline-item;
   }
   margin-bottom: 0;
 }
 .div-border-radius{
-  border-radius: side-values(20px 0 20px 20px) !important;
+  border-radius: corner-values(20px 0 20px 20px) !important;
 }
 .box-shadow{
   box-shadow: 0px 18px 18px 0px rgba(0, 0, 0, 0.07);
 }
 .form-control{
-  padding-left: 15px;
-  padding-right: 15px;
+  @include padding-left(15px);
+  @include padding-right(15px);
 }

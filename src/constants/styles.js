@@ -2,6 +2,7 @@ import React from 'react';
 import NextArrow from '../components/UI/NextArrow/NextArrow';
 import PrevArrow from '../components/UI/PrevArrow/PrevArrow';
 import _ from 'lodash'
+import { ltr } from '.';
 
 //COLOR
 const basicGray = '#37363d';
@@ -68,7 +69,7 @@ const isRequired = (error, touched) => {
 }
 
 const isInvalid = (error, touched) => {
-  return touched && error.includes('Invalid');
+  return touched && (error.includes('Invalid') || error.includes('غير'));
 }
 
 export const styles = {
@@ -110,7 +111,7 @@ export const styles = {
     },
   },
   arrow_right: {
-    color :"black"
+    color: "black"
   }
 }
 
@@ -127,6 +128,39 @@ export const starsRating = {
   edit: false,
   color1: '#cfcfcf',
   color2: '#fabb12'
+}
+
+export const swiperParams = (direction) => {
+  return {
+    containerClass: `swiper-container products-list`,
+    slidesPerView: 5,
+    spaceBetween: 30,
+    grabCursor: true,
+    lazy: true,
+    rebuildOnUpdate: true,
+    navigation: {
+      nextEl: direction === ltr ? '.swiper-button-next' : '.swiper-button-prev',
+      prevEl: direction === ltr ? '.swiper-button-prev' : '.swiper-button-next'
+    },
+    breakpoints: {
+      1200: {
+        slidesPerView: 4,
+        spaceBetween: 30
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 15
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 15
+      },
+      576: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+    }
+  }
 }
 
 export const colors = {

@@ -17,6 +17,7 @@
   border-style: none;
   background: $brand-color;
   color: $white;
+  @include font-size(19px);
   &:hover,
   &:focus {
     background: darken($brand-color, 10%);
@@ -45,9 +46,15 @@
   }
 }
 
-.btn-secondary {
-  border-style: none;
-}
+  .btn-secondary {
+    border-style: none;
+    border: 1px solid darken($light-gray, 3%);
+    background: $white;
+    color: $basic-gray;
+    &:hover{
+      background: $light-gray;
+    }
+  }
 
 .btn-light{
   background-color: $basic-white;
@@ -55,15 +62,24 @@
 
 .btn-facebook {
   background: $white;
-  border-radius: side-values(0 0 0 $border-radius-base) !important;
+  border-radius: corner-values(0 0 0 $border-radius-base) !important;
 }
 .btn-google {
   background: $white;
-  border-radius: side-values(0 0 $border-radius-base 0) !important;
+  border-radius: corner-values(0 0 $border-radius-base 0) !important;
   height: 100%;
   img {
     width: 25px;
   }
+}
+
+.btn-link {
+  color: #37363c;
+  text-decoration: none;
+  background-color: transparent;
+  border: 0;
+  @include padding-right(0);
+  cursor: pointer;
 }
 
 .delete-btn {

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
-import Button from "../UI/Button";
 import Title from '../UI/Title';
 import { right } from '../../utils';
 import OrderSteps from '../OrderSteps';
@@ -9,16 +8,17 @@ import { Link } from "react-router-dom";
 class HomeDetails extends Component {
 
 	render() {
-		const { addRecentViewedProducts, onRecentlyViewedProducts, translate, direction } = this.props;
+		const { recentViewedProducts, translate, direction, currentLanguage } = this.props;
 		return (
 			<Fragment>
 					<section className="start-custom-order container-fluid">
 						<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")}/>
-						<OrderSteps/>
+						<OrderSteps translate={translate} direction={direction}/>
 						<div className="order-form">
 							<header className="row">
-								<h2 className="col col-10 offset-lg-1">
-									<span className="arrow"><i className="icon-arrow-down" /></span>Start Now
+								<h2 className="col col-10 mx-auto">
+									<span className="arrow"><i className="icon-arrow-down" /></span>
+									{translate("quotationOrder.startNow")}
 								</h2>
 							</header>
 							{/* <div className="form-details">
@@ -153,8 +153,8 @@ class HomeDetails extends Component {
 									</picture>
 									<div className="d-flex justify-content-center">
 										<h1>
-											<span>{translate("quotationOrder.items")}</span>
-											VENDOR ! Join Qetaa.com
+											<span>{translate("quotationOrder.vendor.items")}</span>
+											{translate("quotationOrder.vendor.joinUs")}
 										</h1>
 										<a className="btn btn-primary" href="#"><span>{translate("general.join")}</span><i className={`icon-arrow-${right(direction)}`}></i></a>
 									</div>
@@ -164,9 +164,10 @@ class HomeDetails extends Component {
 						</div>
 					</section>
 					<Products
-						addRecentViewedProducts={addRecentViewedProducts}
-						onRecentlyViewedProducts={onRecentlyViewedProducts}
+						recentViewedProducts={recentViewedProducts}
 						translate={translate}
+						direction={direction}
+						currentLanguage={currentLanguage}
 						/>
 			</Fragment>
 		);

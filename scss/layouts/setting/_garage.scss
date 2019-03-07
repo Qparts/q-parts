@@ -39,7 +39,7 @@
     background: $white;
     margin-bottom: 5px;
     padding: side-values(10px);
-    border-radius: side-values(20px 0 20px 20px) !important;
+    border-radius: corner-values(20px 0 20px 20px) !important;
     @include margin-left(5px);
     label{
       margin-bottom: 0px;
@@ -107,6 +107,7 @@
   }
 }
 .garage-popup{
+  @include text-left;
   // width: 700px;
   .modal-content{
     background: $white !important;
@@ -143,12 +144,12 @@
         .div-rounded{
           margin-bottom: 20px;
           .select-input{
-            border-radius: side-values(20px 0 20px 20px !important);
+            border-radius: corner-values(20px 0 20px 20px) !important;
           }
         }
         .div-last-rounded{
           input{
-            border-radius: side-values(20px 0 20px 20px !important);
+            border-radius: corner-values(20px 0 20px 20px) !important;
           }
           .input-group-prepend{
             margin-top: 10px;
@@ -160,12 +161,12 @@
         .btn-light{
           height: auto;
           background-color: $light-gray;
-          border-radius: side-values(0 0 0 20px) !important;
+          border-radius: corner-values(0 0 0 20px) !important;
           box-shadow: 0px 18px 18px 0px rgba(0, 0, 0, 0.07);
         }
         .btn-primary{
           @include margin-left(5px);
-          border-radius: side-values(0 20px 20px 0) !important;
+          border-radius: corner-values(0 20px 20px 0) !important;
           height: auto;
         }
       }
@@ -297,7 +298,7 @@
       background: $white;
       margin-bottom: 5px;
       padding: side-values(10px);
-      border-radius: side-values(20px 0 20px 20px) !important;
+      border-radius: corner-values(20px 0 20px 20px) !important;
       @include margin-right(0px);
       @include margin-left(0px);
       label{
@@ -344,7 +345,7 @@
             width: 66px;
             text-align: center;
             background: $light-gray !important;
-            border-radius: side-values(0 20px 20px 20px) !important;
+            border-radius: corner-values(0 20px 20px 20px) !important;
             margin-#{$right}: 10px;
             color: $black;
             display: flex;

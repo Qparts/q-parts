@@ -14,6 +14,11 @@ a:active {
 h1{
   @extend .text-uppercase;
 }
+.form-control{
+  &:focus{
+    box-shadow: 0 0 0 0.2rem rgba(237, 64, 54, 0.25);
+  }
+}
 .input{
   border: 0;
   background: $light-gray;
@@ -44,6 +49,10 @@ img{
     };
   }
 }
+.p-inner-sec{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 .artical-space{
   margin-bottom: 40px;
   @include media-breakpoint-down(lg){
@@ -55,4 +64,18 @@ img{
 }
 .cd-main-content{
   overflow-x: hidden;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px $light-gray inset !important;
+}
+input:disabled,
+button:disabled{
+  cursor: not-allowed;
+}
+.list-unstyled {
+  @include padding-left(0);
 }

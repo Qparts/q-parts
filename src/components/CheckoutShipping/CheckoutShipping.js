@@ -8,6 +8,8 @@ import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../containers/Autocomplete/Autocomplete';
 import RenderField from '../RenderField/RenderField';
 import * as validations from '../../utils';
+import { right } from '../../utils';
+import { getTranslatedObject, getTranslatedString } from '../../utils';
 import Radio from '../UI/Radio';
 import { connect } from 'react-redux';
 
@@ -64,24 +66,24 @@ class CheckoutShipping extends Component {
     this.props.addDeliveryAddress(address);
   }
   handleSubmit = values => {
-		const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
-		const latitude = city.latitude;
-		const longitude = city.longitude;
-		const cityId = city.id;
+    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+    const latitude = city.latitude;
+    const longitude = city.longitude;
+    const cityId = city.id;
     this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
-    .then(() => {
-      this.setState({ hasNewAddress: false });
-    })
-	  }
+      .then(() => {
+        this.setState({ hasNewAddress: false });
+      })
+  }
   render() {
-    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses } = this.props;
+    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses, currentLanguage, direction } = this.props;
 
     const regionsData = regions ?
       regions.map(region => {
         return {
           ...region,
           value: region.id,
-          label: region.name
+          label: getTranslatedObject(region, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -90,7 +92,7 @@ class CheckoutShipping extends Component {
         return {
           ...city,
           value: city.id,
-          label: city.name
+          label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
 
@@ -137,7 +139,7 @@ class CheckoutShipping extends Component {
         <div className="col-6 col-md-4 div-rounded-first">
           <Field
             disabled
-            name="name"
+            name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
             placeholder={translate("form.address.country")}
             component={RenderField}
             validate={[validations.required]} />
@@ -182,7 +184,7 @@ class CheckoutShipping extends Component {
               </Map>
             </div>
           ) :
-            <div className="Address-container col-12 col-md-8">
+            <div className="Address-container col-12 col-md-9">
               <div className="addresses-header justify-content-between ">
                 <p>{translate("setting.addressBook.shippingItem")}</p>
                 <Button type="button" className="btn btn-primary" icon="icon-add" text={translate("setting.addressBook.add")} onClick={this.handleAddNewAddress} isReverseOrder />
@@ -263,13 +265,13 @@ class CheckoutShipping extends Component {
                         placeholder={translate("form.address.shippingNote")} />
                     </div>
                     <div className="footer col-12">
-                      <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon="icon-arrow-right" />
+                      <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon={`icon-arrow-${right(direction)}`} />
                       <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
                     </div>
                   </div>
                 )}
                 {addressItem}
-                <Button type="button" className="btn btn-secondary" style={canSubmit ? {} : styles.disable} text={translate("form.address.buttons.deliver")} icon="icon-arrow-right" onClick={this.handleDelivery} />
+                <Button type="button" className="btn btn-secondary" style={canSubmit ? {} : styles.disable} text={translate("form.address.buttons.deliver")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleDelivery} />
               </form>
             </div>
         }

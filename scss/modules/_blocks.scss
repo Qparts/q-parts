@@ -1,4 +1,4 @@
-.order-summery{
+.order-summary{
   @include border-radius-div;
   @include box-shadow;
   margin-bottom: 40px;
@@ -71,45 +71,27 @@
     }
   }
 }
-//move to check out oage
-.chat-div{
-  padding: 0 10px;
-  img{
-    max-width: 40px;
-  }
-  .media-body{
-    P{
-      @include font-size(13px);
-      margin-top: 2px;
-      span{
-        @include font-size(14px);
-        display: block;
-      }
-    }
-  }
-  &:hover{
-    p{
-      span{
-        text-decoration: underline;
-      }
-    }
-  }
-}
-// end moving
+
 .banner-250{
   width: 250px;
   height: 250px;
   text-align: center;
   margin-top: 30px;
+  background: $white;
+  position: relative;
   p{
-    vertical-align: middle
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
 .live-chat{
+  @include text-left;
   background: $light-gray;
   @extend .position-fixed;
   bottom: 0;
-  right: 50px;
+  #{$right}: 50px;
   z-index: 999;
   width: 151px;
   border-radius: $border-radius-base $border-radius-base 0 0;
@@ -117,7 +99,7 @@
   @include nav-sm-media{
     width: 48px;
     background: transparent;
-    right: 15px;
+    #{$right}: 15px;
   }
   img{
     max-width: 48px;
@@ -168,4 +150,59 @@
         }
       }
     }
+}
+.products-brand{
+  ul{
+    margin-top: -15px;
+    margin-bottom: 0;
+    @include media-breakpoint-down(md){
+      margin-top: -2px;
+      margin-right: -2px;
+      margin-left: -2px;
+    }
+  }
+  h3{
+    @include font-size(20px);
+    text-transform: capitalize;
+    margin-bottom: 20px;
+    font-weight: 400;
+    @include media-breakpoint-up(lg){
+      @include font-size(25px);
+    };
+  }
+  li{
+    margin-top: 15px;
+    @include media-breakpoint-down(md){
+      padding: 0 2px;
+      margin-top: 2px;
+    };
+  }
+  a{
+    display: block;
+    padding: 10px 20px;
+    background: $white;
+    @include media-breakpoint-down(md){
+      padding: 5px 10px;
+    }
+    &:hover{
+      background: $light-gray;
+    }
+  }
+}
+.banner{
+  @extend .d-flex;
+  @extend .justify-content-center;
+  @extend .align-items-center;
+  margin: 0 auto;
+}
+.banner-728{
+  max-width: 728px;
+  height: 90px;
+  background: $white;
+  text-align: center;
+}
+.div-style{
+  @include border-radius-div();
+  overflow: hidden;
+
 }

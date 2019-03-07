@@ -18,6 +18,7 @@
   background: $default-header-bg;
 }
 .cd-nav {
+  @include text-left;
   @include transition(all, 0.3s, ease);
   ul {
     @extend .list-unstyled;
@@ -35,7 +36,8 @@
     }
     margin-bottom: 0;
     position: relative;
-    > a {
+    > a,
+    button {
       margin: 8px 0;
       padding: 10px;
       font-weight: 500;
@@ -54,6 +56,25 @@
         font-weight: 700;
       }
     }
+    a {
+      &::before,
+      &::after {
+        #{$right}: 20px;
+        @if ($dir == ltr) {
+          -webkit-transform-origin: 9px 50%;
+          -moz-transform-origin: 9px 50%;
+          -ms-transform-origin: 9px 50%;
+          -o-transform-origin: 9px 50%;
+          transform-origin: 9px 50%;
+        } @else {
+          -webkit-transform-origin: 0px 50%;
+          -moz-transform-origin: 0px 50%;
+          -ms-transform-origin: 0px 50%;
+          -o-transform-origin: 0px 50%;
+          transform-origin: 0px 50%;
+        }
+      }
+    }
     &.has-children {
       a {
         &::before,
@@ -66,7 +87,8 @@
       }
     }
     &:hover {
-      > a {
+      > a,
+      button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -83,7 +105,8 @@
       }
     }
     &.selected {
-      a {
+      a,
+      button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -102,7 +125,8 @@
     @include nav-sm-media {
       display: block;
     }
-    a {
+    a,
+    button {
       margin-bottom: 5px;
       > i {
         @include font-size(25px);
@@ -145,12 +169,13 @@ ul.cd-secondary-nav {
       pointer-events: none;
       border-color: rgba(0, 0, 0, 0);
       border-bottom-color: $basic-gray;
-      border-width: 7px;
+      border-width: 8px;
     }
   }
   > li {
     border-bottom: 1px solid $light-gray;
-    > a {
+    > a,
+    button {
       @include font-size(14px);
       padding: 8px 15px;
       text-transform: capitalize;
@@ -161,15 +186,16 @@ ul.cd-secondary-nav {
     &:last-child {
       border-bottom-width: 0;
       border-bottom-left-radius: 20px;
-      border-bottom-#{$right}-radius: 20px;
+      border-bottom-right-radius: 20px;
     }
   }
   .go-back {
-    a {
+    a,
+    button {
       padding-#{$left}: 35px;
       &::before,
       &::after {
-        #{$left}: 15px;
+        left: 15px;
       }
     }
   }
@@ -247,6 +273,11 @@ ul.cd-secondary-nav {
   -webkit-transition: opacity 0.3s 0s, visibility 0s 0s, -webkit-transform 0.3s 0s;
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s, -moz-transform 0.3s 0s;
   transition: opacity 0.3s 0s, visibility 0s 0s, transform 0.3s 0s;
+}
+.cd-overlay {
+  @include nav-lg-media {
+    display: none;
+  }
 }
 .overflow-hidden,
 .overflow-hidden-search {
@@ -330,21 +361,22 @@ ul.cd-secondary-nav {
       padding: 10px;
     }
   }
-  p{
+  p {
     @include font-size(15px);
     display: flex;
     align-items: baseline;
     color: $charcoal-grey-two-40;
-    a{
+    a,
+    button {
       color: $basic-gray;
       font-weight: 400;
       padding-#{$left}: 5px;
-      i{
+      i {
         @include transition(all, 0.5s, ease);
         padding-#{$left}: 5px;
         @include font-size(14px);
 
-        &:before{
+        &:before {
           top: 2px;
           @include font-size(12px);
         }

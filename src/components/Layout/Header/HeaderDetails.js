@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
-import GaragePopup from "../../../containers/GaragePopup/GaragePopup";
 import { isEmpty, right } from "../../../utils";
-import ButtonCustom from "../../UI/Button";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
 
@@ -53,7 +51,7 @@ class HeaderDetails extends Component {
           <DropdownItem header={dropdownHeader}>
             {
               !isLoggedIn && <Fragment>
-                <h6>Welcome Back</h6>
+                <h6>{translate("dialog.signin.title")}</h6>
                 <ul className="signin-list">
                   <li><a className="btn" href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
                   {/* <li><a href="#"><i className="icon-facebook" /></a></li>

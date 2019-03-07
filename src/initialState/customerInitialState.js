@@ -24,7 +24,6 @@ export const initialState = {
     },
     token: null,
     tokenExpire: null,
-    vehiclesFormat: [],
     selectedVehicle: {},
     selectedCountry: {},
     defaultAddress: {
@@ -41,11 +40,10 @@ export const initialState = {
     isOrderCompleted: false,
     recentViewedProducts: [],
     wishlist: [],
-    direction: 'ltr',
-    registered: null,
+    direction: 'rtl',
     isShippingCompleted: false,
     isPaymentCompleted: false,
-    defaultLang: 'en',
+    defaultLang: 'ar',
     quotations: {
         pending: [],
         completed: []

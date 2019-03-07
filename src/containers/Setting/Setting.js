@@ -242,7 +242,7 @@ class Setting extends Component {
         return {
           header: <Title
             header={translate("dialog.vehicle.title")}
-            subHeader={"Store vehicles in your garage and Get product recommendations"} />
+            subHeader={translate("dialog.vehicle.subTitle")} />
         }
       case 'payment':
         return {
@@ -265,11 +265,11 @@ class Setting extends Component {
     this.togglePopup();
   };
   render() {
-    const { translate } = this.props;
+    const { translate, direction } = this.props;
     let dialog;
 
     if (this.state.dialogType === email) {
-      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal dir={direction} contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <EditInfo
@@ -284,7 +284,7 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Modal contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      dialog = <Modal dir={direction} contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <ResetPassword
@@ -300,10 +300,11 @@ class Setting extends Component {
 
     let addressDialog;
     if (this.state.dialogType === addresses_popup) {
-      addressDialog = <Modal contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      addressDialog = <Modal dir={direction} contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Address
+            currentLanguage={this.props.currentLanguage}
             address={this.props.address}
             customer={this.props.customer}
             getRegions={this.props.getRegions}
@@ -330,22 +331,20 @@ class Setting extends Component {
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-      garageDialog = <Modal contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      garageDialog = <Modal dir={direction} contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <Vehicles
-            newOrOldVechile={this.state.newOrOldVechile}
-            onTabChange={this.handleChange}
             toggle={this.togglePopup}
-            displayTwoTabs={false}
             direction={this.props.direction}
+            defaultLang={this.props.currentLanguage}
           />
         </ModalBody>
       </Modal>
 
     let paymentDialog;
     if (this.state.dialogType === payment_pupop)
-      paymentDialog = <Modal contentClassName="container-fluid" className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+      paymentDialog = <Modal dir={direction} contentClassName="container-fluid" className="payment-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
         <ModalBody>
           <PaymentPopup
@@ -356,6 +355,12 @@ class Setting extends Component {
           />
         </ModalBody>
       </Modal>
+
+    const chatMessages = [
+      translate("customerService.setting.whatsApp.header"),
+      translate("customerService.setting.whatsApp.subHeader")
+    ];
+
     return (
       <Fragment>
         <MediumScreen>
@@ -388,7 +393,7 @@ class Setting extends Component {
                   <img className="garage" src="/img/request.svg" alt="garage" />
                   <div>
                     <p>{translate('setting.links.garage')}</p>
-                    <h1>{this.props.vehiclesFormat.length}<p>{translate('setting.vehicle')}</p></h1>
+                    <h1>{this.props.vehicles.length}<p>{translate('setting.vehicle')}</p></h1>
                   </div>
                 </i>
               </div>
@@ -396,11 +401,9 @@ class Setting extends Component {
             <div className="component-background">
               <section id="setting-details" className="container-fluid">
                 <div className="wahtsapp-before-links">
-                  <a className="bg-whatsapp">
-                    <CustomerService
-                      messages={["Have a Question?", "Ask a Specialis, In-House Experts."]}
-                      url="" />
-                  </a>
+                  <CustomerService
+                    messages={chatMessages}
+                    url="" />
                 </div>
                 <div className="row">
                   <SettingLinks {...this.props} />
@@ -493,6 +496,8 @@ class Setting extends Component {
                     <Route path="/setting/wishlist" exact={true} render={() => {
                       return (
                         <Wishlist
+                          currentLanguage={this.props.currentLanguage}
+                          direction={this.props.direction}
                           wishlist={this.props.wishlist}
                           deleteWishlist={this.props.deleteWishlist}
                           moveWishlistToCart={this.props.moveWishlistToCart}
@@ -523,13 +528,6 @@ class Setting extends Component {
                       redirectTo="/setting/profile" />
 
                   </Switch>
-                </div>
-                <div className="row">
-                  <a className="bg-whatsapp">
-                    <CustomerService
-                      messages={["Have a Question?", "Ask a Special"]}
-                      url="" />
-                  </a>
                 </div>
               </section>
             </div>
@@ -628,6 +626,8 @@ class Setting extends Component {
               <Route path="/setting/wishlist" exact={true} render={() => {
                 return (
                   <Wishlist
+                    currentLanguage={this.props.currentLanguage}
+                    direction={this.props.direction}
                     wishlist={this.props.wishlist}
                     deleteWishlist={this.props.deleteWishlist}
                     moveWishlistToCart={this.props.moveWishlistToCart}
@@ -702,7 +702,6 @@ const mapStateToProps = (state) => {
     currentLanguage: getActiveLanguage(state.localize).code,
     selectedCountry: state.customer.selectedCountry,
     checkout: state.cart.checkout,
-    vehiclesFormat: state.customer.vehiclesFormat,
     wishlist: state.customer.wishlist,
     addresses: state.customer.detail.addresses,
     direction: state.customer.direction,

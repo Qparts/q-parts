@@ -10,8 +10,8 @@ import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import Checkout from '../components/Checkout/Checkout';
 import ProductDetail from '../containers/Product/ProductDetail';
 import Accessories from '../components/Accessories/Accessories';
-import Tyres from '../components/Tyres/Tyres';
 import MotorOil from '../components/MotorOil/MotorOil';
+import Tires from '../components/Tires/Tires';
 import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';
 import SearchResult from '../containers/SearchResult/SearchResult'
@@ -19,7 +19,7 @@ import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPa
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 
-export const routes = (isAuth, direction) => [
+export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/",
         exact: true,
@@ -29,7 +29,7 @@ export const routes = (isAuth, direction) => [
         path: "/quotation-order",
         exact: true,
         component: QuotationRequest,
-        redirectTo: '/'
+        defaultLang
     },
     {
         path: "/quotation-order/confirmation:quotationId?",
@@ -58,15 +58,21 @@ export const routes = (isAuth, direction) => [
     {
         path: "/signup/successful",
         component: ConfirmSignUp,
+        isAuth: isAuth,
+        direction: direction,
+        translate,
+        redirectTo: '/',
         exact: true,
     },
     {
         path: "/vehicles",
         component: Vehicles,
+        defaultLang
     },
     {
         path: "/cart",
-        component: Cart
+        component: Cart,
+        direction: direction
     },
     {
         path: "/setting",
@@ -104,8 +110,8 @@ export const routes = (isAuth, direction) => [
         component: Accessories
     },
     {
-        path: "/tyres",
-        component: Tyres
+        path: "/tires",
+        component: Tires
     },
     {
         path: "/motor-oil",
@@ -118,11 +124,14 @@ export const routes = (isAuth, direction) => [
     {
         path: "/password/forgot-password",
         exact: true,
-        component: ForgotPassword
+        component: ForgotPassword,
+        translate
     },
     {
         path: "/payment-response:cartId?/:id?/:status?/:message?",
         exact: true,
         component: CheckoutConfirmationOrder,
+        translate,
+        direction
     },
 ];
