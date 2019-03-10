@@ -10,7 +10,7 @@ import Button from '../../components/UI/Button';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
-import { Card, ListGroup } from 'reactstrap';
+import { Card, ListGroup, CardBody,InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import { isEmpty, replaceAll } from '../../utils';
 import * as constant from '../../constants';
 import { colors, styles, styles as commonStyles } from '../../constants';
@@ -18,7 +18,6 @@ import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { getGeneralSearch } from '../../utils/api';
 import { getActiveLanguage, getTranslate } from 'react-localize-redux';
-
 //mobile filter
 import { LargeScreen, DownLargeScreen } from '../../components/Device';
 import Sidebar from "react-sidebar";
@@ -611,7 +610,49 @@ class SearchResult extends Component {
 						<LargeScreen>
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
-									<li className="tires-filte">
+									{
+									this.props.filterObjects.map((filterObject, idx) => {
+										return <li key={idx}>
+											<h5>
+												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
+											</h5>
+											<div class="collapse show" id={`${filterObject.filterTitle}`}>
+												<Card className="filter-body">
+													<CardBody>
+														<div className="filter-search">
+															<i class="icon-search"></i>
+															<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+														</div>
+														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
+													</CardBody>
+												</Card>
+												{/*<ul className="options-list">
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O1" />
+															<label for="O1">Option 1</label>
+														</div>
+													</li>
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O2" />
+															<label for="O2">Option 2</label>
+														</div>
+													</li>
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O3" />
+															<label for="O3">Option 3</label>
+														</div>
+													</li>
+												</ul>*/}
+												{/*<a href="#" className="btn btn-gray">
+													View More <i className="icon-plus"></i>
+												</a>*/}
+											</div>
+										</li>
+									})}
+									{/*<li className="tires-filte">
 										<h5>
 											Tyer Search
 										</h5>
@@ -660,38 +701,8 @@ class SearchResult extends Component {
 											</div>
 											<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
 										</form>
-									</li>
-									<li>
-										<h5>
-											<a href="#Viscosity" data-toggle="collapse" role="button" aria-expanded="false">Viscosity Grade <span className="minus"></span></a>
-										</h5>
-										<div class="collapse show" id="Viscosity">
-											<ul className="options-list">
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O1" />
-														<label for="O1">Option 1</label>
-													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O2" />
-														<label for="O2">Option 2</label>
-													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O3" />
-														<label for="O3">Option 3</label>
-													</div>
-												</li>
-											</ul>
-											<a href="#" className="btn btn-gray">
-												View More <i className="icon-plus"></i>
-											</a>
-										</div>
-									</li>
-									<li>
+									</li>*/}
+									{/*<li>
 										<h5>
 											<a href="#Volume" data-toggle="collapse" role="button" aria-expanded="false">Volume<span className="minus"></span></a>
 										</h5>
@@ -778,7 +789,7 @@ class SearchResult extends Component {
 												</li>
 											</ul>
 										</div>
-									</li>
+									</li>*/}
 								</ul>
 							</div>
 
@@ -819,7 +830,6 @@ class SearchResult extends Component {
 												}
 												<a className="btn btn-gray" onClick={onClear}>Clear All</a>
 										</ul>
-										<a className="btn btn-gray">Clear All</a>
 									</div>
 								</LargeScreen>
 								<ul className="result-list products-list row">
