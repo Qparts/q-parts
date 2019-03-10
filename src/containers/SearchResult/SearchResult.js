@@ -94,6 +94,7 @@ class SearchResult extends Component {
 	static defaultProps = {
 					filterObjects: [
 							{
+								id: 1,
 									filterTitle: "Brands",
 									filterTitleAr: "الماركة",
 									options: [
@@ -110,6 +111,7 @@ class SearchResult extends Component {
 									]
 							},
 							{
+								id: 2,
 									filterTitle: "Volume",
 									filterTitleAr: "الماركة",
 									options: [
@@ -617,15 +619,11 @@ class SearchResult extends Component {
 												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
 											</h5>
 											<div class="collapse show" id={`${filterObject.filterTitle}`}>
-												<Card className="filter-body">
-													<CardBody>
 														<div className="filter-search">
 															<i class="icon-search"></i>
 															<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
 														</div>
-														{renderSearch(filterObject, Checkbox, onFilter, isChecked, currentLanguage)}
-													</CardBody>
-												</Card>
+														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												{/*<ul className="options-list">
 													<li>
 														<div class="checkbox">

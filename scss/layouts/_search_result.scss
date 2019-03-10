@@ -154,6 +154,8 @@
 .total-result{
   background: $white;
   padding: 0 15px 0;
+  margin-bottom: 15px;
+
   h2{
     padding-top: 9px;
     padding-bottom: 13px;
@@ -321,6 +323,7 @@
   margin-bottom: 0;
   margin-right: -10px;
   margin-left: -10px;
+  margin-top: 5px;
   > li{
     padding: 0 5px;
     margin-top: 10px;

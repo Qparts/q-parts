@@ -100,23 +100,31 @@ const WithProductView = WrappedComponent => {
 		}
 
 
-		renderSearch = (filtration, Component, handleChange, isChecked, currentLanguage) => {
+		renderSearch = (filtration, handleChange, isChecked, currentLanguage) => {
 
-			return filtration.options.map((data, index) => {
-				const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-				const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
-				const value = data[option];
-				const id = data['id'];
-				const filterTitle = filtration['filterTitle'];
-				return <div key={index}>
-					<Component
-						onChange={handleChange.bind(this, { key,value,id,filterTitle })}
-						value={`${filtration[key]} ${value}`}
-						checked={isChecked(`${filtration[key]} ${value}`)}
-						label={value} />
-				</div>
-			})
-		}
+            return filtration.options.map((data, index) => {
+                const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+                const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
+                const value = data[option];
+                const id = data['id'];
+                const filterId = filtration['id'];
+                const filterTitle = filtration['filterTitle'];
+
+								console.log(`${filterId}${id}`)
+                return <li key={index}>
+                    <div className="checkbox">
+                        <input
+                            type="checkbox"
+                            id={`${filterId}${id}`}
+                            onChange={handleChange.bind(this, { key, value, id, filterTitle })}
+                            value={`${filtration[key]} ${value}`}
+                            checked={isChecked(`${filtration[key]} ${value}`)}
+                        />
+                        <label for={`${filterId}${id}`}>{value}</label>
+                    </div>
+                </li>
+            })
+        }
 
 		handleClear = () => {
 			this.props.history.push(clearQuery(this.state.filtrationChecked,this.state.filtration));
