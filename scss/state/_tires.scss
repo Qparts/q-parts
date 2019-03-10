@@ -1,3 +1,7 @@
+.tires {
+  @include text-left;
+}
+
 .tires-hero{
   @extend .position-relative;
 }
