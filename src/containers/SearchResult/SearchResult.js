@@ -141,7 +141,8 @@ class SearchResult extends Component {
 			resultSize: 0,
 			startSize: 1,
 			endSize: 18,
-			item:''
+			item:'',
+			sizeOFItem: [],
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -244,13 +245,13 @@ class SearchResult extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { location: { search }, history, match } = this.props;
-		if (search !== prevProps.location.search) {
-			this.setGeneralSearch(search);
-
-		} else if (this.props.params !== prevProps.params) {
-			history.push(`${match.url}${this.props.params}`);
-		}
+		// const { location: { search }, history, match } = this.props;
+		// if (search !== prevProps.location.search) {
+		// 	this.setGeneralSearch(search);
+		//
+		// } else if (this.props.params !== prevProps.params) {
+		// 	history.push(`${match.url}${this.props.params}`);
+		// }
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -291,7 +292,7 @@ class SearchResult extends Component {
 				isHidden: 'is-hidden',
 				movesOut: ''
 			})
-		} }, 100);
+		} }, 50);
 		if(item === "clear"){
 			this.setState({
 				item: ''
@@ -383,7 +384,7 @@ class SearchResult extends Component {
 												</button>
 											</div>
 											<div className="col">
-												<h3>Filter <span><h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h2></span></h3>
+												<h3>Filter {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h3>
 											</div>
 											<div className="col-auto">
 												<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
@@ -486,8 +487,8 @@ class SearchResult extends Component {
 												</header>
 												<div>
 													<div className="filter-search">
-														<i class="icon-search"></i>
-														<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+														<i className="icon-search"></i>
+														<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
 													</div>
 													<ul className="options-list">
 														<li>
@@ -497,13 +498,13 @@ class SearchResult extends Component {
 															</div>
 														</li>
 														<li>
-															<div class="checkbox">
+															<div className="checkbox">
 																<input type="checkbox" id="O2" />
 																<label for="O2">Option 2</label>
 															</div>
 														</li>
 														<li>
-															<div class="checkbox">
+															<div className="checkbox">
 																<input type="checkbox" id="O3" />
 																<label for="O3">Option 3</label>
 															</div>
@@ -535,8 +536,8 @@ class SearchResult extends Component {
 												</header>
 												<div>
 													<div className="filter-search">
-														<i class="icon-search"></i>
-														<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+														<i className="icon-search"></i>
+														<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
 													</div>
 													<ul className="options-list">
 														<li className="radio-custom">
@@ -560,12 +561,12 @@ class SearchResult extends Component {
 											<div className="row">
 												<label className="col-auto">Price</label>
 												<div className="col">
-													<form class="form-row price-filter">
+													<form className="form-row price-filter">
 														<div className="col">
-															<input type="text" class="form-control" placeholder="From" />
+															<input type="text" className="form-control" placeholder="From" />
 														</div>
 														<div className="col">
-															<input type="text" class="form-control" placeholder="To" />
+															<input type="text" className="form-control" placeholder="To" />
 														</div>
 													</form>
 												</div>
@@ -601,7 +602,7 @@ class SearchResult extends Component {
 												<div>
 													<ul className="options-list">
 														<li>
-															<div class="checkbox">
+															<div className="checkbox">
 																<input type="checkbox" id="O10" />
 																<label for="O10">
 																	<div className="rating">
@@ -612,7 +613,7 @@ class SearchResult extends Component {
 															</div>
 														</li>
 														<li>
-															<div class="checkbox">
+															<div className="checkbox">
 																<input type="checkbox" id="O10" />
 																<label for="O10">Not Yet Rated</label>
 															</div>
@@ -626,14 +627,10 @@ class SearchResult extends Component {
 											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
 												<div className="row">
 													<label className="col-auto">{filterObject[key]}</label>
-														{
-															filtrationChecked.map((item, index) => (
-																(item.split(" ")[0] === filterObject[key] ?
-																	<p className="col" key={index}>{item} <a href="/" className="clear" onClick={() => this.handleClick('clear')}><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></p>
-																							   : ("")
-																							)
-															))
-														}
+															<div className="col">{filtrationChecked.map((item, index) => (
+																	(item.split(" ")[0] === filterObject[key] ? <p key={index}>{item} <a href="/" className="clear" onClick={() => this.handleClick('clear')}><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></p> : (""))
+																))}</div>
+
 												</div>
 												<div className={(this.state.item===filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
 													<header>
@@ -653,8 +650,8 @@ class SearchResult extends Component {
 													</header>
 												<div>
 															<div className="filter-search">
-																<i class="icon-search"></i>
-																<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+																<i className="icon-search"></i>
+																<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												</div>
