@@ -141,13 +141,19 @@ class SearchResult extends Component {
 			resultSize: 0,
 			startSize: 1,
 			endSize: 18,
+			item:''
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 	}
 
 	onSetSidebarOpen(open) {
-		this.setState({ sidebarOpen: open });
+		document.getElementById("html").classList.remove('overflow-hidden');
+		this.setState({
+			sidebarOpen: open,
+			isHidden: 'is-hidden',
+			movesOut: '',
+		});
 	}
 	quantityProducts = () => {
 		const params = getQuery(this.props.location);
@@ -277,20 +283,42 @@ class SearchResult extends Component {
 		console.log(filter);
 	}
 	//END Filter
-	handleClick = () => {
-		if (this.state.isHidden === 'is-hidden') {
-			this.setState({
-				isHidden: '',
-				movesOut: 'moves-out'
+	handleClick = (item) => {
+		var that = this;
+		setTimeout(function(){ if(item === "clear"){
+			that.setState({
+				item: '',
+				isHidden: 'is-hidden',
+				movesOut: ''
 			})
+		} }, 100);
+		if(item === "clear"){
+			this.setState({
+				item: ''
+			})
+		}else{
+			if (this.state.isHidden === 'is-hidden') {
+				this.setState({
+					isHidden: '',
+					movesOut: 'moves-out',
+					item: item
+				})
+			}
 		}
 	}
-
 	handleBack = () => {
 		this.setState({
 			isHidden: 'is-hidden',
 			movesOut: ''
 		})
+	}
+	openSidebar = () => {
+		document.getElementById("html").classList.add('overflow-hidden');
+	 	this.setState({ sidebarOpen: !this.state.sidebarOpen })
+	}
+	done = () => {
+		document.getElementById("html").classList.remove('overflow-hidden');
+		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: ''})
 	}
 	render() {
 		//sidebar
@@ -298,7 +326,6 @@ class SearchResult extends Component {
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-
 
 		const override = `
             border-color: ${colors.brandColor} !important;
@@ -359,17 +386,17 @@ class SearchResult extends Component {
 												<h3>Filter <span><h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h2></span></h3>
 											</div>
 											<div className="col-auto">
-												<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+												<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
 											</div>
 										</div>
 									</header>
 									<ul className="filter" ref={this.setFilter}>
-										<li onClick={this.handleClick} className="have-child" >
+										{/*<li onClick={()=>this.handleClick('tyerSize')} className="have-child" >
 											<div className="row">
 												<label className="col-auto">Tyer Size</label>
 												<p className="col">255, 55, 16 <i className="icon-arrow-right"></i></p>
 											</div>
-											<div className={`d-none filte-items ${this.state.isHidden}`}>
+											<div className={(this.state.item==="tyerSize" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
 												<header>
 													<div className="row">
 														<div className="col-auto">
@@ -382,7 +409,7 @@ class SearchResult extends Component {
 															<h4>Tyer Size</h4>
 														</div>
 														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
 														</div>
 													</div>
 												</header>
@@ -436,12 +463,12 @@ class SearchResult extends Component {
 												</div>
 											</div>
 										</li>
-										<li onClick={this.handleClick} className="have-child">
+										<li onClick={() =>this.handleClick('viscosity')} className="have-child">
 											<div className="row">
 												<label className="col-auto">Viscosity Grade</label>
 												<p className="col">SAE 0W-15, SAE.... <a href="#" className="clear"><i className="icon-close"></i></a></p>
 											</div>
-											<div className={`d-none filte-items ${this.state.isHidden}`}>
+											<div className={(this.state.item==="viscosity" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
 												<header>
 													<div className="row">
 														<div className="col-auto">
@@ -453,7 +480,7 @@ class SearchResult extends Component {
 															<h4>Viscosity Grade</h4>
 														</div>
 														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
 														</div>
 													</div>
 												</header>
@@ -485,12 +512,12 @@ class SearchResult extends Component {
 												</div>
 											</div>
 										</li>
-										<li onClick={this.handleClick} className="have-child">
+										<li onClick={()=> this.handleClick('volume')} className="have-child">
 											<div className="row">
 												<label className="col-auto">Volume</label>
 												<p className="col">All</p>
 											</div>
-											<div className={`d-none filte-items ${this.state.isHidden}`}>
+											<div className={(this.state.item==="volume" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
 												<header>
 													<div className="row">
 														<div className="col-auto">
@@ -502,7 +529,7 @@ class SearchResult extends Component {
 															<h4>Volume</h4>
 														</div>
 														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
 														</div>
 													</div>
 												</header>
@@ -544,7 +571,7 @@ class SearchResult extends Component {
 												</div>
 											</div>
 										</li>
-										<li onClick={this.handleClick} className="have-child">
+										<li onClick={()=>this.handleClick("rating")} className="have-child">
 											<div className="row">
 												<label className="col-auto">Rating</label>
 												<p className="col">
@@ -553,7 +580,7 @@ class SearchResult extends Component {
 													</div> & Up
 													 	</p>
 											</div>
-											<div className={`filte-items ${this.state.isHidden}`}>
+											<div className={(this.state.item==="rating" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
 												<header>
 													<div className="row">
 														<div className="col-auto">
@@ -567,7 +594,7 @@ class SearchResult extends Component {
 																	</h4>
 														</div>
 														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>Done</button>
+															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
 														</div>
 													</div>
 												</header>
@@ -593,7 +620,47 @@ class SearchResult extends Component {
 													</ul>
 												</div>
 											</div>
-										</li>
+										</li>*/}
+										{
+										this.props.filterObjects.map((filterObject, idx) => {
+											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
+												<div className="row">
+													<label className="col-auto">{filterObject[key]}</label>
+														{
+															filtrationChecked.map((item, index) => (
+																(item.split(" ")[0] === filterObject[key] ?
+																	<p className="col" key={index}>{item} <a href="/" className="clear" onClick={() => this.handleClick('clear')}><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></p>
+																							   : ("")
+																							)
+															))
+														}
+												</div>
+												<div className={(this.state.item===filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
+													<header>
+														<div className="row">
+															<div className="col-auto">
+																<button type="button" onClick={this.handleBack} className="btn reset">
+																	<i className="icon-arrow-left"></i>
+																</button>
+															</div>
+															<div className="col">
+																<h4>{filterObject[key]}</h4>
+															</div>
+															<div className="col-auto">
+																<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
+															</div>
+														</div>
+													</header>
+												<div>
+															<div className="filter-search">
+																<i class="icon-search"></i>
+																<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+															</div>
+															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+												</div>
+											</div>
+											</li>
+										})}
 									</ul>
 								</aside>
 							}
@@ -810,7 +877,7 @@ class SearchResult extends Component {
 										</div>
 										<DownLargeScreen>
 											<div className="side-bar-compnent-btn">
-												<button className="btn filter-btn" onClick={() => this.setState({ sidebarOpen: !this.state.sidebarOpen })}>
+												<button className="btn filter-btn" onClick={() => this.openSidebar()}>
 													<i className="icon-filter"></i>
 												</button>
 											</div>
@@ -826,8 +893,8 @@ class SearchResult extends Component {
 														<li key={index}>{item} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></li>
 													))
 												}
-												<a className="btn btn-gray" onClick={onClear}>Clear All</a>
 										</ul>
+										<a className="btn btn-gray" onClick={onClear}>Clear All</a>
 									</div>
 								</LargeScreen>
 								<ul className="result-list products-list row">

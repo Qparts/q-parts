@@ -83,7 +83,7 @@ export const styles = {
     backgroundColor: '#f8f9fa'
   },
   show: {
-    display: 'inline'
+    display: 'inline-block'
   },
   hide: {
     display: 'none'

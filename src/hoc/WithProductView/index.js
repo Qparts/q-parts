@@ -109,8 +109,6 @@ const WithProductView = WrappedComponent => {
                 const id = data['id'];
                 const filterId = filtration['id'];
                 const filterTitle = filtration['filterTitle'];
-
-								console.log(`${filterId}${id}`)
                 return <li key={index}>
                     <div className="checkbox">
                         <input
