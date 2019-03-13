@@ -254,13 +254,13 @@ class SearchResult extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		// const { location: { search }, history, match } = this.props;
-		// if (search !== prevProps.location.search) {
-		// 	this.setGeneralSearch(search);
-		//
-		// } else if (this.props.params !== prevProps.params) {
-		// 	history.push(`${match.url}${this.props.params}`);
-		// }
+		const { location: { search }, history, match } = this.props;
+		if (search !== prevProps.location.search) {
+			this.setGeneralSearch(search);
+		
+		} else if (this.props.params !== prevProps.params) {
+			history.push(`${match.url}${this.props.params}`);
+		}
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
