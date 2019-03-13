@@ -7,7 +7,7 @@ import {
   VERIFY_CODE_NO_SUCCEEDED, SELECT_VEHICLE_FROM_GARAGE, VERIFY_MOBILE_NO_SUCCEEDED, LINK_SOCIAL_MEDIA_SUCCEEDED, ADD_ADDRESS_SUCCEEDED, ACCOUNT_VERIFIED_SUCCEDED, CLEAR_ADDRESS,
   COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
   RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER,
-  CHANGE_DEFAULT_ADDRESS, CHANGE_DEFAULT_VEHICLE
+  CHANGE_DEFAULT_ADDRESS, CHANGE_DEFAULT_VEHICLE, INCREMENRT_QUOTATION_PRODUCT_QUANTITY, DECREMENRT_QUOTATION_PRODUCT_QUANTITY
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR, quotations } from '../constants';
@@ -238,6 +238,51 @@ export default function reducer(state = initialState, action) {
 
     case SET_QUOTATION_ORDER:
       return { ...state, isQuotationorderCompleted: action.payload }
+
+    case INCREMENRT_QUOTATION_PRODUCT_QUANTITY:
+      const { incQuantity } = action.payload;
+      let newCompletedQuotationItemsInc = [];
+      state.quotations.completed.forEach(quotations => {
+        quotations.quotationItems.forEach(oldQuotationItem => {
+          const { quotationItem } = action.payload;
+          const newQuantityInc = oldQuotationItem.id === quotationItem.id ? incQuantity : oldQuotationItem.quantity
+          newCompletedQuotationItemsInc.push({
+            ...oldQuotationItem, quantity: newQuantityInc
+          })
+        })
+      });
+
+      const newQuotations = state.quotations.completed.map(item => {
+        const { requestNumber } = action.payload;
+        return {
+          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsInc : item.quotationItems
+        }
+      });
+
+      return { ...state, quotations: { ...state.quotations, completed: newQuotations } }
+
+    case DECREMENRT_QUOTATION_PRODUCT_QUANTITY:
+      const { decQuantity } = action.payload;
+
+      let newCompletedQuotationItemsDec = [];
+      state.quotations.completed.forEach(quotations => {
+        quotations.quotationItems.forEach(oldQuotationItem => {
+          const { quotationItem } = action.payload;
+          const newQuantity = oldQuotationItem.id === quotationItem.id ? decQuantity : oldQuotationItem.quantity
+          newCompletedQuotationItemsDec.push({
+            ...oldQuotationItem, quantity: newQuantity
+          })
+        })
+      });
+
+      const newQuotationsDec = state.quotations.completed.map(item => {
+        const { requestNumber } = action.payload;
+        return {
+          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsDec : item.quotationItems
+        }
+      });
+
+      return { ...state, quotations: { ...state.quotations, completed: newQuotationsDec } }
 
     default:
       return state;

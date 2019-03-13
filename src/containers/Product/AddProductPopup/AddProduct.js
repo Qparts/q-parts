@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { getTranslatedObject } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
 import { right } from '../../../utils';
@@ -14,6 +14,8 @@ import { MediumScreen, SmallScreen } from '../../../components/Device';
 import Login from "../../Authentication/Login/Login";
 import Title from '../../../components/UI/Title';
 
+const quotationsUrl = '/setting/quotations';
+
 class AddProduct extends Component {
   constructor(props) {
     super(props)
@@ -27,9 +29,8 @@ class AddProduct extends Component {
     })
   }
   continueShoppingMoblile = () => {
-    const { match: { params } } = this.props
     this.props.history.push({
-      pathname: `/products/${params.productId}`,
+      pathname: `/`,
     })
   }
   continueShopping = (values) => {
@@ -50,20 +51,21 @@ class AddProduct extends Component {
       return {
         background: constant.colors.basicWhite
       }
-    } else 
-    return {
-      background: ''
-    }
+    } else
+      return {
+        background: ''
+      }
   }
 
   render() {
+    console.log(this.props)
     if (_.isEmpty(this.props.data)) return <Redirect to="/" />
 
-    const { translate, currentLanguage } = this.props;
+    const { translate, currentLanguage, match: { url } } = this.props;
 
     return <section className="add-product container-fluid">
       <SmallScreen>
-        <Title number={this.props.data.quantity} header={translate("dialog.addToCart.title")} />
+        {url !== quotationsUrl ? <Title number={this.props.data.quantity} header={translate("dialog.addToCart.title")} /> : null}
       </SmallScreen>
       <form className="row">
         <div className="row item">

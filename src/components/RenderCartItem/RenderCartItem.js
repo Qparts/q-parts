@@ -12,8 +12,6 @@ export default class extends Component {
   handleClick = (action, value, purchasedItem, event) => {
     event.preventDefault();
 
-    console.log(action === constant.DECREMENT);
-
 
     const { incrementQuantity, decrementQuantity } = this.props;
     const max = 20;

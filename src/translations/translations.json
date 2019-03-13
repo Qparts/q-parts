@@ -2144,6 +2144,34 @@
     ]
   },
   "quotationRequest": {
+    "pending": [
+      "قيد الانتظار",
+      "Pending"
+    ],
+    "replied": [
+      "ردها",
+      "Replied"
+    ],
+    "requestNo": [
+      "رقم الطلب",
+      "Request number"
+    ],
+    "sent": [
+      "أرسلت",
+      "sent"
+    ],
+    "itemsQuantity": [
+      "عدد المنتج",
+      "Number of items"
+    ],
+    "name": [
+      "اسم",
+      "Name"
+    ],
+    "quantity": [
+      "كمية",
+      "Quantity"
+    ],
     "title": [
       "طلب ل",
       "Request for"
