@@ -266,7 +266,6 @@
           }
         }
         .card-date {
-          margin-top: 20px;
           margin-bottom: 20px;
           display: flex;
           padding: 0px;
@@ -283,9 +282,9 @@
             padding: 5px;
           }
           .years{
+            margin-top: 31px;
             padding: 0px;
             .select-input{
-              margin-top: 13px;
               .css-10nd86i {
                 border-radius: corner-values(0 0 20px 0) !important;
               }
@@ -293,6 +292,7 @@
           }
           .months{
             .select-input{
+              margin-top: 31px;
               .css-10nd86i {
                 border-radius: corner-values(20px 0 0 20px) !important;
               }

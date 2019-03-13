@@ -111,7 +111,9 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     },
     {
         path: "/tires",
-        component: Tires
+        component: Tires,
+        direction,
+        translate
     },
     {
         path: "/motor-oil",

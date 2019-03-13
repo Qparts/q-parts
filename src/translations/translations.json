@@ -1,13 +1,5 @@
 {
   "general": {
-    "searchButton": [
-      "بحث",
-      "Find"
-    ],
-    "search": [
-      "بحث",
-      "Search"
-    ],
     "send": [
       "إرسال",
       "Send"
@@ -46,6 +38,10 @@
       "send": [
         "إرسال",
         "Send"
+      ],
+      "search": [
+        "بحث",
+        "Search"
       ],
       "checkout": [
         "الدفع",
@@ -155,17 +151,61 @@
     "filter": [
       "فلتر",
       "filter"
+    ],
+    "select": [
+      "اختار",
+      "Select"
     ]
   },
-  "tyresPage": {
-    "selectTyreSize": [
-      "اختر المقاس",
-      "Select Size"
+  "tires": {
+    "title": [
+      "الإطارات",
+      "Tires"
+    ],
+    "selectTiresSize": {
+      "header": [
+        "اختر",
+        "Select"
+      ],
+      "subHeader1": [
+        "الإطارات",
+        "Tires"
+      ],
+      "subHeader2": [
+        "حجم",
+        "size"
+      ],
+      "p": [
+        "تأكد من أنه يناسب! ابحث حسب الحجم",
+        "Make Sure It Fits! Search by size"
+      ]
+    },
+    "bestseller": [
+      "الإطارات الأكثر مبيعا",
+      "Tiers Bestseller"
+    ],
+    "popularBrands": [
+      "العلامات التجارية الأكثر طلبا",
+      "Popular Tires Brands"
     ],
     "popularSizes": [
       "المقاسات الأكثر طلبا",
-      "Popular Tyre Sizes"
-    ]
+      "Popular Tires Sizes"
+    ],
+    "placeholders": {
+      "width": [
+        "عرض",
+        "Width"
+      ],
+      "height": [
+        "ارتفاع",
+        "Height"
+      ],
+      "diameter": [
+        "القطر",
+        "Diameter"
+      ]
+    }
   },
   "motorOilPage": {
     "selectViscosity": [
@@ -2116,6 +2156,34 @@
     ]
   },
   "quotationRequest": {
+    "pending": [
+      "قيد الانتظار",
+      "Pending"
+    ],
+    "replied": [
+      "ردها",
+      "Replied"
+    ],
+    "requestNo": [
+      "رقم الطلب",
+      "Request number"
+    ],
+    "sent": [
+      "أرسلت",
+      "sent"
+    ],
+    "itemsQuantity": [
+      "عدد المنتج",
+      "Number of items"
+    ],
+    "name": [
+      "اسم",
+      "Name"
+    ],
+    "quantity": [
+      "كمية",
+      "Quantity"
+    ],
     "title": [
       "طلب ل",
       "Request for"

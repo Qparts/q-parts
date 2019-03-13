@@ -660,7 +660,7 @@ class SearchResult extends Component {
 												<div>
 															<div className="filter-search">
 																<i className="icon-search"></i>
-																<input type="text" className="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
+																<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												</div>
@@ -694,7 +694,7 @@ class SearchResult extends Component {
 											<div class="collapse show" id={`${filterObject.filterTitle}`}>
 														<div className="filter-search">
 															<i class="icon-search"></i>
-															<input type="text" class="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
+															<input type="text" class="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 														</div>
 														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												{/*<ul className="options-list">
