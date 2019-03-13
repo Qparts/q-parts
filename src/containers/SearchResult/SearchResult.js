@@ -142,7 +142,7 @@ class SearchResult extends Component {
 			startSize: 1,
 			endSize: 18,
 			item:'',
-			sizeOFItem: [],
+			checked: [],
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -217,7 +217,6 @@ class SearchResult extends Component {
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
 	componentDidMount() {
-
 		const { location: { search } } = this.props;
 
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -242,6 +241,16 @@ class SearchResult extends Component {
 
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 		this.props.onSetParams(newParams)
+
+		// console.log('aaaaa',this.props.filterObjects)
+		// for(var i=0;i<this.props.filterObjects.length;i++){
+		// 	console.log(i)
+		// 	var a = this.props.filterObjects[i]['filterTitle']
+		// 		console.log(this.props.filterObjects[i]['filterTitle'])
+		// 		this.setState(prevState =>({checked:[...prevState.checked,{"a":a}]}),function(){
+		// 			console.log("a",this.state.checked)
+		// 		})
+		// }
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -345,12 +354,12 @@ class SearchResult extends Component {
 			)
 
 			let btnNext = <a href="#" onClick={this.nextPage} className="btn btn-primary ">
-				Next Page
+				{this.props.translate("general.nextPage")}
 				<i className="icon-arrow-right"></i>
 			</a>
 
 			let btnPrev = <a href="#" onClick={this.prevPage} className="btn btn-primary ">
-				Previous Page
+			{	this.props.translate("general.prevPage")}
 				<i className="icon-arrow-left"></i>
 			</a>
 
@@ -384,7 +393,7 @@ class SearchResult extends Component {
 												</button>
 											</div>
 											<div className="col">
-												<h3>Filter {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} results</span></h3>
+												<h3>Filter {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
 											</div>
 											<div className="col-auto">
 												<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
@@ -651,7 +660,7 @@ class SearchResult extends Component {
 												<div>
 															<div className="filter-search">
 																<i className="icon-search"></i>
-																<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
+																<input type="text" className="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												</div>
@@ -677,7 +686,7 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-									this.props.filterObjects.map((filterObject, idx) => {
+									filterObjects.map((filterObject, idx) => {
 										return <li key={idx}>
 											<h5>
 												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
@@ -685,7 +694,7 @@ class SearchResult extends Component {
 											<div class="collapse show" id={`${filterObject.filterTitle}`}>
 														<div className="filter-search">
 															<i class="icon-search"></i>
-															<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+															<input type="text" class="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
 														</div>
 														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												{/*<ul className="options-list">
@@ -859,9 +868,9 @@ class SearchResult extends Component {
 						<div className="col">
 							<div className="search-result">
 								<div className="total-result row">
-									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} of {this.state.resultSize} </span></h2>
+									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
 									<div className="col-auto">
-										<div className="result-sort">
+										{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
 											<DownLargeScreen>
 												<i className="icon-sorting"></i>
@@ -871,7 +880,7 @@ class SearchResult extends Component {
 												isSearchable={false}
 												defaultValue={sortOptions[0]}
 												options={sortOptions} />
-										</div>
+										</div>*/}
 										<DownLargeScreen>
 											<div className="side-bar-compnent-btn">
 												<button className="btn filter-btn" onClick={() => this.openSidebar()}>
