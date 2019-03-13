@@ -393,10 +393,10 @@ class SearchResult extends Component {
 												</button>
 											</div>
 											<div className="col">
-												<h3>Filter {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
+												<h3>{this.props.translate("general.filter")} {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
 											</div>
 											<div className="col-auto">
-												<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
+												<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
 											</div>
 										</div>
 									</header>
@@ -900,7 +900,7 @@ class SearchResult extends Component {
 													))
 												}
 										</ul>
-										<a className="btn btn-gray" onClick={onClear}>Clear All</a>
+										<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
 									</div>
 								</LargeScreen>
 								<ul className="result-list products-list row">
