@@ -1,14 +1,10 @@
-import React, { Component, Fragment, createRef } from 'react';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react';
 import moment from 'moment';
-import _ from 'lodash';
 
-import { TAB_ONE, PENDING, REPLIED, colors } from '../../constants';
-
-import ListGroupCollapse from '../UI/ListGroupCollapse';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
+import PendingRequest from './PendingRequest/PendingRequest';
+import CompletedRequest from './CompletedRequest/CompletedRequest';
 
 class Quotations extends Component {
   constructor(props) {
@@ -16,21 +12,11 @@ class Quotations extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: TAB_ONE,
-      selectedProduct: {}
+      activeTab: "1",
     };
 
     props.getPendingRequests(props.customer.id);
     props.getCompletedRequests(props.customer.id);
-  }
-
-  setSelectedProduct = (selectedProduct) => {
-    return new Promise((resolve, reject) => {
-      this.setState({
-        selectedProduct
-      });
-      resolve();
-    });
   }
 
   toggle(tab) {
@@ -57,66 +43,16 @@ class Quotations extends Component {
     </Fragment>
   }
 
-  addToCart = ({ quantity }) => {
-    const item = { ...this.state.selectedProduct, quantity };
-    this.props.addToCart(item);
-  }
-
   getCollapseIcon = (collapse) => {
     return this.state[collapse] ? 'icon-minus' : 'icon-plus';
   }
 
-  renderQuotationList = (array, idx, type) => {
-    const created = moment(array.created).format('MMM Do');
-    return <Fragment key={idx}>
-      <Link
-        to="#"
-        onClick={this.handleCollaps}
-        data-toggle="collapse"
-        data-target={`#${array.id}`}
-        aria-expanded="false"
-        aria-controls={array.id}
-        key={array.id}>
-        <li className="bg-white">
-          <figure className="row">
-            <div className="col-3">
-              <label>Request Number</label>
-              <h4>#{array.id}</h4>
-            </div>
-            <figcaption className="col-9">
-              <div className="row">
-                <div className="col-md-9 item-dis">
-                </div>
-                <div className="col-md-3">
-                  <p>sent <span>{created}</span></p>
-                  <p>Number of pieces: <span>{array.quotationItems.length}</span></p>
-                </div>
-              </div>
-            </figcaption>
-          </figure>
-        </li>
-      </Link>
-      {
-        array.quotationItems.map((quotationItem, idx) => {
-          return <ListGroupCollapse
-            key={idx}
-            id={array.id}
-            type={type}
-            onChangeQuantity={this.handleClick}
-            quotationItem={quotationItem}
-            setSelectedProduct={this.setSelectedProduct}
-            onSubmit={this.addToCart} />
-        })
-      }
-    </Fragment>
-  }
-
   render() {
 
-    const { quotations } = this.props;
+    const { quotations, translate, currentLanguage, direction, addToCart, incrementQuantity, decrementQuantity, token } = this.props;
 
     return (
-      <div className="Quotations-container col-10">
+      <div className="Quotations-container col-10" >
         <div>
           <Nav tabs>
             <NavItem>
@@ -124,7 +60,7 @@ class Quotations extends Component {
                 className={classnames({ active: this.state.activeTab === '1' })}
                 onClick={() => { this.toggle('1'); }}
               >
-                Pending
+                {translate("quotationRequest.pending")}
             </NavLink>
             </NavItem>
             <NavItem>
@@ -132,7 +68,7 @@ class Quotations extends Component {
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }}
               >
-                Replayed
+                {translate("quotationRequest.replied")}
             </NavLink>
             </NavItem>
           </Nav>
@@ -142,8 +78,12 @@ class Quotations extends Component {
                 <div className="col-12">
                   <ul className="cart-items list-unstyled">
                     {
-                      quotations.pending.map((pending, idx) => {
-                        return this.renderQuotationList(pending, idx, PENDING)
+                      quotations.pending.map(pendings => {
+                        return <PendingRequest
+                          key={pendings.id}
+                          pendings={pendings}
+                          translate={translate}
+                          currentLanguage={currentLanguage} />
                       })
                     }
                   </ul>
@@ -155,8 +95,18 @@ class Quotations extends Component {
                 <div className="col-12">
                   <ul className="cart-items list-unstyled">
                     {
-                      quotations.completed.map((reply, idx) => {
-                        return this.renderQuotationList(reply, idx, REPLIED)
+                      quotations.completed.map(replies => {
+                        return <CompletedRequest
+                          key={replies.id}
+                          replies={replies}
+                          translate={translate}
+                          currentLanguage={currentLanguage}
+                          addToCart={addToCart}
+                          incrementQuantity={incrementQuantity}
+                          decrementQuantity={decrementQuantity}
+                          direction={direction}
+                          token={token}
+                        />
                       })
                     }
                   </ul>

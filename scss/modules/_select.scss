@@ -24,7 +24,6 @@
   .select__single-value{
     position: static;
     max-width: 100%;
-    overflow: auto;
     transform: translateY(0) !important;
     @include font-size(13.8px);
     margin: 0;
