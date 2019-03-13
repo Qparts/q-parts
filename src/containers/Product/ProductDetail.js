@@ -275,10 +275,10 @@ class ProductDetail extends Component {
                 <div className="row">
                   <nav aria-label="breadcrumb" className="col">
                     <ol className="breadcrumb">
-                      <li className="breadcrumb-item"><a href="#">Home</a></li>
+                      {/* <li className="breadcrumb-item"><a href="#">Home</a></li>
                       <li className="breadcrumb-item"><a href="#">Tyres</a></li>
                       <li className="breadcrumb-item"><a href="#">Nexen</a></li>
-                      <li className="breadcrumb-item active" aria-current="page">ROADIAN AT PRO RA8</li>
+                      <li className="breadcrumb-item active" aria-current="page">ROADIAN AT PRO RA8</li> */}
                     </ol>
                   </nav>
                 </div>
@@ -288,7 +288,7 @@ class ProductDetail extends Component {
                       <header className="pro-heading">
                         <div className="row">
                           <div className="col-6 d-flex align-items-center">
-                            <a href="#" className="btn back"><i className="icon-back"></i>Back to Tyers</a>
+                            {/* <a href="#" className="btn back"><i className="icon-back"></i>{Back to Tyers}</a> */}
                           </div>
                           <div className="col-lg-6">
                             <div className="row">

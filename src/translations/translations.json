@@ -140,6 +140,18 @@
       "عرض التفاصيل",
       "View Details"
     ],
+    "clearAll": [
+      "حذف الكل",
+      "Clear All"
+    ],
+    "done": [
+      "تم",
+      "Done"
+    ],
+    "filter": [
+      "فلتر",
+      "filter"
+    ],
     "select": [
       "اختار",
       "Select"
