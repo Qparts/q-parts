@@ -18,17 +18,17 @@
     ],
     "vehicleButton": {
       "add": [
-        "إضافة مركبة",
-        "Add vehicle"
+        "إضافة سيارة",
+        "Add Vehicle"
       ],
       "remove": [
-        "مسح التاريخ",
-        "Clear history"
+        "احذف سجل البحث",
+        "Clear History"
       ]
     },
     "buttons": {
       "confirm": [
-        "تؤكد",
+        "تأكيد",
         "Confirm"
       ],
       "cancel": [
@@ -57,19 +57,19 @@
       ],
       "wishlist": [
         "الانتقال إلى قائمة الرغبات",
-        "Move to wishlist"
+        "Move to Wishlist"
       ],
       "requests": [
-        "طلبات",
+        "الطلبات",
         "Requests"
       ],
       "edit": [
         "تعديل",
-        "edit"
+        "Edit"
       ],
       "back": [
         "الى الخلف",
-        "back"
+        "Back"
       ],
       "nextPage": [
         "الصفحة التالية",
@@ -101,23 +101,23 @@
       "Quantity"
     ],
     "subtotal": [
-      "حاصل الجمع",
+      "مجموع القطع",
       "Subtotal"
     ],
     "thankYou": [
-      "شكرا جزيلا !",
-      "Thank you !"
+      "شكرا جزيلا!",
+      "Thank you!"
     ],
     "trackOrder": [
       "تتبع طلبك",
-      "Track You Order"
+      "Track Your Order"
     ],
     "cart": [
-      "العربة",
-      "cart"
+      "عربة التسوق",
+      "Cart"
     ],
     "item": [
-      "المنتج",
+      "القطع",
       "Item(s)"
     ],
     "and": [
@@ -129,11 +129,11 @@
       "of"
     ],
     "results": [
-      "نتائج",
-      "results"
+      "النتائج",
+      "Results"
     ],
     "sortby": [
-      "ترتيب حسب",
+      "فرز حسب",
       "Sort by"
     ],
     "viewDetails": [
@@ -389,12 +389,12 @@
       "Qutation Order"
     ],
     "weMoveFast": [
-      ".نحن نتحرك بسرعة",
+      "نحن حريصون على توفير أفضل تجربة لعملائنا.",
       "We Move Fast."
     ],
     "request": [
-      "أرسل لنا طلبك و سوف نرسل لك الأسعار و جميع التفاصيل الأخرى",
-      "Send Us Your Request and We Will Respond With the Prices and All Other Details"
+      "أرسل لنا طلبك و سوف نرسل لك أفضل الأسعار و جميع التفاصيل الضرورية ",
+      "Send Us Your Order and We Will Respond With the Best Prices and Necessary Details"
     ],
     "steps": {
       "title": [
@@ -407,8 +407,8 @@
       ],
       "requestParts": {
         "title": [
-          "طلب قطع",
-          "Request parts"
+          "اطلب القطع",
+          "Order Parts"
         ],
         "subTitle": [
           "املأ بيانات سيارتك والقطع التي تريدها",
@@ -500,7 +500,7 @@
     ],
     "trusted": [
       "احصل على قوة التسوق الموثوق",
-      "Get trusted shopping power"
+      "Get the Trusted Shopping Power"
     ],
     "vendor": {
       "items": [
@@ -508,8 +508,8 @@
         "We offer more than 50000 different items"
       ],
       "joinUs": [
-        "بائع! انضم إلى q.parts.com",
-        "VENDOR! Join q.parts.com"
+        "إذا كنت بائعا, انضم إلى Q.PARTS",
+        "If You Are a Vendor, Join Q.PARTS Now!"
       ]
     },
     "oil": [
@@ -589,7 +589,7 @@
           "Log out"
         ],
         "quotations": [
-          "الاقتباسات",
+          "التسعيرات",
           "Quotations"
         ]
       }
@@ -603,15 +603,15 @@
       "home"
     ],
     "quotations": [
-      "الاقتباسات",
+      "التسعيرات",
       "Quotations"
     ],
     "orders": [
-      "طلبات",
+      "الطلبات",
       "Orders"
     ],
     "wishlist": [
-      "الأماني",
+      "قائمة الرغبات",
       "Wishlist"
     ]
   },
@@ -632,7 +632,7 @@
         "My saved Vehicles"
       ],
       "subTitle": [
-        "عرض وإدارة وإيجاد أجزاء للسيارات كراجك",
+        "عرض وإدارة وإيجاد أجزاء للسيارات في كراجك",
         "View, manage and find parts for the vehicles in your garage"
       ]
     }
@@ -640,12 +640,12 @@
   "form": {
     "order": {
       "title": [
-        "تسوق بواسطة السيارة",
+        "تسوق حسب السيارة",
         "Shop By Vehicle"
       ],
       "subTitle": [
         "إضافة سيارتك للعثور بسهولة على قطع الغيار والملحقات والحصول على توصيات المنتج",
-        "Add your Vehicle to easily find parts & accessories and to get product recommendations"
+        "Add your vehicle to easily find parts & accessories and to get product recommendations"
       ],
       "partNo": [
         "اريد ان اجد",
@@ -666,7 +666,7 @@
         "Thank you! your order has been placed."
       ],
       "trackButton": [
-        "أتبع طلبك",
+        "تتبع طلبك",
         "Track your order"
       ]
     },
@@ -676,11 +676,11 @@
         "Email"
       ],
       "password": [
-        "كلمه السر",
+        "كلمه المرور",
         "Password"
       ],
       "forgotPassword": [
-        "نسيت كلمة السر؟",
+        "نسيت كلمة المرور؟",
         "Forgot your password?"
       ],
       "button": [
@@ -724,7 +724,7 @@
         "Join Us"
       ],
       "subHeader": [
-        "عرض وإدارة وإيجاد أجزاء للسيارات في المرآب الخاص بك",
+        "عرض وإدارة وإيجاد أجزاء للسيارات في الكراج الخاص بك",
         "View, manage and find parts for the vehicles in your garage"
       ],
       "firstName": [
@@ -748,11 +748,11 @@
         "Select a city"
       ],
       "password": [
-        "كلمه السر",
+        "كلمة المرور",
         "Password"
       ],
       "confirmPassword": [
-        "أكد كلمه السري",
+        "أكد كلمة المرور",
         "Confirm your password"
       ],
       "button": [
@@ -785,7 +785,7 @@
           "Password (at least 6 characters)"
         ],
         "confirmPassword": [
-          "أكد كلمه السري",
+          "أكد كلمة المرور",
           "Confirm your password"
         ]
       },
@@ -794,7 +794,7 @@
         "Or Sign in with"
       ],
       "socialMediaInfo": [
-        ".تسجيل الدخول الاجتماعي يبقيك من إنشاء حساب آخر",
+        ".تسجيل الدخول باستخدام حسابات التواصل يبقيك من إنشاء حساب آخر",
         "Social Login keeps you from creating another account."
       ],
       "haveAccount": [
@@ -810,7 +810,7 @@
         "Sign in"
       ],
       "defaultVehicle": [
-        "تعيين كمركبة افتراضية",
+        "تعيين كسيارة افتراضية",
         "Set as default Vehicle"
       ],
       "cp": {
@@ -819,12 +819,12 @@
           "By creating an account, you agree to"
         ],
         "linkOne": [
-          "شروط استخدام Qetaa",
-          "Qetaa's Conditions of Use"
+          "شروط استخدام QParts",
+          "QParts's Terms of Use"
         ],
         "linkTwo": [
-          "إشعار الخصوصية",
-          "Privacy Notice"
+          "سياسة الخصوصية",
+          "Privacy Policy"
         ]
       },
       "passwordStrength": {
@@ -835,30 +835,30 @@
         "scoreWords": {
           "tooShort": [
             "قصيرة جدا",
-            "too short"
+            "Too Short"
           ],
           "weak": [
-            "ضعيف",
-            "weak"
+            "ضعيفة",
+            "Weak"
           ],
           "okay": [
-            "على ما يرام",
-            "okay"
+            "مقبولة",
+            "Okay"
           ],
           "good": [
-            "جيد",
-            "good"
+            "جيدة",
+            "Good"
           ],
           "strong": [
-            "قوي",
-            "strong"
+            "قوية",
+            "Strong"
           ]
         }
       }
     },
     "vehicle": {
       "title": [
-        "كراج",
+        "كراج السيارات",
         "Garage"
       ],
       "make": [
@@ -875,19 +875,19 @@
       ],
       "vin": [
         "رقم الهيكل",
-        "Vin number"
+        "Vin Number"
       ],
       "placeholder": {
         "vin": [
           "أدخل رقم الهيكل الخاص بك",
-          "Enter your Vin number"
+          "Enter your Vin Number"
         ],
         "addNew": [
           "إضافة سيارة جديدة",
           "Add a new vehicle"
         ],
         "select": [
-          "اختر من المركبات المحفوظة الخاصة بك",
+          "اختر من السيارات المحفوظة الخاصة بك",
           "Select from your saved vehicles"
         ]
       },
@@ -920,11 +920,11 @@
         "City"
       ],
       "line1": [
-        "خط عنوان 1",
+        "سطر العنوان ١",
         "Address line 1"
       ],
       "line2": [
-        "خط عنوان 2",
+        "سطر العنوان ٢",
         "Address line 2"
       ],
       "zipCode": [
@@ -937,7 +937,7 @@
           "Set default address"
         ],
         "confirm": [
-          "تؤكد",
+          "تأكيد",
           "Confirm"
         ],
         "cancel": [
@@ -962,7 +962,7 @@
         "First Name"
       ],
       "lastName": [
-        "الاسم الاخير",
+        "الاسم الأخير",
         "Last Name"
       ],
       "alternatePhone": [
@@ -1002,7 +1002,7 @@
         ]
       },
       "modelType": [
-        "موديلات السيارات التي ",
+        "موديلات السيارات التي تتعامل معها ",
         "The models of cars you work with"
       ],
       "partType": {
@@ -1054,7 +1054,7 @@
       "deliveryService": {
         "title": [
           "هل لديك خدمة توصيل؟",
-          "Do you have a delivery service"
+          "Do you have a delivery service?"
         ],
         "yes": [
           "نعم",
@@ -1093,7 +1093,7 @@
       "Recommended for you"
     ],
     "subTitle": [
-      "مجموعة واسعة من العناصر لتختار من بينها",
+      "مجموعة واسعة من القطع لتختار من بينها",
       "A wide selection of items for you to choose from"
     ],
     "recommendation": {
@@ -1132,8 +1132,8 @@
         "Add a vehicle"
       ],
       "subTitle": [
-        "تخزين المركبات في المرآب الخاص بك والحصول على توصيات المنتج",
-        "Store vehicles in your garage and Get product recommendations"
+        "أضف سياراتك إلى الكراج و احصل على توصيات بالمنتجات المناسبة لك",
+        "Store vehicles in your garage and get product recommendations"
       ]
     },
     "signin": {
@@ -1162,7 +1162,7 @@
     },
     "updatePassword": {
       "title": [
-        "تغيير كلمة السر",
+        "تغيير كلمة المرور",
         "Change your password"
       ]
     },
@@ -1178,7 +1178,7 @@
         "Verify Mobile Number"
       ],
       "label": [
-        "يرجى إدخال الرمز الخاص بك من الرسائل القصيرة التي أرسلناها إليك",
+        "يرجى إدخال الرمز الخاص بك من الرسالة القصيرة التي أرسلناها إليك",
         "Please enter your code from SMS we've sent you"
       ],
       "placeholder": [
@@ -1218,7 +1218,7 @@
         "Item added to cart"
       ],
       "items": [
-        "المنتج في السلة",
+        "المنتجات في العربة",
         "item(s) in cart"
       ]
     }
@@ -1235,7 +1235,7 @@
       ]
     },
     "termsCondition": [
-      "أوافق على شروط الشروط",
+      "أوافق على الشروط و الأحكام ",
       "I agree to terms of conditions"
     ]
   },
@@ -1258,7 +1258,7 @@
         "Old password"
       ],
       "newPassword": [
-        "كلمة السر الجديدة",
+        "كلمة المرور الجديدة",
         "New password"
       ],
       "confirmPassword": [
@@ -1285,11 +1285,11 @@
   },
   "searchResult": {
     "title": [
-      "اسم الجزء في",
+      "اسم القطعة في",
       "Part name in"
     ],
     "partAvailability": [
-      "لسوء الحظ ، اسم الجزء في",
+      "لسوء الحظ ، اسم القطعة في",
       "Unfortunately, part name in"
     ],
     "priceAvailability": [
@@ -1302,7 +1302,7 @@
     ],
     "buttons": {
       "makeOrder": [
-        "إصدار أمر",
+        "إنشاء طلب",
         "Make an order"
       ],
       "browse": [
@@ -1317,36 +1317,36 @@
       "Sign Out"
     ],
     "vehicle": [
-      "مركبة",
+      "سيارة",
       "Vehicle"
     ],
     "request": [
-      "طلبات",
+      "الطلبات",
       "Requests"
     ],
     "links": {
       "quotations": [
-        "الاقتباسات",
+        "التسعيرات",
         "Quotations"
       ],
       "orders": [
-        "أوامر",
+        "الطلبات",
         "Orders"
       ],
       "requestCompleted": [
-        "اكتمل الطلب",
-        "Request Completed"
+        "الطلبات المكتملة",
+        "Completed Requests"
       ],
       "helpCenter": [
         "مركز المساعدة",
         "Help center"
       ],
       "wishlist": [
-        "الأماني",
-        "Wish list"
+        "قائمة الرغبات",
+        "Wishlist"
       ],
       "garage": [
-        "مرآبك",
+        "كراجك",
         "Garage"
       ],
       "accountSetting": [
@@ -1358,7 +1358,7 @@
         "Address book"
       ],
       "socialMedia": [
-        "وسائل الاعلام الاجتماعية",
+        "وسائل التواصل الاجتماعي",
         "Social media"
       ]
     },
@@ -1369,7 +1369,7 @@
       ],
       "pendingRequest": {
         "tab": [
-          "في انتظار الطلب",
+          "قيد التنفيذ",
           "Pending requests"
         ],
         "table": {
@@ -1395,15 +1395,15 @@
               "Details"
             ],
             "itemNo": [
-              "رقم الشيء",
+              "رقم القطعة",
               "Item number"
             ],
             "quantity": [
-              "كمية",
+              "الكمية",
               "Quantity"
             ],
             "itemName": [
-              "اسم العنصر",
+              "اسم القطعة",
               "Item name"
             ]
           }
@@ -1411,8 +1411,8 @@
       },
       "repliedRequest": {
         "tab": [
-          "طلب رد",
-          "Replied requests"
+          "الطلبات المكتملة",
+          "Completed Requests"
         ]
       }
     },
@@ -1427,7 +1427,7 @@
           "All"
         ],
         "shipped": [
-          "شحنها",
+          "تم شحنها",
           "Shipped"
         ],
         "underPro": [
@@ -1444,7 +1444,7 @@
             "Past 6 months"
           ],
           "pastOneYear": [
-            "الماضي 1 سنة",
+            "السنة الماضية",
             "Past 1 year"
           ]
         },
@@ -1455,15 +1455,15 @@
       },
       "table": {
         "orderNo": [
-          "رقم الأمر",
+          "رقم الطلب",
           "Order number"
         ],
         "date": [
-          "تاريخ",
+          "التاريخ",
           "Date"
         ],
         "items": [
-          "العناصر",
+          "القطع",
           "Items"
         ],
         "totalAmount": [
@@ -1475,12 +1475,12 @@
           "Order status"
         ],
         "actions": [
-          "أفعال",
+          "أوامر",
           "Actions"
         ],
         "buttons": {
           "details": [
-            "تفاصيل",
+            "التفاصيل",
             "Details"
           ],
           "reorder": [
@@ -1498,7 +1498,7 @@
     },
     "wishlist": {
       "item": [
-        "بند",
+        "القطعة",
         "Item"
       ],
       "price": [
@@ -1506,11 +1506,11 @@
         "price"
       ],
       "date": [
-        "وأضاف",
+        "تمت الإضافة",
         "Added"
       ],
       "addToCart": [
-        "أضف إلى السلة",
+        "أضف إلى العربة",
         "Add to cart"
       ],
       "delete": [
@@ -1518,17 +1518,17 @@
         "Delete"
       ],
       "noWishlist": [
-        "لا توجد قائمة مفضلة محفوظة",
+        "لا توجد قائمة رغبات محفوظة",
         "no saved wishlist"
       ]
     },
     "garage": {
       "title": [
-        "إضافة عرض وإدارة وإيجاد أجزاء للسيارات في المرآب الخاص بك",
+        "إضافة عرض وإدارة وإيجاد قطع للسيارات في الكراج الخاص بك",
         "Add View, manage and find parts for the vehicles in your garage"
       ],
       "add": [
-        "إضافة مركبة",
+        "إضافة سيارة",
         "Add a vehicle"
       ],
       "delete": [
@@ -1536,7 +1536,7 @@
         "Delete"
       ],
       "vehicle": [
-        "مركبة",
+        "سيارة",
         "Vehicle"
       ],
       "noVehicle": [
@@ -1544,7 +1544,7 @@
         "No Saved Vehicles"
       ],
       "defaultVehicle": [
-        "مركبة افتراضي",
+        " السيارة الافتراضية",
         "Default vehicle"
       ]
     },
@@ -1555,7 +1555,7 @@
           "Account info"
         ],
         "label": [
-          "اسم",
+          "الاسم",
           "Name"
         ],
         "fNamePlaceholder": [
@@ -1581,17 +1581,17 @@
           "Change your email"
         ],
         "password": [
-          "كلمه السر",
+          "كلمه المرور",
           "Password"
         ],
         "passwordButton": [
-          "غير كلمة المرور الخاصة بك",
+          "تغيير كلمة المرور",
           "Change your password"
         ]
       },
       "notification": {
         "title": [
-          "إعلام",
+          "الإشعارات",
           "Notification"
         ],
         "placeholder": [
@@ -1618,7 +1618,7 @@
     },
     "addressBook": {
       "title": [
-        "عنوان",
+        "العنوان",
         "Title"
       ],
       "add": [
@@ -1630,7 +1630,7 @@
         "NO SAVED ADDRESS"
       ],
       "shippingItem": [
-        "اين تريد ان يتم شحن اغراض؟",
+        "إلى أين تريد ان يتم شحن القطع؟",
         "Where you would like your items shipped?"
       ],
       "defaultAddress": [
@@ -1639,18 +1639,18 @@
       ],
       "edit": [
         "تعديل",
-        "edit"
+        "Edit"
       ],
       "delete": [
         "حذف",
         "Delete"
       ],
       "addressLine1": [
-        "العنوان (خط عنوان 1)",
+        "سطر العنوان ١",
         "Address (Line 1)"
       ],
       "addressLine2": [
-        "العنوان (خط عنوان 2)",
+        "سطر العنوان ٢",
         "Address (Line 2)"
       ],
       "zipCode": [
@@ -1660,7 +1660,7 @@
     },
     "order": {
       "orderNo": [
-        "رقم الأمر",
+        "رقم الطلب",
         "Order number"
       ],
       "orderPlaced": [
@@ -1672,12 +1672,12 @@
         "Shipped to"
       ],
       "returnCondition": [
-        "لمزيد من المعلومات حول ما يمكن إرجاعه وتبادله ، يرجى الاطلاع على موقعنا",
+        "لمزيد من المعلومات حول ما يمكن إرجاعه و استبداله ، يرجى الاطلاع على موقعنا",
         "For more information on what can be returned and exchanged, please view our"
       ],
       "buttons": {
         "returnEx": [
-          "العودة أو الصرف",
+          "الإرجاع أو الاستبدال",
           "Return or exchange"
         ],
         "cancel": [
@@ -1685,7 +1685,7 @@
           "Cancel"
         ],
         "returnCondition": [
-          "تبادل أو / وظروف العودة",
+          " شروط الاستبدال أو/و الإرجاع",
           "Exchange or/and return conditions"
         ],
         "shippingCondition": [
@@ -1700,11 +1700,11 @@
         ],
         "table": {
           "items": [
-            "العناصر",
+            "القطع",
             "Items"
           ],
           "quantity": [
-            "كمية",
+            "الكمية",
             "Quantity"
           ],
           "price": [
@@ -1722,16 +1722,16 @@
   "product": {
     "buttons": {
       "addToCart": [
-        "أضف إلى السلة",
+        "أضف إلى العربة",
         "Add to cart"
       ],
       "back": [
-        "الى الخلف",
+        "عودة",
         "back"
       ]
     },
     "compare": [
-      "مقارنة مع منتجات مماثلة",
+      "قارن مع منتجات مشابهة",
       "Compare to similar products"
     ],
     "related": [
@@ -1744,7 +1744,7 @@
     ],
     "specs": {
       "title": [
-        "مواصفات",
+        "المواصفات",
         "Specifications"
       ],
       "noSpecs": [
@@ -1769,7 +1769,7 @@
       "out of"
     ],
     "averageRating": [
-      "متوسط تقييم",
+      "متوسط التقييم",
       "Average rating"
     ],
     "writeReview": {
@@ -1778,7 +1778,7 @@
         "Rate this product"
       ],
       "placeholder": [
-        "اكتب مراجعتك:",
+        "اكتب تعليقك:",
         "Write your review:"
       ],
       "cancel": [
@@ -1786,7 +1786,7 @@
         "Cancel"
       ],
       "sumbit": [
-        "إرسال مراجعة",
+        "إرسال تعليق",
         "Submit Review"
       ]
     },
@@ -1801,7 +1801,7 @@
   },
   "compareProduct": {
     "prices": [
-      "أسعار",
+      "الأسعار",
       "prices"
     ],
     "customerRating": {
@@ -1810,14 +1810,14 @@
         "Customer rating"
       ],
       "review": [
-        "إعادة النظر",
+        "مراجعة",
         "Review"
       ]
     }
   },
   "cart": {
     "keepShopping": [
-      "حافظ على التسوق",
+      " تابع التسوق ",
       "Keep shopping"
     ],
     "shoppingCart": {
@@ -1826,16 +1826,16 @@
         "shopping cart"
       ],
       "subHeader": [
-        "عربة",
+        "العربة",
         "cart"
       ]
     },
     "shipTo": [
-      "ارسل إلى",
+      "اشحن إلى",
       "Ship to"
     ],
     "item": [
-      "المنتج",
+      "القطع",
       "Item(s)"
     ]
   },
@@ -1845,11 +1845,11 @@
       "Order summary"
     ],
     "itemsAmount": [
-      "الوحدات الموجودة فى سلة التسوق الخاصة بك",
+      "القطع الموجودة فى عربة التسوق الخاصة بك",
       "item(s) in your cart"
     ],
     "subtotal": [
-      "حاصل الجمع",
+      "مجموع القطع ",
       "Subtotal"
     ],
     "shippingCost": [
@@ -1857,7 +1857,7 @@
       "Shipping cost"
     ],
     "total": [
-      "مجموع",
+      "المجموع",
       "Total"
     ],
     "checkout": [
@@ -1865,11 +1865,11 @@
       "Checkout"
     ],
     "placeOrder": [
-      "ضع طلبك",
+      "اطلب ",
       "Place your order"
     ],
     "vat": [
-      "ضريبة الشراء",
+      "الضريبة ",
       "Vat"
     ],
     "grandTotal": [
@@ -1936,11 +1936,11 @@
             "Card number"
           ],
           "expiration": [
-            "انتهاء الصلاحية",
+            "تاريخ انتهاء الصلاحية ",
             "Expiration"
           ],
           "secure": [
-            "الدفع عن طريق بطاقة الائتمان امنه",
+            "الدفع الآمن عن طريق بطاقة الائتمان ",
             "Secure Credit Card Payment"
           ]
         },
@@ -1979,7 +1979,7 @@
           ]
         },
         "endNo": [
-          "رقم الانتهاء",
+          "نهاية الرقم ",
           "Number Ending"
         ],
         "expires": [
@@ -1994,7 +1994,7 @@
       "bankTransfer": {
         "title": [
           "تفاصيل البنك",
-          "Bank detail"
+          "Bank details"
         ],
         "name": [
           "اسم البنك",
@@ -2017,8 +2017,8 @@
           "owner"
         ],
         "transferText": [
-          "قم بالدفع مباشرة في حسابك . يرجى استخدام معرّف الطلب الخاص بك كمرجع للدفع. لا يمكن شحن طلبك حتى يتم مسح الأموال في حسابك",
-          "Make your payment directly into your bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have cleared in your account"
+          " رجاء احرص على تحويل المبلغ المالي إلى حسابنا مباشرة. الرجاء استخدام رقم الطلب كمرجع لتحويلك. يرجى ملاحظة أنه لن يتم شحن الطلب حتى يتم تحويل ثمن القطع إلى حسابنا",
+          "Please make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won't be shipped until the funds have been transferred to our account"
         ]
       },
       "cash": {
@@ -2027,15 +2027,15 @@
           "Pay with cash upon delivery"
         ],
         "placeOrder": [
-          "عن طريق وضع النظام الخاص بك ، فإنك توافق على موقعنا",
+          " إكمالك للطلب يعني موافقتك على ",
           "By placing your order, you agree to our"
         ],
         "terms": [
-          "البنود والشروط",
+          "الشروط و الأحكام الخاصة بالموقع",
           "Terms & Conditions"
         ],
         "total": [
-          "مجموع",
+          "المجموع",
           "Total"
         ],
         "estimatedDelivery": [
@@ -2044,18 +2044,18 @@
         ]
       },
       "canReview": [
-        "يمكنك مراجعة الطلب قبل الإنتهاء.",
+        "يمكنك مراجعة الطلب قبل أن يتم تأكيده.",
         "You can review this order before it's final."
       ]
     },
     "confirm": {
       "table": {
         "items": [
-          "العناصر",
+          "القطعٍ",
           "Items"
         ],
         "quantity": [
-          "كمية",
+          "الكمية",
           "Quantity"
         ],
         "price": [
@@ -2064,7 +2064,7 @@
         ]
       },
       "placeOrder": [
-        "ضع طلبك",
+        " اطبلب",
         "Place your order"
       ]
     },
@@ -2073,7 +2073,7 @@
       "Shipping"
     ],
     "orderTitle": [
-      "استلام الطلب",
+      "فاتورة الطلب",
       "Order Receipt"
     ],
     "singInTitle": [
@@ -2081,20 +2081,20 @@
       "Sign In"
     ],
     "estimation": [
-      "تقدير",
-      "Estimation"
+      "ملخص الطلب",
+      "Order Summary "
     ],
     "orderNumber": {
       "textOne": [
-        "رقم طلبك #",
+        "الطلب رقم #",
         "Your order number #"
       ],
       "textTwo": [
-        "تم وضعه",
+        "تم إرساله",
         "has been placed"
       ],
       "textThree": [
-        "يرجى التحقق من بريدك الإلكتروني للحصول على تأكيد الطلب ومعلومات التسليم التفصيلية.",
+        "يرجى التحقق من بريدك الإلكتروني لتأكيد الطلب و التحقق من معلومات التوصيل مفصلة",
         "Please check your email for order confirmation and detailed delivery information."
       ]
     }
@@ -2105,7 +2105,7 @@
       "Shipping address"
     ],
     "subTitle": [
-      "المكان الذي ترغب في شحن سلعك فيه",
+      "المكان الذي ترغب في شحن طلبك إليه ",
       "Where you would like your items shipped"
     ],
     "buttons": {
@@ -2114,7 +2114,7 @@
         "Deliver to this address"
       ],
       "edit": [
-        "تصحيح",
+        "تعديل",
         "Edit"
       ],
       "delete": [
@@ -2215,7 +2215,7 @@
           "Search keyword"
         ],
         "model": [
-          "اختر نموذجًا",
+          "اختر موديل",
           "Select a model"
         ],
         "year": [
@@ -2223,8 +2223,8 @@
           "Select a year"
         ],
         "vin": [
-          "أدخل رقم الهيكل الخاص بك",
-          "Enter your Vin number"
+          "أدخل اسم/وصف القطعة أو صورة ",
+          "Enter part name/description or upload an image"
         ]
       }
     }
@@ -2238,26 +2238,26 @@
   "orderSteps": {
     "request": {
       "title": [
-        "طلب",
-        "Request"
+        "اطلب",
+        "Order"
       ],
       "subtitle": [
-        "املأ بيانات سيارتك",
-        "Fill in your vehicle data"
+        "املأ الطلب ببيانات سيارتك",
+        "Fill in an order with your vehicle info "
       ],
       "subtitleSpan": [
-        "والأجزاء التي تريدها",
-        "and the parts you want"
+        "مع تحديد اختيارك الخاص من قطع الغيار الممتازة ",
+        "and your pick of our premium parts"
       ]
     },
     "price": {
       "title": [
-        "سعر الاختيار",
-        "Check price"
+        "تحقق من الأسعار",
+        "Check Prices"
       ],
       "subtitle": [
-        "وسيدفع لك السعر في غضون 24 ساعة",
-        "The price will deliver to you"
+        "سوف نرسل لك تسعيرة بأفضل الأسعار",
+        "We will send you a quotation with the best prices in the market"
       ],
       "subtitleSpan": [
         "خلال 24 ساعة",
@@ -2266,30 +2266,30 @@
     },
     "cart": {
       "title": [
-        "أضف إلى السلة",
-        "Add to cart"
+        "أضف إلى العربة",
+        "Add to Cart"
       ],
       "subtitle": [
-        "اختر عنوان الشحن",
-        "Choose a shipping address"
+        "اضف عنوان الشحن",
+        "Add your shipping address"
       ],
       "subtitleSpan": [
-        "وطريقة الدفع",
-        "and payment method"
+        "و قم باختيار طريقة الدفع المفضلة لديك",
+        "and select your favorite payment method"
       ]
     },
     "receive": {
       "title": [
-        "إستقبال الأوامر",
-        "Add to cart"
+        "تلقى طلبك",
+        "Receive Order"
       ],
       "subtitle": [
-        "طلبك لورشة العمل الخاصة بك أو",
-        "Your order for your workshop or"
+        "سوف نقوم بتوصيل طلبك إلى ورشتك, بيتك أو",
+        "We will deliver your order to your workshop, your house or"
       ],
       "subtitleSpan": [
-        "في أي مكان تحب",
-        "anywhere you love"
+        "أي موقع تختاره",
+        "any location you choose"
       ]
     }
   },
@@ -2297,8 +2297,8 @@
     "product": {
       "whatsApp": {
         "header": [
-          "لدي سؤال؟ اسأل اختصاصي ، خبراء داخلي.",
-          "Have A Question? Ask A Specialist, In-House Experts."
+          "لدي سؤال؟ اسأل اختصاصيي و خبراء السيارات.",
+          "Have A Question? Ask our Specialists, and Car Experts"
         ],
         "subHeader": [
           "نحن نعرف منتجاتنا",
@@ -2313,8 +2313,8 @@
           "Have A Question?"
         ],
         "subHeader": [
-          " اسأل اختصاصي ، خبراء داخلي. نحن نعرف منتجاتنا",
-          "Ask A Specialist, In-House Experts. We Know Our Products"
+          " اسأل اختصاصيي و خبراء السيارات. نحن نعرف منتجاتنا",
+          "Have A Question? Ask our Specialists, and Car Experts. We Know Our Products"
         ]
       }
     },
@@ -2325,8 +2325,8 @@
           "Have A Question?"
         ],
         "subHeader": [
-          "اسأل اختصاصي ، خبراء داخلي.",
-          "Ask a Specialis, In-House Experts."
+          "اسأل اختصاصيي و خبراء السيارات",
+          "Ask our Specialists, and Car Experts"
         ]
       }
     },
@@ -2346,11 +2346,11 @@
   "sendRequest": {
     "confirmation": {
       "textOne": [
-        "رقم طلب السعر الخاص بك هو",
-        "Your Request Price number is"
+        "رقم طلب التسعيرة الخاص بك هو",
+        "Your quotation number is"
       ],
       "textTwo": [
-        "وقد تم إرسالها ،",
+        " تم إرسالها ،",
         "has been sent,"
       ],
       "textThree": [
@@ -2366,14 +2366,14 @@
         "Low Prices"
       ],
       "subHeader": [
-        "ضمان مطابقة السعر",
-        "Price match guarantee"
+        "ضمان أفضل الأسعار ",
+        "Best Price Guarantee"
       ]
     },
     "whatsApp": {
      "header": [
-       "الخبراء الداخليون",
-       "In-House Experts"
+       "خبراء قطع السيارات",
+       "Car Parts Experts"
      ],
      "subHeader": [
        "لدي سؤال؟ اسأل متخصص",
@@ -2382,26 +2382,26 @@
     },
     "delivery": {
       "header": [
-        "تسليم عظيم",
-        "Great Delivery"
+        "توصيل سريع",
+        "Fast Delivery"
       ],
       "subHeader": [
         "من يوم واحد إلى ثلاثة أيام",
-        "From one to three days"
+        "From One to Three Days"
       ]
     },
     "wallet": {
       "header": [
-        "السهل الدفع",
+        "سهولة الدفع",
         "Easy To Pay"
       ],
       "subHeader": [
-        "الدفع عند الاستلام ، بطاقة الائتمان",
-        "Cash on delivery, Credit Card"
+        "استخدم بطاقة الائتمان, مدى",
+        "Pay with Credit Card, Mada"
       ],
       "span": [
-        "ونقل البنك",
-        "and Bank transfer"
+        "او التحويلات البنكية",
+        "and Bank Transfer"
       ]
     },
     "customerService": {
@@ -2414,7 +2414,7 @@
         "Shipping & Delivery"
       ],
       "linkTwo": [
-        "عائدات",
+        "الاسترجاع",
         "Returns"
       ],
       "linkThree": [
@@ -2426,8 +2426,8 @@
         "Contact Us"
       ],
       "linkFive": [
-        "اتبع طلب",
-        "Track order"
+        "تتبع الطلب",
+        "Track Order"
       ]
     },
     "info": {
@@ -2440,7 +2440,7 @@
         "About Us"
       ],
       "linkTwo": [
-        "مدونة",
+        "المدونة",
         "Blog"
       ],
       "linkThree": [
@@ -2450,29 +2450,29 @@
     },
     "pt": {
       "title": [
-        "السياسات والبنود",
+        "السياسات و الشروط",
         "POLICIES & TERMS"
       ],
       "linkOne": [
-        "سياسة خاصة",
+        "سياسةالخصوصية",
         "Privacy Policy"
       ],
       "linkTwo": [
-        "البنود و الظروف",
+        "الشروط و الأحكام",
         "Terms & Conditions"
       ]
     },
     "newsLetter": {
       "header": [
-        "سجل للحصول على اخر اخبارنا",
+        "اشترك للحصول على اخر اخبارنا",
         "Sign Up FOR OUR NEWSLETTER"
       ],
       "subHeader": [
-        "للبقاء على اطلاع على عروضك الترويجية وخصوماتك ومبيعاتك والعروض الخاصة والمزيد",
+        "للبقاء على اطلاع بعروضك الترويجية ,خصوماتك ,مبيعاتك ,عروضك الخاصة والمزيد",
         "to stay up-to-date on your promotions, discounts, sales, special offers and more"
       ],
       "subscribe": [
-        "الاشتراك",
+        "اشترك",
         "Subscribe"
       ],
       "placeholder": [
@@ -2486,22 +2486,22 @@
         "One of the"
       ],
       "subHeader": [
-        "مشاريع حضانة",
+        "المشاريع المحتضنة",
         "incubated projects"
       ]
     }
   },
   "forgotPassword": {
     "title": [
-      "استعادة كلمة السر",
+      "استعادة كلمة المرور",
       "Password Recovery"
     ],
     "textOne": [
-      "يمكنك استرداد معلومات حسابك المفقودة باستخدام النموذج أدناه. تفضل",
+      "يمكنك استرداد معلومات حسابك المفقودة باستخدام النموذج أدناه. الرجاء ادخال",
       "You can recover your lost account information using the form below. Please enter"
     ],
     "textTwo": [
-      "عنوان بريد إلكتروني صالح ، سيتم إرسال معلومات حسابك إليك بعد قليل",
+      "عنوان بريد إلكتروني صحيح ، سيتم إرسال معلومات حسابك إليك بعد قليل",
       "valid e-mail address, your account information will be mailed to you shortly"
     ],
     "labels": {
@@ -2510,13 +2510,13 @@
         "Email"
       ],
       "password": [
-        "كلمه السر",
+        "كلمه المرور",
         "Password"
       ]
     },
     "placeholder": {
       "password": [
-        "كلمة السر الجديدة",
+        "كلمة المرور الجديدة",
         "New password"
       ]
     }
@@ -2527,17 +2527,17 @@
       "We've sent an email to"
     ],
     "activateAccount": [
-      "الرجاء النقر فوق الارتباط الموجود في هذه الرسالة لتنشيط حسابك",
+      "الرجاء النقر على الرابط الموجود في هذه الرسالة لتنشيط حسابك",
       "Please click the link in that message to activate your account"
     ]
   },
   "motorOil": {
     "popularBrands": [
-      "ماركات زيت شعبية",
+      "ماركات الزيوت الأكثر شهرة",
       "Popular Oil Brands"
     ],
     "oilBestSeller": [
-      "زيت أفضل بائع",
+      "الزيوت الأكثر مبيعا",
       "Oil Best Seller"
     ]
   },
@@ -2546,5 +2546,22 @@
       "عنوان البريد الإلكتروني غير صالح",
       "Invalid email address"
     ]
+  },
+  "orderStatus": {
+    "completed": [
+      "الطلبات المكتملة",
+      "Completed"
+    ],
+    "pending": [
+      "قيد التنفيذ",
+      "Pending"
+    ]
+  },
+  "qetaaSign": {
+    "qetaa": [
+      "q.parts@2019",
+      "q.parts@2019"
+    ]
   }
+
 }
