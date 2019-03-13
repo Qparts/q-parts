@@ -128,13 +128,13 @@
   .col:first-child{
     padding-#{$right}: 0;
     .form-control{
-      border-radius: $border-radius-base 0 0 $border-radius-base;
+      border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
 
     }
   }
   .col:nth-child(2){
     .form-control{
-      border-radius: 0 0 $border-radius-base 0;
+      border-radius: corner-values(0 0 $border-radius-base 0);
     }
   }
   .col-auto{
@@ -317,6 +317,7 @@
   }
 }
 .result-list{
+  @include text-left;
   @extend .list-unstyled;
   margin-bottom: 0;
   margin-right: -10px;

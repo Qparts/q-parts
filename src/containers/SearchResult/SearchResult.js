@@ -354,12 +354,12 @@ class SearchResult extends Component {
 			)
 
 			let btnNext = <a href="#" onClick={this.nextPage} className="btn btn-primary ">
-				{this.props.translate("general.nextPage")}
+				{this.props.translate("general.buttons.nextPage")}
 				<i className="icon-arrow-right"></i>
 			</a>
 
 			let btnPrev = <a href="#" onClick={this.prevPage} className="btn btn-primary ">
-			{	this.props.translate("general.prevPage")}
+			{	this.props.translate("general.buttons.prevPage")}
 				<i className="icon-arrow-left"></i>
 			</a>
 
@@ -632,7 +632,7 @@ class SearchResult extends Component {
 											</div>
 										</li>*/}
 										{
-										this.props.filterObjects.map((filterObject, idx) => {
+										filterObjects.map((filterObject, idx) => {
 											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
 												<div className="row">
 													<label className="col-auto">{filterObject[key]}</label>
