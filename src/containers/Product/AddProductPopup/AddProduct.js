@@ -54,52 +54,55 @@ class AddProduct extends Component {
       <SmallScreen>
         <Title number={data.quantity} header={translate("dialog.addToCart.title")} />
       </SmallScreen>
-      <form className="row">
-        <div className="row item">
+      <div className="row">
+        <div className="col-6">
           <img
             src={data.image}
             onError={handleImageFallback}
             alt=""
           />
-          <div className="text-item">
+        </div>
+        <div className="col-6">
+          <ul className="list-inline product-item">
+            <li className="product-item_desc"><h5>{data.desc}</h5></li>
             <div>
-              <span className="product-item_desc">{data.desc}</span>
+              <li className="product-brand">
+                <strong>{getTranslatedObject(data.brand, currentLanguage, 'name', 'nameAr')}</strong>
+              </li>
+              <li className="product-number">#{data.productNumber}</li>
             </div>
-            <div>
-              <span className="product-Name">{translate("general.by")}</span>
-              <span className="product-Name">{getTranslatedObject(data.brand, currentLanguage, 'name', 'nameAr')}</span>
-              <span className="product-Number"> {data.productNumber} </span>
-              <div className="product-rate">
-                <Stars values={data.averageRating} {...constant.starsRating} />
-                {getLength(data.reviews)} {translate("product.reviews")}
-              </div>
+            <div className="product-review">
+              <li><Stars values={data.averageRating} {...constant.starsRating} /></li>
+              <li>{getLength(data.reviews)} {translate("product.reviews")}</li>
             </div>
-            <div >
-              <span className="product-price">{data.salesPrice.toFixed(2)}</span>
-              <sub className="product-price-sr">{translate("general.currency")}</sub>
-            </div>
-            <div>
-              <span className="product-quantity">{translate("general.quantity")}: {data.quantity} </span>
-            </div>
+            <li className="product_price-quantity">
+              <p className="price">{data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
+              <p className="quantity">{translate("general.quantity")}: {data.quantity}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="subtotal">
+        <div className="row">
+          <div className={`${currentLanguage === constant.EN ? 'col-8' : 'col-7'} subtotal-main`}>
+            <p>{translate("general.subtotal")} ({data.quantity} {translate("dialog.addToCart.items")})</p>
           </div>
+          <p className="product_amount col d-flex align-items-center">{data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
         </div>
-        <div style={this.getbackground()} className="btn-primary col-9"><span>{translate("general.subtotal")} ({data.quantity} {translate("dialog.addToCart.items")})</span></div>
-        <div style={this.getbackground()} className="btn-primary sale-price col-2">
-          <p>{data.salesPrice.toFixed(2)}<sub>{translate("general.currency")}</sub></p>
-        </div>
-
+      </div>
+      <div className="row">
         <div className="btn-footer col-12">
-          <div className="group-shadow-input group-shadow-div"></div>
+          {/* <div className="group-shadow-input group-shadow-div"/> */}
           <MediumScreen>
-            <button className="btn btn-primary" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
-            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button className="btn btn-gray-secondary continue-btn" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </MediumScreen>
           <SmallScreen>
-            <button style={this.getbackground()} className="btn btn-primary" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
-            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button style={this.getbackground()} className="btn btn-gray-secondary continue-btn" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </SmallScreen>
         </div>
-      </form>
+      </div>
     </section>
   }
 }

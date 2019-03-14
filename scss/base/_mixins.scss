@@ -102,7 +102,7 @@
   @if $size == none {
     border-#{$right}: none;
   } @else {
-    border-#{$right}: $size $color solid;
+    border-#{$right}: $size solid $color;
   }
 }
 
@@ -110,7 +110,7 @@
   @if $size == none {
     border-#{$left}: none;
   } @else {
-    border-#{$left}: $size $color solid;
+    border-#{$left}: $size solid $color;
   }
 }
 

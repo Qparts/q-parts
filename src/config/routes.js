@@ -113,6 +113,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         token: isAuth,
         direction,
         translate,
+        currentLanguage: defaultLang,
         data: {}
     },
     {
