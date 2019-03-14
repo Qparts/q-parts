@@ -3,7 +3,7 @@ import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import { Link } from 'react-router-dom'
-import { handleImageFallback, getTranslatedObject } from '../../utils';
+import { handleImageFallback, getTranslatedObject, isAuth } from '../../utils';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
 import { addToCart } from '../../actions/cartAction';
@@ -69,7 +69,7 @@ class ProductGridView extends Component {
 					data={this.state.data}
 					direction={this.props.direction}
 					modalAddToCart={this.props.modalAddToCart}
-					token={this.props.token}
+					token={isAuth(this.props.token)}
 					togglePopup={this.togglePopup}
 					translate={translate}
 					currentLanguage={currentLanguage} />

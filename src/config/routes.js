@@ -9,6 +9,7 @@ import QuotationRequest from '../components/QuotationRequest/QuotationRequest';
 import VerifyEmail from '../components/VerifyEmail/VerifyEmail';
 import Checkout from '../components/Checkout/Checkout';
 import ProductDetail from '../containers/Product/ProductDetail';
+import AddProduct from '../containers/Product/AddProductPopup/AddProduct';
 import Accessories from '../components/Accessories/Accessories';
 import MotorOil from '../components/MotorOil/MotorOil';
 import Tires from '../components/Tires/Tires';
@@ -103,7 +104,16 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     },
     {
         path: "/products/:productId",
-        component: ProductDetail
+        component: ProductDetail,
+        exact: true,
+    },
+    {
+        path: "/products/:productId/addProduct",
+        component: AddProduct,
+        token: isAuth,
+        direction,
+        translate,
+        data: {}
     },
     {
         path: "/accessories",

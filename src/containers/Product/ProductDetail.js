@@ -14,7 +14,7 @@ import Stars from 'react-stars';
 import moment from 'moment';
 import Title from "../../components/UI/Title";
 
-import { getTranslatedObject, getTranslatedString, right } from '../../utils';
+import { getTranslatedObject, getTranslatedString, right, isAuth } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import _ from 'lodash';
 import parse from 'html-react-parser';
@@ -97,7 +97,7 @@ class ProductDetail extends Component {
           data={this.state.data}
           direction={this.props.direction}
           modalAddToCart={this.props.modalAddToCart}
-          token={this.props.token}
+          token={isAuth(this.props.token)}
           togglePopup={this.togglePopup}
           translate={translate}
           currentLanguage={currentLanguage} />
@@ -156,7 +156,10 @@ class ProductDetail extends Component {
       this.setState({
         data: item
       });
-      this.props.history.push(`/products/${params.productId}/AddProduct`)
+      this.props.history.push({
+        pathname: `/products/${params.productId}/addProduct`,
+        state: { data: item }
+      });
     }
   }
 
@@ -266,140 +269,138 @@ class ProductDetail extends Component {
         </div>
       )
     return (
-      <Switch>
-        <Route path={'/products/:productId'} exact >
-          <section className="product-details">
-            <div className="pro-main-info">
-              <div className="pro-img-bg"></div>
-              <div className="container-fluid">
-                <div className="row">
-                  <nav aria-label="breadcrumb" className="col">
-                    <ol className="breadcrumb">
-                      {/* <li className="breadcrumb-item"><a href="#">Home</a></li>
+      <section className="product-details">
+        <div className="pro-main-info">
+          <div className="pro-img-bg"></div>
+          <div className="container-fluid">
+            <div className="row">
+              <nav aria-label="breadcrumb" className="col">
+                <ol className="breadcrumb">
+                  {/* <li className="breadcrumb-item"><a href="#">Home</a></li>
                       <li className="breadcrumb-item"><a href="#">Tyres</a></li>
                       <li className="breadcrumb-item"><a href="#">Nexen</a></li>
                       <li className="breadcrumb-item active" aria-current="page">ROADIAN AT PRO RA8</li> */}
-                    </ol>
-                  </nav>
-                </div>
-                <LargeScreen>
-                  <div className="row">
-                    <div className="col">
-                      <header className="pro-heading">
-                        <div className="row">
-                          <div className="col-6 d-flex align-items-center">
-                            {/* <a href="#" className="btn back"><i className="icon-back"></i>{Back to Tyers}</a> */}
-                          </div>
-                          <div className="col-lg-6">
-                            <div className="row">
-                              <div className="col">
-                                <h1>{product.desc}</h1>
-                                <ul className="list-inline">
-                                  <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
-                                  <li>{translate("product.number")} {product.productNumber}</li>
-                                </ul>
-                              </div>
-                              <div className="col-auto">
-                                <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </header>
-                    </div>
-                  </div>
-                </LargeScreen>
-
-                <div className="row">
-                  <div className="col-lg-6">
-                    <div className="pro-img">
-                      <img alt="product Name" src={product.image} onError={handleImageFallback} />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <DownLargeScreen>
-                      <header className="pro-heading ">
+                </ol>
+              </nav>
+            </div>
+            <LargeScreen>
+              <div className="row">
+                <div className="col">
+                  <header className="pro-heading">
+                    <div className="row">
+                      <div className="col-6 d-flex align-items-center">
+                        {/* <a href="#" className="btn back"><i className="icon-back"></i>{Back to Tyers}</a> */}
+                      </div>
+                      <div className="col-lg-6">
                         <div className="row">
                           <div className="col">
                             <h1>{product.desc}</h1>
                             <ul className="list-inline">
                               <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
-                              <li>{translate("product.detail")} {product.productNumber}</li>
+                              <li>{translate("product.number")} {product.productNumber}</li>
                             </ul>
                           </div>
-                          <UpSmallScreen>
-                            <div className="col-auto">
-                              <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                            </div>
-
-                          </UpSmallScreen>
+                          <div className="col-auto">
+                            <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+                          </div>
                         </div>
-                      </header>
-
-                    </DownLargeScreen>
-                    <ul className="list-unstyled summary">
-                      <form onSubmit={this.props.handleSubmit(this.submit)}>
-                        <li className="pro-review">
-                          <Stars value={getLength(product.reviews)} {...constant.starsRating} />
-                          <span className="review">{getLength(product.reviews)} {translate("product.reviews")}</span>
-                          {/* <p>Made in Coria</p> */}
-                        </li>
-                        {/* <li className="availability">
-                          <i className="in-icon"></i> In Stock (16) - Ships in 24 to 48 hrs
-                        </li> */}
-                        <li className="price">
-                          <p>{product.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span> {/*<label> / each</label>*/}</p>
-                          {/* <p>47.6<span>{translate("general.currency")}</span> <label> / Set</label></p> */}
-                        </li>
-                        <li className="pro-options">
-                          {this.renderSpecs(true)}
-                          {parse(_.isNull(product.details) ? "" : product.details)}
-                        </li>
-                        <li className="add-cart row">
-                          <div className="col-sm-auto col-12">
-                            <h5 className="d-sm-none d-inline-block">{translate("general.quantity")}</h5>
-                            <Field
-                              className="col-auto"
-                              type="text"
-                              name="quantity"
-                              component={NumberPicker}
-                            />
-                          </div>
-                          <DownSmallScreen>
-                            <div className="col-auto fav-mob">
-                              <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                            </div>
-                          </DownSmallScreen>
-                          <div className="col">
-                            <Button
-                              type="submit"
-                              className="btn btn-primary"
-                              text={translate("product.buttons.addToCart")}
-                              icon="icon-cart" />
-                          </div>
-
-                        </li>
-                        <li className="support">
-                          <CustomerService
-                            messages={chatMessages}
-                            url="" />
-                        </li>
-                      </form>
-                    </ul>
-                  </div>
+                      </div>
+                    </div>
+                  </header>
                 </div>
               </div>
-            </div>
-            <div className="container-fluid">
-              <div className="row pt-sec">
-                <div className="col">
-                  <h2 className="details-heading">{translate("product.detail")}</h2>
-                  <ul className="list-unstyled pro-details">
-                    <li>
-                      {parse(_.isNull(product.details) ? "" : product.details)}
-                      {this.renderSpecs()}
+            </LargeScreen>
+
+            <div className="row">
+              <div className="col-lg-6">
+                <div className="pro-img">
+                  <img alt="product Name" src={product.image} onError={handleImageFallback} />
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <DownLargeScreen>
+                  <header className="pro-heading ">
+                    <div className="row">
+                      <div className="col">
+                        <h1>{product.desc}</h1>
+                        <ul className="list-inline">
+                          <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
+                          <li>{translate("product.detail")} {product.productNumber}</li>
+                        </ul>
+                      </div>
+                      <UpSmallScreen>
+                        <div className="col-auto">
+                          <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+                        </div>
+
+                      </UpSmallScreen>
+                    </div>
+                  </header>
+
+                </DownLargeScreen>
+                <ul className="list-unstyled summary">
+                  <form onSubmit={this.props.handleSubmit(this.submit)}>
+                    <li className="pro-review">
+                      <Stars value={getLength(product.reviews)} {...constant.starsRating} />
+                      <span className="review">{getLength(product.reviews)} {translate("product.reviews")}</span>
+                      {/* <p>Made in Coria</p> */}
                     </li>
-                    {/* <li>
+                    {/* <li className="availability">
+                          <i className="in-icon"></i> In Stock (16) - Ships in 24 to 48 hrs
+                        </li> */}
+                    <li className="price">
+                      <p>{product.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span> {/*<label> / each</label>*/}</p>
+                      {/* <p>47.6<span>{translate("general.currency")}</span> <label> / Set</label></p> */}
+                    </li>
+                    <li className="pro-options">
+                      {this.renderSpecs(true)}
+                      {parse(_.isNull(product.details) ? "" : product.details)}
+                    </li>
+                    <li className="add-cart row">
+                      <div className="col-sm-auto col-12">
+                        <h5 className="d-sm-none d-inline-block">{translate("general.quantity")}</h5>
+                        <Field
+                          className="col-auto"
+                          type="text"
+                          name="quantity"
+                          component={NumberPicker}
+                        />
+                      </div>
+                      <DownSmallScreen>
+                        <div className="col-auto fav-mob">
+                          <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+                        </div>
+                      </DownSmallScreen>
+                      <div className="col">
+                        <Button
+                          type="submit"
+                          className="btn btn-primary"
+                          text={translate("product.buttons.addToCart")}
+                          icon="icon-cart" />
+                      </div>
+
+                    </li>
+                    <li className="support">
+                      <CustomerService
+                        messages={chatMessages}
+                        url="" />
+                    </li>
+                  </form>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="container-fluid">
+          <div className="row pt-sec">
+            <div className="col">
+              <h2 className="details-heading">{translate("product.detail")}</h2>
+              <ul className="list-unstyled pro-details">
+                <li>
+                  {parse(_.isNull(product.details) ? "" : product.details)}
+                  {this.renderSpecs()}
+                </li>
+                {/* <li>
                       <h4>Features</h4>
                       <ul>
                         <li>Balanced tread compound</li>
@@ -407,137 +408,123 @@ class ProductDetail extends Component {
                         <li>Optimized tread pitch sequence</li>
                       </ul>
                     </li> */}
-                  </ul>
-                  <div className="pt-sec">
-                    <h2 className="details-heading">{translate("product.titleReviews")}</h2>
-                    <div className="list-unstyled review-details">
-                      <div className="row">
-                        <div className="col totla-main">
-                          <Stars value={product.averageRating} {...constant.starsRating} className="star" />
-                          <p className="result">{`0 ${translate("product.ratingRange")} 5`}</p>
-                          <p className="review-num">
-                            <span>{getLength(product.reviews)}</span>
-                            <span>{translate("product.reviews")}</span>
-                          </p>
-                        </div>
-                        <a className="apply-review col-md-auto" data-toggle="collapse" href="#addReview" role="button" aria-expanded="false" aria-controls="addReview">
-                          <div className="d-flex align-items-center">
-                            {translate("product.writeReview.title")} <i className={`icon-arrow-${right(direction)}`}></i>
-                            <MediumScreen>
-                              <Field
-                                name="rating"
-                                component={RenderRating}
-                              />
-                            </MediumScreen>
-                          </div>
-                        </a>
-                      </div>
-                      <form onSubmit={this.props.handleSubmit(this.submitReview)} className="collapse" id="addReview">
-                        <div className="apply-review">
-                          {translate("product.writeReview.title")}
+              </ul>
+              <div className="pt-sec">
+                <h2 className="details-heading">{translate("product.titleReviews")}</h2>
+                <div className="list-unstyled review-details">
+                  <div className="row">
+                    <div className="col totla-main">
+                      <Stars value={product.averageRating} {...constant.starsRating} className="star" />
+                      <p className="result">{`0 ${translate("product.ratingRange")} 5`}</p>
+                      <p className="review-num">
+                        <span>{getLength(product.reviews)}</span>
+                        <span>{translate("product.reviews")}</span>
+                      </p>
+                    </div>
+                    <a className="apply-review col-md-auto" data-toggle="collapse" href="#addReview" role="button" aria-expanded="false" aria-controls="addReview">
+                      <div className="d-flex align-items-center">
+                        {translate("product.writeReview.title")} <i className={`icon-arrow-${right(direction)}`}></i>
+                        <MediumScreen>
                           <Field
                             name="rating"
                             component={RenderRating}
                           />
-                        </div>
-                        <div className="write-review">
-                          <Field
-                            className="form-control input"
-                            id="exampleFormControlTextarea1"
-                            rows="1"
-                            name="review"
-                            component="textarea"
-                            placeholder={translate("product.writeReview.placeholder")} />
-
-                          <div className="group-buttons">
-                            <Button
-                              type="reset"
-                              className="btn btn-secondary"
-                              text={translate("product.writeReview.cancel")}
-                              onClick={this.handleWriteReview.bind(this, false)}
-                              data-toggle="collapse"
-                              data-target="#addReview"
-                              aria-expanded="false"
-                              aria-controls="addReview" />
-                            <Button
-                              type="submit"
-                              className="btn btn-primary"
-                              text={translate("product.writeReview.sumbit")}
-                              data-toggle="collapse"
-                              data-target="#addReview"
-                              aria-expanded="false"
-                              aria-controls="addReview" />
-                          </div>
-                        </div>
-                      </form>
-                      <ul className="users-review list-unstyled">
-                        {
-                          product.reviews.map((review, idx) => {
-                            return <li className="media">
-                              <span className="user-img">
-                                <img className="default" src="/img/user.svg" />
-                              </span>
-                              <div className="media-body">
-                                <div className="row">
-                                  <div className="col">
-                                    <h5>{review.customerName}</h5>
-                                    <Stars values={review.rating} {...starsRating} />
-                                  </div>
-                                  <div className="col-auto">
-                                    <span className="review-date">{moment(review.created).format('MM/DD/YYYY')}</span>
-                                  </div>
-                                </div>
-                                <p>{review.text}</p>
-                              </div>
-                            </li>
-                          })
-                        }
-                      </ul>
-                    </div>
+                        </MediumScreen>
+                      </div>
+                    </a>
                   </div>
-                </div>
-                <aside className="col-auto side-banner d-none d-lg-block">
-                  <img src="/img/160-banner.jpg" />
-                </aside>
-              </div>
-              <div className="row pt-sec">
-                <div className="col products-list">
-                  <h3>{translate("offers.recommendation.recentViewed")}</h3>
-                  <Swiper {...constant.swiperParams(direction)} ref={this.recentViewed}>
-                    {
+                  <form onSubmit={this.props.handleSubmit(this.submitReview)} className="collapse" id="addReview">
+                    <div className="apply-review">
+                      {translate("product.writeReview.title")}
+                      <Field
+                        name="rating"
+                        component={RenderRating}
+                      />
+                    </div>
+                    <div className="write-review">
+                      <Field
+                        className="form-control input"
+                        id="exampleFormControlTextarea1"
+                        rows="1"
+                        name="review"
+                        component="textarea"
+                        placeholder={translate("product.writeReview.placeholder")} />
 
-                      recentViewedProducts.map((product, idx) => (
-                        <RenderProducts
-                          key={idx}
-                          translate={translate}
-                          direction={direction}
-                          currentLanguage={currentLanguage}
-                          isListView={false}
-                          product={product} />
-                      ))
+                      <div className="group-buttons">
+                        <Button
+                          type="reset"
+                          className="btn btn-secondary"
+                          text={translate("product.writeReview.cancel")}
+                          onClick={this.handleWriteReview.bind(this, false)}
+                          data-toggle="collapse"
+                          data-target="#addReview"
+                          aria-expanded="false"
+                          aria-controls="addReview" />
+                        <Button
+                          type="submit"
+                          className="btn btn-primary"
+                          text={translate("product.writeReview.sumbit")}
+                          data-toggle="collapse"
+                          data-target="#addReview"
+                          aria-expanded="false"
+                          aria-controls="addReview" />
+                      </div>
+                    </div>
+                  </form>
+                  <ul className="users-review list-unstyled">
+                    {
+                      product.reviews.map((review, idx) => {
+                        return <li className="media">
+                          <span className="user-img">
+                            <img className="default" src="/img/user.svg" />
+                          </span>
+                          <div className="media-body">
+                            <div className="row">
+                              <div className="col">
+                                <h5>{review.customerName}</h5>
+                                <Stars values={review.rating} {...starsRating} />
+                              </div>
+                              <div className="col-auto">
+                                <span className="review-date">{moment(review.created).format('MM/DD/YYYY')}</span>
+                              </div>
+                            </div>
+                            <p>{review.text}</p>
+                          </div>
+                        </li>
+                      })
                     }
-                  </Swiper>
-                  <div className="swiper-left" ref={this.swiperLeftHidden} />
+                  </ul>
                 </div>
-                {dialog}
               </div>
             </div>
+            <aside className="col-auto side-banner d-none d-lg-block">
+              <img src="/img/160-banner.jpg" />
+            </aside>
+          </div>
+          <div className="row pt-sec">
+            <div className="col products-list">
+              <h3>{translate("offers.recommendation.recentViewed")}</h3>
+              <Swiper {...constant.swiperParams(direction)} ref={this.recentViewed}>
+                {
 
-          </section>
-        </Route>
-        <PrivateRoute
-          path={'/products/:productId/AddProduct'}
-          component={AddProduct}
-          exact
-          translate={translate}
-          currentLanguage={currentLanguage}
-          data={this.state.data}
-          direction={this.props.direction}
-          modalAddToCart={this.props.modalAddToCart}
-          token={this.props.token}
-          fakeAuth={this.state.auth}
-          redirectTo="/" />
-      </Switch >
+                  recentViewedProducts.map((product, idx) => (
+                    <RenderProducts
+                      key={idx}
+                      translate={translate}
+                      direction={direction}
+                      currentLanguage={currentLanguage}
+                      isListView={false}
+                      product={product} />
+                  ))
+                }
+              </Swiper>
+              <div className="swiper-left" ref={this.swiperLeftHidden} />
+            </div>
+            {dialog}
+          </div>
+        </div>
+
+      </section>
     );
   }
 }

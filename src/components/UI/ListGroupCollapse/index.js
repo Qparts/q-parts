@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { PENDING, INCREMENT, DECREMENT, RADIX } from '../../../constants';
 import Button from '../../UI/Button';
-import { handleImageFallback, getTranslatedObject } from '../../../utils';
+import { handleImageFallback, getTranslatedObject, isAuth } from '../../../utils';
 import { CustomScreen, UpSmallScreen } from '../../Device';
 
 //dialog
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
-import AddProduct from "../../../containers/Product/AddProductPopup/AddProduct"
+import AddProduct from '../../../containers/Product/AddProductPopup/AddProduct';
 import Title from '../Title';
 
 export class ListGroupCollapse extends Component {
@@ -34,7 +34,17 @@ export class ListGroupCollapse extends Component {
         });
 
         this.props.onAddtoCart(item);
-        this.togglePopup();
+
+        //width screen
+        let width = window.innerWidth;
+        if (width > 992) {
+            this.togglePopup();
+        } else {
+            this.props.history.push({
+                pathname: `/products/${item.id}/addProduct`,
+                state: { data: item }
+            })
+        }
     }
 
     handleClick = (action, value, quotationItem, e) => {
@@ -87,7 +97,7 @@ export class ListGroupCollapse extends Component {
                     <AddProduct
                         data={this.state.product}
                         direction={direction}
-                        token={token}
+                        token={isAuth(token)}
                         togglePopup={this.togglePopup}
                         translate={translate}
                         currentLanguage={currentLanguage} />
@@ -171,4 +181,4 @@ export class ListGroupCollapse extends Component {
     }
 }
 
-export default ListGroupCollapse;
+export default withRouter(ListGroupCollapse);

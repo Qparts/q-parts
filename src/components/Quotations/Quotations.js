@@ -61,7 +61,7 @@ class Quotations extends Component {
                 onClick={() => { this.toggle('1'); }}
               >
                 {translate("quotationRequest.pending")}
-            </NavLink>
+              </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
@@ -69,7 +69,7 @@ class Quotations extends Component {
                 onClick={() => { this.toggle('2'); }}
               >
                 {translate("quotationRequest.replied")}
-            </NavLink>
+              </NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>

@@ -225,10 +225,10 @@
   content: "\27";
 }
 .icon-filter:before {
-  content: "\28";
+  content: if-ltr("\28", "\29" );
 }
 .icon-facebook:before {
-  content: "\29";
+  content: if-ltr("\29", "\28" );
 }
 .icon-sorting:before {
   content: "\2a";
