@@ -146,6 +146,7 @@ class SearchResult extends Component {
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+
 	}
 
 	onSetSidebarOpen(open) {
@@ -190,6 +191,7 @@ class SearchResult extends Component {
 	}
 
 	nextPage = (e) => {
+		console.log(this.state.checked)
 		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page) + 1;
 		if (this.state.startSize === this.state.resultSize) {
@@ -241,16 +243,13 @@ class SearchResult extends Component {
 
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 		this.props.onSetParams(newParams)
-
-		// console.log('aaaaa',this.props.filterObjects)
-		// for(var i=0;i<this.props.filterObjects.length;i++){
-		// 	console.log(i)
-		// 	var a = this.props.filterObjects[i]['filterTitle']
-		// 		console.log(this.props.filterObjects[i]['filterTitle'])
-		// 		this.setState(prevState =>({checked:[...prevState.checked,{"a":a}]}),function(){
-		// 			console.log("a",this.state.checked)
-		// 		})
-		// }
+		var newObj =[];
+		for(var i=0;i<this.props.filterObjects.length;i++){
+			newObj.push({'filterTitle':this.props.filterObjects[i]['filterTitle'],'filterTitleAr':this.props.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
+		}
+		this.setState({checked:newObj})
+		console.log("raed")
+		this.props.methodSelectedOptions(newObj)
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -331,12 +330,14 @@ class SearchResult extends Component {
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: ''})
 	}
 	render() {
+
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-
+		//methodSelectedOptions(this.state.checked)
+console.log(selectedOptions)
 		const override = `
             border-color: ${colors.brandColor} !important;
             border-bottom-color: transparent !important;
@@ -636,8 +637,8 @@ class SearchResult extends Component {
 											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
 												<div className="row">
 													<label className="col-auto">{filterObject[key]}</label>
-															<div className="col">{filtrationChecked.map((item, index) => (
-																	(item.split(" ")[0] === filterObject[key] ? <p key={index}>{item} <a href="/" className="clear" onClick={() => this.handleClick('clear')}><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></p> : (""))
+															<div className="col">{selectedOptions.map((item, index) => (
+																	(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
 																))}</div>
 
 												</div>
@@ -686,7 +687,7 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-									filterObjects.map((filterObject, idx) => {
+									this.props.filterObjects.map((filterObject, idx) => {
 										return <li key={idx}>
 											<h5>
 												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>

@@ -12,6 +12,7 @@ const WithProductView = WrappedComponent => {
 				filtration: [],
 				filtrationChecked: [],
 				params: '',
+				selectedOptions: []
 			}
 
 		}
@@ -44,11 +45,26 @@ const WithProductView = WrappedComponent => {
 			// const itemValue = item.value.replace(/ /, '_');
 			if (checked && index === -1) {
 				// const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
-
+				this.state.selectedOptions.map((element,index) =>{
+					if(element.filterTitle === item.filterTitle){
+						 element.selectedOptions.push(value);
+						 this.setState({selectedOptions:this.state.selectedOptions, element});
+					}
+				})
 				this.setState({ filtration: [...this.state.filtration, item['id']],filtrationChecked: [...this.state.filtrationChecked, value] }, function () {
 						this.props.history.push(addQuery(item['id'],item['filterTitle'], ''));
 				 })
 			} else if (index !== -1) {
+				this.state.selectedOptions.map((element,index) =>{
+					for(var i = 0 ; i<element.selectedOptions.length; i++){
+						if(element.selectedOptions[i] === value){
+
+						   element.selectedOptions.splice(i, 1);
+
+						   this.setState({selectedOptions:this.state.selectedOptions, element});
+						}
+					}
+				})
 				const clone = [...this.state.filtration];
 				const removeChecked =[...this.state.filtrationChecked];
 
@@ -69,6 +85,17 @@ const WithProductView = WrappedComponent => {
 
 		removeItem = (index,item, event) => {
 			event.preventDefault();
+			const key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+			this.state.selectedOptions.map((element,index) =>{
+				for(var i = 0 ; i<element.selectedOptions.length; i++){
+					if(element.selectedOptions[i] === item){
+
+						 element.selectedOptions.splice(i, 1);
+
+						 this.setState({selectedOptions:this.state.selectedOptions, element});
+					}
+				}
+			})
 			const clone = [...this.state.filtration];
 			const removeChecked = [...this.state.filtrationChecked];
 			//const newParams = this.state.params.slice(1).split(/[&]/);
@@ -101,7 +128,6 @@ const WithProductView = WrappedComponent => {
 
 
 		renderSearch = (filtration, handleChange, isChecked, currentLanguage) => {
-				
             return filtration.options.map((data, index) => {
 
                 const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
@@ -136,6 +162,15 @@ const WithProductView = WrappedComponent => {
 		setParams = (newParams) => {
 			this.setState({ params: fixParamsFormat(newParams) });
 		}
+		selectedOptions = (data) => {
+			console.log(data)
+			data.map((data,index)=>{
+				console.log(data.selectedOptions)
+			})
+			this.setState({
+				selectedOptions: data
+			})
+		}
 
 		render() {
 			return <WrappedComponent
@@ -144,6 +179,7 @@ const WithProductView = WrappedComponent => {
 				onFilter={this.filter}
 				onRemoveItem={this.removeItem}
 				isChecked={this.isChecked}
+				methodSelectedOptions={this.selectedOptions}
 				onClear={this.handleClear}
 				onSetParams={this.setParams}
 
