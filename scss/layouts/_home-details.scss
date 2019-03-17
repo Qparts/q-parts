@@ -672,6 +672,9 @@
       border-#{$right}-width: 0;
     }
   }
+  .tab-content {
+    @include text-left;
+  }
   .nav, .nav-tabs{
     @include padding-left(0);
     margin-bottom: 25px;

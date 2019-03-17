@@ -29,6 +29,18 @@
   padding-inline-start: 0;
   @include nav-sm-media {
     overflow-x: hidden;
+    @include if-rtl {
+      right: 0;
+      left: auto;
+      top: 0;
+      width: 260px;
+      & ul {
+        right: 0;
+        left: auto;
+        top: 0;
+        width: 260px;
+      }
+    }
   }
   > li {
     @include nav-lg-media {
@@ -283,12 +295,10 @@ ul.cd-secondary-nav {
 .overflow-hidden-search {
   overflow: hidden;
 }
-.nav-on-left {
-  .cd-header-buttons {
-    padding-#{$left}: 0;
-    #{$right}: auto;
-    #{$left}: 5px;
-  }
+.cd-header-buttons {
+  padding-#{$left}: 0;
+  #{$right}: auto;
+  #{$left}: 5px;
 }
 .search-sm {
   display: none;

@@ -58,6 +58,10 @@ class Routes extends Component {
 
     }
 
+    getNavLeftStyle = () => {
+        return this.props.direction === 'ltr'? 'nav-on-left': '';
+    }
+
     render() {
         const { translate } = this.props
         return (
@@ -66,7 +70,7 @@ class Routes extends Component {
                     <RouterScrollToTop>
                         <Fragment>
                             <NetworkError error={this.props.error} />
-                            <main className="nav-on-left">
+                            <main className={this.getNavLeftStyle()}>
                                 <Layout
                                     isLoggedIn={isAuth(this.props.token)}
                                     fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
