@@ -65,7 +65,7 @@ class RenderField extends Component {
         color: this.getIcon(),
       },
       textTransform: {
-        textTransform: this.props.textTransform ?  this.props.textTransform : {}
+        textTransform: this.props.textTransform ? this.props.textTransform : {}
       }
     }
     const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, scoreWords, tooShortWord, title, ...renderFieldProps } = this.props;
@@ -94,8 +94,7 @@ class RenderField extends Component {
                 </InputGroup>
               </Fragment> :
               <Fragment>
-                <label>{this.props.label}</label>
-                <sub>{this.props.sub}</sub>
+                {this.props.label && <label>{this.props.label}</label>}
                 <InputGroup style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}>
                   <input
                     className="form-control"

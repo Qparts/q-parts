@@ -136,7 +136,7 @@ class CheckoutShipping extends Component {
     }
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <div className="col-6 col-md-4 div-rounded-first">
+        <div className="col-12 col-md-4 div-rounded-first">
           <Field
             disabled
             name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
@@ -144,7 +144,7 @@ class CheckoutShipping extends Component {
             component={RenderField}
             validate={[validations.required]} />
         </div>
-        <div className="col-6 col-md-4 div-rounded">
+        <div className="col-12 col-md-4 div-rounded">
           <Field
             name="region"
             placeholder={translate("form.address.region")}

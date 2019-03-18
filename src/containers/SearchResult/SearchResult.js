@@ -253,13 +253,13 @@ class SearchResult extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		// const { location: { search }, history, match } = this.props;
-		// if (search !== prevProps.location.search) {
-		// 	this.setGeneralSearch(search);
-		//
-		// } else if (this.props.params !== prevProps.params) {
-		// 	history.push(`${match.url}${this.props.params}`);
-		// }
+		const { location: { search }, history, match } = this.props;
+		if (search !== prevProps.location.search) {
+			this.setGeneralSearch(search);
+		
+		} else if (this.props.params !== prevProps.params) {
+			history.push(`${match.url}${this.props.params}`);
+		}
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -355,12 +355,12 @@ console.log(selectedOptions)
 			)
 
 			let btnNext = <a href="#" onClick={this.nextPage} className="btn btn-primary ">
-				{this.props.translate("general.nextPage")}
+				{this.props.translate("general.buttons.nextPage")}
 				<i className="icon-arrow-right"></i>
 			</a>
 
 			let btnPrev = <a href="#" onClick={this.prevPage} className="btn btn-primary ">
-			{	this.props.translate("general.prevPage")}
+			{	this.props.translate("general.buttons.prevPage")}
 				<i className="icon-arrow-left"></i>
 			</a>
 
@@ -633,7 +633,7 @@ console.log(selectedOptions)
 											</div>
 										</li>*/}
 										{
-										this.props.filterObjects.map((filterObject, idx) => {
+										filterObjects.map((filterObject, idx) => {
 											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
 												<div className="row">
 													<label className="col-auto">{filterObject[key]}</label>
@@ -661,7 +661,7 @@ console.log(selectedOptions)
 												<div>
 															<div className="filter-search">
 																<i className="icon-search"></i>
-																<input type="text" className="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
+																<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												</div>
@@ -695,7 +695,7 @@ console.log(selectedOptions)
 											<div class="collapse show" id={`${filterObject.filterTitle}`}>
 														<div className="filter-search">
 															<i class="icon-search"></i>
-															<input type="text" class="form-control" placeholder={this.props.translate("general.search")} aria-label="Username" />
+															<input type="text" class="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 														</div>
 														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 												{/*<ul className="options-list">

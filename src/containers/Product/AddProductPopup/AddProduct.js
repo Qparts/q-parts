@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { getTranslatedObject } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
 import { right } from '../../../utils';
@@ -7,29 +7,17 @@ import Stars from 'react-stars';
 import * as constant from '../../../constants';
 import _ from 'lodash';
 
-import { isAuth } from '../../../utils'
 import { withRouter, Redirect } from 'react-router-dom';
 import { MediumScreen, SmallScreen } from '../../../components/Device';
 
 import Login from "../../Authentication/Login/Login";
 import Title from '../../../components/UI/Title';
 
+
 class AddProduct extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: [],
-    }
-  }
-  componentDidMount() {
-    this.setState({
-      data: this.props.data
-    })
-  }
   continueShoppingMoblile = () => {
-    const { match: { params } } = this.props
     this.props.history.push({
-      pathname: `/products/${params.productId}`,
+      pathname: `/`,
     })
   }
   continueShopping = (values) => {
@@ -38,7 +26,7 @@ class AddProduct extends Component {
   }
   handleSubmit = values => {
     values.preventDefault();
-    if (isAuth(this.props.token)) {
+    if (this.props.token) {
       this.props.history.push('/checkout');
     } else {
       this.props.history.push('/login')
@@ -50,67 +38,71 @@ class AddProduct extends Component {
       return {
         background: constant.colors.basicWhite
       }
-    } else 
-    return {
-      background: ''
-    }
+    } else
+      return {
+        background: ''
+      }
   }
 
   render() {
-    if (_.isEmpty(this.props.data)) return <Redirect to="/" />
+    const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
+    if (_.isEmpty(data)) return <Redirect to="/" />
 
     const { translate, currentLanguage } = this.props;
 
     return <section className="add-product container-fluid">
       <SmallScreen>
-        <Title number={this.props.data.quantity} header={translate("dialog.addToCart.title")} />
+        <Title number={data.quantity} header={translate("dialog.addToCart.title")} />
       </SmallScreen>
-      <form className="row">
-        <div className="row item">
+      <div className="row">
+        <div className="col-6">
           <img
-            src={this.props.data.image}
+            src={data.image}
             onError={handleImageFallback}
             alt=""
           />
-          <div className="text-item">
+        </div>
+        <div className="col-6">
+          <ul className="list-inline product-item">
+            <li className="product-item_desc"><h5>{data.desc}</h5></li>
             <div>
-              <span className="product-item_desc">{this.props.data.desc}</span>
+              <li className="product-brand">
+                <strong>{getTranslatedObject(data.brand, currentLanguage, 'name', 'nameAr')}</strong>
+              </li>
+              <li className="product-number">#{data.productNumber}</li>
             </div>
-            <div>
-              <span className="product-Name">{translate("general.by")}</span>
-              <span className="product-Name">{getTranslatedObject(this.props.data.brand, currentLanguage, 'name', 'nameAr')}</span>
-              <span className="product-Number"> {this.props.data.productNumber} </span>
-              <div className="product-rate">
-                <Stars values={this.props.data.averageRating} {...constant.starsRating} />
-                {getLength(this.props.data.reviews)} {translate("product.reviews")}
-              </div>
+            <div className="product-review">
+              <li><Stars values={data.averageRating} {...constant.starsRating} /></li>
+              <li>{getLength(data.reviews)} {translate("product.reviews")}</li>
             </div>
-            <div >
-              <span className="product-price">{this.props.data.salesPrice.toFixed(2)}</span>
-              <sub className="product-price-sr">{translate("general.currency")}</sub>
-            </div>
-            <div>
-              <span className="product-quantity">{translate("general.quantity")}: {this.props.data.quantity} </span>
-            </div>
+            <li className="product_price-quantity">
+              <p className="price">{data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
+              <p className="quantity">{translate("general.quantity")}: {data.quantity}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="subtotal">
+        <div className="row">
+          <div className={`${currentLanguage === constant.EN ? 'col-8' : 'col-7'} subtotal-main`}>
+            <p>{translate("general.subtotal")} ({data.quantity} {translate("dialog.addToCart.items")})</p>
           </div>
+          <p className="product_amount col d-flex align-items-center">{data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
         </div>
-        <div style={this.getbackground()} className="btn-primary col-9"><span>{translate("general.subtotal")} ({this.props.data.quantity} {translate("dialog.addToCart.items")})</span></div>
-        <div style={this.getbackground()} className="btn-primary sale-price col-2">
-          <p>{this.props.data.salesPrice.toFixed(2)}<sub>{translate("general.currency")}</sub></p>
-        </div>
-
+      </div>
+      <div className="row">
         <div className="btn-footer col-12">
-          <div className="group-shadow-input group-shadow-div"></div>
+          {/* <div className="group-shadow-input group-shadow-div"/> */}
           <MediumScreen>
-            <button className="btn btn-primary" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
-            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button className="btn btn-gray-secondary continue-btn" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </MediumScreen>
           <SmallScreen>
-            <button style={this.getbackground()} className="btn btn-primary" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
-            <button onClick={this.handleSubmit} className="btn check-out">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button style={this.getbackground()} className="btn btn-gray-secondary continue-btn" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
+            <button onClick={this.handleSubmit} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </SmallScreen>
         </div>
-      </form>
+      </div>
     </section>
   }
 }
