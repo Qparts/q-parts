@@ -54,7 +54,7 @@ class HomeDetails extends Component {
 						<Button
 							className="btn btn-primary"
 							to={'/quotation-order'}
-							text={translate("quotationOrder.startNow")}
+							text={translate("quotationOrder.startHere")}
 						/>
 					</div>
 				</section>
