@@ -531,6 +531,10 @@
     "startNow": [
       "ابدأ الآن",
       "Start now"
+    ],
+    "startHere": [
+      "أبدأ هنا",
+      "Start here"
     ]
   },
   "navBar": {
