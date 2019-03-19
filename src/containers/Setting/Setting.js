@@ -542,7 +542,6 @@ class Setting extends Component {
         <SmallScreen>
           <section id="setting-mobile">
             <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
-            <SideBar />
             <Switch>
               <Route path="/setting/profile" exact={true} render={({ match }) => {
                 return (

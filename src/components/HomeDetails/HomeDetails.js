@@ -66,7 +66,7 @@ class HomeDetails extends Component {
 								<figcaption>
 									<h4>{translate("nav.oil")}</h4>
 								</figcaption>
-								<span>{translate("nav.oil")}</span>
+								<span>{translate("quotationOrder.shopNow")}</span>
 							</figure>
 						</Link>
 						<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
@@ -75,7 +75,7 @@ class HomeDetails extends Component {
 								<figcaption>
 									<h4>{translate("nav.tires")}</h4>
 								</figcaption>
-								<span>{translate("nav.tires")}</span>
+								<span>{translate("quotationOrder.shopNow")}</span>
 							</figure>
 						</Link>
 						<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
