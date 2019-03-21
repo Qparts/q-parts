@@ -22,7 +22,7 @@ export const replaceQuery = (location, str) => {
   return location.pathname + newUrl;
 };
 
-export const addQuery = (array,title,element) => {
+export const addQuery = (array, title, element = []) => {
   // const newArray=[];
   // for(var i = 0 ; i<array.length;i++){
   //   newArray.push(array[i].replace(/\s/g, ""))
@@ -51,45 +51,45 @@ export const addQuery = (array,title,element) => {
   //
 
   // }
- //  const newArray=[];
- //  for(var i = 0 ; i<array.length;i++){
- //    newArray.push(array[i].replace(/\s/g, ""))
- //  }
- // if(element.length !== 0){
- //   var regex = new RegExp(`&brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
- //   var url = window.location.search;
- //   var newUrl = url.replace(regex, "");
- //   return window.location.pathname + newUrl;
- // }
- //
- //  const arr = newArray.map(encodeURIComponent);
- // console.log(array)
- //  for(var i =0;i<array.length;i++){
- //    var regex = new RegExp(`&${title}=${array[i]}`, "gi");
- //    var url = "listing?"+window.location.search.slice(1);
- //    console.log(regex)
- //    var newUrl = url.replace(regex, "");
- //  }
- //  const arr = array.map(encodeURIComponent)
-  if(element.length !==0){
+  //  const newArray=[];
+  //  for(var i = 0 ; i<array.length;i++){
+  //    newArray.push(array[i].replace(/\s/g, ""))
+  //  }
+  // if(element.length !== 0){
+  //   var regex = new RegExp(`&brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
+  //   var url = window.location.search;
+  //   var newUrl = url.replace(regex, "");
+  //   return window.location.pathname + newUrl;
+  // }
+  //
+  //  const arr = newArray.map(encodeURIComponent);
+  // console.log(array)
+  //  for(var i =0;i<array.length;i++){
+  //    var regex = new RegExp(`&${title}=${array[i]}`, "gi");
+  //    var url = "listing?"+window.location.search.slice(1);
+  //    console.log(regex)
+  //    var newUrl = url.replace(regex, "");
+  //  }
+  //  const arr = array.map(encodeURIComponent)
+  if (element.length !== 0) {
     var regex = new RegExp(`&${title}=${element[0]}`, "gi");
-      var url = window.location.search;
-      var newUrl = url.replace(regex, "");
-      return window.location.pathname + newUrl;
+    var url = window.location.search;
+    var newUrl = url.replace(regex, "");
+    return window.location.pathname + newUrl;
   }
   // return '?'+key+'[]=' + arr.join('&'+key+'[]=')
-  return "listing?"+window.location.search.slice(1) + '&'+`${title}`+'=' + array;
+  return "listing?" + window.location.search.slice(1) + '&' + `${title}` + '=' + array;
 }
 
-export const clearQuery = (titleArray,idArray) => {
+export const clearQuery = (titleArray, idArray) => {
   let regex;
   let url = window.location.search;
   let newUrl;
-  for(var i = 0; i < titleArray.length ; i++){
-    for(var j = 0 ; j < idArray.length ; j++){
+  for (var i = 0; i < titleArray.length; i++) {
+    for (var j = 0; j < idArray.length; j++) {
       regex = new RegExp(`&${titleArray[i].substring(0, titleArray[i].indexOf(' '))}=${idArray[j]}`, "gi");
       newUrl = url.replace(regex, "");
-      url=newUrl;
+      url = newUrl;
     }
   }
 

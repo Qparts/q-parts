@@ -112,6 +112,13 @@ export const styles = {
   },
   arrow_right: {
     color: "black"
+  },
+  spinner: `
+      border-color: ${brandColor} !important;
+			border-bottom-color: transparent !important;
+        `,
+  loading: {
+    textAlign: 'center'
   }
 }
 
