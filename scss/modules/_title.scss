@@ -27,5 +27,10 @@
     @include media-breakpoint-down(lg){
       font-weight: 500;
     };
+    span {
+      @include small-screen {
+        display: none;
+      }
+    }
   }
 }

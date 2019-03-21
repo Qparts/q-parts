@@ -256,7 +256,7 @@
     ],
     "oil": [
       "الزيوت و السوائل",
-      "Oils and Fluids"
+      "Oils & Fluids"
     ],
     "motorOil": [
       "زيوت المحرك",
@@ -531,6 +531,10 @@
     "startNow": [
       "ابدأ الآن",
       "Start now"
+    ],
+    "startHere": [
+      "أبدأ هنا",
+      "Start here"
     ]
   },
   "navBar": {
@@ -589,8 +593,8 @@
           "My orders"
         ],
         "address": [
-          "عناويني",
-          "My addresses"
+          "عناوين",
+          "Addresses"
         ],
         "setting": [
           "إعدادات",

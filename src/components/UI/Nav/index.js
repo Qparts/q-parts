@@ -4,10 +4,43 @@ import { closeNav, right } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
 const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection, getCountriesOnly }) => {
+
+    const userSettingPages = isLoggedIn ? <Fragment>
+        <li className="nav-sm">
+            <Link to="/setting/quotations" onClick={close}>
+                <i className="icon-send"></i> {translate("navBar.quotations")}
+            </Link>
+        </li>
+        {/* <li className="nav-sm">
+                    <Link to="/setting/orders" onClick={close}>
+                        <i className="icon-delivered-step"></i> {translate("navBar.orders")}
+                    </Link>
+                </li> */}
+        <li className="nav-sm">
+            <Link to="/setting/wishlist" onClick={close}>
+                <i className="icon-heart"></i> {translate("navBar.wishlist")}
+            </Link>
+        </li>
+        <li className="nav-sm">
+            <Link to="/setting/garage" onClick={close}>
+                <i className="icon-garage"></i>{translate("navBar.garage")}
+            </Link>
+        </li>
+        <li className="nav-sm">
+            <Link to="/setting/addresses" onClick={close}>
+                <i className="icon-address"></i>
+                {translate("navBar.menu.menuItem.address")}
+            </Link>
+        </li>
+        <li className="nav-sm">
+            <Link to="/logout" onClick={close}>{translate("navBar.menu.menuItem.logout")}</Link>
+        </li>
+    </Fragment> : null;
+
     return (
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
-                <li className="nav-sm has-children">
+                <li className="nav-sm">
                     <a className="user-account-sm" href="#">
                         <span className="rounded-circle ">
                             <img alt="user" src="/img/user.svg" />
@@ -15,62 +48,18 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                         {
                             isLoggedIn ?
                                 <p>{fullName}</p> :
-                                <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
+                                <Link to="/login" onClick={close}>
+                                    <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
+                                </Link>
                         }
                     </a>
-                    <ul className="cd-secondary-nav is-hidden user-account-sidebar">
-                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
-                        {
-                            isLoggedIn ?
-                                <Fragment>
-                                    <li><Link to="/setting/addresses" onClick={close}>{translate("navBar.menu.menuItem.address")}</Link></li>
-                                    <li><Link to="/setting/quotations" onClick={close}>{translate("navBar.menu.menuItem.quotations")}</Link></li>
-                                    <li><Link to="/setting" onClick={close}>{translate("navBar.menu.menuItem.setting")}</Link></li>
-                                    <li><Link to="/logout" onClick={close}>{translate("navBar.menu.menuItem.logout")}</Link></li>
-                                </Fragment> :
-                                <div>
-                                    <div className="user mx-3">
-                                        <img alt="user" src="img/user.svg" />
-                                        <h6>{translate("dialog.signin.title")}</h6>
-                                    </div>
-                                    <div>
-                                        <div className="signin-list">
-                                            <li><Link className="btn" to="/login" onClick={close}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
-                                            <li><Link to="#"><i className="icon-facebook" /></Link></li>
-                                            <li><Link to="#"><img src="/img/google-icon.svg" alt="google button"></img></Link></li>
-                                        </div>
-                                    </div>
-                                    <p className="px-3">
-                                        {translate("dropdown.signup.message")}
-                                        <Link to="/signup" onClick={close}>
-                                            {translate("dropdown.signup.link")}
-                                            <i className={`icon-arrow-${right(direction)}`} />
-                                        </Link>
-                                    </p>
-                                </div>
-                        }
-                    </ul>
                 </li>
                 <li className="nav-sm">
                     <Link to="/" onClick={close}>
                         <i className="icon-home"></i> {translate("navBar.home")}
                     </Link>
                 </li>
-                <li className="nav-sm">
-                    <Link to="/setting/quotations" onClick={close}>
-                        <i className="icon-send"></i> {translate("navBar.quotations")}
-                    </Link>
-                </li>
-                {/* <li className="nav-sm">
-                    <Link to="/setting/orders" onClick={close}>
-                        <i className="icon-delivered-step"></i> {translate("navBar.orders")}
-                    </Link>
-                </li> */}
-                <li className="nav-sm">
-                    <Link to="/setting/wishlist" onClick={close}>
-                        <i className="icon-heart"></i> {translate("navBar.wishlist")}
-                    </Link>
-                </li>
+                {userSettingPages}
                 <li className="sep"></li>
                 <li>
                     <Link to="/quotation-order" onClick={close}>

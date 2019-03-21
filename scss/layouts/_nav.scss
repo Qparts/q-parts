@@ -29,6 +29,18 @@
   padding-inline-start: 0;
   @include nav-sm-media {
     overflow-x: hidden;
+    @include if-rtl {
+      right: 0;
+      #{$left}: auto;
+      top: 0;
+      width: 260px;
+      & ul {
+        right: 0;
+        #{$left}: auto;
+        top: 0;
+        width: 260px;
+      }
+    }
   }
   > li {
     @include nav-lg-media {
@@ -195,7 +207,7 @@ ul.cd-secondary-nav {
       padding-#{$left}: 35px;
       &::before,
       &::after {
-        left: 15px;
+        #{$left}: 15px;
       }
     }
   }
@@ -217,6 +229,10 @@ ul.cd-secondary-nav {
     max-width: 200px;
     width: 107px;
     margin-top: 2px;
+    @include if-rtl{
+      position: relative;
+      left: 64px;
+    }
     @include nav-sm-media {
       margin-top: 8px;
       width: 100%;
@@ -228,7 +244,7 @@ ul.cd-secondary-nav {
   transform: translateY(-65px);
   transition: transform 0.5s ease-out;
   .cd-nav {
-    padding-left: 30px;
+    padding-#{$left}: 30px;
   }
   .scroll-dwon-brand {
     @include opacity(1);
@@ -242,7 +258,7 @@ ul.cd-secondary-nav {
     transition: transform 0.3s ease-out;
   }
   .cd-nav {
-    padding-left: 0;
+    padding-#{$left}: 0;
   }
 }
 //overlay-lg
@@ -253,7 +269,7 @@ ul.cd-secondary-nav {
   height: 100%;
   width: 100%;
   top: 0;
-  left: 0;
+  #{$left}: 0;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.5);
   visibility: hidden;
@@ -283,12 +299,10 @@ ul.cd-secondary-nav {
 .overflow-hidden-search {
   overflow: hidden;
 }
-.nav-on-left {
-  .cd-header-buttons {
-    padding-#{$left}: 0;
-    #{$right}: auto;
-    #{$left}: 5px;
-  }
+.cd-header-buttons {
+  padding-#{$left}: 0;
+  #{$right}: auto;
+  #{$left}: 5px;
 }
 .search-sm {
   display: none;
@@ -305,7 +319,7 @@ ul.cd-secondary-nav {
   #{$left}: auto;
   top: 60px;
   .form-control {
-    border-top-left-radius: 0 !important;
+    border-top-#{$left}-radius: 0 !important;
   }
 }
 .user-account-sm {

@@ -1,11 +1,9 @@
 import React, { Component, Fragment, createRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
-import Select from 'react-select';
 import LanguageToggle from '../../../components/LanguageToggle'
-import { styles } from "../../../constants";
-import Nav from '../../UI/Nav';
 import { toggleSearch } from '../../../utils';
+import { NavSm, NavLg } from '../../Device';
 
 class Header extends Component {
   constructor(props) {
@@ -14,9 +12,6 @@ class Header extends Component {
       searchText: ''
     }
     this.header = createRef();
-    this.searchDiv = createRef();
-    this.searchLg = createRef();
-    this.cdSearch = createRef();
   }
 
   componentDidMount() {
@@ -24,19 +19,7 @@ class Header extends Component {
     var last_scroll_position;
     var sm = window.matchMedia("(max-width: 1169px)");
     var lg = window.matchMedia("(min-width: 1170px)");
-    var moveSearch = () => {
-      if (lg.matches) {
-        //move search
-        this.searchLg.current.appendChild(this.searchDiv.current);
-      } else if (sm.matches) {
-        //move search input
-        this.cdSearch.current.appendChild(this.searchDiv.current);
-      }
-    }
-    moveSearch();
-    window.onresize = () => {
-      moveSearch();
-    };
+
     window.addEventListener('scroll', (e) => {
       last_scroll_position = window.scrollY;
       if (lg.matches) { // If media query matches
@@ -72,11 +55,6 @@ class Header extends Component {
 
       new_scroll_position = last_scroll_position;
     });
-
-      for (let x in this.refs) {
-        this.refs[x].onkeypress = (e) =>
-          this._handleKeyPress(e);
-      }
   }
 
   handleClick = (e) => {
@@ -89,12 +67,12 @@ class Header extends Component {
     this.setState({ searchText: e.target.value })
   }
 
-    _handleKeyPress = (e) => {
-      if (e.keyCode === 13) {
-          toggleSearch('close');
-          this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
-      }
+  handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      toggleSearch('close');
+      this.props.history.push(`/listing?query=${this.state.searchText}&page=1`);
     }
+  }
   render() {
     const formatGroupLabel = () => (
       <div className="placeholder">
@@ -108,6 +86,14 @@ class Header extends Component {
     ];
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction } = this.props;
+
+    const mainSearch = (
+      <div className="main-search">
+        <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
+        <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
+      </div>
+    );
+
     return (
       <Fragment>
         <div id="header-fixed" className="cd-main-header" ref={this.header}>
@@ -119,12 +105,10 @@ class Header extends Component {
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
                 </div>
-                <div className="col" id="search-lg" ref={this.searchLg}>
-                  <div className="main-search" ref={this.searchDiv}>
-                    <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} />
-                    <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
-
-                  </div>
+                <div className="col">
+                  <NavLg>
+                    {mainSearch}
+                  </NavLg>
 
                 </div>
                 <div className="col-auto">
@@ -181,8 +165,10 @@ class Header extends Component {
               </div>
             </div>
             <div className="sub-nav"></div>
-            <div id="cd-search" className="cd-search" ref={this.cdSearch}>
-
+            <div id="cd-search" className="cd-search">
+              <NavSm>
+                {mainSearch}
+              </NavSm>
             </div>
           </nav>
 

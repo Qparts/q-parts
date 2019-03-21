@@ -831,11 +831,11 @@ Main components
 }
 @media only screen and (max-width: 1169px) {
   .cd-overlay.is-visible {
-    -webkit-transform: translateX(-260px);
-    -moz-transform: translateX(-260px);
-    -ms-transform: translateX(-260px);
-    -o-transform: translateX(-260px);
-    transform: translateX(-260px);
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
   }
   .nav-on-left .cd-overlay.is-visible {
     -webkit-transform: translateX(260px);
