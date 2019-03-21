@@ -170,7 +170,7 @@ class SearchResult extends Component {
 			})
 		}
 	}
-	setGeneralSearch = (search) => {
+	setGeneralSearch = (search,callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 18) {
@@ -181,7 +181,10 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-		});
+			if(callback){
+				callback(res.data);
+			}
+			});
 	}
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
@@ -191,7 +194,6 @@ class SearchResult extends Component {
 	}
 
 	nextPage = (e) => {
-		console.log(this.state.checked)
 		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page) + 1;
 		if (this.state.startSize === this.state.resultSize) {
@@ -218,11 +220,19 @@ class SearchResult extends Component {
 		})
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
+	generateSelectedOptions = (data) =>{
+		var newObj =[];
+		for(var i=0;i<data.filterObjects.length;i++){
+			newObj.push({'filterTitle':data.filterObjects[i]['filterTitle'],'filterTitleAr':data.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
+		}
+		this.setState({checked:newObj});
+		this.props.methodSelectedOptions(newObj,data);
+	}
+
 	componentDidMount() {
 		const { location: { search } } = this.props;
-
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		this.setGeneralSearch(search);
+		this.setGeneralSearch(search,this.generateSelectedOptions);
 
 		const { searchGeneral: { filterObjects } } = this.state;
 
@@ -240,23 +250,15 @@ class SearchResult extends Component {
 		}) : [];
 
 		this.quantityProducts();
-
 		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
 		this.props.onSetParams(newParams)
-		var newObj =[];
-		for(var i=0;i<this.props.filterObjects.length;i++){
-			newObj.push({'filterTitle':this.props.filterObjects[i]['filterTitle'],'filterTitleAr':this.props.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
-		}
-		this.setState({checked:newObj})
-		console.log("raed")
-		this.props.methodSelectedOptions(newObj)
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search }, history, match } = this.props;
 		if (search !== prevProps.location.search) {
 			this.setGeneralSearch(search);
-		
+
 		} else if (this.props.params !== prevProps.params) {
 			history.push(`${match.url}${this.props.params}`);
 		}
@@ -337,7 +339,6 @@ class SearchResult extends Component {
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		//methodSelectedOptions(this.state.checked)
-console.log(selectedOptions)
 		const override = `
             border-color: ${colors.brandColor} !important;
             border-bottom-color: transparent !important;
@@ -687,7 +688,7 @@ console.log(selectedOptions)
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-									this.props.filterObjects.map((filterObject, idx) => {
+									filterObjects.map((filterObject, idx) => {
 										return <li key={idx}>
 											<h5>
 												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>

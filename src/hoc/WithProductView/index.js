@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { upperCaseFirstChar } from '../../utils'
 import * as constant from '../../constants';
 import {addQuery,clearQuery} from '../../utils';
-
+import queryString from 'qs';
 const WithProductView = WrappedComponent => {
 	return class extends Component {
 		constructor(props) {
@@ -19,8 +19,6 @@ const WithProductView = WrappedComponent => {
 
 		static displayName = `WithProductView(${WrappedComponent.displayName ||
 			WrappedComponent.name})`;
-
-
 
 		addToFilter = (filters, filterObject) => {
 			let params = [];
@@ -129,7 +127,7 @@ const WithProductView = WrappedComponent => {
 
 		renderSearch = (filtration, handleChange, isChecked, currentLanguage) => {
             return filtration.options.map((data, index) => {
-
+							  var url = window.location.search;
                 const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
                 const option = currentLanguage === constant.EN ? 'value' : 'valueAr';
                 const value = data[option];
@@ -162,14 +160,26 @@ const WithProductView = WrappedComponent => {
 		setParams = (newParams) => {
 			this.setState({ params: fixParamsFormat(newParams) });
 		}
-		selectedOptions = (data) => {
-			console.log(data)
-			data.map((data,index)=>{
-				console.log(data.selectedOptions)
-			})
+		selectedOptions = (dataSelectedOptions,dataProducts) => {
 			this.setState({
-				selectedOptions: data
+				selectedOptions: dataSelectedOptions
 			})
+
+			let obj = queryString.parse(window.location.search.slice(1));
+			for(var key in obj){
+				dataProducts.filterObjects.map((item,index)=>{
+					if(item.filterTitle===key){
+						item.options.map((option,index) =>{
+							for(var i=0; i<obj[key].length; i++){
+								if(option.id === Number(obj[key][i])){
+									this.setState({filtration: [...this.state.filtration, option.id],filtrationChecked: [...this.state.filtrationChecked, key+' '+option.value] },function(){
+									})
+								}
+							}
+						})
+					}
+				})
+			}
 		}
 
 		render() {

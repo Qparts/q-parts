@@ -80,6 +80,7 @@ export const addQuery = (array,title,element) => {
   // return '?'+key+'[]=' + arr.join('&'+key+'[]=')
   return "listing?"+window.location.search.slice(1) + '&'+`${title}`+'=' + array;
 }
+
 export const clearQuery = (titleArray,idArray) => {
   let regex;
   let url = window.location.search;
