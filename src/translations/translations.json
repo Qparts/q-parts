@@ -78,6 +78,10 @@
       "prevPage": [
         "الصفحة السابقة",
         "Previous Page"
+      ],
+      "go": [
+        "اذهب",
+        "Go"
       ]
     },
     "arabic": [
@@ -150,7 +154,7 @@
     ],
     "filter": [
       "فلتر",
-      "filter"
+      "Filter"
     ],
     "select": [
       "اختار",
