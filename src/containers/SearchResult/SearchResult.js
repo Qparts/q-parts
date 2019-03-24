@@ -10,10 +10,10 @@ import Button from '../../components/UI/Button';
 import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
-import { Card, ListGroup, CardBody,InputGroup, InputGroupAddon, Input } from 'reactstrap';
-import { isEmpty, replaceAll } from '../../utils';
+import { Card, ListGroup } from 'reactstrap';
+import { isEmpty, replaceAll, addQuery } from '../../utils';
 import * as constant from '../../constants';
-import { colors, styles, styles as commonStyles } from '../../constants';
+import { styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
 import { getGeneralSearch } from '../../utils/api';
@@ -92,38 +92,38 @@ const formatDiameterTiresGroupLabel = () => (
 //END HTML Component
 class SearchResult extends Component {
 	static defaultProps = {
-					filterObjects: [
-							{
-								id: 1,
-									filterTitle: "Brands",
-									filterTitleAr: "الماركة",
-									options: [
-											{
-													id: 1,
-													value: "Toyota",
-													valueAr: "تويوتا"
-											},
-											{
-													id: 2,
-													value: "kia",
-													valueAr: "تويوتا"
-											}
-									]
-							},
-							{
-								id: 2,
-									filterTitle: "Volume",
-									filterTitleAr: "الماركة",
-									options: [
-											{
-													id: 1,
-													value: "8 oz",
-													valueAr: "8 oz"
-											}
-									]
-							}
-					]
+		filterObjects: [
+			{
+				id: 1,
+				filterTitle: "Brands",
+				filterTitleAr: "الماركة",
+				options: [
+					{
+						id: 1,
+						value: "Toyota",
+						valueAr: "تويوتا"
+					},
+					{
+						id: 2,
+						value: "kia",
+						valueAr: "كيا"
+					}
+				]
+			},
+			{
+				id: 2,
+				filterTitle: "Volume",
+				filterTitleAr: "الصوت",
+				options: [
+					{
+						id: 1,
+						value: "8 oz",
+						valueAr: "8 أوقية"
+					}
+				]
 			}
+		]
+	}
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -141,7 +141,7 @@ class SearchResult extends Component {
 			resultSize: 0,
 			startSize: 1,
 			endSize: 18,
-			item:'',
+			item: '',
 			checked: [],
 		};
 		this.header = createRef();
@@ -194,6 +194,7 @@ class SearchResult extends Component {
 	}
 
 	nextPage = (e) => {
+		e.preventDefault();
 		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page) + 1;
 		if (this.state.startSize === this.state.resultSize) {
@@ -208,6 +209,7 @@ class SearchResult extends Component {
 		this.props.history.push(replaceQuery(this.props.location, "nextPage"));
 	}
 	prevPage = (e) => {
+		e.preventDefault();
 		const params = getQuery(this.props.location);
 		let pageNumber = Number(params.page) - 1;
 		if (pageNumber <= 1) {
@@ -250,17 +252,13 @@ class SearchResult extends Component {
 		}) : [];
 
 		this.quantityProducts();
-		const newParams = search.slice(1).split(/[&]/).filter(param => !param.includes(','));
-		this.props.onSetParams(newParams)
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const { location: { search }, history, match } = this.props;
+		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
 			this.setGeneralSearch(search);
 
-		} else if (this.props.params !== prevProps.params) {
-			history.push(`${match.url}${this.props.params}`);
 		}
 	}
 	getCollapseIcon = (collapse) => {
@@ -296,18 +294,20 @@ class SearchResult extends Component {
 	//END Filter
 	handleClick = (item) => {
 		var that = this;
-		setTimeout(function(){ if(item === "clear"){
-			that.setState({
-				item: '',
-				isHidden: 'is-hidden',
-				movesOut: ''
-			})
-		} }, 50);
-		if(item === "clear"){
+		setTimeout(function () {
+			if (item === "clear") {
+				that.setState({
+					item: '',
+					isHidden: 'is-hidden',
+					movesOut: ''
+				})
+			}
+		}, 50);
+		if (item === "clear") {
 			this.setState({
 				item: ''
 			})
-		}else{
+		} else {
 			if (this.state.isHidden === 'is-hidden') {
 				this.setState({
 					isHidden: '',
@@ -325,11 +325,24 @@ class SearchResult extends Component {
 	}
 	openSidebar = () => {
 		document.getElementById("html").classList.add('overflow-hidden');
-	 	this.setState({ sidebarOpen: !this.state.sidebarOpen })
+		this.setState({ sidebarOpen: !this.state.sidebarOpen })
 	}
 	done = () => {
 		document.getElementById("html").classList.remove('overflow-hidden');
-		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: ''})
+		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
+	}
+
+	handleGo = (e) => {
+		e.preventDefault();
+		if (!_.isEmpty(this.props.params)) {
+			const { id, title } = this.props.params;
+			const paramsLength = id.length;
+
+			for (let index = 0; index < paramsLength; index++) {
+				this.props.history.push(addQuery(id[index], title[index]));
+			}
+		}
+
 	}
 	render() {
 
@@ -338,16 +351,12 @@ class SearchResult extends Component {
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		//methodSelectedOptions(this.state.checked)
-		const override = `
-            border-color: ${colors.brandColor} !important;
-            border-bottom-color: transparent !important;
-        `;
+		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
 		if (_.isEmpty(filterObjects))
 			return (
 				<div className="container-fluid" style={styles.loading}>
 					<ClipLoader
-						css={override}
+						css={styles.spinner}
 						sizeUnit={"px"}
 						size={150}
 						loading={this.state.loading}
@@ -355,22 +364,22 @@ class SearchResult extends Component {
 				</div>
 			)
 
-			let btnNext = <a href="#" onClick={this.nextPage} className="btn btn-primary ">
-				{this.props.translate("general.buttons.nextPage")}
-				<i className="icon-arrow-right"></i>
-			</a>
+		let btnNext = <Link to="#" onClick={this.nextPage} className="btn btn-primary ">
+			{this.props.translate("general.buttons.nextPage")}
+			<i className="icon-arrow-right"></i>
+		</Link>
 
-			let btnPrev = <a href="#" onClick={this.prevPage} className="btn btn-primary ">
-			{	this.props.translate("general.buttons.prevPage")}
-				<i className="icon-arrow-left"></i>
-			</a>
+		let btnPrev = <Link to="#" onClick={this.prevPage} className="btn btn-primary ">
+			{this.props.translate("general.buttons.prevPage")}
+			<i className="icon-arrow-left"></i>
+		</Link>
 
-			if(this.state.startSize <=1){
-				btnPrev ="";
-			}
-			if(this.state.endSize === this.state.resultSize){
-				btnNext ="";
-			}
+		if (this.state.startSize <= 1) {
+			btnPrev = "";
+		}
+		if (this.state.endSize === this.state.resultSize) {
+			btnNext = "";
+		}
 
 		const params = {
 			rootClassName: `sidebar-main`,
@@ -384,6 +393,7 @@ class SearchResult extends Component {
 				<DownLargeScreen>
 					<div className={this.state.sidebarOpen ? "sidebar-container" : "none-active"}>
 						<Sidebar
+							children={<div />}
 							sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
 							sidebar={
 								<aside>
@@ -642,33 +652,33 @@ class SearchResult extends Component {
 																	(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
 																))}</div>
 
-												</div>
-												<div className={(this.state.item===filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-													<header>
-														<div className="row">
-															<div className="col-auto">
-																<button type="button" onClick={this.handleBack} className="btn reset">
-																	<i className="icon-arrow-left"></i>
-																</button>
+													</div>
+													<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
+														<header>
+															<div className="row">
+																<div className="col-auto">
+																	<button type="button" onClick={this.handleBack} className="btn reset">
+																		<i className="icon-arrow-left"></i>
+																	</button>
+																</div>
+																<div className="col">
+																	<h4>{filterObject[key]}</h4>
+																</div>
+																<div className="col-auto">
+																	<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
+																</div>
 															</div>
-															<div className="col">
-																<h4>{filterObject[key]}</h4>
-															</div>
-															<div className="col-auto">
-																<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
-															</div>
-														</div>
-													</header>
-												<div>
+														</header>
+														<div>
 															<div className="filter-search">
 																<i className="icon-search"></i>
 																<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
-												</div>
-											</div>
-											</li>
-										})}
+														</div>
+													</div>
+												</li>
+											})}
 									</ul>
 								</aside>
 							}
@@ -688,18 +698,18 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-									filterObjects.map((filterObject, idx) => {
-										return <li key={idx}>
-											<h5>
-												<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
-											</h5>
-											<div class="collapse show" id={`${filterObject.filterTitle}`}>
-														<div className="filter-search">
-															<i class="icon-search"></i>
-															<input type="text" class="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
-														</div>
-														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
-												{/*<ul className="options-list">
+										filterObjects.map((filterObject, idx) => {
+											return <li key={idx}>
+												<h5>
+													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
+												</h5>
+												<div class="collapse show" id={`${filterObject.filterTitle}`}>
+													<div className="filter-search">
+														<i class="icon-search"></i>
+														<input type="text" class="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
+													</div>
+													{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+													{/*<ul className="options-list">
 													<li>
 														<div class="checkbox">
 															<input type="checkbox" id="O1" />
@@ -719,12 +729,12 @@ class SearchResult extends Component {
 														</div>
 													</li>
 												</ul>*/}
-												{/*<a href="#" className="btn btn-gray">
+													{/*<a href="#" className="btn btn-gray">
 													View More <i className="icon-plus"></i>
 												</a>*/}
-											</div>
-										</li>
-									})}
+												</div>
+											</li>
+										})}
 									{/*<li className="tires-filte">
 										<h5>
 											Tyer Search
@@ -863,6 +873,9 @@ class SearchResult extends Component {
 											</ul>
 										</div>
 									</li>*/}
+									<li>
+										<button type="submit" class="btn btn-primary" onClick={this.handleGo}>Go</button>
+									</li>
 								</ul>
 							</div>
 
@@ -895,12 +908,15 @@ class SearchResult extends Component {
 								<LargeScreen>
 									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
-												{
-													filtrationChecked.map((item, index) => (
+											{
+												filtrationChecked.map((item, index) => (
+													checkedCurrentLanguage ?
+													<li key={index}>{item.title} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index, item)}></i></a></li>
+													:
+													<h1><li key={index}>{item.titleAr} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index, item)}></i></a></li></h1>
 
-														<li key={index}>{item} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index,item)}></i></a></li>
-													))
-												}
+												))
+											}
 										</ul>
 										<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
 									</div>
@@ -927,24 +943,24 @@ class SearchResult extends Component {
 	}
 }
 
-	const mapStateToProps = state => {
-		return {
-			products: state.api.products,
-			currentLanguage: getActiveLanguage(state.localize).code,
-			translate: getTranslate(state.localize),
-			direction: state.customer.direction
-		}
+const mapStateToProps = state => {
+	return {
+		products: state.api.products,
+		currentLanguage: getActiveLanguage(state.localize).code,
+		translate: getTranslate(state.localize),
+		direction: state.customer.direction
 	}
-	const mapDispatchToProps = dispatch => {
-		return {
-			addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-			getSortedProducts: () => dispatch(getSortedProducts())
-		}
+}
+const mapDispatchToProps = dispatch => {
+	return {
+		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
+		getSortedProducts: () => dispatch(getSortedProducts())
 	}
-	const withTyresSearch = WithProductView(SearchResult);
-	export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);
+}
+const withTyresSearch = WithProductView(SearchResult);
+export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);
 
-	// this.props.filterObjects.map((filterObject, idx) => {
+	// filterObjects.map((filterObject, idx) => {
 	// 	return <div key={idx} className="filter-category card col-12">
 
 
