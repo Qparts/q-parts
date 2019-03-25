@@ -911,9 +911,9 @@ class SearchResult extends Component {
 											{
 												filtrationChecked.map((item, index) => (
 													checkedCurrentLanguage ?
-													<li key={index}>{item.title} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index, item)}></i></a></li>
+													<li key={index}>{item.title} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
 													:
-													<h1><li key={index}>{item.titleAr} <a href="#"><i className="icon-close" onClick={onRemoveItem.bind(this, index, item)}></i></a></li></h1>
+													<h1><li key={index}>{item.titleAr} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li></h1>
 
 												))
 											}
