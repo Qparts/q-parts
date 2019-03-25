@@ -170,7 +170,7 @@ class SearchResult extends Component {
 			})
 		}
 	}
-	setGeneralSearch = (search,callback = null) => {
+	setGeneralSearch = (search, callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 18) {
@@ -181,10 +181,10 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-			if(callback){
-				callback(res.data);
+			if (callback) {
+				// callback(res.data);
 			}
-			});
+		});
 	}
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
@@ -222,19 +222,20 @@ class SearchResult extends Component {
 		})
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
-	generateSelectedOptions = (data) =>{
-		var newObj =[];
-		for(var i=0;i<data.filterObjects.length;i++){
-			newObj.push({'filterTitle':data.filterObjects[i]['filterTitle'],'filterTitleAr':data.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
+	generateSelectedOptions = (data) => {
+		var newObj = [];
+		for (var i = 0; i < this.props.filterObjects.length; i++) {
+			newObj.push({ 'filterTitle': this.props.filterObjects[i]['filterTitle'], 'filterTitleAr': this.props.filterObjects[i]['filterTitleAr'], 'selectedOptions': [] })
 		}
-		this.setState({checked:newObj});
-		this.props.methodSelectedOptions(newObj,data);
+		this.setState({ checked: newObj });
+		this.props.methodSelectedOptions(newObj, this.props.filterObjects);
 	}
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		this.setGeneralSearch(search,this.generateSelectedOptions);
+		this.setGeneralSearch(search);
+		this.generateSelectedOptions();
 
 		const { searchGeneral: { filterObjects } } = this.state;
 
@@ -286,12 +287,6 @@ class SearchResult extends Component {
 				</Card>
 		));
 	}
-
-	//filters
-	setFilter = (filter) => {
-		console.log(filter);
-	}
-	//END Filter
 	handleClick = (item) => {
 		var that = this;
 		setTimeout(function () {
@@ -335,12 +330,12 @@ class SearchResult extends Component {
 	handleGo = (e) => {
 		e.preventDefault();
 		if (!_.isEmpty(this.props.params)) {
-			const { id, title } = this.props.params;
-			const paramsLength = id.length;
-
-			for (let index = 0; index < paramsLength; index++) {
-				this.props.history.push(addQuery(id[index], title[index]));
-			}
+			this.props.params.forEach(param => {
+				this.props.history.push(addQuery(param.id, param.title));
+			});
+		} else {
+			// console.log(this.props);
+			
 		}
 
 	}
@@ -644,13 +639,13 @@ class SearchResult extends Component {
 											</div>
 										</li>*/}
 										{
-										filterObjects.map((filterObject, idx) => {
-											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
-												<div className="row">
-													<label className="col-auto">{filterObject[key]}</label>
-															<div className="col">{selectedOptions.map((item, index) => (
-																	(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
-																))}</div>
+											this.props.filterObjects.map((filterObject, idx) => {
+												return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
+													<div className="row">
+														<label className="col-auto">{filterObject[key]}</label>
+														<div className="col">{selectedOptions.map((item, index) => (
+															(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
+														))}</div>
 
 													</div>
 													<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
@@ -698,7 +693,7 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-										filterObjects.map((filterObject, idx) => {
+										this.props.filterObjects.map((filterObject, idx) => {
 											return <li key={idx}>
 												<h5>
 													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>

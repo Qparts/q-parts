@@ -22,63 +22,13 @@ export const replaceQuery = (location, str) => {
   return location.pathname + newUrl;
 };
 
-export const addQuery = (array, title, element = []) => {
-  // const newArray=[];
-  // for(var i = 0 ; i<array.length;i++){
-  //   newArray.push(array[i].replace(/\s/g, ""))
-  // }
-  // if(newArray.length === 0){
-  //   var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
-  //   var url = window.location.search;
-  //   console.log(url)
-  //   var newUrl = url.replace(regex, "");
-  //
-  //   return newUrl;
-  // }else{
-  //
-  //     let newUrl=window.location.origin+ '&'+'brands='+newArray
-  //     let obj = queryString.parse(window.location.search.slice(1));
-  //     console.log(obj);
-  //     //let url = new URL(newUrl);
-  //   if(element.length !== 0){
-  //     var regex = new RegExp(`brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
-  //     //let options = url.searchParams.getAll("brands");
-  //     var newUrl =  window.location.search.replace(regex, "raed");
-  //     console.log(newUrl)
-  //   }else{
-  //       return "listing?"+window.location.search.slice(1)+'&'+'brands='+newArray;
-  //   }
-  //
+export const addQuery = (id, title) => {
+  const searchQuery = getUniqueSearchQuery();
+  const newQuery = `${searchQuery}&${title}=${id}`
+  const hasSameQuery = compareLastValue(searchQuery, newQuery);
+  
 
-  // }
-  //  const newArray=[];
-  //  for(var i = 0 ; i<array.length;i++){
-  //    newArray.push(array[i].replace(/\s/g, ""))
-  //  }
-  // if(element.length !== 0){
-  //   var regex = new RegExp(`&brands=${element[0].toString().replace(/\s/g, "")}`, "gi");
-  //   var url = window.location.search;
-  //   var newUrl = url.replace(regex, "");
-  //   return window.location.pathname + newUrl;
-  // }
-  //
-  //  const arr = newArray.map(encodeURIComponent);
-  // console.log(array)
-  //  for(var i =0;i<array.length;i++){
-  //    var regex = new RegExp(`&${title}=${array[i]}`, "gi");
-  //    var url = "listing?"+window.location.search.slice(1);
-  //    console.log(regex)
-  //    var newUrl = url.replace(regex, "");
-  //  }
-  //  const arr = array.map(encodeURIComponent)
-  if (element.length !== 0) {
-    var regex = new RegExp(`&${title}=${element[0]}`, "gi");
-    var url = window.location.search;
-    var newUrl = url.replace(regex, "");
-    return window.location.pathname + newUrl;
-  }
-  // return '?'+key+'[]=' + arr.join('&'+key+'[]=')
-  return "listing?" + window.location.search.slice(1) + '&' + `${title}` + '=' + array;
+  return hasSameQuery ? `listing?${searchQuery}` : `listing?${newQuery}`;
 }
 
 export const clearQuery = (titleArray, idArray) => {
@@ -94,4 +44,21 @@ export const clearQuery = (titleArray, idArray) => {
   }
 
   return window.location.pathname + newUrl;
+}
+
+const getUniqueSearchQuery = () => {
+  const set = new Set(window.location.search.slice(1).split("&"));
+
+  return [...set].join("&");
+
+}
+
+const compareLastValue = (oldQuery, newQuery) => {
+  const oldQueryArray = oldQuery.split("&");
+  const newQueryArray = newQuery.split("&");
+  const oldLastIndex = oldQueryArray.length - 1;
+  const newLastIndex = newQueryArray.length - 1;
+
+  return oldQueryArray[oldLastIndex] === newQueryArray[newLastIndex];
+  
 }
