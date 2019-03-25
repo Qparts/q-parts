@@ -188,6 +188,12 @@ const WithProductView = WrappedComponent => {
 								if (option.id === Number(obj[key][i])) {
 									this.setState({ filtration: [...this.state.filtration, option.id], filtrationChecked: [...this.state.filtrationChecked, {id: option.id,title: item.filterTitle + ' ' + option.value,titleAr: item.filterTitleAr + ' ' + option.valueAr}] }
 									)
+									this.state.selectedOptions.map((element, index) => {
+										if (element.filterTitle === item.filterTitle) {
+											element.selectedOptions.push(item.filterTitle + ' ' + option.value);
+											this.setState({ selectedOptions: this.state.selectedOptions, element });
+										}
+									})
 								}
 							}
 						})
