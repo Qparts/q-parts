@@ -19,6 +19,7 @@ import SearchResult from '../containers/SearchResult/SearchResult'
 import ForgotPassword from '../containers/Authentication/ForgotPassword/ForgotPassword';
 import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSignUp/ConfirmSignUp';
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
+import ResultNotFound from '../containers/SearchResult/ResultNotFound'
 
 export const routes = (isAuth, direction, defaultLang, translate) => [
     {
@@ -146,5 +147,9 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         component: CheckoutConfirmationOrder,
         translate,
         direction
+    },
+    {
+        path: "/notSearch",
+        component: ResultNotFound
     },
 ];

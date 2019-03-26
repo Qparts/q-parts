@@ -1,0 +1,49 @@
+#result-not-found{
+  margin-top: 70px;
+  .no-result{
+    margin-bottom: 70px;
+    text-align: center;
+    background: $light-gray;
+    border-radius: side-values(0 0 20px 0);
+    display: inline-flex;
+    padding: 30px 15% 30px 30%;
+    img{
+      width: 97px;
+      height: 98px;
+    }
+    .sec-header{
+      margin-bottom: 0px;
+      @include margin-left(5px);
+      h1{
+        font-family: Roboto;
+        @include font-size(50px);
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: $left;
+        color: rgb(55, 54, 61);
+      }
+      span{
+        span{
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.67;
+          letter-spacing: normal;
+          text-align: center;
+          opacity: 1;
+        }
+      }
+    }
+    .sec-header h1 > p {
+    border-bottom: 1px solid #ed4036;
+    }
+    .btn-primary{
+      @include margin-left(10px);
+      margin-top: 20px;
+      height: 55px;
+    }
+  }
+}

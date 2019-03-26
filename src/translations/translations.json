@@ -2582,6 +2582,20 @@
       "q.parts@2019",
       "q.parts@2019"
     ]
+  },
+  "no-result": {
+    "no":[
+      "لا",
+      "No"
+    ],
+    "result":[
+      "نتائج",
+      "Results"
+    ],
+    "sorry":[
+      ":( نعتذر,لا يوجد نتائج",
+      "Sorry, No Result Found :("
+    ]
   }
 
 }
