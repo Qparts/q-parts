@@ -11,7 +11,7 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
-import { isEmpty, replaceAll, addQuery } from '../../utils';
+import { isEmpty, replaceAll, addQuery, removeQuery } from '../../utils';
 import * as constant from '../../constants';
 import { styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
@@ -236,6 +236,7 @@ class SearchResult extends Component {
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search);
 		this.generateSelectedOptions();
+		this.props.onSetParams(this.props.filterObjects);
 
 		const { searchGeneral: { filterObjects } } = this.state;
 
@@ -259,8 +260,8 @@ class SearchResult extends Component {
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
 			this.setGeneralSearch(search);
-
 		}
+		
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -322,31 +323,35 @@ class SearchResult extends Component {
 		document.getElementById("html").classList.add('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen })
 	}
-	done = () => {
+	done = (e) => {
 		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
+		this.handleGo(e);
 	}
 
 	handleGo = (e) => {
 		e.preventDefault();
-		if (!_.isEmpty(this.props.params)) {
-			this.props.params.forEach(param => {
-				this.props.history.push(addQuery(param.id, param.title));
-			});
-		} else {
-			// console.log(this.props);
-			
-		}
+		this.props.params.forEach(param => {
+			if (param.isSelected) {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = addQuery(filterQuery);
+				
+				return newUrl ? this.props.history.push(newUrl) : newUrl;
+			} else {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = removeQuery(filterQuery);
+				
+				return newUrl ? this.props.history.push(newUrl) : newUrl
+			}
+		});
 
 	}
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions } = this.props;
-		const { location: { pathname, search } } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
 		if (_.isEmpty(filterObjects))
 			return (
 				<div className="container-fluid" style={styles.loading}>
@@ -376,13 +381,12 @@ class SearchResult extends Component {
 			btnNext = "";
 		}
 
-		const params = {
-			rootClassName: `sidebar-main`,
-			sidebarClassName: `sidebar-content`,
-			overlayClassName: "sidebar-overlay",
-			pullRight: "true",
-		}
-		//END sidebar
+		let selectedParams = window.location.search.slice(1).split('&');
+		const hasSelected = params.filter(param => {
+			const filterParam = `${param.title}=${param.id}`;
+			return selectedParams.includes(filterParam);
+		});
+		
 		return (
 			<section className="results-container gray-bg">
 				<DownLargeScreen>
@@ -901,15 +905,11 @@ class SearchResult extends Component {
 									</div>
 								</div>
 								<LargeScreen>
-									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+									<div className="filter-result" style={isEmpty(hasSelected) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
 											{
 												filtrationChecked.map((item, index) => (
-													checkedCurrentLanguage ?
-													<li key={index}>{item.title} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
-													:
-													<h1><li key={index}>{item.titleAr} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li></h1>
-
+													<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
 												))
 											}
 										</ul>

@@ -22,43 +22,25 @@ export const replaceQuery = (location, str) => {
   return location.pathname + newUrl;
 };
 
-export const addQuery = (id, title) => {
-  const searchQuery = getUniqueSearchQuery();
-  const newQuery = `${searchQuery}&${title}=${id}`
-  const hasSameQuery = compareLastValue(searchQuery, newQuery);
-  
+export const addQuery = (param) => {
+  const searchQueries = getUniqueSearchQuery();
+  const hasSameQuery = searchQueries.includes(param);
+  const newQuery = [...searchQueries, param];
 
-  return hasSameQuery ? `listing?${searchQuery}` : `listing?${newQuery}`;
+  return hasSameQuery ? null : `${window.location.pathname}?${newQuery.join('&')}`;
 }
 
-export const clearQuery = (titleArray, idArray) => {
-  let regex;
-  let url = window.location.search;
-  let newUrl;
-  for (var i = 0; i < titleArray.length; i++) {
-    for (var j = 0; j < idArray.length; j++) {
-      regex = new RegExp(`&${titleArray[i].substring(0, titleArray[i].indexOf(' '))}=${idArray[j]}`, "gi");
-      newUrl = url.replace(regex, "");
-      url = newUrl;
-    }
-  }
+export const removeQuery = (param) => {
+  const searchQueries = getUniqueSearchQuery();
+  const shouldRemoveQuery = searchQueries.includes(param);
+  const newQuery = searchQueries.filter(searchQuery => searchQuery !== param);
 
-  return window.location.pathname + newUrl;
+  return shouldRemoveQuery ? `${window.location.pathname}?${newQuery.join('&')}` : null;
 }
 
 const getUniqueSearchQuery = () => {
   const set = new Set(window.location.search.slice(1).split("&"));
 
-  return [...set].join("&");
+  return [...set];
 
-}
-
-const compareLastValue = (oldQuery, newQuery) => {
-  const oldQueryArray = oldQuery.split("&");
-  const newQueryArray = newQuery.split("&");
-  const oldLastIndex = oldQueryArray.length - 1;
-  const newLastIndex = newQueryArray.length - 1;
-
-  return oldQueryArray[oldLastIndex] === newQueryArray[newLastIndex];
-  
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { upperCaseFirstChar } from '../../utils'
 import * as constant from '../../constants';
-import { addQuery, clearQuery } from '../../utils';
+import { removeQuery } from '../../utils';
 import queryString from 'qs';
 import _ from 'lodash';
 const WithProductView = WrappedComponent => {
@@ -23,7 +22,7 @@ const WithProductView = WrappedComponent => {
 
 
 		filter = (item, event) => {
-			const { id, paramsTitle, label, combinedIds } = item;
+			const { id, combinedIds } = item;
 			const { value, checked } = event.target;
 			let index = -1;
 			if (this.state.filtrationChecked !== []) {
@@ -36,19 +35,19 @@ const WithProductView = WrappedComponent => {
 				})
 			}
 			if (checked && index === -1) {
-
-				// const newParams = this.state.params.length === 1 ? this.state.params.concat(`${item.key}=${itemValue}`) : this.state.params.concat(`&${item.key}=${itemValue}`);
 				this.state.selectedOptions.forEach(element => {
 					if (element.filterTitle === item.filterTitle) {
 						element.selectedOptions.push(value);
 						this.setState({ selectedOptions: this.state.selectedOptions, element });
 					}
-				})
+				});
+
 				this.setState({
 					filtration: [...this.state.filtration, id],
 					filtrationChecked: [...this.state.filtrationChecked, { id: combinedIds, title: item.paramsTitle + ' ' + item.paramsValue, titleAr: item.paramsTitleAr + ' ' + item.paramsValueAr }],
-					params: [...this.state.params, { id, title: paramsTitle, label }]
-				})
+				}, () => {
+					this.updateParams();
+				});
 			} else if (index !== -1) {
 				this.state.selectedOptions.forEach(element => {
 					for (var i = 0; i < element.selectedOptions.length; i++) {
@@ -61,24 +60,42 @@ const WithProductView = WrappedComponent => {
 					}
 				})
 				const clone = [...this.state.filtration];
-				const removeParams = [...this.state.params];
 				const removeChecked = [...this.state.filtrationChecked];
 
 
 				removeChecked.splice(index, 1)
-				removeParams.splice(index, 1);
 				this.setState({
 					filtration: clone,
 					filtrationChecked: removeChecked,
-					params: removeParams
+				}, () => {
+					this.updateParams();
 				});
 			}
 		}
 
+		updateParams = () => {
+			const newParams = this.state.params.map(param => {
+				if (this.isChecked(param.checkId)) {
+					return {
+						...param,
+						isSelected: true
+					}
+				} else {
+					return {
+						...param,
+						isSelected: false
+					}
+				}
+			});
+
+			this.setState({
+				params: newParams
+			});
+		}
+
 		removeItem = (index, item, event) => {
 			event.preventDefault();
-			const key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-			this.state.selectedOptions.map((element, index) => {
+			this.state.selectedOptions.forEach(element => {
 				for (var i = 0; i < element.selectedOptions.length; i++) {
 					if (element.selectedOptions[i] === item) {
 
@@ -90,16 +107,16 @@ const WithProductView = WrappedComponent => {
 			})
 			const clone = [...this.state.filtration];
 			const removeChecked = [...this.state.filtrationChecked];
-			const removeParams = [...this.state.params];
 
 
 			removeChecked.splice(index, 1);
-			removeParams.splice(index, 1);
 
 			this.setState({
 				filtration: clone,
-				filtrationChecked: removeChecked,
-				params: removeParams
+				filtrationChecked: removeChecked
+			}, () => {
+				this.updateParams();
+				this.removeSelectedUrl(item);
 			});
 		}
 
@@ -109,6 +126,14 @@ const WithProductView = WrappedComponent => {
 			})
 
 			return check ? true : false;
+		}
+
+		removeSelectedUrl = (itemToRemove) => {
+			const newParam = this.state.params.find(param => param.checkId === itemToRemove.id);
+			const filterQuery = `${newParam.title}=${newParam.id}`;
+			const newUrl = removeQuery(filterQuery);
+
+			return newUrl ? this.props.history.push(newUrl) : newUrl
 		}
 
 
@@ -145,7 +170,11 @@ const WithProductView = WrappedComponent => {
 		}
 
 		handleClear = () => {
-			this.props.history.push(clearQuery(this.state.filtrationChecked, this.state.filtration));
+			this.state.params.forEach(param => {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = removeQuery(filterQuery);
+				return newUrl ? this.props.history.push(newUrl) : newUrl
+			});
 			this.setState({
 				filtration: [],
 				filtrationChecked: [],
@@ -172,6 +201,12 @@ const WithProductView = WrappedComponent => {
 										filtration: [...this.state.filtration, option.id],
 										filtrationChecked: [...this.state.filtrationChecked, { id: combinedIds, title: label, titleAr: labelAr }],
 										params: [...this.state.params, { id: option.id, title: item.filterTitle }]
+									});
+									this.state.selectedOptions.forEach(element => {
+										if (element.filterTitle === item.filterTitle) {
+											element.selectedOptions.push(label);
+											this.setState({ selectedOptions: this.state.selectedOptions, element });
+										}
 									})
 								}
 							}
@@ -179,6 +214,27 @@ const WithProductView = WrappedComponent => {
 					}
 				})
 			}
+		}
+
+		setParams = (initialArray) => {
+			let newParams = [];
+			let selectedParams = window.location.search.slice(1).split('&');
+
+			initialArray.forEach(filter => {
+				filter.options.forEach(option => {
+					const combinedIds = `${filter.id}${option.id}`;
+					const param = `${filter.filterTitle}=${option.id}`;
+					newParams.push({
+						id: option.id,
+						checkId: combinedIds,
+						title: filter.filterTitle,
+						isSelected: selectedParams.includes(param) ? true : false
+					});
+				});
+			});
+			this.setState({
+				params: newParams
+			})
 		}
 
 		render() {
@@ -189,6 +245,7 @@ const WithProductView = WrappedComponent => {
 				isChecked={this.isChecked}
 				methodSelectedOptions={this.selectedOptions}
 				onClear={this.handleClear}
+				onSetParams={this.setParams}
 
 				{...this.state}
 				{...this.props} />
