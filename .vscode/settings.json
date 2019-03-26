@@ -1,6 +1,2 @@
 {
-    "search.exclude": {
-        "**/bootstrap": true,
-        "**/bootstrap-rtl": true
-    }
 }

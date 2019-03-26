@@ -11,7 +11,7 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
-import { isEmpty, replaceAll, addQuery } from '../../utils';
+import { isEmpty, replaceAll, addQuery, removeQuery } from '../../utils';
 import * as constant from '../../constants';
 import { styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
@@ -170,7 +170,7 @@ class SearchResult extends Component {
 			})
 		}
 	}
-	setGeneralSearch = (search,callback = null) => {
+	setGeneralSearch = (search, callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 18) {
@@ -181,10 +181,10 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-			if(callback){
-				callback(res.data);
+			if (callback) {
+				  callback(res.data);
 			}
-			});
+		});
 	}
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
@@ -222,19 +222,20 @@ class SearchResult extends Component {
 		})
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
-	generateSelectedOptions = (data) =>{
-		var newObj =[];
-		for(var i=0;i<data.filterObjects.length;i++){
-			newObj.push({'filterTitle':data.filterObjects[i]['filterTitle'],'filterTitleAr':data.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
+	generateSelectedOptions = (data) => {
+		var newObj = [];
+		for (var i = 0; i < this.props.filterObjects.length; i++) {
+			newObj.push({ 'filterTitle': this.props.filterObjects[i]['filterTitle'], 'filterTitleAr': this.props.filterObjects[i]['filterTitleAr'], 'selectedOptions': [] })
 		}
-		this.setState({checked:newObj});
-		this.props.methodSelectedOptions(newObj,data);
+		this.setState({ checked: newObj });
+		this.props.methodSelectedOptions(newObj, this.props.filterObjects);
 	}
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.setGeneralSearch(search,this.generateSelectedOptions);
+		this.props.onSetParams(this.props.filterObjects);
 
 		const { searchGeneral: { filterObjects } } = this.state;
 
@@ -258,8 +259,8 @@ class SearchResult extends Component {
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
 			this.setGeneralSearch(search);
-
 		}
+
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -286,12 +287,6 @@ class SearchResult extends Component {
 				</Card>
 		));
 	}
-
-	//filters
-	setFilter = (filter) => {
-		console.log(filter);
-	}
-	//END Filter
 	handleClick = (item) => {
 		var that = this;
 		setTimeout(function () {
@@ -327,31 +322,35 @@ class SearchResult extends Component {
 		document.getElementById("html").classList.add('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen })
 	}
-	done = () => {
+	done = (e) => {
 		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
+		this.handleGo(e);
 	}
 
 	handleGo = (e) => {
 		e.preventDefault();
-		if (!_.isEmpty(this.props.params)) {
-			const { id, title } = this.props.params;
-			const paramsLength = id.length;
+		this.props.params.forEach(param => {
+			if (param.isSelected) {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = addQuery(filterQuery);
 
-			for (let index = 0; index < paramsLength; index++) {
-				this.props.history.push(addQuery(id[index], title[index]));
+				return newUrl ? this.props.history.push(newUrl) : newUrl;
+			} else {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = removeQuery(filterQuery);
+
+				return newUrl ? this.props.history.push(newUrl) : newUrl
 			}
-		}
+		});
 
 	}
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions } = this.props;
-		const { location: { pathname, search } } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
 		if (_.isEmpty(filterObjects))
 			return (
 				<div className="container-fluid" style={styles.loading}>
@@ -381,13 +380,12 @@ class SearchResult extends Component {
 			btnNext = "";
 		}
 
-		const params = {
-			rootClassName: `sidebar-main`,
-			sidebarClassName: `sidebar-content`,
-			overlayClassName: "sidebar-overlay",
-			pullRight: "true",
-		}
-		//END sidebar
+		let selectedParams = window.location.search.slice(1).split('&');
+		const hasSelected = params.filter(param => {
+			const filterParam = `${param.title}=${param.id}`;
+			return selectedParams.includes(filterParam);
+		});
+
 		return (
 			<section className="results-container gray-bg">
 				<DownLargeScreen>
@@ -644,13 +642,13 @@ class SearchResult extends Component {
 											</div>
 										</li>*/}
 										{
-										filterObjects.map((filterObject, idx) => {
-											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
-												<div className="row">
-													<label className="col-auto">{filterObject[key]}</label>
-															<div className="col">{selectedOptions.map((item, index) => (
-																	(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
-																))}</div>
+											this.props.filterObjects.map((filterObject, idx) => {
+												return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
+													<div className="row">
+														<label className="col-auto">{filterObject[key]}</label>
+														<div className="col">{selectedOptions.map((item, index) => (
+															(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
+														))}</div>
 
 													</div>
 													<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
@@ -698,7 +696,7 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-										filterObjects.map((filterObject, idx) => {
+										this.props.filterObjects.map((filterObject, idx) => {
 											return <li key={idx}>
 												<h5>
 													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
@@ -906,15 +904,11 @@ class SearchResult extends Component {
 									</div>
 								</div>
 								<LargeScreen>
-									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+									<div className="filter-result" style={isEmpty(hasSelected) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
 											{
 												filtrationChecked.map((item, index) => (
-													checkedCurrentLanguage ?
-													<li key={index}>{item.title} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
-													:
-													<h1><li key={index}>{item.titleAr} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li></h1>
-
+													<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
 												))
 											}
 										</ul>
