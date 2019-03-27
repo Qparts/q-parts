@@ -361,6 +361,12 @@ class SearchResult extends Component {
 			return (
 				<div>
 					<ResultNotFound />
+						// <ClipLoader
+						// 	css={styles.spinner}
+						// 	sizeUnit={"px"}
+						// 	size={150}
+						// 	loading={this.state.loading}
+						// />
 				</div>
 			)
 
