@@ -29,7 +29,7 @@ import { ClipLoader } from "react-spinners";
 
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { getLength } from '../../utils/array';
-
+import ResultNotFound from './ResultNotFound';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -181,6 +181,9 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
+
+
+							console.log(res.data,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 			if(callback){
 				callback(res.data);
 			}
@@ -255,6 +258,7 @@ class SearchResult extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
 			this.setGeneralSearch(search);
@@ -346,6 +350,7 @@ class SearchResult extends Component {
 	}
 	render() {
 
+		console.log(this.state.searchGeneral.products,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 		//sidebar
 		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions } = this.props;
 		const { location: { pathname, search } } = this.props;
@@ -354,13 +359,8 @@ class SearchResult extends Component {
 		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
 		if (_.isEmpty(filterObjects))
 			return (
-				<div className="container-fluid" style={styles.loading}>
-					<ClipLoader
-						css={styles.spinner}
-						sizeUnit={"px"}
-						size={150}
-						loading={this.state.loading}
-					/>
+				<div>
+					<ResultNotFound />
 				</div>
 			)
 
