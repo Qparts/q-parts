@@ -142,7 +142,6 @@ class SearchResult extends Component {
 			startSize: 1,
 			endSize: 18,
 			item: '',
-			checked: [],
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -182,7 +181,7 @@ class SearchResult extends Component {
 				resultSize: res.data.resultSize,
 			})
 			if (callback) {
-				  callback(res.data);
+				callback(res.data);
 			}
 		});
 	}
@@ -227,40 +226,43 @@ class SearchResult extends Component {
 		for (var i = 0; i < this.props.filterObjects.length; i++) {
 			newObj.push({ 'filterTitle': this.props.filterObjects[i]['filterTitle'], 'filterTitleAr': this.props.filterObjects[i]['filterTitleAr'], 'selectedOptions': [] })
 		}
-		this.setState({ checked: newObj });
-		this.props.methodSelectedOptions(newObj, this.props.filterObjects);
+		console.log('generateSelectedOptions');
+
+		this.props.onSetInitialSelectedOptions(newObj, this.props.filterObjects);
 	}
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
-		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		this.setGeneralSearch(search,this.generateSelectedOptions);
+		this.setGeneralSearch(search, this.generateSelectedOptions);
 		this.props.onSetParams(this.props.filterObjects);
-
-		const { searchGeneral: { filterObjects } } = this.state;
-
-		const query = queryString.parse(search.slice(1));
-		// const keys = Object.keys(query);
-		const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
-			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
-			const queryValues = replaceAll(newArray, '_', ' ');
-			const values = queryValues.length > 1 ? [...new Set(queryValues)] : [];
-			return {
-				filterTitle: key,
-				Checkbox,
-				values
-			}
-		}) : [];
-
 		this.quantityProducts();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search } } = this.props;
-		if (search !== prevProps.location.search) {
-			this.setGeneralSearch(search);
-		}
+		// if (search !== prevProps.location.search) {
+		// 	this.setGeneralSearch(search);
+		// }
 
+
+		window.onpopstate = (event) => {
+			console.log('onpopstate');
+			// this.props.onSetHistoryState()
+			console.log('before');
+			console.log('filtrationChecked', this.props.filtrationChecked);
+			// console.log('filtration', this.props.filtration);
+			console.log('params', this.props.params);
+			// console.log('selectedOptions', this.props.selectedOptions);
+			this.setGeneralSearch(search, this.generateSelectedOptions);
+			this.props.onSetParams(this.props.filterObjects);
+			console.log('after');
+			console.log('filtrationChecked', this.props.filtrationChecked);
+			// console.log('filtration', this.props.filtration);
+			console.log('params', this.props.params);
+			// console.log('selectedOptions', this.props.selectedOptions);
+
+			// this.props.onUpdateParams();
+		}
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';

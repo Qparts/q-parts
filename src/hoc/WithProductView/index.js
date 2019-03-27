@@ -178,7 +178,8 @@ const WithProductView = WrappedComponent => {
 			this.setState({
 				filtration: [],
 				filtrationChecked: [],
-				params: [],
+			}, () => {
+				this.updateParams();
 			})
 		}
 		selectedOptions = (dataSelectedOptions, dataProducts) => {
@@ -187,7 +188,6 @@ const WithProductView = WrappedComponent => {
 			})
 			let obj = queryString.parse(window.location.search.slice(1));
 
-			console.log(this.state.selected)
 			for (var key in obj) {
 				// eslint-disable-next-line no-loop-func
 				dataProducts.forEach(item => {
@@ -201,8 +201,7 @@ const WithProductView = WrappedComponent => {
 									const combinedIds = `${item.id}${option.id}`;
 									this.setState({
 										filtration: [...this.state.filtration, option.id],
-										filtrationChecked: [...this.state.filtrationChecked, { id: combinedIds, title: label, titleAr: labelAr }],
-										params: [...this.state.params, { id: option.id, title: item.filterTitle }]
+										filtrationChecked: [...this.state.filtrationChecked, { id: combinedIds, title: label, titleAr: labelAr }]
 									});
 									this.state.selectedOptions.forEach(element => {
 										if (element.filterTitle === item.filterTitle) {
@@ -246,18 +245,15 @@ const WithProductView = WrappedComponent => {
 				onFilter={this.filter}
 				onRemoveItem={this.removeItem}
 				isChecked={this.isChecked}
-				methodSelectedOptions={this.selectedOptions}
+				onSetInitialSelectedOptions={this.selectedOptions}
 				onClear={this.handleClear}
 				onSetParams={this.setParams}
+				onUpdateParams={this.updateParams}
 
 				{...this.state}
 				{...this.props} />
 		}
 	}
-}
-
-const fixParamsFormat = (newParams) => {
-	return '?'.concat(newParams.join('&'))
 }
 
 export default WithProductView;
