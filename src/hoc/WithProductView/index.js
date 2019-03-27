@@ -187,15 +187,11 @@ const WithProductView = WrappedComponent => {
 				selectedOptions: dataSelectedOptions
 			})
 			let obj = queryString.parse(window.location.search.slice(1));
-<<<<<<< HEAD
 			if(this.state.filtrationChecked.length !== 0){
 				this.setState({
 					filtrationChecked: []
 				})
 			}
-=======
-
->>>>>>> 08900d1bae6fc003dc15c4454c77c6abc57fe50d
 			for (var key in obj) {
 				// eslint-disable-next-line no-loop-func
 				dataProducts.forEach(item => {
