@@ -11,8 +11,9 @@ import WithProductView from '../../hoc/WithProductView';
 import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
-import { isEmpty, replaceAll, addQuery } from '../../utils';
+import { isEmpty, replaceAll, addQuery, removeQuery } from '../../utils';
 import * as constant from '../../constants';
+import { getCategoryId } from '../../constants';
 import { styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
@@ -142,7 +143,6 @@ class SearchResult extends Component {
 			startSize: 1,
 			endSize: 18,
 			item: '',
-			checked: [],
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -170,7 +170,7 @@ class SearchResult extends Component {
 			})
 		}
 	}
-	setGeneralSearch = (search,callback = null) => {
+	setGeneralSearch = (search, callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 18 && res.data.products.length !== 0) {
@@ -183,10 +183,10 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-			if(callback){
+			if (callback) {
 				callback(res.data);
 			}
-			});
+		});
 	}
 	toggle = (collapse) => {
 		this.setState({ [collapse]: !this.state[collapse] });
@@ -224,36 +224,22 @@ class SearchResult extends Component {
 		})
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
-	generateSelectedOptions = (data) =>{
-		var newObj =[];
-		for(var i=0;i<data.filterObjects.length;i++){
-			newObj.push({'filterTitle':data.filterObjects[i]['filterTitle'],'filterTitleAr':data.filterObjects[i]['filterTitleAr'],'selectedOptions':[]})
+	generateSelectedOptions = (data) => {
+		var newObj = [];
+		for (var i = 0; i < data.filterObjects.length; i++) {
+			newObj.push({
+				filterTitle: data.filterObjects[i]['filterTitle'],
+				filterTitleAr: data.filterObjects[i]['filterTitleAr'],
+				selectedOptions: []
+			})
 		}
-		this.setState({checked:newObj});
-		this.props.methodSelectedOptions(newObj,data);
+		this.props.onSetInitialSelectedOptions(newObj, data.filterObjects);
 	}
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
-		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		this.props.getFlage(false);
-		this.setGeneralSearch(search,this.generateSelectedOptions);
-
-		const { searchGeneral: { filterObjects } } = this.state;
-
-		const query = queryString.parse(search.slice(1));
-		// const keys = Object.keys(query);
-		const filters = !_.isUndefined(filterObjects) ? filterObjects.map(filterObject => {
-			const newArray = Array.isArray(query[key]) ? query[key] : [query[key]]
-			const queryValues = replaceAll(newArray, '_', ' ');
-			const values = queryValues.length > 1 ? [...new Set(queryValues)] : [];
-			return {
-				filterTitle: key,
-				Checkbox,
-				values
-			}
-		}) : [];
-
+		this.setGeneralSearch(search, this.runCallbacks);
 		this.quantityProducts();
 	}
 
@@ -261,9 +247,26 @@ class SearchResult extends Component {
 
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
+			this.props.getFlage(false);
+			this.resetLoading();
 			this.setGeneralSearch(search);
-
 		}
+
+
+		window.onpopstate = (event) => {
+			this.setGeneralSearch(search, this.runCallbacks);
+		}
+	}
+
+	resetLoading = () => {
+		this.setState({
+			loading: true
+		})
+	}
+
+	runCallbacks = (data) => {
+		this.generateSelectedOptions(data);
+		this.props.onSetParams(data.filterObjects);
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -290,12 +293,6 @@ class SearchResult extends Component {
 				</Card>
 		));
 	}
-
-	//filters
-	setFilter = (filter) => {
-		console.log(filter);
-	}
-	//END Filter
 	handleClick = (item) => {
 		var that = this;
 		setTimeout(function () {
@@ -331,39 +328,50 @@ class SearchResult extends Component {
 		document.getElementById("html").classList.add('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen })
 	}
-	done = () => {
+	done = (e) => {
 		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
+		this.handleGo(e);
 	}
 
 	handleGo = (e) => {
 		e.preventDefault();
-		if (!_.isEmpty(this.props.params)) {
-			const { id, title } = this.props.params;
-			const paramsLength = id.length;
+		this.props.params.forEach(param => {
+			if (param.isSelected) {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = addQuery(filterQuery);
 
-			for (let index = 0; index < paramsLength; index++) {
-				this.props.history.push(addQuery(id[index], title[index]));
+				return newUrl ? this.props.history.push(newUrl) : newUrl;
+			} else {
+				const filterQuery = `${param.title}=${param.id}`;
+				const newUrl = removeQuery(filterQuery);
+
+				return newUrl ? this.props.history.push(newUrl) : newUrl
 			}
-		}
+		});
 
 	}
+	getCategoryName = () => {
+		let categoryId = queryString.parse(window.location.search.slice(1)).category;
+		let query = queryString.parse(window.location.search.slice(1)).query;
+
+		return categoryId ? getCategoryId(this.props.translate).get(parseInt(categoryId, constant.RADIX)) : query;
+	}
+
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions, flage } = this.props;
-		const { location: { pathname, search } } = this.props;
-		const { searchGeneral: { filterObjects } } = this.state;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params, flage } = this.props;
+		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
 		if(flage){
 			return (
 					<ResultNotFound />
 			)
 		}
-		if (_.isEmpty(filterObjects))
+		if (loading)
 			return (
-				<div>
+				<div style={styles.loading}>
 						<ClipLoader
 							css={styles.spinner}
 							sizeUnit={"px"}
@@ -390,13 +398,12 @@ class SearchResult extends Component {
 			btnNext = "";
 		}
 
-		const params = {
-			rootClassName: `sidebar-main`,
-			sidebarClassName: `sidebar-content`,
-			overlayClassName: "sidebar-overlay",
-			pullRight: "true",
-		}
-		//END sidebar
+		let selectedParams = window.location.search.slice(1).split('&');
+		const hasSelected = params.filter(param => {
+			const filterParam = `${param.title}=${param.id}`;
+			return selectedParams.includes(filterParam);
+		});
+
 		return (
 			<section className="results-container gray-bg">
 				<DownLargeScreen>
@@ -522,7 +529,7 @@ class SearchResult extends Component {
 													</div>
 													<ul className="options-list">
 														<li>
-															<div class="checkbox">
+															<div className="checkbox">
 																<input type="checkbox" id="O1" />
 																<label for="O1">Option 1</label>
 															</div>
@@ -653,13 +660,13 @@ class SearchResult extends Component {
 											</div>
 										</li>*/}
 										{
-										filterObjects.map((filterObject, idx) => {
-											return <li key={idx} onClick={() =>this.handleClick(filterObject.filterTitle)} className="have-child">
-												<div className="row">
-													<label className="col-auto">{filterObject[key]}</label>
-															<div className="col">{selectedOptions.map((item, index) => (
-																	(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
-																))}</div>
+											filterObjects.map((filterObject, idx) => {
+												return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
+													<div className="row">
+														<label className="col-auto">{filterObject[key]}</label>
+														<div className="col">{selectedOptions.map((item, index) => (
+															(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
+														))}</div>
 
 													</div>
 													<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
@@ -712,27 +719,27 @@ class SearchResult extends Component {
 												<h5>
 													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
 												</h5>
-												<div class="collapse show" id={`${filterObject.filterTitle}`}>
+												<div className="collapse show" id={`${filterObject.filterTitle}`}>
 													<div className="filter-search">
-														<i class="icon-search"></i>
-														<input type="text" class="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
+														<i className="icon-search"></i>
+														<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
 													</div>
 													{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 													{/*<ul className="options-list">
 													<li>
-														<div class="checkbox">
+														<div className="checkbox">
 															<input type="checkbox" id="O1" />
 															<label for="O1">Option 1</label>
 														</div>
 													</li>
 													<li>
-														<div class="checkbox">
+														<div className="checkbox">
 															<input type="checkbox" id="O2" />
 															<label for="O2">Option 2</label>
 														</div>
 													</li>
 													<li>
-														<div class="checkbox">
+														<div className="checkbox">
 															<input type="checkbox" id="O3" />
 															<label for="O3">Option 3</label>
 														</div>
@@ -791,17 +798,17 @@ class SearchResult extends Component {
 													</div>
 												</div>
 											</div>
-											<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
+											<button type="button" className="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
 										</form>
 									</li>*/}
 									{/*<li>
 										<h5>
 											<a href="#Volume" data-toggle="collapse" role="button" aria-expanded="false">Volume<span className="minus"></span></a>
 										</h5>
-										<div class="collapse show" id="Volume">
+										<div className="collapse show" id="Volume">
 											<div className="filter-search">
-												<i class="icon-search"></i>
-												<input type="text" class="form-control" placeholder="Search" aria-label="Username" />
+												<i className="icon-search"></i>
+												<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
 											</div>
 											<ul className="options-list">
 												<li className="radio-custom">
@@ -826,30 +833,30 @@ class SearchResult extends Component {
 										<h5>
 											<a href="#price" data-toggle="collapse" role="button" aria-expanded="false">Price<span className="minus"></span></a>
 										</h5>
-										<div class="collapse show" id="price">
+										<div className="collapse show" id="price">
 											<ul className="options-list">
 												<li>
-													<div class="checkbox">
+													<div className="checkbox">
 														<input type="checkbox" id="O7" />
 														<label for="O7">> 50</label>
 													</div>
 												</li>
 												<li>
-													<div class="checkbox">
+													<div className="checkbox">
 														<input type="checkbox" id="O8" />
 														<label for="O8">500-700</label>
 													</div>
 												</li>
 												<li>
-													<form class="form-row price-filter">
+													<form className="form-row price-filter">
 														<div className="col">
-															<input type="text" class="form-control" placeholder="From" />
+															<input type="text" className="form-control" placeholder="From" />
 														</div>
 														<div className="col">
-															<input type="text" class="form-control" placeholder="To" />
+															<input type="text" className="form-control" placeholder="To" />
 														</div>
 														<div className="col-auto">
-															<button type="submit" class="btn btn-primary">Go</button>
+															<button type="submit" className="btn btn-primary">Go</button>
 														</div>
 													</form>
 												</li>
@@ -860,10 +867,10 @@ class SearchResult extends Component {
 										<h5>
 											<a href="#rating" data-toggle="collapse" role="button" aria-expanded="false">Rating<span className="minus"></span></a>
 										</h5>
-										<div class="collapse show" id="rating">
+										<div className="collapse show" id="rating">
 											<ul className="options-list">
 												<li>
-													<div class="checkbox">
+													<div className="checkbox">
 														<input type="checkbox" id="O10" />
 														<label for="O10">
 															<div className="rating">
@@ -874,7 +881,7 @@ class SearchResult extends Component {
 													</div>
 												</li>
 												<li>
-													<div class="checkbox">
+													<div className="checkbox">
 														<input type="checkbox" id="O10" />
 														<label for="O10">Not Yet Rated</label>
 													</div>
@@ -883,7 +890,7 @@ class SearchResult extends Component {
 										</div>
 									</li>*/}
 									<li>
-										<button type="submit" class="btn btn-primary" onClick={this.handleGo}>Go</button>
+										<button type="submit" className="btn btn-primary" onClick={this.handleGo}>{this.props.translate("general.buttons.go")}</button>
 									</li>
 								</ul>
 							</div>
@@ -892,7 +899,7 @@ class SearchResult extends Component {
 						<div className="col">
 							<div className="search-result">
 								<div className="total-result row">
-									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+									<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
 									<div className="col-auto">
 										{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
@@ -915,15 +922,11 @@ class SearchResult extends Component {
 									</div>
 								</div>
 								<LargeScreen>
-									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+									<div className="filter-result" style={isEmpty(hasSelected) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
 											{
 												filtrationChecked.map((item, index) => (
-													checkedCurrentLanguage ?
-													<li key={index}>{item.title} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
-													:
-													<h1><li key={index}>{item.titleAr} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li></h1>
-
+													<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
 												))
 											}
 										</ul>

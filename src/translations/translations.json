@@ -397,6 +397,14 @@
     "oneOfTheIncubatedProjects": [
       "واحد من المشاريع المحتضنة",
       "One of the Incubated Projects"
+    ],
+    "spareParts": [
+      "قطع غيار",
+      "Spare Parts"
+    ],
+    "batteries": [
+      "بطاريات",
+      "Batteries"
     ]
   },
   "quotationOrder": {
@@ -543,7 +551,7 @@
   },
   "navBar": {
     "vehiclePart": [
-      "جزء السيارة",
+      "قطع غيار السيارات",
       "Vehicle part"
     ],
     "motorOil": [
@@ -615,7 +623,7 @@
       }
     },
     "search": [
-      "البحث عن طريق رقم الجزء ، اسم المنتج",
+      "البحث عن طريق رقم القطعة ، اسم المنتج",
       "Search by Part Number,  Product Name"
     ],
     "home": [
@@ -2169,7 +2177,7 @@
       "Pending"
     ],
     "replied": [
-      "ردها",
+      "تم الرد عليها",
       "Replied"
     ],
     "requestNo": [

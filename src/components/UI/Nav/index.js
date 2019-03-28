@@ -41,7 +41,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
                 <li className="nav-sm">
-                    <a className="user-account-sm" href="#">
+                    <button className="user-account-sm w-100" href="#">
                         <span className="rounded-circle ">
                             <img alt="user" src="/img/user.svg" />
                         </span>
@@ -52,7 +52,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                                     <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                                 </Link>
                         }
-                    </a>
+                    </button>
                 </li>
                 <li className="nav-sm">
                     <Link to="/" onClick={close}>
@@ -127,7 +127,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.motorCareLiquids")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
                     </ul>
                 </li>
 
