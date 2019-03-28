@@ -162,7 +162,7 @@ const WithProductView = WrappedComponent => {
 								value={checkLabel}
 								checked={isChecked(combinedIds)}
 							/>
-							<label for={combinedIds}>{value}</label>
+							<label htmlFor={combinedIds}>{value}</label>
 						</div>
 					</li>
 				</ul>

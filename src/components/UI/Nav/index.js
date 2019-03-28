@@ -41,7 +41,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
         <nav className="cd-nav">
             <ul id="cd-primary-nav" className="cd-primary-nav">
                 <li className="nav-sm">
-                    <a className="user-account-sm" href="#">
+                    <button className="user-account-sm w-100" href="#">
                         <span className="rounded-circle ">
                             <img alt="user" src="/img/user.svg" />
                         </span>
@@ -52,7 +52,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                                     <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                                 </Link>
                         }
-                    </a>
+                    </button>
                 </li>
                 <li className="nav-sm">
                     <Link to="/" onClick={close}>
