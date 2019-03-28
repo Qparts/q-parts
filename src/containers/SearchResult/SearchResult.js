@@ -223,46 +223,37 @@ class SearchResult extends Component {
 	}
 	generateSelectedOptions = (data) => {
 		var newObj = [];
-		for (var i = 0; i < this.props.filterObjects.length; i++) {
-			newObj.push({ 'filterTitle': this.props.filterObjects[i]['filterTitle'], 'filterTitleAr': this.props.filterObjects[i]['filterTitleAr'], 'selectedOptions': [] })
+		for (var i = 0; i < data.filterObjects.length; i++) {
+			newObj.push({
+				filterTitle: data.filterObjects[i]['filterTitle'],
+				filterTitleAr: data.filterObjects[i]['filterTitleAr'],
+				selectedOptions: []
+			})
 		}
-		console.log('generateSelectedOptions');
-
-		this.props.onSetInitialSelectedOptions(newObj, this.props.filterObjects);
+		this.props.onSetInitialSelectedOptions(newObj, data.filterObjects);
 	}
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
-		this.setGeneralSearch(search, this.generateSelectedOptions);
-		this.props.onSetParams(this.props.filterObjects);
+		this.setGeneralSearch(search, this.runCallbacks);
 		this.quantityProducts();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search } } = this.props;
-		// if (search !== prevProps.location.search) {
-		// 	this.setGeneralSearch(search);
-		// }
+		if (search !== prevProps.location.search) {
+			this.setGeneralSearch(search);
+		}
 
 
 		window.onpopstate = (event) => {
-			console.log('onpopstate');
-			// this.props.onSetHistoryState()
-			console.log('before');
-			console.log('filtrationChecked', this.props.filtrationChecked);
-			// console.log('filtration', this.props.filtration);
-			console.log('params', this.props.params);
-			// console.log('selectedOptions', this.props.selectedOptions);
-			this.setGeneralSearch(search, this.generateSelectedOptions);
-			this.props.onSetParams(this.props.filterObjects);
-			console.log('after');
-			console.log('filtrationChecked', this.props.filtrationChecked);
-			// console.log('filtration', this.props.filtration);
-			console.log('params', this.props.params);
-			// console.log('selectedOptions', this.props.selectedOptions);
-
-			// this.props.onUpdateParams();
+			this.setGeneralSearch(search, this.runCallbacks);
 		}
+	}
+
+	runCallbacks = (data) => {
+		this.generateSelectedOptions(data);
+		this.props.onSetParams(data.filterObjects);
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -644,7 +635,7 @@ class SearchResult extends Component {
 											</div>
 										</li>*/}
 										{
-											this.props.filterObjects.map((filterObject, idx) => {
+											filterObjects.map((filterObject, idx) => {
 												return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
 													<div className="row">
 														<label className="col-auto">{filterObject[key]}</label>
@@ -698,7 +689,7 @@ class SearchResult extends Component {
 							<div className="filter-col">
 								<ul className="filter" ref={this.setFilter}>
 									{
-										this.props.filterObjects.map((filterObject, idx) => {
+										filterObjects.map((filterObject, idx) => {
 											return <li key={idx}>
 												<h5>
 													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
