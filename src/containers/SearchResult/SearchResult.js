@@ -174,13 +174,10 @@ class SearchResult extends Component {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 18 && res.data.products.length !== 0) {
-
-				console.log("size less than 18", res.data.products.length )
 				this.setState({ endSize: res.data.resultSize })
 			}else if(res.data.products.length === 0){
 				this.props.getFlage(true);
 			}
-			console.log("size less than 18 aa2")
 			this.setState({
 				searchGeneral: res.data,
 				loading: false,
