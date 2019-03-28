@@ -30,15 +30,8 @@
         margin-top: 5px;
       }
       span{
-        span{
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: 1.67;
-          letter-spacing: normal;
-          text-align: center;
-          opacity: 1;
-        }
+        display: flex;
+        white-space: nowrap;
       }
     }
     .sec-header h1 > p {
@@ -48,6 +41,7 @@
       margin-top: 20px;
       height: 55px;
       @include margin-left(10px);
+      margin-right: 40px !important;
     }
   }
 @media (max-width: 1199.98px) {
