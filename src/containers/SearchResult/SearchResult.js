@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
-import { getSortedProducts } from '../../actions/apiAction';
+import { getSortedProducts, getFlage } from '../../actions/apiAction';
 import Select from 'react-select';
 // import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
@@ -30,7 +30,7 @@ import { ClipLoader } from "react-spinners";
 
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { getLength } from '../../utils/array';
-
+import ResultNotFound from './ResultNotFound';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -173,8 +173,10 @@ class SearchResult extends Component {
 	setGeneralSearch = (search, callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
-			if (res.data.products.length < 18) {
+			if (res.data.products.length < 18 && res.data.products.length !== 0) {
 				this.setState({ endSize: res.data.resultSize })
+			}else if(res.data.products.length === 0){
+				this.props.getFlage(true);
 			}
 			this.setState({
 				searchGeneral: res.data,
@@ -236,13 +238,16 @@ class SearchResult extends Component {
 
 	componentDidMount() {
 		const { location: { search } } = this.props;
+		this.props.getFlage(false);
 		this.setGeneralSearch(search, this.runCallbacks);
 		this.quantityProducts();
 	}
 
 	componentDidUpdate(prevProps, prevState) {
+
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
+			this.props.getFlage(false);
 			this.resetLoading();
 			this.setGeneralSearch(search);
 		}
@@ -349,25 +354,30 @@ class SearchResult extends Component {
 	getCategoryName = () => {
 		let categoryId = queryString.parse(window.location.search.slice(1)).category;
 		let query = queryString.parse(window.location.search.slice(1)).query;
-		
+
 		return categoryId ? getCategoryId(this.props.translate).get(parseInt(categoryId, constant.RADIX)) : query;
 	}
 
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params, flage } = this.props;
 		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+		if(flage){
+			return (
+					<ResultNotFound />
+			)
+		}
 		if (loading)
 			return (
-				<div className="container-fluid" style={styles.loading}>
-					<ClipLoader
-						css={styles.spinner}
-						sizeUnit={"px"}
-						size={150}
-						loading={this.state.loading}
-					/>
+				<div style={styles.loading}>
+						<ClipLoader
+							css={styles.spinner}
+							sizeUnit={"px"}
+							size={150}
+							loading={this.state.loading}
+						/>
 				</div>
 			)
 
@@ -950,13 +960,15 @@ const mapStateToProps = state => {
 		products: state.api.products,
 		currentLanguage: getActiveLanguage(state.localize).code,
 		translate: getTranslate(state.localize),
-		direction: state.customer.direction
+		direction: state.customer.direction,
+		flage: state.api.flage
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
 		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-		getSortedProducts: () => dispatch(getSortedProducts())
+		getSortedProducts: () => dispatch(getSortedProducts()),
+		getFlage: (flage) => dispatch(getFlage(flage))
 	}
 }
 const withTyresSearch = WithProductView(SearchResult);

@@ -2590,6 +2590,32 @@
       "q.parts@2019",
       "q.parts@2019"
     ]
+  },
+  "noResult": {
+    "no":[
+      "لا",
+      "No"
+    ],
+    "result":[
+      "نتائج",
+      "Results"
+    ],
+    "sorry":[
+      ":( نعتذر,لا يوجد نتائج",
+      "Sorry, No Result Found :("
+    ],
+    "custom-order":[
+      "إصدار أمر مخصص",
+      "Make a Custom Order"
+    ],
+    "shopBy":[
+      "تسوق حسب",
+      "SHOP BY"
+    ],
+    "category":[
+      "القسم",
+      "CATEGORY"
+    ]
   }
 
 }

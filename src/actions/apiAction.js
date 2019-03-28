@@ -17,6 +17,7 @@ export const GET_REGIONS_SUCCEEDED = 'GET_REGIONS_SUCCEEDED';
 export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 export const SET_DEFAULT_LANG = 'SET_DEFAULT_LANG';
+export const FLAGE = 'FLAGE';
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -136,5 +137,11 @@ export const InitializeDefaultLang = (defaultLanguage = LOCAL_LANGUAGES[0].code)
       options: { renderToStaticMarkup, defaultLanguage }
     }))
     dispatch({type: SET_DEFAULT_LANG, payload: defaultLanguage})
+  }
+}
+
+export const getFlage = (flage) => {
+  return {
+    type: FLAGE, payload: flage
   }
 }

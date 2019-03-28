@@ -1,0 +1,52 @@
+#result-not-found{
+  margin-top: 70px;
+  .no-result{
+    margin-bottom: 70px;
+    width: -webkit-fill-available;
+    justify-content: center;
+    background: $light-gray;
+    border-radius: side-values(0 0 20px 0);
+    display: inline-flex;
+    padding: 30px 0 30px 0;
+    @include margin-right(20%);
+
+    img{
+      width: 97px;
+      height: 98px;
+    }
+    .sec-header{
+      margin-bottom: 0px;
+      h1{
+        font-family: Roboto;
+        @include font-size(50px);
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: $left;
+        color: rgb(55, 54, 61);
+        @include margin-left(10px);
+        margin-top: 5px;
+      }
+      span{
+        display: flex;
+        white-space: nowrap;
+      }
+    }
+    .sec-header h1 > p {
+    border-bottom: 1px solid #ed4036;
+    }
+    .btn-primary{
+      margin-top: 20px;
+      height: 55px;
+      @include margin-left(10px);
+      margin-right: 40px !important;
+    }
+  }
+@media (max-width: 1199.98px) {
+  .artical-space,.sec-header {
+   margin-bottom: 30px;
+}
+}
+}
