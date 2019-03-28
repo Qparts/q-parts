@@ -102,7 +102,7 @@ export const getCategoryId = (translate) => (
 		[10, translate("navBar.accessories")],
 		[11, translate("nav.carAccessorise")],
 		[12, translate("nav.wiresAndCables")],
-		[13, translate("nav.tries")],
+		[13, translate("nav.tires")],
 		[14, translate("nav.carRefrigerator")],
 		[15, translate("nav.childSeat")],
 		[16, translate("nav.bodyworkCleaningAndCare")],
