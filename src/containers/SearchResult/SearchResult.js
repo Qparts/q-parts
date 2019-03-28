@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
-import { getSortedProducts } from '../../actions/apiAction';
+import { getSortedProducts, getFlage } from '../../actions/apiAction';
 import Select from 'react-select';
 // import Button from '../../components/UI/Button';
 import Button from '../../components/UI/Button';
@@ -173,17 +173,19 @@ class SearchResult extends Component {
 	setGeneralSearch = (search,callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
-			if (res.data.products.length < 18) {
+			if (res.data.products.length < 18 && res.data.products.length !== 0) {
+
+				console.log("size less than 18", res.data.products.length )
 				this.setState({ endSize: res.data.resultSize })
+			}else if(res.data.products.length === 0){
+				this.props.getFlage(true);
 			}
+			console.log("size less than 18 aa2")
 			this.setState({
 				searchGeneral: res.data,
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-
-
-							console.log(res.data,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 			if(callback){
 				callback(res.data);
 			}
@@ -237,6 +239,7 @@ class SearchResult extends Component {
 	componentDidMount() {
 		const { location: { search } } = this.props;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
+		this.props.getFlage(false);
 		this.setGeneralSearch(search,this.generateSelectedOptions);
 
 		const { searchGeneral: { filterObjects } } = this.state;
@@ -350,23 +353,26 @@ class SearchResult extends Component {
 	}
 	render() {
 
-		console.log(this.state.searchGeneral.products,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, onFilterRadio, currentLanguage, methodSelectedOptions, selectedOptions, flage } = this.props;
 		const { location: { pathname, search } } = this.props;
 		const { searchGeneral: { filterObjects } } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		let checkedCurrentLanguage = currentLanguage === constant.EN  ? true : false;
+		if(flage){
+			return (
+					<ResultNotFound />
+			)
+		}
 		if (_.isEmpty(filterObjects))
 			return (
 				<div>
-					<ResultNotFound />
-						// <ClipLoader
-						// 	css={styles.spinner}
-						// 	sizeUnit={"px"}
-						// 	size={150}
-						// 	loading={this.state.loading}
-						// />
+						<ClipLoader
+							css={styles.spinner}
+							sizeUnit={"px"}
+							size={150}
+							loading={this.state.loading}
+						/>
 				</div>
 			)
 
@@ -954,13 +960,15 @@ const mapStateToProps = state => {
 		products: state.api.products,
 		currentLanguage: getActiveLanguage(state.localize).code,
 		translate: getTranslate(state.localize),
-		direction: state.customer.direction
+		direction: state.customer.direction,
+		flage: state.api.flage
 	}
 }
 const mapDispatchToProps = dispatch => {
 	return {
 		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-		getSortedProducts: () => dispatch(getSortedProducts())
+		getSortedProducts: () => dispatch(getSortedProducts()),
+		getFlage: (flage) => dispatch(getFlage(flage))
 	}
 }
 const withTyresSearch = WithProductView(SearchResult);

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../components/UI/Button';
+import Button from '../../components/UI/Link';
 
 import { right } from '../../utils';
 import { connect } from 'react-redux';
@@ -25,7 +25,7 @@ class ResultNotFound extends Component {
                 </h1>
                 <span>{translate("noResult.sorry")}</span>
             </header>
-            <Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")}/>
+            <Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
         </div>
         <section className="main-cat container-fluid">
 
