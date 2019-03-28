@@ -127,7 +127,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.motorCareLiquids")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
                     </ul>
                 </li>
 

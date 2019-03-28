@@ -397,6 +397,14 @@
     "oneOfTheIncubatedProjects": [
       "واحد من المشاريع المحتضنة",
       "One of the Incubated Projects"
+    ],
+    "spareParts": [
+      "قطع غيار",
+      "Spare Parts"
+    ],
+    "batteries": [
+      "بطاريات",
+      "Batteries"
     ]
   },
   "quotationOrder": {

@@ -13,6 +13,7 @@ import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
 import { isEmpty, replaceAll, addQuery, removeQuery } from '../../utils';
 import * as constant from '../../constants';
+import { getCategoryId } from '../../constants';
 import { styles, styles as commonStyles } from '../../constants';
 import _ from 'lodash';
 import ProductListView from '../../components/ProductListView/ProductListView';
@@ -242,6 +243,7 @@ class SearchResult extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		const { location: { search } } = this.props;
 		if (search !== prevProps.location.search) {
+			this.resetLoading();
 			this.setGeneralSearch(search);
 		}
 
@@ -249,6 +251,12 @@ class SearchResult extends Component {
 		window.onpopstate = (event) => {
 			this.setGeneralSearch(search, this.runCallbacks);
 		}
+	}
+
+	resetLoading = () => {
+		this.setState({
+			loading: true
+		})
 	}
 
 	runCallbacks = (data) => {
@@ -338,13 +346,20 @@ class SearchResult extends Component {
 		});
 
 	}
+	getCategoryName = () => {
+		let categoryId = queryString.parse(window.location.search.slice(1)).category;
+		let query = queryString.parse(window.location.search.slice(1)).query;
+		
+		return categoryId ? getCategoryId(this.props.translate).get(parseInt(categoryId, constant.RADIX)) : query;
+	}
+
 	render() {
 
 		//sidebar
 		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params } = this.props;
-		const { searchGeneral: { filterObjects } } = this.state;
+		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		if (_.isEmpty(filterObjects))
+		if (loading)
 			return (
 				<div className="container-fluid" style={styles.loading}>
 					<ClipLoader
@@ -865,7 +880,7 @@ class SearchResult extends Component {
 										</div>
 									</li>*/}
 									<li>
-										<button type="submit" className="btn btn-primary" onClick={this.handleGo}>Go</button>
+										<button type="submit" className="btn btn-primary" onClick={this.handleGo}>{this.props.translate("general.buttons.go")}</button>
 									</li>
 								</ul>
 							</div>
@@ -874,7 +889,7 @@ class SearchResult extends Component {
 						<div className="col">
 							<div className="search-result">
 								<div className="total-result row">
-									<h2 className="col">{/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+									<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
 									<div className="col-auto">
 										{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
