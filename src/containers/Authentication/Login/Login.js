@@ -90,11 +90,11 @@ class Login extends Component {
           title={translate("form.signin.socialMedia")}
           handleResponse={this.props.handleResponse}
           handleFailure={this.props.handleFailure} />
-        <div id="sign-up-link">
-          <p>{translate("form.signin.signup")}</p>
+        <p className="sign-up-link">
+          {translate("form.signin.signup")}
           <Button className="btn-link" text={translate("form.signin.joinUs")} onClick={this.handleChange} />
-          <p>{translate("form.signin.here")}</p>
-        </div>
+          {translate("form.signin.here")}
+        </p>
       </div>
     </Fragment>
   }
@@ -105,45 +105,33 @@ class Login extends Component {
   render() {
     const { translate, direction } = this.props;
     let login = (
-      <form className="d-flex flex-column" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-        <div className="form-group">
-          <Field
-            label={translate("form.signin.email")}
-            name="email"
-            component={RenderField}
-            type="text" placeholder={translate("form.signin.placeholders.email")}
-            validate={[validations.required, validations.email]} />
+      <form className="gray-input" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+        <div className="has-float-label">
+          <input name="email" type="email" className="form-control" placeholder={translate("form.signin.email")} />
+          <label>{translate("form.signin.email")}</label>
         </div>
-        <div className="form-group">
-          <Field
-            label={translate("form.signin.password")}
-            name="password"
-            component={RenderField}
-            type="password" placeholder={translate("form.signin.placeholders.password")}
-            validate={[validations.required]} />
+        <div className="has-float-label">
+          <input name="password" type="password" className="form-control" placeholder={translate("form.signin.password")} />
+          <label>{translate("form.signin.password")}</label>
         </div>
-        <div>
-          <div>
-            <Radio
-              value={true}
-              label={translate("form.signin.rememberMe")}
-              labelClassName="label-form"
-              name="rememberMe"
-              onChange={this.handleRememberMe}
-              checked={true === this.state.rememberMe} />
+        <div className="row forger-password">
+          <div className="col checkbox">
+              <input type="checkbox" id="O1" />
+              <label for="O1">{translate("form.signin.rememberMe")}</label>
           </div>
-          <Link
-            className="label-form"
-            to="/password/forgot-password"
-            onClick={this.handleForgotPassword}>
-            {translate("form.signin.forgotPassword")}
-          </Link>
+          <div className="col-auto">
+            <Link
+              to="/password/forgot-password"
+              onClick={this.handleForgotPassword}>
+              {translate("form.signin.forgotPassword")}
+            </Link>
+          </div>
         </div>
-        <Button className="btn btn-primary btn-signin" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
+        <Button className="btn btn-primary" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
       </form>
     )
     return (
-      <section id="login">
+      <section className="login">
         {
           this.renderLogin(login)
         }

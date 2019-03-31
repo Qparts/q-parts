@@ -831,14 +831,9 @@ Main components
   transition: opacity 0.3s 0s, visibility 0s 0s, transform 0.3s 0s;
 }
 @media only screen and (max-width: 1169px) {
+
+  .nav-on-left .cd-overlay.is-visible,
   .cd-overlay.is-visible {
-    -webkit-transform: translateX(-260px);
-    -moz-transform: translateX(-260px);
-    -ms-transform: translateX(-260px);
-    -o-transform: translateX(-260px);
-    transform: translateX(-260px);
-  }
-  .nav-on-left .cd-overlay.is-visible {
     -webkit-transform: translateX(260px);
     -moz-transform: translateX(260px);
     -ms-transform: translateX(260px);

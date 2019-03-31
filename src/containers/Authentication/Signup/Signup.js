@@ -15,10 +15,12 @@ import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore } from '../../../actions/customerAction';
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
+import { LargeScreen } from '../../../components/Device';
 
 import Title from '../../../components/UI/Title';
-
-
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import GoogleLogin from 'react-google-login';
+import { DISCONNECT } from '../../../constants';
 class Signup extends Component {
 
   componentWillMount() {
@@ -71,7 +73,7 @@ class Signup extends Component {
     </Modal>
     if (this.props.submitErrors.email) window.scrollTo(0, 0);
     return (
-      <section id="signup">
+      <section className="signup-page">
         {
           submitErrors.email &&
           <Alert color="danger">
@@ -84,26 +86,24 @@ class Signup extends Component {
             subHeader={translate("form.signup.subHeader")}
           />
           <div className="row">
-            <div className="col-lg-6 col-sm-12">
+            <div className="col-lg-7">
               {signup}
             </div>
-            <div id="right-half" className="col-lg-6 col-sm-12">
-              <span className="seperator"></span>
-              <div id="signin-link">
-                <span className="user-img">
-                  <img className="user" alt="user" src="/img/user.svg" />
-                </span>
-                <span>{translate("form.signup.haveAccount")}
-                  <Link to={"#"} className="signin-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
-                  {translate("form.signup.here")}
-                </span>
-              </div>
+            <div className="col-lg-5 have-account">
+              <p>
+                <img className="user" alt="user" src="/img/user.svg" />
+                {translate("form.signup.haveAccount")} <Link to={"#"} onClick={togglePopup}> {translate("form.signup.signinLink")} </Link> {translate("form.signup.here")}
+              </p>
               <SocialMedia
                 title={translate("form.signup.socialMedia")}
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
-              <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
-              <img src="/img/sign-up-image.png" alt="sign up" />
+              <p>{translate("form.signup.socialMediaInfo")}</p>
+              <LargeScreen>
+                <aside>
+                  <img src="/img/sign-up-image.png" alt="sign up" />
+                </aside>
+              </LargeScreen>
             </div>
           </div>
         </div>

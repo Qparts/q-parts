@@ -7,7 +7,7 @@ import NumberPicker from '../NumberPicker';
 
 export class ListGroupCollapse extends Component {
     submit = (products, event) => {
-        
+
         event.preventDefault();
         this.props.setSelectedProduct(products)
         .then(() => {
@@ -19,7 +19,7 @@ export class ListGroupCollapse extends Component {
 
         return (
             <div className="collapse" id={id}>
-                <div style={{ background: '#ebebeb' }} className="d-table product-options">
+                <div className="d-table product-options">
                     {
                         type === PENDING ?
                             <Fragment>

@@ -1,222 +1,149 @@
-#signup {
-  padding-top: 65px;
-  background: $light-gray;
-  text-align: $left;
-
-  .container-fluid {
-    > .row {
-      margin-top: 46px;
-    }
-  }
-  
-  @include small-screen {
-    padding-top: 0;
-  }
-
-  .form-group {
-    margin-bottom: 40px;
-  }
-
-  .shadow-input {
-    @include rounded-rectangle;
-  }
-
-  .group-shadow-input {
-    height: 55px;
-    top: 32px;
-  }
-
-  .sec-header {
-    h1 {
-      color: $basic-gray;
+.signup-page{
+  @extend .gray-bg;
+  @extend .pt-sec;
+  .sec-header{
+    margin-bottom: 15px;
+    h1{
       font-weight: 300;
       @include font-size(50px);
-      text-transform: capitalize;
     }
-    .red-line {
-      max-width: 153px;
-      height: 1px;
+    span{
+      @include opacity(1);
     }
   }
-  .select-input {
-    label {
-      @include font-size(16px);
-      padding-#{$left}: 13px;
-    }
-  }
-  .RenderField {
-    input {
-      border-radius: corner-values(20px 0 20px 20px) !important;
-      height: 55px;
-      padding-#{$left}: 20px;
-      width: 100%;
-      background: $white;
-    }
-    input::placeholder {
-      color: $charcoal-grey-two-40;
-    }
-    label {
-      @include font-size(16px);
-      padding-#{$left}: 13px;
-    }
-  }
-  .row {
-    position: relative;
-  }
-
-  .signup-form__two-inputs {
-    .col-6:nth-child(2) {
-      input {
-        border-radius: corner-values(20px 0 0 20px) !important;
-      }
-    }
-    .col-6:nth-child(3) {
-      padding-#{$left}: 10px;
-      input {
-        border-radius: corner-values(0 0 20px 0) !important;
-      }
-    }
-  }
-
-  #country-city {
-    .select {
-      background: $white;
-      width: 100%;
-      height: 55px;
-      @include box-shadow;
-      .select__control {
-        height: 100%;
-      }
-    }
-    > .form-group:first-child {
-      margin-#{$right}: 10px;
-    }
-    > div:first-child {
-      .select {
-        border-radius: corner-values(20px 0 20px 20px) !important;
-      }
-    }
-  }
-
-  #bottom {
-    display: flex;
-
-    @include small-screen {
-      display: block;
-    }
-
-    button {
-      height: 51px;
-      text-transform: capitalize;
-      margin-#{$left}: auto;
-
-      @include small-screen {
-        width: 100%;
-        margin-#{$left}: 0;
-        margin-bottom: 64px;
-        text-align: $right;
-      }
-    }
-    i {
-      &:before{
-        top: 4px;
-      }
-    }
-
-    > p {
-      @include font-size(15px);
-      line-height: 25px;
-      padding: 0px 8px;
-      margin-bottom: 255px;
-      @include small-screen {
-        margin-bottom: 0;
-      }
-      span {
-        display: block;
-        .btn-gray {
-          color: $brand-color;
-        }
-      }
-    }
-  }
-
-  #signin-link {
-    display: inline-flex;
-    align-items: baseline;
-    .user-img {
-      width: 17px;
-      img {
-        max-width: 100%;
-      }
-    }
-    > span:nth-child(2) {
-      position: relative;
-      top: 5px;
-      padding-#{$left}: 4px;
+  .have-account{
+    > p{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
       @include font-size(18px);
+      a{
+        color: $brand-color;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
     }
-    .signin-link {
-      @include font-size(13px);
-      position: relative;
-      color: $brand-color;
-      padding: 4px 4px;
-      text-transform: inherit;
-    }
-  }
-  #right-half {
-    text-align: center;
-  }
-  #social-media {
-    position: relative;
-    top: -8px;
-    margin-bottom: 24px;
-  }
-  .row > .column:nth-child(2) {
-    text-align: center;
-  }
-  .seperator {
-    @include medium-screen {
-      position: absolute;
-      display: list-item;
-      list-style: none;
-      height: 570px;
-      background: $very-light-grey;
+    .user{
+      max-width: 20px;
+      display: inline-flex;
+      margin-#{$right}: 5px;
+      margin-top: -8px;
     }
   }
-  #social-media-info {
+  .or{
+    height: 0;
+    span:last-child{
+      background: $light-gray;
+    }
+  }
+  .btn-social{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    @include box-shadow();
+    button{
+      background: $white;
+      &:hover{
+        background: $light-gray;
+      }
+    }
+  }
+  .social-signup{
+    & + p{
+      @include font-size(15px);
+      @include opacity(0.6);
+    }
+  }
+  aside{
+    padding-top: 12px;
+  }
+}
+
+.ReactPasswordStrength {
+    border-width: 0 !important;
+    color: inherit !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+}
+.ReactPasswordStrength-input {
+    @include font-size(18px);
+    padding: 21px 15px 0.375rem  !important;
+    width: 100% !important;
+}
+.ReactPasswordStrength-strength-bar{
+  max-width: calc(100% - 10px);
+  #{$left}: 10px;
+  top: -25px !important;
+  height: 4px !important;
+  z-index: 1;
+  &:before{
+    display: none;
+    min-width: 140px;
     @include font-size(15px);
-    p {
-      margin-bottom: 46px;
-    }
+    @include opacity(0.8);
+    position: relative;
+    top: -20px;
+    @include if-ltr{
+      content: "Password Strength"
+    };
   }
-
-  .ReactPasswordStrength {
-    border-radius: corner-values(20px 0 20px 20px) !important;
-    box-shadow: none;
+  &::after{
+    content: " ";
+    height: 4px;
     width: 100%;
-
-    .ReactPasswordStrength-input {
-      @include font-size(16px);
-    }
-
-    .ReactPasswordStrength-strength-bar {
-      position: absolute;
-      height: 4px;
-      top: 104px;
-      #{$left}: 0;
-    }
-
-    .ReactPasswordStrength-strength-desc {
-      width: auto;
-      top: 83px;
-      padding: 0;
-      #{$right}: 0;
-      #{$left}: unset;
-    }
+    position: absolute;
+    top: 0;
   }
-  .one_shadow-input {
-    input {
-      @include box-shadow;
+}
+.password{
+  position: relative;
+  p{
+    @include transition(all, 0.5s, ease);
+    margin-bottom: 0;
+    width: calc(100% - 10px);
+    height: 4px;
+    background: $light-gray;
+    bottom: -39px;
+    position: absolute;
+    z-index: 0;
+    #{$left}: 10px;
+    @include opacity(0);
+  }
+  [class*=' is-']{
+    margin-bottom: 60px;
+    .ReactPasswordStrength-strength-bar{
+      &:before{
+        display: block;
+      }
+      + p{
+        @include opacity(1);
+      }
+    }
+
+  }
+  .ReactPasswordStrength-strength-desc{
+    width: auto;
+    font-style: normal;
+    @include font-size(16px);
+    text-transform: capitalize;
+    top: auto;
+    bottom: -42px;
+    padding-#{$right}: 0;
+  }
+  .toggle-password{
+    position: absolute;
+    top: 0;
+    #{$right}: 15px;
+    @include font-size(15px);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    i{
+      @include font-size(22px);
+      margin-right: 5px;
+      position: relative;
+      top: 2px;
     }
   }
 }

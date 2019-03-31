@@ -91,7 +91,8 @@
       top: -3px;
     }
   }
-  &:hover{
+  &:hover,
+  &.active{
     i{
       color: $brand-color;
     }

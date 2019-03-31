@@ -594,7 +594,7 @@ class ProductDetail extends Component {
                     </ul>
                   <div className="pt-sec">
                       <h2 className="details-heading">{translate("product.titleReviews")}</h2>
-                      <div className="list-unstyled review-details">
+                      <div className="review-details">
                           <div className="row">
                             <div className="col totla-main">
                               <Stars value={product.averageRating} {...constant.starsRating} className="star"/>
@@ -819,7 +819,7 @@ class ProductDetail extends Component {
                 {dialog}
   						</div>
             </div>
-            
+
           </section>
         </Route>
         <PrivateRoute

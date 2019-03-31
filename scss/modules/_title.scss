@@ -26,6 +26,9 @@
     margin-left: -5px;
     @include media-breakpoint-down(lg){
       font-weight: 500;
+      span{
+        display: none;
+      }
     };
   }
 }

@@ -54,20 +54,19 @@ $dir: ltr;
 @import "../base/float_label";
 
 /*MODULES  - Individual site components */
+@import "../modules/selectInput";
+@import "../modules/select";
 @import "../modules/typography";
 @import "../modules/blocks";
 @import "../modules/buttons";
 @import "../modules/checkbox";
 @import "../modules/radio";
-@import "../modules/list-group";
 @import "../modules/components";
-@import "../modules/select";
 @import "../modules/sections";
 @import "../modules/title";
 @import "../modules/dialog";
 @import "../modules/social-media";
 @import "../modules/renderField";
-@import "../modules/selectInput";
 @import "../modules/renderFileInput";
 @import "../modules/product_grid_view";
 @import "../modules/product_list_view";

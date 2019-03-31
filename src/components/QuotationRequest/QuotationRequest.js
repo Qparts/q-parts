@@ -9,7 +9,6 @@ import { connect } from 'react-redux'
 import SelectInput from '../SelectInput/SelectInput';
 import Button from '../UI/Button';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
-import * as validations from '../../utils';
 import { getTranslatedObject } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
@@ -24,6 +23,88 @@ import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
 import { postQuotation } from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
+//static HTML
+import RenderFileInput from '../RenderFileInput/RenderFileInput';
+const vehicleYear = [
+	{ value: 1, label: "2010" },
+	{ value: 2, label: "2011" },
+	{ value: 3, label: "2012" },
+];
+const groupedvehicleYear = [
+	{
+		options: vehicleYear,
+	},
+];
+const formatvehicleYearLabel = () => (
+	<div className="placeholder">
+		<span>Select Year</span>
+	</div>
+);
+const vehicleMake = [
+	{ value: 1, label: "BMW" },
+	{ value: 2, label: "KIA" },
+	{ value: 3, label: "Ford" },
+];
+const groupedvehicleMake = [
+	{
+		options: vehicleMake,
+	},
+];
+const formatvehicleMakeLabel = () => (
+	<div className="placeholder">
+		<span>Select vehicle Make</span>
+	</div>
+);
+const vehicleModel = [
+	{ value: 1, label: "Rio" },
+	{ value: 2, label: "Focus" },
+	{ value: 3, label: "20CS" },
+];
+const groupedvehicleModel = [
+	{
+		options: vehicleModel,
+	},
+];
+const formatvehicleModelLabel = () => (
+	<div className="placeholder">
+		<span>Select vehicle Model</span>
+	</div>
+);
+
+const country = [
+	{ value: 1, label: "KSA" }
+];
+const Region = [
+	{ value: 1, label: "Riyadh" },
+	{ value: 2, label: "Tabuk" },
+	{ value: 3, label: "Jazan" },
+	{ value: 4, label: "Medina" }
+];
+const groupedRegion = [
+	{
+		options: Region,
+	},
+];
+const formatRegionLabel = () => (
+	<div className="placeholder">
+		<span>Select Region</span>
+	</div>
+);
+const City = [
+	{ value: 1, label: "Riyadh" }
+];
+const groupedCity = [
+	{
+		options: City,
+	},
+];
+const formatCityLabel = () => (
+	<div className="placeholder">
+		<span>Select City</span>
+	</div>
+);
+//END static HTML
+
 
 const vehicles = 'vehicles';
 const signin = 'signin';
@@ -154,9 +235,14 @@ class QuotationRequest extends Component {
 		}
 		return (
 			<Fragment>
-				<section id="custom-header">
-					<div className="container-fluid custom-header-content">
-						<div className="row custom-header-title">
+				<section className="hero qutaion-h">
+					<picture className="hero-img">
+						<source media="(max-width: 480px)" srcSet="/img/custom-req-xxs.jpg" />
+						<source media="(max-width: 767px)" srcSet="/img/custom-req-xs.jpg" />
+						<img src="/img/custom-req-xl.jpg" alt="OUR SALES MORE THAN 50,000 ITEM" />
+					</picture>
+					<div className="hero-content">
+						<div className="row">
 							<header className="col">
 								<h1>{translate("quotationOrder.title")}</h1>
 								<p>{translate("quotationOrder.title")} {translate("quotationOrder.request")}</p>
@@ -164,63 +250,106 @@ class QuotationRequest extends Component {
 						</div>
 					</div>
 				</section>
-				<section id="custom-title">
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-md-6 col-3 title-left">
-								<h1>3</h1>
-							</div>
-							<div className="col-md-6 col-9 title-right">
-								<h1>{translate("quotationOrder.steps.title")}</h1>
-								<p>{translate("quotationOrder.steps.subTitle")}</p>
+				<section className="steps-title">
+					<div className="total-bg gray-bg"></div>
+						<div className="container-fluid">
+							<div className="row">
+								<div className="col-lg-6 col-auto steps-num">
+									<p>3</p>
+									<span>
+										<i className="icon-arrow-r"></i>
+										<i className="icon-arrow-r"></i>
+									</span>
+								</div>
+								<div className="col-lg-6 col steps-cap">
+									<p>
+										<span>{translate("quotationOrder.steps.title")}</span>
+										{translate("quotationOrder.steps.subTitle")}
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
 				</section>
-				<section id="custom-details">
+				<section className="step-active">
 					<div className="container-fluid">
 						<OrderSteps grey="-gs" translate={translate} direction={direction} />
-						<div className="title-container">
-							<Title header={translate("quotationOrder.steps.requestParts.title")}
-								subHeader={translate("quotationOrder.steps.requestParts.subTitle")} />
+					</div>
+				</section>
+				<section className="custom-order-form container-fluid">
+					<div className="title-container">
+						<div className="step-num">
+							1
+							<span>
+								<i className="icon-arrow-r"></i>
+								<i className="icon-arrow-r"></i>
+							</span>
 						</div>
-						<form onSubmit={handleSubmit(this.handleSubmit)}>
-							{
-								isAuth(this.props.token) &&
-								<div className="custom-container col-12">
-									<div className="row d-flex">
-										<div className="col-6">
-											<h3>{translate("quotationOrder.vehicle.title")}</h3>
-										</div>
-										<div className="col-6 garage-btn-container">
-											<Link
-												to={'#'}
-												isReverseOrder
-												className='btn btn-gray'
-												text={translate("form.vehicle.title")}
-												icon='icon-vehicle'
-												onClick={this.handleVehicle}
-											/>
-										</div>
-									</div>
-									<div className="row">
-										<div className="col-12 select-field-make-container">
-											<Field
-												name="vehicleForm"
-												placeholder={translate("form.select")}
-												component={SelectInput}
-												options={vehiclesFormat}
-												validate={[validations.required]}
-											/>
-
-										</div>
+						<Title header={translate("quotationOrder.steps.requestParts.title")}
+							subHeader={translate("quotationOrder.steps.requestParts.subTitle")} />
+					</div>
+					<form className="gray-input" onSubmit={handleSubmit(this.handleSubmit)}>
+						<div className="sec-shadow  vehicle-not-empty">
+								<div className="row">
+									<h3 className="col">{translate("quotationOrder.vehicle.title")}</h3>
+									<div className="col-auto open-garage">
+										<Link
+											to={'#'}
+											isReverseOrder
+											className='btn btn-gray'
+											text={translate("form.vehicle.title")}
+											icon='icon-vehicle'
+											onClick={this.handleVehicle}
+										/>
+									<p>2</p>
 									</div>
 								</div>
-							}
-
-							<div className="custom-container col-12">
-								<div className="row d-flex">
-									<div className="col-6">
+								<div className="row vehicle-info">
+									<div className="col-lg col-md-6 float-label">
+										<Field
+											label="Make"
+											name="make"
+											placeholder={" "}
+											component={SelectInput}
+											options={groupedvehicleMake}
+											formatGroupLabel={formatvehicleMakeLabel}
+										/>
+									</div>
+									<div className="col-lg col-md-6 float-label">
+											<Field
+												label="Model"
+												name="model"
+												placeholder={" "}
+												component={SelectInput}
+												options={groupedvehicleModel}
+												formatGroupLabel={formatvehicleModelLabel}
+											/>
+									</div>
+									<div className="col-lg-auto col-md-6 float-label">
+											<Field
+												label="Year"
+												name="year"
+												placeholder={" "}
+												component={SelectInput}
+												options={groupedvehicleYear}
+												formatGroupLabel={formatvehicleYearLabel}
+											/>
+									</div>
+									<div className="col-lg col-md-6">
+										<div className="has-float-label add-file">
+											<input type="text" className="form-control" placeholder={translate("quotationOrder.vin")} />
+											<label>{translate("quotationOrder.vin")}</label>
+												<Field
+		                       name="vin num"
+		                       component={RenderFileInput}
+		                       image="image"
+		                     />
+									</div>
+									</div>
+								</div>
+						</div>
+						<div className="sec-shadow part-array">
+								<div className="row">
+									<div className="col-lg">
 										<h3>{translate("quotationRequest.partInfo.title")}</h3>
 									</div>
 								</div>
@@ -232,67 +361,71 @@ class QuotationRequest extends Component {
 									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
 								/>
 							</div>
-							{
-								isAuth(this.props.token) &&
-								<div className="custom-container col-12">
-									<div className="row d-flex">
-										<div className="col-6">
-											<h3>{translate("quotationOrder.shipping.title")}</h3>
-										</div>
-									</div>
-									<div className="row">
-										<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
-											<Field
-												name="region"
-												placeholder={translate("form.select")}
-												component={SelectInput}
-												options={regions}
-												validate={[validations.required]}
-											/>
-
-										</div>
-										<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
-											<Field
-												name="city"
-												placeholder={translate("form.select")}
-												component={SelectInput}
-												options={cities}
-												validate={[validations.required]}
-											/>
-
-										</div>
-									</div>
-								</div>
-							}
-
-							<div className="col-12 padding-right-0" style={styles.footer}>
-								<div className="row d-flex">
-									<div className="col-md-6 col-12 links">
-										<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <a href="#">{translate("quotationOrder.agreement.linkTwo")}</a>.</p>
-									</div>
-									{
-										isAuth(this.props.token) ?
-											<div className="col-md-6 col-12 garage-btn-container padding-md-right-0">
-												<Button type="submit" className="btn btn-primary btn-footer" text={
-													<Fragment>
-														<span>{translate("general.send")}</span>
-														<i className={`icon-arrow-${right(direction)}`}></i>
-													</Fragment>
-												} />
-											</div> :
-											<div className="col-md-6 col-12 btn-continue">
-												<Link
-													to={"#"}
-													className="btn btn-primary btn-footer"
-													text={translate("dialog.continue")}
-													onClick={this.handleLogin} />
-											</div>
-									}
+						<div className="sec-shadow">
+							<div className="row">
+								<div className="col-lg">
+									<h3>{translate("quotationOrder.shipping.title")}</h3>
 								</div>
 							</div>
-						</form>
-					</div>
+							<div className="row ship-info">
+								<div className="col-md float-label disabled">
+									<Field
+										isDisabled={true}
+										label="Country"
+										name="Country"
+										defaultValue={country[0]}
+										component={SelectInput}
+									/>
+								</div>
+								<div className="col-md float-label">
+									<Field
+										label="Region"
+										name="Region"
+										placeholder=" "
+										component={SelectInput}
+										options={groupedRegion}
+										formatGroupLabel={formatRegionLabel}
+									/>
+								</div>
+								<div className="col-md float-label">
+									<Field
+										label="City"
+										name="city"
+										placeholder=" "
+										component={SelectInput}
+										options={groupedCity}
+										formatGroupLabel={formatCityLabel}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className="row submit-qout">
+							<div className="col-lg">
+								<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <a href="#">{translate("quotationOrder.agreement.linkTwo")}</a>.</p>
+							</div>
+							<div className="col-lg-auto">
+								{
+									isAuth(this.props.token) ?
+											<Button type="submit" className="btn btn-primary" text={
+												<Fragment>
+													<span>{translate("general.send")}</span>
+													<i className={`icon-arrow-${right(direction)}`}></i>
+												</Fragment>
+											} />
+										 :
+											<Link
+												to={"#"}
+												className="btn btn-primary"
+												text={translate("general.send")}
+												icon={`icon-arrow-${right(direction)}`}
+												onClick={this.handleLogin} />
+
+								}
+							</div>
+						</div>
+					</form>
 				</section>
+
 				{dialog}
 			</Fragment>
 		)
@@ -327,3 +460,85 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuotationRequest);
+
+
+// <section  id="custom-details">
+// 	<div className="container-fluid">
+// 		<form onSubmit={handleSubmit(this.handleSubmit)}>
+// 			{
+// 				isAuth(this.props.token) &&
+// 				<div className="custom-container col-12">
+// 					<div className="row d-flex">
+// 						<div className="col-6">
+// 							<h3>{translate("quotationOrder.vehicle.title")}</h3>
+// 						</div>
+// 						<div className="col-6 garage-btn-container">
+// 							<Link
+// 								to={'#'}
+// 								isReverseOrder
+// 								className='btn btn-gray'
+// 								text={translate("form.vehicle.title")}
+// 								icon='icon-vehicle'
+// 								onClick={this.handleVehicle}
+// 							/>
+// 						</div>
+// 					</div>
+// 					<div className="row">
+// 						<div className="col-12 select-field-make-container">
+// 							<Field
+// 								name="vehicleForm"
+// 								placeholder={translate("form.select")}
+// 								component={SelectInput}
+// 								options={vehiclesFormat}
+// 								validate={[validations.required]}
+// 							/>
+//
+// 						</div>
+// 					</div>
+// 				</div>
+// 			}
+//
+// 			{
+// 				isAuth(this.props.token) &&
+// 				<div className="custom-container col-12">
+// 					<div className="row d-flex">
+// 						<div className="col-6">
+// 							<h3>{translate("quotationOrder.shipping.title")}</h3>
+// 						</div>
+// 					</div>
+// 					<div className="row">
+// 						<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
+// 							<Field
+// 								name="region"
+// 								placeholder={translate("form.select")}
+// 								component={SelectInput}
+// 								options={regions}
+// 								validate={[validations.required]}
+// 							/>
+//
+// 						</div>
+// 						<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
+// 							<Field
+// 								name="city"
+// 								placeholder={translate("form.select")}
+// 								component={SelectInput}
+// 								options={cities}
+// 								validate={[validations.required]}
+// 							/>
+//
+// 						</div>
+// 					</div>
+// 				</div>
+// 			}
+//
+// 			<div className="col-12 padding-right-0" style={styles.footer}>
+// 				<div className="row d-flex">
+// 					<div className="col-md-6 col-12 links">
+//
+// 					</div>
+//
+// 				</div>
+// 			</div>
+// 		</form>
+// 	</div>
+// </section>

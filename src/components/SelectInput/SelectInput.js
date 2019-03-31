@@ -1,52 +1,87 @@
-import React, { Fragment, Component } from 'react';
-import Select from 'react-select';
-import { InputGroup, InputGroupAddon } from 'reactstrap'
-import { helpers, colors } from '../../constants';
-import { StyleSheet, css } from 'aphrodite';
+import React, {  Component, createRef } from "react";
+import Select from "react-select";
+import { InputGroup, InputGroupAddon } from "reactstrap"
+import { helpers, colors } from "../../constants";
+import { StyleSheet, css } from "aphrodite";
 
 export default class SelectInput extends Component {
+   constructor(props) {
+       super(props)
 
-    getIconClassName = () => {
-        return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? 'icon-checked' : '';
-    }
-    handleChange = (value) => {
-        this.props.input.onChange(value);
-        this.props.input.onBlur(value);
-    }
-    render() {
-        const style = StyleSheet.create({
-            border: {
-                border: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.success}` :
-                    helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.invalid}` :
-                        helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : 'none',
-                borderRadius: 'inherit'
-            },
-            icon: {
-                color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' : 'none'
-            }
-        });
-        return (
-            <div className="select-input">
-                <label>{this.props.label}</label> <br />
-                <sub>{this.props.sub}</sub>
-                <InputGroup>
-                    <Select
-                        className={`select ${css(style.border)}`}
-                        classNamePrefix="select"
-                        {...this.props}
-                        {...this.props.input}
-                        indicatorSeparator={false}
-                        isSearchable={false}
-                        value={this.props.input.value || this.props.defaultValue}
-                        onChange={this.handleChange}
-                        onBlur={event => event.preventDefault()}
-                        options={this.props.options}
-                    />
-                    <InputGroupAddon addonType="append">
-                        <i className={`input-icon ${this.getIconClassName()} ${css(style.icon)}`} />
-                    </InputGroupAddon>
-                </InputGroup>
-            </div>
-        );
-    }
+       this.state = {
+           hasFloat: ""
+       }
+       this.selectRef = createRef();
+   }
+   componentDidMount = () => {
+       if (this.props.input.value) {
+           this.setState({
+               hasFloat: "on"
+           })
+       }
+
+   }
+
+   getIconClassName = () => {
+       return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "icon-checked" : "";
+   }
+   handleChange = (value) => {
+       this.props.input.onChange(value);
+       this.handleMenuClose(value);
+   }
+   handleBlur = (value) => {
+       this.selectRef.current.select.blur(value);
+       this.props.input.onBlur(value);
+   }
+
+   handleMenuOpen = () => {
+       this.setState({
+           hasFloat: "on"
+       })
+   }
+
+   handleMenuClose = (value) => {
+       this.handleBlur(value);
+       if (value) {
+           this.setState({
+               hasFloat: "on"
+           })
+       } else {
+           this.setState({
+               hasFloat: ""
+           })
+       }
+   }
+   render() {
+       const style = StyleSheet.create({
+           // border: {
+           //     border: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.success}` :
+           //         helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.invalid}` :
+           //             helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : "none",
+           // },
+           // icon: {
+           //     color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "#30d576" : "none"
+           // }
+       });
+       return (
+               <InputGroup className={`select-input ${this.state.hasFloat}`}>
+                   <label>{this.props.label}</label>
+                   <Select
+                       ref={this.selectRef}
+                       className={`select ${css(style.border)}`}
+                       classNamePrefix="select"
+                       {...this.props}
+                       {...this.props.input}
+                       indicatorSeparator={false}
+                       isSearchable={false}
+                       value={this.props.input.value || this.props.defaultValue}
+                       onChange={this.handleChange}
+                       options={this.props.options}
+                       onMenuOpen={this.handleMenuOpen}
+                       onMenuClose={this.handleMenuClose}
+                       optionClassName="needsclick"
+                   />
+               </InputGroup>
+       );
+   }
 }

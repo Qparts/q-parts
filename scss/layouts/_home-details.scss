@@ -10,12 +10,19 @@
 }
 .main-slider{
   margin-top: 30px;
+  @include media-breakpoint-down(sm){
+    margin-top: 0;
+  }
   .swiper-slide{
     @extend .container-fluid;
     padding: 0;
     margin: 0;
     > div{
       @include make-col-ready();
+      @include media-breakpoint-down(sm){
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+      };
       > a{
         height: 285px;
         @extend .div-border-radius;
@@ -23,7 +30,10 @@
         overflow: hidden;
         background: $basic-gray;
         @include media-breakpoint-down(md){
-          height: 150px;
+          height: auto;
+        };
+        @include media-breakpoint-down(sm){
+          border-radius: 0 !important;
         };
         img{
           width: 100%;
@@ -31,7 +41,7 @@
           min-height: 285px;
           @include opacity(0.6);
           @include media-breakpoint-down(md){
-            min-height: 150px;
+            min-height: 0;
           };
         }
       }
@@ -39,6 +49,7 @@
     &.swiper-slide-active{
       > div{
         >a{
+          background: $white;
           img{
             @include opacity(1);
           }
@@ -96,142 +107,43 @@
 
 }
 .start-custom-order{
-  @extend .pt-sec;
-  @include media-breakpoint-down(xs){
-    margin-top: 20px;
-  };
-}
-.order-steps{
-  margin-bottom: 50px;
+  padding-top: 40px;
   @include media-breakpoint-down(md){
-    margin-bottom: 25px;
+    padding-top: 20px;
   };
-  li{
-    text-align: center;
+  .sec-header{
+    margin-bottom: 30px;
+    @include media-breakpoint-down(md){
+      margin-bottom: 5px;
+    };
   }
-    figure{
-      margin-bottom: 0;
-      > div:first-child{
-        height: 90px;
-        @include media-breakpoint-down(lg){
-          height: auto;
-        }
-        span{
-          display: none;
-          @include media-breakpoint-up(lg){
-            display: block;
-            position: absolute;
-            width: calc(50% + 15px);
-            top: 50%;
-            transform: translate(0, -50%);
-            border-top: 2px dashed $dark-gray;
-            text-align: $right;
-            z-index: -1;
-            height: 3px;
-          };
-          i{
-            color: $dark-gray;
-            @include font-size(24px);
-
-            &:before{
-              @include media-breakpoint-up(lg){
-                top: -14px;
-                background: $white;
-              }
-              padding: 0 5px;
-            }
-          }
-          &:first-child{
-            @include media-breakpoint-up(lg){
-              #{$left}: 0;
-            }
-          }
-          &:last-child{
-            @include media-breakpoint-up(lg){
-              #{$left}: calc(50% + 15px);
-            }
-          }
-        }
-      }
-    }
-    .figure{
-      padding: 0 10px;
-      background: $white;
-      img{
-            display: inline-block;
-          }
-    }
-    .request{
-      img{
-        width: 73px;
-          @include media-breakpoint-down(sm){
-            width: 60px;
-          }
-      }
-    }
-    .price{
-            padding: 0;
-            img{
-              width: 133px;
-              margin-top: 6px;
-                @include media-breakpoint-down(sm){
-                  width: 100px;
-                  margin-top: 0;
-                }
-            }
-          }
-    .cart{
-            img{
-              width: 77px;
-              margin-top: 4px;
-              @include media-breakpoint-down(sm){
-                width: 70px;
-                margin-top: 0;
-              }
-            }
-          }
-    .delivery{
-      height: 90px;
-      @include media-breakpoint-down(sm){
-        height: 70px;
-      }
-            img{
-              width: 106px;
-              @include media-breakpoint-down(sm){
-                width: 80px;
-
-              };
-            }
-          }
-    figcaption{
-      display: block;
-      padding-top: 20px;
-      @include media-breakpoint-down(lg){
-        padding-top: 10px;
-      };
-      h3{
-        text-transform: uppercase;
-        @include font-size(20px);
-        margin-bottom: 5px;
-      }
-      p{
-        margin-bottom: 0;
-        @include font-size(14px);
-        @include opacity(0.5);
-      }
-    }
-    .icon-arrow-down,
-    .done-xs{
-      color: $dark-gray;
-      @include font-size(25px);
-      margin: 15px 0;
-      height: 25px;
-      display: block;
+  .order-steps{
+    margin-bottom: 30px;
+    li{
       @include media-breakpoint-up(lg){
-        display: none;
+        @include make-col(3);
       };
     }
+  }
+  .btn-primary{
+    width: 100%;
+    @include font-size(26px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    i{
+      @include font-size(23px);
+      height: 23px
+    }
+
+    @include media-breakpoint-down(sm){
+      @include font-size(20px);
+    };
+  }
 }
+
 .order-form{
   > header{
     h2{
@@ -318,26 +230,6 @@
         }
 
       }
-    .input-group-prepend{
-          @extend .position-absolute;
-          #{$right}: 12px;
-          top: 3px;
-          width: 43px;
-          height: 43px;
-          background: $white;
-          @extend .rounded-circle;
-          input{
-            display: none;
-          }
-          button{
-            background: none;
-            border-width: 0;
-            cursor: pointer;
-            @extend .mx-auto;
-            @extend .p-0;
-
-          }
-        }
     .col-auto{
       @include media-breakpoint-down(md){
         width: 100%
@@ -476,7 +368,7 @@
     text-align: center;
     font-weight: 500;
     margin-bottom: 20px;
-    @include media-breakpoint-down(lg){
+    @include media-breakpoint-up(lg){
       margin-top: -30px;
     };
     @include media-breakpoint-down(sm){
@@ -594,7 +486,7 @@
         text-transform: uppercase;
         @include font-size(30px);
         @include media-breakpoint-down(sm){
-          @include font-size(25px);
+          @include font-size(21px);
           margin-bottom: 10px;
         };
         span{
@@ -603,7 +495,7 @@
           @include font-size(20px);
           @include opacity(0.8);
           @include media-breakpoint-down(sm){
-            @include font-size(15px);
+            @include font-size(14px);
           };
         }
       }
@@ -615,7 +507,7 @@
         display: flex;
         @include media-breakpoint-down(sm){
           display: inline-block;
-          margin-#{$left}: 0;
+          margin-#{$left}: 0 !important;
           font-weight: 300;
         }
         span{
@@ -653,7 +545,7 @@
       background-color: unset;
       border-#{$right}: 1px solid darken($light-gray, 10%);
         margin: 0 !important;
-  
+
         &:first-child{
           a{
             padding-#{$left}: 0;

@@ -29,7 +29,6 @@ const GRID = 'GRID';
 const LIST = 'LIST';
 
 
-
 const sortOptions = [
 	{ value: 1, label: "Best Match" },
 	{ value: 2, label: "Price: Low to High" },
@@ -486,7 +485,7 @@ class SearchResult extends Component {
 														</div>
 														<div className="col">
 															<h4>Rating
-	
+
 																	</h4>
 														</div>
 														<div className="col-auto">
@@ -534,84 +533,84 @@ class SearchResult extends Component {
 					<div className="row">
 						<LargeScreen>
 							<div className="filter-col">
-								<ul className="filter" ref={this.setFilter}>
-									<li className="tires-filte">
-										<h5>
-											Tyer Search
-										</h5>
-										<form>
-											<div className="d-table">
-												<div className="d-table-row">
-													<label>width</label>
-													<div className="select-main">
-														<Select
-															className="select"
-															classNamePrefix="select"
-															isSearchable={false}
-															defaultValue={tireWidth[0]}
-															options={groupedWidthTiresOptions}
-															formatGroupLabel={formatWidthTiresGroupLabel}
-														/>
-													</div>
+									<ul className="filter" ref={this.setFilter}>
+										<li className="tires-filte">
+											<h5>
+												Tyer Search
+											</h5>
+											<form>
+												<div className="d-table">
+													<div className="d-table-row">
+														<label>width</label>
+														<div className="select-main">
+															<Select
+																className="select"
+																classNamePrefix="select"
+																isSearchable={false}
+																defaultValue={tireWidth[0]}
+																options={groupedWidthTiresOptions}
+																formatGroupLabel={formatWidthTiresGroupLabel}
+																/>
+														</div>
 
-												</div>
-												<div className="d-table-row">
-													<label>Height</label>
-													<div className="select-main">
-														<Select
-															className="select"
-															defaultValue={tireHeight[0]}
-															classNamePrefix="select"
-															isSearchable={false}
-															options={groupedHeightTiresOptions}
-															formatGroupLabel={formatHeightTiresGroupLabel}
-														/>
+													</div>
+													<div className="d-table-row">
+														<label>Height</label>
+														<div className="select-main">
+															<Select
+																className="select"
+																defaultValue={tireHeight[0]}
+																classNamePrefix="select"
+																isSearchable={false}
+																options={groupedHeightTiresOptions}
+																formatGroupLabel={formatHeightTiresGroupLabel}
+																/>
+														</div>
+													</div>
+													<div className="d-table-row">
+														<label>Diameter</label>
+														<div className="select-main">
+															<Select
+																className="select"
+																defaultValue={tireDiameter[0]}
+																classNamePrefix="select"
+																isSearchable={false}
+																options={groupedDiameterTiresOptions}
+																formatGroupLabel={formatDiameterTiresGroupLabel}
+																/>
+														</div>
 													</div>
 												</div>
-												<div className="d-table-row">
-													<label>Diameter</label>
-													<div className="select-main">
-														<Select
-															className="select"
-															defaultValue={tireDiameter[0]}
-															classNamePrefix="select"
-															isSearchable={false}
-															options={groupedDiameterTiresOptions}
-															formatGroupLabel={formatDiameterTiresGroupLabel}
-														/>
-													</div>
-												</div>
-											</div>
-											<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
-										</form>
-									</li>
-									<li>
-										<h5>
-											<a href="#Viscosity" data-toggle="collapse" role="button" aria-expanded="false">Viscosity Grade <span className="minus"></span></a>
-										</h5>
-										<div class="collapse show" id="Viscosity">
-											<ul className="options-list">
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O1" />
-														<label for="O1">Option 1</label>
-													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O2" />
-														<label for="O2">Option 2</label>
-													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O3" />
-														<label for="O3">Option 3</label>
-													</div>
-												</li>
-											</ul>
-											<a href="#" className="btn btn-gray">
-												View More <i className="icon-plus"></i>
+												<button type="button" class="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
+											</form>
+										</li>
+										<li>
+											<h5>
+												<a href="#Viscosity" data-toggle="collapse" role="button" aria-expanded="false">Viscosity Grade <span className="minus"></span></a>
+											</h5>
+											<div class="collapse show" id="Viscosity">
+												<ul className="options-list">
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O1" />
+															<label for="O1">Option 1</label>
+														</div>
+													</li>
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O2" />
+															<label for="O2">Option 2</label>
+														</div>
+													</li>
+													<li>
+														<div class="checkbox">
+															<input type="checkbox" id="O3" />
+															<label for="O3">Option 3</label>
+														</div>
+													</li>
+												</ul>
+												<a href="#" className="btn btn-gray">
+													View More <i className="icon-plus"></i>
 											</a>
 										</div>
 									</li>
@@ -640,70 +639,73 @@ class SearchResult extends Component {
 											</ul>
 											<a href="#" className="btn btn-gray">
 												View less <i className="minus"></i>
-											</a>
-										</div>
-									</li>
-									<li>
-										<h5>
-											<a href="#price" data-toggle="collapse" role="button" aria-expanded="false">Price<span className="minus"></span></a>
-										</h5>
-										<div class="collapse show" id="price">
-											<ul className="options-list">
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O7" />
-														<label for="O7">> 50</label>
+										</a>
+									</div>
+								</li>
+								<li>
+									<h5>
+										<a href="#price" data-toggle="collapse" role="button" aria-expanded="false">Price<span className="minus"></span></a>
+									</h5>
+									<div class="collapse show" id="price">
+										<ul className="options-list">
+											<li>
+												<div class="checkbox">
+													<input type="checkbox" id="O7" />
+													<label for="O7">> 50</label>
+												</div>
+											</li>
+											<li>
+												<div class="checkbox">
+													<input type="checkbox" id="O8" />
+													<label for="O8">500-700</label>
+												</div>
+											</li>
+											<li>
+												<form class="form-row price-filter">
+													<div className="col">
+														<input type="text" class="form-control" placeholder="From" />
 													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O8" />
-														<label for="O8">500-700</label>
+													<div className="col">
+														<input type="text" class="form-control" placeholder="To" />
 													</div>
-												</li>
-												<li>
-													<form class="form-row price-filter">
-														<div className="col">
-															<input type="text" class="form-control" placeholder="From" />
+													<div className="col-auto">
+														<button type="submit" class="btn btn-primary">Go</button>
+													</div>
+												</form>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<h5>
+										<a href="#rating" data-toggle="collapse" role="button" aria-expanded="false">Rating<span className="minus"></span></a>
+									</h5>
+									<div class="collapse show" id="rating">
+										<ul className="options-list">
+											<li>
+												<div class="checkbox">
+													<input type="checkbox" id="O10" />
+													<label for="O10">
+														<div className="rating">
+															<Stars values={1} {...starsRating} />
 														</div>
-														<div className="col">
-															<input type="text" class="form-control" placeholder="To" />
-														</div>
-														<div className="col-auto">
-															<button type="submit" class="btn btn-primary">Go</button>
-														</div>
-													</form>
-												</li>
-											</ul>
-										</div>
-									</li>
-									<li>
-										<h5>
-											<a href="#rating" data-toggle="collapse" role="button" aria-expanded="false">Rating<span className="minus"></span></a>
-										</h5>
-										<div class="collapse show" id="rating">
-											<ul className="options-list">
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O10" />
-														<label for="O10">
-															<div className="rating">
-																<Stars values={1} {...starsRating} />
-															</div>
-															3 review
-														 </label>
-													</div>
-												</li>
-												<li>
-													<div class="checkbox">
-														<input type="checkbox" id="O10" />
-														<label for="O10">Not Yet Rated</label>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</li>
-								</ul>
+														3 review
+													</label>
+												</div>
+											</li>
+											<li>
+												<div class="checkbox">
+													<input type="checkbox" id="O10" />
+													<label for="O10">Not Yet Rated</label>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</li>
+							</ul>
+							<a href="#" className="btn btn-primary">
+								Apply Filter <i className="icon-arrow-right"></i>
+							</a>
 							</div>
 
 						</LargeScreen>
@@ -853,9 +855,19 @@ class SearchResult extends Component {
 									</li>
 								</ul>
 							</div>
-							<div className="row justify-content-center">
-								<div className="col-lg-6 col more-result">
-									<a href="#" className="btn btn-primary ">More <i className="icon-add"></i></a>
+							<div className="row ">
+								<div className="col d-flex justify-content-center">
+									<ul className="more-result list-inline">
+									<li className="disabled">
+										<a href="#"><i className="icon-arrow-l"></i></a>
+									</li>
+									<li>
+										<span>Page 1 of 5</span>
+									</li>
+									<li className="next">
+										<a href="#"><i className="icon-arrow-r"></i></a>
+									</li>
+								</ul>
 								</div>
 							</div>
 						</div>

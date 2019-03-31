@@ -4,7 +4,7 @@ export const getComponentName = (component) => {
   return component;
 }
 
-export const getConnectedPlatforms = (platforms) => {
+export const getConnectedPlatforms = (platforms = []) => {
   return platforms.map(name => {
     return {
       platform: name.platform

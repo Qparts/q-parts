@@ -4,7 +4,7 @@ import Title from '../UI/Title';
 import { right } from '../../utils';
 import OrderSteps from '../OrderSteps';
 import { Link } from "react-router-dom";
-
+import Button from '../UI/Button';
 class HomeDetails extends Component {
 
 	render() {
@@ -14,26 +14,31 @@ class HomeDetails extends Component {
 					<section className="start-custom-order container-fluid">
 						<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")}/>
 						<OrderSteps translate={translate} direction={direction}/>
-						<div className="order-form">
+						<div className="row">
+							<div className="col col-md-6 offset-md-3">
+								<a href="#" className="btn btn-primary">Start Quotation Order <i className="icon-arrow-right"></i></a>
+							</div>
+						</div>
+						{/*<div className="order-form">
 							<header className="row">
 								<h2 className="col col-10 mx-auto">
 									<span className="arrow"><i className="icon-arrow-down" /></span>
 									{translate("quotationOrder.startNow")}
 								</h2>
 							</header>
-							{/* <div className="form-details">
+							 <div className="form-details">
 								<form className="col-lg-10 offset-lg-1 box-shadow">
 									<div className="form-row ">
 										<div className="col">
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.parts")} />
-											<div className="input-group-prepend">
+											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col">
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.vin")}/>
-											<div className="input-group-prepend">
+											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
@@ -47,8 +52,8 @@ class HomeDetails extends Component {
 									</div>
 								</form>
 							</div>
-						 */}
-						</div>
+
+						</div>*/}
 					</section>
 					<section className="main-cat container-fluid">
 						<div className="row">
@@ -58,7 +63,7 @@ class HomeDetails extends Component {
 									<figcaption>
 										<h4>{translate("nav.oil")}</h4>
 									</figcaption>
-									<span>{translate("nav.oil")}</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
 							</Link>
 							<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
@@ -67,7 +72,7 @@ class HomeDetails extends Component {
 									<figcaption>
 										<h4>{translate("nav.tires")}</h4>
 									</figcaption>
-									<span>{translate("nav.tires")}</span>
+									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
 							</Link>
 							<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">

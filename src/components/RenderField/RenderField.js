@@ -95,10 +95,10 @@ class RenderField extends Component {
               </Fragment> :
               <Fragment>
                 <label>{this.props.label}</label>
-                <sub>{this.props.sub}</sub>
+
                 <InputGroup style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}>
                   <input
-                    className="form-control"
+                    className="form-control input"
                     style={Object.assign(this.props.hasPasswordStrength ? { display: 'none' } :
                       this.props.boxShadow ? styles.borderShadow : styles.border, styles.textTransform)}
                     type={this.props.type}

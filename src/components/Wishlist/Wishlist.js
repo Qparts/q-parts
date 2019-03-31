@@ -63,7 +63,7 @@ class Wishlist extends Component {
         const { currentLanguage, translate } = this.props;
 
         return (
-            <section id="wish-list" className="col-md-10 col-12">
+            <section id="wish-list">
                 {
                     _.isEmpty(this.props.wishlist) ? (
                         <div className="wishlist-empty">

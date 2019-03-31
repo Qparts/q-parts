@@ -78,7 +78,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/setting",
         component: Setting,
-        isAuth: isAuth,
+      //  isAuth: isAuth,
         redirectTo: '/'
     },
     {
@@ -111,8 +111,8 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         component: Accessories
     },
     {
-        path: "/tyres",
-        component: Tyres
+        path: "/tires",
+        component: Tires
     },
     {
         path: "/motor-oil",

@@ -30,7 +30,7 @@ class HeaderDetails extends Component {
     const dropdownHeader =
       <Fragment>
         {
-          isLoggedIn ? 
+          isLoggedIn ?
           <span>
             <b>{fullName}</b>
           </span> :
@@ -88,8 +88,9 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          <Link to="/cart">
+          <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
+            <span>2</span>
           </Link>
         </li>
       </ul>

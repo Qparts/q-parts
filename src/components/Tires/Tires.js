@@ -88,13 +88,13 @@ class Tires extends Component {
 		}
 		return (
 			<section>
-				<section className="tires-hero">
+				<section className="hero">
 					<picture className="hero-img">
 						<source media="(max-width: 480px)" srcSet="/img/tyres-xxs.jpg" />
 						<source media="(max-width: 767px)" srcSet="/img/tyres-xs.jpg" />
 						<img src="/img/tyers-lg.jpg" alt="OUR SALES MORE THAN 50,000 ITEM" />
 					</picture>
-					<div className="tire-set">
+					<div className="hero-content tire-set">
 						<div className="container-fluid ">
 							<div className="row">
 								<div className="col-sm-10 offset-sm-1 offset-0 col offset-md-0 col-md-12">
@@ -143,7 +143,6 @@ class Tires extends Component {
 							</div>
 						</div>
 					</div>
-
 				</section>
 				<DownMediumScreen>
 				<section className="tire-set-xs gray-bg">

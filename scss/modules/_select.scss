@@ -20,6 +20,7 @@
     cursor: pointer;
     position: static !important;
     width: auto !important;
+
   }
   .select__single-value{
     position: static;
@@ -38,6 +39,7 @@
       height: auto;
       display: block;
       border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+      z-index: 3;
       @include box-shadow;
       &::after {
       	bottom: 100%;
@@ -129,4 +131,14 @@
 }
 .select__option--is-selected{
   background: $light-gray !important;
+}
+.select__control .select--is-disabled,
+.css-162g8z5{
+  border-width: 0 !important;
+}
+.select__single-value--is-disabled{
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  top: auto !important;
+  color: $basic-gray !important;
 }
