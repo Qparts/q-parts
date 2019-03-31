@@ -1,4 +1,5 @@
 .product-details{
+  @include text-left;
   @extend .gray-bg;
   padding-bottom: 70px;
   @include media-breakpoint-down(md){
@@ -91,8 +92,8 @@
       top: -3px;
     }
   }
-  &:hover,
-  &.active{
+  &.active,
+  &:hover{
     i{
       color: $brand-color;
     }
@@ -114,7 +115,7 @@
     margin-#{$left}: -15px;
   };
 }
-.summery{
+.summary{
   margin-top: 20px;
   li{
     color: rgba(55, 54, 61, 0.8);
@@ -141,11 +142,14 @@
         @include opacity(0.7);
       }
       & + p{
-        margin-left: 15px;
+        @include margin-left(15px);
       }
     }
   }
   .pro-review{
+    .review {
+      @include text-lowercase
+    }
     margin-bottom: 10px;
     > span, p{
       @include font-size(15px);
@@ -160,7 +164,7 @@
         @include font-size(14px);
         position: relative;
         top: -2px;
-        margin-right: 0.5rem;
+        @include margin-right(0.5rem);
 
       }
     }
@@ -440,7 +444,7 @@
   @include font-size(15px);
   display: flex;
   border-#{$left}: 2px solid $light-gray;
-  .icon-arrow-right{
+  .icon-arrow-#{$right}{
     display: none;
   }
   @include media-breakpoint-down(sm){
@@ -449,7 +453,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     @include font-size(14px);
-    .icon-arrow-right{
+    .icon-arrow-#{$right}{
       display: inline-flex;
       margin-#{$left}: 5px;
     }

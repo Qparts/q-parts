@@ -5,4 +5,5 @@ export const initialState = {
 	vehicles: [],
 	city: null,
 	products: [],
+	flage: false,
 }

@@ -3,7 +3,7 @@ import { initialState } from '../initialState/apiInitialState';
 import {
   GET_COUNTRY_SUCCEEDED, GET_COUNTRIES_SUCCEEDED, GET_COUNTRIES_REGIONS_SUCCEEDED, GET_VEHICLE_SUCCEEDED,
   FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_SORTED_PRODUCTS,
-  GET_COUNTRIES_ONLY_SUCCEEDED
+  GET_COUNTRIES_ONLY_SUCCEEDED, FLAGE
 } from '../actions/apiAction';
 
 
@@ -38,7 +38,8 @@ export default function reducer(state = initialState, action) {
 
     case GET_RECENTLY_VIEWED:
       return { ...state, products: action.payload }
-
+    case FLAGE:
+    return { ...state, flage: action.payload }
     default:
       return state;
   }

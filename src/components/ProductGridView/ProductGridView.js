@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react';
 import Stars from 'react-stars';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
-import Link from '../UI/Link';
-import { handleImageFallback, getTranslatedObject } from '../../utils';
+import { Link } from 'react-router-dom'
+import { handleImageFallback, getTranslatedObject, isAuth } from '../../utils';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
 import { addToCart } from '../../actions/cartAction';
@@ -69,7 +69,7 @@ class ProductGridView extends Component {
 					data={this.state.data}
 					direction={this.props.direction}
 					modalAddToCart={this.props.modalAddToCart}
-					token={this.props.token}
+					token={isAuth(this.props.token)}
 					togglePopup={this.togglePopup}
 					translate={translate}
 					currentLanguage={currentLanguage} />
@@ -105,59 +105,32 @@ class ProductGridView extends Component {
 				</Modal>
 			);
 		}
+
 		return (
 			<Fragment>
-				<MediumScreen>
-					<div className="product-grid-view col-6 col-md-4" >
-						<div
-							className=" product-holder"
-							onMouseEnter={this.handleMouseHover}
-							onMouseLeave={this.handleMouseHover}>
-							<div className="image-container" align="center">
-								<img onError={handleImageFallback} src={product.image} alt="no product" />
-								{
-									this.state.isHovering &&
-									<div className="product-buttons">
-										<Link to={`products/${product.id}`} className="btn btn-primary btn-detail" text={translate("general.viewDetails")} />
-										<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="btn btn-primary btn-cart" icons={["icon-cart", "icon-plus"]} />
-									</div>
-								}
-							</div>
-							<div className="details-holder">
-								<span className="part-text">{product.desc}</span><br />
-								<span className="manufacturer-text">{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
-								<div className="product-review_slide">
+					<li className="col-xl-3 col-md-4 col-6">
+						<Link to={`products/${product.id}`} className="card">
+							<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
+							<div className="card-body">
+								<h5 className="card-title">{product.desc}</h5>
+								<ul className="list-inline product-info">
+									<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+									<li>#{product.productNumber}</li>
+								</ul>
+								<div className="rating">
 									<Stars values={product.averageRating} {...starsRating} />
-									<span className="product-review">{getLength(product.reviews)} {translate("product.reviews")}</span>
+									<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
 								</div>
-								<span className="product-price">{product.salesPrice.toFixed(2)}</span>
-								<span className="product-currency">{translate("general.currency")}</span>
+								{/*<p>Made in Germany</p>*/}
+								<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
 							</div>
-						</div>
-						{dialog}
-					</div>
-				</MediumScreen>
-				<SmallScreen>
-					<div className="product-grid-view col-6 col-md-4" >
-						<div
-							className=" product-holder"
-							onClick={() => this.handleClick(product.id)}>
-							<div className="image-container" align="center">
-								<img onError={handleImageFallback} src={product.image} alt="no product" />
-							</div>
-							<div className="details-holder">
-								<span className="part-text">{product.desc}</span><br />
-								<span className="manufacturer-text">{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</span>
-								<div className="product-review_slide">
-									<Stars values={product.averageRating} {...starsRating} />
-									<span className="product-review">{getLength(product.reviews)} {translate("product.reviews")}</span>
-								</div>
-								<span className="product-price">{product.salesPrice.toFixed(2)}</span>
-								<span className="product-currency">{translate("general.currency")}</span>
-							</div>
-						</div>
-					</div>
-				</SmallScreen>
+						</Link>
+						<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="in-cart">
+							<i className="icon-cart"></i>
+							<i className="icon-plus"></i>
+						</Link>
+					</li>
+					{dialog}
 			</Fragment>
 		)
 	}

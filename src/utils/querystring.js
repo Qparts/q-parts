@@ -21,3 +21,26 @@ export const replaceQuery = (location, str) => {
   var newUrl = url.replace(regex, "page=" + newPageNumber);
   return location.pathname + newUrl;
 };
+
+export const addQuery = (param) => {
+  const searchQueries = getUniqueSearchQuery();
+  const hasSameQuery = searchQueries.includes(param);
+  const newQuery = [...searchQueries, param];
+
+  return hasSameQuery ? null : `${window.location.pathname}?${newQuery.join('&')}`;
+}
+
+export const removeQuery = (param) => {
+  const searchQueries = getUniqueSearchQuery();
+  const shouldRemoveQuery = searchQueries.includes(param);
+  const newQuery = searchQueries.filter(searchQuery => searchQuery !== param);
+
+  return shouldRemoveQuery ? `${window.location.pathname}?${newQuery.join('&')}` : null;
+}
+
+const getUniqueSearchQuery = () => {
+  const set = new Set(window.location.search.slice(1).split("&"));
+
+  return [...set];
+
+}

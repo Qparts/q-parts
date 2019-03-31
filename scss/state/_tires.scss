@@ -1,3 +1,7 @@
+.tires {
+  @include text-left;
+}
+
 .tire-set{
   bottom: 0;
   @include media-breakpoint-down(sm){

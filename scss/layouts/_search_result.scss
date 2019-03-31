@@ -1,4 +1,5 @@
 .filter-col{
+  @include text-left;
   @extend .col-lg-3;
   max-width: 300px;
   > .btn{
@@ -138,13 +139,13 @@
   .col:first-child{
     padding-#{$right}: 0;
     .form-control{
-      border-radius: $border-radius-base 0 0 $border-radius-base;
+      border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
 
     }
   }
   .col:nth-child(2){
     .form-control{
-      border-radius: 0 0 $border-radius-base 0;
+      border-radius: corner-values(0 0 $border-radius-base 0);
     }
   }
   .col-auto{
@@ -268,7 +269,7 @@
     }
     .select__menu{
       left: auto !important;
-      right: 0 !important;
+      #{$right}: 0 !important;
     }
   };
 }
@@ -327,10 +328,11 @@
   }
 }
 .result-list{
+  @include text-left;
   @extend .list-unstyled;
   margin-bottom: 0;
-  margin-right: -10px;
-  margin-left: -10px;
+  @include margin-right(-10px);
+  @include margin-left(-10px);
   > li{
     padding: 0 5px;
     margin-top: 10px;
@@ -351,7 +353,6 @@
 .more-result{
   margin-top: 40px;
   text-align: center;
-
   @include border-radius-div();
   display: inline-flex;
   li{
@@ -396,6 +397,8 @@
 }
 .filter-result{
   padding: 15px 15px 5px;
+  width: 100%;
+  @include text-left;
   ul{
     display: inline-block;
     margin-bottom: 0;
@@ -408,28 +411,23 @@
   }
   li{
     border:1px solid rgba(55, 54, 60, 0.3);
-    padding: corner-values(5px 15px 5px 10px);
+    padding: 5px 15px 5px 10px;
     text-transform: capitalize;
     @include font-size(14px);
     position: relative;
-    border-bottom-#{$right}-radius: $border-radius-base;
-    & + li{
-      border-bottom-#{$right}-radius: 0;
+    &:first-child{
+      border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
     }
     &:last-child{
-      border-bottom-#{$right}-radius: $border-radius-base;
+      border-radius: corner-values(0 0 $border-radius-base 0);
     }
-    &:first-child{
-      border-bottom-#{$left}-radius: $border-radius-base;
-      border-top-#{$left}-radius: $border-radius-base;
-    }
-    &:first-child:not(:last-child){
-      border-bottom-#{$right}-radius: 0;
+    &:not(:last-child) {
+      @include margin-right($list-inline-padding);
     }
     a{
       position: absolute;
       top: 0;
-      right: 0;
+      #{$right}: 0;
       width: 11px;
       height: 100%;
       &:hover{
@@ -700,10 +698,11 @@
   }
 }
 .filte-items{
+  @include text-left;
   position: fixed;
   height: 100%;
   top: 0;
-  left: 0;
+  #{$left}: 0;
   width: 100%;
   background: $white;
   overflow: auto;

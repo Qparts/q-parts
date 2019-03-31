@@ -11,10 +11,11 @@ import {
   loadCurrentUser, editName, editPhoneNo, editEmail, editPassword,
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
   deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
-  getCompletedRequests, changeDefaultAddress, changeDefaultVehicle
+  getCompletedRequests, changeDefaultAddress, changeDefaultVehicle,
+  incrementQuantity, decrementQuantity
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { addToCart, decrementQuantity, incrementQuantity } from '../../actions/cartAction';
+import { addToCart } from '../../actions/cartAction';
 import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import EditInfo from '../../components/EditInfo/EditInfo';
 import Addresses from '../../components/Addresses/Addresses';
@@ -541,7 +542,6 @@ class Setting extends Component {
         <SmallScreen>
           <section id="setting-mobile">
             <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
-            <SideBar  />
             <Switch>
               <Route path="/setting/profile" exact={true} render={({ match }) => {
                 return (
@@ -570,7 +570,12 @@ class Setting extends Component {
                       customer={this.props.customer}
                       quotations={this.props.quotations}
                       translate={this.props.translate}
-                      addToCart={this.props.addToCart} />
+                      direction={this.props.direction}
+                      addToCart={this.props.addToCart}
+                      currentLanguage={this.props.currentLanguage}
+                      incrementQuantity={this.props.incrementQuantity}
+                      decrementQuantity={this.props.decrementQuantity}
+                      token={this.props.token} />
                   </Fragment>
                 )
               }} />
@@ -700,6 +705,7 @@ const mapStateToProps = (state) => {
     regions: state.api.regions,
     country: state.api.country,
     vehicles: customer.vehicles,
+    token: state.customer.token,
     city: state.api.city,
     translate: getTranslate(state.localize),
     connectedPlatforms: getConnectedPlatforms(customer.socialMedia),

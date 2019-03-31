@@ -65,7 +65,7 @@ class RenderField extends Component {
         color: this.getIcon(),
       },
       textTransform: {
-        textTransform: this.props.textTransform ?  this.props.textTransform : {}
+        textTransform: this.props.textTransform ? this.props.textTransform : {}
       }
     }
     const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, scoreWords, tooShortWord, title, ...renderFieldProps } = this.props;

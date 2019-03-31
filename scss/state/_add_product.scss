@@ -1,0 +1,115 @@
+.add-product {
+  @include text-left;
+  .sec-header{
+    h1{
+      @include text-capitalize;
+      white-space: nowrap;
+    }
+  }
+  p {
+    margin-bottom: 0;
+  }
+  @include small-screen {
+    background: #f7f7f7;
+  }
+  padding-top: 51px;
+
+  .product-review {
+    display: flex;
+    align-items: center;
+    @include padding-left(0);
+  }
+
+  .product-item_desc {
+    h5 {
+      @include font-size(17px);
+      font-weight: normal;
+    }
+  }
+
+  .product-brand {
+    @include margin-right(3px);
+  }
+
+  .product_price-quantity {
+    .price {
+      color: $basic-gray;
+      margin-bottom: 0;
+      @include font-size(30px);
+      letter-spacing: -1px;
+      label,
+      span {
+        letter-spacing: 0;
+      }
+      span {
+        @include font-size(18px);
+        text-transform: uppercase;
+        padding-#{$left}: 4px;
+      }
+    }
+    .quantity {
+      color: $dark-charcoal-grey;
+      @include opacity(0.8);
+    }
+  }
+
+  .subtotal {
+    border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base);
+    margin-top: 32px;
+    margin-bottom: 32px;
+    @include text-right;
+    overflow: hidden;
+    .row {
+      @include small-screen {
+        background: $basic-white;
+      }
+      @include medium-screen {
+        background: #f6f6f6;
+      }
+    }
+    .subtotal-main {
+      @include font-size(18px);
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .product_amount {
+      @include fill-border-left(2px, $light-gray);
+      color: $basic-gray;
+      margin-bottom: 0;
+      @include font-size(30px);
+      letter-spacing: -1px;
+      label,
+      span {
+        letter-spacing: 0;
+        margin-top: 15px;
+      }
+      span {
+        @include font-size(18px);
+        text-transform: uppercase;
+        padding-#{$left}: 4px;
+      }
+    }
+  }
+
+  .btn-footer {
+    text-align: center;
+    .group-shadow-input {
+      height: 55px;
+      top: 0px;
+    }
+    margin-bottom: 74px;
+    .btn-gray-secondary {
+      border-radius: corner-values(0 0 0 $border-radius-base) !important;
+    }
+    .check-out-btn {
+      border-radius: corner-values(0 $border-radius-base $border-radius-base 0) !important;
+      @include margin-left(10px);
+    }
+    .continue-btn {
+      @include small-screen {
+        background: #f6f6f6;
+      }
+    }
+  }
+}

@@ -83,7 +83,7 @@ export const styles = {
     backgroundColor: '#f8f9fa'
   },
   show: {
-    display: 'inline'
+    display: 'inline-block'
   },
   hide: {
     display: 'none'
@@ -112,6 +112,13 @@ export const styles = {
   },
   arrow_right: {
     color: "black"
+  },
+  spinner: `
+      border-color: ${brandColor} !important;
+			border-bottom-color: transparent !important;
+        `,
+  loading: {
+    textAlign: 'center'
   }
 }
 
@@ -130,7 +137,7 @@ export const starsRating = {
   color2: '#fabb12'
 }
 
-export const params = (direction) => {
+export const swiperParams = (direction) => {
   return {
     containerClass: `swiper-container products-list`,
     slidesPerView: 5,

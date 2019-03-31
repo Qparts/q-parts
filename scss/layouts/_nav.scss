@@ -48,7 +48,8 @@
     }
     margin-bottom: 0;
     position: relative;
-    > a, button {
+    > a,
+    button {
       margin: 8px 0;
       padding: 10px;
       font-weight: 500;
@@ -67,6 +68,25 @@
         font-weight: 700;
       }
     }
+    a {
+      &::before,
+      &::after {
+        #{$right}: 20px;
+        @if ($dir == ltr) {
+          -webkit-transform-origin: 9px 50%;
+          -moz-transform-origin: 9px 50%;
+          -ms-transform-origin: 9px 50%;
+          -o-transform-origin: 9px 50%;
+          transform-origin: 9px 50%;
+        } @else {
+          -webkit-transform-origin: 0px 50%;
+          -moz-transform-origin: 0px 50%;
+          -ms-transform-origin: 0px 50%;
+          -o-transform-origin: 0px 50%;
+          transform-origin: 0px 50%;
+        }
+      }
+    }
     &.has-children {
       a {
         &::before,
@@ -79,7 +99,8 @@
       }
     }
     &:hover {
-      > a, button {
+      > a,
+      button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -96,7 +117,8 @@
       }
     }
     &.selected {
-      a, button {
+      a,
+      button {
         background: $light-gray;
         @include link-border-radius;
         @include nav-sm-media {
@@ -115,7 +137,8 @@
     @include nav-sm-media {
       display: block;
     }
-    a, button {
+    a,
+    button {
       margin-bottom: 5px;
       > i {
         @include font-size(25px);
@@ -136,35 +159,35 @@
     }
   }
 }
-ul.cd-secondary-nav{
-    @include nav-lg-media{
-      top: 47px;
-      width: auto;
-      padding: 0;
-      border-radius: 0 0 $border-radius-base $border-radius-base;
-      @include opacity(0) ;
-      visibility: hidden !important;
-      display: none !important;
-      border-top: 2px solid $basic-gray;
-      min-width: 250px;
-      &:after {
-        bottom: 100%;
-        #{$left}: 10px;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-color: rgba(0, 0, 0, 0);
-        border-bottom-color: $basic-gray;
-        border-width: 8px;
-      }
-
-    };
-  > li{
+ul.cd-secondary-nav {
+  @include nav-lg-media {
+    top: 47px;
+    width: auto;
+    padding: 0;
+    border-radius: 0 0 $border-radius-base $border-radius-base;
+    @include opacity(0);
+    visibility: hidden !important;
+    display: none !important;
+    border-top: 2px solid $basic-gray;
+    min-width: 250px;
+    &:after {
+      bottom: 100%;
+      #{$left}: 10px;
+      border: solid transparent;
+      content: ' ';
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(0, 0, 0, 0);
+      border-bottom-color: $basic-gray;
+      border-width: 8px;
+    }
+  }
+  > li {
     border-bottom: 1px solid $light-gray;
-    > a, button {
+    > a,
+    button {
       @include font-size(14px);
       padding: 8px 15px;
       text-transform: capitalize;
@@ -179,7 +202,8 @@ ul.cd-secondary-nav{
     }
   }
   .go-back {
-    a, button {
+    a,
+    button {
       padding-#{$left}: 35px;
       &::before,
       &::after {
@@ -205,6 +229,10 @@ ul.cd-secondary-nav{
     max-width: 200px;
     width: 107px;
     margin-top: 2px;
+    @include if-rtl{
+      position: relative;
+      left: 64px;
+    }
     @include nav-sm-media {
       margin-top: 8px;
       width: 100%;
@@ -216,7 +244,7 @@ ul.cd-secondary-nav{
   transform: translateY(-65px);
   transition: transform 0.5s ease-out;
   .cd-nav {
-    padding-left: 30px;
+    padding-#{$left}: 30px;
   }
   .scroll-dwon-brand {
     @include opacity(1);
@@ -230,7 +258,7 @@ ul.cd-secondary-nav{
     transition: transform 0.3s ease-out;
   }
   .cd-nav {
-    padding-left: 0;
+    padding-#{$left}: 0;
   }
 }
 //overlay-lg
@@ -241,7 +269,7 @@ ul.cd-secondary-nav{
   height: 100%;
   width: 100%;
   top: 0;
-  left: 0;
+  #{$left}: 0;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.5);
   visibility: hidden;
@@ -262,21 +290,19 @@ ul.cd-secondary-nav{
   -moz-transition: opacity 0.3s 0s, visibility 0s 0s, -moz-transform 0.3s 0s;
   transition: opacity 0.3s 0s, visibility 0s 0s, transform 0.3s 0s;
 }
-.cd-overlay{
-  @include nav-lg-media{
+.cd-overlay {
+  @include nav-lg-media {
     display: none;
-  };
+  }
 }
 .overflow-hidden,
 .overflow-hidden-search {
   overflow: hidden;
 }
-.nav-on-left {
-  .cd-header-buttons {
-    padding-#{$left}: 0;
-    #{$right}: auto;
-    #{$left}: 5px;
-  }
+.cd-header-buttons {
+  padding-#{$left}: 0;
+  #{$right}: auto;
+  #{$left}: 5px;
 }
 .search-sm {
   display: none;
@@ -293,7 +319,7 @@ ul.cd-secondary-nav{
   #{$left}: auto;
   top: 60px;
   .form-control {
-    border-top-left-radius: 0 !important;
+    border-top-#{$left}-radius: 0 !important;
   }
 }
 .user-account-sm {
@@ -349,21 +375,22 @@ ul.cd-secondary-nav{
       padding: 10px;
     }
   }
-  p{
+  p {
     @include font-size(15px);
     display: flex;
     align-items: baseline;
     color: $charcoal-grey-two-40;
-    a, button{
+    a,
+    button {
       color: $basic-gray;
       font-weight: 400;
       padding-#{$left}: 5px;
-      i{
+      i {
         @include transition(all, 0.5s, ease);
         padding-#{$left}: 5px;
         @include font-size(14px);
 
-        &:before{
+        &:before {
           top: 2px;
           @include font-size(12px);
         }

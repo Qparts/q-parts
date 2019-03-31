@@ -10,6 +10,7 @@ import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
 
 import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
+import { loadGoogleAnalytics } from '../../config/google';
 import NetworkError from '../../components/NetworkError';
 import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
 import { selectCountry, onLogout } from '../../actions/customerAction';
@@ -18,6 +19,7 @@ import RouterScrollToTop from '../../components/RouterScrollToTop';
 import Nav from '../../components/UI/Nav';
 import moment from 'moment';
 import { clearCart } from '../../actions/cartAction';
+import { RADIX } from '../../constants';
 
 class Routes extends Component {
     constructor(props) {
@@ -30,13 +32,19 @@ class Routes extends Component {
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
         loadStyle(this.props.direction);
+        loadGoogleAnalytics();
     }
     componentDidUpdate = (prevProps, prevState) => {
         const dateNow = moment();
         const expireHours = moment(this.props.tokenExpire);
         const dateDiff = expireHours.diff(dateNow);
-        const hoursLeft = moment(dateDiff).format("h");
+        const hoursLeft = parseInt(moment(dateDiff).format("h"), RADIX);
         const oneHour = 1;
+
+        // console.log(typeof(hoursLeft));
+        // console.log('hoursLeft: ', hoursLeft);
+        // console.log('oneHour: ', oneHour);
+        
 
         if (hoursLeft <= oneHour) {
             this.props.onLogout();
@@ -50,6 +58,10 @@ class Routes extends Component {
 
     }
 
+    getNavLeftStyle = () => {
+        return this.props.direction === 'ltr'? 'nav-on-left': '';
+    }
+
     render() {
         const { translate } = this.props
         return (
@@ -58,7 +70,7 @@ class Routes extends Component {
                     <RouterScrollToTop>
                         <Fragment>
                             <NetworkError error={this.props.error} />
-                            <main className="nav-on-left">
+                            <main className={this.getNavLeftStyle()}>
                                 <Layout
                                     isLoggedIn={isAuth(this.props.token)}
                                     fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}

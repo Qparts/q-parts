@@ -316,7 +316,7 @@ Main components
   -moz-transition: -moz-transform 0.3s;
   transition: transform 0.3s;
 }
-.cd-primary-nav a, .cd-primary-nav ul a {
+.cd-primary-nav a, .cd-primary-nav button, .cd-primary-nav ul a {
   display: block;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -341,7 +341,7 @@ Main components
   -o-transform: translateX(100%);
   transform: translateX(100%);
 }
-.cd-primary-nav.moves-out > li > a, .cd-primary-nav ul.moves-out > li > a {
+.cd-primary-nav.moves-out > li > a, .cd-primary-nav ul.moves-out > li > a, .cd-primary-nav.moves-out > li > button {
   /* push the navigation items to the left - and lower down opacity - when secondary nav slides in */
   -webkit-transform: translateX(-100%);
   -moz-transform: translateX(-100%);
@@ -694,7 +694,6 @@ Main components
 }
 .has-children > a::before, .has-children > a::after {
   /* arrow goes on the right side - children navigation */
-  right: 20px;
   -webkit-transform-origin: 9px 50%;
   -moz-transform-origin: 9px 50%;
   -ms-transform-origin: 9px 50%;
@@ -834,6 +833,16 @@ Main components
 
   .nav-on-left .cd-overlay.is-visible,
   .cd-overlay.is-visible {
+<<<<<<< HEAD
+=======
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
+  .nav-on-left .cd-overlay.is-visible {
+>>>>>>> 27d60088b2514d767e5816416ded094c1fb47aa2
     -webkit-transform: translateX(260px);
     -moz-transform: translateX(260px);
     -ms-transform: translateX(260px);

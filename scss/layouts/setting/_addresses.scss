@@ -286,8 +286,14 @@
             .select__value-container {
               height: 34px;
             }
+            .select__control {
+              padding-top: 15px;
+            }
           }
           .div-rounded-first{
+            @include small-screen {
+              margin-bottom: 20px;
+            }
             .RenderField{
               border: none;
               input{
@@ -305,6 +311,9 @@
             }
           }
           .div-rounded{
+            @include small-screen {
+              margin-bottom: 20px;
+            }
             @include padding-left(5px);
             @include padding-right(5px);
           }
@@ -354,6 +363,7 @@
             }
           }
           .shipping-style{
+            margin-top: 25px;
             margin-bottom: 20px;
             .form-control{
               padding-bottom: 20px;
@@ -708,6 +718,9 @@
               }
             }
             .div-rounded-first{
+              @include small-screen {
+                margin-bottom: 20px;
+              }
               .RenderField{
                 border: none;
                 input{
@@ -725,6 +738,9 @@
               }
             }
             .div-rounded{
+              @include small-screen {
+                margin-bottom: 20px;
+              }
               @include padding-left(5px);
               @include padding-right(5px);
             }
@@ -774,6 +790,7 @@
               }
             }
             .shipping-style{
+              margin-top: 25px;
               margin-bottom: 20px;
               .form-control{
                 padding-bottom: 20px;

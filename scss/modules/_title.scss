@@ -30,5 +30,10 @@
         display: none;
       }
     };
+    span {
+      @include small-screen {
+        display: none;
+      }
+    }
   }
 }

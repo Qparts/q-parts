@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import Stars from 'react-stars'
+import Stars from 'react-stars';
+import { StyleSheet, css } from 'aphrodite';
 
 import { starsRating } from '../../constants';
 
@@ -9,11 +10,12 @@ const RenderRating = props => {
     <Fragment>
       <div className="RenderRating-container RenderRating-required">
         <Stars
+          className={css(styles.rating)}
           {...starsRating}
           half={false}
           edit={true}
           value={props.input.value || 0}
-          onChange={(e) => props.input.onChange(e.value)}
+          onChange={(newRating) => props.input.onChange(newRating)}
           {...props} />
         <Fragment>
           {props.meta.touched &&
@@ -24,5 +26,11 @@ const RenderRating = props => {
     </Fragment>
   );
 }
+
+const styles = StyleSheet.create({
+  rating: {
+    display: 'flex'
+  }
+});
 
 export default RenderRating;
