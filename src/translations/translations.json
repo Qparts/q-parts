@@ -595,8 +595,8 @@
       "Sign In/Sign Up"
     ],
     "joinUs": [
-      "انضم إلينا",
-      "Join Us"
+      "سجل معنا",
+      "Sign Up"
     ],
     "menu": {
       "menuItem": {
@@ -650,8 +650,8 @@
         "New Customer?"
       ],
       "link": [
-        "انضم إلينا",
-        "Join us"
+        "سجل معنا",
+        "Sign Up"
       ]
     },
     "garage": {
@@ -724,8 +724,8 @@
         "Don't have an account?"
       ],
       "joinUs": [
-        "انضم إلينا",
-        "Join Us"
+        "سجل معنا",
+        "Sign Up"
       ],
       "here": [
         "هنا",
