@@ -367,7 +367,7 @@
       "Cleaners and Polishers"
     ],
     "sportsAndOutdoors": [
-      "الرياضات و الأنشطة الخارجية",
+      "مستلزمات الأنشطة الخارجية",
       "Sports and Outdoors"
     ],
     "country": [
@@ -491,7 +491,7 @@
       "Accessories"
     ],
     "outdoors": [
-      "في الهواء الطلق",
+      "مستلزمات الأنشطة الخارجية",
       "Outdoors"
     ],
     "carCare": [
@@ -748,8 +748,8 @@
     },
     "signup": {
       "title": [
-        "انضم إلينا",
-        "Join Us"
+        "سجل معنا",
+        "Sign Up"
       ],
       "subHeader": [
         "عرض وإدارة وإيجاد أجزاء للسيارات في الكراج الخاص بك",
