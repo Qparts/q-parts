@@ -182,8 +182,19 @@
 .icon-wallet:before {
   content: "\32";
 }
-.icon-vehicle:before {
-  content: "\33";
+.icon-vehicle {
+  @include if-rtl{
+    -moz-transform: scaleX(-1);
+   -o-transform: scaleX(-1);
+   -webkit-transform: scaleX(-1);
+   transform: scaleX(-1);
+   filter: FlipH;
+   -ms-filter: "FlipH";
+   left: 5px;
+  };
+  &:before {
+    content: "\33";
+  }
 }
 .icon-user:before {
   content: "\34";
@@ -780,7 +791,7 @@
   }
     .select__control{
       padding-top: 0 !important;
-      background: $light-gray;
+      background: $light-gray !important;
       height: 55px;
 
     }

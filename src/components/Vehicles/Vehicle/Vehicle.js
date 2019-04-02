@@ -51,7 +51,7 @@ class Vehicle extends Component {
         label: getTranslatedObject(vehicle, defaultLang, 'name', 'nameAr'),
         value: vehicle.id
       }
-    });    
+    });
 
     const modelData = _.has(this.props.formValues, 'make.models') ?
       this.props.formValues.make.models.map(model => {

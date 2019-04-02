@@ -53,7 +53,7 @@ class HeaderDetails extends Component {
               !isLoggedIn && <Fragment>
                 <h6>{translate("dialog.signin.title")}</h6>
                 <ul className="signin-list">
-                  <li><a className="btn" href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
+                  <li><Link className="btn" to="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
                   {/* <li><a href="#"><i className="icon-facebook" /></a></li>
                 <li><a href="#"><img src="/img/google-icon.svg"></img></a></li> */}
                 </ul>

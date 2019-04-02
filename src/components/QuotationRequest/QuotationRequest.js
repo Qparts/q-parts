@@ -23,87 +23,8 @@ import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
 import { postQuotation } from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
-//static HTML
+import * as validations from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
-const vehicleYear = [
-	{ value: 1, label: "2010" },
-	{ value: 2, label: "2011" },
-	{ value: 3, label: "2012" },
-];
-const groupedvehicleYear = [
-	{
-		options: vehicleYear,
-	},
-];
-const formatvehicleYearLabel = () => (
-	<div className="placeholder">
-		<span>Select Year</span>
-	</div>
-);
-const vehicleMake = [
-	{ value: 1, label: "BMW" },
-	{ value: 2, label: "KIA" },
-	{ value: 3, label: "Ford" },
-];
-const groupedvehicleMake = [
-	{
-		options: vehicleMake,
-	},
-];
-const formatvehicleMakeLabel = () => (
-	<div className="placeholder">
-		<span>Select vehicle Make</span>
-	</div>
-);
-const vehicleModel = [
-	{ value: 1, label: "Rio" },
-	{ value: 2, label: "Focus" },
-	{ value: 3, label: "20CS" },
-];
-const groupedvehicleModel = [
-	{
-		options: vehicleModel,
-	},
-];
-const formatvehicleModelLabel = () => (
-	<div className="placeholder">
-		<span>Select vehicle Model</span>
-	</div>
-);
-
-const country = [
-	{ value: 1, label: "KSA" }
-];
-const Region = [
-	{ value: 1, label: "Riyadh" },
-	{ value: 2, label: "Tabuk" },
-	{ value: 3, label: "Jazan" },
-	{ value: 4, label: "Medina" }
-];
-const groupedRegion = [
-	{
-		options: Region,
-	},
-];
-const formatRegionLabel = () => (
-	<div className="placeholder">
-		<span>Select Region</span>
-	</div>
-);
-const City = [
-	{ value: 1, label: "Riyadh" }
-];
-const groupedCity = [
-	{
-		options: City,
-	},
-];
-const formatCityLabel = () => (
-	<div className="placeholder">
-		<span>Select City</span>
-	</div>
-);
-//END static HTML
 
 
 const vehicles = 'vehicles';
@@ -124,15 +45,20 @@ class QuotationRequest extends Component {
 	}
 
 	handleSubmit = values => {
-		const { vehicleForm: {
-			vehicle: { make: { id: makeId } }, id: customerVehicleId }, quotationItems: quotationItemsTemp, city: { id: cityId } } = values;
+		let {
+			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
+		} = values;
+		const customerVehicleId = garage ? garage.vehicleYearId : null;
+		const imageAttached = vinImage ? true : false;
+		vehicleYearId = customerVehicleId ? null : vehicleYearId;
+		vin = customerVehicleId ? null : vin;
 
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
 
-		postQuotation({ cityId, makeId, customerVehicleId, quotationItems })
+		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached })
 			.then(res => {
 				this.props.setQuotationOrder(false);
 				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -203,7 +129,16 @@ class QuotationRequest extends Component {
 	}
 
 	render() {
-		const { handleSubmit, translate, direction, defaultLang, vehicles } = this.props;
+		const { handleSubmit, translate, direction, defaultLang, vehicles, cusVehicles } = this.props;
+
+		const makeData = vehicles.map(vehicle => {
+			return {
+				...vehicle,
+				label: getTranslatedObject(vehicle, defaultLang, 'name', 'nameAr'),
+				value: vehicle.id
+			}
+		});
+
 		const dialog = <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
 			<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
 			<ModalBody>
@@ -211,7 +146,56 @@ class QuotationRequest extends Component {
 			</ModalBody>
 		</Modal>
 
-		const vehiclesFormat = getFormattedVehicles(vehicles, defaultLang);
+		const yearData = _.has(this.props.formValues, 'model.modelYears') ?
+			this.props.formValues.model.modelYears.map(modelYear => {
+				return {
+					...modelYear,
+					label: modelYear.year,
+					value: modelYear.id
+				}
+			}) : [];
+		const groupedvehicleYear = [
+			{
+				options: yearData,
+			},
+		];
+		const formatvehicleYearLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.vehicle.year")}</span>
+			</div>
+		);
+		const groupedvehicleMake = [
+			{
+				options: makeData,
+			},
+		];
+		const formatvehicleMakeLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.vehicle.year")}</span>
+			</div>
+		);
+		const modelData = _.has(this.props.formValues, 'make.models') ?
+			this.props.formValues.make.models.map(model => {
+				return {
+					...model,
+					label: getTranslatedObject(model, defaultLang, 'name', 'nameAr'),
+					value: model.id
+				}
+			}) : [];
+		const groupedvehicleModel = [
+			{
+				options: modelData,
+			},
+		];
+		const formatvehicleModelLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.vehicle.model")}</span>
+			</div>
+		);
+
+		const country = [
+			{ value: 1, label: translate("general.ksa") }
+		];
 		const regions = this.props.regions ? this.props.regions.map(region => {
 			return {
 				...region,
@@ -219,6 +203,16 @@ class QuotationRequest extends Component {
 				label: getTranslatedObject(region, defaultLang, 'name', 'nameAr'),
 			}
 		}) : [];
+		const groupedRegion = [
+			{
+				options: regions,
+			},
+		];
+		const formatRegionLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.shipping.region")}</span>
+			</div>
+		);
 		const cities = _.has(this.props.formValues, 'region.cities') ?
 			this.props.formValues.region.cities.map(city => {
 				return {
@@ -227,12 +221,47 @@ class QuotationRequest extends Component {
 					value: city.id
 				}
 			}) : [];
+		const groupedCity = [
+			{
+				options: cities,
+			},
+		];
+		const formatCityLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.shipping.city")}</span>
+			</div>
+		);
+		const garageList = [
+			{ value: 1, label: "Ford Focus 2016, VIN(000 000 000 000 11)" },
+			{ value: 2, label: "Kia Cerato 2018, VIN(000 000 000 000 11)" },
+		];
+		const vehiclesFormat = getFormattedVehicles(cusVehicles, defaultLang);
+		const groupedGarageList = [
+			{
+				options: vehiclesFormat,
+			},
+		];
+		const formatGarageListLabel = () => (
+			<div className="placeholder">
+				<i className="icon-vehicle"></i>
+				<h6>{translate("quotationOrder.garage.title")}
+					<p>{translate("quotationOrder.garage.subTitle")}</p>
+				</h6>
+			</div>
+		);
+		let garage = null;
+		if (_.has(this.props.formValues, 'garage')) {
+			const selectedVehicle = this.props.formValues.garage.vehicle;
+			const vin = this.props.formValues.garage.vin;
 
-		const styles = {
-			footer: {
-				marginTop: isAuth(this.props.token) ? '' : '56px'
-			}
-		}
+			garage = [
+				{ value: 1, label: getTranslatedObject(selectedVehicle.make, defaultLang, 'name', 'nameAr') },
+				{ value: 2, label: getTranslatedObject(selectedVehicle.model, defaultLang, 'name', 'nameAr') },
+				{ value: 3, label: selectedVehicle.year },
+				{ value: 4, label: vin }
+			]
+		};
+
 		return (
 			<Fragment>
 				<section className="hero qutaion-h">
@@ -252,23 +281,23 @@ class QuotationRequest extends Component {
 				</section>
 				<section className="steps-title">
 					<div className="total-bg gray-bg"></div>
-						<div className="container-fluid">
-							<div className="row">
-								<div className="col-lg-6 col-auto steps-num">
-									<p>3</p>
-									<span>
-										<i className="icon-arrow-r"></i>
-										<i className="icon-arrow-r"></i>
-									</span>
-								</div>
-								<div className="col-lg-6 col steps-cap">
-									<p>
-										<span>{translate("quotationOrder.steps.title")}</span>
-										{translate("quotationOrder.steps.subTitle")}
-									</p>
-								</div>
+					<div className="container-fluid">
+						<div className="row">
+							<div className="col-lg-6 col-auto steps-num">
+								<p>3</p>
+								<span>
+									<i className="icon-arrow-r"></i>
+									<i className="icon-arrow-r"></i>
+								</span>
+							</div>
+							<div className="col-lg-6 col steps-cap">
+								<p>
+									<span>{translate("quotationOrder.steps.title")}</span>
+									{translate("quotationOrder.steps.subTitle")}
+								</p>
 							</div>
 						</div>
+					</div>
 				</section>
 				<section className="step-active">
 					<div className="container-fluid">
@@ -289,78 +318,101 @@ class QuotationRequest extends Component {
 					</div>
 					<form className="gray-input" onSubmit={handleSubmit(this.handleSubmit)}>
 						<div className="sec-shadow  vehicle-not-empty">
-								<div className="row">
-									<h3 className="col">{translate("quotationOrder.vehicle.title")}</h3>
-									<div className="col-auto open-garage">
-										<Link
-											to={'#'}
-											isReverseOrder
-											className='btn btn-gray'
-											text={translate("form.vehicle.title")}
-											icon='icon-vehicle'
-											onClick={this.handleVehicle}
-										/>
-									<p>2</p>
-									</div>
+							<div className="row">
+								<h3 className="col">{translate("quotationOrder.vehicle.title")}</h3>
+								{
+									isAuth(this.props.token) && (
+										<div className="col-auto open-garage">
+											<Field
+												name="garage"
+												placeholder={" "}
+												component={SelectInput}
+												options={groupedGarageList}
+												formatGroupLabel={formatGarageListLabel}
+											/>
+											<Link
+												to={'#'}
+												isReverseOrder
+												className='btn btn-gray'
+												text={translate("form.vehicle.title")}
+												icon='icon-vehicle'
+											/>
+											<p>{cusVehicles.length}</p>
+										</div>
+									)
+								}
+							</div>
+							<div className="row vehicle-info">
+								<div className="col-lg col-md-6 float-label">
+									<Field
+										label={translate("form.vehicle.make")}
+										name="make"
+										placeholder={" "}
+										component={SelectInput}
+										defaultValue={garage ? garage[0] : null}
+										options={groupedvehicleMake}
+										formatGroupLabel={formatvehicleMakeLabel}
+										validate={[validations.required]}
+									/>
 								</div>
-								<div className="row vehicle-info">
-									<div className="col-lg col-md-6 float-label">
+								<div className="col-lg col-md-6 float-label">
+									<Field
+										label={translate("form.vehicle.model")}
+										name="model"
+										placeholder={" "}
+										component={SelectInput}
+										defaultValue={garage ? garage[1] : null}
+										options={groupedvehicleModel}
+										formatGroupLabel={formatvehicleModelLabel}
+										validate={[validations.required]}
+									/>
+								</div>
+								<div className="col-lg-auto col-md-6 float-label">
+									<Field
+										label={translate("form.vehicle.year")}
+										name="year"
+										placeholder={" "}
+										component={SelectInput}
+										defaultValue={garage ? garage[2] : null}
+										options={groupedvehicleYear}
+										formatGroupLabel={formatvehicleYearLabel}
+										validate={[validations.required]}
+									/>
+								</div>
+								<div className="col-lg col-md-6">
+									<div className="has-float-label add-file">
 										<Field
-											label="Make"
-											name="make"
-											placeholder={" "}
-											component={SelectInput}
-											options={groupedvehicleMake}
-											formatGroupLabel={formatvehicleMakeLabel}
+											name="vin"
+											type="text"
+											className="form-control"
+											placeholder={translate("quotationOrder.vin")}
+											component="input"
+											value={garage ? garage[3] : null}
+										/>
+										<label>{translate("quotationOrder.vin")}</label>
+										<Field
+											name="vinImage"
+											component={RenderFileInput}
+											image="image"
 										/>
 									</div>
-									<div className="col-lg col-md-6 float-label">
-											<Field
-												label="Model"
-												name="model"
-												placeholder={" "}
-												component={SelectInput}
-												options={groupedvehicleModel}
-												formatGroupLabel={formatvehicleModelLabel}
-											/>
-									</div>
-									<div className="col-lg-auto col-md-6 float-label">
-											<Field
-												label="Year"
-												name="year"
-												placeholder={" "}
-												component={SelectInput}
-												options={groupedvehicleYear}
-												formatGroupLabel={formatvehicleYearLabel}
-											/>
-									</div>
-									<div className="col-lg col-md-6">
-										<div className="has-float-label add-file">
-											<input type="text" className="form-control" placeholder={translate("quotationOrder.vin")} />
-											<label>{translate("quotationOrder.vin")}</label>
-												<Field
-		                       name="vin num"
-		                       component={RenderFileInput}
-		                       image="image"
-		                     />
-									</div>
-									</div>
 								</div>
+							</div>
 						</div>
 						<div className="sec-shadow part-array">
-								<div className="row">
-									<div className="col-lg">
-										<h3>{translate("quotationRequest.partInfo.title")}</h3>
-									</div>
+							<div className="row">
+								<div className="col-lg">
+									<h3>{translate("quotationRequest.partInfo.title")}</h3>
 								</div>
-								<FieldArray
-									name="quotationItems"
-									component={RenderPartInfo}
-									add={translate("quotationRequest.partInfo.add")}
-									deleteIcon="icon-trash"
-									placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
-								/>
 							</div>
+							<FieldArray
+								name="quotationItems"
+								component={RenderPartInfo}
+								add={translate("quotationRequest.partInfo.add")}
+								deleteIcon="icon-trash"
+								placeholder={translate("quotationRequest.placeholder.carInfo.vin")}
+							/>
+						</div>
 						<div className="sec-shadow">
 							<div className="row">
 								<div className="col-lg">
@@ -371,16 +423,16 @@ class QuotationRequest extends Component {
 								<div className="col-md float-label disabled">
 									<Field
 										isDisabled={true}
-										label="Country"
-										name="Country"
+										label={translate("general.country")}
+										name="country"
 										defaultValue={country[0]}
 										component={SelectInput}
 									/>
 								</div>
 								<div className="col-md float-label">
 									<Field
-										label="Region"
-										name="Region"
+										label={translate("general.region")}
+										name="region"
 										placeholder=" "
 										component={SelectInput}
 										options={groupedRegion}
@@ -389,7 +441,7 @@ class QuotationRequest extends Component {
 								</div>
 								<div className="col-md float-label">
 									<Field
-										label="City"
+										label={translate("general.city")}
 										name="city"
 										placeholder=" "
 										component={SelectInput}
@@ -406,20 +458,19 @@ class QuotationRequest extends Component {
 							<div className="col-lg-auto">
 								{
 									isAuth(this.props.token) ?
-											<Button type="submit" className="btn btn-primary" text={
-												<Fragment>
-													<span>{translate("general.send")}</span>
-													<i className={`icon-arrow-${right(direction)}`}></i>
-												</Fragment>
-											} />
-										 :
-											<Link
-												to={"#"}
-												className="btn btn-primary"
-												text={translate("general.send")}
-												icon={`icon-arrow-${right(direction)}`}
-												onClick={this.handleLogin} />
-
+										<Button type="submit" className="btn btn-primary" text={
+											<Fragment>
+												<span>{translate("general.send")}</span>
+												<i className={`icon-arrow-${right(direction)}`}></i>
+											</Fragment>
+										} />
+										:
+										<Link
+											to={"#"}
+											className="btn btn-primary"
+											text={translate("general.send")}
+											icon={`icon-arrow-${right(direction)}`}
+											onClick={this.handleLogin} />
 								}
 							</div>
 						</div>
@@ -442,8 +493,8 @@ const mapStateToProps = (state) => {
 	return {
 		customer: customerObj.detail,
 		token: state.customer.token,
-		vehicles: customerObj.detail.vehicles,
-		selectedVehicle: customerObj.selectedVehicle,
+		cusVehicles: customerObj.detail.vehicles,
+		vehicles: state.api.vehicles,
 		regions: state.api.regions,
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),

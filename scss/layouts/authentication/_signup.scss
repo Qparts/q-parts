@@ -1,4 +1,5 @@
 .signup-page{
+  @include text-left;
   @extend .gray-bg;
   @extend .pt-sec;
   .sec-header{
@@ -83,9 +84,7 @@
     @include opacity(0.8);
     position: relative;
     top: -20px;
-    @include if-ltr{
-      content: "Password Strength"
-    };
+    content: if-ltr("Password Strength", "قوة كلمة المرور");
   }
   &::after{
     content: " ";
@@ -129,6 +128,8 @@
     top: auto;
     bottom: -42px;
     padding-#{$right}: 0;
+    #{$right}: 0;
+    #{$left}: unset;
   }
   .toggle-password{
     position: absolute;
