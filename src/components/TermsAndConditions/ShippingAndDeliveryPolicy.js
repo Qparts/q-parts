@@ -9,7 +9,7 @@ class ShippingAndDeliveryPolicy extends Component {
     return(
       <div id="terms-and-conditions" className="container-fluid">
         <h4>
-          Shipping and Delivery Policy
+          {translate('terms.shippingAndDeliveryPolicy.shippingAndDelivery')}
         </h4>
         <h3>
           {translate('terms.shippingAndDeliveryPolicy.countriesAreasShipTo.header')}

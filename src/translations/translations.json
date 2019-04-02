@@ -2623,6 +2623,10 @@
       "Terms and Conditions"
     ],
     "privacyPolicy":{
+      "privacyPolicy": [
+        "سياسة الخصوصية",
+        "Q-Parts Privacy Policy"
+      ],
       "welcome":[
         "مرحبا بك في Q-PARTS!",
         "WELCOME TO Q-PARTS"
@@ -2837,6 +2841,10 @@
       }
     },
     "returnPolicy":{
+      "return":[
+        "سياسة السترجاع",
+        "Q-Parts Return Policy"
+      ],
       "header":[
         "10أيام للسترجاع",
         "10 DAYS RETURNS"
@@ -2927,6 +2935,10 @@
       }
     },
     "shippingAndDeliveryPolicy":{
+      "shippingAndDelivery": [
+        "سياسة الشحن و التوصيل",
+        "Shipping and Delivery Policy"
+      ],
       "countriesAreasShipTo":{
         "header":[
           "ما هي الدول التي نشحن إليها؟",

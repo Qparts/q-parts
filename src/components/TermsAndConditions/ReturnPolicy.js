@@ -9,7 +9,7 @@ class ReturnPolicy extends Component {
     return(
       <div id="terms-and-conditions" className="container-fluid">
         <h4>
-          Q-Parts Return Policy
+          {translate('terms.returnPolicy.return')}
         </h4>
         <h3>
           {translate('terms.returnPolicy.header')}

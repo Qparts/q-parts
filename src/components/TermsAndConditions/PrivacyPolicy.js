@@ -9,7 +9,7 @@ class PrivacyPolicy extends Component {
     return(
       <div id="terms-and-conditions" className="container-fluid">
         <div>
-          <h4>Q-Parts Privacy Policyaa</h4>
+          <h4>{translate('terms.privacyPolicy.privacyPolicy')}</h4>
         </div>
         <h3>
           {translate('terms.privacyPolicy.welcome')}
