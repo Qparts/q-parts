@@ -2,7 +2,16 @@
   @include text-left;
   @extend .col-lg-3;
   max-width: 300px;
-
+  > .btn{
+    @include font-size(20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i{
+      @include font-size(23px);
+      height: 23px;
+    }
+  }
 }
 .results-container {
   @extend .p-inner-sec;
@@ -11,8 +20,8 @@
 .filter{
   @extend .list-unstyled;
   @include border-radius-div;
-  overflow: hidden;
   background: $white;
+
   > li{
     border-bottom: 2px solid $light-gray;
     padding: 0 15px 5px;
@@ -88,6 +97,7 @@
     }
   }
 }
+
 .filter-search{
   position: relative;
   margin-bottom: 15px;
@@ -96,7 +106,7 @@
     @include border-radius-div;
     border-width: 0;
     height: 35px;
-    padding-#{$left}: 35px;
+    padding-#{$left}: 35px !important;
     @include font-size(14px);
     &:focus{
       box-shadow: none;
@@ -343,17 +353,46 @@
 .more-result{
   margin-top: 40px;
   text-align: center;
-  display: flex;
-  a{
-    width: 100%;
-    line-height: 20px;
-    display: flex;
+  @include border-radius-div();
+  display: inline-flex;
+  li{
+
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    i{
-      height: 21px;
+    margin-#{$right}: 0 !important;
+    @include font-size(15px);
+    span{
+      @include opacity(0.5);
+      line-height: 17px;
+      padding: 10px 5px;
     }
+    a{
+      padding: 10px 10px;
+      @include font-size(20px);
+
+      @include opacity(0.3);
+      &:hover{
+        @include opacity(1);
+
+      }
+      i{
+        height: 20px;
+        display: block;
+      }
+    }
+    &.next{
+      a{
+      @include opacity(1);
+      }
+    }
+    &.disabled{
+      a{
+        cursor: default;
+        @include opacity(0.1);
+      }
+    }
+
   }
 }
 .filter-result{
@@ -547,9 +586,11 @@
     border-radius: 0;
     background: $white;
     > li{
+
       border-bottom-width: 0;
       padding-bottom: 0;
       margin-bottom: 0;
+
       > .row{
         padding-top: 20px;
         padding-bottom: 20px;
@@ -598,6 +639,9 @@
         > .row{
           border-bottom-width: 2px;
         }
+      }
+      &.have-child{
+        cursor: pointer;
       }
     }
     .products-panel{
@@ -699,4 +743,14 @@
     -o-transform: translateX(100%);
     transform: translateX(100%);
   }
+}
+
+
+.apply-filter{
+  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+}
+.apply-filter{
+  bottom: 0;
 }

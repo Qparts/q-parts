@@ -1,5 +1,9 @@
 {
   "general": {
+    "enter": [
+      "أدخل",
+      "Enter"
+    ],
     "send": [
       "إرسال",
       "Send"
@@ -80,8 +84,16 @@
         "Previous Page"
       ],
       "go": [
-        "اذهب",
-        "Go"
+        "اعرض النتيجة",
+        "Apply Filter"
+      ],
+      "show": [
+        "عرض",
+        "Show"
+      ],
+      "hide": [
+        "إخفاء",
+        "Hide"
       ]
     },
     "arabic": [
@@ -159,6 +171,22 @@
     "select": [
       "اختار",
       "Select"
+    ],
+    "country": [
+      "البلد",
+      "Country"
+    ],
+    "region": [
+      "منطقة",
+      "Region"
+    ],
+    "city": [
+      "مدينة",
+      "City"
+    ],
+    "ksa": [
+      "السعودية",
+      "KSA"
     ]
   },
   "tires": {
@@ -458,12 +486,42 @@
       "title": [
         "معلومات السيارة",
         "Vehicle Information"
+      ],
+      "make": [
+        "اختر السيارة",
+        "Select a Vehicle Make"
+      ],
+      "model": [
+        "اختر موديل",
+        "Select a Vehicle Model"
+      ],
+      "year": [
+        "اختر سنة",
+        "Select a year"
       ]
     },
     "shipping": {
       "title": [
         "معلومات الشحن",
         "Shipping Information"
+      ],
+      "region": [
+        "اختر المنطقة",
+        "Select a region"
+      ],
+      "city": [
+        "اختر المدينة",
+        "Select a city"
+      ]
+    },
+    "garage": {
+      "title": [
+        "اختر السيارة",
+        "Select a vehicle"
+      ],
+      "subTitle": [
+        "عرض وإدارة والعثور على قطع غيار للسيارات في المرآب الخاص بك",
+        "View, manage and find parts for the vehicles in your garage"
       ]
     },
     "parts": [
@@ -545,8 +603,8 @@
       "Start now"
     ],
     "startHere": [
-      "أبدأ هنا",
-      "Start here"
+      "أبدأ طلب تسعيرة",
+      "Start Qutaation Order"
     ]
   },
   "navBar": {
@@ -595,8 +653,8 @@
       "Sign In/Sign Up"
     ],
     "joinUs": [
-      "انضم إلينا",
-      "Join Us"
+      "سجل معنا",
+      "Sign Up"
     ],
     "menu": {
       "menuItem": {
@@ -650,8 +708,8 @@
         "New Customer?"
       ],
       "link": [
-        "انضم إلينا",
-        "Join us"
+        "سجل معنا",
+        "Sign Up"
       ]
     },
     "garage": {
@@ -724,8 +782,8 @@
         "Don't have an account?"
       ],
       "joinUs": [
-        "انضم إلينا",
-        "Join Us"
+        "سجل معنا",
+        "Sign Up"
       ],
       "here": [
         "هنا",
@@ -774,6 +832,10 @@
       "city": [
         "اختر المدينة",
         "Select a city"
+      ],
+      "region": [
+        "اختر المنطقة",
+        "Select a region"
       ],
       "password": [
         "كلمة المرور",
@@ -891,7 +953,7 @@
       ],
       "make": [
         "اختر السيارة",
-        "Choose a car"
+        "Make"
       ],
       "model": [
         "موديل",
@@ -2215,7 +2277,7 @@
       ],
       "select": [
         "اختر السيارة",
-        "Select vehicle"
+        "Select a vehicle"
       ]
     },
     "partInfo": {
@@ -2525,12 +2587,12 @@
       "Password Recovery"
     ],
     "textOne": [
-      "يمكنك استرداد معلومات حسابك المفقودة باستخدام النموذج أدناه. الرجاء ادخال",
-      "You can recover your lost account information using the form below. Please enter"
+      "يمكنك استرداد معلومات حسابك المفقودة باستخدام النموذج أدناه. ",
+      "You can recover your lost account information using the form below."
     ],
     "textTwo": [
-      "عنوان بريد إلكتروني صحيح ، سيتم إرسال معلومات حسابك إليك بعد قليل",
-      "valid e-mail address, your account information will be mailed to you shortly"
+      "إدخل عنوان بريد إلكتروني صالح ، سيتم إرسال معلومات حسابك إليك بعد قليل",
+      "Please enter valid e-mail address, your account information will be mailed to you shortly"
     ],
     "labels": {
       "email": [
@@ -2601,19 +2663,19 @@
       "Results"
     ],
     "sorry":[
-      ":( نعتذر,لا يوجد نتائج",
-      "Sorry, No Result Found :("
+      ":( نعتذر,لا توجد نتائج",
+      "Sorry, No Results Found :("
     ],
     "custom-order":[
-      "إصدار أمر مخصص",
-      "Make a Custom Order"
+      "اطلب تسعيرة للقطع الي تريدها من هنا",
+      "Make a quotation order for your parts here"
     ],
     "shopBy":[
       "تسوق حسب",
       "SHOP BY"
     ],
     "category":[
-      "القسم",
+      "الصنف",
       "CATEGORY"
     ]
   },
@@ -3031,5 +3093,4 @@
       }
     }
   }
-
 }

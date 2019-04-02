@@ -9,9 +9,9 @@ import reducer from './reducers';
 
 let middleware = applyMiddleware(thunk);
 const persistConfig = {
-    key: 'vBeta2.0',
+    key: 'vBeta2.1',
     storage,
-    blacklist: ['networkError']
+    blacklist: ['networkError', 'form']
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

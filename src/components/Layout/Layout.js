@@ -75,7 +75,9 @@ class Layout extends Component {
     } = this.props;
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
-        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+        <ModalHeader toggle={this.togglePopup}>
+          <p>Welcome</p> Back
+        </ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
         </ModalBody>

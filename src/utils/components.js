@@ -4,7 +4,7 @@ export const getComponentName = (component) => {
   return component;
 }
 
-export const getConnectedPlatforms = (platforms) => {
+export const getConnectedPlatforms = (platforms = []) => {
   return platforms.map(name => {
     return {
       platform: name.platform
@@ -22,7 +22,7 @@ export const getFormattedVehicles = (vehicles = [], defaultLang) => {
     return {
       ...veh,
       value: veh.id,
-      label: `${veh.vehicle.year} ${getTranslatedObject(veh.vehicle.make, defaultLang, 'name', 'nameAr')} ${getTranslatedObject(veh.vehicle.model, defaultLang, 'name', 'nameAr')}`
+      label: `${getTranslatedObject(veh.vehicle.make, defaultLang, 'name', 'nameAr')} ${getTranslatedObject(veh.vehicle.model, defaultLang, 'name', 'nameAr')} ${veh.vehicle.year}`
     }
   });
 }

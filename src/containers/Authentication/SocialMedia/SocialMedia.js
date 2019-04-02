@@ -11,13 +11,12 @@ class SocialMedia extends Component {
   }
   render() {
     return (
-      <div id="social-media">
-        <div>
-          <span className="solid-line" />
-          <p>{this.props.title}</p>
-        </div>
-        <div className="btn-social-media">
-          <div>
+      <div className="social-signup">
+        <p className="or">
+          <span className="line"/>
+          <span>{this.props.title}</span>
+        </p>
+        <div className="btn-social">
             {this.props.facebookIcon}
             <FacebookLogin
               appId={process.env.REACT_APP_FACEBOOK_APP_ID}
@@ -30,8 +29,6 @@ class SocialMedia extends Component {
                   disabled={this.props.facebook === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.facebook}</button>
               )} />
-          </div>
-          <div>
             {this.props.googleIcon}
             <GoogleLogin
               clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
@@ -44,7 +41,6 @@ class SocialMedia extends Component {
                   disabled={this.props.google === DISCONNECT}
                   onClick={renderProps.onClick}>{this.props.google}</button>
               )} />
-          </div>
         </div>
       </div>
     )

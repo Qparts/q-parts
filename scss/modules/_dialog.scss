@@ -1,22 +1,39 @@
 .modal-dialog {
-  border-radius: corner-values(20px 0 20px 20px) !important;
   // max-width: $max-container-popup;
-  .modal-content {
-    @include container-fluid;
-    background: $light-gray;
-    border-radius: inherit;
-    .modal-header {
-      border-bottom: 0;
-      .modal-title {
-        width: 100%
-      }
-    }
-    .modal-body {
-      padding: inherit;
+}
+.modal-content {
+  border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base) !important;
+  @include container-fluid;
+  .close{
+    @include opacity(1);
+    margin-top: -15px;
+    span{
+      @include font-size(28px);
+      width: 15px;
+      height: 15px;
+      display: block;
+      line-height: 15px;
     }
   }
 }
-
+.modal-header {
+  padding-top: 35px;
+  border-bottom: 0;
+}
+.modal-title {
+  display: flex;
+  font-weight: 400;
+  @include font-size(30px);
+  line-height: 25px;
+  > p{
+    border-bottom: 2px solid $brand-color;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    margin-#{$right}: 7px;
+  }
+}
+.modal-body {
+}
 .product-checkout_popup {
   .modal-content {
     background: white;

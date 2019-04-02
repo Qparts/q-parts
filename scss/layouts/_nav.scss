@@ -29,18 +29,18 @@
   padding-inline-start: 0;
   @include nav-sm-media {
     overflow-x: hidden;
-    @include if-rtl {
+    @include if-rtl{
       right: 0;
-      #{$left}: auto;
-      top: 0;
-      width: 260px;
-      & ul {
-        right: 0;
-        #{$left}: auto;
-        top: 0;
-        width: 260px;
-      }
-    }
+      left: auto;
+       top: 0;
+       width: 260px;
+       & ul{
+         right: 0;
+         left: auto;
+          top: 0;
+          width: 260px;
+       }
+    };
   }
   > li {
     @include nav-lg-media {
