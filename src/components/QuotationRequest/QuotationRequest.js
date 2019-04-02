@@ -453,7 +453,7 @@ class QuotationRequest extends Component {
 						</div>
 						<div className="row submit-qout">
 							<div className="col-lg">
-								<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <a href="#">{translate("quotationOrder.agreement.linkTwo")}</a>.</p>
+								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")}/>.</p>
 							</div>
 							<div className="col-lg-auto">
 								{
@@ -511,85 +511,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuotationRequest);
-
-
-// <section  id="custom-details">
-// 	<div className="container-fluid">
-// 		<form onSubmit={handleSubmit(this.handleSubmit)}>
-// 			{
-// 				isAuth(this.props.token) &&
-// 				<div className="custom-container col-12">
-// 					<div className="row d-flex">
-// 						<div className="col-6">
-// 							<h3>{translate("quotationOrder.vehicle.title")}</h3>
-// 						</div>
-// 						<div className="col-6 garage-btn-container">
-// 							<Link
-// 								to={'#'}
-// 								isReverseOrder
-// 								className='btn btn-gray'
-// 								text={translate("form.vehicle.title")}
-// 								icon='icon-vehicle'
-// 								onClick={this.handleVehicle}
-// 							/>
-// 						</div>
-// 					</div>
-// 					<div className="row">
-// 						<div className="col-12 select-field-make-container">
-// 							<Field
-// 								name="vehicleForm"
-// 								placeholder={translate("form.select")}
-// 								component={SelectInput}
-// 								options={vehiclesFormat}
-// 								validate={[validations.required]}
-// 							/>
-//
-// 						</div>
-// 					</div>
-// 				</div>
-// 			}
-//
-// 			{
-// 				isAuth(this.props.token) &&
-// 				<div className="custom-container col-12">
-// 					<div className="row d-flex">
-// 						<div className="col-6">
-// 							<h3>{translate("quotationOrder.shipping.title")}</h3>
-// 						</div>
-// 					</div>
-// 					<div className="row">
-// 						<div className="col-md-6 col-12 select-region-field-container padding-md-right-0">
-// 							<Field
-// 								name="region"
-// 								placeholder={translate("form.select")}
-// 								component={SelectInput}
-// 								options={regions}
-// 								validate={[validations.required]}
-// 							/>
-//
-// 						</div>
-// 						<div className="col-md-6 col-12 select-city-field-container padding-md-left-6 padding-md-right-0">
-// 							<Field
-// 								name="city"
-// 								placeholder={translate("form.select")}
-// 								component={SelectInput}
-// 								options={cities}
-// 								validate={[validations.required]}
-// 							/>
-//
-// 						</div>
-// 					</div>
-// 				</div>
-// 			}
-//
-// 			<div className="col-12 padding-right-0" style={styles.footer}>
-// 				<div className="row d-flex">
-// 					<div className="col-md-6 col-12 links">
-//
-// 					</div>
-//
-// 				</div>
-// 			</div>
-// 		</form>
-// 	</div>
-// </section>

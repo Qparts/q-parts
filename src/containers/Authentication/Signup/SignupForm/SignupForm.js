@@ -105,7 +105,7 @@ class SignupForm extends Component {
         </div>
         <div className="form-row submit-row">
           <div className="col-md">
-            <p>{translate("form.signup.cp.title")} <Link to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")} <Link to="/"> {translate("form.signup.cp.linkTwo")}.</Link>
+            <p>{translate("form.signup.cp.title")} <Link to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")} <Link to="/privacyPolicy"> {translate("form.signup.cp.linkTwo")}.</Link>
             </p>
           </div>
           <div className="col-md-auto">

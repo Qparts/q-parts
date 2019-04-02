@@ -47,10 +47,10 @@ class Footer extends Component {
                   <h5>{translate("footer.customerService.title")}</h5>
                 </li>
                 <li>
-                  <a href="#">{translate("footer.customerService.linkOne")}</a>
+                  <Link to="/shippingAndDeliveryPolicy">{translate("footer.customerService.linkOne")}</Link>
                 </li>
                 <li>
-                  <a href="#">{translate("footer.customerService.linkTwo")}</a>
+                  <Link to="/returnPolicy">{translate("footer.customerService.linkTwo")}</Link>
                 </li>
                 <li>
                   <a href="#">{translate("footer.customerService.linkThree")}</a>
@@ -85,7 +85,7 @@ class Footer extends Component {
                   <h5>{translate("footer.pt.title")}</h5>
                 </li>
                 <li>
-                  <a href="#">{translate("footer.pt.linkOne")}</a>
+                  <Link to="/privacyPolicy">{translate("footer.pt.linkOne")}</Link>
                 </li>
                 <li>
                   <a href="#">{translate("footer.pt.linkTwo")}</a>
