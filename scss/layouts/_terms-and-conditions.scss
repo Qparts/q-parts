@@ -1,0 +1,42 @@
+#terms-and-conditions{
+  padding-top: 30px;
+  padding-bottom: 30px;;
+  .header{
+    text-align: center;
+  }
+  h1{
+    color: $basic-gray;
+    @include font-size(40px);
+    @include opacity(0.8);
+    font-weight: 400;
+    margin-bottom: 30px;
+  }
+  h3{
+    color: $basic-gray;
+    @include font-size(30px);
+    @include opacity(0.8);
+    font-weight: 400;
+  }
+  p{
+    color: $basic-gray;
+    @include font-size(16px);
+    @include opacity(0.6);
+    font-weight: 400;
+  }
+  li{
+    color: $basic-gray;
+    @include font-size(14px);
+    @include opacity(0.6);
+    font-weight: 400;
+  }
+  h4{
+    color: $basic-gray;
+    background: $brand-color;
+    width: fit-content;
+    padding: 10px;
+    @include font-size(30px);
+    @include opacity(0.9);
+    font-weight: 400;
+    border-radius: side-values(0 0 20px 0);
+  }
+}

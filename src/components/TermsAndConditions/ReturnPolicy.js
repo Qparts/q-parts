@@ -1,0 +1,81 @@
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+class ReturnPolicy extends Component {
+  render () {
+    const { translate } = this.props;
+    return(
+      <div>
+        <h4>
+          Q-Parts Return Policy
+        </h4>
+        <h3>
+          {translate('terms.returnPolicy.header')}
+        </h3>
+        <p>
+          {translate('terms.returnPolicy.status')}
+        </p>
+        <h3>
+          {translate('terms.returnPolicy.authenticityGuarantee.header')}
+        </h3>
+        <p>
+          {translate('terms.returnPolicy.authenticityGuarantee.status')}
+        </p>
+        <h3>
+          {translate('terms.returnPolicy.quantityGuarantee.header')}
+        </h3>
+        <p>
+          {translate('terms.returnPolicy.quantityGuarantee.header')}
+        </p>
+        <h3>
+          {translate('terms.returnPolicy.returns.header')}
+        </h3>
+        <ul>
+          <li>
+            {translate('terms.returnPolicy.returns.statusA')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusB')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusC')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusD')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusE')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusF')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returns.statusG')}
+          </li>
+        </ul>
+        <h3>
+          {translate('terms.returnPolicy.returnProcess.header')}
+        </h3>
+        <ol>
+          <li>
+            {translate('terms.returnPolicy.returnProcess.statusA')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returnProcess.statusB')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returnProcess.statusC')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returnProcess.statusD')}
+          </li>
+          <li>
+            {translate('terms.returnPolicy.returnProcess.statusE')}
+          </li>
+        </ol>
+      </div>
+    )
+  }
+}
+
+export default ReturnPolicy;
