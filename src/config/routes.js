@@ -21,8 +21,8 @@ import ConfirmSignUp from '../containers/Authentication/ForgotPassword/ConfirmSi
 import CheckoutConfirmationOrder from '../components/CheckoutConfirmationOrder/CheckoutConfirmationOrder';
 import TermsAndConditions from '../components/TermsAndConditions/TermsAndConditions';
 import PrivacyPolicy from '../components/TermsAndConditions/PrivacyPolicy';
-import ReturnPolicy from '../components/TermsAndConditions/PrivacyPolicy';
-import ShippingAndDeliveryPolicy from '../components/TermsAndConditions/PrivacyPolicy';
+import ReturnPolicy from '../components/TermsAndConditions/ReturnPolicy';
+import ShippingAndDeliveryPolicy from '../components/TermsAndConditions/ShippingAndDeliveryPolicy';
 
 export const routes = (isAuth, direction, defaultLang, translate) => [
     {
