@@ -1,14 +1,13 @@
 #result-not-found{
   margin-top: 70px;
   .no-result{
-    margin-bottom: 70px;
     width: -webkit-fill-available;
     justify-content: center;
     background: $light-gray;
     border-radius: side-values(0 0 20px 0);
     display: inline-flex;
     padding: 30px 0 30px 0;
-    @include margin-right(20%);
+    @include margin-right(10%);
 
     img{
       width: 97px;
@@ -39,7 +38,9 @@
     }
     .btn-primary{
       margin-top: 20px;
-      height: 55px;
+      @include large-medium-screens{
+        height: 55px;
+      }
       @include margin-left(10px);
       margin-right: 40px !important;
     }

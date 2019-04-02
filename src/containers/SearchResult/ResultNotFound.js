@@ -16,17 +16,21 @@ class ResultNotFound extends Component {
     return(
       <Fragment>
       <div id="result-not-found">
-        <div className="no-result ">
-          <img alt="No Result" src="/img/no-result.svg"/>
-            <header className="sec-header">
+		
+        <div className="no-result container-fluid">
+						
+          		<img alt="No Result" src="/img/no-result.svg"/>
+            	<header className="sec-header">
                 <h1>
                     <p>{translate("noResult.no")}</p>
                     {translate("noResult.result")}
                 </h1>
                 <span>{translate("noResult.sorry")}</span>
-            </header>
-            <Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
+            	</header>
         </div>
+				<div className="no-result container-fluid">
+					<Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
+				</div>
         <section className="main-cat container-fluid">
 
           <header class="sec-header"><h1><p>{translate("noResult.shopBy")}</p>{translate("noResult.category")}</h1></header>
