@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getTranslate } from "react-localize-redux";
 
 class PrivacyPolicy extends Component {
   render () {
     const { translate } = this.props;
     return(
-      <div>
+      <div id="terms-and-conditions" className="container-fluid">
         <div>
           <h4>Q-Parts Privacy Policyaa</h4>
         </div>
@@ -164,4 +166,10 @@ class PrivacyPolicy extends Component {
   }
 }
 
-export default PrivacyPolicy;
+const mapStateToProps = (state) => {
+  return {
+    translate: getTranslate(state.localize)
+  }
+}
+
+export default connect(mapStateToProps, null)(PrivacyPolicy);

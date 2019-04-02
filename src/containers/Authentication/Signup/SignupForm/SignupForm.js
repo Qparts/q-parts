@@ -114,7 +114,7 @@ class SignupForm extends Component {
           <p>{translate("form.signup.cp.title")}
             <span>
               <Link className="btn-gray" to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")}
-              <Link className="btn-gray" to="/"> {translate("form.signup.cp.linkTwo")}.</Link></span>
+              <Link className="btn-gray" to="/privacyPolicy"> {translate("form.signup.cp.linkTwo")}.</Link></span>
           </p>
           <Button
             className="btn btn-primary"

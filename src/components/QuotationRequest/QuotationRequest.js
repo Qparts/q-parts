@@ -268,7 +268,7 @@ class QuotationRequest extends Component {
 							<div className="col-12 padding-right-0" style={styles.footer}>
 								<div className="row d-flex">
 									<div className="col-md-6 col-12 links">
-										<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <a href="#">{translate("quotationOrder.agreement.linkTwo")}</a>.</p>
+										<p>{translate("quotationOrder.agreement.title")} <a href="#">{translate("quotationOrder.agreement.linkOne")} </a> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")}></Link>.</p>
 									</div>
 									{
 										isAuth(this.props.token) ?
