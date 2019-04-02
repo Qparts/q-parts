@@ -88,9 +88,12 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          <Link to="/cart" className="not-empty">
+          {/* <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
             <span>2</span>
+          </Link> */}
+          <Link to="/cart" className="">
+            <i className="icon-cart" />
           </Link>
         </li>
       </ul>
