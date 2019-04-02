@@ -1,19 +1,65 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, createRef } from 'react';
 import ReactPasswordStrength from 'react-password-strength';
-import { InputGroup, InputGroupAddon } from 'reactstrap'
 import Link from '../UI/Link'
 import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
+  constructor(props) {
+    super(props);
+    this.passwordStrengthRef = createRef();
+  }
+
+  componentDidMount() {
+    if (this.props.hasPasswordStrength) {
+      let passwordParent = this.passwordStrengthRef.current.reactPasswordStrengthInput.offsetParent;
+      var passwordLabelText = document.createTextNode(`${this.props.label}`);
+      var label = document.createElement('label');
+      label.appendChild(passwordLabelText);
+      passwordParent.insertBefore(label, passwordParent.childNodes[1]);
+
+      var barBg = document.createElement('p');
+      passwordParent.insertBefore(barBg, passwordParent.childNodes[3]);
+    }
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (this.props.hasPasswordStrength && prevProps.currentLanguage !== this.props.currentLanguage) {
+      let passwordParent = this.passwordStrengthRef.current.reactPasswordStrengthInput.offsetParent;
+      passwordParent.childNodes[1].innerText = this.props.label;
+    }
+
+  }
+
 
   callback = ({ password, score }) => {
     this.props.input.onChange(password);
     this.props.setPasswordScore(score);
   }
 
-  invalidMessage = (styles) => {
-    if (this.props.meta.error.includes('Invalid') || this.props.meta.error.includes('غير')) {
-      return <span style={styles.invalidMessage}>{this.props.meta.error}</span>
+  isRequired = () => (
+    this.props.meta.touched && this.props.meta.error && !this.props.meta.active
+  );
+
+  isWarning = () => (
+    this.isRequired() && this.props.hasWarning && !this.props.errorMessage && this.props.meta.dirty
+  )
+
+  invalidMessage = () => {
+    if (this.isRequired()) {
+      return <p className="error-text">{this.props.errorMessage}</p>
+    }
+  }
+
+  warningMessage = () => {
+    if (this.props.hasWarning) {
+      if (this.isWarning()) {
+        return <Fragment>
+          <i className="icon-alert"></i>
+          <span className="validate-text">{this.props.warningMessage}</span>
+        </Fragment>
+      } else if (!this.isRequired() && !this.props.meta.error && !this.props.meta.active) {
+        return <i className="icon-checked"></i>
+      }
     }
   }
 
@@ -26,6 +72,11 @@ class RenderField extends Component {
   getFloatLabelStyle = () => (
     this.props.hasFloatLabel ? 'has-float-label' : ''
   );
+
+  getWarningClass = () => {
+    return this.isWarning() ? `${this.props.hasWarning} warning` :
+      !this.isRequired() && !this.props.meta.error && !this.props.meta.active ? `${this.props.hasWarning} true` : '';
+  }
 
   getIcon = () => {
     return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? '#30d576' :
@@ -41,46 +92,52 @@ class RenderField extends Component {
     return this.props.input.value ? { display: '' } : { display: 'none' };
   }
 
+  getErrorClass = () => (
+    this.isRequired() && !this.isWarning() ? 'error' : ''
+  )
+
   render() {
-    const styles = {
-      border: {
-        border: this.getBorder()
-      },
-      invalidMessage: {
-        position: 'absolute',
-        color: '#856404',
-        right: '0',
-        paddingTop: '11px',
-        paddingRight: '18px',
-      },
-      borderShadow: {
-        boxShadow: '0px 18px 18px 0px rgba(0, 0, 0, 0.07)',
-      },
-      hasFloatLabel: {
-        border: this.getBorder(),
-        display: 'block',
-        position: 'relative',
-      },
-      icon: {
-        color: this.getIcon(),
-      },
-      textTransform: {
-        textTransform: this.props.textTransform ? this.props.textTransform : {}
-      }
-    }
-    const { hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform, scoreWords, tooShortWord, title, ...renderFieldProps } = this.props;
+    const {
+      hasPasswordStrength, setPasswordScore, onTogglePassword, hasFloatLabel, textTransform,
+      scoreWords, tooShortWord, title, errorMessage, hasWarning, warningMessage, ...renderFieldProps
+    } = this.props;
+
+    const password = (
+      this.props.hasPasswordStrength && (
+        <Fragment>
+          <ReactPasswordStrength
+            ref={this.passwordStrengthRef}
+            className="has-float-label"
+            minLength={5}
+            minScore={2}
+            changeCallback={this.callback}
+            scoreWords={scoreWords}
+            tooShortWord={tooShortWord}
+            inputProps={{ ...this.props.input, ...renderFieldProps, autoComplete: "off", className: "form-control" }} />
+          <Link
+            className="toggle-password"
+            to="#"
+            text={this.props.text}
+            icon={this.props.icon}
+            isReverseOrder
+            onClick={this.props.onTogglePassword}
+          />
+        </Fragment>
+      )
+    );
     return (
       this.props.readOnly ?
         <Fragment>
           <span className={this.props.className}>{this.props.input.value}</span>
         </Fragment> :
-        <div
-          className={`RenderField ${this.getFloatLabelStyle()}`}
-          style={this.props.hasFloatLabel ? styles.border : {}}>
-          {
-            this.props.hasFloatLabel ?
-              <Fragment>
-                <InputGroup>
+        <Fragment>
+          {password}
+          <div
+            style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}
+            className={`RenderField ${this.getFloatLabelStyle()} ${this.getErrorClass()} ${this.getWarningClass()}`}>
+            {
+              this.props.hasFloatLabel ?
+                <Fragment>
                   <input
                     className="form-control"
                     type={this.props.type}
@@ -88,61 +145,21 @@ class RenderField extends Component {
                     {...this.props.input}
                     {...renderFieldProps} />
                   <label>{this.props.label}</label>
-                  <InputGroupAddon addonType="append">
-                    <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
-                  </InputGroupAddon>
-                </InputGroup>
-              </Fragment> :
-              <Fragment>
-                {this.props.label && <label>{this.props.label}</label>}
-                <InputGroup style={this.props.hasPasswordStrength ? { display: 'none' } : { display: '' }}>
+                  {this.invalidMessage()}
+                  {this.warningMessage()}
+                </Fragment> :
+                <Fragment>
+                  <label>{this.props.label}</label>
                   <input
-                    className="form-control"
-                    style={Object.assign(this.props.hasPasswordStrength ? { display: 'none' } :
-                      this.props.boxShadow ? styles.borderShadow : styles.border, styles.textTransform)}
+                    className="form-control input"
                     type={this.props.type}
                     placeholder={this.props.placeholder}
                     {...this.props.input}
                     {...renderFieldProps} />
-                  <InputGroupAddon addonType="append">
-                    <i className={`input-icon ${this.getIconClassName()}`} style={styles.icon} />
-                  </InputGroupAddon>
-                </InputGroup>
-              </Fragment>
-          }
-          {this.props.hasPasswordStrength &&
-            <Fragment>
-              <InputGroup>
-                <ReactPasswordStrength
-                  style={styles.border}
-                  minLength={5}
-                  minScore={2}
-                  changeCallback={this.callback}
-                  scoreWords={scoreWords}
-                  tooShortWord={tooShortWord}
-                  inputProps={{ ...this.props.input, ...renderFieldProps }} />
-                <InputGroupAddon addonType="append">
-                  <Link
-                    className="input-icon"
-                    to="#"
-                    text={this.props.text}
-                    icon={this.props.icon}
-                    isReverseOrder
-                    onClick={this.props.onTogglePassword}
-                  />
-                </InputGroupAddon>
-              </InputGroup>
-              <label
-                style={this.displayPasswordLabel()}
-                className="password-label">{title}</label>
-            </Fragment>
-          }
-          <Fragment>
-            {this.props.meta.touched &&
-              ((this.props.meta.error && this.invalidMessage(styles)) ||
-                (this.props.meta.warning && <span>{this.props.meta.warning}</span>))}
-          </Fragment>
-        </div>
+                </Fragment>
+            }
+          </div>
+        </Fragment>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Button from '../UI/Button';
 import Lightbox from 'react-images';
 import { connect } from 'react-redux';
@@ -90,45 +90,39 @@ class renderFileInput extends Component {
   render() {
     const { input: { onChange, onBlur }, translate, ...props } = this.props;
     return (
-      <section id="render-file-input">
-        <input
-          className="RenderFileInput-image_input"
-          onChange={this.adaptFileEventToValue(onChange)}
-          onBlur={this.adaptFileEventToValue(onBlur)}
-          ref={fileInput => this.fileInput = fileInput}
-          type="file"
-          {...props.input}
-        />
-        <div className="input-group-prepend">
-          <span className="ellipse">
-            <i>
-              <Button
-                text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />}
-                type="reset" onClick={() => this.fileInput.click()} />
-            </i>
-          </span>
-          <img
-            style={{ display: 'none' }}
-            alt="not found"
-            ref={`${originalImage}_${props.image}`}
-          />
-          <img
-            style={{ display: 'none' }}
-            className="RenderFileInput-img"
-            onClick={this.showLightbox}
-            alt="not found"
-            ref={`${convertedImg}_${props.image}`}
-          />
-          <canvas
-            style={{ display: 'none' }}
-            ref={`${canvas}_${props.image}`} />
-        </div >
-        <Lightbox
-          images={this.state.images}
-          isOpen={this.state.lightboxIsOpen}
-          onClose={this.closeLightbox}
-        />
-      </section>
+        <div className="input-group-prepend input-file">
+          <input type="file"
+            ref={fileInput => this.fileInput = fileInput}
+            onChange={this.adaptFileEventToValue(onChange)}
+            onBlur={this.adaptFileEventToValue(onBlur)}
+             />
+          <Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
+            <img
+              style={{ display: 'none' }}
+              alt="not found"
+              ref={`${originalImage}_${props.image}`}
+            />
+          <div className="file-thumb">
+            <img
+                style={{ display: 'none' }}
+                className="RenderFileInput-img"
+                onClick={this.showLightbox}
+                alt="not found"
+                ref={`${convertedImg}_${props.image}`}
+              />
+          </div>
+
+            <canvas
+              style={{ display: 'none' }}
+              ref={`${canvas}_${props.image}`} />
+              <Lightbox
+                images={this.state.images}
+                isOpen={this.state.lightboxIsOpen}
+                onClose={this.closeLightbox}
+                className="lightbox"
+              />
+          </div>
+
     );
   }
 };

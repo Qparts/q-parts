@@ -35,7 +35,6 @@ const GRID = 'GRID';
 const LIST = 'LIST';
 
 
-
 const sortOptions = [
 	{ value: 1, label: "Best Match" },
 	{ value: 2, label: "Price: Low to High" },
@@ -361,7 +360,7 @@ class SearchResult extends Component {
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params, flage } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params, flage, direction } = this.props;
 		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		if(flage){
@@ -381,14 +380,11 @@ class SearchResult extends Component {
 				</div>
 			)
 
-		let btnNext = <Link to="#" onClick={this.nextPage} className="btn btn-primary ">
-			{this.props.translate("general.buttons.nextPage")}
-			<i className="icon-arrow-right"></i>
+		let btnNext = <Link to="#" onClick={this.nextPage}>
+			<i className="icon-arrow-r"></i>
 		</Link>
-
-		let btnPrev = <Link to="#" onClick={this.prevPage} className="btn btn-primary ">
-			{this.props.translate("general.buttons.prevPage")}
-			<i className="icon-arrow-left"></i>
+		let btnPrev = <Link to="#" onClick={this.prevPage}>
+			<i className="icon-arrow-l"></i>
 		</Link>
 
 		if (this.state.startSize <= 1) {
@@ -770,18 +766,6 @@ class SearchResult extends Component {
 														/>
 													</div>
 
-												</div>
-												<div className="d-table-row">
-													<label>Height</label>
-													<div className="select-main">
-														<Select
-															className="select"
-															defaultValue={tireHeight[0]}
-															classNamePrefix="select"
-															isSearchable={false}
-															options={groupedHeightTiresOptions}
-															formatGroupLabel={formatHeightTiresGroupLabel}
-														/>
 													</div>
 												</div>
 												<div className="d-table-row">
@@ -889,10 +873,10 @@ class SearchResult extends Component {
 											</ul>
 										</div>
 									</li>*/}
-									<li>
-										<button type="submit" className="btn btn-primary" onClick={this.handleGo}>{this.props.translate("general.buttons.go")}</button>
-									</li>
 								</ul>
+								<Button type="submit" className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} onClick={this.handleGo}>
+								{this.props.translate("general.buttons.go")}</Button>
+
 							</div>
 
 						</LargeScreen>
@@ -936,15 +920,22 @@ class SearchResult extends Component {
 								<ul className="result-list products-list row">
 									{this.renderProducts()}
 								</ul>
-								<div className="row justify-content-center">
-									<div className="col-12 more-result">
-										<div className="col-lg-5 col">
-											{btnPrev}
-										</div>
-										<div className="col-lg-5 col">
-											{btnNext}
-										</div>
-									</div>
+							</div>
+							<div className="row ">
+								<div className="col d-flex justify-content-center">
+									<ul className="more-result list-inline">
+									<li className="disabled">
+										{btnPrev}
+										
+									</li>
+									<li>
+										<span>Page 1 of 5</span>
+									</li>
+									<li className="next">
+										{btnNext}
+										
+									</li>
+								</ul>
 								</div>
 							</div>
 						</div>

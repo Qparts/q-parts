@@ -30,7 +30,7 @@ class HeaderDetails extends Component {
     const dropdownHeader =
       <Fragment>
         {
-          isLoggedIn ? 
+          isLoggedIn ?
           <span>
             <b>{fullName}</b>
           </span> :
@@ -53,7 +53,7 @@ class HeaderDetails extends Component {
               !isLoggedIn && <Fragment>
                 <h6>{translate("dialog.signin.title")}</h6>
                 <ul className="signin-list">
-                  <li><a className="btn" href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
+                  <li><Link className="btn" to="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
                   {/* <li><a href="#"><i className="icon-facebook" /></a></li>
                 <li><a href="#"><img src="/img/google-icon.svg"></img></a></li> */}
                 </ul>
@@ -88,7 +88,11 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          <Link to="/cart">
+          {/* <Link to="/cart" className="not-empty">
+            <i className="icon-cart" />
+            <span>2</span>
+          </Link> */}
+          <Link to="/cart" className="">
             <i className="icon-cart" />
           </Link>
         </li>

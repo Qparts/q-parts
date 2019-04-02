@@ -8,14 +8,9 @@ export class OrderSteps extends Component {
 
     render() {
         const { grey, translate, direction } = this.props;
-        const styles = {
-            greyImage: {
-                color: grey ? '#a9a9ab' : null
-            }
-        }
         return (
-            <ul className=" order-steps list-unstyled row">
-                <li className="col-lg-3">
+            <ul className="order-steps list-unstyled row">
+                <li>
                     <figure>
                         <div className="position-relative">
                             <div className="figure request"><img src="/img/request.svg" alt="request" /></div>
@@ -28,7 +23,7 @@ export class OrderSteps extends Component {
                         <i className="icon-arrow-down"></i>
                     </figure>
                 </li>
-                <li style={styles.greyImage} className="col-lg-3">
+                <li>
                     <figure>
                         <div className="position-relative">
                             <span></span>
@@ -42,7 +37,7 @@ export class OrderSteps extends Component {
                     </figure>
                     <i className="icon-arrow-down"></i>
                 </li>
-                <li style={styles.greyImage} className="col-lg-3">
+                <li>
                     <figure>
                         <div className="position-relative">
                             <span></span>
@@ -56,7 +51,7 @@ export class OrderSteps extends Component {
                     </figure>
                     <i className="icon-checked done-xs"></i>
                 </li>
-                <li style={styles.greyImage} className="col-lg-3">
+                <li>
                     <figure>
                         <div className="position-relative">
                             <span></span>

@@ -58,7 +58,7 @@ class Garage extends Component {
   return (
     <Fragment>
       <MediumScreen>
-       <div className="col-10">
+       <div className="col-lg-9">
          {garage}
        </div>
       </MediumScreen>

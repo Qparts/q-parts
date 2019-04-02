@@ -1,7 +1,7 @@
-  .select__menu {
-    @include boarder-left-radius(0);
-    @include boarder-right-radius;
-  }
+.select__menu {
+  @include boarder-left-radius(0);
+  @include boarder-right-radius;
+}
 .select__single-value {
   font-weight: 700;
 }
@@ -20,8 +20,9 @@
     cursor: pointer;
     position: static !important;
     width: auto !important;
+    
   }
-  .select__single-value{
+  .select__single-value {
     position: static;
     max-width: 100%;
     transform: translateY(0) !important;
@@ -29,31 +30,33 @@
     margin: 0;
   }
   .select__menu {
+    position: absolute;
+    min-width: 100%;
+    width: auto;
+    #{$left}: 0;
+    margin-top: 2px !important;
+    height: auto;
+    display: block;
+    border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+    z-index: 3;
+    @include box-shadow;
+    &::after {
+      bottom: 100%;
+      #{$right}: 10px;
+      border: solid transparent;
+      content: ' ';
+      height: 0;
+      width: 0;
       position: absolute;
-      min-width: 100%;
-      width: auto;
-      left: 0;
-      margin-top: 0 !important;
-      height: auto;
-      display: block;
-      border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-      @include box-shadow;
-      &::after {
-      	bottom: 100%;
-      	right: 10px;
-      	border: solid transparent;
-      	content: " ";
-      	height: 0;
-      	width: 0;
-      	position: absolute;
-      	pointer-events: none;
-      	border-color: rgba(213, 210, 204, 0);
-      	border-bottom-color: $light-gray;
-      	border-width: 7px;
-      	margin-left: -4px;
-        margin-bottom: -4px;
+      pointer-events: none;
+      border-color: rgba(213, 210, 204, 0);
+      border-bottom-color: $light-gray;
+      border-width: 7px;
+      margin-#{$left}: -4px;
+      margin-top: -2px;
     }
     .select__menu-list {
+      padding-top: 0 !important;
       padding-bottom: 0;
       border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
       .select__option {
@@ -64,48 +67,47 @@
         border-bottom: 1px solid $light-gray;
         background: $white;
         white-space: nowrap;
-        &:last-child{
+        &:last-child {
           border-bottom-width: 0;
         }
         &:hover,
-        &:Focus{
+        &:focus {
           background: $light-gray !important;
         }
-
       }
     }
   }
 }
-.select__indicator-separator{
+.select__indicator-separator {
   display: none;
 }
- .select__indicator{
-   padding: 0 !important;
-  svg{
+.select__indicator {
+  padding: 0 !important;
+  svg {
     width: 15px !important;
     height: 15px !important;
   }
 }
 .select__control,
-.css-2o5izw{
+.css-2o5izw {
   min-height: 0 !important;
 }
-.select__dropdown-indicator{
-   transition: transform 0.3s ease;
+.select__dropdown-indicator {
+  transition: transform 0.3s ease;
 }
-.select__control--is-focused .select__dropdown-indicator{
+.select__control--is-focused .select__dropdown-indicator {
   -webkit-transform: rotateZ(180deg);
-      -moz-transform: rotateZ(180deg);
-      -o-transform: rotateZ(180deg);
-      -ms-transform: rotateZ(180deg);
-      transform: rotateZ(180deg);
+  -moz-transform: rotateZ(180deg);
+  -o-transform: rotateZ(180deg);
+  -ms-transform: rotateZ(180deg);
+  transform: rotateZ(180deg);
 }
-.select__group{
+.select__group {
   padding: 0 !important;
   margin: 0 !important;
   overflow: hidden;
 }
-.select__group-heading{
+.select__group-heading {
   padding: 0 !important;
   margin: 0 !important;
   display: block !important;
@@ -113,19 +115,29 @@
   text-transform: capitalize !important;
   @include font-size(13px);
 }
-.placeholder{
+.placeholder {
   background: $light-gray;
-  border-bottom: 1px solid $very-light-grey ;
+  border-bottom: 1px solid $very-light-grey;
   width: 200px;
   width: auto;
   display: block;
   padding: 10px 12px;
   color: $basic-black;
   @include opacity(0.6);
-  span{
+  span {
     display: block;
   }
 }
-.select__option--is-selected{
+.select__option--is-selected {
   background: $light-gray !important;
+}
+.select__control .select--is-disabled,
+.css-162g8z5 {
+  border-width: 0 !important;
+}
+.select__single-value--is-disabled {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  top: auto !important;
+  color: $basic-gray !important;
 }

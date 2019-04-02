@@ -54,55 +54,34 @@ class ForgotPassword extends Component {
   renderPageContent = () => {
     const { translate } = this.props
     return (
-      <Fragment>
-        <MediumScreen>
-          <section id="forgot-password">
-            <div className="content">
-              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
+          <section className="forgot-password">
+            <div className="container-fluid">
+              <aside>
+                <img src="/img/password-recovery.svg" alt="upload-img" />
+              </aside>
               <Title header={translate("forgotPassword.title")} />
-              <h5>{translate("forgotPassword.textOne")} <br />{translate("forgotPassword.textTwo")}</h5>
+              <p>
+                <span>{translate("forgotPassword.textOne")}</span>
+                 {translate("forgotPassword.textTwo")}</p>
               <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
-                <div className="form-group row">
-                  <div className="col-10">
-                  <Field
-                    label={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
-                    name={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
-                    component={RenderField}
-                    type={this.getLabel('text', translate("forgotPassword.labels.password"))}
-                    placeholder={this.getLabel('mail@user.com', translate("forgotPassword.placeholders.password"))}
-                    validate={[validations.required]} />
+                <div className="form-row">
+                  <div className="col">
+                    <Field
+                      label={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
+                      name={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
+                      component={RenderField}
+                      type={this.getLabel('text', translate("forgotPassword.labels.password"))}
+                      placeholder={this.getLabel('mail@user.com', translate("forgotPassword.placeholders.password"))}
+                      validate={[validations.required]} />
                   </div>
-                  <div className="col-2">
-                  <button type="submit" className="btn btn-primary">{translate("general.buttons.send")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <div className="col-md-auto">
+                    <button type="submit" className="btn btn-primary">{translate("general.buttons.send")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
 
                   </div>
                 </div>
               </form>
             </div>
           </section>
-        </MediumScreen>
-        <SmallScreen>
-          <section id="forgot-password-mobile">
-            <div className="content">
-              <img className="upload-img" src="/img/password-recovery.svg" alt="upload-img" />
-              <Title header={translate("forgotPassword.title")} />
-              <h5>{translate("forgotPassword.textOne")} {translate("forgotPassword.textTwo")}</h5>
-              <form onSubmit={this.props.handleSubmit(this.confirmPass)}>
-                <div className="form-group">
-                  <Field
-                    label={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
-                    name={this.getLabel(translate("forgotPassword.labels.email"), translate("forgotPassword.labels.password"))}
-                    component={RenderField}
-                    type={this.getLabel('text', translate("forgotPassword.labels.password"))}
-                    placeholder={this.getLabel('mail@user.com', )}
-                    validate={[validations.required]} />
-                  <button type="submit" className="btn btn-primary">{translate("forgotPassword.title")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
-                </div>
-              </form>
-            </div>
-          </section>
-        </SmallScreen>
-      </Fragment>
     )
   }
   render() {

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { accountSetting, addressBook, garage, helpCenter, orders, quotations, socialMedia, wishlist, payment } from '../../constants';
-
+import CustomerService from '../../components/CustomerService/CustomerService';
 class profileLinks extends Component{
 
   settingLink = (link) =>{
@@ -20,25 +20,34 @@ class profileLinks extends Component{
         // { url: 'connect', name: translate(`setting.links.${socialMedia}`) },
         // { url: 'payment', name: payment },
     ]
+    const chatMessages = [
+      translate("customerService.setting.whatsApp.header"),
+      translate("customerService.setting.whatsApp.subHeader")
+    ];
 
     return(
       <Fragment>
-          <div className="col-md-2 w3-hide-medium list-group-items">
-              <div className="list-group">
-                  {links.map((link, idx) => {
-                      return (
-                          <Link
-                              key={idx}
-                              data-toggle="list"
-                              className="list-group-item list-group-item-action"
-                              to="#"
-                              onClick={() => this.settingLink(link.url)}>
-                              {link.name}
-                          </Link>
-                      )
-                  })}
-              </div>
-          </div>
+        <div className="col-lg-3">
+          <CustomerService
+            messages={chatMessages}
+            url="" />
+            <ul className="setting-tabs-link">
+                    {links.map((link, idx) => {
+                        return (
+                          <li>
+                            <Link
+                                key={idx}
+                                data-toggle="list"
+                                to="#"
+                                onClick={() => this.settingLink(link.url)}>
+                                {link.name}
+                            </Link>
+                          </li>
+                        )
+                    })}
+            </ul>
+        </div>
+
       </Fragment>
     )
   }

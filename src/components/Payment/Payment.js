@@ -87,9 +87,7 @@ class Payment extends Component {
   return (
      <Fragment>
        <MediumScreen>
-         <div className="col-10">
             {payment}
-         </div>
        </MediumScreen>
        <SmallScreen>
          <div className="col-12 payment-mobile">

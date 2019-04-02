@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getFormSubmitErrors } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Modal, ModalHeader, ModalBody, Alert } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import SignupForm from './SignupForm/SignupForm';
@@ -15,10 +15,9 @@ import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore } from '../../../actions/customerAction';
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
+import { LargeScreen } from '../../../components/Device';
 
 import Title from '../../../components/UI/Title';
-
-
 class Signup extends Component {
 
   componentWillMount() {
@@ -38,7 +37,7 @@ class Signup extends Component {
 
   handleSubmit = (values) => {
     const { firstName, lastName, email, password, platform, socialMediaId } = values;
-    const countryId = values.countryId.id;
+    const countryId = 1;
 
     return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
@@ -54,7 +53,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage, submitErrors } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
@@ -71,39 +70,31 @@ class Signup extends Component {
     </Modal>
     if (this.props.submitErrors.email) window.scrollTo(0, 0);
     return (
-      <section id="signup">
-        {
-          submitErrors.email &&
-          <Alert color="danger">
-            {submitErrors.email}
-          </Alert>
-        }
+      <section className="signup-page">
         <div className="container-fluid">
           <Title
             header={translate("form.signup.title")}
             subHeader={translate("form.signup.subHeader")}
           />
           <div className="row">
-            <div className="col-lg-6 col-sm-12">
+            <div className="col-lg-7">
               {signup}
             </div>
-            <div id="right-half" className="col-lg-6 col-sm-12">
-              <span className="seperator"></span>
-              <div id="signin-link">
-                <span className="user-img">
-                  <img className="user" alt="user" src="/img/user.svg" />
-                </span>
-                <span>{translate("form.signup.haveAccount")}
-                  <Link to={"#"} className="signin-link" onClick={togglePopup}>{translate("form.signup.signinLink")}</Link>
-                  {translate("form.signup.here")}
-                </span>
-              </div>
+            <div className="col-lg-5 have-account">
+              <p>
+                <img className="user" alt="user" src="/img/user.svg" />
+                {translate("form.signup.haveAccount")} <Link to={"#"} onClick={togglePopup}> {translate("form.signup.signinLink")} </Link> {translate("form.signup.here")}
+              </p>
               <SocialMedia
                 title={translate("form.signup.socialMedia")}
                 handleResponse={this.props.handleResponse}
                 handleFailure={this.props.handleFailure} />
-              <span id="social-media-info"><p>{translate("form.signup.socialMediaInfo")}</p></span>
-              <img src="/img/sign-up-image.png" alt="sign up" />
+              <p>{translate("form.signup.socialMediaInfo")}</p>
+              <LargeScreen>
+                <aside>
+                  <img src="/img/sign-up-image.png" alt="sign up" />
+                </aside>
+              </LargeScreen>
             </div>
           </div>
         </div>
