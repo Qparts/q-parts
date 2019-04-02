@@ -40,7 +40,7 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-1-xs.jpg" />
+									<source media="(max-width: 767px)" srcSet="/img/slide-1-xs-ar.jpg" />
 
 									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1-ar.jpg" />
 								</picture>
@@ -51,7 +51,7 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=10">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-2-xs.jpg" />
+									<source media="(max-width: 767px)" srcSet="/img/slide-2-xs-ar.jpg" />
 									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2-ar.jpg" />
 								</picture>
 							</Link>
@@ -61,7 +61,7 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/quotation-order">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-4-xs.jpg" />
+									<source media="(max-width: 767px)" srcSet="/img/slide-4-xs-ar.jpg" />
 									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4-ar.jpg" />
 								</picture>
 							</Link>
@@ -71,7 +71,7 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=1">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-5-xs.jpg" />
+									<source media="(max-width: 767px)" srcSet="/img/slide-5-xs-ar.jpg" />
 									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5-ar.jpg" />
 								</picture>
 							</Link>
@@ -81,7 +81,7 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-3-xs.jpg" />
+									<source media="(max-width: 767px)" srcSet="/img/slide-3-xs-ar.jpg" />
 									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3-ar.jpg" />
 								</picture>
 							</Link>
