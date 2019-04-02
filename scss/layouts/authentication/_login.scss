@@ -1,94 +1,57 @@
-#login {
+.login {
   @include text-left;
-  padding: 20px;
-  background: $light-gray;
-  .form-control {
-    @include rounded-rectangle;
-    @include boarder-right-radius(0, 20px);
-    height: 55px;
-    @include padding-left(20px);
-
-    input::placeholder {
-      color: $charcoal-grey-two-40;
-    }
-    label {
-      @include font-size(16px);
-      @include padding-left(13px);
-    }
-  }
-  .btn-gray {
-    color: $charcoal-grey-two;
-  }
-  h1 {
-    color: $charcoal-grey-two;
-    text-transform: capitalize;
-    font-weight: normal;
-    font-family: 'Roboto';
-    line-height: unset;
-    @include font-size(50px);
-  }
-
-  .ui-radiobutton + label {
-    text-transform: inherit;
-    vertical-align: inherit;
-  }
-  label {
-    color: $charcoal-grey-two;
-    @include font-size(15px);
-  }
-  .btn-signin{
-    @include box-shadow;
-    text-align: right;
-    text-transform: capitalize;
-    font-weight: normal;
-    @include font-size(20px);
-    i {
-      @include font-size(23px);
-      @include padding-left(10px);
-    }
-  }
   form {
-    margin-left: 0;
-    div:nth-child(3) {
-      margin-top: 10px;
-      margin-bottom: 22px;
+    .has-float-label{
+      &:first-child{
+        border-top-#{$left}-radius : $border-radius-base;
+        input{
+          border-top-#{$left}-radius : $border-radius-base;
+        }
+      }
+      &:nth-child(2){
+        border-bottom-left-radius: $border-radius-base;
+        border-bottom-right-radius: $border-radius-base;
+        margin-bottom: 20px;
+        input{
+          border-bottom-left-radius: $border-radius-base;
+          border-bottom-right-radius: $border-radius-base;
+        }
+      }
+      & + .has-float-label{
+        margin-top: 10px;
+      }
+    }
+    .forger-password{
+      padding-bottom: 20px;
+      label, a{
+        @include font-size(15px);
+      }
+    }
+    .btn-primary{
+      @include font-size(20px);
+      height: 50px;
+      width: 100%;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      .btn-gray {
-        background: inherit;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 40px;
+      i{
+        @include font-size(23px);
+        height: 23px;
+      }
+      &:hover{
+        padding-#{$right}: 30px;
       }
     }
-    .label-form {
-      opacity: 0.8;
-      @include font-size(15px);
-      font-weight: normal;
-      color: $charcoal-grey-80;
-    }
   }
-  .RenderField {
-    label {
-      @include padding-left(13px);
-    }
-  }
-  #sign-up-link {
-    margin-top: 32px;
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    @include font-size(18px);
+}
+.sign-up-link{
+  text-align: center;
+  @include font-size(18px);
+  margin-top: 30px;
+  button{
+    color: $brand-color;
+    margin-#{$right}: 5px;
 
-    p {
-      color: $basic-gray;
-    }
-
-    button {
-      padding: 0;
-      margin-left: 4px;
-      margin-right: 4px;
-      span {
-        color: $brand-color;
-      }
-    }
   }
 }

@@ -8,75 +8,52 @@
     display: block;
     position: relative;
   }
-  
+
   @mixin float-label {
-    label, > span {
+    label {
       position: absolute;
-      z-index: 10;
       #{$left}: 15px;
-      top: 0;
-      cursor: text;
-      font-size: 75%;
-      opacity: 1;
+      margin-top: 0;
+      top: 7px;
+      @include font-size(13px);
+      margin-bottom: 0;
       transition: all .2s;
+      @include opacity(0.7);
       @content;
     }
   }
-  
+
   @mixin float-label-input {
     &::placeholder {
-      opacity: 1;
+      opacity: 0;
       transition: all .2s;
     }
-    &:placeholder-shown:not(:focus)::placeholder {
-        opacity: 0;
-    }
+
   }
-  
+
   @mixin float-label-scaled {
-    &:placeholder-shown:not(:focus) + * {
-        font-size: 150%;
-        opacity: .5;
+    &:placeholder-shown:not(:focus) + label {
+      margin-top: -12px;
+      top: 50%;
+      line-height: 25px;
+      @include font-size(18px);
         @content;
     }
   }
-  
+
   /* Default styling
    * https://github.com/tonystar/float-label-css/blob/master/scss/float-label.scss
    */
   .has-float-label {
     @include float-label-container;
-  
     @include float-label;
-  
-    select {
-      -webkit-appearance: none;
-         -moz-appearance: none;
-              appearance: none;
-    }
-  
-    input, select {
-      @include float-label-input;
-      font-size: inherit;
-      padding-top: 1em;
-      margin-bottom: 2px;
-      border: 0;
+    input {
       border-radius: 0;
-      border-bottom: 2px solid rgba(0,0,0,.1);
-  
+      @include float-label-input;
       @include float-label-scaled {
-        top: .25em;
+
       }
-  
-      &:focus {
-        outline: none;
-        border-color: rgba(0,0,0,.5);
-      }
+
     }
-  
-    select {
-      padding-right: 1em;
-      background: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E") no-repeat right .5em bottom .25em;
-      background-size: 8px 10px;
-    }
+
   }

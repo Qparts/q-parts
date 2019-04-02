@@ -1,9 +1,8 @@
-import React, { Component, Fragment, createRef } from 'react'; // eslint-disable-line no-unused-vars
+import React, { Component } from 'react'; // eslint-disable-line no-unused-vars
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, getFormSubmitErrors } from 'redux-form';
 import { Link } from "react-router-dom";
 
-import SelectInput from '../../../../components/SelectInput/SelectInput';
 import RenderField from '../../../../components/RenderField/RenderField';
 
 import './SignupForm.css';
@@ -20,15 +19,16 @@ class SignupForm extends Component {
 
     this.state = {
       passwordType: 'password',
-      passwordText: 'Show',
+      passwordText: props.translate("general.buttons.show"),
       passwordIcon: 'icon-show-password',
     }
   }
 
   handleTogglePassword = () => {
+    const { translate } = this.props
     this.setState({
       passwordType: this.state.passwordType === 'password' ? 'text' : 'password',
-      passwordText: this.state.passwordText === 'Show' ? 'Hide' : 'Show',
+      passwordText: this.state.passwordText === translate("general.buttons.show") ? translate("general.buttons.hide") : translate("general.buttons.show"),
       passwordIcon: this.state.passwordIcon === 'icon-show-password' ? 'icon-hide-password' : 'icon-show-password',
     });
   }
@@ -44,83 +44,77 @@ class SignupForm extends Component {
     ];
 
     return (
-      <form onSubmit={this.props.handleSubmit}>
-        <div className="row signup-form__two-inputs no-gutters">
-          <div className="group-shadow-input group-shadow-div"></div>
-          <div className="col-6">
-            <div className="form-group">
+      <form onSubmit={this.props.handleSubmit} className="gray-input">
+        <div className="input-sec">
+          <div className="form-row">
+            <div className="col">
               <Field
-                label={translate("form.signup.firstName")}
+                hasFloatLabel
                 name="firstName"
-                component={RenderField}
                 type="text"
-                placeholder={translate("form.signup.placeholders.firstName")}
-                validate={[validations.required]} />
+                placeholder={translate("form.signup.firstName")}
+                label={translate("form.signup.firstName")}
+                errorMessage={`${translate("general.enter")} ${translate("form.signup.firstName")}`}
+                component={RenderField}
+                validate={[validations.required]}
+              />
             </div>
-          </div>
-          <div className="col-6">
-            <div className="form-group">
+            <div className="col">
               <Field
-                label={translate("form.signup.lastName")}
+                hasFloatLabel
                 name="lastName"
-                component={RenderField}
                 type="text"
-                placeholder={translate("form.signup.placeholders.lastName")}
-                validate={[validations.required]} />
+                placeholder={translate("form.signup.lastName")}
+                label={translate("form.signup.lastName")}
+                errorMessage={`${translate("general.enter")} ${translate("form.signup.lastName")}`}
+                component={RenderField}
+                validate={[validations.required]}
+              />
             </div>
           </div>
-        </div>
-        <div className="one_shadow-input form-group">
           <Field
-            label={translate("form.signup.email")}
+            hasFloatLabel
             name="email"
             type="email"
+            hasWarning={'email-validate'}
+            errorMessage={this.props.submitErrors.email || null}
+            warningMessage={'The email you entered is invalid'}
+            placeholder={translate("form.signup.email")}
+            label={translate("form.signup.email")}
             component={RenderField}
-            placeholder={translate("form.signup.placeholders.email")}
-            validate={[validations.required, validations.email]} />
-        </div>
-        <div id="country-city" className="row signup-form__two-inputs">
-          <div className="col-12">
-            <div className="form-group">
-              <Field
-                boxShadow={true}
-                label={translate("form.signup.country")}
-                name="countryId"
-                component={SelectInput}
-                options={validations.getFormattedSelect(this.props.countries, currentLanguage)}
-                placeholder={translate("form.signup.placeholders.country")}
-                validate={[validations.required]} />
-            </div>
+            validate={[validations.required, validations.email]}
+          />
+          <div className="password">
+            <Field
+              hasPasswordStrength={true}
+              currentLanguage={currentLanguage}
+              title={translate("form.signup.passwordStrength.title")}
+              scoreWords={scoreWords}
+              tooShortWord={translate("form.signup.passwordStrength.scoreWords.tooShort")}
+              label={translate("form.signup.password")}
+              name="password"
+              component={RenderField}
+              type={this.state.passwordType}
+              text={this.state.passwordText}
+              icon={this.state.passwordIcon}
+              placeholder={translate("form.signup.placeholders.password")}
+              onTogglePassword={this.handleTogglePassword}
+              setPasswordScore={setPasswordScore}
+              validate={[validations.required, validations.passwordScore]} />
           </div>
         </div>
-        <div className="form-group one_shadow-input password-strength">
-          <Field
-            hasPasswordStrength={true}
-            title={translate("form.signup.passwordStrength.title")}
-            scoreWords={scoreWords}
-            tooShortWord={translate("form.signup.passwordStrength.scoreWords.tooShort")}
-            label={translate("form.signup.password")}
-            name="password"
-            component={RenderField}
-            type={this.state.passwordType}
-            text={this.state.passwordText}
-            icon={this.state.passwordIcon}
-            placeholder={translate("form.signup.placeholders.password")}
-            onTogglePassword={this.handleTogglePassword}
-            setPasswordScore={setPasswordScore}
-            validate={[validations.required, validations.passwordScore]} />
-        </div>
-        <div id="bottom">
-          <p>{translate("form.signup.cp.title")}
-            <span>
-              <Link className="btn-gray" to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")}
-              <Link className="btn-gray" to="/"> {translate("form.signup.cp.linkTwo")}.</Link></span>
-          </p>
-          <Button
-            className="btn btn-primary"
-            type="submit"
-            text={translate("form.signup.button")}
-            icon={`icon-arrow-${right(direction)}`} />
+        <div className="form-row submit-row">
+          <div className="col-md">
+            <p>{translate("form.signup.cp.title")} <Link to="/">{translate("form.signup.cp.linkOne")}</Link> {translate("general.and")} <Link to="/"> {translate("form.signup.cp.linkTwo")}.</Link>
+            </p>
+          </div>
+          <div className="col-md-auto">
+            <Button
+              className="btn btn-primary"
+              type="submit"
+              text={translate("form.signup.button")}
+              icon={`icon-arrow-${right(direction)}`} />
+          </div>
         </div>
       </form>
     );
@@ -133,7 +127,8 @@ SignupForm = reduxForm({
 
 SignupForm = connect(
   state => ({
-    passwordScore: state.customer.passwordScore
+    passwordScore: state.customer.passwordScore,
+    submitErrors: getFormSubmitErrors('SignupForm')(state)
   })
 )(SignupForm)
 

@@ -104,7 +104,7 @@ class Orders extends Component {
     return (
       <Fragment>
         <MediumScreen>
-          <div className="col-10" id="Orders-container">
+          <div id="Orders-container">
             <div className="border rounded card">
               <div className="Orders-search justify-content-between col-12">
                 <div style={{display:'flex'}}>

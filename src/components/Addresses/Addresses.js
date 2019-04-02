@@ -62,7 +62,7 @@ class Addresses extends Component {
     return (
       <Fragment>
         <MediumScreen>
-          <div className="col-10">
+          <div className="col-lg-9">
             {this.renderAddresses()}
           </div>
         </MediumScreen>

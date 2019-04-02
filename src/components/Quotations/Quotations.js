@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import moment from 'moment';
 
-import { TabContent, TabPane, Nav, NavItem, NavLink, Row } from 'reactstrap';
+import { TAB_ONE, PENDING, REPLIED } from '../../constants';
+
+import ListGroupCollapse from '../UI/ListGroupCollapse';
+import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 import classnames from 'classnames';
 import PendingRequest from './PendingRequest/PendingRequest';
 import CompletedRequest from './CompletedRequest/CompletedRequest';
@@ -52,31 +55,44 @@ class Quotations extends Component {
     const { quotations, translate, currentLanguage, direction, addToCart, incrementQuantity, decrementQuantity, token } = this.props;
 
     return (
-      <div className="Quotations-container col-10" >
-        <div>
+      <div className="requests-main">
           <Nav tabs>
             <NavItem>
               <NavLink
-                className={classnames({ active: this.state.activeTab === '1' })}
-                onClick={() => { this.toggle('1'); }}
-              >
-                {translate("quotationRequest.pending")}
-              </NavLink>
+                className={classnames({ active: this.state.activeTab === 'pending' })}
+                onClick={() => { this.toggle('pending'); }}>
+                Pending
+            </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
-                className={classnames({ active: this.state.activeTab === '2' })}
-                onClick={() => { this.toggle('2'); }}
-              >
-                {translate("quotationRequest.replied")}
-              </NavLink>
+                className={classnames({ active: this.state.activeTab === 'replayed' })} onClick={() => { this.toggle('replayed'); }} >
+                Replayed
+            </NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
-            <TabPane tabId="1">
-              <Row>
-                <div className="col-12">
-                  <ul className="cart-items list-unstyled">
+            <TabPane tabId="pending">
+                  <ul className="list-unstyled">
+                  <li>
+                    <a className="row" data-toggle="collapse" href="#request-id" role="button" aria-expanded="false" aria-controls="request-id">
+                      <div className="col-lg-auto">
+                        <label>Request Num</label>
+                        <p>#xxx11xx</p>
+                      </div>
+                      <div className="col-lg">
+                        <p>VIN Num: (000 000 000 000 11)</p>
+                        <span><i className="icon-add"></i> Hide Details</span>
+                      </div>
+                      <div className="col-lg-auto r-info">
+                        <p className="date"><span>Sent</span> Jul 28</p>
+                        <p>Num of pieces:  2</p>
+                      </div>
+                    </a>
+                    <div class="collapse" id="collapseExample">
+
+                    </div>
+                  </li>
                     {
                       quotations.pending.map(pendings => {
                         return <PendingRequest
@@ -87,12 +103,9 @@ class Quotations extends Component {
                       })
                     }
                   </ul>
-                </div>
-              </Row>
             </TabPane>
-            <TabPane tabId="2">
-              <Row>
-                <div className="col-12">
+            <TabPane tabId="replayed">
+              replayed
                   <ul className="cart-items list-unstyled">
                     {
                       quotations.completed.map(replies => {
@@ -110,11 +123,8 @@ class Quotations extends Component {
                       })
                     }
                   </ul>
-                </div>
-              </Row>
             </TabPane>
           </TabContent>
-        </div>
       </div>
     )
   }

@@ -12,7 +12,7 @@ import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
 import { loadGoogleAnalytics } from '../../config/google';
 import NetworkError from '../../components/NetworkError';
-import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
+import { getVehicles, InitializeDefaultLang, getCountriesOnly, getRegions } from '../../actions/apiAction';
 import { selectCountry, onLogout } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
 import RouterScrollToTop from '../../components/RouterScrollToTop';
@@ -31,6 +31,7 @@ class Routes extends Component {
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
+        props.getRegions(1);
         loadStyle(this.props.direction);
         loadGoogleAnalytics();
     }
@@ -132,6 +133,7 @@ const mapDispatchToProps = dispatch => {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
         InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
+        getRegions: (countryId) => dispatch(getRegions(countryId)),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country)),
         onLogout: () => dispatch(onLogout()),

@@ -15,6 +15,7 @@ class HomeDetails extends Component {
 				<section className="start-custom-order container-fluid">
 					<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")} />
 					<OrderSteps translate={translate} direction={direction} />
+					
 					{/* <div className="order-form">
 							<header className="row">
 								<h2 className="col col-10 mx-auto">
@@ -27,14 +28,14 @@ class HomeDetails extends Component {
 									<div className="form-row ">
 										<div className="col">
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.parts")} />
-											<div className="input-group-prepend">
+											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col">
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.vin")}/>
-											<div className="input-group-prepend">
+											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
 												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
@@ -50,13 +51,16 @@ class HomeDetails extends Component {
 							</div>
 						
 						</div> */}
-					<div className="d-flex justify-content-center">
-						<Button
-							className="btn btn-primary"
-							to={'/quotation-order'}
-							text={translate("quotationOrder.startHere")}
-						/>
-					</div>
+						<div className="row">
+							<div className="col col-md-6 offset-md-3">
+								<Button
+								className="btn btn-primary"
+								to={'/quotation-order'}
+								text={translate("quotationOrder.startHere")}
+								icon={`icon-arrow-${right(direction)}`}
+								/>
+							</div>
+						</div>
 				</section>
 				<section className="main-cat container-fluid">
 					<div className="row">
@@ -150,7 +154,7 @@ class HomeDetails extends Component {
 						</li>
 					</ul>
 				</section>
-				<section className="vendor container-fluid">
+				{/* <section className="vendor container-fluid">
 					<div className="row">
 						<div className="col-12">
 							<div className="vendor-details">
@@ -170,7 +174,7 @@ class HomeDetails extends Component {
 
 						</div>
 					</div>
-				</section>
+				</section> */}
 				<Products
 					recentViewedProducts={recentViewedProducts}
 					translate={translate}

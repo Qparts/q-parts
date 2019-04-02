@@ -10,7 +10,6 @@ import { addToCart } from '../../../actions/cartAction';
 
 import { generateQuantity } from '../../../utils';
 import { isAuth } from '../../../utils';
-import SectionHeader from '../../../components/UI/SectionHeader';
 import { getTranslate } from 'react-localize-redux';
 
 import './SearchResult.css';
