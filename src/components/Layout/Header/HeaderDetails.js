@@ -4,7 +4,6 @@ import DropdownItem from "../../UI/Nav/DropdownItem";
 import { isEmpty, right } from "../../../utils";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
-import { connect } from 'react-redux';
 
 class HeaderDetails extends Component {
   constructor(props) {
@@ -26,7 +25,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const dropdownHeader =
       <Fragment>
@@ -91,7 +90,7 @@ class HeaderDetails extends Component {
         <li>
            <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
-            <span>{this.props.cart.length}</span>
+            <span>{cart.length}</span>
           </Link>
         </li>
       </ul>
@@ -116,11 +115,4 @@ const styles = {
 
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart.purchasedItems
-  }
-}
-
-const withHeaderDetails = withStyles(styles)(HeaderDetails);
-export default connect(mapStateToProps, null)(HeaderDetails);
+export default withStyles(styles)(HeaderDetails);

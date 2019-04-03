@@ -71,7 +71,7 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      countriesOnly, getCountriesOnly, selectCountry, direction
+      countriesOnly, getCountriesOnly, selectCountry, direction, cart
     } = this.props;
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -98,7 +98,8 @@ class Layout extends Component {
           countriesOnly={countriesOnly}
           getCountriesOnly={getCountriesOnly}
           selectCountry={selectCountry}
-          direction={direction} />
+          direction={direction}
+          cart={cart} />
         {dialog}
         <div className="cd-main-content">
           {this.props.children}
