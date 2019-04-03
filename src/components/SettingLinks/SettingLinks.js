@@ -30,7 +30,7 @@ class profileLinks extends Component{
         <div className="col-lg-3">
           <CustomerService
             messages={chatMessages}
-            url="" />
+            url="//wa.me/966508448856/" />
             <ul className="setting-tabs-link">
                     {links.map((link, idx) => {
                         return (
