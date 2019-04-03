@@ -45,7 +45,7 @@ class Routes extends Component {
         // console.log(typeof(hoursLeft));
         // console.log('hoursLeft: ', hoursLeft);
         // console.log('oneHour: ', oneHour);
-        
+
 
         if (hoursLeft <= oneHour) {
             this.props.onLogout();
@@ -90,7 +90,7 @@ class Routes extends Component {
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
-                                <Link to="#" className="live-chat">
+                                <Link target="_blank" to="//wa.me/966508448856/" className="live-chat">
                                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                                     <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
                                 </Link>
