@@ -4,6 +4,7 @@ import DropdownItem from "../../UI/Nav/DropdownItem";
 import { isEmpty, right } from "../../../utils";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
+import { connect } from 'react-redux';
 
 class HeaderDetails extends Component {
   constructor(props) {
@@ -88,12 +89,9 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          {/* <Link to="/cart" className="not-empty">
+           <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
-            <span>2</span>
-          </Link> */}
-          <Link to="/cart" className="">
-            <i className="icon-cart" />
+            <span>{this.props.cart.length}</span>
           </Link>
         </li>
       </ul>
@@ -118,4 +116,11 @@ const styles = {
 
 };
 
-export default withStyles(styles)(HeaderDetails);
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart.purchasedItems
+  }
+}
+
+const withHeaderDetails = withStyles(styles)(HeaderDetails);
+export default connect(mapStateToProps, null)(HeaderDetails);
