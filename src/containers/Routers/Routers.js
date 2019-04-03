@@ -45,7 +45,7 @@ class Routes extends Component {
         // console.log(typeof(hoursLeft));
         // console.log('hoursLeft: ', hoursLeft);
         // console.log('oneHour: ', oneHour);
-        
+
 
         if (hoursLeft <= oneHour) {
             this.props.onLogout();
@@ -84,13 +84,14 @@ class Routes extends Component {
                                     selectCountry={this.props.selectCountry}
                                     changeDefaultDirection={this.props.changeDefaultDirection}
                                     direction={this.props.direction}
+                                    cart={this.props.cart}
                                 >
                                     <Switch>
                                         {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang, this.props.translate).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
-                                <Link to="#" className="live-chat">
+                                <Link target="_blank" to="//wa.me/966508448856/" className="live-chat">
                                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                                     <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
                                 </Link>
@@ -125,6 +126,7 @@ const mapStateToProps = state => {
         countriesOnly: state.api.countriesOnly,
         error: state.networkError.error,
         direction: state.customer.direction,
+        cart: state.cart.purchasedItems
     }
 }
 

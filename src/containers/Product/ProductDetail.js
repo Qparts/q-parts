@@ -383,7 +383,7 @@ class ProductDetail extends Component {
                     <li className="support">
                       <CustomerService
                         messages={chatMessages}
-                        url="" />
+                        url="//wa.me/966508448856/" />
                     </li>
                   </form>
                 </ul>

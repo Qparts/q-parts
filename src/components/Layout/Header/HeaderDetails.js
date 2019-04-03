@@ -25,7 +25,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const dropdownHeader =
       <Fragment>
@@ -88,12 +88,9 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          {/* <Link to="/cart" className="not-empty">
+           <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
-            <span>2</span>
-          </Link> */}
-          <Link to="/cart" className="">
-            <i className="icon-cart" />
+            <span>{cart.length}</span>
           </Link>
         </li>
       </ul>
