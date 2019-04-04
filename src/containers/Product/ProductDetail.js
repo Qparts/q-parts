@@ -497,9 +497,9 @@ class ProductDetail extends Component {
                 </div>
               </div>
             </div>
-            <aside className="col-auto side-banner d-none d-lg-block">
+            {/*<aside className="col-auto side-banner d-none d-lg-block">
               <img src="/img/160-banner.jpg" />
-            </aside>
+            </aside>*/}
           </div>
           <div className="row pt-sec">
             <div className="col products-list">
