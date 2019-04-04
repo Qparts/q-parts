@@ -17,6 +17,10 @@ export const l = (direction) => {
     return direction === 'ltr' ? 'l' : 'r';
 }
 
+export const r = (direction) => {
+    return direction === 'ltr' ? 'r' : 'l';
+}
+
 export const sideValues = (direction, values) => {
     const unite = 'px';
     return direction === 'ltr' ?

@@ -25,6 +25,7 @@ import { postQuotation } from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
 import * as validations from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
+import RenderField from '../RenderField/RenderField';
 
 
 const vehicles = 'vehicles';
@@ -453,7 +454,7 @@ class QuotationRequest extends Component {
 						</div>
 						<div className="row submit-qout">
 							<div className="col-lg">
-								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")}/>.</p>
+								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")} />.</p>
 							</div>
 							<div className="col-lg-auto">
 								{
