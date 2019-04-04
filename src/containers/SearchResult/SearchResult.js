@@ -380,19 +380,29 @@ class SearchResult extends Component {
 				</div>
 			)
 
-		let btnNext = <Link to="#" onClick={this.nextPage}>
+		let btnNext = <li className="next">
+			<Link to="#" onClick={this.nextPage}>
 			<i className="icon-arrow-r"></i>
-		</Link>
-		let btnPrev = <Link to="#" onClick={this.prevPage}>
-			<i className="icon-arrow-l"></i>
-		</Link>
+			</Link>
+		</li>
+		let btnPrev = <li className="prev">
+			<Link to="#" onClick={this.prevPage}>
+				<i className="icon-arrow-l"></i>
+			</Link>
+		</li>
 
 		if (this.state.startSize <= 1) {
-			btnPrev = "";
+			btnPrev = <li className="disabled">
+					<Link to="/" onClick={ (e) => e.preventDefault() }><i className="icon-arrow-l"></i></Link>
+			</li>;
 		}
 		if (this.state.endSize === this.state.resultSize) {
-			btnNext = "";
+				btnNext= <li className="disabled">
+					<Link to="/" onClick={ (e) => e.preventDefault() }><i className="disabled icon-arrow-r"></i></Link>
+				</li>;
 		}
+		const paramsN = getQuery(this.props.location);
+		let pageNumber = Number(paramsN.page);
 
 		let selectedParams = window.location.search.slice(1).split('&');
 		const hasSelected = params.filter(param => {
@@ -924,17 +934,11 @@ class SearchResult extends Component {
 							<div className="row ">
 								<div className="col d-flex justify-content-center">
 									<ul className="more-result list-inline">
-									<li className="disabled">
-										{btnPrev}
-										
-									</li>
+									{btnPrev}
 									<li>
-										<span>Page 1 of 5</span>
+										<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize/18)}</span>
 									</li>
-									<li className="next">
-										{btnNext}
-										
-									</li>
+									{btnNext}
 								</ul>
 								</div>
 							</div>
