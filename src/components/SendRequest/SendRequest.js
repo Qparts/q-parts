@@ -27,8 +27,8 @@ class SendRequest extends Component {
                 <Title
                   header={translate("general.thankYou")} />
                 <h5>{translate("sendRequest.confirmation.textOne")} <b>{params.quotationId}</b> {translate("sendRequest.confirmation.textTwo")}<span>{translate("sendRequest.confirmation.textThree")}</span></h5>
-                <Link to="/setting/quotations" className="btn btn-light" text={translate("general.buttons.continueShopping")} />
-                <Link to="/" className="btn btn-primary" text={translate("general.buttons.requests")} icon={`icon-arrow-${right(this.props.direction)}`} />
+                <Link to="/" className="btn btn-light" text={translate("general.buttons.continueShopping")} />
+                <Link to="/setting/quotations" className="btn btn-primary" text={translate("general.buttons.requests")} icon={`icon-arrow-${right(this.props.direction)}`} />
               </div>
             </div>
           </div>
