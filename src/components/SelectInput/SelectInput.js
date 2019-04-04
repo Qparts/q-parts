@@ -21,7 +21,7 @@ export default class SelectInput extends Component {
        }
 
    }
-
+   
    getIconClassName = () => {
        return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "icon-checked" : "";
    }
@@ -41,8 +41,10 @@ export default class SelectInput extends Component {
    }
 
    handleMenuClose = (value) => {
-       this.handleBlur(value);
-       if (value) {
+       const textValue = value || this.props.input.value;
+       
+       this.handleBlur(textValue);
+       if (textValue) {
            this.setState({
                hasFloat: "on"
            })
