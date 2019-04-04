@@ -3,6 +3,7 @@ export { getQuery, replaceQuery, addQuery, removeQuery } from './querystring';
 export { generateQuantity } from './generator';
 export { parseGoogleResponse } from './google';
 export * from './validation';
+export * from './normalizing';
 export { isAuth, handleNetworkError } from './auth';
 export { isEmpty, filterObject, toUpperCaseForEach, replaceAll } from './array';
 export { upperCaseFirstChar, lowerCaseFirstChar, getTranslatedObject, getTranslatedString } from './string';

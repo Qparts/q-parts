@@ -45,13 +45,14 @@ class RenderPartInfo extends Component {
                                 <div className="has-float-label add-file">
                                     <Field
                                         type="text"
+                                        hasFloatLabel
                                         name={`${partInfo}.itemName`}
                                         className="form-control"
-                                        component="input"
+                                        component={RenderField}
+                                        label={this.props.placeholder}
                                         placeholder={this.props.placeholder}
                                         validate={[validations.required]}
                                     />
-                                    <label>{this.props.placeholder}</label>
                                     <Field
                                         name={`${partInfo}.image`}
                                         image={`${partInfo}.image`}
