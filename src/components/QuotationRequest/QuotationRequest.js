@@ -381,18 +381,16 @@ class QuotationRequest extends Component {
 									/>
 								</div>
 								<div className="col-lg col-md-6">
-									<div className="add-file">
+									<div className="has-float-label add-file">
 										<Field
 											name="vin"
 											type="text"
 											className="form-control"
 											placeholder={translate("quotationOrder.vin")}
-											component={RenderField}
+											component="input"
 											value={garage ? garage[3] : null}
-											maxLength="17"
-				              textTransform="uppercase"
-											validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]}
 										/>
+										<label>{translate("quotationOrder.vin")}</label>
 										<Field
 											name="vinImage"
 											component={RenderFileInput}
@@ -456,7 +454,7 @@ class QuotationRequest extends Component {
 						</div>
 						<div className="row submit-qout">
 							<div className="col-lg">
-								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")}/>.</p>
+								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")} />.</p>
 							</div>
 							<div className="col-lg-auto">
 								{
