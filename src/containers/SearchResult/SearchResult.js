@@ -182,6 +182,7 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
+			console.log(res.data)
 			if (callback) {
 				callback(res.data);
 			}

@@ -142,6 +142,9 @@
       @include font-size(20px);
     };
   }
+  .offset-md-3{
+    @include margin-left(25%);
+  }
 }
 
 .order-form{
