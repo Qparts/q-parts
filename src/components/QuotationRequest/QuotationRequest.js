@@ -25,6 +25,7 @@ import { postQuotation } from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
 import * as validations from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
+import RenderField from '../RenderField/RenderField';
 
 
 const vehicles = 'vehicles';
@@ -380,16 +381,18 @@ class QuotationRequest extends Component {
 									/>
 								</div>
 								<div className="col-lg col-md-6">
-									<div className="has-float-label add-file">
+									<div className="add-file">
 										<Field
 											name="vin"
 											type="text"
 											className="form-control"
 											placeholder={translate("quotationOrder.vin")}
-											component="input"
+											component={RenderField}
 											value={garage ? garage[3] : null}
+											maxLength="17"
+				              textTransform="uppercase"
+											validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]}
 										/>
-										<label>{translate("quotationOrder.vin")}</label>
 										<Field
 											name="vinImage"
 											component={RenderFileInput}

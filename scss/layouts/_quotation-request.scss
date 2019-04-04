@@ -445,6 +445,14 @@
   .float-label{
     min-width: 160px;
   }
+  .add-file{
+    label{
+      display: none;
+    }
+    input{
+      border-bottom-#{$right}-radius: $border-radius-base;
+    }
+  }
 }
 .part-array{
   .quantity{
