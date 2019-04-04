@@ -138,7 +138,6 @@ const WithProductView = WrappedComponent => {
 
 
 		renderSearch = (filtration, handleChange, isChecked, currentLanguage) => {
-			console.log(filtration)
 			return filtration.options.map((option, index) => {
 				const key = currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 				const optionKey = currentLanguage === constant.EN ? 'value' : 'valueAr';
