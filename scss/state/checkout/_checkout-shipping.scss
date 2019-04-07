@@ -202,7 +202,7 @@
               border: none;
               background: $light-gray;
               height: 55px;
-              width: 110%;
+              width: 100%;
               label,
               sub,
               br {
@@ -211,6 +211,7 @@
             }
           }
           .zipCode{
+            padding: 0px;
             .form-control {
               border-radius: corner-values(0 0 20px 0) !important;
               border: none;
