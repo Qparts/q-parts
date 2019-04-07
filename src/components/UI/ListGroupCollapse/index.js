@@ -86,7 +86,7 @@ export class ListGroupCollapse extends Component {
         </div>
     )
     render() {
-        const { quotationItem, type, translate, currentLanguage, direction, token } = this.props;
+        const { quotationItem, requestNumber, type, translate, currentLanguage, direction, token } = this.props;
 
         const dialog = (
             <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
@@ -107,7 +107,7 @@ export class ListGroupCollapse extends Component {
 
         return (
             type === PENDING ?
-                <div className="collapse multi-collapse" id={quotationItem.id}>
+                <div className={`collapse ${requestNumber}`}  id={quotationItem.id}>
                     <div style={{ background: '#ebebeb' }} className="d-table product-options">
 
                         <div className="d-table-row">
@@ -121,7 +121,7 @@ export class ListGroupCollapse extends Component {
                     </div>
                 </div> :
                 <Fragment>
-                    <div className="collapse multi-collapse" key={quotationItem.id} id={quotationItem.id}>
+                    <div className={`collapse ${requestNumber}`} key={quotationItem.id} id={quotationItem.id}>
                         <div className="d-table product-options">
                             <div className={`render-cart-item col-12`}>
                                 <ul className="cart-items list-unstyled">
