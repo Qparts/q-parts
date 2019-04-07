@@ -86,6 +86,9 @@ class CheckoutConfirmation extends Component {
                               <h3><Link to="#">{checkoutData.desc}</Link></h3>
                               <h4>{getTranslatedObject(checkoutData.brand, currentLanguage, 'name', 'nameAr')} <span>{checkoutData.productNumber}</span></h4>
                             </header>
+                            <div className="cart-quantity d-block d-lg-none">
+                              <h5>{checkoutData.quantityLabel} <span>{checkoutData.quantity}</span></h5>
+                            </div>
                           </div>
                           <div className="col-md-4 div-price-quantity">
                             <div className="cart-product-price">
