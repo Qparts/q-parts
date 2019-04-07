@@ -156,6 +156,9 @@
               background: $light-gray;
               padding: 12px;
             }
+            label{
+              display: none;
+            }
             .input-group {
               height: 49px;
               top: -2px;
