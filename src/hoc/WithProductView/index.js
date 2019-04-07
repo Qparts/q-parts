@@ -36,8 +36,8 @@ const WithProductView = WrappedComponent => {
 			}
 			if (checked && index === -1) {
 				this.state.selectedOptions.forEach(element => {
-					if (element.filterTitle === item.filterTitle) {
-						element.selectedOptions.push(value);
+					if (element.filterTitle === item.paramsTitle) {
+						element.selectedOptions.push(id);
 						this.setState({ selectedOptions: this.state.selectedOptions, element });
 					}
 				});
@@ -51,7 +51,7 @@ const WithProductView = WrappedComponent => {
 			} else if (index !== -1) {
 				this.state.selectedOptions.forEach(element => {
 					for (var i = 0; i < element.selectedOptions.length; i++) {
-						if (element.selectedOptions[i] === value) {
+						if (element.selectedOptions[i] === id) {
 
 							element.selectedOptions.splice(i, 1);
 
@@ -198,7 +198,6 @@ const WithProductView = WrappedComponent => {
 						item.options.forEach(option => {
 							for (var i = 0; i < obj[key].length; i++) {
 								if (option.id === Number(obj[key][i])) {
-
 									const label = item.filterTitle + ' ' + option.value;
 									const labelAr = item.filterTitleAr + ' ' + option.valueAr;
 									const combinedIds = `${item.id}${option.id}`;
@@ -208,8 +207,7 @@ const WithProductView = WrappedComponent => {
 									});
 									this.state.selectedOptions.forEach(element => {
 										if (element.filterTitle === item.filterTitle) {
-											element.selectedOptions.push(label);
-
+											element.selectedOptions.push(option.id);
 											this.setState({ selectedOptions: this.state.selectedOptions, element });
 										}
 									})
