@@ -182,7 +182,6 @@ class SearchResult extends Component {
 				loading: false,
 				resultSize: res.data.resultSize,
 			})
-			console.log(res.data)
 			if (callback) {
 				callback(res.data);
 			}
@@ -672,7 +671,7 @@ class SearchResult extends Component {
 													<div className="row">
 														<label className="col-auto">{filterObject[key]}</label>
 														<div className="col">{selectedOptions.map((item, index) => (
-															(item.filterTitle === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : (""))
+															(item[key] === filterObject[key] ? <p key={index}>{item.selectedOptions.length} {this.props.translate("general.filter")}</p> : <p>All</p>)
 														))}</div>
 
 													</div>
