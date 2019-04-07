@@ -66,7 +66,7 @@ class OrderSummary extends Component {
                       <div className="order-summary__details">
                           <span className="item-key">{translate("orderSummary.subtotal")}</span>
                           <span className="item-value">
-                              {subtotal}
+                              {subtotal.toFixed(2)}
                               <span>{checkoutData[0].currency}</span>
                           </span>
                           <div className="h-seperator" />
@@ -78,7 +78,7 @@ class OrderSummary extends Component {
                           <div style={styles.secondSperator} className="h-seperator" />
                           <span className="item-key">{translate("orderSummary.total")}</span>
                           <span className="item-value">
-                              {total}
+                              {total.toFixed(2)}
                               <span>{checkoutData[0].currency}</span>
                           </span>
                           <div style={styles.secondSperator} className="h-seperator" />
