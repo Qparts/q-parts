@@ -301,6 +301,9 @@
                 background: $light-gray;
                 padding: 12px;
               }
+              label{
+                display: none;
+              }
             }
           }
           .div-rounded-last{
@@ -340,7 +343,7 @@
                 border: none;
                 background: $light-gray;
                 height: 55px;
-                width: 110%;
+                width: 100%;
                 label,
                 sub,
                 br {
