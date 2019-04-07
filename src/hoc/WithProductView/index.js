@@ -36,8 +36,8 @@ const WithProductView = WrappedComponent => {
 			}
 			if (checked && index === -1) {
 				this.state.selectedOptions.forEach(element => {
-					if (element.filterTitle === item.filterTitle) {
-						element.selectedOptions.push(value);
+					if (element.filterTitle === item.paramsTitle) {
+						element.selectedOptions.push(id);
 						this.setState({ selectedOptions: this.state.selectedOptions, element });
 					}
 				});
@@ -51,7 +51,7 @@ const WithProductView = WrappedComponent => {
 			} else if (index !== -1) {
 				this.state.selectedOptions.forEach(element => {
 					for (var i = 0; i < element.selectedOptions.length; i++) {
-						if (element.selectedOptions[i] === value) {
+						if (element.selectedOptions[i] === id) {
 
 							element.selectedOptions.splice(i, 1);
 
@@ -95,6 +95,8 @@ const WithProductView = WrappedComponent => {
 
 		removeItem = (index, item, event) => {
 			event.preventDefault();
+
+				console.log(this.state.selectedOptions);
 			this.state.selectedOptions.forEach(element => {
 				for (var i = 0; i < element.selectedOptions.length; i++) {
 					if (element.selectedOptions[i] === item) {
@@ -182,9 +184,11 @@ const WithProductView = WrappedComponent => {
 			})
 		}
 		selectedOptions = (dataSelectedOptions, dataProducts) => {
+			console.log(dataSelectedOptions)
 			this.setState({
 				selectedOptions: dataSelectedOptions
 			})
+			console.log(this.state.selectedOptions)
 			let obj = queryString.parse(window.location.search.slice(1));
 			if(this.state.filtrationChecked.length !== 0){
 				this.setState({
@@ -199,6 +203,7 @@ const WithProductView = WrappedComponent => {
 							for (var i = 0; i < obj[key].length; i++) {
 								if (option.id === Number(obj[key][i])) {
 
+										console.log(obj[key],option.id)
 									const label = item.filterTitle + ' ' + option.value;
 									const labelAr = item.filterTitleAr + ' ' + option.valueAr;
 									const combinedIds = `${item.id}${option.id}`;
@@ -208,8 +213,7 @@ const WithProductView = WrappedComponent => {
 									});
 									this.state.selectedOptions.forEach(element => {
 										if (element.filterTitle === item.filterTitle) {
-											element.selectedOptions.push(label);
-
+											element.selectedOptions.push(option.id);
 											this.setState({ selectedOptions: this.state.selectedOptions, element });
 										}
 									})
