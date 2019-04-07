@@ -671,7 +671,7 @@ class SearchResult extends Component {
 													<div className="row">
 														<label className="col-auto">{filterObject[key]}</label>
 														<div className="col">{selectedOptions.map((item, index) => (
-															(item[key] === filterObject[key] && item.selectedOptions.length !==0 ? <p key={index}>{item.selectedOptions.length}</p> : <p>All</p>)
+															(item[key] === filterObject[key] && item.selectedOptions.length !==0 ? <p key={index}>{item.selectedOptions.length}</p> : <p>{this.props.translate("general.all")}</p>)
 														))}</div>
 
 													</div>
