@@ -9,10 +9,16 @@ import { SmallScreen, MediumScreen } from '../Device/index.js';
 import './CheckoutConfirmation.css';
 import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
-import { right } from '../../utils';
+import { getTranslatedObject, l, right } from '../../utils';
+
+import { Link } from 'react-router-dom'
+import { handleImageFallback } from '../../utils';
+import * as constant from '../../constants';
 
 class CheckoutConfirmation extends Component {
-
+  static defaultProps = {
+    divCol: 'col-lg-12'
+  }
   handleClick = () => {
     const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
     const addressId = deliveryAddress.id;
@@ -44,7 +50,8 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage } = this.props;
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage, divCol } = this.props;
+    const removeButton= true;
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
@@ -73,24 +80,58 @@ class CheckoutConfirmation extends Component {
             <div className="div-title">
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
-            <RenderCartItem
-              currentLanguage={currentLanguage}
-              translate={translate}
-              direction={direction}
-              deleteText={translate("cart.table.delete")}
-              name="purchasedItems"
-              purchasedItems={purchasedItems}
-              incrementQuantity={incrementQuantity}
-              decrementQuantity={decrementQuantity}
-              divCol='col-lg-12'
-              removeButton={true}
-            />
+            <div className={`render-cart-item ${divCol}`}>
+              <ul className="cart-items list-unstyled">
+                {
+                  purchasedItems.map((purchasedItem, idx) => {
+                    return <li key={idx} className="bg-white">
+                      <figure className="row">
+                        <Link to="#" className="col-3 item-img">
+                          <img onError={handleImageFallback} src={purchasedItem.image} alt="no item" />
+                        </Link>
+                        <figcaption className="col-9">
+                          <div className="row">
+                            <div className="col-md-9 item-dis">
+                              <header>
+                                <h3><Link to="#">{purchasedItem.desc}</Link></h3>
+                                <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
+                              </header>
+                              <div className="cart-product-price">
+                                <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
+                              </div>
+                              <div className="cart-actions">
+                                <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
+                                <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
+                              </div>
+                            </div>
+                            <div className="col-md-3">
+                              <div className="cart-quantity d-none d-lg-block">
+                                <h5>{translate("general.quantity")}</h5>
+                                <h5 className="quantity">{purchasedItem.quantity} </h5>
+                              </div>
+                            </div>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </li>
+                  })
+                }
+              </ul>
+              <div className="row">
+                <div className={`col-md-6 m${l(direction)}-md-auto`}>
+                  {
+                    !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className={`icon-arrow-${right(direction)}`}></i></Link>
+                  }
+                </div>
+              </div>
+            </div>
+
           </div>
           <div className="footer-delivery justify-content-between row">
             <p>{translate("checkout.payment.cash.placeOrder")} <span> {translate("checkout.payment.cash.terms")} </span></p>
             <button type="button" className="btn btn-primary justify-content-between" onClick={this.handleClick}>
               <div><p>{translate("checkout.payment.cash.total")}</p>
-                <p>{this.props.total}<sub>{translate("general.currency")}</sub></p>
+                <p>{this.props.grandTotal.toFixed(2)}<sub>{translate("general.currency")}</sub></p>
               </div>
               <span>{translate("checkout.confirm.placeOrder")} <i className={`icon-arrow-${right(direction)}`} /></span></button>
           </div>

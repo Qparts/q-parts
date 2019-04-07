@@ -99,6 +99,8 @@ class Checkout extends Component {
 			subtotal += checkoutData[i].subtotal;
 		}
 		const total = subtotal + 35;
+		const vat = total * 0.05;
+		const grandTotal = total + vat;
 
 		if (this.props.isShippingCompleted) {
 			paymentClass += " paymentActive"
@@ -189,7 +191,7 @@ class Checkout extends Component {
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
-								total={total} />
+								grandTotal={grandTotal} />
 						}} />
 					</Switch>
 					<div className="Checkout-Order_summary col-12 col-md-3">
