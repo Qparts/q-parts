@@ -287,8 +287,19 @@
       display: flex;
       .cart-quantity{
         h5{
+          display: flex;
           line-height: 70px;
-          @include margin-left(14px);
+          @include margin-left(10px);
+        }
+        span{
+          @include margin-left(5px);
+        }
+      }
+      .cart-product-price{
+        display: flex;
+        span{
+          margin-top: 25%;
+          @include margin-left(3px);
         }
       }
     }

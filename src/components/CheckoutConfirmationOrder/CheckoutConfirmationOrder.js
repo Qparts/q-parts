@@ -84,38 +84,21 @@ class CheckoutConfirmation extends Component {
                       </Link>
                       <figcaption className="col-9">
                         <div className="row">
-                          <div className="col-md-9 item-dis">
+                          <div className="col-md-8 item-dis">
                             <header>
                               <h3><Link to="#">{checkoutData.desc}</Link></h3>
                               <h4>{getTranslatedObject(checkoutData.brand, currentLanguage, 'name', 'nameAr')} <span>{checkoutData.productNumber}</span></h4>
                             </header>
                             <div className="cart-quantity d-block d-lg-none">
-                              <h5>{checkoutData.quantityLabel}</h5>
-                              <div className="input-group quantity">
-                                <div className="input-group-prepend">
-                                  <button
-                                    className="btn btn-gray"
-                                    type="button"
-                                    onClick={this.handleClick.bind(this, constant.DECREMENT, checkoutData.quantity, checkoutData)}>
-                                    <i className="minus"></i></button>
-                                </div>
-                                <input disabled className="form-control" value={checkoutData.quantity} type="text" />
-                                <div className="input-group-append">
-                                  <button
-                                    className="btn btn-gray" type="button"
-                                    onClick={this.handleClick.bind(this, constant.INCREMENT, checkoutData.quantity, checkoutData)}>
-                                    <i className="icon-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
+                              <h5>{checkoutData.quantityLabel} <span>{checkoutData.quantity}</span></h5>
                             </div>
                           </div>
-                          <div className="col-md-3 div-price-quantity">
+                          <div className="col-md-4 div-price-quantity">
                             <div className="cart-product-price">
-                              <p className="price">{checkoutData.salesPrice} <span>{checkoutData.currency}</span></p>
+                              <p className="price">{checkoutData.salesPrice} </p><span>{checkoutData.currency}</span>
                             </div>
                             <div className="cart-quantity d-none d-lg-block">
-                              <h5>{checkoutData.quantityLabel} {checkoutData.quantity} </h5>
+                              <h5>{checkoutData.quantityLabel} <span>{checkoutData.quantity}</span></h5>
                             </div>
                           </div>
                         </div>
@@ -132,7 +115,7 @@ class CheckoutConfirmation extends Component {
                   <div className="d-table-row">
                     <div className="d-table-cell first-row"><span>{translate("orderSummary.subtotal")}</span></div>
                     <div className="d-table-cell first-row">
-                      {subtotal} <span>{checkoutData.currency}</span>
+                      {subtotal.toFixed(2)} <span>{checkoutData.currency}</span>
                     </div>
                   </div>
                   <div className="d-table-row">
@@ -141,7 +124,7 @@ class CheckoutConfirmation extends Component {
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.total")}</span></div>
-                    <div className="d-table-cell">{total} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{total.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.vat")}</span></div>

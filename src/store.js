@@ -11,7 +11,7 @@ let middleware = applyMiddleware(thunk);
 const persistConfig = {
     key: 'vBeta2.2',
     storage,
-    blacklist: ['networkError', 'form']
+    blacklist: ['form']
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

@@ -294,9 +294,9 @@ export const emailSignup = () => {
   }
 }
 
-export const onLogout = () => {
+export const onLogout = () => {  
   return (dispatch) => {
-    axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/logout`)
+    return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/logout`)
       .then(res => {
         dispatch({
           type: LOGOUT
