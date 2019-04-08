@@ -37,13 +37,14 @@ class Routes extends Component {
     componentDidUpdate = (prevProps, prevState) => {
         const dateNow = moment();
         const expiredDate = moment(this.props.tokenExpire);
-        const dateDiff = dateNow.diff(expiredDate, 'hours');
-        const oneHourLeft = -1;
+        const dateDiff = dateNow.diff(expiredDate, 'minutes');
+        const oneHourLeft = -60;        
 
-
-        if (oneHourLeft >= dateDiff) {
-            this.props.onLogout();
-            this.props.clearCart();
+        if (dateDiff >= oneHourLeft) {
+            this.props.onLogout()
+            .then(() => {
+                this.props.clearCart();
+            })
         }
 
         if (prevProps.direction !== this.props.direction) {
