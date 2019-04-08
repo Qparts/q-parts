@@ -41,7 +41,7 @@ class Routes extends Component {
         const oneHourLeft = -1;
 
 
-        if (dateDiff >= oneHourLeft) {
+        if (oneHourLeft >= dateDiff) {
             this.props.onLogout();
             this.props.clearCart();
         }
