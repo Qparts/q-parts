@@ -19,7 +19,6 @@ import RouterScrollToTop from '../../components/RouterScrollToTop';
 import Nav from '../../components/UI/Nav';
 import moment from 'moment';
 import { clearCart } from '../../actions/cartAction';
-import { RADIX } from '../../constants';
 
 class Routes extends Component {
     constructor(props) {
@@ -37,17 +36,12 @@ class Routes extends Component {
     }
     componentDidUpdate = (prevProps, prevState) => {
         const dateNow = moment();
-        const expireHours = moment(this.props.tokenExpire);
-        const dateDiff = expireHours.diff(dateNow);
-        const hoursLeft = parseInt(moment(dateDiff).format("h"), RADIX);
-        const oneHour = 1;
-
-        // console.log(typeof(hoursLeft));
-        // console.log('hoursLeft: ', hoursLeft);
-        // console.log('oneHour: ', oneHour);
+        const expiredDate = moment(this.props.tokenExpire);
+        const dateDiff = dateNow.diff(expiredDate, 'hours');
+        const oneHourLeft = -1;
 
 
-        if (hoursLeft <= oneHour) {
+        if (dateDiff >= oneHourLeft) {
             this.props.onLogout();
             this.props.clearCart();
         }
