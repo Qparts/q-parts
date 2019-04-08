@@ -49,5 +49,6 @@ export const initialState = {
         completed: []
     },
     isModalAddToCart: false,
-    isQuotationorderCompleted: true
+    isQuotationorderCompleted: true,
+    isLoading: false
 }

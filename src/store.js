@@ -9,7 +9,7 @@ import reducer from './reducers';
 
 let middleware = applyMiddleware(thunk);
 const persistConfig = {
-    key: 'vBeta2.1',
+    key: 'vBeta2.2',
     storage,
     blacklist: ['networkError', 'form']
 };

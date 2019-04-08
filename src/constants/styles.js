@@ -118,7 +118,8 @@ export const styles = {
 			border-bottom-color: transparent !important;
         `,
   loading: {
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%'
   }
 }
 

@@ -9,6 +9,7 @@ import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
 import { clearCart } from '../../actions/cartAction';
+import { setLoading } from '../../actions/customerAction';
 import { Link, Redirect } from 'react-router-dom';
 import Title from '../UI/Title';
 
@@ -17,6 +18,8 @@ class CheckoutConfirmation extends Component {
 
   constructor(props) {
     super(props)
+
+    this.props.setLoading(false);
 
     if (props.checkout.paymentMethod === CREDIT_CARD) {
       paymentResponse(this.props.location.search);
@@ -186,6 +189,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     clearCart,
+    setLoading
   }, dispatch)
 }
 

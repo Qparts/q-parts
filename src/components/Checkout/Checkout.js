@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -189,19 +189,27 @@ class Checkout extends Component {
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
-								total={total} />
+								total={total}
+								setLoading={this.props.setLoading}
+								isLoading={this.props.isLoading} />
 						}} />
 					</Switch>
-					<div className="Checkout-Order_summary col-12 col-md-3">
-						<OrderSummary
-							direction={this.props.direction}
-							translate={translate}
-							isDelivery={canSubmitOrder}
-							submitButton={translate("orderSummary.placeOrder")}
-							checkoutData={checkoutData}
-							purchasedItems={checkoutData}
-							checkout={this.props.checkout} />
-					</div>
+					{
+						!this.props.isLoading && (
+							<div className="Checkout-Order_summary col-12 col-md-3">
+								<OrderSummary
+									direction={this.props.direction}
+									translate={translate}
+									isDelivery={canSubmitOrder}
+									submitButton={translate("orderSummary.placeOrder")}
+									checkoutData={checkoutData}
+									purchasedItems={checkoutData}
+									checkout={this.props.checkout}
+									setLoading={this.props.setLoading}
+									isLoading={this.props.isLoading} />
+							</div>
+						)
+					}
 				</div>
 			</section>
 		)
@@ -222,7 +230,8 @@ const mapStateToProps = state => ({
 	addresses: state.customer.detail.addresses,
 	isShippingCompleted: state.customer.isShippingCompleted,
 	isPaymentCompleted: state.customer.isPaymentCompleted,
-	purchasedItems: state.cart.purchasedItems
+	purchasedItems: state.cart.purchasedItems,
+	isLoading: state.customer.isLoading
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -239,7 +248,8 @@ const mapDispatchToProps = (dispatch) => {
 		completePayment,
 		incrementQuantity,
 		decrementQuantity,
-		changeDefaultAddress
+		changeDefaultAddress,
+		setLoading
 	}, dispatch)
 }
 
