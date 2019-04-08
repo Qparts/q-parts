@@ -96,18 +96,18 @@ class CheckoutConfirmation extends Component {
                                 <h3><Link to="#">{purchasedItem.desc}</Link></h3>
                                 <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
                               </header>
+                              <div>
+                                <div className="cart-quantity d-none d-lg-block">
+                                  <h5>{translate("general.quantity")}</h5>
+                                  <h5 className="quantity">{purchasedItem.quantity} </h5>
+                                </div>
+                              </div>
                               <div className="cart-product-price">
                                 <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
                               </div>
                               <div className="cart-actions">
                                 <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
                                 <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
-                              </div>
-                            </div>
-                            <div className="col-md-3">
-                              <div className="cart-quantity d-none d-lg-block">
-                                <h5>{translate("general.quantity")}</h5>
-                                <h5 className="quantity">{purchasedItem.quantity} </h5>
                               </div>
                             </div>
                           </div>
