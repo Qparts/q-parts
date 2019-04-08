@@ -88,13 +88,15 @@ class renderFileInput extends Component {
       })
   }
   render() {
-    const { input: { onChange, onBlur }, translate, ...props } = this.props;
+    const { input: { onChange, onBlur }, ...props } = this.props;
+    const { removeImage, translate, dispatch, ...renderFileInputProps } = this.props
     return (
         <div className="input-group-prepend input-file">
           <input type="file"
             ref={fileInput => this.fileInput = fileInput}
             onChange={this.adaptFileEventToValue(onChange)}
             onBlur={this.adaptFileEventToValue(onBlur)}
+            {...renderFileInputProps}
              />
           <Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
             <img
@@ -102,7 +104,7 @@ class renderFileInput extends Component {
               alt="not found"
               ref={`${originalImage}_${props.image}`}
             />
-          <div className="file-thumb">
+          <div className="file-thumb" style={{display: removeImage? 'none' : 'flex'}}>
             <img
                 style={{ display: 'none' }}
                 className="RenderFileInput-img"

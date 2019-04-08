@@ -616,7 +616,7 @@
     ],
     "startHere": [
       "ابدأ طلب تسعيرة",
-      "Start Qutaation Order"
+      "Start Quotation Order"
     ]
   },
   "navBar": {
@@ -1010,7 +1010,7 @@
         "Select from google map"
       ],
       "title": [
-        "عنوان",
+        "اسم العنوان",
         "Title"
       ],
       "region": [
@@ -1022,12 +1022,12 @@
         "City"
       ],
       "line1": [
-        "سطر العنوان ١",
+        "العنوان",
         "Address line 1"
       ],
       "line2": [
-        "سطر العنوان ٢",
-        "Address line 2"
+        "الحي أو أقرب معلم",
+        "District / Nearest Landmark"
       ],
       "zipCode": [
         "الرمز البريدي",
@@ -1748,12 +1748,12 @@
         "Delete"
       ],
       "addressLine1": [
-        "سطر العنوان ١",
-        "Address (Line 1)"
+        "العنوان",
+        "Address"
       ],
       "addressLine2": [
-        "سطر العنوان ٢",
-        "Address (Line 2)"
+        "الحي أو أقرب معلم",
+        "District / Nearest Landmark"
       ],
       "zipCode": [
         "الرمز البريدي",

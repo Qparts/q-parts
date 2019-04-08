@@ -28,7 +28,7 @@ const dark50 = 'rgba(39, 39, 52, 0.5)';
 const dark70 = 'rgba(39, 39, 52, 0.7)';
 const dark80 = 'rgba(39, 39, 52, 0.8)';
 
-const error = '#fbc0bd';
+const error = '#c82938';
 const invalid = '#e8d59a';
 const success = 'rgba(48, 213, 118, 0.3)';
 
@@ -118,7 +118,8 @@ export const styles = {
 			border-bottom-color: transparent !important;
         `,
   loading: {
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%'
   }
 }
 

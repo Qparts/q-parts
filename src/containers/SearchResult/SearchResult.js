@@ -31,6 +31,7 @@ import { ClipLoader } from "react-spinners";
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { getLength } from '../../utils/array';
 import ResultNotFound from './ResultNotFound';
+import { r, l, left } from '../../utils/directional';
 const GRID = 'GRID';
 const LIST = 'LIST';
 
@@ -382,23 +383,23 @@ class SearchResult extends Component {
 
 		let btnNext = <li className="next">
 			<Link to="#" onClick={this.nextPage}>
-			<i className="icon-arrow-r"></i>
+			<i className={`icon-arrow-${r(direction)}`}></i>
 			</Link>
 		</li>
 		let btnPrev = <li className="prev">
 			<Link to="#" onClick={this.prevPage}>
-				<i className="icon-arrow-l"></i>
+				<i className={`icon-arrow-${l(direction)}`}></i>
 			</Link>
 		</li>
 
 		if (this.state.startSize <= 1) {
 			btnPrev = <li className="disabled">
-					<Link to="/" onClick={ (e) => e.preventDefault() }><i className="icon-arrow-l"></i></Link>
+					<Link to="/" onClick={ (e) => e.preventDefault() }><i className={`icon-arrow-${l(direction)}`}></i></Link>
 			</li>;
 		}
 		if (this.state.endSize === this.state.resultSize) {
 				btnNext= <li className="disabled">
-					<Link to="/" onClick={ (e) => e.preventDefault() }><i className="disabled icon-arrow-r"></i></Link>
+					<Link to="/" onClick={ (e) => e.preventDefault() }><i className={`icon-arrow-${r(direction)}`}></i></Link>
 				</li>;
 		}
 		const paramsN = getQuery(this.props.location);
@@ -427,7 +428,7 @@ class SearchResult extends Component {
 												</button>
 											</div>
 											<div className="col">
-												<h3>{this.props.translate("general.filter")} {/*Motor Oil*/} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
+												<h3>{this.props.translate("general.filter")} {this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
 											</div>
 											<div className="col-auto">
 												<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
@@ -680,7 +681,7 @@ class SearchResult extends Component {
 															<div className="row">
 																<div className="col-auto">
 																	<button type="button" onClick={this.handleBack} className="btn reset">
-																		<i className="icon-arrow-left"></i>
+																		<i className={`icon-arrow-${left(direction)}`}></i>
 																	</button>
 																</div>
 																<div className="col">

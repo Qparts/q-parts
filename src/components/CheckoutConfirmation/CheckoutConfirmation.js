@@ -5,9 +5,10 @@ import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
+import { ClipLoader } from "react-spinners";
 
 import './CheckoutConfirmation.css';
-import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
+import { CREDIT_CARD, BANK_TRANSFER, styles } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
 import { getTranslatedObject, l, right } from '../../utils';
 
@@ -19,8 +20,14 @@ class CheckoutConfirmation extends Component {
   static defaultProps = {
     divCol: 'col-lg-12'
   }
+  constructor(props) {
+    super(props)
+
+    this.props.setLoading(false);
+  }
   handleClick = () => {
-    const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
+    const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history, setLoading } = this.props;
+    setLoading(true);
     const addressId = deliveryAddress.id;
     const cartItems = purchasedItems.map(purchasedItem => {
       return {
@@ -45,13 +52,28 @@ class CheckoutConfirmation extends Component {
       postWireTransfer(data)
         .then(res => {
           history.push(`/payment-response?cartId=${res.data.cartId}`)
+          this.props.setLoading(false);
         })
     }
   }
 
   render() {
-    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage, divCol } = this.props;
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage, isLoading, divCol } = this.props;
+
     const removeButton= true;
+
+    if (isLoading) {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
+    }
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">

@@ -9,3 +9,4 @@ export const CART_SERVICE = `/${API_V2}/cart`;
 export const QUOTATION_SERVICE = `/${API_V2}/quotation`;
 export const WORDPRESS_API_ROOT = 'http://localhost:8888/blog/wp-json/wp/v2';
 export const NETWORK_FAILURE = 'NETWORK_FAILURE';
+export const CLEAR_NETWORK_ERROR = 'CLEAR_NETWORK_ERROR';

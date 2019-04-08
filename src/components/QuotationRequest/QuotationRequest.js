@@ -24,6 +24,7 @@ import Login from '../../containers/Authentication/Login/Login';
 import { postQuotation } from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
 import * as validations from '../../utils';
+import * as normalizing from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import RenderField from '../RenderField/RenderField';
 
@@ -37,7 +38,8 @@ class QuotationRequest extends Component {
 
 		this.state = {
 			modal: false,
-			dialogType: signin
+			dialogType: signin,
+			garage: null
 		}
 
 		if (isAuth(this.props.token)) {
@@ -45,14 +47,35 @@ class QuotationRequest extends Component {
 		}
 	}
 
+	componentDidUpdate = (prevProps, prevState) => {
+		const { defaultLang } = this.props
+		if (_.has(this.props.formValues, 'garage') && this.props.formValues.garage !== prevProps.formValues.garage) {
+			const selectedVehicle = this.props.formValues.garage.vehicle;
+			const vin = this.props.formValues.garage.vin;
+
+			this.setState({
+				garage: [
+					{ value: 1, label: getTranslatedObject(selectedVehicle.make, defaultLang, 'name', 'nameAr') },
+					{ value: 2, label: getTranslatedObject(selectedVehicle.model, defaultLang, 'name', 'nameAr') },
+					{ value: 3, label: selectedVehicle.year },
+					{ vin }
+				]
+			}, () => {
+				this.handleFillValues()
+			})
+		};
+	}
+	
+
 	handleSubmit = values => {
 		let {
 			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
 		} = values;
 		const customerVehicleId = garage ? garage.vehicleYearId : null;
 		const imageAttached = vinImage ? true : false;
+		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
+		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
 		vehicleYearId = customerVehicleId ? null : vehicleYearId;
-		vin = customerVehicleId ? null : vin;
 
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
@@ -127,6 +150,16 @@ class QuotationRequest extends Component {
 			default:
 				break;
 		}
+	}
+
+	handleFillValues = () => {
+		const { garage } = this.state
+		
+		this.props.changeFieldValue('QuotationRequest', 'make', garage[0]);
+		this.props.changeFieldValue('QuotationRequest', 'model', garage[1]);
+		this.props.changeFieldValue('QuotationRequest', 'year', garage[2]);
+		this.props.changeFieldValue('QuotationRequest', 'vin', garage[3].vin);
+		this.props.changeFieldValue('QuotationRequest', 'vinImage', null);
 	}
 
 	render() {
@@ -250,18 +283,6 @@ class QuotationRequest extends Component {
 				</h6>
 			</div>
 		);
-		let garage = null;
-		if (_.has(this.props.formValues, 'garage')) {
-			const selectedVehicle = this.props.formValues.garage.vehicle;
-			const vin = this.props.formValues.garage.vin;
-
-			garage = [
-				{ value: 1, label: getTranslatedObject(selectedVehicle.make, defaultLang, 'name', 'nameAr') },
-				{ value: 2, label: getTranslatedObject(selectedVehicle.model, defaultLang, 'name', 'nameAr') },
-				{ value: 3, label: selectedVehicle.year },
-				{ value: 4, label: vin }
-			]
-		};
 
 		return (
 			<Fragment>
@@ -350,10 +371,10 @@ class QuotationRequest extends Component {
 										name="make"
 										placeholder={" "}
 										component={SelectInput}
-										defaultValue={garage ? garage[0] : null}
 										options={groupedvehicleMake}
 										formatGroupLabel={formatvehicleMakeLabel}
 										validate={[validations.required]}
+										isDisabled={_.has(this.props.formValues, 'garage')}
 									/>
 								</div>
 								<div className="col-lg col-md-6 float-label">
@@ -362,10 +383,10 @@ class QuotationRequest extends Component {
 										name="model"
 										placeholder={" "}
 										component={SelectInput}
-										defaultValue={garage ? garage[1] : null}
 										options={groupedvehicleModel}
 										formatGroupLabel={formatvehicleModelLabel}
 										validate={[validations.required]}
+										isDisabled={_.has(this.props.formValues, 'garage')}
 									/>
 								</div>
 								<div className="col-lg-auto col-md-6 float-label">
@@ -374,30 +395,31 @@ class QuotationRequest extends Component {
 										name="year"
 										placeholder={" "}
 										component={SelectInput}
-										defaultValue={garage ? garage[2] : null}
 										options={groupedvehicleYear}
 										formatGroupLabel={formatvehicleYearLabel}
 										validate={[validations.required]}
+										isDisabled={_.has(this.props.formValues, 'garage')}
 									/>
 								</div>
 								<div className="col-lg col-md-6">
-									<div className="add-file">
+									<div className="add-file has-float-label">
 										<Field
 											name="vin"
 											type="text"
-											className="form-control"
+											hasFloatLabel
+											label={translate("quotationOrder.vin")}
 											placeholder={translate("quotationOrder.vin")}
 											component={RenderField}
-											value={garage ? garage[3] : null}
 											maxLength="17"
-				              textTransform="uppercase"
-											validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]}
-										/>
+											normalize={normalizing.upper}
+											validate={_.has(this.props.formValues, 'vinImage') ? [] : [validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]}
+											disabled={_.has(this.props.formValues, 'garage')} />
 										<Field
+											removeImage={_.has(this.props.formValues, 'garage')}
 											name="vinImage"
 											component={RenderFileInput}
 											image="image"
-										/>
+											disabled={_.has(this.props.formValues, 'garage')} />
 									</div>
 								</div>
 							</div>
@@ -440,6 +462,7 @@ class QuotationRequest extends Component {
 										component={SelectInput}
 										options={groupedRegion}
 										formatGroupLabel={formatRegionLabel}
+										validate={[validations.required]}
 									/>
 								</div>
 								<div className="col-md float-label">
@@ -450,13 +473,14 @@ class QuotationRequest extends Component {
 										component={SelectInput}
 										options={groupedCity}
 										formatGroupLabel={formatCityLabel}
+										validate={[validations.required]}
 									/>
 								</div>
 							</div>
 						</div>
 						<div className="row submit-qout">
 							<div className="col-lg">
-								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")}/>.</p>
+								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")} />.</p>
 							</div>
 							<div className="col-lg-auto">
 								{

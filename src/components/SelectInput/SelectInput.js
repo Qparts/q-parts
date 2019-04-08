@@ -22,6 +22,16 @@ export default class SelectInput extends Component {
 
    }
 
+   componentDidUpdate = (prevProps, prevState) => {
+     if(this.props.input.value !== prevProps.input.value && this.props.meta.dirty) {
+        this.setState({
+            hasFloat: "on"
+        })
+     } 
+     
+   }
+   
+   
    getIconClassName = () => {
        return helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "icon-checked" : "";
    }
@@ -41,8 +51,10 @@ export default class SelectInput extends Component {
    }
 
    handleMenuClose = (value) => {
-       this.handleBlur(value);
-       if (value) {
+       const textValue = value || this.props.input.value;
+       
+       this.handleBlur(textValue);
+       if (textValue) {
            this.setState({
                hasFloat: "on"
            })
@@ -54,14 +66,12 @@ export default class SelectInput extends Component {
    }
    render() {
        const style = StyleSheet.create({
-           // border: {
-           //     border: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.success}` :
-           //         helpers.isInvalid(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.invalid}` :
-           //             helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : "none",
-           // },
-           // icon: {
-           //     color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "#30d576" : "none"
-           // }
+           border: {
+               border: helpers.isRequired(this.props.meta.error, this.props.meta.touched) ? `4px solid ${colors.error}` : "none"
+           },
+           icon: {
+               color: helpers.isSucceed(this.props.meta.error, this.props.meta.touched) ? "#30d576" : "none"
+           }
        });
        return (
                <InputGroup className={`select-input ${this.state.hasFloat}`}>
