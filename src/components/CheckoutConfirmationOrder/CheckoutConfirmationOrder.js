@@ -57,7 +57,7 @@ class CheckoutConfirmation extends Component {
       subtotal += checkoutData[i].subtotal;
     }
     const total = subtotal + 35;
-    const vat = total + 0.05;
+    const vat = total * 0.05;
     const grandTotal = total + vat;
 
     if (_.isEmpty(purchasedItems)) {
@@ -128,11 +128,11 @@ class CheckoutConfirmation extends Component {
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.vat")}</span></div>
-                    <div className="d-table-cell">{vat} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{vat.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.grandTotal")}</span></div>
-                    <div className="d-table-cell">{grandTotal} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{grandTotal.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                 </div>
               </div>
