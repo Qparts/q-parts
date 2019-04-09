@@ -12,7 +12,7 @@ const paths = require('./paths');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const mainCss = new ExtractTextPlugin({
-  filename: 'static/css/main.css'
+  filename: 'static/css/main-en.css'
 });
 const mainArCss = new ExtractTextPlugin({
   filename: 'static/css/main-ar.css'

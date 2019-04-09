@@ -30,7 +30,7 @@ export class CompletedRequest extends Component {
             <Link
                 to="#"
                 data-toggle="collapse"
-                data-target={".multi-collapse"}
+                data-target={`.${replies.id}`}
                 aria-expanded="false"
                 aria-controls={ids.join(' ')}>
                 <li className="bg-white">

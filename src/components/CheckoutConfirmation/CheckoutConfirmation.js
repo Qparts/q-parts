@@ -5,22 +5,32 @@ import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
+import { ClipLoader } from "react-spinners";
 
 import './CheckoutConfirmation.css';
-import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
+import { CREDIT_CARD, BANK_TRANSFER, styles } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
 import { getTranslatedObject, l, right } from '../../utils';
 
 import { Link } from 'react-router-dom'
 import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
+import { Alert } from 'reactstrap';
 
 class CheckoutConfirmation extends Component {
   static defaultProps = {
     divCol: 'col-lg-12'
   }
+  constructor(props) {
+    super(props)
+    this.state ={
+      error: false
+    }
+    this.props.setLoading(false);
+  }
   handleClick = () => {
-    const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history } = this.props;
+    const { purchasedItems, checkout: { deliveryAddress, creditCard, paymentMethod }, history, setLoading } = this.props;
+    setLoading(true);
     const addressId = deliveryAddress.id;
     const cartItems = purchasedItems.map(purchasedItem => {
       return {
@@ -29,7 +39,6 @@ class CheckoutConfirmation extends Component {
         salesPrice: purchasedItem.salesPrice
       }
     });
-
     if (paymentMethod === CREDIT_CARD) {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
@@ -38,6 +47,10 @@ class CheckoutConfirmation extends Component {
             history.push(`/payment-response?cartId=${res.data.cartId}`)
           } else if (res.status === 202) {
             window.location = res.data.transactionUrl;
+          }else{
+            this.setState({
+              error: true
+            })
           }
         });
     } else if (paymentMethod === BANK_TRANSFER) {
@@ -45,17 +58,36 @@ class CheckoutConfirmation extends Component {
       postWireTransfer(data)
         .then(res => {
           history.push(`/payment-response?cartId=${res.data.cartId}`)
+          this.props.setLoading(false);
         })
     }
   }
 
   render() {
-    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage, divCol } = this.props;
+    const { checkout, translate, purchasedItems, incrementQuantity, decrementQuantity, direction, currentLanguage, isLoading, divCol } = this.props;
+
     const removeButton= true;
+
+    if (isLoading) {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
+    }
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
+            {this.state.error &&
+              <Alert color="danger">
+                transaction failed
+              </Alert>}
             <div className="col-12">
               <div className="row">
                 <div className="col-12 col-md-6 delivery-address">
@@ -96,18 +128,18 @@ class CheckoutConfirmation extends Component {
                                 <h3><Link to="#">{purchasedItem.desc}</Link></h3>
                                 <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
                               </header>
+                              <div>
+                                <div className="cart-quantity d-none d-lg-block">
+                                  <h5>{translate("general.quantity")}</h5>
+                                  <h5 className="quantity">{purchasedItem.quantity} </h5>
+                                </div>
+                              </div>
                               <div className="cart-product-price">
                                 <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
                               </div>
                               <div className="cart-actions">
                                 <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
                                 <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
-                              </div>
-                            </div>
-                            <div className="col-md-3">
-                              <div className="cart-quantity d-none d-lg-block">
-                                <h5>{translate("general.quantity")}</h5>
-                                <h5 className="quantity">{purchasedItem.quantity} </h5>
                               </div>
                             </div>
                           </div>

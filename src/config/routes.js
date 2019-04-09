@@ -82,7 +82,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/setting",
         component: Setting,
-      //  isAuth: isAuth,
+        isAuth: isAuth,
         redirectTo: '/'
     },
     {

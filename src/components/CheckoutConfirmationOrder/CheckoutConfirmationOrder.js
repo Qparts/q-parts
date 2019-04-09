@@ -9,6 +9,7 @@ import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD } from '../../constants';
 import * as constant from '../../constants'
 import { clearCart } from '../../actions/cartAction';
+import { setLoading } from '../../actions/customerAction';
 import { Link, Redirect } from 'react-router-dom';
 import Title from '../UI/Title';
 
@@ -17,6 +18,8 @@ class CheckoutConfirmation extends Component {
 
   constructor(props) {
     super(props)
+
+    this.props.setLoading(false);
 
     if (props.checkout.paymentMethod === CREDIT_CARD) {
       paymentResponse(this.props.location.search);
@@ -54,7 +57,7 @@ class CheckoutConfirmation extends Component {
       subtotal += checkoutData[i].subtotal;
     }
     const total = subtotal + 35;
-    const vat = total + 0.05;
+    const vat = total * 0.05;
     const grandTotal = total + vat;
 
     if (_.isEmpty(purchasedItems)) {
@@ -125,11 +128,11 @@ class CheckoutConfirmation extends Component {
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.vat")}</span></div>
-                    <div className="d-table-cell">{vat} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{vat.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.grandTotal")}</span></div>
-                    <div className="d-table-cell">{grandTotal} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{grandTotal.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                 </div>
               </div>
@@ -169,6 +172,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     clearCart,
+    setLoading
   }, dispatch)
 }
 
