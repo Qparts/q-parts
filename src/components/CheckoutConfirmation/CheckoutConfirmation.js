@@ -15,6 +15,7 @@ import { getTranslatedObject, l, right } from '../../utils';
 import { Link } from 'react-router-dom'
 import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
+import { Alert } from 'reactstrap';
 
 class CheckoutConfirmation extends Component {
   static defaultProps = {
@@ -22,7 +23,9 @@ class CheckoutConfirmation extends Component {
   }
   constructor(props) {
     super(props)
-
+    this.state ={
+      error: false
+    }
     this.props.setLoading(false);
   }
   handleClick = () => {
@@ -36,7 +39,6 @@ class CheckoutConfirmation extends Component {
         salesPrice: purchasedItem.salesPrice
       }
     });
-
     if (paymentMethod === CREDIT_CARD) {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
@@ -45,6 +47,10 @@ class CheckoutConfirmation extends Component {
             history.push(`/payment-response?cartId=${res.data.cartId}`)
           } else if (res.status === 202) {
             window.location = res.data.transactionUrl;
+          }else{
+            this.setState({
+              error: true
+            })
           }
         });
     } else if (paymentMethod === BANK_TRANSFER) {
@@ -78,6 +84,10 @@ class CheckoutConfirmation extends Component {
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
+            {this.state.error &&
+              <Alert color="danger">
+                transaction failed
+              </Alert>}
             <div className="col-12">
               <div className="row">
                 <div className="col-12 col-md-6 delivery-address">
