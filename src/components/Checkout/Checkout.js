@@ -111,6 +111,9 @@ class Checkout extends Component {
 			orderClass += " orderActive"
 			paymentClass += " paymentDone"
 		}
+		if(checkoutData.length === 0){
+			this.props.history.push('/');
+		}
 		return (
 			<section className="checkout-container-shipping">
 				<MediumScreen>
