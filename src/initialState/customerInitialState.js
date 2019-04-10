@@ -50,5 +50,6 @@ export const initialState = {
     },
     isModalAddToCart: false,
     isQuotationorderCompleted: true,
-    isLoading: false
+    isLoading: false,
+    isValidcreditCard: false
 }

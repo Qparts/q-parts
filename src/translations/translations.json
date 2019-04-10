@@ -199,6 +199,10 @@
     "vin": [
       "رقم الهيكل",
       "Vin Number"
+    ],
+    "error": [
+      "فشل الاجراء",
+      "transaction failed"
     ]
   },
   "tires": {

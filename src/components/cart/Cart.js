@@ -166,12 +166,12 @@ class Cart extends Component {
 								<CustomerService
 									messages={chatMessages}
 									url="//wa.me/966508448856/" />
-								<div className="banner-250 d-none d-lg-table bg-white">
+								{/*<div className="banner-250 d-none d-lg-table bg-white">
 									<p className="">
 										Google Ad<br />
 										250x250
 								</p>
-								</div>
+								</div>*/}
 							</div>
 						</form>
 					</div>

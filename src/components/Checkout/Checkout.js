@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, setValidCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -116,6 +116,9 @@ class Checkout extends Component {
 			orderClass += " orderActive"
 			paymentClass += " paymentDone"
 		}
+		if(checkoutData.length === 0){
+			this.props.history.push('/');
+		}
 		return (
 			<section className="checkout-container-shipping">
 				<MediumScreen>
@@ -183,7 +186,8 @@ class Checkout extends Component {
 								translate={translate}
 								addPaymentMethod={this.props.addPaymentMethod}
 								completePayment={this.props.completePayment}
-								checkout={this.props.checkout} />
+								checkout={this.props.checkout} 
+								setValidCredit={this.props.setValidCredit}/>
 						}} />
 
 						<Route path="/checkout/confirm" exact={true} render={() => {
@@ -198,7 +202,9 @@ class Checkout extends Component {
 								decrementQuantity={this.props.decrementQuantity}
 								grandTotal={grandTotal}
 								setLoading={this.props.setLoading}
-								isLoading={this.props.isLoading} />
+								isLoading={this.props.isLoading}
+								setValidCredit={this.props.setValidCredit}
+								isValidcreditCard={this.props.isValidcreditCard} />
 						}} />
 					</Switch>
 					{
@@ -214,7 +220,9 @@ class Checkout extends Component {
 										purchasedItems={checkoutData}
 										checkout={this.props.checkout}
 										setLoading={this.props.setLoading}
-										isLoading={this.props.isLoading} />
+										isLoading={this.props.isLoading}
+										setValidCredit={this.props.setValidCredit}
+										isValidcreditCard={this.props.isValidcreditCard} />
 								</div>
 							</div>
 						)
@@ -240,7 +248,8 @@ const mapStateToProps = state => ({
 	isShippingCompleted: state.customer.isShippingCompleted,
 	isPaymentCompleted: state.customer.isPaymentCompleted,
 	purchasedItems: state.cart.purchasedItems,
-	isLoading: state.customer.isLoading
+	isLoading: state.customer.isLoading,
+	isValidcreditCard: state.customer.isValidcreditCard
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -258,7 +267,8 @@ const mapDispatchToProps = (dispatch) => {
 		incrementQuantity,
 		decrementQuantity,
 		changeDefaultAddress,
-		setLoading
+		setLoading,
+		setValidCredit
 	}, dispatch)
 }
 

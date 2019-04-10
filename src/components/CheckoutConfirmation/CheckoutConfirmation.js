@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import Button from '../UI/Button';
-import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
-import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { ClipLoader } from "react-spinners";
 
 import './CheckoutConfirmation.css';
@@ -14,15 +11,14 @@ import { getTranslatedObject, l, right } from '../../utils';
 
 import { Link } from 'react-router-dom'
 import { handleImageFallback } from '../../utils';
-import * as constant from '../../constants';
+import { Alert } from 'reactstrap';
 
 class CheckoutConfirmation extends Component {
   static defaultProps = {
     divCol: 'col-lg-12'
   }
   constructor(props) {
-    super(props)
-
+    super(props);
     this.props.setLoading(false);
   }
   handleClick = () => {
@@ -36,7 +32,7 @@ class CheckoutConfirmation extends Component {
         salesPrice: purchasedItem.salesPrice
       }
     });
-
+    const self = this;
     if (paymentMethod === CREDIT_CARD) {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
@@ -46,6 +42,10 @@ class CheckoutConfirmation extends Component {
           } else if (res.status === 202) {
             window.location = res.data.transactionUrl;
           }
+        })
+        .catch(function(fallback) {
+          self.props.setValidCredit(false);
+          self.props.setLoading(false);
         });
     } else if (paymentMethod === BANK_TRANSFER) {
       const data = { cartItems, addressId }
@@ -74,10 +74,18 @@ class CheckoutConfirmation extends Component {
         </div>
       )
     }
+
+    if(!this.props.isValidcreditCard){
+      window.scrollTo(0, 0);
+    }
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
+            {!this.props.isValidcreditCard &&
+              <Alert color="danger">
+                {translate("general.error")}
+              </Alert>}
             <div className="col-12">
               <div className="row">
                 <div className="col-12 col-md-6 delivery-address">
