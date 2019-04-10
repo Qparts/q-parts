@@ -14,7 +14,7 @@ import Button from '../UI/Button';
 
 import { SmallScreen, MediumScreen } from '../Device/index.js'
 
-import _ from 'lodash';
+import { colors } from '../../constants'
 
 const shippingStep = '/checkout';
 const paymentStep = '/checkout/payment';
@@ -78,6 +78,11 @@ class Checkout extends Component {
 		let shippingClass = "shipping";
 		let paymentClass = "payment";
 
+		const styles = {
+			hideShadow: {
+				boxShadow: !canSubmitOrder ? 'none' : colors.boxShadow
+			}
+		}
 
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
@@ -203,19 +208,21 @@ class Checkout extends Component {
 					</Switch>
 					{
 						!this.props.isLoading && (
-							<div className="Checkout-Order_summary col-12 col-md-3">
-								<OrderSummary
-									direction={this.props.direction}
-									translate={translate}
-									isDelivery={canSubmitOrder}
-									submitButton={translate("orderSummary.placeOrder")}
-									checkoutData={checkoutData}
-									purchasedItems={checkoutData}
-									checkout={this.props.checkout}
-									setLoading={this.props.setLoading}
-									isLoading={this.props.isLoading}
-									correctCredit={this.props.correctCredit}
-									isCorrectCredit={this.props.isCorrectCredit} />
+							<div className="col-12 col-md-3">
+								<div style={styles.hideShadow} className="order-summary">
+									<OrderSummary
+										direction={this.props.direction}
+										translate={translate}
+										isDelivery={canSubmitOrder}
+										submitButton={translate("orderSummary.placeOrder")}
+										checkoutData={checkoutData}
+										purchasedItems={checkoutData}
+										checkout={this.props.checkout}
+										setLoading={this.props.setLoading}
+										isLoading={this.props.isLoading}
+										correctCredit={this.props.correctCredit}
+										isCorrectCredit={this.props.isCorrectCredit} />
+								</div>
 							</div>
 						)
 					}
