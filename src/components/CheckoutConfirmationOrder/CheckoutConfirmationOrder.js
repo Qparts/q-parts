@@ -18,15 +18,20 @@ class CheckoutConfirmation extends Component {
 
   constructor(props) {
     super(props)
-
+    this.state={
+      copyPurchasedItem:[]
+    }
     this.props.setLoading(false);
 
     if (props.checkout.paymentMethod === CREDIT_CARD) {
       paymentResponse(this.props.location.search);
     }
-  }
-  componentWillUnmount() {
     this.props.clearCart();
+  }
+  componentDidMount(){
+    this.setState({
+      copyPurchasedItem: this.props.purchasedItems
+    })
   }
 
   handleClick = () => {
@@ -37,7 +42,8 @@ class CheckoutConfirmation extends Component {
   render() {
     const { checkout, translate, location, purchasedItems, currentLanguage } = this.props;
     const params = getQuery(location);
-    const checkoutData = purchasedItems.map(item => {
+    console.log(this.state.copyPurchasedItem,purchasedItems)
+    const checkoutData = this.state.copyPurchasedItem.map(item => {
       return {
         ...item.product,
         desc: item.product.desc,
@@ -60,9 +66,6 @@ class CheckoutConfirmation extends Component {
     const vat = total * 0.05;
     const grandTotal = total + vat;
 
-    if (_.isEmpty(purchasedItems)) {
-      return <Redirect to="/" />
-    }
     return (
       <Fragment>
         <section id="confirm-order">
