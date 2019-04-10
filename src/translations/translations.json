@@ -199,6 +199,10 @@
     "all": [
       "الكل",
       "All"
+    ],
+    "error": [
+      "فشل الاجراء",
+      "transaction failed"
     ]
   },
   "tires": {

@@ -79,7 +79,7 @@ class CheckoutConfirmation extends Component {
         </div>
       )
     }
-    
+
     if(this.props.isCorrectCredit){
       window.scrollTo(0, 0);
     }
@@ -89,7 +89,7 @@ class CheckoutConfirmation extends Component {
           <div className="CheckoutConfirmation-container">
             {this.props.isCorrectCredit &&
               <Alert color="danger">
-                transaction failed
+                {translate("general.error")}
               </Alert>}
             <div className="col-12">
               <div className="row">
