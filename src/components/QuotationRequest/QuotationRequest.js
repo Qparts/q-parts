@@ -265,11 +265,7 @@ class QuotationRequest extends Component {
 				<span>{translate("quotationOrder.shipping.city")}</span>
 			</div>
 		);
-		const garageList = [
-			{ value: 1, label: "Ford Focus 2016, VIN(000 000 000 000 11)" },
-			{ value: 2, label: "Kia Cerato 2018, VIN(000 000 000 000 11)" },
-		];
-		const vehiclesFormat = getFormattedVehicles(cusVehicles, defaultLang);
+		const vehiclesFormat = getFormattedVehicles(cusVehicles, defaultLang, translate);
 		const groupedGarageList = [
 			{
 				options: vehiclesFormat,

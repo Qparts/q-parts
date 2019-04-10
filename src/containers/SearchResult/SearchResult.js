@@ -266,7 +266,6 @@ class SearchResult extends Component {
 
 	runCallbacks = (data) => {
 		this.generateSelectedOptions(data);
-		this.props.onSetParams(data.filterObjects);
 	}
 	getCollapseIcon = (collapse) => {
 		return this.state[collapse] ? 'icon-minus' : 'icon-plus';
@@ -331,26 +330,8 @@ class SearchResult extends Component {
 	done = (e) => {
 		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
-		this.handleGo(e);
 	}
 
-	handleGo = (e) => {
-		e.preventDefault();
-		this.props.params.forEach(param => {
-			if (param.isSelected) {
-				const filterQuery = `${param.title}=${param.id}`;
-				const newUrl = addQuery(filterQuery);
-
-				return newUrl ? this.props.history.push(newUrl) : newUrl;
-			} else {
-				const filterQuery = `${param.title}=${param.id}`;
-				const newUrl = removeQuery(filterQuery);
-
-				return newUrl ? this.props.history.push(newUrl) : newUrl
-			}
-		});
-
-	}
 	getCategoryName = () => {
 		let categoryId = queryString.parse(window.location.search.slice(1)).category;
 		let query = queryString.parse(window.location.search.slice(1)).query;
@@ -404,12 +385,6 @@ class SearchResult extends Component {
 		}
 		const paramsN = getQuery(this.props.location);
 		let pageNumber = Number(paramsN.page);
-
-		let selectedParams = window.location.search.slice(1).split('&');
-		const hasSelected = params.filter(param => {
-			const filterParam = `${param.title}=${param.id}`;
-			return selectedParams.includes(filterParam);
-		});
 
 		return (
 			<section className="results-container gray-bg">
@@ -672,7 +647,7 @@ class SearchResult extends Component {
 													<div className="row">
 														<label className="col-auto">{filterObject[key]}</label>
 														<div className="col">{selectedOptions.map((item, index) => (
-															(item[key] === filterObject[key] && item.selectedOptions.length !==0 ? <p key={index}>{item.selectedOptions.length}</p> : <p>{this.props.translate("general.all")}</p>)
+															(item[key] === filterObject[key] && item.selectedOptions.length !==0 ? <p key={index}>{item.selectedOptions.length}</p> : <p key={index}>{this.props.translate("general.all")}</p>)
 														))}</div>
 
 													</div>
@@ -885,9 +860,6 @@ class SearchResult extends Component {
 										</div>
 									</li>*/}
 								</ul>
-								<Button type="submit" className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} onClick={this.handleGo}>
-								{this.props.translate("general.buttons.go")}</Button>
-
 							</div>
 
 						</LargeScreen>
@@ -917,7 +889,7 @@ class SearchResult extends Component {
 									</div>
 								</div>
 								<LargeScreen>
-									<div className="filter-result" style={isEmpty(hasSelected) ? commonStyles.hide : styles.show}>
+									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
 										<ul className="list-inline">
 											{
 												filtrationChecked.map((item, index) => (

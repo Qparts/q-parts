@@ -26,8 +26,9 @@ export const addQuery = (param) => {
   const searchQueries = getUniqueSearchQuery();
   const hasSameQuery = searchQueries.includes(param);
   const newQuery = [...searchQueries, param];
+  const oldQuery = searchQueries.filter(searchQuery => searchQuery !== param);  
 
-  return hasSameQuery ? null : `${window.location.pathname}?${newQuery.join('&')}`;
+  return hasSameQuery ? `${window.location.pathname}?${oldQuery.join('&')}` : `${window.location.pathname}?${newQuery.join('&')}`;
 }
 
 export const removeQuery = (param) => {
@@ -35,7 +36,7 @@ export const removeQuery = (param) => {
   const shouldRemoveQuery = searchQueries.includes(param);
   const newQuery = searchQueries.filter(searchQuery => searchQuery !== param);
 
-  return shouldRemoveQuery ? `${window.location.pathname}?${newQuery.join('&')}` : null;
+  return shouldRemoveQuery ? `${window.location.pathname}?${newQuery.join('&')}` : `${window.location.pathname}?${searchQueries.join('&')}`;
 }
 
 const getUniqueSearchQuery = () => {

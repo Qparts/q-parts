@@ -32,6 +32,8 @@ const error = '#c82938';
 const invalid = '#e8d59a';
 const success = 'rgba(48, 213, 118, 0.3)';
 
+const boxShadow = '0px 18px 18px 0px rgba(0, 0, 0, 0.07)';
+
 const selectStyle = {
   menu: (styles) => {
     return {
@@ -196,7 +198,8 @@ export const colors = {
   dark80,
   error,
   invalid,
-  success
+  success,
+  boxShadow
 }
 
 export const helpers = {
