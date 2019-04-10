@@ -90,6 +90,6 @@ button:disabled{
 }
 .list-unstyled {
   @include if-rtl{
-    @include padding-left(0);
+    padding-right: 0;
   };
 }

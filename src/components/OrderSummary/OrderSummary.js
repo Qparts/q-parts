@@ -51,52 +51,32 @@ class OrderSummary extends Component {
     const total = subtotal + 35;
     const vat = total * 0.05;
     const grandTotal = total + vat;
-    const renderHeader = !this.props.removeHeader && <div className="order-summary__header">
-      <div>
-        <h5 className="card-title">{translate("orderSummary.title")}</h5>
-      </div>
-      <div>
-        <span className="card-subtitle mb-2 order-summary__text-muted">{quantity} {translate("orderSummary.itemsAmount")}</span>
-      </div>
-      <div className="h-seperator" />
-    </div>
+    const renderHeader = !this.props.removeHeader && <header>
+      <h2>{translate("orderSummary.title")}</h2>
+      <span>{quantity} {translate("orderSummary.itemsAmount")}</span>
+    </header>
     if (quantity > 0) {
       orderSummary =
-        <section id="order-summary" className={this.props.col}>
-          <div className="border card card-body">
-            {renderHeader}
-            <div className="order-summary__details">
-              <span className="item-key">{translate("orderSummary.subtotal")}</span>
-              <span className="item-value">
-                {subtotal.toFixed(2)}
-                <span>{checkoutData[0].currency}</span>
-              </span>
-              <div className="h-seperator" />
-              <span className="item-key">{translate("orderSummary.shippingCost")}</span>
-              <span className="item-value">
-                35
-                              <span>{checkoutData[0].currency}</span>
-              </span>
-              <div style={styles.secondSperator} className="h-seperator" />
-              <span className="item-key">{translate("orderSummary.total")}</span>
-              <span className="item-value">
-                {total.toFixed(2)}
-                <span>{checkoutData[0].currency}</span>
-              </span>
-              <div style={styles.secondSperator} className="h-seperator" />
-              <span className="item-key">{translate("orderSummary.vat")}</span>
-              <span className="item-value">
-                {vat.toFixed(2)}
-                <span>{checkoutData[0].currency}</span>
-              </span>
-              <div style={styles.secondSperator} className="h-seperator" />
-              <span className="item-key">{translate("orderSummary.grandTotal")}</span>
-              <span className="item-value">
-                {grandTotal.toFixed(2)}
-                <span>{checkoutData[0].currency}</span>
-              </span>
-            </div>
-          </div>
+        <Fragment>
+          {renderHeader}
+          <ul className="list-unstyled">
+            <li>
+              <label>{translate("orderSummary.subtotal")}</label>
+              <p>{subtotal.toFixed(2)}<span>{checkoutData[0].currency}</span></p>
+            </li>
+            <li>
+              <label>{translate("orderSummary.shippingCost")}</label><p>35<span>{checkoutData[0].currency}</span></p>
+            </li>
+            <li>
+              <label>{translate("orderSummary.total")}</label><p>{total.toFixed(2)}<span>{checkoutData[0].currency}</span></p>
+            </li>
+            <li>
+              <label>{translate("orderSummary.vat")}</label><p>{vat.toFixed(2)}<span>{checkoutData[0].currency}</span></p>
+            </li>
+            <li>
+              <label>{translate("orderSummary.grandTotal")}</label><p>{grandTotal.toFixed(2)}<span>{checkoutData[0].currency}</span></p>
+            </li>
+          </ul>
           {
             this.props.isDelivery && <Fragment>
               <Button
@@ -107,7 +87,7 @@ class OrderSummary extends Component {
                 icon={`icon-arrow-${right('rtl')}`} />
             </Fragment>
           }
-        </section>
+        </Fragment>
     } else {
       orderSummary = <div></div>;
     }
@@ -116,12 +96,6 @@ class OrderSummary extends Component {
         {orderSummary}
       </Fragment>
     )
-  }
-}
-
-const styles = {
-  secondSperator: {
-    marginTop: '16px'
   }
 }
 
