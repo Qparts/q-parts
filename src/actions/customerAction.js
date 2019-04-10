@@ -54,6 +54,7 @@ export const CHANGE_DEFAULT_VEHICLE = 'CHANGE_DEFAULT_VEHICLE';
 export const INCREMENRT_QUOTATION_PRODUCT_QUANTITY = 'INCREMENRT_QUOTATION_PRODUCT_QUANTITY';
 export const DECREMENRT_QUOTATION_PRODUCT_QUANTITY = 'DECREMENRT_QUOTATION_PRODUCT_QUANTITY';
 export const SET_LOADING = 'SET_LOADING';
+export const IS_CORRECT_CREDIT = 'IS_CORRECT_CREDIT';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -598,7 +599,7 @@ export const setQuotationOrder = (isCompleted) => {
 }
 
 export const incrementQuantity = (item) => {
-  
+
   return {
     type: INCREMENRT_QUOTATION_PRODUCT_QUANTITY,
     payload: item
@@ -616,5 +617,12 @@ export const setLoading = (isLoading) => {
   return {
     type: SET_LOADING,
     payload: isLoading
+   }
+}
+
+export const correctCredit = (isCorrectCredit) => {
+  return {
+    type: IS_CORRECT_CREDIT,
+    payload: isCorrectCredit
    }
 }
