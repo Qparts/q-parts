@@ -51,7 +51,6 @@ class CheckoutConfirmation extends Component {
             this.setState({
               error: true
             })
-            this.props.setLoading(false);
           }
         });
     } else if (paymentMethod === BANK_TRANSFER) {
@@ -62,6 +61,8 @@ class CheckoutConfirmation extends Component {
           this.props.setLoading(false);
         })
     }
+
+    this.props.setLoading(false);
   }
 
   render() {
