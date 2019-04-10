@@ -18,7 +18,7 @@ class OrderSummary extends Component {
         salesPrice: purchasedItem.salesPrice
       }
     });
-
+    const that = this;
     if (paymentMethod === CREDIT_CARD) {
       const data = { cartItems, addressId, creditCard }
       postCreditCard(data)
@@ -28,6 +28,10 @@ class OrderSummary extends Component {
           } else if (res.status === 202) {
             window.location = res.data.transactionUrl;
           }
+        })
+        .catch(function(fallback) {
+          that.props.correctCredit(true);
+          that.props.setLoading(false);
         });
     } else if (paymentMethod === BANK_TRANSFER) {
       const data = { cartItems, addressId }

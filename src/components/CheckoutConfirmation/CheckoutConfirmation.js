@@ -22,10 +22,8 @@ class CheckoutConfirmation extends Component {
     divCol: 'col-lg-12'
   }
   constructor(props) {
-    super(props)
-    this.state ={
-      error: false
-    }
+    super(props);
+    this.props.correctCredit(false);
     this.props.setLoading(false);
   }
   handleClick = () => {
@@ -51,9 +49,7 @@ class CheckoutConfirmation extends Component {
           }
         })
         .catch(function(fallback) {
-          that.setState({
-            error: true
-          })
+          that.props.correctCredit(true);
           that.props.setLoading(false);
         });
     } else if (paymentMethod === BANK_TRANSFER) {
@@ -87,7 +83,7 @@ class CheckoutConfirmation extends Component {
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
           <div className="CheckoutConfirmation-container">
-            {this.state.error &&
+            {this.props.isCorrectCredit &&
               <Alert color="danger">
                 transaction failed
               </Alert>}

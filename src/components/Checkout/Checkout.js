@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, correctCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -196,7 +196,9 @@ class Checkout extends Component {
 								decrementQuantity={this.props.decrementQuantity}
 								grandTotal={grandTotal}
 								setLoading={this.props.setLoading}
-								isLoading={this.props.isLoading} />
+								isLoading={this.props.isLoading}
+								correctCredit={this.props.correctCredit}
+								isCorrectCredit={this.props.isCorrectCredit} />
 						}} />
 					</Switch>
 					{
@@ -211,7 +213,9 @@ class Checkout extends Component {
 									purchasedItems={checkoutData}
 									checkout={this.props.checkout}
 									setLoading={this.props.setLoading}
-									isLoading={this.props.isLoading} />
+									isLoading={this.props.isLoading}
+									correctCredit={this.props.correctCredit}
+									isCorrectCredit={this.props.isCorrectCredit} />
 							</div>
 						)
 					}
@@ -236,7 +240,8 @@ const mapStateToProps = state => ({
 	isShippingCompleted: state.customer.isShippingCompleted,
 	isPaymentCompleted: state.customer.isPaymentCompleted,
 	purchasedItems: state.cart.purchasedItems,
-	isLoading: state.customer.isLoading
+	isLoading: state.customer.isLoading,
+	isCorrectCredit: state.customer.isCorrectCredit
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -254,7 +259,8 @@ const mapDispatchToProps = (dispatch) => {
 		incrementQuantity,
 		decrementQuantity,
 		changeDefaultAddress,
-		setLoading
+		setLoading,
+		correctCredit
 	}, dispatch)
 }
 
