@@ -30,7 +30,7 @@ class OrderSummary extends Component {
           }
         })
         .catch(function(fallback) {
-          that.props.correctCredit(true);
+          that.props.setValidCredit(false);
           that.props.setLoading(false);
         });
     } else if (paymentMethod === BANK_TRANSFER) {
