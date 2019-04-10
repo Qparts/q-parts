@@ -79,6 +79,10 @@ class CheckoutConfirmation extends Component {
         </div>
       )
     }
+    
+    if(this.props.isCorrectCredit){
+      window.scrollTo(0, 0);
+    }
     return (
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-order">
