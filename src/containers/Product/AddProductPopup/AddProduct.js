@@ -12,9 +12,15 @@ import { MediumScreen, SmallScreen } from '../../../components/Device';
 
 import Login from "../../Authentication/Login/Login";
 import Title from '../../../components/UI/Title';
-
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 class AddProduct extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      modal: false,
+    }
+  }
   continueShoppingMoblile = () => {
     this.props.history.push({
       pathname: `/`,
@@ -29,7 +35,15 @@ class AddProduct extends Component {
     if (this.props.token) {
       this.props.history.push('/checkout');
     } else {
-      this.props.history.push('/login')
+      this.togglePopup();
+    }
+  }
+  handleSubmitMoblie = values => {
+    values.preventDefault();
+    if (this.props.token) {
+      this.props.history.push('/checkout');
+    } else {
+      this.props.history.push('/loginCheckout');
     }
   }
 
@@ -43,12 +57,24 @@ class AddProduct extends Component {
         background: ''
       }
   }
+  togglePopup = () => {
+		this.setState({
+			modal: !this.state.modal
+		})
+	}
 
   render() {
     const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
     if (_.isEmpty(data)) return <Redirect to="/" />
 
-    const { translate, currentLanguage } = this.props;
+    const { translate, currentLanguage, direction } = this.props;
+
+    const dialog = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.state.modal} toggle={this.togglePopup} >
+			<ModalHeader toggle={this.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+			<ModalBody>
+				<Login toggle={this.togglePopup} />
+			</ModalBody>
+		</Modal>
 
     return <section className="add-product container-fluid">
       <SmallScreen>
@@ -81,6 +107,7 @@ class AddProduct extends Component {
             </li>
           </ul>
         </div>
+        {dialog}
       </div>
       <div className="subtotal">
         <div className="row">
@@ -99,7 +126,7 @@ class AddProduct extends Component {
           </MediumScreen>
           <SmallScreen>
             <button style={this.getbackground()} className="btn btn-gray-secondary continue-btn" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
-            <button onClick={this.handleSubmit} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button onClick={this.handleSubmitMoblie} className="btn btn-primary check-out-btn">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
           </SmallScreen>
         </div>
       </div>

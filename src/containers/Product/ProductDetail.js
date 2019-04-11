@@ -550,7 +550,7 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+    modalAddToCart: (check) => dispatch(modalAddToCart(check))
   }
 }
 
