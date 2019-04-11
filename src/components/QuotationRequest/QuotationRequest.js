@@ -75,15 +75,16 @@ class QuotationRequest extends Component {
 		const customerVehicleId = garage ? garage.vehicleYearId : null;
 		const imageAttached = vinImage ? true : false;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
+		vinImage = vinImage ? vinImage : false;
 		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
 		vehicleYearId = customerVehicleId ? null : vehicleYearId;
 
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
-			}) : undefined;
+			}) : undefined;			
 
-		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached })
+		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
 			.then(res => {
 				this.props.setQuotationOrder(false);
 				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
