@@ -27,6 +27,7 @@ import * as validations from '../../utils';
 import * as normalizing from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import RenderField from '../RenderField/RenderField';
+import { r } from '../../utils/directional';
 
 
 const vehicles = 'vehicles';
@@ -304,8 +305,8 @@ class QuotationRequest extends Component {
 							<div className="col-lg-6 col-auto steps-num">
 								<p>3</p>
 								<span>
-									<i className="icon-arrow-r"></i>
-									<i className="icon-arrow-r"></i>
+									<i className={`icon-arrow-${r(direction)}`}></i>
+									<i className={`icon-arrow-${r(direction)}`}></i>
 								</span>
 							</div>
 							<div className="col-lg-6 col steps-cap">
@@ -327,8 +328,8 @@ class QuotationRequest extends Component {
 						<div className="step-num">
 							1
 							<span>
-								<i className="icon-arrow-r"></i>
-								<i className="icon-arrow-r"></i>
+								<i className={`icon-arrow-${r(direction)}`}></i>
+								<i className={`icon-arrow-${r(direction)}`}></i>
 							</span>
 						</div>
 						<Title header={translate("quotationOrder.steps.requestParts.title")}
