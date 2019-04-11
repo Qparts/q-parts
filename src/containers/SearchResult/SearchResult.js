@@ -141,7 +141,7 @@ class SearchResult extends Component {
 			movesOut: '',
 			resultSize: 0,
 			startSize: 1,
-			endSize: 18,
+			endSize: 16,
 			item: '',
 		};
 		this.header = createRef();
@@ -163,17 +163,17 @@ class SearchResult extends Component {
 		if (this.state.endSize === this.state.resultSize && this.state.startSize !== 1) {
 			this.setState({ startSize: this.state.resultSize })
 		} else {
-			let size = pageNumber * 18 - 17
+			let size = pageNumber * 16 - 15
 			this.setState({
 				startSize: size,
-				endSize: size + 18 - 1
+				endSize: size + 16 - 1
 			})
 		}
 	}
 	setGeneralSearch = (search, callback = null) => {
 		this.quantityProducts();
 		getGeneralSearch(search).then(res => {
-			if (res.data.products.length < 18 && res.data.products.length !== 0) {
+			if (res.data.products.length < 16 && res.data.products.length !== 0) {
 				this.setState({ endSize: res.data.resultSize })
 			}else if(res.data.products.length === 0){
 				this.props.getFlage(true);
@@ -202,10 +202,10 @@ class SearchResult extends Component {
 		if (this.state.startSize === this.state.resultSize) {
 			this.setState({ startSize: this.state.resultSize })
 		} else {
-			let size = pageNumber * 18 - 17;
+			let size = pageNumber * 16 - 15;
 			this.setState({
 				startSize: size,
-				endSize: size + 18 - 1
+				endSize: size + 16 - 1
 			})
 		}
 		this.props.history.push(replaceQuery(this.props.location, "nextPage"));
@@ -217,10 +217,10 @@ class SearchResult extends Component {
 		if (pageNumber <= 1) {
 			pageNumber = 1;
 		}
-		let size = pageNumber * 18 - 17
+		let size = pageNumber * 16 - 15
 		this.setState({
 			startSize: size,
-			endSize: size + 18 - 1
+			endSize: size + 16 - 1
 		})
 		this.props.history.push(replaceQuery(this.props.location, "prePage"));
 	}
@@ -909,7 +909,7 @@ class SearchResult extends Component {
 									<ul className="more-result list-inline">
 									{btnPrev}
 									<li>
-										<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize/18)}</span>
+										<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize/16)}</span>
 									</li>
 									{btnNext}
 								</ul>
