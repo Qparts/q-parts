@@ -86,7 +86,7 @@ class Routes extends Component {
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
-                                <Link target="_blank" to="//wa.me/966508448856/" className="live-chat">
+                                <Link target="_blank" to="//wa.me/966547074452/" className="live-chat">
                                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                                     <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
                                 </Link>
