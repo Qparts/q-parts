@@ -203,13 +203,6 @@
         }
       }
     }
-    .cart-quantity{
-      display: flex !important;
-      .quantity{
-        @include margin-left(3px);
-        margin: 0px;
-      }
-    }
   }
   .footer-delivery{
     display: flex;

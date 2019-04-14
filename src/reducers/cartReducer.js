@@ -1,7 +1,7 @@
 import { initialState, } from '../initialState/cartInitialState';
 import {
   ADD_TO_CART, CLEAR_CART, GET_QUOTATION, GET_REPLIED_QUOTATION, INCREMENRT_CART_PRODUCT_QUANTITY,
-  DECREMENRT_CART_PRODUCT_QUANTITY, ADD_PAYMENT_METHOD, ADD_DELIVERY_ADDRESS, POST_CREDIT_CARD
+  DECREMENRT_CART_PRODUCT_QUANTITY, ADD_PAYMENT_METHOD, ADD_DELIVERY_ADDRESS, POST_CREDIT_CARD, DELETE_CART
 } from '../actions/cartAction';
 
 export default function reducer(state = initialState, action) {
@@ -76,6 +76,11 @@ export default function reducer(state = initialState, action) {
 
     case POST_CREDIT_CARD:
       return { ...state, ...action.payload }
+
+      case DELETE_CART:
+        const removedCart = state.purchasedItems.filter(cart => cart.product.id !== action.payload)
+
+        return { ...state, purchasedItems: removedCart };
 
     default:
       return state;

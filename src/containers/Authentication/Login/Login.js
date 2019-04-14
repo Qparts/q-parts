@@ -36,8 +36,7 @@ class Login extends Component {
   handleSubmit = values => {
     const serverErrorField = "password"
     const { match } = this.props;
-
-    if (match.url !== '/login') {
+    if (match.url !== '/login' && match.url !=='/loginCheckout') {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
         .then(() => {
           this.props.toggle()

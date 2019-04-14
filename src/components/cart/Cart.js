@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { incrementQuantity, decrementQuantity } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, deleteCart } from '../../actions/cartAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
@@ -89,6 +89,7 @@ class Cart extends Component {
 				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
+		console.log(this.props.purchasedItems)
 		var subtotal = 0;
 		var quantity = 0;
 		var divItemMovile = "total-sm d-lg-none d-flex align-items-stretch";
@@ -151,6 +152,7 @@ class Cart extends Component {
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
+								deleteCart={this.props.deleteCart}
 							/>
 							<div className="col-lg-3">
 								<div className="order-summary">
@@ -193,7 +195,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		incrementQuantity,
-		decrementQuantity
+		decrementQuantity,
+		deleteCart
 	}, dispatch)
 }
 
