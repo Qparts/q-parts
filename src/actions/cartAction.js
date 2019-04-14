@@ -11,6 +11,7 @@ export const DECREMENRT_CART_PRODUCT_QUANTITY = 'DECREMENRT_CART_PRODUCT_QUANTIT
 export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
 export const POST_CREDIT_CARD = 'POST_CREDIT_CARD';
+export const DELETE_CART = 'DELETE_CART';
 
 export const addToCart = (item) => {
  return {
@@ -73,12 +74,19 @@ export const addDeliveryAddress = (address) => {
 }
 
 export const addPaymentMethod = (args) => {
-  
+
   return {
     type: ADD_PAYMENT_METHOD,
     payload: {
       type: args.type,
       creditCard: args.creditCard
     }
+  }
+}
+
+export const deleteCart = (cart) => {
+  return {
+    type: DELETE_CART,
+    payload: cart
   }
 }

@@ -115,51 +115,19 @@ class CheckoutConfirmation extends Component {
             <div className="div-title">
               <p className="title">{translate("checkout.confirm.table.items")}</p>
             </div>
-            <div className={`render-cart-item ${divCol}`}>
-              <ul className="cart-items list-unstyled">
-                {
-                  purchasedItems.map((purchasedItem, idx) => {
-                    return <li key={idx} className="bg-white">
-                      <figure className="row">
-                        <Link to="#" className="col-3 item-img">
-                          <img onError={handleImageFallback} src={purchasedItem.image} alt="no item" />
-                        </Link>
-                        <figcaption className="col-9">
-                          <div className="row">
-                            <div className="col-md-9 item-dis">
-                              <header>
-                                <h3><Link to="#">{purchasedItem.desc}</Link></h3>
-                                <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
-                              </header>
-                              <div>
-                                <div className="cart-quantity d-none d-lg-block">
-                                  <h5>{translate("general.quantity")}</h5>
-                                  <h5 className="quantity">{purchasedItem.quantity} </h5>
-                                </div>
-                              </div>
-                              <div className="cart-product-price">
-                                <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
-                              </div>
-                              <div className="cart-actions">
-                                <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
-                                <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
-                              </div>
-                            </div>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </li>
-                  })
-                }
-              </ul>
-              <div className="row">
-                <div className={`col-md-6 m${l(direction)}-md-auto`}>
-                  {
-                    !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className={`icon-arrow-${right(direction)}`}></i></Link>
-                  }
-                </div>
-              </div>
-            </div>
+            <RenderCartItem
+              currentLanguage={currentLanguage}
+              translate={translate}
+              direction={direction}
+              deleteText={translate("cart.table.delete")}
+              name="purchasedItems"
+              purchasedItems={purchasedItems}
+              incrementQuantity={incrementQuantity}
+              decrementQuantity={decrementQuantity}
+              divCol='col-lg-12'
+              removeButton={true}
+              deleteCart={this.props.deleteCart}
+            />
 
           </div>
           <div className="footer-delivery justify-content-between row">

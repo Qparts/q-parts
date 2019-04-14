@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, correctCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
@@ -95,7 +95,8 @@ class Checkout extends Component {
 				image: item.product.image,
 				productNumber: item.product.productNumber,
 				brand: item.product.brand,
-				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
+				subtotal: item.product.salesPrice.toFixed(2) * item.quantity,
+				id: item.product.id
 			}
 		});
 
@@ -203,7 +204,8 @@ class Checkout extends Component {
 								setLoading={this.props.setLoading}
 								isLoading={this.props.isLoading}
 								correctCredit={this.props.correctCredit}
-								isCorrectCredit={this.props.isCorrectCredit} />
+								isCorrectCredit={this.props.isCorrectCredit}
+								deleteCart={this.props.deleteCart} />
 						}} />
 					</Switch>
 					{
@@ -267,7 +269,8 @@ const mapDispatchToProps = (dispatch) => {
 		decrementQuantity,
 		changeDefaultAddress,
 		setLoading,
-		correctCredit
+		correctCredit,
+		deleteCart
 	}, dispatch)
 }
 
