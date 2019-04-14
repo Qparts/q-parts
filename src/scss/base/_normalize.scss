@@ -4,7 +4,10 @@
 body{
   overflow-x: hidden;
   height: auto;
-}
+  @include if-rtl{
+    text-align: right;
+  };
+ }
 body,html{
 color: $basic-gray;
 }

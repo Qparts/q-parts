@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, correctCredit } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, setValidCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -187,7 +187,8 @@ class Checkout extends Component {
 								translate={translate}
 								addPaymentMethod={this.props.addPaymentMethod}
 								completePayment={this.props.completePayment}
-								checkout={this.props.checkout} />
+								checkout={this.props.checkout}
+								setValidCredit={this.props.setValidCredit}/>
 						}} />
 
 						<Route path="/checkout/confirm" exact={true} render={() => {
@@ -203,8 +204,8 @@ class Checkout extends Component {
 								grandTotal={grandTotal}
 								setLoading={this.props.setLoading}
 								isLoading={this.props.isLoading}
-								correctCredit={this.props.correctCredit}
-								isCorrectCredit={this.props.isCorrectCredit}
+								setValidCredit={this.props.setValidCredit}
+								isValidcreditCard={this.props.isValidcreditCard}
 								deleteCart={this.props.deleteCart} />
 						}} />
 					</Switch>
@@ -222,8 +223,8 @@ class Checkout extends Component {
 										checkout={this.props.checkout}
 										setLoading={this.props.setLoading}
 										isLoading={this.props.isLoading}
-										correctCredit={this.props.correctCredit}
-										isCorrectCredit={this.props.isCorrectCredit} />
+										setValidCredit={this.props.setValidCredit}
+										isValidcreditCard={this.props.isValidcreditCard} />
 								</div>
 							</div>
 						)
@@ -250,7 +251,7 @@ const mapStateToProps = state => ({
 	isPaymentCompleted: state.customer.isPaymentCompleted,
 	purchasedItems: state.cart.purchasedItems,
 	isLoading: state.customer.isLoading,
-	isCorrectCredit: state.customer.isCorrectCredit
+	isValidcreditCard: state.customer.isValidcreditCard
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -269,7 +270,7 @@ const mapDispatchToProps = (dispatch) => {
 		decrementQuantity,
 		changeDefaultAddress,
 		setLoading,
-		correctCredit,
+		setValidCredit,
 		deleteCart
 	}, dispatch)
 }

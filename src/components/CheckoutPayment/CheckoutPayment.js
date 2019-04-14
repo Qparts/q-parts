@@ -37,12 +37,12 @@ class CheckoutPayment extends Component {
     }
     getBanks()
       .then(res => {
-        console.log(res.data)
         this.setState({
           banks: res.data
         });
       })
     this.submitForm = createRef();
+    this.props.setValidCredit(true);
   }
 
   // handleSelectCreditCard = e => {

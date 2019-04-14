@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../UI/Button';
+import Link from '../UI/Link';
 
 import './PaymentMethod.css';
 import { CREDIT_CARD, paymentMethod } from '../../constants';
@@ -23,7 +23,7 @@ class PaymentMethod extends Component {
                 <p className="expires-date">{translate("checkout.payment.creditCard.expires")}<span>{checkout.creditCard.ccMonth}/{checkout.creditCard.ccYear}</span></p>
               </div>
               <div className="payment-footer">
-                <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
+                <Link to="/checkout/payment" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
               </div>
             </div>
           </div>
@@ -36,7 +36,10 @@ class PaymentMethod extends Component {
             <h4>{this.props.title}</h4>
             <div className="payment-box_item">
               <div className="payment-box_item-label">
-                <p>{getTranslatedObject(paymentMethod, currentLanguage ,'name', 'nameAr')}</p>
+                <p>{getTranslatedObject(paymentMethod, currentLanguage, 'name', 'nameAr')}</p>
+              </div>
+              <div className="payment-footer">
+                <Link to="/checkout/payment" className="btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
               </div>
             </div>
           </div>
