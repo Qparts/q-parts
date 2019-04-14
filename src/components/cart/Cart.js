@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { incrementQuantity, decrementQuantity, deleteCart } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
@@ -153,6 +153,7 @@ class Cart extends Component {
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
 								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist}
 							/>
 							<div className="col-lg-3">
 								<div className="order-summary">
@@ -196,7 +197,8 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		incrementQuantity,
 		decrementQuantity,
-		deleteCart
+		deleteCart,
+		moveCartToWishlist
 	}, dispatch)
 }
 

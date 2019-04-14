@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, correctCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
@@ -205,7 +205,8 @@ class Checkout extends Component {
 								isLoading={this.props.isLoading}
 								correctCredit={this.props.correctCredit}
 								isCorrectCredit={this.props.isCorrectCredit}
-								deleteCart={this.props.deleteCart} />
+								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist} />
 						}} />
 					</Switch>
 					{
@@ -270,7 +271,8 @@ const mapDispatchToProps = (dispatch) => {
 		changeDefaultAddress,
 		setLoading,
 		correctCredit,
-		deleteCart
+		deleteCart,
+		moveCartToWishlist
 	}, dispatch)
 }
 
