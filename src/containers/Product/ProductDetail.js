@@ -9,7 +9,7 @@ import RenderProducts from '../../components/RenderProducts/RenderProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { addRecentViewedProducts, addWishlist, modalAddToCart, setModalLogin } from '../../actions/customerAction';
+import { addRecentViewedProducts, addWishlist, modalAddToCart, setModalLogin, setCheckLoginCheckout } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
 import Title from "../../components/UI/Title";
@@ -113,7 +113,8 @@ class ProductDetail extends Component {
           togglePopup={this.togglePopup}
           translate={translate}
           currentLanguage={currentLanguage}
-          togglePopupLogin={this.togglePopupLogin} />
+          togglePopupLogin={this.togglePopupLogin}
+          setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
       default:
         break;
     }
@@ -156,6 +157,7 @@ class ProductDetail extends Component {
       })
     this.props.modalAddToCart(false);
     this.props.setModalLogin(false);
+    this.props.setCheckLoginCheckout(false);
   }
 
   submit = ({ quantity }) => {
@@ -574,7 +576,8 @@ const mapDispatchToProps = dispatch => {
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
     modalAddToCart: (check) => dispatch(modalAddToCart(check)),
-    setModalLogin: (check) => dispatch(setModalLogin(check))
+    setModalLogin: (check) => dispatch(setModalLogin(check)),
+    setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
   }
 }
 

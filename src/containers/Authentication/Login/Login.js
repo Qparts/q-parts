@@ -40,6 +40,9 @@ class Login extends Component {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
         .then(() => {
           this.props.toggle()
+          if(this.props.checkLoginCheckout){
+            window.location.pathname="/checkout"
+          }
         });
     } else {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage);
@@ -164,6 +167,7 @@ const mapStateToProps = (state) => {
     selectedCountry: state.customer.selectedCountry,
     direction: state.customer.direction,
     submitErrors: getFormSubmitErrors('Login')(state),
+    checkLoginCheckout: state.customer.checkLoginCheckout
   }
 }
 

@@ -56,6 +56,7 @@ export const DECREMENRT_QUOTATION_PRODUCT_QUANTITY = 'DECREMENRT_QUOTATION_PRODU
 export const SET_LOADING = 'SET_LOADING';
 export const IS_VALID_CREDIT_CARD = 'IS_VALID_CREDIT_CARD';
 export const MODAL_LOGIN = 'MODAL_LOGIN';
+export const CHECK_LOGIN_CHECKOUT = 'CHECK_LOGIN_CHECKOUT';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -235,6 +236,13 @@ export const changeDefaultVehicle = (index) => {
   return {
     type: CHANGE_DEFAULT_VEHICLE,
     payload: index
+  }
+}
+
+export const setCheckLoginCheckout = (check) => {
+  return {
+    type: CHECK_LOGIN_CHECKOUT,
+    payload: check
   }
 }
 
