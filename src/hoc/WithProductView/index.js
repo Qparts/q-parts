@@ -88,6 +88,7 @@ const WithProductView = WrappedComponent => {
 			const validPageFilter = '1';
 
 			if(newQuery.page !== validPageFilter) {
+				newQuery = queryString.parse(addQuery(filterQuery).split('?').slice(1)[0]);
 				newQuery.page = validPageFilter;
 				
 				return this.props.history.push(`${window.location.pathname}?${queryString.stringify(newQuery)}`);
