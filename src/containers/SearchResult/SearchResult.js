@@ -140,7 +140,6 @@ class SearchResult extends Component {
 			currentSearchId: -1
 		};
 		this.header = createRef();
-		this.searchInput = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 
 	}
