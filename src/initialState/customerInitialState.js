@@ -51,5 +51,6 @@ export const initialState = {
     isModalAddToCart: false,
     isQuotationorderCompleted: true,
     isLoading: false,
-    isValidcreditCard: false
+    isValidcreditCard: false,
+    modalLogin: false
 }

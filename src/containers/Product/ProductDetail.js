@@ -9,7 +9,7 @@ import RenderProducts from '../../components/RenderProducts/RenderProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { addRecentViewedProducts, addWishlist, modalAddToCart } from '../../actions/customerAction';
+import { addRecentViewedProducts, addWishlist, modalAddToCart, setModalLogin } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
 import Title from "../../components/UI/Title";
@@ -35,6 +35,10 @@ import { ClipLoader } from 'react-spinners';
 import { getProduct } from '../../utils/api';
 import { starsRating } from '../../constants';
 import Swiper from 'react-id-swiper';
+
+
+import Login from "../Authentication/Login/Login";
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +50,8 @@ class ProductDetail extends Component {
       modal: true,
       loading: true,
       product: {},
-      hasLeftSwiperMoved: false
+      hasLeftSwiperMoved: false,
+      modalLogin: true
     }
 
     this.swiperLeftHidden = createRef();
@@ -71,6 +76,13 @@ class ProductDetail extends Component {
   togglePopup = () => {
     this.props.modalAddToCart(this.state.modal);
     this.setState({ modal: !this.state.modal })
+  }
+
+  togglePopupLogin = () => {
+    console.log(this.props.modalLogin)
+    this.props.setModalLogin(this.state.modalLogin);
+    this.setState({ modalLogin: !this.state.modalLogin })
+    console.log(this.state.modalLogin)
   }
 
   getDialogProps = () => {
@@ -100,7 +112,8 @@ class ProductDetail extends Component {
           token={isAuth(this.props.token)}
           togglePopup={this.togglePopup}
           translate={translate}
-          currentLanguage={currentLanguage} />
+          currentLanguage={currentLanguage}
+          togglePopupLogin={this.togglePopupLogin} />
       default:
         break;
     }
@@ -142,6 +155,7 @@ class ProductDetail extends Component {
         this.props.addRecentViewedProducts(res.data);
       })
     this.props.modalAddToCart(false);
+    this.props.setModalLogin(false);
   }
 
   submit = ({ quantity }) => {
@@ -245,6 +259,13 @@ class ProductDetail extends Component {
         </ModalBody>
       </Modal>
     );
+
+    const dialogLogin = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
+			<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+			<ModalBody>
+				<Login toggle={this.togglePopupLogin} />
+			</ModalBody>
+		</Modal>
 
     const chatMessages = [
       translate("customerService.product.whatsApp.header"),
@@ -521,6 +542,7 @@ class ProductDetail extends Component {
               <div className="swiper-left" ref={this.swiperLeftHidden} />
             </div>
             {dialog}
+            {dialogLogin}
           </div>
         </div>
 
@@ -541,7 +563,8 @@ const mapStateToProps = state => {
     currentLanguage: getActiveLanguage(state.localize).code,
     direction: state.customer.direction,
     isModalAddToCart: state.customer.isModalAddToCart,
-    token: state.customer.token
+    token: state.customer.token,
+    modalLogin: state.customer.modalLogin,
   }
 }
 
@@ -550,7 +573,8 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check))
+    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+    setModalLogin: (check) => dispatch(setModalLogin(check))
   }
 }
 

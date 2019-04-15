@@ -10,17 +10,10 @@ import _ from 'lodash';
 import { withRouter, Redirect } from 'react-router-dom';
 import { MediumScreen, SmallScreen } from '../../../components/Device';
 
-import Login from "../../Authentication/Login/Login";
 import Title from '../../../components/UI/Title';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 class AddProduct extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      modal: false,
-    }
-  }
   continueShoppingMoblile = () => {
     this.props.history.push({
       pathname: `/`,
@@ -35,7 +28,8 @@ class AddProduct extends Component {
     if (this.props.token) {
       this.props.history.push('/checkout');
     } else {
-      this.togglePopup();
+      this.props.togglePopupLogin();
+      this.props.togglePopup();
     }
   }
   handleSubmitMoblie = values => {
@@ -57,24 +51,12 @@ class AddProduct extends Component {
         background: ''
       }
   }
-  togglePopup = () => {
-		this.setState({
-			modal: !this.state.modal
-		})
-	}
 
   render() {
     const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
     if (_.isEmpty(data)) return <Redirect to="/" />
 
     const { translate, currentLanguage, direction } = this.props;
-
-    const dialog = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.state.modal} toggle={this.togglePopup} >
-			<ModalHeader toggle={this.togglePopup}><Title header={translate("dialog.signin.title")} /></ModalHeader>
-			<ModalBody>
-				<Login toggle={this.togglePopup} />
-			</ModalBody>
-		</Modal>
 
     return <section className="add-product container-fluid">
       <SmallScreen>
@@ -107,7 +89,6 @@ class AddProduct extends Component {
             </li>
           </ul>
         </div>
-        {dialog}
       </div>
       <div className="subtotal">
         <div className="row">
