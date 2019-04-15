@@ -78,7 +78,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, ...action.payload }
 
       case DELETE_CART:
-        const removedCart = state.purchasedItems.filter(cart => cart.product.id !== action.payload)
+        const removedCart = state.purchasedItems.filter(cart => cart.product.id !== action.payload.id)
 
         return { ...state, purchasedItems: removedCart };
 

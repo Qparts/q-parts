@@ -176,6 +176,7 @@ export default function reducer(state = initialState, action) {
       let wishListfound = false;
 
       state.wishlist.forEach((wishlistItem, index) => {
+        console.log(wishlistItem)
         if (product.id === wishlistItem.id) {
           wishListfound = true;
           return state.wishlist[index] = { ...wishlistItem, quantity: product.quantity + wishlistItem.quantity };

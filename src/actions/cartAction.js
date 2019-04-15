@@ -85,10 +85,10 @@ export const addPaymentMethod = (args) => {
   }
 }
 
-export const deleteCart = (cart) => {
+export const deleteCart = (product) => {
   return {
     type: DELETE_CART,
-    payload: cart
+    payload: product
   }
 }
 
