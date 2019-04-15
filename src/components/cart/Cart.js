@@ -79,7 +79,7 @@ class Cart extends Component {
 			return {
 				...item.product,
 				desc: item.product.desc,
-				salesPrice: item.product.salesPrice.toFixed(2),
+				salesPrice: Number(item.product.salesPrice.toFixed(2)),
 				currency: translate("general.currency"),
 				quantity: item.quantity,
 				quantityLabel: translate("general.quantity"),
