@@ -27,6 +27,7 @@ import * as validations from '../../utils';
 import * as normalizing from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import RenderField from '../RenderField/RenderField';
+import { r } from '../../utils/directional';
 
 
 const vehicles = 'vehicles';
@@ -74,15 +75,16 @@ class QuotationRequest extends Component {
 		const customerVehicleId = garage ? garage.vehicleYearId : null;
 		const imageAttached = vinImage ? true : false;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
+		vinImage = vinImage ? vinImage : false;
 		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
 		vehicleYearId = customerVehicleId ? null : vehicleYearId;
 
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
-			}) : undefined;
+			}) : undefined;			
 
-		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached })
+		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
 			.then(res => {
 				this.props.setQuotationOrder(false);
 				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -304,8 +306,8 @@ class QuotationRequest extends Component {
 							<div className="col-lg-6 col-auto steps-num">
 								<p>3</p>
 								<span>
-									<i className="icon-arrow-r"></i>
-									<i className="icon-arrow-r"></i>
+									<i className={`icon-arrow-${r(direction)}`}></i>
+									<i className={`icon-arrow-${r(direction)}`}></i>
 								</span>
 							</div>
 							<div className="col-lg-6 col steps-cap">
@@ -327,8 +329,8 @@ class QuotationRequest extends Component {
 						<div className="step-num">
 							1
 							<span>
-								<i className="icon-arrow-r"></i>
-								<i className="icon-arrow-r"></i>
+								<i className={`icon-arrow-${r(direction)}`}></i>
+								<i className={`icon-arrow-${r(direction)}`}></i>
 							</span>
 						</div>
 						<Title header={translate("quotationOrder.steps.requestParts.title")}

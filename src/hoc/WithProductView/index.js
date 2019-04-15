@@ -84,7 +84,18 @@ const WithProductView = WrappedComponent => {
 		updateParams = (param) => {
 
 			const filterQuery = `${param.paramsTitle}=${param.id}`;
-			this.props.history.push(addQuery(filterQuery));
+			let newQuery = queryString.parse(window.location.search.slice(1));
+			const validPageFilter = '1';
+
+			if(newQuery.page !== validPageFilter) {
+				newQuery = queryString.parse(addQuery(filterQuery).split('?').slice(1)[0]);
+				newQuery.page = validPageFilter;
+				
+				return this.props.history.push(`${window.location.pathname}?${queryString.stringify(newQuery)}`);
+			
+			} else {
+				this.props.history.push(addQuery(filterQuery));
+			}
 		}
 
 		removeItem = (index, item, event) => {
@@ -219,7 +230,6 @@ const WithProductView = WrappedComponent => {
 				isChecked={this.isChecked}
 				onSetInitialSelectedOptions={this.selectedOptions}
 				onClear={this.handleClear}
-				onUpdateParams={this.updateParams}
 
 				{...this.state}
 				{...this.props} />

@@ -129,3 +129,8 @@ export const getCategoryId = (translate) => (
 		[38, translate("nav.batteries")],
 	])
 )
+
+export const paymentStatus = {
+	paid: 'paid',
+	failed: 'failed',
+}
