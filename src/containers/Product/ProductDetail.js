@@ -157,7 +157,6 @@ class ProductDetail extends Component {
       })
     this.props.modalAddToCart(false);
     this.props.setModalLogin(false);
-    this.props.setCheckLoginCheckout(false);
   }
 
   submit = ({ quantity }) => {

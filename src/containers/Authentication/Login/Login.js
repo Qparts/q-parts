@@ -12,7 +12,7 @@ import SocialMedia from '../SocialMedia/SocialMedia';
 import PrivateRoute from '../../../components/PrivateRoute';
 import ResetPassword from '../../../components/ResetPassword/ResetPassword';
 
-import { login, sendSmsCode, resetPassword, socialMediaButton } from '../../../actions/customerAction';
+import { login, sendSmsCode, resetPassword, socialMediaButton, setCheckLoginCheckout } from '../../../actions/customerAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 
 import * as validations from '../../../utils';
@@ -41,7 +41,8 @@ class Login extends Component {
         .then(() => {
           this.props.toggle()
           if(this.props.checkLoginCheckout){
-            window.location.pathname="/checkout"
+            window.location.pathname="/checkout";
+            this.props.setCheckLoginCheckout(false);
           }
         });
     } else {
@@ -176,7 +177,8 @@ const mapDispatchToProps = (dispatch) => {
     login,
     sendSmsCode,
     resetPassword,
-    socialMediaButton
+    socialMediaButton,
+    setCheckLoginCheckout
   }, dispatch)
 }
 
