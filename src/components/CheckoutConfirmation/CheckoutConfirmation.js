@@ -124,6 +124,7 @@ class CheckoutConfirmation extends Component {
               divCol='col-lg-12'
               removeButton={true}
               deleteCart={this.props.deleteCart}
+              moveCartToWishlist={this.props.moveCartToWishlist}
             />
 
           </div>

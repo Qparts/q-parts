@@ -18,10 +18,7 @@ export default function reducer(state = initialState, action) {
       });
 
       if (!found) {
-        const hasNoId = -1
-        const generateId = Math.random().toString(36).substr(2, 9);
-        const newId = product.id === hasNoId ? generateId : product.id;
-        const newProduct = { ...product, id: newId }
+        const newProduct = { ...product }
         const quantity = newProduct.quantity;
 
         return { ...state, purchasedItems: [...state.purchasedItems, { product: newProduct, quantity }] };
@@ -78,7 +75,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, ...action.payload }
 
       case DELETE_CART:
-        const removedCart = state.purchasedItems.filter(cart => cart.product.id !== action.payload)
+        const removedCart = state.purchasedItems.filter(cart => cart.product.id !== action.payload.id)
 
         return { ...state, purchasedItems: removedCart };
 
