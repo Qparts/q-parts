@@ -89,7 +89,6 @@ class Cart extends Component {
 				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
-		console.log(this.props.purchasedItems)
 		var subtotal = 0;
 		var quantity = 0;
 		var divItemMovile = "total-sm d-lg-none d-flex align-items-stretch";
