@@ -4,14 +4,10 @@ import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
 import { addRecentViewedProducts } from '../../actions/customerAction';
 import { getSortedProducts, getFlage } from '../../actions/apiAction';
-import Select from 'react-select';
-// import Button from '../../components/UI/Button';
-import Button from '../../components/UI/Button';
 import WithProductView from '../../hoc/WithProductView';
-import Checkbox from '../../components/UI/Checkbox';
 import queryString from 'qs';
 import { Card, ListGroup } from 'reactstrap';
-import { isEmpty, replaceAll, addQuery, removeQuery } from '../../utils';
+import { isEmpty } from '../../utils';
 import * as constant from '../../constants';
 import { getCategoryId } from '../../constants';
 import { styles, styles as commonStyles } from '../../constants';
@@ -22,18 +18,15 @@ import { getActiveLanguage, getTranslate } from 'react-localize-redux';
 //mobile filter
 import { LargeScreen, DownLargeScreen } from '../../components/Device';
 import Sidebar from "react-sidebar";
-import { right, getQuery, replaceQuery } from '../../utils';
+import { getQuery, replaceQuery } from '../../utils';
 //HTML Component
-import Stars from 'react-stars';
-import { starsRating } from '../../constants';
 import { ClipLoader } from "react-spinners";
 
-import { handleImageFallback, getTranslatedObject } from '../../utils';
-import { getLength } from '../../utils/array';
+import { getTranslatedObject } from '../../utils';
+import { binarySearch } from '../../utils/array';
 import ResultNotFound from './ResultNotFound';
 import { r, l, left } from '../../utils/directional';
 const GRID = 'GRID';
-const LIST = 'LIST';
 
 
 const sortOptions = [
@@ -143,8 +136,11 @@ class SearchResult extends Component {
 			startSize: 1,
 			endSize: 16,
 			item: '',
+			keyPressed: 0,
+			currentSearchId: -1
 		};
 		this.header = createRef();
+		this.searchInput = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 
 	}
@@ -170,12 +166,12 @@ class SearchResult extends Component {
 			})
 		}
 	}
-	setGeneralSearch = (search, callback = null) => {
+	setGeneralSearch = async (search, callback = null) => {
 		this.quantityProducts();
-		getGeneralSearch(search).then(res => {
+		await getGeneralSearch(search).then(res => {
 			if (res.data.products.length < 16 && res.data.products.length !== 0) {
 				this.setState({ endSize: res.data.resultSize })
-			}else if(res.data.products.length === 0){
+			} else if (res.data.products.length === 0) {
 				this.props.getFlage(true);
 			}
 			this.setState({
@@ -339,32 +335,97 @@ class SearchResult extends Component {
 		return categoryId ? getCategoryId(this.props.translate).get(parseInt(categoryId, constant.RADIX)) : query;
 	}
 
+	handleChange = async (currentFilterObject, event) => {
+		const { location: { search } } = this.props;
+		const { keyPressed } = this.state;
+		const searchKeyword = event.target.value;
+
+		await this.setCurrentSearchId(currentFilterObject.id);
+
+		if (keyPressed === 8 || keyPressed === 46) {
+			await this.setGeneralSearch(search)
+			this.setSearchFilter(searchKeyword);
+
+		} else {
+			this.setSearchFilter(searchKeyword);
+		}
+	}
+
+	handleKeyDown = (event) => {
+		const keyPressed = event.keyCode || event.charCode;
+
+		this.setState({
+			keyPressed
+		})
+
+	}
+
+	setSearchFilter = async (searchKeyword) => {
+
+		const { location: { search }, currentLanguage } = this.props;
+		const { searchGeneral: { filterObjects }, currentSearchId } = this.state;
+		const getCurrentFilterObject = await binarySearch(filterObjects, currentSearchId);
+
+		let filterOptions = getCurrentFilterObject.options.filter(option => {
+			const value = getTranslatedObject(option, currentLanguage, 'value', 'valueAr');
+			return value.toLowerCase().startsWith(searchKeyword.toLowerCase());
+		});
+		const newFilterObjects = filterObjects.map(filterObject => {
+
+			if (filterObject.id === getCurrentFilterObject.id) {
+				return {
+					...filterObject,
+					options: filterOptions
+				}
+			} else {
+				return { ...filterObject }
+			}
+		});
+
+		this.setState({
+			searchGeneral: {
+				...this.state.searchGeneral,
+				filterObjects: newFilterObjects
+			}
+		});
+
+		if (_.isEmpty(searchKeyword)) {
+			this.setGeneralSearch(search);
+		}
+	}
+
+	setCurrentSearchId = (currentSearchId) => {
+		this.setState({
+			currentSearchId
+		})
+	}
+
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, params, flage, direction } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, flage, direction } = this.props;
 		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
-		if(flage){
+		if (flage) {
 			return (
-					<ResultNotFound />
+				<ResultNotFound />
 			)
 		}
 		if (loading)
 			return (
 				<div style={styles.loading}>
-						<ClipLoader
-							css={styles.spinner}
-							sizeUnit={"px"}
-							size={150}
-							loading={this.state.loading}
-						/>
+					<ClipLoader
+						css={styles.spinner}
+						sizeUnit={"px"}
+						size={150}
+						loading={this.state.loading}
+					/>
 				</div>
 			)
 
 		let btnNext = <li className="next">
 			<Link to="#" onClick={this.nextPage}>
-			<i className={`icon-arrow-${r(direction)}`}></i>
+				<i className={`icon-arrow-${r(direction)}`}></i>
 			</Link>
 		</li>
 		let btnPrev = <li className="prev">
@@ -375,13 +436,13 @@ class SearchResult extends Component {
 
 		if (this.state.startSize <= 1) {
 			btnPrev = <li className="disabled">
-					<Link to="/" onClick={ (e) => e.preventDefault() }><i className={`icon-arrow-${l(direction)}`}></i></Link>
+				<Link to="/" onClick={(e) => e.preventDefault()}><i className={`icon-arrow-${l(direction)}`}></i></Link>
 			</li>;
 		}
 		if (this.state.endSize === this.state.resultSize) {
-				btnNext= <li className="disabled">
-					<Link to="/" onClick={ (e) => e.preventDefault() }><i className={`icon-arrow-${r(direction)}`}></i></Link>
-				</li>;
+			btnNext = <li className="disabled">
+				<Link to="/" onClick={(e) => e.preventDefault()}><i className={`icon-arrow-${r(direction)}`}></i></Link>
+			</li>;
 		}
 		const paramsN = getQuery(this.props.location);
 		let pageNumber = Number(paramsN.page);
@@ -647,7 +708,7 @@ class SearchResult extends Component {
 													<div className="row">
 														<label className="col-auto">{filterObject[key]}</label>
 														<div className="col">{selectedOptions.map((item, index) => (
-															(item[key] === filterObject[key] && item.selectedOptions.length !==0 ? <p key={index}>{item.selectedOptions.length}</p> : <p key={index}>{this.props.translate("general.all")}</p>)
+															(item[key] === filterObject[key] && item.selectedOptions.length !== 0 ? <p key={index}>{item.selectedOptions.length}</p> : <p key={index}>{this.props.translate("general.all")}</p>)
 														))}</div>
 
 													</div>
@@ -670,7 +731,11 @@ class SearchResult extends Component {
 														<div>
 															<div className="filter-search">
 																<i className="icon-search"></i>
-																<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
+																<input type="text"
+																	onChange={this.handleChange.bind(this, filterObject)}
+																	onKeyDown={this.handleKeyDown}
+																	className="form-control"
+																	placeholder={this.props.translate("general.buttons.search")} />
 															</div>
 															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 														</div>
@@ -704,7 +769,11 @@ class SearchResult extends Component {
 												<div className="collapse show" id={`${filterObject.filterTitle}`}>
 													<div className="filter-search">
 														<i className="icon-search"></i>
-														<input type="text" className="form-control" placeholder={this.props.translate("general.buttons.search")} aria-label="Username" />
+														<input type="text"
+															onChange={this.handleChange.bind(this, filterObject)}
+															onKeyDown={this.handleKeyDown}
+															className="form-control"
+															placeholder={this.props.translate("general.buttons.search")} />
 													</div>
 													{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
 													{/*<ul className="options-list">
@@ -907,12 +976,12 @@ class SearchResult extends Component {
 							<div className="row ">
 								<div className="col d-flex justify-content-center">
 									<ul className="more-result list-inline">
-									{btnPrev}
-									<li>
-										<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize/16)}</span>
-									</li>
-									{btnNext}
-								</ul>
+										{btnPrev}
+										<li>
+											<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize / 16)}</span>
+										</li>
+										{btnNext}
+									</ul>
 								</div>
 							</div>
 						</div>
