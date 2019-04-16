@@ -53,5 +53,6 @@ export const initialState = {
     isLoading: false,
     isValidcreditCard: false,
     modalLogin: false,
-    checkLoginCheckout: false
+    checkLoginCheckout: false,
+    checkLoginQuotationOrder: false
 }
