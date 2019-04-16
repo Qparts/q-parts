@@ -124,6 +124,8 @@ class ProductDetail extends Component {
     this.setState({
       auth: !this.state.auth
     })
+
+    this.props.setCheckLoginCheckout(false);
   }
 
   componentDidUpdate(prevProps, prevState) {
