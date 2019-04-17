@@ -15,6 +15,9 @@
 }
 .results-container {
   @extend .p-inner-sec;
+  @include media-breakpoint-down(md) {
+    padding-top: 100px;
+  };
   position: relative;
 }
 .filter{

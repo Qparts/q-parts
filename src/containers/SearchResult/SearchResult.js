@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { Component, createRef, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
 import ProductGridView from '../../components/ProductGridView/ProductGridView';
@@ -26,6 +26,7 @@ import { getTranslatedObject } from '../../utils';
 import { binarySearch } from '../../utils/array';
 import ResultNotFound from './ResultNotFound';
 import { r, l, left } from '../../utils/directional';
+import Footer from '../../components/Layout/Footer/Footer';
 const GRID = 'GRID';
 
 
@@ -121,12 +122,6 @@ class SearchResult extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			collapse1: false,
-			collapse2: false,
-			collapse3: false,
-			collapse4: false,
-			collapse5: false,
-			collapse6: false,
 			selectedView: GRID,
 			searchGeneral: [],
 			loading: true,
@@ -137,15 +132,70 @@ class SearchResult extends Component {
 			endSize: 16,
 			item: '',
 			keyPressed: 0,
-			currentSearchId: -1
+			currentSearchId: -1,
+			scroll: null,
+			newScrollPosition: 0
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
 
 	}
 
+	componentDidMount() {
+		const { location: { search } } = this.props;
+		this.props.getFlage(false);
+		this.setGeneralSearch(search, this.runCallbacks);
+		this.quantityProducts();
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+
+		const { location: { search } } = this.props;
+		if (search !== prevProps.location.search) {
+			this.props.getFlage(false);
+			this.resetLoading();
+			this.setGeneralSearch(search);
+		}
+
+
+		window.onpopstate = (event) => {
+			this.setGeneralSearch(search, this.runCallbacks);
+		}
+	}
+
+	componentWillUnmount() {
+		this.state.scroll.removeEventListener('scroll', this.handleScroll)
+	}
+
+	handleScroll = (event) => {
+		const currentPosition = this.state.scroll.scrollTop;
+		const { newScrollPosition } = this.state;
+		const header = document.getElementById('header-fixed');
+		const hasReachedTargetPosition = currentPosition > 80;
+
+		if (newScrollPosition < currentPosition && hasReachedTargetPosition) {
+			header.classList.remove('slideDown');
+			header.classList.add('slideUp');
+
+
+		} else if (newScrollPosition > currentPosition) {
+			header.classList.remove('slideUp');
+			header.classList.add('slideDown');
+		}
+
+		this.setState({ newScrollPosition: currentPosition })
+	}
+
+	setSidebarRef = async element => {
+		const contentId = document.getElementById("contentId");
+
+
+		await this.setState({ scroll: contentId })
+		this.state.scroll.addEventListener('scroll', this.handleScroll)
+
+	}
+
 	onSetSidebarOpen(open) {
-		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({
 			sidebarOpen: open,
 			isHidden: 'is-hidden',
@@ -231,28 +281,6 @@ class SearchResult extends Component {
 		this.props.onSetInitialSelectedOptions(newObj, data.filterObjects);
 	}
 
-	componentDidMount() {
-		const { location: { search } } = this.props;
-		this.props.getFlage(false);
-		this.setGeneralSearch(search, this.runCallbacks);
-		this.quantityProducts();
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-
-		const { location: { search } } = this.props;
-		if (search !== prevProps.location.search) {
-			this.props.getFlage(false);
-			this.resetLoading();
-			this.setGeneralSearch(search);
-		}
-
-
-		window.onpopstate = (event) => {
-			this.setGeneralSearch(search, this.runCallbacks);
-		}
-	}
-
 	resetLoading = () => {
 		this.setState({
 			loading: true
@@ -319,11 +347,9 @@ class SearchResult extends Component {
 		})
 	}
 	openSidebar = () => {
-		document.getElementById("html").classList.add('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen })
 	}
 	done = (e) => {
-		document.getElementById("html").classList.remove('overflow-hidden');
 		this.setState({ sidebarOpen: !this.state.sidebarOpen, isHidden: 'is-hidden', movesOut: '' })
 	}
 
@@ -402,7 +428,7 @@ class SearchResult extends Component {
 	render() {
 
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, flage, direction } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, flage, direction, translate } = this.props;
 		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		if (flage) {
@@ -447,335 +473,30 @@ class SearchResult extends Component {
 		let pageNumber = Number(paramsN.page);
 
 		return (
-			<section className="results-container gray-bg">
-				<DownLargeScreen>
-					<div className={this.state.sidebarOpen ? "sidebar-container" : "none-active"}>
-						<Sidebar
-							children={<div />}
-							sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
-							sidebar={
-								<aside>
-									<header>
-										<div className="row">
-											<div className="col-auto">
-												<button type="button" className="btn reset" disabled>
-													<i className="icon-reset"></i>
-												</button>
-											</div>
-											<div className="col">
-												<h3>{this.props.translate("general.filter")} {this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
-											</div>
-											<div className="col-auto">
-												<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
-											</div>
-										</div>
-									</header>
-									<ul className="filter" ref={this.setFilter}>
-										{/*<li onClick={()=>this.handleClick('tyerSize')} className="have-child" >
-											<div className="row">
-												<label className="col-auto">Tyer Size</label>
-												<p className="col">255, 55, 16 <i className="icon-arrow-right"></i></p>
-											</div>
-											<div className={(this.state.item==="tyerSize" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-												<header>
-													<div className="row">
-														<div className="col-auto">
-															<button type="button" onClick={this.handleBack} className="btn reset">
-																<i className="icon-arrow-left"></i>
-
-															</button>
-														</div>
-														<div className="col">
-															<h4>Tyer Size</h4>
-														</div>
-														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
-														</div>
-													</div>
-												</header>
-												<div>
-													<div className="tires-filte">
-														<form>
-															<div className="d-table">
-																<div className="d-table-row">
-																	<label>width</label>
-																	<div className="select-main">
-																		<Select
-																			className="select"
-																			classNamePrefix="select"
-																			isSearchable={false}
-																			defaultValue={tireWidth[0]}
-																			options={groupedWidthTiresOptions}
-																			formatGroupLabel={formatWidthTiresGroupLabel}
-																		/>
-																	</div>
-
-																</div>
-																<div className="d-table-row">
-																	<label>Height</label>
-																	<div className="select-main">
-																		<Select
-																			className="select"
-																			defaultValue={tireHeight[0]}
-																			classNamePrefix="select"
-																			isSearchable={false}
-																			options={groupedHeightTiresOptions}
-																			formatGroupLabel={formatHeightTiresGroupLabel}
-																		/>
-																	</div>
-																</div>
-																<div className="d-table-row">
-																	<label>Diameter</label>
-																	<div className="select-main">
-																		<Select
-																			className="select"
-																			defaultValue={tireDiameter[0]}
-																			classNamePrefix="select"
-																			isSearchable={false}
-																			options={groupedDiameterTiresOptions}
-																			formatGroupLabel={formatDiameterTiresGroupLabel}
-																		/>
-																	</div>
-																</div>
-															</div>
-														</form>
-													</div>
-												</div>
-											</div>
-										</li>
-										<li onClick={() =>this.handleClick('viscosity')} className="have-child">
-											<div className="row">
-												<label className="col-auto">Viscosity Grade</label>
-												<p className="col">SAE 0W-15, SAE.... <a href="#" className="clear"><i className="icon-close"></i></a></p>
-											</div>
-											<div className={(this.state.item==="viscosity" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-												<header>
-													<div className="row">
-														<div className="col-auto">
-															<button type="button" onClick={this.handleBack} className="btn reset">
-																<i className="icon-arrow-left"></i>
-															</button>
-														</div>
-														<div className="col">
-															<h4>Viscosity Grade</h4>
-														</div>
-														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
-														</div>
-													</div>
-												</header>
-												<div>
-													<div className="filter-search">
-														<i className="icon-search"></i>
-														<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
-													</div>
-													<ul className="options-list">
-														<li>
-															<div className="checkbox">
-																<input type="checkbox" id="O1" />
-																<label for="O1">Option 1</label>
-															</div>
-														</li>
-														<li>
-															<div className="checkbox">
-																<input type="checkbox" id="O2" />
-																<label for="O2">Option 2</label>
-															</div>
-														</li>
-														<li>
-															<div className="checkbox">
-																<input type="checkbox" id="O3" />
-																<label for="O3">Option 3</label>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li onClick={()=> this.handleClick('volume')} className="have-child">
-											<div className="row">
-												<label className="col-auto">Volume</label>
-												<p className="col">All</p>
-											</div>
-											<div className={(this.state.item==="volume" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-												<header>
-													<div className="row">
-														<div className="col-auto">
-															<button type="button" onClick={this.handleBack} className="btn reset">
-																<i className="icon-arrow-left"></i>
-															</button>
-														</div>
-														<div className="col">
-															<h4>Volume</h4>
-														</div>
-														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
-														</div>
-													</div>
-												</header>
-												<div>
-													<div className="filter-search">
-														<i className="icon-search"></i>
-														<input type="text" className="form-control" placeholder="Search" aria-label="Username" />
-													</div>
-													<ul className="options-list">
-														<li className="radio-custom">
-															<input type="radio" id="test1" name="radio-group" />
-															<label for="test1">Apple</label>
-														</li>
-														<li className="radio-custom">
-															<input type="radio" id="test2" name="radio-group" />
-															<label for="test2">Peach</label>
-														</li>
-														<li className="radio-custom">
-															<input type="radio" id="test3" name="radio-group" />
-															<label for="test3">Orange</label>
-														</li>
-													</ul>
-												</div>
-											</div>
-
-										</li>
-										<li>
-											<div className="row">
-												<label className="col-auto">Price</label>
-												<div className="col">
-													<form className="form-row price-filter">
-														<div className="col">
-															<input type="text" className="form-control" placeholder="From" />
-														</div>
-														<div className="col">
-															<input type="text" className="form-control" placeholder="To" />
-														</div>
-													</form>
-												</div>
-											</div>
-										</li>
-										<li onClick={()=>this.handleClick("rating")} className="have-child">
-											<div className="row">
-												<label className="col-auto">Rating</label>
-												<p className="col">
-													<div className="rating">
-														<Stars values={1} {...starsRating} />
-													</div> & Up
-													 	</p>
-											</div>
-											<div className={(this.state.item==="rating" ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-												<header>
-													<div className="row">
-														<div className="col-auto">
-															<button type="button" onClick={this.handleBack} className="btn reset">
-																<i className="icon-arrow-left"></i>
-															</button>
-														</div>
-														<div className="col">
-															<h4>Rating
-
-																	</h4>
-														</div>
-														<div className="col-auto">
-															<button type="button" className="btn btn-primary" onClick={this.done}>Done</button>
-														</div>
-													</div>
-												</header>
-												<div>
-													<ul className="options-list">
-														<li>
-															<div className="checkbox">
-																<input type="checkbox" id="O10" />
-																<label for="O10">
-																	<div className="rating">
-																		<Stars values={1} {...starsRating} />
-																	</div>
-																	3 review
-																		 </label>
-															</div>
-														</li>
-														<li>
-															<div className="checkbox">
-																<input type="checkbox" id="O10" />
-																<label for="O10">Not Yet Rated</label>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</li>*/}
+			<Fragment>
+				<LargeScreen>
+					<section className="results-container gray-bg">
+						<div className="container-fluid">
+							<div className="row">
+								<div className="filter-col">
+									<ul className="filter">
 										{
 											filterObjects.map((filterObject, idx) => {
-												return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
-													<div className="row">
-														<label className="col-auto">{filterObject[key]}</label>
-														<div className="col">{selectedOptions.map((item, index) => (
-															(item[key] === filterObject[key] && item.selectedOptions.length !== 0 ? <p key={index}>{item.selectedOptions.length}</p> : <p key={index}>{this.props.translate("general.all")}</p>)
-														))}</div>
-
-													</div>
-													<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
-														<header>
-															<div className="row">
-																<div className="col-auto">
-																	<button type="button" onClick={this.handleBack} className="btn reset">
-																		<i className={`icon-arrow-${left(direction)}`}></i>
-																	</button>
-																</div>
-																<div className="col">
-																	<h4>{filterObject[key]}</h4>
-																</div>
-																<div className="col-auto">
-																	<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
-																</div>
-															</div>
-														</header>
-														<div>
-															<div className="filter-search">
-																<i className="icon-search"></i>
-																<input type="text"
-																	onChange={this.handleChange.bind(this, filterObject)}
-																	onKeyDown={this.handleKeyDown}
-																	className="form-control"
-																	placeholder={this.props.translate("general.buttons.search")} />
-															</div>
-															{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+												return <li key={idx}>
+													<h5>
+														<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
+													</h5>
+													<div className="collapse show" id={`${filterObject.filterTitle}`}>
+														<div className="filter-search">
+															<i className="icon-search"></i>
+															<input type="text"
+																onChange={this.handleChange.bind(this, filterObject)}
+																onKeyDown={this.handleKeyDown}
+																className="form-control"
+																placeholder={this.props.translate("general.buttons.search")} />
 														</div>
-													</div>
-												</li>
-											})}
-									</ul>
-								</aside>
-							}
-							open={this.state.sidebarOpen}
-							onClick={this.handleClick}
-							onSetOpen={this.onSetSidebarOpen}
-							pullRight={true}
-						>
-						</Sidebar>
-					</div>
-				</DownLargeScreen>
-
-
-				<div className="container-fluid">
-					<div className="row">
-						<LargeScreen>
-							<div className="filter-col">
-								<ul className="filter" ref={this.setFilter}>
-									{
-										filterObjects.map((filterObject, idx) => {
-											return <li key={idx}>
-												<h5>
-													<a href={`#${filterObject.filterTitle}`} data-toggle="collapse" role="button" aria-expanded="false">{filterObject[key]} <span className="minus"></span></a>
-												</h5>
-												<div className="collapse show" id={`${filterObject.filterTitle}`}>
-													<div className="filter-search">
-														<i className="icon-search"></i>
-														<input type="text"
-															onChange={this.handleChange.bind(this, filterObject)}
-															onKeyDown={this.handleKeyDown}
-															className="form-control"
-															placeholder={this.props.translate("general.buttons.search")} />
-													</div>
-													{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
-													{/*<ul className="options-list">
+														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+														{/*<ul className="options-list">
 													<li>
 														<div className="checkbox">
 															<input type="checkbox" id="O1" />
@@ -795,13 +516,13 @@ class SearchResult extends Component {
 														</div>
 													</li>
 												</ul>*/}
-													{/*<a href="#" className="btn btn-gray">
+														{/*<a href="#" className="btn btn-gray">
 													View More <i className="icon-plus"></i>
 												</a>*/}
-												</div>
-											</li>
-										})}
-									{/*<li className="tires-filte">
+													</div>
+												</li>
+											})}
+										{/*<li className="tires-filte">
 										<h5>
 											Tyer Search
 										</h5>
@@ -839,7 +560,7 @@ class SearchResult extends Component {
 											<button type="button" className="btn btn-primary">Search <i className="icon-arrow-right"></i></button>
 										</form>
 									</li>*/}
-									{/*<li>
+										{/*<li>
 										<h5>
 											<a href="#Volume" data-toggle="collapse" role="button" aria-expanded="false">Volume<span className="minus"></span></a>
 										</h5>
@@ -927,16 +648,14 @@ class SearchResult extends Component {
 											</ul>
 										</div>
 									</li>*/}
-								</ul>
-							</div>
-
-						</LargeScreen>
-						<div className="col">
-							<div className="search-result">
-								<div className="total-result row">
-									<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
-									<div className="col-auto">
-										{/*<div className="result-sort">
+									</ul>
+								</div>
+								<div className="col">
+									<div className="search-result">
+										<div className="total-result row">
+											<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+											<div className="col-auto">
+												{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
 											<DownLargeScreen>
 												<i className="icon-sorting"></i>
@@ -947,46 +666,165 @@ class SearchResult extends Component {
 												defaultValue={sortOptions[0]}
 												options={sortOptions} />
 										</div>*/}
-										<DownLargeScreen>
-											<div className="side-bar-compnent-btn">
-												<button className="btn filter-btn" onClick={() => this.openSidebar()}>
-													<i className="icon-filter"></i>
-												</button>
 											</div>
-										</DownLargeScreen>
-									</div>
-								</div>
-								<LargeScreen>
-									<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
-										<ul className="list-inline">
-											{
-												filtrationChecked.map((item, index) => (
-													<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
-												))
-											}
+										</div>
+										<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+											<ul className="list-inline">
+												{
+													filtrationChecked.map((item, index) => (
+														<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
+													))
+												}
+											</ul>
+											<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
+										</div>
+										<ul className="result-list products-list row">
+											{this.renderProducts()}
 										</ul>
-										<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
 									</div>
-								</LargeScreen>
-								<ul className="result-list products-list row">
-									{this.renderProducts()}
-								</ul>
-							</div>
-							<div className="row ">
-								<div className="col d-flex justify-content-center">
-									<ul className="more-result list-inline">
-										{btnPrev}
-										<li>
-											<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize / 16)}</span>
-										</li>
-										{btnNext}
-									</ul>
+									<div className="row ">
+										<div className="col d-flex justify-content-center">
+											<ul className="more-result list-inline">
+												{btnPrev}
+												<li>
+													<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize / 16)}</span>
+												</li>
+												{btnNext}
+											</ul>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</section>
+					</section>
+
+				</LargeScreen>
+				<DownLargeScreen>
+					<Sidebar
+						ref={this.setSidebarRef}
+						sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
+						sidebar={
+							<aside>
+								<header>
+									<div className="row">
+										<div className="col-auto">
+											<button type="button" className="btn reset" disabled>
+												<i className="icon-reset"></i>
+											</button>
+										</div>
+										<div className="col">
+											<h3>{this.props.translate("general.filter")} {this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
+										</div>
+										<div className="col-auto">
+											<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
+										</div>
+									</div>
+								</header>
+								<ul className="filter">
+									{
+										filterObjects.map((filterObject, idx) => {
+											return <li key={idx} onClick={() => this.handleClick(filterObject.filterTitle)} className="have-child">
+												<div className="row">
+													<label className="col-auto">{filterObject[key]}</label>
+													<div className="col">{selectedOptions.map((item, index) => (
+														(item[key] === filterObject[key] && item.selectedOptions.length !== 0 ? <p key={index}>{item.selectedOptions.length}</p> : <p key={index}>{this.props.translate("general.all")}</p>)
+													))}</div>
+
+												</div>
+												<div className={(this.state.item === filterObject.filterTitle ? `filte-items ${this.state.isHidden}` : `filte-items is-hidden`)}>
+													<header>
+														<div className="row">
+															<div className="col-auto">
+																<button type="button" onClick={this.handleBack} className="btn reset">
+																	<i className={`icon-arrow-${left(direction)}`}></i>
+																</button>
+															</div>
+															<div className="col">
+																<h4>{filterObject[key]}</h4>
+															</div>
+															<div className="col-auto">
+																<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
+															</div>
+														</div>
+													</header>
+													<div>
+														<div className="filter-search">
+															<i className="icon-search"></i>
+															<input type="text"
+																onChange={this.handleChange.bind(this, filterObject)}
+																onKeyDown={this.handleKeyDown}
+																className="form-control"
+																placeholder={this.props.translate("general.buttons.search")} />
+														</div>
+														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+													</div>
+												</div>
+											</li>
+										})}
+								</ul>
+							</aside>
+						}
+						children={
+							<Fragment>
+								<section className="results-container gray-bg">
+									<div className="container-fluid">
+										<div className="row">
+											<div className="col">
+												<div className="search-result">
+													<div className="total-result row">
+														<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+														<div className="col-auto">
+															{/*<div className="result-sort">
+											<LargeScreen><label>Sort by</label></LargeScreen>
+											<DownLargeScreen>
+												<i className="icon-sorting"></i>
+											</DownLargeScreen>
+											<Select
+												classNamePrefix="select"
+												isSearchable={false}
+												defaultValue={sortOptions[0]}
+												options={sortOptions} />
+										</div>*/}
+															<div className="side-bar-compnent-btn">
+																<button className="btn filter-btn" onClick={() => this.openSidebar()}>
+																	<i className="icon-filter"></i>
+																</button>
+															</div>
+														</div>
+													</div>
+													<ul className="result-list products-list row">
+														{this.renderProducts()}
+													</ul>
+												</div>
+												<div className="row ">
+													<div className="col d-flex justify-content-center">
+														<ul className="more-result list-inline">
+															{btnPrev}
+															<li>
+																<span>{this.props.translate("general.page")} {pageNumber} {this.props.translate("general.of")} {Math.ceil(this.state.resultSize / 16)}</span>
+															</li>
+															{btnNext}
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</section>
+
+								<Footer translate={translate} />
+							</Fragment>
+						}
+						open={this.state.sidebarOpen}
+						onClick={this.handleClick}
+						onSetOpen={this.onSetSidebarOpen}
+						contentId="contentId"
+						pullRight={true}
+					>
+					</Sidebar>
+				</DownLargeScreen>
+			</Fragment>
+
 		)
 	}
 }
