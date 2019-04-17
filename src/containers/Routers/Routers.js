@@ -12,14 +12,13 @@ import { isAuth } from '../../utils'
 import loadStyle from '../../config/app-style';
 import { loadGoogleAnalytics } from '../../config/google';
 import NetworkError from '../../components/NetworkError';
-import { getVehicles, InitializeDefaultLang, getCountriesOnly } from '../../actions/apiAction';
+import { getVehicles, InitializeDefaultLang, getCountriesOnly, getRegions } from '../../actions/apiAction';
 import { selectCountry, onLogout } from '../../actions/customerAction';
 import { changeDefaultDirection } from '../../actions/customerAction';
 import RouterScrollToTop from '../../components/RouterScrollToTop';
 import Nav from '../../components/UI/Nav';
 import moment from 'moment';
 import { clearCart } from '../../actions/cartAction';
-import { RADIX } from '../../constants';
 
 class Routes extends Component {
     constructor(props) {
@@ -31,24 +30,21 @@ class Routes extends Component {
         props.getVehicles();
         props.getCountriesOnly(defaultLanguage);
         props.changeDefaultDirection(defaultLanguage);
+        props.getRegions(1);
         loadStyle(this.props.direction);
         loadGoogleAnalytics();
     }
     componentDidUpdate = (prevProps, prevState) => {
         const dateNow = moment();
-        const expireHours = moment(this.props.tokenExpire);
-        const dateDiff = expireHours.diff(dateNow);
-        const hoursLeft = parseInt(moment(dateDiff).format("h"), RADIX);
-        const oneHour = 1;
+        const expiredDate = moment(this.props.tokenExpire);
+        const dateDiff = dateNow.diff(expiredDate, 'minutes');
+        const oneHourLeft = -60;        
 
-        // console.log(typeof(hoursLeft));
-        // console.log('hoursLeft: ', hoursLeft);
-        // console.log('oneHour: ', oneHour);
-        
-
-        if (hoursLeft <= oneHour) {
-            this.props.onLogout();
-            this.props.clearCart();
+        if (dateDiff >= oneHourLeft) {
+            this.props.onLogout()
+            .then(() => {
+                this.props.clearCart();
+            })
         }
 
         if (prevProps.direction !== this.props.direction) {
@@ -83,13 +79,14 @@ class Routes extends Component {
                                     selectCountry={this.props.selectCountry}
                                     changeDefaultDirection={this.props.changeDefaultDirection}
                                     direction={this.props.direction}
+                                    cart={this.props.cart}
                                 >
                                     <Switch>
                                         {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang, this.props.translate).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
                                     </Switch>
                                 </Layout>
                                 <div className="overlay-lg"></div>
-                                <Link to="#" className="live-chat">
+                                <Link target="_blank" to="//wa.me/966547074452/" className="live-chat">
                                     <img className="whatsapp" src="/img/whatsapp-logo.svg" alt="whatsapp" />
                                     <p className="media-body">{translate("customerService.root.whatsApp.header")} <span>{translate("customerService.root.whatsApp.subHeader")}</span></p>
                                 </Link>
@@ -124,6 +121,7 @@ const mapStateToProps = state => {
         countriesOnly: state.api.countriesOnly,
         error: state.networkError.error,
         direction: state.customer.direction,
+        cart: state.cart.purchasedItems
     }
 }
 
@@ -132,6 +130,7 @@ const mapDispatchToProps = dispatch => {
         changeDefaultDirection: (lang) => dispatch(changeDefaultDirection(lang)),
         InitializeDefaultLang: (defaultLanguage) => dispatch(InitializeDefaultLang(defaultLanguage)),
         getVehicles: () => dispatch(getVehicles()),
+        getRegions: (countryId) => dispatch(getRegions(countryId)),
         getCountriesOnly: (defaultLanguage) => dispatch(getCountriesOnly(defaultLanguage)),
         selectCountry: (country) => dispatch(selectCountry(country)),
         onLogout: () => dispatch(onLogout()),

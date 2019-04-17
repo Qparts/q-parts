@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react"; // eslint-disable-line no-un
 import { Link } from "react-router-dom";
 import Swiper from 'react-id-swiper';
 import { ltr } from '../../constants';
+import { getTranslatedString } from "../../utils";
 
 export class ManualForm extends Component {
 	componentDidMount = () => {
@@ -12,7 +13,7 @@ export class ManualForm extends Component {
 		document.getElementsByClassName("slider-nav-container")[0].appendChild(prev);
 	}
 	render() {
-		const { direction } = this.props
+		const { direction, currentLanguage } = this.props
 		const params = {
 			slidesPerView: 'auto',
 			centeredSlides: true,
@@ -40,8 +41,8 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-1-xs.jpg" />
-									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1.jpg" />
+									<source media="(max-width: 767px)" srcSet={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1-xs.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1-xs-ar.jpg")} />
+									<img alt="slider" src={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-1-ar.jpg")} />
 								</picture>
 							</Link>
 						</div>
@@ -50,8 +51,8 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=10">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-2-xs.jpg" />
-									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2.jpg" />
+									<source media="(max-width: 767px)" srcSet={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2-xs.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2-xs-ar.jpg")}  />
+									<img alt="slider-2" src={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-2-ar.jpg")} />
 								</picture>
 							</Link>
 						</div>
@@ -60,8 +61,8 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/quotation-order">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-4-xs.jpg" />
-									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4.jpg" />
+									<source media="(max-width: 767px)" srcSet={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4-xs.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4-xs-ar.jpg")}  />
+									<img alt="slider" src={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-4-ar.jpg")} />
 								</picture>
 							</Link>
 						</div>
@@ -70,8 +71,8 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=1">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-5-xs.jpg" />
-									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5.jpg" />
+									<source media="(max-width: 767px)" srcSet={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5-xs.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5-xs-ar.jpg")}  />
+									<img alt="slider" src={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-5-ar.jpg")} />
 								</picture>
 							</Link>
 						</div>
@@ -80,8 +81,8 @@ export class ManualForm extends Component {
 						<div>
 							<Link to="/listing?query=&page=1&category=9">
 								<picture>
-									<source media="(max-width: 767px)" srcSet="/img/slide-3-xs.jpg" />
-									<img src="https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3.jpg" />
+									<source media="(max-width: 767px)" srcSet={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3-xs.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3-xs-ar.jpg")}  />
+									<img alt="slider" src={getTranslatedString(currentLanguage, "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3.jpg", "https://s3.eu-central-1.amazonaws.com/q-parts-home-slider/slide-3-ar.jpg")} />
 								</picture>
 							</Link>
 						</div>

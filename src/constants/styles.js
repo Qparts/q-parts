@@ -28,9 +28,11 @@ const dark50 = 'rgba(39, 39, 52, 0.5)';
 const dark70 = 'rgba(39, 39, 52, 0.7)';
 const dark80 = 'rgba(39, 39, 52, 0.8)';
 
-const error = '#fbc0bd';
+const error = '#c82938';
 const invalid = '#e8d59a';
 const success = 'rgba(48, 213, 118, 0.3)';
+
+const boxShadow = '0px 18px 18px 0px rgba(0, 0, 0, 0.07)';
 
 const selectStyle = {
   menu: (styles) => {
@@ -69,7 +71,7 @@ const isRequired = (error, touched) => {
 }
 
 const isInvalid = (error, touched) => {
-  return touched && (error.includes('Invalid') || error.includes('غير'));
+  return touched && error;
 }
 
 export const styles = {
@@ -118,7 +120,8 @@ export const styles = {
 			border-bottom-color: transparent !important;
         `,
   loading: {
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%'
   }
 }
 
@@ -195,7 +198,8 @@ export const colors = {
   dark80,
   error,
   invalid,
-  success
+  success,
+  boxShadow
 }
 
 export const helpers = {

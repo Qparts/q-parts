@@ -11,6 +11,8 @@ export const DECREMENRT_CART_PRODUCT_QUANTITY = 'DECREMENRT_CART_PRODUCT_QUANTIT
 export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
 export const POST_CREDIT_CARD = 'POST_CREDIT_CARD';
+export const DELETE_CART = 'DELETE_CART';
+export const ADD_WISHLIST = 'ADD_WISHLIST';
 
 export const addToCart = (item) => {
  return {
@@ -73,12 +75,32 @@ export const addDeliveryAddress = (address) => {
 }
 
 export const addPaymentMethod = (args) => {
-  
+
   return {
     type: ADD_PAYMENT_METHOD,
     payload: {
       type: args.type,
       creditCard: args.creditCard
     }
+  }
+}
+
+export const deleteCart = (product) => {
+  return {
+    type: DELETE_CART,
+    payload: product
+  }
+}
+
+export const moveCartToWishlist = (product) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_CART,
+      payload: product
+    })
+    dispatch({
+      type: ADD_WISHLIST,
+      payload: product
+    })
   }
 }

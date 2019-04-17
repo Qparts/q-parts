@@ -1,0 +1,151 @@
+.signup-page{
+  @include text-left;
+  @extend .gray-bg;
+  @extend .pt-sec;
+  .sec-header{
+    margin-bottom: 15px;
+    h1{
+      font-weight: 300;
+      @include font-size(50px);
+    }
+    span{
+      @include opacity(1);
+    }
+  }
+  .have-account{
+    > p{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      @include font-size(18px);
+      a{
+        color: $brand-color;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+    }
+    .user{
+      max-width: 20px;
+      display: inline-flex;
+      margin-#{$right}: 5px;
+      margin-top: -8px;
+    }
+  }
+  .or{
+    height: 0;
+    span:last-child{
+      background: $light-gray;
+    }
+  }
+  .btn-social{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    @include box-shadow();
+    button{
+      background: $white;
+      &:hover{
+        background: $light-gray;
+      }
+    }
+  }
+  .social-signup{
+    & + p{
+      @include font-size(15px);
+      @include opacity(0.6);
+    }
+  }
+  aside{
+    padding-top: 12px;
+  }
+}
+
+.ReactPasswordStrength {
+    border-width: 0 !important;
+    color: inherit !important;
+    font-family: inherit !important;
+    font-size: inherit !important;
+    line-height: normal !important;
+}
+.ReactPasswordStrength-input {
+    @include font-size(18px);
+    padding: 21px 15px 0.375rem  !important;
+    width: 100% !important;
+}
+.ReactPasswordStrength-strength-bar{
+  max-width: calc(100% - 10px);
+  #{$left}: 10px;
+  top: -25px !important;
+  height: 4px !important;
+  z-index: 1;
+  &:before{
+    display: none;
+    min-width: 140px;
+    @include font-size(15px);
+    @include opacity(0.8);
+    position: relative;
+    top: -20px;
+    content: if-ltr("Password Strength", "قوة كلمة المرور");
+  }
+  &::after{
+    content: " ";
+    height: 4px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+  }
+}
+.password{
+  position: relative;
+  p{
+    @include transition(all, 0.5s, ease);
+    margin-bottom: 0;
+    width: calc(100% - 10px);
+    height: 4px;
+    background: $light-gray;
+    bottom: -39px;
+    position: absolute;
+    z-index: 0;
+    #{$left}: 10px;
+    @include opacity(0);
+  }
+  [class*=' is-']{
+    margin-bottom: 60px;
+    .ReactPasswordStrength-strength-bar{
+      &:before{
+        display: block;
+      }
+      + p{
+        @include opacity(1);
+      }
+    }
+
+  }
+  .ReactPasswordStrength-strength-desc{
+    width: auto;
+    font-style: normal;
+    @include font-size(16px);
+    text-transform: capitalize;
+    top: auto;
+    bottom: -42px;
+    padding-#{$right}: 0;
+    #{$right}: 0;
+    #{$left}: unset;
+  }
+  .toggle-password{
+    position: absolute;
+    top: 0;
+    #{$right}: 15px;
+    @include font-size(15px);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    i{
+      @include font-size(22px);
+      margin-right: 5px;
+      position: relative;
+      top: 2px;
+    }
+  }
+}

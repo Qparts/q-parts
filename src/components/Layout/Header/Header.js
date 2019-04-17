@@ -82,7 +82,7 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, cart } = this.props;
 
     const mainSearch = (
       <div className="main-search">
@@ -157,7 +157,8 @@ class Header extends Component {
                     vehicles={vehicles}
                     onAddVechile={onAddVechile}
                     onSignin={onSignin}
-                    onSearch={onSearch} />
+                    onSearch={onSearch}
+                    cart={cart} />
                 </div>
               </div>
             </div>

@@ -3,27 +3,37 @@ import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { connect } from 'react-redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import _ from 'lodash';
 import { getQuery, handleImageFallback, getTranslatedObject, right } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
-import { CREDIT_CARD } from '../../constants';
+import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
 import * as constant from '../../constants'
 import { clearCart } from '../../actions/cartAction';
+import { setLoading, setValidCredit } from '../../actions/customerAction';
 import { Link, Redirect } from 'react-router-dom';
 import Title from '../UI/Title';
+import _ from 'lodash'
 
 import { bindActionCreators } from 'redux';
 class CheckoutConfirmation extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      clonePurchasedItem: props.purchasedItems,
+      cloneCheckout: props.checkout
+    }
+    const params = getQuery(props.location);
+    props.setLoading(false);
 
     if (props.checkout.paymentMethod === CREDIT_CARD) {
-      paymentResponse(this.props.location.search);
+      paymentResponse(props.location.search);
     }
-  }
-  componentWillUnmount() {
-    this.props.clearCart();
+
+    if ((params.status === constant.paymentStatus.paid) || props.checkout.paymentMethod === BANK_TRANSFER) {
+      props.clearCart();
+    } else {
+      props.setValidCredit(false);
+    }
   }
 
   handleClick = () => {
@@ -32,16 +42,18 @@ class CheckoutConfirmation extends Component {
   }
 
   render() {
-    const { checkout, translate, location, purchasedItems, currentLanguage } = this.props;
+
+    const { translate, location, currentLanguage } = this.props;
+    const { clonePurchasedItem, cloneCheckout } = this.state;
     const params = getQuery(location);
-    const checkoutData = purchasedItems.map(item => {
+    const checkoutData = clonePurchasedItem.map(item => {
       return {
         ...item.product,
         desc: item.product.desc,
         salesPrice: item.product.salesPrice.toFixed(2),
         currency: translate("general.currency"),
-				quantity: item.quantity,
-				quantityLabel: translate("general.quantity"),
+        quantity: item.quantity,
+        quantityLabel: translate("general.quantity"),
         image: item.product.image,
         productNumber: item.product.productNumber,
         brand: item.product.brand,
@@ -54,12 +66,16 @@ class CheckoutConfirmation extends Component {
       subtotal += checkoutData[i].subtotal;
     }
     const total = subtotal + 35;
-    const vat = total + 0.05;
+    const vat = total * 0.05;
     const grandTotal = total + vat;
 
-    if (_.isEmpty(purchasedItems)) {
+    if (params.status === constant.paymentStatus.failed) {
+      return <Redirect to="/checkout/confirm" />
+    
+    } else if (_.isEmpty(clonePurchasedItem)) {
       return <Redirect to="/" />
     }
+
     return (
       <Fragment>
         <section id="confirm-order">
@@ -81,38 +97,21 @@ class CheckoutConfirmation extends Component {
                       </Link>
                       <figcaption className="col-9">
                         <div className="row">
-                          <div className="col-md-9 item-dis">
+                          <div className="col-md-8 item-dis">
                             <header>
                               <h3><Link to="#">{checkoutData.desc}</Link></h3>
                               <h4>{getTranslatedObject(checkoutData.brand, currentLanguage, 'name', 'nameAr')} <span>{checkoutData.productNumber}</span></h4>
                             </header>
                             <div className="cart-quantity d-block d-lg-none">
-                              <h5>{checkoutData.quantityLabel}</h5>
-                              <div className="input-group quantity">
-                                <div className="input-group-prepend">
-                                  <button
-                                    className="btn btn-gray"
-                                    type="button"
-                                    onClick={this.handleClick.bind(this, constant.DECREMENT, checkoutData.quantity, checkoutData)}>
-                                    <i className="minus"></i></button>
-                                </div>
-                                <input disabled className="form-control" value={checkoutData.quantity} type="text" />
-                                <div className="input-group-append">
-                                  <button
-                                    className="btn btn-gray" type="button"
-                                    onClick={this.handleClick.bind(this, constant.INCREMENT, checkoutData.quantity, checkoutData)}>
-                                    <i className="icon-plus"></i>
-                                  </button>
-                                </div>
-                              </div>
+                              <h5>{checkoutData.quantityLabel} <span>{checkoutData.quantity}</span></h5>
                             </div>
                           </div>
-                          <div className="col-md-3 div-price-quantity">
+                          <div className="col-md-4 div-price-quantity">
                             <div className="cart-product-price">
-                              <p className="price">{checkoutData.salesPrice} <span>{checkoutData.currency}</span></p>
+                              <p className="price">{checkoutData.salesPrice} </p><span>{checkoutData.currency}</span>
                             </div>
                             <div className="cart-quantity d-none d-lg-block">
-                              <h5>{checkoutData.quantityLabel} {checkoutData.quantity} </h5>
+                              <h5>{checkoutData.quantityLabel} <span>{checkoutData.quantity}</span></h5>
                             </div>
                           </div>
                         </div>
@@ -129,7 +128,7 @@ class CheckoutConfirmation extends Component {
                   <div className="d-table-row">
                     <div className="d-table-cell first-row"><span>{translate("orderSummary.subtotal")}</span></div>
                     <div className="d-table-cell first-row">
-                      {subtotal} <span>{checkoutData.currency}</span>
+                      {subtotal.toFixed(2)} <span>{checkoutData.currency}</span>
                     </div>
                   </div>
                   <div className="d-table-row">
@@ -138,15 +137,15 @@ class CheckoutConfirmation extends Component {
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.total")}</span></div>
-                    <div className="d-table-cell">{total} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{total.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.vat")}</span></div>
-                    <div className="d-table-cell">{vat} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{vat.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                   <div className="d-table-row">
                     <div className="d-table-cell"><span>{translate("orderSummary.grandTotal")}</span></div>
-                    <div className="d-table-cell">{grandTotal} <span>{checkoutData.currency}</span></div>
+                    <div className="d-table-cell">{grandTotal.toFixed(2)} <span>{checkoutData.currency}</span></div>
                   </div>
                 </div>
               </div>
@@ -156,7 +155,7 @@ class CheckoutConfirmation extends Component {
                 <DeliveryAddress
                   title={translate("deliveryAddress.title")}
                   change={translate("deliveryAddress.change")}
-                  deliveryAddress={checkout.deliveryAddress}
+                  deliveryAddress={cloneCheckout.deliveryAddress}
                   translate={translate} />
               </div>
               <div className="col-md-6 col-12 payment-method">
@@ -164,7 +163,7 @@ class CheckoutConfirmation extends Component {
                   currentLanguage={currentLanguage}
                   title={translate("paymentMethod.title")}
                   change={translate("paymentMethod.change")}
-                  checkout={checkout}
+                  checkout={cloneCheckout}
                   translate={translate} />
               </div>
             </div>
@@ -186,6 +185,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     clearCart,
+    setLoading,
+    setValidCredit
   }, dispatch)
 }
 

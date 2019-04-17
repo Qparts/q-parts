@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress } from '../../actions/customerAction';
+import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, setValidCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
@@ -14,7 +14,7 @@ import Button from '../UI/Button';
 
 import { SmallScreen, MediumScreen } from '../Device/index.js'
 
-import _ from 'lodash';
+import { colors } from '../../constants'
 
 const shippingStep = '/checkout';
 const paymentStep = '/checkout/payment';
@@ -78,19 +78,25 @@ class Checkout extends Component {
 		let shippingClass = "shipping";
 		let paymentClass = "payment";
 
+		const styles = {
+			hideShadow: {
+				boxShadow: !canSubmitOrder ? 'none' : colors.boxShadow
+			}
+		}
 
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
 				...item.product,
 				desc: item.product.desc,
-				salesPrice: item.product.salesPrice.toFixed(2),
+				salesPrice: Number(item.product.salesPrice.toFixed(2)),
 				currency: translate("general.currency"),
 				quantity: item.quantity,
 				quantityLabel: translate("general.quantity"),
 				image: item.product.image,
 				productNumber: item.product.productNumber,
 				brand: item.product.brand,
-				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
+				subtotal: item.product.salesPrice.toFixed(2) * item.quantity,
+				id: item.product.id
 			}
 		});
 
@@ -99,6 +105,8 @@ class Checkout extends Component {
 			subtotal += checkoutData[i].subtotal;
 		}
 		const total = subtotal + 35;
+		const vat = total * 0.05;
+		const grandTotal = total + vat;
 
 		if (this.props.isShippingCompleted) {
 			paymentClass += " paymentActive"
@@ -108,6 +116,9 @@ class Checkout extends Component {
 		if (this.props.isPaymentCompleted) {
 			orderClass += " orderActive"
 			paymentClass += " paymentDone"
+		}
+		if(checkoutData.length === 0){
+			this.props.history.push('/');
 		}
 		return (
 			<section className="checkout-container-shipping">
@@ -176,7 +187,8 @@ class Checkout extends Component {
 								translate={translate}
 								addPaymentMethod={this.props.addPaymentMethod}
 								completePayment={this.props.completePayment}
-								checkout={this.props.checkout} />
+								checkout={this.props.checkout}
+								setValidCredit={this.props.setValidCredit}/>
 						}} />
 
 						<Route path="/checkout/confirm" exact={true} render={() => {
@@ -189,19 +201,35 @@ class Checkout extends Component {
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
-								total={total} />
+								grandTotal={grandTotal}
+								setLoading={this.props.setLoading}
+								isLoading={this.props.isLoading}
+								setValidCredit={this.props.setValidCredit}
+								isValidcreditCard={this.props.isValidcreditCard}
+								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist} />
 						}} />
 					</Switch>
-					<div className="Checkout-Order_summary col-12 col-md-3">
-						<OrderSummary
-							direction={this.props.direction}
-							translate={translate}
-							isDelivery={canSubmitOrder}
-							submitButton={translate("orderSummary.placeOrder")}
-							checkoutData={checkoutData}
-							purchasedItems={checkoutData}
-							checkout={this.props.checkout} />
-					</div>
+					{
+						!this.props.isLoading && (
+							<div className="col-12 col-md-3">
+								<div style={styles.hideShadow} className="order-summary">
+									<OrderSummary
+										direction={this.props.direction}
+										translate={translate}
+										isDelivery={canSubmitOrder}
+										submitButton={translate("orderSummary.placeOrder")}
+										checkoutData={checkoutData}
+										purchasedItems={checkoutData}
+										checkout={this.props.checkout}
+										setLoading={this.props.setLoading}
+										isLoading={this.props.isLoading}
+										setValidCredit={this.props.setValidCredit}
+										isValidcreditCard={this.props.isValidcreditCard} />
+								</div>
+							</div>
+						)
+					}
 				</div>
 			</section>
 		)
@@ -222,7 +250,9 @@ const mapStateToProps = state => ({
 	addresses: state.customer.detail.addresses,
 	isShippingCompleted: state.customer.isShippingCompleted,
 	isPaymentCompleted: state.customer.isPaymentCompleted,
-	purchasedItems: state.cart.purchasedItems
+	purchasedItems: state.cart.purchasedItems,
+	isLoading: state.customer.isLoading,
+	isValidcreditCard: state.customer.isValidcreditCard
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -239,7 +269,11 @@ const mapDispatchToProps = (dispatch) => {
 		completePayment,
 		incrementQuantity,
 		decrementQuantity,
-		changeDefaultAddress
+		changeDefaultAddress,
+		setLoading,
+		setValidCredit,
+		deleteCart,
+		moveCartToWishlist
 	}, dispatch)
 }
 

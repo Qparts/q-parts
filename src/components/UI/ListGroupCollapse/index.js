@@ -93,6 +93,9 @@ export class ListGroupCollapse extends Component {
                 <ModalHeader toggle={this.togglePopup}>
                     <Title number={this.state.product.quantity} header={translate("dialog.addToCart.title")} />
                 </ModalHeader>
+                <ModalHeader toggle={this.togglePopup} className="have-icon">
+                  <p><i className="icon-change-password"></i>Change</p> Password
+                </ModalHeader>
                 <ModalBody>
                     <AddProduct
                         data={this.state.product}

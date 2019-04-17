@@ -383,7 +383,7 @@ class ProductDetail extends Component {
                     <li className="support">
                       <CustomerService
                         messages={chatMessages}
-                        url="" />
+                        url="//wa.me/966547074452/" />
                     </li>
                   </form>
                 </ul>
@@ -497,9 +497,9 @@ class ProductDetail extends Component {
                 </div>
               </div>
             </div>
-            <aside className="col-auto side-banner d-none d-lg-block">
+            {/*<aside className="col-auto side-banner d-none d-lg-block">
               <img src="/img/160-banner.jpg" />
-            </aside>
+            </aside>*/}
           </div>
           <div className="row pt-sec">
             <div className="col products-list">
@@ -550,7 +550,7 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+    modalAddToCart: (check) => dispatch(modalAddToCart(check))
   }
 }
 

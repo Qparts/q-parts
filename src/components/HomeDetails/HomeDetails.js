@@ -154,7 +154,7 @@ class HomeDetails extends Component {
 						</li>
 					</ul>
 				</section>
-				<section className="vendor container-fluid">
+				{/* <section className="vendor container-fluid">
 					<div className="row">
 						<div className="col-12">
 							<div className="vendor-details">
@@ -174,7 +174,7 @@ class HomeDetails extends Component {
 
 						</div>
 					</div>
-				</section>
+				</section> */}
 				<Products
 					recentViewedProducts={recentViewedProducts}
 					translate={translate}

@@ -446,12 +446,17 @@ class Setting extends Component {
                     return (
                       <Fragment>
                         <Quotations
-                          getPendingRequests={this.props.getPendingRequests}
-                          getCompletedRequests={this.props.getCompletedRequests}
-                          customer={this.props.customer}
-                          quotations={this.props.quotations}
-                          translate={this.props.translate}
-                          addToCart={this.props.addToCart} />
+                            getPendingRequests={this.props.getPendingRequests}
+                            getCompletedRequests={this.props.getCompletedRequests}
+                            customer={this.props.customer}
+                            quotations={this.props.quotations}
+                            translate={this.props.translate}
+                            direction={this.props.direction}
+                            addToCart={this.props.addToCart}
+                            currentLanguage={this.props.currentLanguage}
+                            incrementQuantity={this.props.incrementQuantity}
+                            decrementQuantity={this.props.decrementQuantity}
+                            token={this.props.token} />
                       </Fragment>
                     )
                   }} />

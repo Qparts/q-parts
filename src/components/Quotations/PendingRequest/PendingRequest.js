@@ -10,14 +10,14 @@ export class PendingRequest extends Component {
         const { translate, currentLanguage, pendings } = this.props
         const created = moment(pendings.created).format('MMM Do');
         let ids = [];
-        
+
         pendings.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
         return <Fragment key={pendings.id}>
             <Link
                 to="#"
                 data-toggle="collapse"
-                data-target={".multi-collapse"}
+                data-target={`.${pendings.id}`}
                 aria-expanded="false"
                 aria-controls={ids.join(' ')}>
                 <li className="bg-white">
@@ -42,6 +42,7 @@ export class PendingRequest extends Component {
             {
                 pendings.quotationItems.map(quotationItem => {
                     return <ListGroupCollapse
+                        requestNumber={pendings.id}
                         key={quotationItem.id}
                         type={PENDING}
                         quotationItem={quotationItem}

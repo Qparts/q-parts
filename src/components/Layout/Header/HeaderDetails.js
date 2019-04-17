@@ -25,7 +25,7 @@ class HeaderDetails extends Component {
     });
   };
   render() {
-    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction } = this.props;
+    const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
     const dropdownHeader =
       <Fragment>
@@ -53,7 +53,7 @@ class HeaderDetails extends Component {
               !isLoggedIn && <Fragment>
                 <h6>{translate("dialog.signin.title")}</h6>
                 <ul className="signin-list">
-                  <li><a className="btn" href="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></a></li>
+                  <li><Link className="btn" to="#" onClick={onSignin}>{translate("general.signin")} <i className={`icon-arrow-${right(direction)}`} /></Link></li>
                   {/* <li><a href="#"><i className="icon-facebook" /></a></li>
                 <li><a href="#"><img src="/img/google-icon.svg"></img></a></li> */}
                 </ul>
@@ -88,9 +88,9 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-          <Link to="/cart" className="not-empty">
+           <Link to="/cart" className="not-empty">
             <i className="icon-cart" />
-            <span>2</span>
+            <span>{cart.length}</span>
           </Link>
         </li>
       </ul>

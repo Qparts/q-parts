@@ -1,5 +1,9 @@
 {
   "general": {
+    "enter": [
+      "أدخل",
+      "Enter"
+    ],
     "send": [
       "إرسال",
       "Send"
@@ -82,6 +86,14 @@
       "go": [
         "اعرض النتيجة",
         "Apply Filter"
+      ],
+      "show": [
+        "عرض",
+        "Show"
+      ],
+      "hide": [
+        "إخفاء",
+        "Hide"
       ]
     },
     "arabic": [
@@ -159,6 +171,38 @@
     "select": [
       "اختار",
       "Select"
+    ],
+    "country": [
+      "البلد",
+      "Country"
+    ],
+    "region": [
+      "منطقة",
+      "Region"
+    ],
+    "city": [
+      "مدينة",
+      "City"
+    ],
+    "ksa": [
+      "السعودية",
+      "KSA"
+    ],
+    "page": [
+      "صفحة",
+      "Page"
+    ],
+    "all": [
+      "الكل",
+      "All"
+    ],
+    "vin": [
+      "رقم الهيكل",
+      "Vin num"
+    ],
+    "error": [
+      "فشل الاجراء",
+      "transaction failed"
     ]
   },
   "tires": {
@@ -367,7 +411,7 @@
       "Cleaners and Polishers"
     ],
     "sportsAndOutdoors": [
-      "الرياضات و الأنشطة الخارجية",
+      "مستلزمات الأنشطة الخارجية",
       "Sports and Outdoors"
     ],
     "country": [
@@ -458,12 +502,42 @@
       "title": [
         "معلومات السيارة",
         "Vehicle Information"
+      ],
+      "make": [
+        "اختر السيارة",
+        "Select a Vehicle Make"
+      ],
+      "model": [
+        "اختر موديل",
+        "Select a Vehicle Model"
+      ],
+      "year": [
+        "اختر سنة",
+        "Select a year"
       ]
     },
     "shipping": {
       "title": [
         "معلومات الشحن",
         "Shipping Information"
+      ],
+      "region": [
+        "اختر المنطقة",
+        "Select a region"
+      ],
+      "city": [
+        "اختر المدينة",
+        "Select a city"
+      ]
+    },
+    "garage": {
+      "title": [
+        "اختر السيارة",
+        "Select a vehicle"
+      ],
+      "subTitle": [
+        "عرض وإدارة والعثور على قطع غيار للسيارات في المرآب الخاص بك",
+        "View, manage and find parts for the vehicles in your garage"
       ]
     },
     "parts": [
@@ -491,7 +565,7 @@
       "Accessories"
     ],
     "outdoors": [
-      "في الهواء الطلق",
+      "مستلزمات الأنشطة الخارجية",
       "Outdoors"
     ],
     "carCare": [
@@ -545,8 +619,8 @@
       "Start now"
     ],
     "startHere": [
-      "أبدأ طلب تسعيرة",
-      "Start Qutaation Order"
+      "ابدأ طلب تسعيرة",
+      "Start Quotation Order"
     ]
   },
   "navBar": {
@@ -595,8 +669,8 @@
       "Sign In/Sign Up"
     ],
     "joinUs": [
-      "انضم إلينا",
-      "Join Us"
+      "سجل معنا",
+      "Sign Up"
     ],
     "menu": {
       "menuItem": {
@@ -650,8 +724,8 @@
         "New Customer?"
       ],
       "link": [
-        "انضم إلينا",
-        "Join us"
+        "سجل معنا",
+        "Sign Up"
       ]
     },
     "garage": {
@@ -724,8 +798,8 @@
         "Don't have an account?"
       ],
       "joinUs": [
-        "انضم إلينا",
-        "Join Us"
+        "سجل معنا",
+        "Sign Up"
       ],
       "here": [
         "هنا",
@@ -748,8 +822,8 @@
     },
     "signup": {
       "title": [
-        "انضم إلينا",
-        "Join Us"
+        "سجل معنا",
+        "Sign Up"
       ],
       "subHeader": [
         "عرض وإدارة وإيجاد أجزاء للسيارات في الكراج الخاص بك",
@@ -774,6 +848,10 @@
       "city": [
         "اختر المدينة",
         "Select a city"
+      ],
+      "region": [
+        "اختر المنطقة",
+        "Select a region"
       ],
       "password": [
         "كلمة المرور",
@@ -891,7 +969,7 @@
       ],
       "make": [
         "اختر السيارة",
-        "Choose a car"
+        "Make"
       ],
       "model": [
         "موديل",
@@ -936,7 +1014,7 @@
         "Select from google map"
       ],
       "title": [
-        "عنوان",
+        "اسم العنوان",
         "Title"
       ],
       "region": [
@@ -948,12 +1026,12 @@
         "City"
       ],
       "line1": [
-        "سطر العنوان ١",
+        "العنوان",
         "Address line 1"
       ],
       "line2": [
-        "سطر العنوان ٢",
-        "Address line 2"
+        "الحي أو أقرب معلم",
+        "District / Nearest Landmark"
       ],
       "zipCode": [
         "الرمز البريدي",
@@ -1674,12 +1752,12 @@
         "Delete"
       ],
       "addressLine1": [
-        "سطر العنوان ١",
-        "Address (Line 1)"
+        "العنوان",
+        "Address"
       ],
       "addressLine2": [
-        "سطر العنوان ٢",
-        "Address (Line 2)"
+        "الحي أو أقرب معلم",
+        "District / Nearest Landmark"
       ],
       "zipCode": [
         "الرمز البريدي",
@@ -2092,7 +2170,7 @@
         ]
       },
       "placeOrder": [
-        " اطبلب",
+        " اطلب",
         "Place your order"
       ]
     },
@@ -2215,7 +2293,7 @@
       ],
       "select": [
         "اختر السيارة",
-        "Select vehicle"
+        "Select a vehicle"
       ]
     },
     "partInfo": {
@@ -2616,5 +2694,419 @@
       "الصنف",
       "CATEGORY"
     ]
+  },
+  "terms":{
+    "header":[
+      "الشروط والأحكام",
+      "Terms and Conditions"
+    ],
+    "privacyPolicy":{
+      "privacyPolicy": [
+        "سياسة الخصوصية",
+        "Q-Parts Privacy Policy"
+      ],
+      "welcome":[
+        "مرحبا بك في Q-PARTS!",
+        "WELCOME TO Q-PARTS"
+      ],
+      "welcomeStatus":[
+        "توضح سياسة الخصوصية هذه الساس الذي سنقوم بموجبه بالتعامل مع أي بيانات شخصية، بما في ذلك على سبيل المثال ل الحصر، بيانات الدفع، وغيرها من البيانات الخرى التي نجمعها منك أو من مصادر أخرى أو تلك التي تقدمها إلينا يشار إليها بـ البيانات   وذلك بغية وصولك واستخدامك لموقع www.q.parts و او تطبيق Q-Parts للهاتف المتحرك  المشار إليها مجتمعة بـ الموقع  ، والخدمات والتطبيقات  المشار إليها مجتمعة بـ الخدمات. إننا ندرك أهمية هذه البيانات، ونحن نلتزم بحماية خصوصيتك واحترامها. يرجى قراءة ما يلي بعناية لفهم ممارساتنا فيما يتعلق بالبيانات باستخدامك لخدماتنا فإنك توافق على التعامل مع البيانات بما يتفق مع سياسة الخصوصية هذه تعد الشارات المذكورة بضمير المتكلم  أو ما شابه  في سياسة الخصوصية هذه إشارات إلى شركة Q-Parts وتعد الشارات  إليك  أو  المستخدم  إشارات إليك كفرد او شخص اعتباري، .  حسب مقتضى الحال.",
+        "This Privacy Policy sets out the basis on which any personal data, including but notlimited to payment details and other information we collect from you or other sources orthat you provide to us ( Information ) will be handled by us in connection with youraccess and use of www.q.parts, and/or the Q-Parts mobile application (collectively,the  Platform ), services and applications (collectively, the Services ). Weunderstand the importance you place on the Information, and we are committed toprotecting and respecting your privacy. Please read the following carefully to understandour practices regarding your Information. By using our Services, you agree to thehandling of your Information in accordance with this Privacy Policy.References in this Privacy Policy to we , our or us (or similar) are references toQ-Parts. References to user or you (or similar) are references to you as anindividual or legal entity as the case may be."
+      ],
+      "accountObligations":[
+        "التزامات حسابك",
+        "YOUR ACCOUNT OBLIGATIONS"
+      ],
+      "accountObligationsStatus":[
+        "سياسة الخصوصية توضح الطريقة التي تستخدمها Q-Parts في جمع واستخدام بياناتك  نحن ننصحك بقراء سياسة الخصوصية بدقة  استخدامك لخدمات Q-Parts يعني موافقتك على أن تقوم Q-Parts وطرف ثالث مصرح به بجمع بياناتك واستخدامها كما هو مذكور في سياسة الخصوصية. إذا كنت ل توافق على سياسة الخصوصية، الرجاء عدم استخدام موقع www.q.parts. يرجى ملحظة أنه بقبولك لسياسة الخصوصية خل عملية التسجيل، فإنك توافق على كشف واستخدام بياناتك الشخصية كما هو موضح فسي سياسة الخصوصية  سياسة الخصوصية هذه تشمل وعرضة لتفاقية المستخدم.",
+        "This Privacy Policy provides the manner your data is collected and used by Q-Parts. Youare advised to read this Privacy Policy carefully. By accessing the services provided byQ-Parts   you   agree   to   the   collection   and   use   of   your   data   by   Q-Parts   and   certainauthorized third-party service providers in the manner provided in this Privacy Policy. Ifyou do not agree with this Privacy Policy, please do not use the website – www.q.parts.By accepting the Privacy Policy during registration, you expressly consent to our useand disclosure of your personal information in accordance with this Privacy Policy. ThisPrivacy Policy is incorporated into and subject to the terms of the User Agreement."
+      ],
+      "informationCollect":{
+        "header":[
+          "المعلومات التي قد نقوم بجمعها منك",
+          "WHAT INFORMATION WE MAY COLLECT FROM YOU"
+        ],
+        "status":[
+          "قد نقوم بجمع ومعالجة المعلومات التالية عنك:",
+          "We may collect and process the following Information about you:"
+        ],
+        "statusA":[
+          "البيانات التي تقدمها عن طريق تعبئة النماذج في الموقع، بما في ذلك البيانات التي تم تقديمها عند التسجيل لستخدام الموقع والتسجيلت المشتركة الخرى  على سبيل المثال تسجيلت دخول مواقع التواصل الجتماعي  أو الشتراك في خدماتنا أو نشر المواد أو طلب خدمات أخرى.",
+          "Information that you provide by filling in forms on our Platform (like name, phonenumber and address), including information provided at the time of registering touse our Platform and other co- registrations (e.g. social media logins),subscribing to our Services, posting material or requesting further services."
+        ],
+        "statusB":[
+          "البيانات التي تقدمها عند دخول منافسة أو عرض ترويجي عبر موقعنا أو استكمال استطلع للرأي أو عمليات تصويت أو تقديم مراجعات أو شهادات أو ملحظات.",
+          "the Information you provide when you enter a competition or promotion via ourPlatform, provide reviews, testimonials or feedback on our Platform."
+        ],
+        "statusC":[
+          "البيانات التي تقدمها لنا، أو التي قد نجمعها منك، عندما تبلغنا عن اي صعوبة تواجهها عند استخدام موقعنا.",
+          "Information you provide us, or that we may collect from you, when you report aproblem with our Platform."
+        ],
+        "statusD":[
+          "سجل المراسلت في حال التصال بنا.",
+          "A record of correspondence if you contact us."
+        ],
+        "statusE":[
+          "بيانات عامة ومجمعة وديموغرافية وغير شخصية.",
+          "General, aggregated, demographic and non-personal Information."
+        ],
+        "statusF":[
+          "إذا قمت بتحميل أو استخدام تطبيقنا للهاتف المتحرك، فقد نتمكن من الوصول إلى تفاصيل تتعلق بموقعك وموقع هاتفك المتحرك، بما في ذلك المعرف المميز الخاص بجهازك.",
+          "If you download or use our mobile application, we may have access to detailsabout your location and your mobile device, including a unique identifier for yourdevice."
+        ],
+        "statusG":[
+          "تفاصيل المعاملت التي قمت بإجرائها عبر موقعنا وتفاصيل قيامنا بتجهيز وتسليم البضائع التي طلبتها.",
+          "Details of transactions you carry out through our Platform and of the fulfilment ofyour orders."
+        ],
+        "statusH":[
+          "تفاصيل حول جهاز الكمبيوتر الخاص بك، بما في ذلك على سبيل المثال، عنوان بروتوكول النترنت IP الخاص بك ونظام التشغيل ونوع المتصفح، بالضافة إلى البيانات المتعلقة باستخدامك العام لشبكة النترنت  على سبيل المثال  عن طريق استخدامjrkdm تخزن البيانات على جهازك أو الوصول إليه، مثل ملفات تعريف الرتباط وكود تتبع التحويلت وإشارات الويب وما إلى ذلك  المشار إليها مجتمعة بـ ملفات تعريف الرتباط.",
+          "Details about your computer, including but not limited to your IP address,operating system, device type and browser type, as well as information about your general internet usage (e.g. by using technology that stores information onor gains access to your device, such as cookies, tracking pixels, web beacons,etc., (together, Cookies))."
+        ],
+        "statusI":[
+          "عنوان بريدك اللكتروني الذي تم تزويدنا به من قبل الغير الذين اكدوا لنا استحصالهم على موافقتك على مشاركة عنوان بريدك اللكتروني.",
+          "Your email address from a third party if you indicate that you have consented tothat third party sharing your Information with us; and any other Information weconsider necessary to enhance your experience on the Platform."
+        ],
+        "statusJ":[
+          "أي بيانات أخرى نعتبرها ضرورية لتعزيز تجربتك في استخدام الموقع.",
+          "Our website and/or apps usage statistics."
+        ]
+      },
+      "cardDetails":{
+        "header":[
+          "تفاصيل بطاقة الئتمان",
+          "CREDIT CARD DETAILS"
+        ],
+        "status":[
+          "نحن ل تبقي أي تفاصيل بطاقة الئتمان في قاعدة البيانات المتوفرة لدينا أو السيرفر  من المهم بالنسبة لك الحماية ضد وصول غير المصرح لهم إلى كلمة المرور الخاصة بك أو الكمبيوتر الخاص بك   تأكد من تسجيل الخروج عند النتهاء من استخدام جهاز كمبيوتر مشترك.",
+          "We do not keep any credit card details in our data base or server. It is important for youto protect against unauthorized access to your password and to your computer. Be sureto sign off when finished using a shared computer."
+        ]
+      },
+      "useOfYourInformation":{
+        "header":[
+          "استخدامنا لمعلوماتك",
+          "OUR USE OF YOUR INFORMATION"
+        ],
+        "status":[
+          "نحن نستخدم بياناتك الشخصية ومعلومات التواصل الخاصة بك في:",
+          "We use your personal & contact information to:"
+        ],
+        "statusA":[
+          "التواصل معك في حالة الضرورة",
+          "Get in touch with you whenever necessary"
+        ],
+        "statusB":[
+          "توفير الطلبات أو الخدمات التي طلبتها",
+          "Supply the orders/ services requested by you"
+        ],
+        "statusC":[
+          "توصيل المنتجات المطلوبة",
+          "Deliver requested merchandise"
+        ],
+        "statusD":[
+          "اجراء دراسات تحليلية لتطوير الشركة",
+          "Conduct analytical business research"
+        ],
+        "statusE":[
+          "التواصل معك كمستقبل لدراسة استطلعية أو نشرة إخبارية",
+          "Preserve social history as governed by existing law or policy"
+        ],
+        "statusF":[
+          "",
+          "Contact you as a survey and/or newsletter respondent"
+        ],
+        "statusG":[
+          "التواصل معك في حال وقوع حدث طارئ",
+          "Contact you in case of emergency"
+        ],
+        "statusH":[
+          "إعلمك في حال فوزك في مسابقة",
+          "Notify you if you win any contest"
+        ],
+        "statusI":[
+          "إرسال محتوى ترويجي إليك",
+          "Send you promotional materials from our contest sponsors or advertisers"
+        ],
+        "statusJ":[
+          "تطوير المنصة وتجربة المستخدم",
+          "Improve the platform and user experience"
+        ]
+      },
+      "discloseOfYourInformation":{
+        "header":[
+          "متى يتم الفصاح عن المعلومات الخاصة بك؟",
+          "OUR DISCLOSURE OF YOUR INFORMATION"
+        ],
+        "status":[
+          "لن نستخدم معلوماتك الشخصية لي غرض آخر سوى إتمام الصفقة معك  نحن ل نؤجر أو نبيع المعلومات الشخصية الخاصة بك، ولن نكشف عن أي معلومات شخصية إلى أي طرف ثالث إل إذا:",
+          "We will not use your personal information for any purpose other than to complete atransaction with you. We do not rent, sell or share your personal information and we willnot disclose any of your personally identifiable information to third parties unless:"
+        ],
+        "statusA":[
+          "أن يكون لدينا إذن منك.",
+          "We have your permission."
+        ],
+        "statusB":[
+          "لتوفير المنتجات والخدمات التي طلبتها.",
+          "To provide products or services you've requested."
+        ],
+        "statusC":[
+          "للمساعدة في تحقيق ومنع اتخاذ إجراءات تتعلق بأنشطة غير مشروعة وغير قانونية، والمشتبه بهم بالحتيال، خطرا على سلمة أو أمن أي شخص، انتهاكات شروط استخدام Q-Parts أو للدفاع ضد المطالبات القانونية",
+          "To help investigate, prevent or take action regarding unlawful and illegalactivities, suspected fraud, potential threat to the safety or security of any person,violations of Q-Parts terms of use or to defend against legal claims."
+        ],
+        "statusD":[
+          "ظروف خاصة مثل المتثال لوامر الستدعاء، أوامر المحكمة، طلبات   أمر من السلطة القانونية أو وكالت إنفاذ القانون التي تتطلب مثل هذا الكشف",
+          "Special circumstances such as compliance with subpoenas, court orders,requests/order from legal authorities or law enforcement agencies requiring suchdisclosure"
+        ]
+      },
+      "authentication":{
+        "header":[
+          "تسجيل الدخول باستخدام فيسبوك وجوجل",
+          "USE OF FACEBOOK AND GOOGLE AUTHENTICATION"
+        ],
+        "status":[
+          "استخدام فيسبوك، جوجل أو تويتر لتسجيل الدخول إلى Q-Parts اختياري  هذه الطريقة توفر وقتك حيث أنها ل تتطلب إعادة إدخال بياناتك الشخصية وإنشاء حساب شخصي جديد  من الجدير بالذكر أننا نقوم بتخزين معرف وسائل التواصل الجتماعية الخاصة بك بالضافة إلى بريدك اللكتروني لسباب متعلقة بالتصال.",
+          "This Privacy Policy provides the manner your data is collected and used by Q-Parts. Youare advised to read this Privacy Policy carefully. By accessing the services provided byQ-Parts you agree to the collection and use of your data by Q-Parts and certainauthorized third-party service providers in the manner provided in this Privacy Policy. Ifyou do not agree with this Privacy Policy, please do not use the website – www.q.parts.By accepting the Privacy Policy during registration, you expressly consent to our useand disclosure of your personal information in accordance with this Privacy Policy. ThisPrivacy Policy is incorporated into and subject to the terms of the User Agreement."
+        ]
+      },
+      "securityMeasures":{
+        "header":[
+          "ماهي معايير الحماية التي نطبقها؟",
+          "WHAT SECURITY MEASURES WE APPLY"
+        ],
+        "status":[
+          "إننا نتخذ الخطوات اللزمة من الناحية التقنية، التجارية، الفنية، والدارية لضمان التعامل مع البيانات بأمان وبما يتماشى مع سياسة الخصوصية هذه، وذلك لحماية البيانات من الوصول اليها بشكل غير مصرح به، او تغييرها، او الفصاح عنها او اتلفها  ومن الممكن أن نستخدم  على سبيل المثال  تقنية إلكترونية مشفرة لحماية البيانات أثناء إرسالها إلى موقعنا، بالضافة إلى جدار حماية إلكتروني خارجي، وتقنية جدار حماية إلكتروني على الكمبيوتر المضيف لموقعنا حتى نتمكن من صد الهجمات الضارة على الشبكة  سوف يتم السماح فقط للموظفين ومزودي الخدمات والوكلء الذين يكون عليهم معرفة البيانات بالوصول اليها بغية تنفيذ عملهم. ومن المهم بالنسبة لك التأكد من حماية كلمة المرور الخاصة بك والجهاز الذي تستخدمه للوصول إلى موقعنا لتفادي اي وصول غير مصرح به من الغير  وتتحمل أنت وحدك مسؤولية الحفاظ على كلمة المرور الخاصة بك في سرية تامة، على سبيل المثال، تأكد من تسجيل الخروج بعد النتهاء من استخدام أحد الجهزة ذات الستخدام المشترك. رغم أننا سوف نعمل على الحفاظ على سرية معلوماتك الشخصية، ل يمكن أن يكون الرسال الذي يتم بواسطة شبكة النترنت أن يكون آمن تماما باستخدام هذا الموقع، فإنك توافق على أننا ل نتحمل أية مسؤولية عن الفصاح عن المعلومات الخاصة بك بسبب أخطاء في الرسال أو أعمال غير مصرح بها لطراف ثالثة.",
+          "We maintain commercially reasonable technical, administrative, and physical safeguardsto ensure your Information is treated securely and in accordance with this Privacy Policy, and to protect against unauthorized access or alteration to, disclosure, or destruction ofyour Information. We may, for example, use encryption technology to secure yourInformation during transmission (TLS) to our Platform as well as external firewall and on-host firewall technology to prevent network level attacks. Only those authorizedemployees, contractors, and agents who need to know your Information in connectionwith the performance of their services are allowed to access this Information. It is important for you to protect yourself against unauthorized access to your passwordand to your devices used to access our Services. You are responsible for keeping yourpassword confidential. For example, ensure that you sign off when you have finishedusing a shared device.Although we will endeavor to safeguard the confidentiality of your personally identifiableinformation, transmissions made by means of the Internet cannot be made absolutelysecure. By using this Site, you agree that we will have no liability for disclosure of yourinformation due to errors in transmission or unauthorized acts of third parties."
+        ]
+      },
+      "informationCanAccess":{
+        "header":[
+          "المعلومات التي يمكنك الوصول إليها",
+          "INFORMATION THAT YOU CAN ACCESS"
+        ],
+        "status":[
+          "Q-Parts تسمح لك بالوصول إلى مجموعة من المعلومات المتعلقة بحسابك و تفاعلك مع الموقع حيث يمكنك عرضها، تحديثها أو تعديلها.",
+          "Q-Parts gives you access to a range of information about your account and yourinteractions with Q-Parts for the purpose of viewing, updating and editing thatinformation."
+        ]
+      },
+      "changOurPrivacy":{
+        "header":[
+          "ماذا يحصل إن قمنا بتغيير سياسة الخصوصية الخاصة بنا",
+          "WHAT IF WE CHANGE OUR PRIVACY POLICY?"
+        ],
+        "status":[
+          "عملنا يتغير باستمرار، وتبعا لذلك فإن سياسة الخصوصية الخاصة بنا تتغير أيضا  سوف نقوم بنشر رقم نسخة سياسة الخصوصية الحالية على منصتنا وتاريخ تغييرها  من واجبك كمستخدم الطلع على أي تحديثات تطرأ على سياسية الخصوصية باستمرار  متابعتك لستخدام المنصة بعد تحديث سياسة الخصوصية يشير إلى موافقتك على سياسة الخصوصية الجديدة بعد تغييرها.",
+          "Our business changes constantly, and our Privacy Policy may therefore also need tochange. We will post the current version of this Privacy Policy on the Platform and eachsuch change will be effective upon posting on the Platform or upon the date designatedby us as the effective date. It is your obligation to regularly check the Privacy Policy.Your continued use of the Platform following any such change constitutes youragreement to this Privacy Policy as so modified."
+        ]
+      },
+      "consent":{
+        "header":[
+          "الموافقة",
+          "CONSENT"
+        ],
+        "status":[
+          "تسليم معلوماتك لنا أو لوسيطنا على هذا الموقع يعني موافقتك على استخدامنا لبياناتك كم هو موضح في سياسة الخصوصية.",
+          "By submitting data to us or our agent or using the Site, you consent to our use of yourdata in the manner set out in this Privacy Policy to verify your identity."
+        ]
+      },
+      "contact":{
+        "header":[
+          "كيف يمكنك التصال بنا؟",
+          "HOW YOU CAN CONTACT US?"
+        ],
+        "status":[
+          "إذا كان لديك أي تساؤلت بخصوص معلوماتك على منصتنا، رجاء أرسل التفاصيل على customer@qetaa.com وسوف نوافيك بالرد في أسرع وقت ممكن.",
+          "If you have any concerns about your Information on the Platform, please contact usatcustomer@qetaa.com with a thorough description, and we will try to resolve it."
+        ]
+      }
+    },
+    "returnPolicy":{
+      "return":[
+        "سياسة السترجاع",
+        "Q-Parts Return Policy"
+      ],
+      "header":[
+        "10أيام للسترجاع",
+        "10 DAYS RETURNS"
+      ],
+      "status":[
+        "لديك 10 أيام لتقديم طلب السترجاع منذ وصول الشحنة إليك.",
+        "You have 10 days to make a refund request after your order has been delivered."
+      ],
+      "authenticityGuarantee":{
+        "header":[
+          "ضمان القطع الأصلية",
+          "AUTHENTICITY GUARANTEE"
+        ],
+        "status":[
+          "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن هذا البند يشمل القطع الصلية فقط.",
+          "If your purchase of genuine spare parts is found to be counterfeit, you will receive afull refund along with any shipping fees paid (this applies to genuine parts only)."
+        ]
+      },
+      "quantityGuarantee":{
+        "header":[
+          "ضمان الجودة",
+          "QUALITY GUARANTEE"
+        ],
+        "status":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن.",
+          "If your purchase is found to be damaged, you will receive a full refund along with anyshipping fees paid."
+        ]
+      },
+      "returns":{
+        "header":[
+          "استرجاع المبالغ",
+          "REFUNDS"
+        ],
+        "statusA":[
+          "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن هذا البند يشمل القطع الصلية فقط كما هو موضح أعله.",
+          "If your purchase is found to be damaged you will receive a full refund alongwith any shipping fees paid, as mentioned above."
+        ],
+        "statusB":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن كما هو موضح أعله.",
+          "If your purchase of genuine spare parts is found to be counterfeit, you willreceive a full refund along with any shipping fees paid (this applies to genuineparts only), as mentioned above."
+        ],
+        "statusC":[
+          "في حال تم استلم قطعة مختلفة عن القطعة المطلوبة، لديك 10 أيام لرجاعها مع العلم أنه سوف يتم إرجاع رسوم الشحن كاملة.",
+          "If your purchase doesn’t match your order, you have the right to return it in 10days, given that you will be refunded for the shipment fees."
+        ],
+        "statusD":[
+          "في حال أن المنتج ليس تالفا أو غير أصلي ولكن ترغب في إرجاعه على أي حال، لن يتم استرداد ثمن المنتج ال بموافقة المورد في حال موافقة المورد على إرجاع القطعة سوف تقوم بتحمل 15% من قيمة المنتج من المهم ملحظة أن لن الشركة ل تتحمل تكاليف الشحن والرجاع في هذه الحالة.",
+          "If the product is neither damaged nor counterfeit, you will not be refundedunless the vendor approves the return. In case of the vendor’s approval, youwill be charged 15% of the product’s value. It’s worth mentioning that neithershipment refunds nor return shipment fees will be provided in this case."
+        ],
+        "statusE":[
+          "الطلبات الخاصة لقطع من خارج المملكة غير قابلة للسترداد ال في حال كان المنتج تالف أو غير أصلي.",
+          "Unless the product is damaged or counterfeit, products imported fromoverseas (through special request) are non-returnable."
+        ],
+        "statusF":[
+          "المنتجات اللكترونية غير قابلة للسترداد.",
+          "Electronic products are non-returnable."
+        ],
+        "statusG":[
+          "حتى يكون المنتج قابل للسترداد، يجب أن يكون غير مستخدم وبنفس الحالة التي تم استلمه بها أيضا، يجب أن يكون المنتج في علبته الصلية مرفقا مع جميع الملصقات والباركود التي وصلت مع المنتج.",
+          "To be eligible for a return, your item must be unused and in the samecondition that you received it. It must also be in the original packaging intactwith all labels and barcode on it."
+        ]
+      },
+      "returnProcess":{
+        "header":[
+          "عمليةالسترجاع",
+          "RETURN PROCESS"
+        ],
+        "statusA":[
+          "قم بالتواصل مع قسم خدمة العملء على www.q.parts.",
+          "Contact customer service department at www.q.parts."
+        ],
+        "statusB":[
+          "سوف نقوم بإرسال بوليصة الشحن إليك لتمام عملية السترجاع.",
+          "We will send you an Air Waybill in order to return your product."
+        ],
+        "statusD":[
+          "قم بطباعة بوليصة الشحن.",
+          "Print the Air Waybill."
+        ],
+        "statusE":[
+          "قم بالتوجه إلى أقرب فرع من فروع شركات الشحن وقم بتسليم بوليصة الشحن ملحظة في حال عدم تسليمك لبوليصة الشحن سوف تقوم بتحمل أي تكاليف إضافية.",
+          "Head to the closest courier service branch and submit the Air Waybill and theproduct to be returned (note: in case you don’t submit the Air Waybill, you willbe responsible for any extra charges)."
+        ],
+        "statusF":[
+          "حال وصول المنتج إلى المستودع سوف نقوم بإرجاع المبلغ خلل 6 أيام عمل.",
+          "After the product is returned to the warehouse, you will be refunded within 6business days."
+        ]
+      }
+    },
+    "shippingAndDeliveryPolicy":{
+      "shippingAndDelivery": [
+        "سياسة الشحن و التوصيل",
+        "Shipping and Delivery Policy"
+      ],
+      "countriesAreasShipTo":{
+        "header":[
+          "ما هي الدول التي نشحن إليها؟",
+          "WHAT COUNTRIES/AREAS DO WE SHIP TO?"
+        ],
+        "status":[
+          "في الوقت الحاضر، نحن نشحن إلى جميع مناطق المملكة.",
+          "Currently we ship to all areas in Saudi Arabia."
+        ]
+      },
+      "deliverOrder":{
+        "header":[
+          "ما هي شركات الشحن التي نتعاون معها لتوفير أفضل خدمة؟",
+          "WHAT COURIER SERVICES DO WE USE TO DELIVER YOUR ORDERS?"
+        ],
+        "status":[
+          "نحن نتعاون مع أفضل الفضل في مجال الشحن والتوصيل لضمان أفضل خدمة هذه الشركات تشمل:",
+          "We cooperate with delivery business finest to guarantee you a wonderful experience.These companies include:"
+        ],
+        "statusA":[
+          "سمسا",
+          "SMSA"
+        ],
+        "statusB":[
+          "أرامكس",
+          "ARAMEX"
+        ],
+        "statusC":[
+          "زاجل",
+          "ZAJIL"
+        ],
+        "statusD":[
+          "فتشر",
+          "FETCHR"
+        ],
+        "statusE":[
+          "خدمة توصيل Q-Parts",
+          "Q-Parts Delivery Service"
+        ]
+      },
+      "receiveConfirmation":{
+        "header":[
+          "هل سوف أتلقى تأكيدا قبل أن يتم توصيل المنتج؟",
+          "WILL I RECEIVE A CONFIRMATION BEFORE DELIVERY HAPPENS?"
+        ],
+        "status":[
+          "في حال تأكيد الطلب عن طريق إتمام عملية التحويل المالي ، سوف يتم شحن المنتج في أسرع وقت ممكن.",
+          "As soon as you confirm your order (by completing the financial transactions), your product will be prepared and shipped to you as fast as possible."
+        ]
+      },
+      "multipleShipments":{
+        "header":[
+          "ما الذي يحصل في حال طلب أكثر من شحنة؟",
+          "WHAT DO I NEED TO KNOW ABOUT MULTIPLE SHIPMENTS?"
+        ],
+        "status":[
+          "طالما أن جميع المنتجات تحت نفس الطلب، سوف يتم احتساب قيمة الشحن مرة واحدة فقط.",
+          "As long as all the products under the same order, you will be charged for deliveryonly once."
+        ]
+      },
+      "chargedForDelivery":{
+        "header":[
+          "ما هي تكلفة الشحن؟",
+          "HOW MUCH WILL I BE CHARGED FOR DELIVERY?"
+        ],
+        "status":[
+          "قيمة التوصيل إلى جميع مناطق المملكة تبتدئ من 35 ريال وتختلف بناء على وزن المنتج، حجمه وكميته غير شامل الضريبة",
+          "Delivery to any area in Saudi Arabia starts from 35 SR depending on the product’sweight, size and quantity (not including tax)."
+        ]
+      },
+      "estimatedTime":{
+        "header":[
+          "ما هو الوقت المتوقع للتوصيل؟",
+          "WHAT IS THE ESTIMATED TIME OF DELIVERY?"
+        ],
+        "status":[
+          "عادة، يستغرق التوصيل يومين إلى 4 أيام عمل، ملاحظة سوف نحرص على عمل اللزم لتوصيل المنتج في الوقت المحدد، مع العلم أننا ل نتحمل مسؤولية أي تأخير نتيجة الظروف الخارجة عن .",
+          "Normally, it takes 2 to 4 business days to get your shipment delivered to you (note:we will do our best to deliver the products on time, however, we do not takeresponsibility for delays resulting from out of control circumstances)."
+        ]
+      },
+      "payAfterReceiving":{
+        "header":[
+          "هل يمكنني الدفع بعد تلقي الشحنة؟",
+          "CAN I PAY AFTER RECEIVING THE SHIPMENT?"
+        ],
+        "status":[
+          "للسف، خدمة الدفع عند الستلم غير متوفرة في الوقت الحاضر.",
+          "Unfortunately, Cash on Delivery (CoD) option is not available at the moment."
+        ]
+      }
+    }
   }
 }

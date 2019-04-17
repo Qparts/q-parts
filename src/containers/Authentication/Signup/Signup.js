@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getFormSubmitErrors } from 'redux-form';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
-import { Modal, ModalHeader, ModalBody, Alert } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import SignupForm from './SignupForm/SignupForm';
@@ -18,9 +18,6 @@ import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 import { LargeScreen } from '../../../components/Device';
 
 import Title from '../../../components/UI/Title';
-import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import GoogleLogin from 'react-google-login';
-import { DISCONNECT } from '../../../constants';
 class Signup extends Component {
 
   componentWillMount() {
@@ -40,7 +37,7 @@ class Signup extends Component {
 
   handleSubmit = (values) => {
     const { firstName, lastName, email, password, platform, socialMediaId } = values;
-    const countryId = values.countryId.id;
+    const countryId = 1;
 
     return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
@@ -56,7 +53,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage, submitErrors } = this.props;
+    const { translate, togglePopup, setPasswordScore, passwordScore, direction, currentLanguage } = this.props;
     const signup = <SignupForm
       onSubmit={this.handleSubmit}
       countries={this.props.countries}
@@ -74,12 +71,6 @@ class Signup extends Component {
     if (this.props.submitErrors.email) window.scrollTo(0, 0);
     return (
       <section className="signup-page">
-        {
-          submitErrors.email &&
-          <Alert color="danger">
-            {submitErrors.email}
-          </Alert>
-        }
         <div className="container-fluid">
           <Title
             header={translate("form.signup.title")}

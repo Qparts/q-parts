@@ -27,6 +27,12 @@ export default class extends Component {
     }
   }
 
+deleteCart = (id) => {
+  this.props.deleteCart(id);
+}
+addToWishList =(id) => {
+  this.props.moveCartToWishlist(id);
+}
 
   render() {
     const { purchasedItems, removeButton, divCol, direction, translate, currentLanguage } = this.props;
@@ -73,8 +79,8 @@ export default class extends Component {
                             <p className="price">{purchasedItem.salesPrice} <span>{translate("general.currency")}</span></p>
                           </div>
                           <div className="cart-actions">
-                            <Link to="#" className="isDisabled btn btn-gray"><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
-                            <Link to="#" className="isDisabled delete-btn"><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
+                            <Link to="#" className="btn btn-gray" onClick={() => this.addToWishList(purchasedItem)}><i className="icon-heart"></i><span>{translate("general.buttons.wishlist")}</span></Link>
+                            <Link to="#" className="delete-btn" onClick={() => this.deleteCart(purchasedItem)}><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link>
                           </div>
                         </div>
                         <div className="col-md-3">

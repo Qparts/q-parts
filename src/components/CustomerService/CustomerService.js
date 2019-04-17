@@ -5,7 +5,7 @@ export class CustomerService extends Component {
 
     render() {
         return (
-            <Link to="#" className="media chat-div">
+            <Link to="//wa.me/966547074452/" target="_blank" className="media chat-div">
                 <img src="/img/whatsapp-logo.svg" alt="whatsapp" />
                 <div className="media-body">
                     <p>

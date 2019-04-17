@@ -36,8 +36,7 @@ class Login extends Component {
   handleSubmit = values => {
     const serverErrorField = "password"
     const { match } = this.props;
-
-    if (match.url !== '/login') {
+    if (match.url !== '/login' && match.url !=='/loginCheckout') {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
         .then(() => {
           this.props.toggle()
@@ -106,18 +105,26 @@ class Login extends Component {
     const { translate, direction } = this.props;
     let login = (
       <form className="gray-input" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-        <div className="has-float-label">
-          <input name="email" type="email" className="form-control" placeholder={translate("form.signin.email")} />
-          <label>{translate("form.signin.email")}</label>
-        </div>
-        <div className="has-float-label">
-          <input name="password" type="password" className="form-control" placeholder={translate("form.signin.password")} />
-          <label>{translate("form.signin.password")}</label>
-        </div>
+        <Field
+          hasFloatLabel
+          name="email"
+          type="email"
+          placeholder={translate("form.signin.email")}
+          label={translate("form.signin.email")}
+          component={RenderField}
+        />
+        <Field
+          hasFloatLabel
+          name="password"
+          type="password"
+          placeholder={translate("form.signin.password")}
+          label={translate("form.signin.password")}
+          component={RenderField}
+        />
         <div className="row forger-password">
           <div className="col checkbox">
-              <input type="checkbox" id="O1" />
-              <label for="O1">{translate("form.signin.rememberMe")}</label>
+            <input type="checkbox" id="O1" />
+            <label htmlFor="O1">{translate("form.signin.rememberMe")}</label>
           </div>
           <div className="col-auto">
             <Link

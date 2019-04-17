@@ -58,7 +58,7 @@ export class OrderSteps extends Component {
                             <div className="figure delivery"><img src={`/img/delivery-product${grey}.svg`} alt="delivery-product" /></div>
                         </div>
                         <figcaption>
-                            <h3>Receive Order</h3>
+                            <h3>{translate("orderSteps.receive.title")}</h3>
                             <p>{translate("orderSteps.receive.subtitle")} <span>{translate("orderSteps.receive.subtitleSpan")}</span></p>
                         </figcaption>
                     </figure>

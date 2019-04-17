@@ -88,46 +88,49 @@ class renderFileInput extends Component {
       })
   }
   render() {
-    const { input: { onChange, onBlur }, translate, ...props } = this.props;
+    const { input: { onChange, onBlur }, ...props } = this.props;
+    const { removeImage, translate, dispatch, ...renderFileInputProps } = this.props
     return (
-        <div className="input-group-prepend input-file">
-          <input type="file"
-            ref={fileInput => this.fileInput = fileInput}
-            onChange={this.adaptFileEventToValue(onChange)}
-            onBlur={this.adaptFileEventToValue(onBlur)}
-             />
-          <Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
-            <img
-              style={{ display: 'none' }}
-              alt="not found"
-              ref={`${originalImage}_${props.image}`}
-            />
-          <div className="file-thumb">
-            <a href="#">
-              <i className="icon-close"></i>
-            </a>
-            <div className="img-attached">
-              <img
-                  style={{ display: 'none' }}
-                  className="RenderFileInput-img"
-                  onClick={this.showLightbox}
-                  alt="not found"
-                  ref={`${convertedImg}_${props.image}`}
-                />
-            </div>
+      <div className="input-group-prepend input-file">
+        <input type="file"
+          ref={fileInput => this.fileInput = fileInput}
+          onChange={this.adaptFileEventToValue(onChange)}
+          onBlur={this.adaptFileEventToValue(onBlur)}
+          {...renderFileInputProps}
+        />
+        <Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
+        <img
+          style={{ display: 'none' }}
+          alt="not found"
+          ref={`${originalImage}_${props.image}`}
+        />
+        <div className="file-thumb" style={{ display: removeImage ? 'none' : 'flex' }}>
+          {/*<a href="#">
++              <i className="icon-close"></i>
++            </a> */}
+          <div  className="img-attached">
+          <img
+            style={{ display: 'none' }}
+            className="RenderFileInput-img"
+            onClick={this.showLightbox}
+            alt="not found"
+            ref={`${convertedImg}_${props.image}`}
+          />
 
           </div>
+          
+        </div>
 
-            <canvas
-              style={{ display: 'none' }}
-              ref={`${canvas}_${props.image}`} />
-              <Lightbox
-                images={this.state.images}
-                isOpen={this.state.lightboxIsOpen}
-                onClose={this.closeLightbox}
-                className="lightbox"
-              />
-          </div>
+        <canvas
+          style={{ display: 'none' }}
+          ref={`${canvas}_${props.image}`} />
+        <Lightbox
+          images={this.state.images}
+          isOpen={this.state.lightboxIsOpen}
+          onClose={this.closeLightbox}
+          className="lightbox"
+        />
+      </div>
 
     );
   }
