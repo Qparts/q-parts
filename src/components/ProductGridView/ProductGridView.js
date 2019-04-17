@@ -118,12 +118,17 @@ class ProductGridView extends Component {
 				</Modal>
 			);
 		}
-		const dialogLogin = (<Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
-			<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
-			<ModalBody>
-				<Login toggle={this.togglePopupLogin} />
-			</ModalBody>
-		</Modal>)
+		let dialogLogin;
+		if(this.state.data.quantity){
+			dialogLogin = (
+				<Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
+					<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+					<ModalBody>
+						<Login toggle={this.togglePopupLogin} />
+					</ModalBody>
+				</Modal>
+			)
+		}
 		return (
 			<Fragment>
 					<li className="col-xl-3 col-md-4 col-6">
