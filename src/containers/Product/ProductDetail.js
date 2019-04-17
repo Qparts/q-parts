@@ -79,10 +79,8 @@ class ProductDetail extends Component {
   }
 
   togglePopupLogin = () => {
-    console.log(this.props.modalLogin)
     this.props.setModalLogin(this.state.modalLogin);
     this.setState({ modalLogin: !this.state.modalLogin })
-    console.log(this.state.modalLogin)
   }
 
   getDialogProps = () => {

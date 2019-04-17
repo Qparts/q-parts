@@ -30,7 +30,7 @@ class AddProduct extends Component {
     } else {
       this.props.togglePopupLogin();
       this.props.togglePopup();
-      this.props.setCheckLoginCheckout(true)
+      this.props.setCheckLoginCheckout(true);
     }
   }
   handleSubmitMoblie = values => {
