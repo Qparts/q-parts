@@ -1,8 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
-import Checkbox from '../UI/Checkbox';
-import './Garage.css'
-import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
+import './Garage.css';
+import { SmallScreen , MediumScreen } from '../../components/Device';
 
 class Garage extends Component {
   handleChange = (index, e) => {
@@ -13,7 +12,61 @@ class Garage extends Component {
   const { translate, vehicles } = this.props;
   let garage;
   if(vehicles.length>0){
-    garage = <div id="Garage-container">
+    garage = <div>
+        <MediumScreen>
+          <header>
+            <div className="row">
+              <div className="col">
+                  <h5>{translate("setting.garage.title")}</h5>
+              </div>
+              <div className="col-auto">
+                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
+              </div>
+            </div>
+          </header>
+        </MediumScreen>
+        <SmallScreen>
+          <header className="header-sm">
+            <div className="row">
+              <div className="col">
+                  <h5 className="header-sm">Your Garage</h5>
+              </div>
+              <div className="col-auto">
+                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')}  icon="icon-add-vehicle" isReverseOrder/>
+              </div>
+            </div>
+          </header>
+        </SmallScreen>
+      <div className="info-list">
+        <ul className="row list-unstyled">
+          <li className="col-md-6 radio-custom">
+            <div>
+              <input type="radio" id="vehicle-id" name="radio-group" checked />
+              <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
+            </div>
+            <p>{/*{vehicle.label}*/} 2016 Ford Focus</p>
+            <p>{/*{vehicle.vin}*/} VIN(000 000 000 000 11)</p>
+            <div className="actions">
+              <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
+            </div>
+          </li>
+          <li className="col-md-6 radio-custom">
+            <div>
+              <input type="radio" id="vehicle-id1" name="radio-group"  />
+              <label for="vehicle-id1">{translate("setting.garage.defaultVehicle")}</label>
+            </div>
+            <p>{/*{vehicle.label}*/} 2016 Ford Focus</p>
+            <p>{/*{vehicle.vin}*/} VIN(000 000 000 000 11)</p>
+            <div className="actions">
+              <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
+              <Button type="button" className="btn delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    {/*<div id="Garage-container">
      <div className="Garage-add justify-content-between">
        <p>{translate("setting.garage.title")}</p>
       <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
@@ -40,33 +93,26 @@ class Garage extends Component {
        </div>
       })
      }
-    </div>
+    </div>*/}
   }else{
-    garage = <div id="garage-no-vehicle">
-      <p>{translate("dialog.vehicle.subTitle")}</p>
-      <span className="seperator"></span>
-      <div className="add-vehicle">
-        <div className="icon-content">
-          <p className="icon-vehicle"/>
-          <span className="vehi-rotate"><span>{translate("setting.garage.vehicle")}</span></span>
+    garage =
+        <div className="empty">
+          <header>
+            <h5>{translate("dialog.vehicle.subTitle")}</h5>
+          </header>
+                 <figure>
+                   <i className="icon-vehicle"></i>
+                   <p className="rotate">0<span>{translate("setting.garage.vehicle")}</span></p>
+                 </figure>
+                <figcaption>
+                  <p>{translate("setting.garage.noVehicle")}</p>
+                     <a className="btn btn-primary" href="#" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} isReverseOrder><i className="icon-add"> </i> {translate("setting.garage.add")}</a>
+                </figcaption>
         </div>
-        <p className="vehicle-text">{translate("setting.garage.noVehicle")}</p>
-        <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder />
-      </div>
-      </div>
   }
   return (
     <Fragment>
-      <MediumScreen>
-       <div className="col-lg-9">
-         {garage}
-       </div>
-      </MediumScreen>
-      <SmallScreen>
-       <div className="col-12 garage-mobile">
-         {garage}
-       </div>
-      </SmallScreen>
+      {garage}
     </Fragment>
   )
  }

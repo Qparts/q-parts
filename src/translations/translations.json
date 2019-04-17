@@ -966,7 +966,7 @@
         ],
         "confirm": [
           "تأكيد",
-          "Confirm"
+          "Add Adress"
         ],
         "cancel": [
           "إلغاء",
@@ -1546,8 +1546,8 @@
         "Delete"
       ],
       "noWishlist": [
-        "لا توجد قائمة رغبات محفوظة",
-        "no saved wishlist"
+        "لا توجد منتجات محفوظة في قائمة الرغبات",
+        "no saved items in wishlist"
       ]
     },
     "garage": {
@@ -1651,7 +1651,7 @@
       ],
       "add": [
         "اضف عنوان",
-        "Add address"
+        "New Address"
       ],
       "noAddress": [
         "لا يوجد عنوان",

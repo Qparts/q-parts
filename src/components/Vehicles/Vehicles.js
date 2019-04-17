@@ -25,7 +25,7 @@ class Vehicles extends Component {
     const { translate, match: { url } } = this.props;
 
     return (
-      <section id="vehicles">
+      <section>
         {
           url === '/vehicles' ? (
             <Title

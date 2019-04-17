@@ -49,7 +49,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../../components/UI/Title';
 //whatsapp
 
-import { SmallScreen, MediumScreen } from '../../components/Device/index.js'
+import { LargeScreen} from '../../components/Device/index.js'
 
 const name = 'name';
 const phone = 'phone';
@@ -285,8 +285,10 @@ class Setting extends Component {
         </ModalBody>
       </Modal>
     } else if (this.state.dialogType === password) {
-      dialog = <Modal dir={direction} contentClassName="container-fluid" className="password-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+      dialog = <Modal dir={direction} className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup} className="have-icon">
+          <p><i className="icon-change-password"></i>Change</p> Password
+        </ModalHeader>
         <ModalBody>
           <ResetPassword
             translate={translate}
@@ -301,9 +303,12 @@ class Setting extends Component {
 
     let addressDialog;
     if (this.state.dialogType === addresses_popup) {
-      addressDialog = <Modal dir={direction} contentClassName="container-fluid" className="addresses-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+      addressDialog = <Modal dir={direction} contentClassName="container-fluid" className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup} className="have-icon">
+              <p><i className="icon-add-location"></i>Shipping</p> Address
+        </ModalHeader>
         <ModalBody>
+          <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
           <Address
             currentLanguage={this.props.currentLanguage}
             address={this.props.address}
@@ -332,14 +337,18 @@ class Setting extends Component {
 
     let garageDialog;
     if (this.state.dialogType === garage_pupop)
-      garageDialog = <Modal dir={direction} contentClassName="container-fluid" className="garage-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
-        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+      garageDialog = <Modal dir={direction}  className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
+        <ModalHeader toggle={this.togglePopup} className="have-icon">
+              <p><i className="icon-add-vehicle"></i>Add</p> Vehicle
+        </ModalHeader>
         <ModalBody>
+          <span className="sub-header">{translate("dialog.vehicle.subTitle")}</span>
           <Vehicles
             toggle={this.togglePopup}
             direction={this.props.direction}
             defaultLang={this.props.currentLanguage}
           />
+
         </ModalBody>
       </Modal>
 
@@ -361,48 +370,48 @@ class Setting extends Component {
 
     return (
       <Fragment>
-        <MediumScreen>
-          <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
-          <section className="gray-bg">
+          <SectionHeader className="profile-header" text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
+          <section className="user-main">
             <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-9 offset-lg-3">
-                  <div className="dashboard">
-                    <span className="bg"></span>
-                    <ul className="list-unstyled">
-                      <li className="col">
-                        <a href="#" class="media">
-                          <img className="request-tab" src="/img/request.svg" alt="request" />
-                          <div class="media-body">
-                            <h5>{translate('setting.request')}</h5>
-                            {this.props.requests.length}
-                          </div>
-                        </a>
-                      </li>
-                      <li className="col">
-                        <a href="#" class="media">
-                          <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
-                          <div class="media-body">
-                            <h5>Orders</h5>
-                            {this.props.requests.length}
-                          </div>
-                        </a>
-                      </li>
-                      <li className="col">
-                        <a href="#" class="media">
-                          <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
-                          <div class="media-body">
-                            <h5>{translate('setting.links.wishlist')}</h5>
-                            {this.props.wishlist.length}
-                          </div>
-                        </a>
-                      </li>
-                      <li className="col">
-                        <a href="#" class="media">
-                          <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
-                          <div class="media-body">
-                            <h5>{translate('setting.links.garage')}</h5>
-                            {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
+              <LargeScreen>
+                <div className="row">
+                  <div className="col-lg-9 offset-lg-3">
+                    <div className="dashboard">
+                      <span className="bg"></span>
+                      <ul className="list-unstyled">
+                        <li className="col">
+                          <a href="#" class="media">
+                            <img className="request-tab" src="/img/request.svg" alt="request" />
+                            <div class="media-body">
+                              <h5>{translate('setting.request')}</h5>
+                              {this.props.requests.length}
+                            </div>
+                          </a>
+                        </li>
+                        <li className="col">
+                          <a href="#" class="media">
+                            <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
+                            <div class="media-body">
+                              <h5>Orders</h5>
+                              {this.props.requests.length}
+                            </div>
+                          </a>
+                        </li>
+                        <li className="col">
+                          <a href="#" class="media">
+                            <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
+                            <div class="media-body">
+                              <h5>{translate('setting.links.wishlist')}</h5>
+                              {this.props.wishlist.length}
+                            </div>
+                          </a>
+                        </li>
+                        <li className="col">
+                          <a href="#" class="media">
+                            <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
+                            <div class="media-body">
+                              <h5>{translate('setting.links.garage')}</h5>
+                              {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
                           </div>
                         </a>
                       </li>
@@ -410,6 +419,7 @@ class Setting extends Component {
                   </div>
                 </div>
               </div>
+              </LargeScreen>
               <div className="row">
                 <SettingLinks {...this.props} />
                 <div className="setting-tab-content col-lg-9">
@@ -538,8 +548,7 @@ class Setting extends Component {
               </div>
             </div>
           </section>
-        </MediumScreen>
-        <SmallScreen>
+        {/*<SmallScreen>
           <section id="setting-mobile">
             <SectionHeader text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
             <Switch>
@@ -669,7 +678,7 @@ class Setting extends Component {
 
             </Switch>
           </section>
-        </SmallScreen>
+        </SmallScreen>*/}
       </Fragment>
     );
   }

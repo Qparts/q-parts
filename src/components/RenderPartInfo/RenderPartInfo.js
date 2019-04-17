@@ -41,7 +41,7 @@ class RenderPartInfo extends Component {
                     <Fragment key={idx}>
                         <div className="row">
                             <div className="col-md">
-                                <div className="has-float-label add-file">
+                                <div className="has-float-label add-file console.error();">
             										    <input type="text" className="form-control" placeholder="Part Name, Number or image" />
               											<label>Part Name, Number or image</label>
               												<Field
@@ -49,6 +49,7 @@ class RenderPartInfo extends Component {
               		                       component={RenderFileInput}
               		                       image="image"
               		                     />
+
             									  </div>
                             </div>
                             <div className="col-md-auto part-actions">

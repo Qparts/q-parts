@@ -68,6 +68,9 @@
         font-weight: 700;
       }
     }
+    button{
+      border-width: 0;
+    }
     a {
       &::before,
       &::after {

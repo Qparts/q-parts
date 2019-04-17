@@ -101,7 +101,9 @@ class Layout extends Component {
           direction={direction} />
         {dialog}
         <div className="cd-main-content">
-          {this.props.children}
+          <div className="main-content">
+            {this.props.children}
+          </div>
           <Footer translate={translate}/>
           <div className="cd-overlay"></div>
         </div>

@@ -885,7 +885,7 @@ class SearchResult extends Component {
 								<div className="total-result row">
 									<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
 									<div className="col-auto">
-										{/*<div className="result-sort">
+										<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
 											<DownLargeScreen>
 												<i className="icon-sorting"></i>
@@ -895,7 +895,7 @@ class SearchResult extends Component {
 												isSearchable={false}
 												defaultValue={sortOptions[0]}
 												options={sortOptions} />
-										</div>*/}
+										</div>
 										<DownLargeScreen>
 											<div className="side-bar-compnent-btn">
 												<button className="btn filter-btn" onClick={() => this.openSidebar()}>
@@ -926,14 +926,14 @@ class SearchResult extends Component {
 									<ul className="more-result list-inline">
 									<li className="disabled">
 										{btnPrev}
-										
+
 									</li>
 									<li>
 										<span>Page 1 of 5</span>
 									</li>
 									<li className="next">
 										{btnNext}
-										
+
 									</li>
 								</ul>
 								</div>

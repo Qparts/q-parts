@@ -103,6 +103,24 @@ const formatCityLabel = () => (
 		<span>Select City</span>
 	</div>
 );
+
+const garageList = [
+	{ value: 1, label: "Ford Focus 2016, VIN(000 000 000 000 11)" },
+	{ value: 2, label: "Kia Cerato 2018, VIN(000 000 000 000 11)" },
+];
+const groupedGarageList = [
+	{
+		options: garageList,
+	},
+];
+const formatGarageListLabel = () => (
+	<div className="placeholder">
+		<i className="icon-vehicle"></i>
+		<h6>Select vehicle
+			<p>View, manage and find parts for the vehicles in your garage</p>
+		</h6>
+	</div>
+);
 //END static HTML
 
 
@@ -292,6 +310,13 @@ class QuotationRequest extends Component {
 								<div className="row">
 									<h3 className="col">{translate("quotationOrder.vehicle.title")}</h3>
 									<div className="col-auto open-garage">
+										<Field
+											name="garage"
+											placeholder={" "}
+											component={SelectInput}
+											options={groupedGarageList}
+											formatGroupLabel={formatGarageListLabel}
+										/>
 										<Link
 											to={'#'}
 											isReverseOrder
@@ -304,7 +329,7 @@ class QuotationRequest extends Component {
 									</div>
 								</div>
 								<div className="row vehicle-info">
-									<div className="col-lg col-md-6 float-label">
+									<div className="col-lg col-md-6 float-label error">
 										<Field
 											label="Make"
 											name="make"

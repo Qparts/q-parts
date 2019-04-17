@@ -1,8 +1,6 @@
 import React, { Fragment, Component } from 'react';
-
 import './Addresses.css';
 import Button from '../UI/Button';
-import Checkbox from '../UI/Checkbox';
 import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
 
 class Addresses extends Component {
@@ -13,7 +11,70 @@ class Addresses extends Component {
   renderAddresses = () => {
     const { translate, addresses } = this.props;
     if (addresses.length) {
-      return <div id="addresses-container">
+      return <div className="user-address">
+        <MediumScreen>
+          <header>
+            <div className="row">
+              <div className="col">
+                <h5>
+                  {translate("setting.addressBook.shippingItem")}
+                </h5>
+              </div>
+              <div className="col-auto">
+                <Button type="button" className="btn btn-primary" onClick={this.props.onShowEditDialog.bind(this, 'addresses')} text={translate("setting.addressBook.add")} icon="icon-add" isReverseOrder/>
+              </div>
+            </div>
+          </header>
+        </MediumScreen>
+        <SmallScreen>
+          <header className="header-sm">
+            <div className="row">
+              <div className="col">
+                  <h5 className="header-sm">Shipping Addresses</h5>
+              </div>
+              <div className="col-auto">
+                <Button type="button" className="btn btn-primary" onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder/>
+              </div>
+            </div>
+          </header>
+        </SmallScreen>
+        <div className="info-list">
+          <ul className="row list-unstyled">
+            <li className="col-md-6 radio-custom">
+              <div>
+                <input type="radio" id="vehicle-id" name="radio-group" checked />
+                <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
+              </div>
+              <h6>{/*{address.title}*/} Ahmed Mahmoud</h6>
+              <address>
+                <p>{/*{address.line1} {address.line2}*/}7 Yaser Ben Amer Street</p>
+                <p>KSA, {/*{address.cityId}*/}Jazan</p>
+                <p>{/*{address.mobile}*/}(962) 770-2302</p>
+              </address>
+              <div className="actions">
+                <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
+              </div>
+            </li>
+            <li className="col-md-6 radio-custom">
+              <div>
+                <input type="radio" id="vehicle-id1" name="radio-group" />
+                <label for="vehicle-id1">{translate("setting.garage.defaultVehicle")}</label>
+              </div>
+              <h6>{/*{address.title}*/} Ahmed Mahmoud</h6>
+              <address>
+                <p>{/*{address.line1} {address.line2}*/}7 Yaser Ben Amer Street</p>
+                <p>KSA, {/*{address.cityId}*/}Jazan</p>
+                <p>{/*{address.mobile}*/}(962) 770-2302</p>
+              </address>
+              <div className="actions">
+                <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
+                <Button type="button" className="btn delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      {/*<div id="addresses-container">
         <div className="addresses-header justify-content-between">
           <p> {translate("setting.addressBook.shippingItem")}</p>
           <Button type="button" className="btn btn-primary" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder />
@@ -43,34 +104,26 @@ class Addresses extends Component {
               </div>
             })}
         </div>
-      </div>
+      </div>*/}
     } else {
-      return <div id="empty-addresses">
-        <div className="addresses-header justify-content-between">
-          <p>{translate("setting.addressBook.shippingItem")}</p>
+      return <div className="empty">
+          <header>
+            <h5>{translate("setting.addressBook.shippingItem")}</h5>
+          </header>
+                 <figure>
+                   <i className="icon-address"></i>
+                 </figure>
+                <figcaption>
+                  <p>No Saved Addresses{/*{translate("setting.addressBook.noAddresses")}*/}</p>
+                  <a className="btn btn-primary" href="#" onClick={this.props.onShowEditDialog.bind(this, 'addresses')}><i className="icon-add"> </i> {translate("setting.addressBook.add")}</a>
+                </figcaption>
         </div>
-        <span className="seperator"></span>
-        <div className="add-addresses">
-          <p className="icon-address" />
-          <p className="addresses-text">{translate("setting.addressBook.noAddresses")}</p>
-          <Button type="button" className="btn btn-gray" text={translate("setting.addressBook.add")} onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder />
-        </div>
-      </div>
     }
   }
   render() {
     return (
       <Fragment>
-        <MediumScreen>
-          <div className="col-lg-9">
-            {this.renderAddresses()}
-          </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="col-12 adresses-mobile">
-            {this.renderAddresses()}
-          </div>
-        </SmallScreen>
+        {this.renderAddresses()}
       </Fragment>
     )
   }

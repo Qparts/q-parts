@@ -44,7 +44,7 @@
           @include transition(all, 0.5s, ease);
           font-family: $icon-font-name !important;
           line-height: 1;
-          content: "\78";
+          content: "\e02e";
           @include font-size(14px);
           @include opacity(0);
           position: relative;
@@ -232,7 +232,7 @@
     font-weight: 400;
   }
   .select__menu{
-    top: calc(100% + 5px);
+    top: calc(100% - 5px);
   }
   .select__menu-list{
     padding-top: 0;
@@ -242,7 +242,7 @@
     @include font-size(26px);
     position: absolute;
     top: 50%;
-    left: 50%;
+    #{$left}: 50%;
     transform: translate(-50%, -50%);
     height: 26px;
     &:before{
@@ -336,9 +336,15 @@
   > li{
     padding: 0 5px;
     margin-top: 10px;
+
     .card{
       display: flex;
       height: 100%;
+      img{
+        @include media-breakpoint-up(lg){
+          min-height: 197px;
+        };
+      }
     }
     &:hover{
       .in-cart{
@@ -418,11 +424,14 @@
     &:first-child{
       border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
     }
-    &:last-child{
+    &:last-child {
       border-radius: corner-values(0 0 $border-radius-base 0);
     }
     &:not(:last-child) {
       @include margin-right($list-inline-padding);
+    }
+    &:only-child{
+      @include border-radius-div;
     }
     a{
       position: absolute;
@@ -744,8 +753,6 @@
     transform: translateX(100%);
   }
 }
-
-
 .apply-filter{
   position: relative;
   position: -webkit-sticky;

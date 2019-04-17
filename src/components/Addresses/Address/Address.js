@@ -10,7 +10,7 @@ import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
 import { getTranslatedObject, getTranslatedString } from '../../../utils';
-
+import { right } from '../../../utils';
 import './Address.css';
 
 class Address extends Component {
@@ -41,7 +41,7 @@ class Address extends Component {
   render() {
     const {
       handleSubmit, regions, formValues, translate, currentLanguage, onShowGoogleMap,
-      address, onHide, defaultAddress, onDefaultAddress, isDelivery
+      address, onHide, defaultAddress, onDefaultAddress, isDelivery, direction
     } = this.props;
 
     const regionsData = regions ?
@@ -61,10 +61,73 @@ class Address extends Component {
           label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
         }
       }) : [];
-
+      const country = [
+      	{ value: 1, label: "KSA" }
+      ];
+      const Region = [
+      	{ value: 1, label: "Riyadh" },
+      	{ value: 2, label: "Tabuk" },
+      	{ value: 3, label: "Jazan" },
+      	{ value: 4, label: "Medina" }
+      ];
+      const groupedRegion = [
+      	{
+      		options: Region,
+      	},
+      ];
+      const formatRegionLabel = () => (
+      	<div className="placeholder">
+      		<span>Select Region</span>
+      	</div>
+      );
+      const City = [
+      	{ value: 1, label: "Riyadh" }
+      ];
+      const groupedCity = [
+      	{
+      		options: City,
+      	},
+      ];
+      const formatCityLabel = () => (
+      	<div className="placeholder">
+      		<span>Select City</span>
+      	</div>
+      );
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
-        <div className="col-md-4 div-rounded-first">
+        <div className="float-label disabled">
+          <Field
+            isDisabled={true}
+            label="Country"
+            name="Country"
+            defaultValue={country[0]}
+            component={SelectInput}
+          />
+        </div>
+        <div className="form-row">
+          <div className="col-md float-label">
+            <Field
+              label="Region"
+              name="Region"
+              placeholder=" "
+              component={SelectInput}
+              options={groupedRegion}
+              formatGroupLabel={formatRegionLabel}
+            />
+          </div>
+          <div className="col-md float-label">
+            <Field
+              label="City"
+              name="city"
+              placeholder=" "
+              component={SelectInput}
+              options={groupedCity}
+              formatGroupLabel={formatCityLabel}
+            />
+          </div>
+        </div>
+
+        {/*<div className="col-md-4 div-rounded-first">
           <Field
             disabled
             name={`${getTranslatedString(currentLanguage, 'name', 'nameAr')}`}
@@ -87,7 +150,7 @@ class Address extends Component {
             component={SelectInput}
             options={citiesData}
             validate={[validations.required]} />
-        </div>
+        </div>*/}
       </Fragment> :
       <Fragment>
         <div>
@@ -102,7 +165,19 @@ class Address extends Component {
 
     let renderButtons =
       <Fragment>
-        <div className="Checkbox">
+        <div class="checkbox">
+          <input type="checkbox" id="defaultAddress" value="" />
+            <label for="defaultAddress">{translate("form.address.buttons.defaultAddress")}</label>
+          </div>
+      <div className="row form-submit">
+        <div className="col-auto">
+          <Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
+        </div>
+        <div className="col">
+          <Button className="btn btn-primary" text={translate("form.address.buttons.confirm")} icon={`icon-arrow-${right(direction)}`} />
+        </div>
+      </div>
+        {/*<div className="Checkbox">
           <Field
             name="defaultAddress"
             id="defaultAddress"
@@ -113,7 +188,7 @@ class Address extends Component {
         <div className="row">
           <Button onClick={onHide} type="reset" className="btn btn-light col-3" text={translate("form.address.buttons.cancel")} />
           <Button type="submit" className="btn btn-primary col-8" text={translate("form.address.buttons.confirm")} />
-        </div>
+        </div>*/}
       </Fragment>
 
     if (isDelivery) {
@@ -132,9 +207,54 @@ class Address extends Component {
               </Map>
             </div>
           ) :
-            <div className="Address-container">
-              <form onSubmit={handleSubmit}>
-                <div className="row no-gutters">
+              <form onSubmit={handleSubmit} className="one-col gray-input">
+                <div className="input-groub">
+                  <div className="form-row">
+                    <div className="col">
+                      <div className="has-float-label">
+                        <input name="firstName" type="text" className="form-control" placeholder={translate("form.signup.firstName")} />
+                        <label>{translate("form.signup.firstName")}</label>
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="has-float-label">
+                        <input name="lastName" type="text" className="form-control" placeholder={translate("form.signup.lastName")} />
+                        <label>{translate("form.signup.lastName")}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="has-float-label">
+                    <input name="line1" type="text" className="form-control" placeholder={translate("setting.addressBook.addressLine1")} />
+                    <label>{translate("setting.addressBook.addressLine1")}</label>
+                  </div>
+                  <div className="has-float-label">
+                    <input name="line2" type="text" className="form-control" placeholder={translate("setting.addressBook.addressLine2")} />
+                    <label>{translate("setting.addressBook.addressLine2")}</label>
+                  </div>
+                  {renderCityRegion}
+                  <div className="form-row">
+                    <div className="col-auto">
+                      <input className="form-control phone-code" value={"+966"} type="text" readOnly />
+                    </div>
+                    <div className="col">
+                      <div className="has-float-label">
+                        <input name="line1" type="text" className="form-control" placeholder={translate("form.address.phoneNumber")} />
+                        <label>{translate("form.address.phoneNumber")}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="has-float-label">
+                    <input name="zipCode" type="text" className="form-control" placeholder={translate("form.address.zipCode")} />
+                    <label>{translate("form.address.zipCode")}</label>
+                  </div>
+                  <div className="has-float-label textarea">
+                    <textarea class="form-control" placeholder={translate("form.address.shippingNote")} ></textarea>
+                    <label>{translate("form.address.shippingNote")}</label>
+                  </div>
+                </div>
+                {renderButtons}
+
+                {/*<div className="row no-gutters">
                   <div className="col-12 title-address">
                     <Field
                       label={translate("setting.addressBook.title")}
@@ -145,12 +265,12 @@ class Address extends Component {
                       hasFloatLabel
                       validate={[validations.required]} />
                   </div>
-                  {/* <div className="col-12 google-map">
+                   <div className="col-12 google-map">
                     <Link to="#" onClick={onShowGoogleMap}>
                       <img className="main-img" alt="user" src="/img/google-map.svg" />
                       <p>{translate("form.address.selectAddress")}</p>
                     </Link>
-                  </div> */}
+                  </div>
                   <div className="col-md-12 address-title">
                     <Field
                       label={translate("setting.addressBook.addressLine1")}
@@ -209,9 +329,8 @@ class Address extends Component {
                       placeholder={translate("form.address.shippingNote")} />
                   </div>
                 </div>
-                {renderButtons}
+                {renderButtons}*/}
               </form>
-            </div>
         }
       </Fragment>
     )

@@ -1,3 +1,33 @@
+.empty{
+  .icon-address{
+    height: 88px;
+    display: block;
+    &:before{
+      top: -10px;
+    }
+  }
+}
+.user-address{
+  header{
+    .icon-add{
+      height: 23px;
+      &:before{
+        top: -2px;
+      }
+    }
+  }
+}
+.phone-code{
+  height: 55px;
+  background: $light-gray !important;
+  color: $basic-gray;
+  border-radius: 0;
+  width: 70px;
+  cursor: default;
+  &:Focus{
+    box-shadow: none !important;
+  }
+}
 #addresses-container{
   @include text-left;
   @include margin-left(10px);
@@ -122,83 +152,6 @@
   }
 }
 
-#empty-addresses{
-  .addresses-header{
-    p{
-      font-family: Roboto;
-      @include font-size(17px);
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: $left;
-      margin-top: 10px;
-    }
-  }
-  p{
-    font-family: Roboto;
-    @include font-size(17px);
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: $left;
-    margin-bottom: 0px;
-  }
-  .seperator{
-    height: 2px;
-    width: 100%;
-  }
-  .add-addresses{
-    text-align: center;
-    .icon-address{
-      text-align: center;
-      @include font-size(100px);
-      margin-top: 10px;
-      opacity: 0.1;
-    }
-    .addresses-text{
-      opacity: 0.5;
-      font-family: Roboto;
-      font-size: 30px;
-      font-weight: 300;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-      color: rgba(55, 54, 60, 0.5);
-      margin-bottom: 16px;
-      @include text-uppercase;
-    }
-    Button{
-      display: inline-flex !important;
-      height: 41px;
-      background: $brand-color !important;
-      margin: 0px !important;
-      color: $white !important;
-      .icon-add{
-        @include font-size(23px);
-        margin-top: 5px;
-        @include margin-left(10px);
-      }
-      span{
-        @include margin-left(6px);
-        font-family: Roboto;
-        @include font-size(15px);
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 41px;
-        letter-spacing: normal;
-        color: #ffffff;
-        @include margin-right(10px);
-      }
-    }
-  }
-}
 .addresses-popup{
   // width: 650px;
   @include text-left;

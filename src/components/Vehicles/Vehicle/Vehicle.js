@@ -51,7 +51,7 @@ class Vehicle extends Component {
         label: getTranslatedObject(vehicle, defaultLang, 'name', 'nameAr'),
         value: vehicle.id
       }
-    });    
+    });
 
     const modelData = _.has(this.props.formValues, 'make.models') ?
       this.props.formValues.make.models.map(model => {
@@ -71,62 +71,159 @@ class Vehicle extends Component {
         }
       }) : [];
 
+
+      const vehicleYear = [
+      	{ value: 1, label: "2010" },
+      	{ value: 2, label: "2011" },
+      	{ value: 3, label: "2012" },
+      ];
+      const groupedvehicleYear = [
+      	{
+      		options: vehicleYear,
+      	},
+      ];
+      const formatvehicleYearLabel = () => (
+      	<div className="placeholder">
+      		<span>Select Year</span>
+      	</div>
+      );
+      const vehicleMake = [
+      	{ value: 1, label: "BMW" },
+      	{ value: 2, label: "KIA" },
+      	{ value: 3, label: "Ford" },
+      ];
+      const groupedvehicleMake = [
+      	{
+      		options: vehicleMake,
+      	},
+      ];
+      const formatvehicleMakeLabel = () => (
+      	<div className="placeholder">
+      		<span>Select vehicle Make</span>
+      	</div>
+      );
+      const vehicleModel = [
+      	{ value: 1, label: "Rio" },
+      	{ value: 2, label: "Focus" },
+      	{ value: 3, label: "20CS" },
+      ];
+      const groupedvehicleModel = [
+      	{
+      		options: vehicleModel,
+      	},
+      ];
+      const formatvehicleModelLabel = () => (
+      	<div className="placeholder">
+      		<span>Select vehicle Model</span>
+      	</div>
+      );
     return (
-      <form onSubmit={handleSubmit(this.handleSubmit)}>
-        <div className="row no-gutters">
-          <div className="group-shadow-input group-shadow-div" />
-          <div className="col-md-12 div-first-rounded">
+      <form onSubmit={handleSubmit(this.handleSubmit)} className="one-col gray-input">
+        <div className="input-groub">
+          <div className="float-label">
             <Field
+              label="Make"
               name="make"
-              placeholder={translate("form.vehicle.make")}
+              placeholder={" "}
               component={SelectInput}
-              options={makeData}
-              validate={[validations.required]} />
-          </div>
-          <div className="col-md-12 div-rounded">
-            <Field
-              name="model"
-              placeholder={translate("form.vehicle.model")}
-              component={SelectInput}
-              options={modelData}
-              validate={[validations.required]} />
-          </div>
-          <div className="col-md-12 div-rounded">
-            <Field
-              name="year"
-              placeholder={translate("form.vehicle.year")}
-              component={SelectInput}
-              options={yearData}
-              validate={[validations.required]} />
-          </div>
-          <div className="col-md-12 div-last-rounded">
-            <Field
-              name="vin"
-              placeholder={translate("form.vehicle.vin")}
-              component={RenderField}
-              type="text"
-              maxLength="17"
-              textTransform="uppercase"
-              validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]} />
-            <Field
-              name="vinImage"
-              component={RenderFileInput}
-              image='image'
+              options={groupedvehicleMake}
+              formatGroupLabel={formatvehicleMakeLabel}
             />
           </div>
-        </div>
-        <div className="row no-gutters">
-          <div className="col-md-12 align-self-end vehicle-radio">
-            <Field
-              name="defaultVehicle"
-              id="defaultVehicle"
-              component={RenderCheckboxField}
-              label={translate("form.signup.defaultVehicle")}
-            />
+          <div className="float-label">
+              <Field
+                label="Model"
+                name="model"
+                placeholder={" "}
+                component={SelectInput}
+                options={groupedvehicleModel}
+                formatGroupLabel={formatvehicleModelLabel}
+              />
           </div>
-          <Button className="btn btn-light col-3" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
-          <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} />
+          <div className="float-label">
+              <Field
+                label="Year"
+                name="year"
+                placeholder={" "}
+                component={SelectInput}
+                options={groupedvehicleYear}
+                formatGroupLabel={formatvehicleYearLabel}
+              />
+          </div>
+          <div className="has-float-label add-file">
+            <input type="text" className="form-control" placeholder={translate("quotationOrder.vin")} />
+            <label>{translate("quotationOrder.vin")}</label>
+              <Field
+                 name="vin num"
+                 component={RenderFileInput}
+                 image="image"
+               />
         </div>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="default-vehicle" value="checked" />
+            <label for="default-vehicle">Set as Default Vehicle</label>
+          </div>
+      <div className="row form-submit">
+        <div className="col-auto"><Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} /></div>
+        <div className="col"><Button className="btn btn-primary" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} /></div>
+      </div>
+        {/*<form onSubmit={handleSubmit(this.handleSubmit)}>
+          <div className="row no-gutters">
+            <div className="group-shadow-input group-shadow-div" />
+            <div className="col-md-12 div-first-rounded">
+              <Field
+                name="make"
+                placeholder={translate("form.vehicle.make")}
+                component={SelectInput}
+                options={makeData}
+                validate={[validations.required]} />
+            </div>
+            <div className="col-md-12 div-rounded">
+              <Field
+                name="model"
+                placeholder={translate("form.vehicle.model")}
+                component={SelectInput}
+                options={modelData}
+                validate={[validations.required]} />
+            </div>
+            <div className="col-md-12 div-rounded">
+              <Field
+                name="year"
+                placeholder={translate("form.vehicle.year")}
+                component={SelectInput}
+                options={yearData}
+                validate={[validations.required]} />
+            </div>
+            <div className="col-md-12 div-last-rounded">
+              <Field
+                name="vin"
+                placeholder={translate("form.vehicle.vin")}
+                component={RenderField}
+                type="text"
+                maxLength="17"
+                textTransform="uppercase"
+                validate={[validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]} />
+              <Field
+                name="vinImage"
+                component={RenderFileInput}
+                image='image'
+              />
+            </div>
+          </div>
+          <div className="row no-gutters">
+            <div className="col-md-12 align-self-end vehicle-radio">
+              <Field
+                name="defaultVehicle"
+                id="defaultVehicle"
+                component={RenderCheckboxField}
+                label={translate("form.signup.defaultVehicle")}
+              />
+            </div>
+            <Button className="btn btn-light col-3" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
+            <Button className="btn btn-primary col-8" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} />
+          </div>
+        </form>*/}
       </form>
     )
   }

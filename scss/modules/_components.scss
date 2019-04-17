@@ -16,7 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
-.icon-add:before {
+/*.icon-add:before {
   content: "\61";
 }
 .icon-add-card:before {
@@ -233,6 +233,233 @@
 }
 .icon-sorting:before {
   content: "\2a";
+}*/
+.icon-add:before {
+  content: "\e000";
+}
+.icon-add-card:before {
+  content: "\e001";
+}
+.icon-add-location:before {
+  content: "\e002";
+}
+.icon-add-vehicle:before {
+  content: "\e003";
+}
+.icon-address:before {
+  content: "\e004";
+}
+.icon-alert:before {
+  content: "\e005";
+}
+.icon-apple:before {
+  content: "\e006";
+}
+.icon-arrow-d:before {
+  content: "\e007";
+}
+.icon-arrow-down:before {
+  content: "\e008";
+}
+.icon-arrow-dwon:before {
+  content: "\e009";
+}
+.icon-arrow-l:before {
+  content: "\e00a";
+}
+.icon-arrow-left:before,
+.swiper-button-prev::before {
+  content: "\e00b";
+}
+.icon-arrow-r:before {
+  content: "\e00c";
+}
+.icon-arrow-right:before,
+.swiper-button-next::before {
+  content: "\e00d";
+}
+.icon-back:before {
+  content: "\e00e";
+}
+.icon-bank:before {
+  content: "\e00f";
+}
+.icon-cart:before {
+  content: "\e010";
+}
+.icon-cash:before {
+  content: "\e011";
+}
+.icon-cash-payment:before {
+  content: "\e012";
+}
+.icon-change-password:before {
+  content: "\e013";
+}
+.icon-checked:before {
+  content: "\e014";
+}
+.icon-clear:before {
+  content: "\e015";
+}
+.icon-close:before {
+  content: "\e016";
+}
+.icon-credit-card:before {
+  content: "\e017";
+}
+.icon-current:before {
+  content: "\e018";
+}
+.icon-custom-order:before {
+  content: "\e019";
+}
+.icon-debit-card:before {
+  content: "\e01a";
+}
+.icon-delivered-step:before {
+  content: "\e01b";
+}
+.icon-delivery:before {
+  content: "\e01c";
+}
+.icon-door:before {
+  content: "\e01d";
+}
+.icon-edit:before {
+  content: "\e01e";
+}
+.icon-email:before {
+  content: "\e01f";
+}
+.icon-facebook:before {
+  content: "\e020";
+}
+.icon-filter:before {
+  content: "\e021";
+}
+.icon-garage:before {
+  content: "\e022";
+}
+.icon-grid:before {
+  content: "\e023";
+}
+.icon-heart:before {
+  content: "\e024";
+}
+.icon-hide-password:before {
+  content: "\e025";
+}
+.icon-home:before {
+  content: "\e026";
+}
+.icon-less:before {
+  content: "\e027";
+}
+.icon-linked-in:before {
+  content: "\e028";
+}
+.icon-list:before {
+  content: "\e029";
+}
+.icon-location:before {
+  content: "\e02a";
+}
+.icon-minus:before {
+  content: "\e02b";
+}
+.icon-payment:before {
+  content: "\e02c";
+}
+.icon-play-store:before {
+  content: "\e02d";
+}
+.icon-plus:before {
+  content: "\e02e";
+}
+.icon-price-quote:before {
+  content: "\e02f";
+}
+.icon-price-tag:before {
+  content: "\e030";
+}
+.icon-pricing:before {
+  content: "\e031";
+}
+.icon-product:before {
+  content: "\e032";
+}
+.icon-reset:before {
+  content: "\e033";
+}
+.icon-return:before {
+  content: "\e034";
+}
+.icon-save-f:before {
+  content: "\e035";
+}
+.icon-search:before {
+  content: "\e036";
+}
+.icon-secure:before {
+  content: "\e037";
+}
+.icon-send:before {
+  content: "\e038";
+}
+.icon-share:before {
+  content: "\e039";
+}
+.icon-shipping:before {
+  content: "\e03a";
+}
+.icon-shopping-bag:before {
+  content: "\e03b";
+}
+.icon-show-password:before {
+  content: "\e03c";
+}
+.icon-sign-out:before {
+  content: "\e03d";
+}
+.icon-sorting:before {
+  content: "\e03e";
+}
+.icon-time:before {
+  content: "\e03f";
+}
+.icon-to-up:before {
+  content: "\e040";
+}
+.icon-trash:before {
+  content: "\e041";
+}
+.icon-twitter:before {
+  content: "\e042";
+}
+.icon-upload-photo:before {
+  content: "\e043";
+}
+.icon-user:before {
+  content: "\e044";
+}
+.icon-vehicle:before {
+  content: "\e045";
+}
+.icon-vehicle-history:before {
+  content: "\e046";
+}
+.icon-verify-number:before {
+  content: "\e047";
+}
+.icon-wallet:before {
+  content: "\e048";
+}
+.icon-whatsapp:before {
+  content: "\e049";
+}
+.icon-more:before {
+  content: "\e04a";
 }
 .minus{
     width: 11px;
@@ -565,18 +792,39 @@
 
       }
       .file-thumb{
-        left: -100%;
-        width: 40px;
-        height: 40px;
-        overflow: hidden;
+        #{$left}: -100%;
         margin-#{$left}: -3px;
         position: absolute;
         top: 1px;
-        display: flex;
-        align-items: center;
-        img{
-          border-radius: 5px;
-          cursor: pointer;
+        .img-attached{
+          width: 40px;
+          height: 40px;
+          overflow: hidden;
+          display: flex;
+          img{
+            border-radius: 5px;
+          }
+        }
+
+        a{
+          position: absolute;
+          top: -3px;
+          #{$right}: -5px;
+          width: 17px;
+          height: 17px;
+          background: $brand-color;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100%;
+          i{
+            @include font-size(9px);
+            height: 9px;
+            color: $white;
+            &:before{
+              top: -0.5px;
+            }
+          }
         }
       }
     }
@@ -787,8 +1035,14 @@
   .has-float-label{
     background: $light-gray;
     height: 55px;
+    &.textarea{
+      height: auto;
+
+    }
     input{
       height: 55px;
+    }
+    input,textarea{
       background: transparent;
       position: relative;
       z-index: 1;
@@ -900,6 +1154,9 @@
 }
 .error{
   margin-bottom: 30px;
+  .select__control{
+    box-shadow: 0px 1px 1px 0px rgba(200, 41, 56, 0.9);
+  }
   input{
     box-shadow: 0px 1px 1px 0px rgba(200, 41, 56, 0.9);
   }

@@ -81,6 +81,7 @@ export default class SelectInput extends Component {
                        onMenuClose={this.handleMenuClose}
                        optionClassName="needsclick"
                    />
+                 <p className="error-text">Input missing</p>
                </InputGroup>
        );
    }

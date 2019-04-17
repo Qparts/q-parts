@@ -175,22 +175,13 @@
     }
   }
   .sponser{
-    @include nav-sm-media{
-      border-top: 1px solid $light-gray-2;
-      background: $light-gray;
-      margin-top: 20px !important;
-    };
     > span{
       border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
       display: inline-block;
       background: $white;
       padding: 5px 11px;
       margin-#{$right}: 6px;
-      @include nav-sm-media{
-        border-radius: 0;
-        background: transparent;
-        padding: 0;
-      }
+
     }
     i{
       width: 68px;
@@ -203,7 +194,19 @@
       position: relative;
       display: inline-block;
       top: -4px;
-      @include nav-sm-media{
+    }
+  }
+  .nav-sm{
+    .sponser{
+      border-top: 1px solid $light-gray-2;
+      background: $light-gray;
+      margin-top: 20px !important;
+      > span{
+        border-radius: 0;
+        background: transparent;
+        padding: 0;
+      }
+      p{
         @include font-size(13px);
         font-weight: 400 !important;
         margin-bottom: 0;

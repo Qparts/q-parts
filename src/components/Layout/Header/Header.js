@@ -49,10 +49,7 @@ class Header extends Component {
           this.header.current.classList.remove("slideUp");
           this.header.current.classList.add("slideDown");
         }
-
       }
-
-
       new_scroll_position = last_scroll_position;
     });
   }

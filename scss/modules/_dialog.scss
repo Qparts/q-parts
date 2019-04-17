@@ -1,6 +1,4 @@
-.modal-dialog {
-  // max-width: $max-container-popup;
-}
+
 .modal-content {
   border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base) !important;
   @include container-fluid;
@@ -15,10 +13,56 @@
       line-height: 15px;
     }
   }
+  .form-submit{
+    padding-bottom: 20px;
+    .btn{
+      display: flex;
+      width: 100%;
+      align-items: center;
+      height: 50px
+    }
+    .col-auto{
+      padding-#{$right}: 0;
+      .btn{
+        border-top-#{$right}-radius: 0 !important;
+        border-bottom-#{$right}-radius: 0 !important;
+      }
+      .btn-gray{
+        @include font-size(17px);
+      }
+      + .col{
+        padding-#{$left}: 5px;
+      }
+    }
+    .btn-primary{
+      @include font-size(20px);
+      justify-content: flex-end;
+      border-top-#{$left}-radius: 0 !important;
+      border-bottom-#{$left}-radius: 0 !important;
+      i{
+        @include font-size(23px);
+        height: 23px;
+      }
+      &:hover{
+        padding-#{$right}: 30px;
+      }
+    }
+  }
 }
 .modal-header {
   padding-top: 35px;
   border-bottom: 0;
+  &.have-icon{
+    p{
+      display: inline-flex;
+      align-items: flex-start;
+      i{
+        margin-#{$right}: 5px;
+        height: 24px;
+        display: inline-block;
+      }
+    }
+  }
 }
 .modal-title {
   display: flex;
@@ -33,7 +77,14 @@
   }
 }
 .modal-body {
+
 }
+.sub-header{
+  @include font-size(16px);
+  @include opacity(0.6);
+}
+
+//
 .product-checkout_popup {
   .modal-content {
     background: white;
@@ -43,4 +94,7 @@
       @include text-capitalize;
     }
   }
+}
+.dialog-form{
+  
 }

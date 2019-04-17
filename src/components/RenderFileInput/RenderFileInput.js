@@ -103,13 +103,19 @@ class renderFileInput extends Component {
               ref={`${originalImage}_${props.image}`}
             />
           <div className="file-thumb">
-            <img
-                style={{ display: 'none' }}
-                className="RenderFileInput-img"
-                onClick={this.showLightbox}
-                alt="not found"
-                ref={`${convertedImg}_${props.image}`}
-              />
+            <a href="#">
+              <i className="icon-close"></i>
+            </a>
+            <div className="img-attached">
+              <img
+                  style={{ display: 'none' }}
+                  className="RenderFileInput-img"
+                  onClick={this.showLightbox}
+                  alt="not found"
+                  ref={`${convertedImg}_${props.image}`}
+                />
+            </div>
+
           </div>
 
             <canvas

@@ -97,8 +97,10 @@ class ProductGridView extends Component {
 		let dialog;
 		if (this.state.data.quantity) {
 			dialog = (
-				<Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
-					<ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+				<Modal dir={direction} className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+					<ModalHeader toggle={this.togglePopup}>
+						{this.getDialogProps().header}
+					</ModalHeader>
 					<ModalBody>
 						{this.getDialogComponent()}
 					</ModalBody>
