@@ -540,6 +540,9 @@
     background: $light-gray;
     margin-top: 2px;
     position: relative;
+    @include media-breakpoint-down(md) {
+      margin-top: 62px;
+    };
     .col, .col-auto{
       display: flex;
       align-items: center;
