@@ -12,7 +12,7 @@ import SocialMedia from '../SocialMedia/SocialMedia';
 import PrivateRoute from '../../../components/PrivateRoute';
 import ResetPassword from '../../../components/ResetPassword/ResetPassword';
 
-import { login, sendSmsCode, resetPassword, socialMediaButton, setCheckLoginCheckout, setCheckLoginQuotationOrder } from '../../../actions/customerAction';
+import { login, sendSmsCode, resetPassword, socialMediaButton, setCheckLoginCheckout, setCheckLoginQuotationOrder, setQuotationOrder } from '../../../actions/customerAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 
 import * as validations from '../../../utils';
@@ -206,7 +206,8 @@ const mapDispatchToProps = (dispatch) => {
     resetPassword,
     socialMediaButton,
     setCheckLoginCheckout,
-    setCheckLoginQuotationOrder
+    setCheckLoginQuotationOrder,
+    setQuotationOrder
   }, dispatch)
 }
 
