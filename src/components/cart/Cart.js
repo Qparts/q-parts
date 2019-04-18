@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { incrementQuantity, decrementQuantity, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
+import { setCheckLoginCheckout } from '../../actions/customerAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
@@ -60,6 +61,7 @@ class Cart extends Component {
 			if (window.innerWidth < 950) {
 				this.props.history.push('/login')
 			} else {
+				this.props.setCheckLoginCheckout(true);
 				this.setState({ dialogType: 'signin' });
 				this.togglePopup();
 			}
@@ -197,7 +199,8 @@ const mapDispatchToProps = (dispatch) => {
 		incrementQuantity,
 		decrementQuantity,
 		deleteCart,
-		moveCartToWishlist
+		moveCartToWishlist,
+		setCheckLoginCheckout
 	}, dispatch)
 }
 
