@@ -87,12 +87,23 @@ const WithProductView = WrappedComponent => {
 			let newQuery = queryString.parse(window.location.search.slice(1));
 			const validPageFilter = '1';
 
-			if(newQuery.page !== validPageFilter) {
+			if (newQuery.page !== validPageFilter) {
 				newQuery = queryString.parse(addQuery(filterQuery).split('?').slice(1)[0]);
 				newQuery.page = validPageFilter;
-				
-				return this.props.history.push(`${window.location.pathname}?${queryString.stringify(newQuery)}`);
-			
+				let queryArray = [];
+				const keys = Object.keys(newQuery);
+
+				for (let key of keys) {
+					if (Array.isArray(newQuery[key])) {
+						queryArray.push(`&${queryString.stringify({ [key]: newQuery[key] }, { indices: false })}`);
+						delete newQuery[key];
+					}
+				}
+				newQuery = queryString.stringify(newQuery);
+				queryArray.forEach(query => newQuery += query);
+
+				return this.props.history.push(`${window.location.pathname}?${newQuery}`);
+
 			} else {
 				this.props.history.push(addQuery(filterQuery));
 			}

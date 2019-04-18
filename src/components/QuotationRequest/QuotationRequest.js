@@ -79,7 +79,7 @@ class QuotationRequest extends Component {
 		let {
 			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
 		} = values;
-		const customerVehicleId = garage ? garage.vehicleYearId : null;
+		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
 		vinImage = vinImage ? vinImage : false;
