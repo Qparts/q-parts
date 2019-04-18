@@ -164,7 +164,9 @@ class SearchResult extends Component {
 	}
 
 	componentWillUnmount() {
-		this.state.scroll.removeEventListener('scroll', this.handleScroll)
+		if (this.state.scroll) {
+			this.state.scroll.removeEventListener('scroll', this.handleScroll)
+		}
 	}
 
 	handleScroll = (event) => {
