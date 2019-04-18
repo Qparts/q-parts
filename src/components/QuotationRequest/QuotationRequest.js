@@ -79,7 +79,6 @@ class QuotationRequest extends Component {
 		let {
 			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
 		} = values;
-		console.log(values)
 		const customerVehicleId = garage ? garage.vehicleYearId : null;
 		const imageAttached = vinImage ? true : false;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
@@ -93,7 +92,6 @@ class QuotationRequest extends Component {
 			}) : undefined;
 
 			if(!isAuth(this.props.token)){
-				console.log("raed")
 				this.props.setCheckLoginQuotationOrder(true);
 				this.setState({
 					dialogType: signin,
@@ -101,8 +99,6 @@ class QuotationRequest extends Component {
 				});
 				this.togglePopup();
 			}else{
-
-					console.log("raed")
 				postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
 					.then(res => {
 						this.props.setQuotationOrder(false);
