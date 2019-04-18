@@ -9,6 +9,7 @@ import Footer from "./Footer/Footer";
 
 import Title from '../UI/Title';
 import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
+import { LargeScreen } from '../Device';
 
 class Layout extends Component {
   constructor(props) {
@@ -71,7 +72,7 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      countriesOnly, getCountriesOnly, selectCountry, direction, cart
+      countriesOnly, getCountriesOnly, selectCountry, direction, cart, location: { pathname }
     } = this.props;
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -103,7 +104,13 @@ class Layout extends Component {
         {dialog}
         <div className="cd-main-content">
           {this.props.children}
-          <Footer translate={translate}/>
+          {
+            pathname !== '/listing' ? <Footer translate={translate} /> : (
+              <LargeScreen>
+                <Footer translate={translate} />
+              </LargeScreen>
+            )
+          }
           <div className="cd-overlay"></div>
         </div>
       </Fragment>

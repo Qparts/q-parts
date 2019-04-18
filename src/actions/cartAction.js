@@ -12,6 +12,7 @@ export const ADD_DELIVERY_ADDRESS = 'ADD_DELIVERY_ADDRESS';
 export const ADD_PAYMENT_METHOD = 'ADD_PAYMENT_METHOD';
 export const POST_CREDIT_CARD = 'POST_CREDIT_CARD';
 export const DELETE_CART = 'DELETE_CART';
+export const ADD_WISHLIST = 'ADD_WISHLIST';
 
 export const addToCart = (item) => {
  return {
@@ -84,9 +85,22 @@ export const addPaymentMethod = (args) => {
   }
 }
 
-export const deleteCart = (cart) => {
+export const deleteCart = (product) => {
   return {
     type: DELETE_CART,
-    payload: cart
+    payload: product
+  }
+}
+
+export const moveCartToWishlist = (product) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_CART,
+      payload: product
+    })
+    dispatch({
+      type: ADD_WISHLIST,
+      payload: product
+    })
   }
 }

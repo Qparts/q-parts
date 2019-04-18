@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { incrementQuantity, decrementQuantity, deleteCart } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
 import { setCheckLoginCheckout } from '../../actions/customerAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
@@ -81,7 +81,7 @@ class Cart extends Component {
 			return {
 				...item.product,
 				desc: item.product.desc,
-				salesPrice: item.product.salesPrice.toFixed(2),
+				salesPrice: Number(item.product.salesPrice.toFixed(2)),
 				currency: translate("general.currency"),
 				quantity: item.quantity,
 				quantityLabel: translate("general.quantity"),
@@ -91,7 +91,6 @@ class Cart extends Component {
 				subtotal: item.product.salesPrice.toFixed(2) * item.quantity
 			}
 		});
-		console.log(this.props.purchasedItems)
 		var subtotal = 0;
 		var quantity = 0;
 		var divItemMovile = "total-sm d-lg-none d-flex align-items-stretch";
@@ -155,6 +154,7 @@ class Cart extends Component {
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
 								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist}
 							/>
 							<div className="col-lg-3">
 								<div className="order-summary">
@@ -199,6 +199,7 @@ const mapDispatchToProps = (dispatch) => {
 		incrementQuantity,
 		decrementQuantity,
 		deleteCart,
+		moveCartToWishlist,
 		setCheckLoginCheckout
 	}, dispatch)
 }

@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import { confirmUserAddress, completeOrder, addAddress, completeShipping, completePayment, changeDefaultAddress, setLoading, setValidCredit } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
-import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, addDeliveryAddress, addPaymentMethod, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
@@ -88,7 +88,7 @@ class Checkout extends Component {
 			return {
 				...item.product,
 				desc: item.product.desc,
-				salesPrice: item.product.salesPrice.toFixed(2),
+				salesPrice: Number(item.product.salesPrice.toFixed(2)),
 				currency: translate("general.currency"),
 				quantity: item.quantity,
 				quantityLabel: translate("general.quantity"),
@@ -206,7 +206,8 @@ class Checkout extends Component {
 								isLoading={this.props.isLoading}
 								setValidCredit={this.props.setValidCredit}
 								isValidcreditCard={this.props.isValidcreditCard}
-								deleteCart={this.props.deleteCart} />
+								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist} />
 						}} />
 					</Switch>
 					{
@@ -271,7 +272,8 @@ const mapDispatchToProps = (dispatch) => {
 		changeDefaultAddress,
 		setLoading,
 		setValidCredit,
-		deleteCart
+		deleteCart,
+		moveCartToWishlist
 	}, dispatch)
 }
 

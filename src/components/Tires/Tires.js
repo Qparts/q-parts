@@ -12,7 +12,6 @@ import SelectInput from '../SelectInput/SelectInput';
 
 class Tires extends Component {
 	submit = values => {
-		console.log(values);
 		
 	}
 
