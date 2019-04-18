@@ -51,9 +51,9 @@ class QuotationRequest extends Component {
 
 	componentDidMount = () => {
 
-    this.props.setCheckLoginQuotationOrder(false);
+		this.props.setCheckLoginQuotationOrder(false);
 
-  }
+	}
 
 	componentDidUpdate = (prevProps, prevState) => {
 		const { defaultLang } = this.props
@@ -91,20 +91,20 @@ class QuotationRequest extends Component {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
 
-			if(!isAuth(this.props.token)){
-				this.props.setCheckLoginQuotationOrder(true);
-				this.setState({
-					dialogType: signin,
-					data: values
-				});
-				this.togglePopup();
-			}else{
-				postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
-					.then(res => {
-						this.props.setQuotationOrder(false);
-						return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
-					})
-			}
+		if (!isAuth(this.props.token)) {
+			this.props.setCheckLoginQuotationOrder(true);
+			this.setState({
+				dialogType: signin,
+				data: values
+			});
+			this.togglePopup();
+		} else {
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+				.then(res => {
+					this.props.setQuotationOrder(false);
+					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
+				})
+		}
 	}
 
 	handleVehicle = (event) => {
@@ -164,7 +164,7 @@ class QuotationRequest extends Component {
 				/>
 
 			case signin:
-				return <Login toggle={this.togglePopup} data={this.state.data}/>
+				return <Login toggle={this.togglePopup} data={this.state.data} />
 
 			default:
 				break;
@@ -498,12 +498,11 @@ class QuotationRequest extends Component {
 								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")} />.</p>
 							</div>
 							<div className="col-lg-auto">
-										<Button type="submit" className="btn btn-primary" text={
-											<Fragment>
-												<span>{translate("general.send")}</span>
-												<i className={`icon-arrow-${right(direction)}`}></i>
-											</Fragment>
-										} />
+								<Button type="submit"
+									className="btn btn-primary"
+									text={translate("general.send")}
+									icon={`icon-arrow-${right(direction)}`}
+								/>
 							</div>
 						</div>
 					</form>
