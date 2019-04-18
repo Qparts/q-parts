@@ -316,7 +316,7 @@ class ProductDetail extends Component {
                       <div className="col-lg-6">
                         <div className="row">
                           <div className="col">
-                            <h1>{product.desc}</h1>
+                            <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
                             <ul className="list-inline">
                               <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
                               <li>{translate("product.number")} {product.productNumber}</li>
@@ -344,7 +344,7 @@ class ProductDetail extends Component {
                   <header className="pro-heading ">
                     <div className="row">
                       <div className="col">
-                        <h1>{product.desc}</h1>
+                        <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
                         <ul className="list-inline">
                           <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
                           <li>{translate("product.detail")} {product.productNumber}</li>
@@ -376,7 +376,7 @@ class ProductDetail extends Component {
                     </li>
                     <li className="pro-options">
                       {this.renderSpecs(true)}
-                      {parse(_.isNull(product.details) ? "" : product.details)}
+                      {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
                     </li>
                     <li className="add-cart row">
                       <div className="col-sm-auto col-12">
@@ -419,7 +419,7 @@ class ProductDetail extends Component {
               <h2 className="details-heading">{translate("product.detail")}</h2>
               <ul className="list-unstyled pro-details">
                 <li>
-                  {parse(_.isNull(product.details) ? "" : product.details)}
+                  {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
                   {this.renderSpecs()}
                 </li>
                 {/* <li>
