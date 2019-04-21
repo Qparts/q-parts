@@ -3,6 +3,7 @@ import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { PENDING } from '../../../constants';
+import { LargeScreen } from '../../Device';
 
 export class PendingRequest extends Component {
 
@@ -13,31 +14,28 @@ export class PendingRequest extends Component {
 
         pendings.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
-        return <Fragment key={pendings.id}>
-            <Link
+        return <li key={pendings.id}>
+                <Link
                 to="#"
+                className="collapsed"
                 data-toggle="collapse"
                 data-target={`.${pendings.id}`}
                 aria-expanded="false"
                 aria-controls={ids.join(' ')}>
-                <li className="bg-white">
-                    <figure className="row">
-                        <div className="col-3">
-                            <label>{translate("quotationRequest.requestNo")}</label>
-                            <h4>#{pendings.id}</h4>
-                        </div>
-                        <figcaption className="col-9">
-                            <div className="row">
-                                <div className="col-md-9 item-dis">
-                                </div>
-                                <div className="col-md-3">
-                                    <p>{translate("quotationRequest.sent")} <span>{created}</span></p>
-                                    <p>{translate("quotationRequest.itemsQuantity")}: <span>{pendings.quotationItems.length}</span></p>
-                                </div>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </li>
+                <LargeScreen>
+                    <div className="col-lg-auto">
+                        <label>{translate("quotationRequest.requestNo")}</label>
+                        <p>#{pendings.id}</p>
+                    </div>
+                </LargeScreen>
+                <div className="col-lg">
+                    <p>Ford Focus 2015</p>
+                    <span className="details-toggle"><i className="icon-"></i></span>
+                </div>
+                <div className="col-lg-auto r-info">
+                    <p className="date"><span>{translate("quotationRequest.sent")}</span> {created}</p>
+                    <p>{translate("quotationRequest.itemsQuantity")}:  {pendings.quotationItems.length}</p>
+                </div>
             </Link>
             {
                 pendings.quotationItems.map(quotationItem => {
@@ -50,7 +48,7 @@ export class PendingRequest extends Component {
                         currentLanguage={currentLanguage} />
                 })
             }
-        </Fragment>
+        </li>
     }
 }
 

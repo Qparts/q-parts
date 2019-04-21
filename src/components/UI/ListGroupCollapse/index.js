@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { PENDING, INCREMENT, DECREMENT, RADIX } from '../../../constants';
 import Button from '../../UI/Button';
 import { handleImageFallback, getTranslatedObject, isAuth } from '../../../utils';
-import { CustomScreen, UpSmallScreen } from '../../Device';
+import { CustomScreen, UpSmallScreen, DownLargeScreen } from '../../Device';
 
 //dialog
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -86,7 +86,7 @@ export class ListGroupCollapse extends Component {
         </div>
     )
     render() {
-        const { quotationItem, type, translate, currentLanguage, direction, token } = this.props;
+        const { quotationItem, requestNumber, type, translate, currentLanguage, direction, token } = this.props;
 
         const dialog = (
             <Modal dir={direction} className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
@@ -94,7 +94,7 @@ export class ListGroupCollapse extends Component {
                     <Title number={this.state.product.quantity} header={translate("dialog.addToCart.title")} />
                 </ModalHeader>
                 <ModalHeader toggle={this.togglePopup} className="have-icon">
-                  <p><i className="icon-change-password"></i>Change</p> Password
+                    <p><i className="icon-change-password"></i>Change</p> Password
                 </ModalHeader>
                 <ModalBody>
                     <AddProduct
@@ -110,18 +110,35 @@ export class ListGroupCollapse extends Component {
 
         return (
             type === PENDING ?
-                <div className="collapse multi-collapse" id={quotationItem.id}>
-                    <div style={{ background: '#ebebeb' }} className="d-table product-options">
+                <div className={`collapse ${requestNumber}`} id={quotationItem.id}>
+                    <artical className="request-details" >
+                        <ul className="list-inline vehicle-info">
 
-                        <div className="d-table-row">
-                            <div className="d-table-cell"><span>{translate("quotationRequest.name")} </span></div>
-                            <div className="d-table-cell">{quotationItem.name}</div>
+                            <li><i className="icon-vehicle"></i> VIN Num: (000 000 000 000 11)</li>
+                            <DownLargeScreen>
+                                <li className="r-id-small">
+                                    <label>Request Num</label> #xxx11xx
+                                </li>
+                            </DownLargeScreen>
+                            <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>
+                        </ul>
+                        <div className="parts-list">
+                            <ul className="d-table list-unstyled">
+                                <li className="d-table-row">
+                                    <div className="d-table-cell">{translate("quotationRequest.name")}</div>
+                                    <div className="d-table-cell">{translate("quotationRequest.quantity")}</div>
+                                </li>
+                                <li className="d-table-row">
+                                    <div className="d-table-cell">{quotationItem.name}</div>
+                                    <div className="d-table-cell">{quotationItem.quantity}</div>
+                                </li>
+                            </ul>
                         </div>
-                        <div className="d-table-row">
-                            <div className="d-table-cell"><span>{translate("quotationRequest.quantity")}</span></div>
-                            <div className="d-table-cell">{quotationItem.quantity}</div>
+                        <div className="request-actions">
+                            <a className="btn white-btn"><i className="icon-edit"></i></a>
+                            <a className="btn white-btn">Cancel</a>
                         </div>
-                    </div>
+                    </artical>
                 </div> :
                 <Fragment>
                     <div className="collapse multi-collapse" key={quotationItem.id} id={quotationItem.id}>
