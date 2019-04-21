@@ -1626,6 +1626,18 @@
       "noWishlist": [
         "لا توجد منتجات محفوظة في قائمة الرغبات",
         "no saved items in wishlist"
+      ],
+      "startShopping": [
+        "بدء التسوق",
+        "Start Shopping"
+      ],
+      "wishlist": [
+        "الرغبات",
+        "Wish List"
+      ],
+      "items": [
+        "العناصر",
+        "Items"
       ]
     },
     "garage": {
