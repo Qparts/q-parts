@@ -50,7 +50,7 @@ class Login extends Component {
           }else if(this.props.checkLoginQuotationOrder){
             let {
         			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
-        		} = this.props.data;
+        		} = this.props.quotationOrderInfo;
         		const customerVehicleId = garage ? garage.id : null;
         		const imageAttached = vinImage ? true : false;
         		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
@@ -195,7 +195,8 @@ const mapStateToProps = (state) => {
     direction: state.customer.direction,
     submitErrors: getFormSubmitErrors('Login')(state),
     checkLoginCheckout: state.customer.checkLoginCheckout,
-    checkLoginQuotationOrder: state.customer.checkLoginQuotationOrder
+    checkLoginQuotationOrder: state.customer.checkLoginQuotationOrder,
+		quotationOrderInfo: state.customer.quotationOrderInfo
   }
 }
 
