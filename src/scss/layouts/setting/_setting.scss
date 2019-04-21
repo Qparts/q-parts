@@ -1,5 +1,7 @@
 .user-main{
-  @extend .gray-bg;
+  @include media-breakpoint-up(lg){
+    background: $light-gray;
+  };
   padding-bottom: 50px;
 }
 .profile-header{
@@ -90,6 +92,15 @@
       background: transparent;
     }
   }
+  @include media-breakpoint-down(lg){
+    position: absolute;
+    top: -65px;
+    #{$right}: 0;
+    .btn{
+      height: 65px;
+      padding: 0 15px !important;
+    }
+  };
 }
 .dashboard{
   position: relative;
@@ -183,6 +194,13 @@
 .setting-tab-content{
   padding-top: 56px;
   padding-bottom: 20px;
+  @include media-breakpoint-down(lg){
+    margin-top: 125px;
+    min-height: calc(100vh - 185px);
+    background: $light-gray;
+    padding-bottom: 60px;
+
+  };
   .sec-title-sm{
     font-weight: 400;
     text-transform: uppercase;
@@ -192,6 +210,7 @@
     padding: 10px 15px 10px;
     background: $white;
     color: $charcoal-grey;
+
   }
   header {
     border-bottom: 2px solid rgba(55, 54, 60, 0.2);
@@ -359,7 +378,7 @@
       &:hover{
         border-#{$left}-color: $light-gray-2 !important;
       }
-      
+
       .details-toggle{
         &:after{
           @include if-ltr{
@@ -861,5 +880,14 @@ form{
       top: 3px;
       #{$right}: -3px;
     }
+  }
+}
+.sidebar{
+  > div:first-child{
+    padding: 0 !important;
+  }
+  .setting-tabs-link{
+    border-radius: 0 !important;
+    border-bottom: 2px solid $light-gray;
   }
 }

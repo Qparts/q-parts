@@ -15,10 +15,11 @@
 }
 .results-container {
   @extend .p-inner-sec;
-  @include media-breakpoint-down(md) {
-    padding-top: 100px;
-  };
   position: relative;
+  @include media-breakpoint-down(lg){
+    padding-top: 100px;
+
+  };
 }
 .filter{
   @extend .list-unstyled;
@@ -347,6 +348,10 @@
         @include media-breakpoint-up(lg){
           min-height: 197px;
         };
+        @include media-breakpoint-down(lg){
+          min-height: 130px;
+
+        };
       }
     }
     &:hover{
@@ -446,6 +451,11 @@
       #{$right}: 0;
       width: 11px;
       height: 100%;
+      @include media-breakpoint-down(md){
+        width: 100%;
+        text-align: #{$right};
+        padding-#{$right}: 5px;
+      };
       &:hover{
         i{
           color: $basic-gray;
@@ -556,10 +566,11 @@
       height: 60px;
     }
     h3,h4{
-      @include font-size(19px);
+      @include font-size(18px);
       font-weight: 400;
       text-align: center;
       margin-bottom: 0;
+      line-height: 1.5;
       span{
         display: block;
         @include opacity(0.6);
@@ -583,6 +594,9 @@
         @include font-size(24px);
         @include opacity(0.5);
         height: 23px;
+        &:before{
+          top: -2px;
+        }
       }
     }
     .btn-primary{
@@ -767,4 +781,81 @@
 }
 .apply-filter{
   bottom: 0;
+}
+.no-products{
+  padding-top: 40px;
+  > div:first-child{
+    position: relative;
+    justify-content: center;
+    display: flex;
+    .gray-bg{
+      position: absolute;
+      width: 300%;
+      #{$right}: 0;
+      height: 100%;
+      z-index: -1;
+      @include border-radius-div;
+    }
+  }
+  img{
+    width: 115px;
+    margin-top: -20px;
+  }
+  .media{
+    padding-top: 45px;
+    padding-bottom: 45px;
+    h5{
+      font-weight: 400;
+      @include font-size(20px);
+      margin-bottom: 10px;
+      text-transform: capitalize;
+    }
+  }
+  .media-body{
+    @include media-breakpoint-up(sm){
+      padding-#{$left}: 15px;
+    };
+  }
+  .btn{
+    font-weight: 300;
+    @include font-size(20px);
+    @include box-shadow();
+    text-transform: capitalize;
+    display: inline-flex;
+    i{
+      @include font-size(28px);
+      height: 23px;
+      @include opacity(0.9);
+      &:before{
+        top: -2px;
+      }
+
+    }
+    @include media-breakpoint-down(sm){
+
+    }
+  }
+  @include media-breakpoint-down(sm){
+    .media{
+      padding-#{$left}: 0;
+      display: block;
+      text-align: center;
+      padding: side-values(20px 15px 20px 0);
+      h5{
+        line-height: 1.5;
+        @include font-size(17px);
+
+      }
+    }
+
+    .btn{
+      @include font-size(17px);
+      font-weight: 400;
+      i{
+        display: none;
+      }
+    }
+  }
+
+
 }

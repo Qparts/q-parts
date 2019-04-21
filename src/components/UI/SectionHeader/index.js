@@ -13,14 +13,11 @@ class SectionHeader extends Component{
               <figure><img className="default" alt="user" src="/img/user.svg" /></figure>
               <h1>{this.props.text}</h1>
             </header>
-            <div className="sign-out col-auto">
-              <LargeScreen>
+            <LargeScreen>
+              <div className="sign-out col-auto">
                 <Button type="submit" className="btn" text={translate("setting.signout")} icon="icon-sign-out"/>
-              </LargeScreen>
-              <DownLargeScreen>
-                <Button type="submit" className="btn more" icon="icon-more"/>
-              </DownLargeScreen>
-           </div>
+              </div>
+            </LargeScreen>
           </div>
         </div>
       </section>

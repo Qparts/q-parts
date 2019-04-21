@@ -34,7 +34,8 @@ import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
 import Payment from '../../components/Payment/Payment';
 import PaymentPopup from '../../components/Payment/PaymentPopup';
-import SideBar from '../../components/SideBar/SideBar';
+import Footer from '../../components/Layout/Footer/Footer';
+
 import {
   match
 } from '../../utils';
@@ -49,8 +50,8 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../../components/UI/Title';
 //whatsapp
 
-import { LargeScreen} from '../../components/Device/index.js'
-
+import { LargeScreen , DownLargeScreen} from '../../components/Device/index.js'
+import Sidebar from "react-sidebar";
 const name = 'name';
 const phone = 'phone';
 const email = 'email';
@@ -74,7 +75,8 @@ class Setting extends Component {
       defaultAddress: null,
       newOrOldVechile: TAB_ONE,
       sectionHeader: '',
-      modal: false
+      modal: false,
+      sidebarOpen: false,
     }
 
   }
@@ -265,7 +267,18 @@ class Setting extends Component {
     this.setState({ dialogType });
     this.togglePopup();
   };
+
+  openSidebar = () => {
+    this.setState({ sidebarOpen: !this.state.sidebarOpen })
+  }
+  onSetSidebarOpen = async (open) => {
+		await this.setState({
+			sidebarOpen: open,
+		});
+	}
+
   render() {
+      console.log(this.state.sidebarOpen)
     const { translate, direction } = this.props;
     let dialog;
 
@@ -373,184 +386,332 @@ class Setting extends Component {
           <SectionHeader className="profile-header" text={`${this.props.customer.firstName} ${this.props.customer.lastName}`} translate={translate} />
           <section className="user-main">
             <div className="container-fluid">
-              <LargeScreen>
-                <div className="row">
-                  <div className="col-lg-9 offset-lg-3">
-                    <div className="dashboard">
-                      <span className="bg"></span>
-                      <ul className="list-unstyled">
-                        <li className="col">
-                          <a href="#" class="media">
-                            <img className="request-tab" src="/img/request.svg" alt="request" />
-                            <div class="media-body">
-                              <h5>{translate('setting.request')}</h5>
-                              {this.props.requests.length}
-                            </div>
-                          </a>
-                        </li>
-                        <li className="col">
-                          <a href="#" class="media">
-                            <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
-                            <div class="media-body">
-                              <h5>Orders</h5>
-                              {this.props.requests.length}
-                            </div>
-                          </a>
-                        </li>
-                        <li className="col">
-                          <a href="#" class="media">
-                            <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
-                            <div class="media-body">
-                              <h5>{translate('setting.links.wishlist')}</h5>
-                              {this.props.wishlist.length}
-                            </div>
-                          </a>
-                        </li>
-                        <li className="col">
-                          <a href="#" class="media">
-                            <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
-                            <div class="media-body">
-                              <h5>{translate('setting.links.garage')}</h5>
-                              {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
+                <LargeScreen>
+                  <div className="row">
+                    <div className="col-lg-9 offset-lg-3">
+                      <div className="dashboard">
+                          <span className="bg"></span>
+                          <ul className="list-unstyled">
+                            <li className="col">
+                              <a href="#" class="media">
+                                <img className="request-tab" src="/img/request.svg" alt="request" />
+                                <div class="media-body">
+                                  <h5>{translate('setting.request')}</h5>
+                                  {this.props.requests.length}
+                                </div>
+                              </a>
+                            </li>
+                            <li className="col">
+                              <a href="#" class="media">
+                                <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
+                                <div class="media-body">
+                                  <h5>Orders</h5>
+                                  {this.props.requests.length}
+                                </div>
+                              </a>
+                            </li>
+                            <li className="col">
+                              <a href="#" class="media">
+                                <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
+                                <div class="media-body">
+                                  <h5>{translate('setting.links.wishlist')}</h5>
+                                  {this.props.wishlist.length}
+                                </div>
+                              </a>
+                            </li>
+                            <li className="col">
+                              <a href="#" class="media">
+                                <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
+                                <div class="media-body">
+                                  <h5>{translate('setting.links.garage')}</h5>
+                                  {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
+                              </div>
+                            </a>
+                          </li>
+                          </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              </LargeScreen>
-              <div className="row">
-                <SettingLinks {...this.props} />
-                <div className="setting-tab-content col-lg-9">
-                <Switch>
-                  <Route path="/setting/profile" exact={true} render={({ match }) => {
-                    return (
-                      <Fragment>
-                        <Profile
-                          customer={this.props.customer}
-                          title="Personal customer"
-                          name="name"
-                          email="email"
-                          password="password"
-                          onShowEditDialog={this.handleDialog}
-                          onSubmit={this.onEdit.bind(this, name)}
-                          direction={this.props.direction}
-                          {...this.props} />
-                        {dialog}
-                      </Fragment>
-                    )
-                  }} />
-
-                  <Route path="/setting/quotations" exact={true} render={() => {
-                    return (
-                      <Fragment>
-                        <Quotations
-                            getPendingRequests={this.props.getPendingRequests}
-                            getCompletedRequests={this.props.getCompletedRequests}
-                            customer={this.props.customer}
-                            quotations={this.props.quotations}
-                            translate={this.props.translate}
-                            direction={this.props.direction}
-                            addToCart={this.props.addToCart}
+                  <div className="row">
+                    <SettingLinks onSetSidebarOpen={this.onSetSidebarOpen} {...this.props} />
+                    <div className="setting-tab-content col-lg-9">
+                      <Switch>
+                      <Route path="/setting/profile" exact={true} render={({ match }) => {
+                        return (
+                          <Fragment>
+                            <Profile
+                              customer={this.props.customer}
+                              title="Personal customer"
+                              name="name"
+                              email="email"
+                              password="password"
+                              onShowEditDialog={this.handleDialog}
+                              onSubmit={this.onEdit.bind(this, name)}
+                              direction={this.props.direction}
+                              {...this.props} />
+                            {dialog}
+                          </Fragment>
+                        )
+                      }} />
+                      <Route path="/setting/quotations" exact={true} render={() => {
+                        return (
+                          <Fragment>
+                            <Quotations
+                                getPendingRequests={this.props.getPendingRequests}
+                                getCompletedRequests={this.props.getCompletedRequests}
+                                customer={this.props.customer}
+                                quotations={this.props.quotations}
+                                translate={this.props.translate}
+                                direction={this.props.direction}
+                                addToCart={this.props.addToCart}
+                                currentLanguage={this.props.currentLanguage}
+                                incrementQuantity={this.props.incrementQuantity}
+                                decrementQuantity={this.props.decrementQuantity}
+                                token={this.props.token} />
+                          </Fragment>
+                        )
+                      }} />
+                      <Route path="/setting/connect" exact={true} render={({ match }) => {
+                        return (
+                          <Fragment>
+                            <SocialMediaLink
+                              connectedPlatforms={this.props.connectedPlatforms}
+                              handleResponse={this.props.handleResponse}
+                              handleFailure={this.props.handleFailure} />
+                          </Fragment>
+                        )
+                      }} />
+                      <Route path="/setting/addresses" exact={true} render={() => {
+                        return (
+                          <Fragment>
+                            <Addresses
+                              customer={this.props.customer}
+                              onShowEditDialog={this.handleDialog}
+                              onEditAddress={this.handleEditAddress}
+                              translate={this.props.translate}
+                              addresses={this.props.addresses}
+                              changeDefaultAddress={this.props.changeDefaultAddress} />
+                            {addressDialog}
+                          </Fragment>
+                        )
+                      }} />
+                      <Route path="/setting/orders/" exact={true} render={() => {
+                        return (
+                          <Orders translate={this.props.translate} />
+                        )
+                      }} />
+                      <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                        return (
+                          <Order translate={this.props.translate} checkout={this.props.checkout} />
+                        )
+                      }} />
+                      <Route path="/setting/help_center" exact={true} render={() => {
+                        return (
+                          <HelpCenter translate={this.props.translate} />
+                        )
+                      }} />
+                      <Route path="/setting/garage" exact={true} render={() => {
+                        return (
+                          <Fragment>
+                            <Garage
+                              vehicles={this.props.vehicles}
+                              onShowVehicleDialog={this.handleShowDialog}
+                              onDeleteVehicle={this.handleDeleteVehicle}
+                              changeDefaultVehicle={this.props.changeDefaultVehicle}
+                              translate={this.props.translate} />
+                            {garageDialog}
+                          </Fragment>
+                        )
+                      }} />
+                      <Route path="/setting/wishlist" exact={true} render={() => {
+                        return (
+                          <Wishlist
                             currentLanguage={this.props.currentLanguage}
-                            incrementQuantity={this.props.incrementQuantity}
-                            decrementQuantity={this.props.decrementQuantity}
-                            token={this.props.token} />
+                            direction={this.props.direction}
+                            wishlist={this.props.wishlist}
+                            deleteWishlist={this.props.deleteWishlist}
+                            moveWishlistToCart={this.props.moveWishlistToCart}
+                            translate={this.props.translate} />
+                        )
+                      }} />
+                      <Route path="/setting/payment/" exact={true} render={() => {
+                        return (
+                          <Fragment>
+                            <Payment
+                              translate={this.props.translate}
+                              onShowEditDialog={this.handleDialog}
+                            />
+                            {paymentDialog}
+                          </Fragment>
+                        )
+                      }} />
+                      <PrivateRoute
+                        path="/setting/profile/phone"
+                        component={EditInfo}
+                        labels={["Confirmation number", "Phone number"]}
+                        names={["confirmationNo", "mobile"]}
+                        name=""
+                        type="text"
+                        placeholder={["Confirmation number", "Your phone number"]}
+                        renderField={this.renderField}
+                        onSubmit={this.onEdit.bind(this, phone)}
+                        redirectTo="/setting/profile" />
+                    </Switch>
+                    </div>
+                  </div>
+                </LargeScreen>
+                <DownLargeScreen>
+                  <Sidebar
+                    sidebarClassName="sidebar"
+                    contentClassName="content-sidebar"
+                    overlayClassName="sidebar-overlay"
+                    sidebar={
+                      <Fragment>
+                        <SettingLinks {...this.props} />
                       </Fragment>
-                    )
-                  }} />
+                    }
+                    children={
+                      <Fragment>
+                        <div className="setting-tab-content col-lg-9">
+                          <div className="sign-out">
+                            <button className="btn more" onClick={() => this.openSidebar()}><i className="icon-more"></i></button>
+                          </div>
+                          <Switch>
+                            <Route path="/setting/profile" exact={true} render={({ match }) => {
+                              return (
+                                <Fragment>
+                                  <Profile
+                                    customer={this.props.customer}
+                                    title="Personal customer"
+                                    name="name"
+                                    email="email"
+                                    password="password"
+                                    onShowEditDialog={this.handleDialog}
+                                    onSubmit={this.onEdit.bind(this, name)}
+                                    direction={this.props.direction}
+                                    {...this.props} />
+                                  {dialog}
+                                </Fragment>
+                              )
+                            }} />
+                            <Route path="/setting/quotations" exact={true} render={() => {
+                              return (
+                                <Fragment>
+                                  <Quotations
+                                      getPendingRequests={this.props.getPendingRequests}
+                                      getCompletedRequests={this.props.getCompletedRequests}
+                                      customer={this.props.customer}
+                                      quotations={this.props.quotations}
+                                      translate={this.props.translate}
+                                      direction={this.props.direction}
+                                      addToCart={this.props.addToCart}
+                                      currentLanguage={this.props.currentLanguage}
+                                      incrementQuantity={this.props.incrementQuantity}
+                                      decrementQuantity={this.props.decrementQuantity}
+                                      token={this.props.token} />
+                                </Fragment>
+                              )
+                            }} />
+                            <Route path="/setting/connect" exact={true} render={({ match }) => {
+                              return (
+                                <Fragment>
+                                  <SocialMediaLink
+                                    connectedPlatforms={this.props.connectedPlatforms}
+                                    handleResponse={this.props.handleResponse}
+                                    handleFailure={this.props.handleFailure} />
+                                </Fragment>
+                              )
+                            }} />
+                            <Route path="/setting/addresses" exact={true} render={() => {
+                              return (
+                                <Fragment>
+                                  <Addresses
+                                    customer={this.props.customer}
+                                    onShowEditDialog={this.handleDialog}
+                                    onEditAddress={this.handleEditAddress}
+                                    translate={this.props.translate}
+                                    addresses={this.props.addresses}
+                                    changeDefaultAddress={this.props.changeDefaultAddress} />
+                                  {addressDialog}
+                                </Fragment>
+                              )
+                            }} />
+                            <Route path="/setting/orders/" exact={true} render={() => {
+                              return (
+                                <Orders translate={this.props.translate} />
+                              )
+                            }} />
+                            <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                              return (
+                                <Order translate={this.props.translate} checkout={this.props.checkout} />
+                              )
+                            }} />
+                            <Route path="/setting/help_center" exact={true} render={() => {
+                              return (
+                                <HelpCenter translate={this.props.translate} />
+                              )
+                            }} />
+                            <Route path="/setting/garage" exact={true} render={() => {
+                              return (
+                                <Fragment>
+                                  <Garage
+                                    vehicles={this.props.vehicles}
+                                    onShowVehicleDialog={this.handleShowDialog}
+                                    onDeleteVehicle={this.handleDeleteVehicle}
+                                    changeDefaultVehicle={this.props.changeDefaultVehicle}
+                                    translate={this.props.translate} />
+                                  {garageDialog}
+                                </Fragment>
+                              )
+                            }} />
+                            <Route path="/setting/wishlist" exact={true} render={() => {
+                              return (
+                                <Wishlist
+                                  currentLanguage={this.props.currentLanguage}
+                                  direction={this.props.direction}
+                                  wishlist={this.props.wishlist}
+                                  deleteWishlist={this.props.deleteWishlist}
+                                  moveWishlistToCart={this.props.moveWishlistToCart}
+                                  translate={this.props.translate} />
+                              )
+                            }} />
+                            <Route path="/setting/payment/" exact={true} render={() => {
+                              return (
+                                <Fragment>
+                                  <Payment
+                                    translate={this.props.translate}
+                                    onShowEditDialog={this.handleDialog}
+                                  />
+                                  {paymentDialog}
+                                </Fragment>
+                              )
+                            }} />
+                            <PrivateRoute
+                            path="/setting/profile/phone"
+                            component={EditInfo}
+                            labels={["Confirmation number", "Phone number"]}
+                            names={["confirmationNo", "mobile"]}
+                            name=""
+                            type="text"
+                            placeholder={["Confirmation number", "Your phone number"]}
+                            renderField={this.renderField}
+                            onSubmit={this.onEdit.bind(this, phone)}
+                            redirectTo="/setting/profile" />
+                          </Switch>
+                        </div>
+                        <Footer translate={translate} />
+                      </Fragment>
+                    }
+                    open={this.state.sidebarOpen}
+        						onClick={this.handleClick}
+        						onSetOpen={this.onSetSidebarOpen}
+        						contentId="contentId"
+        						pullRight={true}
+                    >
+                  </Sidebar>
 
-                  <Route path="/setting/connect" exact={true} render={({ match }) => {
-                    return (
-                      <Fragment>
-                        <SocialMediaLink
-                          connectedPlatforms={this.props.connectedPlatforms}
-                          handleResponse={this.props.handleResponse}
-                          handleFailure={this.props.handleFailure} />
-                      </Fragment>
-                    )
-                  }} />
-                  <Route path="/setting/addresses" exact={true} render={() => {
-                    return (
-                      <Fragment>
-                        <Addresses
-                          customer={this.props.customer}
-                          onShowEditDialog={this.handleDialog}
-                          onEditAddress={this.handleEditAddress}
-                          translate={this.props.translate}
-                          addresses={this.props.addresses}
-                          changeDefaultAddress={this.props.changeDefaultAddress} />
-                        {addressDialog}
-                      </Fragment>
-                    )
-                  }} />
-                  <Route path="/setting/orders/" exact={true} render={() => {
-                    return (
-                      <Orders translate={this.props.translate} />
-                    )
-                  }} />
+                </DownLargeScreen>
 
-                  <Route path="/setting/orders/:orderId" exact={true} render={() => {
-                    return (
-                      <Order translate={this.props.translate} checkout={this.props.checkout} />
-                    )
-                  }} />
-                  <Route path="/setting/help_center" exact={true} render={() => {
-                    return (
-                      <HelpCenter translate={this.props.translate} />
-                    )
-                  }} />
-                  <Route path="/setting/garage" exact={true} render={() => {
-                    return (
-                      <Fragment>
-                        <Garage
-                          vehicles={this.props.vehicles}
-                          onShowVehicleDialog={this.handleShowDialog}
-                          onDeleteVehicle={this.handleDeleteVehicle}
-                          changeDefaultVehicle={this.props.changeDefaultVehicle}
-                          translate={this.props.translate} />
-                        {garageDialog}
-                      </Fragment>
-                    )
-                  }} />
-                  <Route path="/setting/wishlist" exact={true} render={() => {
-                    return (
-                      <Wishlist
-                        currentLanguage={this.props.currentLanguage}
-                        direction={this.props.direction}
-                        wishlist={this.props.wishlist}
-                        deleteWishlist={this.props.deleteWishlist}
-                        moveWishlistToCart={this.props.moveWishlistToCart}
-                        translate={this.props.translate} />
-                    )
-                  }} />
-                  <Route path="/setting/payment/" exact={true} render={() => {
-                    return (
-                      <Fragment>
-                        <Payment
-                          translate={this.props.translate}
-                          onShowEditDialog={this.handleDialog}
-                        />
-                        {paymentDialog}
-                      </Fragment>
-                    )
-                  }} />
-                  <PrivateRoute
-                    path="/setting/profile/phone"
-                    component={EditInfo}
-                    labels={["Confirmation number", "Phone number"]}
-                    names={["confirmationNo", "mobile"]}
-                    name=""
-                    type="text"
-                    placeholder={["Confirmation number", "Your phone number"]}
-                    renderField={this.renderField}
-                    onSubmit={this.onEdit.bind(this, phone)}
-                    redirectTo="/setting/profile" />
-
-                </Switch>
-                </div>
-              </div>
             </div>
           </section>
         {/*<SmallScreen>

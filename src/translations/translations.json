@@ -2670,6 +2670,10 @@
     ]
   },
   "noResult": {
+    "no-product":[
+      "نعتذر، المنتجات في هذه الفئة غير متاحة مؤقتًا",
+      "Unfortunately products in this category is temporarily unavailable"
+    ],
     "no":[
       "لا",
       "No"
@@ -2683,8 +2687,8 @@
       "Sorry, No Results Found :("
     ],
     "custom-order":[
-      "اطلب تسعيرة للقطع الي تريدها من هنا",
-      "Make a quotation order for your parts here"
+      "يمكنك طلب تسعيرة للقطع الي تريدها",
+      "Make a quotation order for your parts"
     ],
     "shopBy":[
       "تسوق حسب",

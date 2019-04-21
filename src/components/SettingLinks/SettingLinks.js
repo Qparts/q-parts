@@ -7,6 +7,11 @@ class profileLinks extends Component {
   settingLink = (link) => {
     this.props.history.push(`${this.props.match.url}/${link}`)
   }
+
+  handleClick = (link, e) => {
+    if (this.props.onSetSidebarOpen) this.props.onSetSidebarOpen(false);
+    this.settingLink(link.url);
+  }
   render() {
     const { match, translate } = this.props;
     const links = [
@@ -27,20 +32,20 @@ class profileLinks extends Component {
 
     return (
       <Fragment>
-        <LargeScreen>
           <div className="col-lg-3">
-            <CustomerService
-              messages={chatMessages}
-              url="//wa.me/966547074452/" />
+            <LargeScreen>
+              <CustomerService
+                messages={chatMessages}
+                url="//wa.me/966547074452/" />
+            </LargeScreen>
             <ul className="setting-tabs-link">
               {links.map((link, idx) => {
                 return (
-                  <li>
+                  <li key={idx}>
                     <Link
-                      key={idx}
                       data-toggle="list"
                       to="#"
-                      onClick={() => this.settingLink(link.url)}>
+                      onClick={this.handleClick.bind(this, link)}>
                       {link.name}
                     </Link>
                   </li>
@@ -48,9 +53,6 @@ class profileLinks extends Component {
               })}
             </ul>
           </div>
-        </LargeScreen>
-
-
       </Fragment>
     )
   }

@@ -197,7 +197,7 @@ class SearchResult extends Component {
 
 	}
 
-	onSetSidebarOpen(open) {
+	onSetSidebarOpen (open) {
 		this.setState({
 			sidebarOpen: open,
 			isHidden: 'is-hidden',
@@ -655,7 +655,7 @@ class SearchResult extends Component {
 								<div className="col">
 									<div className="search-result">
 										<div className="total-result row">
-											<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+											<h2 className="col">{this.getCategoryName()} <span>({this.state.resultSize} {this.props.translate("general.results")})</span></h2>
 											<div className="col-auto">
 												{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
@@ -705,6 +705,8 @@ class SearchResult extends Component {
 					<Sidebar
 						ref={this.setSidebarRef}
 						sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
+						contentClassName="content-sidebar"
+						overlayClassName="sidebar-overlay"
 						sidebar={
 							<aside>
 								<header>
@@ -715,7 +717,7 @@ class SearchResult extends Component {
 											</button>
 										</div>
 										<div className="col">
-											<h3>{this.props.translate("general.filter")} {this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} {this.props.translate("general.results")}</span></h3>
+											<h3>{this.getCategoryName()} <span>{this.state.resultSize} {this.props.translate("general.results")}</span></h3>
 										</div>
 										<div className="col-auto">
 											<button type="button" className="btn btn-primary" onClick={this.done}>{this.props.translate("general.done")}</button>
@@ -774,7 +776,7 @@ class SearchResult extends Component {
 											<div className="col">
 												<div className="search-result">
 													<div className="total-result row">
-														<h2 className="col">{this.getCategoryName()} <span>{this.state.startSize} - {this.state.endSize} {this.props.translate("general.of")} {this.state.resultSize} </span></h2>
+														<h2 className="col">{this.getCategoryName()} <span>({this.state.resultSize} {this.props.translate("general.results")}) </span></h2>
 														<div className="col-auto">
 															{/*<div className="result-sort">
 											<LargeScreen><label>Sort by</label></LargeScreen>
@@ -793,6 +795,16 @@ class SearchResult extends Component {
 																</button>
 															</div>
 														</div>
+													</div>
+													<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+														<ul className="list-inline">
+															{
+																filtrationChecked.map((item, index) => (
+																	<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
+																))
+															}
+														</ul>
+														<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
 													</div>
 													<ul className="result-list products-list row">
 														{this.renderProducts()}

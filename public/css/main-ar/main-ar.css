@@ -8546,11 +8546,11 @@ img {
     padding-top: 40px;
   }
 }
-.pt-sec.gray-bg, .forgot-password, .gray-bg.custom-order-form, .pt-sec.user-main, .user-main.custom-order-form, .signup-page, .pt-sec.product-details, .product-details.custom-order-form, .pt-sec.products-sec, .products-sec.custom-order-form {
+.pt-sec.gray-bg, .forgot-password, .gray-bg.custom-order-form, .signup-page, .pt-sec.product-details, .product-details.custom-order-form, .pt-sec.products-sec, .products-sec.custom-order-form {
   padding-bottom: 70px;
 }
 @media (max-width: 991.98px) {
-  .pt-sec.gray-bg, .forgot-password, .gray-bg.custom-order-form, .pt-sec.user-main, .user-main.custom-order-form, .signup-page, .pt-sec.product-details, .product-details.custom-order-form, .pt-sec.products-sec, .products-sec.custom-order-form {
+  .pt-sec.gray-bg, .forgot-password, .gray-bg.custom-order-form, .signup-page, .pt-sec.product-details, .product-details.custom-order-form, .pt-sec.products-sec, .products-sec.custom-order-form {
     padding-bottom: 40px;
   }
 }
@@ -10293,10 +10293,10 @@ body {
   z-index: 1;
 }
 
-.gray-bg, .forgot-password, .user-main, .signup-page, .product-details, .products-sec {
+.gray-bg, .forgot-password, .signup-page, .product-details, .products-sec {
   background: #f8f8f8;
 }
-.gray-bg .swiper-left, .forgot-password .swiper-left, .user-main .swiper-left, .signup-page .swiper-left, .product-details .swiper-left, .products-sec .swiper-left {
+.gray-bg .swiper-left, .forgot-password .swiper-left, .signup-page .swiper-left, .product-details .swiper-left, .products-sec .swiper-left {
   background: #f8f8f8;
 }
 
@@ -10526,6 +10526,7 @@ body {
   background: #fff;
   width: 85%;
   overflow-x: hidden;
+  top: 60px !important;
 }
 
 .isDisabled {
@@ -13486,6 +13487,10 @@ ul.cd-secondary-nav .go-back button::after {
   height: 45px;
 }
 
+.main-content > .login:first-child {
+  padding: 40px 15px 20px;
+}
+
 .login {
   text-align: right !important;
 }
@@ -13956,6 +13961,11 @@ ul.cd-secondary-nav .go-back button::after {
 .user-main {
   padding-bottom: 50px;
 }
+@media (min-width: 992px) {
+  .user-main {
+    background: #f8f8f8;
+  }
+}
 
 .profile-header {
   min-height: 0;
@@ -14051,6 +14061,17 @@ ul.cd-secondary-nav .go-back button::after {
 .sign-out .btn:hover {
   background: transparent;
 }
+@media (max-width: 1199.98px) {
+  .sign-out {
+    position: absolute;
+    top: -65px;
+    left: 0;
+  }
+  .sign-out .btn {
+    height: 65px;
+    padding: 0 15px !important;
+  }
+}
 
 .dashboard {
   position: relative;
@@ -14145,6 +14166,14 @@ ul.cd-secondary-nav .go-back button::after {
 .setting-tab-content {
   padding-top: 56px;
   padding-bottom: 20px;
+}
+@media (max-width: 1199.98px) {
+  .setting-tab-content {
+    margin-top: 125px;
+    min-height: calc(100vh - 185px);
+    background: #f8f8f8;
+    padding-bottom: 60px;
+  }
 }
 .setting-tab-content .sec-title-sm {
   font-weight: 400;
@@ -14862,6 +14891,14 @@ form {
   border-radius: 100%;
   top: 3px;
   left: -3px;
+}
+
+.sidebar > div:first-child {
+  padding: 0 !important;
+}
+.sidebar .setting-tabs-link {
+  border-radius: 0 !important;
+  border-bottom: 2px solid #f8f8f8;
 }
 
 .dropdown-menu {
@@ -16262,7 +16299,7 @@ form {
 .results-container {
   position: relative;
 }
-@media (max-width: 991.98px) {
+@media (max-width: 1199.98px) {
   .results-container {
     padding-top: 100px;
   }
@@ -16628,6 +16665,11 @@ form {
     min-height: 197px;
   }
 }
+@media (max-width: 1199.98px) {
+  .result-list > li .card img {
+    min-height: 130px;
+  }
+}
 .result-list > li:hover .in-cart {
   opacity: 1;
   filter: alpha(opacity=100);
@@ -16728,6 +16770,13 @@ form {
   width: 11px;
   height: 100%;
 }
+@media (max-width: 991.98px) {
+  .filter-result li a {
+    width: 100%;
+    text-align: left;
+    padding-left: 5px;
+  }
+}
 .filter-result li a:hover i {
   color: #37363c;
 }
@@ -16823,11 +16872,12 @@ form {
   height: 60px;
 }
 .side-filter header h3, .side-filter header h4 {
-  font-size: 19px;
-  font-size: 1.1875rem;
+  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
   text-align: center;
   margin-bottom: 0;
+  line-height: 1.5;
 }
 .side-filter header h3 span, .side-filter header h4 span {
   display: block;
@@ -16858,6 +16908,9 @@ form {
   opacity: 0.5;
   filter: alpha(opacity=50);
   height: 23px;
+}
+.side-filter header .btn.reset .icon-arrow-left:before {
+  top: -2px;
 }
 .side-filter header .btn-primary, .side-filter header .signin-list li:first-child a, .signin-list li:first-child .side-filter header a {
   font-size: 17px;
@@ -17037,6 +17090,82 @@ form {
 
 .apply-filter {
   bottom: 0;
+}
+
+.no-products {
+  padding-top: 40px;
+}
+.no-products > div:first-child {
+  position: relative;
+  justify-content: center;
+  display: flex;
+}
+.no-products > div:first-child .gray-bg, .no-products > div:first-child .forgot-password, .no-products > div:first-child .products-sec, .no-products > div:first-child .product-details, .no-products > div:first-child .signup-page {
+  position: absolute;
+  width: 300%;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+  border-radius: 20px 0 20px 20px;
+}
+.no-products img {
+  width: 115px;
+  margin-top: -20px;
+}
+.no-products .media, .no-products .main-parts a, .main-parts .no-products a {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
+.no-products .media h5, .no-products .main-parts a h5, .main-parts .no-products a h5 {
+  font-weight: 400;
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+@media (min-width: 576px) {
+  .no-products .media-body {
+    padding-right: 15px;
+  }
+}
+.no-products .btn {
+  font-weight: 300;
+  font-size: 20px;
+  font-size: 1.25rem;
+  box-shadow: 0px 18px 18px 0px rgba(0, 0, 0, 0.07);
+  text-transform: capitalize;
+  display: inline-flex;
+}
+.no-products .btn i {
+  font-size: 28px;
+  font-size: 1.75rem;
+  height: 23px;
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+.no-products .btn i:before {
+  top: -2px;
+}
+@media (max-width: 767.98px) {
+  .no-products .media, .no-products .main-parts a, .main-parts .no-products a {
+    padding-right: 0;
+    display: block;
+    text-align: center;
+    padding: 20px 0 20px 15px;
+  }
+  .no-products .media h5, .no-products .main-parts a h5, .main-parts .no-products a h5 {
+    line-height: 1.5;
+    font-size: 17px;
+    font-size: 1.0625rem;
+  }
+  .no-products .btn {
+    font-size: 17px;
+    font-size: 1.0625rem;
+    font-weight: 400;
+  }
+  .no-products .btn i {
+    display: none;
+  }
 }
 
 .forgot-password {
@@ -19648,6 +19777,15 @@ form {
 }
 .side-bar-compnent-btn .none-active-btn {
   display: none;
+}
+
+.sidebar {
+  z-index: 12 !important;
+}
+
+.sidebar-overlay {
+  z-index: 11 rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 #result-not-found {
