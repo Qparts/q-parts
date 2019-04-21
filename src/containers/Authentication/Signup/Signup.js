@@ -13,11 +13,15 @@ import { getCountries } from '../../../actions/apiAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 import Login from '../Login/Login';
 
-import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore } from '../../../actions/customerAction';
+import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore, setQuotationOrder,setCheckLoginQuotationOrder } from '../../../actions/customerAction';
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 import { LargeScreen } from '../../../components/Device';
 
 import Title from '../../../components/UI/Title';
+
+import _ from 'lodash';
+import { postQuotation } from '../../../utils/api';
+
 class Signup extends Component {
 
   componentWillMount() {
@@ -41,10 +45,37 @@ class Signup extends Component {
 
     return this.props.onSubmitSignup({ firstName, lastName, email, password, countryId, platform, socialMediaId }, this.props.currentLanguage)
       .then(() => {
-        this.props.history.push({
-          pathname: '/signup/successful',
-          state: { isRegistered: false, email }
-        });
+        if(this.props.checkLoginQuotationOrder){
+          let {
+            make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
+          } = this.props.quotationOrderInfo;
+          const customerVehicleId = garage ? garage.id : null;
+          const imageAttached = vinImage ? true : false;
+          vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
+          vinImage = vinImage ? vinImage : false;
+          makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
+          vehicleYearId = customerVehicleId ? null : vehicleYearId;
+
+          const quotationItems = !_.isEmpty(quotationItemsTemp) ?
+            quotationItemsTemp.map(quotationCartItem => {
+              return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
+            }) : undefined;
+
+            this.props.setCheckLoginQuotationOrder(false);
+            postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+              .then(res => {
+                this.props.setQuotationOrder(false);
+                return this.props.history.push({
+                  pathname: `/quotation-order/confirmation?quotationId=${res.data.quotationId}`,
+                  state: {isRegistered: false, email}
+                });
+              })
+        }else{
+          this.props.history.push({
+            pathname: '/signup/successful',
+            state: { isRegistered: false, email }
+          });
+        }
       });
   }
 
@@ -116,6 +147,8 @@ const mapStateToProps = (state) => {
     selectedCountry: state.customer.selectedCountry,
     direction: state.customer.direction,
     submitErrors: getFormSubmitErrors('SignupForm')(state),
+    checkLoginQuotationOrder: state.customer.checkLoginQuotationOrder,
+		quotationOrderInfo: state.customer.quotationOrderInfo
   }
 }
 
@@ -126,7 +159,9 @@ const mapDispatchToProps = (dispatch) => {
     onSubmitSignup,
     verifyCodeNo,
     getCountries,
-    setPasswordScore
+    setPasswordScore,
+    setCheckLoginQuotationOrder,
+    setQuotationOrder
   }, dispatch)
 }
 
