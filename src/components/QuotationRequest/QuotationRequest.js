@@ -13,7 +13,7 @@ import { getTranslatedObject } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
-import { setQuotationOrder, setCheckLoginQuotationOrder } from '../../actions/customerAction';
+import { setQuotationOrder, setCheckLoginQuotationOrder, setQuotationOrderInfo } from '../../actions/customerAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
@@ -40,8 +40,7 @@ class QuotationRequest extends Component {
 		this.state = {
 			modal: false,
 			dialogType: signin,
-			garage: null,
-			data: []
+			garage: null
 		}
 
 		if (isAuth(this.props.token)) {
@@ -52,6 +51,7 @@ class QuotationRequest extends Component {
 	componentDidMount = () => {
 
 		this.props.setCheckLoginQuotationOrder(false);
+		this.props.setQuotationOrderInfo([]);
 
 	}
 
@@ -94,9 +94,9 @@ class QuotationRequest extends Component {
 		if (!isAuth(this.props.token)) {
 			this.props.setCheckLoginQuotationOrder(true);
 			this.setState({
-				dialogType: signin,
-				data: values
+				dialogType: signin
 			});
+			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
 			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
@@ -530,6 +530,7 @@ const mapStateToProps = (state) => {
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
+		quotationOrderInfo: state.customer.quotationOrderInfo
 	}
 }
 
@@ -538,7 +539,8 @@ const mapDispatchToProps = (dispatch) => {
 		changeFieldValue,
 		getRegions,
 		setQuotationOrder,
-		setCheckLoginQuotationOrder
+		setCheckLoginQuotationOrder,
+		setQuotationOrderInfo
 	}, dispatch)
 }
 
