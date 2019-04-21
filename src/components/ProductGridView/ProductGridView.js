@@ -12,8 +12,10 @@ import { connect } from 'react-redux';
 //dialog
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from "../../containers/Product/AddProductPopup/AddProduct";
-import { modalAddToCart } from '../../actions/customerAction';
+import { modalAddToCart, setModalLogin, setCheckLoginCheckout } from '../../actions/customerAction';
 import Title from '../UI/Title';
+
+import Login from "../../containers/Authentication/Login/Login";
 
 class ProductGridView extends Component {
 	constructor(props) {
@@ -24,12 +26,17 @@ class ProductGridView extends Component {
 			loading: true,
 			modal: true,
 			data: [],
-			dialogType: "addProduct"
+			dialogType: "addProduct",
+      modalLogin: true
 		}
 
 	}
 	componentWillMount() {
 		this.props.modalAddToCart(false);
+    this.props.setModalLogin(false);
+	}
+	componentDidMount() {
+		this.props.setCheckLoginCheckout(false);
 	}
 	handleDialog = (dialogType, data) => {
 		this.setState({
@@ -44,6 +51,10 @@ class ProductGridView extends Component {
 		this.setState({ modal: !this.state.modal })
 
 	}
+	togglePopupLogin = () => {
+    this.props.setModalLogin(this.state.modalLogin);
+    this.setState({ modalLogin: !this.state.modalLogin })
+  }
 
 	getDialogProps = () => {
 		const { dialogType } = this.state;
@@ -72,7 +83,9 @@ class ProductGridView extends Component {
 					token={isAuth(this.props.token)}
 					togglePopup={this.togglePopup}
 					translate={translate}
-					currentLanguage={currentLanguage} />
+					currentLanguage={currentLanguage}
+          togglePopupLogin={this.togglePopupLogin}
+          setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
 			default:
 				break;
 		}
@@ -107,7 +120,17 @@ class ProductGridView extends Component {
 				</Modal>
 			);
 		}
-
+		let dialogLogin;
+		if(this.state.data.quantity){
+			dialogLogin = (
+				<Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
+					<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+					<ModalBody>
+						<Login toggle={this.togglePopupLogin} />
+					</ModalBody>
+				</Modal>
+			)
+		}
 		return (
 			<Fragment>
 					<li className="col-xl-3 col-md-4 col-6">
@@ -133,6 +156,7 @@ class ProductGridView extends Component {
 						</Link>
 					</li>
 					{dialog}
+					{dialogLogin}
 			</Fragment>
 		)
 	}
@@ -143,7 +167,8 @@ const mapStateToProps = state => {
 		initialValues: { quantity: 1 },
 		direction: state.customer.direction,
 		isModalAddToCart: state.customer.isModalAddToCart,
-		token: state.customer.token
+		token: state.customer.token,
+    modalLogin: state.customer.modalLogin,
 	}
 }
 
@@ -151,6 +176,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		addToCart: (item) => dispatch(addToCart(item)),
 		modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+    setModalLogin: (check) => dispatch(setModalLogin(check)),
+    setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
 	}
 }
 

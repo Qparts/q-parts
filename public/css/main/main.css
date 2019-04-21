@@ -15565,7 +15565,7 @@ form {
     position: relative;
   }
   .total-result h2 span {
-    display: none;
+    top: -3px;
   }
 }
 .total-result .side-bar-compnent-btn {
@@ -15807,6 +15807,12 @@ form {
   padding: 15px 15px 5px;
   width: 100%;
   text-align: left !important;
+}
+@media (max-width: 991.98px) {
+  .filter-result {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 .filter-result ul {
   display: inline-block;

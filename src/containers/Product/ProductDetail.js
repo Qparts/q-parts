@@ -9,7 +9,7 @@ import RenderProducts from '../../components/RenderProducts/RenderProducts';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { addToCart } from '../../actions/cartAction';
-import { addRecentViewedProducts, addWishlist, modalAddToCart } from '../../actions/customerAction';
+import { addRecentViewedProducts, addWishlist, modalAddToCart, setModalLogin, setCheckLoginCheckout } from '../../actions/customerAction';
 import Stars from 'react-stars';
 import moment from 'moment';
 import Title from "../../components/UI/Title";
@@ -35,6 +35,10 @@ import { ClipLoader } from 'react-spinners';
 import { getProduct } from '../../utils/api';
 import { starsRating } from '../../constants';
 import Swiper from 'react-id-swiper';
+
+
+import Login from "../Authentication/Login/Login";
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +50,8 @@ class ProductDetail extends Component {
       modal: true,
       loading: true,
       product: {},
-      hasLeftSwiperMoved: false
+      hasLeftSwiperMoved: false,
+      modalLogin: true
     }
 
     this.swiperLeftHidden = createRef();
@@ -71,6 +76,11 @@ class ProductDetail extends Component {
   togglePopup = () => {
     this.props.modalAddToCart(this.state.modal);
     this.setState({ modal: !this.state.modal })
+  }
+
+  togglePopupLogin = () => {
+    this.props.setModalLogin(this.state.modalLogin);
+    this.setState({ modalLogin: !this.state.modalLogin })
   }
 
   getDialogProps = () => {
@@ -100,7 +110,9 @@ class ProductDetail extends Component {
           token={isAuth(this.props.token)}
           togglePopup={this.togglePopup}
           translate={translate}
-          currentLanguage={currentLanguage} />
+          currentLanguage={currentLanguage}
+          togglePopupLogin={this.togglePopupLogin}
+          setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
       default:
         break;
     }
@@ -110,6 +122,8 @@ class ProductDetail extends Component {
     this.setState({
       auth: !this.state.auth
     })
+
+    this.props.setCheckLoginCheckout(false);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -142,6 +156,7 @@ class ProductDetail extends Component {
         this.props.addRecentViewedProducts(res.data);
       })
     this.props.modalAddToCart(false);
+    this.props.setModalLogin(false);
   }
 
   submit = ({ quantity }) => {
@@ -246,6 +261,13 @@ class ProductDetail extends Component {
       </Modal>
     );
 
+    const dialogLogin = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
+			<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
+			<ModalBody>
+				<Login toggle={this.togglePopupLogin} />
+			</ModalBody>
+		</Modal>
+
     const chatMessages = [
       translate("customerService.product.whatsApp.header"),
       translate("customerService.product.whatsApp.subHeader")
@@ -294,7 +316,7 @@ class ProductDetail extends Component {
                       <div className="col-lg-6">
                         <div className="row">
                           <div className="col">
-                            <h1>{product.desc}</h1>
+                            <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
                             <ul className="list-inline">
                               <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
                               <li>{translate("product.number")} {product.productNumber}</li>
@@ -322,7 +344,7 @@ class ProductDetail extends Component {
                   <header className="pro-heading ">
                     <div className="row">
                       <div className="col">
-                        <h1>{product.desc}</h1>
+                        <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
                         <ul className="list-inline">
                           <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
                           <li>{translate("product.detail")} {product.productNumber}</li>
@@ -354,7 +376,7 @@ class ProductDetail extends Component {
                     </li>
                     <li className="pro-options">
                       {this.renderSpecs(true)}
-                      {parse(_.isNull(product.details) ? "" : product.details)}
+                      {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
                     </li>
                     <li className="add-cart row">
                       <div className="col-sm-auto col-12">
@@ -397,7 +419,7 @@ class ProductDetail extends Component {
               <h2 className="details-heading">{translate("product.detail")}</h2>
               <ul className="list-unstyled pro-details">
                 <li>
-                  {parse(_.isNull(product.details) ? "" : product.details)}
+                  {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
                   {this.renderSpecs()}
                 </li>
                 {/* <li>
@@ -521,6 +543,7 @@ class ProductDetail extends Component {
               <div className="swiper-left" ref={this.swiperLeftHidden} />
             </div>
             {dialog}
+            {dialogLogin}
           </div>
         </div>
 
@@ -541,7 +564,8 @@ const mapStateToProps = state => {
     currentLanguage: getActiveLanguage(state.localize).code,
     direction: state.customer.direction,
     isModalAddToCart: state.customer.isModalAddToCart,
-    token: state.customer.token
+    token: state.customer.token,
+    modalLogin: state.customer.modalLogin,
   }
 }
 
@@ -550,7 +574,9 @@ const mapDispatchToProps = dispatch => {
     addToCart: (item) => dispatch(addToCart(item)),
     addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
     addWishlist: (product) => dispatch(addWishlist(product)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check))
+    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+    setModalLogin: (check) => dispatch(setModalLogin(check)),
+    setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
   }
 }
 
