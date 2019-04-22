@@ -7,7 +7,7 @@ import './scss/main-ar/main-ar.scss';
 
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
-import { LocalizeProvider, getTranslate } from 'react-localize-redux';
+import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
 

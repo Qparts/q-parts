@@ -27,6 +27,17 @@ export const getFormattedVehicles = (vehicles = [], defaultLang, translate) => {
   });
 }
 
+export const getVehicleInfo = (vehicles = [], customerVehicleId, defaultLang) => {
+  let customerVehicle = vehicles.find(vehicle => vehicle.id === customerVehicleId);
+  return `${getTranslatedObject(customerVehicle.vehicle.make, defaultLang, 'name', 'nameAr')} ${getTranslatedObject(customerVehicle.vehicle.model, defaultLang, 'name', 'nameAr')} ${customerVehicle.vehicle.year}`;
+}
+
+export const getVehicleVin = (vehicles = [], customerVehicleId) => {
+  let customerVehicle = vehicles.find(vehicle => vehicle.id === customerVehicleId);
+
+  return customerVehicle.vin;
+}
+
 export const getFormattedSelect = (array, defaultLang) => {
   return array.map(obj => {
     return {
