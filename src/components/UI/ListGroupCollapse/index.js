@@ -89,12 +89,9 @@ export class ListGroupCollapse extends Component {
         const { quotationItem, requestNumber, type, translate, currentLanguage, direction, token } = this.props;
 
         const dialog = (
-            <Modal dir={direction} className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+            <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
                 <ModalHeader toggle={this.togglePopup}>
                     <Title number={this.state.product.quantity} header={translate("dialog.addToCart.title")} />
-                </ModalHeader>
-                <ModalHeader toggle={this.togglePopup} className="have-icon">
-                    <p><i className="icon-change-password"></i>Change</p> Password
                 </ModalHeader>
                 <ModalBody>
                     <AddProduct
@@ -117,7 +114,7 @@ export class ListGroupCollapse extends Component {
                             <li><i className="icon-vehicle"></i> VIN Num: (000 000 000 000 11)</li>
                             <DownLargeScreen>
                                 <li className="r-id-small">
-                                    <label>Request Num</label> #xxx11xx
+                                    <label>{translate("quotationRequest.name")}</label> #xxx11xx
                                 </li>
                             </DownLargeScreen>
                             <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>
@@ -136,64 +133,53 @@ export class ListGroupCollapse extends Component {
                         </div>
                         <div className="request-actions">
                             <a className="btn white-btn"><i className="icon-edit"></i></a>
-                            <a className="btn white-btn">Cancel</a>
+                            <a className="btn white-btn">{translate("general.buttons.cancel")}</a>
                         </div>
                     </artical>
                 </div> :
                 <Fragment>
-                    <div className="collapse multi-collapse" key={quotationItem.id} id={quotationItem.id}>
-                        <div className="d-table product-options">
-                            <div className={`render-cart-item col-12`}>
-                                <ul className="cart-items list-unstyled">
-                                    <li className="bg-white">
-                                        <figure className="row">
-                                            <Link to="#" className="col-3 item-img">
-                                                <img onError={handleImageFallback} src={quotationItem.products.image} alt="no item" />
-                                            </Link>
-                                            <figcaption className="col-9">
-                                                <div className="row">
-                                                    <div className="col-md-9 item-dis">
-                                                        <header>
-                                                            <h3><Link to="#">{quotationItem.products.desc}</Link></h3>
-                                                            <h4>{getTranslatedObject(quotationItem.products.brand, currentLanguage, 'name', 'nameAr')} <span>{quotationItem.products.productNumber}</span></h4>
-                                                        </header>
-                                                        <CustomScreen maxWidth={1300}>
-                                                            <div className="cart-quantity d-block d-lg-none">
-                                                                <UpSmallScreen>
-                                                                    <h5>{translate("general.quantity")}</h5>
-                                                                </UpSmallScreen>
-                                                                {this.renderNumberPicker(quotationItem)}
-                                                            </div>
-                                                        </CustomScreen>
-                                                        <div className="cart-product-price">
-                                                            <p className="price">{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
-                                                        </div>
-                                                        <div className="cart-actions">
-                                                            <Button
-                                                                onClick={this.handleAddToCart.bind(this, quotationItem)}
-                                                                isReverseOrder
-                                                                type="button"
-                                                                className="btn btn-primary"
-                                                                text={translate("product.buttons.addToCart")}
-                                                                icon="icon-cart" />
-                                                        </div>
-                                                    </div>
-                                                    <CustomScreen minWidth={1300}>
-                                                        <div className="col-md-3">
-                                                            <div className="cart-quantities d-none d-lg-block">
-                                                                <h5>{translate("general.quantity")}</h5>
-                                                                {this.renderNumberPicker(quotationItem)}
-                                                            </div>
-                                                        </div>
-                                                    </CustomScreen>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                </ul>
+                    <li className="media">
+                        <Link to="#">
+                            <img onError={handleImageFallback} src={quotationItem.products.image} alt="no images" />
+                        </Link>
+                        <figcaption className="media-body">
+                            <div className="row">
+                                <div className="col">
+                                    <h5><a href="#">{quotationItem.products.desc}</a></h5>
+                                    <ul className="list-inline product-info">
+                                        <li><strong>{getTranslatedObject(quotationItem.products.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+                                        <li>#{quotationItem.products.productNumber}</li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-auto price">
+                                    <label>{translate("general.price")}</label>
+                                    <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <span className="seperator"></span>
+                            <div className="row">
+                                <div className="col total-price">
+                                    <p>{translate("general.quantity")}</p>
+                                    {this.renderNumberPicker(quotationItem)}
+                                    <div className="price">
+                                        <label>{translate("quotationRequest.totalPrice")}</label>
+                                        <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-auto add-cart">
+                                    <Button
+                                        onClick={this.handleAddToCart.bind(this, quotationItem)}
+                                        isReverseOrder
+                                        type="button"
+                                        className="btn btn-primary"
+                                        text={translate("product.buttons.addToCart")}
+                                        icon="icon-cart" />
+                                    <a href="#" className="btn"><i className="icon-trash"></i></a>
+                                    {/* <Link to="#" className="btn" onClick={() => this.deleteCart(purchasedItem)}><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link> */}
+                                </div>
+                            </div>
+                        </figcaption>
+                    </li>
                     {dialog}
                 </Fragment>
 

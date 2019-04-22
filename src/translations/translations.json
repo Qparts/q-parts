@@ -203,6 +203,10 @@
     "error": [
       "فشل الاجراء",
       "transaction failed"
+    ],
+    "price": [
+      "السعر",
+      "price"
     ]
   },
   "tires": {
@@ -2333,7 +2337,11 @@
           "Enter part name/description or upload an image"
         ]
       }
-    }
+    },
+    "totalPrice": [
+      "المجموع",
+      "Total Price"
+    ]
   },
   "renderFileInput": {
     "uploadFile": [
