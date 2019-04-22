@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { REPLIED } from '../../../constants';
 import { LargeScreen, DownLargeScreen } from '../../Device';
+import { getVehicleVin, getVehicleInfo } from '../../../utils/components';
 
 export class CompletedRequest extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ export class CompletedRequest extends Component {
 
 
     render() {
-        const { replies, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction } = this.props
+        const { replies, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction, vehicles } = this.props
         const created = moment(replies.created).format('MMM Do');
         let ids = [];
 
@@ -41,21 +42,21 @@ export class CompletedRequest extends Component {
                     </div>
                 </LargeScreen>
                 <div className="col-lg">
-                    <p>Ford Focus 2015</p>
+                    <p>{getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage)}</p>
                     <span className="details-toggle"><i className="icon-"></i></span>
                 </div>
                 <div className="col-lg-auto r-info">
-                    <p className="date"><span>{translate("quotationRequest.sent")}</span> {created} <span>Replied</span> Jul 30</p>
+                    <p className="date"><span>{translate("quotationRequest.sent")}</span> {created} </p>
                     <p>{translate("quotationRequest.itemsQuantity")}:  {replies.quotationItems.length}</p>
                 </div>
             </Link>
             <div className={`collapse ${replies.id}`} id={replies.id}>
                 <artical className="request-details" >
                     <ul className="list-inline vehicle-info">
-                        <li><i className="icon-vehicle"></i> VIN Num: (000 000 000 000 11)</li>
+                        <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, replies.customerVehicleId)})</li>
                         <DownLargeScreen>
                             <li className="r-id-small">
-                                <label>{translate("quotationRequest.name")}</label> {replies.id}
+                                <label>{translate("quotationRequest.requestNo")}</label> #{replies.id}
                             </li>
                         </DownLargeScreen>
                         <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>

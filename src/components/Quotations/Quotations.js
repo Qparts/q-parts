@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom'
 import moment from 'moment';
 
 
@@ -8,6 +9,7 @@ import PendingRequest from './PendingRequest/PendingRequest';
 import CompletedRequest from './CompletedRequest/CompletedRequest';
 import { DownLargeScreen, LargeScreen } from '../../components/Device';
 import _ from 'lodash';
+import { right } from '../../utils';
 
 class Quotations extends Component {
   constructor(props) {
@@ -48,27 +50,27 @@ class Quotations extends Component {
 
   render() {
 
-    const { quotations, translate, currentLanguage, direction, addToCart, incrementQuantity, decrementQuantity, token } = this.props;
+    const { quotations, translate, currentLanguage, direction, addToCart, incrementQuantity, decrementQuantity, token, customer } = this.props;
 
     return (
       <div className="requests-main">
         <DownLargeScreen>
-          <h2 className="sec-title-sm">Quotation Order</h2>
+          <h2 className="sec-title-sm">{translate("setting.quotations.title")}</h2>
         </DownLargeScreen>
         {
           (_.isEmpty(quotations.pending || quotations.completed)) && (
             <div className="empty">
               <LargeScreen>
                 <header>
-                  <h5>3 STEPS To Get Your Parts Anywhere You Like</h5>
+                  <h5>3 {translate("setting.quotations.steps")}</h5>
                 </header>
               </LargeScreen>
               <figure>
-                <img src="/img/request.svg" />
+                <img src="/img/request.svg" alt="no img" />
               </figure>
               <figcaption>
-                <p>No Qutation Order Yet </p>
-                <a className="btn btn-primary" href="#" >Start Qutaation Order <i className="icon-arrow-right"></i></a>
+                <p>{translate("setting.quotations.empty")} </p>
+                <Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className={`icon-arrow-${right(direction)}`}></i></Link>
               </figcaption>
             </div>
           )
@@ -97,7 +99,8 @@ class Quotations extends Component {
                     key={pendings.id}
                     pendings={pendings}
                     translate={translate}
-                    currentLanguage={currentLanguage} />
+                    currentLanguage={currentLanguage}
+                    vehicles={customer.vehicles} />
                 })
               }
             </ul>
@@ -116,6 +119,7 @@ class Quotations extends Component {
                     decrementQuantity={decrementQuantity}
                     direction={direction}
                     token={token}
+                    vehicles={customer.vehicles}
                   />
                 })
               }

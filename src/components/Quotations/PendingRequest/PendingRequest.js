@@ -1,21 +1,22 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { PENDING } from '../../../constants';
-import { LargeScreen } from '../../Device';
+import { LargeScreen, DownLargeScreen } from '../../Device';
+import { getVehicleInfo, getVehicleVin } from '../../../utils/components';
 
 export class PendingRequest extends Component {
 
     render() {
-        const { translate, currentLanguage, pendings } = this.props
+        const { translate, currentLanguage, pendings, vehicles } = this.props
         const created = moment(pendings.created).format('MMM Do');
         let ids = [];
 
         pendings.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
         return <li key={pendings.id}>
-                <Link
+            <Link
                 to="#"
                 className="collapsed"
                 data-toggle="collapse"
@@ -29,7 +30,7 @@ export class PendingRequest extends Component {
                     </div>
                 </LargeScreen>
                 <div className="col-lg">
-                    <p>Ford Focus 2015</p>
+                    <p>{getVehicleInfo(vehicles, pendings.customerVehicleId, currentLanguage)}</p>
                     <span className="details-toggle"><i className="icon-"></i></span>
                 </div>
                 <div className="col-lg-auto r-info">
@@ -37,17 +38,39 @@ export class PendingRequest extends Component {
                     <p>{translate("quotationRequest.itemsQuantity")}:  {pendings.quotationItems.length}</p>
                 </div>
             </Link>
-            {
-                pendings.quotationItems.map(quotationItem => {
-                    return <ListGroupCollapse
-                        requestNumber={pendings.id}
-                        key={quotationItem.id}
-                        type={PENDING}
-                        quotationItem={quotationItem}
-                        translate={translate}
-                        currentLanguage={currentLanguage} />
-                })
-            }
+            <div className={`collapse ${pendings.id}`} id={pendings.id}>
+                <artical className="request-details" >
+                    <ul className="list-inline vehicle-info">
+
+                        <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, pendings.customerVehicleId)})</li>
+                        <DownLargeScreen>
+                            <li className="r-id-small">
+                                <label>{translate("quotationRequest.requestNo")}</label> #{pendings.id}
+                            </li>
+                        </DownLargeScreen>
+                        <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>
+                    </ul>
+                    <div className="parts-list">
+                        <ul className="d-table list-unstyled">
+                            <li className="d-table-row">
+                                <div className="d-table-cell">{translate("quotationRequest.name")}</div>
+                                <div className="d-table-cell">{translate("quotationRequest.quantity")}</div>
+                            </li>
+                            {
+                                pendings.quotationItems.map(quotationItem => {
+                                    return <ListGroupCollapse
+                                        requestNumber={pendings.id}
+                                        key={quotationItem.id}
+                                        type={PENDING}
+                                        quotationItem={quotationItem}
+                                        translate={translate}
+                                        currentLanguage={currentLanguage} />
+                                })
+                            }
+                        </ul>
+                    </div>
+                </artical>
+            </div>
         </li>
     }
 }

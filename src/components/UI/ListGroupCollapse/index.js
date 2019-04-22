@@ -107,45 +107,19 @@ export class ListGroupCollapse extends Component {
 
         return (
             type === PENDING ?
-                <div className={`collapse ${requestNumber}`} id={quotationItem.id}>
-                    <artical className="request-details" >
-                        <ul className="list-inline vehicle-info">
-
-                            <li><i className="icon-vehicle"></i> VIN Num: (000 000 000 000 11)</li>
-                            <DownLargeScreen>
-                                <li className="r-id-small">
-                                    <label>{translate("quotationRequest.name")}</label> #xxx11xx
-                                </li>
-                            </DownLargeScreen>
-                            <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>
-                        </ul>
-                        <div className="parts-list">
-                            <ul className="d-table list-unstyled">
-                                <li className="d-table-row">
-                                    <div className="d-table-cell">{translate("quotationRequest.name")}</div>
-                                    <div className="d-table-cell">{translate("quotationRequest.quantity")}</div>
-                                </li>
-                                <li className="d-table-row">
-                                    <div className="d-table-cell">{quotationItem.name}</div>
-                                    <div className="d-table-cell">{quotationItem.quantity}</div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className="request-actions">
-                            <a className="btn white-btn"><i className="icon-edit"></i></a>
-                            <a className="btn white-btn">{translate("general.buttons.cancel")}</a>
-                        </div>
-                    </artical>
-                </div> :
+                <li className="d-table-row">
+                    <div className="d-table-cell">{quotationItem.name}</div>
+                    <div className="d-table-cell">{quotationItem.quantity}</div>
+                </li> :
                 <Fragment>
                     <li className="media">
-                        <Link to="#">
+                        <Link to={`/products/${quotationItem.products.id}`}>
                             <img onError={handleImageFallback} src={quotationItem.products.image} alt="no images" />
                         </Link>
                         <figcaption className="media-body">
                             <div className="row">
                                 <div className="col">
-                                    <h5><a href="#">{quotationItem.products.desc}</a></h5>
+                                    <h5><Link to={`/products/${quotationItem.products.id}`}>{getTranslatedObject(quotationItem.products, currentLanguage, 'desc', 'descAr')}</Link></h5>
                                     <ul className="list-inline product-info">
                                         <li><strong>{getTranslatedObject(quotationItem.products.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                                         <li>#{quotationItem.products.productNumber}</li>
@@ -174,7 +148,6 @@ export class ListGroupCollapse extends Component {
                                         className="btn btn-primary"
                                         text={translate("product.buttons.addToCart")}
                                         icon="icon-cart" />
-                                    <a href="#" className="btn"><i className="icon-trash"></i></a>
                                     {/* <Link to="#" className="btn" onClick={() => this.deleteCart(purchasedItem)}><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link> */}
                                 </div>
                             </div>
