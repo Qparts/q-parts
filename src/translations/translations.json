@@ -1240,6 +1240,14 @@
       "subTitle": [
         "أضف سياراتك إلى الكراج و احصل على توصيات بالمنتجات المناسبة لك",
         "Store vehicles in your garage and get product recommendations"
+      ],
+      "add": [
+        "أضف",
+        "Add"
+      ],
+      "vehicle": [
+        "سيارة",
+        "Vehicle"
       ]
     },
     "signin": {
@@ -1664,6 +1672,10 @@
       "defaultVehicle": [
         " السيارة الافتراضية",
         "Default vehicle"
+      ],
+      "garage": [
+        "كراجك",
+        "Your garage"
       ]
     },
     "accountSetting": {

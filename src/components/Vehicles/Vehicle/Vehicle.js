@@ -16,6 +16,7 @@ import { getTranslatedObject } from '../../../utils';
 import { right } from '../../../utils';
 
 import RenderCheckboxField from '../../UI/RenderCheckboxField';
+import * as normalizing from '../../../utils';
 
 class Vehicle extends Component {
 
@@ -28,8 +29,7 @@ class Vehicle extends Component {
 
   handleSubmit = values => {
     this.props.saveFormDataToCache(values);
-
-    const vehicleYearId = values.year.id;
+    const vehicleYearId = values.year.value;
     const vin = values.vin;
     const defaultVehicle = _.isUndefined(values.defaultVehicle) ? false : values.defaultVehicle;
     this.props.addVehcile({ vehicleYearId, vin, defaultVehicle })
@@ -128,6 +128,7 @@ class Vehicle extends Component {
               component={SelectInput}
               options={groupedvehicleMake}
               formatGroupLabel={formatvehicleMakeLabel}
+              validate={[validations.required]}
             />
           </div>
           <div className="float-label">
@@ -138,6 +139,7 @@ class Vehicle extends Component {
                 component={SelectInput}
                 options={groupedvehicleModel}
                 formatGroupLabel={formatvehicleModelLabel}
+                validate={[validations.required]}
               />
           </div>
           <div className="float-label">
@@ -148,17 +150,28 @@ class Vehicle extends Component {
                 component={SelectInput}
                 options={groupedvehicleYear}
                 formatGroupLabel={formatvehicleYearLabel}
+                validate={[validations.required]}
               />
           </div>
-          <div className="has-float-label add-file">
-            <input type="text" className="form-control" placeholder={translate("quotationOrder.vin")} />
-            <label>{translate("quotationOrder.vin")}</label>
-              <Field
-                 name="vin num"
-                 component={RenderFileInput}
-                 image="image"
-               />
-        </div>
+          <div className="add-file has-float-label">
+            <Field
+              name="vin"
+              type="text"
+              hasFloatLabel
+              label={translate("quotationOrder.vin")}
+              placeholder={translate("quotationOrder.vin")}
+              component={RenderField}
+              maxLength="17"
+              normalize={normalizing.upper}
+              validate={_.has(this.props.formValues, 'vinImage') ? [] : [validations.required, validations.vin, validations.match17Digits, validations.allUpperCase]}
+              disabled={_.has(this.props.formValues, 'garage')} />
+            <Field
+              removeImage={_.has(this.props.formValues, 'garage')}
+              name="vinImage"
+              component={RenderFileInput}
+              image="image"
+              disabled={_.has(this.props.formValues, 'garage')} />
+          </div>
         </div>
         <div class="checkbox">
           <input type="checkbox" id="default-vehicle" value="checked" />
