@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
@@ -42,7 +42,11 @@ export class CompletedRequest extends Component {
                     </div>
                 </LargeScreen>
                 <div className="col-lg">
-                    <p>{getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage)}</p>
+                    {
+                        getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage) && (
+                            <p>{getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage)}</p>
+                        )
+                    }
                     <span className="details-toggle"><i className="icon-"></i></span>
                 </div>
                 <div className="col-lg-auto r-info">
@@ -53,7 +57,11 @@ export class CompletedRequest extends Component {
             <div className={`collapse ${replies.id}`} id={replies.id}>
                 <artical className="request-details" >
                     <ul className="list-inline vehicle-info">
-                        <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, replies.customerVehicleId)})</li>
+                        {
+                            getVehicleVin(vehicles, replies.customerVehicleId) && (
+                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, replies.customerVehicleId)})</li>
+                            )
+                        }
                         <DownLargeScreen>
                             <li className="r-id-small">
                                 <label>{translate("quotationRequest.requestNo")}</label> #{replies.id}

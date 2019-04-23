@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
@@ -30,7 +30,11 @@ export class PendingRequest extends Component {
                     </div>
                 </LargeScreen>
                 <div className="col-lg">
-                    <p>{getVehicleInfo(vehicles, pendings.customerVehicleId, currentLanguage)}</p>
+                    {
+                        getVehicleInfo(vehicles, pendings.customerVehicleId, currentLanguage) && (
+                            <p>{getVehicleInfo(vehicles, pendings.customerVehicleId, currentLanguage)}</p>
+                        )
+                    }
                     <span className="details-toggle"><i className="icon-"></i></span>
                 </div>
                 <div className="col-lg-auto r-info">
@@ -41,8 +45,11 @@ export class PendingRequest extends Component {
             <div className={`collapse ${pendings.id}`} id={pendings.id}>
                 <artical className="request-details" >
                     <ul className="list-inline vehicle-info">
-
-                        <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, pendings.customerVehicleId)})</li>
+                        {
+                            getVehicleVin(vehicles, pendings.customerVehicleId) && (
+                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, pendings.customerVehicleId)})</li>
+                            )
+                        }
                         <DownLargeScreen>
                             <li className="r-id-small">
                                 <label>{translate("quotationRequest.requestNo")}</label> #{pendings.id}
