@@ -122,7 +122,7 @@ class Vehicle extends Component {
         <div className="input-groub">
           <div className="float-label">
             <Field
-              label="Make"
+              label={translate("form.vehicle.make")}
               name="make"
               placeholder={" "}
               component={SelectInput}
@@ -133,7 +133,7 @@ class Vehicle extends Component {
           </div>
           <div className="float-label">
               <Field
-                label="Model"
+                label={translate("form.vehicle.model")}
                 name="model"
                 placeholder={" "}
                 component={SelectInput}
@@ -144,7 +144,7 @@ class Vehicle extends Component {
           </div>
           <div className="float-label">
               <Field
-                label="Year"
+                label={translate("form.vehicle.year")}
                 name="year"
                 placeholder={" "}
                 component={SelectInput}
@@ -175,7 +175,7 @@ class Vehicle extends Component {
         </div>
         <div class="checkbox">
           <input type="checkbox" id="default-vehicle" value="checked" />
-            <label for="default-vehicle">Set as Default Vehicle</label>
+            <label for="default-vehicle">{translate("form.signup.defaultVehicle")}</label>
           </div>
       <div className="row form-submit">
         <div className="col-auto"><Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} /></div>
