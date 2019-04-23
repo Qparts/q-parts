@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter , Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -138,6 +138,18 @@ class Cart extends Component {
 				</section>
 				<section className="gray-bg pt-sec">
 					<div className="container-fluid">
+						<div className="cart-empty">
+							<figure>
+								<i className="icon-cart"></i>
+							</figure>
+								<figcaption>
+										<p>Your Cart Is Empty</p>
+										<span>
+											{translate("offers.subTitle")}
+										</span>
+									<a className="btn btn-primary" href="/">{translate("setting.wishlist.startShopping")}<i className={`icon-arrow-${right(this.props.direction)}`}></i></a>
+								</figcaption>
+						</div>
 						<div className={divItemMovile}>
 							<div>
 								<label>{translate("orderSummary.total")}</label>

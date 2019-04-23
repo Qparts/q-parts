@@ -14762,26 +14762,26 @@ ul.cd-secondary-nav .go-back button::after {
   margin: 15px 0;
 }
 
-.empty {
+.empty, .cart-empty {
   display: block;
   text-align: center;
 }
-.empty figure img {
+.empty figure img, .cart-empty figure img {
   max-width: 120px;
 }
 @media (max-width: 991.98px) {
-  .empty figure img {
+  .empty figure img, .cart-empty figure img {
     max-width: 75px;
   }
 }
-.empty figure i {
+.empty figure i, .cart-empty figure i {
   font-size: 95px;
   font-size: 5.9375rem;
   opacity: 0.1;
   filter: alpha(opacity=10);
   height: 90px;
 }
-.empty figcaption p {
+.empty figcaption p, .cart-empty figcaption p {
   opacity: 0.5;
   filter: alpha(opacity=50);
   font-size: 30px;
@@ -14792,35 +14792,35 @@ ul.cd-secondary-nav .go-back button::after {
   line-height: 1.5;
 }
 @media (max-width: 991.98px) {
-  .empty figcaption p {
+  .empty figcaption p, .cart-empty figcaption p {
     font-size: 18px;
     font-size: 1.125rem;
   }
 }
-.empty figcaption span {
+.empty figcaption span, .cart-empty figcaption span {
   display: block;
   font-size: 16px;
   font-size: 1rem;
   margin-bottom: 10px;
 }
-.empty .btn-primary, .empty .signin-list li:first-child a, .signin-list li:first-child .empty a {
+.empty .btn-primary, .cart-empty .btn-primary, .empty .signin-list li:first-child a, .cart-empty .signin-list li:first-child a, .signin-list li:first-child .empty a, .signin-list li:first-child .cart-empty a {
   font-size: 18px;
   font-size: 1.125rem;
   display: inline-flex;
   align-items: center;
   margin-top: 10px;
 }
-.empty .btn-primary i, .empty .signin-list li:first-child a i, .signin-list li:first-child .empty a i {
+.empty .btn-primary i, .cart-empty .btn-primary i, .empty .signin-list li:first-child a i, .cart-empty .signin-list li:first-child a i, .signin-list li:first-child .empty a i, .signin-list li:first-child .cart-empty a i {
   font-size: 24px;
   font-size: 1.5rem;
   max-height: 24px;
   margin-right: 0;
   margin-left: 5px;
 }
-.empty .btn-primary i:before, .empty .signin-list li:first-child a i:before, .signin-list li:first-child .empty a i:before {
+.empty .btn-primary i:before, .cart-empty .btn-primary i:before, .empty .signin-list li:first-child a i:before, .cart-empty .signin-list li:first-child a i:before, .signin-list li:first-child .empty a i:before, .signin-list li:first-child .cart-empty a i:before {
   top: -1px;
 }
-.empty .btn-primary i.icon-arrow-right, .empty .signin-list li:first-child a i.icon-arrow-right, .signin-list li:first-child .empty a i.icon-arrow-right {
+.empty .btn-primary i.icon-arrow-right, .cart-empty .btn-primary i.icon-arrow-right, .empty .signin-list li:first-child a i.icon-arrow-right, .cart-empty .signin-list li:first-child a i.icon-arrow-right, .signin-list li:first-child .empty a i.icon-arrow-right, .signin-list li:first-child .cart-empty a i.icon-arrow-right {
   margin-right: 5px;
   margin-left: 0;
 }
@@ -15580,6 +15580,19 @@ form {
 
 .order-summary .btn-primary, .order-summary .signin-list li:first-child a, .signin-list li:first-child .order-summary a {
   margin-top: 0px !important;
+}
+
+.cart-empty .icon-cart {
+  font-size: 128px;
+  font-size: 8rem;
+  height: 120px;
+  display: block;
+}
+.cart-empty .icon-cart:before {
+  top: -20px;
+}
+.cart-empty figure {
+  position: relative;
 }
 
 .order-summary {
@@ -18128,10 +18141,10 @@ form {
   margin-right: 11px;
 }
 
-.empty .icon-vehicle {
+.empty .icon-vehicle, .cart-empty .icon-vehicle {
   display: inline-block;
 }
-.empty .rotate {
+.empty .rotate, .cart-empty .rotate {
   display: inline-block;
   margin-bottom: 0;
   font-size: 100px;
@@ -18143,7 +18156,7 @@ form {
   right: -15px;
   top: -10px;
 }
-.empty .rotate span {
+.empty .rotate span, .cart-empty .rotate span {
   position: absolute;
   transform: rotate(90deg);
   font-size: 15px;
@@ -19055,11 +19068,11 @@ form {
   margin-right: 2px !important;
 }
 
-.empty .icon-address {
+.empty .icon-address, .cart-empty .icon-address {
   height: 88px;
   display: block;
 }
-.empty .icon-address:before {
+.empty .icon-address:before, .cart-empty .icon-address:before {
   top: -10px;
 }
 

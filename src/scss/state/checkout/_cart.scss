@@ -257,3 +257,17 @@
     margin-top: 0px !important;
   }
 }
+.cart-empty{
+  @extend .empty;
+  .icon-cart{
+    @include font-size(128px);
+    height: 120px;
+    display: block;
+    &:before{
+      top: -20px;
+    }
+  }
+  figure{
+    position: relative;
+  }
+}
