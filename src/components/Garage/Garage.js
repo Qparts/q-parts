@@ -49,9 +49,9 @@ class Garage extends Component {
                  </div>
                  <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')}</p>
                  <p>{vehicle.vin}</p>
-                 <div className="actions">
+                 {/*<div className="actions">
                    <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
-                 </div>
+                 </div>*/}
                </li>
          })
        }
