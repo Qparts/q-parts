@@ -48,7 +48,7 @@ class Garage extends Component {
                    <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
                  </div>
                  <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')} {getTranslatedObject(vehicle.vehicle.model, defaultLang, 'name', 'nameAr')} {vehicle.vehicle.year}</p>
-                 <p>Vin Number ({vehicle.vin})</p>
+                 <p>{translate("form.vehicle.vin")} ({vehicle.vin})</p>
                  {/*<div className="actions">
                    <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
                  </div>*/}
