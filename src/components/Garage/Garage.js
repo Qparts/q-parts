@@ -47,8 +47,8 @@ class Garage extends Component {
                    <input type="radio" id="vehicle-id" name="radio-group" checked />
                    <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
                  </div>
-                 <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')}</p>
-                 <p>{vehicle.vin}</p>
+                 <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')} {getTranslatedObject(vehicle.vehicle.model, defaultLang, 'name', 'nameAr')} {vehicle.vehicle.year}</p>
+                 <p>Vin Number ({vehicle.vin})</p>
                  {/*<div className="actions">
                    <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
                  </div>*/}
