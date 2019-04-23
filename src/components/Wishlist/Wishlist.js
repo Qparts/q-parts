@@ -5,6 +5,8 @@ import { colors } from '../../constants';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { DownMediumScreen , MediumScreen } from '../../components/Device';
 
+import { right } from '../../utils';
+
 
 import _ from 'lodash';
 
@@ -54,7 +56,6 @@ class Wishlist extends Component {
 
     render() {
         const { currentLanguage, translate } = this.props;
-
         return (
             <section className="wishlist">
                 {
@@ -66,33 +67,33 @@ class Wishlist extends Component {
                                 <span>
                                   {translate("offers.subTitle")}
                                 </span>
-                              <a className="btn btn-primary" href="#">Start Shoppping <i className="icon-arrow-right"></i></a>
+                              <a className="btn btn-primary" href="/">{translate("setting.wishlist.startShopping")}<i className={`icon-arrow-${right(this.props.direction)}`}></i></a>
                             </figcaption>
                         </div>
                     ) :
                         this.state.wishlist.map((item, idx) => (
                           <div className="card">
                             <header>
-                              <h2>Wish List <label>(1 Items)</label></h2>
+                              <h2>{translate("setting.wishlist.wishlist")}<label>({this.state.wishlist.length} {translate("setting.wishlist.items")})</label></h2>
                             </header>
                             <ul className="list-unstyled">
                               <li key={idx} class="media">
-                                <a href="#" className="media-img"><img src={item.image} alt="..." /></a>
+                                <a href="#" className="media-img"><img onError={handleImageFallback} src={item.image} alt="no wishList"/></a>
                                 <div class="media-body">
                                   <div className="col">
-                                    <h5><a href="#">{item.desc}</a></h5>
+                                    <h5><a href="#">{getTranslatedObject(item, currentLanguage, 'desc', 'descAr')}</a></h5>
                                     <ul className="list-inline">
                                       <li><strong>{getTranslatedObject(item.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                                       <li>#{item.productNumber}</li>
                                     </ul>
                                     <DownMediumScreen>
-                                      <p className="date">Added:<span> {item.created}</span></p>
+                                      <p className="date">{translate("setting.wishlist.date")}:<span> {item.created}</span></p>
                                     </DownMediumScreen>
                                     <p className="price">{item.salesPrice} <span>{item.currency}</span></p>
                                   </div>
                                   <div className="col-md-auto">
                                     <MediumScreen>
-                                      <p className="date">Added:<span> {item.created}</span></p>
+                                      <p className="date">{translate("setting.wishlist.date")}:<span> {item.created}</span></p>
                                     </MediumScreen>
                                     {item.actions}
                                   </div>

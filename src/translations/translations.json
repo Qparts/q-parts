@@ -207,7 +207,21 @@
     "price": [
       "السعر",
       "price"
-    ]
+    ],
+    "vehicle": {
+      "make": [
+        "اختر السيارة",
+        "Select a Vehicle Make"
+      ],
+      "model": [
+        "اختر موديل",
+        "Select a Vehicle Model"
+      ],
+      "year": [
+        "اختر سنة",
+        "Select a year"
+      ]
+    }
   },
   "tires": {
     "title": [
@@ -506,18 +520,6 @@
       "title": [
         "معلومات السيارة",
         "Vehicle Information"
-      ],
-      "make": [
-        "اختر السيارة",
-        "Select a Vehicle Make"
-      ],
-      "model": [
-        "اختر موديل",
-        "Select a Vehicle Model"
-      ],
-      "year": [
-        "اختر سنة",
-        "Select a year"
       ]
     },
     "shipping": {
@@ -1244,6 +1246,14 @@
       "subTitle": [
         "أضف سياراتك إلى الكراج و احصل على توصيات بالمنتجات المناسبة لك",
         "Store vehicles in your garage and get product recommendations"
+      ],
+      "add": [
+        "أضف",
+        "Add"
+      ],
+      "vehicle": [
+        "سيارة",
+        "Vehicle"
       ]
     },
     "signin": {
@@ -1638,6 +1648,18 @@
       "noWishlist": [
         "لا توجد منتجات محفوظة في قائمة الرغبات",
         "no saved items in wishlist"
+      ],
+      "startShopping": [
+        "بدء التسوق",
+        "Start Shopping"
+      ],
+      "wishlist": [
+        "الرغبات",
+        "Wish List"
+      ],
+      "items": [
+        "العناصر",
+        "Items"
       ]
     },
     "garage": {
@@ -1664,6 +1686,10 @@
       "defaultVehicle": [
         " السيارة الافتراضية",
         "Default vehicle"
+      ],
+      "garage": [
+        "كراجك",
+        "Your garage"
       ]
     },
     "accountSetting": {
