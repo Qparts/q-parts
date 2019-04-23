@@ -40,66 +40,55 @@ class Address extends Component {
 
   render() {
     const {
-      handleSubmit, regions, formValues, translate, currentLanguage, onShowGoogleMap,
-      address, onHide, defaultAddress, onDefaultAddress, isDelivery, direction
+      handleSubmit, formValues, translate, currentLanguage, onShowGoogleMap,
+      address, onHide, defaultAddress, onDefaultAddress, isDelivery, direction, defaultLang
     } = this.props;
 
-    const regionsData = regions ?
-      regions.map(region => {
-        return {
-          ...region,
-          value: region.id,
-          label: getTranslatedObject(region, currentLanguage, 'name', 'nameAr')
-        }
-      }) : [];
-
-    const citiesData = _.has(formValues, 'region.cities') ?
-      formValues.region.cities.map(city => {
-        return {
-          ...city,
-          value: city.id,
-          label: getTranslatedObject(city, currentLanguage, 'name', 'nameAr')
-        }
-      }) : [];
-      const country = [
-      	{ value: 1, label: "KSA" }
-      ];
-      const Region = [
-      	{ value: 1, label: "Riyadh" },
-      	{ value: 2, label: "Tabuk" },
-      	{ value: 3, label: "Jazan" },
-      	{ value: 4, label: "Medina" }
-      ];
-      const groupedRegion = [
-      	{
-      		options: Region,
-      	},
-      ];
-      const formatRegionLabel = () => (
-      	<div className="placeholder">
-      		<span>Select Region</span>
-      	</div>
-      );
-      const City = [
-      	{ value: 1, label: "Riyadh" }
-      ];
-      const groupedCity = [
-      	{
-      		options: City,
-      	},
-      ];
-      const formatCityLabel = () => (
-      	<div className="placeholder">
-      		<span>Select City</span>
-      	</div>
-      );
+    const country = [
+			{ value: 1, label: translate("general.ksa") }
+		];
+		const regions = this.props.regions ? this.props.regions.map(region => {
+			return {
+				...region,
+				value: region.id,
+				label: getTranslatedObject(region, defaultLang, 'name', 'nameAr'),
+			}
+		}) : [];
+		const groupedRegion = [
+			{
+				options: regions,
+			},
+		];
+		const formatRegionLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.shipping.region")}</span>
+			</div>
+		);
+		const cities = _.has(this.props.formValues, 'region.cities') ?
+			this.props.formValues.region.cities.map(city => {
+				return {
+					...city,
+					label: getTranslatedObject(city, defaultLang, 'name', 'nameAr'),
+					value: city.id
+				}
+			}) : [];
+		const groupedCity = [
+			{
+				options: cities,
+			},
+		];
+		const formatCityLabel = () => (
+			<div className="placeholder">
+				<span>{translate("quotationOrder.shipping.city")}</span>
+			</div>
+		);
     const renderCityRegion = !this.props.cityFound ?
       <Fragment>
         <div className="float-label disabled">
           <Field
             isDisabled={true}
-            label="Country"
-            name="Country"
+            label={translate("general.country")}
+            name="country"
             defaultValue={country[0]}
             component={SelectInput}
           />
@@ -107,26 +96,27 @@ class Address extends Component {
         <div className="form-row">
           <div className="col-md float-label">
             <Field
-              label="Region"
-              name="Region"
+              label={translate("general.region")}
+              name="region"
               placeholder=" "
               component={SelectInput}
               options={groupedRegion}
               formatGroupLabel={formatRegionLabel}
+              validate={[validations.required]}
             />
           </div>
           <div className="col-md float-label">
             <Field
-              label="City"
+              label={translate("general.city")}
               name="city"
               placeholder=" "
               component={SelectInput}
               options={groupedCity}
               formatGroupLabel={formatCityLabel}
+              validate={[validations.required]}
             />
           </div>
         </div>
-
         {/*<div className="col-md-4 div-rounded-first">
           <Field
             disabled
@@ -212,14 +202,8 @@ class Address extends Component {
                   <div className="form-row">
                     <div className="col">
                       <div className="has-float-label">
-                        <input name="firstName" type="text" className="form-control" placeholder={translate("form.signup.firstName")} />
-                        <label>{translate("form.signup.firstName")}</label>
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="has-float-label">
-                        <input name="lastName" type="text" className="form-control" placeholder={translate("form.signup.lastName")} />
-                        <label>{translate("form.signup.lastName")}</label>
+                        <input name="title" type="text" className="form-control" placeholder={translate("setting.addressBook.title")} />
+                        <label>{translate("setting.addressBook.title")}</label>
                       </div>
                     </div>
                   </div>

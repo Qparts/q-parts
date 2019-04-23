@@ -3,7 +3,7 @@ import Button from '../UI/Button';
 import './Garage.css';
 import { SmallScreen , MediumScreen } from '../../components/Device';
 import { getTranslatedObject } from '../../utils';
-import Radio from '../UI/Radio'
+import Radio from '../UI/Radio';
 class Garage extends Component {
   handleChange = (index, e) => {
     this.props.changeDefaultVehicle(index);
