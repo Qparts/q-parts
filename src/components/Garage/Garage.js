@@ -3,7 +3,7 @@ import Button from '../UI/Button';
 import './Garage.css';
 import { SmallScreen , MediumScreen } from '../../components/Device';
 import { getTranslatedObject } from '../../utils';
-
+import Radio from '../UI/Radio'
 class Garage extends Component {
   handleChange = (index, e) => {
     this.props.changeDefaultVehicle(index);
@@ -43,10 +43,14 @@ class Garage extends Component {
         {
          this.props.vehicles.map((vehicle, idx) => {
            return  <li className="col-md-6 radio-custom" key={idx}>
-                 <div>
-                   <input type="radio" id="vehicle-id" name="radio-group" checked />
-                   <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
-                 </div>
+             <Radio
+                onChange={this.handleChange.bind(this, idx)}
+                checked={vehicle.defaultVehicle}
+                label={translate("setting.garage.defaultVehicle")}
+                type="radio"
+                id={vehicle.id}
+                name="radioGroup"
+             />
                  <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')} {getTranslatedObject(vehicle.vehicle.model, defaultLang, 'name', 'nameAr')} {vehicle.vehicle.year}</p>
                  <p>{translate("form.vehicle.vin")} ({vehicle.vin})</p>
                  {/*<div className="actions">

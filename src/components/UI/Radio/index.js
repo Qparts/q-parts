@@ -2,12 +2,10 @@ import React from 'react';
 
 const radio = props => {
     const { labelClassName, ...radioProps } = props;
-    return <label className="radio-container">
-        <label className={props.labelClassName}>{props.label}</label>
-        <input type="radio" {...radioProps} />
-        <span className={props.checked ? 'checkmark icon-checked' : 'checkmark'} />
-    </label>
-
+    return <div className="radio-custom">
+      <input {...props}/>
+      <label htmlFor={props.id}>{props.label}</label>
+    </div>
 }
 
 export default radio;
