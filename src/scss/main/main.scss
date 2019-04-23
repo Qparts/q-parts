@@ -114,3 +114,7 @@ $dir: ltr;
 @import "../state/tires.scss";
 @import "../state/checkout/checkout-confirmation-order";
 @import "../state/add_product";
+
+@import "../checkout-layout/header.scss";
+@import "../checkout-layout/footer.scss";
+@import "../checkout-layout/check-out.scss";

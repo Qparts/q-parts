@@ -11,19 +11,14 @@ import CheckoutShipping from '../CheckoutShipping/CheckoutShipping';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
 import CheckoutConfirmation from '../CheckoutConfirmation/CheckoutConfirmation';
 import Button from '../UI/Button';
-
 import { SmallScreen, MediumScreen } from '../Device/index.js'
-
 import { colors } from '../../constants'
-
 const shippingStep = '/checkout';
 const paymentStep = '/checkout/payment';
 const confirmationStep = '/checkout/confirm';
-
 class Checkout extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			showGoogleMap: false,
 			cityFound: false,
@@ -32,13 +27,11 @@ class Checkout extends Component {
 			active: ''
 		}
 	}
-
 	componentDidMount() {
 		const { pathname } = this.props.location;
 		if (pathname === paymentStep) this.setState({ header: this.props.translate("checkout.paymentTitle") })
 		else if (pathname === shippingStep) this.setState({ header: this.props.translate("checkout.customerTitle") })
 	}
-
 	componentDidUpdate(prevProps, prevState) {
 		const { pathname } = this.props.location;
 		if (prevProps.location !== this.props.location) {
@@ -83,7 +76,6 @@ class Checkout extends Component {
 				boxShadow: !canSubmitOrder ? 'none' : colors.boxShadow
 			}
 		}
-
 		const checkoutData = this.props.purchasedItems.map(item => {
 			return {
 				...item.product,

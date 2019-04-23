@@ -306,6 +306,28 @@ ul.cd-secondary-nav {
   padding-#{$left}: 0;
   #{$right}: auto;
   #{$left}: 5px;
+  .cd-nav-trigger{
+    &.new{
+      &:after{
+        width: 12px;
+        height: 12px;
+        background: $brand-color;
+        position: absolute;
+        #{$right}: 4px;
+        content: " ";
+        border-radius: 100%;
+        top: 8px;
+        border: 2px solid $white;
+
+      }
+      &.nav-is-visible{
+        &::after{
+          display: none;
+        }
+      }
+    }
+
+  }
 }
 .search-sm {
   display: none;
@@ -345,6 +367,13 @@ ul.cd-secondary-nav {
     position: relative;
     margin-bottom: 0;
     margin-#{$left}: 15px;
+    span{
+      display: block;
+      text-align: #{$left};
+      @include font-size(13px);
+      color: $brand-color;
+      padding-top: 7px;
+    }
     i {
       display: inline-block;
       height: 12px;

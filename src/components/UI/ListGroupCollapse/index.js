@@ -89,9 +89,9 @@ export class ListGroupCollapse extends Component {
         const { quotationItem, type, translate, currentLanguage, direction, token } = this.props;
 
         const dialog = (
-            <Modal dir={direction} className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+            <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>
                 <ModalHeader toggle={this.togglePopup}>
-                    <Title number={this.state.product.quantity} header={translate("dialog.addToCart.title")} />
+                    <p><i className="icon-checked"></i>1 Item</p> Added To Cart
                 </ModalHeader>
                 <ModalHeader toggle={this.togglePopup} className="have-icon">
                   <p><i className="icon-change-password"></i>Change</p> Password

@@ -60,7 +60,7 @@
         "Delete"
       ],
       "wishlist": [
-        "الانتقال إلى قائمة الرغبات",
+        "الانتقال إلى قائمتك المفضلة",
         "Move to Wishlist"
       ],
       "requests": [
@@ -684,7 +684,7 @@
         ],
         "setting": [
           "إعدادات",
-          "Settings"
+          "ِAcount Setting"
         ],
         "logout": [
           "الخروج",
@@ -693,6 +693,10 @@
         "quotations": [
           "التسعيرات",
           "Quotations"
+        ],
+        "wishlist": [
+          "قائمتك المفضلة",
+          "Wishlist"
         ]
       }
     },
@@ -713,7 +717,7 @@
       "Orders"
     ],
     "wishlist": [
-      "قائمة الرغبات",
+      "قائمتي المفضلة",
       "Wishlist"
     ]
   },
@@ -1448,7 +1452,7 @@
         "Help center"
       ],
       "wishlist": [
-        "قائمة الرغبات",
+        "قائمتي المفضلة",
         "Wishlist"
       ],
       "garage": [
@@ -1624,7 +1628,7 @@
         "Delete"
       ],
       "noWishlist": [
-        "لا توجد منتجات محفوظة في قائمة الرغبات",
+        "لا توجد منتجات محفوظة في قائمتك المفضلة",
         "no saved items in wishlist"
       ]
     },
