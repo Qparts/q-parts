@@ -33,7 +33,6 @@ export class ManualForm extends Component {
 			},
 			rebuildOnUpdate: true,
 		}
-		console.log("current language "+currentLanguage);
 
 		return (
 			<section className="main-slider">

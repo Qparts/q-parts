@@ -12,7 +12,7 @@ import SocialMedia from '../SocialMedia/SocialMedia';
 import PrivateRoute from '../../../components/PrivateRoute';
 import ResetPassword from '../../../components/ResetPassword/ResetPassword';
 
-import { login, sendSmsCode, resetPassword, socialMediaButton } from '../../../actions/customerAction';
+import { login, sendSmsCode, resetPassword, socialMediaButton, setCheckLoginCheckout, setCheckLoginQuotationOrder, setQuotationOrder } from '../../../actions/customerAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 
 import * as validations from '../../../utils';
@@ -21,6 +21,9 @@ import { getComponentName, right } from '../../../utils';
 
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
 import Radio from '../../../components/UI/Radio';
+
+import { postQuotation } from '../../../utils/api';
+import _ from 'lodash';
 
 class Login extends Component {
   constructor(props) {
@@ -35,12 +38,38 @@ class Login extends Component {
 
   handleSubmit = values => {
     const serverErrorField = "password"
-    const { match } = this.props;
 
-    if (match.url !== '/login') {
+    const { match } = this.props;
+    if (match.url !== '/login' && match.url !=='/loginCheckout') {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage)
         .then(() => {
           this.props.toggle()
+          if(this.props.checkLoginCheckout){
+            window.location.pathname="/checkout";
+            this.props.setCheckLoginCheckout(false);
+          }else if(this.props.checkLoginQuotationOrder){
+            let {
+        			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
+        		} = this.props.quotationOrderInfo;
+        		const customerVehicleId = garage ? garage.id : null;
+        		const imageAttached = vinImage ? true : false;
+        		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
+        		vinImage = vinImage ? vinImage : false;
+        		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
+        		vehicleYearId = customerVehicleId ? null : vehicleYearId;
+
+        		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
+        			quotationItemsTemp.map(quotationCartItem => {
+        				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
+        			}) : undefined;
+
+              this.props.setCheckLoginQuotationOrder(false);
+              postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+      					.then(res => {
+      						this.props.setQuotationOrder(false);
+      						return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
+      					})
+          }
         });
     } else {
       return this.props.login(values.email, values.password, serverErrorField, this.props.currentLanguage);
@@ -165,6 +194,9 @@ const mapStateToProps = (state) => {
     selectedCountry: state.customer.selectedCountry,
     direction: state.customer.direction,
     submitErrors: getFormSubmitErrors('Login')(state),
+    checkLoginCheckout: state.customer.checkLoginCheckout,
+    checkLoginQuotationOrder: state.customer.checkLoginQuotationOrder,
+		quotationOrderInfo: state.customer.quotationOrderInfo
   }
 }
 
@@ -173,7 +205,10 @@ const mapDispatchToProps = (dispatch) => {
     login,
     sendSmsCode,
     resetPassword,
-    socialMediaButton
+    socialMediaButton,
+    setCheckLoginCheckout,
+    setCheckLoginQuotationOrder,
+    setQuotationOrder
   }, dispatch)
 }
 

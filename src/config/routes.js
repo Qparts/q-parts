@@ -104,7 +104,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         path: "/checkout",
         component: Checkout,
         isAuth: isAuth,
-        redirectTo: '/login'
+        redirectTo: '/loginCheckout'
     },
     {
         path: "/products/:productId",
@@ -166,5 +166,11 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/shippingAndDeliveryPolicy",
         component: ShippingAndDeliveryPolicy
+    },
+    {
+        path: "/loginCheckout",
+        component: Login,
+        isAuth: !isAuth,
+        redirectTo: '/checkout'
     },
 ];

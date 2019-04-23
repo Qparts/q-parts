@@ -3,7 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { incrementQuantity, decrementQuantity } from '../../actions/cartAction';
+import { incrementQuantity, decrementQuantity, deleteCart, moveCartToWishlist } from '../../actions/cartAction';
+import { setCheckLoginCheckout } from '../../actions/customerAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
@@ -60,6 +61,7 @@ class Cart extends Component {
 			if (window.innerWidth < 950) {
 				this.props.history.push('/login')
 			} else {
+				this.props.setCheckLoginCheckout(true);
 				this.setState({ dialogType: 'signin' });
 				this.togglePopup();
 			}
@@ -79,7 +81,7 @@ class Cart extends Component {
 			return {
 				...item.product,
 				desc: item.product.desc,
-				salesPrice: item.product.salesPrice.toFixed(2),
+				salesPrice: Number(item.product.salesPrice.toFixed(2)),
 				currency: translate("general.currency"),
 				quantity: item.quantity,
 				quantityLabel: translate("general.quantity"),
@@ -151,6 +153,8 @@ class Cart extends Component {
 								purchasedItems={checkoutData}
 								incrementQuantity={this.props.incrementQuantity}
 								decrementQuantity={this.props.decrementQuantity}
+								deleteCart={this.props.deleteCart}
+								moveCartToWishlist={this.props.moveCartToWishlist}
 							/>
 							<div className="col-lg-3">
 								<div className="order-summary">
@@ -193,7 +197,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		incrementQuantity,
-		decrementQuantity
+		decrementQuantity,
+		deleteCart,
+		moveCartToWishlist,
+		setCheckLoginCheckout
 	}, dispatch)
 }
 

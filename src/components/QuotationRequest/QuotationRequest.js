@@ -13,7 +13,7 @@ import { getTranslatedObject } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
-import { setQuotationOrder } from '../../actions/customerAction';
+import { setQuotationOrder, setCheckLoginQuotationOrder, setQuotationOrderInfo } from '../../actions/customerAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
@@ -48,6 +48,13 @@ class QuotationRequest extends Component {
 		}
 	}
 
+	componentDidMount = () => {
+
+		this.props.setCheckLoginQuotationOrder(false);
+		this.props.setQuotationOrderInfo([]);
+
+	}
+
 	componentDidUpdate = (prevProps, prevState) => {
 		const { defaultLang } = this.props
 		if (_.has(this.props.formValues, 'garage') && this.props.formValues.garage !== prevProps.formValues.garage) {
@@ -66,13 +73,13 @@ class QuotationRequest extends Component {
 			})
 		};
 	}
-	
+
 
 	handleSubmit = values => {
 		let {
 			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
 		} = values;
-		const customerVehicleId = garage ? garage.vehicleYearId : null;
+		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
 		vinImage = vinImage ? vinImage : false;
@@ -82,13 +89,22 @@ class QuotationRequest extends Component {
 		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
-			}) : undefined;			
+			}) : undefined;
 
-		postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
-			.then(res => {
-				this.props.setQuotationOrder(false);
-				return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
-			})
+		if (!isAuth(this.props.token)) {
+			this.props.setCheckLoginQuotationOrder(true);
+			this.setState({
+				dialogType: signin
+			});
+			this.props.setQuotationOrderInfo(values)
+			this.togglePopup();
+		} else {
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+				.then(res => {
+					this.props.setQuotationOrder(false);
+					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
+				})
+		}
 	}
 
 	handleVehicle = (event) => {
@@ -107,6 +123,7 @@ class QuotationRequest extends Component {
 
 	handleLogin = e => {
 		e.preventDefault();
+		this.props.setCheckLoginQuotationOrder(true);
 		this.setState({
 			dialogType: signin
 		});
@@ -147,7 +164,7 @@ class QuotationRequest extends Component {
 				/>
 
 			case signin:
-				return <Login toggle={this.togglePopup} />
+				return <Login toggle={this.togglePopup} data={this.state.data} />
 
 			default:
 				break;
@@ -156,7 +173,7 @@ class QuotationRequest extends Component {
 
 	handleFillValues = () => {
 		const { garage } = this.state
-		
+
 		this.props.changeFieldValue('QuotationRequest', 'make', garage[0]);
 		this.props.changeFieldValue('QuotationRequest', 'model', garage[1]);
 		this.props.changeFieldValue('QuotationRequest', 'year', garage[2]);
@@ -481,22 +498,11 @@ class QuotationRequest extends Component {
 								<p>{translate("quotationOrder.agreement.title")} <Link to="#" text={translate("quotationOrder.agreement.linkOne")} /> {translate("general.and")} <Link to="/privacyPolicy" text={translate("quotationOrder.agreement.linkTwo")} />.</p>
 							</div>
 							<div className="col-lg-auto">
-								{
-									isAuth(this.props.token) ?
-										<Button type="submit" className="btn btn-primary" text={
-											<Fragment>
-												<span>{translate("general.send")}</span>
-												<i className={`icon-arrow-${right(direction)}`}></i>
-											</Fragment>
-										} />
-										:
-										<Link
-											to={"#"}
-											className="btn btn-primary"
-											text={translate("general.send")}
-											icon={`icon-arrow-${right(direction)}`}
-											onClick={this.handleLogin} />
-								}
+								<Button type="submit"
+									className="btn btn-primary"
+									text={translate("general.send")}
+									icon={`icon-arrow-${right(direction)}`}
+								/>
 							</div>
 						</div>
 					</form>
@@ -524,6 +530,7 @@ const mapStateToProps = (state) => {
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
+		quotationOrderInfo: state.customer.quotationOrderInfo
 	}
 }
 
@@ -531,7 +538,9 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		changeFieldValue,
 		getRegions,
-		setQuotationOrder
+		setQuotationOrder,
+		setCheckLoginQuotationOrder,
+		setQuotationOrderInfo
 	}, dispatch)
 }
 

@@ -5,7 +5,7 @@ export { parseGoogleResponse } from './google';
 export * from './validation';
 export * from './normalizing';
 export { isAuth, handleNetworkError } from './auth';
-export { isEmpty, filterObject, toUpperCaseForEach, replaceAll } from './array';
+export { isEmpty, filterObject, toUpperCaseForEach, replaceAll, binarySearch } from './array';
 export { upperCaseFirstChar, lowerCaseFirstChar, getTranslatedObject, getTranslatedString } from './string';
 export { getComponentName, getFormattedVehicles, getFormattedSelect } from './components';
 export { left, right, paddingLeft, paddingRight, l, sideValues } from './directional';
