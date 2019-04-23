@@ -94,7 +94,7 @@ class Vehicle extends Component {
     ];
     const formatvehicleModelLabel = () => (
       <div className="placeholder">
-        <span>{translate("general.vehicle.modal")}</span>
+        <span>{translate("general.vehicle.model")}</span>
       </div>
     );
     return (
