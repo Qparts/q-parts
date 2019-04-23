@@ -207,7 +207,21 @@
     "price": [
       "السعر",
       "price"
-    ]
+    ],
+    "vehicle": {
+      "make": [
+        "اختر السيارة",
+        "Select a Vehicle Make"
+      ],
+      "model": [
+        "اختر موديل",
+        "Select a Vehicle Model"
+      ],
+      "year": [
+        "اختر سنة",
+        "Select a year"
+      ]
+    }
   },
   "tires": {
     "title": [
@@ -506,18 +520,6 @@
       "title": [
         "معلومات السيارة",
         "Vehicle Information"
-      ],
-      "make": [
-        "اختر السيارة",
-        "Select a Vehicle Make"
-      ],
-      "model": [
-        "اختر موديل",
-        "Select a Vehicle Model"
-      ],
-      "year": [
-        "اختر سنة",
-        "Select a year"
       ]
     },
     "shipping": {
