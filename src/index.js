@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux"
 import registerServiceWorker from './registerServiceWorker';
-// import './scss/main/main.scss';
-// import './scss/main-ar/main-ar.scss';
+import './scss/main/main.scss';
+import './scss/main-ar/main-ar.scss';
 
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
-import { LocalizeProvider, getTranslate } from 'react-localize-redux';
+import { LocalizeProvider } from 'react-localize-redux';
 
 import Routes from './containers/Routers/Routers';
 

@@ -352,7 +352,7 @@ class Setting extends Component {
     if (this.state.dialogType === garage_pupop)
       garageDialog = <Modal dir={direction}  className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup} className="have-icon">
-              <p><i className="icon-add-vehicle"></i>Add</p> Vehicle
+              <p><i className="icon-add-vehicle"></i>{translate("dialog.vehicle.add")}</p> {translate("dialog.vehicle.vehicle")}
         </ModalHeader>
         <ModalBody>
           <span className="sub-header">{translate("dialog.vehicle.subTitle")}</span>
@@ -518,7 +518,8 @@ class Setting extends Component {
                               onShowVehicleDialog={this.handleShowDialog}
                               onDeleteVehicle={this.handleDeleteVehicle}
                               changeDefaultVehicle={this.props.changeDefaultVehicle}
-                              translate={this.props.translate} />
+                              translate={this.props.translate}
+                              defaultLang={this.props.defaultLang} />
                             {garageDialog}
                           </Fragment>
                         )

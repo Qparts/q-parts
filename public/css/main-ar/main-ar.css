@@ -10427,7 +10427,7 @@ body {
 .radio-custom [type=radio]:checked,
 .radio-custom [type=radio]:not(:checked) {
   position: absolute;
-  left: -9999px;
+  right: -9999px;
 }
 .radio-custom [type=radio]:checked + label,
 .radio-custom [type=radio]:not(:checked) + label {
@@ -10443,7 +10443,7 @@ body {
 .radio-custom [type=radio]:not(:checked) + label:before {
   content: "";
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
   width: 13px;
   height: 13px;
@@ -14557,7 +14557,7 @@ ul.cd-secondary-nav .go-back button::after {
   top: 2px;
 }
 .requests-main .request-details .parts-list {
-  padding: 5px 15px 0;
+  padding: 5px 15px 15px;
 }
 .requests-main .request-details .parts-list .d-table {
   width: 100%;
@@ -18159,6 +18159,9 @@ form {
 }
 .setting-popup .modal-header .icon-add-vehicle:before {
   top: -11px;
+}
+.setting-popup .add-file .RenderField {
+  border-radius: 20px;
 }
 
 .orders-main .search-order {

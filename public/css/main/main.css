@@ -13640,7 +13640,7 @@ ul.cd-secondary-nav .go-back button::after {
   top: 2px;
 }
 .requests-main .request-details .parts-list {
-  padding: 5px 15px 0;
+  padding: 5px 15px 15px;
 }
 .requests-main .request-details .parts-list .d-table {
   width: 100%;
@@ -17235,6 +17235,9 @@ form {
 }
 .setting-popup .modal-header .icon-add-vehicle:before {
   top: -11px;
+}
+.setting-popup .add-file .RenderField {
+  border-radius: 20px;
 }
 
 .orders-main .search-order {

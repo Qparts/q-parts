@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { REPLIED } from '../../../constants';
+import { LargeScreen, DownLargeScreen } from '../../Device';
+import { getVehicleVin, getVehicleInfo } from '../../../utils/components';
 
 export class CompletedRequest extends Component {
     constructor(props) {
@@ -19,58 +21,78 @@ export class CompletedRequest extends Component {
 
 
     render() {
-        const { replies, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction } = this.props
+        const { replies, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction, vehicles } = this.props
         const created = moment(replies.created).format('MMM Do');
         let ids = [];
 
         replies.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
-
-        return <Fragment>
+        return <li key={replies.id}>
             <Link
                 to="#"
+                className="collapsed new"
                 data-toggle="collapse"
                 data-target={`.${replies.id}`}
                 aria-expanded="false"
                 aria-controls={ids.join(' ')}>
-                <li className="bg-white">
-                    <figure className="row">
-                        <div className="col-3">
-                            <label>{translate("quotationRequest.requestNo")}</label>
-                            <h4>#{replies.id}</h4>
-                        </div>
-                        <figcaption className="col-9">
-                            <div className="row">
-                                <div className="col-md-9 item-dis">
-                                </div>
-                                <div className="col-md-3">
-                                    <p>{translate("quotationRequest.sent")} <span>{created}</span></p>
-                                    <p>{translate("quotationRequest.itemsQuantity")}: <span>{replies.quotationItems.length}</span></p>
-                                </div>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </li>
+                <LargeScreen>
+                    <div className="col-lg-auto">
+                        <label>{translate("quotationRequest.requestNo")}</label>
+                        <p>#{replies.id}</p>
+                    </div>
+                </LargeScreen>
+                <div className="col-lg">
+                    {
+                        getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage) && (
+                            <p>{getVehicleInfo(vehicles, replies.customerVehicleId, currentLanguage)}</p>
+                        )
+                    }
+                    <span className="details-toggle"><i className="icon-"></i></span>
+                </div>
+                <div className="col-lg-auto r-info">
+                    <p className="date"><span>{translate("quotationRequest.sent")}</span> {created} </p>
+                    <p>{translate("quotationRequest.itemsQuantity")}:  {replies.quotationItems.length}</p>
+                </div>
             </Link>
-            {
-                replies.quotationItems.map(quotationItem => {
-                    return <ListGroupCollapse
-                        requestNumber={replies.id}
-                        key={quotationItem.id}
-                        type={REPLIED}
-                        quotationItem={quotationItem}
-                        translate={translate}
-                        currentLanguage={currentLanguage}
-                        onSelectedProduct={this.setSelectedProduct}
-                        incrementQuantity={incrementQuantity}
-                        decrementQuantity={decrementQuantity}
-                        onAddtoCart={this.addToCart}
-                        direction={direction}
-                        token={token}
-                    />
-                })
-            }
-        </Fragment>
+            <div className={`collapse ${replies.id}`} id={replies.id}>
+                <artical className="request-details" >
+                    <ul className="list-inline vehicle-info">
+                        {
+                            getVehicleVin(vehicles, replies.customerVehicleId) && (
+                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, replies.customerVehicleId)})</li>
+                            )
+                        }
+                        <DownLargeScreen>
+                            <li className="r-id-small">
+                                <label>{translate("quotationRequest.requestNo")}</label> #{replies.id}
+                            </li>
+                        </DownLargeScreen>
+                        <li className="ship-info"><i className="icon-location"></i> KSA, Jeddah, Jeddah</li>
+                    </ul>
+                    <ul className="replayed-parts-list ">
+                        {
+                            replies.quotationItems.map(quotationItem => {
+                                return <ListGroupCollapse
+                                    requestNumber={replies.id}
+                                    key={quotationItem.id}
+                                    type={REPLIED}
+                                    quotationItem={quotationItem}
+                                    translate={translate}
+                                    currentLanguage={currentLanguage}
+                                    onSelectedProduct={this.setSelectedProduct}
+                                    incrementQuantity={incrementQuantity}
+                                    decrementQuantity={decrementQuantity}
+                                    onAddtoCart={this.addToCart}
+                                    direction={direction}
+                                    token={token}
+                                />
+                            })
+                        }
+
+                    </ul>
+                </artical>
+            </div>
+        </li>
     }
 }
 
