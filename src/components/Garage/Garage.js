@@ -38,11 +38,11 @@ class Garage extends Component {
             </div>
           </header>
         </SmallScreen>
+        <div className="info-list">
+          <ul className="row list-unstyled">
         {
          this.props.vehicles.map((vehicle, idx) => {
-           return <div className="info-list" key={idx}>
-             <ul className="row list-unstyled">
-               <li className="col-md-6 radio-custom">
+           return  <li className="col-md-6 radio-custom" key={idx}>
                  <div>
                    <input type="radio" id="vehicle-id" name="radio-group" checked />
                    <label for="vehicle-id">{translate("setting.garage.defaultVehicle")}</label>
@@ -53,22 +53,10 @@ class Garage extends Component {
                    <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
                  </div>
                </li>
-               <li className="col-md-6 radio-custom">
-                 <div>
-                   <input type="radio" id="vehicle-id1" name="radio-group"  />
-                   <label for="vehicle-id1">{translate("setting.garage.defaultVehicle")}</label>
-                 </div>
-                 <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')}</p>
-                 <p>{vehicle.vin}</p>
-                 <div className="actions">
-                   <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
-                   <Button type="button" className="btn delete" text={translate("setting.garage.delete")} icon="icon-trash" isReverseOrder/>
-                 </div>
-               </li>
-             </ul>
-           </div>
          })
        }
+     </ul>
+   </div>
     </div>
 
     {/*<div id="Garage-container">

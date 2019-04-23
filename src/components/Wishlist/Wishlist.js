@@ -56,7 +56,6 @@ class Wishlist extends Component {
 
     render() {
         const { currentLanguage, translate } = this.props;
-
         return (
             <section className="wishlist">
                 {
@@ -75,7 +74,7 @@ class Wishlist extends Component {
                         this.state.wishlist.map((item, idx) => (
                           <div className="card">
                             <header>
-                              <h2>{translate("setting.wishlist.wishlist")}<label>(1 {translate("setting.wishlist.items")})</label></h2>
+                              <h2>{translate("setting.wishlist.wishlist")}<label>({this.state.wishlist.length} {translate("setting.wishlist.items")})</label></h2>
                             </header>
                             <ul className="list-unstyled">
                               <li key={idx} class="media">
