@@ -5,6 +5,8 @@ import { colors } from '../../constants';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { DownMediumScreen , MediumScreen } from '../../components/Device';
 
+import Link from '../../components/UI/Link';
+
 import { right } from '../../utils';
 
 
@@ -67,7 +69,12 @@ class Wishlist extends Component {
                                 <span>
                                   {translate("offers.subTitle")}
                                 </span>
-                              <a className="btn btn-primary" href="/">{translate("setting.wishlist.startShopping")}<i className={`icon-arrow-${right(this.props.direction)}`}></i></a>
+                                <Link
+          												to={'/'}
+          												className='btn btn-primary'
+          												text={translate("setting.wishlist.startShopping")}
+          												icon={`icon-arrow-${right(this.props.direction)}`}
+          											/>
                             </figcaption>
                         </div>
                     ) :
