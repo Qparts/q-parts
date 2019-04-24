@@ -50,6 +50,8 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../../components/UI/Title';
 //whatsapp
 
+import { getFormValues } from 'redux-form';
+
 import { LargeScreen , DownLargeScreen} from '../../components/Device/index.js'
 import Sidebar from "react-sidebar";
 const name = 'name';
@@ -278,7 +280,6 @@ class Setting extends Component {
 	}
 
   render() {
-      console.log(this.state.sidebarOpen)
     const { translate, direction } = this.props;
     let dialog;
 
@@ -323,7 +324,7 @@ class Setting extends Component {
         <ModalBody>
           <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
           <Address
-            currentLanguage={this.props.currentLanguage}
+            defaultLang={this.props.currentLanguage}
             address={this.props.address}
             customer={this.props.customer}
             getRegions={this.props.getRegions}
@@ -342,6 +343,7 @@ class Setting extends Component {
             onHide={this.onHide}
             defaultAddress={this.state.defaultAddress}
             onDefaultAddress={this.handleChangeDefaultAddress}
+            formValues={this.props.formValues}
           />
 
         </ModalBody>
@@ -893,7 +895,8 @@ const mapStateToProps = (state) => {
     addresses: state.customer.detail.addresses,
     direction: state.customer.direction,
     requests: state.customer.quotations.pending,
-    requestCompleted: state.customer.quotations.completed
+    requestCompleted: state.customer.quotations.completed,
+    formValues: getFormValues('Setting')(state),
   }
 }
 

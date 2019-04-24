@@ -4,6 +4,9 @@ import Link from '../UI/Link'
 import { colors, helpers } from '../../constants';
 
 class RenderField extends Component {
+  static defaultProps = {
+      errorMessage: 'required input'
+  }
   constructor(props) {
     super(props);
     this.passwordStrengthRef = createRef();
