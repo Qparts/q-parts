@@ -43,7 +43,6 @@ class Address extends Component {
       handleSubmit, formValues, translate, currentLanguage, onShowGoogleMap,
       address, onHide, defaultAddress, onDefaultAddress, isDelivery, direction, defaultLang
     } = this.props;
-
     const country = [
 			{ value: 1, label: translate("general.ksa") }
 		];
@@ -155,10 +154,14 @@ class Address extends Component {
 
     let renderButtons =
       <Fragment>
-        <div class="checkbox">
-          <input type="checkbox" id="defaultAddress" value="" />
-            <label for="defaultAddress">{translate("form.address.buttons.defaultAddress")}</label>
-          </div>
+          <Field
+            className="checkbox"
+            type="checkbox"
+            name="defaultAddress"
+            id="defaultAddress"
+            component={RenderCheckboxField}
+            label={translate("form.address.buttons.defaultAddress")}
+          />
       <div className="row form-submit">
         <div className="col-auto">
           <Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
@@ -202,18 +205,36 @@ class Address extends Component {
                   <div className="form-row">
                     <div className="col">
                       <div className="has-float-label">
-                        <input name="title" type="text" className="form-control" placeholder={translate("setting.addressBook.title")} />
-                        <label>{translate("setting.addressBook.title")}</label>
+                        <Field
+                          hasFloatLabel
+                          name="title"
+                          label={translate("setting.addressBook.title")}
+                          component={RenderField}
+                          placeholder={translate("setting.addressBook.title")}
+                          validate={[validations.required]}
+                          />
                       </div>
                     </div>
                   </div>
                   <div className="has-float-label">
-                    <input name="line1" type="text" className="form-control" placeholder={translate("setting.addressBook.addressLine1")} />
-                    <label>{translate("setting.addressBook.addressLine1")}</label>
+                    <Field
+                      hasFloatLabel
+                      name="line1"
+                      label={translate("setting.addressBook.addressLine1")}
+                      component={RenderField}
+                      placeholder={translate("setting.addressBook.addressLine1")}
+                      validate={[validations.required]}
+                      />
                   </div>
                   <div className="has-float-label">
-                    <input name="line2" type="text" className="form-control" placeholder={translate("setting.addressBook.addressLine2")} />
-                    <label>{translate("setting.addressBook.addressLine2")}</label>
+                    <Field
+                      hasFloatLabel
+                      name="line2"
+                      label={translate("setting.addressBook.addressLine2")}
+                      component={RenderField}
+                      placeholder={translate("setting.addressBook.addressLine2")}
+                      validate={[validations.required]}
+                      />
                   </div>
                   {renderCityRegion}
                   <div className="form-row">
@@ -222,17 +243,34 @@ class Address extends Component {
                     </div>
                     <div className="col">
                       <div className="has-float-label">
-                        <input name="line1" type="text" className="form-control" placeholder={translate("form.address.phoneNumber")} />
-                        <label>{translate("form.address.phoneNumber")}</label>
+                        <Field
+                          hasFloatLabel
+                          name="mobile"
+                          label={translate("form.address.phoneNumber")}
+                          component={RenderField}
+                          placeholder={translate("form.address.phoneNumber")}
+                          validate={[validations.required]}
+                          />
                       </div>
                     </div>
                   </div>
                   <div className="has-float-label">
-                    <input name="zipCode" type="text" className="form-control" placeholder={translate("form.address.zipCode")} />
-                    <label>{translate("form.address.zipCode")}</label>
+                    <Field
+                      hasFloatLabel
+                      name="zipCode"
+                      label={translate("form.address.zipCode")}
+                      component={RenderField}
+                      placeholder={translate("form.address.zipCode")}
+                      validate={[validations.required]}
+                      />
                   </div>
                   <div className="has-float-label textarea">
-                    <textarea class="form-control" placeholder={translate("form.address.shippingNote")} ></textarea>
+                    <Field
+                      className="form-control"
+                      name="shippingNote"
+                      component={'textarea'}
+                      placeholder={translate("form.address.shippingNote")}
+                      />
                     <label>{translate("form.address.shippingNote")}</label>
                   </div>
                 </div>

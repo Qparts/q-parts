@@ -1800,6 +1800,14 @@
       "zipCode": [
         "الرمز البريدي",
         "zipCode"
+      ],
+      "shipping": [
+          "الشحن",
+          "Shipping"
+      ],
+      "address": [
+        "عنوان",
+        "Address"
       ]
     },
     "order": {

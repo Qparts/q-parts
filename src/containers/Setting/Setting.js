@@ -280,7 +280,6 @@ class Setting extends Component {
 	}
 
   render() {
-      console.log(this.state.sidebarOpen)
     const { translate, direction } = this.props;
     let dialog;
 
@@ -325,7 +324,7 @@ class Setting extends Component {
         <ModalBody>
           <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
           <Address
-            currentLanguage={this.props.currentLanguage}
+            defaultLang={this.props.currentLanguage}
             address={this.props.address}
             customer={this.props.customer}
             getRegions={this.props.getRegions}

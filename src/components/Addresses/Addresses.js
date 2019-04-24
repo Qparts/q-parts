@@ -11,7 +11,6 @@ class Addresses extends Component {
 
   renderAddresses = () => {
     const { translate, addresses } = this.props;
-    console.log(addresses)
     if (addresses.length) {
       return <div className="user-address">
         <MediumScreen>
@@ -44,7 +43,7 @@ class Addresses extends Component {
           <ul className="row list-unstyled">
             {
               this.props.addresses.map((address, idx) => {
-            return <li className="col-md-6 radio-custom">
+            return <li className="col-md-6 radio-custom" key={idx}>
               <Radio
                  onChange={this.handleChange.bind(this, idx)}
                  checked={address.defaultAddress}
