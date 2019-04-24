@@ -9,7 +9,7 @@ import { Map, GoogleApiWrapper } from 'google-maps-react'
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
-import { getTranslatedObject, getTranslatedString } from '../../../utils';
+import { getTranslatedObject } from '../../../utils';
 import { right } from '../../../utils';
 import './Address.css';
 
@@ -40,8 +40,8 @@ class Address extends Component {
 
   render() {
     const {
-      handleSubmit, formValues, translate, currentLanguage, onShowGoogleMap,
-      address, onHide, defaultAddress, onDefaultAddress, isDelivery, direction, defaultLang
+      handleSubmit, translate, onShowGoogleMap,
+      address, isDelivery, direction, defaultLang
     } = this.props;
     const country = [
 			{ value: 1, label: translate("general.ksa") }
@@ -233,7 +233,6 @@ class Address extends Component {
                       label={translate("setting.addressBook.addressLine2")}
                       component={RenderField}
                       placeholder={translate("setting.addressBook.addressLine2")}
-                      validate={[validations.required]}
                       />
                   </div>
                   {renderCityRegion}
