@@ -221,7 +221,11 @@
         "اختر سنة",
         "Select a year"
       ]
-    }
+    },
+    "requiredField": [
+      "المعلومات المطلوبه",
+      "Required input"
+    ]
   },
   "tires": {
     "title": [

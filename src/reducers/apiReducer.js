@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
       return { ...state, city: action.payload[0] }
 
     case GET_REGIONS_SUCCEEDED:
-      return { ...state, regions: action.payload }
+      return { ...state, regions: action.payload.sort() }
 
     case GET_SORTED_PRODUCTS:
       return { ...state }

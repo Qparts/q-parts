@@ -459,6 +459,8 @@ class Setting extends Component {
                         return (
                           <Fragment>
                             <Quotations
+                                regions={this.props.regions}
+                                getCountry={this.props.getCountry}
                                 getPendingRequests={this.props.getPendingRequests}
                                 getCompletedRequests={this.props.getCompletedRequests}
                                 customer={this.props.customer}
@@ -601,6 +603,8 @@ class Setting extends Component {
                               return (
                                 <Fragment>
                                   <Quotations
+                                      regions={this.props.regions}
+                                      getCountry={this.props.getCountry}
                                       getPendingRequests={this.props.getPendingRequests}
                                       getCompletedRequests={this.props.getCompletedRequests}
                                       customer={this.props.customer}

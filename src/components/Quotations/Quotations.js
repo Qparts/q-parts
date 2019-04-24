@@ -50,7 +50,10 @@ class Quotations extends Component {
 
   render() {
 
-    const { quotations, translate, currentLanguage, direction, addToCart, incrementQuantity, decrementQuantity, token, customer } = this.props;
+    const {
+      quotations, translate, currentLanguage, direction, addToCart, incrementQuantity,
+      decrementQuantity, token, customer, regions
+    } = this.props;
 
     return (
       <div className="requests-main">
@@ -94,13 +97,15 @@ class Quotations extends Component {
           <TabPane tabId="pending">
             <ul className="list-unstyled" id="request-list">
               {
-                quotations.pending.map(pendings => {
+                quotations.pending.map(pending => {
                   return <PendingRequest
-                    key={pendings.id}
-                    pendings={pendings}
+                    key={pending.id}
+                    pending={pending}
                     translate={translate}
                     currentLanguage={currentLanguage}
-                    vehicles={customer.vehicles} />
+                    vehicles={customer.vehicles}
+                    regions={regions}
+                  />
                 })
               }
             </ul>
@@ -108,10 +113,10 @@ class Quotations extends Component {
           <TabPane tabId="replayed">
             <ul className="list-unstyled" id="replayed-list">
               {
-                quotations.completed.map(replies => {
+                quotations.completed.map(reply => {
                   return <CompletedRequest
-                    key={replies.id}
-                    replies={replies}
+                    key={reply.id}
+                    reply={reply}
                     translate={translate}
                     currentLanguage={currentLanguage}
                     addToCart={addToCart}
@@ -120,6 +125,7 @@ class Quotations extends Component {
                     direction={direction}
                     token={token}
                     vehicles={customer.vehicles}
+                    regions={regions}
                   />
                 })
               }

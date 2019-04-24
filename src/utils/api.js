@@ -1,5 +1,5 @@
 import { API_ROOT } from '../config/api';
-import { PRODUCT_SERVICE, CART_SERVICE, QUOTATION_SERVICE } from '../actions/constants';
+import { PRODUCT_SERVICE, CART_SERVICE, QUOTATION_SERVICE, LOCATION_SERVICE } from '../actions/constants';
 
 import axios from 'axios';
 
@@ -38,4 +38,8 @@ export const postQuotation = (data) => {
 
 export const getBanks = () => {
     return axios.get(`${API_ROOT}${CART_SERVICE}/banks`)
+}
+
+export const getCountry = async (countryId) => {
+    return await axios.get(`${API_ROOT}${LOCATION_SERVICE}/${countryId}`);
 }
