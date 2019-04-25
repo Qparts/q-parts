@@ -1,76 +1,155 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { REPLIED } from '../../../constants';
+import { LargeScreen, DownLargeScreen } from '../../Device';
+import { getVehicleVin, getVehicleInfo, getRegion, getCity } from '../../../utils/components';
+import { getCountry } from '../../../utils/api';
+import { getTranslatedObject } from '../../../utils';
 
 export class CompletedRequest extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            selectedProduct: {}
+            shippingInfo: getRegion(props.regions, props.reply.cityId),
+            region: null,
+            country: null,
+            city: null
         }
+    }
+
+    componentDidMount = async () => {
+        await this.getRegion();
+        await this.getCountry().then(res => this.setState({ country: res }));
+        await this.getCity();
+    }
+
+    componentDidUpdate = async (prevProps, prevState) => {
+        if (prevProps.currentLanguage !== this.props.currentLanguage) {
+            await this.getRegion();
+            await this.getCountry().then(res => this.setState({ country: res }));
+            await this.getCity();
+        }
+    }
+
+
+    getCountry = async () => {
+        let country = await getCountry(this.state.shippingInfo.countryId);
+
+        return getTranslatedObject(country.data, this.props.currentLanguage, 'name', 'nameAr');
+    }
+
+    getCity = () => {
+        let city = getCity(this.state.shippingInfo.cities, this.props.reply.cityId);
+
+        this.setState({
+            city: getTranslatedObject(city, this.props.currentLanguage, 'name', 'nameAr')
+        });
+    }
+
+    getRegion = () => {
+        this.setState({
+            region: getTranslatedObject(this.state.shippingInfo, this.props.currentLanguage, 'name', 'nameAr')
+        })
     }
 
     addToCart = (item) => {
         this.props.addToCart(item);
     }
 
+    handleClick = event => {
+        const { reply, completedIndex, putCompletedRequestRead } = this.props
+        event.preventDefault();
+        if (!reply.read) {
+            putCompletedRequestRead(reply.id, completedIndex);
+        }
+    }
 
     render() {
-        const { replies, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction } = this.props
-        const created = moment(replies.created).format('MMM Do');
+        const {
+            reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token,
+            direction, vehicles, completedIndex
+        } = this.props;
+        const { country, city, region } = this.state;
+        const created = moment(reply.created).format('MMM Do');
         let ids = [];
+        let hasShippingInfo = (country && region && city);
 
-        replies.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
+        reply.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
-
-        return <Fragment>
+        return <li key={reply.id}>
             <Link
                 to="#"
+                className={`collapsed ${!reply.read ? 'new' : ''}`}
                 data-toggle="collapse"
-                data-target={`.${replies.id}`}
+                data-target={`.${reply.id}`}
                 aria-expanded="false"
-                aria-controls={ids.join(' ')}>
-                <li className="bg-white">
-                    <figure className="row">
-                        <div className="col-3">
-                            <label>{translate("quotationRequest.requestNo")}</label>
-                            <h4>#{replies.id}</h4>
-                        </div>
-                        <figcaption className="col-9">
-                            <div className="row">
-                                <div className="col-md-9 item-dis">
-                                </div>
-                                <div className="col-md-3">
-                                    <p>{translate("quotationRequest.sent")} <span>{created}</span></p>
-                                    <p>{translate("quotationRequest.itemsQuantity")}: <span>{replies.quotationItems.length}</span></p>
-                                </div>
-                            </div>
-                        </figcaption>
-                    </figure>
-                </li>
+                aria-controls={ids.join(' ')}
+                onClick={this.handleClick}>
+                <LargeScreen>
+                    <div className="col-lg-auto">
+                        <label>{translate("quotationRequest.requestNo")}</label>
+                        <p>#{reply.id}</p>
+                    </div>
+                </LargeScreen>
+                <div className="col-lg">
+                    {
+                        getVehicleInfo(vehicles, reply.customerVehicleId, currentLanguage) && (
+                            <p>{getVehicleInfo(vehicles, reply.customerVehicleId, currentLanguage)}</p>
+                        )
+                    }
+                    <span className="details-toggle"><i className="icon-"></i></span>
+                </div>
+                <div className="col-lg-auto r-info">
+                    <p className="date"><span>{translate("quotationRequest.sent")}</span> {created} </p>
+                    <p>{translate("quotationRequest.itemsQuantity")}:  {reply.quotationItems.length}</p>
+                </div>
             </Link>
-            {
-                replies.quotationItems.map(quotationItem => {
-                    return <ListGroupCollapse
-                        requestNumber={replies.id}
-                        key={quotationItem.id}
-                        type={REPLIED}
-                        quotationItem={quotationItem}
-                        translate={translate}
-                        currentLanguage={currentLanguage}
-                        onSelectedProduct={this.setSelectedProduct}
-                        incrementQuantity={incrementQuantity}
-                        decrementQuantity={decrementQuantity}
-                        onAddtoCart={this.addToCart}
-                        direction={direction}
-                        token={token}
-                    />
-                })
-            }
-        </Fragment>
+            <div className={`collapse ${reply.id}`} id={reply.id}>
+                <artical className="request-details" >
+                    <ul className="list-inline vehicle-info">
+                        {
+                            getVehicleVin(vehicles, reply.customerVehicleId) && (
+                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, reply.customerVehicleId)})</li>
+                            )
+                        }
+                        <DownLargeScreen>
+                            <li className="r-id-small">
+                                <label>{translate("quotationRequest.requestNo")}</label> #{reply.id}
+                            </li>
+                        </DownLargeScreen>
+                        {
+                            <li className="ship-info"><i className={hasShippingInfo ? 'icon-location' : ''}></i> {hasShippingInfo ? `${country}, ${region}, ${city}` : ''}</li>
+                        }
+                    </ul>
+                    <ul className="replayed-parts-list ">
+                        {
+                            reply.quotationItems.map((quotationItem, quotationItemIndex) => {
+                                return <ListGroupCollapse
+                                    key={quotationItem.products.id}
+                                    completedIndex={completedIndex}
+                                    quotationItemIndex={quotationItemIndex}
+                                    requestNumber={reply.id}
+                                    type={REPLIED}
+                                    quotationItem={quotationItem}
+                                    translate={translate}
+                                    currentLanguage={currentLanguage}
+                                    onSelectedProduct={this.setSelectedProduct}
+                                    incrementQuantity={incrementQuantity}
+                                    decrementQuantity={decrementQuantity}
+                                    onAddtoCart={this.addToCart}
+                                    direction={direction}
+                                    token={token}
+                                />
+                            })
+                        }
+
+                    </ul>
+                </artical>
+            </div>
+        </li>
     }
 }
 

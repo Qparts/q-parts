@@ -1,3 +1,6 @@
+.main-content > .login:first-child{
+  padding: 40px 15px 20px;
+}
 .login {
   @include text-left;
   form {

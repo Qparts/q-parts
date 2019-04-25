@@ -273,6 +273,12 @@
     @include nav-sm-media{
       display: none !important;
     };
+    .new-note{
+      background: $brand-color;
+      border-radius: 100%;
+      width: 8px;
+      height: 8px;
+    }
     .user-img {
       margin-#{$right}: 5px;
       top: -1px;
@@ -297,5 +303,75 @@
 .slideDown {
   .main-header{
     @include opacity(1);
+  }
+}
+.profile-actions{
+  white-space: nowrap;
+  margin-top: -10px;
+  min-width: 200px;
+  img{
+    max-width: 25px;
+  }
+  i{
+    @include font-size(26px);
+    max-height: 27px;
+    display: inline-block;
+
+  }
+  img,i{
+    margin-#{$right}: 10px;
+  }
+  li{
+    + li{
+      a{
+        border-top: 1px solid darken($light-gray, 1%);
+      }
+    }
+    a{
+      display: flex;
+      width: 100%;
+      align-items: center;
+      padding: 15px;
+      @include font-size(16px);
+      line-height: 1;
+      &:hover{
+        background: $light-gray;
+      }
+      > span{
+        display: none;
+      }
+
+    }
+
+  }
+}
+.notification{
+  position: relative;
+  background: lighten($brand-color, 38%);
+  border-#{$left}: 2px solid $brand-color;
+  span{
+  display: block !important;
+  position: absolute;
+  border-radius: 100%;
+  background: $brand-color;
+  color: $white;
+  top: 19px;
+  #{$right}: 15px;
+  padding: 0 7px;
+  font-family: 'Roboto', sans-serif;
+  text-decoration: none;
+  @include font-size(15px);
+  line-height: 1.5;
+}
+  &:hover{
+    background: lighten($brand-color, 38%) !important;
+  }
+}
+.nav-sm{
+  .notification{
+    span{
+      top: 10px;
+
+    }
   }
 }

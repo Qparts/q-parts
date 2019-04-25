@@ -100,3 +100,18 @@
     margin-#{$left}: 2px;
   }
 }
+.white-btn{
+  background: $white;
+  &:hover,
+  &:focus{
+    background: $light-gray;
+  }
+  + .white-btn{
+    border-bottom-#{$left}-radius: 0 !important;
+  }
+  &:first-child:not(:last-child){
+    border-top-#{$right}-radius: 0 !important;
+    border-bottom-#{$right}-radius: 0 !important;
+    margin-#{$right}: 1px;
+  }
+}

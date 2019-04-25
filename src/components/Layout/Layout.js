@@ -69,10 +69,24 @@ class Layout extends Component {
     }
   }
 
+  renderFooter = () => {
+    const { location: { pathname }, translate } = this.props;
+    if (pathname === '/listing' || pathname.startsWith('/setting')) {
+      return <LargeScreen>
+        <Footer translate={translate} />
+      </LargeScreen>
+
+    } else {
+      return (
+          <Footer translate={translate} />
+      )
+    }
+  }
+
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      countriesOnly, getCountriesOnly, selectCountry, direction, cart, location: { pathname }
+      countriesOnly, getCountriesOnly, selectCountry, direction, cart
     } = this.props;
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -103,14 +117,10 @@ class Layout extends Component {
           cart={cart} />
         {dialog}
         <div className="cd-main-content">
-          {this.props.children}
-          {
-            pathname !== '/listing' ? <Footer translate={translate} /> : (
-              <LargeScreen>
-                <Footer translate={translate} />
-              </LargeScreen>
-            )
-          }
+          <div className="main-content">
+            {this.props.children}
+          </div>
+          {this.renderFooter()}
           <div className="cd-overlay"></div>
         </div>
       </Fragment>

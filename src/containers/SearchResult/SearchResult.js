@@ -197,7 +197,7 @@ class SearchResult extends Component {
 
 	}
 
-	onSetSidebarOpen(open) {
+	onSetSidebarOpen (open) {
 		this.setState({
 			sidebarOpen: open,
 			isHidden: 'is-hidden',
@@ -705,6 +705,8 @@ class SearchResult extends Component {
 					<Sidebar
 						ref={this.setSidebarRef}
 						sidebarClassName={`sidebar side-filter ${this.state.movesOut}`}
+						contentClassName="content-sidebar"
+						overlayClassName="sidebar-overlay"
 						sidebar={
 							<aside>
 								<header>
@@ -793,6 +795,16 @@ class SearchResult extends Component {
 																</button>
 															</div>
 														</div>
+													</div>
+													<div className="filter-result" style={isEmpty(filtrationChecked) ? commonStyles.hide : styles.show}>
+														<ul className="list-inline">
+															{
+																filtrationChecked.map((item, index) => (
+																	<li key={index}>{getTranslatedObject(item, currentLanguage, 'title', 'titleAr')} <a href="#" onClick={onRemoveItem.bind(this, index, item)}><i className="icon-close"></i></a></li>
+																))
+															}
+														</ul>
+														<a className="btn btn-gray" onClick={onClear}>{this.props.translate("general.clearAll")}</a>
 													</div>
 													<ul className="result-list products-list row">
 														{this.renderProducts()}

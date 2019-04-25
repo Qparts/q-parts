@@ -33,26 +33,18 @@
       }
     }
   }
-
-  // .none-active{
-  //   div{
-  //     display: none;
-  //     div{
-  //       padding-top: 15%;
-  //       div{
-  //         width: 0px !important;
-  //       }
-  //     }
-  //   }
-  // }
-
   .side-bar-compnent-btn{
-
       .btn-primary{
         display: block;
       }
-
         .none-active-btn{
           display: none;
         }
   }
+.sidebar{
+  z-index: 12 !important;
+}
+.sidebar-overlay{
+  z-index: 11 rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}

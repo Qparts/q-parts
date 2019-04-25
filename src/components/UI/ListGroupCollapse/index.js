@@ -3,12 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { PENDING, INCREMENT, DECREMENT, RADIX } from '../../../constants';
 import Button from '../../UI/Button';
 import { handleImageFallback, getTranslatedObject, isAuth } from '../../../utils';
-import { CustomScreen, UpSmallScreen } from '../../Device';
 
 //dialog
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from '../../../containers/Product/AddProductPopup/AddProduct';
-import Title from '../Title';
 
 export class ListGroupCollapse extends Component {
     constructor(props) {
@@ -51,7 +49,7 @@ export class ListGroupCollapse extends Component {
         e.preventDefault();
 
 
-        const { incrementQuantity, decrementQuantity, requestNumber } = this.props;
+        const { incrementQuantity, decrementQuantity, requestNumber, completedIndex, quotationItemIndex } = this.props;
 
         const max = 20;
         const min = 1;
@@ -59,10 +57,10 @@ export class ListGroupCollapse extends Component {
 
         if (action === DECREMENT) {
             const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
-            decrementQuantity({ quotationItem, decQuantity, requestNumber });
+            decrementQuantity({ quotationItem, decQuantity, requestNumber, completedIndex, quotationItemIndex });
         } else {
             const incQuantity = newQuanValue !== max ? newQuanValue += 1 : newQuanValue;
-            incrementQuantity({ quotationItem, incQuantity, requestNumber });
+            incrementQuantity({ quotationItem, incQuantity, requestNumber, completedIndex, quotationItemIndex });
         }
     }
 
@@ -89,9 +87,9 @@ export class ListGroupCollapse extends Component {
         const { quotationItem, requestNumber, type, translate, currentLanguage, direction, token } = this.props;
 
         const dialog = (
-            <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.state.modal} toggle={this.togglePopup}>
+            <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>
                 <ModalHeader toggle={this.togglePopup}>
-                    <Title number={this.state.product.quantity} header={translate("dialog.addToCart.title")} />
+                    <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
                 </ModalHeader>
                 <ModalBody>
                     <AddProduct
@@ -107,73 +105,52 @@ export class ListGroupCollapse extends Component {
 
         return (
             type === PENDING ?
-                <div className={`collapse ${requestNumber}`}  id={quotationItem.id}>
-                    <div style={{ background: '#ebebeb' }} className="d-table product-options">
-
-                        <div className="d-table-row">
-                            <div className="d-table-cell"><span>{translate("quotationRequest.name")} </span></div>
-                            <div className="d-table-cell">{quotationItem.name}</div>
-                        </div>
-                        <div className="d-table-row">
-                            <div className="d-table-cell"><span>{translate("quotationRequest.quantity")}</span></div>
-                            <div className="d-table-cell">{quotationItem.quantity}</div>
-                        </div>
-                    </div>
-                </div> :
+                <li className="d-table-row">
+                    <div className="d-table-cell">{quotationItem.name}</div>
+                    <div className="d-table-cell">{quotationItem.quantity}</div>
+                </li> :
                 <Fragment>
-                    <div className={`collapse ${requestNumber}`} key={quotationItem.id} id={quotationItem.id}>
-                        <div className="d-table product-options">
-                            <div className={`render-cart-item col-12`}>
-                                <ul className="cart-items list-unstyled">
-                                    <li className="bg-white">
-                                        <figure className="row">
-                                            <Link to="#" className="col-3 item-img">
-                                                <img onError={handleImageFallback} src={quotationItem.products.image} alt="no item" />
-                                            </Link>
-                                            <figcaption className="col-9">
-                                                <div className="row">
-                                                    <div className="col-md-9 item-dis">
-                                                        <header>
-                                                            <h3><Link to="#">{quotationItem.products.desc}</Link></h3>
-                                                            <h4>{getTranslatedObject(quotationItem.products.brand, currentLanguage, 'name', 'nameAr')} <span>{quotationItem.products.productNumber}</span></h4>
-                                                        </header>
-                                                        <CustomScreen maxWidth={1300}>
-                                                            <div className="cart-quantity d-block d-lg-none">
-                                                                <UpSmallScreen>
-                                                                    <h5>{translate("general.quantity")}</h5>
-                                                                </UpSmallScreen>
-                                                                {this.renderNumberPicker(quotationItem)}
-                                                            </div>
-                                                        </CustomScreen>
-                                                        <div className="cart-product-price">
-                                                            <p className="price">{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
-                                                        </div>
-                                                        <div className="cart-actions">
-                                                            <Button
-                                                                onClick={this.handleAddToCart.bind(this, quotationItem)}
-                                                                isReverseOrder
-                                                                type="button"
-                                                                className="btn btn-primary"
-                                                                text={translate("product.buttons.addToCart")}
-                                                                icon="icon-cart" />
-                                                        </div>
-                                                    </div>
-                                                    <CustomScreen minWidth={1300}>
-                                                        <div className="col-md-3">
-                                                            <div className="cart-quantities d-none d-lg-block">
-                                                                <h5>{translate("general.quantity")}</h5>
-                                                                {this.renderNumberPicker(quotationItem)}
-                                                            </div>
-                                                        </div>
-                                                    </CustomScreen>
-                                                </div>
-                                            </figcaption>
-                                        </figure>
-                                    </li>
-                                </ul>
+                    <li className="media">
+                        <Link to={`/products/${quotationItem.products.id}`}>
+                            <img onError={handleImageFallback} src={quotationItem.products.image} alt="no images" />
+                        </Link>
+                        <figcaption className="media-body">
+                            <div className="row">
+                                <div className="col">
+                                    <h5><Link to={`/products/${quotationItem.products.id}`}>{getTranslatedObject(quotationItem.products, currentLanguage, 'desc', 'descAr')}</Link></h5>
+                                    <ul className="list-inline product-info">
+                                        <li><strong>{getTranslatedObject(quotationItem.products.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+                                        <li>#{quotationItem.products.productNumber}</li>
+                                    </ul>
+                                </div>
+                                <div className="col-lg-auto price">
+                                    <label>{translate("general.price")}</label>
+                                    <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                            <span className="seperator"></span>
+                            <div className="row">
+                                <div className="col total-price">
+                                    <p>{translate("general.quantity")}</p>
+                                    {this.renderNumberPicker(quotationItem)}
+                                    <div className="price">
+                                        <label>{translate("quotationRequest.totalPrice")}</label>
+                                        <p>{quotationItem.products.salesPrice * quotationItem.quantity} <span>{translate("general.currency")}</span></p>
+                                    </div>
+                                </div>
+                                <div className="col-lg-auto add-cart">
+                                    <Button
+                                        onClick={this.handleAddToCart.bind(this, quotationItem)}
+                                        isReverseOrder
+                                        type="button"
+                                        className="btn btn-primary"
+                                        text={translate("product.buttons.addToCart")}
+                                        icon="icon-cart" />
+                                    {/* <Link to="#" className="btn" onClick={() => this.deleteCart(purchasedItem)}><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link> */}
+                                </div>
+                            </div>
+                        </figcaption>
+                    </li>
                     {dialog}
                 </Fragment>
 

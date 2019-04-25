@@ -33,6 +33,7 @@ class HeaderDetails extends Component {
           isLoggedIn ?
           <span>
             <b>{fullName}</b>
+            <label className="new-note"></label>
           </span> :
             <Fragment>
               <span className="user-img position-relative d-inline-block">
@@ -64,16 +65,43 @@ class HeaderDetails extends Component {
                     <i className={`icon-arrow-${right(direction)}`} style={styles.arrow_right} />
                   </Link>
                 </p>
+                {/*<ul className="account-actions">
+                  <li>
+                   <Link to="/" onClick={onSignin}><i className="icon-shopping-bag"></i>{translate("navBar.menu.menuItem.order")}</Link>
+                  </li>
+                  <li><Link to="/setting/quotations"><i className="icon-send"></i>{translate("navBar.menu.menuItem.quotations")}</Link></li>
+                  <li><Link to="/" onClick={onSignin}><img alt="garage" src="/img/garage.svg" />{translate("navBar.garage")}</Link></li>
+                </ul>*/}
               </Fragment>
             }
             {
-              isLoggedIn && <ul className="account-actions">
+              isLoggedIn && <ul className="profile-actions list-unstyled">
                 <li>
-                  {/* <Link to="/"><i className="icon-shopping-bag"></i>{translate("navBar.menu.menuItem.quotations")}</Link> */}
+                  <Link to="/setting/quotations" className="notification">
+                    <span>1</span>
+                    <i className="icon-send"></i>
+                    {translate("navBar.menu.menuItem.quotations")}
+
+                  </Link>
                 </li>
-                <li><Link to="/setting/quotations"><i className="icon-send"></i>{translate("navBar.menu.menuItem.quotations")}</Link></li>
-                <li><Link to="/setting/garage"><img alt="garage" src="/img/garage.svg" />{translate("navBar.garage")}</Link></li>
-                <li><Link to="/logout">{translate("navBar.menu.menuItem.logout")}</Link></li>
+                <li>
+                  <Link to="/setting/orders"><i className="icon-product"></i>{translate("navBar.menu.menuItem.order")}</Link>
+                </li>
+                <li>
+                  <Link to="/setting/wishlist"><i className="icon-heart"></i>{translate("navBar.menu.menuItem.wishlist")}</Link>
+                </li>
+                <li>
+                  <Link to="/setting/garage"><img alt="garage" src="/img/garage.svg" />{translate("navBar.garage")}</Link>
+                </li>
+                <li>
+                  <Link to="/setting/addresses"><i className="icon-address"></i>{translate("navBar.menu.menuItem.address")}</Link>
+                </li>
+                <li>
+                  <Link to="/setting/profile"><img alt="garage" src="/img/user.svg" />{translate("navBar.menu.menuItem.setting")}</Link>
+                </li>
+                <li>
+                  <Link to="/logout"><i className="icon-sign-out"></i>{translate("navBar.menu.menuItem.logout")}</Link>
+                </li>
               </ul>
             }
           </DropdownItem>

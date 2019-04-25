@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { withRouter, Link } from 'react-router-dom';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -98,7 +98,7 @@ class Cart extends Component {
 		const chatMessages = [
 			translate("customerService.cart.whatsApp.header"),
 			translate("customerService.cart.whatsApp.subHeader")
-		  ];
+		];
 
 		for (var i = 0; i < checkoutData.length; i++) {
 			subtotal += checkoutData[i].subtotal;
@@ -110,6 +110,69 @@ class Cart extends Component {
 			{ value: 2, label: "Egypt" },
 			{ value: 3, label: "Jordan" }
 		];
+
+		let cart;
+
+		if (this.props.purchasedItems.length > 0) {
+			cart = <Fragment>
+				<div className={divItemMovile}>
+					<div>
+						<label>{translate("orderSummary.total")}</label>
+						<p>{subtotal + 50}<span className="currency">{translate("general.currency")}</span></p>
+					</div>
+					<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
+				</div>
+				<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
+					<RenderCartItem
+						currentLanguage={this.props.currentLanguage}
+						translate={translate}
+						direction={direction}
+						purchasedItems={checkoutData}
+						incrementQuantity={this.props.incrementQuantity}
+						decrementQuantity={this.props.decrementQuantity}
+						deleteCart={this.props.deleteCart}
+						moveCartToWishlist={this.props.moveCartToWishlist}
+					/>
+					<div className="col-lg-3">
+						<div className="order-summary">
+							<OrderSummary
+								translate={translate}
+								checkoutData={checkoutData}
+								subtotal={subtotal}
+								submitButton={translate("orderSummary.placeOrder")} />
+							{quantity > 0 &&
+								<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
+							}
+						</div>
+						<CustomerService
+							messages={chatMessages}
+							url="//wa.me/966547074452/" />
+						{/*<div className="banner-250 d-none d-lg-table bg-white">
+									<p className="">
+										Google Ad<br />
+										250x250
+								</p>
+								</div>*/}
+					</div>
+				</form>
+			</Fragment>
+
+		} else {
+			cart = <div className="cart-empty">
+				<figure>
+					<i className="icon-cart"></i>
+				</figure>
+				<figcaption>
+					<p>{translate("cart.empty")}</p>
+					<span>
+						{translate("offers.subTitle")}
+					</span>
+					<Link className="btn btn-primary" to="/">{translate("setting.wishlist.startShopping")}<i className={`icon-arrow-${right(this.props.direction)}`}></i></Link>
+				</figcaption>
+			</div>
+		}
+
+
 		return (
 			<section>
 				<section className="default-header-bg">
@@ -138,46 +201,7 @@ class Cart extends Component {
 				</section>
 				<section className="gray-bg pt-sec">
 					<div className="container-fluid">
-						<div className={divItemMovile}>
-							<div>
-								<label>{translate("orderSummary.total")}</label>
-								<p>{subtotal + 50}<span className="currency">{translate("general.currency")}</span></p>
-							</div>
-							<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
-						</div>
-						<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-							<RenderCartItem
-								currentLanguage={this.props.currentLanguage}
-								translate={translate}
-								direction={direction}
-								purchasedItems={checkoutData}
-								incrementQuantity={this.props.incrementQuantity}
-								decrementQuantity={this.props.decrementQuantity}
-								deleteCart={this.props.deleteCart}
-								moveCartToWishlist={this.props.moveCartToWishlist}
-							/>
-							<div className="col-lg-3">
-								<div className="order-summary">
-									<OrderSummary
-										translate={translate}
-										checkoutData={checkoutData}
-										subtotal={subtotal}
-										submitButton={translate("orderSummary.placeOrder")} />
-									{quantity > 0 &&
-										<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
-									}
-								</div>
-								<CustomerService
-									messages={chatMessages}
-									url="//wa.me/966547074452/" />
-								{/*<div className="banner-250 d-none d-lg-table bg-white">
-									<p className="">
-										Google Ad<br />
-										250x250
-								</p>
-								</div>*/}
-							</div>
-						</form>
+						{cart}
 					</div>
 				</section>
 				{dialog}

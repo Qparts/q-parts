@@ -1,3 +1,16 @@
+.main-content{
+  height: auto;
+  @include nav-lg-media{
+    min-height: calc(100vh - 490px);
+  };
+  @include nav-sm-media{
+    min-height: calc(100vh - 464px);
+  };
+  @include media-breakpoint-down(md){
+    min-height: calc(100vh - 240px);
+
+  };
+}
 /*container max width*/
 .container-fluid {
   max-width: $max-container;
@@ -92,4 +105,7 @@ button:disabled{
   @include if-rtl{
     padding-right: 0;
   };
+}
+textarea{
+  border-width: 0 !important;
 }

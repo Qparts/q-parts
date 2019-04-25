@@ -15,89 +15,91 @@ class ResultNotFound extends Component {
 
     return(
       <Fragment>
-      <div id="result-not-found">
-		
-        <div className="no-result container-fluid">
-						
-          		<img alt="No Result" src="/img/no-result.svg"/>
-            	<header className="sec-header">
-                <h1>
-                    <p>{translate("noResult.no")}</p>
-                    {translate("noResult.result")}
-                </h1>
-                <span>{translate("noResult.sorry")}</span>
-            	</header>
-        </div>
-				<div className="no-result container-fluid">
-					<Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
-				</div>
-        <section className="main-cat container-fluid">
+        <div className="container-fluid">
+          <div className="no-products">
+            <div>
+              <div className="gray-bg"></div>
+              <div class="media">
+                <img alt="No Products" src="/img/no-products.svg"/>
+                <div class="media-body">
+                  <h5 class="mt-0">{translate("noResult.no-product")}</h5>
+                  <Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <header class="sec-header"><h1><p>{translate("noResult.shopBy")}</p>{translate("noResult.category")}</h1></header>
-					<div className="row">
-						<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/motor-oil.png" alt="Oil" />
-								<figcaption>
-									<h4>{translate("nav.oil")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-						<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/tyres.png" alt="Tires" />
-								<figcaption>
-									<h4>{translate("nav.tires")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-						<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/tools.png" alt="Tools" />
-								<figcaption>
-									<h4>{translate("quotationOrder.tools")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-						<Link to="/listing?query=&page=1&category=10" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/accessories.png" alt="Accessories" />
-								<figcaption>
-									<h4>{translate("quotationOrder.accessories")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-						<Link to="/listing?query=&page=1&category=36" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/outdoor-cat.jpg" alt="Outdoors" />
-								<figcaption>
-									<h4>{translate("quotationOrder.outdoors")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-						<Link to="/listing?query=&page=1&category=26" className="col-lg-4 col-6">
-							<figure>
-								<img src="/img/car-care.jpg" alt=" Car Care" />
-								<figcaption>
-									<h4>{translate("quotationOrder.carCare")}</h4>
-								</figcaption>
-								<span>{translate("quotationOrder.shopNow")}</span>
-							</figure>
-						</Link>
-					</div>
-				</section>
+          <section className="main-cat">
+            <div className="row">
+              <div className="col">
+                <header class="sec-header"><h1><p>{translate("noResult.shopBy")}</p>{translate("noResult.category")}</h1></header>
+              </div>
+            </div>
+  					<div className="row">
+  						<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/motor-oil.png" alt="Oil" />
+  								<figcaption>
+  									<h4>{translate("nav.oil")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  						<Link to="/listing?query=&page=1&category=13" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/tyres.png" alt="Tires" />
+  								<figcaption>
+  									<h4>{translate("nav.tires")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  						<Link to="/listing?query=&page=1&category=28" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/tools.png" alt="Tools" />
+  								<figcaption>
+  									<h4>{translate("quotationOrder.tools")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  						<Link to="/listing?query=&page=1&category=10" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/accessories.png" alt="Accessories" />
+  								<figcaption>
+  									<h4>{translate("quotationOrder.accessories")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  						<Link to="/listing?query=&page=1&category=36" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/outdoor-cat.jpg" alt="Outdoors" />
+  								<figcaption>
+  									<h4>{translate("quotationOrder.outdoors")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  						<Link to="/listing?query=&page=1&category=26" className="col-lg-4 col-6">
+  							<figure>
+  								<img src="/img/car-care.jpg" alt=" Car Care" />
+  								<figcaption>
+  									<h4>{translate("quotationOrder.carCare")}</h4>
+  								</figcaption>
+  								<span>{translate("quotationOrder.shopNow")}</span>
+  							</figure>
+  						</Link>
+  					</div>
+  				</section>
+
+        </div>
         <Products
-					recentViewedProducts={recentViewedProducts}
-					translate={translate}
-					direction={direction}
-					currentLanguage={currentLanguage}
-				/>
-      </div>
+          recentViewedProducts={recentViewedProducts}
+          translate={translate}
+          direction={direction}
+          currentLanguage={currentLanguage}
+        />
       </Fragment>
     )
   }

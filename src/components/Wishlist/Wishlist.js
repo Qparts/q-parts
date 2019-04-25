@@ -3,7 +3,12 @@ import Button from '../UI/Button';
 import moment from 'moment';
 import { colors } from '../../constants';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
-import { MediumScreen, SmallScreen } from '../Device';
+import { DownMediumScreen , MediumScreen } from '../../components/Device';
+
+import Link from '../../components/UI/Link';
+
+import { right } from '../../utils';
+
 
 import _ from 'lodash';
 
@@ -35,19 +40,12 @@ class Wishlist extends Component {
                 currency: translate("general.currency"),
                 created,
                 actions: [
-                    <div key={idx} className="cart-actions">
-                        <SmallScreen><span className="added-date" style={styles.addedDate}>{created}</span></SmallScreen>
-                        <Button
-                            isReverseOrder={true}
-                            className="btn btn-gray"
-                            icon="icon-cart"
-                            text={translate("setting.wishlist.addToCart")}
-                            onClick={moveWishlistToCart.bind(this, list)} />
-                        <Button
-                            className="btn-link delete-btn"
-                            icon="icon-trash"
-                            onClick={deleteWishlist.bind(this, list)} />
-                    </div>
+                  <div key={idx} className="item-actions">
+                    <a href="#" className="btn btn-gray" isReverseOrder={true} onClick={moveWishlistToCart.bind(this, list)}>
+                      <i className="icon-cart"></i> {translate("setting.wishlist.addToCart")}
+                    </a>
+                    <a href="#" className="btn" onClick={deleteWishlist.bind(this, list)}><i className="icon-trash"></i></a>
+                  </div>
                 ],
                 image: list.image,
                 productNumber: list.productNumber,
@@ -60,47 +58,58 @@ class Wishlist extends Component {
 
     render() {
         const { currentLanguage, translate } = this.props;
-
         return (
-            <section id="wish-list">
+            <section className="wishlist">
                 {
                     _.isEmpty(this.props.wishlist) ? (
-                        <div className="wishlist-empty">
-                            <div>
-                                <p className="icon-heart" />
-                                <p className="wishlist-text">{translate("setting.wishlist.noWishlist")}</p>
-                            </div>
+                        <div className="empty">
+                          <figure><i className="icon-heart"></i></figure>
+                            <figcaption>
+                                <p>{translate("setting.wishlist.noWishlist")}</p>
+                                <span>
+                                  {translate("offers.subTitle")}
+                                </span>
+                                <Link
+          												to={'/'}
+          												className='btn btn-primary'
+          												text={translate("setting.wishlist.startShopping")}
+          												icon={`icon-arrow-${right(this.props.direction)}`}
+          											/>
+                            </figcaption>
                         </div>
                     ) :
                         this.state.wishlist.map((item, idx) => (
-                            <div key={idx} className="border rounded card">
-                                <div className="row">
-                                    <div className="col-5 col-md-2">
-                                        <img
-                                            style={{ height: '165px' }}
-                                            src={item.image}
-                                            onError={handleImageFallback}
-                                            alt="no wish list found" />
-                                    </div>
-                                    <div className="col-7 col-md-3 pt">
-                                        <div className="wish-list_product-details">
-                                            <span className="part-text" style={styles}>{item.desc}</span>
-                                            <span className="manufacturer-text">{getTranslatedObject(item.brand, currentLanguage, 'name', 'nameAr')}</span>
-                                            <span className="part-text">{item.productNumber}</span>
-                                            <div className="w-100">
-                                                <span className="sales-price">{item.salesPrice}</span>
-                                                <span className="currency">{item.currency}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-12 col-md-7 pt">
-                                        <div>
-                                            <MediumScreen><span className="added-date" style={styles.addedDate}>{item.created}</span></MediumScreen>
-                                            {item.actions}
-                                        </div>
-                                    </div>
+                          <div className="card">
+                            <header>
+                              <h2>{translate("setting.wishlist.wishlist")}<label>({this.state.wishlist.length} {translate("setting.wishlist.items")})</label></h2>
+                            </header>
+                            <ul className="list-unstyled">
+                              <li key={idx} class="media">
+                                <a href="#" className="media-img"><img onError={handleImageFallback} src={item.image} alt="no wishList"/></a>
+                                <div class="media-body">
+                                  <div className="col">
+                                    <h5><a href="#">{getTranslatedObject(item, currentLanguage, 'desc', 'descAr')}</a></h5>
+                                    <ul className="list-inline">
+                                      <li><strong>{getTranslatedObject(item.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+                                      <li>#{item.productNumber}</li>
+                                    </ul>
+                                    <DownMediumScreen>
+                                      <p className="date">{translate("setting.wishlist.date")}:<span> {item.created}</span></p>
+                                    </DownMediumScreen>
+                                    <p className="price">{item.salesPrice} <span>{item.currency}</span></p>
+                                  </div>
+                                  <div className="col-md-auto">
+                                    <MediumScreen>
+                                      <p className="date">{translate("setting.wishlist.date")}:<span> {item.created}</span></p>
+                                    </MediumScreen>
+                                    {item.actions}
+                                  </div>
                                 </div>
-                            </div>
+                              </li>
+
+                            </ul>
+                          </div>
+
                         ))
                 }
 

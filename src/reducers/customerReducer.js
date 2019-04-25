@@ -8,7 +8,7 @@ import {
   COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
   RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER,
   CHANGE_DEFAULT_ADDRESS, CHANGE_DEFAULT_VEHICLE, INCREMENRT_QUOTATION_PRODUCT_QUANTITY, DECREMENRT_QUOTATION_PRODUCT_QUANTITY, SET_LOADING, IS_VALID_CREDIT_CARD, MODAL_LOGIN, CHECK_LOGIN_CHECKOUT, CHECK_LOGIN_QUOTATION_ORDER,
-  QUOTATION_ORDER_INOF
+  QUOTATION_ORDER_INOF, PUT_COMPLETED_REQUEST_READ
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR, quotations } from '../constants';
@@ -231,6 +231,13 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, quotations: completed }
 
+    case PUT_COMPLETED_REQUEST_READ:
+      const completedRead = update(state.quotations.completed, {
+        [action.payload.idx]: { read: { $set: true } }
+      });
+
+      return { ...state, quotations: { ...state.quotations, completed: completedRead } }
+
     case SET_PASSWORD_SCORE:
       return { ...state, passwordScore: action.payload }
 
@@ -248,68 +255,54 @@ export default function reducer(state = initialState, action) {
 
     case INCREMENRT_QUOTATION_PRODUCT_QUANTITY:
       const { incQuantity } = action.payload;
-      let newCompletedQuotationItemsInc = [];
-      state.quotations.completed.forEach(quotations => {
-        quotations.quotationItems.forEach(oldQuotationItem => {
-          const { quotationItem } = action.payload;
-          const newQuantityInc = oldQuotationItem.id === quotationItem.id ? incQuantity : oldQuotationItem.quantity
-          newCompletedQuotationItemsInc.push({
-            ...oldQuotationItem, quantity: newQuantityInc
-          })
-        })
-      });
+      let replaceQuotationItem = state.quotations.completed[action.payload.completedIndex].quotationItems[action.payload.quotationItemIndex];
 
-      const newQuotations = state.quotations.completed.map(item => {
-        const { requestNumber } = action.payload;
-        return {
-          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsInc : item.quotationItems
+
+      const newQuotationsInc = update(state.quotations.completed, {
+        [action.payload.completedIndex]: {
+          quotationItems: {
+            $splice: [[action.payload.quotationItemIndex, 1, { ...replaceQuotationItem, quantity: incQuantity }]]
+          }
         }
       });
 
-      return { ...state, quotations: { ...state.quotations, completed: newQuotations } }
+      return { ...state, quotations: { ...state.quotations, completed: newQuotationsInc } }
 
     case DECREMENRT_QUOTATION_PRODUCT_QUANTITY:
+
       const { decQuantity } = action.payload;
+      let replaceQuotationItemInc = state.quotations.completed[action.payload.completedIndex].quotationItems[action.payload.quotationItemIndex];
 
-      let newCompletedQuotationItemsDec = [];
-      state.quotations.completed.forEach(quotations => {
-        quotations.quotationItems.forEach(oldQuotationItem => {
-          const { quotationItem } = action.payload;
-          const newQuantity = oldQuotationItem.id === quotationItem.id ? decQuantity : oldQuotationItem.quantity
-          newCompletedQuotationItemsDec.push({
-            ...oldQuotationItem, quantity: newQuantity
-          })
-        })
-      });
 
-      const newQuotationsDec = state.quotations.completed.map(item => {
-        const { requestNumber } = action.payload;
-        return {
-          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsDec : item.quotationItems
+      const newQuotationsDec = update(state.quotations.completed, {
+        [action.payload.completedIndex]: {
+          quotationItems: {
+            $splice: [[action.payload.quotationItemIndex, 1, { ...replaceQuotationItemInc, quantity: decQuantity }]]
+          }
         }
       });
 
       return { ...state, quotations: { ...state.quotations, completed: newQuotationsDec } }
 
-     case SET_LOADING:
+    case SET_LOADING:
       return {
         ...state, isLoading: action.payload
       }
 
-      case IS_VALID_CREDIT_CARD:
-       return {
-         ...state, isValidcreditCard: action.payload
-       }
+    case IS_VALID_CREDIT_CARD:
+      return {
+        ...state, isValidcreditCard: action.payload
+      }
 
-       case MODAL_LOGIN:
-        return {
-          ...state, modalLogin: action.payload
-        }
+    case MODAL_LOGIN:
+      return {
+        ...state, modalLogin: action.payload
+      }
 
-        case QUOTATION_ORDER_INOF:
-         return {
-           ...state, quotationOrderInfo: action.payload
-         }
+    case QUOTATION_ORDER_INOF:
+      return {
+        ...state, quotationOrderInfo: action.payload
+      }
 
     default:
       return state;

@@ -11,7 +11,7 @@ import SelectInput from '../SelectInput/SelectInput';
 import * as validations from '../../utils';
 import Link from "../UI/Link";
 
-import { SmallScreen, MediumScreen } from '../../components/Device/index.js';
+import { DownLargeScreen, LargeScreen } from '../../components/Device/index.js';
 
 class Orders extends Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Orders extends Component {
       price: "200 SR",
       status: "Canceled",
       actions: [
-        <Button key={0} value={0} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+        <Button key={0} value={0} text={this.props.translate("setting.orders.table.buttons.details")} onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     }, {
       orderNum: '0002',
@@ -41,7 +41,7 @@ class Orders extends Component {
       price: "200 SR",
       status: "Shipped",
       actions: [
-        <Button key={0} value={1} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+        <Button key={0} value={1} text={this.props.translate("setting.orders.table.buttons.details")} onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     }, {
       orderNum: '0003',
@@ -50,7 +50,7 @@ class Orders extends Component {
       price: "200 SR",
       status: "Under processing",
       actions: [
-        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     }, {
       orderNum: '0003',
@@ -59,7 +59,7 @@ class Orders extends Component {
       price: "200 SR",
       status: "Under processing",
       actions: [
-        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} className="btn btn-light" onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
+        <Button key={0} value={2} text={this.props.translate("setting.orders.table.buttons.details")} onClick={this.handleDetails} icon="icon-add" isReverseOrder/>,
       ]
     },
     ]
@@ -103,79 +103,86 @@ class Orders extends Component {
 
     return (
       <Fragment>
-        <MediumScreen>
-          <div id="Orders-container">
-            <div className="border rounded card">
-              <div className="Orders-search justify-content-between col-12">
-                <div style={{display:'flex'}}>
-                  <div className="col-12">
-                    <Field
-                      name="search-option"
-                      component={SelectInput}
-                      options={options}
-                      placeholder="Select Date"
-                       onChange={this.handleSelectChange}/>
+          <div className="orders-main">
+            <DownLargeScreen>
+              <h2 className="sec-title-sm">Orders</h2>
+            </DownLargeScreen>
+            <div className="empty">
+              <LargeScreen>
+                <header>
+                  <h5>Track Your Orders</h5>
+                </header>
+              </LargeScreen>
+                      <figure>
+                        <img src="/img/no-products.svg" />
+                      </figure>
+                     <figcaption>
+                       <p>No Order Yet </p>
+                          <a className="btn btn-primary" href="#" >Start Shopping <i className="icon-arrow-right"></i></a>
+                     </figcaption>
+             </div>
+            <div className="row">
+              <div className="col search-order">
+                <Field
+                  name="search-option"
+                  component={SelectInput}
+                  options={options}
+                  placeholder="Select Date"
+                   onChange={this.handleSelectChange}/>
+                 <div className="search-input">
+                   <input type="search" className="form-control input" onChange={this.handleChange} value={this.state.orderNum} placeholder="Search by order ID"/>
+                   <i className="icon-search"></i>
+                 </div>
+              </div>
+              <LargeScreen>
+                <ul className="col-auto order-status">
+                  <li>
+                    <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
+                  </li>
+                  <li>
+                    <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
+                  </li>
+                  <li>
+                    <Link to="#" value={"Canceled"} text={"Canceled"} onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
+                  </li>
+                  <li>
+                    <Link to="#" value={"Returned"} text={"Returned"} onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
+                  </li>
+                </ul>
+              </LargeScreen>
+            </div>
+            <LargeScreen>
+              <div className="row">
+                <div className="col">
+                  <div className="filter-result">
+                    <ul className="list-inline">
+                      <li>ID: 0003 <a href="#"><i class="icon-close"></i></a></li>
+                      <li>Shipped Orders <a href="#"><i class="icon-close"></i></a></li>
+                    </ul>
+                    <a class="btn btn-gray">Clear All</a>
                   </div>
-                  <div id="search" className="col-1">
-                  	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
-                  </div>
-                </div>
-                <div className="btn-div">
-                  <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
-                  <span className="seperator"></span>
-                  <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
-                  <span className="seperator"></span>
-                  <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
-                  <span className="seperator"></span>
-                  <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
                 </div>
               </div>
-              <span className="seperator"></span>
-              <Table
-                headers={headers}
-                columns={this.state.mockItems}
-                search={this.state.search}
-                searchByDate={this.state.searchByDate}
-              />
-            </div>
-          </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="col-12" id="Orders-container-mobile">
-            <div className="border rounded card">
-              <div className="Orders-search justify-content-between row">
-                <div style={{display:'flex'}} className="col-12">
-                  <div className="col-9">
-                    <Field
-                      name="search-option"
-                      component={SelectInput}
-                      options={options}
-                      placeholder="Select Date"
-                       onChange={this.handleSelectChange}/>
-                  </div>
-                  <div id="search" className="col-3">
-                  	<input type="search" onChange={this.handleChange} value={this.state.orderNum}/>
-                  </div>
+            </LargeScreen>
+            <div className="row">
+              <div className="col">
+                <div className="table-responsive">
+                  <Table
+                    className="data"
+                    headers={headers}
+                    columns={this.state.mockItems}
+                    search={this.state.search}
+                    searchByDate={this.state.searchByDate}
+                  />
                 </div>
-                <div className="btn-div col-12">
-                  <Link to="#" value={"under processing"} text={translate("setting.orders.filter.underPro")} className="btn btn-light col-6" onClick={() => this.handleFilter("under")} icon="icon-time" isReverseOrder/>
-                  <Link  to="#" value={"shipped"} text={translate("setting.orders.filter.shipped")} className="btn btn-light col-6" onClick={() => this.handleFilter("shipped")} icon="icon-shipping" isReverseOrder/>
-                </div>
-                <div className="btn-div col-12">
-                  <Link to="#" value={"Canceled"} text={"Canceled"} className="btn btn-light col-6" onClick={() => this.handleFilter("Canceled")} icon="icon-clear" isReverseOrder/>
-                  <Link to="#" value={"Returned"} text={"Returned"} className="btn btn-light col-6" onClick={() => this.handleFilter("Returned")} icon="icon-return" isReverseOrder/>
-                </div>
+
               </div>
-              <span className="seperator"></span>
-              <Table
-                headers={headers}
-                columns={this.state.mockItems}
-                search={this.state.search}
-                searchByDate={this.state.searchByDate}
-              />
+            </div>
+            <div className="border rounded card">
+
+
             </div>
           </div>
-        </SmallScreen>
       </Fragment>
     )
   }

@@ -253,8 +253,10 @@ class ProductDetail extends Component {
       translate("compareProduct.customerRating.title")
     ];
     const dialog = (
-      <Modal dir={direction} contentClassName="container-fluid" className="product-checkout_popup" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
-        <ModalHeader toggle={this.togglePopup}>{this.getDialogProps().header}</ModalHeader>
+      <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+        <ModalHeader toggle={this.togglePopup}>
+          <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
+        </ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
         </ModalBody>

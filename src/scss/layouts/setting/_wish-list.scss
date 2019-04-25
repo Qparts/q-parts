@@ -1,94 +1,135 @@
-#wish-list {
-  .wish-list_product-details {
-    display: flex;
-    flex-wrap: wrap;
-
-    span {
-      color: $dark-charcoal-grey;
+.wishlist{
+  .icon-heart{
+    height: 95px;
+    display: block;
+    &:before{
+      top: -11px;
     }
-
-    span:first-child {
-      width: 100%;
+  }
+  .card{
+    background: $white;
+    @include border-radius-div;
+    overflow: hidden;
+    border-width: 0;
+    > ul{
+      margin-bottom: 0;
+      > li{
+        border-bottom: 10px solid $light-gray;
+        &:last-child{
+          border-bottom-width: 0;
+        }
+      }
+    }
+  }
+  header{
+    border-bottom: 20px solid $light-gray !important;
+    padding: 15px;
+    margin-bottom: 0 !important;
+    h2{
+      @include font-size(25px);
+      font-weight: 400;
+      text-transform: capitalize;
+      margin-bottom: 0;
+      line-height: 1;
+      label{
+        @include font-size(15px);
+        @include opacity(0.6);
+        margin-bottom: 0;
+      }
     }
   }
 
-  .border {
-    margin-bottom: 20px;
-  }
-
-  .pt {
+  .media{
     padding-top: 20px;
+    padding-bottom: 20px;
   }
+  .media-img{
+    width: 80px;
+    margin-#{$left}: 15px;
+    @include media-breakpoint-down(md){
+      width: 40px;
 
-  .col-md-7 {
-    text-align: $right;
-    div:first-child {
-      justify-content: flex-end;
     }
   }
-
-  .added-date {
-    @include medium-screen {
-      position: relative;
-      display: block;
-      #{$right}: 53px;
+  .media-body{
+    @include media-breakpoint-up(md){
+      display: flex;
+    };
+    h5{
+      margin-bottom: 5px;
+      a{
+        font-weight: 400;
+        @include font-size(17px);
+        &:hover{
+          text-decoration: underline;
+        }
+      }
     }
-    @include small-screen {
-      position: absolute;
-      #{$left}: 30px;
-      transform: translate(0%, 50%);
+    ul{
+      li{
+        @include font-size(15px);
+        border-left: 1px solid $lighter-grey;
+        line-height: 1;
+        padding-#{$left}: 0.5rem;
+        &:first-child{
+          padding-#{$left}: 0;
+          border-#{$left}-width: 0;
+        }
+      }
     }
-  }
-
-  .part-text {
-    @include font-size(17px);
-  }
-  .manufacturer-text {
-    padding-#{$right}: 11px;
-    @include font-size(15px);
-    font-weight: bold;
-  }
-  .sales-price {
-    @include font-size(30px);
-    font-weight: 300;
-  }
-  .currency {
-    @include font-size(15px);
-  }
-  .btn-secondary {
-    text-transform: capitalize;
-    @include font-size(14px);
-    @include small-screen {
-      width: 126px;
-    }
-  }
-  button {
-    height: 40px;
-    i {
-      @include padding-right(5px);
-    }
-  }
-
-  .wishlist-empty {
-    @include margin-left(10px);
-    p {
-      @include font-size(17px);
-      text-align: $left;
-      margin-bottom: 0px;
-    }
-    .wishlist-text {
-      opacity: 0.5;
+    .price{
+      margin-bottom: 0;
       @include font-size(30px);
-      text-align: center;
-      color: rgba(55, 54, 60, 0.5);
-      margin-bottom: 16px;
-      @include text-uppercase;
-    }
-    .icon-heart{
-      text-align: center;
-      @include font-size(100px);
+      line-height: 1;
+      font-weight: 300;
       margin-top: 10px;
-      opacity: 0.1;
+      span{
+        @include font-size(15px);
+        font-weight: 400;
+        margin-#{$left}: -5px;
+      }
+      @include media-breakpoint-down(sm){
+        margin-bottom: 1rem;
+      }
+    }
+    .date{
+      @include font-size(14px);
+      span{
+        @include opacity(0.6);
+      }
+      @include media-breakpoint-down(sm){
+        margin-bottom: 0;
+        margin-top: 5px;
+      };
+    }
+    .item-actions{
+      .btn-gray{
+        @include font-size(16px);
+        display: inline-flex;
+        align-items: center;
+        i{
+          @include font-size(20px);
+          height: 20px;
+          margin-#{$right}: 5px;
+        }
+      }
+      .icon-trash{
+        @include opacity(0.3);
+        height: 20px;
+      }
+      .btn{
+        &:hover{
+          .icon-trash{
+            @include opacity(1);
+          }
+        }
+      }
+    }
+  }
+  .btn-primary{
+    span{
+      margin-bottom: 0px;
+      font-size: 18px !important;
     }
   }
 }

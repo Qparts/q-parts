@@ -46,6 +46,7 @@ export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
+export const PUT_COMPLETED_REQUEST_READ = 'PUT_COMPLETED_REQUEST_READ';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
 export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
@@ -588,6 +589,20 @@ export const getCompletedRequests = (customerId) => {
   }
 }
 
+export const putCompletedRequestRead = (id, idx) => {
+  return (dispatch) => {
+    return axios.put(`${API_ROOT}${QUOTATION_SERVICE}/quotation/read`, { quotationId: id })
+      .then(() => {
+        dispatch({
+          type: PUT_COMPLETED_REQUEST_READ,
+          payload: { id, idx }
+        })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
 export const setPasswordScore = (score) => {
   return {
     type: SET_PASSWORD_SCORE,
@@ -614,47 +629,47 @@ export const incrementQuantity = (item) => {
   return {
     type: INCREMENRT_QUOTATION_PRODUCT_QUANTITY,
     payload: item
-   }
+  }
 }
 
 export const decrementQuantity = (item) => {
   return {
     type: DECREMENRT_QUOTATION_PRODUCT_QUANTITY,
     payload: item
-   }
+  }
 }
 
 export const setLoading = (isLoading) => {
   return {
     type: SET_LOADING,
     payload: isLoading
-   }
+  }
 }
 
 export const setValidCredit = (isValidcreditCard) => {
   return {
     type: IS_VALID_CREDIT_CARD,
     payload: isValidcreditCard
-   }
+  }
 }
 
 export const setModalLogin = (modal) => {
   return {
     type: MODAL_LOGIN,
     payload: modal
-   }
+  }
 }
 
 export const setCheckLoginQuotationOrder = (check) => {
   return {
     type: CHECK_LOGIN_QUOTATION_ORDER,
     payload: check
-   }
+  }
 }
 
 export const setQuotationOrderInfo = (data) => {
   return {
     type: QUOTATION_ORDER_INOF,
     payload: data
-   }
+  }
 }

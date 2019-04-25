@@ -15,7 +15,7 @@ class HomeDetails extends Component {
 				<section className="start-custom-order container-fluid">
 					<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")} />
 					<OrderSteps translate={translate} direction={direction} />
-					
+
 					{/* <div className="order-form">
 							<header className="row">
 								<h2 className="col col-10 mx-auto">
@@ -49,10 +49,10 @@ class HomeDetails extends Component {
 									</div>
 								</form>
 							</div>
-						
+
 						</div> */}
 						<div className="row">
-							<div className="col col-md-6 offset-md-3">
+							<div className="col col-lg-6 offset-lg-3">
 								<Button
 								className="btn btn-primary"
 								to={'/quotation-order'}

@@ -1,4 +1,5 @@
 import { getTranslatedObject } from './string';
+import _ from 'lodash';
 
 export const getComponentName = (component) => {
   return component;
@@ -27,6 +28,18 @@ export const getFormattedVehicles = (vehicles = [], defaultLang, translate) => {
   });
 }
 
+export const getVehicleInfo = (vehicles = [], customerVehicleId, defaultLang) => {
+  let customerVehicle = vehicles.find(vehicle => vehicle.id === customerVehicleId);
+
+  return !_.isUndefined(customerVehicle) ? `${getTranslatedObject(customerVehicle.vehicle.make, defaultLang, 'name', 'nameAr')} ${getTranslatedObject(customerVehicle.vehicle.model, defaultLang, 'name', 'nameAr')} ${customerVehicle.vehicle.year}` : null;
+}
+
+export const getVehicleVin = (vehicles = [], customerVehicleId) => {
+  let customerVehicle = vehicles.find(vehicle => vehicle.id === customerVehicleId);
+
+  return !_.isUndefined(customerVehicle) ? customerVehicle.vin : null;
+}
+
 export const getFormattedSelect = (array, defaultLang) => {
   return array.map(obj => {
     return {
@@ -35,4 +48,16 @@ export const getFormattedSelect = (array, defaultLang) => {
       label: getTranslatedObject(obj, defaultLang, 'name', 'nameAr')
     }
   });
+}
+
+export const getRegion = (regions, id) => {
+  const selectedRegion = regions.find(region => {
+    return region.cities.find(city => city.id === id);
+  });
+
+  return selectedRegion;
+}
+
+export const getCity = (cities, id) => {
+  return cities.find(city => city.id === id);
 }

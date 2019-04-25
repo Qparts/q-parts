@@ -49,10 +49,7 @@ class Header extends Component {
           this.header.current.classList.remove("slideUp");
           this.header.current.classList.add("slideDown");
         }
-
       }
-
-
       new_scroll_position = last_scroll_position;
     });
   }
@@ -148,7 +145,7 @@ class Header extends Component {
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
                   <ul className="cd-header-buttons">
-                    <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
+                    <li><a className="cd-nav-trigger new" href="#cd-primary-nav"><span></span></a></li>
                   </ul>
                 </div>
                 <div className="user-actions col-auto">

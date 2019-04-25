@@ -7,21 +7,23 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
 
     const userSettingPages = isLoggedIn ? <Fragment>
         <li className="nav-sm">
-            <Link to="/setting/quotations" onClick={close}>
+            <Link className="notification" to="/setting/quotations" onClick={close}>
                 <i className="icon-send"></i> {translate("navBar.quotations")}
+                  <span>1</span>
             </Link>
         </li>
-        {/* <li className="nav-sm">
+        <li className="nav-sm">
                     <Link to="/setting/orders" onClick={close}>
-                        <i className="icon-delivered-step"></i> {translate("navBar.orders")}
+                        <i className="icon-product"></i> {translate("navBar.orders")}
                     </Link>
-                </li> */}
+                </li>
         <li className="nav-sm">
             <Link to="/setting/wishlist" onClick={close}>
                 <i className="icon-heart"></i> {translate("navBar.wishlist")}
             </Link>
         </li>
-        <li className="nav-sm">
+
+        {/*<li className="nav-sm">
             <Link to="/setting/garage" onClick={close}>
                 <i className="icon-garage"></i>{translate("navBar.garage")}
             </Link>
@@ -31,9 +33,9 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                 <i className="icon-address"></i>
                 {translate("navBar.menu.menuItem.address")}
             </Link>
-        </li>
+        </li>*/}
         <li className="nav-sm">
-            <Link to="/logout" onClick={close}>{translate("navBar.menu.menuItem.logout")}</Link>
+            <Link to="/logout" onClick={close}><i className="icon-sign-out"></i> {translate("navBar.menu.menuItem.logout")}</Link>
         </li>
     </Fragment> : null;
 
@@ -47,7 +49,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                         </span>
                         {
                             isLoggedIn ?
-                                <p>{fullName}</p> :
+                                <p>{fullName} <span>View Profile</span></p> :
                                 <Link to="/login" onClick={close}>
                                     <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                                 </Link>
@@ -65,7 +67,6 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                     <Link to="/quotation-order" onClick={close}>
                         {translate("nav.quotationOrder")}
                     </Link>
-
                 </li>
                 <li className="has-children">
                     <Link to="#">{translate("nav.consumableParts")}</Link>

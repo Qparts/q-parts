@@ -54,8 +54,8 @@
   h1{
     font-weight: 300;
     @include font-size(30px);
-    line-height: 22px;
-    padding: 22px 0 10px;
+    line-height: 1.5;
+    padding-top: 22px;
     margin-bottom: 0;
   }
   ul{
@@ -129,6 +129,7 @@
       margin-bottom: 0;
       @include font-size(40px);
       letter-spacing: -1px;
+      font-weight: 300;
       label, span{
         letter-spacing: 0;
       }
@@ -136,6 +137,7 @@
         @include font-size(18px);
         text-transform: uppercase;
         padding-#{$left}: 4px;
+        font-weight: 400;
       }
       label{
         @include font-size(14px);
@@ -296,15 +298,17 @@
   > li{
     background: $white;
     margin-bottom: 20px;
-    padding: 1.5rem 15px 1PX 15px;
+    padding: 1.5rem 15px 1.5rem 15px;
     @include font-size(15px);
-
     line-height: 23px;
     &:last-child{
       margin-bottom: 0;
     }
     > *{
       margin-bottom: 1.5rem;
+    }
+    > *:last-child{
+      margin-bottom: -1px;
     }
   }
   .d-table{

@@ -214,7 +214,7 @@ class QuotationRequest extends Component {
 		];
 		const formatvehicleYearLabel = () => (
 			<div className="placeholder">
-				<span>{translate("quotationOrder.vehicle.year")}</span>
+				<span>{translate("general.vehicle.year")}</span>
 			</div>
 		);
 		const groupedvehicleMake = [
@@ -224,7 +224,7 @@ class QuotationRequest extends Component {
 		];
 		const formatvehicleMakeLabel = () => (
 			<div className="placeholder">
-				<span>{translate("quotationOrder.vehicle.year")}</span>
+				<span>{translate("general.vehicle.make")}</span>
 			</div>
 		);
 		const modelData = _.has(this.props.formValues, 'make.models') ?
@@ -242,7 +242,7 @@ class QuotationRequest extends Component {
 		];
 		const formatvehicleModelLabel = () => (
 			<div className="placeholder">
-				<span>{translate("quotationOrder.vehicle.model")}</span>
+				<span>{translate("general.vehicle.model")}</span>
 			</div>
 		);
 
