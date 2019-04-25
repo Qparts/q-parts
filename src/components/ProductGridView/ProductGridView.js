@@ -27,13 +27,13 @@ class ProductGridView extends Component {
 			modal: true,
 			data: [],
 			dialogType: "addProduct",
-      modalLogin: true
+			modalLogin: true
 		}
 
 	}
 	componentWillMount() {
 		this.props.modalAddToCart(false);
-    this.props.setModalLogin(false);
+		this.props.setModalLogin(false);
 	}
 	componentDidMount() {
 		this.props.setCheckLoginCheckout(false);
@@ -52,9 +52,9 @@ class ProductGridView extends Component {
 
 	}
 	togglePopupLogin = () => {
-    this.props.setModalLogin(this.state.modalLogin);
-    this.setState({ modalLogin: !this.state.modalLogin })
-  }
+		this.props.setModalLogin(this.state.modalLogin);
+		this.setState({ modalLogin: !this.state.modalLogin })
+	}
 
 	getDialogProps = () => {
 		const { dialogType } = this.state;
@@ -63,7 +63,7 @@ class ProductGridView extends Component {
 			case 'addProduct':
 				return {
 					header:
-					<Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
+						<Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
 				}
 			default:
 				break;
@@ -84,8 +84,8 @@ class ProductGridView extends Component {
 					togglePopup={this.togglePopup}
 					translate={translate}
 					currentLanguage={currentLanguage}
-          togglePopupLogin={this.togglePopupLogin}
-          setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
+					togglePopupLogin={this.togglePopupLogin}
+					setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
 			default:
 				break;
 		}
@@ -112,7 +112,7 @@ class ProductGridView extends Component {
 			dialog = (
 				<Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
 					<ModalHeader toggle={this.togglePopup}>
-						<p><i className="icon-checked"></i>1 Item</p> Added To Cart
+						<p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
 					</ModalHeader>
 					<ModalBody>
 						{this.getDialogComponent()}
@@ -121,7 +121,7 @@ class ProductGridView extends Component {
 			);
 		}
 		let dialogLogin;
-		if(this.state.data.quantity){
+		if (this.state.data.quantity) {
 			dialogLogin = (
 				<Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
 					<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
@@ -133,30 +133,30 @@ class ProductGridView extends Component {
 		}
 		return (
 			<Fragment>
-					<li className="col-xl-3 col-md-4 col-6">
-						<Link to={`products/${product.id}`} className="card">
-							<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
-							<div className="card-body">
-								<h5 className="card-title">{product.desc}</h5>
-								<ul className="list-inline product-info">
-									<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
-									<li>#{product.productNumber}</li>
-								</ul>
-								<div className="rating">
-									<Stars values={product.averageRating} {...starsRating} />
-									<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
-								</div>
-								{/*<p>Made in Germany</p>*/}
-								<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
+				<li className="col-xl-3 col-md-4 col-6">
+					<Link to={`products/${product.id}`} className="card">
+						<img onError={handleImageFallback} src={product.image} alt="no product" className="card-img-top" />
+						<div className="card-body">
+							<h5 className="card-title">{product.desc}</h5>
+							<ul className="list-inline product-info">
+								<li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
+								<li>#{product.productNumber}</li>
+							</ul>
+							<div className="rating">
+								<Stars values={product.averageRating} {...starsRating} />
+								<span>{getLength(product.reviews)} {translate("product.reviews")}</span>
 							</div>
-						</Link>
-						<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="in-cart">
-							<i className="icon-cart"></i>
-							<i className="icon-plus"></i>
-						</Link>
-					</li>
-					{dialog}
-					{dialogLogin}
+							{/*<p>Made in Germany</p>*/}
+							<p className="price">{product.salesPrice.toFixed(2)} <span className="product-currency">{translate("general.currency")}</span> </p>
+						</div>
+					</Link>
+					<Link to={`${pathname}${search}`} onClick={() => this.submit(product)} className="in-cart">
+						<i className="icon-cart"></i>
+						<i className="icon-plus"></i>
+					</Link>
+				</li>
+				{dialog}
+				{dialogLogin}
 			</Fragment>
 		)
 	}
@@ -168,7 +168,7 @@ const mapStateToProps = state => {
 		direction: state.customer.direction,
 		isModalAddToCart: state.customer.isModalAddToCart,
 		token: state.customer.token,
-    modalLogin: state.customer.modalLogin,
+		modalLogin: state.customer.modalLogin,
 	}
 }
 
@@ -176,8 +176,8 @@ const mapDispatchToProps = dispatch => {
 	return {
 		addToCart: (item) => dispatch(addToCart(item)),
 		modalAddToCart: (check) => dispatch(modalAddToCart(check)),
-    setModalLogin: (check) => dispatch(setModalLogin(check)),
-    setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
+		setModalLogin: (check) => dispatch(setModalLogin(check)),
+		setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
 	}
 }
 

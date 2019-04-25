@@ -89,7 +89,7 @@ export class ListGroupCollapse extends Component {
         const dialog = (
             <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>
                 <ModalHeader toggle={this.togglePopup}>
-                    <p><i className="icon-checked"></i>1 Item</p> Added To Cart
+                    <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
                 </ModalHeader>
                 <ModalBody>
                     <AddProduct
@@ -135,7 +135,7 @@ export class ListGroupCollapse extends Component {
                                     {this.renderNumberPicker(quotationItem)}
                                     <div className="price">
                                         <label>{translate("quotationRequest.totalPrice")}</label>
-                                        <p>{quotationItem.products.salesPrice *  quotationItem.quantity} <span>{translate("general.currency")}</span></p>
+                                        <p>{quotationItem.products.salesPrice * quotationItem.quantity} <span>{translate("general.currency")}</span></p>
                                     </div>
                                 </div>
                                 <div className="col-lg-auto add-cart">

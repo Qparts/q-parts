@@ -255,7 +255,7 @@ class ProductDetail extends Component {
     const dialog = (
       <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
         <ModalHeader toggle={this.togglePopup}>
-          <p><i className="icon-checked"></i>1 Item</p> Added To Cart
+          <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
         </ModalHeader>
         <ModalBody>
           {this.getDialogComponent()}
