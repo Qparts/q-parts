@@ -19,7 +19,7 @@ import { addToCart } from '../../actions/cartAction';
 import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import EditInfo from '../../components/EditInfo/EditInfo';
 import Addresses from '../../components/Addresses/Addresses';
-import Address from '../../components/Addresses/Address/Address';
+import Address from '../../components/Addresses/NewAddress/NewAddress';
 import PrivateRoute from '../../components/PrivateRoute';
 import SocialMediaLink from '../../components/SocialMediaLink/SocialMediaLink';
 import Quotations from '../../components/Quotations/Quotations';
@@ -490,6 +490,8 @@ class Setting extends Component {
                         return (
                           <Fragment>
                             <Addresses
+                              currentLanguage={this.props.currentLanguage}
+                              regions={this.props.regions}
                               customer={this.props.customer}
                               onShowEditDialog={this.handleDialog}
                               onEditAddress={this.handleEditAddress}
@@ -635,6 +637,8 @@ class Setting extends Component {
                               return (
                                 <Fragment>
                                   <Addresses
+                                    currentLanguage={this.props.currentLanguage}
+                                    regions={this.props.regions}
                                     customer={this.props.customer}
                                     onShowEditDialog={this.handleDialog}
                                     onEditAddress={this.handleEditAddress}
