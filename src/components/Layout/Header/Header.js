@@ -145,7 +145,8 @@ class Header extends Component {
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
                   <ul className="cd-header-buttons">
-                    <li><a className="cd-nav-trigger new" href="#cd-primary-nav"><span></span></a></li>
+                  {/* className="cd-nav-trigger new" */}
+                    <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
                   </ul>
                 </div>
                 <div className="user-actions col-auto">

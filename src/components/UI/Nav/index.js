@@ -7,9 +7,10 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
 
     const userSettingPages = isLoggedIn ? <Fragment>
         <li className="nav-sm">
-            <Link className="notification" to="/setting/quotations" onClick={close}>
+        {/* className="notification" */}
+            <Link className="" to="/setting/quotations" onClick={close}>
                 <i className="icon-send"></i> {translate("navBar.quotations")}
-                  <span>1</span>
+                  {/* <span>1</span> */}
             </Link>
         </li>
         <li className="nav-sm">
@@ -49,7 +50,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                         </span>
                         {
                             isLoggedIn ?
-                                <p>{fullName} <span>View Profile</span></p> :
+                                <p>{fullName} {/*<span>View Profile</span>*/}</p> :
                                 <Link to="/login" onClick={close}>
                                     <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                                 </Link>

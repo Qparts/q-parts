@@ -395,36 +395,36 @@ class Setting extends Component {
                           <span className="bg"></span>
                           <ul className="list-unstyled">
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="#" className="media">
                                 <img className="request-tab" src="/img/request.svg" alt="request" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.request')}</h5>
                                   {this.props.requests.length}
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="#" className="media">
                                 <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
-                                <div class="media-body">
-                                  <h5>Orders</h5>
-                                  {this.props.requests.length}
+                                <div className="media-body">
+                                  <h5>{translate("setting.links.orders")}</h5>
+                                  0
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="#" className="media">
                                 <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.links.wishlist')}</h5>
                                   {this.props.wishlist.length}
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="#" className="media">
                                 <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.links.garage')}</h5>
                                   {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
                               </div>
@@ -435,10 +435,10 @@ class Setting extends Component {
                     </div>
                   </div>
                   <div className="row">
-                    <SettingLinks onSetSidebarOpen={this.onSetSidebarOpen} {...this.props} />
+                    <SettingLinks {...this.props} />
                     <div className="setting-tab-content col-lg-9">
                       <Switch>
-                      <Route path="/setting/profile" exact={true} render={({ match }) => {
+                      {/* <Route path="/setting/profile" exact={true} render={({ match }) => {
                         return (
                           <Fragment>
                             <Profile
@@ -454,7 +454,7 @@ class Setting extends Component {
                             {dialog}
                           </Fragment>
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/quotations" exact={true} render={() => {
                         return (
                           <Fragment>
@@ -476,7 +476,7 @@ class Setting extends Component {
                           </Fragment>
                         )
                       }} />
-                      <Route path="/setting/connect" exact={true} render={({ match }) => {
+                      {/* <Route path="/setting/connect" exact={true} render={({ match }) => {
                         return (
                           <Fragment>
                             <SocialMediaLink
@@ -485,7 +485,7 @@ class Setting extends Component {
                               handleFailure={this.props.handleFailure} />
                           </Fragment>
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/addresses" exact={true} render={() => {
                         return (
                           <Fragment>
@@ -502,21 +502,21 @@ class Setting extends Component {
                           </Fragment>
                         )
                       }} />
-                      <Route path="/setting/orders/" exact={true} render={() => {
+                      {/* <Route path="/setting/orders/" exact={true} render={() => {
                         return (
                           <Orders translate={this.props.translate} />
                         )
-                      }} />
-                      <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                      }} /> */}
+                      {/* <Route path="/setting/orders/:orderId" exact={true} render={() => {
                         return (
                           <Order translate={this.props.translate} checkout={this.props.checkout} />
                         )
-                      }} />
-                      <Route path="/setting/help_center" exact={true} render={() => {
+                      }} /> */}
+                      {/* <Route path="/setting/help_center" exact={true} render={() => {
                         return (
                           <HelpCenter translate={this.props.translate} />
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/garage" exact={true} render={() => {
                         return (
                           <Fragment>
@@ -542,7 +542,7 @@ class Setting extends Component {
                             translate={this.props.translate} />
                         )
                       }} />
-                      <Route path="/setting/payment/" exact={true} render={() => {
+                      {/* <Route path="/setting/payment/" exact={true} render={() => {
                         return (
                           <Fragment>
                             <Payment
@@ -552,8 +552,8 @@ class Setting extends Component {
                             {paymentDialog}
                           </Fragment>
                         )
-                      }} />
-                      <PrivateRoute
+                      }} /> */}
+                      {/* <PrivateRoute
                         path="/setting/profile/phone"
                         component={EditInfo}
                         labels={["Confirmation number", "Phone number"]}
@@ -563,7 +563,7 @@ class Setting extends Component {
                         placeholder={["Confirmation number", "Your phone number"]}
                         renderField={this.renderField}
                         onSubmit={this.onEdit.bind(this, phone)}
-                        redirectTo="/setting/profile" />
+                        redirectTo="/setting/profile" /> */}
                     </Switch>
                     </div>
                   </div>
@@ -575,7 +575,7 @@ class Setting extends Component {
                     overlayClassName="sidebar-overlay"
                     sidebar={
                       <Fragment>
-                        <SettingLinks {...this.props} />
+                        <SettingLinks onSetSidebarOpen={this.onSetSidebarOpen} {...this.props} />
                       </Fragment>
                     }
                     children={
@@ -585,7 +585,7 @@ class Setting extends Component {
                             <button className="btn more" onClick={() => this.openSidebar()}><i className="icon-more"></i></button>
                           </div>
                           <Switch>
-                            <Route path="/setting/profile" exact={true} render={({ match }) => {
+                            {/* <Route path="/setting/profile" exact={true} render={({ match }) => {
                               return (
                                 <Fragment>
                                   <Profile
@@ -601,7 +601,7 @@ class Setting extends Component {
                                   {dialog}
                                 </Fragment>
                               )
-                            }} />
+                            }} /> */}
                             <Route path="/setting/quotations" exact={true} render={() => {
                               return (
                                 <Fragment>
@@ -649,21 +649,21 @@ class Setting extends Component {
                                 </Fragment>
                               )
                             }} />
-                            <Route path="/setting/orders/" exact={true} render={() => {
+                            {/* <Route path="/setting/orders/" exact={true} render={() => {
                               return (
                                 <Orders translate={this.props.translate} />
                               )
-                            }} />
-                            <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                            }} /> */}
+                            {/* <Route path="/setting/orders/:orderId" exact={true} render={() => {
                               return (
                                 <Order translate={this.props.translate} checkout={this.props.checkout} />
                               )
-                            }} />
-                            <Route path="/setting/help_center" exact={true} render={() => {
+                            }} /> */}
+                            {/* <Route path="/setting/help_center" exact={true} render={() => {
                               return (
                                 <HelpCenter translate={this.props.translate} />
                               )
-                            }} />
+                            }} /> */}
                             <Route path="/setting/garage" exact={true} render={() => {
                               return (
                                 <Fragment>
@@ -688,7 +688,7 @@ class Setting extends Component {
                                   translate={this.props.translate} />
                               )
                             }} />
-                            <Route path="/setting/payment/" exact={true} render={() => {
+                            {/* <Route path="/setting/payment/" exact={true} render={() => {
                               return (
                                 <Fragment>
                                   <Payment
@@ -698,8 +698,8 @@ class Setting extends Component {
                                   {paymentDialog}
                                 </Fragment>
                               )
-                            }} />
-                            <PrivateRoute
+                            }} /> */}
+                            {/* <PrivateRoute
                             path="/setting/profile/phone"
                             component={EditInfo}
                             labels={["Confirmation number", "Phone number"]}
@@ -709,7 +709,7 @@ class Setting extends Component {
                             placeholder={["Confirmation number", "Your phone number"]}
                             renderField={this.renderField}
                             onSubmit={this.onEdit.bind(this, phone)}
-                            redirectTo="/setting/profile" />
+                            redirectTo="/setting/profile" /> */}
                           </Switch>
                         </div>
                         <Footer translate={translate} />

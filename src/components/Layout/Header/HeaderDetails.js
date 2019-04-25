@@ -33,7 +33,8 @@ class HeaderDetails extends Component {
           isLoggedIn ?
           <span>
             <b>{fullName}</b>
-            <label className="new-note"></label>
+            {/* className="new-note" */}
+            <label className=""></label>
           </span> :
             <Fragment>
               <span className="user-img position-relative d-inline-block">
@@ -77,16 +78,17 @@ class HeaderDetails extends Component {
             {
               isLoggedIn && <ul className="profile-actions list-unstyled">
                 <li>
-                  <Link to="/setting/quotations" className="notification">
-                    <span>1</span>
+                  {/* className="notification" */}
+                  <Link to="/setting/quotations" className="">
+                    {/* <span>1</span> */}
                     <i className="icon-send"></i>
                     {translate("navBar.menu.menuItem.quotations")}
 
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/setting/orders"><i className="icon-product"></i>{translate("navBar.menu.menuItem.order")}</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/setting/wishlist"><i className="icon-heart"></i>{translate("navBar.menu.menuItem.wishlist")}</Link>
                 </li>
@@ -96,9 +98,9 @@ class HeaderDetails extends Component {
                 <li>
                   <Link to="/setting/addresses"><i className="icon-address"></i>{translate("navBar.menu.menuItem.address")}</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="/setting/profile"><img alt="garage" src="/img/user.svg" />{translate("navBar.menu.menuItem.setting")}</Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="/logout"><i className="icon-sign-out"></i>{translate("navBar.menu.menuItem.logout")}</Link>
                 </li>
@@ -116,9 +118,11 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-           <Link to="/cart" className="not-empty">
+           <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
             <i className="icon-cart" />
-            <span>{cart.length}</span>
+            {
+              cart.length > 0 && <span>{cart.length}</span>
+            }
           </Link>
         </li>
       </ul>

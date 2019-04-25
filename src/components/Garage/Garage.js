@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import './Garage.css';
-import { SmallScreen , MediumScreen } from '../../components/Device';
+import { SmallScreen, MediumScreen } from '../../components/Device';
 import { getTranslatedObject } from '../../utils';
 import Radio from '../UI/Radio';
 class Garage extends Component {
@@ -9,19 +9,19 @@ class Garage extends Component {
     this.props.changeDefaultVehicle(index);
   }
 
- render() {
-  const { translate, vehicles, defaultLang } = this.props;
-  let garage;
-  if(vehicles.length>0){
-    garage = <div>
+  render() {
+    const { translate, vehicles, defaultLang } = this.props;
+    let garage;
+    if (vehicles.length > 0) {
+      garage = <div>
         <MediumScreen>
           <header>
             <div className="row">
               <div className="col">
-                  <h5>{translate("setting.garage.title")}</h5>
+                <h5>{translate("setting.garage.title")}</h5>
               </div>
               <div className="col-auto">
-                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
+                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder />
               </div>
             </div>
           </header>
@@ -30,40 +30,42 @@ class Garage extends Component {
           <header className="header-sm">
             <div className="row">
               <div className="col">
-                  <h5 className="header-sm">{translate("setting.garage.garage")}</h5>
+                <h5 className="header-sm">{translate("setting.garage.garage")}</h5>
               </div>
               <div className="col-auto">
-                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')}  icon="icon-add-vehicle" isReverseOrder/>
+                <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} icon="icon-add-vehicle" isReverseOrder />
               </div>
             </div>
           </header>
         </SmallScreen>
         <div className="info-list">
           <ul className="row list-unstyled">
-        {
-         this.props.vehicles.map((vehicle, idx) => {
-           return  <li className="col-md-6 radio-custom" key={idx}>
-             <Radio
-                onChange={this.handleChange.bind(this, idx)}
-                checked={vehicle.defaultVehicle}
-                label={translate("setting.garage.defaultVehicle")}
-                type="radio"
-                id={vehicle.id}
-                name="radioGroup"
-             />
-                 <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')} {getTranslatedObject(vehicle.vehicle.model, defaultLang, 'name', 'nameAr')} {vehicle.vehicle.year}</p>
-                 <p>{translate("form.vehicle.vin")} ({vehicle.vin})</p>
-                 {/*<div className="actions">
+            {
+              this.props.vehicles.map((vehicle, idx) => {
+                return <li className="col-md-6 radio-custom" key={idx}>
+                  <Radio
+                    onChange={this.handleChange.bind(this, idx)}
+                    checked={vehicle.defaultVehicle}
+                    label={translate("setting.garage.defaultVehicle")}
+                    type="radio"
+                    id={vehicle.id}
+                    name="radioGroup"
+                  />
+                  <p>{getTranslatedObject(vehicle.vehicle.make, defaultLang, 'name', 'nameAr')} {getTranslatedObject(vehicle.vehicle.model, defaultLang, 'name', 'nameAr')} {vehicle.vehicle.year}</p>
+                  {
+                    vehicle.vin && <p>{translate("form.vehicle.vin")} ({vehicle.vin})</p>
+                  }
+                  {/*<div className="actions">
                    <Button type="button"  className="btn btn-gray" text={translate("general.buttons.edit")} icon="icon-edit" isReverseOrder/>
                  </div>*/}
-               </li>
-         })
-       }
-     </ul>
-   </div>
-    </div>
+                </li>
+              })
+            }
+          </ul>
+        </div>
+      </div>
 
-    {/*<div id="Garage-container">
+      {/*<div id="Garage-container">
      <div className="Garage-add justify-content-between">
        <p>{translate("setting.garage.title")}</p>
       <Button className="btn btn-secondary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} text={translate("setting.garage.add")} icon="icon-add-vehicle" isReverseOrder/>
@@ -91,28 +93,28 @@ class Garage extends Component {
       })
      }
     </div>*/}
-  }else{
-    garage =
+    } else {
+      garage =
         <div className="empty">
           <header>
             <h5>{translate("dialog.vehicle.subTitle")}</h5>
           </header>
-                 <figure>
-                   <i className="icon-vehicle"></i>
-                   <p className="rotate">0<span>{translate("setting.garage.vehicle")}</span></p>
-                 </figure>
-                <figcaption>
-                  <p>{translate("setting.garage.noVehicle")}</p>
-                     <a className="btn btn-primary" href="#" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} isReverseOrder><i className="icon-add"> </i> {translate("setting.garage.add")}</a>
-                </figcaption>
+          <figure>
+            <i className="icon-vehicle"></i>
+            <p className="rotate">0<span>{translate("setting.garage.vehicle")}</span></p>
+          </figure>
+          <figcaption>
+            <p>{translate("setting.garage.noVehicle")}</p>
+            <a className="btn btn-primary" href="#" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} isReverseOrder><i className="icon-add"> </i> {translate("setting.garage.add")}</a>
+          </figcaption>
         </div>
+    }
+    return (
+      <Fragment>
+        {garage}
+      </Fragment>
+    )
   }
-  return (
-    <Fragment>
-      {garage}
-    </Fragment>
-  )
- }
 }
 
 export default Garage;
