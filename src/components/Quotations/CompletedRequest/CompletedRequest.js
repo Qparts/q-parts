@@ -60,17 +60,17 @@ export class CompletedRequest extends Component {
     }
 
     handleClick = event => {
-        const { reply, idx, putCompletedRequestRead } = this.props
+        const { reply, completedIndex, putCompletedRequestRead } = this.props
         event.preventDefault();
         if (!reply.read) {
-            putCompletedRequestRead(reply.id, idx);
+            putCompletedRequestRead(reply.id, completedIndex);
         }
     }
 
     render() {
         const {
-            reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token, 
-            direction, vehicles
+            reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token,
+            direction, vehicles, completedIndex
         } = this.props;
         const { country, city, region } = this.state;
         const created = moment(reply.created).format('MMM Do');
@@ -126,10 +126,12 @@ export class CompletedRequest extends Component {
                     </ul>
                     <ul className="replayed-parts-list ">
                         {
-                            reply.quotationItems.map(quotationItem => {
+                            reply.quotationItems.map((quotationItem, quotationItemIndex) => {
                                 return <ListGroupCollapse
+                                    key={quotationItem.products.id}
+                                    completedIndex={completedIndex}
+                                    quotationItemIndex={quotationItemIndex}
                                     requestNumber={reply.id}
-                                    key={quotationItem.id}
                                     type={REPLIED}
                                     quotationItem={quotationItem}
                                     translate={translate}

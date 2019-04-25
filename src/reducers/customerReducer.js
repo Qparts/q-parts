@@ -255,44 +255,30 @@ export default function reducer(state = initialState, action) {
 
     case INCREMENRT_QUOTATION_PRODUCT_QUANTITY:
       const { incQuantity } = action.payload;
-      let newCompletedQuotationItemsInc = [];
-      state.quotations.completed.forEach(quotations => {
-        quotations.quotationItems.forEach(oldQuotationItem => {
-          const { quotationItem } = action.payload;
-          const newQuantityInc = oldQuotationItem.id === quotationItem.id ? incQuantity : oldQuotationItem.quantity
-          newCompletedQuotationItemsInc.push({
-            ...oldQuotationItem, quantity: newQuantityInc
-          })
-        })
-      });
+      let replaceQuotationItem = state.quotations.completed[action.payload.completedIndex].quotationItems[action.payload.quotationItemIndex];
 
-      const newQuotations = state.quotations.completed.map(item => {
-        const { requestNumber } = action.payload;
-        return {
-          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsInc : item.quotationItems
+
+      const newQuotationsInc = update(state.quotations.completed, {
+        [action.payload.completedIndex]: {
+          quotationItems: {
+            $splice: [[action.payload.quotationItemIndex, 1, { ...replaceQuotationItem, quantity: incQuantity }]]
+          }
         }
       });
 
-      return { ...state, quotations: { ...state.quotations, completed: newQuotations } }
+      return { ...state, quotations: { ...state.quotations, completed: newQuotationsInc } }
 
     case DECREMENRT_QUOTATION_PRODUCT_QUANTITY:
+
       const { decQuantity } = action.payload;
+      let replaceQuotationItemInc = state.quotations.completed[action.payload.completedIndex].quotationItems[action.payload.quotationItemIndex];
 
-      let newCompletedQuotationItemsDec = [];
-      state.quotations.completed.forEach(quotations => {
-        quotations.quotationItems.forEach(oldQuotationItem => {
-          const { quotationItem } = action.payload;
-          const newQuantity = oldQuotationItem.id === quotationItem.id ? decQuantity : oldQuotationItem.quantity
-          newCompletedQuotationItemsDec.push({
-            ...oldQuotationItem, quantity: newQuantity
-          })
-        })
-      });
 
-      const newQuotationsDec = state.quotations.completed.map(item => {
-        const { requestNumber } = action.payload;
-        return {
-          ...item, quotationItems: requestNumber === item.id ? newCompletedQuotationItemsDec : item.quotationItems
+      const newQuotationsDec = update(state.quotations.completed, {
+        [action.payload.completedIndex]: {
+          quotationItems: {
+            $splice: [[action.payload.quotationItemIndex, 1, { ...replaceQuotationItemInc, quantity: decQuantity }]]
+          }
         }
       });
 

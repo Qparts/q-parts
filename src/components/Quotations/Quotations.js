@@ -23,6 +23,9 @@ class Quotations extends Component {
 
     props.getPendingRequests(props.customer.id);
     props.getCompletedRequests(props.customer.id);
+  }
+
+  componentDidMount() {
     this.setReadReplies();
   }
 
@@ -130,10 +133,10 @@ class Quotations extends Component {
           <TabPane tabId="replayed">
             <ul className="list-unstyled" id="replayed-list">
               {
-                quotations.completed.map((reply, idx) => {
+                quotations.completed.map((reply, completedIndex) => {
                   return <CompletedRequest
                     key={reply.id}
-                    idx={idx}
+                    completedIndex={completedIndex}
                     reply={reply}
                     translate={translate}
                     currentLanguage={currentLanguage}
