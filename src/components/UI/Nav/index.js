@@ -7,24 +7,24 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
 
     const userSettingPages = isLoggedIn ? <Fragment>
         <li className="nav-sm">
-        {/* className="notification" */}
+            {/* className="notification" */}
             <Link className="" to="/setting/quotations" onClick={close}>
                 <i className="icon-send"></i> {translate("navBar.quotations")}
-                  {/* <span>1</span> */}
+                {/* <span>1</span> */}
             </Link>
         </li>
-        <li className="nav-sm">
+        {/* <li className="nav-sm">
                     <Link to="/setting/orders" onClick={close}>
                         <i className="icon-product"></i> {translate("navBar.orders")}
                     </Link>
-                </li>
+                </li> */}
         <li className="nav-sm">
             <Link to="/setting/wishlist" onClick={close}>
                 <i className="icon-heart"></i> {translate("navBar.wishlist")}
             </Link>
         </li>
 
-        {/*<li className="nav-sm">
+        <li className="nav-sm">
             <Link to="/setting/garage" onClick={close}>
                 <i className="icon-garage"></i>{translate("navBar.garage")}
             </Link>
@@ -34,7 +34,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                 <i className="icon-address"></i>
                 {translate("navBar.menu.menuItem.address")}
             </Link>
-        </li>*/}
+        </li>
         <li className="nav-sm">
             <Link to="/logout" onClick={close}><i className="icon-sign-out"></i> {translate("navBar.menu.menuItem.logout")}</Link>
         </li>
