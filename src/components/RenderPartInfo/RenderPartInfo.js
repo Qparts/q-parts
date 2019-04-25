@@ -44,6 +44,7 @@ class RenderPartInfo extends Component {
                             <div className="col-md">
                                 <div className="has-float-label add-file">
                                     <Field
+                                        maxLength="200"
                                         type="text"
                                         hasFloatLabel
                                         name={`${partInfo}.itemName`}

@@ -258,7 +258,7 @@ class CheckoutPayment extends Component {
                             <div>
                               <div className="d-table product-options">
                                 <div className="d-table-row">
-                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.name")}</span></div>
                                   <div className="d-table-cell">{item.name}({item.nameAr})</div>
                                 </div>
                                 <div className="d-table-row">
@@ -270,7 +270,7 @@ class CheckoutPayment extends Component {
                                   <div className="d-table-cell">{item.iban}</div>
                                 </div>
                                 <div className="d-table-row">
-                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.owner")}</span></div>
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
                                   <div className="d-table-cell">{item.owner}</div>
                                 </div>
                               </div>

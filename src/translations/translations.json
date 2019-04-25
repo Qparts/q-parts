@@ -2980,6 +2980,7 @@
         ]
       }
     },
+<<<<<<< HEAD
     "returnPolicy": {
       "return": [
         "سياسة السترجاع",
@@ -2987,6 +2988,15 @@
       ],
       "header": [
         "10أيام للسترجاع",
+=======
+    "returnPolicy":{
+      "return":[
+        "سياسة الإسترجاع",
+        "Q-Parts Return Policy"
+      ],
+      "header":[
+        "10أيام للإسترجاع",
+>>>>>>> 176f7e0e48153ae387eaa1ad0a3a71d4c8623b9e
         "10 DAYS RETURNS"
       ],
       "status": [
@@ -3008,8 +3018,13 @@
           "ضمان الجودة",
           "QUALITY GUARANTEE"
         ],
+<<<<<<< HEAD
         "status": [
           "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن.",
+=======
+        "status":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كاملا، شاملا رسوم الشحن.",
+>>>>>>> 176f7e0e48153ae387eaa1ad0a3a71d4c8623b9e
           "If your purchase is found to be damaged, you will receive a full refund along with anyshipping fees paid."
         ]
       },
@@ -3018,6 +3033,7 @@
           "استرجاع المبالغ",
           "REFUNDS"
         ],
+<<<<<<< HEAD
         "statusA": [
           "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن هذا البند يشمل القطع الصلية فقط كما هو موضح أعله.",
           "If your purchase is found to be damaged you will receive a full refund alongwith any shipping fees paid, as mentioned above."
@@ -3050,12 +3066,47 @@
       "returnProcess": {
         "header": [
           "عمليةالسترجاع",
+=======
+        "statusA":[
+          "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن. هذا البند يشمل القطع الصلية فقط كما هو موضح أعلاه.",
+          "If your purchase is found to be damaged you will receive a full refund alongwith any shipping fees paid, as mentioned above."
+        ],
+        "statusB":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن كما هو موضح أعلاه.",
+          "If your purchase of genuine spare parts is found to be counterfeit, you willreceive a full refund along with any shipping fees paid (this applies to genuineparts only), as mentioned above."
+        ],
+        "statusC":[
+          "في حال تم استلم قطعة مختلفة عن القطعة المطلوبة، لديك 10 أيام لإرجاعها مع العلم أنه سوف يتم إرجاع رسوم الشحن كاملة.",
+          "If your purchase doesn’t match your order, you have the right to return it in 10days, given that you will be refunded for the shipment fees."
+        ],
+        "statusD":[
+          "في حال أن المنتج ليس تالفا أو غير أصلي ولكن ترغب في إرجاعه على أي حال، لن يتم استرداد ثمن المنتج الا بموافقة المورد و في حال موافقة المورد على إرجاع القطعة سوف تقوم بتحمل 15% من قيمة المنتج. من المهم ملاحظة أن الشركة لن تتحمل تكاليف الشحن والإرجاع في هذه الحالة.",
+          "If the product is neither damaged nor counterfeit, you will not be refundedunless the vendor approves the return. In case of the vendor’s approval, youwill be charged 15% of the product’s value. It’s worth mentioning that neithershipment refunds nor return shipment fees will be provided in this case."
+        ],
+        "statusE":[
+          "الطلبات الخاصة للقطع من خارج المملكة غير قابلة للإسترداد الا في حال كان المنتج تالف أو غير مطابق.",
+          "Unless the product is damaged or counterfeit, products imported fromoverseas (through special request) are non-returnable."
+        ],
+        "statusF":[
+          "المنتجات الإلكترونية غير قابلة للإسترداد.",
+          "Electronic products are non-returnable."
+        ],
+        "statusG":[
+          "حتى يكون المنتج قابل للسترداد، يجب أن يكون غير مستخدم وبنفس الحالة التي تم استلامه بها أيضا، يجب أن يكون المنتج في علبته الصلية مرفقا مع جميع الملصقات والباركود التي وصلت مع المنتج.",
+          "To be eligible for a return, your item must be unused and in the samecondition that you received it. It must also be in the original packaging intactwith all labels and barcode on it."
+        ]
+      },
+      "returnProcess":{
+        "header":[
+          "عمليةالإسترجاع",
+>>>>>>> 176f7e0e48153ae387eaa1ad0a3a71d4c8623b9e
           "RETURN PROCESS"
         ],
         "statusA": [
           "قم بالتواصل مع قسم خدمة العملء على www.q.parts.",
           "Contact customer service department at www.q.parts."
         ],
+<<<<<<< HEAD
         "statusB": [
           "سوف نقوم بإرسال بوليصة الشحن إليك لتمام عملية السترجاع.",
           "We will send you an Air Waybill in order to return your product."
@@ -3070,6 +3121,22 @@
         ],
         "statusF": [
           "حال وصول المنتج إلى المستودع سوف نقوم بإرجاع المبلغ خلل 6 أيام عمل.",
+=======
+        "statusB":[
+          "سوف نقوم بإرسال بوليصة الشحن إليك لإتمام عملية الإسترجاع.",
+          "We will send you an Air Waybill in order to return your product."
+        ],
+        "statusC":[
+          "قم بطباعة بوليصة الشحن.",
+          "Print the Air Waybill."
+        ],
+        "statusD":[
+          "قم بالتوجه إلى أقرب فرع من فروع شركات الشحن وقم بتسليم بوليصة الشحن. ملاحظة: في حال عدم تسليمك لبوليصة الشحن سوف تقوم بتحمل أي تكاليف إضافية.",
+          "Head to the closest courier service branch and submit the Air Waybill and theproduct to be returned (note: in case you don’t submit the Air Waybill, you willbe responsible for any extra charges)."
+        ],
+        "statusE":[
+          "حال وصول المنتج إلى المستودع سوف نقوم بإرجاع المبلغ خلال 6 أيام عمل.",
+>>>>>>> 176f7e0e48153ae387eaa1ad0a3a71d4c8623b9e
           "After the product is returned to the warehouse, you will be refunded within 6business days."
         ]
       }
