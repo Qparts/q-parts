@@ -112,6 +112,9 @@ class CheckoutShipping extends Component {
             this.props.addresses.map((address, idx) => {
               return <div className="addresses-box_item col-6" key={idx}>
                 <Radio
+                  type="radio"
+                  id={address.id}
+                  name="radioGroup"
                   onChange={this.handleChange.bind(this, address, idx)}
                   checked={address.defaultAddress}
                   label={translate("setting.addressBook.defaultAddress")}
