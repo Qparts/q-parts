@@ -75,29 +75,26 @@ class Quotations extends Component {
       decrementQuantity, token, customer, regions, putCompletedRequestRead
     } = this.props;
 
-    return (
-      <div className="requests-main">
-        <DownLargeScreen>
-          <h2 className="sec-title-sm">{translate("setting.quotations.title")}</h2>
-        </DownLargeScreen>
-        {
-          (_.isEmpty(quotations.pending || quotations.completed)) && (
-            <div className="empty">
-              <LargeScreen>
-                <header>
-                  <h5>3 {translate("setting.quotations.steps")}</h5>
-                </header>
-              </LargeScreen>
-              <figure>
-                <img src="/img/request.svg" alt="no img" />
-              </figure>
-              <figcaption>
-                <p>{translate("setting.quotations.empty")} </p>
-                <Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className={`icon-arrow-${right(direction)}`}></i></Link>
-              </figcaption>
-            </div>
-          )
-        }
+    let renderQuotation = null;
+
+    if (_.isEmpty(quotations.pending && quotations.completed)) {
+      renderQuotation = <div className="empty">
+        <LargeScreen>
+          <header>
+            <h5>3 {translate("setting.quotations.steps")}</h5>
+          </header>
+        </LargeScreen>
+        <figure>
+          <img src="/img/request.svg" alt="no img" />
+        </figure>
+        <figcaption>
+          <p>{translate("setting.quotations.empty")} </p>
+          <Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className={`icon-arrow-${right(direction)}`}></i></Link>
+        </figcaption>
+      </div>
+
+    } else {
+      renderQuotation = <Fragment>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -154,6 +151,15 @@ class Quotations extends Component {
             </ul>
           </TabPane>
         </TabContent>
+      </Fragment>
+    }
+
+    return (
+      <div className="requests-main">
+        <DownLargeScreen>
+          <h2 className="sec-title-sm">{translate("setting.quotations.title")}</h2>
+        </DownLargeScreen>
+        {renderQuotation}
       </div>
     )
   }
