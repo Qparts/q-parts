@@ -59,9 +59,19 @@ export class CompletedRequest extends Component {
         this.props.addToCart(item);
     }
 
+    handleClick = event => {
+        const { reply, idx, putCompletedRequestRead } = this.props
+        event.preventDefault();
+        if (!reply.read) {
+            putCompletedRequestRead(reply.id, idx);
+        }
+    }
 
     render() {
-        const { reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token, direction, vehicles } = this.props;
+        const {
+            reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token, 
+            direction, vehicles
+        } = this.props;
         const { country, city, region } = this.state;
         const created = moment(reply.created).format('MMM Do');
         let ids = [];
@@ -72,11 +82,12 @@ export class CompletedRequest extends Component {
         return <li key={reply.id}>
             <Link
                 to="#"
-                className="collapsed new"
+                className={`collapsed ${!reply.read ? 'new' : ''}`}
                 data-toggle="collapse"
                 data-target={`.${reply.id}`}
                 aria-expanded="false"
-                aria-controls={ids.join(' ')}>
+                aria-controls={ids.join(' ')}
+                onClick={this.handleClick}>
                 <LargeScreen>
                     <div className="col-lg-auto">
                         <label>{translate("quotationRequest.requestNo")}</label>

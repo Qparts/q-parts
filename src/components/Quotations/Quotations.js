@@ -18,11 +18,20 @@ class Quotations extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       activeTab: "pending",
+      noNewReply: ''
     };
 
     props.getPendingRequests(props.customer.id);
     props.getCompletedRequests(props.customer.id);
+    this.setReadReplies();
   }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.quotations.completed !== prevProps.quotations.completed) {
+      this.setReadReplies();
+    }
+  }
+
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -48,11 +57,19 @@ class Quotations extends Component {
     </Fragment>
   }
 
+  setReadReplies = () => {
+    let noNewReply = this.props.quotations.completed.every(reply => reply.read);
+
+    this.setState({
+      noNewReply: noNewReply ? '' : 'new'
+    })
+  }
+
   render() {
 
     const {
       quotations, translate, currentLanguage, direction, addToCart, incrementQuantity,
-      decrementQuantity, token, customer, regions
+      decrementQuantity, token, customer, regions, putCompletedRequestRead
     } = this.props;
 
     return (
@@ -86,7 +103,7 @@ class Quotations extends Component {
               {translate("quotationRequest.pending")}
             </NavLink>
           </NavItem>
-          <NavItem className="new">
+          <NavItem className={this.state.noNewReply}>
             <NavLink
               className={classnames({ active: this.state.activeTab === 'replayed' })} onClick={() => { this.toggle('replayed'); }} >
               {translate("quotationRequest.replied")} <span></span>
@@ -113,9 +130,10 @@ class Quotations extends Component {
           <TabPane tabId="replayed">
             <ul className="list-unstyled" id="replayed-list">
               {
-                quotations.completed.map(reply => {
+                quotations.completed.map((reply, idx) => {
                   return <CompletedRequest
                     key={reply.id}
+                    idx={idx}
                     reply={reply}
                     translate={translate}
                     currentLanguage={currentLanguage}
@@ -126,6 +144,7 @@ class Quotations extends Component {
                     token={token}
                     vehicles={customer.vehicles}
                     regions={regions}
+                    putCompletedRequestRead={putCompletedRequestRead}
                   />
                 })
               }

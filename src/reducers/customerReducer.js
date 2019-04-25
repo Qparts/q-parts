@@ -8,7 +8,7 @@ import {
   COMPLETE_ORDER, DELETE_VEHICLE, ADD_WISHLIST, DELETE_WISHLIST, ADD_RECENT_VIEWED_PRODUCTS, CHANGE_DEFAULT_DIRECTION, REGISTERED, SELECT_COUNTRY,
   RESET_PASSWORD_SUCCEEDED, RESET_PASSWORD_TOKEN_SUCCEEDED, UPDATE_PASSWORD, COMPLETE_SHIPPING, COMPLETE_PAYMENT, GET_PENDING_REQUESTS, GET_COMPLETED_REQUESTS, SET_PASSWORD_SCORE, MODAL_ADD_TO_CART, SET_QUOTATION_ORDER,
   CHANGE_DEFAULT_ADDRESS, CHANGE_DEFAULT_VEHICLE, INCREMENRT_QUOTATION_PRODUCT_QUANTITY, DECREMENRT_QUOTATION_PRODUCT_QUANTITY, SET_LOADING, IS_VALID_CREDIT_CARD, MODAL_LOGIN, CHECK_LOGIN_CHECKOUT, CHECK_LOGIN_QUOTATION_ORDER,
-  QUOTATION_ORDER_INOF
+  QUOTATION_ORDER_INOF, PUT_COMPLETED_REQUEST_READ
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR, quotations } from '../constants';
@@ -231,6 +231,13 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, quotations: completed }
 
+    case PUT_COMPLETED_REQUEST_READ:
+      const completedRead = update(state.quotations.completed, {
+        [action.payload.idx]: { read: { $set: true } }
+      });
+
+      return { ...state, quotations: { ...state.quotations, completed: completedRead } }
+
     case SET_PASSWORD_SCORE:
       return { ...state, passwordScore: action.payload }
 
@@ -291,25 +298,25 @@ export default function reducer(state = initialState, action) {
 
       return { ...state, quotations: { ...state.quotations, completed: newQuotationsDec } }
 
-     case SET_LOADING:
+    case SET_LOADING:
       return {
         ...state, isLoading: action.payload
       }
 
-      case IS_VALID_CREDIT_CARD:
-       return {
-         ...state, isValidcreditCard: action.payload
-       }
+    case IS_VALID_CREDIT_CARD:
+      return {
+        ...state, isValidcreditCard: action.payload
+      }
 
-       case MODAL_LOGIN:
-        return {
-          ...state, modalLogin: action.payload
-        }
+    case MODAL_LOGIN:
+      return {
+        ...state, modalLogin: action.payload
+      }
 
-        case QUOTATION_ORDER_INOF:
-         return {
-           ...state, quotationOrderInfo: action.payload
-         }
+    case QUOTATION_ORDER_INOF:
+      return {
+        ...state, quotationOrderInfo: action.payload
+      }
 
     default:
       return state;
