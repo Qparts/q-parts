@@ -4,11 +4,20 @@ import { accountSetting, addressBook, garage, helpCenter, orders, quotations, so
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { LargeScreen } from '../../components/Device/index.js';
 class profileLinks extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      active: ''
+    }
+  }
   settingLink = (link) => {
     this.props.history.push(`${this.props.match.url}/${link}`)
   }
 
   handleClick = (link, e) => {
+    this.setState({
+      active: link.url
+    })
     if (this.props.onSetSidebarOpen) this.props.onSetSidebarOpen(false);
     this.settingLink(link.url);
   }
@@ -43,6 +52,7 @@ class profileLinks extends Component {
                 return (
                   <li key={idx}>
                     <Link
+                      className={this.state.active===link.url ? 'active' : ''}
                       data-toggle="list"
                       to="#"
                       onClick={this.handleClick.bind(this, link)}>
