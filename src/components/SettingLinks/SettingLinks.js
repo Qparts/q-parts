@@ -25,6 +25,21 @@ class profileLinks extends Component {
     }
     this.settingLink(link.url);
   }
+  componentDidMount(){
+    const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+    this.setState({
+      active: urlActive
+    });
+  }
+  componentWillUpdate(prevProps,prevState){
+    if(prevProps.location.pathname.split("/")[prevProps.location.pathname.split("/").length-1] !== prevState.active){
+      const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+      this.setState({
+        active: urlActive
+      });
+    }
+
+  }
   render() {
     const { match, translate } = this.props;
     const links = [
@@ -38,6 +53,7 @@ class profileLinks extends Component {
       // { url: 'connect', name: translate(`setting.links.${socialMedia}`) },
       // { url: 'payment', name: payment },
     ]
+
     const chatMessages = [
       translate("customerService.setting.whatsApp.header"),
       translate("customerService.setting.whatsApp.subHeader")
