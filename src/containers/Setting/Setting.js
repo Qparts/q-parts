@@ -416,7 +416,7 @@ class Setting extends Component {
                           <span className="bg"></span>
                           <ul className="list-unstyled">
                             <li className="col">
-                              <a to="javascript:void(0)" onClick={() => {this.handleClick(this,'request')}} className={this.state.active === "request" ? 'media active' : 'media'}>
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'quotations')}} className={this.state.active === "quotations" ? 'media active' : 'media'}>
                                 <img className="request-tab" src="/img/request.svg" alt="request" />
                                 <div className="media-body">
                                   <h5>{translate('setting.request')}</h5>
