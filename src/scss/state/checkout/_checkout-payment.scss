@@ -274,7 +274,7 @@
               width: 100%;
               border-radius: 0px;
               background-color: $light-gray;
-              border-radius: corner-values(20px 0 20px 20px) !important;
+              border-radius: corner-values(20px 0 20px 20px);
               position: relative !important;
             }
           }
@@ -287,14 +287,14 @@
             padding: 0px;
             .select-input{
               .css-10nd86i {
-                border-radius: corner-values(0 0 20px 0) !important;
+                border-radius: corner-values(0 0 20px 0);
               }
             }
           }
           .months{
             .select-input{
               .css-10nd86i {
-                border-radius: corner-values(20px 0 0 20px) !important;
+                border-radius: corner-values(20px 0 0 20px);
               }
             }
           }
@@ -316,6 +316,19 @@
               text-align: $left;
               color: #37363d;
             }
+          }
+        }
+        .card-date-mobile{
+          @extend .card-date;
+          display: inherit;
+          .years{
+            @include padding-left(15px);
+            @include padding-right(15px);
+            margin-bottom: 15px;
+          }
+          .css-10nd86i {
+            border-radius: corner-values(20px 0 20px 20px) !important;
+            position: relative !important;
           }
         }
         .card-name{

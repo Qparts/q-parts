@@ -124,34 +124,66 @@ class CheckoutPayment extends Component {
           placeholder={translate("checkout.payment.creditCard.newCard.enterCardNo")}
           validate={[validations.required]} />
       </div>
-      <div className="card-date col-12">
-        <div className="col-4 months">
-          <Field
-            label={expirationDate}
-            name="ccMonth"
-            component={SelectInput}
-            options={months}
-            placeholder="MM"
-            validate={[validations.required]} />
+      <MediumScreen>
+        <div className="card-date col-12">
+          <div className="col-4 months">
+            <Field
+              label={expirationDate}
+              name="ccMonth"
+              component={SelectInput}
+              options={months}
+              placeholder="MM"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-4 years">
+            <Field
+              name="ccYear"
+              component={SelectInput}
+              options={years}
+              placeholder="YYYY"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-4">
+            <Field
+              label={securityCode}
+              name="ccCvc"
+              component={RenderField}
+              type="text"
+              placeholder="CVV"
+              validate={[validations.required]} />
+          </div>
         </div>
-        <div className="col-4 years">
-          <Field
-            name="ccYear"
-            component={SelectInput}
-            options={years}
-            placeholder="YYYY"
-            validate={[validations.required]} />
+      </MediumScreen>
+      <SmallScreen>
+        <div className="card-date-mobile col-12">
+          <div className="col-12 months">
+            <Field
+              label={expirationDate}
+              name="ccMonth"
+              component={SelectInput}
+              options={months}
+              placeholder="MM"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-12 years">
+            <Field
+              name="ccYear"
+              component={SelectInput}
+              options={years}
+              placeholder="YYYY"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-12">
+            <Field
+              label={securityCode}
+              name="ccCvc"
+              component={RenderField}
+              type="text"
+              placeholder="CVV"
+              validate={[validations.required]} />
+          </div>
         </div>
-        <div className="col-4">
-          <Field
-            label={securityCode}
-            name="ccCvc"
-            component={RenderField}
-            type="text"
-            placeholder="CVV"
-            validate={[validations.required]} />
-        </div>
-      </div>
+      </SmallScreen>
       <div className="col-12 card-name">
         <Field
           label={nameCard}
