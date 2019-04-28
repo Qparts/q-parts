@@ -79,12 +79,17 @@ class Setting extends Component {
       sectionHeader: '',
       modal: false,
       sidebarOpen: false,
+      active: ''
     }
 
   }
 
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
+    const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+    this.setState({
+      active: urlActive
+    })
   }
 
 
@@ -279,6 +284,22 @@ class Setting extends Component {
 		});
 	}
 
+  handleClick = (e,link) => {
+    this.setState({
+      active: link
+    })
+    this.props.history.push(`${this.props.match.url}/${link}`)
+  }
+  componentWillUpdate(prevProps,prevState){
+    if(prevProps.location.pathname.split("/")[prevProps.location.pathname.split("/").length-1] !== prevState.active){
+      const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+      this.setState({
+        active: urlActive
+      });
+    }
+
+  }
+
   render() {
     const { translate, direction } = this.props;
     let dialog;
@@ -395,7 +416,7 @@ class Setting extends Component {
                           <span className="bg"></span>
                           <ul className="list-unstyled">
                             <li className="col">
-                              <a href="#" className="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'quotations')}} className={this.state.active === "quotations" ? 'media active' : 'media'}>
                                 <img className="request-tab" src="/img/request.svg" alt="request" />
                                 <div className="media-body">
                                   <h5>{translate('setting.request')}</h5>
@@ -404,7 +425,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" className="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'orders')}} className={this.state.active === "orders" ? 'media active' : 'media'}>
                                 <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
                                 <div className="media-body">
                                   <h5>{translate("setting.links.orders")}</h5>
@@ -413,7 +434,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" className="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'wishlist')}} className={this.state.active === "wishlist" ? 'media active' : 'media'}>
                                 <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
                                 <div className="media-body">
                                   <h5>{translate('setting.links.wishlist')}</h5>
@@ -422,7 +443,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" className="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'garage')}} className={this.state.active === "garage" ? 'media active' : 'media'}>
                                 <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
                                 <div className="media-body">
                                   <h5>{translate('setting.links.garage')}</h5>
@@ -471,7 +492,7 @@ class Setting extends Component {
                                 currentLanguage={this.props.currentLanguage}
                                 incrementQuantity={this.props.incrementQuantity}
                                 decrementQuantity={this.props.decrementQuantity}
-                                token={this.props.token} 
+                                token={this.props.token}
                                 putCompletedRequestRead={this.props.putCompletedRequestRead} />
                           </Fragment>
                         )
