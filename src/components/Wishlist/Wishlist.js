@@ -32,7 +32,7 @@ class Wishlist extends Component {
     let result = [];
     const { translate, moveWishlistToCart, deleteWishlist } = this.props
     this.props.wishlist.forEach((list, idx) => {
-      const created = `${translate("setting.wishlist.date")}: ${moment(list.created).format('MM/DD/YYYY')}`;
+      const created = moment(list.created).format('MM/DD/YYYY');
       const tempWishlist = {
         ...list,
         desc: list.desc,
