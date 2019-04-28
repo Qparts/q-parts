@@ -1695,7 +1695,7 @@
         " السيارة الافتراضية",
         "Default vehicle"
       ],
-      "garage": [
+      "mobileTitle": [
         "كراجك",
         "Your garage"
       ]
@@ -1816,6 +1816,10 @@
       "address": [
         "عنوان",
         "Address"
+      ],
+      "mobileTitle": [
+        "عناوين",
+        "Addresses"
       ]
     },
     "order": {

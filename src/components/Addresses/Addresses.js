@@ -30,7 +30,7 @@ class Addresses extends Component {
           <header className="header-sm">
             <div className="row">
               <div className="col">
-                <h5 className="header-sm">{translate("setting.addressBook")}</h5>
+                <h5 className="header-sm">{translate("setting.addressBook.mobileTitle")}</h5>
               </div>
               <div className="col-auto">
                 <Button type="button" className="btn btn-primary" onClick={this.props.onShowEditDialog.bind(this, 'addresses')} icon="icon-add" isReverseOrder />

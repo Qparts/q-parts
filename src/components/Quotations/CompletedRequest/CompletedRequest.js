@@ -67,6 +67,12 @@ export class CompletedRequest extends Component {
         }
     }
 
+    show = () => {
+        const { reply, show } = this.props;
+
+        return reply.id === show ? 'show' : '';
+    }
+
     render() {
         const {
             reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token,
@@ -107,7 +113,7 @@ export class CompletedRequest extends Component {
                     <p>{translate("quotationRequest.itemsQuantity")}:  {reply.quotationItems.length}</p>
                 </div>
             </Link>
-            <div className={`collapse ${reply.id}`} id={reply.id}>
+            <div className={`collapse ${reply.id} ${this.show()}`} id={reply.id}>
                 <artical className="request-details" >
                     <ul className="list-inline vehicle-info">
                         {

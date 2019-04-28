@@ -30,7 +30,7 @@ class Garage extends Component {
           <header className="header-sm">
             <div className="row">
               <div className="col">
-                <h5 className="header-sm">{translate("setting.garage.garage")}</h5>
+                <h5 className="header-sm">{translate("setting.garage.mobileTitle")}</h5>
               </div>
               <div className="col-auto">
                 <Button className="btn btn-primary" onClick={this.props.onShowVehicleDialog.bind(this, 'garage')} icon="icon-add-vehicle" isReverseOrder />

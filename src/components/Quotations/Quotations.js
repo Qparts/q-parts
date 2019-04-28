@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import moment from 'moment';
+import queryString from 'qs';
 
 
 import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
@@ -10,15 +11,16 @@ import CompletedRequest from './CompletedRequest/CompletedRequest';
 import { DownLargeScreen, LargeScreen } from '../../components/Device';
 import _ from 'lodash';
 import { right } from '../../utils';
+import { RADIX } from '../../constants';
 
 class Quotations extends Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: "pending",
-      noNewReply: ''
+      activeTab: '',
+      noNewReply: '',
+      show: null
     };
 
     props.getPendingRequests(props.customer.id);
@@ -26,7 +28,13 @@ class Quotations extends Component {
   }
 
   componentDidMount() {
+    let query = queryString.parse(this.props.location.search.slice(1));
+
     this.setReadReplies();
+    this.toggle(query.panel);
+    this.setState({
+      show: parseInt(query.id, RADIX)
+    })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -36,7 +44,7 @@ class Quotations extends Component {
   }
 
 
-  toggle(tab) {
+  toggle = (tab = "pending") => {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
@@ -105,7 +113,7 @@ class Quotations extends Component {
           </NavItem>
           <NavItem className={this.state.noNewReply}>
             <NavLink
-              className={classnames({ active: this.state.activeTab === 'replayed' })} onClick={() => { this.toggle('replayed'); }} >
+              className={classnames({ active: this.state.activeTab === 'replied' })} onClick={() => { this.toggle('replied'); }} >
               {translate("quotationRequest.replied")} <span></span>
             </NavLink>
           </NavItem>
@@ -127,12 +135,13 @@ class Quotations extends Component {
               }
             </ul>
           </TabPane>
-          <TabPane tabId="replayed">
-            <ul className="list-unstyled" id="replayed-list">
+          <TabPane tabId="replied">
+            <ul className="list-unstyled" id="replied-list">
               {
                 quotations.completed.map((reply, completedIndex) => {
                   return <CompletedRequest
                     key={reply.id}
+                    show={this.state.show}
                     completedIndex={completedIndex}
                     reply={reply}
                     translate={translate}
@@ -166,4 +175,4 @@ class Quotations extends Component {
 }
 
 
-export default Quotations;
+export default withRouter(Quotations);
