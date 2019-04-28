@@ -31,7 +31,7 @@ class profileLinks extends Component {
       active: urlActive
     });
   }
-  componentWillUpdate(prevProps,prevState){
+  componentDidUpdate(prevProps,prevState){
     if(prevProps.location.pathname.split("/")[prevProps.location.pathname.split("/").length-1] !== prevState.active){
       const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
       this.setState({
