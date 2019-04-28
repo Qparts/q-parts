@@ -77,13 +77,15 @@ class Wishlist extends Component {
                 />
               </figcaption>
             </div>
-          ) :
-            this.state.wishlist.map((item, idx) => (
-              <div key={idx} className="card">
-                <header>
-                  <h2>{translate("setting.wishlist.wishlist")}<label>({this.state.wishlist.length} {translate("setting.wishlist.items")})</label></h2>
-                </header>
-                <ul className="list-unstyled">
+          ) : (
+
+            <div className="card">
+              <header>
+                <h2>{translate("setting.wishlist.wishlist")}<label>({this.state.wishlist.length} {translate("setting.wishlist.items")})</label></h2>
+              </header>
+            {
+              this.state.wishlist.map((item, idx) => (
+                <ul className="list-unstyled" key={idx}>
                   <li className="media">
                     <a href="#" className="media-img"><img onError={handleImageFallback} src={item.image} alt="no wishList" /></a>
                     <div className="media-body">
@@ -106,13 +108,10 @@ class Wishlist extends Component {
                       </div>
                     </div>
                   </li>
-
                 </ul>
-              </div>
-
-            ))
-        }
-
+            ))}
+          </div>
+        )}
       </section>
     )
   }
