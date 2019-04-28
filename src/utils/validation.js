@@ -61,6 +61,11 @@ export const allUpperCase = value => {
     : undefined;
 }
 
-export const passwordScore = (value, allValues, {passwordScore}) => {
+export const passwordScore = (value, allValues, { passwordScore }) => {
   return value && passwordScore >= 2 ? undefined : 'Required';
+}
+
+export const renderTopIfError = (submitFailed) => {
+  
+  if (submitFailed) window.scrollTo(0, 0);
 }

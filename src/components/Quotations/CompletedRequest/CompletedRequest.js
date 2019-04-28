@@ -73,6 +73,12 @@ export class CompletedRequest extends Component {
         return reply.id === show ? 'show' : '';
     }
 
+    renderToDiv = () => {
+        if (this.props.show) {
+            window.location = `#${this.props.show}`;
+        }
+    }
+
     render() {
         const {
             reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token,
@@ -82,6 +88,7 @@ export class CompletedRequest extends Component {
         const created = moment(reply.created).format('MMM Do');
         let ids = [];
         let hasShippingInfo = (country && region && city);
+        this.renderToDiv()
 
         reply.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 

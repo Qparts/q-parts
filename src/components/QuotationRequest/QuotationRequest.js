@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import SelectInput from '../SelectInput/SelectInput';
 import Button from '../UI/Button';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
-import { getTranslatedObject } from '../../utils';
+import { getTranslatedObject, renderTopIfError } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
@@ -28,6 +28,8 @@ import * as normalizing from '../../utils';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
 import RenderField from '../RenderField/RenderField';
 import { r } from '../../utils/directional';
+import { styles } from '../../constants';
+import { ClipLoader } from 'react-spinners';
 
 
 const vehicles = 'vehicles';
@@ -40,7 +42,8 @@ class QuotationRequest extends Component {
 		this.state = {
 			modal: false,
 			dialogType: signin,
-			garage: null
+			garage: null,
+			loading: false
 		}
 
 		if (isAuth(this.props.token)) {
@@ -56,7 +59,7 @@ class QuotationRequest extends Component {
 	}
 
 	componentDidUpdate = (prevProps, prevState) => {
-		const { defaultLang } = this.props
+		const { defaultLang, submitFailed } = this.props
 		if (_.has(this.props.formValues, 'garage') && this.props.formValues.garage !== prevProps.formValues.garage) {
 			const selectedVehicle = this.props.formValues.garage.vehicle;
 			const vin = this.props.formValues.garage.vin;
@@ -72,10 +75,17 @@ class QuotationRequest extends Component {
 				this.handleFillValues()
 			})
 		};
+
+		if((submitFailed !== prevProps.submitFailed) && submitFailed) {
+			renderTopIfError(submitFailed);
+		}
 	}
 
 
 	handleSubmit = values => {
+		this.setState({
+			loading: true
+		});
 		let {
 			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
 		} = values;
@@ -117,7 +127,8 @@ class QuotationRequest extends Component {
 
 	togglePopup = () => {
 		this.setState({
-			modal: !this.state.modal
+			modal: !this.state.modal,
+			loading: false
 		})
 	}
 
@@ -298,6 +309,18 @@ class QuotationRequest extends Component {
 				</h6>
 			</div>
 		);
+
+		if (this.state.loading)
+			return (
+				<div style={styles.loading}>
+					<ClipLoader
+						css={styles.spinner}
+						sizeUnit={"px"}
+						size={150}
+						loading={this.state.loading}
+					/>
+				</div>
+			)
 
 		return (
 			<Fragment>
