@@ -443,7 +443,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                            <a href="#" className="media">
+                            <a href="javascript:void(0)" className="media">
                                 <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
                                 <div className="media-body">
                                   <h5>{translate("setting.links.orders")}</h5>
