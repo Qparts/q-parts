@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from "./Header/Header.js";

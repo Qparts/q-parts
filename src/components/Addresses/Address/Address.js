@@ -58,7 +58,7 @@ export default class Address extends Component {
                 <h6>{address.title}</h6>
                 <address>
                     <p>{address.line1} {address.line2}</p>
-                    <p>{country}, {city}</p>
+                    {country && city && <p>{country}, {city}</p>}
                     <p>{address.mobile}</p>
                 </address>
                 {/*<div className="actions">

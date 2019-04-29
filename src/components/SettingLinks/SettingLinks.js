@@ -26,22 +26,25 @@ class profileLinks extends Component {
     this.settingLink(link.url);
   }
   componentDidMount(){
-    const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+    const urlActive = this.props.location.pathname;
     this.setState({
       active: urlActive
-    });
+    });    
   }
-  componentDidUpdate(prevProps,prevState){
-    if(prevProps.location.pathname.split("/")[prevProps.location.pathname.split("/").length-1] !== prevState.active){
-      const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+
+  
+  componentDidUpdate(prevProps, prevState) {
+    const { location: { pathname } } = this.props;
+    const isActivePage = pathname !== prevState.active;
+    
+    if(isActivePage){
       this.setState({
-        active: urlActive
+        active: pathname
       });
     }
-
   }
   render() {
-    const { match, translate } = this.props;
+    const { translate } = this.props;
     const links = [
       { url: 'quotations', name: translate(`setting.links.${quotations}`) },
       // { url: 'orders', name: translate(`setting.links.${orders}`) },
@@ -72,7 +75,7 @@ class profileLinks extends Component {
               return (
                 <li key={idx}>
                   <Link
-                    className={this.state.active === link.url ? 'active' : ''}
+                    className={this.state.active.includes(link.url) ? 'active' : ''}
                     data-toggle="list"
                     to="#"
                     onClick={this.handleClick.bind(this, link)}>

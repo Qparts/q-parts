@@ -9,7 +9,7 @@ import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react'
 import { LocalizeProvider } from 'react-localize-redux';
 
-import Routes from './containers/Routers/Routers';
+import App from './containers/App';
 
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -22,7 +22,7 @@ class Root extends React.Component {
         <PersistGate loading={null} persistor={persistor}>
           <LocalizeProvider store={store}>
             <ErrorBoundary>
-              <Routes />
+              <App />
             </ErrorBoundary>
           </LocalizeProvider>
         </PersistGate>

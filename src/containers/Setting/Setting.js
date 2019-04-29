@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,7 +12,7 @@ import {
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
   deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
   getCompletedRequests, changeDefaultAddress, changeDefaultVehicle,
-  incrementQuantity, decrementQuantity, putCompletedRequestRead
+  incrementQuantity, decrementQuantity, putCompletedRequestRead, postCodeLogin
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart } from '../../actions/cartAction';
@@ -34,10 +34,11 @@ import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
 import Payment from '../../components/Payment/Payment';
 import PaymentPopup from '../../components/Payment/PaymentPopup';
+import queryString from 'qs';
 import Footer from '../../components/Layout/Footer/Footer';
 
 import {
-  match
+  match, isAuth
 } from '../../utils';
 import _ from 'lodash';
 
@@ -86,18 +87,27 @@ class Setting extends Component {
 
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
-    const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
+    const urlActive = this.props.location.pathname;
     this.setState({
       active: urlActive
-    })
+    });
+    this.codeLogin();
   }
 
 
   componentDidUpdate(prevProps, prevState) {
     const { location: { pathname } } = this.props;
     const prevPathname = prevProps.location.pathname;
+    const isActivePage = pathname !== prevState.active;
+
     if (pathname !== prevPathname) {
       this.getSectionHeader(pathname)
+    }
+
+    if(isActivePage){
+      this.setState({
+        active: pathname
+      });
     }
   }
 
@@ -290,15 +300,20 @@ class Setting extends Component {
     })
     this.props.history.push(`${this.props.match.url}/${link}`)
   }
-  componentWillUpdate(prevProps,prevState){
-    if(prevProps.location.pathname.split("/")[prevProps.location.pathname.split("/").length-1] !== prevState.active){
-      const urlActive = window.location.href.split("/")[window.location.href.split("/").length-1];
-      this.setState({
-        active: urlActive
-      });
+
+  codeLogin = async () => {
+    const { location: { pathname, search }, postCodeLogin, defaultLang, token } = this.props;
+    let query = queryString.parse(search.slice(1));
+    let url = `${pathname}/${search}`;
+
+    if(!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
+      await postCodeLogin(query.email, query.code, defaultLang)
+      .then(() => {
+        this.props.history.push(url);
+      })
     }
 
-  }
+}
 
   render() {
     const { translate, direction } = this.props;
@@ -403,6 +418,9 @@ class Setting extends Component {
       </Modal>
 
 
+      if(!isAuth(this.props.token)) {
+        return <Redirect to="/" />
+      }
 
     return (
       <Fragment>
@@ -416,7 +434,7 @@ class Setting extends Component {
                           <span className="bg"></span>
                           <ul className="list-unstyled">
                             <li className="col">
-                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'quotations')}} className={this.state.active === "quotations" ? 'media active' : 'media'}>
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'quotations')}} className={this.state.active.includes('quotations') ? 'media active' : 'media'}>
                                 <img className="request-tab" src="/img/request.svg" alt="request" />
                                 <div className="media-body">
                                   <h5>{translate('setting.request')}</h5>
@@ -425,7 +443,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'orders')}} className={this.state.active === "orders" ? 'media active' : 'media'}>
+                            <a href="#" className="media">
                                 <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
                                 <div className="media-body">
                                   <h5>{translate("setting.links.orders")}</h5>
@@ -434,7 +452,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'wishlist')}} className={this.state.active === "wishlist" ? 'media active' : 'media'}>
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'wishlist')}} className={this.state.active.includes('wishlist') ? 'media active' : 'media'}>
                                 <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
                                 <div className="media-body">
                                   <h5>{translate('setting.links.wishlist')}</h5>
@@ -443,7 +461,7 @@ class Setting extends Component {
                               </a>
                             </li>
                             <li className="col">
-                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'garage')}} className={this.state.active === "garage" ? 'media active' : 'media'}>
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'garage')}} className={this.state.active.includes('garage') ? 'media active' : 'media'}>
                                 <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
                                 <div className="media-body">
                                   <h5>{translate('setting.links.garage')}</h5>
@@ -955,7 +973,8 @@ const mapDispatchToProps = (dispatch) => {
     getCompletedRequests,
     changeDefaultAddress,
     changeDefaultVehicle,
-    putCompletedRequestRead
+    putCompletedRequestRead,
+    postCodeLogin
   }, dispatch)
 }
 

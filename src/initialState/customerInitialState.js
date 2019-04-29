@@ -26,17 +26,6 @@ export const initialState = {
     tokenExpire: null,
     selectedVehicle: {},
     selectedCountry: {},
-    defaultAddress: {
-        addressId: 1000,
-        customerId: 12532,
-        line1: "First Line Address",
-        line2: "Secondd Line Address",
-        cityId: 1,
-        zipCode: "123VB123",
-        title: "Home Address",
-        latitude: 123323.4,
-        longitude: 231233.5
-    },
     isOrderCompleted: false,
     recentViewedProducts: [],
     wishlist: [],

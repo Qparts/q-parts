@@ -16,25 +16,22 @@ import { RADIX } from '../../constants';
 class Quotations extends Component {
   constructor(props) {
     super(props);
+    let query = queryString.parse(this.props.location.search.slice(1));
 
     this.state = {
       activeTab: '',
       noNewReply: '',
-      show: null
+      show: parseInt(query.id, RADIX)
     };
-
-    props.getPendingRequests(props.customer.id);
-    props.getCompletedRequests(props.customer.id);
   }
 
   componentDidMount() {
+    this.props.getPendingRequests(this.props.customer.id);
+    this.props.getCompletedRequests(this.props.customer.id);
     let query = queryString.parse(this.props.location.search.slice(1));
 
     this.setReadReplies();
     this.toggle(query.panel);
-    this.setState({
-      show: parseInt(query.id, RADIX)
-    })
   }
 
   componentDidUpdate(prevProps, prevState) {

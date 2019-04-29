@@ -21,6 +21,7 @@ export class CompletedRequest extends Component {
     }
 
     componentDidMount = async () => {
+        this.scrollToDiv()
         await this.getRegion();
         await this.getCountry().then(res => this.setState({ country: res }));
         await this.getCity();
@@ -73,7 +74,7 @@ export class CompletedRequest extends Component {
         return reply.id === show ? 'show' : '';
     }
 
-    renderToDiv = () => {
+    scrollToDiv = () => {
         if (this.props.show) {
             window.location = `#${this.props.show}`;
         }
@@ -88,7 +89,6 @@ export class CompletedRequest extends Component {
         const created = moment(reply.created).format('MMM Do');
         let ids = [];
         let hasShippingInfo = (country && region && city);
-        this.renderToDiv()
 
         reply.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 

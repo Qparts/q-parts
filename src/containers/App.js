@@ -3,24 +3,24 @@ import { BrowserRouter as Router, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getTranslate } from "react-localize-redux";
 
-import { routes } from '../../config/routes';
-import RouteWithSubRoutes from '../../hoc/RouteWithSubRoutes';
-import Layout from '../../components/Layout/Layout';
+import { routes } from '../config/routes';
+import RouteWithSubRoutes from '../hoc/RouteWithSubRoutes';
+import Layout from '../components/Layout/Layout';
 import DirectionProvider from 'react-with-direction/dist/DirectionProvider';
 
-import { isAuth } from '../../utils'
-import loadStyle from '../../config/app-style';
-import { loadGoogleAnalytics } from '../../config/google';
-import NetworkError from '../../components/NetworkError';
-import { getVehicles, InitializeDefaultLang, getCountriesOnly, getRegions } from '../../actions/apiAction';
-import { selectCountry, onLogout } from '../../actions/customerAction';
-import { changeDefaultDirection } from '../../actions/customerAction';
-import RouterScrollToTop from '../../components/RouterScrollToTop';
-import Nav from '../../components/UI/Nav';
+import { isAuth } from '../utils'
+import loadStyle from '../config/app-style';
+import { loadGoogleAnalytics } from '../config/google';
+import NetworkError from '../components/NetworkError';
+import { getVehicles, InitializeDefaultLang, getCountriesOnly, getRegions } from '../actions/apiAction';
+import { selectCountry, onLogout } from '../actions/customerAction';
+import { changeDefaultDirection } from '../actions/customerAction';
+import RouterScrollToTop from '../components/RouterScrollToTop';
+import Nav from '../components/UI/Nav';
 import moment from 'moment';
-import { clearCart } from '../../actions/cartAction';
+import { clearCart } from '../actions/cartAction';
 
-class Routes extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
 
@@ -38,13 +38,13 @@ class Routes extends Component {
         const dateNow = moment();
         const expiredDate = moment(this.props.tokenExpire);
         const dateDiff = dateNow.diff(expiredDate, 'minutes');
-        const oneHourLeft = -60;        
+        const oneHourLeft = -60;
 
         if (dateDiff >= oneHourLeft) {
             this.props.onLogout()
-            .then(() => {
-                this.props.clearCart();
-            })
+                .then(() => {
+                    this.props.clearCart();
+                })
         }
 
         if (prevProps.direction !== this.props.direction) {
@@ -55,7 +55,7 @@ class Routes extends Component {
     }
 
     getNavLeftStyle = () => {
-        return this.props.direction === 'ltr'? 'nav-on-left': '';
+        return this.props.direction === 'ltr' ? 'nav-on-left' : '';
     }
 
     render() {
@@ -68,6 +68,7 @@ class Routes extends Component {
                             <NetworkError error={this.props.error} />
                             <main className={this.getNavLeftStyle()}>
                                 <Layout
+                                    defaultLang={this.props.defaultLang}
                                     isLoggedIn={isAuth(this.props.token)}
                                     fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`}
                                     vehicles={this.props.vehicles}
@@ -138,4 +139,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Routes);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

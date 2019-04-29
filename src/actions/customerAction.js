@@ -23,6 +23,7 @@ export const ADD_ADDRESS_SUCCEEDED = 'ADD_ADDRESS_SUCCEEDED';
 export const EDIT_ADDRESS_SUCCEEDED = 'EDIT_ADDRESS_SUCCEEDED';
 export const DELETE_ADDRESS_SUCCEEDED = 'DELETE_ADDRESS_SUCCEEDED';
 export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
+export const POST_CODE_LOGIN_SUCCEEDED = 'POST_CODE_LOGIN_SUCCEEDED';
 export const LINK_SOCIAL_MEDIA_SUCCEEDED = 'LINK_SOCIAL_MEDIA_SUCCEEDED';
 export const SOCIAL_MEDIA_SIGNUP = 'SOCIAL_MEDIA_SIGNUP';
 export const EMAIL_SIGNUP = 'EMAIL_SIGNUP';
@@ -259,6 +260,33 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
         defaultLanguage = currentLanguage || res.data.customer.defaultLang;
         dispatch({
           type: LOGIN_SUCCEEDED,
+          payload: res.data,
+        })
+        dispatch(changeDefaultLanguage(defaultLanguage))
+      })
+      .catch(error => {
+        dispatch({
+          type: REQUEST_FAILED,
+          payload: {
+            error: error.response.data,
+            field: serverErrorField,
+            currentLanguage,
+          }
+        })
+      })
+  }
+}
+
+export const postCodeLogin = (email, code, currentLanguage) => {
+  return (dispatch) => {
+    let defaultLanguage = null;
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/code-login`, {
+      email, code
+    })
+      .then(res => {
+        defaultLanguage = currentLanguage || res.data.customer.defaultLang;
+        dispatch({
+          type: POST_CODE_LOGIN_SUCCEEDED,
           payload: res.data,
         })
         dispatch(changeDefaultLanguage(defaultLanguage))

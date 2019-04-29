@@ -125,7 +125,7 @@ export class ListGroupCollapse extends Component {
                                 </div>
                                 <div className="col-lg-auto price">
                                     <label>{translate("general.price")}</label>
-                                    <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                    <p>{quotationItem.products.salesPrice.toFixed(2)} <span>{translate("general.currency")}</span></p>
                                 </div>
                             </div>
                             <span className="seperator"></span>
@@ -135,7 +135,7 @@ export class ListGroupCollapse extends Component {
                                     {this.renderNumberPicker(quotationItem)}
                                     <div className="price">
                                         <label>{translate("quotationRequest.totalPrice")}</label>
-                                        <p>{quotationItem.products.salesPrice * quotationItem.quantity} <span>{translate("general.currency")}</span></p>
+                                        <p>{(quotationItem.products.salesPrice * quotationItem.quantity).toFixed(2)} <span>{translate("general.currency")}</span></p>
                                     </div>
                                 </div>
                                 <div className="col-lg-auto add-cart">
