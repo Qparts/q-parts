@@ -86,11 +86,12 @@ class Wishlist extends Component {
               <ul className="list-unstyled">
             {
               this.state.wishlist.map((item, idx) => (
+
                 <li className="media" key={idx}>
-                  <a href="#" className="media-img"><img onError={handleImageFallback} src={item.image} alt="no wishList" /></a>
+                  <a href={`/products/${item.id}`} className="media-img"><img onError={handleImageFallback} src={item.image} alt="no wishList" /></a>
                   <div className="media-body">
                     <div className="col">
-                      <h5><a href="#">{getTranslatedObject(item, currentLanguage, 'desc', 'descAr')}</a></h5>
+                      <h5><a href={`/products/${item.id}`}>{getTranslatedObject(item, currentLanguage, 'desc', 'descAr')}</a></h5>
                       <ul className="list-inline">
                         <li><strong>{getTranslatedObject(item.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                         <li>#{item.productNumber}</li>
