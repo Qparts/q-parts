@@ -307,11 +307,9 @@ class Setting extends Component {
     let query = queryString.parse(search.slice(1));
     let url = `${pathname}/${search}`;
 
-      console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr')
     if(!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
       await postCodeLogin(query.email, query.code, defaultLang)
       .then(() => {
-        console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr',url)
         this.props.history.push(url);
       })
     }
@@ -319,8 +317,10 @@ class Setting extends Component {
 }
 
   render() {
-    const { translate, direction, isLoading, token } = this.props;
-    if (!isAuth(token)) {
+    const { location: { pathname, search }, translate, direction, isLoading, token } = this.props;
+
+    let query = queryString.parse(search.slice(1));
+    if (!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
       return (
         <div style={styles.loading}>
           <ClipLoader
