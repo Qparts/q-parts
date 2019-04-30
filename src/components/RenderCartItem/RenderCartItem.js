@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { getTranslatedObject, l, right } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
+import CustomLink from '../UI/Link'
 
-export default class extends Component {
+class RenderCartItem extends Component {
   static defaultProps = {
     divCol: 'col-lg-9'
   }
@@ -27,12 +28,16 @@ export default class extends Component {
     }
   }
 
-deleteCart = (id) => {
-  this.props.deleteCart(id);
-}
-addToWishList =(id) => {
-  this.props.moveCartToWishlist(id);
-}
+  deleteCart = (id) => {
+    this.props.deleteCart(id);
+  }
+  addToWishList = (id) => {
+    this.props.moveCartToWishlist(id);
+  }
+
+  goBack = () => {
+    this.props.history.goBack();
+  }
 
   render() {
     const { purchasedItems, removeButton, divCol, direction, translate, currentLanguage } = this.props;
@@ -116,7 +121,13 @@ addToWishList =(id) => {
           <div className="row">
             <div className={`col-md-6 m${l(direction)}-md-auto`}>
               {
-                !removeButton && <Link to="/" className="btn cart-back">{translate("general.buttons.continueShopping")}<i className={`icon-arrow-${right(direction)}`}></i></Link>
+                !removeButton && <CustomLink
+                  className="btn cart-back"
+                  to={"#"}
+                  onClick={this.goBack}
+                  text={translate("general.buttons.continueShopping")}
+                  icon={`icon-arrow-${right(direction)}`}
+                />
               }
             </div>
           </div>
@@ -125,3 +136,5 @@ addToWishList =(id) => {
     )
   }
 }
+
+export default withRouter(RenderCartItem);
