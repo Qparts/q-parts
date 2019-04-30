@@ -45,14 +45,14 @@ addToWishList =(id) => {
               purchasedItems.map((purchasedItem, idx) => {
                 return <li key={idx} className="bg-white">
                   <figure className="row">
-                    <Link to="#" className="col-3 item-img">
+                    <Link to={`/products/${purchasedItem.id}`} className="col-3 item-img">
                       <img onError={handleImageFallback} src={purchasedItem.image} alt="no item" />
                     </Link>
                     <figcaption className="col-9">
                       <div className="row">
                         <div className="col-md-9 item-dis">
                           <header>
-                            <h3><Link to="#">{purchasedItem.desc}</Link></h3>
+                            <h3><Link to={`/products/${purchasedItem.id}`}>{purchasedItem.desc}</Link></h3>
                             <h4>{getTranslatedObject(purchasedItem.brand, currentLanguage, 'name', 'nameAr')} <span>{purchasedItem.productNumber}</span></h4>
                           </header>
                           <div className="cart-quantity d-block d-lg-none">

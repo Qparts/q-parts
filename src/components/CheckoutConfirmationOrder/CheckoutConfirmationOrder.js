@@ -71,7 +71,7 @@ class CheckoutConfirmation extends Component {
 
     if (params.status === constant.paymentStatus.failed) {
       return <Redirect to="/checkout/confirm" />
-    
+
     } else if (_.isEmpty(clonePurchasedItem)) {
       return <Redirect to="/" />
     }
@@ -92,14 +92,14 @@ class CheckoutConfirmation extends Component {
                 checkoutData.map((checkoutData, idx) => {
                   return <li key={idx} className="bg-white">
                     <figure className="row">
-                      <Link to="#" className="col-3 item-img">
+                      <Link to={`/products/${checkoutData.id}`} className="col-3 item-img">
                         <img onError={handleImageFallback} src={checkoutData.image} alt="no item" />
                       </Link>
                       <figcaption className="col-9">
                         <div className="row">
                           <div className="col-md-8 item-dis">
                             <header>
-                              <h3><Link to="#">{checkoutData.desc}</Link></h3>
+                              <h3><Link to={`/products/${checkoutData.id}`}>{checkoutData.desc}</Link></h3>
                               <h4>{getTranslatedObject(checkoutData.brand, currentLanguage, 'name', 'nameAr')} <span>{checkoutData.productNumber}</span></h4>
                             </header>
                             <div className="cart-quantity d-block d-lg-none">
