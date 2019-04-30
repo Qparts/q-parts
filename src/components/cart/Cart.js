@@ -118,7 +118,7 @@ class Cart extends Component {
 				<div className={divItemMovile}>
 					<div>
 						<label>{translate("orderSummary.total")}</label>
-						<p>{subtotal + 50}<span className="currency">{translate("general.currency")}</span></p>
+						<p>{(subtotal + 50).toFixed(2)}<span className="currency">{translate("general.currency")}</span></p>
 					</div>
 					<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
 				</div>

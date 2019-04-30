@@ -25,7 +25,7 @@ import SocialMediaLink from '../../components/SocialMediaLink/SocialMediaLink';
 import Quotations from '../../components/Quotations/Quotations';
 import WithSocialMedia from '../../hoc/WithSocialMedia';
 import { getConnectedPlatforms, getComponentName } from '../../utils/components';
-import { ON_SOCIAL_MEDIA_LINK, TAB_ONE } from '../../constants';
+import { ON_SOCIAL_MEDIA_LINK, TAB_ONE, styles } from '../../constants';
 import Orders from '../../components/Orders/Orders';
 import Order from '../../components/Order/Order';
 import HelpCenter from '../../components/HelpCenter/HelpCenter';
@@ -37,6 +37,7 @@ import PaymentPopup from '../../components/Payment/PaymentPopup';
 import queryString from 'qs';
 import Footer from '../../components/Layout/Footer/Footer';
 
+import { ClipLoader } from "react-spinners";
 import {
   match, isAuth
 } from '../../utils';
@@ -316,7 +317,21 @@ class Setting extends Component {
 }
 
   render() {
-    const { translate, direction } = this.props;
+    const { location: { pathname, search }, translate, direction, isLoading, token } = this.props;
+
+    let query = queryString.parse(search.slice(1));
+    if (!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
+    }
     let dialog;
 
     if (this.state.dialogType === email) {
@@ -658,7 +673,8 @@ class Setting extends Component {
                                       incrementQuantity={this.props.incrementQuantity}
                                       decrementQuantity={this.props.decrementQuantity}
                                       token={this.props.token}
-                                      putCompletedRequestRead={this.props.putCompletedRequestRead} />
+                                      putCompletedRequestRead={this.props.putCompletedRequestRead}
+                                      isLoading={this.props.isLoading} />
                                 </Fragment>
                               )
                             }} />
