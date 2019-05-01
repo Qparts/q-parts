@@ -82,21 +82,7 @@ class Quotations extends Component {
     } = this.props;
 
 
-    console.log(quotations)
     let renderQuotation = null;
-
-    if (quotations.pending.length === 0) {
-      return (
-        <div style={styles.loading}>
-          <ClipLoader
-            css={styles.spinner}
-            sizeUnit={"px"}
-            size={150}
-            loading={isLoading}
-          />
-        </div>
-      )
-    }
 
     if (_.isEmpty(quotations.pending && quotations.completed)) {
       renderQuotation = <div className="empty">
@@ -174,6 +160,19 @@ class Quotations extends Component {
           </TabPane>
         </TabContent>
       </Fragment>
+    }
+    console.log(renderQuotation.props.className !== "empty", quotations.completed.length === 0, quotations.pending.length === 0, quotations )
+    if ( quotations.pending.length === 0 || quotations.completed.length === 0 && renderQuotation.props.className !== "empty") {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
     }
 
     return (
