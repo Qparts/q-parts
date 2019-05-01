@@ -4,8 +4,6 @@ import DropdownItem from "../../UI/Nav/DropdownItem";
 import { isEmpty, right } from "../../../utils";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
-import SocketContext from '../../../containers/SocketContext/SocketContext';
-import { message } from '../../../utils/socketio';
 
 class HeaderDetails extends Component {
   constructor(props) {
