@@ -36,7 +36,7 @@ class Quotations extends Component {
     this.toggle(query.panel);
 
         const that = this;
-    setTimeout(function(){ that.setState({loading: false}) }, 500);
+    setTimeout(function(){ that.setState({loading: false}) }, 1000);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -164,7 +164,7 @@ class Quotations extends Component {
         </TabContent>
       </Fragment>
     }
-    
+
       if ( this.state.loading) {
         return (
           <div style={styles.loading}>
