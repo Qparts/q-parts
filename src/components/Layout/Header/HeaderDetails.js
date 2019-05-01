@@ -4,6 +4,8 @@ import DropdownItem from "../../UI/Nav/DropdownItem";
 import { isEmpty, right } from "../../../utils";
 import { withStyles, Menu, MenuItem, Button } from "@material-ui/core";
 import { NavLg } from '../../Device';
+import SocketContext from '../../../containers/SocketContext/SocketContext';
+import { message } from '../../../utils/socketio';
 
 class HeaderDetails extends Component {
   constructor(props) {
@@ -24,6 +26,14 @@ class HeaderDetails extends Component {
       anchorEl: null
     });
   };
+
+  getMessage = (socket) => {
+    if(socket) {
+      console.log('we have socket');
+      
+    }
+  }
+
   render() {
     const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
@@ -31,11 +41,11 @@ class HeaderDetails extends Component {
       <Fragment>
         {
           isLoggedIn ?
-          <span>
-            <b>{fullName}</b>
-            {/* className="new-note" */}
-            <label className=""></label>
-          </span> :
+            <span>
+              <b>{fullName}</b>
+              {/* className="new-note" */}
+              <label className=""></label>
+            </span> :
             <Fragment>
               <span className="user-img position-relative d-inline-block">
                 <img alt="user" src="/img/user.svg" />
@@ -111,21 +121,26 @@ class HeaderDetails extends Component {
         </li>
       </NavLg>
     return (
-      <ul>
-        {authOrNotAuthButtons}
-        <li className="search-sm"><a className="cd-search-trigger" href="#cd-search"><span></span></a></li>
-        <li>
-          <span className="seperator" />
-        </li>
-        <li>
-           <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
-            <i className="icon-cart" />
-            {
-              cart.length > 0 && <span>{cart.length}</span>
-            }
-          </Link>
-        </li>
-      </ul>
+      <SocketContext.Consumer>
+        {({ socket }) => (
+          <ul>
+            {authOrNotAuthButtons}
+            {this.getMessage(socket)}
+            <li className="search-sm"><a className="cd-search-trigger" href="#cd-search"><span></span></a></li>
+            <li>
+              <span className="seperator" />
+            </li>
+            <li>
+              <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
+                <i className="icon-cart" />
+                {
+                  cart.length > 0 && <span>{cart.length}</span>
+                }
+              </Link>
+            </li>
+          </ul>
+        )}
+      </SocketContext.Consumer>
     );
   }
 }
