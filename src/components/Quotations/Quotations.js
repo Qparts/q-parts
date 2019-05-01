@@ -11,7 +11,8 @@ import CompletedRequest from './CompletedRequest/CompletedRequest';
 import { DownLargeScreen, LargeScreen } from '../../components/Device';
 import _ from 'lodash';
 import { right } from '../../utils';
-import { RADIX } from '../../constants';
+import { RADIX, styles } from '../../constants';
+import { ClipLoader } from "react-spinners";
 
 class Quotations extends Component {
   constructor(props) {
@@ -77,10 +78,25 @@ class Quotations extends Component {
 
     const {
       quotations, translate, currentLanguage, direction, addToCart, incrementQuantity,
-      decrementQuantity, token, customer, regions, putCompletedRequestRead
+      decrementQuantity, token, customer, regions, putCompletedRequestRead, isLoading
     } = this.props;
 
+
+    console.log(quotations)
     let renderQuotation = null;
+
+    if (quotations.pending.length === 0) {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
+    }
 
     if (_.isEmpty(quotations.pending && quotations.completed)) {
       renderQuotation = <div className="empty">
