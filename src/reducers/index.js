@@ -7,6 +7,7 @@ import customer from './customerReducer';
 import createCommonForm from './hoc/formReducer';
 import cart from './cartReducer';
 import api from './apiReducer';
+import webSocket from './webSocketReducer'
 import { localizeReducer } from "react-localize-redux";
 import networkError from './networkErrorReducer';
 
@@ -21,5 +22,6 @@ export default combineReducers({
  manualForm: createCommonForm(MANUAL_FORM),
  form: formReducer,
  localize: localizeReducer,
- networkError
+ networkError,
+ webSocket
 })

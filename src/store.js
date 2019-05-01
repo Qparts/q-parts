@@ -11,7 +11,7 @@ let middleware = applyMiddleware(thunk);
 const persistConfig = {
     key: 'vBeta2.6',
     storage,
-    blacklist: ['form']
+    blacklist: ['form', 'webSocket']
 };
 const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

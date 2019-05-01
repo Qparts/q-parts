@@ -61,6 +61,7 @@ export const MODAL_LOGIN = 'MODAL_LOGIN';
 export const CHECK_LOGIN_CHECKOUT = 'CHECK_LOGIN_CHECKOUT';
 export const CHECK_LOGIN_QUOTATION_ORDER = 'CHECK_LOGIN_QUOTATION_ORDER';
 export const QUOTATION_ORDER_INOF = 'QUOTATION_ORDER_INOF';
+export const INITIALIZE_WS_CONNECTION = 'INITIALIZE_WS_CONNECTION';
 // This is needed for sending the agent's cookies.
 // WithCredentials() makes your browser include cookies and authentication headers in your XHR request. If your service depends on any cookie (including session cookies), it will only work with this option set.
 axios.defaults.withCredentials = true
@@ -263,6 +264,7 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           payload: res.data,
         })
         dispatch(changeDefaultLanguage(defaultLanguage))
+        dispatch(initializeWsConnection())
       })
       .catch(error => {
         dispatch({
@@ -699,5 +701,11 @@ export const setQuotationOrderInfo = (data) => {
   return {
     type: QUOTATION_ORDER_INOF,
     payload: data
+  }
+}
+
+const initializeWsConnection = () => {
+  return (dispatch) => {
+    dispatch({ type: INITIALIZE_WS_CONNECTION })
   }
 }

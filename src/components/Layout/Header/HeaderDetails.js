@@ -27,13 +27,6 @@ class HeaderDetails extends Component {
     });
   };
 
-  getMessage = (socket) => {
-    if(socket) {
-      console.log('we have socket');
-      
-    }
-  }
-
   render() {
     const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
     const { anchorEl, activeSignIn, activeGatage, count } = this.state;
@@ -121,26 +114,21 @@ class HeaderDetails extends Component {
         </li>
       </NavLg>
     return (
-      <SocketContext.Consumer>
-        {({ socket }) => (
-          <ul>
-            {authOrNotAuthButtons}
-            {this.getMessage(socket)}
-            <li className="search-sm"><a className="cd-search-trigger" href="#cd-search"><span></span></a></li>
-            <li>
-              <span className="seperator" />
-            </li>
-            <li>
-              <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
-                <i className="icon-cart" />
-                {
-                  cart.length > 0 && <span>{cart.length}</span>
-                }
-              </Link>
-            </li>
-          </ul>
-        )}
-      </SocketContext.Consumer>
+      <ul>
+        {authOrNotAuthButtons}
+        <li className="search-sm"><a className="cd-search-trigger" href="#cd-search"><span></span></a></li>
+        <li>
+          <span className="seperator" />
+        </li>
+        <li>
+          <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
+            <i className="icon-cart" />
+            {
+              cart.length > 0 && <span>{cart.length}</span>
+            }
+          </Link>
+        </li>
+      </ul>
     );
   }
 }
