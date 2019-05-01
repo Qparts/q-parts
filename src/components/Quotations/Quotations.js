@@ -22,7 +22,8 @@ class Quotations extends Component {
     this.state = {
       activeTab: '',
       noNewReply: '',
-      show: parseInt(query.id, RADIX)
+      show: parseInt(query.id, RADIX),
+      loading: true
     };
   }
 
@@ -33,6 +34,9 @@ class Quotations extends Component {
 
     this.setReadReplies();
     this.toggle(query.panel);
+
+        const that = this;
+    setTimeout(function(){ that.setState({loading: false}) }, 500);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -80,7 +84,6 @@ class Quotations extends Component {
       quotations, translate, currentLanguage, direction, addToCart, incrementQuantity,
       decrementQuantity, token, customer, regions, putCompletedRequestRead, isLoading
     } = this.props;
-
 
     let renderQuotation = null;
 
@@ -161,20 +164,19 @@ class Quotations extends Component {
         </TabContent>
       </Fragment>
     }
-    console.log(renderQuotation.props.className !== "empty", quotations.completed.length === 0, quotations.pending.length === 0, quotations )
-    if ( quotations.pending.length === 0 || quotations.completed.length === 0 && renderQuotation.props.className !== "empty") {
-      return (
-        <div style={styles.loading}>
-          <ClipLoader
-            css={styles.spinner}
-            sizeUnit={"px"}
-            size={150}
-            loading={isLoading}
-          />
-        </div>
-      )
-    }
-
+    
+      if ( this.state.loading) {
+        return (
+          <div style={styles.loading}>
+            <ClipLoader
+              css={styles.spinner}
+              sizeUnit={"px"}
+              size={150}
+              loading={isLoading}
+            />
+          </div>
+        )
+      }
     return (
       <div className="requests-main">
         <DownLargeScreen>

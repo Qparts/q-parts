@@ -526,7 +526,8 @@ class Setting extends Component {
                                 incrementQuantity={this.props.incrementQuantity}
                                 decrementQuantity={this.props.decrementQuantity}
                                 token={this.props.token}
-                                putCompletedRequestRead={this.props.putCompletedRequestRead} />
+                                putCompletedRequestRead={this.props.putCompletedRequestRead}
+                                isLoading={this.props.isLoading} />
                           </Fragment>
                         )
                       }} />
