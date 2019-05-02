@@ -106,14 +106,6 @@ render() {
 
   let renderQuotation = null;
 
-  console.log('===========================================================================================');
-
-  console.log('this.state.loading: ', this.state.loading);
-  console.log('_.isEmpty(quotations.pending && quotations.completed): ', _.isEmpty(quotations.pending && quotations.completed));
-
-  console.log('===========================================================================================');
-
-
   if (this.state.loading) {
     return (
       <div style={styles.loading}>
