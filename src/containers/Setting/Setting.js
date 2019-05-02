@@ -305,13 +305,9 @@ class Setting extends Component {
   codeLogin = async () => {
     const { location: { pathname, search }, postCodeLogin, defaultLang, token } = this.props;
     let query = queryString.parse(search.slice(1));
-    let url = `${pathname}/${search}`;
 
     if(!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
-      await postCodeLogin(query.email, query.code, defaultLang)
-      .then(() => {
-        this.props.history.push(url);
-      })
+      await postCodeLogin(query.email, query.code, defaultLang);
     }
 
 }
