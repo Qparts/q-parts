@@ -34,9 +34,6 @@ class Quotations extends Component {
 
     this.setReadReplies();
     this.toggle(query.panel);
-
-        const that = this;
-    setTimeout(function(){ that.setState({loading: false}) }, 1000);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -102,7 +99,6 @@ class Quotations extends Component {
           <Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className={`icon-arrow-${right(direction)}`}></i></Link>
         </figcaption>
       </div>
-
     } else {
       renderQuotation = <Fragment>
         <Nav tabs>
@@ -165,7 +161,7 @@ class Quotations extends Component {
       </Fragment>
     }
 
-      if ( this.state.loading) {
+      if ( quotations.pending.length === 0 || quotations.completed.length === 0 ) {
         return (
           <div style={styles.loading}>
             <ClipLoader
@@ -177,6 +173,7 @@ class Quotations extends Component {
           </div>
         )
       }
+
     return (
       <div className="requests-main">
         <DownLargeScreen>
