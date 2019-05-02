@@ -17,3 +17,7 @@ export const initializeWsConnection = dispatch => {
         })
     })
 }
+
+export const disconnectWs = () => {
+    socket.disconnect();
+}
