@@ -18,48 +18,41 @@ class Quotations extends Component {
   constructor(props) {
     super(props);
     let query = queryString.parse(this.props.location.search.slice(1));
-    const isEmptyQuotation = _.isEmpty(props.quotations.pending && props.quotations.completed);
 
     this.state = {
       activeTab: '',
       noNewReply: '',
       show: parseInt(query.id, RADIX),
-      loading: isEmptyQuotation ? true : false
+      loading: true
     };
   }
 
   componentDidMount() {
-    this.props.getPendingRequests(this.props.customer.id);
-    this.props.getCompletedRequests(this.props.customer.id);
+    this.props.getPendingRequests(this.props.customer.id)
+    .then(() => {
+      this.resetLoading();
+    });
+    this.props.getCompletedRequests(this.props.customer.id)
+    .then(() => {
+      this.resetLoading();
+    });
     let query = queryString.parse(this.props.location.search.slice(1));
 
     this.setReadReplies();
     this.toggle(query.panel);
-
-    if (this.state.loading) {
-      setTimeout(() => {
-        this.setState({ loading: false })
-      }, 5000)
-    };
 }
 
 componentDidUpdate(prevProps, prevState) {
-  const { pending, completed } = this.props.quotations;
-  const prevPending = prevProps.quotations.pending;
+  const { completed } = this.props.quotations;
   const prevCompleted = prevProps.quotations.completed;
 
   if (completed !== prevCompleted) {
     this.setReadReplies();
   }
-  const isEmptyQuotation = !_.isEmpty(pending || completed);
-
-  if ((prevPending !== pending || completed !== prevCompleted) && isEmptyQuotation) {
-    this.resetLoading();
-  }
 }
 
-resetLoading = async () => {
-  await this.setState({
+resetLoading = () => {
+  this.setState({
     loading: false
   })
 }
@@ -118,7 +111,7 @@ render() {
       </div>
     )
 
-  } else if (_.isEmpty(quotations.pending && quotations.completed)) {
+  } else if (_.isEmpty(quotations.pending) && _.isEmpty(quotations.completed)) {
     renderQuotation = <div className="empty">
       <LargeScreen>
         <header>
