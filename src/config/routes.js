@@ -131,7 +131,8 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     },
     {
         path: "/motor-oil",
-        component: MotorOil
+        component: MotorOil,
+        currentLanguage: defaultLang
     },
     {
         path: "/listing",
