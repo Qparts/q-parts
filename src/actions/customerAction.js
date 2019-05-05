@@ -292,16 +292,8 @@ export const postCodeLogin = (email, code, currentLanguage) => {
           payload: res.data,
         })
         dispatch(changeDefaultLanguage(defaultLanguage))
-      })
-      .catch(error => {
-        dispatch({
-          type: REQUEST_FAILED,
-          payload: {
-            error: error.response.data,
-            field: serverErrorField,
-            currentLanguage,
-          }
-        })
+      }, error => {
+        handleNetworkError(dispatch, error);
       })
   }
 }

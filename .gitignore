@@ -21,3 +21,4 @@ yarn-debug.log*
 yarn-error.log*
 .env
 /public/**/*.map
+public/css/main-ar/main-ar.css
