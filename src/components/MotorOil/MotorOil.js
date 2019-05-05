@@ -14,7 +14,7 @@ import Swiper from 'react-id-swiper';
 import { getBestSeller } from '../../utils/api';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
-import { handleImageFallback } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 
 class MotorOil extends Component {
 	constructor(props) {
@@ -37,7 +37,7 @@ class MotorOil extends Component {
       });
   }
 	render() {
-		const { translate, direction } = this.props;
+		const { translate, direction, currentLanguage } = this.props;
     const { bestSeller } = this.state
 		return (
 			<Fragment>
@@ -101,9 +101,9 @@ class MotorOil extends Component {
 			                      <Link to={`/products/${product.id}`} className="card">
 			                        <img onError={handleImageFallback} src={product.image} className="card-img-top" alt="no product" />
 			                        <div className="card-body">
-			                          <h5 className="card-title">{product.desc}</h5>
+			                          <h5 className="card-title">{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h5>
 			                          <ul className="list-inline product-info">
-			                            <li><strong>{product.brand.name}</strong></li>
+			                            <li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
 			                            <li>{product.number}</li>
 			                          </ul>
 			                          <div className="rating">
