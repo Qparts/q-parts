@@ -44,6 +44,6 @@ export const getCountry = async (countryId) => {
     return await axios.get(`${API_ROOT}${LOCATION_SERVICE}/${countryId}`);
 }
 
-export const getMotorOil = () => {
+export const getPopularOilBrands = () => {
     return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/popular-brands/oil`)
 }

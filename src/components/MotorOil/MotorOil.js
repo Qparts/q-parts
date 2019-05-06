@@ -28,7 +28,6 @@ class MotorOil extends Component {
     this.loadBestSeller()
 		getMotorOil()
 		.then(res =>{
-			console.log(res.data)
 			this.setState({
 				popularOilBrands: res.data
 			})
@@ -63,34 +62,12 @@ class MotorOil extends Component {
 						<header>
 							<h1>{translate("motorOil.popularBrands")}</h1>
 						</header>
-						{/*<section className="main-cat">
-							<div className="row">
-								<Link to="/listing?query=&page=1&category=9" className="col-2">
-										<img src="/img/motor-oil.png" alt="Oil" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=13" className="col-2">
-										<img src="/img/tyres.png" alt="Tires" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=28" className="col-2">
-										<img src="/img/tools.png" alt="Tools" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=9" className="col-2">
-										<img src="/img/motor-oil.png" alt="Oil" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=13" className="col-2">
-										<img src="/img/tyres.png" alt="Tires" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=28" className="col-2">
-										<img src="/img/tools.png" alt="Tools" />
-								</Link>
-							</div>
-						</section>*/}
 						<section className="main-cat">
 							<div className="row">
 								{
 									this.state.popularOilBrands.map((product,idx) => (
 											<Link to={`/listing?query=&page=1&category=${product.id}`} className="col-2" key={idx}>
-													<img src={product.image} alt={product.name} />
+													<img src={product.image} alt={getTranslatedObject(product, currentLanguage, 'name', 'nameAr')} />
 											</Link>
 									))
 								}
