@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client';
 import { GET_NOTIFICATION } from '../reducers/websocket/constants';
 
-let socket = {};
+let socket = null;
 
 export const initializeWsConnection = dispatch => {
     socket = openSocket('http://localhost:8000');
@@ -19,5 +19,7 @@ export const initializeWsConnection = dispatch => {
 }
 
 export const disconnectWs = () => {
-    socket.disconnect();
+    if (socket) {
+        socket.disconnect();
+    }
 }
