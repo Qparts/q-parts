@@ -66,7 +66,7 @@ class MotorOil extends Component {
 							<div className="row">
 								{
 									this.state.popularOilBrands.map((product,idx) => (
-											<Link to={`/listing?query=&page=1&category=${product.id}`} className="col-2" key={idx}>
+											<Link to={`/listing?query=&page=1&category=9&Brands=${product.id}`} className="col-2" key={idx}>
 													<img src={product.image} alt={getTranslatedObject(product, currentLanguage, 'name', 'nameAr')} />
 											</Link>
 									))
