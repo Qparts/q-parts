@@ -11,7 +11,7 @@ import { getTranslate } from 'react-localize-redux';
 
 import { swiperParams } from '../../constants';
 import Swiper from 'react-id-swiper';
-import { getBestSeller, getMotorOil } from '../../utils/api';
+import { getBestSeller, getPopularOilBrands } from '../../utils/api';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
@@ -26,7 +26,7 @@ class MotorOil extends Component {
     }
 
     this.loadBestSeller()
-		getMotorOil()
+		getPopularOilBrands()
 		.then(res =>{
 			this.setState({
 				popularOilBrands: res.data
