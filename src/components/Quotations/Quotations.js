@@ -192,24 +192,16 @@ render() {
           </ul>
         </TabPane>
         <TabPane tabId="closed">
-          <ul className="list-unstyled" id="replied-list">
+          <ul className="list-unstyled" id="request-list">
             {
-              quotations.completed.map((reply, completedIndex) => {
-                return <CompletedRequest
-                  key={reply.id}
-                  show={this.state.show}
-                  completedIndex={completedIndex}
-                  reply={reply}
+              quotations.pending.map(pending => {
+                return <PendingRequest
+                  key={pending.id}
+                  pending={pending}
                   translate={translate}
                   currentLanguage={currentLanguage}
-                  addToCart={addToCart}
-                  incrementQuantity={incrementQuantity}
-                  decrementQuantity={decrementQuantity}
-                  direction={direction}
-                  token={token}
                   vehicles={customer.vehicles}
                   regions={regions}
-                  putCompletedRequestRead={putCompletedRequestRead}
                 />
               })
             }
