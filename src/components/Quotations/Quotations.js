@@ -145,8 +145,8 @@ render() {
         </NavItem>
         <NavItem className={this.state.noNewReply}>
           <NavLink
-            className={classnames({ active: this.state.activeTab === 'archived' })} onClick={() => { this.toggle('archived'); }} >
-            {translate("quotationRequest.archived")} <span></span>
+            className={classnames({ active: this.state.activeTab === 'closed' })} onClick={() => { this.toggle('closed'); }} >
+            {translate("quotationRequest.closed")} <span></span>
           </NavLink>
         </NavItem>
       </Nav>
@@ -191,7 +191,7 @@ render() {
             }
           </ul>
         </TabPane>
-        <TabPane tabId="archived">
+        <TabPane tabId="closed">
           <ul className="list-unstyled" id="replied-list">
             {
               quotations.completed.map((reply, completedIndex) => {

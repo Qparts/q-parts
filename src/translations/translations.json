@@ -2400,9 +2400,9 @@
       "المجموع",
       "Total Price"
     ],
-    "archived": [
-      "الارشيف",
-      "archived"
+    "closed": [
+      "مغلق",
+      "Closed"
     ],
     "comment": [
       "التعليقات",
