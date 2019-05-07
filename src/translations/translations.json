@@ -2399,6 +2399,14 @@
     "totalPrice": [
       "المجموع",
       "Total Price"
+    ],
+    "archived": [
+      "الارشيف",
+      "archived"
+    ],
+    "comment": [
+      "التعليقات",
+      "Comments"
     ]
   },
   "renderFileInput": {
