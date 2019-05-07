@@ -143,6 +143,12 @@ render() {
             {translate("quotationRequest.replied")} <span></span>
           </NavLink>
         </NavItem>
+        <NavItem className={this.state.noNewReply}>
+          <NavLink
+            className={classnames({ active: this.state.activeTab === 'archived' })} onClick={() => { this.toggle('archived'); }} >
+            {translate("quotationRequest.archived")} <span></span>
+          </NavLink>
+        </NavItem>
       </Nav>
       <TabContent activeTab={this.state.activeTab}>
         <TabPane tabId="pending">
@@ -162,6 +168,30 @@ render() {
           </ul>
         </TabPane>
         <TabPane tabId="replied">
+          <ul className="list-unstyled" id="replied-list">
+            {
+              quotations.completed.map((reply, completedIndex) => {
+                return <CompletedRequest
+                  key={reply.id}
+                  show={this.state.show}
+                  completedIndex={completedIndex}
+                  reply={reply}
+                  translate={translate}
+                  currentLanguage={currentLanguage}
+                  addToCart={addToCart}
+                  incrementQuantity={incrementQuantity}
+                  decrementQuantity={decrementQuantity}
+                  direction={direction}
+                  token={token}
+                  vehicles={customer.vehicles}
+                  regions={regions}
+                  putCompletedRequestRead={putCompletedRequestRead}
+                />
+              })
+            }
+          </ul>
+        </TabPane>
+        <TabPane tabId="archived">
           <ul className="list-unstyled" id="replied-list">
             {
               quotations.completed.map((reply, completedIndex) => {
