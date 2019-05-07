@@ -62,8 +62,7 @@ export class PendingRequest extends Component {
         const created = moment(pending.created).format('MMM Do');
         let ids = [];
         let hasShippingInfo = (country && region && city);
-
-
+        
         pending.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
         return <li key={pending.id}>
@@ -130,6 +129,25 @@ export class PendingRequest extends Component {
                         </ul>
                     </div>
                 </artical>
+                {
+                  pending.comments.length !== 0 &&
+                  <artical className="request-details" >
+                      <div className="parts-list">
+                          <ul className="d-table list-unstyled">
+                              <li className="d-table-row">
+                                  <div className="d-table-cell">Comment</div>
+                              </li>
+                              {
+                                pending.comments.map((comment,idx) =>(
+                                  <li className="d-table-row" key={idx}>
+                                      <div className="d-table-cell">{comment.text}</div>
+                                  </li>
+                                ))
+                              }
+                          </ul>
+                      </div>
+                  </artical>
+                }
             </div>
         </li>
     }
