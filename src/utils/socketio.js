@@ -1,19 +1,16 @@
 import openSocket from 'socket.io-client';
-import { GET_NOTIFICATION } from '../reducers/websocket/constants';
+import { GET_COMPLETED_REQUESTS } from '../actions/customerAction';
 
 let socket = null;
 
 export const initializeWsConnection = dispatch => {
     socket = openSocket('http://localhost:8000');
 
-    socket.on('connect', () => {
-        console.log('congrats, we are finally connected :D');
-    });
 
-    socket.on(GET_NOTIFICATION, notification => {
+    socket.on(GET_COMPLETED_REQUESTS, completed => {
         dispatch({
-            type: GET_NOTIFICATION,
-            payload: notification
+            type: GET_COMPLETED_REQUESTS,
+            payload: completed
         })
     })
 }
