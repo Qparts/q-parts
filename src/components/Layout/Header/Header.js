@@ -9,7 +9,8 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: ''
+      searchText: '',
+      new: ''
     }
     this.header = createRef();
   }
@@ -19,6 +20,7 @@ class Header extends Component {
     var last_scroll_position;
     var sm = window.matchMedia("(max-width: 1169px)");
     var lg = window.matchMedia("(min-width: 1170px)");
+    this.setReadReplies();
 
     window.addEventListener('scroll', (e) => {
       last_scroll_position = window.scrollY;
@@ -52,6 +54,23 @@ class Header extends Component {
       }
       new_scroll_position = last_scroll_position;
     });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { completed } = this.props.quotations;
+    const prevCompleted = prevProps.quotations.completed;
+
+    if (completed !== prevCompleted) {
+      this.setReadReplies();
+    }
+  }
+
+  setReadReplies = () => {
+    let hasNoNewReply = this.props.quotations.completed.every(reply => reply.read);
+
+    this.setState({
+      new: hasNoNewReply ? '' : 'new',
+    })
   }
 
   handleClick = (e) => {
@@ -145,8 +164,7 @@ class Header extends Component {
                     <img alt="qParts" src="/img/qParts-logo.svg" />
                   </Link>
                   <ul className="cd-header-buttons">
-                  {/* className="cd-nav-trigger new" */}
-                    <li><a className="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
+                    <li><a className={`cd-nav-trigger ${this.state.new}`} href="#cd-primary-nav"><span></span></a></li>
                   </ul>
                 </div>
                 <div className="user-actions col-auto">
@@ -159,8 +177,8 @@ class Header extends Component {
                     onAddVechile={onAddVechile}
                     onSignin={onSignin}
                     onSearch={onSearch}
-                    cart={cart} 
-                    quotations={this.props.quotations}/>
+                    cart={cart}
+                    quotations={this.props.quotations} />
                 </div>
               </div>
             </div>

@@ -99,7 +99,8 @@ class App extends Component {
                                 direction={this.props.direction}
                                 translate={this.props.translate}
                                 isLoggedIn={isAuth(this.props.token)}
-                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
+                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} 
+                                quotations={this.props.quotations} />
                         </Fragment>
                     </RouterScrollToTop>
                 </DirectionProvider>
