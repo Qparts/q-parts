@@ -135,7 +135,7 @@ export class PendingRequest extends Component {
                       <div className="parts-list">
                           <ul className="d-table list-unstyled">
                               <li className="d-table-row">
-                                  <div className="d-table-cell">Comment</div>
+                                  <div className="d-table-cell">{translate("quotationRequest.comment")}</div>
                               </li>
                               {
                                 pending.comments.map((comment,idx) =>(
