@@ -6,7 +6,7 @@ const isProduction = process.env.REACT_APP_NODE_ENV === 'production';
 if (isProduction) {
     backendHost = `https://${proxyHost}`;
 } else {
-    proxyHost = 'localhost:8000';
+    proxyHost = 'localhost:8000'; // qtest.fareed9.com
     backendHost = `http://${proxyHost}`;
 }
 

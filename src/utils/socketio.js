@@ -17,6 +17,6 @@ export const initializeWsConnection = dispatch => {
 
 export const disconnectWs = () => {
     if (socket) {
-        socket.disconnect();
+        socket.close();
     }
 }

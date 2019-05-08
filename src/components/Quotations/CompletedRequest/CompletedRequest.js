@@ -138,10 +138,10 @@ export class CompletedRequest extends Component {
                         }
                     </ul>
                     <ul className="replayed-parts-list ">
-                        {
+                        {   
                             reply.quotationItems.map((quotationItem, quotationItemIndex) => {
                                 return <ListGroupCollapse
-                                    key={quotationItem.products.id}
+                                    key={quotationItemIndex}
                                     completedIndex={completedIndex}
                                     quotationItemIndex={quotationItemIndex}
                                     requestNumber={reply.id}
