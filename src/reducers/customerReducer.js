@@ -12,6 +12,7 @@ import {
 } from '../actions/customerAction';
 import { SET_DEFAULT_LANG } from '../actions/apiAction';
 import { AR } from '../constants';
+import { GET_NOTIFICATION } from './websocket/constants';
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -300,6 +301,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state, quotationOrderInfo: action.payload
       }
+
+      case GET_NOTIFICATION:
+        return {
+          ...state, notification: action.payload
+        }
 
     default:
       return state;

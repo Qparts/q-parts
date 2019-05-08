@@ -51,7 +51,6 @@ class App extends Component {
             loadStyle(this.props.direction);
         }
 
-
     }
 
     getNavLeftStyle = () => {
@@ -81,6 +80,7 @@ class App extends Component {
                                     changeDefaultDirection={this.props.changeDefaultDirection}
                                     direction={this.props.direction}
                                     cart={this.props.cart}
+                                    quotations={this.props.quotations}
                                 >
                                     <Switch>
                                         {routes(isAuth(this.props.token), this.props.direction, this.props.defaultLang, this.props.translate).map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
@@ -99,7 +99,8 @@ class App extends Component {
                                 direction={this.props.direction}
                                 translate={this.props.translate}
                                 isLoggedIn={isAuth(this.props.token)}
-                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} />
+                                fullName={`${this.props.customer.firstName} ${this.props.customer.lastName}`} 
+                                quotations={this.props.quotations} />
                         </Fragment>
                     </RouterScrollToTop>
                 </DirectionProvider>
@@ -122,7 +123,8 @@ const mapStateToProps = state => {
         countriesOnly: state.api.countriesOnly,
         error: state.networkError.error,
         direction: state.customer.direction,
-        cart: state.cart.purchasedItems
+        cart: state.cart.purchasedItems,
+        quotations: state.customer.quotations,
     }
 }
 

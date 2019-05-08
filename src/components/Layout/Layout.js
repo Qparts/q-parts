@@ -113,7 +113,8 @@ class Layout extends Component {
           getCountriesOnly={getCountriesOnly}
           selectCountry={selectCountry}
           direction={direction}
-          cart={cart} />
+          cart={cart} 
+          quotations={this.props.quotations}/>
         {dialog}
         <div className="cd-main-content">
           <div className="main-content">

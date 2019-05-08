@@ -9,8 +9,21 @@ class HeaderDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      anchorEl: null,
-      count: 0,
+      notification: '',
+      newNote: '',
+    }
+  }
+
+  componentDidMount() {
+    this.setReadReplies();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { completed } = this.props.quotations;
+    const prevCompleted = prevProps.quotations.completed;
+
+    if (completed !== prevCompleted) {
+      this.setReadReplies();
     }
   }
   handleClick = event => {
@@ -24,18 +37,32 @@ class HeaderDetails extends Component {
       anchorEl: null
     });
   };
+
+  setReadReplies = () => {
+    let hasNoNewReply = this.props.quotations.completed.every(reply => reply.read);
+
+    this.setState({
+      notification: hasNoNewReply ? '' : 'notification',
+      newNote: hasNoNewReply ? '' : 'new-note',
+    })
+  }
+
+  getReplayCounter = () => {
+    return this.props.quotations.completed.filter(reply => !reply.read).length;
+  }
+  
+
   render() {
     const { translate, vehicles, isLoggedIn, fullName, classes, onAddVechile, onSignin, onSearch, direction, cart } = this.props;
-    const { anchorEl, activeSignIn, activeGatage, count } = this.state;
+    const { notification, newNote } = this.state;
     const dropdownHeader =
       <Fragment>
         {
           isLoggedIn ?
-          <span>
-            <b>{fullName}</b>
-            {/* className="new-note" */}
-            <label className=""></label>
-          </span> :
+            <span>
+              <b>{fullName}</b>
+              <label className={newNote}></label>
+            </span> :
             <Fragment>
               <span className="user-img position-relative d-inline-block">
                 <img alt="user" src="/img/user.svg" />
@@ -78,9 +105,8 @@ class HeaderDetails extends Component {
             {
               isLoggedIn && <ul className="profile-actions list-unstyled">
                 <li>
-                  {/* className="notification" */}
-                  <Link to="/setting/quotations" className="">
-                    {/* <span>1</span> */}
+                  <Link to="/setting/quotations" className={notification}>
+                    { this.getReplayCounter() > 0 && <span>{this.getReplayCounter()}</span> }
                     <i className="icon-send"></i>
                     {translate("navBar.menu.menuItem.quotations")}
 
@@ -118,7 +144,7 @@ class HeaderDetails extends Component {
           <span className="seperator" />
         </li>
         <li>
-           <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
+          <Link to="/cart" className={cart.length > 0 ? "not-empty" : ''}>
             <i className="icon-cart" />
             {
               cart.length > 0 && <span>{cart.length}</span>

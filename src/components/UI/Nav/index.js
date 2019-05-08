@@ -3,14 +3,23 @@ import { Link } from "react-router-dom";
 import { closeNav, right } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
-const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection, getCountriesOnly }) => {
+const Nav = (
+    {
+        translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection,
+        getCountriesOnly, quotations
+    }) => {
+
+    const getReplayCounter = () => {
+        return quotations.completed.filter(reply => !reply.read).length;
+    }
+
+    let hasNoNewReply = quotations.completed.every(reply => reply.read);
 
     const userSettingPages = isLoggedIn ? <Fragment>
         <li className="nav-sm">
-            {/* className="notification" */}
-            <Link className="" to="/setting/quotations" onClick={close}>
+            <Link className={hasNoNewReply ? '' : 'notification'} to="/setting/quotations" onClick={close}>
                 <i className="icon-send"></i> {translate("navBar.quotations")}
-                {/* <span>1</span> */}
+                {getReplayCounter() > 0 && <span>{getReplayCounter()}</span>}
             </Link>
         </li>
         {/* <li className="nav-sm">

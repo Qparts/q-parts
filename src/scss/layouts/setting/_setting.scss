@@ -530,6 +530,11 @@
     }
   }
 
+  .request-comments {
+    @extend .request-details;
+    margin-top: 10px;
+  }
+
 }
 .replayed-parts-list{
   @extend .list-unstyled;

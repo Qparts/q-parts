@@ -7,6 +7,7 @@ import globalTranslations from "../translations/translations.json";
 import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
 import { SET_DEFAULT_LANG } from './apiAction';
+import { initializeWsConnection, disconnectWs } from '../utils/socketio';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -263,6 +264,7 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           payload: res.data,
         })
         dispatch(changeDefaultLanguage(defaultLanguage))
+        initializeWsConnection(dispatch)
       })
       .catch(error => {
         dispatch({
@@ -334,6 +336,7 @@ export const onLogout = () => {
         dispatch({
           type: LOGOUT
         })
+        disconnectWs();
       });
   }
 }

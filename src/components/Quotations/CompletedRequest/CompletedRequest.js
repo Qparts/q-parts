@@ -121,7 +121,7 @@ export class CompletedRequest extends Component {
                 </div>
             </Link>
             <div className={`collapse ${reply.id} ${this.show()}`} id={reply.id}>
-                <artical className="request-details" >
+                <article className="request-details" >
                     <ul className="list-inline vehicle-info">
                         {
                             getVehicleVin(vehicles, reply.customerVehicleId) && (
@@ -141,7 +141,7 @@ export class CompletedRequest extends Component {
                         {
                             reply.quotationItems.map((quotationItem, quotationItemIndex) => {
                                 return <ListGroupCollapse
-                                    key={quotationItem.products.id}
+                                    key={quotationItemIndex}
                                     completedIndex={completedIndex}
                                     quotationItemIndex={quotationItemIndex}
                                     requestNumber={reply.id}
@@ -160,25 +160,25 @@ export class CompletedRequest extends Component {
                         }
 
                     </ul>
-                </artical>
+                </article>
                 {
-                  reply.comments.length !== 0 &&
-                  <artical className="request-details" >
-                      <div className="parts-list">
-                          <ul className="d-table list-unstyled">
-                              <li className="d-table-row">
-                                  <div className="d-table-cell">{translate("quotationRequest.comment")}</div>
-                              </li>
-                              {
-                                reply.comments.map((comment,idx) =>(
-                                  <li className="d-table-row" key={idx}>
-                                      <div className="d-table-cell">{comment.text}</div>
-                                  </li>
-                                ))
-                              }
-                          </ul>
-                      </div>
-                  </artical>
+                    reply.comments.length !== 0 &&
+                    <article className="request-comments">
+                        <div className="parts-list">
+                            <ul className="d-table list-unstyled">
+                                <li className="d-table-row">
+                                    <div className="d-table-cell">{translate("quotationRequest.comment")}</div>
+                                </li>
+                                {
+                                    reply.comments.map((comment, idx) => (
+                                        <li className="d-table-row" key={idx}>
+                                            <div className="d-table-cell">{comment.text}</div>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    </article>
                 }
             </div>
         </li>
