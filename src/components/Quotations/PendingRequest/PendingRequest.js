@@ -93,7 +93,7 @@ export class PendingRequest extends Component {
                 </div>
             </Link>
             <div className={`collapse ${pending.id}`} id={pending.id}>
-                <artical className="request-details" >
+                <article className="request-details" >
                     <ul className="list-inline vehicle-info">
                         {
                             getVehicleVin(vehicles, pending.customerVehicleId) && (
@@ -128,10 +128,10 @@ export class PendingRequest extends Component {
                             }
                         </ul>
                     </div>
-                </artical>
+                </article>
                 {
                   pending.comments.length !== 0 &&
-                  <artical className="request-details" >
+                  <article className="request-comments">
                       <div className="parts-list">
                           <ul className="d-table list-unstyled">
                               <li className="d-table-row">
@@ -146,7 +146,7 @@ export class PendingRequest extends Component {
                               }
                           </ul>
                       </div>
-                  </artical>
+                  </article>
                 }
             </div>
         </li>
