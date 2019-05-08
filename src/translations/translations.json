@@ -2399,6 +2399,10 @@
     "totalPrice": [
       "المجموع",
       "Total Price"
+    ],
+    "comment": [
+      "التعليقات",
+      "Comments"
     ]
   },
   "renderFileInput": {
