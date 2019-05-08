@@ -161,6 +161,25 @@ export class CompletedRequest extends Component {
 
                     </ul>
                 </artical>
+                {
+                  reply.comments.length !== 0 &&
+                  <artical className="request-details" >
+                      <div className="parts-list">
+                          <ul className="d-table list-unstyled">
+                              <li className="d-table-row">
+                                  <div className="d-table-cell">Comment</div>
+                              </li>
+                              {
+                                reply.comments.map((comment,idx) =>(
+                                  <li className="d-table-row" key={idx}>
+                                      <div className="d-table-cell">{comment.text}</div>
+                                  </li>
+                                ))
+                              }
+                          </ul>
+                      </div>
+                  </artical>
+                }
             </div>
         </li>
     }

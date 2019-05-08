@@ -129,11 +129,11 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         direction,
         translate
     },
-    {
-        path: "/motor-oil",
-        component: MotorOil,
-        currentLanguage: defaultLang
-    },
+    // {
+    //     path: "/motor-oil",
+    //     component: MotorOil,
+    //     currentLanguage: defaultLang
+    // },
     {
         path: "/listing",
         component: SearchResult
