@@ -2399,14 +2399,6 @@
     "totalPrice": [
       "المجموع",
       "Total Price"
-    ],
-    "closed": [
-      "مغلق",
-      "Closed"
-    ],
-    "comment": [
-      "التعليقات",
-      "Comments"
     ]
   },
   "renderFileInput": {

@@ -143,12 +143,6 @@ render() {
             {translate("quotationRequest.replied")} <span></span>
           </NavLink>
         </NavItem>
-        <NavItem className={this.state.noNewReply}>
-          <NavLink
-            className={classnames({ active: this.state.activeTab === 'closed' })} onClick={() => { this.toggle('closed'); }} >
-            {translate("quotationRequest.closed")} <span></span>
-          </NavLink>
-        </NavItem>
       </Nav>
       <TabContent activeTab={this.state.activeTab}>
         <TabPane tabId="pending">
@@ -186,22 +180,6 @@ render() {
                   vehicles={customer.vehicles}
                   regions={regions}
                   putCompletedRequestRead={putCompletedRequestRead}
-                />
-              })
-            }
-          </ul>
-        </TabPane>
-        <TabPane tabId="closed">
-          <ul className="list-unstyled" id="request-list">
-            {
-              quotations.pending.map(pending => {
-                return <PendingRequest
-                  key={pending.id}
-                  pending={pending}
-                  translate={translate}
-                  currentLanguage={currentLanguage}
-                  vehicles={customer.vehicles}
-                  regions={regions}
                 />
               })
             }
