@@ -1,5 +1,5 @@
 import { API_ROOT } from '../config/api';
-import { PRODUCT_SERVICE, CART_SERVICE, QUOTATION_SERVICE, LOCATION_SERVICE } from '../actions/constants';
+import { PRODUCT_SERVICE, CART_SERVICE, QUOTATION_SERVICE, LOCATION_SERVICE, CUSTOMER_SERVICE } from '../actions/constants';
 
 import axios from 'axios';
 
@@ -46,4 +46,8 @@ export const getCountry = async (countryId) => {
 
 export const getPopularOilBrands = () => {
     return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/popular-brands/oil`)
+}
+
+export const postSubscribeCustomer = (subscription) => {
+	return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/notification/register`, subscription)
 }

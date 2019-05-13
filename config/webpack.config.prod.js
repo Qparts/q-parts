@@ -37,7 +37,7 @@ if (env.stringified['process.env'].NODE_ENV !== '"production"') {
 // Note: defined here because it will be used more than once.
 const cssFilename = 'static/css/style.css';
 const sassFilename = 'static/css/main-en.css';
-const sassArFilename = 'static/css/main-ar.css';
+// const sassArFilename = 'static/css/main-ar.css';
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -51,10 +51,10 @@ const extractTextSassPluginOptions = shouldUseRelativeAssetPaths
   ? // Making sure that the publicPath goes back to to build folder.
   { publicPath: Array(sassFilename.split('/').length).join('../') }
   : {};
-const extractTextSassArPluginOptions = shouldUseRelativeAssetPaths
-  ? // Making sure that the publicPath goes back to to build folder.
-  { publicPath: Array(sassArFilename.split('/').length).join('../') }
-  : {};
+// const extractTextSassArPluginOptions = shouldUseRelativeAssetPaths
+//   ? // Making sure that the publicPath goes back to to build folder.
+//   { publicPath: Array(sassArFilename.split('/').length).join('../') }
+//   : {};
 
 
 const mainCssStyle = new ExtractTextPlugin({
@@ -63,9 +63,9 @@ const mainCssStyle = new ExtractTextPlugin({
 const mainStyle = new ExtractTextPlugin({
   filename: sassFilename,
 });
-const mainArStyle = new ExtractTextPlugin({
-  filename: sassArFilename,
-});
+// const mainArStyle = new ExtractTextPlugin({
+//   filename: sassArFilename,
+// });
 
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
@@ -263,36 +263,36 @@ module.exports = {
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
-          {
-            test: /main-ar\/.*\.scss$/,
-            loader: mainArStyle.extract(
-              Object.assign(
-                {
-                  fallback: {
-                    loader: require.resolve('style-loader'),
-                    options: {
-                      hmr: false,
-                    },
-                  },
-                  use: [
-                    {
-                      loader: require.resolve('css-loader'),
-                      options: {
-                        importLoaders: 1,
-                        minimize: true,
-                        sourceMap: shouldUseSourceMap,
-                      },
-                    },
-                    {
-                      loader: require.resolve('sass-loader'),
-                    }
-                  ],
-                },
-                extractTextSassArPluginOptions
-              )
-            ),
-            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
-          },
+        //   {
+        //     test: /main-ar\/.*\.scss$/,
+        //     loader: mainArStyle.extract(
+        //       Object.assign(
+        //         {
+        //           fallback: {
+        //             loader: require.resolve('style-loader'),
+        //             options: {
+        //               hmr: false,
+        //             },
+        //           },
+        //           use: [
+        //             {
+        //               loader: require.resolve('css-loader'),
+        //               options: {
+        //                 importLoaders: 1,
+        //                 minimize: true,
+        //                 sourceMap: shouldUseSourceMap,
+        //               },
+        //             },
+        //             {
+        //               loader: require.resolve('sass-loader'),
+        //             }
+        //           ],
+        //         },
+        //         extractTextSassArPluginOptions
+        //       )
+        //     ),
+        //     // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+        //   },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
@@ -367,7 +367,7 @@ module.exports = {
     // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
     mainCssStyle,
     mainStyle,
-    mainArStyle,
+    // mainArStyle,
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
     // having to parse `index.html`.
