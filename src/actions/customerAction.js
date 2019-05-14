@@ -8,6 +8,7 @@ import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
 import { SET_DEFAULT_LANG } from './apiAction';
 import { initializeWsConnection, disconnectWs } from '../utils/socketio';
+import { requestNotification } from '../config/notification';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -149,7 +150,11 @@ export const onAccountVerify = (query) => {
         dispatch({
           type: ACCOUNT_VERIFIED_SUCCEDED,
           payload: res.data
-        })
+		})
+		requestNotification()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
       });
@@ -263,8 +268,11 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           type: LOGIN_SUCCEEDED,
           payload: res.data,
         })
-        dispatch(changeDefaultLanguage(defaultLanguage))
-        initializeWsConnection(dispatch)
+		dispatch(changeDefaultLanguage(defaultLanguage))
+		requestNotification()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       })
       .catch(error => {
         dispatch({
@@ -291,7 +299,11 @@ export const postCodeLogin = (email, code, currentLanguage) => {
           type: POST_CODE_LOGIN_SUCCEEDED,
           payload: res.data,
         })
-        dispatch(changeDefaultLanguage(defaultLanguage))
+		dispatch(changeDefaultLanguage(defaultLanguage))
+		requestNotification()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
       })
@@ -308,7 +320,11 @@ export const onSubmitSignup = (customer, currentLanguage) => {
         dispatch({
           type: REGISTER_CUSTOMER_SUCCEEDED,
           payload: res.data
-        })
+		})
+		requestNotification()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
         dispatch({

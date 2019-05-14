@@ -17,13 +17,15 @@ const urlB64ToUint8Array = (base64String) => {
 
 
 
-export const requestNotification = (registration) => {
-    const key = "BHJi5MpWRcO9_TPQ7Uotn4padQLFf9X3ut6lY60NbGBWSfpw-8sb2UOscnd_tdy9v6LWEO4-HeJnRjkWHFoq1V4";
-    registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlB64ToUint8Array(key)
-    })
-        .then(subscription => postSubscribeCustomer(subscription))
-        .catch(err => console.error("Push subscription error: ", err))
+export const requestNotification = async() => {
+	if (global.registration) {
+		await global.registration.pushManager.subscribe({
+			userVisibleOnly: true,
+			applicationServerKey: urlB64ToUint8Array(process.env.REACT_APP_WEBPUSH_PUBLIC_KEY)
+		})
+			.then(subscription => postSubscribeCustomer(subscription))
+			.catch(err => console.error("Push subscription error: ", err))
+	}
+	return;
 
 }
