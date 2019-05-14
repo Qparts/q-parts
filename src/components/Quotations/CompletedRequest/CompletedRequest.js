@@ -20,7 +20,7 @@ export class CompletedRequest extends Component {
             region: null,
             country: null,
             city: null,
-            product: {},
+            product: [],
             modal: false,
         }
     }
@@ -89,25 +89,25 @@ export class CompletedRequest extends Component {
     }
 
     handleAddToCart = (quotationItem, e) => {
-      console.log(quotationItem[0].productsid)
       e.preventDefault();
+      var products = [];
       for(var i=0 ; i<quotationItem.length ; i++){
         const product = quotationItem[i].products;
         const item = { ...product, quantity: quotationItem[i].quantity }
-        this.addToCart(item)
+        products.push(item);
       }
       this.setState({
-          product: quotationItem[0].products
-      });
-        let width = window.innerWidth;
-        if (width > 992) {
-            this.togglePopup();
-        } else {
-            this.props.history.push({
-                pathname: `/products/${quotationItem[0].products.id}/addProduct`,
-                state: { data: quotationItem[0].products  }
-            })
-        }
+        product: products
+      })
+      let width = window.innerWidth;
+      if (width > 992) {
+          this.togglePopup();
+      } else {
+          this.props.history.push({
+              pathname: `/products/${quotationItem[0].products.id}/addProduct`,
+              state: { data: products }
+          })
+      }
 
     }
     render() {
