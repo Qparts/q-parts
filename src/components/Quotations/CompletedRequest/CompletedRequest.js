@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 import ListGroupCollapse from '../../UI/ListGroupCollapse';
 import { REPLIED } from '../../../constants';
 import { LargeScreen, DownLargeScreen } from '../../Device';
 import { getVehicleVin, getVehicleInfo, getRegion, getCity } from '../../../utils/components';
 import { getCountry } from '../../../utils/api';
-import { getTranslatedObject } from '../../../utils';
+import { getTranslatedObject, isAuth } from '../../../utils';
+import Button from '../../UI/Button';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+import AddProduct from '../../../containers/Product/AddProductPopup/AddProduct';
 
 export class CompletedRequest extends Component {
     constructor(props) {
@@ -16,8 +19,13 @@ export class CompletedRequest extends Component {
             shippingInfo: getRegion(props.regions, props.reply.cityId),
             region: null,
             country: null,
-            city: null
+            city: null,
+            product: {},
+            modal: false,
         }
+    }
+    togglePopup = () => {
+        this.setState({ modal: !this.state.modal })
     }
 
     componentDidMount = async () => {
@@ -80,6 +88,28 @@ export class CompletedRequest extends Component {
         }
     }
 
+    handleAddToCart = (quotationItem, e) => {
+      console.log(quotationItem[0].productsid)
+      e.preventDefault();
+      for(var i=0 ; i<quotationItem.length ; i++){
+        const product = quotationItem[i].products;
+        const item = { ...product, quantity: quotationItem[i].quantity }
+        this.addToCart(item)
+      }
+      this.setState({
+          product: quotationItem[0].products
+      });
+        let width = window.innerWidth;
+        if (width > 992) {
+            this.togglePopup();
+        } else {
+            this.props.history.push({
+                pathname: `/products/${quotationItem[0].products.id}/addProduct`,
+                state: { data: quotationItem[0].products  }
+            })
+        }
+
+    }
     render() {
         const {
             reply, translate, currentLanguage, incrementQuantity, decrementQuantity, token,
@@ -91,6 +121,22 @@ export class CompletedRequest extends Component {
         let hasShippingInfo = (country && region && city);
 
         reply.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
+        const dialog = (
+            <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>
+                <ModalHeader toggle={this.togglePopup}>
+                    <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
+                </ModalHeader>
+                <ModalBody>
+                    <AddProduct
+                        data={this.state.product}
+                        direction={direction}
+                        token={isAuth(token)}
+                        togglePopup={this.togglePopup}
+                        translate={translate}
+                        currentLanguage={currentLanguage} />
+                </ModalBody>
+            </Modal>
+        );
 
         return <li key={reply.id}>
             <Link
@@ -158,7 +204,16 @@ export class CompletedRequest extends Component {
                                 />
                             })
                         }
-
+                        <div className="col-lg-auto add-cart">
+                            <Button
+                                onClick={this.handleAddToCart.bind(this, reply.quotationItems)}
+                                isReverseOrder
+                                type="button"
+                                className="btn btn-primary"
+                                text={translate("product.buttons.addToCart")}
+                                icon="icon-cart" />
+                            {/* <Link to="#" className="btn" onClick={() => this.deleteCart(purchasedItem)}><i className="icon-trash"></i><span>{translate("general.buttons.delete")}</span></Link> */}
+                        </div>
                     </ul>
                 </article>
                 {
@@ -181,9 +236,10 @@ export class CompletedRequest extends Component {
                     </article>
                 }
             </div>
+            {dialog}
         </li>
     }
 }
 
 
-export default CompletedRequest
+export default withRouter(CompletedRequest);
