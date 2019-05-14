@@ -471,6 +471,26 @@
     "batteries": [
       "بطاريات",
       "Batteries"
+    ],
+    "cleaning": [
+      "تنظيف هيك السيارة والعناية بها",
+      "Bodywork Cleaning and Care"
+    ],
+    "children": [
+      "مقعد للأطفال",
+      "Children Seats"
+    ],
+    "mats": [
+      "سجاد السيارة",
+      "car mats"
+    ],
+    "refrigerator": [
+      "ثلاجة",
+      "Refrigerator"
+    ],
+    "wires": [
+      "الأسلاك والكيبلات",
+      "Wires & Cables"
     ]
   },
   "quotationOrder": {
@@ -3182,5 +3202,19 @@
         ]
       }
     }
+  },
+  "accessories": {
+    "popularBrands": [
+      "اكسسوارات الماركات الشعبية",
+      "Popular  Accessories Brands"
+    ],
+    "accessBestSeller": [
+      "اكسسوارات الأكثر مبيعا",
+      "Accessories Bestseller"
+    ],
+    "category": [
+      "فئات الملحقات",
+      "Accessories Categories"
+    ]
   }
 }

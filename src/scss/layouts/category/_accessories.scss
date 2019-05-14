@@ -1,0 +1,297 @@
+#accessorise{
+  background: $light-gray;
+  margin-right: auto;
+  margin-left: auto;
+  .main-cat{
+    margin-top: 0px;
+    @media (min-width: 992px) {
+      .cleaning{
+        div{
+          padding-left: 50%;
+          background: #f0f4ee;
+          border-radius: corner-values(0 0 0 20px);
+        }
+        span{
+          left: 30% !important;
+          h4{
+            width: 250px;
+          }
+        }
+      }
+      .children{
+        div{
+          padding-right: 40%;
+          background: #f5f5f5;
+          border-radius: corner-values(0 0 20px 0);
+          span{
+            left: 77% !important;
+            top: 30% !important;
+          }
+        }
+      }
+      .wires{
+        div{
+          padding-bottom: 15%;
+          background: #f7f7f7;
+          border-radius: corner-values(20px 0 0 0);
+          span{
+            top: 50% !important;
+            left: 35% !important;
+            h4{
+              width: 200px;
+            }
+          }
+        }
+      }
+      .refrigerator{
+        div{
+          padding-top: 20%;
+          background: #f7e9e9;
+          span{
+            top: 10% !important;
+            h4{
+              width: 200px;
+            }
+          }
+        }
+      }
+      .mats{
+        div{
+          padding-bottom: 10%;
+          background: #f5f3fd;
+          span{
+            top: 60% !important;
+            left: 80% !important;
+            h4{
+              width: 200px;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width: 991px) {
+      span{
+        h4{
+          font-size: 20px !important;
+        }
+      }
+      .cleaning{
+        div{
+          padding-left: 50%;
+          background: #f0f4ee;
+        }
+        span{
+          left: 30% !important;
+          h4{
+            width: 250px;
+          }
+        }
+      }
+      .children{
+        div{
+          padding-right: 40%;
+          background: #f5f5f5;
+          border-radius: corner-values(0 0 20px 20px);
+          span{
+            left: 77% !important;
+          }
+          img{
+            border-radius: corner-values(0 0 0 20px);
+          }
+        }
+      }
+      .wires{
+        div{
+          padding-bottom: 5%;
+          background: #f7f7f7;
+          border-radius: corner-values(20px 0 0 0);
+          span{
+            top: 90% !important;
+            left: 30% !important;
+            h4{
+              width: 200px;
+            }
+          }
+          img{
+            border-radius: corner-values(20px 0 0 0);
+          }
+        }
+      }
+      .refrigerator{
+        div{
+          padding-top: 20%;
+          background: #f7e9e9;
+          span{
+            top: 10% !important;
+            left: 60% !important;
+            h4{
+              width: 200px;
+            }
+          }
+        }
+      }
+      .mats{
+        div{
+          padding-bottom: 10%;
+          background: #f5f3fd;
+          span{
+            top: 60% !important;
+            left: 80% !important;
+            h4{
+              width: 200px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .accessorise-img{
+    padding-top: 40px;
+    background: white;
+    margin-bottom: 50px;
+  }
+  header{
+    padding-bottom: 20px;
+    h1{
+      font-family: Roboto;
+      @include font-size(25px);
+      font-weight: 500;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: $left;
+      color: #37363c;
+    }
+  }
+  .popular-accessorise{
+    padding-bottom: 40px;
+
+    @media (min-width: 992px) {
+      .popular-img a:first-child div {
+        border-radius: corner-values(20px 0 0 20px);
+      }
+      .popular-img a:last-child div {
+        border-radius: corner-values(0 0 20px 0);
+      }
+      .popular-img{
+        a{
+          div{
+            padding: 20px;
+            background: $white;
+            img{
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+    @media (max-width: 992px) {
+      header{
+        h1{
+          @include font-size(20px);
+        }
+      }
+      .popular-img a:first-child div {
+        border-radius: corner-values(20px 0 0 0);
+      }
+      .popular-img a:nth-child(4) div {
+        border-radius: corner-values(0 0 0 20px);
+      }
+      .popular-img a:last-child div {
+        border-radius: corner-values(0 0 20px 0);
+      }
+      .popular-img{
+        a{
+          div{
+            padding: 10%;
+            background: $white;
+            margin-bottom: 3px;
+            padding-left: 20%;
+            img{
+              height: 40px;
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .best-seller{
+    @media (max-width: 992px) {
+      header{
+        h1{
+          @include font-size(20px);
+        }
+      }
+    }
+    header{
+      padding-bottom: 0px;
+      h1{
+        margin: 0px;
+      }
+    }
+    .products-sec{
+      margin-top: 0px;
+    }
+  }
+  .accessorise-img{
+    @media (min-width: 992px) {
+      .main-cat li:first-child img {
+        border-radius: corner-values(20px 0 0 20px);
+      }
+    }
+    @media (min-width: 992px) {
+      .main-cat li:last-child img {
+        border-radius: corner-values(0 0 20px 0);
+      }
+    }
+    .main-cat{
+      ul{
+        list-style-type: none;
+        padding-bottom: 40px;
+        @include padding-left(0px);
+        li{
+          position: relative;
+          margin-bottom: 5px;
+          span{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-transform: uppercase;
+            h4{
+              font-family: Roboto;
+              font-size: 25px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: normal;
+              text-align: $left;
+              color: rgb(55, 54, 60);
+            }
+          }
+          img{
+            width: 100%;
+          }
+        }
+      }
+      .header-category{
+        padding-bottom: 10px;
+        h1{
+          opacity: 0.8;
+          font-family: Roboto;
+          @include font-size(20px);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: rgba(55, 54, 60, 0.8);
+        }
+      }
+    }
+  }
+}
