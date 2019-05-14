@@ -50,6 +50,9 @@
             @include margin-left(5px);
           }
         }
+        .hide{
+          display: none;
+        }
         p{
           font-family: Roboto;
           @include font-size(17px);
