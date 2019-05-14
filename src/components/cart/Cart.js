@@ -59,7 +59,7 @@ class Cart extends Component {
 			this.props.history.push('/checkout');
 		} else {
 			if (window.innerWidth < 950) {
-				this.props.history.push('/login')
+				this.props.history.push('/loginCheckout')
 			} else {
 				this.props.setCheckLoginCheckout(true);
 				this.setState({ dialogType: 'signin' });
