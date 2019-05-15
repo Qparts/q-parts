@@ -118,7 +118,7 @@ class RenderCartItem extends Component {
               })
             }
           </ul>
-          <div className="row">
+          {/*<div className="row">
             <div className={`col-md-6 m${l(direction)}-md-auto`}>
               {
                 !removeButton && <CustomLink
@@ -130,7 +130,7 @@ class RenderCartItem extends Component {
                 />
               }
             </div>
-          </div>
+          </div>*/}
         </div>
       </Fragment>
     )
