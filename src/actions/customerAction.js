@@ -347,11 +347,9 @@ export const emailSignup = () => {
 
 export const onLogout = () => {
   return (dispatch) => {
+		dispatch({ type: LOGOUT })
     return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/logout`)
-      .then(res => {
-        dispatch({
-          type: LOGOUT
-        })
+      .then(() => {
         disconnectWs();
       });
   }
