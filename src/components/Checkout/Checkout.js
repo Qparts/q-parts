@@ -109,7 +109,7 @@ class Checkout extends Component {
 			orderClass += " orderActive"
 			paymentClass += " paymentDone"
 		}
-		
+
 		if (checkoutData.length === 0) {
 			return <Redirect to='/cart' />
 		}
@@ -200,7 +200,8 @@ class Checkout extends Component {
 								setValidCredit={this.props.setValidCredit}
 								isValidcreditCard={this.props.isValidcreditCard}
 								deleteCart={this.props.deleteCart}
-								moveCartToWishlist={this.props.moveCartToWishlist} />
+								moveCartToWishlist={this.props.moveCartToWishlist}
+								regions={this.props.regions} />
 						}} />
 					</Switch>
 					{

@@ -95,7 +95,8 @@ class CheckoutConfirmation extends Component {
                     title={translate("deliveryAddress.title")}
                     change={translate("deliveryAddress.change")}
                     deliveryAddress={checkout.deliveryAddress}
-                    translate={translate} />
+                    translate={translate}
+    								regions={this.props.regions} />
                 </div>
                 <div className="col-12 col-md-6 payment-method">
                   <PaymentMethod
