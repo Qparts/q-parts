@@ -111,7 +111,7 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         exact: true,
     },
     {
-        path: "/products/:productId/addProduct",
+        path: "/addProduct",
         component: AddProduct,
         token: isAuth,
         direction,

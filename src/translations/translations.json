@@ -2403,7 +2403,11 @@
     "comment": [
       "التعليقات",
       "Comments"
-    ]
+	],
+	"addAllToCart": [
+		"أضف الكل إلى العربة",
+		"Add all to cart"
+	]
   },
   "renderFileInput": {
     "uploadFile": [

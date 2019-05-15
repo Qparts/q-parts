@@ -460,7 +460,7 @@
           };
         }
         &.ship-info{
-          float: #{$right};
+        //   float: #{$right};
           border-#{$left}-width: 0;
           @include font-size(15px);
           padding-top: 5px;
@@ -473,9 +473,22 @@
           @include media-breakpoint-down(md){
             padding-top: 0.5rem;
           };
-        }
-      }
-    }
+		}
+		&.add-all-to-cart {
+			.btn-primary {
+				@include font-size(15px);
+				display: flex;
+				align-items: center;
+				i{
+				  @include font-size(23px);
+				  height: 23px;
+				  margin-#{$left}: 0;
+				  margin-#{$right}: 10px;
+				}
+			  }
+			}
+	}
+}
     .icon-vehicle{
       @include font-size(20px);
       height: 20px;

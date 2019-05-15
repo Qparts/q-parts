@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getTranslatedObject } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
 import { right } from '../../../utils';
@@ -54,7 +54,8 @@ class AddProduct extends Component {
   }
 
   render() {
-    const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
+	const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
+
     if (_.isEmpty(data)) return <Redirect to="/" />
     const { translate, currentLanguage, direction } = this.props;
     let quantity =0;
@@ -67,8 +68,8 @@ class AddProduct extends Component {
           <Title number={quantity} header={translate("dialog.addToCart.title")} />
         </SmallScreen>
         {
-          data.map((productData,idx) => {
-            return <div>
+          data.map((productData, idx) => {
+            return <Fragment key={idx}>
             <div className="media">
               <span className="media-img">
                 <img
@@ -101,7 +102,7 @@ class AddProduct extends Component {
                   {productData.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span>
                 </div>
             </div>
-          </div>
+          </Fragment>
           })
         }
         <MediumScreen>
@@ -113,7 +114,7 @@ class AddProduct extends Component {
                   <button className="btn btn-gray" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
                 </div>
                 <div className="col">
-                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
                 </div>
               </div>
             </div>
@@ -126,7 +127,7 @@ class AddProduct extends Component {
                 <button  className="btn btn-gray" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
               </div>
               <div className="col">
-                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
               </div>
             </div>
           </div>
@@ -178,7 +179,7 @@ class AddProduct extends Component {
                   <button className="btn btn-gray" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
                 </div>
                 <div className="col">
-                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
                 </div>
               </div>
             </div>
@@ -191,7 +192,7 @@ class AddProduct extends Component {
                 <button  className="btn btn-gray" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
               </div>
               <div className="col">
-                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
               </div>
             </div>
           </div>

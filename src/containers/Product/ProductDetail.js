@@ -167,12 +167,11 @@ class ProductDetail extends Component {
     if (width > 992) {
       this.handleDialog('addProduct', item)
     } else {
-      const { match: { params } } = this.props
       this.setState({
         data: item
       });
       this.props.history.push({
-        pathname: `/products/${params.productId}/addProduct`,
+        pathname: `/addProduct`,
         state: { data: item }
       });
     }
