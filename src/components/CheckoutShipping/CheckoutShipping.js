@@ -93,6 +93,13 @@ class CheckoutShipping extends Component {
         this.setState({ hasNewAddress: false });
       })
   }
+
+  componentDidMount () {
+    if(this.props.addresses){
+      this.props.changeDefaultAddress(0);
+      this.props.addDeliveryAddress(this.props.addresses[0]);
+    }
+  }
   render() {
     const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses, currentLanguage, direction } = this.props;
 
