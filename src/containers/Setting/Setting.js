@@ -12,7 +12,8 @@ import {
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
   deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
   getCompletedRequests, changeDefaultAddress, changeDefaultVehicle,
-  incrementQuantity, decrementQuantity, putCompletedRequestRead, postCodeLogin
+  getClosedRequests,incrementQuantity, decrementQuantity, putCompletedRequestRead, 
+  postCodeLogin
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart } from '../../actions/cartAction';
@@ -512,6 +513,7 @@ class Setting extends Component {
                                 regions={this.props.regions}
                                 getCountry={this.props.getCountry}
                                 getPendingRequests={this.props.getPendingRequests}
+                                getClosedRequests={this.props.getClosedRequests}
                                 getCompletedRequests={this.props.getCompletedRequests}
                                 customer={this.props.customer}
                                 quotations={this.props.quotations}
@@ -659,6 +661,7 @@ class Setting extends Component {
                                       regions={this.props.regions}
                                       getCountry={this.props.getCountry}
                                       getPendingRequests={this.props.getPendingRequests}
+                                      getClosedRequests={this.props.getClosedRequests}
                                       getCompletedRequests={this.props.getCompletedRequests}
                                       customer={this.props.customer}
                                       quotations={this.props.quotations}
@@ -981,7 +984,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteWishlist,
     incrementQuantity,
     decrementQuantity,
-    getPendingRequests,
+	getPendingRequests,
+	getClosedRequests,
     getCompletedRequests,
     changeDefaultAddress,
     changeDefaultVehicle,

@@ -9,7 +9,7 @@ import reducer from './reducers';
 
 let middleware = applyMiddleware(thunk);
 const persistConfig = {
-    key: 'vBeta2.7',
+    key: 'vBeta2.8',
     storage,
     blacklist: ['form', 'webSocket']
 };

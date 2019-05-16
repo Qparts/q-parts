@@ -35,7 +35,8 @@ export const initialState = {
     defaultLang: 'ar',
     quotations: {
         pending: [],
-        completed: []
+		completed: [],
+		closed: []
     },
     isModalAddToCart: false,
     isQuotationorderCompleted: true,

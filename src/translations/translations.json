@@ -2319,7 +2319,11 @@
     "replied": [
       "تم الرد عليها",
       "Replied"
-    ],
+	],
+	"closed": [
+		"مغلق",
+		"Closed"
+	],
     "requestNo": [
       "رقم الطلب",
       "Request number"

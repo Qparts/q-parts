@@ -48,6 +48,7 @@ export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
 export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
+export const GET_CLOSED_REQUESTS = 'GET_CLOSED_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 export const PUT_COMPLETED_REQUEST_READ = 'PUT_COMPLETED_REQUEST_READ';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
@@ -601,6 +602,22 @@ export const getPendingRequests = (customerId) => {
         dispatch(
           {
             type: GET_PENDING_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const getClosedRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/closed`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_CLOSED_REQUESTS,
             payload: res.data
           }
         )
