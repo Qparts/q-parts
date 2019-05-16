@@ -248,7 +248,7 @@
       margin-top: -10px !important;
       @include media-breakpoint-down(md){
         #{$right}: if-rtl(-30px, 0) !important;
- 
+
       }
     }
     .placeholder{
@@ -301,6 +301,18 @@
       border-bottom-#{$right}-radius: 0;
       margin-bottom: 60px;
       padding-bottom: 0;
+    }
+    .ship-info{
+      .phone-info{
+        .phone-number{
+          div{            
+            margin-top: 0px;
+            label{
+              display: none;
+            }
+          }
+        }
+      }
     }
   }
   .form-control,
