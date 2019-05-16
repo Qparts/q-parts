@@ -8,7 +8,7 @@ import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
 import { SET_DEFAULT_LANG } from './apiAction';
 import { initializeWsConnection, disconnectWs } from '../utils/socketio';
-import { requestNotification } from '../config/notification';
+import { getSubscription } from '../config/notification';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -151,7 +151,7 @@ export const onAccountVerify = (query) => {
           type: ACCOUNT_VERIFIED_SUCCEDED,
           payload: res.data
 		})
-		requestNotification()
+		getSubscription()
 		.then(() => {
 			initializeWsConnection(dispatch)
 		})
@@ -269,7 +269,7 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           payload: res.data,
         })
 		dispatch(changeDefaultLanguage(defaultLanguage))
-		requestNotification()
+		getSubscription()
 		.then(() => {
 			initializeWsConnection(dispatch)
 		})
@@ -300,7 +300,7 @@ export const postCodeLogin = (email, code, currentLanguage) => {
           payload: res.data,
         })
 		dispatch(changeDefaultLanguage(defaultLanguage))
-		requestNotification()
+		getSubscription()
 		.then(() => {
 			initializeWsConnection(dispatch)
 		})
@@ -321,7 +321,7 @@ export const onSubmitSignup = (customer, currentLanguage) => {
           type: REGISTER_CUSTOMER_SUCCEEDED,
           payload: res.data
 		})
-		requestNotification()
+		getSubscription()
 		.then(() => {
 			initializeWsConnection(dispatch)
 		})
