@@ -87,7 +87,7 @@ class QuotationRequest extends Component {
 			loading: true
 		});
 		let {
-			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
+			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }, mobile
 		} = values;
 		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
@@ -109,7 +109,7 @@ class QuotationRequest extends Component {
 			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
-			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobile })
 				.then(res => {
 					this.props.setQuotationOrder(false);
 					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -513,6 +513,24 @@ class QuotationRequest extends Component {
 										formatGroupLabel={formatCityLabel}
 										validate={[validations.required]}
 									/>
+								</div>
+								<div className="phone-info col-md">
+									<div className="phone-number row">
+										<div className="first col-3">
+											<input
+												className="form-control"
+												value={"+966"}
+												type="text"
+												readOnly />
+										</div>
+										<div className="col-9">
+											<Field
+												name="mobile"
+												component={RenderField}
+												placeholder={translate("form.address.phoneNumber")}
+												validate={[validations.required]} />
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
