@@ -91,7 +91,7 @@ export const paymentMethod = {
 export const getCategoryId = (translate) => (
 	new Map([
 		[1, translate("nav.oilFilter")],
-		[2, translate("nav.airFilter")],
+		[2, translate("nav.oilFilter")],
 		[3, translate("nav.airFilter")],
 		[4, translate("nav.acFilter")],
 		[5, translate("nav.sparkPlugs")],

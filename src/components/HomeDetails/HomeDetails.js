@@ -120,7 +120,7 @@ class HomeDetails extends Component {
 						</Link>
 					</div>
 				</section>
-				<section className="main-parts container-fluid">
+				{/* <section className="main-parts container-fluid">
 					<header className="row">
 						<h1 className="col">{translate("quotationOrder.mustHaves")}</h1>
 					</header>
@@ -153,7 +153,7 @@ class HomeDetails extends Component {
 							</Link>
 						</li>
 					</ul>
-				</section>
+				</section> */}
 				{/* <section className="vendor container-fluid">
 					<div className="row">
 						<div className="col-12">
