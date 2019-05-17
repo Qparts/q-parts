@@ -88,33 +88,23 @@ export class CompletedRequest extends Component {
 		}
 	}
 
-	handleAddToCart = async (quotationItem, e) => {
-		e.preventDefault();
-		const hasOneProduct = quotationItem.length === 1;
-		let products = [];
+		handleAddToCart = async (quotationItem, e) => {
+			e.preventDefault();
+			const hasOneProduct = quotationItem.length === 1;
+			let products = [];
 
-		for (var i = 0; i < quotationItem.length; i++) {
-			const product = quotationItem[i].products;
-			const item = { ...product, quantity: quotationItem[i].quantity }
-			products.push(item);
-		}
-		await this.setState({
-			product: hasOneProduct ? products[0] : products
-		})
-		let width = window.innerWidth;
-		if (width > 992) {
-			this.togglePopup();
-		} else {
-			this.props.history.push({
-				pathname: `/addProduct`,
-				state: { data: this.state.product }
+			for (var i = 0; i < quotationItem.length; i++) {
+				const product = quotationItem[i].products;
+				const item = { ...product, quantity: quotationItem[i].quantity }
+				products.push(item);
+			}
+			await this.setState({
+				product: hasOneProduct ? products[0] : products
 			})
-		}
-
-		products.forEach(product => {
-			this.addToCart(product);
+			this.togglePopup();
+			products.forEach(product => {
+				this.addToCart(product);
 		});
-
 	}
 	render() {
 		const {

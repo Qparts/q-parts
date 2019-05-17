@@ -1785,6 +1785,10 @@
         "إلى أين تريد ان يتم شحن القطع؟",
         "Where you would like your items shipped?"
       ],
+      "selectAddress": [
+        "اختر العنوان",
+        "Select Address"
+      ],
       "defaultAddress": [
         "عنوان افتراضي",
         "Default Addresses"

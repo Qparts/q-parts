@@ -475,6 +475,14 @@
           };
 		}
 		&.add-all-to-cart {
+      @include small-screen{
+        padding-top: 20px;
+        margin-top: 20px;
+      }
+      @include medium-screen{
+        padding-top: 20px;
+        margin-top: 20px;
+      }
 			.btn-primary {
 				@include font-size(15px);
 				display: flex;
