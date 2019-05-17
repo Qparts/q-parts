@@ -293,7 +293,7 @@
       "Tires"
     ],
     "quotationOrder": [
-      "طلب تسعيرة",
+      "طلب قطع غيار",
       "Quotation Order"
     ],
     "coolant": [
@@ -475,7 +475,7 @@
   },
   "quotationOrder": {
     "title": [
-      "طلب تسعيرة",
+      "طلب قطع غيار",
       "Quotation Order"
     ],
     "weMoveFast": [
@@ -629,7 +629,7 @@
       "Start now"
     ],
     "startHere": [
-      "ابدأ طلب تسعيرة",
+      "ابدأ طلب قطع الغيار",
       "Start Quotation Order"
     ]
   },
@@ -2317,11 +2317,11 @@
       "Pending"
     ],
     "replied": [
-      "تم الرد عليها",
-      "Replied"
+      "منجزة",
+      "Completed"
 	],
 	"closed": [
-		"مغلق",
+		"مغلقة",
 		"Closed"
 	],
     "requestNo": [
