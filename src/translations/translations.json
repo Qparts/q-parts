@@ -1770,7 +1770,7 @@
     },
     "addressBook": {
       "title": [
-        "العنوان",
+        "اسم العنوان",
         "Title"
       ],
       "add": [
@@ -1784,6 +1784,10 @@
       "shippingItem": [
         "إلى أين تريد ان يتم شحن القطع؟",
         "Where you would like your items shipped?"
+      ],
+      "shippingHeader": [
+        "عنوان جديد",
+        "New Address"
       ],
       "selectAddress": [
         "اختر العنوان",
