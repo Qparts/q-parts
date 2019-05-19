@@ -67,9 +67,9 @@ class Checkout extends Component {
 		const canSubmitOrder = pathname === confirmationStep;
 		const { translate } = this.props;
 		let signinClass = "signin";
-		let orderClass = "order";
 		let shippingClass = "shipping";
 		let paymentClass = "payment";
+		let orderClass = "order";
 
 		const styles = {
 			hideShadow: {
@@ -113,116 +113,174 @@ class Checkout extends Component {
 			this.props.history.push('/');
 		}
 		return (
-			<section className="checkout-container-shipping">
-				<MediumScreen>
-					<section className="default-header-bg">
-						<div className="container-fluid">
-							<div className="row">
-								<header className="col-4">
-									<h1>{this.state.header}</h1>
-								</header>
-								<div className="col-8">
-									<div className="header-options">
+			<section>
+				<header className="header-checkout">
+					<div className="container-fluid">
+						<div className="row">
+							<div className="col">
+								<a href="#" className="brand">
+									<img src="/img/qParts-logo.svg" />
+								</a>
+							</div>
+							<div className="col-auto">
+								<ul className="list-inline">
+									<li><a href="#">Help Center</a></li>
+									<li>
+										<a href="#">
+											<i className="icon-cart"></i>
+											<span>2</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</header>
+				<section className="shipping-step">
+					<div className="container-fluid">
+						<div className="row">
+							<header className="col">
+								<h1>{this.state.header}</h1>
+							</header>
+							<MediumScreen>
+								<div className="col-auto">
+									<ul className="list-inline steps">
+										<li className="done">
+											<a href="#" >
+												<figure>
+													<img src="/img/user.svg"/>
+													<i className="icon-checked"></i>
+												</figure>
+												{translate("checkout.singInTitle")}
+											</a>
+										</li>
+										<li className="active">
+											<a href="#">
+												<i className="icon-shipping"></i> {translate("checkout.shippingTitle")}
+											</a>
+										</li>
+										<li >
+											<a href="#">
+												<i className="icon-payment"></i> {translate("checkout.paymentTitle")}
+											</a>
+										</li>
+										<li>
+											<a href="#">
+												<i className="icon-delivered-step"></i> {translate("checkout.orderTitle")}
+											</a>
+										</li>
+									</ul>
+									{/*<div className="header-options">
 										<Button type="button" className={signinClass} text={translate("checkout.singInTitle")} icon="icon-user" isReverseOrder />
 										<button type="button" className={shippingClass}><i className="icon-shipping"></i> {translate("checkout.shippingTitle")} <div><i className="icon-arrow-down" /></div></button>
 										<button type="button" className={paymentClass}><i className="icon-payment"></i> {translate("checkout.paymentTitle")} <div><i className="icon-arrow-down" /></div></button>
 										<button type="button" className={orderClass}><i className="icon-delivered-step"></i> {translate("checkout.orderTitle")} <div><i className="icon-arrow-down" /></div></button>
-									</div>
+									</div>*/}
 								</div>
-							</div>
+							</MediumScreen>
 						</div>
-					</section>
-				</MediumScreen>
-				<SmallScreen>
-					<section className="default-header-bg">
-						<div className="container-fluid">
-							<div className="row">
-								<header className="col-4">
-									<h1>{this.state.header}</h1>
-								</header>
-							</div>
-						</div>
-					</section>
-				</SmallScreen>
-				<div className="Checkout-container container-fluid">
-					<Switch>
-						<Route path="/checkout" exact={true} render={() => {
-							return <CheckoutShipping
-								direction={this.props.direction}
-								currentLanguage={this.props.currentLanguage}
-								addAddress={this.props.addAddress}
-								address={this.props.address}
-								customer={this.props.customer}
-								checkout={this.props.checkout}
-								getRegions={this.props.getRegions}
-								getCountry={this.props.getCountry}
-								regions={this.props.regions}
-								country={this.props.country}
-								confirmUserAddress={this.props.confirmUserAddress}
-								onShowGoogleMap={this.handleShowGoogleMap}
-								onCityFound={this.handleCityFound}
-								showGoogleMap={this.state.showGoogleMap}
-								cityFound={this.state.cityFound}
-								city={this.props.city}
-								findCity={this.props.findCity}
-								translate={this.props.translate}
-								defaultAddress={this.props.defaultAddress}
-								addDeliveryAddress={this.props.addDeliveryAddress}
-								addresses={this.props.addresses}
-								completeShipping={this.props.completeShipping}
-								changeDefaultAddress={this.props.changeDefaultAddress} />
-						}} />
+					</div>
+				</section>
+				<section className="checkout-container container-fluid">
+					<div className="row">
+						<div className="col-lg-9">
+							<Switch>
+								<Route path="/checkout" exact={true} render={() => {
+									return <CheckoutShipping
+										direction={this.props.direction}
+										currentLanguage={this.props.currentLanguage}
+										addAddress={this.props.addAddress}
+										address={this.props.address}
+										customer={this.props.customer}
+										checkout={this.props.checkout}
+										getRegions={this.props.getRegions}
+										getCountry={this.props.getCountry}
+										regions={this.props.regions}
+										country={this.props.country}
+										confirmUserAddress={this.props.confirmUserAddress}
+										onShowGoogleMap={this.handleShowGoogleMap}
+										onCityFound={this.handleCityFound}
+										showGoogleMap={this.state.showGoogleMap}
+										cityFound={this.state.cityFound}
+										city={this.props.city}
+										findCity={this.props.findCity}
+										translate={this.props.translate}
+										defaultAddress={this.props.defaultAddress}
+										addDeliveryAddress={this.props.addDeliveryAddress}
+										addresses={this.props.addresses}
+										completeShipping={this.props.completeShipping}
+										changeDefaultAddress={this.props.changeDefaultAddress} />
+								}} />
 
-						<Route path="/checkout/payment" exact={true} render={() => {
-							return <CheckoutPayment
-								direction={this.props.direction}
-								translate={translate}
-								addPaymentMethod={this.props.addPaymentMethod}
-								completePayment={this.props.completePayment}
-								checkout={this.props.checkout}
-								setValidCredit={this.props.setValidCredit}/>
-						}} />
-
-						<Route path="/checkout/confirm" exact={true} render={() => {
-							return <CheckoutConfirmation
-								translate={translate}
-								currentLanguage={this.props.currentLanguage}
-								direction={this.props.direction}
-								checkout={this.props.checkout}
-								completeOrder={this.props.completeOrder}
-								purchasedItems={checkoutData}
-								incrementQuantity={this.props.incrementQuantity}
-								decrementQuantity={this.props.decrementQuantity}
-								grandTotal={grandTotal}
-								setLoading={this.props.setLoading}
-								isLoading={this.props.isLoading}
-								setValidCredit={this.props.setValidCredit}
-								isValidcreditCard={this.props.isValidcreditCard}
-								deleteCart={this.props.deleteCart}
-								moveCartToWishlist={this.props.moveCartToWishlist} />
-						}} />
-					</Switch>
-					{
-						!this.props.isLoading && (
-							<div className="col-12 col-md-3">
-								<div style={styles.hideShadow} className="order-summary">
-									<OrderSummary
+								<Route path="/checkout/payment" exact={true} render={() => {
+									return <CheckoutPayment
 										direction={this.props.direction}
 										translate={translate}
-										isDelivery={canSubmitOrder}
-										submitButton={translate("orderSummary.placeOrder")}
-										checkoutData={checkoutData}
-										purchasedItems={checkoutData}
+										addPaymentMethod={this.props.addPaymentMethod}
+										completePayment={this.props.completePayment}
 										checkout={this.props.checkout}
+										setValidCredit={this.props.setValidCredit}/>
+								}} />
+
+								<Route path="/checkout/confirm" exact={true} render={() => {
+									return <CheckoutConfirmation
+										translate={translate}
+										currentLanguage={this.props.currentLanguage}
+										direction={this.props.direction}
+										checkout={this.props.checkout}
+										completeOrder={this.props.completeOrder}
+										purchasedItems={checkoutData}
+										incrementQuantity={this.props.incrementQuantity}
+										decrementQuantity={this.props.decrementQuantity}
+										grandTotal={grandTotal}
 										setLoading={this.props.setLoading}
 										isLoading={this.props.isLoading}
 										setValidCredit={this.props.setValidCredit}
-										isValidcreditCard={this.props.isValidcreditCard} />
+										isValidcreditCard={this.props.isValidcreditCard}
+										deleteCart={this.props.deleteCart}
+										moveCartToWishlist={this.props.moveCartToWishlist} />
+								}} />
+							</Switch>
+						</div>
+						{
+							!this.props.isLoading && (
+								<div className="col-lg-3">
+									<div style={styles.hideShadow} className="order-summary">
+										<OrderSummary
+											direction={this.props.direction}
+											translate={translate}
+											isDelivery={canSubmitOrder}
+											submitButton={translate("orderSummary.placeOrder")}
+											checkoutData={checkoutData}
+											purchasedItems={checkoutData}
+											checkout={this.props.checkout}
+											setLoading={this.props.setLoading}
+											isLoading={this.props.isLoading}
+											setValidCredit={this.props.setValidCredit}
+											isValidcreditCard={this.props.isValidcreditCard} />
+									</div>
 								</div>
+							)
+						}
+					</div>
+
+
+				</section>
+				<footer className="footer-checkout">
+					<div className="container-fluid">
+						<div className="row">
+							<div className="col">
+								<p>@2018 Qetaa.com</p>
 							</div>
-						)
-					}
-				</div>
+							<div className="col-auto">
+								<ul className="list-inline">
+									<li><a href="#">Privacy Policy</a></li>
+									<li><a href="#">Return Policy </a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</footer>
 			</section>
 		)
 	}

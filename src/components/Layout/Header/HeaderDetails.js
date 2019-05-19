@@ -105,7 +105,6 @@ class HeaderDetails extends Component {
               </ul>
             }
           </DropdownItem>
-
         </li>
       </NavLg>
     return (
@@ -115,6 +114,13 @@ class HeaderDetails extends Component {
         <li>
           <span className="seperator" />
         </li>
+        <NavLg>
+          <li>
+            <a href="#">
+              <i className="icon-heart"></i>
+            </a>
+          </li>
+        </NavLg>
         <li>
            <Link to="/cart" className="not-empty">
             <i className="icon-cart" />

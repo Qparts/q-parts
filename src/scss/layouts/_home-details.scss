@@ -131,11 +131,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 300;
     text-transform: uppercase;
+    span{
+      line-height: 1;
+      top: 0;
+    }
     i{
       @include font-size(23px);
-      height: 23px
+      height: 23px;
+      &:before{
+        top: -2px;
+      }
     }
 
     @include media-breakpoint-down(sm){
@@ -177,20 +183,16 @@
           height: 50px;
         };
         @include media-breakpoint-down(sm){
-          box-shadow: none;
-          width: auto;
-          padding-#{$right}: 10px;
+          display: none;
         }
         i{
           @include font-size(35px);
           @include media-breakpoint-down(sm){
             @include font-size(26px);
-
           }
           color: $basic-gray;
           @include opacity(0.2);
           position: relative;
-          height: 32px;
           overflow: hidden;
           display: block;
         }
@@ -203,7 +205,7 @@
     };
     @include media-breakpoint-down(sm){
       padding-#{$left}: 0;
-      margin-bottom: 70px;
+      margin-bottom: 50px;
     };
     > form{
       border-radius: 0 0 $border-radius-base $border-radius-base;
@@ -251,118 +253,108 @@
         }
         i{
           @include font-size(23px);
-          &:before{
-            top: 3px;
-          }
         }
       }
   }
 .main-cat{
   @extend .mt-sec-home;
-  a{
-    overflow: hidden;
-    margin-bottom: 30px;
-    @include media-breakpoint-down(md){
-      margin-bottom: 5px;
-      &:nth-child(odd){
-        padding-#{$right}: 2.5px;
+  >ul{
+    margin-bottom: 0;
+  }
+  li{
+    a{
+      overflow: hidden;
+      display: block;
+      @include media-breakpoint-down(md){
+        margin-bottom: 5px;
       };
-      &:nth-child(even){
-        padding-#{$left}: 2.5px;
-      };
-      &:nth-child(2){
-        figure{
-          border-top-#{$right}-radius: $border-radius-base;
+      figure{
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+        background: $basic-gray;
+        img{
+          width: 100%;
+          @include transition(all, 0.3s, ease);
+          height: auto;
         }
-      };
-      &:nth-child(5){
-        figure{
-          border-bottom-#{$left}-radius: $border-radius-base;
-        }
-      };
-      &:nth-child(6){
-        figure{
-          border-bottom-#{$right}-radius: $border-radius-base;
-        }
-      };
-    };
-    &:first-child{
-      @include media-breakpoint-up(lg){
-        figure{
-          border-radius: corner-values($border-radius-base 0 0 0);
-        }
-      };
-    }
-    &:last-child{
-      @include media-breakpoint-up(lg){
-        figure{
-          border-radius: corner-values(0 0 $border-radius-base 0);
-        }
-      }
-    }
-    &:nth-child(4){
-        @include media-breakpoint-up(lg){
-          figure{
-            border-radius: corner-values(0 0 0 $border-radius-base);
+        figcaption{
+          @extend .position-absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 100%;
+          text-align: center;
+          h4{
+            color: $white;
+            @include font-size(40px);
+            font-weight: 300;
+            @extend .text-uppercase;
+            @include media-breakpoint-down(md){
+              @include font-size(30px);
+              font-weight: 700;
+            };
+            @include media-breakpoint-down(xs){
+              @include font-size(19px);
+            };
           }
         }
-    }
-    figure{
-      margin-bottom: 0;
-      position: relative;
-      overflow: hidden;
-      background: $basic-gray;
-      img{
-        width: 100%;
-        @include transition(all, 0.3s, ease);
-        height: auto;
-      }
-      figcaption{
-        @extend .position-absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        text-align: center;
-        h4{
-          color: $white;
-          @include font-size(30px);
+        span{
+          @extend .position-absolute;
+          @include font-size(22px);
+          @extend .text-center;
+          background: darken($brand-color, 2%);
+          color: $light-gray;
+          bottom: -60px;
+          width: 100%;
+          padding: 10px;
+          @include transition(all, 0.5s, ease);
+          #{$left}: 0;
+          font-weight: 300;
           @extend .text-uppercase;
-          @include media-breakpoint-down(xs){
-            @include font-size(22px);
-
+          @include media-breakpoint-down(md){
+            display: none;
           };
         }
       }
-      span{
-        @extend .position-absolute;
-        @include font-size(22px);
-        @extend .text-center;
-        background: darken($brand-color, 2%);
-        color: $light-gray;
-        bottom: -60px;
-        width: 100%;
-        padding: 10px;
-        @include transition(all, 0.5s, ease);
-        #{$left}: 0;
-        font-weight: 300;
-        @extend .text-uppercase;
+      &:hover{
+        @include media-breakpoint-up(lg){
+          figure{
+            img{
+              margin-top: -30px;
+              margin-bottom: 30px;
+            }
+            span{
+              bottom: 0;
+            }
+          }
+        };
       }
     }
-    &:hover{
-      @include media-breakpoint-up(lg){
-        figure{
-          img{
-            margin-top: -30px;
-            margin-bottom: 30px;
-          }
-          span{
-            bottom: 0;
-          }
-        }
-      };
+    &:first-child{
+      a{
+        border-top-#{$left}-radius: $border-radius-base;
+        border-bottom-#{$left}-radius: $border-radius-base;
+      }
     }
+    &:last-child{
+      a{
+        border-bottom-#{$right}-radius: $border-radius-base;
+      }
+    }
+    @include media-breakpoint-down(md){
+      &:nth-child(2){
+        padding: 0;
+      };
+      &:first-child{
+        padding-#{$right}: 5px;
+      };
+      &:last-child{
+        padding-#{$left}: 5px;
+      }
+    };
   }
+
 }
 .main-parts{
   @extend .mt-sec-home;
@@ -371,9 +363,6 @@
     text-align: center;
     font-weight: 500;
     margin-bottom: 20px;
-    @include media-breakpoint-up(lg){
-      margin-top: -30px;
-    };
     @include media-breakpoint-down(sm){
       @include font-size(25px);
       text-align: #{$left};
@@ -381,26 +370,46 @@
   }
   ul{
     @extend .justify-content-center;
+    margin-bottom: 0;
   }
   li{
+    @include media-breakpoint-down(md){
+      margin-bottom: 30px;
+    };
       @include media-breakpoint-down(sm){
         margin-bottom: 5px;
       }
     &:first-child{
       a{
         border-radius: corner-values($border-radius-base 0 0 $border-radius-base);
-        @include media-breakpoint-down(sm){
+        @include media-breakpoint-down(md){
           border-radius: corner-values($border-radius-base 0 0 0);
         }
       }
     }
     &:last-child{
+      margin-bottom: 0;
       a{
         border-radius: corner-values(0 $border-radius-base $border-radius-base 0);
+        @include media-breakpoint-down(md){
+          border-top-#{$right}-radius: 0;
+        };
         @include media-breakpoint-down(sm){
           border-radius: corner-values(0 0 $border-radius-base $border-radius-base);
         }
       }
+    }
+    &:nth-child(3){
+      @include media-breakpoint-down(md){
+        a{
+          border-bottom-#{$left}-radius: $border-radius-base;
+        };
+      };
+      @include media-breakpoint-down(sm){
+        a{
+          border-bottom-#{$left}-radius: 0;
+        };
+      };
     }
     &.oil{
       img{
@@ -408,6 +417,8 @@
         position: relative;
         @include media-breakpoint-down(sm){
           width: 25px;
+          margin-left: 10px;
+          margin-right: 10px;
         }
       }
     }
@@ -421,10 +432,12 @@
     }
     &.brake{
       img{
-        width: 46px;
-        @include media-breakpoint-down(sm){
-          width: 40px;
-        }
+        width: 45px;
+      }
+    }
+    &.spark{
+      img{
+        width: 45px;
       }
     }
   }
@@ -604,6 +617,216 @@
       display: block;
       @include opacity(1);
       margin-bottom: 15px;
+    }
+  }
+}
+.cat-header{
+  h3{
+    @include font-size(30px);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    @include media-breakpoint-down(sm){
+      @include font-size(25px);
+      margin-bottom: 20px;
+    };
+  }
+  a{
+    display: flex;
+    align-items: center;
+    @include font-size(15px);
+    @include opacity(0.6);
+    i{
+      @include font-size(19px);
+      height: 19px;
+      display: inline-block;
+      margin-#{$left}: 5px;
+      &:before{
+        top: -2px;
+      }
+    }
+    &:hover{
+      @include opacity(1);
+    }
+  }
+}
+.accessories-cat{
+  [class*='col-']{
+    margin-bottom: 15px;
+    + [class*='col-']{
+      padding-#{$left}: 0;
+      @include media-breakpoint-down(sm){
+        padding-#{$left}: 15px;
+
+      };
+    }
+  }
+  a{
+    display: block;
+    background: #f5f5f5;
+    height: 100%;
+    &:hover{
+      figcaption{
+        text-decoration: underline;
+      }
+    }
+    }
+  figcaption{
+    display: block;
+    @include font-size(25px);
+    text-transform: uppercase;
+    flex: 1;
+    padding-bottom: 20px;
+    line-height: 1;
+    padding-#{$left}: 25px;
+    padding-right: 25px;
+    @include media-breakpoint-down(md){
+      @include font-size(20px);
+      padding-bottom: 15px;
+      padding-#{$left}: 15px;
+      padding-right: 15px;
+    };
+    @include media-breakpoint-down(sm){
+      @include font-size(18px);
+    };
+  }
+  figure{
+    margin-bottom: 0;
+  }
+  .cables{
+    a{
+      border-top-left-radius: $border-radius-base;
+      overflow: hidden;
+      padding-bottom: 57px;
+      @include media-breakpoint-down(md){
+        padding-bottom: 35px;
+      }
+    }
+    img{
+      width: 100%;
+    }
+    figcaption{
+      position: absolute;
+      bottom: 0;
+    }
+    figure{
+      width: 100%;
+    }
+  }
+  .refrigerator{
+    text-align: center;
+    img{
+      margin: 0 auto;
+    }
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    figure{
+      width: 100%;
+      padding: 0 15px;
+    }
+    @include media-breakpoint-down(md){
+      figcaption{
+        padding-top: 15px;
+      }
+      figure{
+        padding: 0 15px 10px;
+
+      }
+    }
+    @include media-breakpoint-down(sm){
+      padding-#{$right}: 7.5px;
+      a{
+        position: relative;
+        padding-bottom: 35px;
+      };
+      figcaption{
+        position: absolute;
+        bottom: 0;
+      }
+      figure{
+        padding-top: 15px;
+      }
+    };
+  }
+  .car-mats{
+    a{
+      padding-bottom: 57px;
+      position: relative;
+      @include media-breakpoint-down(md){
+        padding-bottom: 35px;
+      }
+    }
+    figure{
+      padding-#{$left}: 20px;
+      width: 100%;
+      overflow: hidden;
+      img{
+        #{$right}: -20px;
+        margin-top: 5px;
+        width: 100%;
+        position: relative;
+        @include media-breakpoint-down(md){
+          #{$right}: 0;
+
+        }
+      }
+    }
+    figcaption{
+      text-align: #{$right};
+      z-index: 1;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+    @include media-breakpoint-down(sm){
+      padding-#{$left}: 7.5px !important;
+      figure{
+        padding-#{$left}: 0;
+        padding-top: 15px;
+      }
+      figcaption{
+        text-align: center;
+      }
+    };
+  }
+  .bodywork, .children-seats{
+    a{
+      display: flex;
+      align-items: center;
+    }
+    figcaption{
+      padding-bottom: 0;
+      line-height: 1.5;
+    }
+  }
+  .bodywork{
+    figcaption{
+      span{
+        display: block;
+      }
+    }
+    figure{
+      padding-top: 30px;
+      @include media-breakpoint-down(sm){
+        padding-top: 15px;
+      };
+    }
+  }
+  .children-seats{
+    @include media-breakpoint-down(sm){
+      margin-bottom: 0 !important;
+      a{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-#{$left}: 10px;
+        border-bottom-#{$right}-radius: $border-radius-base;
+        border-bottom-#{$left}-radius: $border-radius-base;
+      }
+    }
+    figcaption{
+      text-align: #{$right};
     }
   }
 }

@@ -5,7 +5,7 @@ import { right } from '../../utils';
 import OrderSteps from '../OrderSteps';
 import { Link } from "react-router-dom";
 import Button from '../UI/Link';
-
+import { LargeScreen } from '../Device';
 class HomeDetails extends Component {
 
 	render() {
@@ -16,9 +16,9 @@ class HomeDetails extends Component {
 					<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")} />
 					<OrderSteps translate={translate} direction={direction} />
 
-					{/* <div className="order-form">
+				 <div className="order-form">
 							<header className="row">
-								<h2 className="col col-10 mx-auto">
+								<h2 className="col-lg-10 mx-auto">
 									<span className="arrow"><i className="icon-arrow-down" /></span>
 									{translate("quotationOrder.startNow")}
 								</h2>
@@ -30,14 +30,14 @@ class HomeDetails extends Component {
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.parts")} />
 											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
-												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
+												<Button to="#" text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col">
 											<input type="text" className="form-control input" placeholder={translate("quotationOrder.vin")}/>
 											<div className="input-group-prepend input-file">
 												<input type="file" ref={ref => this.fileInput = ref} />
-												<Button text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
+												<Button to="#" text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
 											</div>
 										</div>
 										<div className="col-auto">
@@ -50,8 +50,8 @@ class HomeDetails extends Component {
 								</form>
 							</div>
 
-						</div> */}
-						<div className="row">
+						</div>
+						{/*<div className="row">
 							<div className="col col-lg-6 offset-lg-3">
 								<Button
 								className="btn btn-primary"
@@ -60,10 +60,51 @@ class HomeDetails extends Component {
 								icon={`icon-arrow-${right(direction)}`}
 								/>
 							</div>
-						</div>
+						</div>*/}
 				</section>
 				<section className="main-cat container-fluid">
-					<div className="row">
+					<header className="row cat-header">
+						<h3 className="col">Oils & Fluids</h3>
+						<LargeScreen>
+							<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
+						</LargeScreen>
+					</header>
+					<ul className="list-unstyled row">
+						<li className="col">
+							<Link to="listing?query=&page=1&category=7">
+								<figure>
+									<img src="/img/motor-oil-cat-lg.jpg" alt="Motor Oil" />
+									<figcaption>
+										<h4>Motor Oil</h4>
+									</figcaption>
+									<span>{translate("quotationOrder.shopNow")}</span>
+								</figure>
+							</Link>
+						</li>
+						<li className="col">
+							<Link to="listing?query=&page=1&category=8">
+								<figure>
+									<img src="/img/gear-oil-cat-lg.jpg" alt="Gear Oil" />
+									<figcaption>
+										<h4>Gear Oil</h4>
+									</figcaption>
+									<span>{translate("quotationOrder.shopNow")}</span>
+								</figure>
+							</Link>
+						</li>
+						<li className="col">
+							<Link to="listing?query=&page=1&category=27">
+								<figure>
+									<img src="/img/coolant-lg.jpg" alt="Coolant " />
+									<figcaption>
+										<h4>Coolant</h4>
+									</figcaption>
+									<span>{translate("quotationOrder.shopNow")}</span>
+								</figure>
+							</Link>
+						</li>
+					</ul>
+				{/*<div className="row">
 						<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 							<figure>
 								<img src="/img/motor-oil.png" alt="Oil" />
@@ -118,14 +159,14 @@ class HomeDetails extends Component {
 								<span>{translate("quotationOrder.shopNow")}</span>
 							</figure>
 						</Link>
-					</div>
+					</div>*/}
 				</section>
 				<section className="main-parts container-fluid">
 					<header className="row">
 						<h1 className="col">{translate("quotationOrder.mustHaves")}</h1>
 					</header>
 					<ul className="list-unstyled row">
-						<li className="oil col-md-4 col-lg-auto">
+						<li className="oil col-md-6 col-lg-3">
 							<Link to="/listing?query=&page=1&category=2" >
 								<img src="/img/oil-filter.svg" alt="Premium quality oil for your engine" />
 								<div className="media-body">
@@ -134,7 +175,7 @@ class HomeDetails extends Component {
 								</div>
 							</Link>
 						</li>
-						<li className="air col-md-4 col col-lg-auto">
+						<li className="air col-md-6 col-lg-3">
 							<Link to="/listing?query=&page=1&category=3" >
 								<img src="/img/air-filter.svg" alt="Maximize engine  performance" />
 								<div className="media-body">
@@ -143,16 +184,71 @@ class HomeDetails extends Component {
 								</div>
 							</Link>
 						</li>
-						<li className="brake col-md-4 col-lg-auto">
+						<li className="brake col-md-6 col-lg-3">
 							<Link to="/listing?query=&page=1&category=6" >
-								<img src="/img/disc-brake.svg" alt="Get trusted stopping  power" />
+								<img src="/img/disc-brake.svg" alt="Get trusted stopping power" />
 								<div className="media-body">
 									<h5>{translate("quotationOrder.brakePads")}</h5>
 									<p>{translate("quotationOrder.trusted")}</p>
 								</div>
 							</Link>
 						</li>
+						<li className="spark col-md-6 col-lg-3">
+							<Link to="/listing?query=&page=1&category=5" >
+								<img src="/img/spark-plug.svg" alt="Maintain Engine Efficiency" />
+								<div className="media-body">
+									<h5>Spark Plugs</h5>
+									<p>Maintain Engine Efficiency</p>
+								</div>
+							</Link>
+						</li>
 					</ul>
+				</section>
+				<section className="container-fluid mt-sec-home">
+					<header className="row cat-header">
+						<h3 className="col">Accessorise <LargeScreen>top Categories</LargeScreen></h3>
+							<LargeScreen>
+								<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
+							</LargeScreen>
+					</header>
+					<div className="accessories-cat">
+						<div className="row">
+							<div className="col-md-5 cables">
+								<a href="#">
+									<figure><img src="/img/Wires&Cables-gray.jpg" alt="Wires & Cables" /></figure>
+									<figcaption>Wires & Cables</figcaption>
+								</a>
+							</div>
+							<div className="col-6 col-md-3 refrigerator">
+								<a href="#">
+									<div>
+										<figcaption>Refrigerator</figcaption>
+										<figure><img src="/img/refrigerator-gray.jpg" alt="Refrigerator" /></figure>
+									</div>
+								</a>
+							</div>
+							<div className="col-6 col-md-4 car-mats">
+								<a href="#">
+									<figure><img src="/img/car-mats-gray.jpg" alt="Car Mats" /></figure>
+									<figcaption>car mats</figcaption>
+								</a>
+							</div>
+						</div>
+						<div className="row">
+							<div className="col-md-7 bodywork">
+								<a href="#">
+									<figcaption><span>Bodywork</span> Cleaning and Care</figcaption>
+									<figure><img src="/img/bodywork-gray.jpg" alt="Bodywork Cleaning and Care" /></figure>
+								</a>
+							</div>
+							<div className="col-md-5 children-seats">
+								<a href="#">
+									<figure><img src="/img/children-seats-gray.jpg" alt="Children Seats" /></figure>
+									<figcaption>Children Seats</figcaption>
+								</a>
+							</div>
+						</div>
+					</div>
 				</section>
 				{/* <section className="vendor container-fluid">
 					<div className="row">

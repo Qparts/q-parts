@@ -107,14 +107,13 @@ $dir: ltr;
 @import "../layouts/setting/side-bar";
 @import "../layouts/result-not-found";
 @import "../layouts/terms-and-conditions";
+@import "../state/tires.scss";
+@import "../state/add_product";
 
 @import "../state/checkout/checkout-shipping";
 @import "../state/checkout/checkout-payment";
 @import "../state/checkout/checkout-order";
-@import "../state/tires.scss";
 @import "../state/checkout/checkout-confirmation-order";
-@import "../state/add_product";
 
-@import "../checkout-layout/header.scss";
-@import "../checkout-layout/footer.scss";
+
 @import "../checkout-layout/check-out.scss";
