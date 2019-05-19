@@ -306,8 +306,17 @@
       .phone-info{
         padding: 15px !important;
         .phone-number{
-          .input-mobile{
-            // @include padding-right(0px);
+          display: flex;
+          .first{
+            margin-#{$right}: 5px;
+            .form-control{
+              border-radius: corner-values(20px 0 0 20px) !important;
+              width: 70px;
+              text-align: center;
+            }
+          }
+          .RenderField{
+            width: 100%;
           }
           div{
             margin-top: 0px;

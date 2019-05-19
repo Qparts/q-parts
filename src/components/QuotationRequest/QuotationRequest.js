@@ -517,15 +517,15 @@ class QuotationRequest extends Component {
 									/>
 								</div>
 								<div className="phone-info col-12">
-									<div className="phone-number row">
-										<div className="first col-2">
-											<input
-												className="form-control"
-												value={"+966"}
-												type="text"
-												readOnly />
-										</div>
-										<div className="col-10">
+									<div className="row">
+										<div className="phone-number col-12">
+											<div className="first">
+												<input
+													className="form-control"
+													value={"+966"}
+													type="text"
+													readOnly />
+											</div>
 											<Field
 												name="mobile"
 												component={RenderField}
