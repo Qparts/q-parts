@@ -66,6 +66,11 @@ export const passwordScore = (value, allValues, { passwordScore }) => {
 }
 
 export const renderTopIfError = (submitFailed) => {
-  
+
   if (submitFailed) window.scrollTo(0, 0);
 }
+
+export const mobileCodeNumber = value =>
+  value && !/^([5]\d)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/.test(value)
+    ? 'Invalid code number'
+    : undefined

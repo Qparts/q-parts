@@ -100,7 +100,7 @@ class QuotationRequest extends Component {
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
-
+		const mobileNumber = `${966}${mobile}`;
 		if (!isAuth(this.props.token)) {
 			this.props.setCheckLoginQuotationOrder(true);
 			this.setState({
@@ -109,7 +109,7 @@ class QuotationRequest extends Component {
 			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
-			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobile })
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobileNumber})
 				.then(res => {
 					this.props.setQuotationOrder(false);
 					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -530,7 +530,7 @@ class QuotationRequest extends Component {
 												name="mobile"
 												component={RenderField}
 												placeholder={translate("form.address.phoneNumber")}
-												validate={[validations.required]} />
+												validate={[validations.required, validations.mobileCodeNumber]} />
 										</div>
 									</div>
 								</div>
