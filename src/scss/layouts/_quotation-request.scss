@@ -304,14 +304,23 @@
     }
     .ship-info{
       .phone-info{
+        padding: 15px !important;
         .phone-number{
-          div{            
+          .input-mobile{
+            // @include padding-right(0px);
+          }
+          div{
             margin-top: 0px;
             label{
               display: none;
             }
           }
         }
+      }
+    }
+    @media (min-width: 992px){
+      .city-filed{
+        @include padding-right(15px);
       }
     }
   }

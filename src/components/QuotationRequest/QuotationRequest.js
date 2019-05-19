@@ -309,7 +309,6 @@ class QuotationRequest extends Component {
 				</h6>
 			</div>
 		);
-
 		if (this.state.loading)
 			return (
 				<div style={styles.loading}>
@@ -503,7 +502,7 @@ class QuotationRequest extends Component {
 										validate={[validations.required]}
 									/>
 								</div>
-								<div className="col-md float-label">
+								<div className="col-md float-label city-filed">
 									<Field
 										label={translate("general.city")}
 										name="city"
@@ -514,16 +513,16 @@ class QuotationRequest extends Component {
 										validate={[validations.required]}
 									/>
 								</div>
-								<div className="phone-info col-md">
+								<div className="phone-info col-12">
 									<div className="phone-number row">
-										<div className="first col-3">
+										<div className="first col-2">
 											<input
 												className="form-control"
 												value={"+966"}
 												type="text"
 												readOnly />
 										</div>
-										<div className="col-9">
+										<div className="col-10">
 											<Field
 												name="mobile"
 												component={RenderField}
