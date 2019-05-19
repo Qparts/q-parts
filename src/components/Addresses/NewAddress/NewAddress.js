@@ -262,7 +262,7 @@ class Address extends Component {
                       validate={[validations.required]}
                       />
                   </div>
-                  <div className="has-float-label textarea">
+                  {/* <div className="has-float-label textarea">
                     <Field
                       className="form-control"
                       name="shippingNote"
@@ -270,7 +270,7 @@ class Address extends Component {
                       placeholder={translate("form.address.shippingNote")}
                       />
                     <label>{translate("form.address.shippingNote")}</label>
-                  </div>
+                  </div> */}
                 </div>
                 {renderButtons}
 

@@ -50,7 +50,7 @@ export default class Address extends Component {
                 <Radio
                     onChange={onClickDefaultAddress.bind(this, addressIndex)}
                     checked={address.defaultAddress}
-                    label={translate("setting.garage.defaultVehicle")}
+                    label={translate("setting.addressBook.selectAddress")}
                     type="radio"
                     id={address.id}
                     name="radioGroup"

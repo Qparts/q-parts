@@ -161,20 +161,20 @@ class ProductDetail extends Component {
 
   submit = ({ quantity }) => {
     //width screen
-    let width = window.innerWidth;
+    //let width = window.innerWidth;
     const item = { ...this.state.product, quantity };
     this.props.addToCart(item);
-    if (width > 992) {
+//    if (width > 992) {
       this.handleDialog('addProduct', item)
-    } else {
-      this.setState({
-        data: item
-      });
-      this.props.history.push({
-        pathname: `/addProduct`,
-        state: { data: item }
-      });
-    }
+    // } else {
+    //   this.setState({
+    //     data: item
+    //   });
+    //   this.props.history.push({
+    //     pathname: `/addProduct`,
+    //     state: { data: item }
+    //   });
+    // }
   }
 
   submitReview = ({ review, rating }) => {

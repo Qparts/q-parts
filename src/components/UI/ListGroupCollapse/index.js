@@ -34,15 +34,15 @@ export class ListGroupCollapse extends Component {
 		this.props.onAddtoCart(item);
 
 		//width screen
-		let width = window.innerWidth;
-		if (width > 992) {
+//		let width = window.innerWidth;
+//		if (width > 992) {
 			this.togglePopup();
-		} else {
-			this.props.history.push({
-				pathname: `/addProduct`,
-				state: { data: item }
-			})
-		}
+		// } else {
+		// 	this.props.history.push({
+		// 		pathname: `/addProduct`,
+		// 		state: { data: item }
+		// 	})
+		// }
 	}
 
 	handleClick = (action, value, quotationItem, e) => {

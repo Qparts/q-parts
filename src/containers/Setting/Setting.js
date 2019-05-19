@@ -367,7 +367,7 @@ class Setting extends Component {
     if (this.state.dialogType === addresses_popup) {
       addressDialog = <Modal dir={direction} contentClassName="container-fluid" className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup} className="have-icon">
-              <p><i className="icon-add-location"></i>Shipping</p> Address
+              <p><i className="icon-add-location"></i></p>{translate("setting.addressBook.shippingHeader")}
         </ModalHeader>
         <ModalBody>
           <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
