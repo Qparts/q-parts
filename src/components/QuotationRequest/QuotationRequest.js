@@ -333,11 +333,13 @@ class QuotationRequest extends Component {
 						<div className="row">
 							<header className="col">
 								<h1>{translate("quotationOrder.title")}</h1>
-								<p>{translate("quotationOrder.title")} {translate("quotationOrder.request")}</p>
+								<p>{translate("quotationOrder.request")}</p>
 							</header>
 						</div>
 					</div>
 				</section>
+
+
 				<section className="steps-title">
 					<div className="total-bg gray-bg"></div>
 					<div className="container-fluid">
@@ -358,11 +360,12 @@ class QuotationRequest extends Component {
 						</div>
 					</div>
 				</section>
-				<section className="step-active">
+
+				{/* <section className="step-active">
 					<div className="container-fluid">
 						<OrderSteps grey="-gs" translate={translate} direction={direction} />
 					</div>
-				</section>
+				</section> */}
 				<section className="custom-order-form container-fluid">
 					<div className="title-container">
 						<div className="step-num">

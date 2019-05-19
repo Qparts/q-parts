@@ -26,7 +26,7 @@ class AddProduct extends Component {
   handleSubmit = values => {
     values.preventDefault();
     if (this.props.token) {
-      this.props.history.push('/checkout');
+      this.props.history.push('/cart');
     } else {
       this.props.togglePopupLogin();
       this.props.togglePopup();
@@ -36,7 +36,7 @@ class AddProduct extends Component {
   handleSubmitMoblie = values => {
     values.preventDefault();
     if (this.props.token) {
-      this.props.history.push('/checkout');
+      this.props.history.push('/cart');
     } else {
       this.props.history.push('/loginCheckout');
     }
@@ -60,13 +60,10 @@ class AddProduct extends Component {
     const { translate, currentLanguage, direction } = this.props;
     let quantity =0;
     if(data.length > 1){
-      for(var i=0 ; i<data.length ; i++){
-        quantity += data[i].quantity;
-      }
+      // for(var i=0 ; i<data.length ; i++){
+      //   quantity += data[i].quantity;
+      // }
       return <section className="add-product">
-        <SmallScreen>
-          <Title number={quantity} header={translate("dialog.addToCart.title")} />
-        </SmallScreen>
         {
           data.map((productData, idx) => {
             return <Fragment key={idx}>
@@ -84,10 +81,10 @@ class AddProduct extends Component {
                     <li>
                       <strong>{getTranslatedObject(productData.brand, currentLanguage, 'name', 'nameAr')}</strong> #{productData.productNumber}
                     </li>
-                    <li className="product-review">
+                    {/* <li className="product-review">
                       <Stars values={productData.averageRating} {...constant.starsRating} />
                       {getLength(productData.reviews)} {translate("product.reviews")}
-                  </li>
+                    </li> */}
                 </ul>
                 <p className="price">{productData.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
                 <p>{translate("general.quantity")}: {productData.quantity}</p>
@@ -95,17 +92,17 @@ class AddProduct extends Component {
             </div>
 
             <div className="subtotal">
-                <div className="col">
+                {/* <div className="col">
                   {translate("general.subtotal")} <p>({productData.quantity} {translate("dialog.addToCart.items")})</p>
                 </div>
                 <div className="price col-auto">
                   {productData.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span>
-                </div>
+                </div> */}
             </div>
           </Fragment>
           })
         }
-        <MediumScreen>
+        <Fragment>
           <div className="btn-footer row">
             <div className="col-md-7 offset-md-5">
               <div className="row">
@@ -119,25 +116,10 @@ class AddProduct extends Component {
               </div>
             </div>
           </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="btn-footer">
-            <div className="row">
-              <div className="col-auto">
-                <button  className="btn btn-gray" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
-              </div>
-              <div className="col">
-                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
-              </div>
-            </div>
-          </div>
-      </SmallScreen>
+      </Fragment>
       </section>
     }else{
       return <section className="add-product">
-        <SmallScreen>
-          <Title number={data.quantity} header={translate("dialog.addToCart.title")} />
-        </SmallScreen>
         <div className="media">
           <span className="media-img">
             <img
@@ -152,25 +134,25 @@ class AddProduct extends Component {
                 <li>
                   <strong>{getTranslatedObject(data.brand, currentLanguage, 'name', 'nameAr')}</strong> #{data.productNumber}
                 </li>
-                <li className="product-review">
+                {/* <li className="product-review">
                   <Stars values={data.averageRating} {...constant.starsRating} />
                   {getLength(data.reviews)} {translate("product.reviews")}
-              </li>
+               </li> */}
             </ul>
             <p className="price">{data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span></p>
             <p>{translate("general.quantity")}: {data.quantity}</p>
           </div>
         </div>
 
-        <div className="subtotal">
+        {/* <div className="subtotal">
             <div className="col">
               {translate("general.subtotal")} <p>({data.quantity} {translate("dialog.addToCart.items")})</p>
             </div>
             <div className="price col-auto">
               {data.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span>
             </div>
-        </div>
-        <MediumScreen>
+        </div> */}
+        <Fragment>
           <div className="btn-footer row">
             <div className="col-md-7 offset-md-5">
               <div className="row">
@@ -184,19 +166,7 @@ class AddProduct extends Component {
               </div>
             </div>
           </div>
-        </MediumScreen>
-        <SmallScreen>
-          <div className="btn-footer">
-            <div className="row">
-              <div className="col-auto">
-                <button  className="btn btn-gray" onClick={this.continueShoppingMoblile}>{translate("general.buttons.continueShopping")}</button>
-              </div>
-              <div className="col">
-                <button onClick={this.handleSubmitMoblie} className="btn btn-primary">{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
-              </div>
-            </div>
-          </div>
-      </SmallScreen>
+      </Fragment>
       </section>
     }
   }

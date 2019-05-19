@@ -223,7 +223,7 @@
       ]
     },
     "requiredField": [
-      "المعلومات المطلوبه",
+      "المعلومات مطلوبة",
       "Required input"
     ]
   },
@@ -293,7 +293,7 @@
       "Tires"
     ],
     "quotationOrder": [
-      "طلب تسعيرة",
+      "طلب قطع غيار",
       "Quotation Order"
     ],
     "coolant": [
@@ -475,8 +475,8 @@
   },
   "quotationOrder": {
     "title": [
-      "طلب تسعيرة",
-      "Qutation Order"
+      "طلب قطع غيار",
+      "Quotation Order"
     ],
     "weMoveFast": [
       "نحن حريصون على توفير أفضل تجربة لعملائنا.",
@@ -629,7 +629,7 @@
       "Start now"
     ],
     "startHere": [
-      "ابدأ طلب تسعيرة",
+      "ابدأ طلب قطع الغيار",
       "Start Quotation Order"
     ]
   },
@@ -1770,7 +1770,7 @@
     },
     "addressBook": {
       "title": [
-        "العنوان",
+        "اسم العنوان",
         "Title"
       ],
       "add": [
@@ -1784,6 +1784,14 @@
       "shippingItem": [
         "إلى أين تريد ان يتم شحن القطع؟",
         "Where you would like your items shipped?"
+      ],
+      "shippingHeader": [
+        "عنوان جديد",
+        "New Address"
+      ],
+      "selectAddress": [
+        "اختر العنوان",
+        "Select Address"
       ],
       "defaultAddress": [
         "عنوان افتراضي",
@@ -2317,9 +2325,13 @@
       "Pending"
     ],
     "replied": [
-      "تم الرد عليها",
-      "Replied"
-    ],
+      "منجزة",
+      "Completed"
+	],
+	"closed": [
+		"مغلقة",
+		"Closed"
+	],
     "requestNo": [
       "رقم الطلب",
       "Request number"
