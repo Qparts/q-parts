@@ -102,7 +102,22 @@ class Header extends Component {
     ];
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, cart } = this.props;
-
+    let subNav;
+    if(window.location.pathname === "/"){
+      subNav ="";
+    }else{
+      subNav= <NavLg>
+        <div className="sub-nav">
+          <ul className="container-fluid list-inline">
+            <li><a>Wires and Cables</a></li>
+            <li><a>Car Refrigerators</a></li>
+            <li><a>Bodywork Cleaning</a></li>
+            <li><a>Car Mats</a></li>
+            <li><a>Children Seats</a></li>
+          </ul>
+        </div>
+      </NavLg>;
+    }
     const mainSearch = (
       <div className="main-search">
         <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
@@ -182,7 +197,7 @@ class Header extends Component {
                 </div>
               </div>
             </div>
-            <div className="sub-nav"></div>
+            {subNav}
             <div id="cd-search" className="cd-search">
               <NavSm>
                 {mainSearch}

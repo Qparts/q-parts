@@ -16,6 +16,24 @@
 .sub-nav {
   min-height: 2px;
   background: $default-header-bg;
+  .list-inline{
+    @include padding-left(15px);
+    @include padding-right(15px);
+    li{
+      padding: 14px;
+      a {
+        font-family: Roboto;
+        @include font-size(15px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: $white;  
+      }
+    }
+  }
 }
 .cd-nav {
   @include text-left;
