@@ -103,18 +103,18 @@ class Header extends Component {
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, cart } = this.props;
     let subNav;
-    if(window.location.pathname === "/"){
-      subNav ="";
+    if(window.location.pathname === "/accessories"){
+      subNav = <div className="sub-nav"><ul className="container-fluid list-inline">
+        <li><a>Wires and Cables</a></li>
+        <li><a>Car Refrigerators</a></li>
+        <li><a>Bodywork Cleaning</a></li>
+        <li><a>Car Mats</a></li>
+        <li><a>Children Seats</a></li>
+      </ul>
+    </div>;
     }else{
       subNav= <NavLg>
         <div className="sub-nav">
-          <ul className="container-fluid list-inline">
-            <li><a>Wires and Cables</a></li>
-            <li><a>Car Refrigerators</a></li>
-            <li><a>Bodywork Cleaning</a></li>
-            <li><a>Car Mats</a></li>
-            <li><a>Children Seats</a></li>
-          </ul>
         </div>
       </NavLg>;
     }
