@@ -1,18 +1,20 @@
 import React, { Fragment } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { closeNav, right } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
 const Nav = (
     {
         translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection,
-        getCountriesOnly, quotations
+        getCountriesOnly, quotations, history
     }) => {
 
     const getReplayCounter = () => {
         return quotations.completed.filter(reply => !reply.read).length;
     }
-
+    const test = () => {
+        return history.push('/accessories')
+    }
     let hasNoNewReply = quotations.completed.every(reply => reply.read);
 
     const userSettingPages = isLoggedIn ? <Fragment>
@@ -91,7 +93,7 @@ const Nav = (
                 </li>
                 <li className="has-children">
 
-                    <Link to="/setting/addresses">
+                    <Link to="#" onClick={() => history.push('/motor-oil')}>
                         {translate("nav.oil")}
                     </Link>
                     <ul className="cd-secondary-nav is-hidden">
@@ -102,8 +104,8 @@ const Nav = (
                     </ul>
                 </li>
 
-                <li><Link to="/listing?query=&page=1&category=13" onClick={close}>{translate("nav.tires")}</Link></li>
                 <li className="has-children">
+                  <Link to="/listing?query=&page=1&category=13" onClick={() => history.push('/tires')}>{translate("nav.tires")}</Link>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=29" onClick={close}>{translate("nav.handTools")}</Link></li>
@@ -113,7 +115,7 @@ const Nav = (
                     </ul>
                 </li>
                 <li className="has-children">
-                    <a href="#">{translate("nav.accessorise")}</a>
+                    <a href="#" onClick={() => history.push('/accessories')}>{translate("nav.accessorise")}</a>
                     <ul className="cd-secondary-nav is-hidden">
                         <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
                         <li><Link to="/listing?query=&page=1&category=11" onClick={close}>{translate("nav.carAccessorise")}</Link></li>
@@ -178,4 +180,4 @@ const close = () => {
     closeNav();
 }
 
-export default Nav;
+export default withRouter(Nav);;
