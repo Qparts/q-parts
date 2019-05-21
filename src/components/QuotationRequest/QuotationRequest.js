@@ -76,7 +76,7 @@ class QuotationRequest extends Component {
 			})
 		};
 
-		if((submitFailed !== prevProps.submitFailed) && submitFailed) {
+		if ((submitFailed !== prevProps.submitFailed) && submitFailed) {
 			renderTopIfError(submitFailed);
 		}
 	}
@@ -109,7 +109,7 @@ class QuotationRequest extends Component {
 			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
-			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobileNumber})
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobileNumber })
 				.then(res => {
 					this.props.setQuotationOrder(false);
 					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -524,12 +524,15 @@ class QuotationRequest extends Component {
 													className="form-control"
 													value={"+966"}
 													type="text"
+													disabled
 													readOnly />
 											</div>
 											<Field
+												hasFloatLabel
 												name="mobile"
 												component={RenderField}
-												placeholder={translate("form.address.phoneNumber")}
+												label={translate("form.address.phoneNumber")}
+												errorMessage={`${translate("general.validationMessages.mobile")}`}
 												validate={[validations.required, validations.mobileCodeNumber]} />
 										</div>
 									</div>

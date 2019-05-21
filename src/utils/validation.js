@@ -71,6 +71,6 @@ export const renderTopIfError = (submitFailed) => {
 }
 
 export const mobileCodeNumber = value =>
-  value && !/^([5]\d)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/.test(value)
+  value && !/^(5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/.test(value)
     ? 'Invalid code number'
     : undefined
