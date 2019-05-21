@@ -6,9 +6,11 @@ workbox.core.clientsClaim();
 self.addEventListener('push', event => {
 	const data = event.data.json();
 	event.waitUntil(self.registration.showNotification(data.title, {
-		body: data.body
-	}))
-})
+		body: data.body,
+		icon: './icon/notification-icons/qParts-icon128.png',
+		badge: './icon/notification-icons/qParts-icon128.png'
+	}));
+});
 
 self.addEventListener('notificationclick', event => {
 	const notification = event.notification;
