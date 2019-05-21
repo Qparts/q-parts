@@ -76,7 +76,7 @@ class QuotationRequest extends Component {
 			})
 		};
 
-		if((submitFailed !== prevProps.submitFailed) && submitFailed) {
+		if ((submitFailed !== prevProps.submitFailed) && submitFailed) {
 			renderTopIfError(submitFailed);
 		}
 	}
@@ -100,7 +100,7 @@ class QuotationRequest extends Component {
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
-
+		const mobileNumber = `${966}${mobile}`;
 		if (!isAuth(this.props.token)) {
 			this.props.setCheckLoginQuotationOrder(true);
 			this.setState({
@@ -109,7 +109,7 @@ class QuotationRequest extends Component {
 			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
-			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobile })
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobileNumber })
 				.then(res => {
 					this.props.setQuotationOrder(false);
 					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -309,7 +309,6 @@ class QuotationRequest extends Component {
 				</h6>
 			</div>
 		);
-
 		if (this.state.loading)
 			return (
 				<div style={styles.loading}>
@@ -506,7 +505,7 @@ class QuotationRequest extends Component {
 										validate={[validations.required]}
 									/>
 								</div>
-								<div className="col-md float-label">
+								<div className="col-md float-label city-filed">
 									<Field
 										label={translate("general.city")}
 										name="city"
@@ -517,21 +516,24 @@ class QuotationRequest extends Component {
 										validate={[validations.required]}
 									/>
 								</div>
-								<div className="phone-info col-md">
-									<div className="phone-number row">
-										<div className="first col-3">
-											<input
-												className="form-control"
-												value={"+966"}
-												type="text"
-												readOnly />
-										</div>
-										<div className="col-9">
+								<div className="phone-info col-12">
+									<div className="row">
+										<div className="phone-number col-12">
+											<div className="first">
+												<input
+													className="form-control"
+													value={"+966"}
+													type="text"
+													disabled
+													readOnly />
+											</div>
 											<Field
+												hasFloatLabel
 												name="mobile"
 												component={RenderField}
-												placeholder={translate("form.address.phoneNumber")}
-												validate={[validations.required]} />
+												label={translate("form.address.phoneNumber")}
+												errorMessage={`${translate("general.validationMessages.mobile")}`}
+												validate={[validations.required, validations.mobileCodeNumber]} />
 										</div>
 									</div>
 								</div>

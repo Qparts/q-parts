@@ -225,7 +225,13 @@
     "requiredField": [
       "المعلومات مطلوبة",
       "Required input"
-    ]
+	],
+	"validationMessages": {
+		"mobile": [
+			"رقم الجوال غير صالح",
+			"Invalid mobile number"
+		]
+	}
   },
   "tires": {
     "title": [
