@@ -43,7 +43,9 @@ class Quotations extends Component {
 		let query = queryString.parse(this.props.location.search.slice(1));
 
 		this.setReadReplies();
-		this.toggle(query.panel);
+		const noNewReply = this.props.quotations.completed.every(reply => reply.read);
+		const replied = noNewReply ? undefined : 'replied';
+		this.toggle(query.panel || replied);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
