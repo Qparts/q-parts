@@ -60,9 +60,9 @@ class Signup extends Component {
             quotationItemsTemp.map(quotationCartItem => {
               return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
             }) : undefined;
-            const mobileNumber = `${966}${mobile}`;
+            mobile = `${966}${mobile}`;
             this.props.setCheckLoginQuotationOrder(false);
-            postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobileNumber })
+            postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobile })
               .then(res => {
                 this.props.setQuotationOrder(false);
                 return this.props.history.push({
