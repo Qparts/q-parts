@@ -24,6 +24,7 @@ import Radio from '../../../components/UI/Radio';
 
 import { postQuotation } from '../../../utils/api';
 import _ from 'lodash';
+import { largeScreenSize } from '../../../components/Device/constants';
 
 class Login extends Component {
 	constructor(props) {
@@ -79,7 +80,7 @@ class Login extends Component {
 
 	handleChange = (event) => {
 		let screenSize = window.innerWidth;
-		if (screenSize > 992) {
+		if (screenSize > largeScreenSize) {
 			this.props.toggle();
 		}
 		this.props.history.push('/signup')

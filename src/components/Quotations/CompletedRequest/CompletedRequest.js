@@ -10,6 +10,7 @@ import { getTranslatedObject, isAuth } from '../../../utils';
 import Button from '../../UI/Button';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from '../../../containers/Product/AddProductPopup/AddProduct';
+import { largeScreenSize } from '../../Device/constants';
 
 export class CompletedRequest extends Component {
 	constructor(props) {
@@ -165,7 +166,7 @@ export class CompletedRequest extends Component {
 			</Link>
 			<div className={`collapse ${reply.id} ${this.show()}`} id={reply.id}>
 				<article className="request-details" >
-					<ul className="list-inline vehicle-info" style={screenSize > 992 ? styles.vehicleInfo : {}}>
+					<ul className="list-inline vehicle-info" style={screenSize > largeScreenSize ? styles.vehicleInfo : {}}>
 						{
 							getVehicleVin(vehicles, reply.customerVehicleId) && (
 								<li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, reply.customerVehicleId)})</li>

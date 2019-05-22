@@ -154,7 +154,7 @@ class SearchResult extends Component {
 		if (search !== prevProps.location.search) {
 			this.props.getFlage(false);
 			this.resetLoading();
-			this.setGeneralSearch(search);
+			this.setGeneralSearch(search, this.runCallbacks);
 		}
 
 

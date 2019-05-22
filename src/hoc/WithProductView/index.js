@@ -58,7 +58,7 @@ const WithProductView = WrappedComponent => {
 				});
 			} else if (index !== -1) {
 				this.state.selectedOptions.forEach(element => {
-					for (var i = 0; i < element.selectedOptions.length; i++) {
+					for (let i = 0; i < element.selectedOptions.length; i++) {
 						if (element.selectedOptions[i] === id) {
 
 							element.selectedOptions.splice(i, 1);
@@ -112,7 +112,7 @@ const WithProductView = WrappedComponent => {
 		removeItem = (index, item, event) => {
 			event.preventDefault();
 			this.state.selectedOptions.forEach(element => {
-				for (var i = 0; i < element.selectedOptions.length; i++) {
+				for (let i = 0; i < element.selectedOptions.length; i++) {
 					if (element.selectedOptions[i] === item) {
 
 						element.selectedOptions.splice(i, 1);
@@ -205,13 +205,15 @@ const WithProductView = WrappedComponent => {
 					filtrationChecked: []
 				})
 			}
-			for (var key in obj) {
+			for (let key in obj) {
+				let queryString = { ...obj };
 				// eslint-disable-next-line no-loop-func
 				dataProducts.forEach(item => {
 					if (item.filterTitle === key) {
+						queryString[key] = typeof queryString[key] === 'string' ? [queryString[key]] : queryString[key];
 						item.options.forEach(option => {
-							for (var i = 0; i < obj[key].length; i++) {
-								if (option.id === Number(obj[key][i])) {
+							for (let i = 0; i < queryString[key].length; i++) {
+								if (option.id === Number(queryString[key][i])) {
 									const label = item.filterTitle + ' ' + option.value;
 									const labelAr = item.filterTitleAr + ' ' + option.valueAr;
 									const combinedIds = `${item.id}${option.id}`;
