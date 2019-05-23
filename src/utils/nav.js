@@ -33,3 +33,7 @@ export const toggleSearch = (type) => {
         ($('.cd-search').hasClass('is-visible')) ? $('.cd-overlay').addClass('is-visible') : $('.cd-overlay').removeClass('is-visible');
     }
 }
+
+export const goBack = (history) => {
+    history.goBack();
+  }
