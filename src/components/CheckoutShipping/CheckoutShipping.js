@@ -67,10 +67,11 @@ class CheckoutShipping extends Component {
     this.props.addDeliveryAddress(address);
   }
   handleSubmit = values => {
-    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+    let { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
     const latitude = city.latitude;
     const longitude = city.longitude;
-    const cityId = city.id;
+	const cityId = city.id;
+	mobile = `${966}${mobile}`;
     this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
       .then(() => {
         this.setState({ hasNewAddress: false });
@@ -184,7 +185,7 @@ class CheckoutShipping extends Component {
               <form onSubmit={handleSubmit(this.handleSubmit)}>
                 {(
                   this.state.hasNewAddress && <div className="row no-gutters">
-                    <div className="col-12 title-address">
+                    {/* <div className="col-12 title-address">
                       <Field
                         label={translate("setting.addressBook.title")}
                         name="title"
@@ -193,7 +194,7 @@ class CheckoutShipping extends Component {
                         placeholder={translate("setting.addressBook.title")}
                         hasFloatLabel
                         validate={[validations.required]} />
-                    </div>
+                    </div> */}
                     {/* <div className="col-12 google-map">
                     <Link to="#" onClick={onShowGoogleMap}>
                       <img className="main-img" alt="user" src="/img/google-map.svg" />
@@ -234,7 +235,7 @@ class CheckoutShipping extends Component {
                             name="mobile"
                             component={RenderField}
                             placeholder={translate("form.address.phoneNumber")}
-                            validate={[validations.required]} />
+                            validate={[validations.required, validations.mobileCodeNumber]} />
                         </div>
                       </div>
                       <div className="phone-info col-12">
@@ -243,19 +244,18 @@ class CheckoutShipping extends Component {
                             <Field
                               name="zipCode"
                               component={RenderField}
-                              placeholder={translate("form.address.zipCode")}
-                              validate={[validations.required]} />
+                              placeholder={translate("form.address.zipCode")} />
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="col-12 shipping-style">
+                    {/* <div className="col-12 shipping-style">
                       <Field
                         name="shipping"
                         component={RenderField}
                         type="text"
                         placeholder={translate("form.address.shippingNote")} />
-                    </div>
+                    </div> */}
                     <div className="footer col-12">
                       <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon={`icon-arrow-${right(direction)}`} />
                       <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
