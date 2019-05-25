@@ -35,6 +35,10 @@ class RenderCartItem extends Component {
     this.props.moveCartToWishlist(id);
   }
 
+  goBack = () => {
+    this.props.history.goBack();
+  }
+
   render() {
     const { purchasedItems, removeButton, divCol, direction, translate, currentLanguage } = this.props;
 
@@ -119,7 +123,8 @@ class RenderCartItem extends Component {
               {
                 !removeButton && <CustomLink
                   className="btn cart-back"
-                  to="/"
+                  to={"#"}
+                  onClick={this.goBack}
                   text={translate("general.buttons.continueShopping")}
                   icon={`icon-arrow-${right(direction)}`}
                 />
