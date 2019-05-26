@@ -3,27 +3,37 @@ import { Link } from "react-router-dom";
 import { closeNav, right } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
-const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection, getCountriesOnly }) => {
+const Nav = (
+    {
+        translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection,
+        getCountriesOnly, quotations
+    }) => {
+
+    const getReplayCounter = () => {
+        return quotations.completed.filter(reply => !reply.read).length;
+    }
+
+    let hasNoNewReply = quotations.completed.every(reply => reply.read);
 
     const userSettingPages = isLoggedIn ? <Fragment>
         <li className="nav-sm">
-            <Link className="notification" to="/setting/quotations" onClick={close}>
+            <Link className={hasNoNewReply ? '' : 'notification'} to="/setting/quotations" onClick={close}>
                 <i className="icon-send"></i> {translate("navBar.quotations")}
-                  <span>1</span>
+                {getReplayCounter() > 0 && <span>{getReplayCounter()}</span>}
             </Link>
         </li>
-        <li className="nav-sm">
+        {/* <li className="nav-sm">
                     <Link to="/setting/orders" onClick={close}>
                         <i className="icon-product"></i> {translate("navBar.orders")}
                     </Link>
-                </li>
+                </li> */}
         <li className="nav-sm">
             <Link to="/setting/wishlist" onClick={close}>
                 <i className="icon-heart"></i> {translate("navBar.wishlist")}
             </Link>
         </li>
 
-        {/*<li className="nav-sm">
+        <li className="nav-sm">
             <Link to="/setting/garage" onClick={close}>
                 <i className="icon-garage"></i>{translate("navBar.garage")}
             </Link>
@@ -33,7 +43,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                 <i className="icon-address"></i>
                 {translate("navBar.menu.menuItem.address")}
             </Link>
-        </li>*/}
+        </li>
         <li className="nav-sm">
             <Link to="/logout" onClick={close}><i className="icon-sign-out"></i> {translate("navBar.menu.menuItem.logout")}</Link>
         </li>
@@ -49,7 +59,7 @@ const Nav = ({ translate, direction, isLoggedIn, fullName, localize, changeDefau
                         </span>
                         {
                             isLoggedIn ?
-                                <p>{fullName} <span>View Profile</span></p> :
+                                <p>{fullName} {/*<span>View Profile</span>*/}</p> :
                                 <Link to="/login" onClick={close}>
                                     <p>{translate("general.signin")}<i></i>{translate("general.join")}</p>
                                 </Link>

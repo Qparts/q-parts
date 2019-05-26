@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,20 +12,20 @@ import {
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
   deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
   getCompletedRequests, changeDefaultAddress, changeDefaultVehicle,
-  incrementQuantity, decrementQuantity
+  incrementQuantity, decrementQuantity, putCompletedRequestRead, postCodeLogin
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart } from '../../actions/cartAction';
 import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import EditInfo from '../../components/EditInfo/EditInfo';
 import Addresses from '../../components/Addresses/Addresses';
-import Address from '../../components/Addresses/Address/Address';
+import Address from '../../components/Addresses/NewAddress/NewAddress';
 import PrivateRoute from '../../components/PrivateRoute';
 import SocialMediaLink from '../../components/SocialMediaLink/SocialMediaLink';
 import Quotations from '../../components/Quotations/Quotations';
 import WithSocialMedia from '../../hoc/WithSocialMedia';
 import { getConnectedPlatforms, getComponentName } from '../../utils/components';
-import { ON_SOCIAL_MEDIA_LINK, TAB_ONE } from '../../constants';
+import { ON_SOCIAL_MEDIA_LINK, TAB_ONE, styles } from '../../constants';
 import Orders from '../../components/Orders/Orders';
 import Order from '../../components/Order/Order';
 import HelpCenter from '../../components/HelpCenter/HelpCenter';
@@ -34,10 +34,12 @@ import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
 import Payment from '../../components/Payment/Payment';
 import PaymentPopup from '../../components/Payment/PaymentPopup';
+import queryString from 'qs';
 import Footer from '../../components/Layout/Footer/Footer';
 
+import { ClipLoader } from "react-spinners";
 import {
-  match
+  match, isAuth
 } from '../../utils';
 import _ from 'lodash';
 
@@ -49,6 +51,8 @@ import {
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../../components/UI/Title';
 //whatsapp
+
+import { getFormValues } from 'redux-form';
 
 import { LargeScreen , DownLargeScreen} from '../../components/Device/index.js'
 import Sidebar from "react-sidebar";
@@ -77,20 +81,34 @@ class Setting extends Component {
       sectionHeader: '',
       modal: false,
       sidebarOpen: false,
+      active: ''
     }
 
   }
 
   componentDidMount = () => {
     this.getSectionHeader(this.props.location.pathname);
+    const urlActive = this.props.location.pathname;
+    this.setState({
+      active: urlActive
+    });
+    this.codeLogin();
   }
 
 
   componentDidUpdate(prevProps, prevState) {
     const { location: { pathname } } = this.props;
     const prevPathname = prevProps.location.pathname;
+    const isActivePage = pathname !== prevState.active;
+
     if (pathname !== prevPathname) {
       this.getSectionHeader(pathname)
+    }
+
+    if(isActivePage){
+      this.setState({
+        active: pathname
+      });
     }
   }
 
@@ -277,9 +295,39 @@ class Setting extends Component {
 		});
 	}
 
+  handleClick = (e,link) => {
+    this.setState({
+      active: link
+    })
+    this.props.history.push(`${this.props.match.url}/${link}`)
+  }
+
+  codeLogin = async () => {
+    const { location: { pathname, search }, postCodeLogin, defaultLang, token } = this.props;
+    let query = queryString.parse(search.slice(1));
+
+    if(!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
+      await postCodeLogin(query.email, query.code, defaultLang);
+    }
+
+}
+
   render() {
-      console.log(this.state.sidebarOpen)
-    const { translate, direction } = this.props;
+    const { location: { pathname, search }, translate, direction, isLoading, token } = this.props;
+
+    let query = queryString.parse(search.slice(1));
+    if (!isAuth(token) && pathname === '/setting/quotations' && query.email && query.code) {
+      return (
+        <div style={styles.loading}>
+          <ClipLoader
+            css={styles.spinner}
+            sizeUnit={"px"}
+            size={150}
+            loading={isLoading}
+          />
+        </div>
+      )
+    }
     let dialog;
 
     if (this.state.dialogType === email) {
@@ -323,7 +371,7 @@ class Setting extends Component {
         <ModalBody>
           <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
           <Address
-            currentLanguage={this.props.currentLanguage}
+            defaultLang={this.props.currentLanguage}
             address={this.props.address}
             customer={this.props.customer}
             getRegions={this.props.getRegions}
@@ -342,6 +390,7 @@ class Setting extends Component {
             onHide={this.onHide}
             defaultAddress={this.state.defaultAddress}
             onDefaultAddress={this.handleChangeDefaultAddress}
+            formValues={this.props.formValues}
           />
 
         </ModalBody>
@@ -380,6 +429,9 @@ class Setting extends Component {
       </Modal>
 
 
+      if(!isAuth(this.props.token)) {
+        return <Redirect to="/" />
+      }
 
     return (
       <Fragment>
@@ -393,36 +445,36 @@ class Setting extends Component {
                           <span className="bg"></span>
                           <ul className="list-unstyled">
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'quotations')}} className={this.state.active.includes('quotations') ? 'media active' : 'media'}>
                                 <img className="request-tab" src="/img/request.svg" alt="request" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.request')}</h5>
                                   {this.props.requests.length}
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                            <a href="javascript:void(0)" className="media">
                                 <img className="order-tab" src="/img/orders-UP.svg" alt="Orders" />
-                                <div class="media-body">
-                                  <h5>Orders</h5>
-                                  {this.props.requests.length}
+                                <div className="media-body">
+                                  <h5>{translate("setting.links.orders")}</h5>
+                                  0
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'wishlist')}} className={this.state.active.includes('wishlist') ? 'media active' : 'media'}>
                                 <img className="wish-list-tab" src="/img/wish-list-UP.svg" alt="Wish List" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.links.wishlist')}</h5>
                                   {this.props.wishlist.length}
                                 </div>
                               </a>
                             </li>
                             <li className="col">
-                              <a href="#" class="media">
+                              <a href="javascript:void(0)" onClick={() => {this.handleClick(this,'garage')}} className={this.state.active.includes('garage') ? 'media active' : 'media'}>
                                 <img className="garage-tab" src="/img/garage-UP.svg" alt="Garage" />
-                                <div class="media-body">
+                                <div className="media-body">
                                   <h5>{translate('setting.links.garage')}</h5>
                                   {this.props.vehicles.length}<label>{translate('setting.vehicle')}</label>
                               </div>
@@ -433,10 +485,10 @@ class Setting extends Component {
                     </div>
                   </div>
                   <div className="row">
-                    <SettingLinks onSetSidebarOpen={this.onSetSidebarOpen} {...this.props} />
+                    <SettingLinks {...this.props} />
                     <div className="setting-tab-content col-lg-9">
                       <Switch>
-                      <Route path="/setting/profile" exact={true} render={({ match }) => {
+                      {/* <Route path="/setting/profile" exact={true} render={({ match }) => {
                         return (
                           <Fragment>
                             <Profile
@@ -452,11 +504,13 @@ class Setting extends Component {
                             {dialog}
                           </Fragment>
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/quotations" exact={true} render={() => {
                         return (
                           <Fragment>
                             <Quotations
+                                regions={this.props.regions}
+                                getCountry={this.props.getCountry}
                                 getPendingRequests={this.props.getPendingRequests}
                                 getCompletedRequests={this.props.getCompletedRequests}
                                 customer={this.props.customer}
@@ -467,11 +521,12 @@ class Setting extends Component {
                                 currentLanguage={this.props.currentLanguage}
                                 incrementQuantity={this.props.incrementQuantity}
                                 decrementQuantity={this.props.decrementQuantity}
-                                token={this.props.token} />
+                                token={this.props.token}
+                                putCompletedRequestRead={this.props.putCompletedRequestRead} />
                           </Fragment>
                         )
                       }} />
-                      <Route path="/setting/connect" exact={true} render={({ match }) => {
+                      {/* <Route path="/setting/connect" exact={true} render={({ match }) => {
                         return (
                           <Fragment>
                             <SocialMediaLink
@@ -480,11 +535,13 @@ class Setting extends Component {
                               handleFailure={this.props.handleFailure} />
                           </Fragment>
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/addresses" exact={true} render={() => {
                         return (
                           <Fragment>
                             <Addresses
+                              currentLanguage={this.props.currentLanguage}
+                              regions={this.props.regions}
                               customer={this.props.customer}
                               onShowEditDialog={this.handleDialog}
                               onEditAddress={this.handleEditAddress}
@@ -495,21 +552,21 @@ class Setting extends Component {
                           </Fragment>
                         )
                       }} />
-                      <Route path="/setting/orders/" exact={true} render={() => {
+                      {/* <Route path="/setting/orders/" exact={true} render={() => {
                         return (
                           <Orders translate={this.props.translate} />
                         )
-                      }} />
-                      <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                      }} /> */}
+                      {/* <Route path="/setting/orders/:orderId" exact={true} render={() => {
                         return (
                           <Order translate={this.props.translate} checkout={this.props.checkout} />
                         )
-                      }} />
-                      <Route path="/setting/help_center" exact={true} render={() => {
+                      }} /> */}
+                      {/* <Route path="/setting/help_center" exact={true} render={() => {
                         return (
                           <HelpCenter translate={this.props.translate} />
                         )
-                      }} />
+                      }} /> */}
                       <Route path="/setting/garage" exact={true} render={() => {
                         return (
                           <Fragment>
@@ -535,7 +592,7 @@ class Setting extends Component {
                             translate={this.props.translate} />
                         )
                       }} />
-                      <Route path="/setting/payment/" exact={true} render={() => {
+                      {/* <Route path="/setting/payment/" exact={true} render={() => {
                         return (
                           <Fragment>
                             <Payment
@@ -545,8 +602,8 @@ class Setting extends Component {
                             {paymentDialog}
                           </Fragment>
                         )
-                      }} />
-                      <PrivateRoute
+                      }} /> */}
+                      {/* <PrivateRoute
                         path="/setting/profile/phone"
                         component={EditInfo}
                         labels={["Confirmation number", "Phone number"]}
@@ -556,7 +613,7 @@ class Setting extends Component {
                         placeholder={["Confirmation number", "Your phone number"]}
                         renderField={this.renderField}
                         onSubmit={this.onEdit.bind(this, phone)}
-                        redirectTo="/setting/profile" />
+                        redirectTo="/setting/profile" /> */}
                     </Switch>
                     </div>
                   </div>
@@ -568,7 +625,7 @@ class Setting extends Component {
                     overlayClassName="sidebar-overlay"
                     sidebar={
                       <Fragment>
-                        <SettingLinks {...this.props} />
+                        <SettingLinks onSetSidebarOpen={this.onSetSidebarOpen} {...this.props} />
                       </Fragment>
                     }
                     children={
@@ -578,7 +635,7 @@ class Setting extends Component {
                             <button className="btn more" onClick={() => this.openSidebar()}><i className="icon-more"></i></button>
                           </div>
                           <Switch>
-                            <Route path="/setting/profile" exact={true} render={({ match }) => {
+                            {/* <Route path="/setting/profile" exact={true} render={({ match }) => {
                               return (
                                 <Fragment>
                                   <Profile
@@ -594,11 +651,13 @@ class Setting extends Component {
                                   {dialog}
                                 </Fragment>
                               )
-                            }} />
+                            }} /> */}
                             <Route path="/setting/quotations" exact={true} render={() => {
                               return (
                                 <Fragment>
                                   <Quotations
+                                      regions={this.props.regions}
+                                      getCountry={this.props.getCountry}
                                       getPendingRequests={this.props.getPendingRequests}
                                       getCompletedRequests={this.props.getCompletedRequests}
                                       customer={this.props.customer}
@@ -609,7 +668,9 @@ class Setting extends Component {
                                       currentLanguage={this.props.currentLanguage}
                                       incrementQuantity={this.props.incrementQuantity}
                                       decrementQuantity={this.props.decrementQuantity}
-                                      token={this.props.token} />
+                                      token={this.props.token}
+                                      putCompletedRequestRead={this.props.putCompletedRequestRead}
+                                      isLoading={this.props.isLoading} />
                                 </Fragment>
                               )
                             }} />
@@ -627,6 +688,8 @@ class Setting extends Component {
                               return (
                                 <Fragment>
                                   <Addresses
+                                    currentLanguage={this.props.currentLanguage}
+                                    regions={this.props.regions}
                                     customer={this.props.customer}
                                     onShowEditDialog={this.handleDialog}
                                     onEditAddress={this.handleEditAddress}
@@ -637,21 +700,21 @@ class Setting extends Component {
                                 </Fragment>
                               )
                             }} />
-                            <Route path="/setting/orders/" exact={true} render={() => {
+                            {/* <Route path="/setting/orders/" exact={true} render={() => {
                               return (
                                 <Orders translate={this.props.translate} />
                               )
-                            }} />
-                            <Route path="/setting/orders/:orderId" exact={true} render={() => {
+                            }} /> */}
+                            {/* <Route path="/setting/orders/:orderId" exact={true} render={() => {
                               return (
                                 <Order translate={this.props.translate} checkout={this.props.checkout} />
                               )
-                            }} />
-                            <Route path="/setting/help_center" exact={true} render={() => {
+                            }} /> */}
+                            {/* <Route path="/setting/help_center" exact={true} render={() => {
                               return (
                                 <HelpCenter translate={this.props.translate} />
                               )
-                            }} />
+                            }} /> */}
                             <Route path="/setting/garage" exact={true} render={() => {
                               return (
                                 <Fragment>
@@ -676,7 +739,7 @@ class Setting extends Component {
                                   translate={this.props.translate} />
                               )
                             }} />
-                            <Route path="/setting/payment/" exact={true} render={() => {
+                            {/* <Route path="/setting/payment/" exact={true} render={() => {
                               return (
                                 <Fragment>
                                   <Payment
@@ -686,8 +749,8 @@ class Setting extends Component {
                                   {paymentDialog}
                                 </Fragment>
                               )
-                            }} />
-                            <PrivateRoute
+                            }} /> */}
+                            {/* <PrivateRoute
                             path="/setting/profile/phone"
                             component={EditInfo}
                             labels={["Confirmation number", "Phone number"]}
@@ -697,7 +760,7 @@ class Setting extends Component {
                             placeholder={["Confirmation number", "Your phone number"]}
                             renderField={this.renderField}
                             onSubmit={this.onEdit.bind(this, phone)}
-                            redirectTo="/setting/profile" />
+                            redirectTo="/setting/profile" /> */}
                           </Switch>
                         </div>
                         <Footer translate={translate} />
@@ -893,7 +956,8 @@ const mapStateToProps = (state) => {
     addresses: state.customer.detail.addresses,
     direction: state.customer.direction,
     requests: state.customer.quotations.pending,
-    requestCompleted: state.customer.quotations.completed
+    requestCompleted: state.customer.quotations.completed,
+    formValues: getFormValues('Setting')(state),
   }
 }
 
@@ -920,7 +984,9 @@ const mapDispatchToProps = (dispatch) => {
     getPendingRequests,
     getCompletedRequests,
     changeDefaultAddress,
-    changeDefaultVehicle
+    changeDefaultVehicle,
+    putCompletedRequestRead,
+    postCodeLogin
   }, dispatch)
 }
 

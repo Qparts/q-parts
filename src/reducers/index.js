@@ -21,5 +21,5 @@ export default combineReducers({
  manualForm: createCommonForm(MANUAL_FORM),
  form: formReducer,
  localize: localizeReducer,
- networkError
+ networkError,
 })

@@ -12,6 +12,7 @@ import { right } from '../../utils';
 import { getTranslatedObject, getTranslatedString } from '../../utils';
 import Radio from '../UI/Radio';
 import { connect } from 'react-redux';
+import Address from '../Addresses/Address/Address';
 
 class CheckoutShipping extends Component {
   constructor(props) {
@@ -106,30 +107,21 @@ class CheckoutShipping extends Component {
 
     let addressItem;
     if (addresses) {
-      addressItem = <div id="addresses-container">
-        <div className="addresses-box border rounded  row" style={{ marginRight: "0px" }}>
+      addressItem = <div className="info-list">
+        <ul className="row list-unstyled">
           {
-            this.props.addresses.map((address, idx) => {
-              return <div className="addresses-box_item col-6" key={idx}>
-                <Radio
-                  onChange={this.handleChange.bind(this, address, idx)}
-                  checked={address.defaultAddress}
-                  label={translate("setting.addressBook.defaultAddress")}
-                />
-                <div className="addresses-box_item-label">
-                  <p>{address.title}</p>
-                </div>
-                <div className="about-the-person">
-                  <p>{address.cityId} {address.line1} {address.line2}</p>
-                  <p>{address.mobile}</p>
-                </div>
-                <div className="addresses-footer">
-                  <Button disabled type="button" className="isDisabled btn btn-gray" text={translate("setting.addressBook.edit")} icon="icon-edit" isReverseOrder />
-                  <Button disabled type="button" className="isDisabled btn btn-delete" text={translate("setting.addressBook.delete")} icon="icon-trash" isReverseOrder />
-                </div>
-              </div>
+            this.props.addresses.map((address, addressIndex) => {
+              return <Address
+                key={addressIndex}
+                address={address}
+                addressIndex={addressIndex}
+                onClickDefaultAddress={this.handleChange.bind(this, address)}
+                translate={translate}
+                regions={this.props.regions}
+                currentLanguage={currentLanguage}
+              />
             })}
-        </div>
+        </ul>
       </div>
     } else {
       addressItem = <div></div>

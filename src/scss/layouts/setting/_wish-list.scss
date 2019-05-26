@@ -68,7 +68,7 @@
     ul{
       li{
         @include font-size(15px);
-        border-left: 1px solid $lighter-grey;
+        border-#{$left}: 1px solid $lighter-grey;
         line-height: 1;
         padding-#{$left}: 0.5rem;
         &:first-child{
@@ -124,6 +124,12 @@
           }
         }
       }
+    }
+  }
+  .btn-primary{
+    span{
+      margin-bottom: 0px;
+      font-size: 18px !important;
     }
   }
 }

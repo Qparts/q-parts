@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
@@ -109,8 +109,9 @@ class Checkout extends Component {
 			orderClass += " orderActive"
 			paymentClass += " paymentDone"
 		}
-		if(checkoutData.length === 0){
-			this.props.history.push('/');
+		
+		if (checkoutData.length === 0) {
+			return <Redirect to='/cart' />
 		}
 		return (
 			<section>

@@ -7,6 +7,7 @@ import globalTranslations from "../translations/translations.json";
 import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
 import { SET_DEFAULT_LANG } from './apiAction';
+import { initializeWsConnection, disconnectWs } from '../utils/socketio';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -23,6 +24,7 @@ export const ADD_ADDRESS_SUCCEEDED = 'ADD_ADDRESS_SUCCEEDED';
 export const EDIT_ADDRESS_SUCCEEDED = 'EDIT_ADDRESS_SUCCEEDED';
 export const DELETE_ADDRESS_SUCCEEDED = 'DELETE_ADDRESS_SUCCEEDED';
 export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
+export const POST_CODE_LOGIN_SUCCEEDED = 'POST_CODE_LOGIN_SUCCEEDED';
 export const LINK_SOCIAL_MEDIA_SUCCEEDED = 'LINK_SOCIAL_MEDIA_SUCCEEDED';
 export const SOCIAL_MEDIA_SIGNUP = 'SOCIAL_MEDIA_SIGNUP';
 export const EMAIL_SIGNUP = 'EMAIL_SIGNUP';
@@ -46,6 +48,7 @@ export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
+export const PUT_COMPLETED_REQUEST_READ = 'PUT_COMPLETED_REQUEST_READ';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
 export const MODAL_ADD_TO_CART = 'MODAL_ADD_TO_CART';
 export const SET_QUOTATION_ORDER = 'SET_QUOTATION_ORDER';
@@ -261,6 +264,7 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           payload: res.data,
         })
         dispatch(changeDefaultLanguage(defaultLanguage))
+        initializeWsConnection(dispatch)
       })
       .catch(error => {
         dispatch({
@@ -271,6 +275,25 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
             currentLanguage,
           }
         })
+      })
+  }
+}
+
+export const postCodeLogin = (email, code, currentLanguage) => {
+  return (dispatch) => {
+    let defaultLanguage = null;
+    return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/code-login`, {
+      email, code
+    })
+      .then(res => {
+        defaultLanguage = currentLanguage || res.data.customer.defaultLang;
+        dispatch({
+          type: POST_CODE_LOGIN_SUCCEEDED,
+          payload: res.data,
+        })
+        dispatch(changeDefaultLanguage(defaultLanguage))
+      }, error => {
+        handleNetworkError(dispatch, error);
       })
   }
 }
@@ -313,6 +336,7 @@ export const onLogout = () => {
         dispatch({
           type: LOGOUT
         })
+        disconnectWs();
       });
   }
 }
@@ -588,6 +612,20 @@ export const getCompletedRequests = (customerId) => {
   }
 }
 
+export const putCompletedRequestRead = (id, idx) => {
+  return (dispatch) => {
+    return axios.put(`${API_ROOT}${QUOTATION_SERVICE}/quotation/read`, { quotationId: id })
+      .then(() => {
+        dispatch({
+          type: PUT_COMPLETED_REQUEST_READ,
+          payload: { id, idx }
+        })
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
 export const setPasswordScore = (score) => {
   return {
     type: SET_PASSWORD_SCORE,
@@ -614,47 +652,47 @@ export const incrementQuantity = (item) => {
   return {
     type: INCREMENRT_QUOTATION_PRODUCT_QUANTITY,
     payload: item
-   }
+  }
 }
 
 export const decrementQuantity = (item) => {
   return {
     type: DECREMENRT_QUOTATION_PRODUCT_QUANTITY,
     payload: item
-   }
+  }
 }
 
 export const setLoading = (isLoading) => {
   return {
     type: SET_LOADING,
     payload: isLoading
-   }
+  }
 }
 
 export const setValidCredit = (isValidcreditCard) => {
   return {
     type: IS_VALID_CREDIT_CARD,
     payload: isValidcreditCard
-   }
+  }
 }
 
 export const setModalLogin = (modal) => {
   return {
     type: MODAL_LOGIN,
     payload: modal
-   }
+  }
 }
 
 export const setCheckLoginQuotationOrder = (check) => {
   return {
     type: CHECK_LOGIN_QUOTATION_ORDER,
     payload: check
-   }
+  }
 }
 
 export const setQuotationOrderInfo = (data) => {
   return {
     type: QUOTATION_ORDER_INOF,
     payload: data
-   }
+  }
 }

@@ -82,8 +82,6 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
     {
         path: "/setting",
         component: Setting,
-        isAuth: isAuth,
-        redirectTo: '/',
         defaultLang
     },
     {
@@ -131,10 +129,11 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
         direction,
         translate
     },
-    {
-        path: "/motor-oil",
-        component: MotorOil
-    },
+    // {
+    //     path: "/motor-oil",
+    //     component: MotorOil,
+    //     currentLanguage: defaultLang
+    // },
     {
         path: "/listing",
         component: SearchResult

@@ -109,3 +109,11 @@ button:disabled{
 textarea{
   border-width: 0 !important;
 }
+
+.list-inline-item {
+  &:not(:last-child) {
+    @include if-rtl {
+      margin-left: $list-inline-padding;
+    }
+  }
+}

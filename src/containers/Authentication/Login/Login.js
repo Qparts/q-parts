@@ -56,12 +56,12 @@ class Login extends Component {
         		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
         		vinImage = vinImage ? vinImage : false;
         		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
-        		vehicleYearId = customerVehicleId ? null : vehicleYearId;
+            vehicleYearId = customerVehicleId ? null : vehicleYearId;
 
         		const quotationItems = !_.isEmpty(quotationItemsTemp) ?
         			quotationItemsTemp.map(quotationCartItem => {
         				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
-        			}) : undefined;
+              }) : undefined;
 
               this.props.setCheckLoginQuotationOrder(false);
               postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
@@ -132,7 +132,7 @@ class Login extends Component {
   }
 
   render() {
-    const { translate, direction } = this.props;
+    const { translate, direction, submitting } = this.props;
     let login = (
       <form className="gray-input" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
         <Field
@@ -164,7 +164,7 @@ class Login extends Component {
             </Link>
           </div>
         </div>
-        <Button className="btn btn-primary" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
+        <Button disabled={submitting} className="btn btn-primary" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
       </form>
     )
     return (

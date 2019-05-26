@@ -63,7 +63,7 @@ export default class RenderProducts extends Component {
                 <Link to={`/products/${product.id}`} className="card">
                   <img onError={handleImageFallback} src={product.image} className="card-img-top" alt="no product" />
                   <div className="card-body">
-                    <h5 className="card-title">{product.desc}</h5>
+                    <h5 className="card-title">{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h5>
                     <ul className="list-inline product-info">
                       <li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
                       <li>{product.number}</li>

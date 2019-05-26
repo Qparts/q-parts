@@ -124,34 +124,66 @@ class CheckoutPayment extends Component {
           placeholder={translate("checkout.payment.creditCard.newCard.enterCardNo")}
           validate={[validations.required]} />
       </div>
-      <div className="card-date col-12">
-        <div className="col-4 months">
-          <Field
-            label={expirationDate}
-            name="ccMonth"
-            component={SelectInput}
-            options={months}
-            placeholder="MM"
-            validate={[validations.required]} />
+      <MediumScreen>
+        <div className="card-date col-12">
+          <div className="col-4 months">
+            <Field
+              label={expirationDate}
+              name="ccMonth"
+              component={SelectInput}
+              options={months}
+              placeholder="MM"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-4 years">
+            <Field
+              name="ccYear"
+              component={SelectInput}
+              options={years}
+              placeholder="YYYY"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-4">
+            <Field
+              label={securityCode}
+              name="ccCvc"
+              component={RenderField}
+              type="text"
+              placeholder="CVV"
+              validate={[validations.required]} />
+          </div>
         </div>
-        <div className="col-4 years">
-          <Field
-            name="ccYear"
-            component={SelectInput}
-            options={years}
-            placeholder="YYYY"
-            validate={[validations.required]} />
+      </MediumScreen>
+      <SmallScreen>
+        <div className="card-date-mobile col-12">
+          <div className="col-12 months">
+            <Field
+              label={expirationDate}
+              name="ccMonth"
+              component={SelectInput}
+              options={months}
+              placeholder="MM"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-12 years">
+            <Field
+              name="ccYear"
+              component={SelectInput}
+              options={years}
+              placeholder="YYYY"
+              validate={[validations.required]} />
+          </div>
+          <div className="col-12">
+            <Field
+              label={securityCode}
+              name="ccCvc"
+              component={RenderField}
+              type="text"
+              placeholder="CVV"
+              validate={[validations.required]} />
+          </div>
         </div>
-        <div className="col-4">
-          <Field
-            label={securityCode}
-            name="ccCvc"
-            component={RenderField}
-            type="text"
-            placeholder="CVV"
-            validate={[validations.required]} />
-        </div>
-      </div>
+      </SmallScreen>
       <div className="col-12 card-name">
         <Field
           label={nameCard}
@@ -258,7 +290,7 @@ class CheckoutPayment extends Component {
                             <div>
                               <div className="d-table product-options">
                                 <div className="d-table-row">
-                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.name")}</span></div>
                                   <div className="d-table-cell">{item.name}({item.nameAr})</div>
                                 </div>
                                 <div className="d-table-row">
@@ -270,7 +302,7 @@ class CheckoutPayment extends Component {
                                   <div className="d-table-cell">{item.iban}</div>
                                 </div>
                                 <div className="d-table-row">
-                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.owner")}</span></div>
+                                  <div className="d-table-cell"><span>{translate("checkout.payment.bankTransfer.holderName")}</span></div>
                                   <div className="d-table-cell">{item.owner}</div>
                                 </div>
                               </div>

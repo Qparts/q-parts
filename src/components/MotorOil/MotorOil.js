@@ -11,20 +11,27 @@ import { getTranslate } from 'react-localize-redux';
 
 import { swiperParams } from '../../constants';
 import Swiper from 'react-id-swiper';
-import { getBestSeller } from '../../utils/api';
+import { getBestSeller, getPopularOilBrands } from '../../utils/api';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
-import { handleImageFallback } from '../../utils';
+import { handleImageFallback, getTranslatedObject } from '../../utils';
 
 class MotorOil extends Component {
 	constructor(props) {
     super(props)
 
     this.state = {
-      bestSeller: []
+      bestSeller: [],
+			popularOilBrands: [],
     }
 
     this.loadBestSeller()
+		getPopularOilBrands()
+		.then(res =>{
+			this.setState({
+				popularOilBrands: res.data
+			})
+		})
   }
 
   loadBestSeller = () => {
@@ -37,7 +44,7 @@ class MotorOil extends Component {
       });
   }
 	render() {
-		const { translate, direction } = this.props;
+		const { translate, direction, currentLanguage } = this.props;
     const { bestSeller } = this.state
 		return (
 			<Fragment>
@@ -57,24 +64,13 @@ class MotorOil extends Component {
 						</header>
 						<section className="main-cat">
 							<div className="row">
-								<Link to="/listing?query=&page=1&category=9" className="col-2">
-										<img src="/img/motor-oil.png" alt="Oil" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=13" className="col-2">
-										<img src="/img/tyres.png" alt="Tires" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=28" className="col-2">
-										<img src="/img/tools.png" alt="Tools" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=9" className="col-2">
-										<img src="/img/motor-oil.png" alt="Oil" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=13" className="col-2">
-										<img src="/img/tyres.png" alt="Tires" />
-								</Link>
-								<Link to="/listing?query=&page=1&category=28" className="col-2">
-										<img src="/img/tools.png" alt="Tools" />
-								</Link>
+								{
+									this.state.popularOilBrands.map((product,idx) => (
+											<Link to={`/listing?query=&page=1&category=9&Brands=${product.id}`} className="col-2" key={idx}>
+													<img src={product.image} alt={getTranslatedObject(product, currentLanguage, 'name', 'nameAr')} />
+											</Link>
+									))
+								}
 							</div>
 						</section>
 					</div>
@@ -101,9 +97,9 @@ class MotorOil extends Component {
 			                      <Link to={`/products/${product.id}`} className="card">
 			                        <img onError={handleImageFallback} src={product.image} className="card-img-top" alt="no product" />
 			                        <div className="card-body">
-			                          <h5 className="card-title">{product.desc}</h5>
+			                          <h5 className="card-title">{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h5>
 			                          <ul className="list-inline product-info">
-			                            <li><strong>{product.brand.name}</strong></li>
+			                            <li><strong>{getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</strong></li>
 			                            <li>{product.number}</li>
 			                          </ul>
 			                          <div className="rating">

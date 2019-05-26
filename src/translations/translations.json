@@ -221,7 +221,11 @@
         "اختر سنة",
         "Select a year"
       ]
-    }
+    },
+    "requiredField": [
+      "المعلومات المطلوبه",
+      "Required input"
+    ]
   },
   "tires": {
     "title": [
@@ -467,6 +471,26 @@
     "batteries": [
       "بطاريات",
       "Batteries"
+    ],
+    "cleaning": [
+      "تنظيف هيك السيارة والعناية بها",
+      "Bodywork Cleaning and Care"
+    ],
+    "children": [
+      "مقعد للأطفال",
+      "Children Seats"
+    ],
+    "mats": [
+      "سجاد السيارة",
+      "car mats"
+    ],
+    "refrigerator": [
+      "ثلاجة",
+      "Refrigerator"
+    ],
+    "wires": [
+      "الأسلاك والكيبلات",
+      "Wires & Cables"
     ]
   },
   "quotationOrder": {
@@ -1691,7 +1715,7 @@
         " السيارة الافتراضية",
         "Default vehicle"
       ],
-      "garage": [
+      "mobileTitle": [
         "كراجك",
         "Your garage"
       ]
@@ -1804,6 +1828,18 @@
       "zipCode": [
         "الرمز البريدي",
         "zipCode"
+      ],
+      "shipping": [
+          "الشحن",
+          "Shipping"
+      ],
+      "address": [
+        "عنوان",
+        "Address"
+      ],
+      "mobileTitle": [
+        "عناوين",
+        "Addresses"
       ]
     },
     "order": {
@@ -1985,6 +2021,10 @@
     "item": [
       "القطع",
       "Item(s)"
+    ],
+    "empty": [
+      "عربة التسوق فارغة",
+      "Your cart is empty"
     ]
   },
   "orderSummary": {
@@ -2379,6 +2419,10 @@
     "totalPrice": [
       "المجموع",
       "Total Price"
+    ],
+    "comment": [
+      "التعليقات",
+      "Comments"
     ]
   },
   "renderFileInput": {
@@ -2968,13 +3012,13 @@
         ]
       }
     },
-    "returnPolicy": {
-      "return": [
-        "سياسة السترجاع",
+    "returnPolicy":{
+      "return":[
+        "سياسة الإسترجاع",
         "Q-Parts Return Policy"
       ],
-      "header": [
-        "10أيام للسترجاع",
+      "header":[
+        "10أيام للإسترجاع",
         "10 DAYS RETURNS"
       ],
       "status": [
@@ -2996,8 +3040,8 @@
           "ضمان الجودة",
           "QUALITY GUARANTEE"
         ],
-        "status": [
-          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن.",
+        "status":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كاملا، شاملا رسوم الشحن.",
           "If your purchase is found to be damaged, you will receive a full refund along with anyshipping fees paid."
         ]
       },
@@ -3006,58 +3050,58 @@
           "استرجاع المبالغ",
           "REFUNDS"
         ],
-        "statusA": [
-          "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن هذا البند يشمل القطع الصلية فقط كما هو موضح أعله.",
+        "statusA":[
+          "إذا قمت بشراء قطع أصلية واتضح انها لم تكن كذلك، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن. هذا البند يشمل القطع الصلية فقط كما هو موضح أعلاه.",
           "If your purchase is found to be damaged you will receive a full refund alongwith any shipping fees paid, as mentioned above."
         ],
-        "statusB": [
-          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن كما هو موضح أعله.",
+        "statusB":[
+          "إذا قمت بشراء قطعة واتضح أنها تالفة أو بحالة غير سليمة، سوف نقوم بإرجاع المبلغ كامل، شامل رسوم الشحن كما هو موضح أعلاه.",
           "If your purchase of genuine spare parts is found to be counterfeit, you willreceive a full refund along with any shipping fees paid (this applies to genuineparts only), as mentioned above."
         ],
-        "statusC": [
-          "في حال تم استلم قطعة مختلفة عن القطعة المطلوبة، لديك 10 أيام لرجاعها مع العلم أنه سوف يتم إرجاع رسوم الشحن كاملة.",
+        "statusC":[
+          "في حال تم استلم قطعة مختلفة عن القطعة المطلوبة، لديك 10 أيام لإرجاعها مع العلم أنه سوف يتم إرجاع رسوم الشحن كاملة.",
           "If your purchase doesn’t match your order, you have the right to return it in 10days, given that you will be refunded for the shipment fees."
         ],
-        "statusD": [
-          "في حال أن المنتج ليس تالفا أو غير أصلي ولكن ترغب في إرجاعه على أي حال، لن يتم استرداد ثمن المنتج ال بموافقة المورد في حال موافقة المورد على إرجاع القطعة سوف تقوم بتحمل 15% من قيمة المنتج من المهم ملحظة أن لن الشركة ل تتحمل تكاليف الشحن والرجاع في هذه الحالة.",
+        "statusD":[
+          "في حال أن المنتج ليس تالفا أو غير أصلي ولكن ترغب في إرجاعه على أي حال، لن يتم استرداد ثمن المنتج الا بموافقة المورد و في حال موافقة المورد على إرجاع القطعة سوف تقوم بتحمل 15% من قيمة المنتج. من المهم ملاحظة أن الشركة لن تتحمل تكاليف الشحن والإرجاع في هذه الحالة.",
           "If the product is neither damaged nor counterfeit, you will not be refundedunless the vendor approves the return. In case of the vendor’s approval, youwill be charged 15% of the product’s value. It’s worth mentioning that neithershipment refunds nor return shipment fees will be provided in this case."
         ],
-        "statusE": [
-          "الطلبات الخاصة لقطع من خارج المملكة غير قابلة للسترداد ال في حال كان المنتج تالف أو غير أصلي.",
+        "statusE":[
+          "الطلبات الخاصة للقطع من خارج المملكة غير قابلة للإسترداد الا في حال كان المنتج تالف أو غير مطابق.",
           "Unless the product is damaged or counterfeit, products imported fromoverseas (through special request) are non-returnable."
         ],
-        "statusF": [
-          "المنتجات اللكترونية غير قابلة للسترداد.",
+        "statusF":[
+          "المنتجات الإلكترونية غير قابلة للإسترداد.",
           "Electronic products are non-returnable."
         ],
-        "statusG": [
-          "حتى يكون المنتج قابل للسترداد، يجب أن يكون غير مستخدم وبنفس الحالة التي تم استلمه بها أيضا، يجب أن يكون المنتج في علبته الصلية مرفقا مع جميع الملصقات والباركود التي وصلت مع المنتج.",
+        "statusG":[
+          "حتى يكون المنتج قابل للسترداد، يجب أن يكون غير مستخدم وبنفس الحالة التي تم استلامه بها أيضا، يجب أن يكون المنتج في علبته الصلية مرفقا مع جميع الملصقات والباركود التي وصلت مع المنتج.",
           "To be eligible for a return, your item must be unused and in the samecondition that you received it. It must also be in the original packaging intactwith all labels and barcode on it."
         ]
       },
-      "returnProcess": {
-        "header": [
-          "عمليةالسترجاع",
+      "returnProcess":{
+        "header":[
+          "عمليةالإسترجاع",
           "RETURN PROCESS"
         ],
         "statusA": [
           "قم بالتواصل مع قسم خدمة العملء على www.q.parts.",
           "Contact customer service department at www.q.parts."
         ],
-        "statusB": [
-          "سوف نقوم بإرسال بوليصة الشحن إليك لتمام عملية السترجاع.",
+        "statusB":[
+          "سوف نقوم بإرسال بوليصة الشحن إليك لإتمام عملية الإسترجاع.",
           "We will send you an Air Waybill in order to return your product."
         ],
-        "statusD": [
+        "statusC":[
           "قم بطباعة بوليصة الشحن.",
           "Print the Air Waybill."
         ],
-        "statusE": [
-          "قم بالتوجه إلى أقرب فرع من فروع شركات الشحن وقم بتسليم بوليصة الشحن ملحظة في حال عدم تسليمك لبوليصة الشحن سوف تقوم بتحمل أي تكاليف إضافية.",
+        "statusD":[
+          "قم بالتوجه إلى أقرب فرع من فروع شركات الشحن وقم بتسليم بوليصة الشحن. ملاحظة: في حال عدم تسليمك لبوليصة الشحن سوف تقوم بتحمل أي تكاليف إضافية.",
           "Head to the closest courier service branch and submit the Air Waybill and theproduct to be returned (note: in case you don’t submit the Air Waybill, you willbe responsible for any extra charges)."
         ],
-        "statusF": [
-          "حال وصول المنتج إلى المستودع سوف نقوم بإرجاع المبلغ خلل 6 أيام عمل.",
+        "statusE":[
+          "حال وصول المنتج إلى المستودع سوف نقوم بإرجاع المبلغ خلال 6 أيام عمل.",
           "After the product is returned to the warehouse, you will be refunded within 6business days."
         ]
       }
@@ -3158,5 +3202,19 @@
         ]
       }
     }
+  },
+  "accessories": {
+    "popularBrands": [
+      "اكسسوارات الماركات الشعبية",
+      "Popular  Accessories Brands"
+    ],
+    "accessBestSeller": [
+      "اكسسوارات الأكثر مبيعا",
+      "Accessories Bestseller"
+    ],
+    "category": [
+      "فئات الملحقات",
+      "Accessories Categories"
+    ]
   }
 }

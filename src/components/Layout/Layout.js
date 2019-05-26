@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 
-import Search from "../Search/Search";
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from "./Header/Header.js";
@@ -114,7 +113,8 @@ class Layout extends Component {
           getCountriesOnly={getCountriesOnly}
           selectCountry={selectCountry}
           direction={direction}
-          cart={cart} />
+          cart={cart} 
+          quotations={this.props.quotations}/>
         {dialog}
         {/*<div className="cd-main-content checkout">*/}
         <div className="cd-main-content">

@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
-import { LargeScreen, DownLargeScreen } from '../../../components/Device';
-import Button from '../../UI/Button';
+import React, { Component } from 'react';
+import { LargeScreen } from '../../../components/Device';
+import Link from '../../UI/Link';
 
 class SectionHeader extends Component{
   render(){
@@ -15,7 +15,7 @@ class SectionHeader extends Component{
             </header>
             <LargeScreen>
               <div className="sign-out col-auto">
-                <Button type="submit" className="btn" text={translate("setting.signout")} icon="icon-sign-out"/>
+                <Link to="/logout" className="btn" text={translate("setting.signout")} icon="icon-sign-out"/>
               </div>
             </LargeScreen>
           </div>

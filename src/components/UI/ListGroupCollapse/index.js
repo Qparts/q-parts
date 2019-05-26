@@ -3,12 +3,10 @@ import { Link, withRouter } from 'react-router-dom';
 import { PENDING, INCREMENT, DECREMENT, RADIX } from '../../../constants';
 import Button from '../../UI/Button';
 import { handleImageFallback, getTranslatedObject, isAuth } from '../../../utils';
-import { CustomScreen, UpSmallScreen, DownLargeScreen } from '../../Device';
 
 //dialog
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from '../../../containers/Product/AddProductPopup/AddProduct';
-import Title from '../Title';
 
 export class ListGroupCollapse extends Component {
     constructor(props) {
@@ -51,7 +49,7 @@ export class ListGroupCollapse extends Component {
         e.preventDefault();
 
 
-        const { incrementQuantity, decrementQuantity, requestNumber } = this.props;
+        const { incrementQuantity, decrementQuantity, requestNumber, completedIndex, quotationItemIndex } = this.props;
 
         const max = 20;
         const min = 1;
@@ -59,10 +57,10 @@ export class ListGroupCollapse extends Component {
 
         if (action === DECREMENT) {
             const decQuantity = newQuanValue !== min ? newQuanValue -= 1 : newQuanValue;
-            decrementQuantity({ quotationItem, decQuantity, requestNumber });
+            decrementQuantity({ quotationItem, decQuantity, requestNumber, completedIndex, quotationItemIndex });
         } else {
             const incQuantity = newQuanValue !== max ? newQuanValue += 1 : newQuanValue;
-            incrementQuantity({ quotationItem, incQuantity, requestNumber });
+            incrementQuantity({ quotationItem, incQuantity, requestNumber, completedIndex, quotationItemIndex });
         }
     }
 
@@ -91,7 +89,7 @@ export class ListGroupCollapse extends Component {
         const dialog = (
             <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>
                 <ModalHeader toggle={this.togglePopup}>
-                    <p><i className="icon-checked"></i>1 Item</p> Added To Cart
+                    <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
                 </ModalHeader>
                 <ModalBody>
                     <AddProduct
@@ -127,7 +125,7 @@ export class ListGroupCollapse extends Component {
                                 </div>
                                 <div className="col-lg-auto price">
                                     <label>{translate("general.price")}</label>
-                                    <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                    <p>{quotationItem.products.salesPrice.toFixed(2)} <span>{translate("general.currency")}</span></p>
                                 </div>
                             </div>
                             <span className="seperator"></span>
@@ -137,7 +135,7 @@ export class ListGroupCollapse extends Component {
                                     {this.renderNumberPicker(quotationItem)}
                                     <div className="price">
                                         <label>{translate("quotationRequest.totalPrice")}</label>
-                                        <p>{quotationItem.products.salesPrice} <span>{translate("general.currency")}</span></p>
+                                        <p>{(quotationItem.products.salesPrice * quotationItem.quantity).toFixed(2)} <span>{translate("general.currency")}</span></p>
                                     </div>
                                 </div>
                                 <div className="col-lg-auto add-cart">

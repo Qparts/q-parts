@@ -49,3 +49,15 @@ export const getFormattedSelect = (array, defaultLang) => {
     }
   });
 }
+
+export const getRegion = (regions, id) => {
+  const selectedRegion = regions.find(region => {
+    return region.cities.find(city => city.id === id);
+  });
+
+  return selectedRegion;
+}
+
+export const getCity = (cities, id) => {
+  return cities.find(city => city.id === id);
+}
