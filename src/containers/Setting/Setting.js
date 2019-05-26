@@ -12,7 +12,8 @@ import {
   confirmUserAddress, socialMediaButton, addAddress, clearAddress,
   deleteVehicle, moveWishlistToCart, deleteWishlist, getPendingRequests,
   getCompletedRequests, changeDefaultAddress, changeDefaultVehicle,
-  incrementQuantity, decrementQuantity, putCompletedRequestRead, postCodeLogin
+  getClosedRequests,incrementQuantity, decrementQuantity, putCompletedRequestRead, 
+  postCodeLogin
 } from '../../actions/customerAction';
 import { getCountry, findCity, getRegions } from '../../actions/apiAction';
 import { addToCart } from '../../actions/cartAction';
@@ -153,10 +154,11 @@ class Setting extends Component {
   }
 
   onSaveNewAddress = values => {
-    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+    let { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
     const latitude = city.latitude;
     const longitude = city.longitude;
-    const cityId = city.id;
+	const cityId = city.id;
+	mobile = `${966}${mobile}`;
     this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
       .then(() => {
         this.onHide();
@@ -366,7 +368,7 @@ class Setting extends Component {
     if (this.state.dialogType === addresses_popup) {
       addressDialog = <Modal dir={direction} contentClassName="container-fluid" className="setting-popup" isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup} className="have-icon">
-              <p><i className="icon-add-location"></i>Shipping</p> Address
+              <p><i className="icon-add-location"></i></p>{translate("setting.addressBook.shippingHeader")}
         </ModalHeader>
         <ModalBody>
           <span className="sub-header">{translate("setting.addressBook.shippingItem")}</span>
@@ -512,6 +514,7 @@ class Setting extends Component {
                                 regions={this.props.regions}
                                 getCountry={this.props.getCountry}
                                 getPendingRequests={this.props.getPendingRequests}
+                                getClosedRequests={this.props.getClosedRequests}
                                 getCompletedRequests={this.props.getCompletedRequests}
                                 customer={this.props.customer}
                                 quotations={this.props.quotations}
@@ -659,6 +662,7 @@ class Setting extends Component {
                                       regions={this.props.regions}
                                       getCountry={this.props.getCountry}
                                       getPendingRequests={this.props.getPendingRequests}
+                                      getClosedRequests={this.props.getClosedRequests}
                                       getCompletedRequests={this.props.getCompletedRequests}
                                       customer={this.props.customer}
                                       quotations={this.props.quotations}
@@ -981,7 +985,8 @@ const mapDispatchToProps = (dispatch) => {
     deleteWishlist,
     incrementQuantity,
     decrementQuantity,
-    getPendingRequests,
+	getPendingRequests,
+	getClosedRequests,
     getCompletedRequests,
     changeDefaultAddress,
     changeDefaultVehicle,

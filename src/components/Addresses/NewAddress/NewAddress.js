@@ -201,7 +201,7 @@ class Address extends Component {
           ) :
               <form onSubmit={handleSubmit} className="one-col gray-input">
                 <div className="input-groub">
-                  <div className="form-row">
+                  {/* <div className="form-row">
                     <div className="col">
                       <div className="has-float-label">
                         <Field
@@ -214,7 +214,7 @@ class Address extends Component {
                           />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="has-float-label">
                     <Field
                       hasFloatLabel
@@ -247,7 +247,7 @@ class Address extends Component {
                           label={translate("form.address.phoneNumber")}
                           component={RenderField}
                           placeholder={translate("form.address.phoneNumber")}
-                          validate={[validations.required]}
+						  validate={[validations.required, validations.mobileCodeNumber]}
                           />
                       </div>
                     </div>
@@ -259,10 +259,9 @@ class Address extends Component {
                       label={translate("form.address.zipCode")}
                       component={RenderField}
                       placeholder={translate("form.address.zipCode")}
-                      validate={[validations.required]}
                       />
                   </div>
-                  <div className="has-float-label textarea">
+                  {/* <div className="has-float-label textarea">
                     <Field
                       className="form-control"
                       name="shippingNote"
@@ -270,86 +269,9 @@ class Address extends Component {
                       placeholder={translate("form.address.shippingNote")}
                       />
                     <label>{translate("form.address.shippingNote")}</label>
-                  </div>
+                  </div> */}
                 </div>
                 {renderButtons}
-
-                {/*<div className="row no-gutters">
-                  <div className="col-12 title-address">
-                    <Field
-                      label={translate("setting.addressBook.title")}
-                      name="title"
-                      component={RenderField}
-                      type="text"
-                      placeholder={translate("setting.addressBook.title")}
-                      hasFloatLabel
-                      validate={[validations.required]} />
-                  </div>
-                   <div className="col-12 google-map">
-                    <Link to="#" onClick={onShowGoogleMap}>
-                      <img className="main-img" alt="user" src="/img/google-map.svg" />
-                      <p>{translate("form.address.selectAddress")}</p>
-                    </Link>
-                  </div>
-                  <div className="col-md-12 address-title">
-                    <Field
-                      label={translate("setting.addressBook.addressLine1")}
-                      name="line1"
-                      component={RenderField}
-                      type="text"
-                      placeholder={translate("setting.addressBook.addressLine1")}
-                      hasFloatLabel
-                      validate={[validations.required]} />
-                  </div>
-                  <div className="col-12 address-title">
-                    <Field
-                      label={translate("setting.addressBook.addressLine2")}
-                      name="line2"
-                      component={RenderField}
-                      type="text"
-                      placeholder={translate("setting.addressBook.addressLine2")}
-                      hasFloatLabel />
-                  </div>
-                  {renderCityRegion}
-                  <div className="phone-info col-12">
-                    <div className="row">
-                      <div className="phone-number col-12">
-                        <div className="first">
-                          <input
-                            className="form-control"
-                            value={"+966"}
-                            type="text"
-                            readOnly />
-                        </div>
-                        <Field
-                          name="mobile"
-                          component={RenderField}
-                          placeholder={translate("form.address.phoneNumber")}
-                          validate={[validations.required]} />
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="phone-info col-12">
-                    <div className="row">
-                      <div className="zipCode col-12">
-                        <Field
-                          name="zipCode"
-                          component={RenderField}
-                          placeholder={translate("form.address.zipCode")}
-                          validate={[validations.required]} />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12 shipping-style">
-                    <Field
-                      name="shipping"
-                      component={RenderField}
-                      type="text"
-                      placeholder={translate("form.address.shippingNote")} />
-                  </div>
-                </div>
-                {renderButtons}*/}
               </form>
         }
       </Fragment>

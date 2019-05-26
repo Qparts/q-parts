@@ -161,7 +161,7 @@ class HomeDetails extends Component {
 						</Link>
 					</div>*/}
 				</section>
-				<section className="main-parts container-fluid">
+				 <section className="main-parts container-fluid">
 					<header className="row">
 						<h1 className="col">{translate("quotationOrder.mustHaves")}</h1>
 					</header>

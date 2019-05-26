@@ -8,6 +8,7 @@ import { handleNetworkError } from '../utils';
 import { ADD_TO_CART } from './cartAction';
 import { SET_DEFAULT_LANG } from './apiAction';
 import { initializeWsConnection, disconnectWs } from '../utils/socketio';
+import { getSubscription } from '../config/notification';
 
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const LOAD_CURRENT_USER_DEATILS_SUCCEEDED = 'LOAD_CURRENT_USER_DEATILS_SUCCEEDED';
@@ -47,6 +48,7 @@ export const CHANGE_DEFAULT_DIRECTION = 'CHANGE_DEFAULT_DIRECTION';
 export const COMPLETE_SHIPPING = 'COMPLETE_Shipping';
 export const COMPLETE_PAYMENT = 'COMPLETE_Payment';
 export const GET_PENDING_REQUESTS = 'GET_PENDING_REQUESTS';
+export const GET_CLOSED_REQUESTS = 'GET_CLOSED_REQUESTS';
 export const GET_COMPLETED_REQUESTS = 'GET_COMPLETED_REQUESTS';
 export const PUT_COMPLETED_REQUEST_READ = 'PUT_COMPLETED_REQUEST_READ';
 export const SET_PASSWORD_SCORE = 'SET_PASSWORD_SCORE';
@@ -149,7 +151,11 @@ export const onAccountVerify = (query) => {
         dispatch({
           type: ACCOUNT_VERIFIED_SUCCEDED,
           payload: res.data
-        })
+		})
+		getSubscription()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
       });
@@ -263,8 +269,11 @@ export const login = (email, password, serverErrorField, currentLanguage) => {
           type: LOGIN_SUCCEEDED,
           payload: res.data,
         })
-        dispatch(changeDefaultLanguage(defaultLanguage))
-        initializeWsConnection(dispatch)
+		dispatch(changeDefaultLanguage(defaultLanguage))
+		getSubscription()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       })
       .catch(error => {
         dispatch({
@@ -291,7 +300,11 @@ export const postCodeLogin = (email, code, currentLanguage) => {
           type: POST_CODE_LOGIN_SUCCEEDED,
           payload: res.data,
         })
-        dispatch(changeDefaultLanguage(defaultLanguage))
+		dispatch(changeDefaultLanguage(defaultLanguage))
+		getSubscription()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
       })
@@ -308,7 +321,11 @@ export const onSubmitSignup = (customer, currentLanguage) => {
         dispatch({
           type: REGISTER_CUSTOMER_SUCCEEDED,
           payload: res.data
-        })
+		})
+		getSubscription()
+		.then(() => {
+			initializeWsConnection(dispatch)
+		})
       }, error => {
         handleNetworkError(dispatch, error);
         dispatch({
@@ -331,11 +348,9 @@ export const emailSignup = () => {
 
 export const onLogout = () => {
   return (dispatch) => {
+		dispatch({ type: LOGOUT })
     return axios.get(`${API_ROOT}${CUSTOMER_SERVICE}/logout`)
-      .then(res => {
-        dispatch({
-          type: LOGOUT
-        })
+      .then(() => {
         disconnectWs();
       });
   }
@@ -587,6 +602,22 @@ export const getPendingRequests = (customerId) => {
         dispatch(
           {
             type: GET_PENDING_REQUESTS,
+            payload: res.data
+          }
+        )
+      }, error => {
+        handleNetworkError(dispatch, error)
+      });
+  }
+}
+
+export const getClosedRequests = (customerId) => {
+  return (dispatch) => {
+    return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/quotations/customer/${customerId}/closed`)
+      .then((res) => {
+        dispatch(
+          {
+            type: GET_CLOSED_REQUESTS,
             payload: res.data
           }
         )

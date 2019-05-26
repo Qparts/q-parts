@@ -8645,8 +8645,8 @@ textarea {
   margin-top: -12px;
   top: 50%;
   line-height: 25px;
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 .has-float-label textarea {
   border-radius: 0;
@@ -8659,8 +8659,8 @@ textarea {
   margin-top: -12px;
   top: 25px;
   line-height: 25px;
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 /*MODULES  - Individual site components */
@@ -10552,8 +10552,8 @@ body {
   top: 50%;
   opacity: 0.7;
   filter: alpha(opacity=70);
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -10580,14 +10580,14 @@ body {
 }
 .float-label .select-input .select__single-value {
   font-weight: 400;
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   margin-top: 17px;
 }
 .float-label .select-input .select__multi-value__label {
   padding: 0px 10px;
-  font-size: 16px;
-  font-size: 1rem;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 .float-label .select-input .select__multi-value {
   margin-top: 18px;
@@ -14286,8 +14286,8 @@ ul.cd-secondary-nav .go-back button::after {
 .dashboard .media-body {
   padding-right: 10px;
   font-weight: 300;
-  font-size: 40px;
-  font-size: 2.5rem;
+  font-size: 20px;
+  font-size: 1.25rem;
   line-height: 1;
 }
 .dashboard .media-body label,
@@ -14314,8 +14314,8 @@ ul.cd-secondary-nav .go-back button::after {
 .setting-tabs-link a {
   display: block;
   padding: 25px 15px;
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 16px;
+  font-size: 1rem;
   line-height: 1;
 }
 .setting-tabs-link a:hover, .setting-tabs-link a.active {
@@ -14618,6 +14618,31 @@ ul.cd-secondary-nav .go-back button::after {
   .requests-main .request-details .vehicle-info li.ship-info, .requests-main .request-comments .vehicle-info li.ship-info {
     padding-top: 0.5rem;
   }
+}
+@media only screen and (max-width: 767px) {
+  .requests-main .request-details .vehicle-info li.add-all-to-cart, .requests-main .request-comments .vehicle-info li.add-all-to-cart {
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .requests-main .request-details .vehicle-info li.add-all-to-cart, .requests-main .request-comments .vehicle-info li.add-all-to-cart {
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+}
+.requests-main .request-details .vehicle-info li.add-all-to-cart .btn-primary, .requests-main .request-comments .vehicle-info li.add-all-to-cart .btn-primary, .requests-main .request-details .vehicle-info li.add-all-to-cart .signin-list li:first-child a, .requests-main .request-comments .vehicle-info li.add-all-to-cart .signin-list li:first-child a, .signin-list li:first-child .requests-main .request-details .vehicle-info li.add-all-to-cart a, .signin-list li:first-child .requests-main .request-comments .vehicle-info li.add-all-to-cart a {
+  font-size: 15px;
+  font-size: 0.9375rem;
+  display: flex;
+  align-items: center;
+}
+.requests-main .request-details .vehicle-info li.add-all-to-cart .btn-primary i, .requests-main .request-comments .vehicle-info li.add-all-to-cart .btn-primary i, .requests-main .request-details .vehicle-info li.add-all-to-cart .signin-list li:first-child a i, .requests-main .request-comments .vehicle-info li.add-all-to-cart .signin-list li:first-child a i, .signin-list li:first-child .requests-main .request-details .vehicle-info li.add-all-to-cart a i, .signin-list li:first-child .requests-main .request-comments .vehicle-info li.add-all-to-cart a i {
+  font-size: 23px;
+  font-size: 1.4375rem;
+  height: 23px;
+  margin-right: 0;
+  margin-left: 10px;
 }
 .requests-main .request-details .icon-vehicle, .requests-main .request-comments .icon-vehicle {
   font-size: 20px;
@@ -14937,8 +14962,8 @@ ul.cd-secondary-nav .go-back button::after {
 }
 .info-list > ul li p {
   margin-bottom: 10px;
-  font-size: 18px;
-  font-size: 1.125rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1;
 }
 .info-list > ul li h6 {
@@ -14949,8 +14974,8 @@ ul.cd-secondary-nav .go-back button::after {
   margin-bottom: 15px;
 }
 .info-list > ul li address p {
-  font-size: 15px;
-  font-size: 0.9375rem;
+  font-size: 14px;
+  font-size: 0.875rem;
 }
 .info-list > ul li .actions {
   padding-top: 10px;
@@ -16106,6 +16131,31 @@ form {
   border-bottom-left-radius: 0;
   margin-bottom: 60px;
   padding-bottom: 0;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info {
+  padding: 15px !important;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info .phone-number {
+  display: flex;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info .phone-number .first {
+  margin-left: 5px;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info .phone-number .first .form-control {
+  border-radius: 0 20px 20px 0 !important;
+  width: 70px;
+  text-align: center;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info .phone-number .RenderField {
+  width: 100%;
+}
+.custom-order-form .sec-shadow .ship-info .phone-info .phone-number div {
+  margin-top: 0px;
+}
+@media (min-width: 992px) {
+  .custom-order-form .sec-shadow .city-filed {
+    padding-left: 15px !important;
+  }
 }
 .custom-order-form .form-control,
 .custom-order-form .part-actions {

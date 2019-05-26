@@ -13,7 +13,7 @@ export class PendingRequest extends Component {
         super(props)
 
         this.state = {
-            shippingInfo: getRegion(props.regions, props.pending.cityId),
+            shippingInfo: getRegion(props.regions, props.list.cityId),
             region: null,
             country: null,
             city: null
@@ -43,7 +43,7 @@ export class PendingRequest extends Component {
     }
 
     getCity = () => {
-        let city = getCity(this.state.shippingInfo.cities, this.props.pending.cityId);
+        let city = getCity(this.state.shippingInfo.cities, this.props.list.cityId);
 
         this.setState({
             city: getTranslatedObject(city, this.props.currentLanguage, 'name', 'nameAr')
@@ -57,52 +57,52 @@ export class PendingRequest extends Component {
     }
 
     render() {
-        const { translate, currentLanguage, pending, vehicles } = this.props
+        const { translate, currentLanguage, list, vehicles } = this.props
         const { country, city, region } = this.state;
-        const created = moment(pending.created).format('MMM Do');
+        const created = moment(list.created).format('MMM Do');
         let ids = [];
         let hasShippingInfo = (country && region && city);
 
-        pending.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
+        list.quotationItems.forEach(quotationItem => ids.push(quotationItem.id));
 
-        return <li key={pending.id}>
+        return <li key={list.id}>
             <Link
                 to="#"
                 className="collapsed"
                 data-toggle="collapse"
-                data-target={`.${pending.id}`}
+                data-target={`.${list.id}`}
                 aria-expanded="false"
                 aria-controls={ids.join(' ')}>
                 <LargeScreen>
                     <div className="col-lg-auto">
                         <label>{translate("quotationRequest.requestNo")}</label>
-                        <p>#{pending.id}</p>
+                        <p>#{list.id}</p>
                     </div>
                 </LargeScreen>
                 <div className="col-lg">
                     {
-                        getVehicleInfo(vehicles, pending.customerVehicleId, currentLanguage) && (
-                            <p>{getVehicleInfo(vehicles, pending.customerVehicleId, currentLanguage)}</p>
+                        getVehicleInfo(vehicles, list.customerVehicleId, currentLanguage) && (
+                            <p>{getVehicleInfo(vehicles, list.customerVehicleId, currentLanguage)}</p>
                         )
                     }
                     <span className="details-toggle"><i className="icon-"></i></span>
                 </div>
                 <div className="col-lg-auto r-info">
                     <p className="date"><span>{translate("quotationRequest.sent")}</span> {created}</p>
-                    <p>{translate("quotationRequest.itemsQuantity")}:  {pending.quotationItems.length}</p>
+                    <p>{translate("quotationRequest.itemsQuantity")}:  {list.quotationItems.length}</p>
                 </div>
             </Link>
-            <div className={`collapse ${pending.id}`} id={pending.id}>
+            <div className={`collapse ${list.id}`} id={list.id}>
                 <article className="request-details" >
                     <ul className="list-inline vehicle-info">
                         {
-                            getVehicleVin(vehicles, pending.customerVehicleId) && (
-                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, pending.customerVehicleId)})</li>
+                            getVehicleVin(vehicles, list.customerVehicleId) && (
+                                <li><i className="icon-vehicle"></i> {translate("general.vin")}: ({getVehicleVin(vehicles, list.customerVehicleId)})</li>
                             )
                         }
                         <DownLargeScreen>
                             <li className="r-id-small">
-                                <label>{translate("quotationRequest.requestNo")}</label> #{pending.id}
+                                <label>{translate("quotationRequest.requestNo")}</label> #{list.id}
                             </li>
                         </DownLargeScreen>
                         {
@@ -116,9 +116,9 @@ export class PendingRequest extends Component {
                                 <div className="d-table-cell">{translate("quotationRequest.quantity")}</div>
                             </li>
                             {
-                                pending.quotationItems.map(quotationItem => {
+                                list.quotationItems.map(quotationItem => {
                                     return <ListGroupCollapse
-                                        requestNumber={pending.id}
+                                        requestNumber={list.id}
                                         key={quotationItem.id}
                                         type={PENDING}
                                         quotationItem={quotationItem}
@@ -130,7 +130,7 @@ export class PendingRequest extends Component {
                     </div>
                 </article>
                 {
-                  pending.comments.length !== 0 &&
+                  list.comments.length !== 0 &&
                   <article className="request-comments">
                       <div className="parts-list">
                           <ul className="d-table list-unstyled">
@@ -138,7 +138,7 @@ export class PendingRequest extends Component {
                                   <div className="d-table-cell">{translate("quotationRequest.comment")}</div>
                               </li>
                               {
-                                pending.comments.map((comment,idx) =>(
+                                list.comments.map((comment,idx) =>(
                                   <li className="d-table-row" key={idx}>
                                       <div className="d-table-cell">{comment.text}</div>
                                   </li>

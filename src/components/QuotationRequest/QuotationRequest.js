@@ -76,7 +76,7 @@ class QuotationRequest extends Component {
 			})
 		};
 
-		if((submitFailed !== prevProps.submitFailed) && submitFailed) {
+		if ((submitFailed !== prevProps.submitFailed) && submitFailed) {
 			renderTopIfError(submitFailed);
 		}
 	}
@@ -87,7 +87,7 @@ class QuotationRequest extends Component {
 			loading: true
 		});
 		let {
-			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }
+			make: { id: makeId }, year: { id: vehicleYearId }, garage, vin, vinImage, quotationItems: quotationItemsTemp, city: { id: cityId }, mobile
 		} = values;
 		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
@@ -100,7 +100,7 @@ class QuotationRequest extends Component {
 			quotationItemsTemp.map(quotationCartItem => {
 				return { ...quotationCartItem, hasImage: quotationCartItem.image ? true : false }
 			}) : undefined;
-
+		mobile = `${966}${mobile}`;
 		if (!isAuth(this.props.token)) {
 			this.props.setCheckLoginQuotationOrder(true);
 			this.setState({
@@ -109,7 +109,7 @@ class QuotationRequest extends Component {
 			this.props.setQuotationOrderInfo(values)
 			this.togglePopup();
 		} else {
-			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage })
+			postQuotation({ cityId, makeId, customerVehicleId, quotationItems, vehicleYearId, vin, imageAttached, vinImage, mobile })
 				.then(res => {
 					this.props.setQuotationOrder(false);
 					return this.props.history.push(`/quotation-order/confirmation?quotationId=${res.data.quotationId}`);
@@ -309,7 +309,6 @@ class QuotationRequest extends Component {
 				</h6>
 			</div>
 		);
-
 		if (this.state.loading)
 			return (
 				<div style={styles.loading}>
@@ -334,11 +333,13 @@ class QuotationRequest extends Component {
 						<div className="row">
 							<header className="col">
 								<h1>{translate("quotationOrder.title")}</h1>
-								<p>{translate("quotationOrder.title")} {translate("quotationOrder.request")}</p>
+								<p>{translate("quotationOrder.request")}</p>
 							</header>
 						</div>
 					</div>
 				</section>
+
+
 				<section className="steps-title">
 					<div className="total-bg gray-bg"></div>
 					<div className="container-fluid">
@@ -359,11 +360,12 @@ class QuotationRequest extends Component {
 						</div>
 					</div>
 				</section>
-				<section className="step-active">
+
+				{/* <section className="step-active">
 					<div className="container-fluid">
 						<OrderSteps grey="-gs" translate={translate} direction={direction} />
 					</div>
-				</section>
+				</section> */}
 				<section className="custom-order-form container-fluid">
 					<div className="title-container">
 						<div className="step-num">
@@ -503,7 +505,7 @@ class QuotationRequest extends Component {
 										validate={[validations.required]}
 									/>
 								</div>
-								<div className="col-md float-label">
+								<div className="col-md float-label city-filed">
 									<Field
 										label={translate("general.city")}
 										name="city"
@@ -513,6 +515,27 @@ class QuotationRequest extends Component {
 										formatGroupLabel={formatCityLabel}
 										validate={[validations.required]}
 									/>
+								</div>
+								<div className="phone-info col-12">
+									<div className="row">
+										<div className="phone-number col-12">
+											<div className="first">
+												<input
+													className="form-control"
+													value={"+966"}
+													type="text"
+													disabled
+													readOnly />
+											</div>
+											<Field
+												hasFloatLabel
+												name="mobile"
+												component={RenderField}
+												label={translate("form.address.phoneNumber")}
+												errorMessage={`${translate("general.validationMessages.mobile")}`}
+												validate={[validations.required, validations.mobileCodeNumber]} />
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
