@@ -20,5 +20,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-/public/**/*.map
-public/css/main-ar/main-ar.css
+/public/css/**/*.map
+/public/css/**/main.css
+/public/css/**/main-ar.css
