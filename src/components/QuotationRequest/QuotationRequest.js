@@ -55,6 +55,7 @@ class QuotationRequest extends Component {
 
 		this.props.setCheckLoginQuotationOrder(false);
 		this.props.setQuotationOrderInfo([]);
+		this.fillVehicleInfo();
 
 	}
 
@@ -79,6 +80,17 @@ class QuotationRequest extends Component {
 		if ((submitFailed !== prevProps.submitFailed) && submitFailed) {
 			renderTopIfError(submitFailed);
 		}
+	}
+
+	fillVehicleInfo = () => {
+		const { initialValues } = this.props;
+		const make = _.has(initialValues, 'make') ? initialValues.make : null;
+		const model = _.has(initialValues, 'model') ? initialValues.model : null;
+		const year = _.has(initialValues, 'year') ? initialValues.year : null;
+		
+		this.props.changeFieldValue('QuotationRequest', 'make', make);
+		this.props.changeFieldValue('QuotationRequest', 'model', model);
+		this.props.changeFieldValue('QuotationRequest', 'year', year);
 	}
 
 
@@ -568,6 +580,7 @@ const mapStateToProps = (state) => {
 	const customerObj = state.customer;
 
 	return {
+		initialValues: getFormValues('QuotationRequest')(state),
 		customer: customerObj.detail,
 		token: state.customer.token,
 		cusVehicles: customerObj.detail.vehicles,

@@ -1,57 +1,227 @@
 import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
 import Title from '../UI/Title';
-import { right } from '../../utils';
+import { right, getTranslatedObject, getFormattedVehicles, isAuth } from '../../utils';
+import * as validations from '../../utils';
 import OrderSteps from '../OrderSteps';
-import { Link } from "react-router-dom";
-import Button from '../UI/Link';
+import { Link, withRouter } from "react-router-dom";
+import DefaultLink from '../UI/Link';
 import { LargeScreen } from '../Device';
+import { connect } from 'react-redux';
+import {
+	Field, reduxForm, getFormValues, change as changeFieldValue
+} from 'redux-form';
+import SelectInput from '../SelectInput/SelectInput';
+import _ from 'lodash';
+
+
 class HomeDetails extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			garage: null
+		}
+	}
+
+	componentDidUpdate = (prevProps, prevState) => {
+		const { currentLanguage, formValues } = this.props
+		const prevFormValues = _.has(prevProps, 'formValues.garage') ? prevProps.formValues.garage : null;
+		
+		if (_.has(formValues, 'garage') && formValues.garage !== prevFormValues) {
+			const selectedVehicle = formValues.garage.vehicle;
+
+			this.setState({
+				garage: [
+					{ value: 1, label: getTranslatedObject(selectedVehicle.make, currentLanguage, 'name', 'nameAr') },
+					{ value: 2, label: getTranslatedObject(selectedVehicle.model, currentLanguage, 'name', 'nameAr') },
+					{ value: 3, label: selectedVehicle.year }
+				]
+			}, () => {
+				this.handleFillValues()
+			})
+		};
+	}
+
+	handleFillValues = () => {
+		const { garage } = this.state
+
+		this.props.changeFieldValue('QuotationRequest', 'make', garage[0]);
+		this.props.changeFieldValue('QuotationRequest', 'model', garage[1]);
+		this.props.changeFieldValue('QuotationRequest', 'year', garage[2]);
+	}
+
+	handleSubmit = values => {
+		this.props.history.push('/quotation-order');
+	}
 
 	render() {
-		const { recentViewedProducts, translate, direction, currentLanguage } = this.props;
+		const {
+			recentViewedProducts, translate, direction, currentLanguage, vehicles,
+			cusVehicles, token
+		} = this.props;
+		const makeData = vehicles.map(vehicle => {
+			return {
+				...vehicle,
+				label: getTranslatedObject(vehicle, currentLanguage, 'name', 'nameAr'),
+				value: vehicle.id
+			}
+		});
+
+		const groupedvehicleMake = [
+			{
+				options: makeData,
+			},
+		];
+
+		const formatvehicleMakeLabel = () => (
+			<div className="placeholder">
+				<span>{translate("general.vehicle.make")}</span>
+			</div>
+		);
+
+		const modelData = _.has(this.props.formValues, 'make.models') ?
+			this.props.formValues.make.models.map(model => {
+				return {
+					...model,
+					label: getTranslatedObject(model, currentLanguage, 'name', 'nameAr'),
+					value: model.id
+				}
+			}) : [];
+
+		const groupedvehicleModel = [
+			{
+				options: modelData,
+			},
+		];
+
+		const formatvehicleModelLabel = () => (
+			<div className="placeholder">
+				<span>{translate("general.vehicle.model")}</span>
+			</div>
+		);
+
+		const yearData = _.has(this.props.formValues, 'model.modelYears') ?
+			this.props.formValues.model.modelYears.map(modelYear => {
+				return {
+					...modelYear,
+					label: modelYear.year,
+					value: modelYear.id
+				}
+			}) : [];
+		const groupedvehicleYear = [
+			{
+				options: yearData,
+			},
+		];
+		const formatvehicleYearLabel = () => (
+			<div className="placeholder">
+				<span>{translate("general.vehicle.year")}</span>
+			</div>
+		);
+
+		const vehiclesFormat = getFormattedVehicles(cusVehicles, currentLanguage, translate);
+		const groupedGarageList = [
+			{
+				options: vehiclesFormat,
+			},
+		];
+		const formatGarageListLabel = () => (
+			<div className="placeholder">
+				<i className="icon-vehicle"></i>
+				<h6>{translate("quotationOrder.garage.title")}
+					<p>{translate("quotationOrder.garage.subTitle")}</p>
+				</h6>
+			</div>
+		);
+
 		return (
 			<Fragment>
 				<section className="start-custom-order container-fluid">
 					<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")} />
 					<OrderSteps translate={translate} direction={direction} />
 
-				 <div className="order-form">
-							<header className="row">
-								<h2 className="col-lg-10 mx-auto">
-									<span className="arrow"><i className="icon-arrow-down" /></span>
-									{translate("quotationOrder.startNow")}
-								</h2>
-							</header>
-							<div className="form-details">
-								<form className="col-lg-10 offset-lg-1 box-shadow">
-									<div className="form-row ">
-										<div className="col">
-											<input type="text" className="form-control input" placeholder={translate("quotationOrder.parts")} />
-											<div className="input-group-prepend input-file">
-												<input type="file" ref={ref => this.fileInput = ref} />
-												<Button to="#" text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
+					<div className="order-form">
+						<header className="row">
+							<h2 className="col-lg-10 mx-auto">
+								<span className="arrow"><i className="icon-arrow-down" /></span>
+								{translate("quotationOrder.startNow")}
+							</h2>
+						</header>
+						<div className="form-details">
+							<form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="col-lg-10 offset-lg-1 box-shadow gray-input">
+								<div className="form-row">
+									{
+										isAuth(token) && (
+											<div className="col-auto open-garage">
+												<Field
+													name="garage"
+													placeholder={" "}
+													component={SelectInput}
+													options={groupedGarageList}
+													formatGroupLabel={formatGarageListLabel}
+												/>
+												<DefaultLink
+													to={'#'}
+													isReverseOrder
+													className='btn btn-gray'
+													text={translate("form.vehicle.title")}
+													icon='icon-vehicle'
+												/>
+												<p>{cusVehicles.length}</p>
 											</div>
-										</div>
-										<div className="col">
-											<input type="text" className="form-control input" placeholder={translate("quotationOrder.vin")}/>
-											<div className="input-group-prepend input-file">
-												<input type="file" ref={ref => this.fileInput = ref} />
-												<Button to="#" text={<img className="upload-img" src="/img/upload-img.svg" alt="upload-img" />} type="reset" onClick={() => this.fileInput.click()} />
-											</div>
-										</div>
-										<div className="col-auto">
-											<button type="submit"className="btn btn-primary">
-												<span>{translate("general.send")}</span>
-												<i className={`icon-arrow-${right(direction)}`}></i>
-											</button>
-										</div>
+										)
+									}
+								</div>
+								<div className="form-row">
+									<div className="col float-label">
+										<Field
+											label={translate("form.vehicle.make")}
+											name="make"
+											placeholder={" "}
+											component={SelectInput}
+											options={groupedvehicleMake}
+											formatGroupLabel={formatvehicleMakeLabel}
+											validate={[validations.required]}
+											isDisabled={_.has(this.props.formValues, 'garage')}
+										/>
 									</div>
-								</form>
-							</div>
-
+									<div className="col float-label">
+										<Field
+											label={translate("form.vehicle.model")}
+											name="model"
+											placeholder={" "}
+											component={SelectInput}
+											options={groupedvehicleModel}
+											formatGroupLabel={formatvehicleModelLabel}
+											validate={[validations.required]}
+											isDisabled={_.has(this.props.formValues, 'garage')}
+										/>
+									</div>
+									<div className="col float-label">
+										<Field
+											label={translate("form.vehicle.year")}
+											name="year"
+											placeholder={" "}
+											component={SelectInput}
+											options={groupedvehicleYear}
+											formatGroupLabel={formatvehicleYearLabel}
+											validate={[validations.required]}
+											isDisabled={_.has(this.props.formValues, 'garage')}
+										/>
+									</div>
+									<div className="col-auto">
+										<button type="submit" className="btn btn-primary">
+											<span>{translate("general.send")}</span>
+											<i className={`icon-arrow-${right(direction)}`}></i>
+										</button>
+									</div>
+								</div>
+							</form>
 						</div>
-						{/*<div className="row">
+
+					</div>
+					{/*<div className="row">
 							<div className="col col-lg-6 offset-lg-3">
 								<Button
 								className="btn btn-primary"
@@ -104,7 +274,7 @@ class HomeDetails extends Component {
 							</Link>
 						</li>
 					</ul>
-				{/*<div className="row">
+					{/*<div className="row">
 						<Link to="/listing?query=&page=1&category=9" className="col-lg-4 col-6">
 							<figure>
 								<img src="/img/motor-oil.png" alt="Oil" />
@@ -161,7 +331,7 @@ class HomeDetails extends Component {
 						</Link>
 					</div>*/}
 				</section>
-				 <section className="main-parts container-fluid">
+				<section className="main-parts container-fluid">
 					<header className="row">
 						<h1 className="col">{translate("quotationOrder.mustHaves")}</h1>
 					</header>
@@ -207,9 +377,9 @@ class HomeDetails extends Component {
 				<section className="container-fluid mt-sec-home">
 					<header className="row cat-header">
 						<h3 className="col">Accessorise <LargeScreen>top Categories</LargeScreen></h3>
-							<LargeScreen>
-								<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
-							</LargeScreen>
+						<LargeScreen>
+							<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
+						</LargeScreen>
 					</header>
 					<div className="accessories-cat">
 						<div className="row">
@@ -281,4 +451,23 @@ class HomeDetails extends Component {
 		);
 	}
 }
-export default HomeDetails;
+
+HomeDetails = reduxForm({
+	form: 'QuotationRequest'
+})(HomeDetails)
+
+const mapStateToProps = state => {
+	return {
+		formValues: getFormValues('QuotationRequest')(state),
+	}
+}
+
+const mapDispatchToProps = dispatch => {
+	return {
+		changeFieldValue: (format, field, value) => dispatch(changeFieldValue(format, field, value))
+	}
+}
+
+const withHomeDetails = withRouter(HomeDetails);
+
+export default connect(mapStateToProps, mapDispatchToProps)(withHomeDetails);
