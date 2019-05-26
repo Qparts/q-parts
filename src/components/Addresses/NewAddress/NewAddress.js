@@ -247,7 +247,7 @@ class Address extends Component {
                           label={translate("form.address.phoneNumber")}
                           component={RenderField}
                           placeholder={translate("form.address.phoneNumber")}
-                          validate={[validations.required]}
+						  validate={[validations.required, validations.mobileCodeNumber]}
                           />
                       </div>
                     </div>

@@ -154,10 +154,11 @@ class Setting extends Component {
   }
 
   onSaveNewAddress = values => {
-    const { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
+    let { line1, line2, zipCode, title, mobile, city, defaultAddress } = values;
     const latitude = city.latitude;
     const longitude = city.longitude;
-    const cityId = city.id;
+	const cityId = city.id;
+	mobile = `${966}${mobile}`;
     this.props.addAddress({ line1, line2, cityId, zipCode, title, latitude, longitude, mobile, defaultAddress: _.isUndefined(defaultAddress) ? false : defaultAddress })
       .then(() => {
         this.onHide();
