@@ -1,29 +1,31 @@
-.checkout-container-shipping{
-
-  .Checkout-container{
+.checkout-container-shipping {
+  @include text-left;
+  background: $light-gray;
+  padding-bottom: 20%;
+  .Checkout-container {
     @include large-medium-screens {
       display: flex;
     }
     @include small-screen {
       display: block;
     }
-    .whatsapp{
-      .bg-whatsapp{
+    .whatsapp {
+      .bg-whatsapp {
         text-transform: none;
         color: black;
         border-radius: corner-values(20px 20px 0px 20px) !important;
-        span{
+        span {
           font-size: 9px;
           width: fit-content !important;
           text-align: $left;
         }
       }
     }
-    .Address-container{
+    .Address-container {
       .form-control {
         height: 55px;
       }
-      .addresses-header{
+      .addresses-header {
         display: flex;
         margin-bottom: 3px;
         background: white;
@@ -35,7 +37,7 @@
           @include padding-left(20px);
           @include padding-right(20px);
         }
-        .btn-primary{
+        .btn-primary {
           background: $light-gray;
           text-transform: capitalize;
           color: $black;
@@ -44,11 +46,11 @@
             margin-top: 5px;
             margin-bottom: 5px;
           }
-          span{
+          span {
             @include margin-left(5px);
           }
         }
-        p{
+        p {
           font-family: Roboto;
           @include font-size(17px);
           font-weight: normal;
@@ -64,7 +66,7 @@
           }
         }
       }
-      #addresses-container{
+      #addresses-container {
         background: white;
         .addresses-box {
           background: none;
@@ -74,36 +76,36 @@
         @include margin-left(0);
         border-radius: corner-values(0 0 $border-radius-base $border-radius-base) !important;
       }
-      form{
-        .no-gutters{
+      form {
+        .no-gutters {
           background: $white;
           padding: 20px;
         }
-        .title-address{
+        .title-address {
           margin-bottom: 20px;
-          .form-control{
+          .form-control {
             border-radius: corner-values(20px 0 0 20px) !important;
             background: $light-gray;
           }
-          .RenderField{
+          .RenderField {
             border-radius: corner-values(20px 0 0 20px) !important;
-            input{
+            input {
               margin-bottom: 0px;
               border-bottom: none;
             }
           }
         }
-        .google-map{
+        .google-map {
           display: flex;
           margin-top: 30px;
           margin-bottom: 10px;
-          a{
+          a {
             display: flex;
           }
-          img{
+          img {
             height: 28px;
           }
-          p{
+          p {
             font-family: Roboto;
             @include font-size(15px);
             font-weight: normal;
@@ -116,22 +118,22 @@
             color: $brand-color;
           }
         }
-        .address-title{
+        .address-title {
           margin-bottom: 20px;
-          .form-control{
+          .form-control {
             border-radius: corner-values(20px 0 20px 20px) !important;
             background: $light-gray;
           }
-          .RenderField{
+          .RenderField {
             border-radius: corner-values(20px 0 20px 20px) !important;
-            input{
+            input {
               margin-bottom: 0px;
               border-bottom: none;
             }
           }
         }
-        .select-input{
-          .css-10nd86i{
+        .select-input {
+          .css-10nd86i {
             width: 100%;
             padding-bottom: 6px;
             background: $light-gray;
@@ -143,18 +145,18 @@
             padding-top: 15px;
           }
         }
-        .div-rounded-first{
+        .div-rounded-first {
           @include small-screen {
             margin-bottom: 20px;
           }
-          .RenderField{
+          .RenderField {
             border: none;
-            input{
+            input {
               border-radius: corner-values(20px 0 0 20px) !important;
               background: $light-gray;
               padding: 12px;
             }
-            label{
+            label {
               display: none;
             }
             .input-group {
@@ -163,33 +165,33 @@
             }
           }
         }
-        .div-rounded-last{
-          .select-input{
-            .css-10nd86i{
+        .div-rounded-last {
+          .select-input {
+            .css-10nd86i {
               border-radius: corner-values(0 0 20px 0) !important;
             }
           }
         }
-        .div-rounded{
+        .div-rounded {
           @include small-screen {
             margin-bottom: 20px;
           }
           @include padding-left(5px);
           @include padding-right(5px);
         }
-        .phone-info{
+        .phone-info {
           margin-top: 25px;
-          .RenderField{
+          .RenderField {
             width: 100%;
-            label{
+            label {
               display: none;
             }
           }
-          .phone-number{
+          .phone-number {
             display: flex;
-            .first{
+            .first {
               margin-#{$right}: 5px;
-              .form-control{
+              .form-control {
                 border-radius: corner-values(20px 0 0 20px) !important;
                 width: 70px;
                 text-align: center;
@@ -208,7 +210,7 @@
               }
             }
           }
-          .zipCode{
+          .zipCode {
             padding: 0px;
             .form-control {
               border-radius: corner-values(0 0 20px 0) !important;
@@ -223,35 +225,35 @@
             }
           }
         }
-        .shipping-style{
+        .shipping-style {
           margin-top: 25px;
           margin-bottom: 20px;
-          .form-control{
+          .form-control {
             padding-bottom: 20px;
             border-radius: corner-values(20px 0 20px 20px) !important;
             background: $light-gray;
           }
-          .RenderField{
+          .RenderField {
             @include padding-left(10px);
             border-radius: corner-values(20px 0 20px 20px) !important;
             @include margin-left(-13px);
-            input{
+            input {
               margin-bottom: 0px;
               border-bottom: none;
             }
           }
         }
-        .checkmark{
+        .checkmark {
           border-radius: 9px;
         }
-        .container{
+        .container {
           margin-top: 10px;
           margin-bottom: 0px;
         }
-        .footer{
+        .footer {
           margin-top: 32px;
           margin-bottom: 50px;
-          .btn-light{
+          .btn-light {
             float: $right;
             height: auto;
             background-color: $light-gray;
@@ -265,7 +267,7 @@
               margin-top: 20px;
             }
           }
-          .btn-primary{
+          .btn-primary {
             float: $right;
             @include margin-left(5px);
             width: 80%;
@@ -273,7 +275,7 @@
             height: auto;
             text-align: $right;
             text-transform: none;
-            i{
+            i {
               @include margin-left(10px);
             }
             @include large-medium-screens {
@@ -286,7 +288,7 @@
           }
         }
 
-        .btn-secondary{
+        .btn-secondary {
           @include margin-left(5px);
           background: $brand-color;
           border-radius: corner-values(0 20px 20px 0) !important;
@@ -296,21 +298,116 @@
           text-transform: none;
           float: $right;
           color: $white;
-          i{
+          i {
             @include margin-left(10px);
           }
         }
       }
     }
   }
-  .default-header-bg{
+  .default-header-bg {
     @include text-left;
     margin-bottom: 70px;
-    header{
-      h1{
+    header {
+      h1 {
         @include font-size(30px);
       }
     }
-    
+    .header-options {
+      float: $right;
+      margin-top: 27px;
+      position: relative;
+      .payment {
+        div {
+          display: none !important;
+        }
+      }
+      .paymentActive {
+        background: $white !important;
+        border-radius: corner-values(0 0 20px 0);
+        color: $black;
+        opacity: 1 !important;
+        div {
+          display: block !important;
+          color: red;
+          position: absolute;
+          @include margin-left(5%);
+          i::before {
+            background: white;
+            border-radius: 50%;
+          }
+        }
+      }
+      .paymentDone {
+        border-radius: corner-values(0) !important;
+        div {
+          display: none !important;
+        }
+      }
+      .shippingDone {
+        border-radius: corner-values(0) !important;
+        div {
+          display: none !important;
+        }
+      }
+      .signin {
+        background: $white !important;
+        border-radius: corner-values(20px 0 0 20px);
+        color: $black;
+        opacity: 1 !important;
+      }
+      .shipping {
+        background: $white !important;
+        border-radius: corner-values(0 0 20px 0);
+        color: $black;
+        opacity: 1 !important;
+        div {
+          color: red;
+          position: absolute;
+          @include margin-left(5%);
+          i::before {
+            background: white;
+            border-radius: 50%;
+          }
+        }
+      }
+      .order {
+        border-radius: corner-values(0 0 20px 0);
+        div {
+          display: none !important;
+        }
+      }
+      .orderActive {
+        background: $white !important;
+        border-radius: corner-values(0 0 20px 0);
+        color: $black;
+        opacity: 1 !important;
+        div {
+          display: block !important;
+          color: red;
+          position: absolute;
+          @include margin-left(5%);
+          i::before {
+            background: white;
+            border-radius: 50%;
+          }
+        }
+      }
+      button {
+        opacity: 0.7;
+        background: #000000;
+        color: $white;
+        border: none;
+        padding: 12px;
+        @include padding-left(20px);
+        @include padding-right(30px);
+        span {
+          @include margin-left(7px);
+        }
+        i {
+          @include font-size(25px);
+        }
+      }
+    }
   }
 }

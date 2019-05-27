@@ -384,7 +384,7 @@
     ],
     "wiresAndCables": [
       "اسلاك",
-      "Wires and Cables"
+      "Wires & Cables"
     ],
     "Covers": [
       "اغطية",
@@ -416,7 +416,7 @@
     ],
     "bodyworkCleaningAndCare": [
       "التنظيف و العناية بالسيارة",
-      "Bodywork Cleaning and Care"
+      "Bodywork Cleaning & Care"
     ],
     "carRefrigerator": [
       "ثلاجات السيارة",
@@ -436,11 +436,11 @@
     ],
     "washCleanersAndPolishers": [
       "معدات تنظيف و تلميع السيارة",
-      "Cleaners and Polishers"
+      "Cleaners & Polishers"
     ],
     "sportsAndOutdoors": [
       "مستلزمات الأنشطة الخارجية",
-      "Sports and Outdoors"
+      "Sports & Outdoors"
     ],
     "country": [
       "البلد",
@@ -448,7 +448,7 @@
     ],
     "shippingAndDelivery": [
       "الشحن و التوصيل",
-      "Shipping and Delivery"
+      "Shipping & Delivery"
     ],
     "returns": [
       "الاسترجاع",
@@ -464,7 +464,7 @@
     ],
     "termsAndConditions": [
       "الشروط و الاحكام",
-      "Terms and Conditions"
+      "Terms & Conditions"
     ],
     "oneOfTheIncubatedProjects": [
       "واحد من المشاريع المحتضنة",
@@ -480,7 +480,7 @@
     ],
     "cleaning": [
       "تنظيف هيك السيارة والعناية بها",
-      "Bodywork Cleaning and Care"
+      "Bodywork Cleaning & Care"
     ],
     "children": [
       "مقعد للأطفال",
@@ -635,7 +635,11 @@
     "trusted": [
       "احصل على قوة التسوق الموثوق",
       "Get the Trusted Shopping Power"
-    ],
+	],
+	"maintenance": [
+		"الحفاظ على كفاءة المحرك",
+		"Maintain Engine Efficiency"
+	],
     "vendor": {
       "items": [
         "نوفر أكثر من ٥٠٠٠٠ قطعة",
@@ -1888,7 +1892,7 @@
         ],
         "shippingCondition": [
           "الشحن والشروط",
-          "Shipping and conditions"
+          "Shipping & conditions"
         ]
       },
       "orderDetail": {
@@ -2814,7 +2818,7 @@
   "terms": {
     "header": [
       "الشروط والأحكام",
-      "Terms and Conditions"
+      "Terms & Conditions"
     ],
     "privacyPolicy": {
       "privacyPolicy": [
@@ -3238,5 +3242,23 @@
       "فئات الملحقات",
       "Accessories Categories"
     ]
-  }
+  },
+	"category": {
+		"accessories": {
+			"top": [
+				"أفضل اكسسوارات",
+				"Top Accessories"
+			]
+		},
+		"bodyworkCleaningAndCare": {
+			"title": [
+				"التنظيف",
+				"Bodywork"
+			],
+			"subTitle": [
+				"و العناية بالسيارة",
+				"Cleaning & Care"
+			]
+		}
+	}
 }

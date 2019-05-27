@@ -1,18 +1,18 @@
-.banner-250{
+.banner-250 {
   width: 250px;
   height: 250px;
   text-align: center;
   margin-top: 30px;
   background: $white;
   position: relative;
-  p{
+  p {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 }
-.live-chat{
+.live-chat {
   @include text-left;
   background: $light-gray;
   @extend .position-fixed;
@@ -22,345 +22,341 @@
   width: 151px;
   border-radius: $border-radius-base $border-radius-base 0 0;
   @include transition(all, 0.3s, ease);
-  @include nav-sm-media{
+  @include nav-sm-media {
     width: 48px;
     background: transparent;
     #{$right}: 15px;
   }
-  img{
+  img {
     max-width: 48px;
     display: inline-block;
   }
-  p{
+  p {
     display: inline-block;
     @include font-size(12px);
     position: relative;
     margin-bottom: 0;
     top: 7px;
-    @include nav-sm-media{
+    @include nav-sm-media {
       display: none;
-    };
-    span{
+    }
+    span {
       display: block;
     }
   }
 }
 .overflow-hidden,
-.overflow-hidden-search{
-  .live-chat{
+.overflow-hidden-search {
+  .live-chat {
     @include opacity(0);
   }
 }
-.product-options{
+.product-options {
   margin-top: 15px;
   border-bottom: 1px solid $dark-gray;
   width: 100%;
-  .d-table-cell{
-      padding: 5px 10px;
-      @include font-size(15px);
-      border-top: 1px solid $dark-gray;
-      @include media-breakpoint-down(xs){
-        @include font-size(14px);
-
-      };
-      .icon-checked:before{
-        color: $brand-color;
-        top: 3px;
-      }
-      &:first-child{
-        text-transform: capitalize;
-        border-#{$right}: 1px solid $dark-gray;
-        width: 30%;
-        span{
-          @include opacity(0.5);
-        }
+  .d-table-cell {
+    padding: 5px 10px;
+    @include font-size(15px);
+    border-top: 1px solid $dark-gray;
+    @include media-breakpoint-down(xs) {
+      @include font-size(14px);
+    }
+    .icon-checked:before {
+      color: $brand-color;
+      top: 3px;
+    }
+    &:first-child {
+      text-transform: capitalize;
+      border-#{$right}: 1px solid $dark-gray;
+      width: 30%;
+      span {
+        @include opacity(0.5);
       }
     }
+  }
 }
-.products-brand{
-  ul{
+.products-brand {
+  ul {
     margin-top: -15px;
     margin-bottom: 0;
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       margin-top: -2px;
       margin-right: -2px;
       margin-left: -2px;
     }
   }
-  h3{
+  h3 {
     @include font-size(20px);
     text-transform: capitalize;
     margin-bottom: 20px;
     font-weight: 400;
-    @include media-breakpoint-up(lg){
+    @include media-breakpoint-up(lg) {
       @include font-size(25px);
-    };
+    }
   }
-  li{
+  li {
     margin-top: 15px;
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       padding: 0 2px;
       margin-top: 2px;
-    };
+    }
   }
-  a{
+  a {
     display: block;
     padding: 10px 20px;
     background: $white;
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       padding: 5px 10px;
     }
-    &:hover{
+    &:hover {
       background: $light-gray;
     }
   }
 }
-.banner{
+.banner {
   @extend .d-flex;
   @extend .justify-content-center;
   @extend .align-items-center;
   margin: 0 auto;
 }
-.banner-728{
+.banner-728 {
   max-width: 728px;
   height: 90px;
   background: $white;
   text-align: center;
 }
-.div-style{
+.div-style {
   @include border-radius-div();
   overflow: hidden;
 }
-.hero{
+.hero {
   @extend .position-relative;
-  img{
+  img {
     width: 100%;
   }
 }
-.hero-content{
+.hero-content {
   @extend .position-absolute;
   left: 0;
   width: 100%;
   z-index: 2;
-  h1{
+  h1 {
     color: $white;
     @include font-size(55px);
     text-transform: uppercase;
     font-weight: 500;
     text-align: center;
     line-height: 38px;
-    @include media-breakpoint-down(lg){
+    @include media-breakpoint-down(lg) {
       font-size: 2.5rem;
-    };
+    }
   }
 }
-.order-steps{
+.order-steps {
   margin-bottom: 50px;
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     margin-bottom: 25px;
-  };
-  li{
+  }
+  li {
     text-align: center;
     @include make-col-ready();
   }
-    figure{
-      margin-bottom: 0;
-      > div:first-child{
-        height: 90px;
-        @include media-breakpoint-down(lg){
-          height: auto;
-        }
-        span{
-          display: none;
-          @include media-breakpoint-up(lg){
-            display: block;
-            position: absolute;
-            width: calc(50% + 15px);
-            top: 50%;
-            transform: translate(0, -50%);
-            border-top: 2px dashed $dark-gray;
-            text-align: $right;
-            z-index: -1;
-            height: 3px;
-          };
-          i{
-            color: $dark-gray;
-            @include font-size(24px);
-
-            &:before{
-              @include media-breakpoint-up(lg){
-                top: -14px;
-                background: $white;
-              }
-              padding: 0 5px;
-            }
-          }
-          &:first-child{
-            @include media-breakpoint-up(lg){
-              #{$left}: 0;
-            }
-          }
-          &:last-child{
-            @include media-breakpoint-up(lg){
-              #{$left}: calc(50% + 15px);
-            }
-          }
-        }
-      }
-    }
-    .figure{
-      padding: 0 10px;
-      background: $white;
-      img{
-            display: inline-block;
-          }
-    }
-    .request{
-      img{
-        width: 73px;
-          @include media-breakpoint-down(sm){
-            width: 60px;
-          }
-      }
-    }
-    .price{
-            padding: 0;
-            img{
-              width: 133px;
-              margin-top: 6px;
-                @include media-breakpoint-down(sm){
-                  width: 100px;
-                  margin-top: 0;
-                }
-            }
-          }
-    .cart{
-            img{
-              width: 77px;
-              margin-top: 4px;
-              @include media-breakpoint-down(sm){
-                width: 70px;
-                margin-top: 0;
-              }
-            }
-          }
-    .delivery{
+  figure {
+    margin-bottom: 0;
+    > div:first-child {
       height: 90px;
-      @include media-breakpoint-down(sm){
-        height: 70px;
+      @include media-breakpoint-down(lg) {
+        height: auto;
       }
-            img{
-              width: 106px;
-              @include media-breakpoint-down(sm){
-                width: 80px;
-
-              };
-            }
-          }
-    figcaption{
-      display: block;
-      padding-top: 20px;
-      @include media-breakpoint-down(lg){
-        padding-top: 10px;
-      };
-      h3{
-        text-transform: uppercase;
-        @include font-size(20px);
-        margin-bottom: 5px;
-      }
-      p{
-        margin-bottom: 0;
-        @include font-size(14px);
-        @include opacity(0.5);
-      }
-    }
-    .icon-arrow-down,
-    .done-xs{
-      color: $dark-gray;
-      @include font-size(25px);
-      margin: 15px 0;
-      height: 25px;
-      display: block;
-      @include media-breakpoint-up(lg){
+      span {
         display: none;
-      };
+        @include media-breakpoint-up(lg) {
+          display: block;
+          position: absolute;
+          width: calc(50% + 15px);
+          top: 50%;
+          transform: translate(0, -50%);
+          border-top: 2px dashed $dark-gray;
+          text-align: $right;
+          z-index: -1;
+          height: 3px;
+        }
+        i {
+          color: $dark-gray;
+          @include font-size(24px);
+
+          &:before {
+            @include media-breakpoint-up(lg) {
+              top: -14px;
+              background: $white;
+            }
+            padding: 0 5px;
+          }
+        }
+        &:first-child {
+          @include media-breakpoint-up(lg) {
+            #{$left}: 0;
+          }
+        }
+        &:last-child {
+          @include media-breakpoint-up(lg) {
+            #{$left}: calc(50% + 15px);
+          }
+        }
+      }
     }
+  }
+  .figure {
+    padding: 0 10px;
+    background: $white;
+    img {
+      display: inline-block;
+    }
+  }
+  .request {
+    img {
+      width: 73px;
+      @include media-breakpoint-down(sm) {
+        width: 60px;
+      }
+    }
+  }
+  .price {
+    padding: 0;
+    img {
+      width: 133px;
+      margin-top: 6px;
+      @include media-breakpoint-down(sm) {
+        width: 100px;
+        margin-top: 0;
+      }
+    }
+  }
+  .cart {
+    img {
+      width: 77px;
+      margin-top: 4px;
+      @include media-breakpoint-down(sm) {
+        width: 70px;
+        margin-top: 0;
+      }
+    }
+  }
+  .delivery {
+    height: 90px;
+    @include media-breakpoint-down(sm) {
+      height: 70px;
+    }
+    img {
+      width: 106px;
+      @include media-breakpoint-down(sm) {
+        width: 80px;
+      }
+    }
+  }
+  figcaption {
+    display: block;
+    padding-top: 20px;
+    @include media-breakpoint-down(lg) {
+      padding-top: 10px;
+    }
+    h3 {
+      text-transform: uppercase;
+      @include font-size(20px);
+      margin-bottom: 5px;
+    }
+    p {
+      margin-bottom: 0;
+      @include font-size(14px);
+      @include opacity(0.5);
+    }
+  }
+  .icon-arrow-down,
+  .done-xs {
+    color: $dark-gray;
+    @include font-size(25px);
+    margin: 15px 0;
+    height: 25px;
+    display: block;
+    @include media-breakpoint-up(lg) {
+      display: none;
+    }
+  }
 }
-.input-sec{
+.input-sec {
   background: $white;
   @include border-radius-div();
   padding: 20px 15px 1px;
   .has-float-label,
-  .float-label{
+  .float-label {
     margin-bottom: 20px;
     &.error,
-    &.warning{
+    &.warning {
       margin-bottom: 40px;
     }
   }
-  .has-float-label{
+  .has-float-label {
     @include border-radius-div();
-    input{
+    input {
       @include border-radius-div();
     }
   }
-  .select__control{
+  .select__control {
     @include border-radius-div();
   }
-  .form-row{
-    .col{
-      &:last-child{
+  .form-row {
+    .col {
+      &:last-child {
         .has-float-label,
-        .select__control{
+        .select__control {
           border-top-#{$left}-radius: 0;
           border-bottom-#{$left}-radius: 0;
-          input{
+          input {
             border-top-#{$left}-radius: 0;
             border-bottom-#{$left}-radius: 0;
           }
         }
-
       }
-      &:first-child{
+      &:first-child {
         .has-float-label,
-        .select__control{
+        .select__control {
           border-bottom-#{$right}-radius: 0;
-          input{
+          input {
             border-bottom-#{$right}-radius: 0;
           }
         }
       }
-
     }
   }
 }
-.submit-row{
+.submit-row {
   padding-top: 30px;
   display: flex;
   align-items: center;
-  p{
+  p {
     @include font-size(15px);
     margin-bottom: 0;
-    a{
+    a {
       color: $brand-color;
     }
   }
-  .btn{
+  .btn {
     height: 50px;
     @include box-shadow();
     display: flex;
     align-items: center;
     justify-content: center;
     @include font-size(20px);
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       width: 100%;
       justify-content: flex-end;
       margin: 20px 0 50px;
-    };
-    &.btn-primary{
+    }
+    &.btn-primary {
       min-width: 150px;
     }
-    i{
+    i {
       @include font-size(23px);
       height: 23px;
     }
@@ -369,14 +365,14 @@
 
 //email email-validation
 
-.email-validate{
+.email-validate {
   .validate-text,
-  .icon-alert{
+  .icon-alert {
     @include transition(all, 0.5s, ease);
     @include opacity(0);
     height: 0;
   }
-  [class^='icon-']{
+  [class^='icon-'] {
     position: absolute;
     #{$right}: 15px;
     @include font-size(22px);
@@ -384,7 +380,7 @@
     top: 50%;
     margin-top: -11px;
   }
-  .validate-text{
+  .validate-text {
     padding-#{$right}: 15px;
     height: auto;
     text-align: #{$right};
@@ -392,71 +388,69 @@
     padding-#{$left}: 10px;
   }
   &.warning,
-  &.true{
-    [class^='icon-']{
+  &.true {
+    [class^='icon-'] {
       @include opacity(1);
       display: block;
     }
   }
-  &.warning{
-    input{
+  &.warning {
+    input {
       box-shadow: 0px 1px 1px 0px #e8d59a;
     }
-      input:-webkit-autofill{
-      box-shadow: inset  0 0 0 30px $light-gray, 0px 1px 1px 0px #e8d59a !important;
+    input:-webkit-autofill {
+      box-shadow: inset 0 0 0 30px $light-gray, 0px 1px 1px 0px #e8d59a !important;
     }
-    [class^='icon-']{
+    [class^='icon-'] {
       color: #856404;
     }
-    .validate-text{
+    .validate-text {
       color: #856404;
       @include opacity(1);
       display: block;
     }
   }
-  &.true{
-    input{
+  &.true {
+    input {
       box-shadow: 0px 1px 1px 0px rgba(48, 213, 118, 0.7);
-
     }
-    input:-webkit-autofill{
-      box-shadow: inset  0 0 0 30px $light-gray, 0px 1px 1px 0px rgba(48, 213, 118, 0.7) !important;
+    input:-webkit-autofill {
+      box-shadow: inset 0 0 0 30px $light-gray, 0px 1px 1px 0px rgba(48, 213, 118, 0.7) !important;
     }
-    [class^='icon-']{
+    [class^='icon-'] {
       color: #30d576;
     }
-    .validate-text{
+    .validate-text {
       color: #30d576;
     }
   }
 }
-[class*="-landing"]{
-  .gray-bg.pt-sec{
+[class*='-landing'] {
+  .gray-bg.pt-sec {
     padding-top: 40px;
   }
 }
-.accessories-cat{
-  [class*='col-']{
+.accessories-cat {
+  [class*='col-'] {
     margin-bottom: 15px;
-    + [class*='col-']{
+    + [class*='col-'] {
       padding-#{$left}: 0;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         padding-#{$left}: 15px;
-
-      };
+      }
     }
   }
-  a{
+  a {
     display: block;
     background: #f5f5f5;
     height: 100%;
-    &:hover{
-      figcaption{
+    &:hover {
+      figcaption {
         text-decoration: underline;
       }
     }
-    }
-  figcaption{
+  }
+  figcaption {
     display: block;
     @include font-size(25px);
     text-transform: uppercase;
@@ -464,153 +458,151 @@
     padding-bottom: 20px;
     line-height: 1;
     padding-#{$left}: 25px;
-    padding-right: 25px;
-    @include media-breakpoint-down(md){
+    @include padding-right(25px);
+    @include media-breakpoint-down(md) {
       @include font-size(20px);
       padding-bottom: 15px;
       padding-#{$left}: 15px;
-      padding-right: 15px;
-    };
-    @include media-breakpoint-down(sm){
+      @include padding-right(15px);
+    }
+    @include media-breakpoint-down(sm) {
       @include font-size(18px);
-    };
+    }
   }
-  figure{
+  figure {
     margin-bottom: 0;
   }
-  .cables{
-    a{
+  .cables {
+    a {
       border-top-left-radius: $border-radius-base;
       overflow: hidden;
       padding-bottom: 57px;
-      @include media-breakpoint-down(md){
+      @include media-breakpoint-down(md) {
         padding-bottom: 35px;
       }
     }
-    img{
+    img {
       width: 100%;
     }
-    figcaption{
+    figcaption {
       position: absolute;
       bottom: 0;
     }
-    figure{
+    figure {
       width: 100%;
     }
   }
-  .refrigerator{
+  .refrigerator {
     text-align: center;
-    img{
+    img {
       margin: 0 auto;
     }
-    a{
+    a {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    figure{
+    figure {
       width: 100%;
       padding: 0 15px;
     }
-    @include media-breakpoint-down(md){
-      figcaption{
+    @include media-breakpoint-down(md) {
+      figcaption {
         padding-top: 15px;
       }
-      figure{
+      figure {
         padding: 0 15px 10px;
-
       }
     }
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       padding-#{$right}: 7.5px;
-      a{
+      a {
         position: relative;
         padding-bottom: 35px;
-      };
-      figcaption{
+      }
+      figcaption {
         position: absolute;
         bottom: 0;
       }
-      figure{
+      figure {
         padding-top: 15px;
       }
-    };
+    }
   }
-  .car-mats{
-    a{
+  .car-mats {
+    a {
       padding-bottom: 57px;
       position: relative;
-      @include media-breakpoint-down(md){
+      @include media-breakpoint-down(md) {
         padding-bottom: 35px;
       }
     }
-    figure{
+    figure {
       padding-#{$left}: 20px;
       width: 100%;
       overflow: hidden;
-      img{
+      img {
         #{$right}: -20px;
         margin-top: 5px;
         width: 100%;
         position: relative;
-        @include media-breakpoint-down(md){
+        @include media-breakpoint-down(md) {
           #{$right}: 0;
-
         }
       }
     }
-    figcaption{
+    figcaption {
       text-align: #{$right};
       z-index: 1;
       position: absolute;
       bottom: 0;
       width: 100%;
     }
-    @include media-breakpoint-down(sm){
+    @include media-breakpoint-down(sm) {
       padding-#{$left}: 7.5px !important;
-      figure{
+      figure {
         padding-#{$left}: 0;
         padding-top: 15px;
       }
-      figcaption{
+      figcaption {
         text-align: center;
       }
-    };
+    }
   }
-  .bodywork, .children-seats{
-    a{
+  .bodywork,
+  .children-seats {
+    a {
       display: flex;
       align-items: center;
     }
-    figcaption{
+    figcaption {
       padding-bottom: 0;
       line-height: 1.5;
     }
   }
-  .bodywork{
-    a{
+  .bodywork {
+    a {
       border-bottom-#{$left}-radius: $border-radius-base;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         border-bottom-#{$left}-radius: 0;
-
       }
     }
-    figcaption{
-      span{
+    figcaption {
+      span {
         display: block;
       }
     }
-    figure{
+    figure {
       padding-top: 30px;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         padding-top: 15px;
-      };
+      }
     }
   }
-  .children-seats{
-    a{
+  .children-seats {
+    a {
       border-bottom-#{$right}-radius: $border-radius-base;
-      @include media-breakpoint-down(sm){
+      @include media-breakpoint-down(sm) {
         margin-bottom: 0 !important;
         padding-top: 15px;
         padding-bottom: 15px;
@@ -618,7 +610,7 @@
         border-bottom-#{$left}-radius: $border-radius-base;
       }
     }
-    figcaption{
+    figcaption {
       text-align: #{$right};
     }
   }

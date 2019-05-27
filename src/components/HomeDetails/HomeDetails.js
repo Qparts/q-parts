@@ -1,19 +1,26 @@
 import React, { Component, Fragment } from "react";
 import Products from "../Products/Products";
-import Title from '../UI/Title';
-import { right, getTranslatedObject, getFormattedVehicles, isAuth } from '../../utils';
-import * as validations from '../../utils';
-import OrderSteps from '../OrderSteps';
-import { Link, withRouter } from "react-router-dom";
-import DefaultLink from '../UI/Link';
-import { LargeScreen } from '../Device';
-import { connect } from 'react-redux';
+import Title from "../UI/Title";
 import {
-	Field, reduxForm, getFormValues, change as changeFieldValue
-} from 'redux-form';
-import SelectInput from '../SelectInput/SelectInput';
-import _ from 'lodash';
-
+	right,
+	getTranslatedObject,
+	getFormattedVehicles,
+	isAuth
+} from "../../utils";
+import * as validations from "../../utils";
+import OrderSteps from "../OrderSteps";
+import { Link, withRouter } from "react-router-dom";
+import DefaultLink from "../UI/Link";
+import { LargeScreen } from "../Device";
+import { connect } from "react-redux";
+import {
+	Field,
+	reduxForm,
+	getFormValues,
+	change as changeFieldValue
+} from "redux-form";
+import SelectInput from "../SelectInput/SelectInput";
+import _ from "lodash";
 
 class HomeDetails extends Component {
 	constructor(props) {
@@ -21,57 +28,83 @@ class HomeDetails extends Component {
 
 		this.state = {
 			garage: null
-		}
-	}
-
-	componentDidUpdate = (prevProps, prevState) => {
-		const { currentLanguage, formValues } = this.props
-		const prevFormValues = _.has(prevProps, 'formValues.garage') ? prevProps.formValues.garage : null;
-		
-		if (_.has(formValues, 'garage') && formValues.garage !== prevFormValues) {
-			const selectedVehicle = formValues.garage.vehicle;
-
-			this.setState({
-				garage: [
-					{ value: 1, label: getTranslatedObject(selectedVehicle.make, currentLanguage, 'name', 'nameAr') },
-					{ value: 2, label: getTranslatedObject(selectedVehicle.model, currentLanguage, 'name', 'nameAr') },
-					{ value: 3, label: selectedVehicle.year }
-				]
-			}, () => {
-				this.handleFillValues()
-			})
 		};
 	}
 
-	handleFillValues = () => {
-		const { garage } = this.state
+	componentDidUpdate = (prevProps, prevState) => {
+		const { currentLanguage, formValues } = this.props;
+		const prevFormValues = _.has(prevProps, "formValues.garage")
+			? prevProps.formValues.garage
+			: null;
 
-		this.props.changeFieldValue('QuotationRequest', 'make', garage[0]);
-		this.props.changeFieldValue('QuotationRequest', 'model', garage[1]);
-		this.props.changeFieldValue('QuotationRequest', 'year', garage[2]);
-	}
+		if (_.has(formValues, "garage") && formValues.garage !== prevFormValues) {
+			const selectedVehicle = formValues.garage.vehicle;
+
+			this.setState(
+				{
+					garage: [
+						{
+							value: 1,
+							label: getTranslatedObject(
+								selectedVehicle.make,
+								currentLanguage,
+								"name",
+								"nameAr"
+							)
+						},
+						{
+							value: 2,
+							label: getTranslatedObject(
+								selectedVehicle.model,
+								currentLanguage,
+								"name",
+								"nameAr"
+							)
+						},
+						{ value: 3, label: selectedVehicle.year }
+					]
+				},
+				() => {
+					this.handleFillValues();
+				}
+			);
+		}
+	};
+
+	handleFillValues = () => {
+		const { garage } = this.state;
+
+		this.props.changeFieldValue("QuotationRequest", "make", garage[0]);
+		this.props.changeFieldValue("QuotationRequest", "model", garage[1]);
+		this.props.changeFieldValue("QuotationRequest", "year", garage[2]);
+	};
 
 	handleSubmit = values => {
-		this.props.history.push('/quotation-order');
-	}
+		this.props.history.push("/quotation-order");
+	};
 
 	render() {
 		const {
-			recentViewedProducts, translate, direction, currentLanguage, vehicles,
-			cusVehicles, token
+			recentViewedProducts,
+			translate,
+			direction,
+			currentLanguage,
+			vehicles,
+			cusVehicles,
+			token
 		} = this.props;
 		const makeData = vehicles.map(vehicle => {
 			return {
 				...vehicle,
-				label: getTranslatedObject(vehicle, currentLanguage, 'name', 'nameAr'),
+				label: getTranslatedObject(vehicle, currentLanguage, "name", "nameAr"),
 				value: vehicle.id
-			}
+			};
 		});
 
 		const groupedvehicleMake = [
 			{
-				options: makeData,
-			},
+				options: makeData
+			}
 		];
 
 		const formatvehicleMakeLabel = () => (
@@ -80,19 +113,25 @@ class HomeDetails extends Component {
 			</div>
 		);
 
-		const modelData = _.has(this.props.formValues, 'make.models') ?
-			this.props.formValues.make.models.map(model => {
-				return {
-					...model,
-					label: getTranslatedObject(model, currentLanguage, 'name', 'nameAr'),
-					value: model.id
-				}
-			}) : [];
+		const modelData = _.has(this.props.formValues, "make.models")
+			? this.props.formValues.make.models.map(model => {
+					return {
+						...model,
+						label: getTranslatedObject(
+							model,
+							currentLanguage,
+							"name",
+							"nameAr"
+						),
+						value: model.id
+					};
+			  })
+			: [];
 
 		const groupedvehicleModel = [
 			{
-				options: modelData,
-			},
+				options: modelData
+			}
 		];
 
 		const formatvehicleModelLabel = () => (
@@ -101,18 +140,19 @@ class HomeDetails extends Component {
 			</div>
 		);
 
-		const yearData = _.has(this.props.formValues, 'model.modelYears') ?
-			this.props.formValues.model.modelYears.map(modelYear => {
-				return {
-					...modelYear,
-					label: modelYear.year,
-					value: modelYear.id
-				}
-			}) : [];
+		const yearData = _.has(this.props.formValues, "model.modelYears")
+			? this.props.formValues.model.modelYears.map(modelYear => {
+					return {
+						...modelYear,
+						label: modelYear.year,
+						value: modelYear.id
+					};
+			  })
+			: [];
 		const groupedvehicleYear = [
 			{
-				options: yearData,
-			},
+				options: yearData
+			}
 		];
 		const formatvehicleYearLabel = () => (
 			<div className="placeholder">
@@ -120,16 +160,21 @@ class HomeDetails extends Component {
 			</div>
 		);
 
-		const vehiclesFormat = getFormattedVehicles(cusVehicles, currentLanguage, translate);
+		const vehiclesFormat = getFormattedVehicles(
+			cusVehicles,
+			currentLanguage,
+			translate
+		);
 		const groupedGarageList = [
 			{
-				options: vehiclesFormat,
-			},
+				options: vehiclesFormat
+			}
 		];
 		const formatGarageListLabel = () => (
 			<div className="placeholder">
-				<i className="icon-vehicle"></i>
-				<h6>{translate("quotationOrder.garage.title")}
+				<i className="icon-vehicle" />
+				<h6>
+					{translate("quotationOrder.garage.title")}
 					<p>{translate("quotationOrder.garage.subTitle")}</p>
 				</h6>
 			</div>
@@ -138,40 +183,47 @@ class HomeDetails extends Component {
 		return (
 			<Fragment>
 				<section className="start-custom-order container-fluid">
-					<Title header={translate("quotationOrder.title")} subHeader={translate("quotationOrder.weMoveFast")} caption={translate("quotationOrder.request")} />
+					<Title
+						header={translate("quotationOrder.title")}
+						subHeader={translate("quotationOrder.weMoveFast")}
+						caption={translate("quotationOrder.request")}
+					/>
 					<OrderSteps translate={translate} direction={direction} />
 
 					<div className="order-form">
 						<header className="row">
 							<h2 className="col-lg-10 mx-auto">
-								<span className="arrow"><i className="icon-arrow-down" /></span>
+								<span className="arrow">
+									<i className="icon-arrow-down" />
+								</span>
 								{translate("quotationOrder.startNow")}
 							</h2>
 						</header>
 						<div className="form-details">
-							<form onSubmit={this.props.handleSubmit(this.handleSubmit)} className="col-lg-10 offset-lg-1 box-shadow gray-input">
+							<form
+								onSubmit={this.props.handleSubmit(this.handleSubmit)}
+								className="col-lg-10 offset-lg-1 box-shadow gray-input"
+							>
 								<div className="form-row">
-									{
-										isAuth(token) && (
-											<div className="col-auto open-garage">
-												<Field
-													name="garage"
-													placeholder={" "}
-													component={SelectInput}
-													options={groupedGarageList}
-													formatGroupLabel={formatGarageListLabel}
-												/>
-												<DefaultLink
-													to={'#'}
-													isReverseOrder
-													className='btn btn-gray'
-													text={translate("form.vehicle.title")}
-													icon='icon-vehicle'
-												/>
-												<p>{cusVehicles.length}</p>
-											</div>
-										)
-									}
+									{isAuth(token) && (
+										<div className="col-auto open-garage">
+											<Field
+												name="garage"
+												placeholder={" "}
+												component={SelectInput}
+												options={groupedGarageList}
+												formatGroupLabel={formatGarageListLabel}
+											/>
+											<DefaultLink
+												to={"#"}
+												isReverseOrder
+												className="btn btn-gray"
+												text={translate("form.vehicle.title")}
+												icon="icon-vehicle"
+											/>
+											<p>{cusVehicles.length}</p>
+										</div>
+									)}
 								</div>
 								<div className="form-row">
 									<div className="col float-label">
@@ -183,7 +235,7 @@ class HomeDetails extends Component {
 											options={groupedvehicleMake}
 											formatGroupLabel={formatvehicleMakeLabel}
 											validate={[validations.required]}
-											isDisabled={_.has(this.props.formValues, 'garage')}
+											isDisabled={_.has(this.props.formValues, "garage")}
 										/>
 									</div>
 									<div className="col float-label">
@@ -195,7 +247,7 @@ class HomeDetails extends Component {
 											options={groupedvehicleModel}
 											formatGroupLabel={formatvehicleModelLabel}
 											validate={[validations.required]}
-											isDisabled={_.has(this.props.formValues, 'garage')}
+											isDisabled={_.has(this.props.formValues, "garage")}
 										/>
 									</div>
 									<div className="col float-label">
@@ -207,19 +259,18 @@ class HomeDetails extends Component {
 											options={groupedvehicleYear}
 											formatGroupLabel={formatvehicleYearLabel}
 											validate={[validations.required]}
-											isDisabled={_.has(this.props.formValues, 'garage')}
+											isDisabled={_.has(this.props.formValues, "garage")}
 										/>
 									</div>
 									<div className="col-auto">
 										<button type="submit" className="btn btn-primary">
 											<span>{translate("general.send")}</span>
-											<i className={`icon-arrow-${right(direction)}`}></i>
+											<i className={`icon-arrow-${right(direction)}`} />
 										</button>
 									</div>
 								</div>
 							</form>
 						</div>
-
 					</div>
 					{/*<div className="row">
 							<div className="col col-lg-6 offset-lg-3">
@@ -234,40 +285,37 @@ class HomeDetails extends Component {
 				</section>
 				<section className="main-cat container-fluid">
 					<header className="row cat-header">
-						<h3 className="col">Oils & Fluids</h3>
-						<LargeScreen>
-							<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
-						</LargeScreen>
+						<h3 className="col">{translate("nav.oil")}</h3>
 					</header>
 					<ul className="list-unstyled row">
 						<li className="col">
-							<Link to="listing?query=&page=1&category=7">
+							<Link to="/listing?query=&page=1&category=7">
 								<figure>
 									<img src="/img/motor-oil-cat-lg.jpg" alt="Motor Oil" />
 									<figcaption>
-										<h4>Motor Oil</h4>
+										<h4>{translate("nav.motorOil")}</h4>
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
 							</Link>
 						</li>
 						<li className="col">
-							<Link to="listing?query=&page=1&category=8">
+							<Link to="/listing?query=&page=1&category=8">
 								<figure>
 									<img src="/img/gear-oil-cat-lg.jpg" alt="Gear Oil" />
 									<figcaption>
-										<h4>Gear Oil</h4>
+										<h4>{translate("nav.gearOil")}</h4>
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
 							</Link>
 						</li>
 						<li className="col">
-							<Link to="listing?query=&page=1&category=27">
+							<Link to="/listing?query=&page=1&category=27">
 								<figure>
 									<img src="/img/coolant-lg.jpg" alt="Coolant " />
 									<figcaption>
-										<h4>Coolant</h4>
+										<h4>{translate("nav.coolant")}</h4>
 									</figcaption>
 									<span>{translate("quotationOrder.shopNow")}</span>
 								</figure>
@@ -337,8 +385,11 @@ class HomeDetails extends Component {
 					</header>
 					<ul className="list-unstyled row">
 						<li className="oil col-md-6 col-lg-3">
-							<Link to="/listing?query=&page=1&category=2" >
-								<img src="/img/oil-filter.svg" alt="Premium quality oil for your engine" />
+							<Link to="/listing?query=&page=1&category=2">
+								<img
+									src="/img/oil-filter.svg"
+									alt="Premium quality oil for your engine"
+								/>
 								<div className="media-body">
 									<h5>{translate("quotationOrder.oilFilter")}</h5>
 									<p>{translate("quotationOrder.premium")}</p>
@@ -346,8 +397,11 @@ class HomeDetails extends Component {
 							</Link>
 						</li>
 						<li className="air col-md-6 col-lg-3">
-							<Link to="/listing?query=&page=1&category=3" >
-								<img src="/img/air-filter.svg" alt="Maximize engine  performance" />
+							<Link to="/listing?query=&page=1&category=3">
+								<img
+									src="/img/air-filter.svg"
+									alt="Maximize engine  performance"
+								/>
 								<div className="media-body">
 									<h5>{translate("quotationOrder.airFilter")}</h5>
 									<p>{translate("quotationOrder.max")}</p>
@@ -355,8 +409,11 @@ class HomeDetails extends Component {
 							</Link>
 						</li>
 						<li className="brake col-md-6 col-lg-3">
-							<Link to="/listing?query=&page=1&category=6" >
-								<img src="/img/disc-brake.svg" alt="Get trusted stopping power" />
+							<Link to="/listing?query=&page=1&category=6">
+								<img
+									src="/img/disc-brake.svg"
+									alt="Get trusted stopping power"
+								/>
 								<div className="media-body">
 									<h5>{translate("quotationOrder.brakePads")}</h5>
 									<p>{translate("quotationOrder.trusted")}</p>
@@ -364,11 +421,14 @@ class HomeDetails extends Component {
 							</Link>
 						</li>
 						<li className="spark col-md-6 col-lg-3">
-							<Link to="/listing?query=&page=1&category=5" >
-								<img src="/img/spark-plug.svg" alt="Maintain Engine Efficiency" />
+							<Link to="/listing?query=&page=1&category=5">
+								<img
+									src="/img/spark-plug.svg"
+									alt="Maintain Engine Efficiency"
+								/>
 								<div className="media-body">
-									<h5>Spark Plugs</h5>
-									<p>Maintain Engine Efficiency</p>
+									<h5>{translate("nav.sparkPlugs")}</h5>
+									<p>{translate("quotationOrder.maintenance")}</p>
 								</div>
 							</Link>
 						</li>
@@ -376,46 +436,72 @@ class HomeDetails extends Component {
 				</section>
 				<section className="container-fluid mt-sec-home">
 					<header className="row cat-header">
-						<h3 className="col">Accessorise <LargeScreen>top Categories</LargeScreen></h3>
-						<LargeScreen>
-							<a href="#" className="col-auto">Shop All <i className="icon-arrow-right"></i></a>
-						</LargeScreen>
+						<h3 className="col">
+							<LargeScreen>{translate("category.accessories.top")}</LargeScreen>
+						</h3>
 					</header>
 					<div className="accessories-cat">
 						<div className="row">
 							<div className="col-md-5 cables">
-								<a href="#">
-									<figure><img src="/img/Wires&Cables-gray.jpg" alt="Wires & Cables" /></figure>
-									<figcaption>Wires & Cables</figcaption>
-								</a>
+								<Link to="/listing?query=&page=1&category=12">
+									<figure>
+										<img
+											src="/img/Wires&Cables-gray.jpg"
+											alt="Wires & Cables"
+										/>
+									</figure>
+									<figcaption>{translate("nav.wiresAndCables")}</figcaption>
+								</Link>
 							</div>
 							<div className="col-6 col-md-3 refrigerator">
-								<a href="#">
+								<Link to="/listing?query=&page=1&category=14">
 									<div>
-										<figcaption>Refrigerator</figcaption>
-										<figure><img src="/img/refrigerator-gray.jpg" alt="Refrigerator" /></figure>
+										<figcaption>{translate("nav.carRefrigerator")}</figcaption>
+										<figure>
+											<img
+												src="/img/refrigerator-gray.jpg"
+												alt="Refrigerator"
+											/>
+										</figure>
 									</div>
-								</a>
+								</Link>
 							</div>
 							<div className="col-6 col-md-4 car-mats">
-								<a href="#">
-									<figure><img src="/img/car-mats-gray.jpg" alt="Car Mats" /></figure>
-									<figcaption>car mats</figcaption>
-								</a>
+								<Link to="/listing?query=&page=1&category=17">
+									<figure>
+										<img src="/img/car-mats-gray.jpg" alt="Car Mats" />
+									</figure>
+									<figcaption>{translate("nav.carMats")}</figcaption>
+								</Link>
 							</div>
 						</div>
 						<div className="row">
 							<div className="col-md-7 bodywork">
-								<a href="#">
-									<figcaption><span>Bodywork</span> Cleaning and Care</figcaption>
-									<figure><img src="/img/bodywork-gray.jpg" alt="Bodywork Cleaning and Care" /></figure>
-								</a>
+								<Link to="/listing?query=&page=1&category=16">
+									<figcaption>
+										<span>
+											{translate("category.bodyworkCleaningAndCare.title")}
+										</span>
+										{translate("category.bodyworkCleaningAndCare.subTitle")}
+									</figcaption>
+									<figure>
+										<img
+											src="/img/bodywork-gray.jpg"
+											alt="Bodywork Cleaning and Care"
+										/>
+									</figure>
+								</Link>
 							</div>
 							<div className="col-md-5 children-seats">
-								<a href="#">
-									<figure><img src="/img/children-seats-gray.jpg" alt="Children Seats" /></figure>
-									<figcaption>Children Seats</figcaption>
-								</a>
+								<Link to="/listing?query=&page=1&category=15">
+									<figure>
+										<img
+											src="/img/children-seats-gray.jpg"
+											alt="Children Seats"
+										/>
+									</figure>
+									<figcaption>{translate("nav.childSeat")}</figcaption>
+								</Link>
 							</div>
 						</div>
 					</div>
@@ -453,21 +539,25 @@ class HomeDetails extends Component {
 }
 
 HomeDetails = reduxForm({
-	form: 'QuotationRequest'
-})(HomeDetails)
+	form: "QuotationRequest"
+})(HomeDetails);
 
 const mapStateToProps = state => {
 	return {
-		formValues: getFormValues('QuotationRequest')(state),
-	}
-}
+		formValues: getFormValues("QuotationRequest")(state)
+	};
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
-		changeFieldValue: (format, field, value) => dispatch(changeFieldValue(format, field, value))
-	}
-}
+		changeFieldValue: (format, field, value) =>
+			dispatch(changeFieldValue(format, field, value))
+	};
+};
 
 const withHomeDetails = withRouter(HomeDetails);
 
-export default connect(mapStateToProps, mapDispatchToProps)(withHomeDetails);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(withHomeDetails);
