@@ -4,7 +4,8 @@
 .swiper-button-next::before,
 .swiper-button-prev::before,
 .breadcrumb-item + .breadcrumb-item::before,
-.order-steps li:first-child::after{
+.order-steps li:first-child::after,
+.steps .active a::after{
   font-family: $icon-font-name !important;
   font-style: normal !important;
   font-weight: normal !important;
@@ -16,235 +17,6 @@
   -moz-osx-font-smoothing: grayscale;
   position: relative;
 }
-/*.icon-add:before {
-  content: "\61";
-}
-.icon-add-card:before {
-  content: "\62";
-}
-.icon-add-location:before {
-  content: "\63";
-}
-.icon-address:before {
-  content: "\64";
-}
-.icon-arrow-d:before {
-  content: "\65";
-}
-.icon-arrow-dropdwon:before {
-  content: "\66";
-}
-.icon-arrow-l:before {
-  content: "\67";
-}
-.icon-arrow-r:before {
-  content: "\68";
-}
-.icon-back:before {
-  content: "\69";
-}
-.icon-bank:before {
-  content: "\6a";
-}
-.icon-cash:before {
-  content: "\6b";
-}
-.icon-cash-payment:before {
-  content: "\6c";
-}
-.icon-clear:before {
-  content: "\6d";
-}
-.icon-credit-card:before {
-  content: "\6e";
-}
-.icon-current:before {
-  content: "\6f";
-}
-.icon-debit-card:before {
-  content: "\70";
-}
-.icon-delivered-step:before {
-  content: "\71";
-}
-.icon-door:before {
-  content: "\72";
-}
-.icon-edit:before {
-  content: "\73";
-}
-.icon-less:before {
-  content: "\74";
-}
-.icon-location:before {
-  content: "\75";
-}
-.icon-minus:before {
-  content: "\76";
-}
-.icon-payment:before {
-  content: "\77";
-}
-.icon-plus:before {
-  content: "\78";
-}
-.icon-price-quote:before {
-  content: "\79";
-}
-.icon-price-tag:before {
-  content: "\7a";
-}
-.icon-return:before {
-  content: "\41";
-}
-.icon-save-f:before {
-  content: "\42";
-}
-.icon-secure:before {
-  content: "\43";
-}
-.icon-share:before {
-  content: "\44";
-}
-.icon-shipping:before {
-  content: "\45";
-}
-.icon-sign-out:before {
-  content: "\46";
-}
-.icon-time:before {
-  content: "\47";
-}
-.icon-trash:before {
-  content: "\48";
-}
-.icon-vehicle-history:before {
-  content: "\49";
-}
-.icon-verify-number:before {
-  content: "\4a";
-}
-.icon-add-vehicle:before {
-  content: "\4b";
-}
-.icon-apple:before {
-  content: "\4c";
-}
-.icon-alert:before {
-  content: "\4d";
-}
-.icon-arrow-down:before {
-  content: "\4e";
-}
-.icon-arrow-left:before,
-.swiper-button-prev::before {
-  content: "\4f";
-}
-.icon-custom-order:before {
-  content: "\50";
-}
-.icon-home:before {
-  content: "\51";
-}
-.icon-reset:before {
-  content: "\52";
-}
-.icon-twitter:before {
-  content: "\53";
-}
-.icon-to-up:before {
-  content: "\54";
-}
-.icon-product:before {
-  content: "\55";
-}
-.icon-hide-password:before {
-  content: "\56";
-}
-.icon-pricing:before {
-  content: "\57";
-}
-.icon-heart:before {
-  content: "\58";
-}
-.icon-grid:before {
-  content: "\59";
-}
-.icon-garage:before {
-  content: "\5a";
-}
-.icon-close:before {
-  content: "\30";
-}
-.icon-whatsapp:before {
-  content: "\31";
-}
-.icon-wallet:before {
-  content: "\32";
-}
-.icon-vehicle {
-  @include if-rtl{
-    -moz-transform: scaleX(-1);
-   -o-transform: scaleX(-1);
-   -webkit-transform: scaleX(-1);
-   transform: scaleX(-1);
-   filter: FlipH;
-   -ms-filter: "FlipH";
-   left: 5px;
-  };
-  &:before {
-    content: "\33";
-  }
-}
-.icon-user:before {
-  content: "\34";
-}
-.icon-search:before {
-  content: "\35";
-}
-.icon-send:before {
-  content: "\36";
-}
-.icon-shopping-bag:before {
-  content: "\37";
-}
-.icon-show-password:before {
-  content: "\38";
-}
-.icon-play-store:before {
-  content: "\39";
-}
-.icon-list:before {
-  content: "\21";
-}
-.icon-linked-in:before {
-  content: "\22";
-}
-.icon-email:before {
-  content: "\23";
-}
-.icon-delivery:before {
-  content: "\24";
-}
-.icon-arrow-right:before,
-.swiper-button-next::before  {
-  content: "\25";
-}
-.icon-cart:before {
-  content: "\26";
-}
-.icon-checked:before {
-  content: "\27";
-}
-.icon-filter:before {
-  content: if-ltr("\28", "\29" );
-}
-.icon-facebook:before {
-  content: if-ltr("\29", "\28" );
-}
-.icon-sorting:before {
-  content: "\2a";
-}*/
 .icon-add:before {
   content: "\e000";
 }
@@ -1194,4 +966,117 @@
 }
 .alert{
   @include border-radius-div;
+}
+
+// open garage drawdown
+.open-garage{
+    position: relative;
+    .btn.btn-gray{
+      position: relative;
+      @include font-size(19px);
+      border-bottom-#{$right}-radius: 0 !important;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      padding: 6px 20px;
+      @include media-breakpoint-down(md){
+        padding-right: 10px;
+        padding-left: 10px;
+        span{
+          display: none;
+        }
+      };
+      i{
+        @include font-size(30px);
+        height: 30px;
+        @include if-rtl{
+          -moz-transform: scaleX(-1);
+         -o-transform: scaleX(-1);
+         -webkit-transform: scaleX(-1);
+         transform: scaleX(-1);
+         filter: FlipH;
+         -ms-filter: "FlipH";
+         left: 5px;
+        };
+      }
+    }
+    > p{
+      position: absolute;
+      top: -5px;
+      #{$right}: 15px;
+      border-radius: 100%;
+      @include font-size(15px);
+      color: $white;
+      background: $brand-color;
+      padding: 0 5px;
+      margin-bottom: 0;
+      border: 1px solid $white;
+      min-width: 22px;
+      text-align: center
+    }
+    .select-input{
+      position: absolute;
+      z-index: 3;
+      width: calc(100% - 15px);
+      height: 100%;
+      @include media-breakpoint-down(md){
+        width: calc(100% - 30px);
+      };
+      &:hover + a{
+        background: $dark-gray;
+      }
+    }
+
+    .select__indicators{
+      display: none;
+    }
+    .select__value-container,
+    .select__control{
+      background: transparent !important;
+    }
+    .select__single-value{
+      display: none !important;
+    }
+    .select__menu{
+      #{$left}: auto !important;
+      #{$right}:0 !important;
+      margin-top: -10px !important;
+      @include media-breakpoint-down(md){
+        #{$right}: if-rtl(-30px, 0) !important;
+
+      }
+    }
+    .placeholder{
+      display: flex;
+      align-items: center;
+      color: $basic-gray;
+      @include opacity(1);
+      i{
+        @include font-size(33px);
+        @include opacity(0.7);
+        margin-#{$right}: 5px;
+        height: 35px;
+      }
+      h6{
+        font-weight: 400;
+        @include font-size(16px);
+        margin-bottom: 0;
+        p{
+          @include font-size(13px);
+          @include opacity(0.8);
+          white-space: nowrap;
+          margin-top: 2px;
+          @include media-breakpoint-down(md){
+            display: none;
+          };
+        }
+      }
+    }
+    .select__menu-list{
+      .select__option{
+        padding-top: 20px;
+        padding-bottom: 20px;
+        @include font-size(16px);
+      }
+    }
 }

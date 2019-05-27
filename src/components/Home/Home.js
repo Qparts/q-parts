@@ -15,6 +15,9 @@ export class Home extends Component {
                     translate={this.props.translate}
                     direction={this.props.direction}
                     currentLanguage={this.props.currentLanguage}
+					vehicles={this.props.vehicles}
+					cusVehicles={this.props.cusVehicles}
+					token={this.props.token}
                 />
             </Fragment>
         )
@@ -26,7 +29,10 @@ const mapStateToProps = state => {
         translate: getTranslate(state.localize),
         recentViewedProducts: state.customer.recentViewedProducts,
         direction: state.customer.direction,
-        currentLanguage: getActiveLanguage(state.localize).code,
+		currentLanguage: getActiveLanguage(state.localize).code,
+		vehicles: state.api.vehicles,
+		cusVehicles: state.customer.detail.vehicles,
+		token: state.customer.token
     }
 }
 

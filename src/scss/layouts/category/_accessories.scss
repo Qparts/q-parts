@@ -1,0 +1,25 @@
+.accessorise-landing{
+  .accessories-cat{
+    padding-top: 40px;
+    padding-bottom: 30px;
+    h3{
+      @include font-size(20px);
+      font-weight: 400;
+    }
+  }
+  .refrigerator{
+    a{
+      background: #f7e9e9;
+    }
+  }
+  .car-mats{
+    a{
+      background: #f5f3fd;
+    }
+  }
+  .bodywork{
+    a{
+      background: #f0f4ee;
+    }
+  }
+}

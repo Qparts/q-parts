@@ -64,7 +64,6 @@ export class OrderSteps extends Component {
                     </figure>
                 </li>
             </ul>
-
         )
     }
 }

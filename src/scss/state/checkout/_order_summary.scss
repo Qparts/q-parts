@@ -1,8 +1,8 @@
 .order-summary{
-  @include text-left;
   @include border-radius-div;
   @include box-shadow;
   margin-bottom: 40px;
+  overflow: hidden;
   @include media-breakpoint-down(md){
     margin-top: 40px;
   }

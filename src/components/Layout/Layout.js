@@ -116,6 +116,7 @@ class Layout extends Component {
           cart={cart} 
           quotations={this.props.quotations}/>
         {dialog}
+        {/*<div className="cd-main-content checkout">*/}
         <div className="cd-main-content">
           <div className="main-content">
             {this.props.children}

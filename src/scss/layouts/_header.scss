@@ -81,6 +81,17 @@
         margin-#{$right}: 15px;
         margin-top: 1px;
       }
+      @include nav-lg-media{
+        width: 50px;
+        background: $brand-color;
+        border-top-#{$right}-radius: 0 !important;
+        border-bottom-#{$left}-radius: 0 !important;
+        .icon-search{
+          color: $white;
+          margin-#{$right}: 0;
+          margin-top: 5px;
+        }
+      };
     }
   }
 .brand{
@@ -92,23 +103,26 @@
   }
 .user-actions{
   @extend .float-#{$right};
-  margin-top: 13px;
-  @include nav-sm-media{
-    margin-top: 20px;
-  };
+  display: flex;
+  align-items: center;
+
   > ul{
+    align-items: center;
     display: flex;
     @extend .list-unstyled;
     margin-bottom: 0;
     padding-bottom: 0;
     > li{
-      margin-#{$right}: 15px;
+      margin-#{$right}: 20px;
+      @include nav-sm-media{
+        margin-#{$right}: 15px;
+      };
       &:last-child{
         margin-#{$right}: 0;
       }
       &.search-sm{
         margin-#{$right}: 2px;
-        margin-top: -2px;
+        margin-top: 7px;
       }
       .not-empty{
         position: relative;
@@ -123,17 +137,32 @@
           padding: 0 5px;
         }
       }
+      .icon-heart{
+        @include font-size(24px);
+        height: 22px;
+        display: block;
+        &:before{
+          top: -4px;
+        }
+      }
+
+    }
+    .search-sm + li{
+      @include nav-lg-media(){
+        display: none;
+      };
     }
   }
   .icon-cart {
     @include font-size(24px);
     height: 24px;
+    display: block;
     &:before{
       top: -2px;
     }
   }
   .seperator {
-    height: 20px;
+    height: 30px;
     display: inline-table;
   }
   .dropdown-menu{
