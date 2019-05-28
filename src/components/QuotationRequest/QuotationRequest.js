@@ -50,7 +50,8 @@ class QuotationRequest extends Component {
 			modal: false,
 			dialogType: signin,
 			garage: null,
-			loading: false
+			loading: false,
+			loadedFromGarage: false
 		};
 
 		if (isAuth(this.props.token)) {
@@ -65,7 +66,7 @@ class QuotationRequest extends Component {
 	};
 
 	componentDidUpdate = (prevProps, prevState) => {
-		const { defaultLang, submitFailed } = this.props;
+		const { submitFailed } = this.props;
 		if (
 			_.has(this.props.formValues, 'garage') &&
 			this.props.formValues.garage !== prevProps.formValues.garage
@@ -73,35 +74,7 @@ class QuotationRequest extends Component {
 			const selectedVehicle = this.props.formValues.garage.vehicle;
 			const vin = this.props.formValues.garage.vin;
 
-			this.setState(
-				{
-					garage: [
-						{
-							value: 1,
-							label: getTranslatedObject(
-								selectedVehicle.make,
-								defaultLang,
-								'name',
-								'nameAr'
-							)
-						},
-						{
-							value: 2,
-							label: getTranslatedObject(
-								selectedVehicle.model,
-								defaultLang,
-								'name',
-								'nameAr'
-							)
-						},
-						{ value: 3, label: selectedVehicle.year },
-						{ vin }
-					]
-				},
-				() => {
-					this.handleFillValues();
-				}
-			);
+			this.setGarage(selectedVehicle, vin);
 		}
 
 		if (submitFailed !== prevProps.submitFailed && submitFailed) {
@@ -111,15 +84,67 @@ class QuotationRequest extends Component {
 
 	fillVehicleInfo = () => {
 		const { initialValues } = this.props;
+
 		const make = _.has(initialValues, 'make') ? initialValues.make : null;
 		const model = _.has(initialValues, 'model')
 			? initialValues.model
 			: null;
 		const year = _.has(initialValues, 'year') ? initialValues.year : null;
+		const vin = _.has(initialValues, 'vin') ? initialValues.vin : null;
+		const hasSelectedFromGarage = _.has(initialValues, 'garage')
+			? initialValues.garage
+			: null;
 
-		this.props.changeFieldValue('QuotationRequest', 'make', make);
-		this.props.changeFieldValue('QuotationRequest', 'model', model);
-		this.props.changeFieldValue('QuotationRequest', 'year', year);
+		if (hasSelectedFromGarage) {
+			this.props.changeFieldValue(
+				'QuotationRequest',
+				'garage',
+				initialValues.garage
+			);
+			this.setGarage(
+				initialValues.garage.vehicle,
+				initialValues.garage.vin
+			);
+		} else {
+			this.props.changeFieldValue('QuotationRequest', 'make', make);
+			this.props.changeFieldValue('QuotationRequest', 'model', model);
+			this.props.changeFieldValue('QuotationRequest', 'year', year);
+			this.props.changeFieldValue('QuotationRequest', 'vin', vin);
+		}
+	};
+
+	setGarage = (selectedVehicle, vin) => {
+		const { defaultLang } = this.props;
+		this.setState(
+			{
+				garage: [
+					{
+						value: 1,
+						label: getTranslatedObject(
+							selectedVehicle.make,
+							defaultLang,
+							'name',
+							'nameAr'
+						)
+					},
+					{
+						value: 2,
+						label: getTranslatedObject(
+							selectedVehicle.model,
+							defaultLang,
+							'name',
+							'nameAr'
+						)
+					},
+					{ value: 3, label: selectedVehicle.year },
+					{ vin }
+				],
+				loadedFromGarage: true
+			},
+			() => {
+				this.handleFillValues();
+			}
+		);
 	};
 
 	handleSubmit = values => {
@@ -559,10 +584,7 @@ class QuotationRequest extends Component {
 											formatvehicleMakeLabel
 										}
 										validate={[validations.required]}
-										isDisabled={_.has(
-											this.props.formValues,
-											'garage'
-										)}
+										isDisabled={this.state.loadedFromGarage}
 									/>
 								</div>
 								<div className='col-lg col-md-6 float-label'>
@@ -576,10 +598,7 @@ class QuotationRequest extends Component {
 											formatvehicleModelLabel
 										}
 										validate={[validations.required]}
-										isDisabled={_.has(
-											this.props.formValues,
-											'garage'
-										)}
+										isDisabled={this.state.loadedFromGarage}
 									/>
 								</div>
 								<div className='col-lg-auto col-md-6 float-label'>
@@ -593,10 +612,7 @@ class QuotationRequest extends Component {
 											formatvehicleYearLabel
 										}
 										validate={[validations.required]}
-										isDisabled={_.has(
-											this.props.formValues,
-											'garage'
-										)}
+										isDisabled={this.state.loadedFromGarage}
 									/>
 								</div>
 								<div className='col-lg col-md-6'>
@@ -627,10 +643,9 @@ class QuotationRequest extends Component {
 															validations.allUpperCase
 													  ]
 											}
-											disabled={_.has(
-												this.props.formValues,
-												'garage'
-											)}
+											disabled={
+												this.state.loadedFromGarage
+											}
 										/>
 										<Field
 											removeImage={_.has(
