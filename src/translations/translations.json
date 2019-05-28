@@ -2767,7 +2767,21 @@
     "email": [
       "عنوان البريد الإلكتروني غير صالح",
       "Invalid email address"
-    ]
+	],
+	"paymentViaCard": {
+		"ccNumber": [
+			"رقم بطاقة الائتمان غير صالح",
+			"the credit card number is invalid"
+		],
+		"ccYear": [
+			"تاريخ بطاقة الائتمان غير صالح",
+			"Invalid credit card date"
+		],
+		"ccCvv": [
+			"رقم كود غير صالح",
+			"Invalid CVV number"
+		] 
+	}
   },
   "orderStatus": {
     "completed": [

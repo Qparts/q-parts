@@ -1,11 +1,10 @@
-
 .modal-content {
   border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base) !important;
   @include container-fluid;
-  .close{
+  .close {
     @include opacity(1);
     margin-top: -15px;
-    span{
+    span {
       @include font-size(28px);
       width: 15px;
       height: 15px;
@@ -14,37 +13,37 @@
     }
     margin: unset;
   }
-  .form-submit{
+  .form-submit {
     padding-bottom: 20px;
-    .btn{
+    .btn {
       display: flex;
       width: 100%;
       align-items: center;
-      height: 50px
+      height: 50px;
     }
-    .col-auto{
+    .col-auto {
       padding-#{$right}: 0;
-      .btn{
+      .btn {
         border-top-#{$right}-radius: 0 !important;
         border-bottom-#{$right}-radius: 0 !important;
       }
-      .btn-gray{
+      .btn-gray {
         @include font-size(17px);
       }
-      + .col{
+      + .col {
         padding-#{$left}: 5px;
       }
     }
-    .btn-primary{
+    .btn-primary {
       @include font-size(20px);
       justify-content: flex-end;
       border-top-#{$left}-radius: 0 !important;
       border-bottom-#{$left}-radius: 0 !important;
-      i{
+      i {
         @include font-size(23px);
         height: 23px;
       }
-      &:hover{
+      &:hover {
         padding-#{$right}: 30px;
       }
     }
@@ -53,11 +52,11 @@
 .modal-header {
   padding-top: 35px;
   border-bottom: 0;
-  &.have-icon{
-    p{
+  &.have-icon {
+    p {
       display: inline-flex;
       align-items: flex-start;
-      i{
+      i {
         margin-#{$right}: 5px;
         height: 24px;
         display: inline-block;
@@ -70,7 +69,7 @@
   font-weight: 400;
   @include font-size(30px);
   line-height: 25px;
-  > p{
+  > p {
     border-bottom: 2px solid $brand-color;
     margin-bottom: 0;
     padding-bottom: 10px;
@@ -78,9 +77,11 @@
   }
 }
 .modal-body {
-
+  .error-text {
+    padding-top: 0;
+  }
 }
-.sub-header{
+.sub-header {
   @include font-size(16px);
   @include opacity(0.6);
 }
@@ -90,12 +91,11 @@
   .modal-content {
     background: white;
   }
-  .sec-header{
+  .sec-header {
     h1 {
       @include text-capitalize;
     }
   }
 }
-.dialog-form{
-  
+.dialog-form {
 }

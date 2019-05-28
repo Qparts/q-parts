@@ -1,76 +1,95 @@
 export const required = value => (value ? undefined : true);
 export const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
+	value && value.length > max
+		? `Must be ${max} characters or less`
+		: undefined;
 export const maxLength15 = maxLength(15);
 export const tooOld = value =>
-  value && value > 65 ? 'You might be too old for this' : undefined
+	value && value > 65 ? 'You might be too old for this' : undefined;
 export const aol = value =>
-  value && /.+@aol\.com/.test(value)
-    ? 'Really? You still use AOL for your email?'
-    : undefined
+	value && /.+@aol\.com/.test(value)
+		? 'Really? You still use AOL for your email?'
+		: undefined;
 export const alphaNumeric = value =>
-  value && /[^a-zA-Z0-9 ]/i.test(value)
-    ? 'Only alphanumeric characters'
-    : undefined
+	value && /[^a-zA-Z0-9 ]/i.test(value)
+		? 'Only alphanumeric characters'
+		: undefined;
 
 // const minLength = min => value =>
 //   value && value.length < min ? `Must be ${min} characters or more` : undefined
 
 const matchDigits = digits => value =>
-  value && value.length !== digits ? `Must be ${digits} digits` : undefined
+	value && value.length !== digits ? `Must be ${digits} digits` : undefined;
 
 export const match17Digits = matchDigits(17);
 export const number = value =>
-  value && isNaN(Number(value)) ? 'Must be a number' : undefined
+	value && isNaN(Number(value)) ? 'Must be a number' : undefined;
 export const minValue = min => value =>
-  value && value < min ? `Must be at least ${min}` : undefined
-export const minValue18 = minValue(18)
+	value && value < min ? `Must be at least ${min}` : undefined;
+export const minValue18 = minValue(18);
 export const email = (value, props, allProps) => {
-  return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? allProps.translate("validation.email")
-    : undefined
-}
+	return value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+		? allProps.translate('validation.email')
+		: undefined;
+};
 
 export const phoneNumber = value =>
-  value && !/^(0|[1-9][0-9]{9})$/i.test(value)
-    ? 'Invalid phone number, must be 10 digits'
-    : undefined
+	value && !/^(0|[1-9][0-9]{9})$/i.test(value)
+		? 'Invalid phone number, must be 10 digits'
+		: undefined;
 
 export const confirmPassword = (value, allValues) => {
-  return value !== allValues.password ? 'The password does not match'
-    : undefined
-}
+	return value !== allValues.password
+		? 'The password does not match'
+		: undefined;
+};
 
 export const mobileCountryCode = (value, allValues) => {
-  const mobileRegex = allValues.countryId !== -1 ? allValues.countryId.mobileRegex : null;
-  const regex = RegExp(mobileRegex);
+	const mobileRegex =
+		allValues.countryId !== -1 ? allValues.countryId.mobileRegex : null;
+	const regex = RegExp(mobileRegex);
 
-  return !regex.test(value) ?
-    'Invalid mobile' : undefined
-}
+	return !regex.test(value) ? 'Invalid mobile' : undefined;
+};
 
-export const vin = (value) => {
-  return value && !/^[a-zA-Z0-9]*$/.test(value)
-    ? 'Invalid VIN'
-    : undefined;
-}
+export const vin = value => {
+	return value && !/^[a-zA-Z0-9]*$/.test(value) ? 'Invalid VIN' : undefined;
+};
 
 export const allUpperCase = value => {
-  return value && !/^[^a-z]*$/.test(value)
-    ? 'Must contain only upper case letters'
-    : undefined;
-}
+	return value && !/^[^a-z]*$/.test(value)
+		? 'Must contain only upper case letters'
+		: undefined;
+};
 
 export const passwordScore = (value, allValues, { passwordScore }) => {
-  return value && passwordScore >= 2 ? undefined : 'Required';
-}
+	return value && passwordScore >= 2 ? undefined : 'Required';
+};
 
-export const renderTopIfError = (submitFailed) => {
-
-  if (submitFailed) window.scrollTo(0, 0);
-}
+export const renderTopIfError = submitFailed => {
+	if (submitFailed) window.scrollTo(0, 0);
+};
 
 export const mobileCodeNumber = value =>
-  value && !/^(5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/.test(value)
-    ? 'Invalid code number'
-    : undefined
+	value && !/^(5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/.test(value)
+		? 'Invalid code number'
+		: undefined;
+
+export const ccNumber = value => {
+	return value &&
+		!/^((4\d{3})|(5[1-5]\d{2})|(6011))-?\d{4}-?\d{4}-?\d{4}|3[4,7]\d{13}$/.test(
+			value
+		)
+		? 'Invalid number'
+		: undefined;
+};
+
+export const ccCvv = value =>
+	value && !/^([0-9]{3,4})$/.test(value) ? 'Invalid CVV number' : undefined;
+
+export const ccDate = (value, allValues) => {
+	const { ccMonth } = allValues;
+	const expiryDate = new Date(`${value.label}-${ccMonth.label}`);
+
+	return value && expiryDate < new Date() ? 'Invalid date' : undefined;
+};
