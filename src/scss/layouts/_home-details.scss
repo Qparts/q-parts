@@ -147,8 +147,10 @@
     }
   }
   .offset-lg-1 {
-    @include if-rtl {
-      margin-right: 8.33333%;
+    @include media-breakpoint-up(lg) {
+      @include if-rtl {
+        margin-right: 8.33333%;
+      }
     }
   }
 }
@@ -156,9 +158,6 @@
 .order-form {
   > header {
     h2 {
-      @include media-breakpoint-down(sm) {
-        height: 75px;
-      }
       position: relative;
       margin-bottom: 15px;
       @include font-size(25px);
@@ -206,7 +205,6 @@
   .open-garage {
     position: absolute;
     top: -42px;
-    @extend .open-garage;
     > p {
       top: -10px;
     }
@@ -247,6 +245,9 @@
   > form {
     border-radius: 0 0 $border-radius-base $border-radius-base;
     padding: side-values(10px 0 10px 10px);
+    @include media-breakpoint-down(sm) {
+      margin-top: 0;
+    }
   }
   .form-row {
     width: 100%;

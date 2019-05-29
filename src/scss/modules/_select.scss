@@ -20,7 +20,6 @@
     cursor: pointer;
     position: static !important;
     width: auto !important;
-    
   }
   .select__single-value {
     position: static;
@@ -44,7 +43,7 @@
       bottom: 100%;
       #{$right}: 10px;
       border: solid transparent;
-      content: " ";
+      content: ' ';
       height: 0;
       width: 0;
       position: absolute;
