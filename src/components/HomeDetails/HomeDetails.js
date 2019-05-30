@@ -219,7 +219,7 @@ class HomeDetails extends Component {
 							>
 								<div className='form-row'>
 									{isAuth(token) && (
-										<div className='col-auto open-garage'>
+										<div className='col-xs-auto open-garage'>
 											<Field
 												name='garage'
 												placeholder={' '}
