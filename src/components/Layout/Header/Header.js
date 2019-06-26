@@ -118,7 +118,7 @@ class Header extends Component {
               <div className="row">
                 <div className="col-auto">
                   <Link className="brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                    <img alt="qParts" src="/img/qParts-logo-ar.svg" />
                   </Link>
                 </div>
                 <div className="col">
@@ -161,7 +161,7 @@ class Header extends Component {
               <div className="row">
                 <div className="col">
                   <Link className="scroll-dwon-brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                    <img alt="qParts" src="/img/qParts-logo-ar.svg" />
                   </Link>
                   <ul className="cd-header-buttons">
                     <li><a className={`cd-nav-trigger ${this.state.new}`} href="#cd-primary-nav"><span></span></a></li>

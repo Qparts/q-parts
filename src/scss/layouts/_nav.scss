@@ -221,7 +221,7 @@ ul.cd-secondary-nav {
   #{$left}: 0;
   @include transition(all, 0.3s, ease);
   @include opacity(0);
-  width: 40px;
+  width: 43px;
   overflow: hidden;
   @include nav-sm-media {
     @include opacity(1);
@@ -232,10 +232,6 @@ ul.cd-secondary-nav {
     max-width: 200px;
     width: 107px;
     margin-top: 2px;
-    @include if-rtl{
-      position: relative;
-      left: 64px;
-    }
     @include nav-sm-media {
       margin-top: 8px;
       width: 100%;
