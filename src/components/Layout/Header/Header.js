@@ -160,8 +160,8 @@ class Header extends Component {
             <div className="container-fluid">
               <div className="row">
                 <div className="col">
-                  <Link className="scroll-dwon-brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                  <Link className={getTranslatedString(currentLanguage, "scroll-dwon-brand", "scroll-dwon-brand-ar")} to="/">
+                    <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
                   </Link>
                   <ul className="cd-header-buttons">
                     <li><a className={`cd-nav-trigger ${this.state.new}`} href="#cd-primary-nav"><span></span></a></li>
