@@ -89,8 +89,6 @@ class Layout extends Component {
     } = this.props;
 
     
-
-    
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
         <ModalHeader toggle={this.togglePopup}>
@@ -104,9 +102,9 @@ class Layout extends Component {
     return (
       <Fragment>
         <Header
-          currentLanguage={currentLanguage}
           translate={translate}
           localize={localize}
+          currentLanguage={currentLanguage}
           vehicles={this.props.vehicles}
           isLoggedIn={isLoggedIn}
           fullName={fullName}
@@ -135,13 +133,12 @@ class Layout extends Component {
 }
 
 
-
 const mapStateToProps = state => {
   return {
     currentLanguage: getActiveLanguage(state.localize).code
   }
 }
 
-const WithLayout = withRouter(Layout);
 
+const WithLayout = withRouter(connect(mapStateToProps, null) (Layout));
 export default WithLayout;

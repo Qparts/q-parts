@@ -103,7 +103,6 @@ class Header extends Component {
     ];
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, currentLanguage, cart } = this.props;
-
     const mainSearch = (
       <div className="main-search">
         <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
