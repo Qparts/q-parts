@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
-
+import { connect } from 'react-redux';
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from "./Header/Header.js";
 import Footer from "./Footer/Footer";
-
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import Title from '../UI/Title';
 import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
 import { LargeScreen } from '../Device';
@@ -85,7 +85,7 @@ class Layout extends Component {
   render() {
     const {
       isLoggedIn, fullName, translate, localize, changeDefaultDirection,
-      countriesOnly, getCountriesOnly, selectCountry, direction, cart
+      countriesOnly, getCountriesOnly, selectCountry, direction, cart, currentLanguage
     } = this.props;
     const dialog = (
       <Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
@@ -100,6 +100,7 @@ class Layout extends Component {
     return (
       <Fragment>
         <Header
+          currentLanguage={currentLanguage}
           translate={translate}
           localize={localize}
           vehicles={this.props.vehicles}
@@ -129,6 +130,13 @@ class Layout extends Component {
   }
 }
 
+
+const mapStateToProps = state => {
+  return {
+    currentLanguage: getActiveLanguage(state.localize).code,
+  }
+}
+
 const WithLayout = withRouter(Layout);
 
-export default WithLayout;
+export default connect(mapStateToProps, null)(WithLayout);

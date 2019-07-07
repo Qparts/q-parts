@@ -4,6 +4,7 @@ import HeaderDetails from "./HeaderDetails";
 import LanguageToggle from '../../../components/LanguageToggle'
 import { toggleSearch } from '../../../utils';
 import { NavSm, NavLg } from '../../Device';
+import { getTranslatedString } from "../../../utils";
 
 class Header extends Component {
   constructor(props) {
@@ -101,7 +102,7 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, cart } = this.props;
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, currentLanguage, cart } = this.props;
 
     const mainSearch = (
       <div className="main-search">
@@ -118,7 +119,7 @@ class Header extends Component {
               <div className="row">
                 <div className="col-auto">
                   <Link className="brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                    <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
                   </Link>
                 </div>
                 <div className="col">
