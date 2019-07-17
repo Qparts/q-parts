@@ -42,7 +42,8 @@ class CheckoutPayment extends Component {
         });
       })
     this.submitForm = createRef();
-    this.props.setValidCredit(true);
+	this.props.setValidCredit(true);
+	this.props.addPaymentMethod({ type: BANK_TRANSFER });
   }
 
   // handleSelectCreditCard = e => {
@@ -207,7 +208,7 @@ class CheckoutPayment extends Component {
     </form>
   }
   render() {
-    const { translate, direction } = this.props;
+    const { translate, direction, hidePaymentButton } = this.props;
 
     let canSubmit = Object.keys(this.props.checkout.paymentMethod).length > 0;
     const styles = {
@@ -233,7 +234,7 @@ class CheckoutPayment extends Component {
         <div className="border rounded card card-body row" id="checkout-payment">
           <div className="payment_option" onClick={this.handlePaymentClick}>
             <div className="Checkout-shipping_address-footer">
-              <h4>{translate("checkout.payment.title")}</h4>
+              <h3>{translate("checkout.payment.title")}</h3>
             </div>
             <div className="checkout-payment-container">
               <div className="col-12">
@@ -289,7 +290,7 @@ class CheckoutPayment extends Component {
                   </Fragment>) || ((
                     this.state.renderBankTransfer) && <Fragment>
                       <div id="bank-transfer">
-                        <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
+                        <h3>{translate("checkout.payment.bankTransfer.title")}</h3>
                         <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
                         {this.state.banks.map((item, idx) => {
                           return <Fragment key={idx}>
@@ -321,13 +322,17 @@ class CheckoutPayment extends Component {
 
                 )}
             </div>
-            <div className="justify-content-between footer-payment">
-              <p>{translate("checkout.payment.canReview")}</p>
-              {
-                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleSubmit} /> :
-                  <Button type="button" style={canSubmit ? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleProceed} />
-              }
-            </div>
+			{
+				!hidePaymentButton && (
+					<div className="justify-content-between footer-payment">
+					<p>{translate("checkout.payment.canReview")}</p>
+					{
+						this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleSubmit} /> :
+						<Button type="button" style={canSubmit ? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleProceed} />
+						}
+						</div>
+						)
+			}
           </div>
         </div>
       </Fragment>

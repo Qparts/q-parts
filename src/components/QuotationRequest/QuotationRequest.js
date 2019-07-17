@@ -17,10 +17,13 @@ import { getTranslatedObject, renderTopIfError } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
+import { addPaymentMethod } from '../../actions/cartAction';
 import {
 	setQuotationOrder,
 	setCheckLoginQuotationOrder,
-	setQuotationOrderInfo
+	setQuotationOrderInfo,
+	completePayment,
+	setValidCredit
 } from '../../actions/customerAction';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
@@ -38,6 +41,7 @@ import RenderField from '../RenderField/RenderField';
 import { r } from '../../utils/directional';
 import { styles } from '../../constants';
 import { ClipLoader } from 'react-spinners';
+import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
 
 const vehicles = 'vehicles';
 const signin = 'signin';
@@ -758,6 +762,17 @@ class QuotationRequest extends Component {
 								</div>
 							</div>
 						</div>
+						<div className='sec-shadow'>
+							<CheckoutPayment
+								direction={this.props.direction}
+								translate={translate}
+								addPaymentMethod={this.props.addPaymentMethod}
+								completePayment={this.props.completePayment}
+								checkout={this.props.checkout}
+								setValidCredit={this.props.setValidCredit}
+								hidePaymentButton={true}
+							/>
+						</div>
 						<div className='row submit-qout'>
 							<div className='col-lg'>
 								<p>
@@ -815,7 +830,8 @@ const mapStateToProps = state => {
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
-		quotationOrderInfo: state.customer.quotationOrderInfo
+		quotationOrderInfo: state.customer.quotationOrderInfo,
+		checkout: state.cart.checkout
 	};
 };
 
@@ -826,7 +842,10 @@ const mapDispatchToProps = dispatch => {
 			getRegions,
 			setQuotationOrder,
 			setCheckLoginQuotationOrder,
-			setQuotationOrderInfo
+			setQuotationOrderInfo,
+			addPaymentMethod,
+			completePayment,
+			setValidCredit
 		},
 		dispatch
 	);
