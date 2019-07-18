@@ -764,6 +764,7 @@ class QuotationRequest extends Component {
 						</div>
 						<div className='sec-shadow'>
 							<CheckoutPayment
+								paymentTitle
 								direction={this.props.direction}
 								translate={translate}
 								addPaymentMethod={this.props.addPaymentMethod}

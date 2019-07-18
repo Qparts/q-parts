@@ -1,38 +1,38 @@
-#checkout-payment{
+#checkout-payment {
   background: none;
   padding-top: 0px;
-  .payment_option{
-    .Checkout-shipping_address-footer{
+  .payment_option {
+    .Checkout-shipping_address-footer {
       background: $white;
       margin-bottom: 3px;
       border-radius: corner-values(20px 0 0 0);
       padding: 20px;
     }
-    .checkout-payment-container{
+    .checkout-payment-container {
       background: $white;
       padding: 15px;
-      .payment-methods{
+      .payment-methods {
         margin-bottom: 60px;
         @include box-shadow;
         padding: 5px;
         border-radius: corner-values(0 0 20px 20px);
-        .active{
+        .active {
           background: #37363c !important;
           color: $white !important;
-          span{
+          span {
             @include small-screen {
               display: block !important;
             }
           }
         }
-        .credit-card{
+        .credit-card {
           padding: 0px;
-          .btn-light{
+          .btn-light {
             background: $light-gray;
             border-radius: corner-values(20px 0 0 20px) !important;
             padding: 20px;
             width: 100%;
-            span{
+            span {
               @include margin-left(5px);
               text-transform: capitalize;
               @include small-screen {
@@ -40,20 +40,20 @@
                 @include font-size(12px);
               }
             }
-            i{
+            i {
               @include font-size(25px);
             }
           }
         }
-        .bank-transfer{
+        .bank-transfer {
           @include padding-right(0px !important);
-          .btn-primary{
+          .btn-primary {
             background: $light-gray;
             border-radius: corner-values(0 0 20px 0) !important;
             padding: 20px;
             width: 100%;
             color: $black;
-            span{
+            span {
               @include margin-left(5px);
               text-transform: capitalize;
               @include small-screen {
@@ -61,7 +61,7 @@
                 @include font-size(12px);
               }
             }
-            i{
+            i {
               @include font-size(25px);
               margin: 0px;
             }
@@ -69,37 +69,37 @@
         }
       }
     }
-    .credit-container{
-      .seperator{
+    .credit-container {
+      .seperator {
         width: 100%;
         height: 1px;
-        opacity: .4;
+        opacity: 0.4;
       }
       background: $white;
       @include padding-left(20px);
       @include padding-right(20px);
       padding-bottom: 30px;
-      .header-credit{
+      .header-credit {
         display: flex;
         margin-bottom: 20px;
-        .btn-primary{
+        .btn-primary {
           background: $light-gray;
           color: $black;
           text-transform: capitalize;
-          span{
+          span {
             @include margin-left(6px);
           }
         }
-        div{
+        div {
           display: flex;
-          i{
+          i {
             opacity: 0.2;
             @include font-size(40px);
           }
-          div{
+          div {
             @include margin-left(6px);
             display: block;
-            h1{
+            h1 {
               @include font-size(25px);
               font-weight: normal;
               font-style: normal;
@@ -110,7 +110,7 @@
               text-transform: none;
               margin-bottom: 0px;
             }
-            p{
+            p {
               opacity: 0.7;
               font-family: Roboto;
               @include font-size(13px);
@@ -125,12 +125,12 @@
           }
         }
       }
-      .payment-container{
-        .payment-box{
+      .payment-container {
+        .payment-box {
           margin-bottom: 5px;
           padding: side-values(10px);
           padding-bottom: 50px;
-          label{
+          label {
             margin-bottom: 0px;
             font-family: Roboto;
             @include font-size(13px);
@@ -140,21 +140,21 @@
             line-height: 2;
             letter-spacing: normal;
             opacity: 0.8;
-            .checkmark{
+            .checkmark {
               border-radius: 9px;
             }
           }
-          .seperator{
+          .seperator {
             width: 1px;
             height: 100%;
             @include margin-left(100%);
             margin-top: 0px;
           }
-          .payment-box_item{
-            .payment-box_item-label{
+          .payment-box_item {
+            .payment-box_item-label {
               display: flex;
               @include margin-left(20px);
-              p{
+              p {
                 margin-bottom: 0px;
                 font-family: Roboto;
                 @include font-size(17px);
@@ -166,14 +166,14 @@
                 text-align: $left;
                 @include margin-left(4px);
               }
-              img{
+              img {
                 width: 25px;
                 height: 25px;
               }
             }
-            .visa-num{
+            .visa-num {
               @include margin-left(19px);
-              .end-number{
+              .end-number {
                 display: flex;
                 opacity: 0.6;
                 font-family: Roboto;
@@ -186,12 +186,12 @@
                 text-align: $left;
                 color: rgba(55, 54, 60, 0.6);
                 margin-bottom: 10px;
-                span{
+                span {
                   @include margin-left(6px);
                   color: $black;
                 }
               }
-              .expires-date{
+              .expires-date {
                 display: flex;
                 opacity: 0.6;
                 margin-bottom: 0px;
@@ -204,37 +204,37 @@
                 letter-spacing: normal;
                 text-align: $left;
                 color: rgba(55, 54, 60, 0.6);
-                span{
+                span {
                   @include margin-left(6px);
                   color: $black;
                 }
               }
             }
-            .payment-footer{
+            .payment-footer {
               height: 41px;
               display: flex;
               margin-top: 18px;
-              .btn-gray{
+              .btn-gray {
                 @include margin-left(20px);
                 margin-#{$right}: 10px;
-                .icon-edit{
+                .icon-edit {
                   @include font-size(18px);
                 }
-                span{
+                span {
                   @include font-size(13px);
                   @include margin-left(6px);
                 }
               }
-              .btn-delete{
+              .btn-delete {
                 background: none;
                 padding-top: 0px;
                 padding-bottom: 0px;
                 @include padding-left(0);
                 opacity: 0.6;
-                .icon-trash{
+                .icon-trash {
                   @include font-size(18px);
                 }
-                span{
+                span {
                   @include font-size(13px);
                   @include margin-left(2px);
                 }
@@ -243,17 +243,17 @@
           }
         }
       }
-      form{
-        .card-number{
+      form {
+        .card-number {
           width: 100%;
         }
-        .RenderField{
-          .form-control{
+        .RenderField {
+          .form-control {
             border-radius: corner-values(20px 0 20px 20px) !important;
             border: none;
             background: $light-gray;
           }
-          label{
+          label {
             font-family: Roboto;
             @include font-size(13px);
             font-weight: normal;
@@ -269,7 +269,7 @@
           margin-bottom: 20px;
           display: flex;
           padding: 0px;
-          .select-input{
+          .select-input {
             .css-10nd86i {
               width: 100%;
               border-radius: 0px;
@@ -278,34 +278,34 @@
               position: relative !important;
             }
           }
-          .select__control{
+          .select__control {
             padding: 5px;
             height: 45px;
           }
-          .years{
+          .years {
             margin-top: 31px;
             padding: 0px;
-            .select-input{
+            .select-input {
               .css-10nd86i {
                 border-radius: corner-values(0 0 20px 0);
               }
             }
           }
-          .months{
-            .select-input{
+          .months {
+            .select-input {
               .css-10nd86i {
                 border-radius: corner-values(20px 0 0 20px);
               }
             }
           }
-          .RenderField{
+          .RenderField {
             margin-top: 4px;
-            .form-control{
+            .form-control {
               padding: 8px;
             }
           }
-          .select-input{
-            label{
+          .select-input {
+            label {
               font-family: Roboto;
               @include font-size(13px);
               font-weight: normal;
@@ -318,10 +318,10 @@
             }
           }
         }
-        .card-date-mobile{
+        .card-date-mobile {
           @extend .card-date;
           display: inherit;
-          .years{
+          .years {
             @include padding-left(15px);
             @include padding-right(15px);
             margin-bottom: 15px;
@@ -331,29 +331,29 @@
             position: relative !important;
           }
         }
-        .card-name{
+        .card-name {
           margin-bottom: 20px;
         }
-        .card-radio{
-          @include margin-left (17px);
+        .card-radio {
+          @include margin-left(17px);
           margin-bottom: 15px;
           padding: 0px;
-          .checkmark{
+          .checkmark {
             border-radius: 9px;
           }
         }
-        .footer{
+        .footer {
           @include padding-right(12px);
           margin-bottom: 30px;
           height: 55px;
-          .btn-light{
+          .btn-light {
             height: auto;
             background-color: $light-gray;
             border-radius: corner-values(0 0 0 20px) !important;
             width: 100%;
             float: $right;
           }
-          .btn-primary{
+          .btn-primary {
             width: 100%;
             border-radius: corner-values(0 20px 20px 0) !important;
             height: auto;
@@ -361,17 +361,17 @@
             text-transform: none;
             float: $right;
             @include margin-left(5px);
-            i{
+            i {
               @include margin-left(10px);
             }
           }
         }
       }
     }
-    #bank-transfer{
+    #bank-transfer {
       background: $white;
       padding: 20px;
-      .dis-payment{
+      .dis-payment {
         color: #0c5460;
         background: #bee5eb;
         padding: 10px;
@@ -385,20 +385,20 @@
         letter-spacing: normal;
         text-align: $left;
       }
-      .product-options{
+      .product-options {
         margin-bottom: 30px;
       }
     }
-    #cash-delivery{
+    #cash-delivery {
       background: $white;
       display: flex;
       @include padding-left(20px);
       border-radius: corner-values(0 0 20px 20px);
-      i{
-       opacity: 0.35;
-       @include font-size(60px);
+      i {
+        opacity: 0.35;
+        @include font-size(60px);
       }
-      p{
+      p {
         font-family: Roboto;
         @include font-size(25px);
         font-weight: normal;
@@ -411,7 +411,7 @@
         @include margin-left(9px);
       }
     }
-    .footer-payment{
+    .footer-payment {
       margin-top: 20px;
       @include small-screen {
         display: block;
@@ -419,7 +419,7 @@
       @include large-medium-screens {
         display: flex;
       }
-      p{
+      p {
         font-family: Roboto;
         @include font-size(15px);
         font-weight: normal;
@@ -430,13 +430,21 @@
         text-align: $left;
         margin-top: 10px;
       }
-      .btn-primary{
+      .btn-primary {
         @include small-screen {
           width: 100%;
         }
-        i{
+        i {
           @include margin-left(10px);
         }
+      }
+    }
+    .payment_expiration_into {
+      align-items: flex-end;
+    }
+    .input-sec {
+      .form-row:not(:last-child) {
+        margin-bottom: 40px;
       }
     }
   }

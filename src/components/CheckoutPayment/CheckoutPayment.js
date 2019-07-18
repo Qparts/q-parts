@@ -14,24 +14,22 @@ import { years, months, BANK_TRANSFER, CREDIT_CARD, RADIX } from '../../constant
 import { getBanks } from '../../utils/api';
 
 class CheckoutPayment extends Component {
+	static defaultProps = {
+		paymentTitle: 'Checkout-shipping_address-footer'
+	}
+
   constructor(props) {
     super(props);
 
     this.state = {
-      renderCreditCard: false,
+      renderCreditCard: true,
       renderCash: false,
-      renderBankTransfer: true,
+      renderBankTransfer: false,
       hasNewCard: true,
-      bankTransferInfo: {
-        bankName: 'Qetaa',
-        accountName: 'Qetaa.com',
-        accountNumber: '00000000',
-        swiftCode: '#00000000'
-      },
       defaultCreditCard: null,
       hasRadioButton: true,
       canProceed: false,
-      active: 'bank',
+      active: 'credit',
       check: false,
       banks: []
     }
@@ -43,7 +41,7 @@ class CheckoutPayment extends Component {
       })
     this.submitForm = createRef();
 	this.props.setValidCredit(true);
-	this.props.addPaymentMethod({ type: BANK_TRANSFER });
+	this.props.addPaymentMethod({ type: CREDIT_CARD, creditCard: null });
   }
 
   // handleSelectCreditCard = e => {
@@ -233,7 +231,7 @@ class CheckoutPayment extends Component {
       <Fragment>
         <div className="border rounded card card-body row" id="checkout-payment">
           <div className="payment_option" onClick={this.handlePaymentClick}>
-            <div className="Checkout-shipping_address-footer">
+            <div className={this.props.paymentTitle}>
               <h3>{translate("checkout.payment.title")}</h3>
             </div>
             <div className="checkout-payment-container">
