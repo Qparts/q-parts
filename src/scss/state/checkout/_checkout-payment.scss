@@ -251,6 +251,7 @@
           .form-control {
             border-radius: corner-values(20px 0 20px 20px) !important;
             border: none;
+            height: 50px;
             background: $light-gray;
           }
           label {
@@ -284,7 +285,6 @@
           }
           .years {
             margin-top: 31px;
-            padding: 0px;
             .select-input {
               .css-10nd86i {
                 border-radius: corner-values(0 0 20px 0);
@@ -296,12 +296,6 @@
               .css-10nd86i {
                 border-radius: corner-values(20px 0 0 20px);
               }
-            }
-          }
-          .RenderField {
-            margin-top: 4px;
-            .form-control {
-              padding: 8px;
             }
           }
           .select-input {

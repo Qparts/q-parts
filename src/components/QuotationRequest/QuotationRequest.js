@@ -4,7 +4,8 @@ import {
 	reduxForm,
 	change as changeFieldValue,
 	FieldArray,
-	getFormValues
+	getFormValues,
+	formValueSelector
 } from 'redux-form';
 import Link from '../../components/UI/Link';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -23,8 +24,11 @@ import {
 	setCheckLoginQuotationOrder,
 	setQuotationOrderInfo,
 	completePayment,
-	setValidCredit
+	setValidCredit,
+	setLoading,
+	setQuotationValues
 } from '../../actions/customerAction';
+import { throwNetworkError } from '../../actions/networkError';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
@@ -32,7 +36,11 @@ import Title from '../UI/Title';
 import OrderSteps from '../OrderSteps';
 import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
-import { postQuotation } from '../../utils/api';
+import {
+	postQuotation,
+	postWireTransferQuotation,
+	postCCQuotation
+} from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
 import * as validations from '../../utils';
 import * as normalizing from '../../utils';
@@ -42,6 +50,9 @@ import { r } from '../../utils/directional';
 import { styles } from '../../constants';
 import { ClipLoader } from 'react-spinners';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
+import { Alert } from 'reactstrap';
+
+import { W, V } from '../../constants';
 
 const vehicles = 'vehicles';
 const signin = 'signin';
@@ -55,7 +66,8 @@ class QuotationRequest extends Component {
 			dialogType: signin,
 			garage: null,
 			loading: false,
-			loadedFromGarage: false
+			loadedFromGarage: false,
+			paymentMethod: 'V'
 		};
 
 		if (isAuth(this.props.token)) {
@@ -69,10 +81,15 @@ class QuotationRequest extends Component {
 		this.fillVehicleInfo();
 	};
 
+	componentWillUnmount = () => {
+		this.props.setValidCredit(true);
+	};
+
 	componentDidUpdate = (prevProps, prevState) => {
 		const { submitFailed } = this.props;
 		if (
 			_.has(this.props.formValues, 'garage') &&
+			prevProps.formValues &&
 			this.props.formValues.garage !== prevProps.formValues.garage
 		) {
 			const selectedVehicle = this.props.formValues.garage.vehicle;
@@ -151,7 +168,23 @@ class QuotationRequest extends Component {
 		);
 	};
 
+	setPaymentMethod = paymentMethod => {
+		this.setState({ paymentMethod });
+	};
+
 	handleSubmit = values => {
+		this.props.setQuotationValues({
+			make: values.make,
+			year: values.year,
+			garage: values.garage,
+			vin: values.vin,
+			vinImage: values.vinImage,
+			quotationItems: values.quotationItems,
+			region: values.region,
+			city: values.city,
+			mobile: values.mobile,
+			paymentMethod: this.state.paymentMethod
+		});
 		this.setState({
 			loading: true
 		});
@@ -167,6 +200,7 @@ class QuotationRequest extends Component {
 		} = values;
 		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
+		const { paymentMethod } = this.state;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
 		vinImage = vinImage ? vinImage : false;
 		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
@@ -188,8 +222,8 @@ class QuotationRequest extends Component {
 			});
 			this.props.setQuotationOrderInfo(values);
 			this.togglePopup();
-		} else {
-			postQuotation({
+		} else if (paymentMethod === W) {
+			postWireTransferQuotation({
 				cityId,
 				makeId,
 				customerVehicleId,
@@ -198,7 +232,8 @@ class QuotationRequest extends Component {
 				vin,
 				imageAttached,
 				vinImage,
-				mobile
+				mobile,
+				paymentMethod
 			}).then(res => {
 				this.props.setQuotationOrder(false);
 				return this.props.history.push(
@@ -207,6 +242,46 @@ class QuotationRequest extends Component {
 					}`
 				);
 			});
+		} else if (paymentMethod === V) {
+			const ccMonth = this.props.cardHolder.ccMonth.value;
+			const ccYear = this.props.cardHolder.ccYear.value;
+			const creditCardValues = {
+				...this.props.cardHolder,
+				ccMonth,
+				ccYear
+			};
+
+			postCCQuotation({
+				cityId,
+				makeId,
+				customerVehicleId,
+				quotationItems,
+				vehicleYearId,
+				vin,
+				imageAttached,
+				vinImage,
+				mobile,
+				paymentMethod,
+				cardHolder: creditCardValues
+			})
+				.then(res => {
+					if (res.status === 202) {
+						this.props.setQuotationOrder(false);
+						window.location = res.data.transactionUrl;
+					} else if (res.status === 200) {
+						this.props.setQuotationOrder(false);
+						return this.props.history.push(
+							`/quotation-order/confirmation?quotationId=${
+								res.data.quotationId
+							}`
+						);
+					}
+				})
+				.catch(error => {
+					this.props.setValidCredit(false);
+					this.props.setLoading(false);
+					this.props.throwNetworkError(error);
+				});
 		}
 	};
 
@@ -526,6 +601,11 @@ class QuotationRequest extends Component {
 					</div>
 				</section> */}
 				<section className='custom-order-form container-fluid'>
+					{!this.props.isValidcreditCard && (
+						<Alert color='danger'>
+							{translate('general.error')}
+						</Alert>
+					)}
 					<div className='title-container'>
 						<div className='step-num'>
 							1
@@ -772,6 +852,7 @@ class QuotationRequest extends Component {
 								checkout={this.props.checkout}
 								setValidCredit={this.props.setValidCredit}
 								hidePaymentButton={true}
+								onChangePaymentMethod={this.setPaymentMethod}
 							/>
 						</div>
 						<div className='row submit-qout'>
@@ -820,9 +901,21 @@ QuotationRequest = reduxForm({
 
 const mapStateToProps = state => {
 	const customerObj = state.customer;
+	const selector = formValueSelector('CheckoutPayment');
+
+	const { ccNumber, ccMonth, ccYear, ccCvc, ccName } = selector(
+		state,
+		'ccNumber',
+		'ccMonth',
+		'ccYear',
+		'ccCvc',
+		'ccName'
+	);
 
 	return {
-		initialValues: getFormValues('QuotationRequest')(state),
+		initialValues:
+			getFormValues('QuotationRequest')(state) ||
+			customerObj.quotationValues,
 		customer: customerObj.detail,
 		token: state.customer.token,
 		cusVehicles: customerObj.detail.vehicles,
@@ -832,7 +925,15 @@ const mapStateToProps = state => {
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
 		quotationOrderInfo: state.customer.quotationOrderInfo,
-		checkout: state.cart.checkout
+		checkout: state.cart.checkout,
+		isValidcreditCard: state.customer.isValidcreditCard,
+		cardHolder: {
+			ccNumber,
+			ccMonth,
+			ccYear,
+			ccCvc,
+			ccName
+		}
 	};
 };
 
@@ -846,7 +947,10 @@ const mapDispatchToProps = dispatch => {
 			setQuotationOrderInfo,
 			addPaymentMethod,
 			completePayment,
-			setValidCredit
+			setValidCredit,
+			setLoading,
+			throwNetworkError,
+			setQuotationValues
 		},
 		dispatch
 	);
