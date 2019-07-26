@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Login from '../../containers/Authentication/Login/Login';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from './Header/Header.js';
 import Footer from './Footer/Footer';
-import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import Title from '../UI/Title';
 import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
 import { LargeScreen } from '../Device';
