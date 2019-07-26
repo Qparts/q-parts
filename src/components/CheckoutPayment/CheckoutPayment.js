@@ -85,13 +85,17 @@ class CheckoutPayment extends Component {
 			case BANK_TRANSFER:
 				this.activeButton('bank');
 				this.handleBankTransferOpt();
-				this.props.onChangePaymentMethod('W');
+				if (this.props.onChangePaymentMethod) {
+					this.props.onChangePaymentMethod('W');
+				}
 				break;
 
 			case CREDIT_CARD:
 				this.activeButton('credit');
 				this.handleCreditCardOpt();
-				this.props.onChangePaymentMethod('V');
+				if (this.props.onChangePaymentMethod) {
+					this.props.onChangePaymentMethod('V');
+				}
 				break;
 
 			default:
