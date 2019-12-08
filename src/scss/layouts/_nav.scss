@@ -53,8 +53,14 @@
       margin: 8px 0;
       padding: 10px;
       font-weight: 500;
-      @include font-size(15px);
       line-height: 11.5px;
+      @include if-ltr{
+        @include font-size(15px);
+      };
+      @include if-rtl{
+        @include font-size(16px);
+        font-weight: 700;
+      };
       @include nav-sm-media {
         padding: 10px 20px;
         display: flex;
@@ -191,12 +197,23 @@ ul.cd-secondary-nav {
     border-bottom: 1px solid $light-gray;
     > a,
     button {
-      @include font-size(14px);
       padding: 8px 15px;
       text-transform: capitalize;
+      @include if-ltr{
+        @include font-size(14px);
+      };
+      @include if-rtl{
+        @include font-size(15px);
+      };
       &:hover {
         background: $light-gray;
       }
+      @include nav-lg-media{
+        @include if-rtl{
+          padding-top: 10px;
+          padding-bottom: 10px;
+        };
+      };
     }
     &:last-child {
       border-bottom-width: 0;

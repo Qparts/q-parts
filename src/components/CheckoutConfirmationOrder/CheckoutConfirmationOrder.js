@@ -83,7 +83,7 @@ class CheckoutConfirmation extends Component {
             <i className="icon-delivered-step upload-img" />
             <Title header={translate("general.thankYou")} />
             <h5>{translate("checkout.orderNumber.textOne")}{params.cartId} {translate("checkout.orderNumber.textTwo")} <br />{translate("checkout.orderNumber.textThree")}</h5>
-            <button className="btn btn-open-G" style={{ display: "none" }}>{translate("general.trackOrder")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+            <button className="btn btn-open-G" style={{ display: "none" }}>{translate("general.trackOrder")}<i className="icon-arrow-right" /></button>
           </div>
           <div className="CheckoutConfirmation_items card">
             <p className="title">{translate("checkout.confirm.table.items")}</p>

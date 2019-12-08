@@ -172,7 +172,41 @@ export const swiperParams = (direction) => {
     }
   }
 }
+export const swiperBrandParams = (direction) => {
+  return {
+    containerClass: `swiper-container products-list`,
+    slidesPerView: 6,
+    spaceBetween: 30,
+    grabCursor: true,
+    lazy: true,
+    rebuildOnUpdate: true,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullets',
+      clickable: true
+    },
+    navigation: {
+      nextEl: direction === ltr ? '.swiper-button-next' : '.swiper-button-prev',
+      prevEl: direction === ltr ? '.swiper-button-prev' : '.swiper-button-next'
+    },
+    breakpoints: {
+      1200: {
+        slidesPerView: 4,
+        spaceBetween: 30
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 15
+      },
 
+      576: {
+        slidesPerView: 3,
+        spaceBetween: 5,
+
+      },
+    }
+  }
+}
 export const colors = {
   basicGray,
   basicBlack,

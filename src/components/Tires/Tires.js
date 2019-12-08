@@ -117,7 +117,7 @@ class Tires extends Component {
 												/>
 											</div>
 											<div className="col-md-auto col-12">
-												<button type="submit" className="btn btn-primary">{translate("general.buttons.search")} <i className={`icon-arrow-${right(direction)}`}></i></button>
+												<button type="submit" className="btn btn-primary">{translate("general.buttons.search")} <i className="icon-arrow-right"></i></button>
 											</div>
 										</form>
 									</MediumScreen>
@@ -154,7 +154,7 @@ class Tires extends Component {
 											formatGroupLabel={formatDiameterTiresGroupLabel}
 										/>
 									</div>
-									<button type="submit" className="btn btn-primary">{translate("general.buttons.search")} <i className={`icon-arrow-${right(direction)}`}></i></button>
+									<button type="submit" className="btn btn-primary">{translate("general.buttons.search")} <i className="icon-arrow-right"></i></button>
 								</form>
 
 							</div>

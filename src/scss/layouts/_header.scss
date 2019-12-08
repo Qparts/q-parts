@@ -29,7 +29,8 @@
     position: relative;
   }
   .ship-to {
-    @include font-size(14px);
+    @include font-size(13px);
+
   }
   .select__value-container{
     padding: 1px 5px;
@@ -48,50 +49,84 @@
         font-family: 'Cairo', sans-serif;
         font-weight: 400;
       }
+      @include if-rtl{
+        font-family: 'Roboto', sans-serif;
+
+      };
     }
 .main-search{
     margin-top: 2px;
     @extend .input-group;
+    padding-left: 10px;
+    padding-right: 10px;
     .form-control{
       background: $light-gray;
       height: 40px;
       border-width: 0;
-      padding-#{$right}: 40px;
+      padding-#{$right}: 200px;
       @extend .div-border-radius;
       box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+      @include font-size(15px);
+      @include media-breakpoint-down(md){
+        padding-#{$right}: 50px;
+      };
       &:focus{
         box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.3);
       }
+      &::placeholder{
+        color: $basic-gray;
+        @include font-size(13px);
+      }
     }
-    button{
+    .float-btn{
       position: absolute;
       top: 0;
-      #{$right}: 0;
-      width: 35px;
-      height: 40px;
-      background: transparent;
-      border-width: 0;
+      #{$right}: 10px;
       z-index: 3;
-      @extend .p-0;
-      @extend .text-center;
-      .icon-search{
-        color: $basic-gray;
-        height: 21px;
-        @include font-size(20px);
-        margin-#{$right}: 15px;
-        margin-top: 1px;
+      display: flex;
+      align-items: center;
+      p{
+        display: inline-block;
+        margin-bottom: 0;
+        @include font-size(13px);
+        @include opacity(0.6);
+        padding-#{$right}: 15px;
       }
-      @include nav-lg-media{
-        width: 50px;
-        background: $brand-color;
-        border-top-#{$right}-radius: 0 !important;
-        border-bottom-#{$left}-radius: 0 !important;
+      button{
+        width: 35px;
+        height: 40px;
+        background: transparent;
+        border-width: 0;
+        padding: 0;
+        text-align: center;
         .icon-search{
-          color: $white;
-          margin-#{$right}: 0;
-          margin-top: 5px;
+          color: $basic-gray;
+          height: 21px;
+          @include font-size(20px);
+          margin-#{$right}: 15px;
+          margin-top: 1px;
         }
-      };
+        @include nav-lg-media{
+          width: 50px;
+          background: $brand-color;
+          border-top-#{$right}-radius: 0 !important;
+          border-bottom-#{$left}-radius: 0 !important;
+          .icon-search{
+            color: $white;
+            margin-#{$right}: 0;
+            margin-top: 5px;
+          }
+        };
+      }
+    }
+    .vin-sm{
+      color: $white;
+      padding-#{$left}: 15px;
+      padding-top: 15px;
+      width: 100%;
+      a{
+        color: $white;
+      }
     }
   }
 .brand{
@@ -105,7 +140,6 @@
   @extend .float-#{$right};
   display: flex;
   align-items: center;
-
   > ul{
     align-items: center;
     display: flex;
@@ -114,6 +148,16 @@
     padding-bottom: 0;
     > li{
       margin-#{$right}: 20px;
+      @include font-size(15px);
+      > a{
+        display: flex;
+        @include if-ltr{
+          align-items: center;
+        };
+        @include if-rtl{
+          align-items: flex-start;
+        };
+      }
       @include nav-sm-media{
         margin-#{$right}: 15px;
       };
@@ -124,10 +168,15 @@
         margin-#{$right}: 2px;
         margin-top: 7px;
       }
+      &.user-account {
+          @include font-size(14px);
+      }
       .not-empty{
         position: relative;
         display: block;
         span{
+          font-family: "Roboto";
+          @include font-size(13px);
           position: absolute;
           border-radius: 100%;
           background: $brand-color;
@@ -135,6 +184,16 @@
           top: -8px;
           #{$right}: -6px;
           padding: 0 5px;
+          height: 17px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @include if-ltr{
+            padding-top: 1px;
+          };
+          @include if-rtl{
+
+          };
         }
       }
       .icon-heart{
@@ -142,10 +201,19 @@
         height: 22px;
         display: block;
         &:before{
-          top: -4px;
+          @include if-ltr{
+            top: -4px;
+          };
+          @include if-rtl{
+            top: -1px;
+          };
         }
       }
-
+      img{
+        width: 24px;
+        height: auto;
+        margin-#{$right}: 10px;
+      }
     }
     .search-sm + li{
       @include nav-lg-media(){
@@ -158,7 +226,9 @@
     height: 24px;
     display: block;
     &:before{
-      top: -2px;
+      @include if-ltr{
+        top: -2px;
+      };
     }
   }
   .seperator {
@@ -166,12 +236,17 @@
     display: inline-table;
   }
   .dropdown-menu{
-    @include text-left;
+    text-align: #{$left};
     overflow: hidden;
     border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;
     #{$right}: 0 !important;
-    top: 15px !important;
+    @include if-ltr{
+      top: 15px !important;
+    };
+    @include if-rtl{
+      top: 11px !important;
+    };
     border-width: 0;
     padding-bottom: 0;
     > h6{
@@ -213,41 +288,16 @@
       @extend .mx-3;
       padding-left: 0;
       padding-right: 0;
-      display: inline-flex;
-      @extend .flex-nowrap;
-      margin-bottom: 17px;
+      display: flex;
+      margin-bottom: 15px;
       li{
         display: inline-block;
         margin-#{$right}: 5px;
-        a{
-          height: 40px;
-          padding-top: 10px;
-          padding-bottom: 10px;
-          text-align: center;
-          min-width: 40px;
-          background: $light-gray;
-          display: block;
-          .icon-facebook{
-            @include font-size(19px);
-          }
-          > img{
-            max-width: 18px;
-            margin-top: -4px;
-          }
-          &:hover{
-            background: darken($light-gray, 2%);
-          }
-        }
         &:first-child{
           a{
             @extend .btn-primary;
-            padding-top: 7px;
-            white-space: nowrap;
-            border-radius: corner-values(0 0 0 $border-radius-base) !important;
             text-transform: capitalize;
             @include font-size(18px);
-            padding-left: 15px;
-            padding-right: 15px;
             i{
               @include font-size(17px);
               margin-#{$left}: 3px;
@@ -299,7 +349,6 @@
       }
     }
 .user-account {
-    @include font-size(13.8px);
     @include nav-sm-media{
       display: none !important;
     };
@@ -323,6 +372,15 @@
     }
     b {
       font-weight: 500;
+    }
+    .dropdown-toggle{
+      &:after{
+        @include if-rtl{
+          margin-right: 5px;
+          position: relative;
+          top: 2px;
+        };
+      }
     }
   }
 .slideUp {

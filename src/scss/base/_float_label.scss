@@ -33,10 +33,17 @@
 
   @mixin float-label-scaled {
     &:placeholder-shown:not(:focus) + label {
-      margin-top: -12px;
+      transform: translateY(-50%);
       top: 50%;
       line-height: 25px;
-      @include font-size(14px);
+      @include if-ltr{
+        @include font-size(14px);
+      };
+      @include if-rtl{
+        @include font-size(16px);
+        line-height: 1;
+        font-weight: 500;
+      };
         @content;
     }
   }
@@ -67,5 +74,4 @@
       @include float-label-scaled-textarea {
       }
     }
-
   }

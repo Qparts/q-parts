@@ -134,7 +134,7 @@ class CheckoutConfirmation extends Component {
               <div><p>{translate("checkout.payment.cash.total")}</p>
                 <p>{this.props.grandTotal.toFixed(2)}<sub>{translate("general.currency")}</sub></p>
               </div>
-              <span>{translate("checkout.confirm.placeOrder")} <i className={`icon-arrow-${right(direction)}`} /></span></button>
+              <span>{translate("checkout.confirm.placeOrder")} <i className="icon-arrow-right" /></span></button>
           </div>
         </div>
       </Fragment>

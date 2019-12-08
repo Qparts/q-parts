@@ -100,8 +100,7 @@ class Footer extends Component {
               <form className="form-inline">
                 <input type="text" className="form-control col"   placeholder={translate("footer.newsLetter.placeholder")} />
                 <button type="submit col-auto" className="btn btn-primary">
-                  <i className="icon-email"></i>
-                  <span>{translate("footer.newsLetter.subscribe")} <i className={`icon-arrow-${right(this.props.direction)}`} /></span>
+                  <span>{translate("footer.newsLetter.subscribe")} <i className="icon-arrow-right" /></span>
                 </button>
               </form>
             </li>

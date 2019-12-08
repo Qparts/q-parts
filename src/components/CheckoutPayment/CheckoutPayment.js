@@ -20,7 +20,7 @@ class CheckoutPayment extends Component {
     this.state = {
       renderCreditCard: false,
       renderCash: false,
-      renderbankTransfer: false,
+      renderBankTransfer: true,
       hasNewCard: true,
       bankTransferInfo: {
         bankName: 'Qetaa',
@@ -31,7 +31,7 @@ class CheckoutPayment extends Component {
       defaultCreditCard: null,
       hasRadioButton: true,
       canProceed: false,
-      active: '',
+      active: 'bank',
       check: false,
       banks: []
     }
@@ -84,7 +84,7 @@ class CheckoutPayment extends Component {
   }
 
   handleBankTransferOpt = () => {
-    this.setState({ hasNewCard: false, renderCash: false, renderCreditCard: false, renderbankTransfer: true, canProceed: true })
+    this.setState({ hasNewCard: false, renderCash: false, renderCreditCard: false, renderBankTransfer: true, canProceed: true })
     this.props.addPaymentMethod({ type: BANK_TRANSFER });
   }
 
@@ -103,10 +103,10 @@ class CheckoutPayment extends Component {
   componentWillMount = () => {
     this.props.completePayment(false);
   }
-  onCancle = () => {
+  onCancel = () => {
     this.setState({ hasNewCard: false })
   }
-  renderCCform = () => {
+  renderCCForm = () => {
     const { translate } = this.props
     const cardNumber = `* ${translate("checkout.payment.creditCard.newCard.cardNo")}`;
     const expirationDate = `* ${translate("checkout.payment.creditCard.newCard.expiration")}`;
@@ -122,7 +122,8 @@ class CheckoutPayment extends Component {
           component={RenderField}
           type="text"
           placeholder={translate("checkout.payment.creditCard.newCard.enterCardNo")}
-          validate={[validations.required]} />
+		  errorMessage={translate("validation.paymentViaCard.ccNumber")}
+          validate={[validations.required, validations.ccNumber]} />
       </div>
       <MediumScreen>
         <div className="card-date col-12">
@@ -141,7 +142,8 @@ class CheckoutPayment extends Component {
               component={SelectInput}
               options={years}
               placeholder="YYYY"
-              validate={[validations.required]} />
+			  errorMessage={translate("validation.paymentViaCard.ccYear")}
+              validate={[validations.required, validations.ccDate]} />
           </div>
           <div className="col-4">
             <Field
@@ -149,8 +151,10 @@ class CheckoutPayment extends Component {
               name="ccCvc"
               component={RenderField}
               type="text"
+			  maxLength="4"
               placeholder="CVV"
-              validate={[validations.required]} />
+			  errorMessage={translate("validation.paymentViaCard.ccCvv")}
+              validate={[validations.required, validations.ccCvv]} />
           </div>
         </div>
       </MediumScreen>
@@ -171,7 +175,8 @@ class CheckoutPayment extends Component {
               component={SelectInput}
               options={years}
               placeholder="YYYY"
-              validate={[validations.required]} />
+			  errorMessage={translate("validation.paymentViaCard.ccYear")}
+              validate={[validations.required, validations.ccDate]} />
           </div>
           <div className="col-12">
             <Field
@@ -180,7 +185,8 @@ class CheckoutPayment extends Component {
               component={RenderField}
               type="text"
               placeholder="CVV"
-              validate={[validations.required]} />
+			  errorMessage={translate("validation.paymentViaCard.ccCvv")}
+              validate={[validations.required, validations.ccCvv]} />
           </div>
         </div>
       </SmallScreen>
@@ -195,7 +201,7 @@ class CheckoutPayment extends Component {
       </div>
       {/* <div className="footer col-12">
             <Button className="btn btn-primary col-3" text={translate("checkout.payment.creditCard.newCard.add")} icon={{`icon-arrow-${right(direction)}`}} />
-            <Button className="btn btn-light col-2" type="reset" text={translate("checkout.payment.creditCard.newCard.cancel")} onClick={this.onCancle} />
+            <Button className="btn btn-light col-2" type="reset" text={translate("checkout.payment.creditCard.newCard.cancel")} onClick={this.onCancel} />
         </div> */}
       <input type="submit" ref={this.submitForm} style={{ display: 'none' }} />
     </form>
@@ -215,12 +221,12 @@ class CheckoutPayment extends Component {
     }
 
     let creditClass = "btn btn-light text-center";
-    let banckClass = "btn btn-primary text-center"
+    let bankClass = "btn btn-primary text-center"
     if (this.state.active === "credit") {
       creditClass += " active";
     }
-    if (this.state.active === "banck") {
-      banckClass += " active";
+    if (this.state.active === "bank") {
+      bankClass += " active";
     }
     return (
       <Fragment>
@@ -239,8 +245,8 @@ class CheckoutPayment extends Component {
                     }} icon="icon-credit-card" isReverseOrder />
                   </div>
                   <div className="col-6 bank-transfer">
-                    <Button type="button" className={banckClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
-                      this.activeButton('banck');
+                    <Button type="button" className={bankClass} text={translate("checkout.payment.buttons.bankTransfer")} onClick={() => {
+                      this.activeButton('bank');
                       this.handleBankTransferOpt();
                     }} icon="icon-bank" isReverseOrder />
                   </div>
@@ -266,7 +272,7 @@ class CheckoutPayment extends Component {
                     {(
                       // this.state.hasNewCard &&
                       <Fragment>
-                        {this.renderCCform()}
+                        {this.renderCCForm()}
                       </Fragment>) || ((
                         this.state.canProceed) && <Button type="button" className="btn btn-secondary" text={translate("checkout.payment.buttons.continue")} onClick={this.handleProceed} />
                       )
@@ -281,7 +287,7 @@ class CheckoutPayment extends Component {
                       <p>{translate("checkout.payment.cash.title")}</p>
                     </div>
                   </Fragment>) || ((
-                    this.state.renderbankTransfer) && <Fragment>
+                    this.state.renderBankTransfer) && <Fragment>
                       <div id="bank-transfer">
                         <h4>{translate("checkout.payment.bankTransfer.title")}</h4>
                         <p className="dis-payment">{translate("checkout.payment.bankTransfer.transferText")}</p>
@@ -318,8 +324,8 @@ class CheckoutPayment extends Component {
             <div className="justify-content-between footer-payment">
               <p>{translate("checkout.payment.canReview")}</p>
               {
-                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleSubmit} /> :
-                  <Button type="button" style={canSubmit ? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleProceed} />
+                this.state.renderCreditCard ? <Button type="button" className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={"icon-arrow-right"} onClick={this.handleSubmit} /> :
+                  <Button type="button" style={canSubmit ? {} : styles.disable} className="btn btn-primary" text={translate("orderSummary.placeOrder")} icon={"icon-arrow-right"} onClick={this.handleProceed} />
               }
             </div>
           </div>

@@ -129,7 +129,7 @@ class Quotations extends Component {
 				</figure>
 				<figcaption>
 					<p>{translate("setting.quotations.empty")} </p>
-					<Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className={`icon-arrow-${right(direction)}`}></i></Link>
+					<Link className="btn btn-primary" to="/quotation-order" >{translate("quotationOrder.startHere")} <i className="icon-arrow-right"></i></Link>
 				</figcaption>
 			</div>
 

@@ -38,392 +38,400 @@ import Swiper from 'react-id-swiper';
 
 
 import Login from "../Authentication/Login/Login";
+import { goBack } from '../../utils/nav';
 
 class ProductDetail extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      canWriteReview: false,
-      dialogType: 'addProduct',
-      data: [],
-      auth: false,
-      modal: true,
-      loading: true,
-      product: {},
-      hasLeftSwiperMoved: false,
-      modalLogin: true
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			canWriteReview: false,
+			dialogType: 'addProduct',
+			data: [],
+			auth: false,
+			modal: true,
+			loading: true,
+			product: {},
+			hasLeftSwiperMoved: false,
+			modalLogin: true
+		}
 
-    this.swiperLeftHidden = createRef();
-    this.recentViewed = createRef();
+		this.swiperLeftHidden = createRef();
+		this.recentViewed = createRef();
 
-    getProduct(this.props)
-      .then(res => {
-        this.setState({
-          product: res.data,
-          loading: false
-        });
-      })
-  }
-  handleDialog = (dialogType, data) => {
-    this.setState({
-      dialogType,
-      data: data
-    });
-    this.togglePopup();
-  };
+		getProduct(this.props)
+			.then(res => {
+				this.setState({
+					product: res.data,
+					loading: false
+				});
+			})
+	}
+	handleDialog = (dialogType, data) => {
+		this.setState({
+			dialogType,
+			data: data
+		});
+		this.togglePopup();
+	};
 
-  togglePopup = () => {
-    this.props.modalAddToCart(this.state.modal);
-    this.setState({ modal: !this.state.modal })
-  }
+	togglePopup = () => {
+		this.props.modalAddToCart(this.state.modal);
+		this.setState({ modal: !this.state.modal })
+	}
 
-  togglePopupLogin = () => {
-    this.props.setModalLogin(this.state.modalLogin);
-    this.setState({ modalLogin: !this.state.modalLogin })
-  }
+	togglePopupLogin = () => {
+		this.props.setModalLogin(this.state.modalLogin);
+		this.setState({ modalLogin: !this.state.modalLogin })
+	}
 
-  getDialogProps = () => {
-    const { dialogType } = this.state;
-    const { translate } = this.props;
-    switch (dialogType) {
-      case 'addProduct':
-        return {
-          header:
-            <Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
-        }
-      default:
-        break;
-    }
-  }
+	getDialogProps = () => {
+		const { dialogType } = this.state;
+		const { translate } = this.props;
+		switch (dialogType) {
+			case 'addProduct':
+				return {
+					header:
+						<Title number={this.state.data.quantity} header={translate("dialog.addToCart.title")} />
+				}
+			default:
+				break;
+		}
+	}
 
-  getDialogComponent = () => {
-    const { dialogType } = this.state;
-    const { translate, currentLanguage } = this.props
+	getDialogComponent = () => {
+		const { dialogType } = this.state;
+		const { translate, currentLanguage } = this.props
 
-    switch (dialogType) {
-      case 'addProduct':
-        return <AddProduct
-          data={this.state.data}
-          direction={this.props.direction}
-          modalAddToCart={this.props.modalAddToCart}
-          token={isAuth(this.props.token)}
-          togglePopup={this.togglePopup}
-          translate={translate}
-          currentLanguage={currentLanguage}
-          togglePopupLogin={this.togglePopupLogin}
-          setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
-      default:
-        break;
-    }
-  }
+		switch (dialogType) {
+			case 'addProduct':
+				return <AddProduct
+					data={this.state.data}
+					direction={this.props.direction}
+					modalAddToCart={this.props.modalAddToCart}
+					token={isAuth(this.props.token)}
+					togglePopup={this.togglePopup}
+					translate={translate}
+					currentLanguage={currentLanguage}
+					togglePopupLogin={this.togglePopupLogin}
+					setCheckLoginCheckout={this.props.setCheckLoginCheckout} />
+			default:
+				break;
+		}
+	}
 
-  componentDidMount = () => {
-    this.setState({
-      auth: !this.state.auth
-    })
+	componentDidMount = () => {
+		this.setState({
+			auth: !this.state.auth
+		})
 
-    this.props.setCheckLoginCheckout(false);
-  }
+		this.props.setCheckLoginCheckout(false);
+	}
 
-  componentDidUpdate(prevProps, prevState) {
-    const { match: { params: { productId } } } = this.props;
-    const nextProductId = prevProps.match.params.productId;
+	componentDidUpdate(prevProps, prevState) {
+		const { match: { params: { productId } } } = this.props;
+		const nextProductId = prevProps.match.params.productId;
 
-    if (nextProductId !== productId) {
-      getProduct(this.props)
-        .then(res => {
-          this.setState({
-            product: res.data,
-            loading: false
-          });
-        })
-    }
+		if (nextProductId !== productId) {
+			getProduct(this.props)
+				.then(res => {
+					this.setState({
+						product: res.data,
+						loading: false
+					});
+				})
+		}
 
-    if (this.recentViewed.current && !this.state.hasLeftSwiperMoved) {
-      this.recentViewed.current.swiper.el.appendChild(this.swiperLeftHidden.current);
-      this.setState({
-        hasLeftSwiperMoved: true
-      });
-    }
-  }
-  componentWillMount() {
-    getProduct(this.props)
-      .then(res => {
-        this.setState({
-          data: res.data
-        })
-        this.props.addRecentViewedProducts(res.data);
-      })
-    this.props.modalAddToCart(false);
-    this.props.setModalLogin(false);
-  }
+		if (this.recentViewed.current && !this.state.hasLeftSwiperMoved) {
+			this.recentViewed.current.swiper.el.appendChild(this.swiperLeftHidden.current);
+			this.setState({
+				hasLeftSwiperMoved: true
+			});
+		}
+	}
+	componentWillMount() {
+		getProduct(this.props)
+			.then(res => {
+				this.setState({
+					data: res.data
+				})
+				this.props.addRecentViewedProducts(res.data);
+			})
+		this.props.modalAddToCart(false);
+		this.props.setModalLogin(false);
+	}
 
-  submit = ({ quantity }) => {
-    //width screen
-    //let width = window.innerWidth;
-    const item = { ...this.state.product, quantity };
-    this.props.addToCart(item);
-//    if (width > 992) {
-      this.handleDialog('addProduct', item)
-    // } else {
-    //   this.setState({
-    //     data: item
-    //   });
-    //   this.props.history.push({
-    //     pathname: `/addProduct`,
-    //     state: { data: item }
-    //   });
-    // }
-  }
+	submit = ({ quantity }) => {
+		//width screen
+		//let width = window.innerWidth;
+		const item = { ...this.state.product, quantity };
+		this.props.addToCart(item);
+		//    if (width > 992) {
+		this.handleDialog('addProduct', item)
+		// } else {
+		//   this.setState({
+		//     data: item
+		//   });
+		//   this.props.history.push({
+		//     pathname: `/addProduct`,
+		//     state: { data: item }
+		//   });
+		// }
+	}
 
-  submitReview = ({ review, rating }) => {
-    const { firstName, lastName } = this.props.customer;
-    this.setState({
-      canWriteReview: false
-    });
-  }
+	submitReview = ({ review, rating }) => {
+		const { firstName, lastName } = this.props.customer;
+		this.setState({
+			canWriteReview: false
+		});
+	}
 
-  handleWriteReview = (canWriteReview) => {
-    this.setState({
-      canWriteReview
-    });
-  }
+	handleWriteReview = (canWriteReview) => {
+		this.setState({
+			canWriteReview
+		});
+	}
 
-  handleAddWishlist = () => {
-    const newDate = moment();
-    const { quantity } = this.props.formValues;
-    const item = { ...this.state.product, quantity, created: newDate };
+	handleAddWishlist = () => {
+		const newDate = moment();
+		const { quantity } = this.props.formValues;
+		const item = { ...this.state.product, quantity, created: newDate };
 
-    this.props.addWishlist(item);
-  }
+		this.props.addWishlist(item);
+	}
 
-  renderSpecs = (isProductDetail = false) => {
-    const { specs } = this.state.product;
-    const { translate, currentLanguage } = this.props
+	renderSpecs = (isProductDetail = false) => {
+		const { specs } = this.state.product;
+		const { translate, currentLanguage } = this.props
 
-    if (specs.length < 1) return null;
+		if (specs.length < 1) return null;
 
-    else {
-      const key = getTranslatedString(currentLanguage, 'specKey', 'specKeyAr');
-      const value = getTranslatedString(currentLanguage, 'specValue', 'specValueAr');
+		else {
+			const key = getTranslatedString(currentLanguage, 'specKey', 'specKeyAr');
+			const value = getTranslatedString(currentLanguage, 'specValue', 'specValueAr');
 
-      return (
-        <Fragment>
-          {
-            isProductDetail && <h5>{translate("product.specs.title")}</h5>
-          }
-          <div className="d-table">
-            {
-              specs.map((item, idx) => (
-                <div key={idx} className="d-table-row">
-                  <div className="d-table-cell">
-                    {item[key]}:
+			return (
+				<Fragment>
+					{
+						isProductDetail && <h5>{translate("product.specs.title")}</h5>
+					}
+					<div className="d-table">
+						{
+							specs.map((item, idx) => (
+								<div key={idx} className="d-table-row">
+									<div className="d-table-cell">
+										{item[key]}:
                 </div>
-                  <div className="d-table-cell">
-                    {item[value]}
-                  </div>
-                </div>
-              ))}
-          </div>
-        </Fragment>
-      )
-    }
-  }
+									<div className="d-table-cell">
+										{item[value]}
+									</div>
+								</div>
+							))}
+					</div>
+				</Fragment>
+			)
+		}
+	}
 
-  getWishlistActive = () => {
-    const { wishlist } = this.props;
-    const { product } = this.state;
-    const wishlistMatch = wishlist.find(wishlist => wishlist.id === product.id);
+	getWishlistActive = () => {
+		const { wishlist } = this.props;
+		const { product } = this.state;
+		const wishlistMatch = wishlist.find(wishlist => wishlist.id === product.id);
 
-    return wishlistMatch ? 'active' : '';
-  }
+		return wishlistMatch ? 'active' : '';
+	}
 
-  render() {
-    const styles = {
-      loading: {
-        textAlign: 'center'
-      }
-    };
-    const { translate, match: { params }, direction, currentLanguage, recentViewedProducts } = this.props;
-    const { product } = this.state;
-    const compareHeaders = [
-      translate("compareProduct.prices"),
-      translate("compareProduct.customerRating.title")
-    ];
-    const dialog = (
-      <Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
-        <ModalHeader toggle={this.togglePopup}>
-          <p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
-        </ModalHeader>
-        <ModalBody>
-          {this.getDialogComponent()}
-        </ModalBody>
-      </Modal>
-    );
+	render() {
+		const styles = {
+			loading: {
+				textAlign: 'center'
+			}
+		};
+		const { translate, match: { params }, direction, currentLanguage, recentViewedProducts } = this.props;
+		const { product } = this.state;
+		const compareHeaders = [
+			translate("compareProduct.prices"),
+			translate("compareProduct.customerRating.title")
+		];
+		const dialog = (
+			<Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
+				<ModalHeader toggle={this.togglePopup}>
+					<p><i className="icon-checked"></i></p> {translate("dialog.addToCart.title")}
+				</ModalHeader>
+				<ModalBody>
+					{this.getDialogComponent()}
+				</ModalBody>
+			</Modal>
+		);
 
-    const dialogLogin = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
+		const dialogLogin = <Modal dir={direction} contentClassName="container-fluid" isOpen={this.props.modalLogin} toggle={this.togglePopupLogin} >
 			<ModalHeader toggle={this.togglePopupLogin}><Title header={translate("dialog.signin.title")} /></ModalHeader>
 			<ModalBody>
 				<Login toggle={this.togglePopupLogin} />
 			</ModalBody>
 		</Modal>
 
-    const chatMessages = [
-      translate("customerService.product.whatsApp.header"),
-      translate("customerService.product.whatsApp.subHeader")
-    ];
+		const chatMessages = [
+			translate("customerService.product.whatsApp.header"),
+			translate("customerService.product.whatsApp.subHeader")
+		];
 
 
-    const override = `
+		const override = `
             border-color: ${colors.brandColor} !important;
             border-bottom-color: transparent !important;
         `;
 
-    if (_.isEmpty(this.state.product))
-      return (
-        <div className="container-fluid" style={styles.loading}>
-          <ClipLoader
-            css={override}
-            sizeUnit={"px"}
-            size={150}
-            loading={this.state.loading}
-          />
-        </div>
-      )
-    return (
-      <section className="product-details">
-        <div className="pro-main-info">
-          <div className="pro-img-bg"></div>
-          <div className="container-fluid">
-            <div className="row">
-              <nav aria-label="breadcrumb" className="col">
-                <ol className="breadcrumb">
-                  {/* <li className="breadcrumb-item"><a href="#">Home</a></li>
+		if (_.isEmpty(this.state.product))
+			return (
+				<div className="container-fluid" style={styles.loading}>
+					<ClipLoader
+						css={override}
+						sizeUnit={"px"}
+						size={150}
+						loading={this.state.loading}
+					/>
+				</div>
+			)
+		return (
+			<section className="product-details">
+				<div className="pro-main-info">
+					<div className="pro-img-bg"></div>
+					<div className="container-fluid">
+						<div className="row">
+							<nav aria-label="breadcrumb" className="col">
+								<ol className="breadcrumb">
+									{/* <li className="breadcrumb-item"><a href="#">Home</a></li>
                       <li className="breadcrumb-item"><a href="#">Tyres</a></li>
                       <li className="breadcrumb-item"><a href="#">Nexen</a></li>
                       <li className="breadcrumb-item active" aria-current="page">ROADIAN AT PRO RA8</li> */}
-                </ol>
-              </nav>
-            </div>
-            <LargeScreen>
-              <div className="row">
-                <div className="col">
-                  <header className="pro-heading">
-                    <div className="row">
-                      <div className="col-6 d-flex align-items-center">
-                        {/* <a href="#" className="btn back"><i className="icon-back"></i>{Back to Tyers}</a> */}
-                      </div>
-                      <div className="col-lg-6">
-                        <div className="row">
-                          <div className="col">
-                            <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
-                            <ul className="list-inline">
-                              <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
-                              <li>{translate("product.number")} {product.productNumber}</li>
-                            </ul>
-                          </div>
-                          <div className="col-auto">
-                            <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </header>
-                </div>
-              </div>
-            </LargeScreen>
+								</ol>
+							</nav>
+						</div>
+						<LargeScreen>
+							<div className="row">
+								<div className="col">
+									<header className="pro-heading">
+										<div className="row">
+											<div className="col-6 d-flex align-items-center">
+												<Link
+													to="#"
+													isReverseOrder
+													className="btn back"
+													text={translate("product.buttons.back")}
+													icon="icon-back"
+													onClick={goBack.bind(this, this.props.history)}
+												/>
+											</div>
+											<div className="col-lg-6">
+												<div className="row">
+													<div className="col">
+														<h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
+														<ul className="list-inline">
+															<li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
+															<li>{translate("product.number")} {product.productNumber}</li>
+														</ul>
+													</div>
+													<div className="col-auto">
+														<Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+													</div>
+												</div>
+											</div>
+										</div>
+									</header>
+								</div>
+							</div>
+						</LargeScreen>
 
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="pro-img">
-                  <img alt="product Name" src={product.image} onError={handleImageFallback} />
-                </div>
-              </div>
-              <div className="col-lg-6">
-                <DownLargeScreen>
-                  <header className="pro-heading ">
-                    <div className="row">
-                      <div className="col">
-                        <h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
-                        <ul className="list-inline">
-                          <li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
-                          <li>{translate("product.detail")} {product.productNumber}</li>
-                        </ul>
-                      </div>
-                      <UpSmallScreen>
-                        <div className="col-auto">
-                          <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                        </div>
+						<div className="row">
+							<div className="col-lg-6">
+								<div className="pro-img">
+									<img alt="product Name" src={product.image} onError={handleImageFallback} />
+								</div>
+							</div>
+							<div className="col-lg-6">
+								<DownLargeScreen>
+									<header className="pro-heading ">
+										<div className="row">
+											<div className="col">
+												<h1>{getTranslatedObject(product, currentLanguage, 'desc', 'descAr')}</h1>
+												<ul className="list-inline">
+													<li>{translate("general.by")} {getTranslatedObject(product.brand, currentLanguage, 'name', 'nameAr')}</li>
+													<li>{translate("product.detail")} {product.productNumber}</li>
+												</ul>
+											</div>
+											<UpSmallScreen>
+												<div className="col-auto">
+													<Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+												</div>
 
-                      </UpSmallScreen>
-                    </div>
-                  </header>
+											</UpSmallScreen>
+										</div>
+									</header>
 
-                </DownLargeScreen>
-                <ul className="list-unstyled summary">
-                  <form onSubmit={this.props.handleSubmit(this.submit)}>
-                    <li className="pro-review">
-                      <Stars value={getLength(product.reviews)} {...constant.starsRating} />
-                      <span className="review">{getLength(product.reviews)} {translate("product.reviews")}</span>
-                      {/* <p>Made in Coria</p> */}
-                    </li>
-                    {/* <li className="availability">
+								</DownLargeScreen>
+								<ul className="list-unstyled summary">
+									<form onSubmit={this.props.handleSubmit(this.submit)}>
+										<li className="pro-review">
+											<Stars value={getLength(product.reviews)} {...constant.starsRating} />
+											<span className="review">{getLength(product.reviews)} {translate("product.reviews")}</span>
+											{/* <p>Made in Coria</p> */}
+										</li>
+										{/* <li className="availability">
                           <i className="in-icon"></i> In Stock (16) - Ships in 24 to 48 hrs
                         </li> */}
-                    <li className="price">
-                      <p>{product.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span> {/*<label> / each</label>*/}</p>
-                      {/* <p>47.6<span>{translate("general.currency")}</span> <label> / Set</label></p> */}
-                    </li>
-                    <li className="pro-options">
-                      {this.renderSpecs(true)}
-                      {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
-                    </li>
-                    <li className="add-cart row">
-                      <div className="col-sm-auto col-12">
-                        <h5 className="d-sm-none d-inline-block">{translate("general.quantity")}</h5>
-                        <Field
-                          className="col-auto"
-                          type="text"
-                          name="quantity"
-                          component={NumberPicker}
-                        />
-                      </div>
-                      <DownSmallScreen>
-                        <div className="col-auto fav-mob">
-                          <Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
-                        </div>
-                      </DownSmallScreen>
-                      <div className="col">
-                        <Button
-                          type="submit"
-                          className="btn btn-primary"
-                          text={translate("product.buttons.addToCart")}
-                          icon="icon-cart" />
-                      </div>
+										<li className="price">
+											<p>{product.salesPrice.toFixed(2)}<span>{translate("general.currency")}</span> {/*<label> / each</label>*/}</p>
+											{/* <p>47.6<span>{translate("general.currency")}</span> <label> / Set</label></p> */}
+										</li>
+										<li className="pro-options">
+											{this.renderSpecs(true)}
+											{parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
+										</li>
+										<li className="add-cart row">
+											<div className="col-sm-auto col-12">
+												<h5 className="d-sm-none d-inline-block">{translate("general.quantity")}</h5>
+												<Field
+													className="col-auto"
+													type="text"
+													name="quantity"
+													component={NumberPicker}
+												/>
+											</div>
+											<DownSmallScreen>
+												<div className="col-auto fav-mob">
+													<Link to="#" className={`btn add-fav ${this.getWishlistActive()}`} icon="icon-heart" onClick={this.handleAddWishlist} />
+												</div>
+											</DownSmallScreen>
+											<div className="col">
+												<Button
+													type="submit"
+													className="btn btn-primary"
+													text={translate("product.buttons.addToCart")}
+													icon="icon-cart" />
+											</div>
 
-                    </li>
-                    <li className="support">
-                      <CustomerService
-                        messages={chatMessages}
-                        url="//wa.me/966547074452/" />
-                    </li>
-                  </form>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container-fluid">
-          <div className="row pt-sec">
-            <div className="col">
-              <h2 className="details-heading">{translate("product.detail")}</h2>
-              <ul className="list-unstyled pro-details">
-                <li>
-                  {parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
-                  {this.renderSpecs()}
-                </li>
-                {/* <li>
+										</li>
+										<li className="support">
+											<CustomerService
+												messages={chatMessages}
+												url="//wa.me/966547074452/" />
+										</li>
+									</form>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className="container-fluid">
+					<div className="row pt-sec">
+						<div className="col">
+							<h2 className="details-heading">{translate("product.detail")}</h2>
+							<ul className="list-unstyled pro-details">
+								<li>
+									{parse(_.isNull(getTranslatedObject(product, currentLanguage, 'details', 'detailsAr')) ? "" : getTranslatedObject(product, currentLanguage, 'details', 'detailsAr'))}
+									{this.renderSpecs()}
+								</li>
+								{/* <li>
                       <h4>Features</h4>
                       <ul>
                         <li>Balanced tread compound</li>
@@ -431,158 +439,158 @@ class ProductDetail extends Component {
                         <li>Optimized tread pitch sequence</li>
                       </ul>
                     </li> */}
-              </ul>
-              <div className="pt-sec">
-                <h2 className="details-heading">{translate("product.titleReviews")}</h2>
-                <div className="list-unstyled review-details">
-                  <div className="row">
-                    <div className="col totla-main">
-                      <Stars value={product.averageRating} {...constant.starsRating} className="star" />
-                      <p className="result">{`0 ${translate("product.ratingRange")} 5`}</p>
-                      <p className="review-num">
-                        <span>{getLength(product.reviews)}</span>
-                        <span>{translate("product.reviews")}</span>
-                      </p>
-                    </div>
-                    <a className="apply-review col-md-auto" data-toggle="collapse" href="#addReview" role="button" aria-expanded="false" aria-controls="addReview">
-                      <div className="d-flex align-items-center">
-                        {translate("product.writeReview.title")} <i className={`icon-arrow-${right(direction)}`}></i>
-                        <MediumScreen>
-                          <Field
-                            name="rating"
-                            component={RenderRating}
-                          />
-                        </MediumScreen>
-                      </div>
-                    </a>
-                  </div>
-                  <form onSubmit={this.props.handleSubmit(this.submitReview)} className="collapse" id="addReview">
-                    <div className="apply-review">
-                      {translate("product.writeReview.title")}
-                      <Field
-                        name="rating"
-                        component={RenderRating}
-                      />
-                    </div>
-                    <div className="write-review">
-                      <Field
-                        className="form-control input"
-                        id="exampleFormControlTextarea1"
-                        rows="1"
-                        name="review"
-                        component="textarea"
-                        placeholder={translate("product.writeReview.placeholder")} />
+							</ul>
+							<div className="pt-sec">
+								<h2 className="details-heading">{translate("product.titleReviews")}</h2>
+								<div className="list-unstyled review-details">
+									<div className="row">
+										<div className="col totla-main">
+											<Stars value={product.averageRating} {...constant.starsRating} className="star" />
+											<p className="result">{`0 ${translate("product.ratingRange")} 5`}</p>
+											<p className="review-num">
+												<span>{getLength(product.reviews)}</span>
+												<span>{translate("product.reviews")}</span>
+											</p>
+										</div>
+										<a className="apply-review col-md-auto" data-toggle="collapse" href="#addReview" role="button" aria-expanded="false" aria-controls="addReview">
+											<div className="d-flex align-items-center">
+												{translate("product.writeReview.title")} <i className="icon-arrow-right"></i>
+												<MediumScreen>
+													<Field
+														name="rating"
+														component={RenderRating}
+													/>
+												</MediumScreen>
+											</div>
+										</a>
+									</div>
+									<form onSubmit={this.props.handleSubmit(this.submitReview)} className="collapse" id="addReview">
+										<div className="apply-review">
+											{translate("product.writeReview.title")}
+											<Field
+												name="rating"
+												component={RenderRating}
+											/>
+										</div>
+										<div className="write-review">
+											<Field
+												className="form-control input"
+												id="exampleFormControlTextarea1"
+												rows="1"
+												name="review"
+												component="textarea"
+												placeholder={translate("product.writeReview.placeholder")} />
 
-                      <div className="group-buttons">
-                        <Button
-                          type="reset"
-                          className="btn btn-secondary"
-                          text={translate("product.writeReview.cancel")}
-                          onClick={this.handleWriteReview.bind(this, false)}
-                          data-toggle="collapse"
-                          data-target="#addReview"
-                          aria-expanded="false"
-                          aria-controls="addReview" />
-                        <Button
-                          type="submit"
-                          className="btn btn-primary"
-                          text={translate("product.writeReview.sumbit")}
-                          data-toggle="collapse"
-                          data-target="#addReview"
-                          aria-expanded="false"
-                          aria-controls="addReview" />
-                      </div>
-                    </div>
-                  </form>
-                  <ul className="users-review list-unstyled">
-                    {
-                      product.reviews.map((review, idx) => {
-                        return <li className="media">
-                          <span className="user-img">
-                            <img className="default" src="/img/user.svg" />
-                          </span>
-                          <div className="media-body">
-                            <div className="row">
-                              <div className="col">
-                                <h5>{review.customerName}</h5>
-                                <Stars values={review.rating} {...starsRating} />
-                              </div>
-                              <div className="col-auto">
-                                <span className="review-date">{moment(review.created).format('MM/DD/YYYY')}</span>
-                              </div>
-                            </div>
-                            <p>{review.text}</p>
-                          </div>
-                        </li>
-                      })
-                    }
-                  </ul>
-                </div>
-              </div>
-            </div>
-            {/*<aside className="col-auto side-banner d-none d-lg-block">
+											<div className="group-buttons">
+												<Button
+													type="reset"
+													className="btn btn-secondary"
+													text={translate("product.writeReview.cancel")}
+													onClick={this.handleWriteReview.bind(this, false)}
+													data-toggle="collapse"
+													data-target="#addReview"
+													aria-expanded="false"
+													aria-controls="addReview" />
+												<Button
+													type="submit"
+													className="btn btn-primary"
+													text={translate("product.writeReview.sumbit")}
+													data-toggle="collapse"
+													data-target="#addReview"
+													aria-expanded="false"
+													aria-controls="addReview" />
+											</div>
+										</div>
+									</form>
+									<ul className="users-review list-unstyled">
+										{
+											product.reviews.map((review, idx) => {
+												return <li className="media">
+													<span className="user-img">
+														<img className="default" src="/img/user.svg" />
+													</span>
+													<div className="media-body">
+														<div className="row">
+															<div className="col">
+																<h5>{review.customerName}</h5>
+																<Stars values={review.rating} {...starsRating} />
+															</div>
+															<div className="col-auto">
+																<span className="review-date">{moment(review.created).format('MM/DD/YYYY')}</span>
+															</div>
+														</div>
+														<p>{review.text}</p>
+													</div>
+												</li>
+											})
+										}
+									</ul>
+								</div>
+							</div>
+						</div>
+						{/*<aside className="col-auto side-banner d-none d-lg-block">
               <img src="/img/160-banner.jpg" />
             </aside>*/}
-          </div>
-          <div className="row pt-sec">
-            <div className="col products-list">
-              <h3>{translate("offers.recommendation.recentViewed")}</h3>
-              <Swiper {...constant.swiperParams(direction)} ref={this.recentViewed}>
-                {
+					</div>
+					<div className="row pt-sec">
+						<div className="col products-list">
+							<h3>{translate("offers.recommendation.recentViewed")}</h3>
+							<Swiper {...constant.swiperParams(direction)} ref={this.recentViewed}>
+								{
 
-                  recentViewedProducts.map((product, idx) => (
-                    <RenderProducts
-                      key={idx}
-                      translate={translate}
-                      direction={direction}
-                      currentLanguage={currentLanguage}
-                      isListView={false}
-                      product={product} />
-                  ))
-                }
-              </Swiper>
-              <div className="swiper-left" ref={this.swiperLeftHidden} />
-            </div>
-            {dialog}
-            {dialogLogin}
-          </div>
-        </div>
+									recentViewedProducts.map((product, idx) => (
+										<RenderProducts
+											key={idx}
+											translate={translate}
+											direction={direction}
+											currentLanguage={currentLanguage}
+											isListView={false}
+											product={product} />
+									))
+								}
+							</Swiper>
+							<div className="swiper-left" ref={this.swiperLeftHidden} />
+						</div>
+						{dialog}
+						{dialogLogin}
+					</div>
+				</div>
 
-      </section>
-    );
-  }
+			</section>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    initialValues: { quantity: 1 },
-    products: state.api.products,
-    recentViewedProducts: state.customer.recentViewedProducts,
-    customer: state.customer.detail,
-    wishlist: state.customer.wishlist,
-    formValues: getFormValues('Product')(state),
-    translate: getTranslate(state.localize),
-    currentLanguage: getActiveLanguage(state.localize).code,
-    direction: state.customer.direction,
-    isModalAddToCart: state.customer.isModalAddToCart,
-    token: state.customer.token,
-    modalLogin: state.customer.modalLogin,
-  }
+	return {
+		initialValues: { quantity: 1 },
+		products: state.api.products,
+		recentViewedProducts: state.customer.recentViewedProducts,
+		customer: state.customer.detail,
+		wishlist: state.customer.wishlist,
+		formValues: getFormValues('Product')(state),
+		translate: getTranslate(state.localize),
+		currentLanguage: getActiveLanguage(state.localize).code,
+		direction: state.customer.direction,
+		isModalAddToCart: state.customer.isModalAddToCart,
+		token: state.customer.token,
+		modalLogin: state.customer.modalLogin,
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    addToCart: (item) => dispatch(addToCart(item)),
-    addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
-    addWishlist: (product) => dispatch(addWishlist(product)),
-    modalAddToCart: (check) => dispatch(modalAddToCart(check)),
-    setModalLogin: (check) => dispatch(setModalLogin(check)),
-    setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
-  }
+	return {
+		addToCart: (item) => dispatch(addToCart(item)),
+		addRecentViewedProducts: (product) => dispatch(addRecentViewedProducts(product)),
+		addWishlist: (product) => dispatch(addWishlist(product)),
+		modalAddToCart: (check) => dispatch(modalAddToCart(check)),
+		setModalLogin: (check) => dispatch(setModalLogin(check)),
+		setCheckLoginCheckout: (check) => dispatch(setCheckLoginCheckout(check))
+	}
 }
 
 ProductDetail = reduxForm({
-  form: 'Product'
+	form: 'Product'
 })(ProductDetail)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

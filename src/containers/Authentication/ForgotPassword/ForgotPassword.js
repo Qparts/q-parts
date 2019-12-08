@@ -75,7 +75,7 @@ class ForgotPassword extends Component {
                       validate={[validations.required]} />
                   </div>
                   <div className="col-md-auto">
-                    <button type="submit" className="btn btn-primary">{translate("general.buttons.send")}<i className={`icon-arrow-${right(this.props.direction)}`} /></button>
+                    <button type="submit" className="btn btn-primary">{translate("general.buttons.send")}<i className="icon-arrow-right" /></button>
 
                   </div>
                 </div>

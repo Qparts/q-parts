@@ -120,7 +120,7 @@ class Cart extends Component {
 						<label>{translate("orderSummary.total")}</label>
 						<p>{(subtotal + 50).toFixed(2)}<span className="currency">{translate("general.currency")}</span></p>
 					</div>
-					<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
+					<button className="btn btn-primary" type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 				</div>
 				<form className="row" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 					<RenderCartItem
@@ -141,7 +141,7 @@ class Cart extends Component {
 								subtotal={subtotal}
 								submitButton={translate("orderSummary.placeOrder")} />
 							{quantity > 0 &&
-								<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className={`icon-arrow-${right(direction)}`}></i></button>
+								<button className="btn btn-primary" style={{ marginTop: "0px" }} type="button" onClick={this.handleSubmit}>{translate("orderSummary.checkout")}<i className="icon-arrow-right"></i></button>
 							}
 						</div>
 						<CustomerService
@@ -167,7 +167,7 @@ class Cart extends Component {
 					<span>
 						{translate("offers.subTitle")}
 					</span>
-					<Link className="btn btn-primary" to="/">{translate("setting.wishlist.startShopping")}<i className={`icon-arrow-${right(this.props.direction)}`}></i></Link>
+					<Link className="btn btn-primary" to="/">{translate("setting.wishlist.startShopping")}<i className="icon-arrow-right"></i></Link>
 				</figcaption>
 			</div>
 		}

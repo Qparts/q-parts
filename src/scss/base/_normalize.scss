@@ -1,11 +1,17 @@
 *{
   outline: none !important;
 }
+a,p,li, button{
+  @include if-rtl{
+    line-height: 1.1;
+  };
+}
 body{
   overflow-x: hidden;
   height: auto;
   @include if-rtl{
     text-align: right;
+    direction: rtl;
   };
  }
 body,html{

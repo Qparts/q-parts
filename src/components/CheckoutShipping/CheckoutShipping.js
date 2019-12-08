@@ -257,13 +257,13 @@ class CheckoutShipping extends Component {
                         placeholder={translate("form.address.shippingNote")} />
                     </div> */}
                     <div className="footer col-12">
-                      <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon={`icon-arrow-${right(direction)}`} />
+                      <Button type="submit" className="btn btn-primary col-12 col-md-3" text={translate("setting.addressBook.add")} icon={"icon-arrow-right"} />
                       <Button type="reset" className="btn btn-light col-12 col-md-4" onClick={this.cancle} text={translate("form.address.buttons.cancel")} />
                     </div>
                   </div>
                 )}
                 {addressItem}
-                <Button type="button" className="btn btn-secondary" style={canSubmit ? {} : styles.disable} text={translate("form.address.buttons.deliver")} icon={`icon-arrow-${right(direction)}`} onClick={this.handleDelivery} />
+                <Button type="button" className="btn btn-secondary" style={canSubmit ? {} : styles.disable} text={translate("form.address.buttons.deliver")} icon={"icon-arrow-right"} onClick={this.handleDelivery} />
               </form>
             </div>
         }

@@ -14,7 +14,7 @@ export class OrderSteps extends Component {
                     <figure>
                         <div className="position-relative">
                             <div className="figure request"><img src="/img/request.svg" alt="request" /></div>
-                            <span><i className={`icon-arrow-${right(direction)}`}></i></span>
+                            <span><i className="icon-arrow-right"></i></span>
                         </div>
                         <figcaption>
                             <h3>{translate("orderSteps.request.title")}</h3>
@@ -28,7 +28,7 @@ export class OrderSteps extends Component {
                         <div className="position-relative">
                             <span></span>
                             <div className="figure price"><img src={`/img/check-price${grey}.svg`} alt="check-price" /></div>
-                            <span><i className={`icon-arrow-${right(direction)}`}></i></span>
+                            <span><i className="icon-arrow-right"></i></span>
                         </div>
                         <figcaption>
                             <h3>{translate("orderSteps.price.title")}</h3>

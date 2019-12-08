@@ -145,23 +145,6 @@
 @mixin d-inline-block {
   display: inline-block;
 }
-
-@mixin swiper-button-next {
-  @if ($dir == ltr) {
-    #{$right}: -2px;
-  } @else {
-    #{$right}: 30px;
-  }
-}
-
-@mixin swiper-button-prev {
-  @if ($dir == ltr) {
-    #{$right}: 30px;
-  } @else {
-    #{$right}: -2px;
-  }
-}
-
 //@include font
 
 @mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
@@ -307,4 +290,20 @@
   @media only screen and (min-width: 1170px) {
     @content;
   }
+}
+@mixin media-breakpoint-down-xxs {
+  @media only screen and (max-width: 400px) {
+    @content;
+  }
+}
+@mixin flip-h{
+  @include if-rtl{
+    display: inline-block;
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: 'FlipH';
+  };
 }

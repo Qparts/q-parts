@@ -160,7 +160,7 @@ class Vehicle extends Component {
         />
         <div className="row form-submit">
           <div className="col-auto"><Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} /></div>
-          <div className="col"><Button className="btn btn-primary" text={translate("form.vehicle.buttons.add")} icon={`icon-arrow-${right(direction)}`} /></div>
+          <div className="col"><Button className="btn btn-primary" text={translate("form.vehicle.buttons.add")} icon={"icon-arrow-right"} /></div>
         </div>
       </form>
     )

@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import LanguageToggle from '../../../components/LanguageToggle'
 import { toggleSearch } from '../../../utils';
-import { NavSm, NavLg } from '../../Device';
+import { NavSm, NavLg, MediumScreen, DownMediumScreen } from '../../Device';
 
 class Header extends Component {
   constructor(props) {
@@ -106,7 +106,15 @@ class Header extends Component {
     const mainSearch = (
       <div className="main-search">
         <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
-        <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
+        <div className="float-btn">
+          <MediumScreen>
+            <p>{translate("navBar.partNumExText")}<a href="#">{translate("navBar.partNumEx")}</a></p>
+          </MediumScreen>
+          <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
+        </div>
+        <DownMediumScreen>
+          <p className="vin-sm">{translate("navBar.partNumExText")}<a href="#">{translate("navBar.partNumEx")}</a></p>
+        </DownMediumScreen>
       </div>
     );
 
@@ -118,7 +126,8 @@ class Header extends Component {
               <div className="row">
                 <div className="col-auto">
                   <Link className="brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo-ar.svg" />
+                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                    {/*<img alt="qParts" src="/img/qParts-logo-ar.svg" />*/}
                   </Link>
                 </div>
                 <div className="col">
@@ -129,21 +138,21 @@ class Header extends Component {
                 </div>
                 <div className="col-auto">
                   <ul className="data-setting list-inline ">
-                    {/* <li className="ship-country">
-                      <div className="input-group">
-                        <span className="ship-to">Ship to</span>
-                        <Select
+                    <li className="ship-country">
+                      <span className="ship-to">{translate("cart.shipTo")} {translate("general.ksa")}</span>
+                      {/*<div className="input-group">
+                         <Select
                           classNamePrefix="select"
                           isSearchable={false}
                           styles={styles.select}
                           defaultValue={"Saudi Arabia"}
                           options={groupedOptions}
                           formatGroupLabel={formatGroupLabel} />
-                      </div>
-                    </li> */}
-                    {/* <li>
+                      </div>*/}
+                    </li>
+                    <li>
                       <span className="seperator" />
-                    </li> */}
+                    </li>
                     <li>
                       <LanguageToggle
                         localize={localize}
@@ -161,7 +170,8 @@ class Header extends Component {
               <div className="row">
                 <div className="col">
                   <Link className="scroll-dwon-brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo-ar.svg" />
+                    <img alt="qParts" src="/img/qParts-logo.svg" />
+                    {/*<img alt="qParts" src="/img/qParts-logo-ar.svg" />*/}
                   </Link>
                   <ul className="cd-header-buttons">
                     <li><a className={`cd-nav-trigger ${this.state.new}`} href="#cd-primary-nav"><span></span></a></li>

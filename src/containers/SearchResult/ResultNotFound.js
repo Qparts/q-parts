@@ -23,7 +23,7 @@ class ResultNotFound extends Component {
                 <img alt="No Products" src="/img/no-products.svg"/>
                 <div class="media-body">
                   <h5 class="mt-0">{translate("noResult.no-product")}</h5>
-                  <Button className="btn btn-primary" icon={`icon-arrow-${right(direction)}`} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
+                  <Button className="btn btn-primary" icon={"icon-arrow-right"} text={translate("noResult.custom-order")} to={'/quotation-order'}/>
                 </div>
               </div>
             </div>

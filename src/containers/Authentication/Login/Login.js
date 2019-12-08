@@ -169,7 +169,7 @@ class Login extends Component {
 						</Link>
 					</div>
 				</div>
-				<Button disabled={submitting} className="btn btn-primary" text={translate("form.signin.button")} icon={`icon-arrow-${right(direction)}`} />
+				<Button disabled={submitting} className="btn btn-primary" text={translate("form.signin.button")} icon={"icon-arrow-right"} />
 			</form>
 		)
 		return (

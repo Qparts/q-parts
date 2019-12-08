@@ -48,7 +48,12 @@
         h5{
           @include font-size(17px);
           text-transform: uppercase;
-          margin-bottom: 2px;
+          @include if-ltr{
+            margin-bottom: 2px;
+          };
+          @include if-ltr{
+            margin-bottom: 7px;
+          };
         }
         p{
           @include font-size(14px);
@@ -74,7 +79,12 @@
       padding-bottom: 0;
     }
     ul li{
-      margin-bottom: 2px;
+      @include if-ltr{
+        margin-bottom: 2px;
+      };
+      @include if-rtl{
+        margin-bottom: 7px;
+      };
     }
     h5{
       @include font-size(15px);

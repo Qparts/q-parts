@@ -111,7 +111,7 @@ class AddProduct extends Component {
                   <button className="btn btn-gray" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
                 </div>
                 <div className="col">
-                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className="icon-arrow-right" /></button>
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@ class AddProduct extends Component {
                   <button className="btn btn-gray" onClick={this.continueShopping}>{translate("general.buttons.continueShopping")}</button>
                 </div>
                 <div className="col">
-                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className={`icon-arrow-${right(direction)}`} /></button>
+                  <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>{translate("general.buttons.checkout")}<i className="icon-arrow-right" /></button>
                 </div>
               </div>
             </div>

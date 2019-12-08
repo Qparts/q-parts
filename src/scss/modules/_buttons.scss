@@ -7,12 +7,14 @@
   font-weight: 400;
   display: inline-block;
   border-width: 0;
+  @include if-rtl{
+    font-weight: 500;
+  };
   i {
     display: inline-block;
     @include transition(all, 0.5s, ease);
   }
 }
-
 .btn-primary {
   border-style: none;
   background: $brand-color;
@@ -23,8 +25,12 @@
     background: darken($brand-color, 10%);
   }
   i{
-    margin-#{$left}: 10px;
     @include font-size(23px);
+    height: 25px;
+    &.icon-arrow-right{
+      margin-#{$left}: 10px;
+    }
+
   }
   &:hover{
     color: $white;
@@ -45,8 +51,7 @@
     background: darken($dark-gray, 3%);
   }
 }
-
-  .btn-secondary {
+.btn-secondary {
     border-style: none;
     border: 1px solid darken($light-gray, 3%);
     background: $white;
@@ -55,11 +60,9 @@
       background: $light-gray;
     }
   }
-
 .btn-light{
   background-color: $basic-white;
 }
-
 .btn-facebook {
   background: $white;
   border-radius: corner-values(0 0 0 $border-radius-base) !important;
@@ -72,7 +75,6 @@
     width: 25px;
   }
 }
-
 .btn-link {
   color: #37363c;
   text-decoration: none;
@@ -81,7 +83,6 @@
   @include padding-right(0);
   cursor: pointer;
 }
-
 .delete-btn {
   @include transition(all, 0.5s, ease);
   @include opacity(0.6);
@@ -113,5 +114,23 @@
     border-top-#{$right}-radius: 0 !important;
     border-bottom-#{$right}-radius: 0 !important;
     margin-#{$right}: 1px;
+  }
+}
+.btn-black{
+  background: rgba(0, 0, 0, 0.4);
+  color: $light-gray-2;
+  &:hover{
+    color: $light-gray-2;
+
+    background: #000;
+  }
+}
+.btn-gray-overlay{
+  background: rgba(249, 249, 249, 0.2);
+  color: $white;
+  &:hover,
+  &:focus{
+    color: $white;
+
   }
 }

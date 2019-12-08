@@ -113,7 +113,7 @@ class SignupForm extends Component {
               className="btn btn-primary"
               type="submit"
               text={translate("form.signup.button")}
-              icon={`icon-arrow-${right(direction)}`} />
+              icon={"icon-arrow-right"} />
           </div>
         </div>
       </form>

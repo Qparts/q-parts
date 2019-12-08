@@ -4,10 +4,10 @@ export let proxyHost = 'www.q.parts';
 const isProduction = process.env.REACT_APP_NODE_ENV === 'production';
 
 if (isProduction) {
-    backendHost = `https://${proxyHost}`;
+	backendHost = `https://${proxyHost}`;
 } else {
-    proxyHost = 'qtest.fareed9.com';
-    backendHost = `http://${proxyHost}`;
+	proxyHost = 'qtest.fareed9.com';
+	backendHost = `http://${proxyHost}`;
 }
 
 export const API_ROOT = `${backendHost}/api`;

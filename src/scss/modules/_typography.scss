@@ -1,12 +1,13 @@
 /*FONT*/
   @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
-  @import url('https://fonts.googleapis.com/css?family=Cairo:300,400,700&amp;subset=arabic');
+  @import url('https://fonts.googleapis.com/css?family=Tajawal:300,400,500,700,800&display=swap');
 body{
   @include if-ltr{
     font-family: 'Roboto', sans-serif;
   };
   @include if-rtl{
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 500;
   };
   color: $basic-gray;
   @include font-size(13px);

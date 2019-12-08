@@ -73,7 +73,7 @@ class Wishlist extends Component {
                   to={'/'}
                   className='btn btn-primary'
                   text={translate("setting.wishlist.startShopping")}
-                  icon={`icon-arrow-${right(this.props.direction)}`}
+                  icon="icon-arrow-right"
                 />
               </figcaption>
             </div>

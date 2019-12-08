@@ -231,7 +231,17 @@
 			"رقم الجوال غير صالح",
 			"Invalid mobile number"
 		]
-	}
+	},
+  "VINInput":{
+    "placeholder":[
+      "اكتب رقم الهيكل",
+      "Enter:  VIN/Frame"
+    ],
+    "label":[
+      "رقم الهيكل",
+      "VIN/Frame"
+    ]
+  }
   },
   "tires": {
     "title": [
@@ -294,6 +304,10 @@
     ]
   },
   "nav": {
+    "vehicleParts": [
+      "قطع غيار السيارة",
+      "Vehicle Parts"
+    ],
     "tires": [
       "الاطارات",
       "Tires"
@@ -384,7 +398,7 @@
     ],
     "wiresAndCables": [
       "اسلاك",
-      "Wires and Cables"
+      "Wires & Cables"
     ],
     "Covers": [
       "اغطية",
@@ -416,7 +430,7 @@
     ],
     "bodyworkCleaningAndCare": [
       "التنظيف و العناية بالسيارة",
-      "Bodywork Cleaning and Care"
+      "Bodywork Cleaning & Care"
     ],
     "carRefrigerator": [
       "ثلاجات السيارة",
@@ -436,11 +450,11 @@
     ],
     "washCleanersAndPolishers": [
       "معدات تنظيف و تلميع السيارة",
-      "Cleaners and Polishers"
+      "Cleaners & Polishers"
     ],
     "sportsAndOutdoors": [
       "مستلزمات الأنشطة الخارجية",
-      "Sports and Outdoors"
+      "Sports & Outdoors"
     ],
     "country": [
       "البلد",
@@ -448,7 +462,7 @@
     ],
     "shippingAndDelivery": [
       "الشحن و التوصيل",
-      "Shipping and Delivery"
+      "Shipping & Delivery"
     ],
     "returns": [
       "الاسترجاع",
@@ -464,7 +478,7 @@
     ],
     "termsAndConditions": [
       "الشروط و الاحكام",
-      "Terms and Conditions"
+      "Terms & Conditions"
     ],
     "oneOfTheIncubatedProjects": [
       "واحد من المشاريع المحتضنة",
@@ -480,7 +494,7 @@
     ],
     "cleaning": [
       "تنظيف هيك السيارة والعناية بها",
-      "Bodywork Cleaning and Care"
+      "Bodywork Cleaning & Care"
     ],
     "children": [
       "مقعد للأطفال",
@@ -510,25 +524,25 @@
     ],
     "request": [
       "أرسل لنا طلبك و سوف نرسل لك أفضل الأسعار و جميع التفاصيل الضرورية ",
-      "Send Us Your Order and We Will Respond With the Best Prices and Necessary Details"
+      "We Move Fast. Send Us Your Order And We Will Respond With The Best Prices And Necessary Details"
     ],
     "steps": {
       "title": [
-        "خطوات",
-        "steps"
+        "لدينا قطع الغيار التي تحتاجها",
+        "We have the parts you need"
       ],
       "subTitle": [
-        "للحصول على قطع الغيار الخاصة بك في أي مكان تريد",
-        "To get your parts anywhere you like"
+        "خطوات للحصول على قطع الغيار الخاصة بك في أي مكان تريد",
+        "steps To get your parts any where you like"
       ],
       "requestParts": {
         "title": [
           "اطلب القطع",
-          "Order Parts"
+          "Tell Us what you need"
         ],
         "subTitle": [
           "املأ بيانات سيارتك والقطع التي تريدها",
-          "Fill in your vehicle data and the parts you want"
+          "Fill In Your Vehicle Data And The Parts You Want"
         ]
       }
     },
@@ -635,17 +649,12 @@
     "trusted": [
       "احصل على قوة التسوق الموثوق",
       "Get the Trusted Shopping Power"
-    ],
-    "vendor": {
-      "items": [
-        "نوفر أكثر من ٥٠٠٠٠ قطعة",
-        "We offer more than 50000 different items"
-      ],
-      "joinUs": [
-        "إذا كنت بائعا, انضم إلى Q.PARTS",
-        "If You Are a Vendor, Join Q.PARTS Now!"
-      ]
-    },
+	],
+	"maintenance": [
+		"الحفاظ على كفاءة المحرك",
+		"Maintain Engine Efficiency"
+	],
+
     "oil": [
       "الزيوت و السوائل",
       "Oils"
@@ -738,7 +747,15 @@
     },
     "search": [
       "البحث عن طريق رقم القطعة ، اسم المنتج",
-      "Search by Part Number,  Product Name"
+      "Search by Part Number and  Product Name"
+    ],
+    "partNumExText":[
+      "مثال لرقم القطعة :",
+      "Part Number EX: "
+    ],
+    "partNumEx":[
+      "879310KD00",
+      "879310KD00"
     ],
     "home": [
       "الصفحة الرئيسية",
@@ -1004,7 +1021,7 @@
     },
     "vehicle": {
       "title": [
-        "كراج السيارات",
+        "كراج",
         "Garage"
       ],
       "make": [
@@ -1888,7 +1905,7 @@
         ],
         "shippingCondition": [
           "الشحن والشروط",
-          "Shipping and conditions"
+          "Shipping & conditions"
         ]
       },
       "orderDetail": {
@@ -2429,8 +2446,8 @@
           "Select a year"
         ],
         "vin": [
-          "أدخل اسم/وصف القطعة أو صورة ",
-          "Enter part name/description or upload an image"
+          "أدخل اسم القطعة أو صور",
+          "Enter part name or upload an image"
         ]
       }
     },
@@ -2488,12 +2505,8 @@
         "Add to Cart"
       ],
       "subtitle": [
-        "اضف عنوان الشحن",
-        "Add your shipping address"
-      ],
-      "subtitleSpan": [
-        "و قم باختيار طريقة الدفع المفضلة لديك",
-        "and select your favorite payment method"
+        "اضف عنوان الشحن و قم باختيار طريقة الدفع المفضلة لديك",
+        "Add your shipping address and select your favorite payment method"
       ]
     },
     "receive": {
@@ -2763,7 +2776,21 @@
     "email": [
       "عنوان البريد الإلكتروني غير صالح",
       "Invalid email address"
-    ]
+	],
+	"paymentViaCard": {
+		"ccNumber": [
+			"رقم بطاقة الائتمان غير صالح",
+			"the credit card number is invalid"
+		],
+		"ccYear": [
+			"تاريخ بطاقة الائتمان غير صالح",
+			"Invalid credit card date"
+		],
+		"ccCvv": [
+			"رقم كود غير صالح",
+			"Invalid CVV number"
+		]
+	}
   },
   "orderStatus": {
     "completed": [
@@ -2814,7 +2841,7 @@
   "terms": {
     "header": [
       "الشروط والأحكام",
-      "Terms and Conditions"
+      "Terms & Conditions"
     ],
     "privacyPolicy": {
       "privacyPolicy": [
@@ -3238,5 +3265,68 @@
       "فئات الملحقات",
       "Accessories Categories"
     ]
+  },
+	"category": {
+		"accessories": {
+			"top": [
+				"أفضل اكسسوارات",
+				"Top Accessories"
+			]
+		},
+		"bodyworkCleaningAndCare": {
+			"title": [
+				"التنظيف",
+				"Bodywork"
+			],
+			"subTitle": [
+				"و العناية بالسيارة",
+				"Cleaning & Care"
+			]
+		}
+	},
+  "homePage": {
+    "vendorHeader": [
+      "هل أنت صاحب ورشة أو محل؟ انضم إلينا الآن!!",
+      "Are you the owner of a shop ? Join us now !!"
+    ],
+    "vendorSubHeader": [
+      "تستطيع الوصول لأكثر من 100 ألف عميل يوميا..",
+      "You Can Reach More Than 100,000 Customers A Day "
+    ],
+    "vendorJoinUs": [
+      "إضم إلى كيو بارتز",
+      "Join Q.parts"
+    ],
+    "shopBrandHeader":[
+      "تسوق قطع غيار حسب الماركة",
+      "Shop Parts by brand"
+    ],
+    "shopByCateg":[
+      "تسوق حسب الفئة",
+      "Shop by categories"
+    ]
+  },
+  "vehicleInfo": {
+    "popupVinNumTitle":[
+      "أدخل معلومات سيارتك",
+      "Enter Your Vehicle Information"
+    ],
+    "popupVinNumSubTitle":[
+      "أضف سيارتك في الجراج الخاص بك والحصول على توصيات المنتج",
+      "Store vehicles in your garage and Get product recommendations"
+    ],
+    "browseCatalogueBtn":[
+      "تصفح الكتالوج",
+      "Browse Catalogue"
+    ],
+    "VINNumberEx":[
+      "مثال رقم الهيكل",
+      "VIN Number EX"
+    ],
+    "carId":[
+      "أين تجد رقم الهيكل؟",
+      "Where is my VIN?"
+    ]
   }
+
 }

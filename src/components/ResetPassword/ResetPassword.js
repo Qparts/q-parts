@@ -19,7 +19,7 @@ class resetPassword extends Component {
   }
   render() {
     const { handleSubmit, showPhoneNo, translate, direction } = this.props;
-    const updateBtn = <p>{translate("resetPassword.update")}<i className={`icon-arrow-${right(direction)}`}></i></p>
+    const updateBtn = <p>{translate("resetPassword.update")}<i className="icon-arrow-right"></i></p>
     const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
     return (
       <form className="one-col gray-input" onSubmit={handleSubmit}>
@@ -68,7 +68,7 @@ class resetPassword extends Component {
             <Button className="btn btn-gray" type="reset" text={translate("general.buttons.cancel")} onClick={this.onCancle} />
           </div>
           <div className="col">
-            <Button className="btn btn-primary" text={translate("resetPassword.update")} icon={`icon-arrow-${right(direction)}`} />
+            <Button className="btn btn-primary" text={translate("resetPassword.update")} icon={"icon-arrow-right"} />
           </div>
         </div>
 

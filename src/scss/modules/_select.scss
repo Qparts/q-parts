@@ -37,14 +37,14 @@
     margin-top: 2px !important;
     height: auto;
     display: block;
-    border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
-    z-index: 3;
+    border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base);
+    z-index: 5;
     @include box-shadow;
     &::after {
       bottom: 100%;
       #{$right}: 10px;
       border: solid transparent;
-      content: " ";
+      content: ' ';
       height: 0;
       width: 0;
       position: absolute;
@@ -58,15 +58,21 @@
     .select__menu-list {
       padding-top: 0 !important;
       padding-bottom: 0;
-      border-radius: $border-radius-base 0 $border-radius-base $border-radius-base;
+      border-radius: corner-values($border-radius-base 0 $border-radius-base $border-radius-base);
       .select__option {
         color: $basic-black;
         text-align: $left;
         cursor: pointer;
-        @include font-size(13px);
         border-bottom: 1px solid $light-gray;
         background: $white;
         white-space: nowrap;
+        @include if-ltr{
+          @include font-size(13px);
+        };
+        @include if-ltr{
+          @include font-size(14px);
+          font-weight: 500;
+        };
         &:last-child {
           border-bottom-width: 0;
         }
@@ -124,6 +130,10 @@
   padding: 10px 12px;
   color: $basic-black;
   @include opacity(0.6);
+  @include if-rtl{
+    @include font-size(16px);
+    font-weight: 500;
+  };
   span {
     display: block;
   }
