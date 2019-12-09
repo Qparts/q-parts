@@ -4,7 +4,8 @@ import {
 	reduxForm,
 	change as changeFieldValue,
 	FieldArray,
-	getFormValues
+	getFormValues,
+	formValueSelector
 } from 'redux-form';
 import Link from '../../components/UI/Link';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
@@ -17,18 +18,28 @@ import { getTranslatedObject, renderTopIfError } from '../../utils';
 import { isAuth } from '../../utils';
 import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
+import { addPaymentMethod } from '../../actions/cartAction';
 import {
 	setQuotationOrder,
 	setCheckLoginQuotationOrder,
-	setQuotationOrderInfo
+	setQuotationOrderInfo,
+	completePayment,
+	setValidCredit,
+	setLoading,
+	setQuotationValues
 } from '../../actions/customerAction';
+import { throwNetworkError } from '../../actions/networkError';
 import _ from 'lodash';
 import { getTranslate } from 'react-localize-redux';
 import './QuotationRequest.css';
 import Title from '../UI/Title';
 import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
-import { postQuotation } from '../../utils/api';
+import {
+	postQuotation,
+	postWireTransferQuotation,
+	postCCQuotation
+} from '../../utils/api';
 import { getFormattedVehicles } from '../../utils/components';
 import * as validations from '../../utils';
 import * as normalizing from '../../utils';
@@ -38,6 +49,9 @@ import { styles } from '../../constants';
 import { ClipLoader } from 'react-spinners';
 import Radio from '../UI/Radio';
 import { LargeScreen} from '../../components/Device';
+import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
+import { Alert } from 'reactstrap';
+import { W, V } from '../../constants';
 const vehicles = 'vehicles';
 const signin = 'signin';
 class QuotationRequest extends Component {
@@ -49,7 +63,8 @@ class QuotationRequest extends Component {
 			dialogType: signin,
 			garage: null,
 			loading: false,
-			loadedFromGarage: false
+			loadedFromGarage: false,
+			paymentMethod: 'V'
 		};
 
 		if (isAuth(this.props.token)) {
@@ -61,10 +76,16 @@ class QuotationRequest extends Component {
 		this.props.setQuotationOrderInfo([]);
 		this.fillVehicleInfo();
 	};
+
+	componentWillUnmount = () => {
+		this.props.setValidCredit(true);
+	};
+
 	componentDidUpdate = (prevProps, prevState) => {
 		const { submitFailed } = this.props;
 		if (
 			_.has(this.props.formValues, 'garage') &&
+			prevProps.formValues &&
 			this.props.formValues.garage !== prevProps.formValues.garage
 		) {
 			const selectedVehicle = this.props.formValues.garage.vehicle;
@@ -140,7 +161,24 @@ class QuotationRequest extends Component {
 			}
 		);
 	};
+
+	setPaymentMethod = paymentMethod => {
+		this.setState({ paymentMethod });
+	};
+
 	handleSubmit = values => {
+		this.props.setQuotationValues({
+			make: values.make,
+			year: values.year,
+			garage: values.garage,
+			vin: values.vin,
+			vinImage: values.vinImage,
+			quotationItems: values.quotationItems,
+			region: values.region,
+			city: values.city,
+			mobile: values.mobile,
+			paymentMethod: this.state.paymentMethod
+		});
 		this.setState({
 			loading: true
 		});
@@ -156,6 +194,7 @@ class QuotationRequest extends Component {
 		} = values;
 		const customerVehicleId = garage ? garage.id : null;
 		const imageAttached = vinImage ? true : false;
+		const { paymentMethod } = this.state;
 		vin = customerVehicleId ? null : _.isUndefined(vin) ? null : vin;
 		vinImage = vinImage ? vinImage : false;
 		makeId = customerVehicleId ? garage.vehicle.make.id : makeId;
@@ -177,8 +216,8 @@ class QuotationRequest extends Component {
 			});
 			this.props.setQuotationOrderInfo(values);
 			this.togglePopup();
-		} else {
-			postQuotation({
+		} else if (paymentMethod === W) {
+			postWireTransferQuotation({
 				cityId,
 				makeId,
 				customerVehicleId,
@@ -187,7 +226,8 @@ class QuotationRequest extends Component {
 				vin,
 				imageAttached,
 				vinImage,
-				mobile
+				mobile,
+				paymentMethod
 			}).then(res => {
 				this.props.setQuotationOrder(false);
 				return this.props.history.push(
@@ -196,6 +236,46 @@ class QuotationRequest extends Component {
 					}`
 				);
 			});
+		} else if (paymentMethod === V) {
+			const ccMonth = this.props.cardHolder.ccMonth.value;
+			const ccYear = this.props.cardHolder.ccYear.value;
+			const creditCardValues = {
+				...this.props.cardHolder,
+				ccMonth,
+				ccYear
+			};
+
+			postCCQuotation({
+				cityId,
+				makeId,
+				customerVehicleId,
+				quotationItems,
+				vehicleYearId,
+				vin,
+				imageAttached,
+				vinImage,
+				mobile,
+				paymentMethod,
+				cardHolder: creditCardValues
+			})
+				.then(res => {
+					if (res.status === 202) {
+						this.props.setQuotationOrder(false);
+						window.location = res.data.transactionUrl;
+					} else if (res.status === 200) {
+						this.props.setQuotationOrder(false);
+						return this.props.history.push(
+							`/quotation-order/confirmation?quotationId=${
+								res.data.quotationId
+							}`
+						);
+					}
+				})
+				.catch(error => {
+					this.props.setValidCredit(false);
+					this.props.setLoading(false);
+					this.props.throwNetworkError(error);
+				});
 		}
 	};
 	handleVehicle = event => {
@@ -944,6 +1024,51 @@ class QuotationRequest extends Component {
 							</div>
 						</LargeScreen>
 					</div>
+						<div className='sec-shadow'>
+							<CheckoutPayment
+								paymentTitle
+								direction={this.props.direction}
+								translate={translate}
+								addPaymentMethod={this.props.addPaymentMethod}
+								completePayment={this.props.completePayment}
+								checkout={this.props.checkout}
+								setValidCredit={this.props.setValidCredit}
+								hidePaymentButton={true}
+								onChangePaymentMethod={this.setPaymentMethod}
+							/>
+						</div>
+					
+						<div className='row submit-qout'>
+							<div className='col-lg'>
+								<p>
+									{translate(
+										'quotationOrder.agreement.title'
+									)}{' '}
+									<Link
+										to='#'
+										text={translate(
+											'quotationOrder.agreement.linkOne'
+										)}
+									/>{' '}
+									{translate('general.and')}{' '}
+									<Link
+										to='/privacyPolicy'
+										text={translate(
+											'quotationOrder.agreement.linkTwo'
+										)}
+									/>
+									.
+								</p>
+							</div>
+							<div className='col-lg-auto'>
+								<Button
+									type='submit'
+									className='btn btn-primary'
+									text={translate('general.send')}
+									icon={`icon-arrow-${right(direction)}`}
+								/>
+							</div>
+						</div>
 				</section>
 				{dialog}
 			</Fragment>
@@ -957,9 +1082,21 @@ QuotationRequest = reduxForm({
 
 const mapStateToProps = state => {
 	const customerObj = state.customer;
+	const selector = formValueSelector('CheckoutPayment');
+
+	const { ccNumber, ccMonth, ccYear, ccCvc, ccName } = selector(
+		state,
+		'ccNumber',
+		'ccMonth',
+		'ccYear',
+		'ccCvc',
+		'ccName'
+	);
 
 	return {
-		initialValues: getFormValues('QuotationRequest')(state),
+		initialValues:
+			getFormValues('QuotationRequest')(state) ||
+			customerObj.quotationValues,
 		customer: customerObj.detail,
 		token: state.customer.token,
 		cusVehicles: customerObj.detail.vehicles,
@@ -968,7 +1105,16 @@ const mapStateToProps = state => {
 		formValues: getFormValues('QuotationRequest')(state),
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
-		quotationOrderInfo: state.customer.quotationOrderInfo
+		quotationOrderInfo: state.customer.quotationOrderInfo,
+		checkout: state.cart.checkout,
+		isValidcreditCard: state.customer.isValidcreditCard,
+		cardHolder: {
+			ccNumber,
+			ccMonth,
+			ccYear,
+			ccCvc,
+			ccName
+		}
 	};
 };
 
@@ -979,7 +1125,13 @@ const mapDispatchToProps = dispatch => {
 			getRegions,
 			setQuotationOrder,
 			setCheckLoginQuotationOrder,
-			setQuotationOrderInfo
+			setQuotationOrderInfo,
+			addPaymentMethod,
+			completePayment,
+			setValidCredit,
+			setLoading,
+			throwNetworkError,
+			setQuotationValues
 		},
 		dispatch
 	);

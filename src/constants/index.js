@@ -5,7 +5,7 @@ const BANK_TRANSFER_AR = 'التحويل المصرفي';
 export const RADIX = 10;
 export const TAB_ONE = 0;
 export const TAB_TWO = 1;
-export const ADD_VEHICLE = 'ADD_VEHICLE'
+export const ADD_VEHICLE = 'ADD_VEHICLE';
 export const ON_SOCIAL_MEDIA_AUTH = 'ON_SOCIAL_MEDIA_AUTH';
 export const ON_SOCIAL_MEDIA_LINK = 'ON_SOCIAL_MEDIA_LINK';
 export const CONNECT = 'connect';
@@ -24,7 +24,7 @@ export const serverErrorField = {
 	email: 'email',
 	newPassword: 'newPassword',
 	password: 'password'
-}
+};
 export const BEST_SELLER = 'Best Seller';
 export const OFFERS = 'Offers';
 export const RECENT_VIEWED = 'Recent Viewed';
@@ -61,11 +61,13 @@ export const years = [
 	{ value: 2026, label: '2026' },
 	{ value: 2027, label: '2027' },
 	{ value: 2028, label: '2028' },
-	{ value: 2029, label: '2029' },
+	{ value: 2029, label: '2029' }
 ];
 
 export const CREDIT_CARD = 'Credit Card';
 export const BANK_TRANSFER = 'Bank Transfer';
+export const W = 'W';
+export const V = 'V';
 
 export const DECREMENT = 'decrement';
 export const INCREMENT = 'increment';
@@ -86,51 +88,50 @@ export const ltr = 'ltr';
 export const paymentMethod = {
 	name: BANK_TRANSFER,
 	nameAr: BANK_TRANSFER_AR
-}
+};
 
-export const getCategoryId = (translate) => (
+export const getCategoryId = translate =>
 	new Map([
-		[1, translate("nav.oilFilter")],
-		[2, translate("nav.oilFilter")],
-		[3, translate("nav.airFilter")],
-		[4, translate("nav.acFilter")],
-		[5, translate("nav.sparkPlugs")],
-		[6, translate("nav.brakePads")],
-		[7, translate("nav.motorOil")],
-		[8, translate("nav.gearOil")],
-		[9, translate("nav.oil")],
-		[10, translate("navBar.accessories")],
-		[11, translate("nav.carAccessorise")],
-		[12, translate("nav.wiresAndCables")],
-		[13, translate("nav.tires")],
-		[14, translate("nav.carRefrigerator")],
-		[15, translate("nav.childSeat")],
-		[16, translate("nav.bodyworkCleaningAndCare")],
-		[17, translate("nav.carMats")],
-		[18, translate("nav.Covers")],
-		[19, translate("nav.carFirstAidKit")],
-		[20, translate("nav.exteriorAccessorise")],
-		[21, translate("nav.InternalLights")],
-		[22, translate("nav.toolKits")],
-		[23, translate("nav.sunCurtains")],
-		[24, translate("nav.carSunShade")],
-		[25, translate("nav.towingTools")],
-		[26, translate("nav.carCare")],
-		[27, translate("nav.coolant")],
-		[28, translate("nav.tools")],
-		[29, translate("nav.handTools")],
-		[30, translate("nav.electricalTools")],
-		[31, translate("nav.tyreInflator")],
-		[33, translate("nav.repairEquipment")],
-		[34, translate("nav.motorCareLiquids")],
-		[35, translate("nav.washCleanersAndPolishers")],
-		[36, translate("nav.sportsAndOutdoors")],
-		[37, translate("nav.spareParts")],
-		[38, translate("nav.batteries")],
-	])
-)
+		[1, translate('nav.oilFilter')],
+		[2, translate('nav.oilFilter')],
+		[3, translate('nav.airFilter')],
+		[4, translate('nav.acFilter')],
+		[5, translate('nav.sparkPlugs')],
+		[6, translate('nav.brakePads')],
+		[7, translate('nav.motorOil')],
+		[8, translate('nav.gearOil')],
+		[9, translate('nav.oil')],
+		[10, translate('navBar.accessories')],
+		[11, translate('nav.carAccessorise')],
+		[12, translate('nav.wiresAndCables')],
+		[13, translate('nav.tires')],
+		[14, translate('nav.carRefrigerator')],
+		[15, translate('nav.childSeat')],
+		[16, translate('nav.bodyworkCleaningAndCare')],
+		[17, translate('nav.carMats')],
+		[18, translate('nav.Covers')],
+		[19, translate('nav.carFirstAidKit')],
+		[20, translate('nav.exteriorAccessorise')],
+		[21, translate('nav.InternalLights')],
+		[22, translate('nav.toolKits')],
+		[23, translate('nav.sunCurtains')],
+		[24, translate('nav.carSunShade')],
+		[25, translate('nav.towingTools')],
+		[26, translate('nav.carCare')],
+		[27, translate('nav.coolant')],
+		[28, translate('nav.tools')],
+		[29, translate('nav.handTools')],
+		[30, translate('nav.electricalTools')],
+		[31, translate('nav.tyreInflator')],
+		[33, translate('nav.repairEquipment')],
+		[34, translate('nav.motorCareLiquids')],
+		[35, translate('nav.washCleanersAndPolishers')],
+		[36, translate('nav.sportsAndOutdoors')],
+		[37, translate('nav.spareParts')],
+		[38, translate('nav.batteries')]
+	]);
 
 export const paymentStatus = {
 	paid: 'paid',
-	failed: 'failed',
-}
+	failed: 'failed'
+};

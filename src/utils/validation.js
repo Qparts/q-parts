@@ -1,3 +1,5 @@
+import { months } from '../constants';
+
 export const required = value => (value ? undefined : true);
 export const maxLength = max => value =>
 	value && value.length > max
@@ -88,8 +90,10 @@ export const ccCvv = value =>
 	value && !/^([0-9]{3,4})$/.test(value) ? 'Invalid CVV number' : undefined;
 
 export const ccDate = (value, allValues) => {
-	const { ccMonth } = allValues;
-	const expiryDate = new Date(`${value.label}-${ccMonth.label}`);
+	let { ccMonth } = allValues;
+	ccMonth = ccMonth ? ccMonth.label : months[0].label;
+
+	const expiryDate = new Date(`${value.label}-${ccMonth}`);
 
 	return value && expiryDate < new Date() ? 'Invalid date' : undefined;
 };

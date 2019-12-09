@@ -5524,7 +5524,7 @@ button.bg-dark:focus {
   position: relative !important;
 }
 
-.position-absolute, .pro-img-bg, .main-cat li a figure span, .main-cat li a figure figcaption, .scroll-dwon-brand, .input-file, .hero-content {
+.position-absolute, .pro-img-bg, .main-cat li a figure span, .main-cat li a figure figcaption, .scroll-dwon-brand-ar, .scroll-dwon-brand, .input-file, .hero-content {
   position: absolute !important;
 }
 
@@ -11149,6 +11149,40 @@ ul.cd-secondary-nav .go-back button::after {
 @media only screen and (max-width: 1169px) {
   .scroll-dwon-brand img {
     margin-top: 8px;
+    width: 100%;
+  }
+}
+
+.scroll-dwon-brand-ar {
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  width: 40px;
+  overflow: hidden;
+}
+@media only screen and (max-width: 1169px) {
+  .scroll-dwon-brand-ar {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    width: 110px;
+    left: 60px;
+  }
+}
+.scroll-dwon-brand-ar img {
+  max-width: 200px;
+  width: 107px;
+  margin-top: 2px;
+}
+@media only screen and (max-width: 1169px) {
+  .scroll-dwon-brand-ar img {
+    margin-top: 8px;
+    margin-right: 65px;
     width: 100%;
   }
 }
@@ -20386,6 +20420,7 @@ form {
 #checkout-payment .payment_option .credit-container form .RenderField .form-control {
   border-radius: 20px 0 20px 20px !important;
   border: none;
+  height: 50px;
   background: #f8f8f8;
 }
 #checkout-payment .payment_option .credit-container form .RenderField label {
@@ -20418,19 +20453,12 @@ form {
 }
 #checkout-payment .payment_option .credit-container form .card-date .years, #checkout-payment .payment_option .credit-container form .card-date-mobile .years {
   margin-top: 31px;
-  padding: 0px;
 }
 #checkout-payment .payment_option .credit-container form .card-date .years .select-input .css-10nd86i, #checkout-payment .payment_option .credit-container form .card-date-mobile .years .select-input .css-10nd86i {
   border-radius: 0 0 20px 0;
 }
 #checkout-payment .payment_option .credit-container form .card-date .months .select-input .css-10nd86i, #checkout-payment .payment_option .credit-container form .card-date-mobile .months .select-input .css-10nd86i {
   border-radius: 20px 0 0 20px;
-}
-#checkout-payment .payment_option .credit-container form .card-date .RenderField, #checkout-payment .payment_option .credit-container form .card-date-mobile .RenderField {
-  margin-top: 4px;
-}
-#checkout-payment .payment_option .credit-container form .card-date .RenderField .form-control, #checkout-payment .payment_option .credit-container form .card-date-mobile .RenderField .form-control {
-  padding: 8px;
 }
 #checkout-payment .payment_option .credit-container form .card-date .select-input label, #checkout-payment .payment_option .credit-container form .card-date-mobile .select-input label {
   font-family: Roboto;
@@ -20569,6 +20597,12 @@ form {
 }
 #checkout-payment .payment_option .footer-payment .btn-primary i, #checkout-payment .payment_option .footer-payment .signin-list li:first-child a i, .signin-list li:first-child #checkout-payment .payment_option .footer-payment a i {
   margin-left: 10px !important;
+}
+#checkout-payment .payment_option .payment_expiration_into {
+  align-items: flex-end;
+}
+#checkout-payment .payment_option .input-sec .form-row:not(:last-child) {
+  margin-bottom: 40px;
 }
 
 #checkout-order {

@@ -255,6 +255,37 @@ ul.cd-secondary-nav {
     }
   }
 }
+
+
+.scroll-dwon-brand-ar {
+  @extend .position-absolute;
+  top: 0;
+  #{$left}: 0;
+  @include transition(all, 0.3s, ease);
+  @include opacity(0);
+  width: 40px;
+  overflow: hidden;
+  @include nav-sm-media {
+    @include opacity(1);
+    width: 110px;
+    #{$left}: 60px;
+  }
+  img {
+    max-width: 200px;
+    width: 107px;
+    margin-top: 2px;
+    @include if-rtl{
+      position: relative;
+      left: 64px;
+    }
+    @include nav-sm-media {
+      margin-top: 8px;
+      margin-right: 65px;
+      width: 100%;
+    }
+  }
+}
+
 .slideUp {
   -webkit-transform: translateY(-65px);
   transform: translateY(-65px);

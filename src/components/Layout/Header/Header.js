@@ -3,7 +3,8 @@ import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import LanguageToggle from '../../../components/LanguageToggle'
 import { toggleSearch } from '../../../utils';
-import { NavSm, NavLg, MediumScreen, DownMediumScreen } from '../../Device';
+import { NavSm, NavLg } from '../../Device';
+import { getTranslatedString } from "../../../utils";
 
 class Header extends Component {
   constructor(props) {
@@ -101,8 +102,7 @@ class Header extends Component {
       },
     ];
 
-    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, cart } = this.props;
-
+    const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, currentLanguage, cart } = this.props;
     const mainSearch = (
       <div className="main-search">
         <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
@@ -126,8 +126,7 @@ class Header extends Component {
               <div className="row">
                 <div className="col-auto">
                   <Link className="brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
-                    {/*<img alt="qParts" src="/img/qParts-logo-ar.svg" />*/}
+                    <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
                   </Link>
                 </div>
                 <div className="col">
@@ -169,9 +168,8 @@ class Header extends Component {
             <div className="container-fluid">
               <div className="row">
                 <div className="col">
-                  <Link className="scroll-dwon-brand" to="/">
-                    <img alt="qParts" src="/img/qParts-logo.svg" />
-                    {/*<img alt="qParts" src="/img/qParts-logo-ar.svg" />*/}
+                  <Link className={getTranslatedString(currentLanguage, "scroll-dwon-brand", "scroll-dwon-brand-ar")} to="/">
+                    <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
                   </Link>
                   <ul className="cd-header-buttons">
                     <li><a className={`cd-nav-trigger ${this.state.new}`} href="#cd-primary-nav"><span></span></a></li>

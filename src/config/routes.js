@@ -23,6 +23,7 @@ import TermsAndConditions from '../components/TermsAndConditions/TermsAndConditi
 import PrivacyPolicy from '../components/TermsAndConditions/PrivacyPolicy';
 import ReturnPolicy from '../components/TermsAndConditions/ReturnPolicy';
 import ShippingAndDeliveryPolicy from '../components/TermsAndConditions/ShippingAndDeliveryPolicy';
+import QuotationPaymentResponse from '../components/QuotationPaymentResponse/QuotationPaymentResponse';
 
 import HomeSelectedVehicle from '../components/HomeSelectedVehicle/HomeSelectedVehicle';
 import ListingVechile from '../containers/SearchResult/ListingVechile';
@@ -157,7 +158,15 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
 		exact: true,
 		component: CheckoutConfirmationOrder,
 		translate,
-		direction
+		direction,
+		defaultLang
+	},
+	{
+		path: '/quotation-payment-response:quotationId?/:paymentStatus?',
+		component: QuotationPaymentResponse,
+		direction: direction,
+		isAuth: isAuth,
+		redirectTo: '/'
 	},
 	{
 		path: '/privacy',

@@ -1,53 +1,79 @@
 import { API_ROOT } from '../config/api';
-import { PRODUCT_SERVICE, CART_SERVICE, QUOTATION_SERVICE, LOCATION_SERVICE, CUSTOMER_SERVICE } from '../actions/constants';
+import {
+	PRODUCT_SERVICE,
+	CART_SERVICE,
+	QUOTATION_SERVICE,
+	LOCATION_SERVICE,
+	CUSTOMER_SERVICE
+} from '../actions/constants';
 
 import axios from 'axios';
 
-export const getProduct = (props) => {
-    const { match: { params: { productId } } } = props;
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`)
-}
+export const getProduct = props => {
+	const {
+		match: {
+			params: { productId }
+		}
+	} = props;
+	return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/product/${productId}`);
+};
 
-export const getGeneralSearch = (query) => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/search/general${query}`)
-}
+export const getGeneralSearch = query => {
+	return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/search/general${query}`);
+};
 
 export const getBestSeller = () => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`)
-}
+	return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/best-sellers`);
+};
 
 export const getOffers = () => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`)
-}
+	return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/products/offers`);
+};
 
-export const postCreditCard = (data) => {
-    return axios.post(`${API_ROOT}${CART_SERVICE}/cart/credit-card`, data)
-}
+export const postCreditCard = data => {
+	return axios.post(`${API_ROOT}${CART_SERVICE}/cart/credit-card`, data);
+};
 
-export const postWireTransfer = (data) => {
-    return axios.post(`${API_ROOT}${CART_SERVICE}/cart/wire-transfer`, data)
-}
+export const postWireTransfer = data => {
+	return axios.post(`${API_ROOT}${CART_SERVICE}/cart/wire-transfer`, data);
+};
 
-export const paymentResponse = (query) => {
-    return axios.get(`${API_ROOT}${CART_SERVICE}/payment/3dsecure-response${query}`)
-}
+export const paymentResponse = query => {
+	return axios.get(
+		`${API_ROOT}${CART_SERVICE}/payment/3dsecure-response${query}`
+	);
+};
 
-export const postQuotation = (data) => {
-    return axios.post(`${API_ROOT}${QUOTATION_SERVICE}`, data);
-}
+export const postQuotation = data => {
+	return axios.post(`${API_ROOT}${QUOTATION_SERVICE}`, data);
+};
+export const postWireTransferQuotation = data => {
+	return axios.post(`${API_ROOT}${QUOTATION_SERVICE}/wire-transfer`, data);
+};
+
+export const postCCQuotation = data => {
+	return axios.post(`${API_ROOT}${QUOTATION_SERVICE}/credit-card`, data);
+};
+
+export const quotationPaymentResponse = query => {
+	return axios.get(`${API_ROOT}${QUOTATION_SERVICE}/payment${query}`);
+};
 
 export const getBanks = () => {
-    return axios.get(`${API_ROOT}${CART_SERVICE}/banks`)
-}
+	return axios.get(`${API_ROOT}${CART_SERVICE}/banks`);
+};
 
-export const getCountry = async (countryId) => {
-    return await axios.get(`${API_ROOT}${LOCATION_SERVICE}/${countryId}`);
-}
+export const getCountry = async countryId => {
+	return await axios.get(`${API_ROOT}${LOCATION_SERVICE}/${countryId}`);
+};
 
 export const getPopularOilBrands = () => {
-    return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/popular-brands/oil`)
-}
+	return axios.get(`${API_ROOT}${PRODUCT_SERVICE}/popular-brands/oil`);
+};
 
-export const postSubscribeCustomer = (subscription) => {
-	return axios.post(`${API_ROOT}${CUSTOMER_SERVICE}/notification/register`, subscription)
-}
+export const postSubscribeCustomer = subscription => {
+	return axios.post(
+		`${API_ROOT}${CUSTOMER_SERVICE}/notification/register`,
+		subscription
+	);
+};
