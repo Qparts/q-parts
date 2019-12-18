@@ -15,7 +15,6 @@ import { DownLargeScreen, LargeScreen } from '../../components/Device';
 class HomeDetails extends Component {
 	constructor(props) {
 		super(props);
-
 		this.toggle = this.toggle.bind(this);
 		this.state = {
 			garage: null,
@@ -419,7 +418,6 @@ class HomeDetails extends Component {
 										<div><Link to="#"><img src="/img/brand-x-4.jpg"></img></Link></div>
 										<div><Link to="#"><img src="/img/brand-x-5.jpg"></img></Link></div>
 										<div><Link to="#"><img src="/img/brand-x-6.jpg"></img></Link></div>
-
 									</Swiper>
 									<div className="swiper-left"></div>
 							</div>

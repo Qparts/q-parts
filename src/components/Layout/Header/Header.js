@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
 import LanguageToggle from '../../../components/LanguageToggle'
 import { toggleSearch } from '../../../utils';
-import { NavSm, NavLg } from '../../Device';
+import { NavSm, NavLg, DownMediumScreen, MediumScreen } from '../../Device';
 import { getTranslatedString } from "../../../utils";
 
 class Header extends Component {
@@ -133,7 +133,6 @@ class Header extends Component {
                   <NavLg>
                     {mainSearch}
                   </NavLg>
-
                 </div>
                 <div className="col-auto">
                   <ul className="data-setting list-inline ">

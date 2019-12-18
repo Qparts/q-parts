@@ -10186,7 +10186,7 @@ body {
   margin-top: 0;
   font-size: 13px;
   font-size: 0.8125rem;
-  top: 7px;
+  top: 18px;
 }
 .float-label.disabled {
   cursor: not-allowed;
@@ -12323,6 +12323,7 @@ ul.cd-secondary-nav .go-back button::after {
 }
 
 .shop-brand {
+  padding: 15px;
   padding-bottom: 60px;
 }
 .shop-brand .products-list {

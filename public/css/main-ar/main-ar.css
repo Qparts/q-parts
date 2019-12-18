@@ -13346,6 +13346,7 @@ ul.cd-secondary-nav .go-back button::after {
 }
 
 .shop-brand {
+  padding: 15px;
   padding-bottom: 60px;
 }
 .shop-brand .products-list {
