@@ -9,6 +9,12 @@ class RenderField extends Component {
 	constructor(props) {
 		super(props);
 		this.passwordStrengthRef = createRef();
+		this.textInput = createRef();
+		this.state = {
+			value: this.props.value
+		}
+		this.focusTextInput = this.focusTextInput.bind(this);
+
 	}
 
 	componentDidMount() {
@@ -132,7 +138,14 @@ class RenderField extends Component {
 	getErrorClass = () =>
 		this.isRequired() && !this.isWarning() ? 'error' : '';
 
-	render() {
+		focusTextInput() {
+			// Explicitly focus the text input using the raw DOM API
+			// Note: we're accessing "current" to get the DOM node
+			this.textInput.current.focus();
+		  }
+
+		  render() {
+
 		const {
 			hasPasswordStrength,
 			setPasswordScore,
@@ -200,7 +213,11 @@ class RenderField extends Component {
 								placeholder={this.props.placeholder}
 								{...this.props.input}
 								{...renderFieldProps}
+								value={this.state.value}
+
 							/>
+						
+							{/* <button onClick={(e)=>{e.preventDefault();this.focusTextInput()}}>ay7aga</button> */}
 							<label>{this.props.label}</label>
 							{this.invalidMessage()}
 							{this.warningMessage()}
@@ -214,6 +231,7 @@ class RenderField extends Component {
 								placeholder={this.props.placeholder}
 								{...this.props.input}
 								{...renderFieldProps}
+								value={this.state.value}
 							/>
 							{this.invalidMessage()}
 							{this.warningMessage()}

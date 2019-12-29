@@ -13,6 +13,6 @@ export const handleNetworkError = (dispatch, error) => {
             type: NETWORK_FAILURE,
             payload: error
         })
-        throw new Error(error);
+        throw new Error( error);
     }
 }

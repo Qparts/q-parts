@@ -7,6 +7,7 @@
     margin-bottom: 0;
     display: flow-root;
     align-items: center;
+    padding-top: 25px;
     @include if-ltr{
       font-weight: 400;
     };
@@ -208,7 +209,7 @@
     }
   }
   .gray-bg{
-    padding-top: 30px;
+    padding-top: 50px;
   }
   .btn-group{
      .btn:first-child:not(:last-child){

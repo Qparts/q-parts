@@ -138,7 +138,9 @@
 }
 .hero-content {
   @extend .position-absolute;
-  left: 0;
+  @include if-rtl{
+    left: -113px;
+  }
   width: 100%;
   z-index: 2;
   h1 {
@@ -562,8 +564,10 @@
     padding-top: 5px;
     padding-right: 15px;
     padding-left: 15px;
+    display: flex;
+    justify-content: space-between;
     p{
-      display: inline-block;
+      display: flex;
       margin-bottom: 0;
       @include font-size(13px);
       color: $light-charcoal-grey;
@@ -595,6 +599,10 @@
         }
       }
     }
+  }
+  .popover {
+    position: absolute;
+    top: -122px !important;
   }
   .actions{
     @include media-breakpoint-down(sm){
@@ -872,7 +880,7 @@
     @include font-size(20px);
     display: flex;
     align-items: center;
-    height: 100%;
+    height: inherit;
     text-transform: uppercase;
     @include media-breakpoint-down(sm){
       margin-top: 12px;

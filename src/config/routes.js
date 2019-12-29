@@ -128,10 +128,10 @@ export const routes = (isAuth, direction, defaultLang, translate) => [
 		currentLanguage: defaultLang,
 		data: {}
 	},
-	// {
-	//     path: "/accessories",
-	//     component: Accessories
-	// },
+	{
+	    path: "/accessories",
+	    component: Accessories
+	},
 	{
 		path: '/tires',
 		component: Tires,

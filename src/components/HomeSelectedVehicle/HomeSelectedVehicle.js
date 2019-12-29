@@ -15,6 +15,8 @@ import { Field , reduxForm } from 'redux-form';
 import { DownLargeScreen, LargeScreen , MediumScreen} from '../../components/Device';
 import Radio from '../UI/Radio';
 import { withRouter } from 'react-router-dom';
+
+
 class selectedVehicle extends Component{
   constructor(props) {
     super(props)
@@ -122,7 +124,7 @@ class selectedVehicle extends Component{
                             Skoda Octavia 2012
                           </p>
                         </div>
-                        <div className="col-auto">
+                        {/* <div className="col-auto">
                           <a href="#" className="btn btn-gray-secondary" onClick={this.toggle}><i className="icon-vehicle"></i>Change Vehicle</a>
                             <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-xl vin-modal">
                               <ModalHeader toggle={this.toggle}>
@@ -247,7 +249,7 @@ class selectedVehicle extends Component{
           											</form>
                               </ModalBody>
                             </Modal>
-                        </div>
+                        </div> */}
                       </div>
                       <form className="gray-input vin-input">
                           <Field

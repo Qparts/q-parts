@@ -6,4 +6,5 @@ export const initialState = {
 	city: null,
 	products: [],
 	flage: false,
+	isVehicleSelected:false
 }

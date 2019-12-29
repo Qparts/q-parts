@@ -224,7 +224,6 @@ class Tires extends Component {
 										<li className=" col-4 col-lg-2"><Link to="/"><img src="../img/maxxis.png" alt="Maxxis Tires" /></Link></li>
 									</ul>
 								</div>
-
 							</div>
 						</div>
 						<div className="row pt-sec">
