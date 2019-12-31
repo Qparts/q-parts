@@ -18,7 +18,12 @@ export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 export const SET_DEFAULT_LANG = 'SET_DEFAULT_LANG';
 export const FLAGE = 'FLAGE';
-export const IS_VEHICLE_SELECTED="IS_VEHICLE_SELECTED=";
+export const IS_VEHICLE_SELECTED="IS_VEHICLE_SELECTED";
+export const SET_SELECTED_VEHICLE = "SET_SELECTED_VEHICLE"
+export const GET_SELECTED_VEHICLE = "GET_SELECTED_VEHICLE"
+
+
+
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -161,9 +166,21 @@ export const getFlage = (flage) => {
   }
 }
 
-  export const getSelectedVehicle = (value)=>{
+  export const checkIsVehicleSelected = (value)=>{
     return{
       type: IS_VEHICLE_SELECTED , payload:value
     }
 }
 
+
+ export const setSelectedVehicle = (value)=>{
+   return{
+     type: SET_SELECTED_VEHICLE , payload:value 
+   }
+ }
+
+ export const getSelectedVehicle = (value)=>{
+  return{
+    type: GET_SELECTED_VEHICLE , payload:value 
+  }
+}

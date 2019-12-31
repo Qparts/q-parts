@@ -115,6 +115,20 @@ const Nav = (
                         <li><Link to="/listing?query=&page=1&category=33" onClick={close}>{translate("nav.repairEquipment")}</Link></li>
                     </ul>
                 </li>
+
+                <li className="has-children">
+                    <a href="#">{translate("tires.title")}</a>
+                    {/* <ul className="cd-secondary-nav is-hidden">
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
+                        <li><Link to="/listing?query=&page=1&category=12" onClick={close}>{translate("nav.wiresAndCables")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=19" onClick={close}>{translate("nav.carFirstAidKit")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=17" onClick={close}>{translate("nav.carMats")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=16" onClick={close}>{translate("nav.bodyworkCleaningAndCare")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=15" onClick={close}>{translate("nav.childSeat")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
+                    </ul> */}
+                </li>
+
                 <li className="has-children">
                     <a href="#">{translate("nav.accessorise")}</a>
                     <ul className="cd-secondary-nav is-hidden">
@@ -139,6 +153,32 @@ const Nav = (
                         */}
                     </ul>
                 </li>
+              
+                <li className="has-children">
+                    <a href="#">{translate("nav.sportsAndOutdoors")}</a>
+                    {/* <ul className="cd-secondary-nav is-hidden">
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
+                        <li><Link to="/listing?query=&page=1&category=12" onClick={close}>{translate("nav.wiresAndCables")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=19" onClick={close}>{translate("nav.carFirstAidKit")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=17" onClick={close}>{translate("nav.carMats")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=16" onClick={close}>{translate("nav.bodyworkCleaningAndCare")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=15" onClick={close}>{translate("nav.childSeat")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
+                    </ul> */}
+                </li>
+
+                <li className="has-children">
+                    <a href="#">{translate("nav.quotationOrder")}</a>
+                    {/* <ul className="cd-secondary-nav is-hidden">
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
+                        <li><Link to="/listing?query=&page=1&category=12" onClick={close}>{translate("nav.wiresAndCables")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=19" onClick={close}>{translate("nav.carFirstAidKit")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=17" onClick={close}>{translate("nav.carMats")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=16" onClick={close}>{translate("nav.bodyworkCleaningAndCare")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=15" onClick={close}>{translate("nav.childSeat")}</Link></li>
+                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
+                    </ul> */}
+                </li>
                   {/*
                 <li className="has-children">
                     <a href="#">{translate("nav.carCare")}</a>
@@ -150,7 +190,7 @@ const Nav = (
                 </li>
                 <li><Link to="/listing?query=&page=1&category=36" onClick={close}>{translate("nav.sportsAndOutdoors")}</Link></li>
                 */}
-                <li><Link to="#" onClick={close}>{translate("navBar.vendor")}</Link></li>
+                {/* <li><Link to="#" onClick={close}>{translate("navBar.vendor")}</Link></li> */}
                 <li className="sep"></li>
                 <li className="nav-sm has-children">
                     <a href="#">{translate("nav.country")}</a>

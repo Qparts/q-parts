@@ -11,15 +11,11 @@ export class Home extends Component {
      }
  }
 
- getSelectedVehecile = (data)=>{
-   this.setState({isVehicleSelected : data})
- }
- 
  render() {
     console.log(this.props);
         return (
             <Fragment>
-                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles} isVehicleSelected={this.getSelectedVehecile} />
+                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles}  />
 
                 <HomeDetails
                     products={this.props.products}

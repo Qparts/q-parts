@@ -13,6 +13,7 @@ import RenderField from '../../components/RenderField/RenderField';
 import { Link } from "react-router-dom";
 import { UncontrolledPopover, PopoverBody } from 'reactstrap';
 import Radio from '../../components/UI/Radio';
+import {  checkIsVehicleSelected , setSelectedVehicle } from '../../actions/apiAction';
 
 
 
@@ -23,19 +24,15 @@ export class ManualForm extends Component {
 		super(props);
 		this.toggle = this.toggle.bind(this);
 		this.toggleChangeVehivle = this.toggleChangeVehivle.bind(this);
-
+		console.log(this.props, 'props veh')
 		this.state = {
 			vehicle: [],
-			selectedVehicle: {
-				id: null
-			},
+			selectedVehicle:props.selectedVehicle,
 			selectedVehicleModel: {
 				id: null
 			},
-			selectedVehicleYear: {
-				id: null
-			},
-			isVehicleSelected: false,
+			selectedVehicleYear: props.selectedVehicle,
+			isVehicleSelected: props.isVehicleSelected,
 			modal: false,
 			vin: "JTHBJ46G9B2420251",
 			vinInput: "",
@@ -56,8 +53,12 @@ export class ManualForm extends Component {
 		}));
 	}
 
-	handleSubmit = () => {
-		this.setState({ isVehicleSelected: true })
+	handleSubmit = async () => {
+		await this.setState({
+			isVehicleSelected: true		
+		});
+        this.props.onSelectedVehicle(this.state.selectedVehicleYear)
+		this.props.onVehicleSelected(this.state.isVehicleSelected);
 		// this.props.history.push(`/selected-vehicle?make=${this.state.selectedVehicle.name}&model=${this.state.selectedVehicleModel.label}&year=${this.state.selectedVehicleYear.label}`);
 	};
 
@@ -65,10 +66,8 @@ export class ManualForm extends Component {
 	render() {
 		const { vehicles, currentLanguage  } = this.props;
 		const { isVehicleSelected } = this.state;
-		let selectedVechileModule;
-
-		console.log(isVehicleSelected , ">>>>>>>>>");
-		 
+		console.log(this.state.selectedVehicle, 'selected')
+		let selectedVechileModule;		 
 
 		
 		const vehicleMake = vehicles.map(vehicle => {
@@ -173,12 +172,13 @@ export class ManualForm extends Component {
 
 
 		if (isVehicleSelected) {
+			console.log('selceted1dsda')
 			selectedVechileModule =
 				<div>
 					<section className="select-vehicle">
 						<picture>
-							<source media="(max-width: 650px)" srcset={this.state.selectedVehicleYear.imageLarge} />
-							<source media="(max-width: 465px)" srcset={this.state.selectedVehicleYear.imageSmall} />
+							<source media="(max-width: 650px)" srcSet={this.state.selectedVehicleYear.imageLarge} />
+							<source media="(max-width: 465px)" srcSet={this.state.selectedVehicleYear.imageSmall} />
 							<img alt="" src={this.state.selectedVehicleYear.imageLarge} />
 						</picture>
 						<div className="container-fluid">
@@ -464,7 +464,7 @@ export class ManualForm extends Component {
 									/>
 								</div>
 								<div className="col-md-auto">
-									<button type="submit" className='btn btn-primary'>{this.props.translate('general.buttons.go')} <i className="icon-arrow-right"></i></button>
+									<button type="submit" className='btn btn-primary' >{this.props.translate('general.buttons.go')} <i className="icon-arrow-right"></i></button>
 								</div>
 							</div>
 						</form>
@@ -481,25 +481,33 @@ export class ManualForm extends Component {
 }
 
 
-const mapStateToProps = state => ({
-	translate: getTranslate(state.localize)
-});
+const mapStateToProps = state => {
+	console.log(state.customer, '>>>state')
+	return ({
+		translate: getTranslate(state.localize),
+		isVehicleSelected: state.api.isVehicleSelected,
+		selectedVehicle : state.api.selectedVehicle
+	});
+}
 
 
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		getVehicleService: () =>
-// 			dispatch(getVehicleService())
-// 	};
-// };
 
 ManualForm = reduxForm({
 	form: 'ManualForm'
 })(ManualForm);
 
+
 const withManualForm = withRouter(ManualForm);
+
+const mapDispatchToProps = dispatch => {
+	return {
+		onVehicleSelected :(value)=>dispatch(checkIsVehicleSelected(value)),
+        onSelectedVehicle : (value)=>dispatch(setSelectedVehicle(value))
+	};
+};
+
 
 export default connect(
 	mapStateToProps,
-	// mapDispatchToProps
+	mapDispatchToProps
 )(withManualForm);

@@ -22,7 +22,6 @@ import { UncontrolledPopover, PopoverBody } from 'reactstrap';
 import { MediumScreen , DownMediumScreen } from '../../components/Device';
 import TiresForm from './tires-form';
 import './shop-tires.css';
-import {  getSelectedVehicle } from '../../actions/apiAction';
 
 
 const { Component, Fragment, createRef } = React;
@@ -134,10 +133,6 @@ class HomeDetails extends Component {
 
 	render() {
 		const { bestSeller } = this.state;
-
-		console.log(this.props.isVehicleSelected() ,">>>>>>>");
-		
-
 		const {
 			translate,
 			direction,
@@ -599,7 +594,6 @@ const mapDispatchToProps = dispatch => {
 	return {
 		changeFieldValue: (format, field, value) =>
 			dispatch(changeFieldValue(format, field, value)),
-		isVehicleSelected :(value)=>dispatch(getSelectedVehicle(value))
 	};
 };
 

@@ -198,11 +198,8 @@ class Header extends Component {
               </NavSm>
             </div>
           </nav>
-
         </div>
-
       </Fragment>
-
     );
   }
 }

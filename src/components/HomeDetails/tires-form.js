@@ -30,10 +30,11 @@ export class TiresForm extends Component {
 	}
 
 	
-	submit = values => {
+	// submit = () => {
+	// 	console.log("ay7aga");
 		
-		
-	}
+	// 	this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth}&height=${this.state.selectedTireHeigth}&diameter=${this.state.selectedTireDiameter}`);
+	// }
 	
 	render() {
 		const { translate } = this.props
@@ -48,7 +49,6 @@ export class TiresForm extends Component {
 
 		
         const tireWidth = tires.map(tire => {
-			console.log(tire.heigths.find(heigth => heigth.widthId === this.state.selectedTireWidth.id));
 			return{
 				...tire,
 				label: getTranslatedObject(
@@ -150,7 +150,11 @@ export class TiresForm extends Component {
 							<div className="row">
 								<div className=" offset-sm-1 offset-10 col offset-md-0 col-md-12">
 									<MediumScreen>
-										<form className="form-row tires-set-form" onSubmit={this.props.handleSubmit(this.submit)}>
+										<form 
+										onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}} 
+										// onSubmit={this.props.handleSubmit(this.submit)}
+										className="form-row tires-set-form" 
+										>
 											<div className="col-md col-12">
 												<Field
 													onChange={e =>
@@ -216,7 +220,9 @@ export class TiresForm extends Component {
 					<section className="tire-set-xs gray-bg">
 						<div className="container-fluid">
 							<div className="row">
-								<form className="offset-0 col col-sm-10 offset-sm-1 offset-md-0 col-md-12 tires-set-form" onSubmit={this.props.handleSubmit(this.submit)}>
+								<form className="offset-0 col col-sm-10 offset-sm-1 offset-md-0 col-md-12 tires-set-form" 
+								onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}} 
+								>
 									<div className="input-container">
 										<Field
 											name="width"

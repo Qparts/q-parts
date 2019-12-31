@@ -317,6 +317,7 @@ class SearchResult extends Component {
 				</Card>
 		));
 	}
+	
 	handleClick = (item) => {
 		var that = this;
 		setTimeout(function () {
