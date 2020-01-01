@@ -3,7 +3,15 @@ export const initialState = {
 	countriesRegions: [],
 	countries: [],
 	vehicles: [],
+	selectedVehicles: [
+	],
 	selectedVehicle: {
+		id: null
+	},
+	selectedVehicleModel: {
+		id: null,
+	},
+	selectedVehicleYear: {
 		id: null
 	},
 	city: null,

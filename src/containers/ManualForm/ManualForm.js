@@ -13,25 +13,19 @@ import RenderField from '../../components/RenderField/RenderField';
 import { Link } from "react-router-dom";
 import { UncontrolledPopover, PopoverBody } from 'reactstrap';
 import Radio from '../../components/UI/Radio';
-import {  checkIsVehicleSelected , setSelectedVehicle } from '../../actions/apiAction';
-
-
+import { setSelectedVehicles, checkIsVehicleSelected , setSelectedVehicle, setSelectedVehicleModel, setSelectedVehicleYear, unsetVehcileFromSelectedVehicles } from '../../actions/apiAction';
 
 
 
 export class ManualForm extends Component {
 	constructor(props) {
 		super(props);
-		this.toggle = this.toggle.bind(this);
-		this.toggleChangeVehivle = this.toggleChangeVehivle.bind(this);
-		console.log(this.props, 'props veh')
+		this.toggleChangeVehivle = this.toggleChangeVehivle.bind(this)
 		this.state = {
-			vehicle: [],
-			selectedVehicle:props.selectedVehicle,
-			selectedVehicleModel: {
-				id: null
-			},
-			selectedVehicleYear: props.selectedVehicle,
+			selectedVehicles: props.selectedVehicles,
+			selectedVehicle: props.selectedVehicle,
+			selectedVehicleModel: props.selectedVehicleModel,
+			selectedVehicleYear: props.selectedVehicleYear,
 			isVehicleSelected: props.isVehicleSelected,
 			modal: false,
 			vin: "JTHBJ46G9B2420251",
@@ -41,24 +35,60 @@ export class ManualForm extends Component {
 		}
 	}
 
+
+	async componentDidUpdate() {
+		if (this.state.selectedVehicle !== this.props.selectedVehicle) {
+			await this.setState({
+				selectedVehicle: this.props.selectedVehicle
+			})
+		}
+		if (this.state.selectedVehicles != this.props.selectedVehicles) {
+			await this.setState({
+				selectedVehicles: this.props.selectedVehicles
+			})
+		}
+		if (this.state.selectedVehicleModel != this.props.selectedVehicleModel) {
+			await this.setState({
+				selectedVehicleModel: this.props.selectedVehicleModel
+			})
+		}
+		if (this.props.selectedVehicleYear != this.state.selectedVehicleYear) {
+			await this.setState({
+				selectedVehicleYear: this.props.selectedVehicleYear
+			})
+		}
+		if (this.props.isVehicleSelected != this.state.isVehicleSelected) {
+			await this.setState({
+				isVehicleSelected: this.props.isVehicleSelected
+			})
+		}
+	}
+
 	toggle() {
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));
 	}
 
-	toggleChangeVehivle() {
-		this.setState(prevState => ({
-			changeVehcileModal: !prevState.changeVehcileModal
-		}));
+
+	async toggleChangeVehivle() {
+		await this.setState({
+			changeVehcileModal: true
+		});
 	}
 
+	
 	handleSubmit = async () => {
-		await this.setState({
-			isVehicleSelected: true		
-		});
-        this.props.onSelectedVehicle(this.state.selectedVehicleYear)
-		this.props.onVehicleSelected(this.state.isVehicleSelected);
+		let selectedVehicle = this.state.selectedVehicle;
+		delete selectedVehicle.models;
+		selectedVehicle = {
+			...selectedVehicle,
+			year: this.state.selectedVehicleYear,
+			model: this.state.selectedVehicleModel
+		}
+        this.props.onSelectedVehicle(selectedVehicle)
+        this.props.setSelectedVehicles(selectedVehicle);
+		this.props.onVehicleSelected(true);
 		// this.props.history.push(`/selected-vehicle?make=${this.state.selectedVehicle.name}&model=${this.state.selectedVehicleModel.label}&year=${this.state.selectedVehicleYear.label}`);
 	};
 
@@ -66,7 +96,6 @@ export class ManualForm extends Component {
 	render() {
 		const { vehicles, currentLanguage  } = this.props;
 		const { isVehicleSelected } = this.state;
-		console.log(this.state.selectedVehicle, 'selected')
 		let selectedVechileModule;		 
 
 		
@@ -100,6 +129,7 @@ export class ManualForm extends Component {
 		let vehicleModels = null
 		let selectedVehicle = vehicles.find(vehicle => vehicle.models.some(model => model.makeId === this.state.selectedVehicle.id))
 		if (selectedVehicle) {
+
 			vehicleModels = selectedVehicle.models.map(model => {
 				return {
 					...model,
@@ -131,10 +161,11 @@ export class ManualForm extends Component {
 			</div>
 		);
 
-
 		let vehicleYears = null;
 		if (vehicleModels && this.state.selectedVehicleModel && this.state.selectedVehicleModel.years) {
-			vehicleYears = vehicleModels.find(model => model.id === this.state.selectedVehicleModel.id).years.map(year => {
+			let vehicleModel;
+			if (vehicleModel = vehicleModels.find(model => model.id === this.state.selectedVehicleModel.id)) {
+				vehicleYears = vehicleModel.years.map(year => {
 				return {
 					label: getTranslatedObject(
 						year,
@@ -148,6 +179,10 @@ export class ManualForm extends Component {
 					imageSmall: year.imageSmall
 				}
 			});
+			} else {
+				vehicleYears = []
+			}
+			
 		}
 		else {
 			vehicleYears = [{ value: "no options", label: "no options" }]
@@ -172,7 +207,6 @@ export class ManualForm extends Component {
 
 
 		if (isVehicleSelected) {
-			console.log('selceted1dsda')
 			selectedVechileModule =
 				<div>
 					<section className="select-vehicle">
@@ -264,7 +298,7 @@ export class ManualForm extends Component {
 													</MediumScreen>
 													<a href="#" className="btn btn-gray-secondary dropdown-toggle" role="button" id="garage-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 														<img className="icon-garage" alt="garage" src="/img/garage.svg" /> {this.props.translate('form.vehicle.title')}
-														<span className="vec-count">2</span>
+														<span className="vec-count">{this.props.selectedVehicles.length}</span>
 													</a>
 													<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
 														<div class="media">
@@ -275,45 +309,32 @@ export class ManualForm extends Component {
 															</div>
 														</div>
 														<ul className="list-unstyled">
-															<li className="radio-custom" key="1">
-																<a href="#" className="row">
-																	<div className="col-auto">
-																		<Radio
-																			checked="true"
-																			type="radio"
-																			id="1"
-																			name="radioGroup"
-																		/>
-																	</div>
-																	<p className="col">
-																		2016 Ford Focus
-                                            <span>VIN(000 000 000 000 11)</span>
-																	</p>
-																	<div className="col-auto vec-actions">
-																		<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>{this.props.translate('searchResult.buttons.catalog')}</a>
-																		<a href="#" className="link">{this.props.translate('setting.accountSetting.save')}</a>
-																	</div>
-																</a>
-															</li>
-															<li className="radio-custom" key="1">
-																<a href="#" className="row">
-																	<div className="col-auto">
-																		<Radio
-																			checked="true"
-																			type="radio"
-																			id="1"
-																			name="radioGroup"
-																		/>
-																	</div>
-																	<p className="col">
-																		2016 Ford Focus
-                                                                        </p>
-																	<div className="col-auto vec-actions">
-											                        	<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>{this.props.translate('searchResult.buttons.catalog')}</a>
-												                        <a href="#" className="link">{this.props.translate('setting.accountSetting.save')}</a>
-																	</div>
-																</a>
-															</li>
+																{this.state.selectedVehicles.map((vehicle, key) => {
+																	return (
+																	    <li className="radio-custom" key={key}>
+																			<div href="#" className="row">
+																				<div className="col-auto">
+																					<Radio
+																						checked={this.state.selectedVehicle.id === vehicle.id}
+																						type="radio"
+																						id="1"
+																						name="radioGroup"
+																					/>
+																				</div>
+																				<p className="col">
+																					{vehicle.name}
+			                                            							<span>VIN(000 000 000 000 11)</span>
+																				</p>
+																				<div className="col-auto vec-actions">
+																					<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>{this.props.translate('searchResult.buttons.catalog')}</a>
+																					<a href="#"  className="link" onClick={() => this.props.onDeleteSelectedVehicle(vehicle)}>Delete</a>
+																				</div>
+																			</div>
+																		</li>
+																	)
+																})}
+															
+															
 														</ul>
 														<div className="vec-list-actions">
 															<div className="main-action">
@@ -412,10 +433,7 @@ export class ManualForm extends Component {
 								<div className="col-md float-label">
 									<Field
 										value={this.state.selectedVehicle}
-										onChange={e => this.setState(() => ({
-											selectedVehicle: e,
-											selectedVehicleModel: ''
-										}))}
+										onChange={e => this.props.onSelectedVehicle(e)}
 										label={this.props.translate('form.vehicle.make')}
 										name="make"
 										placeholder={' '}
@@ -431,10 +449,7 @@ export class ManualForm extends Component {
 									<Field
 
 										onChange={e =>
-											this.setState(() => ({
-
-												selectedVehicleModel: e
-											}))
+											this.props.onSelectedVehicleModel(e)
 										}
 										label={this.props.translate('form.vehicle.model')}
 										name="model"
@@ -449,9 +464,7 @@ export class ManualForm extends Component {
 								</div>
 								<div className="col-md float-label">
 									<Field
-										onChange={e => this.setState(() => ({
-											selectedVehicleYear: e
-										}))}
+										onChange={e => this.props.onSelectedVehicleYear(e)}
 										label={this.props.translate('form.vehicle.year')}
 										name="year"
 										placeholder={' '}
@@ -482,13 +495,15 @@ export class ManualForm extends Component {
 
 
 const mapStateToProps = state => {
-	console.log(state.customer, '>>>state')
-	return ({
+	return {
 		translate: getTranslate(state.localize),
 		isVehicleSelected: state.api.isVehicleSelected,
-		selectedVehicle : state.api.selectedVehicle
-	});
-}
+		selectedVehicle : state.api.selectedVehicle,
+		selectedVehicleModel: state.api.selectedVehicleModel,
+		selectedVehicleYear: state.api.selectedVehicleYear,
+		selectedVehicles: state.api.selectedVehicles,
+	}
+};
 
 
 
@@ -502,7 +517,11 @@ const withManualForm = withRouter(ManualForm);
 const mapDispatchToProps = dispatch => {
 	return {
 		onVehicleSelected :(value)=>dispatch(checkIsVehicleSelected(value)),
-        onSelectedVehicle : (value)=>dispatch(setSelectedVehicle(value))
+        onSelectedVehicle : (value)=>dispatch(setSelectedVehicle(value)),
+        onSelectedVehicleModel : (value)=>dispatch(setSelectedVehicleModel(value)),
+        onSelectedVehicleYear: value => dispatch(setSelectedVehicleYear(value)),
+        onDeleteSelectedVehicle: payload => dispatch(unsetVehcileFromSelectedVehicles(payload)),
+        setSelectedVehicles: payload => dispatch(setSelectedVehicles(payload))
 	};
 };
 
