@@ -523,7 +523,9 @@ class SearchResult extends Component {
 												</a>*/}
 													</div>
 												</li>
+
 											})}
+
 										{/*<li className="tires-filte">
 										<h5>
 											Tyer Search

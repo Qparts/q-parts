@@ -62,10 +62,9 @@ export class ManualForm extends Component {
 				<div className="form-main">
 					<div className="container-fluid">
 						<header>
-							{/*<h1>Shop By Vechile</h1>
-							<p>More than 20,000,000 products (original pieces, commercial parts, replacement parts, sports pieces, accessories)</p>*/}
-							<h1>تسوق حسب السيارة</h1>
-							<p>أكثر من 20،000،000 منتج (قطع أصلية ، قطع غيار تجارية ، قطع غيار ، قطع رياضية ، إكسسوارات)</p>
+							<h1>Shop By Vechile</h1>
+							<p>More than 20,000,000 products (original pieces, commercial parts, replacement parts, sports pieces, accessories)</p>
+
 						</header>
 						<form className="select-vechile-form">
 							<div className="row">
