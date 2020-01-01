@@ -1,14 +1,17 @@
 import { initialState } from '../initialState/apiInitialState';
 
 import {
+  SET_SELECTED_VEHICLES,
   GET_COUNTRY_SUCCEEDED, GET_COUNTRIES_SUCCEEDED, GET_COUNTRIES_REGIONS_SUCCEEDED, GET_VEHICLE_SUCCEEDED,
   FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_SORTED_PRODUCTS,
-  GET_COUNTRIES_ONLY_SUCCEEDED, FLAGE ,IS_VEHICLE_SELECTED, SET_SELECTED_VEHICLE,GET_SELECTED_VEHICLE
+  GET_COUNTRIES_ONLY_SUCCEEDED, FLAGE ,IS_VEHICLE_SELECTED, SET_SELECTED_VEHICLE,GET_SELECTED_VEHICLE, SET_SELECTED_VEHICLE_MODEL, SET_SELECTED_VEHICLE_YEAR,
+  GET_SELECTED_VEHICLE_YEAR,
+GET_SELECTED_VEHICLE_MODEL,
+UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES
 } from '../actions/apiAction';
 
 
 export default function reducer(state = initialState, action) {
-  console.log(state , ">>>>>>");
   switch (action.type) {
 
     case GET_COUNTRY_SUCCEEDED:
@@ -45,12 +48,41 @@ export default function reducer(state = initialState, action) {
 
     case IS_VEHICLE_SELECTED:
       return {...state , isVehicleSelected:action.payload}
-
+      case SET_SELECTED_VEHICLES:
+        return {
+          ...state,
+         selectedVehicles: [...state.selectedVehicles, action.payload]
+        }
       case SET_SELECTED_VEHICLE:
-        return{...state , setSelectedVehicle : action.payload}
+        return {...state, selectedVehicle: action.payload }
+      case SET_SELECTED_VEHICLE_MODEL:
+        return {...state, selectedVehicleModel: action.payload }
+      case SET_SELECTED_VEHICLE_YEAR:
 
+        return {...state, selectedVehicleYear: action.payload }
         case GET_SELECTED_VEHICLE:
-          return{...state , selectedVehicle : action.payload}
+          return state.selectedVehicle;
+        case GET_SELECTED_VEHICLE_YEAR:
+          return state.selectedVehicleYear;
+        case GET_SELECTED_VEHICLE_MODEL:
+          return state.selectedVehicleModel;
+          case UNSET_SELECTED_VEHICLES:
+            return {
+              ...state, 
+              selectedVehicles: [], 
+              selectedVehicle: {
+                id: null
+              }
+            }
+           case UNSET_VEHICLE_FROM_SELECTED_VEHICLES:
+             console.log(action.payload, 'payload')
+             return {
+               ...state,
+               selectedVehicles: state.selectedVehicles.filter(vehicle => vehicle.id !== action.payload.id),
+               selectedVehicle: {
+                 id: null
+               }
+             }
     default:
       return state;
   }

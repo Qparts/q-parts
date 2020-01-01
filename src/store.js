@@ -12,7 +12,7 @@ const persistConfig = {
 	storage,
 	blacklist: ['form', 'webSocket']
 };
-const persistedReducer = persistReducer(persistConfig, reducer);
+// const persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 if (process.env.NODE_ENV === 'development') {
@@ -21,9 +21,9 @@ if (process.env.NODE_ENV === 'development') {
 
 /* eslint-disable no-underscore-dangle */
 export const store = createStore(
-	persistedReducer,
+	reducer,
 	composeEnhancers(middleware)
 );
 /* eslint-enable */
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
