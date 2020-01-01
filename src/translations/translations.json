@@ -20,6 +20,34 @@
       "انضم",
       "Join"
     ],
+    "browseCataloge":{
+      "browseButton":[
+      "تصفح الكتالوج",
+      "Browse Cataloge"
+    ],
+    "vehicleVinNumber":[
+      "ادخل رقم الشاسيه الخاص بسيارتك",
+      "Enter Your Vehicle VIN Number"
+    ],
+    "vehcileSelectedLabel":[
+      "سيارتك المخنارة",
+      "Your selected vehicle"
+    ]
+  },
+  "changeVehicle":{
+     "addNewVehicle":[
+       "إضافة سيارة جديدة",
+       "Add New Vehicle"
+     ],
+     "modalHeader":[
+       "سياراتى",
+       "My Vehicle (S)"
+     ],
+     "modalHeaderSpan":[
+       "قم بتخظزين سياراتك فى الكراج واحصل على ترشيحات",
+       "Store vehicles in your garage and Get product recommendations"
+     ]
+  },
     "vehicleButton": {
       "add": [
         "إضافة سيارة",
@@ -85,7 +113,7 @@
       ],
       "go": [
         "اعرض النتيجة",
-        "Apply Filter"
+        "Go"
       ],
       "show": [
         "عرض",
@@ -220,17 +248,25 @@
       "year": [
         "اختر سنة",
         "Select a year"
+      ],
+      "changeVehcile":[
+        "لتغيير السيارة ",
+        "Change Vehcile"
       ]
     },
     "requiredField": [
       "المعلومات مطلوبة",
       "Required input"
-	],
+  ],
+  "selectedVehcile":[
+    "سيارتك المختارة",
+    "your selected vehcile"
+  ],
 	"validationMessages": {
 		"mobile": [
 			"رقم الجوال غير صالح",
 			"Invalid mobile number"
-		]
+    ]
 	},
   "VINInput":{
     "placeholder":[
@@ -251,7 +287,7 @@
     "selectTiresSize": {
       "header": [
         "اختر",
-        "Select"
+        "Select Your Tire Size"
       ],
       "subHeader1": [
         "الإطارات",
@@ -1479,6 +1515,10 @@
       "browse": [
         "تصفح الكتالوج",
         "Browse catalog"
+      ],
+      "catalog":[
+        "كنالوج",
+        "Catalog"
       ]
     }
   },

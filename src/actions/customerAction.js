@@ -527,12 +527,15 @@ export const selectVehicleGarage = vehcile => {
 	};
 };
 
+
+
 export const selectCountry = country => {
 	return {
 		type: SELECT_COUNTRY,
 		payload: country
 	};
 };
+
 
 export const socialMediaButton = (data, type) => {
 	switch (type) {

@@ -11,7 +11,9 @@ class Header extends Component {
     super(props);
     this.state = {
       searchText: '',
-      new: ''
+      new: '',
+      vin:"879310KD00",
+      vinInput:""
     }
     this.header = createRef();
   }
@@ -81,7 +83,7 @@ class Header extends Component {
   }
 
   handleChange = e => {
-    this.setState({ searchText: e.target.value })
+    this.setState({ vinInput: e.target.value })
   }
 
   handleKeyDown = (e) => {
@@ -105,15 +107,15 @@ class Header extends Component {
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, currentLanguage, cart } = this.props;
     const mainSearch = (
       <div className="main-search">
-        <input type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
+        <input value={this.state.vinInput} type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
         <div className="float-btn">
           <MediumScreen>
-            <p>{translate("navBar.partNumExText")}<a href="#">{translate("navBar.partNumEx")}</a></p>
+            <p onClick={()=>{this.setState(prevState => ({vinInput: prevState.vin})); console.log(this.state.vinInput) }}>{translate("navBar.partNumExText")}:{this.state.vin}</p>
           </MediumScreen>
           <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
         </div>
         <DownMediumScreen>
-          <p className="vin-sm">{translate("navBar.partNumExText")}<a href="#">{translate("navBar.partNumEx")}</a></p>
+          <p className="vin-sm">{translate("navBar.partNumExText")}{translate("navBar.partNumEx")}</p>
         </DownMediumScreen>
       </div>
     );
@@ -126,7 +128,7 @@ class Header extends Component {
               <div className="row">
                 <div className="col-auto">
                   <Link className="brand" to="/">
-                    <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
+                  <img alt="qParts" src={getTranslatedString(currentLanguage, "/img/qParts-logo.svg", "/img/qParts-logo-ar.svg")} />
                   </Link>
                 </div>
                 <div className="col">
@@ -196,11 +198,8 @@ class Header extends Component {
               </NavSm>
             </div>
           </nav>
-
         </div>
-
       </Fragment>
-
     );
   }
 }

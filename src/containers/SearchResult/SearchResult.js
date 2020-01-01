@@ -317,6 +317,7 @@ class SearchResult extends Component {
 				</Card>
 		));
 	}
+	
 	handleClick = (item) => {
 		var that = this;
 		setTimeout(function () {
@@ -861,6 +862,7 @@ const mapDispatchToProps = dispatch => {
 		getFlage: (flage) => dispatch(getFlage(flage))
 	}
 }
+
 const withTyresSearch = WithProductView(SearchResult);
 export default connect(mapStateToProps, mapDispatchToProps)(withTyresSearch);
 

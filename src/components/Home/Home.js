@@ -4,11 +4,19 @@ import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import ManualForm from '../../containers/ManualForm/ManualForm';
 import HomeDetails from '../HomeDetails/HomeDetails';
 export class Home extends Component {
+ constructor(props){
+     super(props);
+     this.state={
+        isVehicleSelected : false
+     }
+ }
 
-    render() {
+ render() {
+    console.log(this.props);
         return (
             <Fragment>
-                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} />
+                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles}  />
+
                 <HomeDetails
                     products={this.props.products}
                     recentViewedProducts={this.props.recentViewedProducts}
@@ -17,7 +25,8 @@ export class Home extends Component {
                     currentLanguage={this.props.currentLanguage}
 					vehicles={this.props.vehicles}
 					cusVehicles={this.props.cusVehicles}
-					token={this.props.token}
+                    token={this.props.token}
+                    selectedVehicle={this.props.selectedVehicle}
                 />
             </Fragment>
         )

@@ -3,7 +3,9 @@
 }
 
 .tire-set{
-  bottom: 0;
+  // bottom: 0;
+  padding-top: 30px;
+  width: 585px;
   @include media-breakpoint-down(sm){
     bottom: 1px;
   };
@@ -68,6 +70,8 @@
   }
   .tires-set-form{
     margin-bottom: 30px;
+    margin-right: 333px;
+    width: 100%;
     [class*=' col']{
       padding-#{$right}: 0;
       &:first-child{

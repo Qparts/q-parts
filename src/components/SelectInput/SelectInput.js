@@ -8,7 +8,6 @@ import { getTranslate } from 'react-localize-redux';
 class SelectInput extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			hasFloat: ''
 		};
@@ -38,7 +37,7 @@ class SelectInput extends Component {
 			? 'icon-checked'
 			: '';
 	};
-	handleChange = value => {
+	handleChange =value => {
 		this.props.input.onChange(value);
 		this.handleMenuClose(value);
 	};
@@ -78,31 +77,33 @@ class SelectInput extends Component {
 		};
 		return (
 			<InputGroup
-				className={`select-input ${style.hasError} ${
-					this.state.hasFloat
-				}`}
-			>
-				<label>{this.props.label}</label>
-				<Select
-					ref={this.selectRef}
-					className={`select`}
-					classNamePrefix='select'
-					{...this.props}
-					{...this.props.input}
-					indicatorSeparator={false}
-					isSearchable={false}
-					value={this.props.input.value || this.props.defaultValue}
-					onChange={this.handleChange}
-					options={this.props.options}
-					onMenuOpen={this.handleMenuOpen}
-					onMenuClose={this.handleMenuClose}
-					optionClassName='needsclick'
-				/>
-				<p className='error-text'>
-					{this.props.errorMessage ||
-						this.props.translate('general.requiredField')}
-				</p>
-			</InputGroup>
+			className={`select-input ${style.hasError} ${
+				this.state.hasFloat
+			}`}
+
+			onClick={(e)=>e.stopPropagation()}
+		>
+			<label>{this.props.label}</label>
+			<Select
+				ref={this.selectRef}
+				className={`select`}
+				classNamePrefix='select'
+				{...this.props}
+				{...this.props.input}
+				indicatorSeparator={false}
+				isSearchable={false}
+				value={this.props.input.value || this.props.defaultValue}
+				onChange={this.handleChange}
+				options={this.props.options}
+				onMenuOpen={this.handleMenuOpen}
+				onMenuClose={this.handleMenuClose}
+				optionClassName='needsclick'
+			/>
+			<p className='error-text'>
+				{this.props.errorMessage ||
+					this.props.translate('general.requiredField')}
+			</p>
+		</InputGroup>
 		);
 	}
 }

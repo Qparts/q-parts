@@ -902,6 +902,7 @@
     height: 55px;
     .select {
       margin-top: 0;
+      height: inherit;
     }
     .select__control {
       padding-#{$left}: 15px;
@@ -989,7 +990,7 @@
   }
   .error-text {
     display: block;
-    padding-top: 3px;
+    padding-top: 11px;
     padding-#{$left}: 10px;
     color: #c82938;
     margin-bottom: 0;

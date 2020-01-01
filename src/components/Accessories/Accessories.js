@@ -46,7 +46,7 @@ class Accessories extends Component {
   }
 	render() {
 		const { translate, direction, currentLanguage } = this.props;
-    const { bestSeller } = this.state
+        const { bestSeller } = this.state
 		return (
 			<Fragment>
 				<section  className="accessorise-landing">
@@ -56,10 +56,10 @@ class Accessories extends Component {
 								</SmallScreen>
 								<div className="row">
 									<div className="col-md-5 cables">
-										<a href="#">
+										<Link to="/listing?query=&page=1&category=12">
 											<figure><img src="/img/Wires&Cables.jpg" alt="Wires & Cables" /></figure>
-											<figcaption>Wires & Cables</figcaption>
-										</a>
+											<figcaption>{translate("nav.wiresAndCables")}</figcaption>
+										</Link>
 									</div>
 									<div className="col-6 col-md-3 refrigerator">
 										<a href="#">
@@ -70,24 +70,24 @@ class Accessories extends Component {
 										</a>
 									</div>
 									<div className="col-6 col-md-4 car-mats">
-										<a href="#">
+										<Link to="/listing?query=&page=1&category=17">
 											<figure><img src="/img/car-mats.jpg" alt="Car Mats" /></figure>
-											<figcaption>car mats</figcaption>
-										</a>
+											<figcaption>{translate("nav.carMats")}</figcaption>
+										</Link>
 									</div>
 								</div>
 								<div className="row">
 									<div className="col-md-7 bodywork">
-										<a href="#">
-											<figcaption><span>Bodywork</span> Cleaning and Care</figcaption>
+										<Link to="/listing?query=&page=1&category=16">
+											<figcaption><span>Bodywork</span> {translate("nav.bodyworkCleaningAndCare")}</figcaption>
 											<figure><img src="/img/bodywork.jpg" alt="Bodywork Cleaning and Care" /></figure>
-										</a>
+										</Link>
 									</div>
 									<div className="col-md-5 children-seats">
-										<a href="#">
+										<Link to="/listing?query=&page=1&category=15">
 											<figure><img src="/img/children-seats.jpg" alt="Children Seats" /></figure>
-											<figcaption>Children Seats</figcaption>
-										</a>
+											<figcaption>{translate("nav.childSeat")}</figcaption>
+										</Link>
 									</div>
 								</div>
 							</div>

@@ -18,6 +18,12 @@ export const GET_RECENTLY_VIEWED = 'GET_RECENTLY_VIEWED';
 export const GET_SORTED_PRODUCTS = 'GET_SORTED_PRODUCTS';
 export const SET_DEFAULT_LANG = 'SET_DEFAULT_LANG';
 export const FLAGE = 'FLAGE';
+export const IS_VEHICLE_SELECTED="IS_VEHICLE_SELECTED";
+export const SET_SELECTED_VEHICLE = "SET_SELECTED_VEHICLE"
+export const GET_SELECTED_VEHICLE = "GET_SELECTED_VEHICLE"
+
+
+
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -105,6 +111,20 @@ export const getVehicles = () => {
   }
 }
 
+// export const getVehicleService = () => {
+//   return (dispatch) => {
+//     axios.get(`${API_ROOT}:8081/service-q-vehicle/rest/api/v2/makes`, {
+//     })
+//       .then(res => {
+//         console.log(res,">>>>>>>>")
+//         dispatch({ type: GET_VEHICLE_SUCCEEDED, payload: res.data })
+//       }, error => {
+//         handleNetworkError(dispatch, error);
+//       })
+//   }
+// }
+
+
 export const findCity = (city, country) => {
   return (dispatch) => {
     axios.get(`${API_ROOT}${LOCATION_SERVICE}/find-city/name/${city}/country/${country}`)
@@ -143,5 +163,24 @@ export const InitializeDefaultLang = (defaultLanguage = LOCAL_LANGUAGES[0].code)
 export const getFlage = (flage) => {
   return {
     type: FLAGE, payload: flage
+  }
+}
+
+  export const checkIsVehicleSelected = (value)=>{
+    return{
+      type: IS_VEHICLE_SELECTED , payload:value
+    }
+}
+
+
+ export const setSelectedVehicle = (value)=>{
+   return{
+     type: SET_SELECTED_VEHICLE , payload:value 
+   }
+ }
+
+ export const getSelectedVehicle = (value)=>{
+  return{
+    type: GET_SELECTED_VEHICLE , payload:value 
   }
 }
