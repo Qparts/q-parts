@@ -6,7 +6,9 @@ import {
   FIND_CITY_SUCCEEDED, GET_REGIONS_SUCCEEDED, GET_RECENTLY_VIEWED, GET_SORTED_PRODUCTS,
   GET_COUNTRIES_ONLY_SUCCEEDED, FLAGE ,IS_VEHICLE_SELECTED, SET_SELECTED_VEHICLE,GET_SELECTED_VEHICLE, SET_SELECTED_VEHICLE_MODEL, SET_SELECTED_VEHICLE_YEAR,
   GET_SELECTED_VEHICLE_YEAR,
-GET_SELECTED_VEHICLE_MODEL,
+  GET_SELECTED_VEHICLE_MODEL,
+  GET_SELECTED_VEHICLE_VIN,
+  SET_SELECTED_VEHICLE_VIN,
 UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES
 } from '../actions/apiAction';
 
@@ -53,19 +55,30 @@ export default function reducer(state = initialState, action) {
           ...state,
          selectedVehicles: [...state.selectedVehicles, action.payload]
         }
+
+
       case SET_SELECTED_VEHICLE:
         return {...state, selectedVehicle: action.payload }
       case SET_SELECTED_VEHICLE_MODEL:
         return {...state, selectedVehicleModel: action.payload }
       case SET_SELECTED_VEHICLE_YEAR:
-
         return {...state, selectedVehicleYear: action.payload }
+
+        case SET_SELECTED_VEHICLE_VIN:
+          return {...state, selectedVehicleVin: action.payload }
+
         case GET_SELECTED_VEHICLE:
           return state.selectedVehicle;
+
         case GET_SELECTED_VEHICLE_YEAR:
           return state.selectedVehicleYear;
+
         case GET_SELECTED_VEHICLE_MODEL:
           return state.selectedVehicleModel;
+
+          case GET_SELECTED_VEHICLE_VIN:
+          return state.selectedVehicleVin;
+
           case UNSET_SELECTED_VEHICLES:
             return {
               ...state, 
@@ -74,8 +87,8 @@ export default function reducer(state = initialState, action) {
                 id: null
               }
             }
-           case UNSET_VEHICLE_FROM_SELECTED_VEHICLES:
-             console.log(action.payload, 'payload')
+          
+           case UNSET_VEHICLE_FROM_SELECTED_VEHICLES:         
              return {
                ...state,
                selectedVehicles: state.selectedVehicles.filter(vehicle => vehicle.id !== action.payload.id),

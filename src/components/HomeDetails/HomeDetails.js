@@ -156,11 +156,13 @@ class HomeDetails extends Component {
 				options: tireWidth,
 			},
 		];
+
 		const formatWidthTiresGroupLabel = () => (
 			<div className="placeholder">
 				<span>{translate("general.select")} {translate("tires.placeholders.width")}</span>
 			</div>
 		);
+
 		const tireHeight = [
 			{ value: 1, label: "35" },
 			{ value: 2, label: "40" },
@@ -171,6 +173,7 @@ class HomeDetails extends Component {
 				options: tireHeight,
 			},
 		];
+
 		
 		const formatHeightTiresGroupLabel = () => (
 			<div className="placeholder">

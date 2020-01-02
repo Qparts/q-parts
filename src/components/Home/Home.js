@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 import ManualForm from '../../containers/ManualForm/ManualForm';
 import HomeDetails from '../HomeDetails/HomeDetails';
+import { isAuth } from '../../utils'
+
 export class Home extends Component {
  constructor(props){
      super(props);
@@ -15,7 +17,7 @@ export class Home extends Component {
     console.log(this.props);
         return (
             <Fragment>
-                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles}  />
+                <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles}  isLoggedIn={isAuth(this.props.token)}/>
 
                 <HomeDetails
                     products={this.props.products}

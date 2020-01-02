@@ -38,14 +38,15 @@ export const saveFormDataToCache = (values) => {
   }
 }
 
-export const clearFormDataFromCache = (data) => {
+export const clearFormDataFromCache = () => {
   return {
     type: CLEAR_FORM_DATA_FROM_CACHE,
-    payload: data
   }
 }
 
+
 export const setCurrentVehicleSearch = (currentVehicle, itemName) => {
+  console.log(currentVehicle ,"form action");
   return {
     type: SET_CURRENT_VEHICLE_SEARCH,
     payload: {
