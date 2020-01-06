@@ -22,8 +22,13 @@
     height: 100%;
     @include media-breakpoint-down(lg){
       position: absolute;
-      transform: translate(-50%, 0);
       #{$left}: 50%;
+      @include if-ltr{
+        transform: translate(-50%, 0);
+      };
+      @include if-rtl{
+        transform: translate(50%, 0);
+      };
     }
   }
   .form-main{
@@ -72,7 +77,7 @@
 
 
 }
-
+/*Hasnaa*/
 .selected-vehicle-details{
   top: 18%;
   left: 0;
@@ -81,7 +86,6 @@
   transform: translate(0, -50%);
   display: flex;
   justify-content: space-between;
-
   .header-label{
     width: 100%;
     height: 13px;
@@ -93,31 +97,29 @@
     line-height: normal;
     letter-spacing: normal;
     text-align: left;
-    color: #fefeff;  
+    color: #fefeff;
     margin-left: 21px;
     @include if-rtl{
       margin-right: -90px;
     }
 }
-
-.header-h3{
-  width: 100%;
-  height: 19px;
-  font-family: Roboto;
-  font-size: 25px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fefeff;
-  text-transform: uppercase;
-  margin-left: 21px;
+    .header-h3{
+      width: 100%;
+      height: 19px;
+      font-family: Roboto;
+      font-size: 25px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: left;
+      color: #fefeff;
+      text-transform: uppercase;
+      margin-left: 21px;
+    }
 }
-
-}
-
+/*Hasnaa*/
 .main-parts {
   padding-top: 50px;
   @include media-breakpoint-down(sm){
@@ -302,7 +304,12 @@
             max-width: none;
             position: relative;
             #{$left}: 50%;
-            transform: translate(-50%, 0);
+            @include if-ltr{
+              transform: translate(-50%, 0);
+            };
+            @include if-rtl{
+              transform: translate(50%, 0);
+            };
           };
         }
         figcaption {
@@ -547,69 +554,245 @@
     }
   }
 }
+.tires-filter{
+  position: relative;
+  margin-top: 60px;
+  @include media-breakpoint-down(lg){
+    margin-top: 50px;
+  }
+  > picture{
+    position: absolute;
+    top: 0;
+    #{$left}: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    @include border-radius-div;
+    img{
+      height: auto;
+      min-height: 100%;
+      width: auto;
+      max-width: none;
+      min-width: 100%;
+      position: relative;
+      #{$left}: 50%;
+      @include if-ltr{
+        transform: translate(-50%, 0);
+      };
+      @include if-rtl{
+        transform: translate(50%, 0);
+      };
+    }
+  }
+  .cat-header{
+    h1{
+      font-weight: 500;
+      margin-bottom: 28px;
+      margin-top: 48px;
+      @include media-breakpoint-down(xs){
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
+    p{
+      display: inline;
+      border-bottom: 2px solid $brand-color;
+    }
+  }
+  .tire-ex{
+    display: flex;
+    align-items: center;
+    h5{
+      @include font-size(20px);
+      font-weight: 400;
+    }
+    > ul{
+      margin-#{$left}: 20px;
+      border-#{$left}: 1px solid $charcoal-grey-two-40;
+      padding-#{$left}: 20px !important;
+      display: flex;
+      align-items: flex-start;
+      margin-top: -2px;
+      li{
+        text-align: center;
+        @include font-size(30px);
+        &:last-child{
+          padding-#{$left}: 4px;
+        }
+        &:nth-child(2){
+          margin-#{$right}: -2px;
+        }
+        @include if-ltr{
+          margin-top: -9px;
+        };
+      }
+      p{
+        margin-bottom: 0;
+        border-bottom: 1px solid $brand-color;
+        display: inline-block;
+        position: relative;
+        padding-left: 3px;
+        padding-right: 3px;
+        &::before,
+        &::after{
+          content: " ";
+          position: absolute;
+          bottom: -1px;
+          display: inline-block;
+          width: 0.5px;
+          height: 4px;
+          background: $brand-color;
+        }
+        &:before{
+          #{$left}: 0;
+        }
+        &:after{
+          #{$right}: 0;
+        }
+        @include if-ltr{
+          line-height: 26px;
+        }
+      }
+      label{
+        @include font-size(14px);
+        color: $brand-color;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0;
+        font-weight: 500;
+        line-height: 1;
+      }
+    }
+    @include media-breakpoint-down(xs){
+      display: block;
+      h5{
+        @include font-size(15px);
+        font-weight: 500;
+        @include opacity(0.6);
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+      > ul{
+        margin-#{$left}: 0;
+        border-#{$left}-width: 0;
+        padding-#{$left}: 0 !important;
+      }
+    }
+  }
+  .img-ex{
+    margin-top: 20px;
+    img{
+      max-width: 420px;
+    }
+  }
+  form{
+    margin-top: 20px;
+    margin-bottom: 48px;
+    .float-label:first-child{
+      padding-#{$left}: 0;
+    }
+    @include media-breakpoint-down(sm){
+      margin-left: -15px;
+      margin-right: -15px;
+      .col-md-auto{
+          padding-left: 15px;
+          padding-right: 15px;
+      };
+      .float-label{
+        &:first-child{
+          padding-#{$left}: 15px;
+          .select__control{
+            border-bottom-#{$left}-radius: $border-radius-base;
+          }
+        }
+        &:nth-child(3){
+          padding-#{$right}: 15px;
+          .select__control{
+            border-bottom-#{$left}-radius: 0;
+          }
+        }
+      }
+
+    };
+    @include media-breakpoint-down(xs){
+      margin-top: 15px;
+      margin-bottom: 20px;
+    };
+  }
+}
 .top-selling{
   padding-top: 50px;
 }
-.shop-brand{
-  padding: 15px;
-  @extend .mt-sec-home;
-  padding-bottom: 60px;
-  .products-list{
-    position: relative;
-    @include media-breakpoint-down(sm){
-      .swiper-button-next,
-      .swiper-button-prev{
-        display: none;
-      }
-    };
-  }
-  h1{
-    @include font-size(30px);
-    margin-bottom: 20px;
-    line-height: 1;
-    @include if-ltr{
-      font-weight: 400;
-    };
-    @include media-breakpoint-down(sm){
-      @include font-size(25px);
+.vehicle-img{
+  border-bottom-#{$left}-radius: $border-radius-base;
+  border-bottom-#{$right}-radius: $border-radius-base;
+  overflow: hidden;
+  position: relative;
+  height: 370px;
+  @include media-breakpoint-down(sm){
+    height: 330px;
+  };
+  > div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    #{$left}: 0;
+    &.bg-overlay{
+      @include  gradient-y(rgba(255,255,255, 0), rgba(0,0,0, 1),  65%, 100%);
+      @include media-breakpoint-down(sm){
+        @include  gradient-y(rgba(255,255,255, 0), rgba(0,0,0, 1),  50%, 100%);
 
-    };
-  }
-  .swiper-slide{
-    a{
-      background: $light-gray;
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      img{
-        max-height: 106px;
-        width: auto;
-        height: auto;
       }
-      @include media-breakpoint-down(md){
-        padding: 0 30px;
-        height: 90px;
-      };
     }
-
+    &.bg-brand{
+      @include gradient-x($brand-color, #000, $start-percent: 0%, $end-percent: 100%);
+      @include opacity(0.3);
+    }
   }
-  .swiper-container-horizontal>.swiper-pagination-bullets{
-    display: none;
-      bottom: -25px;
-      @include media-breakpoint-down(md){
-        display: block;
-      };
-      .swiper-pagination-bullet{
-        height: 2px;
-        border-radius: 0;
-        width: 10px;
-        @include transition(all, 0.5s, ease);
-      }
-      .swiper-pagination-bullet-active{
-        background: $brand-color;
-        width: 35px;
-      }
+  img{
+    height: auto;
+    min-height: 100%;
+    width: auto;
+    max-width: 1270px;
+    position: relative;
+    #{$left}: 50%;
+    @include if-ltr{
+      transform: translate(-50%, 0);
+    };
+    @include if-rtl{
+      transform: translate(50%, 0);
+    };
+  }
+}
+.vehicle-info{
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  @include media-breakpoint-down(sm){
+    bottom: 20px;
+  }
+  .header-label{
+    line-height: 1;
+  }
+}
+.selected-vechile{
+  &.home{
+    @include media-breakpoint-down(xs){
+      margin-right: -15px;
+      margin-left: -15px;
+    };
+  }
+  .vehicle-info{
+    .header-label,h3{
+      color: $white;
+      font-weight: 400;
+    }
+    .header-label{
+      margin-bottom: 8px;
+
+    }
   }
 }

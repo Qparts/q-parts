@@ -835,12 +835,13 @@
     }
   }
 }
-.select-vechile-form{
+.select-vechile-form,
+.select-white{
   .select__control{
     background: $white;
     border-radius: 0;
   }
-  .col-md{
+  .float-label{
     &:first-child{
       .select__control{
         border-top-#{$left}-radius: $border-radius-base;
@@ -880,7 +881,7 @@
     @include font-size(20px);
     display: flex;
     align-items: center;
-    height: inherit;
+    height: 100%;
     text-transform: uppercase;
     @include media-breakpoint-down(sm){
       margin-top: 12px;

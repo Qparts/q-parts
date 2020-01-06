@@ -341,11 +341,11 @@
   },
   "nav": {
     "vehicleParts": [
-      "قطع غيار السيارة",
+      "قطع غيار",
       "Vehicle Parts"
     ],
     "tires": [
-      "الاطارات",
+      "إطارات",
       "Tires"
     ],
     "quotationOrder": [
@@ -357,7 +357,7 @@
       "Coolant"
     ],
     "consumableParts": [
-      "القطع الاستهلاكية",
+      "قطع إستهلاكية",
       "Consumable Parts"
     ],
     "acFilter": [
@@ -381,7 +381,7 @@
       "Brake Pads"
     ],
     "oil": [
-      "الزيوت و السوائل",
+      "زيوت و سوائل",
       "Oils & Fluids"
     ],
     "motorOil": [
@@ -489,7 +489,7 @@
       "Cleaners & Polishers"
     ],
     "sportsAndOutdoors": [
-      "مستلزمات الأنشطة الخارجية",
+      "لوازم الرحلات",
       "Sports & Outdoors"
     ],
     "country": [

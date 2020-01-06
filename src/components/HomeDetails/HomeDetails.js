@@ -19,7 +19,6 @@ import * as validations from '../../utils';
 import { DownLargeScreen, LargeScreen } from '../../components/Device';
 import { Field } from 'redux-form';
 import { UncontrolledPopover, PopoverBody } from 'reactstrap';
-import { MediumScreen , DownMediumScreen } from '../../components/Device';
 import TiresForm from './tires-form';
 import './shop-tires.css';
 
@@ -171,7 +170,7 @@ class HomeDetails extends Component {
 				options: tireHeight,
 			},
 		];
-		
+
 		const formatHeightTiresGroupLabel = () => (
 			<div className="placeholder">
 				<span>{translate("general.select")} {translate("tires.placeholders.height")}</span>
@@ -383,8 +382,8 @@ class HomeDetails extends Component {
 											{translate('quotationOrder.shopNow')}
 										</span>
 									</figure>
-									{this.props.isVehicleSelected ? 
-									
+									{this.props.isVehicleSelected ?
+
 									<Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-lg vin-modal">
 										<ModalHeader toggle={this.toggle}>
 											{this.props.translate('general.browseCataloge.vehicleVinNumber')}
@@ -440,7 +439,7 @@ class HomeDetails extends Component {
 											</form>
 										</ModalBody>
 									</Modal>
-								       : 
+								       :
 									   <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-xl vin-modal" backdrop="false" >
 									   <ModalHeader toggle={this.toggle}>
 										   {translate('vehicleInfo.popupVinNumTitle')}
@@ -483,14 +482,14 @@ class HomeDetails extends Component {
 												   />
 												   <div className="VIN-info">
 													   <p onClick={()=>this.setState(prevState => ({vinInput: prevState.vin}))}>{translate("vehicleInfo.VINNumberEx")}:{this.state.vin}</p>
-													   
+
 														   <p className="id-img" id="UncontrolledPopover" type="text">
 															   <i className="icon-info"></i> {translate("vehicleInfo.carId")}
 														   </p>
 														   <UncontrolledPopover placement="top" target="UncontrolledPopover">
 															   <PopoverBody><img alt="" src="/img/vin-ex.jpg" /></PopoverBody>
 														   </UncontrolledPopover>
-											   
+
 												   </div>
 											   </div>
 											   <div className="col-lg-auto actions">
@@ -509,7 +508,7 @@ class HomeDetails extends Component {
 											   </div>
 										   </form>
 									   </ModalBody>
-								   </Modal>	   
+								   </Modal>
 									   }
 							</Link>
 							</li>
@@ -579,7 +578,7 @@ class HomeDetails extends Component {
 							</li>
 						</ul>
 					</section>
-					<section className="vendor">
+					<section className="vendor d-none">
 						<div className="shop-tires">
 							<div className="shop-tires-details">
 								<header>{translate("tires.title")}
@@ -591,16 +590,94 @@ class HomeDetails extends Component {
 							<img alt="" src="/img/tire-ex.png" className="tires-img" />
 						</div>
 					</section>
+					<section className="tires-filter">
+						<picture>
+							<source media="(max-width: 760px)" srcset="/img/tire-bg-sm.jpg" />
+							<img alt="" src="/img/tire-bg.jpg" />
+						</picture>
+						<div className="d-flex">
+							<div className="col">
+								<header className="cat-header">
+									<h1><p>Shop</p> Tires</h1>
+								</header>
+								<div className="tire-ex">
+									<h5>Select your Tire Size</h5>
+									<ul className="list-inline">
+										<li>
+											<p>225</p>
+											<label>width</label>
+										</li>
+										<li>/</li>
+										<li>
+											<p>45</p>
+											<label>Height</label>
+										</li>
+										<li>
+											<p>R17</p>
+											<label>Diameter</label>
+										</li>
+									</ul>
+								</div>
+								<form className="form-row select-white">
+									<div className="col float-label">
+										<Field
+										label={translate("tires.placeholders.width")}
+										name="make"
+										placeholder={' '}
+										component={SelectInput}
+										options={groupedWidthTiresOptions}
+										formatGroupLabel={
+											formatWidthTiresGroupLabel
+										}
+										/>
+									</div>
+									<div className="col float-label">
+										<Field
+										label={translate("tires.placeholders.height")}
+										name="height"
+										placeholder={' '}
+										component={SelectInput}
+										options={groupedHeightTiresOptions}
+										formatGroupLabel={
+											formatHeightTiresGroupLabel
+										}
+										/>
+									</div>
+									<div className="col float-label">
+										<Field
+										label={translate("tires.placeholders.diameter")}
+										name="diameter"
+										placeholder={' '}
+										component={SelectInput}
+										options={groupedDiameterTiresOptions}
+										formatGroupLabel={
+											formatDiameterTiresGroupLabel
+										}
+										/>
+									</div>
+									<div className="col-md-auto">
+										<button className="btn btn-primary">Search</button>
+									</div>
+								</form>
+							</div>
+							<LargeScreen>
+								<aside className="col-lg-auto col-md-5 img-ex">
+									<img alt="" src="/img/tire-ex.png" />
+								</aside>
+							</LargeScreen>
+						</div>
+
+					</section>
 				</div>
 				<section className="top-selling">
-				<div className="gray-bg pb-sec">
+					<div className="gray-bg pb-sec">
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col products-list">
 								<header className="sec-head">
 									<h2>
 										Top Selling
-                                       
+
 									</h2>
 								</header>
 								<Swiper {...swiperParams(direction)}>

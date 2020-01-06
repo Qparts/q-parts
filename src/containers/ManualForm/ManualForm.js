@@ -77,7 +77,7 @@ export class ManualForm extends Component {
 		});
 	}
 
-	
+
 	handleSubmit = async () => {
 		let selectedVehicle = this.state.selectedVehicle;
 		delete selectedVehicle.models;
@@ -96,9 +96,9 @@ export class ManualForm extends Component {
 	render() {
 		const { vehicles, currentLanguage  } = this.props;
 		const { isVehicleSelected } = this.state;
-		let selectedVechileModule;		 
+		let selectedVechileModule;
 
-		
+
 		const vehicleMake = vehicles.map(vehicle => {
 			return {
 				...vehicle,
@@ -182,7 +182,7 @@ export class ManualForm extends Component {
 			} else {
 				vehicleYears = []
 			}
-			
+
 		}
 		else {
 			vehicleYears = [{ value: "no options", label: "no options" }]
@@ -208,10 +208,10 @@ export class ManualForm extends Component {
 
 		if (isVehicleSelected) {
 			selectedVechileModule =
-				<div>
-					<section className="select-vehicle">
+			<div>
+				<div className="d-none">
+					<section className="vehicle-home">
 						<picture>
-							<source media="(max-width: 650px)" srcSet={this.state.selectedVehicleYear.imageLarge} />
 							<source media="(max-width: 465px)" srcSet={this.state.selectedVehicleYear.imageSmall} />
 							<img alt="" src={this.state.selectedVehicleYear.imageLarge} />
 						</picture>
@@ -333,8 +333,8 @@ export class ManualForm extends Component {
 																		</li>
 																	)
 																})}
-															
-															
+
+
 														</ul>
 														<div className="vec-list-actions">
 															<div className="main-action">
@@ -411,6 +411,43 @@ export class ManualForm extends Component {
 						</div>
 					</section>
 				</div>
+				<section className="container-fluid">
+					<div className="selected-vechile home">
+						<div className="vehicle-img">
+							<picture>
+								<source media="(max-width: 465px)" srcSet={this.state.selectedVehicleYear.imageSmall} />
+								<img alt="" src={this.state.selectedVehicleYear.imageLarge} />
+							</picture>
+							<div className="bg-overlay"></div>
+							<div className="bg-brand"></div>
+						</div>
+						<div className="vehicle-info">
+							<div className="row">
+								<header className="col">
+									<label className="header-label">{this.props.translate('general.selectedVehcile')}:</label>
+									<h3>
+										{currentLanguage === "ar" ?
+											this.state.selectedVehicle.nameAr + " " + this.state.selectedVehicleModel.nameAr + " " + this.state.selectedVehicleYear.label
+											:
+											this.state.selectedVehicle.name + " " + this.state.selectedVehicleModel.name + " " + this.state.selectedVehicleYear.label
+										}
+									</h3>
+									<p>VIN(JTHBJ46G9B2420251)</p>
+								</header>
+								<div className="col-md-auto btn-group">
+									<a href="#" className="btn btn-primary" onClick={this.toggle}><i className="icon-catalog"></i>{this.props.translate('general.browseCataloge.browseButton')}</a>
+									<a href="#" className="btn btn-dark-black" onClick={this.toggleChangeVehivle}><i className="icon-vehicle"></i>{this.props.translate('general.vehicle.changeVehcile')}</a>
+							</div>
+							</div>
+						</div>
+					</div>
+
+
+
+				</section>
+			</div>
+
+
 		} else {
 			selectedVechileModule = <section className="select-vechile">
 				<picture>

@@ -122,7 +122,6 @@
   // margin-right: 61.6px;
   &:hover{
     color: $light-gray-2;
-
     background: #000;
   }
 }
@@ -133,5 +132,14 @@
   &:focus{
     color: $white;
 
+  }
+}
+.btn-dark-black{
+  background: rgba(0, 0, 0, 0.4);
+  color: $light-gray-2;
+  // margin-right: 61.6px;
+  &:hover{
+    color: $light-gray-2;
+    background: #000;
   }
 }

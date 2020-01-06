@@ -62,6 +62,7 @@ class listingVechile extends Component{
                 <h3>
                   Skoda Octavia 2012
                 </h3>
+                <p>VIN(JTHBJ46G9B2420251)</p>
               </header>
               <div className="col-md-auto btn-group">
                 <a href="#" className="btn btn-primary"><i className="icon-catalog"></i>Browse Catalog</a>

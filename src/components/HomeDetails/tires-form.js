@@ -29,17 +29,17 @@ export class TiresForm extends Component {
 		}
 	}
 
-	
+
 	// submit = () => {
 	// 	console.log("ay7aga");
-		
+
 	// 	this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth}&height=${this.state.selectedTireHeigth}&diameter=${this.state.selectedTireDiameter}`);
 	// }
-	
+
 	render() {
 		const { translate } = this.props
 		const { currentLanguage } = this.props;
-         
+
 
 		const tires = [
 			{ id: 1, label: 15 , heigths :[{widthId:1 , id:10 , label:35 , diameters :[{widthId:1 , id:12 , label:14 }]} ,{widthId:1 , id:11 , label:25 , diameters :[{widthId:1 , id:13 , label:16 }]},{widthId:1 , id:12 , label:33 , diameters :[{widthId:1 , id:14 , label:25 }]}  ]},
@@ -47,7 +47,7 @@ export class TiresForm extends Component {
 			{ id: 3, label: 125 , heigths :[{widthId:3 , id:40 , label:55 , diameters :[{widthId:3 , id:54 , label:239 }]} , {widthId:3 , id:23 , label:123 , diameters :[{widthId:3 , id:23 , label:46 }]}]},
 		];
 
-		
+
         const tireWidth = tires.map(tire => {
 			return{
 				...tire,
@@ -84,7 +84,7 @@ export class TiresForm extends Component {
 						'label',
 					),
 					value: heigth.id,
-					diameters: heigth.diameters 
+					diameters: heigth.diameters
 				}
 			})
 		}else {
@@ -97,7 +97,7 @@ export class TiresForm extends Component {
 				options: tireHeigths,
 			},
 		];
-		
+
 		const formatHeightTiresGroupLabel = () => (
 			<div className="placeholder">
 				<span>{translate("general.select")} {translate("tires.placeholders.height")}</span>
@@ -107,7 +107,7 @@ export class TiresForm extends Component {
 
 		let tireDiameter = null ;
 		if(tireHeigths && this.state.selectedTireHeigth && this.state.selectedTireHeigth.diameters){
-			
+
 			 tireDiameter = tireHeigths.find(heigth=> heigth.id === this.state.selectedTireHeigth.id).diameters.map(diameter => {
 				return{
 					label: getTranslatedObject(
@@ -150,10 +150,10 @@ export class TiresForm extends Component {
 							<div className="row">
 								<div className=" offset-sm-1 offset-10 col offset-md-0 col-md-12">
 									<MediumScreen>
-										<form 
-										onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}} 
+										<form
+										onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}}
 										// onSubmit={this.props.handleSubmit(this.submit)}
-										className="form-row tires-set-form" 
+										className="form-row tires-set-form"
 										>
 											<div className="col-md col-12">
 												<Field
@@ -220,8 +220,8 @@ export class TiresForm extends Component {
 					<section className="tire-set-xs gray-bg">
 						<div className="container-fluid">
 							<div className="row">
-								<form className="offset-0 col col-sm-10 offset-sm-1 offset-md-0 col-md-12 tires-set-form" 
-								onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}} 
+								<form className="offset-0 col col-sm-10 offset-sm-1 offset-md-0 col-md-12 tires-set-form"
+								onSubmit={(e) => {e.preventDefault(); this.props.history.push(`/listing?query=&page=1&&category=13&width=${this.state.selectedTireWidth.label}&height=${this.state.selectedTireHeigth.label}&diameter=${this.state.selectedTireDiameter.label}`)}}
 								>
 									<div className="input-container">
 										<Field

@@ -110,12 +110,12 @@ class Header extends Component {
         <input value={this.state.vinInput} type="text" className="form-control" placeholder={translate("navBar.search")} aria-describedby="search input" onChange={this.handleChange} onKeyDown={this.handleKeyDown} />
         <div className="float-btn">
           <MediumScreen>
-            <p onClick={()=>{this.setState(prevState => ({vinInput: prevState.vin})); console.log(this.state.vinInput) }}>{translate("navBar.partNumExText")}:{this.state.vin}</p>
+            <p onClick={()=>{this.setState(prevState => ({vinInput: prevState.vin})); console.log(this.state.vinInput) }}>{translate("navBar.partNumExText")}:<a>{this.state.vin}</a></p>
           </MediumScreen>
           <button className="btn" type="submit" onClick={this.handleClick}><i className="icon-search"></i></button>
         </div>
         <DownMediumScreen>
-          <p className="vin-sm">{translate("navBar.partNumExText")}{translate("navBar.partNumEx")}</p>
+          <p className="vin-sm">{translate("navBar.partNumExText")}<a href="#">{translate("navBar.partNumEx")}</a></p>
         </DownMediumScreen>
       </div>
     );

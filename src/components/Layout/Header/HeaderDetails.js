@@ -191,12 +191,6 @@ class HeaderDetails extends Component {
 							{translate('navBar.garage')}
 						</Link>
 					</li>
-					<li>
-						<Link to='/setting/wishlist'>
-							<i className='icon-heart' />
-						</Link>
-					</li>
-
 				</NavLg>
 				<li>
 					<Link
