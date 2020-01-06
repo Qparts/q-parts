@@ -123,9 +123,6 @@ export class ManualForm extends Component {
 				<span>{this.props.translate('form.vehicle.make')}</span>
 			</div>
 		);
-
-
-
 		let vehicleModels = null
 		let selectedVehicle = vehicles.find(vehicle => vehicle.models.some(model => model.makeId === this.state.selectedVehicle.id))
 		if (selectedVehicle) {
@@ -209,7 +206,7 @@ export class ManualForm extends Component {
 		if (isVehicleSelected) {
 			selectedVechileModule =
 			<div>
-				<div className="d-none">
+				<div>
 					<section className="vehicle-home">
 						<picture>
 							<source media="(max-width: 465px)" srcSet={this.state.selectedVehicleYear.imageSmall} />

@@ -578,7 +578,7 @@ class HomeDetails extends Component {
 							</li>
 						</ul>
 					</section>
-					<section className="vendor d-none">
+					<section className="vendor">
 						<div className="shop-tires">
 							<div className="shop-tires-details">
 								<header>{translate("tires.title")}

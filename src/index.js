@@ -5,8 +5,8 @@ import registerServiceWorker from './registerServiceWorker';
 import './scss/main/main.scss';
 import './scss/main-ar/main-ar.scss';
 
-import { store } from './store';
-// import { PersistGate } from 'redux-persist/integration/react'
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react'
 import { LocalizeProvider } from 'react-localize-redux';
 
 import App from './containers/App';
@@ -19,11 +19,13 @@ class Root extends React.Component {
 
     return (
       <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
           <LocalizeProvider store={store}>
             <ErrorBoundary>
               <App />
             </ErrorBoundary>
           </LocalizeProvider>
+        </PersistGate>
       </Provider>
     )
   }
