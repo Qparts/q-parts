@@ -16,7 +16,8 @@ import Radio from '../../components/UI/Radio';
 import { setSelectedVehicles, checkIsVehicleSelected, setSelectedVehicle, setSelectedVehicleModel, setSelectedVehicleYear, unsetVehcileFromSelectedVehicles, unsetSelectedVehicles, setSelectedVehicleVin } from '../../actions/apiAction';
 import { clearFormDataFromCache } from '../../actions/baseFormAction';
 import Login from "../Authentication/Login/Login";
-
+import Title from '../../components/UI/Title';
+import axios from 'axios';
 
 
 
@@ -31,11 +32,13 @@ export class ManualForm extends Component {
 			selectedVehicleModel: props.selectedVehicleModel,
 			selectedVehicleYear: props.selectedVehicleYear,
 			isVehicleSelected: props.isVehicleSelected,
-			modal: false,
+			browseCatalogeModal: false,
 			vin: "JTHBJ46G9B2420251",
 			vinInput: props.selectedVehicleVin,
 			open: false,
-			changeVehcileModal: false
+			changeVehcileModal: false,
+			dialogType: 'signin',
+            modal : false
 		}
 	}
 
@@ -76,7 +79,7 @@ export class ManualForm extends Component {
 
 	toggle() {
 		this.setState(prevState => ({
-			modal: !prevState.modal
+			browseCatalogeModal: !prevState.browseCatalogeModal
 		}));
 	}
 
@@ -87,19 +90,78 @@ export class ManualForm extends Component {
 		}));
 	}
 
-	addSelectedVehiclesToGarage = () => {
-		if (this.isLoggedIn) {
-			console.log("ay7aga");
+	handleDialog = dialogType => {
+		this.setState({ dialogType });
+		this.togglePopup();
+	};
+
+	togglePopup = () => {
+		this.setState({
+			modal: !this.state.modal
+		});
+	};
+
+	getDialogProps = () => {
+		const { dialogType } = this.state;
+		const { translate } = this.props;
+
+		switch (dialogType) {
+			case 'vehicle':
+				return {
+					header: (
+						<Title
+							header={translate('dialog.vehicle.title')}
+							subHeader={translate('dialog.vehicle.subTitle')}
+						/>
+					),
+					className: 'garage-popup'
+				};
+			case 'signin':
+				return {
+					header: <Title header={translate('dialog.signin.title')} />
+				};
+			default:
+				break;
 		}
-		else{
-			return <Login/>
+	};
+
+	// getDialogComponent = () => {
+	// 	const { dialogType } = this.state;
+
+	// 	switch (dialogType) {
+	// 		case 'signin':
+	// 			return <Login toggle={this.togglePopup} />;
+
+	// 		default:
+	// 			break;
+	// 	}
+	// };
+
+	addSelectedVehiclesToGarage = () => {
+
+	if (this.props.isLoggedIn) {
+		axios.post("http://qtest.fareed9.com:8081/service-q-customer/rest/api/v1/vehicle" ,{
+			id : this.state.selectedVehicle.id , 
+			customerId : this.props.customerDetail.id,
+			vehicleYearId : this.state.selectedVehicleYear.vehicleYearId,
+			vin : this.state.vinInput
+		}).then(res=>{
+			console.log(res);
+		}).catch(err=>{
+			console.log(err);
+		})
+	}
+	else {
+		return <Login toggle={this.togglePopup} />;
 		}
 	}
+
 
 	handleSubmit = async () => {
 		if (this.state.isVehicleSelected) {
 			let selectedVehicle = this.state.selectedVehicle
 			delete selectedVehicle.models;
+			console.log(selectedVehicle);
 			selectedVehicle = {
 				...selectedVehicle,
 				year: this.state.selectedVehicleYear,
@@ -129,27 +191,14 @@ export class ManualForm extends Component {
 			this.props.onVehicleSelected(true);
 		}
 
-		// this.props.onClearFormDataFromCache(this.state.selectedVehicles)
 	};
 
-	// handleChangeVehicleSubmit = ()=>{
-	// 	let selectedVehicle = this.state.selectedVehicle
-	// 	delete selectedVehicle.models;
-	// 	selectedVehicle = {
-	// 		...selectedVehicle,
-	// 		year: this.state.selectedVehicleYear,
-	// 		model: this.state.selectedVehicleModel,
-	// 		vin:this.state.vinInput
-	// 	}
-	// 	// this.toggleChangeVehivle();
-	// }
-
 	render() {
-		const { vehicles, currentLanguage } = this.props;
+		const { vehicles, currentLanguage, direction } = this.props;
 		const { isVehicleSelected } = this.state;
 		let selectedVechileModule;
 
-		console.log(this.props.isLoggedIn, "loggein");
+		console.log(this.props.isLoggedIn, "loggein" , vehicles);
 
 		const vehicleMake = vehicles.map(vehicle => {
 			return {
@@ -225,7 +274,7 @@ export class ManualForm extends Component {
 							'year'
 
 						),
-						value: year.id,
+						vehicleYearId: year.id,
 						imageLarge: year.imageLarge,
 						imageSmall: year.imageSmall
 					}
@@ -255,8 +304,6 @@ export class ManualForm extends Component {
 
 
 
-
-
 		if (isVehicleSelected) {
 			selectedVechileModule =
 				<div>
@@ -280,7 +327,7 @@ export class ManualForm extends Component {
 								</header>
 								<div className="col-auto">
 									<a className="btn btn-primary" onClick={this.toggle}><i className="icon-catalog"></i><MediumScreen>{this.props.translate('general.browseCataloge.browseButton')}</MediumScreen></a>
-									<Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-lg vin-modal">
+									<Modal isOpen={this.state.browseCatalogeModal} toggle={this.toggle} className="modal-lg vin-modal">
 										<ModalHeader toggle={this.toggle}>
 											{this.props.translate('general.browseCataloge.vehicleVinNumber')}
 										</ModalHeader>
@@ -364,8 +411,8 @@ export class ManualForm extends Component {
 														</div>
 														<ul className="list-unstyled">
 															{this.state.selectedVehicles.map((vehicle, key) => {
-																console.log(vehicle, "<<<<");
-
+																console.log(vehicle);
+																
 																return (
 																	<li className="radio-custom" key={key}>
 																		<div href="#" className="row">
@@ -379,13 +426,27 @@ export class ManualForm extends Component {
 																			</div>
 																			<p className="col">
 																				{vehicle.name + " " + vehicle.model.name + "" + vehicle.year.label}
-																				{isVehicleSelected ?
-																					<span>{this.state.vinInput}</span>
+																				{vehicle.vin ?
+																					<span>{vehicle.vin}</span>
 																					: null
 																				}
 																			</p>
 																			<div className="col-auto vec-actions">
-																				<a href="#" className="btn btn-primary"><i className="icon-catalog" onClick={() => this.addSelectedVehiclesToGarage}></i>save</a>
+																				{!this.props.isLoggedIn ?
+																				<div>
+																				<a href="#" className="btn btn-primary" onClick={this.togglePopup} ><i className="icon-catalog"></i>save</a>
+																				<Modal dir={direction} contentClassName="container-fluid" className={this.getDialogProps().className} isOpen={this.state.modal} toggle={this.togglePopup} >
+																					<ModalHeader toggle={this.togglePopup}>
+																						<p>Welcome</p> Back
+      																			    </ModalHeader>
+																					<ModalBody>
+																						{this.addSelectedVehiclesToGarage()}
+																					</ModalBody>
+																				</Modal>
+																				</div>
+																				:
+																				<a href="#" className="btn btn-primary" onClick={this.addSelectedVehiclesToGarage}><i className="icon-catalog"></i>save</a>
+																				}
 																				<a href="#" className="link" onClick={() => this.props.onDeleteSelectedVehicle(vehicle)}>Delete</a>
 																			</div>
 																		</div>
@@ -584,7 +645,8 @@ const mapStateToProps = state => {
 		selectedVehicleModel: state.api.selectedVehicleModel,
 		selectedVehicleYear: state.api.selectedVehicleYear,
 		selectedVehicles: state.api.selectedVehicles,
-		selectedVehicleVin: state.api.selectedVehicleVin
+		selectedVehicleVin: state.api.selectedVehicleVin,
+		customerDetail : state.customer.detail
 	}
 };
 
