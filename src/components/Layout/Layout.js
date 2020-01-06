@@ -5,8 +5,9 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Header from './Header/Header.js';
 import Footer from './Footer/Footer';
 import Title from '../UI/Title';
-import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
+// import EmailVerification from '../../containers/Authentication/ForgotPassword/EmailVerification/EmailVerification';
 import { LargeScreen } from '../Device';
+
 
 class Layout extends Component {
 	constructor(props) {
@@ -22,6 +23,7 @@ class Layout extends Component {
 		this.setState({ dialogType });
 		this.togglePopup();
 	};
+
 	togglePopup = () => {
 		this.setState({
 			modal: !this.state.modal
@@ -139,6 +141,7 @@ class Layout extends Component {
           {this.renderFooter()}
           <div className="cd-overlay"></div>
         </div>
+	
       </Fragment>
     );
   }

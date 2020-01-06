@@ -14,6 +14,7 @@ export const initialState = {
 	selectedVehicleYear: {
 		id: null
 	},
+	selectedVehicleVin:"",
 	city: null,
 	products: [],
 	flage: false,

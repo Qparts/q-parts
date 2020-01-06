@@ -29,11 +29,14 @@ export const GET_SELECTED_VEHICLE_YEAR = "GET_SELECTED_VEHICLE_YEAR";
 
 export const GET_SELECTED_VEHICLE_MODEL = "GET_SELECTED_VEHICLE_MODEL"
 export const SET_SELECTED_VEHICLE_MODEL = "SET_SELECTED_VEHICLE_MODEL";
+export const GET_SELECTED_VEHICLE_VIN = "GET_SELECTED_VEHICLE_VIN";
 
 export const UNSET_SELECTED_VEHICLES = "UNSET_SELECTED_VEHICLES";
 export const UNSET_VEHICLE_FROM_SELECTED_VEHICLES= "UNSET_VEHICLE_FROM_SELECTED_VEHICLES"
 
 export const SET_SELECTED_VEHICLES = "SET_SELECTED_VEHICLES"
+export const SET_SELECTED_VEHICLE_VIN = "SET_SELECTED_VEHICLE_VIN"
+
 
 export const getCountry = (countryId) => {
   return (dispatch) => {
@@ -193,16 +196,27 @@ export const setSelectedVehicleYear = value => {
      payload: value
    }
 }
+
+export const setSelectedVehicleVin = value => {
+  return {
+    type: SET_SELECTED_VEHICLE_VIN,
+    payload: value
+  }
+}
+
+
 export const setSelectedVehicle = (value)=>{
    return{
      type: SET_SELECTED_VEHICLE , payload:value 
    }
  }
+ 
 export const unsetSelectedVehicles = () => {
   return {
     type: UNSET_SELECTED_VEHICLES
   }
 }
+
 export const unsetVehcileFromSelectedVehicles = (payload) => {
   return {
     type: UNSET_VEHICLE_FROM_SELECTED_VEHICLES,
@@ -224,6 +238,13 @@ export const getSelectedVehicleModel = () => {
     type: GET_SELECTED_VEHICLE_MODEL
   }
 }
+
+export const getSelectedVehicleVin = () => {
+  return {
+    type: GET_SELECTED_VEHICLE_VIN
+  }
+}
+
 export const setSelectedVehicles = payload => {
   return {
     type: SET_SELECTED_VEHICLES,

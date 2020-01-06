@@ -11,8 +11,7 @@ export default function createCommonForm(formName = '') {
         return { ...state, vehicle: { maker, model, year, vin } }
 
       case CLEAR_FORM_DATA_FROM_CACHE:
-      const object = action.payload;
-        return { ...state, [object]: {} }
+        return { ...state, vehicle: {} }
 
       default:
         return state;
