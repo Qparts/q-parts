@@ -8,7 +8,6 @@ class Footer extends Component {
     return (
 
       <section className="main-footer">
-
         <div className="container-fluid">
           <ul className="qparts-benefit">
             <li className="col-auto media">
@@ -36,11 +35,11 @@ class Footer extends Component {
               <i className="icon-wallet" />
               <div className="media-body">
                 <h5>{translate("footer.wallet.header")}</h5>
-                <p>{translate("footer.wallet.subHeader")} <span>{translate("footer.wallet.span")}</span></p>
+                <p>{translate("footer.wallet.subHeader")}</p>
             </div>
             </li>
           </ul>
-          <ul className="site-map list-unstyled row">
+          <ul className="site-map list-unstyled row justify-content-between">
             <li className="col-auto">
               <ul className="list-unstyled">
                 <li>
@@ -51,31 +50,6 @@ class Footer extends Component {
                 </li>
                 <li>
                   <Link to="/returnPolicy">{translate("footer.customerService.linkTwo")}</Link>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.customerService.linkThree")}</a>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.customerService.linkFour")}</a>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.customerService.linkFive")}</a>
-                </li>
-              </ul>
-            </li>
-            <li className="col-auto">
-              <ul className="list-unstyled">
-                <li>
-                  <h5>{translate("footer.info.title")}</h5>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.info.linkOne")}</a>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.info.linkTwo")}</a>
-                </li>
-                <li>
-                  <a href="#">{translate("footer.info.linkThree")}</a>
                 </li>
               </ul>
             </li>
@@ -92,7 +66,19 @@ class Footer extends Component {
                 </li>
               </ul>
             </li>
-            <li className="col subscribe">
+            <li className="col-auto">
+              <ul className=" list-unstyled social-footer">
+                <li>
+                  <h5>{translate("footer.socialMediaContact.title")}</h5>
+                </li>
+                <li>
+                  <a href="#"><i className="icon-twitter"></i></a>
+                  <a href="#"><i className="icon-facebook"></i></a>
+                  <a href="#"><i className="icon-linked-in"></i></a>
+                </li>
+              </ul>
+            </li>
+            <li className="col-6 subscribe">
               <h5>{translate("footer.newsLetter.header")}</h5>
                 <p>
                 {translate("footer.newsLetter.subHeader")}
@@ -105,22 +91,8 @@ class Footer extends Component {
               </form>
             </li>
           </ul>
-          <div className="row copy-rights">
-            <div className="col sponser">
-              <span><i/></span>
-              <p>
-              {translate("footer.copyRight.header")} <br/>
-              {translate("footer.copyRight.subHeader")}
-            </p>
-            </div>
-            <div className="col ">
-              <p className="text-center">@2018 Qetaa.com</p>
-            </div>
-              <ul className="col social-footer">
-                <li><a href="#"><i className="icon-twitter"></i></a></li>
-                  <li><a href="#"><i className="icon-facebook"></i></a></li>
-                <li><a href="#"><i className="icon-linked-in"></i></a></li>
-              </ul>
+          <div className="copy-rights">
+            @2018 Qetaa.com {translate("footer.copyRight.header")}
           </div>
         </div>
       </section>

@@ -173,7 +173,7 @@ class HomeDetails extends Component {
 			},
 		];
 
-		
+
 		const formatHeightTiresGroupLabel = () => (
 			<div className="placeholder">
 				<span>{translate("general.select")} {translate("tires.placeholders.height")}</span>
@@ -580,18 +580,6 @@ class HomeDetails extends Component {
 								</Link>
 							</li>
 						</ul>
-					</section>
-					<section className="vendor">
-						<div className="shop-tires">
-							<div className="shop-tires-details">
-								<header>{translate("tires.title")}
-								</header>
-								<hr />
-								<h5>{translate("tires.selectTiresSize.header")}  | </h5>
-                                 <TiresForm vehicles={this.vehicles}/>
-							</div>
-							<img alt="" src="/img/tire-ex.png" className="tires-img" />
-						</div>
 					</section>
 					<section className="tires-filter">
 						<picture>

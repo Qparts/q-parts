@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { closeNav, right } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
+import Radio from '../../UI/Radio';
+
 const Nav = (
     {
         translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection,
@@ -16,34 +18,6 @@ const Nav = (
     let hasNoNewReply = quotations.completed.every(reply => reply.read);
 
     const userSettingPages = isLoggedIn ? <Fragment>
-        <li className="nav-sm">
-            <Link className={hasNoNewReply ? '' : 'notification'} to="/setting/quotations" onClick={close}>
-                <i className="icon-send"></i> {translate("navBar.quotations")}
-                {getReplayCounter() > 0 && <span>{getReplayCounter()}</span>}
-            </Link>
-        </li>
-        {/* <li className="nav-sm">
-                    <Link to="/setting/orders" onClick={close}>
-                        <i className="icon-product"></i> {translate("navBar.orders")}
-                    </Link>
-                </li> */}
-        <li className="nav-sm">
-            <Link to="/setting/wishlist" onClick={close}>
-                <i className="icon-heart"></i> {translate("navBar.wishlist")}
-            </Link>
-        </li>
-
-        <li className="nav-sm">
-            <Link to="/setting/garage" onClick={close}>
-                <i className="icon-garage"></i>{translate("navBar.garage")}
-            </Link>
-        </li>
-        <li className="nav-sm">
-            <Link to="/setting/addresses" onClick={close}>
-                <i className="icon-address"></i>
-                {translate("navBar.menu.menuItem.address")}
-            </Link>
-        </li>
         <li className="nav-sm">
             <Link to="/logout" onClick={close}><i className="icon-sign-out"></i> {translate("navBar.menu.menuItem.logout")}</Link>
         </li>
@@ -69,6 +43,122 @@ const Nav = (
                 <li className="nav-sm">
                     <Link to="/" onClick={close}>
                         <i className="icon-home"></i> {translate("navBar.home")}
+                    </Link>
+                </li>
+                <li className="nav-sm has-children" >
+                    <Link to="#" className="garage-sm">
+                      <img alt='garage' src='/img/garage.svg' />
+                      <span className="notify-num">3</span>
+                      <div>
+                        {translate("navBar.garage")}
+                        <p>2016 Ford Focus</p>
+                      </div>
+
+                    </Link>
+                    <ul className="cd-secondary-nav is-hidden">
+                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
+                        <li>
+                          <div class="garage-dropdown">
+            								<div className="saved">
+            									<div class="media">
+            										<i className="icon-vehicle"></i>
+            										<div class="media-body">
+            											<h5>{translate('dropdown.garage.userGarage')}</h5>
+            										</div>
+            										<a href="#">
+            											<i className="icon-add"></i>
+            											{translate('dropdown.garage.addVehicle')}
+            										</a>
+            									</div>
+            									<div className="vehic-list">
+            										<div className="radio-custom" key="3">
+            											<a href="#" className="row">
+            												<div className="col-auto">
+            													<Radio
+            														checked="true"
+            														type="radio"
+            														id="3"
+            														name="radioGroup"
+            													/>
+            												</div>
+            												<p className="col">
+            												2016 Ford Focus
+            												<span>VIN(000 000 000 000 11)</span>
+            											</p>
+            												<div className="col-auto vec-actions">
+            													<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
+            													<a href="#" className="link"><i className="icon-trash"></i></a>
+            											</div>
+            											</a>
+            										</div>
+            									</div>
+            								</div>
+            								<div className="cached">
+            									<div class="media">
+            										<i className="icon-vehicle-history"></i>
+            										<div class="media-body">
+            											<h5>{translate('dropdown.garage.cached')}</h5>
+            										</div>
+            										<a href="#">
+            											<i className="icon-clear"></i>
+            											{translate('dropdown.garage.clear')}
+            										</a>
+            									</div>
+            									<div className="vehic-list">
+            										<div className="radio-custom" key="1">
+            											<a href="#" className="row">
+            												<div className="col-auto">
+            													<Radio
+            														checked="true"
+            														type="radio"
+            														id="1"
+            														name="radioGroup"
+            													/>
+            												</div>
+            												<p className="col">
+            												2016 Ford Focus
+            												<span>VIN(000 000 000 000 11)</span>
+            											</p>
+            												<div className="col-auto vec-actions">
+            												<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
+            												<a href="#" className="link">{translate('dropdown.garage.save')}</a>
+            											</div>
+            											</a>
+            										</div>
+            										<div className="radio-custom" key="2">
+            											<a href="#" className="row">
+            												<div className="col-auto">
+            													<Radio
+            														checked="true"
+            														type="radio"
+            														id="2"
+            														name="radioGroup"
+            													/>
+            												</div>
+            												<p className="col">
+            												2016 Ford Focus
+            											</p>
+            												<div className="col-auto vec-actions">
+            												<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
+            												<a href="#" className="link">{translate('dropdown.garage.save')}</a>
+            											</div>
+            											</a>
+            										</div>
+            									</div>
+            								</div>
+            							</div>
+                        </li>
+                    </ul>
+                </li>
+                <li className="nav-sm">
+                    <Link className={hasNoNewReply ? '' : 'notification'} to="/setting/quotations" onClick={close}>
+                        <i className="icon-send"></i> {translate("navBar.quotations")}
+                        {getReplayCounter() > 0 && <span>{getReplayCounter()}</span>}
+                    </Link>
+                </li>
+                <li className="nav-sm">
+                    <Link to="/setting/wishlist" onClick={close}>
+                        <i className="icon-heart"></i> {translate("navBar.wishlist")}
                     </Link>
                 </li>
                 {userSettingPages}
@@ -123,18 +213,6 @@ const Nav = (
                         <li><Link to="/listing?query=&page=1&category=16" onClick={close}>{translate("nav.bodyworkCleaningAndCare")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=15" onClick={close}>{translate("nav.childSeat")}</Link></li>
                         <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
-
-                        {/*
-                        <li><Link to="/listing?query=&page=1&category=11" onClick={close}>{translate("nav.carAccessorise")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=20" onClick={close}>{translate("nav.exteriorAccessorise")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=18" onClick={close}>{translate("nav.Covers")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=21" onClick={close}>{translate("nav.InternalLights")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=22" onClick={close}>{translate("nav.toolKits")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=23" onClick={close}>{translate("nav.sunCurtains")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=24" onClick={close}>{translate("nav.carSunShade")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=25" onClick={close}>{translate("nav.towingTools")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=14" onClick={close}>{translate("nav.carRefrigerator")}</Link></li>
-                        */}
                     </ul>
                 </li>
 
@@ -145,27 +223,7 @@ const Nav = (
                 <li>
                     <a href="#">{translate("nav.quotationOrder")}</a>
                 </li>
-                  {/*
-                <li className="has-children">
-                    <a href="#">{translate("nav.carCare")}</a>
-                    <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
-                        <li><Link to="/listing?query=&page=1&category=34" onClick={close}>{translate("nav.motorCareLiquids")}</Link></li>
-                        <li><Link to="/listing?query=&page=1&category=35" onClick={close}>{translate("nav.washCleanersAndPolishers")}</Link></li>
-                    </ul>
-                </li>
-                <li><Link to="/listing?query=&page=1&category=36" onClick={close}>{translate("nav.sportsAndOutdoors")}</Link></li>
-                */}
-                {/* <li><Link to="#" onClick={close}>{translate("navBar.vendor")}</Link></li> */}
                 <li className="sep"></li>
-                <li className="nav-sm has-children">
-                    <a href="#">{translate("nav.country")}</a>
-                    <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
-                        <li><a href="#">KSA</a></li>
-                        <li><a href="#">Cairo</a></li>
-                    </ul>
-                </li>
                 <li className="nav-sm">
                     <LanguageToggle
                         closeNav={close}
@@ -177,12 +235,18 @@ const Nav = (
                 <li className="sep"></li>
                 <li className="nav-sm"><a href="#">{translate("nav.shippingAndDelivery")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.returns")}</a></li>
-                <li className="nav-sm"><a href="#">{translate("nav.contactUs")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.privacyPolicy")}</a></li>
                 <li className="nav-sm"><a href="#">{translate("nav.termsAndConditions")}</a></li>
-                <li className="nav-sm"><a href="#" className="sponser">
-                    <span><i></i></span><p>{translate("nav.oneOfTheIncubatedProjects")}</p>
-                </a></li>
+                <li className="sep"></li>
+                <li className="nav-sm">
+                </li>
+                <li className="nav-sm social-footer">
+                  <span>{translate("footer.socialMediaContact.title")}</span>
+                  <a href="#"><i className="icon-twitter"></i></a>
+                  <a href="#"><i className="icon-facebook"></i></a>
+                  <a href="#"><i className="icon-linked-in"></i></a>
+                </li>
+
             </ul>
         </nav>
     );

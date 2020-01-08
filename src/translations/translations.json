@@ -794,12 +794,12 @@
       "879310KD00"
     ],
     "home": [
-      "الصفحة الرئيسية",
+      "الرئيسية",
       "home"
     ],
     "quotations": [
       "التسعيرات",
-      "Quotations"
+      "Your Quotations"
     ],
     "orders": [
       "الطلبات",
@@ -822,14 +822,31 @@
       ]
     },
     "garage": {
-      "title": [
-        "سيارتي المحفوظة",
-        "My saved Vehicles"
+      "cached": [
+        "السيارات المختارة سابقاً",
+        "Selected Vehicle History"
       ],
-      "subTitle": [
-        "عرض وإدارة وإيجاد أجزاء للسيارات في كراجك",
-        "View, manage and find parts for the vehicles in your garage"
+      "catalog":[
+        "كتالوج",
+        "Catalog"
+      ],
+      "save":[
+        "حفظ",
+        "Save"
+      ],
+      "addVehicle":[
+        "أضف سيارة",
+        "Add Vehicle"
+      ],
+      "clear":[
+        "حذف السيارات المختارة",
+        "Clear History"
+      ],
+      "userGarage":[
+        "الكراج",
+        "My Garage"
       ]
+
     }
   },
   "form": {
@@ -1517,7 +1534,7 @@
         "Browse catalog"
       ],
       "catalog":[
-        "كنالوج",
+        "كتالوج",
         "Catalog"
       ]
     }
@@ -2668,11 +2685,7 @@
       ],
       "subHeader": [
         "استخدم بطاقة الائتمان, مدى",
-        "Pay with Credit Card, Mada"
-      ],
-      "span": [
-        "او التحويلات البنكية",
-        "and Bank Transfer"
+        "Pay with Credit Card and Mada"
       ]
     },
     "customerService": {
@@ -2687,38 +2700,9 @@
       "linkTwo": [
         "الاسترجاع",
         "Returns"
-      ],
-      "linkThree": [
-        "أسئلة وأجوبة",
-        "FAQs"
-      ],
-      "linkFour": [
-        "اتصل بنا",
-        "Contact Us"
-      ],
-      "linkFive": [
-        "تتبع الطلب",
-        "Track Order"
       ]
     },
-    "info": {
-      "title": [
-        "معلومات",
-        "INFORMATION"
-      ],
-      "linkOne": [
-        "معلومات عنا",
-        "About Us"
-      ],
-      "linkTwo": [
-        "المدونة",
-        "Blog"
-      ],
-      "linkThree": [
-        "وظائف",
-        "Careers"
-      ]
-    },
+
     "pt": {
       "title": [
         "السياسات و الشروط",
@@ -2731,6 +2715,12 @@
       "linkTwo": [
         "الشروط و الأحكام",
         "Terms & Conditions"
+      ]
+    },
+    "socialMediaContact": {
+      "title": [
+        "تواصل معنا على",
+        "Contact with us on"
       ]
     },
     "newsLetter": {
@@ -2753,12 +2743,8 @@
     },
     "copyRight": {
       "header": [
-        "واحدة من",
-        "One of the"
-      ],
-      "subHeader": [
-        "المشاريع المحتضنة",
-        "incubated projects"
+        "جميع الحقوق محفوظة",
+        "All rights reserved"
       ]
     }
   },

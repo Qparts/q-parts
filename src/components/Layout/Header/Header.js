@@ -140,15 +140,6 @@ class Header extends Component {
                   <ul className="data-setting list-inline ">
                     <li className="ship-country">
                       <span className="ship-to">{translate("cart.shipTo")} {translate("general.ksa")}</span>
-                      {/*<div className="input-group">
-                         <Select
-                          classNamePrefix="select"
-                          isSearchable={false}
-                          styles={styles.select}
-                          defaultValue={"Saudi Arabia"}
-                          options={groupedOptions}
-                          formatGroupLabel={formatGroupLabel} />
-                      </div>*/}
                     </li>
                     <li>
                       <span className="seperator" />

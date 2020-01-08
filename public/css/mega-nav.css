@@ -22,18 +22,18 @@ Main components
 }
 @media only screen and (max-width: 1169px) {
   .cd-main-content.nav-is-visible, .cd-main-header.nav-is-visible {
-    -webkit-transform: translateX(-260px);
-    -moz-transform: translateX(-260px);
-    -ms-transform: translateX(-260px);
-    -o-transform: translateX(-260px);
-    transform: translateX(-260px);
+    -webkit-transform: translateX(-310px);
+    -moz-transform: translateX(-310px);
+    -ms-transform: translateX(-310px);
+    -o-transform: translateX(-310px);
+    transform: translateX(-310px);
   }
   .nav-on-left .cd-main-content.nav-is-visible, .nav-on-left .cd-main-header.nav-is-visible {
-    -webkit-transform: translateX(260px);
-    -moz-transform: translateX(260px);
-    -ms-transform: translateX(260px);
-    -o-transform: translateX(260px);
-    transform: translateX(260px);
+    -webkit-transform: translateX(310px);
+    -moz-transform: translateX(310px);
+    -ms-transform: translateX(310px);
+    -o-transform: translateX(310px);
+    transform: translateX(310px);
   }
 }
 
@@ -292,9 +292,11 @@ Main components
   .cd-nav-trigger {
     display: none;
   }
+
 }
 
-.cd-primary-nav, .cd-primary-nav ul {
+.cd-primary-nav,
+.cd-primary-nav ul {
   position: fixed;
   height: 100%;
   background: #fff;
@@ -356,7 +358,7 @@ Main components
     right: auto;
     left: 0;
     top: 0;
-    width: 260px;
+    width: 310px;
   }
 }
 .cd-primary-nav .see-all a {
@@ -843,11 +845,11 @@ Main components
   }
   .nav-on-left .cd-overlay.is-visible {
 >>>>>>> 27d60088b2514d767e5816416ded094c1fb47aa2
-    -webkit-transform: translateX(260px);
-    -moz-transform: translateX(260px);
-    -ms-transform: translateX(260px);
-    -o-transform: translateX(260px);
-    transform: translateX(260px);
+    -webkit-transform: translateX(310px);
+    -moz-transform: translateX(310px);
+    -ms-transform: translateX(310px);
+    -o-transform: translateX(310px);
+    transform: translateX(310px);
   }
   .cd-overlay.is-visible.search-is-visible,
   .nav-on-left .cd-overlay.is-visible.search-is-visible,

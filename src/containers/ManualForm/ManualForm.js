@@ -141,7 +141,7 @@ export class ManualForm extends Component {
 
 	if (this.props.isLoggedIn) {
 		axios.post("http://qtest.fareed9.com:8081/service-q-customer/rest/api/v1/vehicle" ,{
-			id : this.state.selectedVehicle.id , 
+			id : this.state.selectedVehicle.id ,
 			customerId : this.props.customerDetail.id,
 			vehicleYearId : this.state.selectedVehicleYear.vehicleYearId,
 			vin : this.state.vinInput
@@ -225,25 +225,25 @@ export class ManualForm extends Component {
 			</div>
 		);
 		let vehicleModels = null
-		let selectedVehicle = vehicles.find(vehicle => vehicle.models.some(model => model.makeId === this.state.selectedVehicle.id))
-		if (selectedVehicle) {
-			vehicleModels = selectedVehicle.models.map(model => {
-				return {
-					...model,
-					label: getTranslatedObject(
-						model,
-						currentLanguage,
-						'name',
-						'nameAr'
-					),
-					value: model.id,
-					years: model.modelYears
-				}
-			})
-		}
-		else {
-			vehicleModels = [{ value: "no options", label: "no options", years: [{}] }]
-		}
+		// let selectedVehicle = vehicles.find(vehicle => vehicle.models.some(model => model.makeId === this.state.selectedVehicle.id))
+		// if (selectedVehicle) {
+		// 	vehicleModels = selectedVehicle.models.map(model => {
+		// 		return {
+		// 			...model,
+		// 			label: getTranslatedObject(
+		// 				model,
+		// 				currentLanguage,
+		// 				'name',
+		// 				'nameAr'
+		// 			),
+		// 			value: model.id,
+		// 			years: model.modelYears
+		// 		}
+		// 	})
+		// }
+		// else {
+		// 	vehicleModels = [{ value: "no options", label: "no options", years: [{}] }]
+		// }
 
 
 		const groupedvehicleModel = [
@@ -409,7 +409,7 @@ export class ManualForm extends Component {
 														<ul className="list-unstyled">
 															{this.state.selectedVehicles.map((vehicle, key) => {
 																console.log(vehicle);
-																
+
 																return (
 																	<li className="radio-custom" key={key}>
 																		<div href="#" className="row">
@@ -582,9 +582,6 @@ export class ManualForm extends Component {
 							</div>
 						</div>
 					</div>
-
-
-
 				</section>
 			</div>
 

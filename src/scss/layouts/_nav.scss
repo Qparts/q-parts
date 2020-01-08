@@ -29,16 +29,19 @@
   padding-inline-start: 0;
   @include nav-sm-media {
     overflow-x: hidden;
+    &.moves-out{
+      overflow: hidden;
+    }
     @include if-rtl{
       right: 0;
       left: auto;
        top: 0;
-       width: 260px;
+       width: 310px;
        & ul{
          right: 0;
          left: auto;
           top: 0;
-          width: 260px;
+          width: 310px;
        }
     };
   }
@@ -70,6 +73,7 @@
         margin-top: 0;
         margin-bottom: 0;
       }
+
       .selected {
         font-weight: 700;
       }
@@ -140,6 +144,26 @@
         margin-top: 0;
       }
     }
+    &.social-footer{
+      &:hover{
+        a{
+          background: transparent;
+        }
+      }
+      a{
+        display: inline-flex;
+        margin-bottom: 20px;
+        i{
+          color: $charcoal-grey;
+        }
+      }
+      span{
+        display: block;
+        padding: 10px 20px 0;
+        @include font-size(15px);
+        font-weight: 500;
+      }
+    }
   }
   .nav-sm {
     display: none;
@@ -148,10 +172,15 @@
     }
     a,
     button {
-      margin-bottom: 5px;
+      >i,
+      >img{
+        margin-#{$right}: 10px;
+      }
       > i {
         @include font-size(25px);
-        margin-#{$right}: 10px;
+      }
+      > img{
+        max-width: 25px;
       }
     }
   }
@@ -161,7 +190,7 @@
   .sep {
     display: none;
     border-bottom: 1px solid $light-gray-2;
-    margin-bottom: 18px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     @include nav-sm-media {
       display: block;
@@ -231,6 +260,48 @@ ul.cd-secondary-nav {
       }
     }
   }
+  @include nav-sm-media{
+    .garage-dropdown{
+      .icon-vehicle,
+      .icon-vehicle-history{
+        display: none;
+      }
+      .media{
+        display: block;
+      }
+      h5{
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+      .saved{
+        .media{
+          a{
+            color: $brand-color;
+          }
+        }
+      }
+      .cached{
+        border-bottom: 1px solid $dark-gray;
+
+      }
+      .row{
+        display: flex;
+      }
+      .radio-custom{
+        .col-auto{
+          padding: 0;
+        }
+      }
+      .vec-actions{
+        margin-#{$left}: 30px;
+        margin-top: 10px;
+        a{
+          margin-bottom: 0;
+        }
+      }
+    }
+
+  };
 }
 .scroll-dwon-brand {
   @extend .position-absolute;
@@ -394,6 +465,7 @@ ul.cd-secondary-nav {
 .user-account-sm {
   font-weight: 300 !important;
   background: $basic-gray !important;
+  margin-bottom: 10px !important;
   .rounded-circle {
     width: 45px;
     height: 45px;
@@ -472,5 +544,17 @@ ul.cd-secondary-nav {
         }
       }
     }
+  }
+}
+.garage-sm{
+  .notify-num{
+    top: 8px;
+    #{$left}: 33px;
+  }
+  p{
+    margin-bottom: 0;
+    @include font-size(13px);
+    color: $charcoal-grey;
+    margin-top: 3px;
   }
 }

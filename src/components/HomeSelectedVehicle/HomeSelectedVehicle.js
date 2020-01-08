@@ -87,21 +87,14 @@ class selectedVehicle extends Component{
         <section className="default-header-bg">
           <div className="container-fluid">
             <div className="row">
-              {/*<header className="col">
+              <header className="col">
                 <label className="header-label">Your selected vehicle:</label>
                 <h3>
                   Skoda Octavia 2012
                 </h3>
-              </header>*/}
-              <header className="col">
-                <label className="header-label">سيارتك المختارة:</label>
-                <h3>
-                  سكودا اوكتافيا 2012
-                </h3>
               </header>
               <div className="col-auto">
-                {/*<a href="#" className="btn btn-black"><i className="icon-vehicle"></i>Change<MediumScreen> Vehicle</MediumScreen></a>*/}
-                <a href="#" className="btn btn-black"><i className="icon-vehicle"></i>لتغير<MediumScreen> السيارة</MediumScreen></a>
+                <a href="#" className="btn btn-black"><i className="icon-vehicle"></i>Change<MediumScreen> Vehicle</MediumScreen></a>
             </div>
             </div>
           </div>
@@ -124,7 +117,7 @@ class selectedVehicle extends Component{
                             Skoda Octavia 2012
                           </p>
                         </div>
-                        {/* <div className="col-auto">
+                        <div className="col-auto">
                           <a href="#" className="btn btn-gray-secondary" onClick={this.toggle}><i className="icon-vehicle"></i>Change Vehicle</a>
                             <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-xl vin-modal">
                               <ModalHeader toggle={this.toggle}>
@@ -249,7 +242,7 @@ class selectedVehicle extends Component{
           											</form>
                               </ModalBody>
                             </Modal>
-                        </div> */}
+                        </div>
                       </div>
                       <form className="gray-input vin-input">
                           <Field

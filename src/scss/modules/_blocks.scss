@@ -685,53 +685,67 @@
   }
 }
 .garage-dropdown{
-  padding: 15px;
-  @include border-radius-div;
-  border-color: $dark-gray;
-  margin-top: 19px;
-  border-top-#{$left}-radius: 0 !important;
+  padding-top: 0;
+  .cached,
+  .saved{
+    padding: 15px 15px 0;
+  }
   @include media-breakpoint-up(md){
     min-width: 550px;
   };
   &:before{
     border-bottom: 12px solid $dark-gray;
-	border-right: 12px solid transparent;
-	border-left: 12px solid transparent;
-  position: absolute;
-  #{$left}: 50px;
-  top: -13px;
-	content: "";
+  	border-right: 12px solid transparent;
+  	border-left: 12px solid transparent;
+    position: absolute;
+    #{$left}: 50px;
+    top: -13px;
+  	content: " ";
   }
-  >.media{
+  .media{
     padding-bottom: 12px;
+    align-items: center;
+    h5{
+      @include font-size(17px);
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+    a{
+      @include font-size(14px);
+      display: flex;
+      align-items: center;
+      line-height: 1;
+      overflow: visible !important;
+      i{
+        font-size: 1rem !important;
+        height: 16px;
+        margin-#{$right}: 5px !important;
+        &:before{
+          top: -1px;
+        }
+      }
+    }
+  }
+
+  [class*='icon-vehicle']{
+    margin-#{$right}: 7px;
+    height: 31px;
+    @include opacity(0.5);
+  }
+  .icon-vehicle{
+    @include font-size(28px);
   }
   .icon-vehicle-history{
     @include font-size(45px);
-    @include opacity(0.5);
-    margin-#{$right}: 7px;
-    height: 31px;
     &:before{
       top: -11px;
     }
   }
-  .media-body{
-    h5{
-      @include font-size(15px);
-      font-weight: 400;
-      margin-bottom: 0;
-    }
-    p{
-      @include font-size(13px);
-      @include opacity(0.7);
-      margin-bottom: 0;
-
-    }
-  }
-  > ul{
-    border-bottom: 1px solid $dark-gray;
-    li{
+  .vehic-list{
+    > div{
       border-top: 1px solid $dark-gray;
-      padding: 15px 10px;
+      padding-right: 15px;
+      padding-left: 15px;
       p{
         @include font-size(15px);
         margin-bottom: 0;
@@ -741,52 +755,97 @@
           @include font-size(13px);
         }
       }
+      > a{
+        padding-top: 15px;
+        padding-bottom: 15px;
+        &:hover{
+          background: $light-gray;
+        }
+      }
       .radio-custom{
         width: 15px;
         display: flex;
         padding-top: 2px;
       }
-      .vec-actions{
-        display: flex;
-        align-items: center;
+    }
+  }
+  .vec-actions{
+    display: flex;
+    align-items: center;
+  }
+  .btn{
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    @include font-size(15px);
+
+    .icon-catalog{
+      @include font-size(21px);
+      height: 18px;
+      margin-#{$right}: 5px;
+      &:before{
+        @include if-ltr{
+          top: -4px;
+        };
+        @include if-rtl{
+          top: -1px;
+        };
       }
-      .btn{
-        padding: 6px 12px;
-        display: flex;
-        align-items: center;
-        @include font-size(15px);
-        margin-#{$right}: 10px;
-        .icon-catalog{
-          @include font-size(21px);
-          height: 18px;
-          margin-#{$right}: 5px;
-          &:before{
-            @include if-ltr{
-              top: -4px;
-            };
-            @include if-rtl{
-              top: -1px;
-            };
-          }
-          @include media-breakpoint-down(xs){
-            display: none;
-          };
-        }
+    }
+  }
+  .link{
+    padding-#{$left}: 10px;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  .saved{
+    .btn-gray{
+      @include nav-lg-media{
+        color: $brand-color !important;
+      };
+    }
+    .link{
+      color: $basic-gray;
+    }
+    .icon-trash{
+      @include font-size(22px);
+      height: 22px;
+      &:before{
+        top: 3px;
       }
-      .link{
-        @include font-size(15px);
+    }
+  }
+  .cached{
+    .link{
+      @include font-size(15px);
+      color: $brand-color;
+    }
+    .media{
+      a{
+        @include opacity(0.4);
         &:hover{
-          text-decoration: underline;
+          @include opacity(1);
+
         }
       }
+    }
+  }
+  .saved + .cached{
+    background: $light-gray;
+    margin-top: 15px;
+    border-top: 1px solid $dark-gray;
+    .row{
       &:hover{
-        background: $light-gray;
+        background: $dark-gray;
       }
     }
   }
   .vec-list-actions{
     display: flex;
     align-items: center;
+    border-top: 1px solid $dark-gray;
+    padding: 15px;
     .main-action{
       flex-basis: 0;
       flex-grow: 1;
@@ -797,7 +856,6 @@
       display: inline-flex;
       align-items: center;
       .icon-add-vehicle{
-        @include opacity(0.7);
         @include font-size(39px);
         margin-#{$right}: 5px;
         @include if-ltr{
@@ -818,7 +876,7 @@
     }
     .link{
       @include font-size(15px);
-      @include opacity(0.4);
+      @include opacity(0.7);
       display: flex;
       align-items: center;
       line-height: 1;
@@ -829,8 +887,8 @@
         display: inline-block;
       }
       &:hover{
-        @include opacity(0.7);
-
+        @include opacity(1);
+        text-decoration: none;
       }
     }
   }
