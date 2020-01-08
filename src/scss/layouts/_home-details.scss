@@ -722,34 +722,33 @@
     };
   }
 }
-.vehicle-info{
-  position: absolute;
-  bottom: 50px;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  @include media-breakpoint-down(sm){
-    bottom: 20px;
-  }
-  .header-label{
-    line-height: 1;
-  }
-}
+
 .selected-vechile{
   &.home{
     @include media-breakpoint-down(xs){
       margin-right: -15px;
       margin-left: -15px;
     };
-  }
-  .vehicle-info{
-    .header-label,h3{
-      color: $white;
-      font-weight: 400;
+    .vehicle-info{
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      @include media-breakpoint-down(sm){
+        bottom: 20px;
+      }
+      .header-label{
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+      .header-label,h3{
+        color: $white;
+        font-weight: 400;
+      }
+      .header-label{
+      }
     }
-    .header-label{
-      margin-bottom: 8px;
+  }
 
-    }
-  }
 }

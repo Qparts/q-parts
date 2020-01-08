@@ -12982,7 +12982,13 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   transform: translate(-50%, 0);
 }
 
-.vehicle-info {
+@media (max-width: 575.98px) {
+  .selected-vechile.home {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+.selected-vechile.home .vehicle-info {
   position: absolute;
   bottom: 50px;
   width: 100%;
@@ -12990,28 +12996,18 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   padding-left: 15px;
 }
 @media (max-width: 767.98px) {
-  .vehicle-info {
+  .selected-vechile.home .vehicle-info {
     bottom: 20px;
   }
 }
-.vehicle-info .header-label {
+.selected-vechile.home .vehicle-info .header-label {
   line-height: 1;
+  margin-bottom: 8px;
 }
-
-@media (max-width: 575.98px) {
-  .selected-vechile.home {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-}
-.selected-vechile .vehicle-info .header-label, .selected-vechile .vehicle-info h3 {
+.selected-vechile.home .vehicle-info .header-label, .selected-vechile.home .vehicle-info h3 {
   color: #fff;
   font-weight: 400;
 }
-.selected-vechile .vehicle-info .header-label {
-  margin-bottom: 8px;
-}
-
 .product-details {
   text-align: left !important;
   padding-bottom: 70px;

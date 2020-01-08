@@ -1037,7 +1037,7 @@ class QuotationRequest extends Component {
 								onChangePaymentMethod={this.setPaymentMethod}
 							/>
 						</div>
-					
+
 						<div className='row submit-qout'>
 							<div className='col-lg'>
 								<p>
