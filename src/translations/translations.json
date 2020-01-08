@@ -284,9 +284,13 @@
       "الإطارات",
       "Tires"
     ],
+    "shop":[
+      "سوق",
+      "Shop"
+    ],
     "selectTiresSize": {
       "header": [
-        "اختر",
+        " اخنر حجم اطارك",
         "Select Your Tire Size"
       ],
       "subHeader1": [
@@ -1847,8 +1851,8 @@
         "Cancel"
       ],
       "save": [
-        "احفظ التغييرات",
-        "Save changes"
+        "احفظ ",
+        "Save "
       ]
     },
     "addressBook": {

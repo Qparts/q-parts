@@ -14,19 +14,17 @@ import App from './containers/App';
 import ErrorBoundary from './components/ErrorBoundary';
 
 class Root extends React.Component {
-
   render() {
-
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <LocalizeProvider store={store}>
-            <ErrorBoundary>
-              <App />
-            </ErrorBoundary>
-          </LocalizeProvider>
-        </PersistGate>
-      </Provider>
+      <PersistGate loading={null} persistor={persistor}>
+        <LocalizeProvider store={store}>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </LocalizeProvider>
+      </PersistGate>
+    </Provider>
     )
   }
 }

@@ -14,6 +14,8 @@ UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES
 
 
 export default function reducer(state = initialState, action) {
+  console.log(state);
+
   switch (action.type) {
 
     case GET_COUNTRY_SUCCEEDED:
@@ -50,10 +52,11 @@ export default function reducer(state = initialState, action) {
 
     case IS_VEHICLE_SELECTED:
       return {...state , isVehicleSelected:action.payload}
+
       case SET_SELECTED_VEHICLES:
         return {
           ...state,
-         selectedVehicles: [...state.selectedVehicles, action.payload]
+          selectedVehicles: [...state.selectedVehicles, action.payload]
         }
 
 
