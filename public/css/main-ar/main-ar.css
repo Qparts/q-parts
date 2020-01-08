@@ -430,15 +430,15 @@ mark,
   list-style: none;
 }
 
-.list-inline, .orders-main .order-status, .social-footer, .result-style {
+.list-inline, .orders-main .order-status, .result-style {
   padding-left: 0;
   list-style: none;
 }
 
-.list-inline-item, .list-inline li, .orders-main .order-status li, .social-footer li, .result-style li {
+.list-inline-item, .list-inline li, .orders-main .order-status li, .result-style li {
   display: inline-block;
 }
-.list-inline-item:not(:last-child), .list-inline li:not(:last-child), .orders-main .order-status li:not(:last-child), .social-footer li:not(:last-child), .result-style li:not(:last-child) {
+.list-inline-item:not(:last-child), .list-inline li:not(:last-child), .orders-main .order-status li:not(:last-child), .result-style li:not(:last-child) {
   margin-right: 0.5rem;
 }
 
@@ -8376,7 +8376,7 @@ button.bg-dark:focus {
   white-space: nowrap;
 }
 
-.text-left, .social-footer {
+.text-left {
   text-align: left !important;
 }
 
@@ -8711,7 +8711,7 @@ body, html {
   }
 }
 
-.list-inline, .orders-main .order-status, .social-footer, .result-style {
+.list-inline, .orders-main .order-status, .result-style {
   padding-right: 0 !important;
   margin-bottom: 0;
 }
@@ -8864,7 +8864,7 @@ textarea {
   border-width: 0 !important;
 }
 
-.list-inline-item:not(:last-child), .list-inline li:not(:last-child), .orders-main .order-status li:not(:last-child), .social-footer li:not(:last-child), .result-style li:not(:last-child) {
+.list-inline-item:not(:last-child), .list-inline li:not(:last-child), .orders-main .order-status li:not(:last-child), .result-style li:not(:last-child) {
   margin-left: 0.5rem;
 }
 
@@ -9851,11 +9851,11 @@ body {
 }
 
 .garage-dropdown {
-  padding: 15px;
-  border-radius: 20px 0 20px 20px;
-  border-color: #efeeee;
-  margin-top: 19px;
-  border-top-right-radius: 0 !important;
+  padding-top: 0;
+}
+.garage-dropdown .cached,
+.garage-dropdown .saved {
+  padding: 15px 15px 0;
 }
 @media (min-width: 768px) {
   .garage-dropdown {
@@ -9869,97 +9869,147 @@ body {
   position: absolute;
   right: 50px;
   top: -13px;
-  content: "";
+  content: " ";
 }
-.garage-dropdown > .media, .main-parts .garage-dropdown > a {
+.garage-dropdown .media, .garage-dropdown .main-parts a, .main-parts .garage-dropdown a {
   padding-bottom: 12px;
+  align-items: center;
+}
+.garage-dropdown .media h5, .garage-dropdown .main-parts a h5, .main-parts .garage-dropdown a h5 {
+  font-size: 17px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.garage-dropdown .media a, .garage-dropdown .main-parts a a, .main-parts .garage-dropdown a a {
+  font-size: 14px;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  overflow: visible !important;
+}
+.garage-dropdown .media a i, .garage-dropdown .main-parts a a i, .main-parts .garage-dropdown a a i {
+  font-size: 1rem !important;
+  height: 16px;
+  margin-left: 5px !important;
+}
+.garage-dropdown .media a i:before, .garage-dropdown .main-parts a a i:before, .main-parts .garage-dropdown a a i:before {
+  top: -1px;
+}
+.garage-dropdown [class*=icon-vehicle] {
+  margin-left: 7px;
+  height: 31px;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.garage-dropdown .icon-vehicle {
+  font-size: 28px;
+  font-size: 1.75rem;
 }
 .garage-dropdown .icon-vehicle-history {
   font-size: 45px;
   font-size: 2.8125rem;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
-  margin-left: 7px;
-  height: 31px;
 }
 .garage-dropdown .icon-vehicle-history:before {
   top: -11px;
 }
-.garage-dropdown .media-body h5 {
-  font-size: 15px;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  margin-bottom: 0;
-}
-.garage-dropdown .media-body p {
-  font-size: 13px;
-  font-size: 0.8125rem;
-  opacity: 0.7;
-  filter: alpha(opacity=70);
-  margin-bottom: 0;
-}
-.garage-dropdown > ul {
-  border-bottom: 1px solid #efeeee;
-}
-.garage-dropdown > ul li {
+.garage-dropdown .vehic-list > div {
   border-top: 1px solid #efeeee;
-  padding: 15px 10px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
-.garage-dropdown > ul li p {
+.garage-dropdown .vehic-list > div p {
   font-size: 15px;
   font-size: 0.9375rem;
   margin-bottom: 0;
   line-height: 1.3;
 }
-.garage-dropdown > ul li p span {
+.garage-dropdown .vehic-list > div p span {
   display: block;
   font-size: 13px;
   font-size: 0.8125rem;
 }
-.garage-dropdown > ul li .radio-custom {
+.garage-dropdown .vehic-list > div > a {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.garage-dropdown .vehic-list > div > a:hover {
+  background: #f8f8f8;
+}
+.garage-dropdown .vehic-list > div .radio-custom {
   width: 15px;
   display: flex;
   padding-top: 2px;
 }
-.garage-dropdown > ul li .vec-actions {
+.garage-dropdown .vec-actions {
   display: flex;
   align-items: center;
 }
-.garage-dropdown > ul li .btn {
+.garage-dropdown .btn {
   padding: 6px 12px;
   display: flex;
   align-items: center;
   font-size: 15px;
   font-size: 0.9375rem;
-  margin-left: 10px;
 }
-.garage-dropdown > ul li .btn .icon-catalog {
+.garage-dropdown .btn .icon-catalog {
   font-size: 21px;
   font-size: 1.3125rem;
   height: 18px;
   margin-left: 5px;
 }
-.garage-dropdown > ul li .btn .icon-catalog:before {
+.garage-dropdown .btn .icon-catalog:before {
   top: -1px;
 }
-@media (max-width: 575.98px) {
-  .garage-dropdown > ul li .btn .icon-catalog {
-    display: none;
-  }
+.garage-dropdown .link {
+  padding-right: 10px;
 }
-.garage-dropdown > ul li .link {
-  font-size: 15px;
-  font-size: 0.9375rem;
-}
-.garage-dropdown > ul li .link:hover {
+.garage-dropdown .link:hover {
   text-decoration: underline;
 }
-.garage-dropdown > ul li:hover {
+@media only screen and (min-width: 1170px) {
+  .garage-dropdown .saved .btn-gray {
+    color: #ed4036 !important;
+  }
+}
+.garage-dropdown .saved .link {
+  color: #37363c;
+}
+.garage-dropdown .saved .icon-trash {
+  font-size: 22px;
+  font-size: 1.375rem;
+  height: 22px;
+}
+.garage-dropdown .saved .icon-trash:before {
+  top: 3px;
+}
+.garage-dropdown .cached .link {
+  font-size: 15px;
+  font-size: 0.9375rem;
+  color: #ed4036;
+}
+.garage-dropdown .cached .media a, .garage-dropdown .cached .main-parts a a, .main-parts .garage-dropdown .cached a a {
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+}
+.garage-dropdown .cached .media a:hover, .garage-dropdown .cached .main-parts a a:hover, .main-parts .garage-dropdown .cached a a:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.garage-dropdown .saved + .cached {
   background: #f8f8f8;
+  margin-top: 15px;
+  border-top: 1px solid #efeeee;
+}
+.garage-dropdown .saved + .cached .row:hover {
+  background: #efeeee;
 }
 .garage-dropdown .vec-list-actions {
   display: flex;
   align-items: center;
+  border-top: 1px solid #efeeee;
+  padding: 15px;
 }
 .garage-dropdown .vec-list-actions .main-action {
   flex-basis: 0;
@@ -9973,8 +10023,6 @@ body {
   align-items: center;
 }
 .garage-dropdown .vec-list-actions .btn-gray .icon-add-vehicle {
-  opacity: 0.7;
-  filter: alpha(opacity=70);
   font-size: 39px;
   font-size: 2.4375rem;
   margin-left: 5px;
@@ -9986,8 +10034,8 @@ body {
 .garage-dropdown .vec-list-actions .link {
   font-size: 15px;
   font-size: 0.9375rem;
-  opacity: 0.4;
-  filter: alpha(opacity=40);
+  opacity: 0.7;
+  filter: alpha(opacity=70);
   display: flex;
   align-items: center;
   line-height: 1;
@@ -10000,8 +10048,9 @@ body {
   display: inline-block;
 }
 .garage-dropdown .vec-list-actions .link:hover {
-  opacity: 0.7;
-  filter: alpha(opacity=70);
+  opacity: 1;
+  filter: alpha(opacity=100);
+  text-decoration: none;
 }
 
 .select-vechile-form .select__control,
@@ -11182,7 +11231,7 @@ body {
   color: #03a9f4;
 }
 
-.sprite, .sponser i {
+.sprite {
   position: relative;
   background: url("/img/sprite.png") no-repeat transparent;
   display: block;
@@ -11255,6 +11304,9 @@ body {
   display: inline-block;
   font-size: 14px;
   font-size: 0.875rem;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 0;
 }
 .radio-custom [type=radio]:checked + label:before,
 .radio-custom [type=radio]:not(:checked) + label:before {
@@ -11262,8 +11314,8 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  width: 13px;
-  height: 13px;
+  width: 20px;
+  height: 20px;
   border: 1px solid #e2e2e2;
   border-radius: 100%;
   background: #fff;
@@ -11271,12 +11323,12 @@ body {
 .radio-custom [type=radio]:checked + label:after,
 .radio-custom [type=radio]:not(:checked) + label:after {
   content: "";
-  width: 6.5px;
-  height: 6.5px;
+  width: 10px;
+  height: 10px;
   background: #ed4036;
   position: absolute;
-  top: 3px;
-  right: 3.5px;
+  top: 5px;
+  right: 5px;
   border-radius: 100%;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -11646,6 +11698,21 @@ body {
 
 .uppercase, .selected-vechile h3, .sec-head h2 {
   text-transform: uppercase;
+}
+
+.notify-num {
+  font-family: "Roboto";
+  font-size: 13px;
+  font-size: 0.8125rem;
+  position: absolute;
+  border-radius: 100%;
+  background: #ed4036;
+  color: #fff;
+  padding: 0 5px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sec-header {
@@ -12234,13 +12301,16 @@ body {
     right: 0;
     left: auto;
     top: 0;
-    width: 260px;
+    width: 310px;
+  }
+  .cd-primary-nav.moves-out {
+    overflow: hidden;
   }
   .cd-primary-nav ul {
     right: 0;
     left: auto;
     top: 0;
-    width: 260px;
+    width: 310px;
   }
 }
 .cd-primary-nav > li {
@@ -12333,6 +12403,23 @@ body {
     margin-top: 0;
   }
 }
+.cd-primary-nav > li.social-footer:hover a {
+  background: transparent;
+}
+.cd-primary-nav > li.social-footer a {
+  display: inline-flex;
+  margin-bottom: 20px;
+}
+.cd-primary-nav > li.social-footer a i {
+  color: rgba(55, 54, 60, 0.6);
+}
+.cd-primary-nav > li.social-footer span {
+  display: block;
+  padding: 10px 20px 0;
+  font-size: 15px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
 .cd-primary-nav .nav-sm {
   display: none;
 }
@@ -12341,15 +12428,20 @@ body {
     display: block;
   }
 }
-.cd-primary-nav .nav-sm a,
-.cd-primary-nav .nav-sm button {
-  margin-bottom: 5px;
+.cd-primary-nav .nav-sm a > i,
+.cd-primary-nav .nav-sm a > img,
+.cd-primary-nav .nav-sm button > i,
+.cd-primary-nav .nav-sm button > img {
+  margin-left: 10px;
 }
 .cd-primary-nav .nav-sm a > i,
 .cd-primary-nav .nav-sm button > i {
   font-size: 25px;
   font-size: 1.5625rem;
-  margin-left: 10px;
+}
+.cd-primary-nav .nav-sm a > img,
+.cd-primary-nav .nav-sm button > img {
+  max-width: 25px;
 }
 .cd-primary-nav .icon-home:before {
   top: -3px;
@@ -12357,7 +12449,7 @@ body {
 .cd-primary-nav .sep {
   display: none;
   border-bottom: 1px solid #c7c7c9;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   padding-bottom: 10px;
 }
 @media only screen and (max-width: 1169px) {
@@ -12427,6 +12519,38 @@ ul.cd-secondary-nav .go-back a::before, ul.cd-secondary-nav .go-back a::after,
 ul.cd-secondary-nav .go-back button::before,
 ul.cd-secondary-nav .go-back button::after {
   right: 15px;
+}
+@media only screen and (max-width: 1169px) {
+  ul.cd-secondary-nav .garage-dropdown .icon-vehicle,
+ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
+    display: none;
+  }
+  ul.cd-secondary-nav .garage-dropdown .media, ul.cd-secondary-nav .garage-dropdown .main-parts a, .main-parts ul.cd-secondary-nav .garage-dropdown a {
+    display: block;
+  }
+  ul.cd-secondary-nav .garage-dropdown h5 {
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  ul.cd-secondary-nav .garage-dropdown .saved .media a, ul.cd-secondary-nav .garage-dropdown .saved .main-parts a a, .main-parts ul.cd-secondary-nav .garage-dropdown .saved a a {
+    color: #ed4036;
+  }
+  ul.cd-secondary-nav .garage-dropdown .cached {
+    border-bottom: 1px solid #efeeee;
+  }
+  ul.cd-secondary-nav .garage-dropdown .row {
+    display: flex;
+  }
+  ul.cd-secondary-nav .garage-dropdown .radio-custom .col-auto {
+    padding: 0;
+  }
+  ul.cd-secondary-nav .garage-dropdown .vec-actions {
+    margin-right: 30px;
+    margin-top: 10px;
+  }
+  ul.cd-secondary-nav .garage-dropdown .vec-actions a {
+    margin-bottom: 0;
+  }
 }
 
 .scroll-dwon-brand {
@@ -12614,6 +12738,7 @@ ul.cd-secondary-nav .go-back button::after {
 .user-account-sm {
   font-weight: 300 !important;
   background: #37363c !important;
+  margin-bottom: 10px !important;
 }
 .user-account-sm .rounded-circle, .user-account-sm .input-file {
   width: 45px;
@@ -12702,6 +12827,18 @@ ul.cd-secondary-nav .go-back button::after {
   top: 2px;
   font-size: 12px;
   font-size: 0.75rem;
+}
+
+.garage-sm .notify-num {
+  top: 8px;
+  right: 33px;
+}
+.garage-sm p {
+  margin-bottom: 0;
+  font-size: 13px;
+  font-size: 0.8125rem;
+  color: rgba(55, 54, 60, 0.6);
+  margin-top: 3px;
 }
 
 #header-fixed {
@@ -12872,6 +13009,7 @@ ul.cd-secondary-nav .go-back button::after {
   margin-left: 15px;
   font-size: 15px;
   font-size: 0.9375rem;
+  position: relative;
 }
 .user-actions > ul > li > a {
   display: flex;
@@ -12893,34 +13031,13 @@ ul.cd-secondary-nav .go-back button::after {
   font-size: 14px;
   font-size: 0.875rem;
 }
-.user-actions > ul > li .not-empty {
-  position: relative;
-  display: block;
-}
-.user-actions > ul > li .not-empty span {
-  font-family: "Roboto";
-  font-size: 13px;
-  font-size: 0.8125rem;
-  position: absolute;
-  border-radius: 100%;
-  background: #ed4036;
-  color: #fff;
-  top: -8px;
+.user-actions > ul > li .icon-cart + .notify-num {
+  top: -7px;
   left: -6px;
-  padding: 0 5px;
-  height: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-.user-actions > ul > li .icon-heart {
-  font-size: 24px;
-  font-size: 1.5rem;
-  height: 22px;
-  display: block;
-}
-.user-actions > ul > li .icon-heart:before {
-  top: -1px;
+.user-actions > ul > li img + .notify-num {
+  right: 11px;
+  top: -6px;
 }
 .user-actions > ul > li img {
   width: 24px;
@@ -12948,7 +13065,8 @@ ul.cd-secondary-nav .go-back button::after {
   border-radius: 0px 0px 20px 20px;
   right: auto !important;
   left: 0 !important;
-  top: 11px !important;
+  transform: none !important;
+  top: calc(100% + 9px) !important;
   border-width: 0;
   padding-bottom: 0;
 }
@@ -13232,48 +13350,6 @@ ul.cd-secondary-nav .go-back button::after {
   }
 }
 
-/*Hasnaa*/
-.selected-vehicle-details {
-  top: 18%;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  transform: translate(0, -50%);
-  display: flex;
-  justify-content: space-between;
-}
-.selected-vehicle-details .header-label {
-  width: 100%;
-  height: 13px;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fefeff;
-  margin-left: 21px;
-  margin-right: -90px;
-}
-.selected-vehicle-details .header-h3 {
-  width: 100%;
-  height: 19px;
-  font-family: Roboto;
-  font-size: 25px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: left;
-  color: #fefeff;
-  text-transform: uppercase;
-  margin-left: 21px;
-}
-
-/*Hasnaa*/
 .main-parts {
   padding-top: 50px;
 }
@@ -18581,14 +18657,19 @@ form {
   background: #37363c;
   color: #fff;
 }
-@media (max-width: 991.98px) {
-  .main-footer {
-    padding-top: 20px;
-  }
-}
 .main-footer h5 {
   font-weight: 300;
   text-transform: uppercase;
+}
+@media only screen and (max-width: 1169px) {
+  .main-footer {
+    padding-top: 0;
+  }
+  .main-footer .qparts-benefit,
+.main-footer .site-map,
+.main-footer .subscribe {
+    display: none;
+  }
 }
 
 .qparts-benefit {
@@ -18597,11 +18678,6 @@ form {
   margin-right: -15px;
   margin-left: -15px;
   padding-bottom: 20px;
-}
-@media (max-width: 991.98px) {
-  .qparts-benefit {
-    display: none;
-  }
 }
 .qparts-benefit i {
   padding-left: 15px;
@@ -18658,13 +18734,6 @@ form {
   padding-bottom: 25px;
   margin-bottom: 0;
 }
-@media (max-width: 991.98px) {
-  .site-map {
-    border-top-width: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-}
 .site-map ul li {
   margin-bottom: 7px;
 }
@@ -18684,15 +18753,7 @@ form {
   opacity: 0.9;
   filter: alpha(opacity=90);
 }
-@media (max-width: 991.98px) {
-  .site-map .col-auto {
-    display: none;
-  }
-}
 
-.subscribe {
-  margin-bottom: 25px;
-}
 .subscribe p {
   font-weight: 300;
   font-size: 14px;
@@ -18700,11 +18761,6 @@ form {
   opacity: 0.5;
   filter: alpha(opacity=50);
   margin-bottom: 10px;
-}
-@media (max-width: 991.98px) {
-  .subscribe p {
-    display: none;
-  }
 }
 .subscribe .form-control {
   height: 50px;
@@ -18736,14 +18792,6 @@ form {
 .subscribe .btn-primary .icon-email:before, .subscribe .signin-list li:first-child a .icon-email:before, .signin-list li:first-child .subscribe a .icon-email:before {
   top: 2px;
 }
-@media (max-width: 991.98px) {
-  .subscribe .btn-primary span, .subscribe .signin-list li:first-child a span, .signin-list li:first-child .subscribe a span {
-    display: none;
-  }
-  .subscribe .btn-primary .icon-email, .subscribe .signin-list li:first-child a .icon-email, .signin-list li:first-child .subscribe a .icon-email {
-    display: block !important;
-  }
-}
 .subscribe .btn-primary i, .subscribe .signin-list li:first-child a i, .signin-list li:first-child .subscribe a i {
   height: 20px;
 }
@@ -18752,73 +18800,18 @@ form {
 }
 
 .copy-rights {
-  text-align: right !important;
+  text-align: center;
+  padding-top: 10px;
   padding-bottom: 10px;
-}
-.copy-rights p, .copy-rights a {
-  font-size: 13px;
-  font-size: 0.8125rem;
+  font-size: 16px;
+  font-size: 1rem;
   opacity: 0.5;
   filter: alpha(opacity=50);
-  margin-bottom: 0;
-}
-.copy-rights a {
-  color: #fff;
-}
-@media (max-width: 991.98px) {
-  .copy-rights p {
-    text-align: left !important;
-  }
-}
-.copy-rights .text-center, .copy-rights .main-cat li a figure span, .main-cat li a figure .copy-rights span {
-  margin-top: 17px;
-}
-@media (max-width: 991.98px) {
-  .copy-rights .sponser {
-    display: none;
-  }
 }
 
-.sponser > span {
-  border-radius: 0 0 20px 20px;
+.social-footer a {
   display: inline-block;
-  background: #fff;
-  padding: 5px 11px;
-  margin-left: 6px;
-}
-.sponser i {
-  width: 68px;
-  height: 29px;
-  background-position: 0 0;
-  margin: 0;
-}
-.sponser p {
-  position: relative;
-  display: inline-block;
-  top: -4px;
-}
-
-.nav-sm .sponser {
-  border-top: 1px solid #c7c7c9;
-  background: #f8f8f8;
-  margin-top: 20px !important;
-}
-.nav-sm .sponser > span {
-  border-radius: 0;
-  background: transparent;
-  padding: 0;
-}
-.nav-sm .sponser p {
-  font-size: 13px;
-  font-size: 0.8125rem;
-  font-weight: 400 !important;
-  margin-bottom: 0;
-  white-space: normal;
-  top: 0;
-}
-
-.social-footer {
-  margin-top: 13px;
+  margin-left: 10px;
 }
 .social-footer i {
   color: #fff;

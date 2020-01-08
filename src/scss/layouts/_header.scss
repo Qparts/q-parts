@@ -159,6 +159,7 @@
     > li{
       margin-#{$right}: 15px;
       @include font-size(15px);
+      position: relative;
       > a{
         display: flex;
         @include if-ltr{
@@ -181,43 +182,13 @@
       &.user-account {
           @include font-size(14px);
       }
-      .not-empty{
-        position: relative;
-        display: block;
-        span{
-          font-family: "Roboto";
-          @include font-size(13px);
-          position: absolute;
-          border-radius: 100%;
-          background: $brand-color;
-          color: $white;
-          top: -8px;
-          #{$right}: -6px;
-          padding: 0 5px;
-          height: 17px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          @include if-ltr{
-            padding-top: 1px;
-          };
-          @include if-rtl{
-
-          };
-        }
+      .icon-cart + .notify-num{
+        top: -7px;
+        #{$right}: -6px;
       }
-      .icon-heart{
-        @include font-size(24px);
-        height: 22px;
-        display: block;
-        &:before{
-          @include if-ltr{
-            top: -4px;
-          };
-          @include if-rtl{
-            top: -1px;
-          };
-        }
+      img + .notify-num{
+        #{$left}: 11px;
+        top: -6px;
       }
       img{
         width: 24px;
@@ -251,11 +222,12 @@
     border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;
     #{$right}: 0 !important;
+    transform: none !important;
     @include if-ltr{
-      top: 15px !important;
+      top: calc(100% + 12px) !important;
     };
     @include if-rtl{
-      top: 11px !important;
+      top: calc(100% + 9px) !important;
     };
     border-width: 0;
     padding-bottom: 0;

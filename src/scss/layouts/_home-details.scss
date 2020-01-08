@@ -77,49 +77,6 @@
 
 
 }
-/*Hasnaa*/
-.selected-vehicle-details{
-  top: 18%;
-  left: 0;
-  width: 100%;
-  position: absolute;
-  transform: translate(0, -50%);
-  display: flex;
-  justify-content: space-between;
-  .header-label{
-    width: 100%;
-    height: 13px;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: normal;
-    letter-spacing: normal;
-    text-align: left;
-    color: #fefeff;
-    margin-left: 21px;
-    @include if-rtl{
-      margin-right: -90px;
-    }
-}
-    .header-h3{
-      width: 100%;
-      height: 19px;
-      font-family: Roboto;
-      font-size: 25px;
-      font-weight: normal;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: left;
-      color: #fefeff;
-      text-transform: uppercase;
-      margin-left: 21px;
-    }
-}
-/*Hasnaa*/
 .main-parts {
   padding-top: 50px;
   @include media-breakpoint-down(sm){
