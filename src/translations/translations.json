@@ -1107,8 +1107,8 @@
           "Add a new vehicle"
         ],
         "select": [
-          "اختر من السيارات المحفوظة الخاصة بك",
-          "Select from your saved vehicles"
+          "إختر من",
+          "Select from"
         ]
       },
       "buttons": {

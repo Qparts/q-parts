@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownItem from '../../UI/Nav/DropdownItem';
 import { isEmpty, right } from '../../../utils';
-import { withStyles, Menu, MenuItem, Button } from '@material-ui/core';
 import { NavLg } from '../../Device';
 
 import Radio from '../../UI/Radio';
@@ -194,7 +193,7 @@ class HeaderDetails extends Component {
 							<span className="notify-num">3</span>
 								{translate('navBar.garage')}
 							</Link>
-							{/*user not loged in or loged in and do not have vehicle in garage
+							{/*user not loged in and have vehicle in garage
 							<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
 								<div className="cached">
 									<div class="media">
@@ -258,8 +257,9 @@ class HeaderDetails extends Component {
 									</a>
 								</div>
 							</div>
-							{/*END-- user not loged in or loged in and do not have vehicle in garage*/}
-							{/*user loged inand have vehicle in garage and history*/}
+							{/*END-- user not loged in and have vehicle in garage*/}
+
+							{/*user loged in and have vehicle in garage and history*/}
 							<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
 								<div className="saved">
 									<div class="media">
@@ -365,21 +365,4 @@ class HeaderDetails extends Component {
 		);
 	}
 }
-
-const styles = {
-	label: {
-		textTransform: 'capitalize'
-	},
-	btn_social: {
-		display: 'flex',
-		margin: '0px 0px 10px 0px'
-	},
-	text: {
-		margin: '0px 0px 24px 0px'
-	},
-	arrow_right: {
-		color: 'black'
-	}
-};
-
-export default withStyles(styles)(HeaderDetails);
+export default (HeaderDetails);

@@ -1146,3 +1146,10 @@
 
   };
 }
+.dropdown-menu{
+  overflow: hidden;
+  border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
+  padding-bottom: 0;
+  border-width: 0;
+  
+}

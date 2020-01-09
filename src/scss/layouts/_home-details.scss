@@ -686,6 +686,7 @@
   overflow: hidden;
   position: relative;
   height: 370px;
+  background: $basic-gray;
   @include media-breakpoint-down(sm){
     height: 330px;
   };
