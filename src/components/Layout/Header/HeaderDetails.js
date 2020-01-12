@@ -259,7 +259,7 @@ class HeaderDetails extends Component {
 							</div>
 							{/*END-- user not loged in and have vehicle in garage*/}
 
-							{/*user loged in and have vehicle in garage and history*/}
+							{/*user loged in and have vehicle in garage and history
 							<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
 								<div className="saved">
 									<div class="media">
@@ -350,6 +350,12 @@ class HeaderDetails extends Component {
 								</div>
 							</div>
 							{/*END-- user loged inand have vehicle in garage and history*/}
+							<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+								<div className="empty-vehic">
+									<a className="btn btn-primary" href="#" ><i className="icon-add"> </i> {translate('dropdown.garage.addVehicle')}</a>
+									<p>{translate("dialog.vehicle.subTitle")}</p>
+								</div>
+							</div>
 						</div>
 					</li>
 				</NavLg>

@@ -686,6 +686,9 @@
   .cached,
   .saved{
     padding: 15px 15px 0;
+    @include media-breakpoint-up(md){
+      min-width: 550px;
+    };
   }
   .media{
     padding-bottom: 12px;
@@ -711,7 +714,6 @@
       }
     }
   }
-
   [class*='icon-vehicle']{
     margin-#{$right}: 7px;
     height: 31px;
@@ -875,6 +877,23 @@
         @include opacity(1);
         text-decoration: none;
       }
+    }
+  }
+  .empty-vehic{
+    padding: 1rem 1rem 0;
+    text-align: center;
+    .btn{
+      display: inline-flex;
+      padding: 10px 15px;
+      @include font-size(17px);
+      margin-bottom: 0.6rem;
+      i{
+        @include font-size(20px);
+        margin-#{$right}: 5px;
+      }
+    }
+    p{
+      min-width: 300px;
     }
   }
 }

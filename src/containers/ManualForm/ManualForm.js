@@ -4,14 +4,12 @@ import SelectInput from "../../components/SelectInput/SelectInput";
 import { getTranslate } from "react-localize-redux";
 import { connect } from "react-redux";
 import { getTranslatedObject } from "../../utils";
-import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import * as validations from "../../utils";
 import {
   DownLargeScreen,
   LargeScreen,
-  MediumScreen,
-  DownMediumScreen
+  MediumScreen
 } from "../../components/Device";
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import RenderField from "../../components/RenderField/RenderField";

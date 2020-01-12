@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import { swiperParams } from '../../constants';
 import Title from '../UI/Title';
-import { Tabs, Tab } from 'react-bootstrap';
+// import { Tabs, Tab } from 'react-bootstrap';
 
 import Swiper from 'react-id-swiper';
 import { getBestSeller, getOffers } from '../../utils/api';
@@ -70,7 +70,7 @@ class Products extends Component {
       <section className="products-sec">
         <div className="container-fluid">
           <Title header={translate("offers.title")} subHeader={translate("offers.subTitle")} />
-          <Tabs defaultActiveKey="best-seller" id="uncontrolled-tab-example">
+          {/*<Tabs defaultActiveKey="best-seller" id="uncontrolled-tab-example">
             <Tab eventKey="best-seller" title={translate("offers.recommendation.bestSeller")}>
               <h3>{translate("offers.recommendation.bestSeller")}</h3>
               <Swiper {...swiperParams(direction)} ref={this.bestSeller}>
@@ -122,7 +122,8 @@ class Products extends Component {
                 }
               </Swiper>
             </Tab>
-          </Tabs>
+          </Tabs>*/}
+
         </div>
         <div className="swiper-left" ref={this.swiperLeftHidden}/>
       </section>
