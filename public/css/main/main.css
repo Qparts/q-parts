@@ -8059,6 +8059,7 @@ textarea {
   cursor: pointer;
   position: static !important;
   width: auto !important;
+  border-radius: 0;
 }
 .css-10nd86i .select__single-value {
   position: static;
@@ -8761,36 +8762,37 @@ body {
 .vin-modal .make {
   min-width: 230px;
 }
-@media (max-width: 767.98px) {
-  .vin-modal .make {
-    padding-bottom: 10px;
-  }
-}
-.vin-modal [class*=col]:not(:first-child) {
+.vin-modal form [class*=col]:not(:first-child) {
   padding-left: 0;
 }
 @media (max-width: 767.98px) {
-  .vin-modal [class*=col]:not(:first-child) {
+  .vin-modal form [class*=col]:not(:first-child) {
     padding-left: 15px;
   }
 }
-.vin-modal [class*=col]:not(:last-child) {
-  padding-right: 10px;
+.vin-modal form [class*=col]:not(:last-child) {
+  padding-right: 5px;
 }
-.vin-modal [class*=col]:first-child .select__control {
+@media (max-width: 767.98px) {
+  .vin-modal form [class*=col]:not(:last-child) {
+    padding-right: 15px;
+    padding-bottom: 10px;
+  }
+}
+.vin-modal form [class*=col]:first-child .select__control {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 @media (max-width: 767.98px) {
-  .vin-modal [class*=col]:first-child .select__control {
+  .vin-modal form [class*=col]:first-child .select__control {
     border-bottom-left-radius: 0;
   }
 }
-.vin-modal [class*=col]:nth-last-child(2) .RenderField, .vin-modal [class*=col]:nth-last-child(2) .form-control {
+.vin-modal form [class*=col]:nth-last-child(2) .RenderField, .vin-modal form [class*=col]:nth-last-child(2) .form-control {
   border-bottom-right-radius: 20px;
 }
 @media (max-width: 767.98px) {
-  .vin-modal [class*=col]:nth-last-child(2) .has-float-label, .vin-modal [class*=col]:nth-last-child(2) .form-control {
+  .vin-modal form [class*=col]:nth-last-child(2) .has-float-label, .vin-modal form [class*=col]:nth-last-child(2) .form-control {
     border-bottom-left-radius: 20px !important;
   }
 }
@@ -8808,8 +8810,13 @@ body {
   padding-top: 5px;
   padding-right: 15px;
   padding-left: 15px;
-  display: flex;
-  justify-content: space-between;
+}
+@media (min-width: 576px) {
+  .vin-modal .VIN-info {
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 .vin-modal .VIN-info p {
   display: flex;
@@ -8818,24 +8825,13 @@ body {
   font-size: 0.8125rem;
   color: rgba(55, 54, 60, 0.7);
 }
-.vin-modal .VIN-info p a {
-  color: rgba(55, 54, 60, 0.7);
-}
-.vin-modal .VIN-info p a:hover {
-  color: #37363c;
-}
 .vin-modal .VIN-info .id-img {
-  float: right;
+  cursor: pointer;
 }
 @media (max-width: 575.98px) {
   .vin-modal .VIN-info .id-img {
-    float: none;
     margin-top: 10px;
   }
-}
-.vin-modal .VIN-info .id-img a {
-  display: flex;
-  align-items: center;
 }
 .vin-modal .VIN-info .id-img i {
   height: 20px;
@@ -8846,32 +8842,28 @@ body {
 .vin-modal .VIN-info .id-img i:before {
   top: -3px;
 }
-.vin-modal .popover {
-  position: absolute;
-  top: -122px !important;
-}
 @media (max-width: 767.98px) {
   .vin-modal .actions {
     display: block !important;
   }
-  .vin-modal .actions .btn {
-    height: 50px;
-  }
 }
 .vin-modal .actions .btn {
   display: flex;
-  height: 55px;
+  height: 50px;
   align-items: center;
+  font-size: 17px;
+  font-size: 1.0625rem;
+}
+.vin-modal .actions .col-auto {
+  padding-right: 10px !important;
 }
 .vin-modal .actions .col-auto .btn {
-  font-size: 19px;
-  font-size: 1.1875rem;
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
 @media (max-width: 767.98px) {
   .vin-modal .actions .col {
-    padding-left: 0;
+    padding-left: 0 !important;
   }
   .vin-modal .actions .col .btn {
     border-bottom-left-radius: 0 !important;
@@ -8931,6 +8923,15 @@ body {
 .vin-modal .two-actions .btn-primary, .vin-modal .two-actions .signin-list li:first-child a, .signin-list li:first-child .vin-modal .two-actions a {
   border-bottom-left-radius: 0 !important;
 }
+@media (min-width: 992px) {
+  .vin-modal .year {
+    max-width: 120px;
+  }
+}
+.vin-modal .garage-dropdown {
+  border-top-width: 1px;
+  border-color: #efeeee;
+}
 
 .garage-dropdown {
   padding-top: 0;
@@ -8940,18 +8941,10 @@ body {
   padding: 15px 15px 0;
 }
 @media (min-width: 768px) {
-  .garage-dropdown {
+  .garage-dropdown .cached,
+.garage-dropdown .saved {
     min-width: 550px;
   }
-}
-.garage-dropdown:before {
-  border-bottom: 12px solid #efeeee;
-  border-right: 12px solid transparent;
-  border-left: 12px solid transparent;
-  position: absolute;
-  left: 50px;
-  top: -13px;
-  content: " ";
 }
 .garage-dropdown .media, .garage-dropdown .main-parts a, .main-parts .garage-dropdown a {
   padding-bottom: 12px;
@@ -9134,6 +9127,25 @@ body {
   filter: alpha(opacity=100);
   text-decoration: none;
 }
+.garage-dropdown .empty-vehic {
+  padding: 1rem 1rem 0;
+  text-align: center;
+}
+.garage-dropdown .empty-vehic .btn {
+  display: inline-flex;
+  padding: 10px 15px;
+  font-size: 17px;
+  font-size: 1.0625rem;
+  margin-bottom: 0.6rem;
+}
+.garage-dropdown .empty-vehic .btn i {
+  font-size: 20px;
+  font-size: 1.25rem;
+  margin-right: 5px;
+}
+.garage-dropdown .empty-vehic p {
+  min-width: 300px;
+}
 
 .select-vechile-form .select__control,
 .select-white .select__control {
@@ -9200,6 +9212,61 @@ body {
   .select-vechile-form .float-label .select-input,
 .select-white .float-label .select-input {
     height: 50px;
+  }
+}
+
+.vin-popover > p {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  z-index: 2;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+.vin-popover > p i {
+  display: inline-block;
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+  height: 20px;
+  font-size: 23px;
+  font-size: 1.4375rem;
+}
+.vin-popover > p i:before {
+  top: -3px;
+}
+
+.popover.vin {
+  min-width: 270px !important;
+  min-height: 150px !important;
+}
+.popover.vin .popover-body {
+  padding: 5px;
+}
+.popover.vin .popover-body img {
+  width: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .add-vech-model [class*=col]:not(:first-child) {
+    padding-left: 15px;
+  }
+  .add-vech-model [class*=col]:not(:last-child) {
+    padding-right: 15px;
+    padding-bottom: 10px;
+  }
+  .add-vech-model [class*=col]:first-child .select__control {
+    border-bottom-left-radius: 0;
+  }
+  .add-vech-model [class*=col]:nth-last-child(2) .has-float-label, .add-vech-model [class*=col]:nth-last-child(2) .form-control {
+    border-bottom-left-radius: 20px !important;
+  }
+  .add-vech-model .VIN-info {
+    padding-top: 10px;
+    padding-bottom: 20px;
   }
 }
 
@@ -10300,15 +10367,12 @@ body {
 .radio-custom [type=radio]:checked + label,
 .radio-custom [type=radio]:not(:checked) + label {
   position: relative;
-  padding-left: 18px;
+  padding-left: 25px;
   cursor: pointer;
-  line-height: 13px;
   display: inline-block;
   font-size: 14px;
   font-size: 0.875rem;
-  width: 20px;
-  height: 20px;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 .radio-custom [type=radio]:checked + label:before,
 .radio-custom [type=radio]:not(:checked) + label:before {
@@ -10707,6 +10771,13 @@ body {
   align-items: center;
   justify-content: center;
   padding-top: 1px;
+}
+
+.dropdown-menu {
+  overflow: hidden;
+  border-radius: 0px 0px 20px 20px;
+  padding-bottom: 0;
+  border-width: 0;
 }
 
 .sec-header {
@@ -12040,14 +12111,10 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
 }
 .user-actions .dropdown-menu {
   text-align: left;
-  overflow: hidden;
-  border-radius: 0px 0px 20px 20px;
   left: auto !important;
   right: 0 !important;
   transform: none !important;
   top: calc(100% + 12px) !important;
-  border-width: 0;
-  padding-bottom: 0;
 }
 .user-actions .dropdown-menu > h6 {
   color: #37363c;
@@ -12943,6 +13010,7 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   overflow: hidden;
   position: relative;
   height: 370px;
+  background: #37363c;
 }
 @media (max-width: 767.98px) {
   .vehicle-img {
@@ -12982,7 +13050,13 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   transform: translate(-50%, 0);
 }
 
-.vehicle-info {
+@media (max-width: 575.98px) {
+  .selected-vechile.home {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+.selected-vechile.home .vehicle-info {
   position: absolute;
   bottom: 50px;
   width: 100%;
@@ -12990,28 +13064,18 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   padding-left: 15px;
 }
 @media (max-width: 767.98px) {
-  .vehicle-info {
+  .selected-vechile.home .vehicle-info {
     bottom: 20px;
   }
 }
-.vehicle-info .header-label {
+.selected-vechile.home .vehicle-info .header-label {
   line-height: 1;
+  margin-bottom: 8px;
 }
-
-@media (max-width: 575.98px) {
-  .selected-vechile.home {
-    margin-right: -15px;
-    margin-left: -15px;
-  }
-}
-.selected-vechile .vehicle-info .header-label, .selected-vechile .vehicle-info h3 {
+.selected-vechile.home .vehicle-info .header-label, .selected-vechile.home .vehicle-info h3 {
   color: #fff;
   font-weight: 400;
 }
-.selected-vechile .vehicle-info .header-label {
-  margin-bottom: 8px;
-}
-
 .product-details {
   text-align: left !important;
   padding-bottom: 70px;
@@ -15003,7 +15067,7 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
   filter: alpha(opacity=100);
 }
 .info-list > ul li p, .info-list > ul li .actions, .info-list > ul li h6 {
-  padding-left: 20px;
+  padding-left: 25px;
 }
 
 .modal-body {
@@ -18077,7 +18141,7 @@ form {
   position: relative;
   color: #e2e2e3;
   line-height: 0.8;
-  left: -15px;
+  left: -7px;
   top: -10px;
 }
 .empty .rotate span, .cart-empty .rotate span {
@@ -22206,12 +22270,14 @@ form {
   margin-bottom: 0;
   padding-right: 10px;
 }
+.add-new-vehicle .garage-select.show .dropdown-toggle {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
 @media (max-width: 575.98px) {
   .add-new-vehicle .dropdown-menu {
     transform: none !important;
     top: 100% !important;
-    margin-top: -20px;
-    margin-top: 11px;
     width: 100%;
   }
   .add-new-vehicle .dropdown-menu:before {

@@ -4,7 +4,6 @@ import SelectInput from "../../components/SelectInput/SelectInput";
 import { getTranslate } from "react-localize-redux";
 import { connect } from "react-redux";
 import { getTranslatedObject } from "../../utils";
-import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import * as validations from "../../utils";
 import {
@@ -31,7 +30,6 @@ import { clearFormDataFromCache } from "../../actions/baseFormAction";
 import Login from "../Authentication/Login/Login";
 import Title from "../../components/UI/Title";
 import axios from "axios";
-
 export class ManualForm extends Component {
   constructor(props) {
     super(props);
@@ -120,15 +118,15 @@ export class ManualForm extends Component {
         return {
           header: (
             <Title
-              header={translate("dialog.vehicle.title")}
-              subHeader={translate("dialog.vehicle.subTitle")}
+              header={this.props.translate("dialog.vehicle.title")}
+              subHeader={this.props.translate("dialog.vehicle.subTitle")}
             />
           ),
           className: "garage-popup"
         };
       case "signin":
         return {
-          header: <Title header={translate("dialog.signin.title")} />
+          header: <Title header={this.props.translate("dialog.signin.title")} />
         };
       default:
         break;
@@ -440,6 +438,7 @@ export class ManualForm extends Component {
                               {this.props.translate("vehicleInfo.VINNumberEx")}:{" "}
                               <Link to="#">{this.state.vin}</Link>
                             </p>
+
                             <p
                               className="id-img"
                               id="UncontrolledPopover"
@@ -493,7 +492,7 @@ export class ManualForm extends Component {
                     <Modal
                       isOpen={this.state.changeVehcileModal}
                       toggle={this.toggleChangeVehivle}
-                      className="modal-lg vin-modal"
+                      className="modal-xl vin-modal"
                     >
                       <ModalHeader toggle={this.toggleChangeVehivle}>
                         {this.props.translate(
@@ -541,20 +540,150 @@ export class ManualForm extends Component {
                                 {this.props.selectedVehicles.length}
                               </span>
                             </a>
+                            <div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+              								<div className="saved">
+              									<div class="media">
+              										<i className="icon-vehicle"></i>
+              										<div class="media-body">
+              											<h5>{this.props.translate('dropdown.garage.userGarage')}</h5>
+              										</div>
+              									</div>
+              									<div className="vehic-list">
+              										<div className="radio-custom" key="3">
+              											<a href="#" className="row">
+              												<div className="col-auto">
+              													<Radio
+              														checked="true"
+              														type="radio"
+              														id="3"
+              														name="radioGroup"
+              													/>
+              												</div>
+              												<p className="col">
+              												2016 Ford Focus
+              												<span>VIN(000 000 000 000 11)</span>
+              											</p>
+              											</a>
+              										</div>
+              									</div>
+              								</div>
+              								<div className="cached">
+              									<div class="media">
+              										<i className="icon-vehicle-history"></i>
+              										<div class="media-body">
+              											<h5>{this.props.translate('dropdown.garage.cached')}</h5>
+              										</div>
+              									</div>
+                                {/*Shaimaa react code*/}
+                                {this.state.selectedVehicles.map(
+                                  (vehicle, key) => {
+                                    console.log(vehicle);
+
+                                    return (
+                                      <div className="vehic-list" key={key}>
+                    										<div className="radio-custom" key="1">
+                    											<a href="#" className="row">
+                    												<div className="col-auto">
+                                              <Radio
+                                                checked={
+                                                  this.state.selectedVehicle
+                                                    .id === vehicle.id
+                                                }
+                                                type="radio"
+                                                id="1"
+                                                name="radioGroup"
+                                              />
+                    												</div>
+                    												<p className="col">
+                                              {vehicle.name +
+                                                " " +
+                                                vehicle.model.name +
+                                                " " +
+                                                vehicle.year.label}
+                                              {vehicle.vin ? (
+                                                <span>{vehicle.vin}</span>
+                                              ) : null}
+                    											</p>
+                                          <div className="col-auto vec-actions">
+                                            {!this.props.isLoggedIn ? (
+                                              <div>
+                                                <a
+                                                  href="#"
+                                                  className="link"
+                                                  onClick={this.togglePopup}
+                                                >
+                                                {this.props.translate('dropdown.garage.save')}
+                                                </a>
+                                                <Modal
+                                                  dir={direction}
+                                                  contentClassName="container-fluid"
+                                                  className={
+                                                    this.getDialogProps()
+                                                      .className
+                                                  }
+                                                  isOpen={this.state.modal}
+                                                  toggle={this.togglePopup}
+                                                >
+                                                  <ModalHeader
+                                                    toggle={this.togglePopup}
+                                                  >
+                                                    <p>Welcome</p> Back
+                                                  </ModalHeader>
+                                                  <ModalBody>
+                                                    {this.addSelectedVehiclesToGarage()}
+                                                  </ModalBody>
+                                                </Modal>
+                                              </div>
+                                            ) : (
+                                              <a
+                                                href="#"
+                                                className="link"
+                                                onClick={
+                                                  this
+                                                    .addSelectedVehiclesToGarage
+                                                }
+                                              >
+                                                {this.props.translate('dropdown.garage.save')}
+                                              </a>
+                                            )}
+                                          </div>
+                    											</a>
+                    										</div>
+                    									</div>
+
+                                  );
+                                }
+                              )}
+                                {/*END Shaimaa react code*/}
+              									<div className="vehic-list">
+              										<div className="radio-custom" key="1">
+              											<a href="#" className="row">
+              												<div className="col-auto">
+              													<Radio
+              														checked="true"
+              														type="radio"
+              														id="1"
+              														name="radioGroup"
+              													/>
+              												</div>
+              												<p className="col">
+              												2016 Ford Focus
+              												<span>VIN(000 000 000 000 11)</span>
+              											</p>
+              												<div className="col-auto vec-actions">
+              												<a href="#" className="link">{this.props.translate('dropdown.garage.save')}</a>
+              											</div>
+              											</a>
+              										</div>
+              									</div>
+              								</div>
+              							</div>
+                            {/* react code*/}
                             <div
-                              class="dropdown-menu garage-dropdown"
+                              class="dropdown-menu garage-dropdown d-none"
                               aria-labelledby="garage-dropdown"
                             >
-                              <div class="media">
-                                <i className="icon-vehicle-history"></i>
-                                <div class="media-body">
-                                  <h5>تاريخ المركبة المختار </h5>
-                                  <p>
-                                    عرض وإدارة والعثور على قطع غيار للسيارات في
-                                    المرآب الخاص بك
-                                  </p>
-                                </div>
-                              </div>
+
                               <ul className="list-unstyled">
                                 {this.state.selectedVehicles.map(
                                   (vehicle, key) => {
@@ -593,7 +722,7 @@ export class ManualForm extends Component {
                                                   onClick={this.togglePopup}
                                                 >
                                                   <i className="icon-catalog"></i>
-                                                {this.props.translate("setting.accountSetting.save")}                    
+                                                {this.props.translate("setting.accountSetting.save")}
                                                 </a>
                                                 <Modal
                                                   dir={direction}
@@ -628,7 +757,6 @@ export class ManualForm extends Component {
                                                 save
                                               </a>
                                             )}
-                                            {/* <a href="#" className="link" onClick={() => this.props.onDeleteSelectedVehicle(vehicle)}>Delete</a> */}
                                           </div>
                                         </div>
                                       </li>
@@ -636,22 +764,15 @@ export class ManualForm extends Component {
                                   }
                                 )}
                               </ul>
-                              {/* <div className="vec-list-actions">
-															<div className="main-action">
-															</div>
-															<a href="#" className="link" onClick={() => this.props.onClearHistory(this.state.selectedVehicles)}>
-																<i className="icon-clear"></i>
-																{this.props.translate('general.vehicleButton.remove')}
-															</a>
-														</div> */}
                             </div>
+                            {/*END react code*/}
                           </div>
                         </header>
                         <form
-                          className="gray-input row"
+                          className="gray-input row add-vech-model"
                           onSubmit={this.props.handleSubmit(this.handleSubmit)}
                         >
-                          <div className="col-md-auto float-label make">
+                          <div className="col-lg float-label">
                             <Field
                               onChange={e => this.props.onSelectedVehicle(e)}
                               label="Make"
@@ -662,7 +783,7 @@ export class ManualForm extends Component {
                               formatGroupLabel={formatvehicleMakeLabel}
                             />
                           </div>
-                          <div className="col-md float-label">
+                          <div className="col-lg float-label">
                             <Field
                               onChange={e =>
                                 this.props.onSelectedVehicleModel(e)
@@ -676,7 +797,7 @@ export class ManualForm extends Component {
                               formatGroupLabel={formatvehicleModelLabel}
                             />
                           </div>
-                          <div className="col-md float-label">
+                          <div className="col-lg float-label year">
                             <Field
                               onChange={e =>
                                 this.props.onSelectedVehicleYear(e)
@@ -690,7 +811,26 @@ export class ManualForm extends Component {
                               formatGroupLabel={formatvehicleYearLabel}
                             />
                           </div>
-                          <div className="col">
+                          <div className="col-lg vin-popover">
+                            <LargeScreen>
+                              <p
+                                className="id-img"
+                                id="UncontrolledPopover"
+                                type="text"
+                              >
+                                <i className="icon-info"></i>{" "}
+                              </p>
+                              <UncontrolledPopover
+                                className="vin"
+                                placement="left"
+                                target="UncontrolledPopover"
+                                trigger="legacy"
+                              >
+                                <PopoverBody>
+                                  <img alt="" src="/img/vin-ex.jpg" />
+                                </PopoverBody>
+                              </UncontrolledPopover>
+                            </LargeScreen>
                             <Field
                                onChange={e =>{
                                  this.props.onSelectedVehicleVin(e.target.value)
@@ -733,49 +873,63 @@ export class ManualForm extends Component {
                                 )}
                                 :{this.state.vin}
                               </p>
+                              <DownLargeScreen>
+                                <p
+                                  className="id-img "
+                                  id="UncontrolledPopover"
+                                  type="text"
+                                >
+                                  <i className="icon-info"></i>{" "}
 
-                              <p
-                                className="id-img"
-                                id="UncontrolledPopover"
-                                type="text"
-                              >
-                                <i className="icon-info"></i>{" "}
-                                {this.props.translate("vehicleInfo.carId")}
-                              </p>
-                              <UncontrolledPopover
-                                placement="top"
-                                target="UncontrolledPopover"
-                              >
-                                <PopoverBody>
-                                  <img alt="" src="/img/vin-ex.jpg" />
-                                </PopoverBody>
-                              </UncontrolledPopover>
+                                  {this.props.translate("vehicleInfo.carId")}
+                                </p>
+                                <UncontrolledPopover
+                                  placement="top"
+                                  target="UncontrolledPopover"
+                                  trigger="legacy"
+                                >
+                                  <PopoverBody>
+                                    <img alt="" src="/img/vin-ex.jpg" />
+                                  </PopoverBody>
+                                </UncontrolledPopover>
+                              </DownLargeScreen>
                             </div>
                           </div>
-                          <div className="col-lg-auto actions">
-                            <div className="row">
-                              <DownLargeScreen>
+                          <LargeScreen>
+                            <div className="col-lg-auto actions">
+                              <button
+                                type="submit"
+                                className="btn btn-primary"
+                                >
+                                {this.props.translate("general.vehicleButton.add")}
+                                <i className="icon-arrow-right"></i>
+                              </button>
+                            </div>
+
+                          </LargeScreen>
+                          <DownLargeScreen>
+                            <div className="actions two-actions col">
+                              <div className="row">
                                 <div className="col-auto">
-                                  <button
-                                    type="submit"
-                                    className="btn btn-gray"
-                                    onClick={this.toggleChangeVehivle}
-                                  >
-                                    Cancel
+                                  <button type="submit" className="btn btn-gray" onClick={this.toggleChangeVehivle}>
+                                    {this.props.translate(
+                                      "general.buttons.cancel"
+                                    )}
                                   </button>
                                 </div>
-                              </DownLargeScreen>
-                              <div className="col-md-auto col">
-                                <button
-                                  type="submit"
-                                  className="btn btn-primary"
-                                >
-                                  {this.props.translate("general.buttons.go")}
-                                  <i className="icon-arrow-right"></i>
-                                </button>
+                                <div className="col-md-auto col">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    >
+                                    {this.props.translate("general.vehicleButton.add")}
+                                    <i className="icon-arrow-right"></i>
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </DownLargeScreen>
+
                         </form>
                       </ModalBody>
                     </Modal>

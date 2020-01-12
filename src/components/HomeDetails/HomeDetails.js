@@ -20,7 +20,7 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import SelectInput from "../../components/SelectInput/SelectInput";
 import RenderField from "../../components/RenderField/RenderField";
 import * as validations from "../../utils";
-import { DownLargeScreen, LargeScreen } from "../../components/Device";
+import { DownLargeScreen, LargeScreen, MediumScreen } from "../../components/Device";
 import { Field } from "redux-form";
 import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import TiresForm from "./tires-form";
@@ -336,6 +336,11 @@ class HomeDetails extends Component {
                                   this.props.selectedVehicleYear.label}
                             </p>
                           </div>
+                          <MediumScreen>
+                            <div class="col-auto">
+                              <a href="#" class="btn btn-gray-secondary"><i class="icon-vehicle"></i>Change Vehicle</a>
+                            </div>
+                          </MediumScreen>
                         </div>
                         <form className="gray-input vin-input">
                           <Field

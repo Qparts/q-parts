@@ -516,39 +516,42 @@
   }
   .make{
     min-width: 230px;
-    @include media-breakpoint-down(sm){
-      padding-bottom: 10px;
+  }
+  form{
+    [class*='col']:not(:first-child){
+      padding-#{$left}: 0;
+      @include media-breakpoint-down(sm){
+        padding-#{$left}: 15px;
+      };
     }
-  }
-  [class*='col']:not(:first-child){
-    padding-#{$left}: 0;
-    @include media-breakpoint-down(sm){
-      padding-#{$left}: 15px;
-    };
-  }
-  [class*='col']:not(:last-child){
-    padding-#{$right}: 10px;
-  }
-  [class*='col']:first-child{
-    .select__control{
-        border-top-#{$left}-radius: $border-radius-base;
-        border-bottom-#{$left}-radius: $border-radius-base;
-        @include media-breakpoint-down(sm){
-          border-bottom-#{$left}-radius: 0;
+    [class*='col']:not(:last-child){
+      padding-#{$right}: 5px;
+      @include media-breakpoint-down(sm){
+        padding-#{$right}: 15px;
+        padding-bottom: 10px;
+      };
+    }
+    [class*='col']:first-child{
+      .select__control{
+          border-top-#{$left}-radius: $border-radius-base;
+          border-bottom-#{$left}-radius: $border-radius-base;
+          @include media-breakpoint-down(sm){
+            border-bottom-#{$left}-radius: 0;
+
+          }
+      }
+    }
+    [class*='col']:nth-last-child(2){
+      .RenderField, .form-control{
+          border-bottom-#{$right}-radius: $border-radius-base;
+      }
+      @include media-breakpoint-down(sm){
+        .has-float-label, .form-control{
+          border-bottom-#{$left}-radius: $border-radius-base !important;
 
         }
+      };
     }
-  }
-  [class*='col']:nth-last-child(2){
-    .RenderField, .form-control{
-        border-bottom-#{$right}-radius: $border-radius-base;
-    }
-    @include media-breakpoint-down(sm){
-      .has-float-label, .form-control{
-        border-bottom-#{$left}-radius: $border-radius-base !important;
-
-      }
-    };
   }
   .col-lg-auto:last-child{
     @include media-breakpoint-down(md){
@@ -564,68 +567,53 @@
     padding-top: 5px;
     padding-right: 15px;
     padding-left: 15px;
-    display: flex;
-    justify-content: space-between;
+    @include media-breakpoint-up(sm){
+      padding-top: 5px;
+      display: flex;
+      justify-content: space-between;
+    };
     p{
       display: flex;
       margin-bottom: 0;
       @include font-size(13px);
       color: $light-charcoal-grey;
-      a{
-        color: $light-charcoal-grey;
-        &:hover{
-          color: $basic-gray;
-        }
-      }
     }
     .id-img{
-      float: #{$right};
+      cursor: pointer;
       @include media-breakpoint-down(xs){
-        float: none;
         margin-top: 10px;
       };
-      a{
-        display: flex;
-        align-items: center;
-      }
       i{
         height: 20px;
         @include font-size(23px);
         margin-#{$right}: 5px;
-
-
         &:before{
           top: -3px;
         }
       }
     }
   }
-  .popover {
-    position: absolute;
-    top: -122px !important;
-  }
   .actions{
     @include media-breakpoint-down(sm){
       display: block !important;
-      .btn{
-        height: 50px;
-      }
     };
     .btn{
       display: flex;
-      height: 55px;
+      height: 50px;
       align-items: center;
+      @include font-size(17px);
     }
     .col-auto{
+      padding-#{$right}: 10px !important;
       .btn{
-        @include font-size(19px);
+
         border-top-#{$right}-radius: 0 !important;
         border-bottom-#{$right}-radius: 0 !important;
       }
     }
     .col{
       @include media-breakpoint-down(sm){
-        padding-#{$left}: 0;
+        padding-#{$left}: 0 !important;
         .btn{
           border-bottom-#{$left}-radius: 0 !important;
           width: 100%;
@@ -683,24 +671,24 @@
       border-bottom-#{$left}-radius: 0 !important;
     }
   }
+  .year{
+    @include media-breakpoint-up(lg){
+      max-width: 120px;
+    };
+  }
+  .garage-dropdown{
+    border-top-width: 1px;
+    border-color: $dark-gray;
+  }
 }
 .garage-dropdown{
   padding-top: 0;
   .cached,
   .saved{
     padding: 15px 15px 0;
-  }
-  @include media-breakpoint-up(md){
-    min-width: 550px;
-  };
-  &:before{
-    border-bottom: 12px solid $dark-gray;
-  	border-right: 12px solid transparent;
-  	border-left: 12px solid transparent;
-    position: absolute;
-    #{$left}: 50px;
-    top: -13px;
-  	content: " ";
+    @include media-breakpoint-up(md){
+      min-width: 550px;
+    };
   }
   .media{
     padding-bottom: 12px;
@@ -726,7 +714,6 @@
       }
     }
   }
-
   [class*='icon-vehicle']{
     margin-#{$right}: 7px;
     height: 31px;
@@ -892,6 +879,23 @@
       }
     }
   }
+  .empty-vehic{
+    padding: 1rem 1rem 0;
+    text-align: center;
+    .btn{
+      display: inline-flex;
+      padding: 10px 15px;
+      @include font-size(17px);
+      margin-bottom: 0.6rem;
+      i{
+        @include font-size(20px);
+        margin-#{$right}: 5px;
+      }
+    }
+    p{
+      min-width: 300px;
+    }
+  }
 }
 .select-vechile-form,
 .select-white{
@@ -951,4 +955,59 @@
       height: 50px;
     }
   };
+}
+.vin-popover{
+  > p{
+    position: absolute;
+    #{$right}: 20px;
+    top: 15px;
+    z-index: 2;
+    margin-bottom: 0;
+    cursor: pointer;
+    i{
+      @include flip-h-ltr;
+      height: 20px;
+      @include font-size(23px);
+      &:before{
+        top: -3px;
+      }
+    }
+  }
+}
+.popover.vin {
+  min-width: 270px !important;
+  min-height: 150px !important;
+  .popover-body{
+    padding: 5px;
+    img{
+      width: 100%;
+    }
+  }
+}
+.add-vech-model{
+
+  @include media-breakpoint-down(md){
+
+    [class*='col']:not(:first-child){
+      padding-#{$left}: 15px;
+    }
+    [class*='col']:not(:last-child){
+      padding-#{$right}: 15px;
+      padding-bottom: 10px;
+    }
+    [class*='col']:first-child{
+      .select__control{
+        border-bottom-#{$left}-radius: 0;
+      }
+    }
+    [class*='col']:nth-last-child(2){
+      .has-float-label, .form-control{
+        border-bottom-#{$left}-radius: $border-radius-base !important;
+      }
+    }
+    .VIN-info{
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+  }
 }

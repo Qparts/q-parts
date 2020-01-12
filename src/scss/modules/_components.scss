@@ -728,14 +728,11 @@
   [type='radio']:checked + label,
   [type='radio']:not(:checked) + label {
     position: relative;
-    padding-#{$left}: 18px;
+    padding-#{$left}: 25px;
     cursor: pointer;
-    line-height: 13px;
     display: inline-block;
     @include font-size(14px);
-    width: 20px;
-    height: 20px;
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
   [type='radio']:checked + label:before,
   [type='radio']:not(:checked) + label:before {
@@ -1145,4 +1142,11 @@
   @include if-rtl{
 
   };
+}
+.dropdown-menu{
+  overflow: hidden;
+  border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
+  padding-bottom: 0;
+  border-width: 0;
+
 }

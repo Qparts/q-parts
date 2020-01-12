@@ -218,8 +218,6 @@
   }
   .dropdown-menu{
     text-align: #{$left};
-    overflow: hidden;
-    border-radius: corner-values(0px 0px $border-radius-base $border-radius-base);
     #{$left}: auto !important;
     #{$right}: 0 !important;
     transform: none !important;
@@ -229,8 +227,6 @@
     @include if-rtl{
       top: calc(100% + 9px) !important;
     };
-    border-width: 0;
-    padding-bottom: 0;
     > h6{
       @extend .px-3;
       color: $basic-gray;

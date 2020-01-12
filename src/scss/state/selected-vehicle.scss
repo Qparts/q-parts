@@ -269,6 +269,7 @@
       display: inline;
       @include font-size(16px);
       position: relative;
+
     }
     .vec-count{
       min-width: 21px;
@@ -289,13 +290,17 @@
       margin-bottom: 0;
       padding-#{$right}: 10px;
     }
+    &.show{
+      .dropdown-toggle{
+        border-bottom-#{$left}-radius: 0 !important;
+        border-bottom-#{$right}-radius: 0 !important;
+      }
+    }
   }
   @include media-breakpoint-down(xs){
     .dropdown-menu{
       transform: none !important;
       top: 100% !important;
-      margin-top: -20px;
-      margin-top: 11px;
       width: 100%;
       &:before{
         #{$left}: 50%;
@@ -303,6 +308,7 @@
       }
     }
   };
+
 }
 .garage-select{
   .icon-garage{
