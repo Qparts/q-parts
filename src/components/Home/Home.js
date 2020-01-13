@@ -14,7 +14,6 @@ export class Home extends Component {
  }
 
  render() {
-    console.log(this.props);
         return (
             <Fragment>
                 <ManualForm direction={this.props.direction} currentLanguage={this.props.currentLanguage} vehicles={this.props.vehicles}  isLoggedIn={isAuth(this.props.token)}/>

@@ -58,7 +58,7 @@ class App extends Component {
     }
 
     render() {
-        const { translate } = this.props
+        const { translate } = this.props;        
         return (
             <Router>
                 <DirectionProvider direction={this.props.direction}>

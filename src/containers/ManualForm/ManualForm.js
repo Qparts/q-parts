@@ -172,7 +172,6 @@ export class ManualForm extends Component {
     if (this.state.isVehicleSelected) {
       let selectedVehicle = this.state.selectedVehicle;
       delete selectedVehicle.models;
-      console.log(selectedVehicle);
       selectedVehicle = {
         ...selectedVehicle,
         year: this.state.selectedVehicleYear,
@@ -180,8 +179,6 @@ export class ManualForm extends Component {
         vin: this.state.vinInput
 
       };
-      console.log(selectedVehicle);
-
       this.props.onSelectedVehicle(selectedVehicle);
       this.props.setSelectedVehicles(selectedVehicle);
       // this.props.onVehicleSelected(true);
@@ -195,7 +192,6 @@ export class ManualForm extends Component {
         model: this.state.selectedVehicleModel
         // vin:this.state.vinInput
       };
-      console.log(selectedVehicle);
 
       this.props.onSelectedVehicle(selectedVehicle);
       this.props.setSelectedVehicles(selectedVehicle);
@@ -211,8 +207,6 @@ export class ManualForm extends Component {
     const { vehicles, currentLanguage, direction } = this.props;
     const { isVehicleSelected } = this.state;
     let selectedVechileModule;
-
-    console.log(this.state.vinInput);
 
     const vehicleMake = vehicles.map(vehicle => {
       return {
@@ -233,6 +227,7 @@ export class ManualForm extends Component {
         <span>{this.props.translate("form.vehicle.make")}</span>
       </div>
     );
+
     let vehicleModels = null;
 
     let selectedVehicle = vehicles.find(vehicle =>
@@ -579,12 +574,10 @@ export class ManualForm extends Component {
                                 {/*Shaimaa react code*/}
                                 {this.state.selectedVehicles.map(
                                   (vehicle, key) => {
-                                    console.log(vehicle);
-
                                     return (
                                       <div className="vehic-list" key={key}>
                     										<div className="radio-custom" key="005">
-                    											<a href="#" className="row">
+                    											<a className="row">
                     												<div className="col-auto">
                                               <Radio
                                                 checked={
@@ -689,8 +682,6 @@ export class ManualForm extends Component {
                               <ul className="list-unstyled">
                                 {this.state.selectedVehicles.map(
                                   (vehicle, key) => {
-                                    console.log(vehicle);
-
                                     return (
                                       <li className="radio-custom" key={key}>
                                         <div href="#" className="row">
@@ -931,7 +922,6 @@ export class ManualForm extends Component {
                               </div>
                             </div>
                           </DownLargeScreen>
-
                         </form>
                       </ModalBody>
                     </Modal>

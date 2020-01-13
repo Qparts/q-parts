@@ -14,7 +14,6 @@ UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES
 
 
 export default function reducer(state = initialState, action) {
-  console.log(state);
 
   switch (action.type) {
 

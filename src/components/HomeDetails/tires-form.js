@@ -106,7 +106,6 @@ export class TiresForm extends Component {
         value: tire.id
       };
     });
-    console.log(tires);
     const groupedWidthTiresOptions = [
       {
         options: tireWidth

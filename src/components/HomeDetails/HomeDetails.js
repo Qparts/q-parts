@@ -137,7 +137,6 @@ class HomeDetails extends Component {
       cusVehicles
     } = this.props;
 
-    console.log(this.props.selectedVehicle, ">>>>>>>>>");
 
     const makeData = vehicles.map(vehicle => {
       return {
