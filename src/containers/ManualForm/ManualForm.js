@@ -541,6 +541,7 @@ export class ManualForm extends Component {
                               </span>
                             </a>
                             <div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+                              {this.props.isLoggedIn ?
               								<div className="saved">
               									<div class="media">
               										<i className="icon-vehicle"></i>
@@ -567,6 +568,7 @@ export class ManualForm extends Component {
               										</div>
               									</div>
               								</div>
+                         :null }
               								<div className="cached">
               									<div class="media">
               										<i className="icon-vehicle-history"></i>
@@ -655,7 +657,7 @@ export class ManualForm extends Component {
                                 }
                               )}
                                 {/*END Shaimaa react code*/}
-              									<div className="vehic-list">
+              									{/* <div className="vehic-list">
               										<div className="radio-custom" key="1">
               											<a href="#" className="row">
               												<div className="col-auto">
@@ -675,7 +677,7 @@ export class ManualForm extends Component {
               											</div>
               											</a>
               										</div>
-              									</div>
+              									</div> */}
               								</div>
               							</div>
                             {/* react code*/}

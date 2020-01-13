@@ -327,7 +327,7 @@ class HeaderDetails extends Component {
                                       .id === vehicle.id
                                   }
                                   type="radio"
-                                  id="1"
+                                  id={key}
                                   name="radioGroup"
                                 />
                               </div>
