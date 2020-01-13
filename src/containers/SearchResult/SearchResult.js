@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, createRef, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
@@ -30,60 +31,8 @@ import Footer from '../../components/Layout/Footer/Footer';
 const GRID = 'GRID';
 
 
-const sortOptions = [
-	{ value: 1, label: "Best Match" },
-	{ value: 2, label: "Price: Low to High" },
-	{ value: 3, label: "Price: High to Low" }
-];
-const tireWidth = [
-	{ value: 1, label: "15" },
-	{ value: 2, label: "115" },
-	{ value: 3, label: "125" },
-	{ value: 4, label: "15" },
-	{ value: 5, label: "115" },
-	{ value: 6, label: "125" }
-];
-const groupedWidthTiresOptions = [
-	{
-		options: tireWidth,
-	},
-];
-const formatWidthTiresGroupLabel = () => (
-	<div className="placeholder">
-		<span>Select Width</span>
-	</div>
-);
-const tireHeight = [
-	{ value: 1, label: "35" },
-	{ value: 2, label: "40" },
-	{ value: 3, label: "45" }
-];
-const groupedHeightTiresOptions = [
-	{
-		options: tireHeight,
-	},
-];
-const formatHeightTiresGroupLabel = () => (
-	<div className="placeholder">
-		<span>Select Height</span>
-	</div>
-);
 
-const tireDiameter = [
-	{ value: 1, label: "14" },
-	{ value: 2, label: "15" },
-	{ value: 3, label: "16" }
-];
-const groupedDiameterTiresOptions = [
-	{
-		options: tireDiameter,
-	},
-];
-const formatDiameterTiresGroupLabel = () => (
-	<div className="placeholder">
-		<span>Select Diameter</span>
-	</div>
-);
+
 //END HTML Component
 class SearchResult extends Component {
 	static defaultProps = {

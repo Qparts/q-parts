@@ -1,13 +1,11 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from 'react';
-import Button from '../UI/Button';
 import moment from 'moment';
-import { colors } from '../../constants';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
 import { DownMediumScreen, MediumScreen } from '../../components/Device';
 
 import Link from '../../components/UI/Link';
 
-import { right } from '../../utils';
 
 
 import _ from 'lodash';
@@ -118,13 +116,13 @@ class Wishlist extends Component {
   }
 }
 
-const styles = {
-  addedDate: {
-    color: colors.charcoalGrey,
-  },
-  partText: {
-    color: colors.charcoalGrey
-  }
-}
+// const styles = {
+//   addedDate: {
+//     color: colors.charcoalGrey,
+//   },
+//   partText: {
+//     color: colors.charcoalGrey
+//   }
+// }
 
 export default Wishlist;

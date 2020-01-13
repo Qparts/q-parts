@@ -10,7 +10,6 @@ import PendingRequest from './PendingRequest/PendingRequest';
 import CompletedRequest from './CompletedRequest/CompletedRequest';
 import { DownLargeScreen, LargeScreen } from '../../components/Device';
 import _ from 'lodash';
-import { right } from '../../utils';
 import { RADIX, styles } from '../../constants';
 import { ClipLoader } from "react-spinners";
 

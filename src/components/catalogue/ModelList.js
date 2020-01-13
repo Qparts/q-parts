@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component , Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { MediumScreen} from '../../components/Device';

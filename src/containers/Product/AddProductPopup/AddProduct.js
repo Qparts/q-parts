@@ -1,17 +1,14 @@
+/* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
 import { getTranslatedObject } from '../../../utils';
 import { handleImageFallback } from '../../../utils';
-import { right } from '../../../utils';
-import { getLength } from '../../../utils/array';
-import Stars from 'react-stars';
+
 import * as constant from '../../../constants';
 import _ from 'lodash';
 
 import { withRouter, Redirect } from 'react-router-dom';
-import { MediumScreen, SmallScreen } from '../../../components/Device';
 
-import Title from '../../../components/UI/Title';
-import { Modal, ModalHeader, ModalBody } from 'reactstrap';
+
 
 class AddProduct extends Component {
   continueShoppingMoblile = () => {
@@ -57,7 +54,7 @@ class AddProduct extends Component {
 	const data = _.has(this.props.location.state, 'data') ? this.props.location.state.data : this.props.data;
 
     if (_.isEmpty(data)) return <Redirect to="/" />
-    const { translate, currentLanguage, direction } = this.props;
+    const { translate, currentLanguage } = this.props;
     let quantity =0;
     if(data.length > 1){
       // for(var i=0 ; i<data.length ; i++){

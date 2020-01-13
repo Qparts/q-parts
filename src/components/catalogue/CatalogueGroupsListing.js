@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component , Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { MediumScreen , LargeScreen , DownMediumScreen} from '../../components/Device';
@@ -117,7 +118,7 @@ class CatalogueGroupsListing extends Component {
                         <div>
                           <a href="#">
                             <figure>
-                              <img src="/img/catalogue/engine.jpg"></img>
+                              <img alt=" "  src="/img/catalogue/engine.jpg"></img>
                             </figure>
                             <figcaption>
                               <h3>أداة / محرك / الوقود</h3>
@@ -143,7 +144,7 @@ class CatalogueGroupsListing extends Component {
                         <div>
                           <a href="#">
                             <figure>
-                              <img src="/img/catalogue/chassis.jpg"></img>
+                              <img alt=" "  src="/img/catalogue/chassis.jpg"></img>
                             </figure>
                             <figcaption>
                               <h3>Power Train/Chassis</h3>
@@ -177,7 +178,7 @@ class CatalogueGroupsListing extends Component {
                         <div>
                           <a href="#">
                             <figure>
-                              <img src="/img/catalogue/body.jpg"></img>
+                              <img alt=" "  src="/img/catalogue/body.jpg"></img>
                             </figure>
                             <figcaption>
                               <h3>body</h3>
@@ -211,7 +212,7 @@ class CatalogueGroupsListing extends Component {
                         <div>
                           <a href="#">
                             <figure>
-                              <img src="/img/catalogue/electrical-.jpg"></img>
+                              <img alt=" "  src="/img/catalogue/electrical-.jpg"></img>
                             </figure>
                             <figcaption>
                               <h3>Electrical</h3>

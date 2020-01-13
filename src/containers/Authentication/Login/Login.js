@@ -15,12 +15,10 @@ import ResetPassword from '../../../components/ResetPassword/ResetPassword';
 import { login, sendSmsCode, resetPassword, socialMediaButton, setCheckLoginCheckout, setCheckLoginQuotationOrder, setQuotationOrder } from '../../../actions/customerAction';
 import WithSocialMedia from '../../../hoc/WithSocialMedia';
 
-import * as validations from '../../../utils';
-import { getComponentName, right } from '../../../utils';
+import { getComponentName } from '../../../utils';
 
 
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
-import Radio from '../../../components/UI/Radio';
 
 import { postQuotation } from '../../../utils/api';
 import _ from 'lodash';
@@ -137,7 +135,7 @@ class Login extends Component {
 	}
 
 	render() {
-		const { translate, direction, submitting } = this.props;
+		const { translate, submitting } = this.props;
 		let login = (
 			<form className="gray-input" onSubmit={this.props.handleSubmit(this.handleSubmit)}>
 				<Field

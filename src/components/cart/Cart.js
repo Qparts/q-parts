@@ -8,8 +8,7 @@ import { setCheckLoginCheckout } from '../../actions/customerAction';
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import Select from 'react-select';
-import { isAuth, right } from '../../utils'
+import { isAuth } from '../../utils'
 import Login from "../../containers/Authentication/Login/Login";
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import Title from '../UI/Title';
@@ -105,11 +104,11 @@ class Cart extends Component {
 			quantity += checkoutData[i].quantity;
 			divItemMovile = "totalFoundData d-block d-lg-none d-flex align-items-stretch"
 		}
-		const shipToOptions = [
-			{ value: 1, label: "KSA" },
-			{ value: 2, label: "Egypt" },
-			{ value: 3, label: "Jordan" }
-		];
+		// const shipToOptions = [
+		// 	{ value: 1, label: "KSA" },
+		// 	{ value: 2, label: "Egypt" },
+		// 	{ value: 3, label: "Jordan" }
+		// ];
 
 		let cart;
 
@@ -233,11 +232,11 @@ Cart = reduxForm({
 })(Cart)
 
 
-const styles = {
-	divBtn: {
-		textAlign: 'right'
-	}
-}
+// const styles = {
+// 	divBtn: {
+// 		textAlign: 'right'
+// 	}
+// }
 
 const withCart = withRouter(Cart);
 

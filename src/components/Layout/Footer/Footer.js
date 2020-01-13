@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { right } from '../../../utils';
+/* eslint-disable jsx-a11y/href-no-hash */
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Footer extends Component {
   render() {

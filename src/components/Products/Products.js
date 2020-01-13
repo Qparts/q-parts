@@ -1,12 +1,12 @@
 import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
-import { swiperParams } from '../../constants';
+
 import Title from '../UI/Title';
 // import { Tabs, Tab } from 'react-bootstrap';
 
-import Swiper from 'react-id-swiper';
+
 import { getBestSeller, getOffers } from '../../utils/api';
-import RenderProducts from '../RenderProducts/RenderProducts';
+
 
 class Products extends Component {
   constructor(props) {
@@ -64,8 +64,8 @@ class Products extends Component {
   )
 
   render() {
-    const { translate, direction, currentLanguage, recentViewedProducts } = this.props;
-    const { bestSeller, offers } = this.state
+    const { translate } = this.props;
+    // const { bestSeller, offers } = this.state
     return (
       <section className="products-sec">
         <div className="container-fluid">

@@ -8,7 +8,6 @@ import RenderField from '../../../../components/RenderField/RenderField';
 import './SignupForm.css';
 
 import * as validations from '../../../../utils';
-import { right } from '../../../../utils';
 
 import './SignupForm.css';
 import Button from '../../../../components/UI/Button';
@@ -34,7 +33,7 @@ class SignupForm extends Component {
   }
 
   render() {
-    const { translate, direction, setPasswordScore, currentLanguage } = this.props;
+    const { translate, setPasswordScore, currentLanguage } = this.props;
     const scoreWords = [
       translate("form.signup.passwordStrength.scoreWords.tooShort"),
       translate("form.signup.passwordStrength.scoreWords.weak"),

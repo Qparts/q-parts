@@ -1,5 +1,5 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Fragment } from 'react';
-import propTypes from 'prop-types';
 import DropdownMenu from '../DropdownMenu';
 
 const DropdownItem = props => {

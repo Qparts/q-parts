@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import PrivacyPolicy from './PrivacyPolicy'
 import ReturnPolicy from './ReturnPolicy'
 import ShippingAndDeliveryPolicy from './ShippingAndDeliveryPolicy'

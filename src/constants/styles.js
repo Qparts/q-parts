@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import NextArrow from '../components/UI/NextArrow/NextArrow';
 import PrevArrow from '../components/UI/PrevArrow/PrevArrow';

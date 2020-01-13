@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component , Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-import { MediumScreen , LargeScreen , DownLargeScreen , DownMediumScreen} from '../../components/Device';
+import { MediumScreen , LargeScreen , DownLargeScreen} from '../../components/Device';
 import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 class SubGroupDetails extends Component {
@@ -109,7 +110,7 @@ class SubGroupDetails extends Component {
                     <div className="row">
                       <div className="col-md">
                         <div className="part-img">
-                          <img src="http://img.parts-catalogs.com/toyota_2018_06/general/741895C.png"></img>
+                          <img alt=" "  src="http://img.parts-catalogs.com/toyota_2018_06/general/741895C.png"></img>
                         </div>
                       </div>
                       <div className="col-md">
@@ -314,7 +315,7 @@ class SubGroupDetails extends Component {
                                                 </ModalHeader>
                                                 <ModalBody>
                                                   <div className="qoutation">
-                                                    <img src="/img/no-products.svg"></img>
+                                                    <img alt=" "  src="/img/no-products.svg"></img>
                                                     <p>
                                                       <span>Unfortunately the product with number #06H103011AN  is temporarily unavailable</span>
                                                       Send Us Your Order and We Will Respond With the Best Prices and Necessary Details

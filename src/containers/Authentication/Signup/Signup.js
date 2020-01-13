@@ -15,7 +15,6 @@ import Login from '../Login/Login';
 
 import { socialMediaButton, onSubmitSignup, emailSignup, verifyCodeNo, setPasswordScore, setQuotationOrder,setCheckLoginQuotationOrder } from '../../../actions/customerAction';
 import { ON_SOCIAL_MEDIA_AUTH } from '../../../constants';
-import { LargeScreen } from '../../../components/Device';
 
 import Title from '../../../components/UI/Title';
 

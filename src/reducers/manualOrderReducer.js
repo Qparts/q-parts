@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import { initialState } from '../initialState/baseFormInitialState';
 import {
   FIND_SELECTED_PART_SUCCEEDED, ADD_ID_PART, SET_CURRENT_VEHICLE_SEARCH

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { addRecentViewedProducts } from '../../actions/customerAction';
@@ -15,7 +16,7 @@ import { getBestSeller, getPopularOilBrands } from '../../utils/api';
 import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import { handleImageFallback, getTranslatedObject } from '../../utils';
-import { MediumScreen, SmallScreen } from '../Device';
+import {  SmallScreen } from '../Device';
 
 class Accessories extends Component {
 	constructor(props) {

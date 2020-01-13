@@ -5,12 +5,12 @@ import Button from '../../UI/Button';
 import { connect } from 'react-redux';
 import SelectInput from '../../SelectInput/SelectInput';
 import RenderCheckboxField from '../../UI/RenderCheckboxField';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map } from 'google-maps-react';
 import AutoComplete from '../../../containers/Autocomplete/Autocomplete';
 import RenderField from '../../RenderField/RenderField';
 import * as validations from '../../../utils';
 import { getTranslatedObject } from '../../../utils';
-import { right } from '../../../utils';
+
 
 class Address extends Component {
 	constructor(props) {
@@ -44,10 +44,8 @@ class Address extends Component {
 		const {
 			handleSubmit,
 			translate,
-			onShowGoogleMap,
 			address,
 			isDelivery,
-			direction,
 			defaultLang
 		} = this.props;
 		const country = [{ value: 1, label: translate('general.ksa') }];

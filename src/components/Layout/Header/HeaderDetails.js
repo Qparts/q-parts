@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
@@ -676,7 +677,7 @@ class HeaderDetails extends Component {
                       {this.state.selectedVehicles.map((vehicle, key) => {
                         return (
                           <div className="radio-custom" key={key}>
-                            <a href="#" className="row">
+                            <a  className="row">
                               <div className="col-auto">
                                 <Radio
                                    checked={
@@ -701,7 +702,6 @@ class HeaderDetails extends Component {
 
                               <div className="col-auto vec-actions">
                                 <a
-                                  href="#"
                                   className="btn btn-gray"
                                   onClick={this.togglePopup}
                                 >
@@ -711,7 +711,7 @@ class HeaderDetails extends Component {
                                 {!isLoggedIn ? (
                                   <div>
                                     <a
-                                      href="#"
+                                    href="#"
                                       className="link"
                                       onClick={this.togglePopup}
                                     >
@@ -734,7 +734,6 @@ class HeaderDetails extends Component {
                                   </div>
                                 ) : (
                                   <a
-                                    href="#"
                                     className="link"
                                     onClick={this.addSelectedVehiclesToGarage}
                                   >
@@ -755,7 +754,7 @@ class HeaderDetails extends Component {
                         {translate("dropdown.garage.addVehicle")}
                       </a>
                     </div>
-										<a href="#" className="link" onClick={() =>
+										<a  className="link" onClick={() =>
 											this.props.onClearHistory(this.state.selectedVehicles)
 										}>
 											<i className="icon-clear"></i>
@@ -763,11 +762,9 @@ class HeaderDetails extends Component {
 										</a>
                   </div>
                 </div>
-              ) :
-                isLoggedIn && this.state.selectedVehicles ?
-              {/*user logged in and have vehicles in garage and history*/}
-                 (
-                  <div
+                /*user logged in and have vehicles in garage and history*/
+               ) : isLoggedIn && this.state.selectedVehicles ? (
+                <div
                   class="dropdown-menu garage-dropdown"
                   aria-labelledby="garage-dropdown"
                 >
@@ -777,14 +774,14 @@ class HeaderDetails extends Component {
                       <div class="media-body">
                         <h5>{translate("dropdown.garage.userGarage")}</h5>
                       </div>
-                      <a href="#">
+                      <a >
                         <i className="icon-add"></i>
                         {translate("dropdown.garage.addVehicle")}
                       </a>
                     </div>
                     <div className="vehic-list">
                       <div className="radio-custom" key="03">
-                        <a href="#" className="row">
+                        <a  className="row">
                           <div className="col-auto">
                             <Radio
                               checked="true"
@@ -798,11 +795,11 @@ class HeaderDetails extends Component {
                             <span>VIN(000 000 000 000 11)</span>
                           </p>
                           <div className="col-auto vec-actions">
-                            <a href="#" className="btn btn-gray">
+                            <a  className="btn btn-gray">
                               <i className="icon-catalog"></i>
                               {translate("dropdown.garage.catalog")}
                             </a>
-                            <a href="#" className="link">
+                            <a  className="link">
                               <i className="icon-trash"></i>
                             </a>
                           </div>
@@ -817,7 +814,6 @@ class HeaderDetails extends Component {
                           <h5>{translate("dropdown.garage.cached")}</h5>
                         </div>
                         <a
-                          href="#"
                           onClick={() =>
                             this.props.onClearHistory(this.state.selectedVehicles)
                           }
@@ -831,7 +827,7 @@ class HeaderDetails extends Component {
                           console.log(vehicle);
                           return (
                             <div className="radio-custom" key={key}>
-                              <a href="#" className="row">
+                              <a  className="row">
                                 <div className="col-auto">
                                   <Radio
                                      checked={
@@ -839,7 +835,7 @@ class HeaderDetails extends Component {
                                         .id === vehicle.id
                                     }
                                     type="radio"
-                                    id="1"
+                                    id={key}
                                     name="radioGroup"
                                   />
                                 </div>
@@ -856,7 +852,6 @@ class HeaderDetails extends Component {
 
                                 <div className="col-auto vec-actions">
                                   <a
-                                    href="#"
                                     className="btn btn-gray"
                                     onClick={this.togglePopup}
                                   >
@@ -866,7 +861,6 @@ class HeaderDetails extends Component {
                                   {!isLoggedIn ? (
                                     <div>
                                       <a
-                                        href="#"
                                         className="link"
                                         onClick={this.togglePopup}
                                       >
@@ -889,7 +883,6 @@ class HeaderDetails extends Component {
                                     </div>
                                   ) : (
                                     <a
-                                      href="#"
                                       className="link"
                                       onClick={this.addSelectedVehiclesToGarage}
                                     >

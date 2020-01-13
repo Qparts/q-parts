@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component , Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 import { MediumScreen , LargeScreen , DownLargeScreen} from '../../components/Device';
@@ -145,7 +146,7 @@ class CatalogueGroupsListing extends Component {
                       <li className="col-md-4 col-sm-6 sec-child">
                         <a href="#">
                         <div>
-                            <img src="http://img.parts-catalogs.com/r/250x250/honda/euro/17S8401/IMGE/B__5701.png"></img>
+                            <img alt=" "   src="http://img.parts-catalogs.com/r/250x250/honda/euro/17S8401/IMGE/B__5701.png"></img>
                             <div className="info">
                               <p>Standard Tool</p>
                               <a id="PopoverFocus"><i className="icon-info"></i></a>
@@ -160,7 +161,7 @@ class CatalogueGroupsListing extends Component {
                       <li className="col-md-4 col-sm-6 sec-child">
                         <a href="#">
                           <div>
-                              <img src="https://img.parts-catalogs.com/r/320x220/toyota_2018_06/general/742799A.png"></img>
+                              <img  alt=" "  src="https://img.parts-catalogs.com/r/320x220/toyota_2018_06/general/742799A.png"></img>
                               <div className="info">
                                 <p>AIR CONDITIONER (CONDENSER)</p>
                                 <a href="#"><i className="icon-info"></i></a>
@@ -171,7 +172,7 @@ class CatalogueGroupsListing extends Component {
                       <li className="col-md-4 col-sm-6 sec-child">
                         <a href="#">
                           <div>
-                              <img src="https://img.parts-catalogs.com/r/250x250/honda/euro/17S8401/IMGE/B__5900.png"></img>
+                              <img alt=" "  src="https://img.parts-catalogs.com/r/250x250/honda/euro/17S8401/IMGE/B__5900.png"></img>
                               <div className="info">
                                 <p>AIR CONDITIONER (COOLING UNIT) (LH)</p>
                                 <a href="#"><i className="icon-info"></i></a>
@@ -183,7 +184,7 @@ class CatalogueGroupsListing extends Component {
                         <div>
                           <a href="#">
                             <figure>
-                              <img src="/img/catalogue/engine.jpg"></img>
+                              <img alt=" "  src="/img/catalogue/engine.jpg"></img>
                             </figure>
                             <figcaption>
                               <h3>Tool/Engine/Fuel</h3>

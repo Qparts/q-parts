@@ -4,7 +4,6 @@ import RenderField from '../RenderField/RenderField';
 import Button from '../UI/Button';
 
 import * as validations from '../../utils';
-import { right } from '../../utils';
 import { withRouter } from 'react-router-dom';
 
 import { Link } from "react-router-dom";
@@ -18,9 +17,9 @@ class resetPassword extends Component {
     this.props.toggle();
   }
   render() {
-    const { handleSubmit, showPhoneNo, translate, direction } = this.props;
-    const updateBtn = <p>{translate("resetPassword.update")}<i className="icon-arrow-right"></i></p>
-    const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
+    const { handleSubmit, showPhoneNo, translate } = this.props;
+    // const updateBtn = <p>{translate("resetPassword.update")}<i className="icon-arrow-right"></i></p>
+    // const cancelBtn = <p>{translate("resetPassword.cancel")}</p>
     return (
       <form className="one-col gray-input" onSubmit={handleSubmit}>
         {

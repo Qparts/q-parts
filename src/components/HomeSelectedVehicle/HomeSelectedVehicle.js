@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { swiperParams } from '../../constants';
@@ -65,7 +66,7 @@ class selectedVehicle extends Component{
     });
   }
   render(){
-    const { translate, direction, currentLanguage } = this.props;
+    const { direction, currentLanguage } = this.props;
     const { bestSeller } = this.state
     const vehicleMake = [
       { value: 1, label: "BMW" },
@@ -277,37 +278,37 @@ class selectedVehicle extends Component{
             <ul className="list-unstyled category-list gray row">
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/body.jpg"></img></figure>
+                  <figure><img alt=" "src="/img/categories/body.jpg"></img></figure>
                   <figcaption>الجسم</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/CHASSIS.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/CHASSIS.jpg"></img></figure>
                   <figcaption>chassis</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/ELECTRICAL.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/ELECTRICAL.jpg"></img></figure>
                   <figcaption>electrical</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/ENGINE.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/ENGINE.jpg"></img></figure>
                   <figcaption>engine</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/fuel.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/fuel.jpg"></img></figure>
                   <figcaption>Fuel, exhaust and cooling</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/TRANSMISSION.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/TRANSMISSION.jpg"></img></figure>
                   <figcaption>transition</figcaption>
                 </a>
               </li>
@@ -320,73 +321,73 @@ class selectedVehicle extends Component{
             <ul className="list-unstyled row category-list">
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/oil-filter.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/oil-filter.jpg"></img></figure>
                   <figcaption>Oil Filters</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/air-filter.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/air-filter.jpg"></img></figure>
                   <figcaption>Air Filters</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/ac-filter.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/ac-filter.jpg"></img></figure>
                   <figcaption>AC Filters</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/brake-pads.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/brake-pads.jpg"></img></figure>
                   <figcaption>Brake Pads</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/spark-pugs.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/spark-pugs.jpg"></img></figure>
                   <figcaption>Spark Plugs</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/motor-oil.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/motor-oil.jpg"></img></figure>
                   <figcaption>Motor Oils</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/gear-oil.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/gear-oil.jpg"></img></figure>
                   <figcaption>Gear Oils</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/coolant.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/coolant.jpg"></img></figure>
                   <figcaption>Coolant</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/bodywork.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/bodywork.jpg"></img></figure>
                   <figcaption>Bodywork Cleaning & Care</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/car-mats.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/car-mats.jpg"></img></figure>
                   <figcaption>Car Mats</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/wire-cable.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/wire-cable.jpg"></img></figure>
                   <figcaption>Wires & Cables</figcaption>
                 </a>
               </li>
               <li className="col-lg-2 col-md-3 col-4 ">
                 <a href="#">
-                  <figure><img src="/img/categories/refrigerator.jpg"></img></figure>
+                  <figure><img alt=" " src="/img/categories/refrigerator.jpg"></img></figure>
                   <figcaption>Refrigerator</figcaption>
                 </a>
               </li>

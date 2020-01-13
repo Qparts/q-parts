@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment } from "react"; // eslint-disable-line no-unused-vars
 import { Field, reduxForm } from "redux-form";
 import SelectInput from "../../components/SelectInput/SelectInput";
@@ -118,15 +119,15 @@ export class ManualForm extends Component {
         return {
           header: (
             <Title
-              header={this.props.translate("dialog.vehicle.title")}
-              subHeader={this.props.translate("dialog.vehicle.subTitle")}
+              header={translate("dialog.vehicle.title")}
+              subHeader={translate("dialog.vehicle.subTitle")}
             />
           ),
           className: "garage-popup"
         };
       case "signin":
         return {
-          header: <Title header={this.props.translate("dialog.signin.title")} />
+          header: <Title header={translate("dialog.signin.title")} />
         };
       default:
         break;
@@ -204,7 +205,7 @@ export class ManualForm extends Component {
   }
 
   render() {
-    const { vehicles, currentLanguage, direction } = this.props;
+    const { vehicles, currentLanguage, direction , translate } = this.props;
     const { isVehicleSelected } = this.state;
     let selectedVechileModule;
 
@@ -224,7 +225,7 @@ export class ManualForm extends Component {
 
     const formatvehicleMakeLabel = () => (
       <div className="placeholder">
-        <span>{this.props.translate("form.vehicle.make")}</span>
+        <span>{translate("form.vehicle.make")}</span>
       </div>
     );
 
@@ -258,7 +259,7 @@ export class ManualForm extends Component {
 
     const formatvehicleModelLabel = () => (
       <div className="placeholder">
-        <span>{this.props.translate("form.vehicle.model")}</span>
+        <span>{translate("form.vehicle.model")}</span>
       </div>
     );
 
@@ -297,7 +298,7 @@ export class ManualForm extends Component {
 
     const formatvehicleYearLabel = () => (
       <div className="placeholder">
-        <span>{this.props.translate("form.vehicle.year")}</span>
+        <span>{translate("form.vehicle.year")}</span>
       </div>
     );
 
@@ -322,7 +323,7 @@ export class ManualForm extends Component {
                     {this.state.selectedVehicle.name ?
                   <header className="col">
                     <label className="header-label">
-                      {this.props.translate("general.selectedVehcile")}:
+                      {translate("general.selectedVehcile")}:
                     </label>
                     <h3>
                       {currentLanguage === "ar"
@@ -349,7 +350,7 @@ export class ManualForm extends Component {
                       onClick={this.toggle}
                     >
                       <i className="icon-catalog"></i>
-                      {this.props.translate(
+                      {translate(
                         "general.browseCataloge.browseButton"
                       )}
                     </a>
@@ -359,7 +360,7 @@ export class ManualForm extends Component {
                       className="modal-lg vin-modal"
                     >
                       <ModalHeader toggle={this.toggle}>
-                        {this.props.translate(
+                        {translate(
                           "general.browseCataloge.vehicleVinNumber"
                         )}
                       </ModalHeader>
@@ -368,7 +369,7 @@ export class ManualForm extends Component {
                           <div className="col">
                             <p>
                               <label className="header-label">
-                                {this.props.translate(
+                                {translate(
                                   "general.browseCataloge.vehcileSelectedLabel"
                                 )}
                                 :
@@ -403,15 +404,15 @@ export class ManualForm extends Component {
                             hasFloatLabel
                             name="VIN/Frame"
                             type="text"
-                            placeholder={this.props.translate(
+                            placeholder={translate(
                               "general.VINInput.placeholder"
                             )}
-                            label={this.props.translate(
+                            label={translate(
                               "general.VINInput.label"
                             )}
-                            errorMessage={`${this.props.translate(
+                            errorMessage={`${translate(
                               "general.enter"
-                            )} ${this.props.translate(
+                            )} ${translate(
                               "general.VINInput.label"
                             )}`}
                             component={props => (
@@ -430,7 +431,7 @@ export class ManualForm extends Component {
                                 }))
                               }
                             >
-                              {this.props.translate("vehicleInfo.VINNumberEx")}:{" "}
+                              {translate("vehicleInfo.VINNumberEx")}:{" "}
                               <Link to="#">{this.state.vin}</Link>
                             </p>
 
@@ -440,7 +441,7 @@ export class ManualForm extends Component {
                               type="text"
                             >
                               <i className="icon-info"></i>{" "}
-                              {this.props.translate("vehicleInfo.carId")}
+                              {translate("vehicleInfo.carId")}
                             </p>
                             <UncontrolledPopover
                               placement="top"
@@ -455,7 +456,7 @@ export class ManualForm extends Component {
                             <div className="row">
                               <div className="col-auto">
                                 <button type="submit" className="btn btn-gray" onClick={this.toggle}>
-                                  {this.props.translate(
+                                  {translate(
                                     "general.buttons.cancel"
                                   )}
                                 </button>
@@ -465,7 +466,7 @@ export class ManualForm extends Component {
                                   type="submit"
                                   className="btn btn-primary"
                                 >
-                                  {this.props.translate(
+                                  {translate(
                                     "general.browseCataloge.browseButton"
                                   )}
                                   <i className="icon-arrow-right"></i>
@@ -482,7 +483,7 @@ export class ManualForm extends Component {
                       onClick={this.toggleChangeVehivle}
                     >
                       <i className="icon-vehicle"></i>
-                      {this.props.translate("general.vehicle.changeVehcile")}
+                      {translate("general.vehicle.changeVehcile")}
                     </a>
                     <Modal
                       isOpen={this.state.changeVehcileModal}
@@ -490,12 +491,12 @@ export class ManualForm extends Component {
                       className="modal-xl vin-modal"
                     >
                       <ModalHeader toggle={this.toggleChangeVehivle}>
-                        {this.props.translate(
+                        {translate(
                           "general.changeVehicle.modalHeader"
                         )}{" "}
                         <LargeScreen>
                           <span>
-                            {this.props.translate(
+                            {translate(
                               "general.changeVehicle.modalHeaderSpan"
                             )}
                           </span>
@@ -504,20 +505,19 @@ export class ManualForm extends Component {
                       <ModalBody className="add-new-vehicle">
                         <header>
                           <h4>
-                            {this.props.translate(
+                            {translate(
                               "general.changeVehicle.addNewVehicle"
                             )}{" "}
                           </h4>
                           <div className="garage-select">
                             <MediumScreen>
                               <label>
-                                {this.props.translate(
+                                {translate(
                                   "form.vehicle.placeholder.select"
                                 )}
                               </label>
                             </MediumScreen>
                             <a
-                              href="#"
                               className="btn btn-gray-secondary dropdown-toggle"
                               role="button"
                               id="garage-dropdown"
@@ -530,7 +530,7 @@ export class ManualForm extends Component {
                                 alt="garage"
                                 src="/img/garage.svg"
                               />{" "}
-                              {this.props.translate("form.vehicle.title")}
+                              {translate("form.vehicle.title")}
                               <span className="vec-count">
                                 {this.props.selectedVehicles.length}
                               </span>
@@ -541,12 +541,12 @@ export class ManualForm extends Component {
               									<div class="media">
               										<i className="icon-vehicle"></i>
               										<div class="media-body">
-              											<h5>{this.props.translate('dropdown.garage.userGarage')}</h5>
+              											<h5>{translate('dropdown.garage.userGarage')}</h5>
               										</div>
               									</div>
               									<div className="vehic-list">
               										<div className="radio-custom" key="004">
-              											<a href="#" className="row">
+              											<a  className="row">
               												<div className="col-auto">
               													<Radio
               														checked="true"
@@ -568,7 +568,7 @@ export class ManualForm extends Component {
               									<div class="media">
               										<i className="icon-vehicle-history"></i>
               										<div class="media-body">
-              											<h5>{this.props.translate('dropdown.garage.cached')}</h5>
+              											<h5>{translate('dropdown.garage.cached')}</h5>
               										</div>
               									</div>
                                 {/*Shaimaa react code*/}
@@ -607,7 +607,7 @@ export class ManualForm extends Component {
                                                   className="link"
                                                   onClick={this.togglePopup}
                                                 >
-                                                {this.props.translate('dropdown.garage.save')}
+                                                {translate('dropdown.garage.save')}
                                                 </a>
                                                 <Modal
                                                   dir={direction}
@@ -638,7 +638,7 @@ export class ManualForm extends Component {
                                                     .addSelectedVehiclesToGarage
                                                 }
                                               >
-                                                {this.props.translate('dropdown.garage.save')}
+                                                {translate('dropdown.garage.save')}
                                               </a>
                                             )}
                                           </div>
@@ -666,7 +666,7 @@ export class ManualForm extends Component {
               												<span>VIN(000 000 000 000 11)</span>
               											</p>
               												<div className="col-auto vec-actions">
-              												<a href="#" className="link">{this.props.translate('dropdown.garage.save')}</a>
+              												<a href="#" className="link">{translate('dropdown.garage.save')}</a>
               											</div>
               											</a>
               										</div>
@@ -715,7 +715,7 @@ export class ManualForm extends Component {
                                                   onClick={this.togglePopup}
                                                 >
                                                   <i className="icon-catalog"></i>
-                                                {this.props.translate("setting.accountSetting.save")}
+                                                {translate("setting.accountSetting.save")}
                                                 </a>
                                                 <Modal
                                                   dir={direction}
@@ -781,7 +781,7 @@ export class ManualForm extends Component {
                               onChange={e =>
                                 this.props.onSelectedVehicleModel(e)
                               }
-                              label={this.props.translate("form.vehicle.model")}
+                              label={translate("form.vehicle.model")}
                               name="model"
                               placeholder={" "}
                               component={SelectInput}
@@ -795,7 +795,7 @@ export class ManualForm extends Component {
                               onChange={e =>
                                 this.props.onSelectedVehicleYear(e)
                               }
-                              label={this.props.translate("form.vehicle.year")}
+                              label={translate("form.vehicle.year")}
                               name="year"
                               placeholder={" "}
                               component={SelectInput}
@@ -834,15 +834,15 @@ export class ManualForm extends Component {
                               hasFloatLabel
                               name="VIN/Frame"
                               type="text"
-                              placeholder={this.props.translate(
+                              placeholder={translate(
                                 "general.VINInput.placeholder"
                               )}
-                              label={this.props.translate(
+                              label={translate(
                                 "general.VINInput.label"
                               )}
-                              errorMessage={`${this.props.translate(
+                              errorMessage={`${translate(
                                 "general.enter"
-                              )} ${this.props.translate(
+                              )} ${translate(
                                 "general.VINInput.label"
                               )}`}
                               component={props => (
@@ -861,7 +861,7 @@ export class ManualForm extends Component {
                                   }))
                                 }
                               >
-                                {this.props.translate(
+                                {translate(
                                   "vehicleInfo.VINNumberEx"
                                 )}
                                 :{this.state.vin}
@@ -874,7 +874,7 @@ export class ManualForm extends Component {
                                 >
                                   <i className="icon-info"></i>{" "}
 
-                                  {this.props.translate("vehicleInfo.carId")}
+                                  {translate("vehicleInfo.carId")}
                                 </p>
                                 <UncontrolledPopover
                                   placement="top"
@@ -894,7 +894,7 @@ export class ManualForm extends Component {
                                 type="submit"
                                 className="btn btn-primary"
                                 >
-                                {this.props.translate("general.vehicleButton.add")}
+                                {translate("general.vehicleButton.add")}
                                 <i className="icon-arrow-right"></i>
                               </button>
                             </div>
@@ -905,7 +905,7 @@ export class ManualForm extends Component {
                               <div className="row">
                                 <div className="col-auto">
                                   <button type="submit" className="btn btn-gray" onClick={this.toggleChangeVehivle}>
-                                    {this.props.translate(
+                                    {translate(
                                       "general.buttons.cancel"
                                     )}
                                   </button>
@@ -915,7 +915,7 @@ export class ManualForm extends Component {
                                     type="submit"
                                     className="btn btn-primary"
                                     >
-                                    {this.props.translate("general.vehicleButton.add")}
+                                    {translate("general.vehicleButton.add")}
                                     <i className="icon-arrow-right"></i>
                                   </button>
                                 </div>
@@ -943,8 +943,8 @@ export class ManualForm extends Component {
           <div className="form-main">
             <div className="container-fluid">
               <header>
-                <h1> {this.props.translate("form.order.title")} </h1>
-                <p>{this.props.translate("form.order.subTitle")} </p>
+                <h1> {translate("form.order.title")} </h1>
+                <p>{translate("form.order.subTitle")} </p>
               </header>
               <form
                 onSubmit={this.props.handleSubmit(this.handleSubmit)}
@@ -955,7 +955,7 @@ export class ManualForm extends Component {
                     <Field
                       // value={this.state.selectedVehicle}
                       onChange={e => this.props.onSelectedVehicle(e)}
-                      label={this.props.translate("form.vehicle.make")}
+                      label={translate("form.vehicle.make")}
                       name="make"
                       placeholder={" "}
                       component={SelectInput}
@@ -967,7 +967,7 @@ export class ManualForm extends Component {
                   <div className="col-md float-label">
                     <Field
                       onChange={e => this.props.onSelectedVehicleModel(e)}
-                      label={this.props.translate("form.vehicle.model")}
+                      label={translate("form.vehicle.model")}
                       name="model"
                       placeholder={" "}
                       component={SelectInput}
@@ -979,7 +979,7 @@ export class ManualForm extends Component {
                   <div className="col-md float-label">
                     <Field
                       onChange={e => this.props.onSelectedVehicleYear(e)}
-                      label={this.props.translate("form.vehicle.year")}
+                      label={translate("form.vehicle.year")}
                       name="year"
                       placeholder={" "}
                       component={SelectInput}
@@ -990,7 +990,7 @@ export class ManualForm extends Component {
                   </div>
                   <div className="col-md-auto">
                     <button type="submit" className="btn btn-primary">
-                      {this.props.translate("general.buttons.go")}{" "}
+                      {translate("general.buttons.go")}{" "}
                       <i className="icon-arrow-right"></i>
                     </button>
                   </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { change as changeFieldValue } from 'redux-form';
 import { connect } from 'react-redux';
-import Button from '../Button';
 import * as constant from '../../../constants';
 
 class NumberPicker extends Component {

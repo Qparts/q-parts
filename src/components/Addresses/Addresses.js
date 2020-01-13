@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import { SmallScreen, MediumScreen } from '../Device/index.js';

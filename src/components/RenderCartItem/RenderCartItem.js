@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { getTranslatedObject, l, right } from '../../utils';
+import { getTranslatedObject, l} from '../../utils';
 import { handleImageFallback } from '../../utils';
 import * as constant from '../../constants';
 import CustomLink from '../UI/Link';

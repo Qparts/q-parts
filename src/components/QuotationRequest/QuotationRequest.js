@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment } from 'react';
 import {
 	Field,
@@ -16,7 +17,6 @@ import Button from '../UI/Button';
 import RenderPartInfo from '../RenderPartInfo/RenderPartInfo';
 import { getTranslatedObject, renderTopIfError } from '../../utils';
 import { isAuth } from '../../utils';
-import { right } from '../../utils';
 import { getRegions } from '../../actions/apiAction';
 import { addPaymentMethod } from '../../actions/cartAction';
 import {
@@ -36,7 +36,6 @@ import Title from '../UI/Title';
 import Vehicles from '../Vehicles/Vehicles';
 import Login from '../../containers/Authentication/Login/Login';
 import {
-	postQuotation,
 	postWireTransferQuotation,
 	postCCQuotation
 } from '../../utils/api';
@@ -49,7 +48,6 @@ import { styles } from '../../constants';
 import { ClipLoader } from 'react-spinners';
 import Radio from '../UI/Radio';
 import { LargeScreen} from '../../components/Device';
-import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
 import { W, V } from '../../constants';
 
 //steps

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { right, getQuery } from '../../utils';
+import {  getQuery } from '../../utils';
 import { setQuotationOrder } from '../../actions/customerAction';
 import Title from '../UI/Title';
 import Link from '../UI/Link';

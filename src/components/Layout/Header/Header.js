@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment, createRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import HeaderDetails from "./HeaderDetails";
@@ -93,17 +94,6 @@ class Header extends Component {
     }
   }
   render() {
-
-    const formatGroupLabel = () => (
-      <div className="placeholder">
-        <span>Select city</span>
-      </div>
-    );
-    const groupedOptions = [
-      {
-        options: this.props.countriesOnly,
-      },
-    ];
 
     const { translate, localize, isLoggedIn, fullName, vehicles, onAddVechile, onSignin, changeDefaultDirection, onSearch, getCountriesOnly, direction, currentLanguage, cart } = this.props;
     const mainSearch = (

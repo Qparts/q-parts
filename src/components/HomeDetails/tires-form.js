@@ -4,10 +4,8 @@ import SelectInput from "../../components/SelectInput/SelectInput";
 import { getTranslate } from "react-localize-redux";
 import { connect } from "react-redux";
 import { getTranslatedObject } from "../../utils";
-import _ from "lodash";
 import { withRouter } from "react-router-dom";
-import * as validations from "../../utils";
-import { MediumScreen, DownMediumScreen } from "../../components/Device";
+
 
 export class TiresForm extends Component {
   constructor(props) {

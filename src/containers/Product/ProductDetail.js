@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { Component, Fragment, createRef } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm, getFormValues } from 'redux-form';
@@ -14,7 +15,7 @@ import Stars from 'react-stars';
 import moment from 'moment';
 import Title from "../../components/UI/Title";
 
-import { getTranslatedObject, getTranslatedString, right, isAuth } from '../../utils';
+import { getTranslatedObject, getTranslatedString, isAuth } from '../../utils';
 import { handleImageFallback } from '../../utils';
 import _ from 'lodash';
 import parse from 'html-react-parser';
@@ -24,8 +25,7 @@ import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 import AddProduct from "./AddProductPopup/AddProduct"
 
 //Router
-import PrivateRoute from '../../components/PrivateRoute/index.js'
-import { Switch, Route } from 'react-router-dom';
+
 
 import * as constant from '../../constants';
 import { colors } from '../../constants';
@@ -179,7 +179,7 @@ class ProductDetail extends Component {
 	}
 
 	submitReview = ({ review, rating }) => {
-		const { firstName, lastName } = this.props.customer;
+		// const { firstName, lastName } = this.props.customer;
 		this.setState({
 			canWriteReview: false
 		});
@@ -246,12 +246,9 @@ class ProductDetail extends Component {
 				textAlign: 'center'
 			}
 		};
-		const { translate, match: { params }, direction, currentLanguage, recentViewedProducts } = this.props;
+		const { translate, direction, currentLanguage, recentViewedProducts } = this.props;
 		const { product } = this.state;
-		const compareHeaders = [
-			translate("compareProduct.prices"),
-			translate("compareProduct.customerRating.title")
-		];
+
 		const dialog = (
 			<Modal dir={direction} className="cart-popup modal-lg" isOpen={this.props.isModalAddToCart} toggle={this.togglePopup}>
 				<ModalHeader toggle={this.togglePopup}>

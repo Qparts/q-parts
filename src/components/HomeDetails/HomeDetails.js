@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React from "react";
-import { getTranslatedObject, getFormattedVehicles } from "../../utils";
+import { getTranslatedObject } from "../../utils";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -134,7 +135,6 @@ class HomeDetails extends Component {
       direction,
       currentLanguage,
       vehicles,
-      cusVehicles
     } = this.props;
 
 
@@ -158,76 +158,14 @@ class HomeDetails extends Component {
       </div>
     );
 
-    const modelData = _.has(this.props.formValues, "make.models")
-      ? this.props.formValues.make.models.map(model => {
-          return {
-            ...model,
-            label: getTranslatedObject(
-              model,
-              currentLanguage,
-              "name",
-              "nameAr"
-            ),
-            value: model.id
-          };
-        })
-      : [];
 
-    const groupedvehicleModel = [
-      {
-        options: modelData
-      }
-    ];
 
-    const formatvehicleModelLabel = () => (
-      <div className="placeholder">
-        <span>{translate("general.vehicle.model")}</span>
-      </div>
-    );
 
-    const yearData = _.has(this.props.formValues, "model.modelYears")
-      ? this.props.formValues.model.modelYears.map(modelYear => {
-          return {
-            ...modelYear,
-            label: modelYear.year,
-            value: modelYear.id
-          };
-        })
-      : [];
 
-    const groupedvehicleYear = [
-      {
-        options: yearData
-      }
-    ];
 
-    const formatvehicleYearLabel = () => (
-      <div className="placeholder">
-        <span>{translate("general.vehicle.year")}</span>
-      </div>
-    );
+ 
 
-    const vehiclesFormat = getFormattedVehicles(
-      cusVehicles,
-      currentLanguage,
-      translate
-    );
 
-    const groupedGarageList = [
-      {
-        options: vehiclesFormat
-      }
-    ];
-
-    const formatGarageListLabel = () => (
-      <div className="placeholder">
-        <i className="icon-vehicle" />
-        <h6>
-          {translate("quotationOrder.garage.title")}
-          <p>{translate("quotationOrder.garage.subTitle")}</p>
-        </h6>
-      </div>
-    );
 
     return (
       <Fragment>

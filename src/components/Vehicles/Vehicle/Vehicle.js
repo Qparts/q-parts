@@ -13,7 +13,6 @@ import RenderFileInput from '../../RenderFileInput/RenderFileInput';
 import _ from 'lodash';
 import * as validations from '../../../utils';
 import { getTranslatedObject } from '../../../utils';
-import { right } from '../../../utils';
 
 import RenderCheckboxField from '../../UI/RenderCheckboxField';
 import * as normalizing from '../../../utils';
@@ -37,7 +36,7 @@ class Vehicle extends Component {
   }
 
   render() {
-    const { handleSubmit, vehicles, translate, direction, defaultLang } = this.props;
+    const { handleSubmit, vehicles, translate, defaultLang } = this.props;
     const makeData = vehicles.map(vehicle => {
       return {
         ...vehicle,

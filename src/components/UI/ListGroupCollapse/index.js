@@ -84,7 +84,7 @@ export class ListGroupCollapse extends Component {
 		</div>
 	)
 	render() {
-		const { quotationItem, requestNumber, type, translate, currentLanguage, direction, token } = this.props;
+		const { quotationItem, type, translate, currentLanguage, direction, token } = this.props;
 
 		const dialog = (
 			<Modal dir={direction} className="cart-popup modal-lg" isOpen={this.state.modal} toggle={this.togglePopup}>

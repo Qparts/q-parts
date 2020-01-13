@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { FACEBOOK, GOOGLE, TWITTER } from '../../containers/Authentication/constants';
+import { FACEBOOK, GOOGLE } from '../../containers/Authentication/constants';
 
 const WithSocialMedia = WrappedComponent => {
   return class extends Component {

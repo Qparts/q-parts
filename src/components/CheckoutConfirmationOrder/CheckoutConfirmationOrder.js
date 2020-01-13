@@ -3,7 +3,7 @@ import DeliveryAddress from '../DeliveryAddress/DeliveryAddress';
 import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import { connect } from 'react-redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
-import { getQuery, handleImageFallback, getTranslatedObject, right } from '../../utils/index.js';
+import { getQuery, handleImageFallback, getTranslatedObject } from '../../utils/index.js';
 import { paymentResponse } from '../../utils/api';
 import { CREDIT_CARD, BANK_TRANSFER } from '../../constants';
 import * as constant from '../../constants'

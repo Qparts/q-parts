@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux'
+
 
 import SelectInput from '../SelectInput/SelectInput';
 import RenderField from '../RenderField/RenderField';
-import RenderFileInput from '../RenderFileInput/RenderFileInput';
+
 import Button from '../UI/Button';
 import Checkbox from '../UI/Checkbox';
 
 import * as validations from '../../utils';
-import { right } from '../../utils';
+
 
 class PaymentPopup extends Component {
 
@@ -28,12 +28,12 @@ class PaymentPopup extends Component {
   }
 
   render() {
-    const { translate, direction } = this.props;
-    const options = [
-      { value: '3', label: "rae" },
-      { value: '6', label: "aww" },
-      { value: '12', label: "dd" }
-    ];
+    // const { translate, direction } = this.props;
+    // const options = [
+    //   { value: '3', label: "rae" },
+    //   { value: '6', label: "aww" },
+    //   { value: '12', label: "dd" }
+    // ];
     return (
       <form className="row">
       <div className="col-12 card-number">

@@ -1,3 +1,5 @@
+/* eslint-disable no-script-url */
+/* eslint-disable no-unused-vars */
 import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import propTypes from 'prop-types';
@@ -5,7 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getTranslate, getActiveLanguage } from "react-localize-redux";
 
-import Profile from '../../components/Profile/Profile';
+
 import SettingLinks from '../../components/SettingLinks/SettingLinks';
 import {
   loadCurrentUser, editName, editPhoneNo, editEmail, editPassword,
@@ -21,19 +23,17 @@ import ResetPassword from '../../components/ResetPassword/ResetPassword';
 import EditInfo from '../../components/EditInfo/EditInfo';
 import Addresses from '../../components/Addresses/Addresses';
 import Address from '../../components/Addresses/NewAddress/NewAddress';
-import PrivateRoute from '../../components/PrivateRoute';
+
 import SocialMediaLink from '../../components/SocialMediaLink/SocialMediaLink';
 import Quotations from '../../components/Quotations/Quotations';
 import WithSocialMedia from '../../hoc/WithSocialMedia';
 import { getConnectedPlatforms, getComponentName } from '../../utils/components';
 import { ON_SOCIAL_MEDIA_LINK, TAB_ONE, styles } from '../../constants';
-import Orders from '../../components/Orders/Orders';
-import Order from '../../components/Order/Order';
-import HelpCenter from '../../components/HelpCenter/HelpCenter';
+
 import Garage from '../../components/Garage/Garage';
 import Vehicles from '../../components/Vehicles/Vehicles';
 import Wishlist from '../../components/Wishlist/Wishlist';
-import Payment from '../../components/Payment/Payment';
+
 import PaymentPopup from '../../components/Payment/PaymentPopup';
 import queryString from 'qs';
 import Footer from '../../components/Layout/Footer/Footer';

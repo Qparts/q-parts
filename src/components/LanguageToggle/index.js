@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { withLocalize } from 'react-localize-redux';
 import { connect } from 'react-redux';
 import { changeDefaultLanguage } from "../../actions/customerAction";

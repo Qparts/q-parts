@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as constant from '../../constants';
 import { removeQuery, addQuery } from '../../utils';
 import queryString from 'qs';
-import _ from 'lodash';
+
 const WithProductView = WrappedComponent => {
 	return class extends Component {
 		constructor(props) {
@@ -22,7 +22,7 @@ const WithProductView = WrappedComponent => {
 
 		filter = (item, event) => {
 			const { id, combinedIds } = item;
-			const { value, checked } = event.target;
+			const { checked } = event.target;
 			let index = -1;
 			if (this.state.filtrationChecked !== []) {
 

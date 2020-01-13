@@ -6,16 +6,13 @@ import Button from '../UI/Button';
 import * as validations from '../../utils';
 import { right } from '../../utils';
 import SelectInput from '../SelectInput/SelectInput';
-import Checkbox from '../UI/Checkbox';
 import './CheckoutPayment.css';
-import Table from '../UI/Table';
 import { SmallScreen, MediumScreen } from '../Device/index.js';
 import {
 	years,
 	months,
 	BANK_TRANSFER,
 	CREDIT_CARD,
-	RADIX
 } from '../../constants';
 import { getBanks } from '../../utils/api';
 

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component } from "react";
 import SelectInput from '../../components/SelectInput/SelectInput';
 import { Field , reduxForm } from 'redux-form';

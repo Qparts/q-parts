@@ -4,7 +4,6 @@ import { starsRating } from '../../constants';
 import { getLength } from '../../utils/array';
 import { Link } from 'react-router-dom'
 import { handleImageFallback, getTranslatedObject, isAuth } from '../../utils';
-import { SmallScreen, MediumScreen } from '../Device/index.js';
 import { withRouter } from 'react-router-dom';
 import { addToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux';

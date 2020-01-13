@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { accountSetting, addressBook, garage, helpCenter, orders, quotations, socialMedia, wishlist, payment } from '../../constants';
+import {  addressBook, garage, quotations, wishlist } from '../../constants';
 import CustomerService from '../../components/CustomerService/CustomerService';
 import { LargeScreen } from '../../components/Device/index.js';
 class profileLinks extends Component {

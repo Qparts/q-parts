@@ -11,7 +11,7 @@ import Checkout from '../components/Checkout/Checkout';
 import ProductDetail from '../containers/Product/ProductDetail';
 import AddProduct from '../containers/Product/AddProductPopup/AddProduct';
 import Accessories from '../components/Accessories/Accessories';
-import MotorOil from '../components/MotorOil/MotorOil';
+// import MotorOil from '../components/MotorOil/MotorOil';
 import Tires from '../components/Tires/Tires';
 import Vehicles from '../components/Vehicles/Vehicles';
 import SendRequest from '../components/SendRequest/SendRequest';

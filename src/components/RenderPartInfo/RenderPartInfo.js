@@ -5,19 +5,9 @@ import Button from '../UI/Button';
 import * as validations from '../../utils';
 import NumberPicker from '../UI/NumberPicker';
 import RenderFileInput from '../RenderFileInput/RenderFileInput';
-import SelectInput from '../SelectInput/SelectInput';
 import RenderField from '../RenderField/RenderField';
-const partCondition = [{ value: 1, label: 'New' }, { value: 2, label: 'Used' }];
-const groupedPartCondition = [
-	{
-		options: partCondition
-	}
-];
-const formatPartConditionLabel = () => (
-	<div className='placeholder'>
-		<span>Select Part Condition</span>
-	</div>
-);
+
+
 
 class RenderPartInfo extends Component {
 	componentDidMount() {

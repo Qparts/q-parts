@@ -1,13 +1,14 @@
+/* eslint-disable jsx-a11y/href-no-hash */
 import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
-import { closeNav, right } from '../../../utils';
+import { closeNav } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 
 import Radio from '../../UI/Radio';
 
 const Nav = (
     {
-        translate, direction, isLoggedIn, fullName, localize, changeDefaultDirection,
+        translate, isLoggedIn, fullName, localize, changeDefaultDirection,
         getCountriesOnly, quotations
     }) => {
 

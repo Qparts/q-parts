@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/href-no-hash */
+/* eslint-disable no-lone-blocks */
 import React, { Fragment, Component } from 'react';
 import Button from '../UI/Button';
 import './Garage.css';

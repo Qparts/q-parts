@@ -1,11 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { SmallScreen, MediumScreen } from '../../../components/Device/index.js'
 import RenderField from '../../../components/RenderField/RenderField';
 import { connect } from 'react-redux';
 import * as validations from '../../../utils';
-import { right } from '../../../utils';
 import { getQuery } from '../../../utils';
 //Router
 import PrivateRoute from '../../../components/PrivateRoute/index.js'

@@ -7,10 +7,10 @@ import { ClipLoader } from 'react-spinners';
 import './CheckoutConfirmation.css';
 import { CREDIT_CARD, BANK_TRANSFER, styles } from '../../constants';
 import { postCreditCard, postWireTransfer } from '../../utils/api';
-import { getTranslatedObject, l, right } from '../../utils';
+import {  right } from '../../utils';
 
-import { Link } from 'react-router-dom';
-import { handleImageFallback } from '../../utils';
+// import { Link } from 'react-router-dom';
+// import { handleImageFallback } from '../../utils';
 import { Alert } from 'reactstrap';
 
 import RenderCartItem from '../RenderCartItem/RenderCartItem';
@@ -80,10 +80,10 @@ class CheckoutConfirmation extends Component {
 			direction,
 			currentLanguage,
 			isLoading,
-			divCol
+			
 		} = this.props;
 
-		const removeButton = true;
+		// const removeButton = true;
 
 		if (isLoading) {
 			return (

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_ROOT, VEHICLE_SERVICE, LOCATION_SERVICE, PRODUCT_SERVICE } from '../actions/constants';
+import { API_ROOT, VEHICLE_SERVICE, LOCATION_SERVICE } from '../actions/constants';
 import { handleNetworkError } from '../utils';
 import { LOCAL_LANGUAGES } from '../constants';
 import { renderToStaticMarkup } from "react-dom/server";

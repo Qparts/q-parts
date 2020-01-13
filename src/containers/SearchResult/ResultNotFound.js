@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 import Button from '../../components/UI/Link';
 
-import { right } from '../../utils';
+
 import { connect } from 'react-redux';
 import { getTranslate, getActiveLanguage } from 'react-localize-redux';
 

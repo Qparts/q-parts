@@ -4,13 +4,11 @@ import { withRouter } from 'react-router-dom';
 import _ from 'lodash';
 import Button from '../UI/Button';
 import SelectInput from '../SelectInput/SelectInput';
-import { Map, GoogleApiWrapper } from 'google-maps-react'
+import { Map } from 'google-maps-react'
 import AutoComplete from '../../containers/Autocomplete/Autocomplete';
 import RenderField from '../RenderField/RenderField';
 import * as validations from '../../utils';
-import { right } from '../../utils';
 import { getTranslatedObject, getTranslatedString } from '../../utils';
-import Radio from '../UI/Radio';
 import { connect } from 'react-redux';
 import Address from '../Addresses/Address/Address';
 
@@ -78,7 +76,7 @@ class CheckoutShipping extends Component {
       })
   }
   render() {
-    const { handleSubmit, regions, formValues, translate, onShowGoogleMap, address, defaultAddress, onDefaultAddress, isDelivery, addresses, currentLanguage, direction } = this.props;
+    const { handleSubmit, regions, formValues, translate, address, addresses, currentLanguage } = this.props;
 
     const regionsData = regions ?
       regions.map(region => {

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { postSubscribeCustomer } from '../utils/api';
 const isProduction = process.env.NODE_ENV === 'production';
 

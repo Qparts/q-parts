@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import Select from 'react-select';
 import Swiper from 'react-id-swiper';
 import Stars from 'react-stars';
 import { starsRating, swiperParams } from '../../constants';
 import { MediumScreen, DownMediumScreen } from '../../components/Device';
-import { right } from '../../utils';
 import SelectInput from '../SelectInput/SelectInput';
 
 
