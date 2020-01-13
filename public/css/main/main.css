@@ -8928,10 +8928,6 @@ body {
     max-width: 120px;
   }
 }
-.vin-modal .garage-dropdown {
-  border-top-width: 1px;
-  border-color: #efeeee;
-}
 
 .garage-dropdown {
   padding-top: 0;
@@ -8939,12 +8935,6 @@ body {
 .garage-dropdown .cached,
 .garage-dropdown .saved {
   padding: 15px 15px 0;
-}
-@media (min-width: 768px) {
-  .garage-dropdown .cached,
-.garage-dropdown .saved {
-    min-width: 550px;
-  }
 }
 .garage-dropdown .media, .garage-dropdown .main-parts a, .main-parts .garage-dropdown a {
   padding-bottom: 12px;
@@ -9268,6 +9258,11 @@ body {
     padding-top: 10px;
     padding-bottom: 20px;
   }
+}
+
+.vin-modal .garage-dropdown, .garage-select .garage-dropdown {
+  border-top-width: 1px;
+  border-color: #efeeee;
 }
 
 .btn {
@@ -10593,7 +10588,7 @@ body {
   cursor: not-allowed;
 }
 .float-label.disabled label {
-  top: 7px;
+  top: 18px;
   margin-top: 0;
   font-size: 13px;
   font-size: 0.8125rem;
@@ -10605,7 +10600,7 @@ body {
 }
 
 .error {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .error .select__control {
   box-shadow: 0px 1px 1px 0px rgba(200, 41, 56, 0.9);
@@ -10615,7 +10610,7 @@ body {
 }
 .error .error-text {
   display: block;
-  padding-top: 11px;
+  padding-top: 3px;
   padding-left: 10px;
   color: #c82938;
   margin-bottom: 0;
@@ -12150,6 +12145,12 @@ ul.cd-secondary-nav .garage-dropdown .icon-vehicle-history {
 }
 .user-actions .dropdown-menu > p a:hover i {
   margin-left: 5px !important;
+}
+@media (min-width: 768px) {
+  .user-actions .dropdown-menu .cached,
+.user-actions .dropdown-menu .saved {
+    min-width: 550px;
+  }
 }
 
 .signin-list {
@@ -15961,77 +15962,77 @@ form {
 .custom-order-form form .select__menu {
   z-index: 2;
 }
-.custom-order-form form .row [class*=col]:first-child .has-float-label,
-.custom-order-form form .row [class*=col]:first-child .has-float-label input {
+.custom-order-form form .input-list [class*=col]:first-child .has-float-label,
+.custom-order-form form .input-list [class*=col]:first-child .has-float-label input {
   border-top-left-radius: 20px;
 }
 @media (min-width: 992px) {
-  .custom-order-form form .row [class*=col]:first-child .has-float-label,
-.custom-order-form form .row [class*=col]:first-child .has-float-label input {
+  .custom-order-form form .input-list [class*=col]:first-child .has-float-label,
+.custom-order-form form .input-list [class*=col]:first-child .has-float-label input {
     border-bottom-left-radius: 20px;
   }
-  .custom-order-form form .row [class*=col] {
+  .custom-order-form form .input-list [class*=col] {
     padding-right: 6px;
   }
-  .custom-order-form form .row [class*=col] + [class*=col] {
+  .custom-order-form form .input-list [class*=col] + [class*=col] {
     padding-left: 0;
   }
-  .custom-order-form form .row [class*=col]:last-child {
+  .custom-order-form form .input-list [class*=col]:last-child {
     padding-right: 15px;
   }
-  .custom-order-form form .row [class*=col]:last-child .has-float-label,
-.custom-order-form form .row [class*=col]:last-child .has-float-label input {
+  .custom-order-form form .input-list [class*=col]:last-child .has-float-label,
+.custom-order-form form .input-list [class*=col]:last-child .has-float-label input {
     border-bottom-right-radius: 20px;
   }
 }
 @media (max-width: 991.98px) {
-  .custom-order-form form .row [class*=col]:last-child {
+  .custom-order-form form .input-list [class*=col]:last-child {
     padding-right: 15px;
   }
-  .custom-order-form form .row [class*=col]:last-child .select__control,
-.custom-order-form form .row [class*=col]:last-child .has-float-label,
-.custom-order-form form .row [class*=col]:last-child .has-float-label input {
+  .custom-order-form form .input-list [class*=col]:last-child .select__control,
+.custom-order-form form .input-list [class*=col]:last-child .has-float-label,
+.custom-order-form form .input-list [class*=col]:last-child .has-float-label input {
     border-bottom-right-radius: 20px;
   }
-  .custom-order-form form .row [class*=col] {
+  .custom-order-form form .input-list [class*=col] {
     margin-top: 10px;
   }
-  .custom-order-form form .row [class*=col]:nth-child(1),
-.custom-order-form form .row [class*=col]:nth-child(2) {
+  .custom-order-form form .input-list [class*=col]:nth-child(1),
+.custom-order-form form .input-list [class*=col]:nth-child(2) {
     margin-top: 0;
   }
-  .custom-order-form form .row [class*=col]:nth-child(even) {
+  .custom-order-form form .input-list [class*=col]:nth-child(even) {
     padding-left: 0;
   }
-  .custom-order-form form .row [class*=col]:nth-child(odd) {
+  .custom-order-form form .input-list [class*=col]:nth-child(odd) {
     padding-right: 10px;
   }
-  .custom-order-form form .row.ship-info [class*=col]:first-child .select__control,
-.custom-order-form form .row.ship-info [class*=col]:first-child .has-float-label,
-.custom-order-form form .row.ship-info [class*=col]:first-child .has-float-label input {
+  .custom-order-form form .input-list.ship-info [class*=col]:first-child .select__control,
+.custom-order-form form .input-list.ship-info [class*=col]:first-child .has-float-label,
+.custom-order-form form .input-list.ship-info [class*=col]:first-child .has-float-label input {
     border-bottom-left-radius: 20px;
   }
 }
 @media (max-width: 991.98px) and (max-width: 991.98px) {
-  .custom-order-form form .row.ship-info [class*=col] {
+  .custom-order-form form .input-list.ship-info [class*=col] {
     margin-top: 0;
   }
-  .custom-order-form form .row.ship-info [class*=col]:not(:first-child) {
+  .custom-order-form form .input-list.ship-info [class*=col]:not(:first-child) {
     padding-left: 0;
     padding-right: 10px;
   }
 }
 @media (max-width: 767.98px) {
-  .custom-order-form form .row [class*=col] {
+  .custom-order-form form .input-list [class*=col] {
     padding-right: 15px !important;
     padding-left: 15px !important;
   }
-  .custom-order-form form .row [class*=col] + [class*=col] {
+  .custom-order-form form .input-list [class*=col] + [class*=col] {
     margin-top: 10px;
   }
-  .custom-order-form form .row [class*=col]:last-child .select__control,
-.custom-order-form form .row [class*=col]:last-child .has-float-label,
-.custom-order-form form .row [class*=col]:last-child .has-float-label input {
+  .custom-order-form form .input-list [class*=col]:last-child .select__control,
+.custom-order-form form .input-list [class*=col]:last-child .has-float-label,
+.custom-order-form form .input-list [class*=col]:last-child .has-float-label input {
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
   }
@@ -16039,8 +16040,12 @@ form {
 .custom-order-form form .input-file {
   top: 7px;
 }
+.custom-order-form .add-new-vehicle {
+  position: relative;
+}
 .custom-order-form .add-new-vehicle .garage-select {
   border-left-width: 0;
+  position: static;
 }
 .custom-order-form .add-new-vehicle .garage-select .dropdown-toggle {
   display: flex;
@@ -16051,16 +16056,15 @@ form {
   padding-bottom: 7px;
 }
 .custom-order-form .add-new-vehicle .garage-dropdown {
-  right: 0 !important;
+  transform: none !important;
+  right: 15px !important;
   left: auto !important;
-}
-.custom-order-form .add-new-vehicle .garage-dropdown:before {
-  right: 50px !important;
-  left: auto !important;
+  top: 40px !important;
 }
 
 .vehicle-info .float-label {
   min-width: 160px;
+  display: flex;
 }
 
 .part-array .quantity {
@@ -16070,9 +16074,6 @@ form {
 .part-array .quantity button {
   height: auto;
   width: 55px;
-}
-.part-array .row + .row {
-  padding-top: 15px;
 }
 .part-array .row + .row .quantity button {
   width: 50px;
@@ -16101,11 +16102,19 @@ form {
   opacity: 1;
   filter: alpha(opacity=100);
 }
+.part-array > div > .row [class*=col]:first-child .has-float-label,
+.part-array > div > .row [class*=col]:first-child .has-float-label input {
+  border-bottom-right-radius: 0 !important;
+}
 @media (max-width: 991.98px) {
   .part-array > div > .row {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border-top: 2px solid #f8f8f8;
+    margin-bottom: 0;
+  }
+  .part-array > div > .row:first-child {
+    border-top-width: 0;
   }
   .part-array > div > .row [class*=col]:first-child .has-float-label,
 .part-array > div > .row [class*=col]:first-child .has-float-label input {
@@ -16119,7 +16128,6 @@ form {
 }
 @media (max-width: 767.98px) {
   .part-array > div > .row [class*=col]:last-child {
-    margin-top: 10px !important;
     padding-left: 15px !important;
     padding-right: 15px !important;
   }
@@ -16196,7 +16204,6 @@ form {
 .input-list > .float-label:first-child .select__control,
 .input-list > .row:first-child .select__control {
   border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
 }
 .input-list > .float-label:last-child,
 .input-list > .row:last-child {
@@ -16225,7 +16232,6 @@ form {
 }
 
 .qutaion-steps {
-  margin-left: 80px;
   background: #f8f8f8;
   padding: 45px 30px;
   border-radius: 20px 0 20px 20px;
@@ -16236,7 +16242,7 @@ form {
   font-weight: 500;
   text-transform: uppercase;
   line-height: 1;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .qutaion-steps > .d-flex, .qutaion-steps > .banner, .qutaion-steps > .default-header-bg, .qutaion-steps > .shipping-step, .qutaion-steps > .account-actions, .account-actions > li .qutaion-steps > a, .qutaion-steps > .pro-img {
   align-items: center;
@@ -16249,6 +16255,7 @@ form {
   margin-bottom: 0;
   padding-left: 10px;
   text-transform: capitalize;
+  line-height: 1.4;
 }
 .qutaion-steps .num {
   font-size: 100px;
@@ -16334,7 +16341,7 @@ form {
   max-width: 60px;
 }
 .qutaion-steps .steps-list .cart {
-  max-width: 62px;
+  max-width: 70px;
 }
 .qutaion-steps .steps-list .delivery {
   max-width: 74px;
@@ -16344,15 +16351,15 @@ form {
   font-size: 1.25rem;
   text-transform: uppercase;
   font-weight: 400;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
+  opacity: 0.7;
+  filter: alpha(opacity=70);
   margin-bottom: 10px;
 }
 .qutaion-steps .steps-list P {
   font-size: 16px;
   font-size: 1rem;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  opacity: 0.6;
+  filter: alpha(opacity=60);
   margin-bottom: 0;
 }
 .qutaion-steps .steps-list .active h5 {
@@ -16396,7 +16403,6 @@ form {
   color: #ed4036;
   border: 1px solid #ebebeb;
   width: 100%;
-  margin-bottom: 10px;
 }
 .add-part button span {
   margin-left: 7px;
@@ -16407,6 +16413,10 @@ form {
   font-size: 17px;
   font-size: 1.0625rem;
   height: 17px;
+}
+.add-part button:disabled {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
 }
 
 .send-request {

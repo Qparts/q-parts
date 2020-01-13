@@ -581,8 +581,8 @@
           "Tell Us what you need"
         ],
         "subTitle": [
-          "املأ بيانات سيارتك والقطع التي تريدها",
-          "Fill In Your Vehicle Data And The Parts You Want"
+          "فقط بـ 15 ريال إملأ الطلب ببيانات سيارتك مع تحديد اختيارك الخاص من قطع الغيار الممتازة",
+          "Pay just 15 SAR and fill in an order with your vehicle info and your pick of our premium parts"
         ]
       }
     },
@@ -618,6 +618,16 @@
       "city": [
         "اختر المدينة",
         "Select a city"
+      ]
+    },
+    "payment": {
+      "title": [
+        "معلومات الدفع",
+        "Payment Information"
+      ],
+      "amount":[
+        "المبلغ المطلوب دفعه",
+        "Payment Amount Required"
       ]
     },
     "garage": {

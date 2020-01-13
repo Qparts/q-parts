@@ -35,9 +35,9 @@ class HeaderDetails extends Component {
   }
 
   componentDidMount() {
-    this.setReadReplies();    
+    this.setReadReplies();
   }
-  
+
  async componentDidUpdate(prevProps, prevState) {
     const { completed } = this.props.quotations;
     const prevCompleted = prevProps.quotations.completed;
@@ -55,7 +55,7 @@ class HeaderDetails extends Component {
         selectedVehicles: this.props.selectedVehicles
       });
     }
-   
+
     if (this.props.isVehicleSelected !== this.state.isVehicleSelected) {
       await this.setState({
         isVehicleSelected: this.props.isVehicleSelected
@@ -289,7 +289,11 @@ class HeaderDetails extends Component {
                   class="dropdown-menu garage-dropdown"
                   aria-labelledby="garage-dropdown"
                 >
-                  <div>hello</div>
+								<div className="empty-vehic">
+                  <a className="btn btn-primary" href="#" onClick={this.toggleChangeVehivle}><i className="icon-add"> </i> {translate('dropdown.garage.addVehicle')}</a>
+                     
+									<p>{translate("dialog.vehicle.subTitle")}</p>
+								</div>
                 </div>
               ) : null}
 
@@ -305,15 +309,7 @@ class HeaderDetails extends Component {
                       <div class="media-body">
                         <h5>{translate("dropdown.garage.cached")}</h5>
                       </div>
-                      <a
-                        href="#"
-                        onClick={() =>
-                          this.props.onClearHistory(this.state.selectedVehicles)
-                        }
-                      >
-                        <i className="icon-clear"></i>
-                        {translate("dropdown.garage.clear")}
-                      </a>
+
                     </div>
                     <div className="vehic-list">
                       {this.state.selectedVehicles.map((vehicle, key) => {
@@ -398,10 +394,16 @@ class HeaderDetails extends Component {
                         {translate("dropdown.garage.addVehicle")}
                       </a>
                     </div>
+										<a href="#" className="link" onClick={() =>
+											this.props.onClearHistory(this.state.selectedVehicles)
+										}>
+											<i className="icon-clear"></i>
+											{translate('dropdown.garage.clear')}
+										</a>
                   </div>
                 </div>
               ) :
-                isLoggedIn && this.state.selectedVehicles ? 
+                isLoggedIn && this.state.selectedVehicles ?
               {/*user logged in and have vehicles in garage and history*/}
                  (
                   <div
@@ -420,13 +422,13 @@ class HeaderDetails extends Component {
                       </a>
                     </div>
                     <div className="vehic-list">
-                      <div className="radio-custom" key="3">
+                      <div className="radio-custom" key="03">
                         <a href="#" className="row">
                           <div className="col-auto">
                             <Radio
                               checked="true"
                               type="radio"
-                              id="3"
+                              id="03"
                               name="radioGroup"
                             />
                           </div>
@@ -490,7 +492,7 @@ class HeaderDetails extends Component {
                                     <span>{vehicle.vin}</span>
                                   ) : null}
                                 </p>
-  
+
                                 <div className="col-auto vec-actions">
                                   <a
                                     href="#"
