@@ -374,9 +374,11 @@ class HomeDetails extends Component {
                           <div className="VIN-info">
                             <p
                               onClick={() =>
-                                this.setState(prevState => ({
+                                this.setState(prevState => 
+                                  ({
                                   vinInput: prevState.vin
-                                }))
+                                })
+                                )
                               }
                             >
                               {this.props.translate("vehicleInfo.VINNumberEx")}:{" "}

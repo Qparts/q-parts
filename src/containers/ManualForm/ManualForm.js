@@ -44,6 +44,7 @@ export class ManualForm extends Component {
       browseCatalogeModal: false,
       vin: "JTHBJ46G9B2420251",
       vinInput: props.selectedVehicleVin,
+      vinNum :"",
       open: false,
       changeVehcileModal: false,
       dialogType: "signin",
@@ -177,6 +178,7 @@ export class ManualForm extends Component {
         year: this.state.selectedVehicleYear,
         model: this.state.selectedVehicleModel,
         vin: this.state.vinInput
+
       };
       console.log(selectedVehicle);
 
@@ -322,6 +324,7 @@ export class ManualForm extends Component {
               </div>
               <div className="vehicle-info">
                 <div className="row">
+                    {this.state.selectedVehicle.name ?
                   <header className="col">
                     <label className="header-label">
                       {this.props.translate("general.selectedVehcile")}:
@@ -341,8 +344,9 @@ export class ManualForm extends Component {
                     </h3>
                     {this.state.selectedVehicle.vin ? (
                       <p>VIN({this.state.selectedVehicle.vin})</p>
-                    ) : null}
+                      ) : null}
                   </header>
+                      :null}
                   <div className="col-md-auto btn-group">
                     <a
                       href="##"
@@ -375,7 +379,8 @@ export class ManualForm extends Component {
                                 :
                               </label>
                               {currentLanguage === "ar"
-                                ? this.state.selectedVehicle.nameAr +
+                                ?
+                                 this.state.selectedVehicle.nameAr +
                                   " " +
                                   this.state.selectedVehicleModel.nameAr +
                                   " " +
@@ -394,8 +399,12 @@ export class ManualForm extends Component {
                         >
                           <Field
                            onChange={e =>
-							this.props.onSelectedVehicleVin(e.target.value)
-						  }
+                            this.setState(() => ({
+                              vinNum : e.target.value ,
+                              vinInput:	this.props.onSelectedVehicleVin(e.target.value)
+                            }))
+                         }
+
                             hasFloatLabel
                             name="VIN/Frame"
                             type="text"
@@ -413,7 +422,7 @@ export class ManualForm extends Component {
                             component={props => (
                               <RenderField
                                 {...props}
-                                value={this.state.vinInput}
+                                value={this.state.vinNum}
                               />
                             )}
                             validate={[validations.required]}
@@ -421,8 +430,8 @@ export class ManualForm extends Component {
                           <div className="VIN-info">
                             <p
                               onClick={() =>
-                                this.setState(prevState => ({
-                                  vinInput: prevState.vin
+                                this.setState(prevState =>({
+                                  vinNum: prevState.vin
                                 }))
                               }
                             >
@@ -540,13 +549,13 @@ export class ManualForm extends Component {
               										</div>
               									</div>
               									<div className="vehic-list">
-              										<div className="radio-custom" key="3">
+              										<div className="radio-custom" key="004">
               											<a href="#" className="row">
               												<div className="col-auto">
               													<Radio
               														checked="true"
               														type="radio"
-              														id="3"
+              														id="004"
               														name="radioGroup"
               													/>
               												</div>
@@ -572,7 +581,7 @@ export class ManualForm extends Component {
 
                                     return (
                                       <div className="vehic-list" key={key}>
-                    										<div className="radio-custom" key="1">
+                    										<div className="radio-custom" key="005">
                     											<a href="#" className="row">
                     												<div className="col-auto">
                                               <Radio
@@ -581,7 +590,7 @@ export class ManualForm extends Component {
                                                     .id === vehicle.id
                                                 }
                                                 type="radio"
-                                                id="1"
+                                                id="005"
                                                 name="radioGroup"
                                               />
                     												</div>
@@ -647,13 +656,13 @@ export class ManualForm extends Component {
                               )}
                                 {/*END Shaimaa react code*/}
               									<div className="vehic-list">
-              										<div className="radio-custom" key="1">
+              										<div className="radio-custom" key="006">
               											<a href="#" className="row">
               												<div className="col-auto">
               													<Radio
               														checked="true"
               														type="radio"
-              														id="1"
+              														id="006"
               														name="radioGroup"
               													/>
               												</div>
@@ -823,9 +832,12 @@ export class ManualForm extends Component {
                               </UncontrolledPopover>
                             </LargeScreen>
                             <Field
-                              onChange={e =>
-                                this.props.onSelectedVehicleVin(e.target.value)
-                              }
+                               onChange={e =>{
+                                 this.props.onSelectedVehicleVin(e.target.value)
+                                this.setState(() => ({
+                                  vinNum : e.target.value
+                                }))
+                             }}
                               hasFloatLabel
                               name="VIN/Frame"
                               type="text"
@@ -843,7 +855,7 @@ export class ManualForm extends Component {
                               component={props => (
                                 <RenderField
                                   {...props}
-                                  value={this.state.vinInput}
+                                  value={this.state.vinNum}
                                 />
                               )}
                               validate={[validations.required]}
@@ -852,7 +864,7 @@ export class ManualForm extends Component {
                               <p
                                 onClick={() =>
                                   this.setState(prevState => ({
-                                    vinInput: prevState.vin
+                                    vinNum: prevState.vin
                                   }))
                                 }
                               >
@@ -1001,6 +1013,7 @@ export class ManualForm extends Component {
   }
 }
 
+
 const mapStateToProps = state => {
   return {
     translate: getTranslate(state.localize),
@@ -1027,7 +1040,7 @@ const mapDispatchToProps = dispatch => {
     onSelectedVehicleModel: value => dispatch(setSelectedVehicleModel(value)),
     onSelectedVehicleYear: value => dispatch(setSelectedVehicleYear(value)),
     onDeleteSelectedVehicle: payload =>
-      dispatch(unsetVehcileFromSelectedVehicles(payload)),
+    dispatch(unsetVehcileFromSelectedVehicles(payload)),
     setSelectedVehicles: payload => dispatch(setSelectedVehicles(payload)),
     onClearHistory: payload => dispatch(unsetSelectedVehicles(payload)),
     onClearFormDataFromCache: data => dispatch(clearFormDataFromCache(data)),

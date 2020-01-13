@@ -595,13 +595,13 @@ class QuotationRequest extends Component {
 														</div>
 													</div>
 													<div className="vehic-list">
-														<div className="radio-custom" key="3">
+														<div className="radio-custom" key="003">
 															<a href="#" className="row">
 																<div className="col-auto">
 																	<Radio
 																		checked="true"
 																		type="radio"
-																		id="3"
+																		id="003"
 																		name="radioGroup"
 																	/>
 																</div>
@@ -621,13 +621,13 @@ class QuotationRequest extends Component {
 														</div>
 													</div>
 													<div className="vehic-list">
-														<div className="radio-custom" key="1">
+														<div className="radio-custom" key="001">
 															<a href="#" className="row">
 																<div className="col-auto">
 																	<Radio
 																		checked="true"
 																		type="radio"
-																		id="1"
+																		id="001"
 																		name="radioGroup"
 																	/>
 																</div>
@@ -778,13 +778,13 @@ class QuotationRequest extends Component {
 														</div>
 													</div>
 													<div className="vehic-list">
-														<div className="radio-custom" key="3">
+														<div className="radio-custom" key="02">
 															<a href="#" className="row">
 																<div className="col-auto">
 																	<Radio
 																		checked="true"
 																		type="radio"
-																		id="3"
+																		id="02"
 																		name="radioGroup"
 																	/>
 																</div>
@@ -804,13 +804,13 @@ class QuotationRequest extends Component {
 														</div>
 													</div>
 													<div className="vehic-list">
-														<div className="radio-custom" key="1">
+														<div className="radio-custom" key="01">
 															<a href="#" className="row">
 																<div className="col-auto">
 																	<Radio
 																		checked="true"
 																		type="radio"
-																		id="1"
+																		id="01"
 																		name="radioGroup"
 																	/>
 																</div>
