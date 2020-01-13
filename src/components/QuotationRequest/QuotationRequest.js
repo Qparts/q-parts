@@ -50,21 +50,23 @@ import { ClipLoader } from 'react-spinners';
 import Radio from '../UI/Radio';
 import { LargeScreen} from '../../components/Device';
 import CheckoutPayment from '../CheckoutPayment/CheckoutPayment';
-import { Alert } from 'reactstrap';
 import { W, V } from '../../constants';
+
+//steps
+//import { Multistep, StepOne, StepTwo, StepThree, StepFour } from 'react-multistep'
+
 const vehicles = 'vehicles';
 const signin = 'signin';
 class QuotationRequest extends Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			modal: false,
 			dialogType: signin,
 			garage: null,
 			loading: false,
 			loadedFromGarage: false,
-			paymentMethod: 'V'
+			paymentMethod: 'V',
 		};
 
 		if (isAuth(this.props.token)) {
@@ -526,7 +528,14 @@ class QuotationRequest extends Component {
 					/>
 				</div>
 			);
-
+			//Steps
+			// const steps = [
+      //         {name: 'StepOne', component: <StepOne/>},
+      //         {name: 'StepTwo', component: <StepTwo/>},
+      //         {name: 'StepThree', component: <StepThree/>},
+      //         {name: 'StepFour', component: <StepFour/>}
+      //       ];
+			//END STEPS
 		return (
 			<Fragment>
 				<section className='hero qutaion-h'>
@@ -561,11 +570,9 @@ class QuotationRequest extends Component {
 									header={translate(
 										'quotationOrder.steps.requestParts.title'
 									)}
-									subHeader={translate(
-										'quotationOrder.steps.requestParts.subTitle'
-									)}
 								/>
 							</div>
+								{/*<Multistep showNavigation={true} steps={steps}/>*/}
 							<form
 								className='gray-input'
 								onSubmit={handleSubmit(this.handleSubmit)}>
@@ -580,67 +587,63 @@ class QuotationRequest extends Component {
 												<span className="vec-count">2</span>
 											</a>
 											<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+												<div className="saved">
+													<div class="media">
+														<i className="icon-vehicle"></i>
+														<div class="media-body">
+															<h5>{this.props.translate('dropdown.garage.userGarage')}</h5>
+														</div>
+													</div>
+													<div className="vehic-list">
+														<div className="radio-custom" key="3">
+															<a href="#" className="row">
+																<div className="col-auto">
+																	<Radio
+																		checked="true"
+																		type="radio"
+																		id="3"
+																		name="radioGroup"
+																	/>
+																</div>
+																<p className="col">
+																2016 Ford Focus
+																<span>VIN(000 000 000 000 11)</span>
+															</p>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div className="cached">
 													<div class="media">
 														<i className="icon-vehicle-history"></i>
 														<div class="media-body">
-															<h5>Selected Vehicle History </h5>
-															<p>View, manage and find parts for the vehicles in your garage</p>
+															<h5>{this.props.translate('dropdown.garage.cached')}</h5>
 														</div>
 													</div>
-												<ul className="list-unstyled">
-													<li  className="radio-custom" key="1">
-														<a href="#" className="row">
-															<div className="col-auto">
-																<Radio
-																	checked="true"
-																	type="radio"
-																	id="1"
-																	name="radioGroup"
-																/>
+													<div className="vehic-list">
+														<div className="radio-custom" key="1">
+															<a href="#" className="row">
+																<div className="col-auto">
+																	<Radio
+																		checked="true"
+																		type="radio"
+																		id="1"
+																		name="radioGroup"
+																	/>
+																</div>
+																<p className="col">
+																2016 Ford Focus
+																<span>VIN(000 000 000 000 11)</span>
+															</p>
+																<div className="col-auto vec-actions">
+																<a href="#" className="link">{this.props.translate('dropdown.garage.save')}</a>
 															</div>
-															<p className="col">
-															2016 Ford Focus
-															<span>VIN(000 000 000 000 11)</span>
-														</p>
-															<div className="col-auto vec-actions">
-															<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>Catalog</a>
-															<a href="#" className="link">Save</a>
+															</a>
 														</div>
-														</a>
-													</li>
-													<li  className="radio-custom" key="1">
-														<a href="#" className="row">
-															<div className="col-auto">
-																<Radio
-																	checked="true"
-																	type="radio"
-																	id="1"
-																	name="radioGroup"
-																/>
-															</div>
-															<p className="col">
-															2016 Ford Focus
-														</p>
-															<div className="col-auto vec-actions">
-															<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>Catalog</a>
-															<a href="#" className="link">Save</a>
-														</div>
-														</a>
-													</li>
-												</ul>
-												<div className="vec-list-actions">
-													<div className="main-action">
-														<a className="btn btn-gray">
-															<i className="icon-add-vehicle"></i>
-															Add Vehicle
-														</a>
 													</div>
-													<a href="#" className="link">
-														<i className="icon-clear"></i>
-														Clear History
-													</a>
 												</div>
 											</div>
+
 										</div>
 										{isAuth(this.props.token) && (
 											<div className='col-auto open-garage'>
@@ -767,65 +770,60 @@ class QuotationRequest extends Component {
 												<span className="vec-count">2</span>
 											</a>
 											<div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+												<div className="saved">
+													<div class="media">
+														<i className="icon-vehicle"></i>
+														<div class="media-body">
+															<h5>{this.props.translate('dropdown.garage.userGarage')}</h5>
+														</div>
+													</div>
+													<div className="vehic-list">
+														<div className="radio-custom" key="3">
+															<a href="#" className="row">
+																<div className="col-auto">
+																	<Radio
+																		checked="true"
+																		type="radio"
+																		id="3"
+																		name="radioGroup"
+																	/>
+																</div>
+																<p className="col">
+																2016 Ford Focus
+																<span>VIN(000 000 000 000 11)</span>
+															</p>
+															</a>
+														</div>
+													</div>
+												</div>
+												<div className="cached">
 													<div class="media">
 														<i className="icon-vehicle-history"></i>
 														<div class="media-body">
-															<h5>Selected Vehicle History </h5>
-															<p>View, manage and find parts for the vehicles in your garage</p>
+															<h5>{this.props.translate('dropdown.garage.cached')}</h5>
 														</div>
 													</div>
-												<ul className="list-unstyled">
-													<li  className="radio-custom" key="1">
-														<a href="#" className="row">
-															<div className="col-auto">
-																<Radio
-																	checked="true"
-																	type="radio"
-																	id="1"
-																	name="radioGroup"
-																/>
+													<div className="vehic-list">
+														<div className="radio-custom" key="1">
+															<a href="#" className="row">
+																<div className="col-auto">
+																	<Radio
+																		checked="true"
+																		type="radio"
+																		id="1"
+																		name="radioGroup"
+																	/>
+																</div>
+																<p className="col">
+																2016 Ford Focus
+																<span>VIN(000 000 000 000 11)</span>
+															</p>
+																<div className="col-auto vec-actions">
+																<a href="#" className="link">{this.props.translate('dropdown.garage.save')}</a>
 															</div>
-															<p className="col">
-															2016 Ford Focus
-															<span>VIN(000 000 000 000 11)</span>
-														</p>
-															<div className="col-auto vec-actions">
-															<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>Catalog</a>
-															<a href="#" className="link">Save</a>
+															</a>
 														</div>
-														</a>
-													</li>
-													<li  className="radio-custom" key="1">
-														<a href="#" className="row">
-															<div className="col-auto">
-																<Radio
-																	checked="true"
-																	type="radio"
-																	id="1"
-																	name="radioGroup"
-																/>
-															</div>
-															<p className="col">
-															2016 Ford Focus
-														</p>
-															<div className="col-auto vec-actions">
-															<a href="#" className="btn btn-primary"><i className="icon-catalog"></i>Catalog</a>
-															<a href="#" className="link">Save</a>
-														</div>
-														</a>
-													</li>
-												</ul>
-												<div className="vec-list-actions">
-													<div className="main-action">
-														<a className="btn btn-gray">
-															<i className="icon-add-vehicle"></i>
-															Add Vehicle
-														</a>
 													</div>
-													<a href="#" className="link">
-														<i className="icon-clear"></i>
-														Clear History
-													</a>
 												</div>
 											</div>
 										</div>
@@ -848,7 +846,7 @@ class QuotationRequest extends Component {
 										<div className="col add-part">
 											<button className="btn">
 												<i className="icon-plus"></i>
-												<span> Add Another Part </span>
+												<span> Add Vehicle </span>
 											</button>
 										</div>
 									</div>
@@ -938,6 +936,47 @@ class QuotationRequest extends Component {
 											</div>
 									</div>
 								</div>
+								<div className='sec-shadow payment-info'>
+									<div className='row'>
+										<div className='col-12'>
+											<h3>
+												{translate(
+													'quotationOrder.payment.title'
+												)}
+											</h3>
+										</div>
+										<div className="col-12">
+											<p>{translate('quotationOrder.payment.amount')} <span>15 <label>SAR</label></span></p>
+										</div>
+									</div>
+									<div className="input-list">
+										<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										  <label class="btn btn-secondary active">
+										    <input type="radio" name="options" id="option1" checked></input> Active
+										  </label>
+										  <label class="btn btn-secondary">
+										    <input type="radio" name="options" id="option2"></input> Radio
+										  </label>
+										  <label class="btn btn-secondary">
+										    <input type="radio" name="options" id="option3"></input> Radio
+										  </label>
+										</div>
+
+										<Field
+											hasFloatLabel
+											name='Card Number'
+											placeholder={' '}
+											component={RenderField}
+											label="Card Number"
+											errorMessage={`${translate(
+												'general.validationMessages.mobile'
+											)}`}
+											validate={[
+												validations.required
+											]}
+										/>
+									</div>
+								</div>
 								<div className='submit-qout'>
 									<p>
 										{translate(
@@ -967,7 +1006,7 @@ class QuotationRequest extends Component {
 							</form>
 						</div>
 						<LargeScreen>
-							<div className="col-lg">
+							<div className="col-lg-5 col-xl offset-xl-1">
 								<div className="qutaion-steps">
 									<h5>{translate('quotationOrder.steps.title')}</h5>
 									<div className="d-flex">
@@ -1024,7 +1063,8 @@ class QuotationRequest extends Component {
 							</div>
 						</LargeScreen>
 					</div>
-						<div className='sec-shadow'>
+						{/* payment section in react
+							<div className='sec-shadow'>
 							<CheckoutPayment
 								paymentTitle
 								direction={this.props.direction}
@@ -1069,6 +1109,7 @@ class QuotationRequest extends Component {
 								/>
 							</div>
 						</div>
+						END  payment section in react*/}
 				</section>
 				{dialog}
 			</Fragment>

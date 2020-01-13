@@ -35,7 +35,7 @@ class RenderPartInfo extends Component {
 			meta: { error, submitFailed }
 		} = this.props;
 		return (
-			<div>
+			<div className="input-list">
 				{submitFailed && error && <span>{error}</span>}
 				{fields.map((partInfo, idx) => (
 					<Fragment key={idx}>

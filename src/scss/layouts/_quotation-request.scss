@@ -85,7 +85,7 @@
     .select__menu {
       z-index: 2;
     }
-    .row {
+    .input-list {
       [class*='col']:first-child {
         .has-float-label,
         .has-float-label input {
@@ -177,8 +177,10 @@
     }
   }
   .add-new-vehicle{
+    position: relative;
     .garage-select{
       border-#{$left}-width: 0;
+      position: static;
       .dropdown-toggle{
         display: flex;
         align-items: center;
@@ -189,12 +191,10 @@
       }
     }
     .garage-dropdown{
-      #{$right}: 0 !important;
+      transform: none !important;
+      #{$right}: 15px !important;
       #{$left}: auto !important;
-      &:before{
-        #{$right}: 50px !important;
-        #{$left}: auto !important;
-      }
+      top: 40px !important;
     }
   }
 }
@@ -202,6 +202,7 @@
 .vehicle-info {
   .float-label {
     min-width: 160px;
+    display: flex;
   }
 }
 .part-array {
@@ -214,7 +215,6 @@
     }
   }
   .row + .row {
-    padding-top: 15px;
     .quantity {
       button {
         width: 50px;
@@ -242,12 +242,21 @@
       @include opacity(1);
     }
   }
-
   > div > .row {
+    [class*='col']:first-child {
+      .has-float-label,
+      .has-float-label input {
+        border-bottom-#{$right}-radius: 0 !important;
+      }
+    }
     @include media-breakpoint-down(md) {
-      padding-top: 20px;
-      padding-bottom: 20px;
+      padding-top: 15px;
+      padding-bottom: 15px;
       border-top: 2px solid $light-gray;
+      margin-bottom: 0;
+      &:first-child{
+        border-top-width: 0;
+      }
       [class*='col']:first-child {
         .has-float-label,
         .has-float-label input {
@@ -258,11 +267,11 @@
       &:last-child {
         padding: 0;
         border-top-width: 0;
+
       }
     }
     @include media-breakpoint-down(sm) {
       [class*='col']:last-child {
-        margin-top: 10px !important;
         padding-#{$left}: 15px !important;
         padding-#{$right}: 15px !important;
         .has-float-label,
@@ -334,7 +343,6 @@
     &:first-child{
       .select__control{
         border-top-#{$left}-radius: $border-radius-base;
-        border-top-#{$right}-radius: $border-radius-base;
       }
     }
     &:last-child{
@@ -364,7 +372,6 @@
   }
 }
 .qutaion-steps{
-  margin-#{$left}: 80px;
   background: $light-gray;
   padding: 45px 30px;
   @include border-radius-div;
@@ -373,7 +380,7 @@
     font-weight: 500;
     text-transform: uppercase;
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
   > .d-flex{
     align-items: center;
@@ -384,6 +391,7 @@
       margin-bottom: 0;
       padding-#{$left}: 10px;
       text-transform: capitalize;
+      line-height: 1.4;
     }
   }
   .num{
@@ -466,7 +474,7 @@
       max-width: 60px;
     }
     .cart{
-      max-width: 62px;
+      max-width: 70px;
     }
     .delivery{
       max-width: 74px;
@@ -475,12 +483,12 @@
       @include font-size(20px);
       text-transform: uppercase;
       font-weight: 400;
-      @include opacity(0.6);
+      @include opacity(0.7);
       margin-bottom: 10px;
     }
     P{
       @include font-size(16px);
-      @include opacity(0.5);
+      @include opacity(0.6);
       margin-bottom: 0;
     }
     .active{
@@ -522,7 +530,6 @@
     color: $brand-color;
     border: 1px solid darken($light-gray, 5%);
     width: 100%;
-    margin-bottom: 10px;
     span {
       margin-left: 7px;
       position: relative;
@@ -531,6 +538,9 @@
     i {
       @include font-size(17px);
       height: 17px;
+    }
+    &:disabled{
+      @include opacity(0.7);
     }
   }
 }

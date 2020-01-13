@@ -260,6 +260,12 @@
         }
       }
     }
+    .cached,
+    .saved{
+      @include media-breakpoint-up(md){
+        min-width: 550px;
+      };
+    }
   }
 }
 .signin-list{

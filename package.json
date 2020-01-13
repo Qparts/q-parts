@@ -66,6 +66,7 @@
     "react-id-swiper": "^1.6.8",
     "react-images": "^0.5.19",
     "react-localize-redux": "^3.3.0",
+    "react-multistep": "^3.6.16",
     "react-owl-carousel": "^2.3.1",
     "react-password-strength": "^2.3.1",
     "react-places-autocomplete": "^7.2.0",
