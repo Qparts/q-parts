@@ -3,8 +3,7 @@ import React, { Fragment } from 'react';
 import { Link } from "react-router-dom";
 import { closeNav } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
-
-import Radio from '../../UI/Radio';
+import GarageDropDownMenueSm from '../../GarageDropDownMenueSm/GarageDropDownMenueSm';
 
 const Nav = (
     {
@@ -46,111 +45,7 @@ const Nav = (
                         <i className="icon-home"></i> {translate("navBar.home")}
                     </Link>
                 </li>
-                <li className="nav-sm has-children" >
-                    <Link to="#" className="garage-sm">
-                      <img alt='garage' src='/img/garage.svg' />
-                      <span className="notify-num">3</span>
-                      <div>
-                        {translate("navBar.garage")}
-                        <p>2016 Ford Focus</p>
-                      </div>
-
-                    </Link>
-                    <ul className="cd-secondary-nav is-hidden">
-                        <li className="go-back"><a href="#0">{translate("general.buttons.back")}</a></li>
-                        <li>
-                          <div class="garage-dropdown">
-            								<div className="saved">
-            									<div class="media">
-            										<i className="icon-vehicle"></i>
-            										<div class="media-body">
-            											<h5>{translate('dropdown.garage.userGarage')}</h5>
-            										</div>
-            										<a href="#">
-            											<i className="icon-add"></i>
-            											{translate('dropdown.garage.addVehicle')}
-            										</a>
-            									</div>
-            									<div className="vehic-list">
-            										<div className="radio-custom" key="3">
-            											<a href="#" className="row">
-            												<div className="col-auto">
-            													<Radio
-            														checked="true"
-            														type="radio"
-            														id="3"
-            														name="radioGroup"
-            													/>
-            												</div>
-            												<p className="col">
-            												2016 Ford Focus
-            												<span>VIN(000 000 000 000 11)</span>
-            											</p>
-            												<div className="col-auto vec-actions">
-            													<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
-            													<a href="#" className="link"><i className="icon-trash"></i></a>
-            											</div>
-            											</a>
-            										</div>
-            									</div>
-            								</div>
-            								<div className="cached">
-            									<div class="media">
-            										<i className="icon-vehicle-history"></i>
-            										<div class="media-body">
-            											<h5>{translate('dropdown.garage.cached')}</h5>
-            										</div>
-            										<a href="#">
-            											<i className="icon-clear"></i>
-            											{translate('dropdown.garage.clear')}
-            										</a>
-            									</div>
-            									<div className="vehic-list">
-            										<div className="radio-custom" key="1">
-            											<a href="#" className="row">
-            												<div className="col-auto">
-            													<Radio
-            														checked="true"
-            														type="radio"
-            														id="1"
-            														name="radioGroup"
-            													/>
-            												</div>
-            												<p className="col">
-            												2016 Ford Focus
-            												<span>VIN(000 000 000 000 11)</span>
-            											</p>
-            												<div className="col-auto vec-actions">
-            												<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
-            												<a href="#" className="link">{translate('dropdown.garage.save')}</a>
-            											</div>
-            											</a>
-            										</div>
-            										<div className="radio-custom" key="2">
-            											<a href="#" className="row">
-            												<div className="col-auto">
-            													<Radio
-            														checked="true"
-            														type="radio"
-            														id="2"
-            														name="radioGroup"
-            													/>
-            												</div>
-            												<p className="col">
-            												2016 Ford Focus
-            											</p>
-            												<div className="col-auto vec-actions">
-            												<a href="#" className="btn btn-gray"><i className="icon-catalog"></i>{translate('dropdown.garage.catalog')}</a>
-            												<a href="#" className="link">{translate('dropdown.garage.save')}</a>
-            											</div>
-            											</a>
-            										</div>
-            									</div>
-            								</div>
-            							</div>
-                        </li>
-                    </ul>
-                </li>
+                        <GarageDropDownMenueSm/>
                 <li className="nav-sm">
                     <Link className={hasNoNewReply ? '' : 'notification'} to="/setting/quotations" onClick={close}>
                         <i className="icon-send"></i> {translate("navBar.quotations")}

@@ -1,9 +1,10 @@
+
 /* eslint-disable jsx-a11y/href-no-hash */
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import DropdownItem from "../../UI/Nav/DropdownItem";
 import { NavLg } from "../../Device";
-import { getTranslate } from "react-localize-redux";
+import { getTranslate , getActiveLanguage } from "react-localize-redux";
 import { connect } from "react-redux";
 import {
   setSelectedVehicles,
@@ -25,12 +26,13 @@ import * as validations from "../../../utils";
 import {
   DownLargeScreen,
   LargeScreen,
+  MediumScreen
 } from "../../../components/Device";
 import { Field  , reduxForm} from "redux-form";
 import SelectInput from "../../../components/SelectInput/SelectInput";
-import { UncontrolledPopover, PopoverBody } from "reactstrap";
+// import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import { getTranslatedObject } from "../../../utils";
-import RenderField from "../../../components/RenderField/RenderField";
+// import RenderField from "../../../components/RenderField/RenderField";
 import { withRouter } from "react-router-dom";
 
 
@@ -192,36 +194,31 @@ class HeaderDetails extends Component {
   }
 
   handleSubmit = async () => {
-    if (this.state.isVehicleSelected) {
-      let selectedVehicle = this.state.selectedVehicle;
-      delete selectedVehicle.models;
-      console.log(selectedVehicle);
-      selectedVehicle = {
-        ...selectedVehicle,
-        year: this.state.selectedVehicleYear,
-        model: this.state.selectedVehicleModel,
-        vin: this.state.vinInput
-      };
-
-      this.props.onSelectedVehicle(selectedVehicle);
-      this.props.setSelectedVehicles(selectedVehicle);
-      // this.props.onVehicleSelected(true);
-      this.toggleChangeVehivle();
-    } else {
-      let selectedVehicle = this.state.selectedVehicle;
-      delete selectedVehicle.models;
-      selectedVehicle = {
-        ...selectedVehicle,
-        year: this.state.selectedVehicleYear,
-        model: this.state.selectedVehicleModel
-        // vin:this.state.vinInput
-      };
-      this.props.onSelectedVehicle(selectedVehicle);
-      this.props.setSelectedVehicles(selectedVehicle);
-      this.props.onVehicleSelected(true);
-    }
+    let selectedVehicle = this.state.selectedVehicle;
+    delete selectedVehicle.models;
+    selectedVehicle = {
+      ...selectedVehicle,
+      year: this.state.selectedVehicleYear,
+      model: this.state.selectedVehicleModel
+    };
+    this.props.onSelectedVehicle(selectedVehicle);
+    this.props.setSelectedVehicles(selectedVehicle);
+    this.props.onVehicleSelected(true);
   };
 
+  handleChangeVehicleSubmit = ()=>{
+    let selectedVehicle = this.state.selectedVehicle;
+    delete selectedVehicle.models;
+    selectedVehicle = {
+      ...selectedVehicle,
+      year: this.state.selectedVehicleYear,
+      model: this.state.selectedVehicleModel,
+      // vin: this.state.vinInput
+    };
+    this.props.onSelectedVehicle(selectedVehicle);
+    this.props.setSelectedVehicles(selectedVehicle);
+    this.toggleChangeVehivle();
+}
 
   render() {
     const {
@@ -230,9 +227,11 @@ class HeaderDetails extends Component {
       fullName,
       onSignin,
       cart,
-      direction
+      direction,
+      currentLanguage
     } = this.props;
 
+    
     const { notification, newNote } = this.state;
     const dropdownHeader = (
       <Fragment>
@@ -323,7 +322,7 @@ class HeaderDetails extends Component {
       </NavLg>
     );
 
-    const { vehicles, currentLanguage } = this.props;
+    const { vehicles } = this.props;
 
     const vehicleMake = vehicles.map(vehicle => {
       return {
@@ -458,8 +457,7 @@ class HeaderDetails extends Component {
               </Link>
 
               {/*  user not logged in or logged in and don't have vehicles in history or garage will be show a message to user */}
-              {(!isLoggedIn || isLoggedIn) &&
-              this.state.selectedVehicles.length <= 0 ? (
+              {!this.state.selectedVehicles.length ? (
                 <div
                   class="dropdown-menu garage-dropdown"
                   aria-labelledby="garage-dropdown"
@@ -498,8 +496,8 @@ class HeaderDetails extends Component {
                           <div className="col-lg float-label">
                             <Field
                               onChange={e => this.props.onSelectedVehicle(e)}
-                              label="Make"
-                              name="make"
+                              label={translate("form.vehicle.make")}
+                              name="make1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleMake}
@@ -512,7 +510,7 @@ class HeaderDetails extends Component {
                                 this.props.onSelectedVehicleModel(e)
                               }
                               label={translate("form.vehicle.model")}
-                              name="model"
+                              name="model1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleModel}
@@ -526,7 +524,7 @@ class HeaderDetails extends Component {
                                 this.props.onSelectedVehicleYear(e)
                               }
                               label={translate("form.vehicle.year")}
-                              name="year"
+                              name="year1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleYear}
@@ -534,7 +532,7 @@ class HeaderDetails extends Component {
                               formatGroupLabel={formatvehicleYearLabel}
                             />
                           </div>
-                          <div className="col-lg vin-popover">
+                          {/* <div className="col-lg vin-popover">
                             <LargeScreen>
                               <p
                                 className="id-img"
@@ -555,14 +553,8 @@ class HeaderDetails extends Component {
                               </UncontrolledPopover>
                             </LargeScreen>
                             <Field
-                               onChange={e =>{
-                                 this.props.onSelectedVehicleVin(e.target.value)
-                                this.setState(() => ({
-                                  vinNum : e.target.value
-                                }))
-                             }}
                               hasFloatLabel
-                              name="VIN/Frame"
+                              name="VIN/Frame0"
                               type="text"
                               placeholder={translate(
                                 "general.VINInput.placeholder"
@@ -575,12 +567,14 @@ class HeaderDetails extends Component {
                               )} ${translate(
                                 "general.VINInput.label"
                               )}`}
-                              component={props => (
+                              component={props => {
+                                props.input.onChange = async e => await this.setState({ vinNum: e })
+                                return (
                                 <RenderField
                                   {...props}
                                   value={this.state.vinNum}
                                 />
-                              )}
+                              )}}
                               validate={[validations.required]}
                             />
                             <div className="VIN-info">
@@ -617,7 +611,7 @@ class HeaderDetails extends Component {
                                 </UncontrolledPopover>
                               </DownLargeScreen>
                             </div>
-                          </div>
+                          </div> */}
                           <LargeScreen>
                             <div className="col-lg-auto actions">
                               <button
@@ -657,10 +651,7 @@ class HeaderDetails extends Component {
 									<p>{translate("dialog.vehicle.subTitle")}</p>
 								</div>
                 </div>
-              ) : null}
-
-              {/* user not logged in or logged in and have vehicles in history */}
-              {(!isLoggedIn || isLoggedIn) && this.state.selectedVehicles ? (
+              ) : (
                 <div
                   class="dropdown-menu garage-dropdown"
                   aria-labelledby="garage-dropdown"
@@ -677,34 +668,47 @@ class HeaderDetails extends Component {
                       {this.state.selectedVehicles.map((vehicle, key) => {
                         return (
                           <div className="radio-custom" key={key}>
+                                {vehicle.name ?
                             <a  className="row">
                               <div className="col-auto">
                                 <Radio
-                                   checked={
-                                    this.state.selectedVehicle
-                                      .id === vehicle.id
-                                  }
+                                  defaultChecked={this.state.selectedVehicle.id === vehicle.id}
                                   type="radio"
                                   id={key}
                                   name="radioGroup"
                                 />
                               </div>
+                               {this.props.currentLanguage === "ar" ?
                               <p className="col">
-                                {vehicle.name +
+                                {vehicle.nameAr +
                                   " " +
-                                  vehicle.model.name +
+                                  vehicle.model.nameAr +
                                   "" +
-                                  vehicle.year.label}
+                                  vehicle.year.label
+                                 }
                                 {vehicle.vin ? (
                                   <span>{vehicle.vin}</span>
-                                ) : null}
+                                  ) : null}
                               </p>
+                               :
+                               <p className="col">
+                                {vehicle.name +
+                                  " " +
+                                  vehicle.model.name+
+                                  "" +
+                                  vehicle.year.label
+                                 }
+                                {vehicle.vin ? (
+                                  <span>{vehicle.vin}</span>
+                                  ) : null}
+                              </p>
+                               }
 
                               <div className="col-auto vec-actions">
                                 <a
                                   className="btn btn-gray"
                                   onClick={this.togglePopup}
-                                >
+                                  >
                                   <i className="icon-catalog"></i>
                                   {translate("dropdown.garage.catalog")}
                                 </a>
@@ -723,7 +727,7 @@ class HeaderDetails extends Component {
                                       // className={this.getDialogProps().className}
                                       isOpen={this.state.modal}
                                       toggle={this.togglePopup}
-                                    >
+                                      >
                                       <ModalHeader toggle={this.togglePopup}>
                                         <p>Welcome</p> Back
                                       </ModalHeader>
@@ -734,14 +738,15 @@ class HeaderDetails extends Component {
                                   </div>
                                 ) : (
                                   <a
-                                    className="link"
-                                    onClick={this.addSelectedVehiclesToGarage}
+                                  className="link"
+                                  onClick={this.addSelectedVehiclesToGarage}
                                   >
                                     {translate("dropdown.garage.save")}
                                   </a>
                                 )}
                               </div>
                             </a>
+                              :null}
                           </div>
                         );
                       })}
@@ -749,164 +754,477 @@ class HeaderDetails extends Component {
                   </div>
                   <div className="vec-list-actions">
                     <div className="main-action">
-                      <a className="btn btn-gray">
+                      <a className="btn btn-gray" onClick={this.toggleChangeVehivle}>
                         <i className="icon-add-vehicle"></i>
                         {translate("dropdown.garage.addVehicle")}
+                        <Modal
+                              isOpen={this.state.changeVehcileModal}
+                              toggle={this.toggleChangeVehivle}
+                              className="modal-xl vin-modal"
+                    >
+                      <ModalHeader toggle={this.toggleChangeVehivle}>
+                        {translate(
+                          "general.changeVehicle.modalHeader"
+                        )}{" "}
+                        <LargeScreen>
+                          <span>
+                            {translate(
+                              "general.changeVehicle.modalHeaderSpan"
+                            )}
+                          </span>
+                        </LargeScreen>
+                      </ModalHeader>
+                      <ModalBody className="add-new-vehicle">
+                        <header>
+                          <h4>
+                            {translate(
+                              "general.changeVehicle.addNewVehicle"
+                            )}{" "}
+                          </h4>
+                          <div className="garage-select">
+                            <MediumScreen>
+                              <label>
+                                {translate(
+                                  "form.vehicle.placeholder.select"
+                                )}
+                              </label>
+                            </MediumScreen>
+                            <a
+                              className="btn btn-gray-secondary dropdown-toggle"
+                              role="button"
+                              id="garage-dropdown"
+                              data-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false"
+                            >
+                              <img
+                                className="icon-garage"
+                                alt="garage"
+                                src="/img/garage.svg"
+                              />{" "}
+                              {translate("form.vehicle.title")}
+                              <span className="vec-count">
+                                {this.props.selectedVehicles.length}
+                              </span>
+                            </a>
+                            <div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
+                              {/* {this.props.isLoggedIn ?
+              								<div className="saved">
+              									<div class="media">
+              										<i className="icon-vehicle"></i>
+              										<div class="media-body">
+              											<h5>{translate('dropdown.garage.userGarage')}</h5>
+              										</div>
+              									</div>
+              									<div className="vehic-list">
+              										<div className="radio-custom" key={key}>
+              											<a  className="row">
+              												<div className="col-auto">
+              													<Radio
+              														checked={this.state.selectedVehicle
+                                            .id === vehicle.id}
+              														type="radio"
+              														id={key}
+              														name="radioGroup"
+              													/>
+              												</div>
+              												<p className="col">
+              												2016 Ford Focus
+              												<span>VIN(000 000 000 000 11)</span>
+              											</p>
+              											</a>
+              										</div>
+              									</div>
+              								</div>
+                         :null } */}
+              								<div className="cached">
+              									<div class="media">
+              										<i className="icon-vehicle-history"></i>
+              										<div class="media-body">
+              											<h5>{translate('dropdown.garage.cached')}</h5>
+              										</div>
+              									</div>
+                                {this.state.selectedVehicles.map(
+                                  (vehicle, key) => {
+                                    return (
+                                      <div className="vehic-list" key={key}>
+                    										<div className="radio-custom" key="005">
+                    											<a className="row">
+                    												<div className="col-auto">
+                                              <Radio
+                                                checked={
+                                                  this.state.selectedVehicle
+                                                    .id === vehicle.id
+                                                }
+                                                type="radio"
+                                                id={key}
+                                                name="radioGroup"
+                                              />
+                    												</div>
+                    												<p className="col">
+                                              {currentLanguage === "ar" ?
+                                              vehicle.nameAr +
+                                                " " +
+                                                vehicle.model.nameAr +
+                                                " " +
+                                                vehicle.year.label
+                                                :
+                                                vehicle.name +
+                                                " " +
+                                                vehicle.model.name +
+                                                " " +
+                                                vehicle.year.label
+                                                }
+                                              {vehicle.vin ? (
+                                                <span>{vehicle.vin}</span>
+                                              ) : null}
+                    											</p>
+                                          <div className="col-auto vec-actions">
+                                            {!this.props.isLoggedIn ? (
+                                              <div>
+                                                <a
+                                                  href="#"
+                                                  className="link"
+                                                  onClick={this.togglePopup}
+                                                >
+                                                {translate('dropdown.garage.save')}
+                                                </a>
+                                                <Modal
+                                                  dir={direction}
+                                                  contentClassName="container-fluid"
+                                                  // className={
+                                                  //   this.getDialogProps()
+                                                  //     .className
+                                                  // }
+                                                  isOpen={this.state.loginModal}
+                                                  toggle={this.togglePopup}
+                                                >
+                                                  <ModalHeader
+                                                    toggle={this.togglePopup}
+                                                  >
+                                                    <p>Welcome</p> Back
+                                                  </ModalHeader>
+                                                  <ModalBody>
+                                                    {this.addSelectedVehiclesToGarage()}
+                                                  </ModalBody>
+                                                </Modal>
+                                              </div>
+                                            ) : (
+                                              <a
+                                                href="#"
+                                                className="link"
+                                                onClick={
+                                                  this
+                                                    .addSelectedVehiclesToGarage
+                                                }
+                                              >
+                                                {translate('dropdown.garage.save')}
+                                              </a>
+                                            )}
+                                          </div>
+                    											</a>
+                    										</div>
+                    									</div>
+                                  );
+                                }
+                              )}
+              								</div>
+              							</div>
+                            <div
+                              class="dropdown-menu garage-dropdown d-none"
+                              aria-labelledby="garage-dropdown"
+                            >
+
+                              <ul className="list-unstyled">
+                                {this.state.selectedVehicles.map(
+                                  (vehicle, key) => {
+                                    
+                                    return (
+                                      <li className="radio-custom" key={key}>
+                                        <div href="#" className="row">
+                                          <div className="col-auto">
+                                            <Radio
+                                              checked={
+                                                this.state.selectedVehicle
+                                                  .id === vehicle.id
+                                              }
+                                              type="radio"
+                                              id={key}
+                                              name="radioGroup"
+                                            />
+                                          </div>
+                                          <p className="col">
+                                            {vehicle.name +
+                                              " " +
+                                              vehicle.model.name +
+                                              "" +
+                                              vehicle.year.label}
+                                            {vehicle.vin ? (
+                                              <span>{vehicle.vin}</span>
+                                            ) : null}
+                                          </p>
+                                          <div className="col-auto vec-actions">
+                                            {!this.props.isLoggedIn ? (
+                                              <div>
+                                                <a
+                                                  href="#"
+                                                  className="btn btn-primary"
+                                                  onClick={this.togglePopup}
+                                                >
+                                                  <i className="icon-catalog"></i>
+                                                {translate("setting.accountSetting.save")}
+                                                </a>
+                                                <Modal
+                                                  dir={direction}
+                                                  contentClassName="container-fluid"
+                                                  // className={
+                                                  //   this.getDialogProps()
+                                                  //     .className
+                                                  // }
+                                                  isOpen={this.state.loginModal}
+                                                  toggle={this.togglePopup}
+                                                >
+                                                  <ModalHeader
+                                                    toggle={this.togglePopup}
+                                                  >
+                                                    <p>Welcome</p> Back
+                                                  </ModalHeader>
+                                                  <ModalBody>
+                                                    {this.addSelectedVehiclesToGarage()}
+                                                  </ModalBody>
+                                                </Modal>
+                                              </div>
+                                            ) : (
+                                              <a
+                                                href="#"
+                                                className="btn btn-primary"
+                                                onClick={
+                                                  this
+                                                    .addSelectedVehiclesToGarage
+                                                }
+                                              >
+                                                <i className="icon-catalog"></i>
+                                                save
+                                              </a>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </li>
+                                    );
+                                  }
+                                )}
+                              </ul>
+                            </div>
+                          </div>
+                        </header>
+                        <form
+                          className="gray-input row add-vech-model"
+                          onSubmit={this.props.handleSubmit(this.handleChangeVehicleSubmit)}  
+                        >
+                          <div className="col-lg float-label">
+                            <Field
+                              onChange={e => this.props.onSelectedVehicle(e)}
+                              label={translate("form.vehicle.make")}
+                              name="make2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleMake}
+                              formatGroupLabel={formatvehicleMakeLabel}
+                            />
+                          </div>
+                          <div className="col-lg float-label">
+                            <Field
+                              onChange={e =>
+                                this.props.onSelectedVehicleModel(e)
+                              }
+                              label={translate("form.vehicle.model")}
+                              name="model2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleModel}
+                              validate={[validations.required]}
+                              formatGroupLabel={formatvehicleModelLabel}
+                            />
+                          </div>
+                          <div className="col-lg float-label year">
+                            <Field
+                              onChange={e =>
+                                this.props.onSelectedVehicleYear(e)
+                              }
+                              label={translate("form.vehicle.year")}
+                              name="year2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleYear}
+                              validate={[validations.required]}
+                              formatGroupLabel={formatvehicleYearLabel}
+                            />
+                          </div>
+                          {/* <div className="col-lg vin-popover">
+                            <LargeScreen>
+                              <p
+                                className="id-img"
+                                id="UncontrolledPopover"
+                                type="text"
+                              >
+                                <i className="icon-info"></i>{" "}
+                              </p>
+                              <UncontrolledPopover
+                                className="vin"
+                                placement="left"
+                                target="UncontrolledPopover"
+                                trigger="legacy"
+                              >
+                                <PopoverBody>
+                                  <img alt="" src="/img/vin-ex.jpg" />
+                                </PopoverBody>
+                              </UncontrolledPopover>
+                            </LargeScreen>
+                            <Field
+                              hasFloatLabel
+                              name="VIN/Frame2"
+                              type="text"
+                              placeholder={translate(
+                                "general.VINInput.placeholder"
+                              )}
+                              label={translate(
+                                "general.VINInput.label"
+                              )}
+                              errorMessage={`${translate(
+                                "general.enter"
+                              )} ${translate(
+                                "general.VINInput.label"
+                              )}`}
+                              component={props => {
+                              	props.input.onChange= e => {
+    	                            this.props.onSelectedVehicleVin(e)
+	                                this.setState(() => ({
+	                                  vinNum : e
+	                                }))
+                             	}
+                              	return (
+                                <RenderField
+                                  {...props}
+                                  value={this.state.vinNum}
+                                />
+                              )}}
+                              validate={[validations.required]}
+                            />
+                            <div className="VIN-info">
+                              <p
+                                onClick={() =>
+                                  this.setState(prevState => ({
+                                    vinNum: prevState.vin
+                                  }))
+                                }
+                              >
+                                {translate(
+                                  "vehicleInfo.VINNumberEx"
+                                )}
+                                :{this.state.vin}
+                              </p>
+                              <DownLargeScreen>
+                                <p
+                                  className="id-img "
+                                  id="UncontrolledPopover"
+                                  type="text"
+                                >
+                                  <i className="icon-info"></i>{" "}
+
+                                  {translate("vehicleInfo.carId")}
+                                </p>
+                                <UncontrolledPopover
+                                  placement="top"
+                                  target="UncontrolledPopover"
+                                  trigger="legacy"
+                                >
+                                  <PopoverBody>
+                                    <img alt="" src="/img/vin-ex.jpg" />
+                                  </PopoverBody>
+                                </UncontrolledPopover>
+                              </DownLargeScreen>
+                            </div>
+                          </div> */}
+                          <LargeScreen>
+                            <div className="col-lg-auto actions">
+                              <button
+                                type="submit"
+                                className="btn btn-primary"
+                                >
+                                {translate("general.vehicleButton.add")}
+                                <i className="icon-arrow-right"></i>
+                              </button>
+                            </div>
+
+                          </LargeScreen>
+                          <DownLargeScreen>
+                            <div className="actions two-actions col">
+                              <div className="row">
+                                <div className="col-auto">
+                                  <button type="submit" className="btn btn-gray" onClick={this.toggleChangeVehivle}>
+                                    {translate(
+                                      "general.buttons.cancel"
+                                    )}
+                                  </button>
+                                </div>
+                                <div className="col-md-auto col">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    >
+                                    {translate("general.vehicleButton.add")}
+                                    <i className="icon-arrow-right"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </DownLargeScreen>
+                        </form>
+                      </ModalBody>
+                    </Modal>
                       </a>
                     </div>
-										<a  className="link" onClick={() =>
-											this.props.onClearHistory(this.state.selectedVehicles)
-										}>
-											<i className="icon-clear"></i>
-											{translate('dropdown.garage.clear')}
-										</a>
+                    <a href="" className="link" onClick={() =>{
+                      this.props.onClearHistory(this.state.selectedVehicles);
+                      this.props.onVehicleSelected(false)
+                    }
+                    }>
+                      <i className="icon-clear"></i>
+                      {translate('dropdown.garage.clear')}
+                    </a>
                   </div>
                 </div>
                 /*user logged in and have vehicles in garage and history*/
-               ) : isLoggedIn && this.state.selectedVehicles ? (
-                <div
-                  class="dropdown-menu garage-dropdown"
-                  aria-labelledby="garage-dropdown"
-                >
-                  <div className="saved">
-                    <div class="media">
-                      <i className="icon-vehicle"></i>
-                      <div class="media-body">
-                        <h5>{translate("dropdown.garage.userGarage")}</h5>
-                      </div>
-                      <a >
-                        <i className="icon-add"></i>
-                        {translate("dropdown.garage.addVehicle")}
-                      </a>
-                    </div>
-                    <div className="vehic-list">
-                      <div className="radio-custom" key="03">
-                        <a  className="row">
-                          <div className="col-auto">
-                            <Radio
-                              checked="true"
-                              type="radio"
-                              id="03"
-                              name="radioGroup"
-                            />
-                          </div>
-                          <p className="col">
-                            2016 Ford Focus
-                            <span>VIN(000 000 000 000 11)</span>
-                          </p>
-                          <div className="col-auto vec-actions">
-                            <a  className="btn btn-gray">
-                              <i className="icon-catalog"></i>
-                              {translate("dropdown.garage.catalog")}
-                            </a>
-                            <a  className="link">
-                              <i className="icon-trash"></i>
-                            </a>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="cached">
-                      <div class="media">
-                        <i className="icon-vehicle-history"></i>
-                        <div class="media-body">
-                          <h5>{translate("dropdown.garage.cached")}</h5>
-                        </div>
-                        <a
-                          onClick={() =>
-                            this.props.onClearHistory(this.state.selectedVehicles)
-                          }
-                        >
-                          <i className="icon-clear"></i>
-                          {translate("dropdown.garage.clear")}
-                        </a>
-                      </div>
-                      <div className="vehic-list">
-                        {this.state.selectedVehicles.map((vehicle, key) => {
-                          console.log(vehicle);
-                          return (
-                            <div className="radio-custom" key={key}>
-                              <a  className="row">
-                                <div className="col-auto">
-                                  <Radio
-                                     checked={
-                                      this.state.selectedVehicle
-                                        .id === vehicle.id
-                                    }
-                                    type="radio"
-                                    id={key}
-                                    name="radioGroup"
-                                  />
-                                </div>
-                                <p className="col">
-                                  {vehicle.name +
-                                    " " +
-                                    vehicle.model.name +
-                                    "" +
-                                    vehicle.year.label}
-                                  {vehicle.vin ? (
-                                    <span>{vehicle.vin}</span>
-                                  ) : null}
-                                </p>
+              //   <div className="saved">
+              //   <div class="media">
+              //     <i className="icon-vehicle"></i>
+              //     <div class="media-body">
+              //       <h5>{translate('dropdown.garage.userGarage')}</h5>
+              //     </div>
+              //   </div>
+              //   <div className="vehic-list">
+              //     <div className="radio-custom" key={key}>
+              //       <a  className="row">
+              //         <div className="col-auto">
+              //           <Radio
+              //             checked={this.state.selectedVehicle
+              //               .id === vehicle.id}
+              //             type="radio"
+              //             id={key}
+              //             name="radioGroup"
+              //           />
+              //         </div>
+              //         <p className="col">
+              //         2016 Ford Focus
+              //         <span>VIN(000 000 000 000 11)</span>
+              //       </p>
+              //       </a>
+              //     </div>
+              //   </div>
+              // </div>
+               )}
 
-                                <div className="col-auto vec-actions">
-                                  <a
-                                    className="btn btn-gray"
-                                    onClick={this.togglePopup}
-                                  >
-                                    <i className="icon-catalog"></i>
-                                    {translate("dropdown.garage.catalog")}
-                                  </a>
-                                  {!isLoggedIn ? (
-                                    <div>
-                                      <a
-                                        className="link"
-                                        onClick={this.togglePopup}
-                                      >
-                                        {translate("dropdown.garage.save")}
-                                      </a>
-                                      <Modal
-                                        dir={direction}
-                                        contentClassName="container-fluid"
-                                        // className={this.getDialogProps().className}
-                                        isOpen={this.state.modal}
-                                        toggle={this.togglePopup}
-                                      >
-                                        <ModalHeader toggle={this.togglePopup}>
-                                          <p>Welcome</p> Back
-                                        </ModalHeader>
-                                        <ModalBody>
-                                          {this.addSelectedVehiclesToGarage()}
-                                        </ModalBody>
-                                      </Modal>
-                                    </div>
-                                  ) : (
-                                    <a
-                                      className="link"
-                                      onClick={this.addSelectedVehiclesToGarage}
-                                    >
-                                      {translate("dropdown.garage.save")}
-                                    </a>
-                                  )}
-                                </div>
-                              </a>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                    <div className="vec-list-actions">
-                      <div className="main-action">
-                        <a className="btn btn-gray">
-                          <i className="icon-add-vehicle"></i>
-                          {translate("dropdown.garage.addVehicle")}
-                        </a>
-                      </div>
-                    </div>
-                </div>
-                 )
-                : null }
+    
             </div>
           </li>
         </NavLg>
@@ -935,6 +1253,8 @@ const mapStateToProps = state => {
     selectedVehicleVin: state.api.selectedVehicleVin,
     customerDetail: state.customer.detail,
     vehicles: state.api.vehicles,
+		currentLanguage: getActiveLanguage(state.localize).code,
+
   };
 };
 
@@ -955,9 +1275,10 @@ const mapDispatchToProps = dispatch => {
 
 
 HeaderDetails = reduxForm({
-  form: "ManualForm"
+  form: "HeaderDetails"
 })(HeaderDetails);
 
 const withHeaderDetails = withRouter(HeaderDetails)
 
 export default connect(mapStateToProps, mapDispatchToProps)(withHeaderDetails);
+

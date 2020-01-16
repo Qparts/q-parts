@@ -9,8 +9,9 @@ import {
   GET_SELECTED_VEHICLE_MODEL,
   GET_SELECTED_VEHICLE_VIN,
   SET_SELECTED_VEHICLE_VIN,
-UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES
+UNSET_SELECTED_VEHICLES, UNSET_VEHICLE_FROM_SELECTED_VEHICLES,
 } from '../actions/apiAction';
+import  {CLEAR_FORM_DATA_FROM_CACHE } from "../actions/baseFormAction";
 
 
 export default function reducer(state = initialState, action) {
@@ -98,6 +99,11 @@ export default function reducer(state = initialState, action) {
                  id: null
                }
              }
+
+            case CLEAR_FORM_DATA_FROM_CACHE:
+              return{
+
+              }             
     default:
       return state;
   }

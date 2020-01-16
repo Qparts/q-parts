@@ -46,7 +46,6 @@ export const clearFormDataFromCache = () => {
 
 
 export const setCurrentVehicleSearch = (currentVehicle, itemName) => {
-  console.log(currentVehicle ,"form action");
   return {
     type: SET_CURRENT_VEHICLE_SEARCH,
     payload: {
