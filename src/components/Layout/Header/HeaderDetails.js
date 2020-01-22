@@ -30,10 +30,14 @@ import {
 } from "../../../components/Device";
 import { Field  , reduxForm} from "redux-form";
 import SelectInput from "../../../components/SelectInput/SelectInput";
-// import { UncontrolledPopover, PopoverBody } from "reactstrap";
+import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import { getTranslatedObject } from "../../../utils";
 // import RenderField from "../../../components/RenderField/RenderField";
 import { withRouter } from "react-router-dom";
+import { InputField } from "./inputField";
+
+
+
 
 
 class HeaderDetails extends Component {
@@ -101,6 +105,9 @@ class HeaderDetails extends Component {
     }
 
   }
+
+  
+
 
   handleClick = event => {
     this.setState({
@@ -420,7 +427,6 @@ class HeaderDetails extends Component {
       </div>
     );
 
-
     return (
       <ul>
         {authOrNotAuthButtons}
@@ -463,7 +469,7 @@ class HeaderDetails extends Component {
                   aria-labelledby="garage-dropdown"
                 >
 								<div className="empty-vehic">
-                  <a className="btn btn-primary" onClick={this.toggleChangeVehivle}><i className="icon-add"> </i> {translate('dropdown.garage.addVehicle')}</a>
+                  <a href="#" className="btn btn-primary" onClick={this.toggleChangeVehivle}><i className="icon-add"> </i> {translate('dropdown.garage.addVehicle')}</a>
                     <Modal
                       isOpen={this.state.changeVehcileModal}
                       toggle={this.toggleChangeVehivle}
@@ -489,163 +495,14 @@ class HeaderDetails extends Component {
                             )}{" "}
                           </h4>
                         </header>
-                        <form
-                          className="gray-input row add-vech-model"
-                          onSubmit={this.props.handleSubmit(this.handleSubmit)}
-                        >
-                          <div className="col-lg float-label">
-                            <Field
-                              onChange={e => this.props.onSelectedVehicle(e)}
-                              label={translate("form.vehicle.make")}
-                              name="make1"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleMake}
-                              formatGroupLabel={formatvehicleMakeLabel}
-                            />
-                          </div>
-                          <div className="col-lg float-label">
-                            <Field
-                              onChange={e =>
-                                this.props.onSelectedVehicleModel(e)
-                              }
-                              label={translate("form.vehicle.model")}
-                              name="model1"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleModel}
-                              validate={[validations.required]}
-                              formatGroupLabel={formatvehicleModelLabel}
-                            />
-                          </div>
-                          <div className="col-lg float-label year">
-                            <Field
-                              onChange={e =>
-                                this.props.onSelectedVehicleYear(e)
-                              }
-                              label={translate("form.vehicle.year")}
-                              name="year1"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleYear}
-                              validate={[validations.required]}
-                              formatGroupLabel={formatvehicleYearLabel}
-                            />
-                          </div>
-                          {/* <div className="col-lg vin-popover">
-                            <LargeScreen>
-                              <p
-                                className="id-img"
-                                id="UncontrolledPopover"
-                                type="text"
-                              >
-                                <i className="icon-info"></i>{" "}
-                              </p>
-                              <UncontrolledPopover
-                                className="vin"
-                                placement="left"
-                                target="UncontrolledPopover"
-                                trigger="legacy"
-                              >
-                                <PopoverBody>
-                                  <img alt="" src="/img/vin-ex.jpg" />
-                                </PopoverBody>
-                              </UncontrolledPopover>
-                            </LargeScreen>
-                            <Field
-                              hasFloatLabel
-                              name="VIN/Frame0"
-                              type="text"
-                              placeholder={translate(
-                                "general.VINInput.placeholder"
-                              )}
-                              label={translate(
-                                "general.VINInput.label"
-                              )}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate(
-                                "general.VINInput.label"
-                              )}`}
-                              component={props => {
-                                props.input.onChange = async e => await this.setState({ vinNum: e })
-                                return (
-                                <RenderField
-                                  {...props}
-                                  value={this.state.vinNum}
-                                />
-                              )}}
-                              validate={[validations.required]}
-                            />
-                            <div className="VIN-info">
-                              <p
-                                onClick={() =>
-                                  this.setState(prevState => ({
-                                    vinNum: prevState.vin
-                                  }))
-                                }
-                              >
-                                {translate(
-                                  "vehicleInfo.VINNumberEx"
-                                )}
-                                :{this.state.vin}
-                              </p>
-                              <DownLargeScreen>
-                                <p
-                                  className="id-img "
-                                  id="UncontrolledPopover"
-                                  type="text"
-                                >
-                                  <i className="icon-info"></i>{" "}
-
-                                  {translate("vehicleInfo.carId")}
-                                </p>
-                                <UncontrolledPopover
-                                  placement="top"
-                                  target="UncontrolledPopover"
-                                  trigger="legacy"
-                                >
-                                  <PopoverBody>
-                                    <img alt="" src="/img/vin-ex.jpg" />
-                                  </PopoverBody>
-                                </UncontrolledPopover>
-                              </DownLargeScreen>
-                            </div>
-                          </div> */}
-                          <LargeScreen>
-                            <div className="col-lg-auto actions">
-                              <button
-                                type="submit"
-                                className="btn btn-primary"
-                                >
-                                {translate("general.vehicleButton.add")}
-                                <i className="icon-arrow-right"></i>
-                              </button>
-                            </div>
-                          </LargeScreen>
-                          <DownLargeScreen>
-                            <div className="actions two-actions col">
-                              <div className="row">
-                                <div className="col-auto">
-                                  <button type="submit" className="btn btn-gray" onClick={this.toggleChangeVehivle}>
-                                    {translate(
-                                      "general.buttons.cancel"
-                                    )}
-                                  </button>
-                                </div>
-                                <div className="col-md-auto col">
-                                  <button
-                                    type="submit"
-                                    className="btn btn-primary"
-                                    >
-                                    {translate("general.vehicleButton.add")}
-                                    <i className="icon-arrow-right"></i>
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </DownLargeScreen>
-                        </form>
+                     <InputField 
+                     vehicles={this.props.vehicles} 
+                     currentLanguage ={this.props.currentLanguage}
+                     selectedVehicle={this.state.selectedVehicle}
+                     translate={this.props.translate}
+                     selectedVehicleModel = {this.state.selectedVehicleModel}
+                     selectedVehicleYear = {this.state.selectedVehicleYear}
+                     />
                       </ModalBody>
                     </Modal>
 									<p>{translate("dialog.vehicle.subTitle")}</p>

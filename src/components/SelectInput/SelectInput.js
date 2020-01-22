@@ -66,6 +66,7 @@ class SelectInput extends Component {
 			});
 		}
 	};
+	
 	render() {
 		const style = {
 			hasError: helpers.isRequired(
@@ -75,6 +76,7 @@ class SelectInput extends Component {
 				? 'error'
 				: 'none'
 		};
+		
 		return (
 			<InputGroup
 			className={`select-input ${style.hasError} ${

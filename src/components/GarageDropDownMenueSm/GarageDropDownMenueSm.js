@@ -121,6 +121,7 @@ class GarageDropDownMenueSm extends Component {
     });
   };
   
+  
   addSelectedVehiclesToGarage = () => {
     if (this.props.isLoggedIn) {
       axios

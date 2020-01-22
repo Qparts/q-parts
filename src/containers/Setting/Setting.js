@@ -127,6 +127,21 @@ class Setting extends Component {
     );
   }
 
+  
+  inputField = ({ label, type, placeholder, input, meta: { touched, error } }) => {
+
+    return (
+      <div>
+        <label htmlFor={label}></label>
+        <input
+          type={type}
+          placeholder={placeholder}
+          {...input} />
+        {touched && error}
+      </div>
+    );
+  }
+
   onHide = () => {
     this.setState({ visible: false, cityFound: false, showGoogleMap: false, defaultAddress: null, newOrOldVechile: TAB_ONE });
 

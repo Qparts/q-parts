@@ -1,15 +1,19 @@
 /* eslint-disable jsx-a11y/href-no-hash */
-import React, { Fragment } from 'react';
+import React, { Fragment , useState} from 'react';
 import { Link } from "react-router-dom";
 import { closeNav } from '../../../utils';
 import LanguageToggle from '../../LanguageToggle';
 import GarageDropDownMenueSm from '../../GarageDropDownMenueSm/GarageDropDownMenueSm';
+import { Modal } from "reactstrap";
+import ChangeVehicleModal from '../../ChangeVehicleModal/ChangeVehicleModal';
 
 const Nav = (
     {
         translate, isLoggedIn, fullName, localize, changeDefaultDirection,
         getCountriesOnly, quotations
     }) => {
+
+    const [changeVehcileModal , setChangeVehicleModal] = useState(false);
 
     const getReplayCounter = () => {
         return quotations.completed.filter(reply => !reply.read).length;
@@ -22,6 +26,10 @@ const Nav = (
             <Link to="/logout" onClick={close}><i className="icon-sign-out"></i> {translate("navBar.menu.menuItem.logout")}</Link>
         </li>
     </Fragment> : null;
+
+const toggleChangeVehivle = ()=> {
+    setChangeVehicleModal(!changeVehcileModal);
+  }
 
     return (
         <nav className="cd-nav">
@@ -60,7 +68,14 @@ const Nav = (
                 {userSettingPages}
                 <li className="sep"></li>
                 <li>
-                  <Link to="#" onClick={close}>{translate("nav.vehicleParts")}</Link>
+                  <Link to="#" onClick={toggleChangeVehivle}>{translate("nav.vehicleParts")}</Link>
+                  <Modal
+                      isOpen={changeVehcileModal}
+                      toggle={toggleChangeVehivle}
+                      className="modal-xl vin-modal"
+                    >
+                        <ChangeVehicleModal/>
+                    </Modal>
                 </li>
                 <li className="has-children">
                     <Link to="#">{translate("nav.consumableParts")}</Link>

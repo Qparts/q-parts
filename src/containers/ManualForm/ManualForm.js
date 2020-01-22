@@ -45,7 +45,6 @@ export class ManualForm extends Component {
       isVehicleSelected: props.isVehicleSelected,
       browseCatalogeModal: false,
       vin: "JTHBJ46G9B2420251",
-      vinInput: props.selectedVehicleVin,
       vinNum :"",
       open: false,
       changeVehcileModal: false,
@@ -191,7 +190,7 @@ export class ManualForm extends Component {
         ...selectedVehicle,
         year: this.state.selectedVehicleYear,
         model: this.state.selectedVehicleModel,
-        vin: this.state.vinInput
+        vin: this.state.vinNum
       };
       this.props.onSelectedVehicle(selectedVehicle);
       this.props.setSelectedVehicles(selectedVehicle);
@@ -695,7 +694,7 @@ export class ManualForm extends Component {
                               formatGroupLabel={formatvehicleYearLabel}
                             />
                           </div>
-                          {/* <div className="col-lg vin-popover">
+                          <div className="col-lg vin-popover">
                             <LargeScreen>
                               <p
                                 className="id-img"
@@ -715,34 +714,19 @@ export class ManualForm extends Component {
                                 </PopoverBody>
                               </UncontrolledPopover>
                             </LargeScreen>
-                            <Field
+                            <input
                               hasFloatLabel
-                              name="VIN/Frame2"
+                              onChange = {(e)=>this.setState({vinNum : e.target.value})}
+                              className="form-control"
                               type="text"
+                              value={this.state.vinNum}
+                              errorMessage={`${translate(
+                                "general.enter"
+                              )} ${translate("general.VINInput.label")}`}
                               placeholder={translate(
                                 "general.VINInput.placeholder"
                               )}
-                              label={translate(
-                                "general.VINInput.label"
-                              )}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate(
-                                "general.VINInput.label"
-                              )}`}
-                              component={props => {
-                              	props.input.onChange= e => {
-    	                            this.props.onSelectedVehicleVin(e)
-	                                this.setState(() => ({
-	                                  vinNum : e
-	                                }))
-                             	}
-                              	return (
-                                <RenderField
-                                  {...props}
-                                  value={this.state.vinNum}
-                                />
-                              )}}
+                              label={translate("general.VINInput.label")}
                               validate={[validations.required]}
                             />
                             <div className="VIN-info">
@@ -779,7 +763,7 @@ export class ManualForm extends Component {
                                 </UncontrolledPopover>
                               </DownLargeScreen>
                             </div>
-                          </div> */}
+                          </div>
                           <LargeScreen>
                             <div className="col-lg-auto actions">
                               <button
@@ -821,34 +805,22 @@ export class ManualForm extends Component {
                           </MediumScreen>
                         </div>
                         <form className="gray-input vin-input">
-                          <Field
-                            onChange={e =>
-                              this.setState(() => ({
-                                vinInput: e.target.value
-                              }))
-                            }
-                            hasFloatLabel
-                            name="VIN/Frame"
-                            type="text"
-                            placeholder={this.props.translate(
-                              "general.VINInput.placeholder"
-                            )}
-                            label={this.props.translate(
-                              "general.VINInput.label"
-                            )}
-                            errorMessage={`${this.props.translate(
-                              "general.enter"
-                            )} ${this.props.translate(
-                              "general.VINInput.label"
-                            )}`}
-                            component={props => (
-                              <RenderField
-                                {...props}
-                                value={this.state.vinInput}
-                              />
-                            )}
-                            // validate={[validations.required]}
-                          />
+                        <input
+                              hasFloatLabel
+                              onChange = {(e)=>this.setState({vinNum : e.target.value})}
+                              className="form-control"
+                              type="text"
+                              value={this.state.vinNum}
+                              errorMessage={`${translate(
+                                "general.enter"
+                              )} ${translate("general.VINInput.label")}`}
+                              placeholder={translate(
+                                "general.VINInput.placeholder"
+                              )}
+                              label={translate("general.VINInput.label")}
+                              validate={[validations.required]}
+                              autoFocus={true}
+                            />
                           <div className="VIN-info">
                             <p
                               onClick={() =>
@@ -1004,7 +976,6 @@ export class ManualForm extends Component {
               											<h5>{translate('dropdown.garage.cached')}</h5>
               										</div>
               									</div>
-                                {/*Shaimaa react code*/}
                                 {this.state.selectedVehicles.map(
                                   (vehicle, key) => {
                                     return (
@@ -1086,11 +1057,9 @@ export class ManualForm extends Component {
                     											</a>
                     										</div>
                     									</div>
-
                                   );
                                 }
                               )}
-                                {/*END Shaimaa react code*/}
               									{/* <div className="vehic-list">
               										<div className="radio-custom" key="006">
               											<a href="#" className="row">
@@ -1114,7 +1083,6 @@ export class ManualForm extends Component {
               									</div>  */}
               								</div>
               							</div>
-                            {/* react code*/}
                             <div
                               class="dropdown-menu garage-dropdown d-none"
                               aria-labelledby="garage-dropdown"
@@ -1200,7 +1168,6 @@ export class ManualForm extends Component {
                                 )}
                               </ul>
                             </div>
-                            {/*END react code*/}
                           </div>
                         </header>
                         <form
@@ -1246,7 +1213,7 @@ export class ManualForm extends Component {
                               formatGroupLabel={formatvehicleYearLabel}
                             />
                           </div>
-                          {/* <div className="col-lg vin-popover">
+                          <div className="col-lg vin-popover">
                             <LargeScreen>
                               <p
                                 className="id-img"
@@ -1266,34 +1233,19 @@ export class ManualForm extends Component {
                                 </PopoverBody>
                               </UncontrolledPopover>
                             </LargeScreen>
-                            <Field
+                            <input
                               hasFloatLabel
-                              name="VIN/Frame2"
+                              onChange = {(e)=>this.setState({vinNum : e.target.value})}
+                              className="form-control"
                               type="text"
+                              value={this.state.vinNum}
+                              errorMessage={`${translate(
+                                "general.enter"
+                              )} ${translate("general.VINInput.label")}`}
                               placeholder={translate(
                                 "general.VINInput.placeholder"
                               )}
-                              label={translate(
-                                "general.VINInput.label"
-                              )}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate(
-                                "general.VINInput.label"
-                              )}`}
-                              component={props => {
-                              	props.input.onChange= e => {
-    	                            this.props.onSelectedVehicleVin(e)
-	                                this.setState(() => ({
-	                                  vinNum : e
-	                                }))
-                             	}
-                              	return (
-                                <RenderField
-                                  {...props}
-                                  value={this.state.vinNum}
-                                />
-                              )}}
+                              label={translate("general.VINInput.label")}
                               validate={[validations.required]}
                             />
                             <div className="VIN-info">
@@ -1330,7 +1282,7 @@ export class ManualForm extends Component {
                                 </UncontrolledPopover>
                               </DownLargeScreen>
                             </div>
-                          </div> */}
+                          </div>
                           <LargeScreen>
                             <div className="col-lg-auto actions">
                               <button

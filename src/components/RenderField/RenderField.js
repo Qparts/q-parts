@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment, createRef } from 'react';
 import ReactPasswordStrength from 'react-password-strength';
 import { connect } from 'react-redux';
@@ -145,8 +144,7 @@ class RenderField extends Component {
 			this.textInput.current.focus();
 		  }
 
-		  render() {
-
+		  render() {	  
 		const {
 			hasPasswordStrength,
 			setPasswordScore,
@@ -212,14 +210,10 @@ class RenderField extends Component {
 								className='form-control'
 								type={this.props.type}
 								placeholder={this.props.placeholder}
-								{...renderFieldProps}
 								{...this.props.input}
-								onChange={e => {
-									console.log(e.target.value) 
-									this.props.input.onChange(e.target.value)
-								}}
+								{...renderFieldProps}
 								value={this.state.value}
-                                autoFocus = {true}
+                                autoFocus={true}
 							/>
 						
 							{/* <button onClick={(e)=>{e.preventDefault();this.focusTextInput()}}>ay7aga</button> */}
@@ -234,11 +228,10 @@ class RenderField extends Component {
 								className='form-control input'
 								type={this.props.type}
 								placeholder={this.props.placeholder}
+								{...this.props.input}
 								{...renderFieldProps}
-								onChange={e => this.props.input.onChange(e.target.value)}
 								value={this.state.value}
-                                autoFocus = {true}
-
+								autoFocus={true}
 							/>
 							{this.invalidMessage()}
 							{this.warningMessage()}
