@@ -32,7 +32,7 @@ import { Field  , reduxForm} from "redux-form";
 import SelectInput from "../../../components/SelectInput/SelectInput";
 import { UncontrolledPopover, PopoverBody } from "reactstrap";
 import { getTranslatedObject } from "../../../utils";
-// import RenderField from "../../../components/RenderField/RenderField";
+import RenderField from "../../../components/RenderField/RenderField";
 import { withRouter } from "react-router-dom";
 import { InputField } from "./inputField";
 
@@ -220,10 +220,11 @@ class HeaderDetails extends Component {
       ...selectedVehicle,
       year: this.state.selectedVehicleYear,
       model: this.state.selectedVehicleModel,
-      // vin: this.state.vinInput
+      vin: this.state.vinNum
     };
     this.props.onSelectedVehicle(selectedVehicle);
     this.props.setSelectedVehicles(selectedVehicle);
+    this.props.onVehicleSelected(true);
     this.toggleChangeVehivle();
 }
 
@@ -495,14 +496,179 @@ class HeaderDetails extends Component {
                             )}{" "}
                           </h4>
                         </header>
-                     <InputField 
-                     vehicles={this.props.vehicles} 
-                     currentLanguage ={this.props.currentLanguage}
-                     selectedVehicle={this.state.selectedVehicle}
-                     translate={this.props.translate}
-                     selectedVehicleModel = {this.state.selectedVehicleModel}
-                     selectedVehicleYear = {this.state.selectedVehicleYear}
-                     />
+                        <form
+                          className="gray-input row add-vech-model"
+                          onSubmit={this.props.handleSubmit(this.handleChangeVehicleSubmit)}  
+                        >
+                          <div className="col-lg float-label">
+                            <Field
+                              onChange={e => this.props.onSelectedVehicle(e)}
+                              label={translate("form.vehicle.make")}
+                              name="make2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleMake}
+                              formatGroupLabel={formatvehicleMakeLabel}
+                            />
+                          </div>
+                          <div className="col-lg float-label">
+                            <Field
+                              onChange={e =>
+                                this.props.onSelectedVehicleModel(e)
+                              }
+                              label={translate("form.vehicle.model")}
+                              name="model2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleModel}
+                              validate={[validations.required]}
+                              formatGroupLabel={formatvehicleModelLabel}
+                            />
+                          </div>
+                          <div className="col-lg float-label year">
+                            <Field
+                              onChange={e =>
+                                this.props.onSelectedVehicleYear(e)
+                              }
+                              label={translate("form.vehicle.year")}
+                              name="year2"
+                              placeholder={" "}
+                              component={SelectInput}
+                              options={groupedvehicleYear}
+                              validate={[validations.required]}
+                              formatGroupLabel={formatvehicleYearLabel}
+                            />
+                          </div>
+                          <div className="col-lg vin-popover">
+                            <LargeScreen>
+                              <p
+                                className="id-img"
+                                id="UncontrolledPopover"
+                                type="text"
+                              >
+                                <i className="icon-info"></i>{" "}
+                              </p>
+                              <UncontrolledPopover
+                                className="vin"
+                                placement="left"
+                                target="UncontrolledPopover"
+                                trigger="legacy"
+                              >
+                                <PopoverBody>
+                                  <img alt="" src="/img/vin-ex.jpg" />
+                                </PopoverBody>
+                              </UncontrolledPopover>
+                            </LargeScreen>
+                            {/* <Field
+                              hasFloatLabel
+                              name="VIN/Frame2"
+                              type="text"
+                              placeholder={translate(
+                                "general.VINInput.placeholder"
+                              )}
+                              label={translate(
+                                "general.VINInput.label"
+                              )}
+                              errorMessage={`${translate(
+                                "general.enter"
+                              )} ${translate(
+                                "general.VINInput.label"
+                              )}`}
+                              component={RenderField}
+                              onChange={(e)=>this.props.onSelectedVehicleVin(e)}
+                              validate={[validations.required]}
+                            /> */}
+                            <RenderField
+                             hasFloatLabel
+                             name="VIN/Frame2"
+                             type="text"
+                             placeholder={translate(
+                               "general.VINInput.placeholder"
+                             )}
+                             label={translate(
+                               "general.VINInput.label"
+                             )}
+                             errorMessage={`${translate(
+                               "general.enter"
+                             )} ${translate(
+                               "general.VINInput.label"
+                             )}`}
+                             
+                             value={this.state.vinNum}
+                          
+                             validate={[validations.required]}
+                             onChange={(e)=>this.setState({vinNum : e.target.value})}
+                            />
+                            <div className="VIN-info">
+                              <p
+                                onClick={() =>
+                                  this.setState(prevState => ({
+                                    vinNum: prevState.vin
+                                  }))
+                                }
+                              >
+                                {translate(
+                                  "vehicleInfo.VINNumberEx"
+                                )}
+                                :{this.state.vin}
+                              </p>
+                              <DownLargeScreen>
+                                <p
+                                  className="id-img "
+                                  id="UncontrolledPopover"
+                                  type="text"
+                                >
+                                  <i className="icon-info"></i>{" "}
+
+                                  {translate("vehicleInfo.carId")}
+                                </p>
+                                <UncontrolledPopover
+                                  placement="top"
+                                  target="UncontrolledPopover"
+                                  trigger="legacy"
+                                >
+                                  <PopoverBody>
+                                    <img alt="" src="/img/vin-ex.jpg" />
+                                  </PopoverBody>
+                                </UncontrolledPopover>
+                              </DownLargeScreen>
+                            </div>
+                          </div>
+                          <LargeScreen>
+                            <div className="col-lg-auto actions">
+                              <button
+                                type="submit"
+                                className="btn btn-primary"
+                                >
+                                {translate("general.vehicleButton.add")}
+                                <i className="icon-arrow-right"></i>
+                              </button>
+                            </div>
+
+                          </LargeScreen>
+                          <DownLargeScreen>
+                            <div className="actions two-actions col">
+                              <div className="row">
+                                <div className="col-auto">
+                                  <button type="submit" className="btn btn-gray" onClick={this.toggleChangeVehivle}>
+                                    {translate(
+                                      "general.buttons.cancel"
+                                    )}
+                                  </button>
+                                </div>
+                                <div className="col-md-auto col">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    >
+                                    {translate("general.vehicleButton.add")}
+                                    <i className="icon-arrow-right"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </DownLargeScreen>
+                        </form>
                       </ModalBody>
                     </Modal>
 									<p>{translate("dialog.vehicle.subTitle")}</p>
