@@ -198,7 +198,7 @@ export class ManualForm extends Component {
     };
     this.props.onSelectedVehicle(selectedVehicle);
     this.props.setSelectedVehicles(selectedVehicle);
-    this.toggleChangeVehivle();
+    // this.toggleChangeVehivle();
   };
 
   handleBrowseCataloge = () => {};
@@ -717,7 +717,7 @@ export class ManualForm extends Component {
                                           this.props.onSelectedVehicle(e)
                                         }
                                         label={translate("form.vehicle.make")}
-                                        name="make2"
+                                        name="make6"
                                         placeholder={" "}
                                         component={SelectInput}
                                         options={groupedvehicleMake}
@@ -732,7 +732,7 @@ export class ManualForm extends Component {
                                           this.props.onSelectedVehicleModel(e)
                                         }
                                         label={translate("form.vehicle.model")}
-                                        name="model2"
+                                        name="model6"
                                         placeholder={" "}
                                         component={SelectInput}
                                         options={groupedvehicleModel}
@@ -748,7 +748,7 @@ export class ManualForm extends Component {
                                           this.props.onSelectedVehicleYear(e)
                                         }
                                         label={translate("form.vehicle.year")}
-                                        name="year2"
+                                        name="year6"
                                         placeholder={" "}
                                         component={SelectInput}
                                         options={groupedvehicleYear}
@@ -780,15 +780,12 @@ export class ManualForm extends Component {
                                       </LargeScreen>
                                       <Field
                                         onChange={e =>
-                                          this.setState(() => ({
-                                            vinNum: e.target.value,
-                                            vinInput: this.props.onSelectedVehicleVin(
-                                              e.target.value
-                                            )
-                                          }))
+                                          this.setState({
+                                            vinNum: e.target.value
+                                          })
                                         }
                                         hasFloatLabel
-                                        name="VIN/Frame"
+                                        name="VIN/Frame0"
                                         type="text"
                                         placeholder={this.props.translate(
                                           "general.VINInput.placeholder"
@@ -801,12 +798,7 @@ export class ManualForm extends Component {
                                         )} ${this.props.translate(
                                           "general.VINInput.label"
                                         )}`}
-                                        component={props => (
-                                          <RenderField
-                                            {...props}
-                                            value={this.state.vinNum}
-                                          />
-                                        )}
+                                        component={RenderField}
                                         validate={[validations.required]}
                                       />
                                       <div className="VIN-info">
@@ -892,21 +884,25 @@ export class ManualForm extends Component {
                           </MediumScreen>
                         </div>
                         <form className="gray-input vin-input">
-                          <input
-                            hasFloatLabel
+                          <Field
                             onChange={e =>
                               this.setState({ vinNum: e.target.value })
                             }
-                            className="form-control float-label"
+                            hasFloatLabel
+                            name="VIN/Frame1"
                             type="text"
-                            value={this.state.vinNum}
-                            errorMessage={`${translate(
-                              "general.enter"
-                            )} ${translate("general.VINInput.label")}`}
-                            placeholder={translate(
+                            placeholder={this.props.translate(
                               "general.VINInput.placeholder"
                             )}
-                            label={translate("general.VINInput.label")}
+                            label={this.props.translate(
+                              "general.VINInput.label"
+                            )}
+                            errorMessage={`${this.props.translate(
+                              "general.enter"
+                            )} ${this.props.translate(
+                              "general.VINInput.label"
+                            )}`}
+                            component={RenderField}
                             validate={[validations.required]}
                           />
                           <div className="VIN-info">
@@ -1265,7 +1261,7 @@ export class ManualForm extends Component {
                             <Field
                               onChange={e => this.props.onSelectedVehicle(e)}
                               label={translate("form.vehicle.make")}
-                              name="make2"
+                              name="make1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleMake}
@@ -1278,7 +1274,7 @@ export class ManualForm extends Component {
                                 this.props.onSelectedVehicleModel(e)
                               }
                               label={translate("form.vehicle.model")}
-                              name="model2"
+                              name="model1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleModel}
@@ -1292,7 +1288,7 @@ export class ManualForm extends Component {
                                 this.props.onSelectedVehicleYear(e)
                               }
                               label={translate("form.vehicle.year")}
-                              name="year2"
+                              name="year1"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleYear}
@@ -1325,7 +1321,7 @@ export class ManualForm extends Component {
                                 this.setState({ vinNum: e.target.value })
                               }
                               hasFloatLabel
-                              name="VIN/Frame"
+                              name="VIN/Frame2"
                               type="text"
                               placeholder={this.props.translate(
                                 "general.VINInput.placeholder"
@@ -1439,7 +1435,7 @@ export class ManualForm extends Component {
                       // value={this.state.selectedVehicle}
                       onChange={e => this.props.onSelectedVehicle(e)}
                       label={translate("form.vehicle.make")}
-                      name="make"
+                      name="make4"
                       placeholder={" "}
                       component={SelectInput}
                       options={groupedvehicleMake}
@@ -1451,7 +1447,7 @@ export class ManualForm extends Component {
                     <Field
                       onChange={e => this.props.onSelectedVehicleModel(e)}
                       label={translate("form.vehicle.model")}
-                      name="model"
+                      name="model4"
                       placeholder={" "}
                       component={SelectInput}
                       options={groupedvehicleModel}
@@ -1463,7 +1459,7 @@ export class ManualForm extends Component {
                     <Field
                       onChange={e => this.props.onSelectedVehicleYear(e)}
                       label={translate("form.vehicle.year")}
-                      name="year"
+                      name="year4"
                       placeholder={" "}
                       component={SelectInput}
                       options={groupedvehicleYear}
