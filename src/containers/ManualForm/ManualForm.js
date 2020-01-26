@@ -43,7 +43,7 @@ export class ManualForm extends Component {
       selectedVehicleYear: props.selectedVehicleYear,
       isVehicleSelected: props.isVehicleSelected,
       browseCatalogeModal: false,
-      selectedVehicleField : null,
+      selectedVehicleField: null,
       vin: "JTHBJ46G9B2420251",
       vinNum: "",
       open: false,
@@ -147,10 +147,8 @@ export class ManualForm extends Component {
   // };
 
   handleSelect(e) {
-   
     console.log(e);
-    
- }
+  }
 
   addSelectedVehiclesToGarage = () => {
     if (this.props.isLoggedIn) {
@@ -714,45 +712,24 @@ export class ManualForm extends Component {
                                     )}
                                   >
                                     <div className="col-lg float-label">
-                                      {/* <Field
-                              onChange={e => this.props.onSelectedVehicle(e)}
-                              label={translate("form.vehicle.make")}
-                              name="make2"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleMake}
-                              formatGroupLabel={formatvehicleMakeLabel}
-                            /> */}
-                                      <SelectInput
-                                        selectOnChange={this.handleSelect}
-                                        options={groupedvehicleMake}
+                                      <Field
+                                        onChange={e =>
+                                          this.props.onSelectedVehicle(e)
+                                        }
                                         label={translate("form.vehicle.make")}
                                         name="make2"
                                         placeholder={" "}
+                                        component={SelectInput}
+                                        options={groupedvehicleMake}
                                         formatGroupLabel={
                                           formatvehicleMakeLabel
                                         }
-                                        value={this.state.selectedVehicleField}
                                       />
                                     </div>
                                     <div className="col-lg float-label">
-                                      {/* <Field
-                              onChange={e =>
-                                this.props.onSelectedVehicleModel(e)
-                              }
-                              label={translate("form.vehicle.model")}
-                              name="model2"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleModel}
-                              validate={[validations.required]}
-                              formatGroupLabel={formatvehicleModelLabel}
-                            /> */}
-                                      <SelectInput
+                                      <Field
                                         onChange={e =>
-                                          this.setState({
-                                            selectedVehicleField: e.target.value
-                                          })
+                                          this.props.onSelectedVehicleModel(e)
                                         }
                                         label={translate("form.vehicle.model")}
                                         name="model2"
@@ -766,19 +743,7 @@ export class ManualForm extends Component {
                                       />
                                     </div>
                                     <div className="col-lg float-label year">
-                                      {/* <Field
-                              onChange={e =>
-                                this.props.onSelectedVehicleYear(e)
-                              }
-                              label={translate("form.vehicle.year")}
-                              name="year2"
-                              placeholder={" "}
-                              component={SelectInput}
-                              options={groupedvehicleYear}
-                              validate={[validations.required]}
-                              formatGroupLabel={formatvehicleYearLabel}
-                            /> */}
-                                      <SelectInput
+                                      <Field
                                         onChange={e =>
                                           this.props.onSelectedVehicleYear(e)
                                         }
@@ -813,26 +778,34 @@ export class ManualForm extends Component {
                                           </PopoverBody>
                                         </UncontrolledPopover>
                                       </LargeScreen>
-                                      <input
-                                        hasFloatLabel
+                                      <Field
                                         onChange={e =>
-                                          this.setState({
-                                            vinNum: e.target.value
-                                          })
+                                          this.setState(() => ({
+                                            vinNum: e.target.value,
+                                            vinInput: this.props.onSelectedVehicleVin(
+                                              e.target.value
+                                            )
+                                          }))
                                         }
-                                        className="form-control"
+                                        hasFloatLabel
+                                        name="VIN/Frame"
                                         type="text"
-                                        value={this.state.vinNum}
-                                        errorMessage={`${translate(
-                                          "general.enter"
-                                        )} ${translate(
-                                          "general.VINInput.label"
-                                        )}`}
-                                        placeholder={translate(
+                                        placeholder={this.props.translate(
                                           "general.VINInput.placeholder"
                                         )}
-                                        label={translate(
+                                        label={this.props.translate(
                                           "general.VINInput.label"
+                                        )}
+                                        errorMessage={`${this.props.translate(
+                                          "general.enter"
+                                        )} ${this.props.translate(
+                                          "general.VINInput.label"
+                                        )}`}
+                                        component={props => (
+                                          <RenderField
+                                            {...props}
+                                            value={this.state.vinNum}
+                                          />
                                         )}
                                         validate={[validations.required]}
                                       />
@@ -1347,21 +1320,25 @@ export class ManualForm extends Component {
                                 </PopoverBody>
                               </UncontrolledPopover>
                             </LargeScreen>
-                            <input
-                              hasFloatLabel
+                            <Field
                               onChange={e =>
                                 this.setState({ vinNum: e.target.value })
                               }
-                              className="form-control"
+                              hasFloatLabel
+                              name="VIN/Frame"
                               type="text"
-                              value={this.state.vinNum}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate("general.VINInput.label")}`}
-                              placeholder={translate(
+                              placeholder={this.props.translate(
                                 "general.VINInput.placeholder"
                               )}
-                              label={translate("general.VINInput.label")}
+                              label={this.props.translate(
+                                "general.VINInput.label"
+                              )}
+                              errorMessage={`${this.props.translate(
+                                "general.enter"
+                              )} ${this.props.translate(
+                                "general.VINInput.label"
+                              )}`}
+                              component={RenderField}
                               validate={[validations.required]}
                             />
                             <div className="VIN-info">
@@ -1469,7 +1446,6 @@ export class ManualForm extends Component {
                       validate={[validations.required]}
                       formatGroupLabel={formatvehicleMakeLabel}
                     />
-                     
                   </div>
                   <div className="col-md float-label">
                     <Field

@@ -578,7 +578,7 @@ class HeaderDetails extends Component {
                               onChange={(e)=>this.props.onSelectedVehicleVin(e)}
                               validate={[validations.required]}
                             /> */}
-                            <RenderField
+                            {/* <RenderField
                              hasFloatLabel
                              name="VIN/Frame2"
                              type="text"
@@ -598,6 +598,26 @@ class HeaderDetails extends Component {
                           
                              validate={[validations.required]}
                              onChange={(e)=>this.setState({vinNum : e.target.value})}
+                            /> */}
+                            <Field
+                              onChange={e => this.setState({vinNum : e.target.value})}
+                              hasFloatLabel
+                              name="VIN/Frame"
+                              type="text"
+                              placeholder={this.props.translate(
+                                "general.VINInput.placeholder"
+                              )}
+                              label={this.props.translate(
+                                "general.VINInput.label"
+                              )}
+                              errorMessage={`${this.props.translate(
+                                "general.enter"
+                              )} ${this.props.translate(
+                                "general.VINInput.label"
+                              )}`}
+                              component={RenderField}
+                              validate={[validations.required]}
+                         
                             />
                             <div className="VIN-info">
                               <p

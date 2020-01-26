@@ -9,12 +9,6 @@ class RenderField extends Component {
   constructor(props) {
     super(props);
     this.passwordStrengthRef = createRef();
-    this.textInput = createRef();
-    this.inputRef = createRef();
-    this.state = {
-      value: this.props.value,
-      touched: false
-    };
   }
 
   componentDidMount() {
@@ -47,12 +41,14 @@ class RenderField extends Component {
     this.props.setPasswordScore(score);
   };
 
-  // isRequired = ()=>
-  // 	this.props.touched &&
-  // 	this.props.error &&
-  //   !this.props.active;
+  isRequired = () =>
+    this.props.meta.touched && this.props.meta.error && !this.props.meta.active;
 
-  isWarning = () => this.isRequired() && !this.props.errorMessage;
+  isWarning = () =>
+    this.isRequired() &&
+    this.props.hasWarning &&
+    !this.props.errorMessage &&
+    this.props.meta.dirty;
 
   invalidMessage = () => {
     if (this.isRequired()) {
@@ -76,8 +72,8 @@ class RenderField extends Component {
         );
       } else if (
         !this.isRequired() &&
-        !this.props.error &&
-        !this.props.active
+        !this.props.meta.error &&
+        !this.props.meta.active
       ) {
         return <i className="icon-checked" />;
       }
@@ -85,11 +81,11 @@ class RenderField extends Component {
   };
 
   getBorder = () => {
-    return helpers.isSucceed(this.props.error, this.props.touched)
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched)
       ? `4px solid ${colors.success}`
-      : helpers.isInvalid(this.props.error, this.props.touched)
+      : helpers.isInvalid(this.props.meta.error, this.props.meta.touched)
       ? `4px solid ${colors.invalid}`
-      : helpers.isRequired(this.props.error, this.props.touched)
+      : helpers.isRequired(this.props.meta.error, this.props.meta.touched)
       ? `4px solid ${colors.error}`
       : "none";
   };
@@ -100,23 +96,23 @@ class RenderField extends Component {
   getWarningClass = () => {
     return this.isWarning()
       ? `${this.props.hasWarning} warning`
-      : !this.isRequired() && !this.props.error && !this.props.active
+      : !this.isRequired() && !this.props.meta.error && !this.props.meta.active
       ? `${this.props.hasWarning} true`
       : "";
   };
 
   getIcon = () => {
-    return helpers.isSucceed(this.props.error, this.props.touched)
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched)
       ? "#30d576"
-      : helpers.isInvalid(this.props.error, this.props.touched)
+      : helpers.isInvalid(this.props.meta.error, this.props.meta.touched)
       ? "#856404"
       : "none";
   };
 
   getIconClassName = () => {
-    return helpers.isSucceed(this.props.error, this.props.touched)
+    return helpers.isSucceed(this.props.meta.error, this.props.meta.touched)
       ? "icon-checked"
-      : helpers.isInvalid(this.props.error, this.props.touched)
+      : helpers.isInvalid(this.props.meta.error, this.props.meta.touched)
       ? "icon-alert"
       : "";
   };
@@ -125,8 +121,7 @@ class RenderField extends Component {
     return this.props.input.value ? { display: "" } : { display: "none" };
   };
 
-  // getErrorClass = () =>
-  // 	this.isRequired() && !this.isWarning() ? 'error' : '';
+  getErrorClass = () => (this.isRequired() && !this.isWarning() ? "error" : "");
 
   render() {
     const {
@@ -184,23 +179,20 @@ class RenderField extends Component {
               ? { display: "none" }
               : { display: "" }
           }
-          className={`RenderField ${this.getFloatLabelStyle()} `}
+          className={`RenderField ${this.getFloatLabelStyle()} ${this.getErrorClass()} ${this.getWarningClass()}`}
         >
           {this.props.hasFloatLabel ? (
             <Fragment>
-              <label>{this.props.label}</label>
               <input
-                ref={this.inputRef}
                 className="form-control"
                 type={this.props.type}
                 placeholder={this.props.placeholder}
                 {...this.props.input}
                 {...renderFieldProps}
-                value={this.props.value}
-                onChange={this.props.onChange}
               />
-              {/* {this.invalidMessage()}
-							{this.warningMessage()} */}
+              <label>{this.props.label}</label>
+              {this.invalidMessage()}
+              {this.warningMessage()}
             </Fragment>
           ) : (
             <Fragment>
@@ -209,13 +201,11 @@ class RenderField extends Component {
                 className="form-control input"
                 type={this.props.type}
                 placeholder={this.props.placeholder}
-                // {...this.props.input}
-                // {...renderFieldProps}
-                value={this.props.input.value}
-                onChange={this.props.onChange}
+                {...this.props.input}
+                {...renderFieldProps}
               />
-              {/* {this.invalidMessage()}
-							{this.warningMessage()} */}
+              {this.invalidMessage()}
+              {this.warningMessage()}
             </Fragment>
           )}
         </div>
