@@ -187,6 +187,7 @@ class RenderField extends Component {
                 className="form-control"
                 type={this.props.type}
                 placeholder={this.props.placeholder}
+                // autoFocus={true}
                 {...this.props.input}
                 {...renderFieldProps}
               />
@@ -201,6 +202,7 @@ class RenderField extends Component {
                 className="form-control input"
                 type={this.props.type}
                 placeholder={this.props.placeholder}
+                // autoFocus={this.props.autoFocus}
                 {...this.props.input}
                 {...renderFieldProps}
               />

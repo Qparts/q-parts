@@ -48,6 +48,7 @@ class ChangeVehicleModal extends Component {
     this.state = {
       garage: null,
       modal: false,
+      browseCatalogeModal:false,
       open: false,
       vin: "JTHBJ46G9B2420251",
       vinInput: props.selectedVehicleVin,
@@ -70,7 +71,6 @@ class ChangeVehicleModal extends Component {
      async toggleChangeVehivle(e) {
       await  this.setState(prevState => ({
           changeVehcileModal: !prevState.changeVehcileModal,
-          modal: !prevState.modal
         }));
       }
 
@@ -97,6 +97,10 @@ class ChangeVehicleModal extends Component {
         }
       };
     
+      handleClose = e => {
+        this.setState({ open: false });
+      };
+      
       handleSubmit = async () => {
           let selectedVehicle = this.state.selectedVehicle;
           delete selectedVehicle.models;
@@ -539,7 +543,7 @@ class ChangeVehicleModal extends Component {
                             <Field
                               onChange={e => this.props.onSelectedVehicle(e)}
                               label={translate("form.vehicle.make")}
-                              name="make2"
+                              name="make8"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleMake}
@@ -552,7 +556,7 @@ class ChangeVehicleModal extends Component {
                                 this.props.onSelectedVehicleModel(e)
                               }
                               label={translate("form.vehicle.model")}
-                              name="model2"
+                              name="model8"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleModel}
@@ -566,7 +570,7 @@ class ChangeVehicleModal extends Component {
                                 this.props.onSelectedVehicleYear(e)
                               }
                               label={translate("form.vehicle.year")}
-                              name="year2"
+                              name="year8"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleYear}
@@ -574,7 +578,7 @@ class ChangeVehicleModal extends Component {
                               formatGroupLabel={formatvehicleYearLabel}
                             />
                           </div>
-                          {/* <div className="col-lg vin-popover">
+                          <div className="col-lg vin-popover">
                             <LargeScreen>
                               <p
                                 className="id-img"
@@ -595,35 +599,26 @@ class ChangeVehicleModal extends Component {
                               </UncontrolledPopover>
                             </LargeScreen>
                             <Field
-                              hasFloatLabel
-                              name="VIN/Frame2"
-                              type="text"
-                              placeholder={translate(
-                                "general.VINInput.placeholder"
-                              )}
-                              label={translate(
-                                "general.VINInput.label"
-                              )}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate(
-                                "general.VINInput.label"
-                              )}`}
-                              component={props => {
-                              	props.input.onChange= e => {
-    	                            this.props.onSelectedVehicleVin(e)
-	                                this.setState(() => ({
-	                                  vinNum : e
-	                                }))
-                             	}
-                              	return (
-                                <RenderField
-                                  {...props}
-                                  value={this.state.vinNum}
-                                />
-                              )}}
-                              validate={[validations.required]}
-                            />
+                            onChange={e =>
+                              this.setState({ vinNum: e.target.value })
+                            }
+                            hasFloatLabel
+                            name="VIN/Frame10"
+                            type="text"
+                            placeholder={this.props.translate(
+                              "general.VINInput.placeholder"
+                            )}
+                            label={this.props.translate(
+                              "general.VINInput.label"
+                            )}
+                            errorMessage={`${this.props.translate(
+                              "general.enter"
+                            )} ${this.props.translate(
+                              "general.VINInput.label"
+                            )}`}
+                            component={RenderField}
+                            validate={[validations.required]}
+                          />
                             <div className="VIN-info">
                               <p
                                 onClick={() =>
@@ -658,7 +653,7 @@ class ChangeVehicleModal extends Component {
                                 </UncontrolledPopover>
                               </DownLargeScreen>
                             </div>
-                          </div> */}
+                          </div>
                           <LargeScreen>
                             <div className="col-lg-auto actions">
                               <button
@@ -700,14 +695,12 @@ class ChangeVehicleModal extends Component {
                           </MediumScreen>
                         </div>
                         <form className="gray-input vin-input">
-                          <Field
+                        <Field
                             onChange={e =>
-                              this.setState(() => ({
-                                vinInput: e.target.value
-                              }))
+                              this.setState({ vinNum: e.target.value })
                             }
                             hasFloatLabel
-                            name="VIN/Frame"
+                            name="VIN/Frame11"
                             type="text"
                             placeholder={this.props.translate(
                               "general.VINInput.placeholder"
@@ -720,13 +713,8 @@ class ChangeVehicleModal extends Component {
                             )} ${this.props.translate(
                               "general.VINInput.label"
                             )}`}
-                            component={props => (
-                              <RenderField
-                                {...props}
-                                value={this.state.vinInput}
-                              />
-                            )}
-                            // validate={[validations.required]}
+                            component={RenderField}
+                            validate={[validations.required]}
                           />
                           <div className="VIN-info">
                             <p
@@ -809,7 +797,7 @@ class ChangeVehicleModal extends Component {
                                 }))
                               }
                               label="Make"
-                              name="make"
+                              name="make2"
                               placeholder={" "}
                               component={SelectInput}
                               options={groupedvehicleMake}
@@ -817,32 +805,27 @@ class ChangeVehicleModal extends Component {
                             />
                           </div>
                           <div className="col">
-                            <Field
-                              onChange={e =>
-                                this.setState(() => ({
-                                  vinInput: e.target.value
-                                }))
-                              }
-                              ref={this.vinFieldRef}
-                              value={this.state.vinInput}
-                              hasFloatLabel
-                              name="VIN/Frame"
-                              type="text"
-                              placeholder={translate(
-                                "general.VINInput.placeholder"
-                              )}
-                              label={translate("general.VINInput.label")}
-                              errorMessage={`${translate(
-                                "general.enter"
-                              )} ${translate("general.VINInput.label")}`}
-                              component={props => (
-                                <RenderField
-                                  {...props}
-                                  value={this.state.vinInput}
-                                />
-                              )}
-                              validate={[validations.required]}
-                            />
+                          <Field
+                            onChange={e =>
+                              this.setState({ vinNum: e.target.value })
+                            }
+                            hasFloatLabel
+                            name="VIN/Frame12"
+                            type="text"
+                            placeholder={this.props.translate(
+                              "general.VINInput.placeholder"
+                            )}
+                            label={this.props.translate(
+                              "general.VINInput.label"
+                            )}
+                            errorMessage={`${this.props.translate(
+                              "general.enter"
+                            )} ${this.props.translate(
+                              "general.VINInput.label"
+                            )}`}
+                            component={RenderField}
+                            validate={[validations.required]}
+                          />
                             <div className="VIN-info">
                               <p
                                 onClick={() =>

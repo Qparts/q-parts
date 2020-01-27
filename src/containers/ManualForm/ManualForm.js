@@ -87,6 +87,9 @@ export class ManualForm extends Component {
     }
   }
 
+  handleClose = e => {
+    this.setState({ open: false });
+  };
   toggle() {
     this.setState(prevState => ({
       browseCatalogeModal: !prevState.browseCatalogeModal
@@ -1484,6 +1487,10 @@ export class ManualForm extends Component {
   }
 }
 
+ManualForm = reduxForm({
+  form: "ManualForm"
+})(ManualForm);
+
 const mapStateToProps = state => {
   return {
     translate: getTranslate(state.localize),
@@ -1497,11 +1504,6 @@ const mapStateToProps = state => {
   };
 };
 
-ManualForm = reduxForm({
-  form: "ManualForm"
-})(ManualForm);
-
-const withManualForm = withRouter(ManualForm);
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -1510,11 +1512,12 @@ const mapDispatchToProps = dispatch => {
     onSelectedVehicleModel: value => dispatch(setSelectedVehicleModel(value)),
     onSelectedVehicleYear: value => dispatch(setSelectedVehicleYear(value)),
     onDeleteSelectedVehicle: payload =>
-      dispatch(unsetVehcileFromSelectedVehicles(payload)),
+    dispatch(unsetVehcileFromSelectedVehicles(payload)),
     setSelectedVehicles: payload => dispatch(setSelectedVehicles(payload)),
     onClearHistory: payload => dispatch(unsetSelectedVehicles(payload)),
     onSelectedVehicleVin: value => dispatch(setSelectedVehicleVin(value))
   };
 };
+const withManualForm = withRouter(ManualForm);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withManualForm);

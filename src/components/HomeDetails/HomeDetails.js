@@ -86,8 +86,9 @@ class HomeDetails extends Component {
  async toggleChangeVehivle(e) {
   await  this.setState(prevState => ({
       changeVehcileModal: !prevState.changeVehcileModal,
-      modal: !prevState.modal
+      // modal: !prevState.modal
     }));
+    // this.toggle();
   }
 
 
@@ -234,7 +235,7 @@ class HomeDetails extends Component {
         ...selectedVehicle,
         year: this.state.selectedVehicleYear,
         model: this.state.selectedVehicleModel,
-        // vin: this.state.vinInput
+        vin: this.state.vinInput
       };
       this.props.onSelectedVehicle(selectedVehicle);
       this.props.setSelectedVehicles(selectedVehicle);
@@ -814,6 +815,7 @@ class HomeDetails extends Component {
                               )}`}
                               component={RenderField}
                               validate={[validations.required]}
+                              autoFocus={true}
                             />
                             <div className="VIN-info">
                               <p
@@ -1022,6 +1024,7 @@ class HomeDetails extends Component {
                               )}`}
                               component={RenderField}
                               validate={[validations.required]}
+                              autoFocus={true}
                             />
                             <div className="VIN-info">
                               <p

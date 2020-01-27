@@ -28,6 +28,7 @@ import { binarySearch } from '../../utils/array';
 import ResultNotFound from './ResultNotFound';
 import { r, l, left } from '../../utils/directional';
 import Footer from '../../components/Layout/Footer/Footer';
+import ListingVechile from './ListingVechile';
 const GRID = 'GRID';
 
 
@@ -429,6 +430,7 @@ class SearchResult extends Component {
 				<LargeScreen>
 					<section className="results-container gray-bg">
 						<div className="container-fluid">
+							<ListingVechile/>
 							<div className="row">
 								<div className="filter-col">
 									<ul className="filter">

@@ -477,25 +477,20 @@ class HeaderDetails extends Component {
                       className="modal-xl vin-modal"
                     >
                       <ModalHeader toggle={this.toggleChangeVehivle}>
-                        {translate(
-                          "general.changeVehicle.modalHeader"
-                        )}{" "}
-                        <LargeScreen>
-                          <span>
+                      <h4>
                             {translate(
-                              "general.changeVehicle.modalHeaderSpan"
-                            )}
-                          </span>
-                        </LargeScreen>
+                              "general.changeVehicle.addNewVehicle"
+                            )}{" "}
+                          </h4>
                       </ModalHeader>
                       <ModalBody className="add-new-vehicle">
-                      <header>
+                      {/* <header>
                           <h4>
                             {translate(
                               "general.changeVehicle.addNewVehicle"
                             )}{" "}
                           </h4>
-                        </header>
+                        </header> */}
                         <form
                           className="gray-input row add-vech-model"
                           onSubmit={this.props.handleSubmit(this.handleChangeVehicleSubmit)}  
@@ -765,19 +760,14 @@ class HeaderDetails extends Component {
                               className="modal-xl vin-modal"
                     >
                       <ModalHeader toggle={this.toggleChangeVehivle}>
-                        {translate(
-                          "general.changeVehicle.modalHeader"
-                        )}{" "}
-                        <LargeScreen>
-                          <span>
+                      <h4>
                             {translate(
-                              "general.changeVehicle.modalHeaderSpan"
-                            )}
-                          </span>
-                        </LargeScreen>
+                              "general.changeVehicle.addNewVehicle"
+                            )}{" "}
+                          </h4>
                       </ModalHeader>
                       <ModalBody className="add-new-vehicle">
-                        <header>
+                        {/* <header>
                           <h4>
                             {translate(
                               "general.changeVehicle.addNewVehicle"
@@ -810,7 +800,7 @@ class HeaderDetails extends Component {
                               </span>
                             </a>
                             <div class="dropdown-menu garage-dropdown" aria-labelledby="garage-dropdown">
-                              {/* {this.props.isLoggedIn ?
+                              {this.props.isLoggedIn ?
               								<div className="saved">
               									<div class="media">
               										<i className="icon-vehicle"></i>
@@ -838,7 +828,7 @@ class HeaderDetails extends Component {
               										</div>
               									</div>
               								</div>
-                         :null } */}
+                         :null }
               								<div className="cached">
               									<div class="media">
               										<i className="icon-vehicle-history"></i>
@@ -1018,7 +1008,7 @@ class HeaderDetails extends Component {
                               </ul>
                             </div>
                           </div>
-                        </header>
+                        </header> */}
                         <form
                           className="gray-input row add-vech-model"
                           onSubmit={this.props.handleSubmit(this.handleChangeVehicleSubmit)}  
