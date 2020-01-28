@@ -186,17 +186,23 @@ class listingVechile extends Component {
     };
     this.props.onSelectedVehicle(selectedVehicle);
     this.props.setSelectedVehicles(selectedVehicle);
-    // this.toggleChangeVehivle();
+    this.toggleChangeVehivle();
   };
 
   handleBrowseCataloge = () => {};
+
+
+  sendSelectedVehcileData = ()=>{
+    this.props.selectedVehicleData(this.state.selectedVehicle);
+  }
 
   render() {
     const { vehicles, currentLanguage, translate , direction} = this.props;
     const { isVehicleSelected } = this.state;
     let selectedVechileModule;
 
-    console.log(currentLanguage);
+    this.sendSelectedVehcileData();
+
     const vehicleMake = vehicles.map(vehicle => {
       return {
         ...vehicle,
@@ -939,13 +945,6 @@ class listingVechile extends Component {
                       </ModalBody>
                     </Modal>
             
-
-
-
-
-
-
-
                    {/* change vehicle button */}
                    <a
                       href="#"

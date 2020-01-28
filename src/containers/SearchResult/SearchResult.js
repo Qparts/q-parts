@@ -84,7 +84,8 @@ class SearchResult extends Component {
 			keyPressed: 0,
 			currentSearchId: -1,
 			scroll: null,
-			newScrollPosition: 0
+			newScrollPosition: 0,
+			selectedVehicle : {id : null}
 		};
 		this.header = createRef();
 		this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
@@ -378,10 +379,14 @@ class SearchResult extends Component {
 		})
 	}
 
+	getSelectedVehicle = (data)=>{
+       this.setState({selectedVehicle : data})
+	}
 	render() {
 
+		
 		//sidebar
-		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, flage, direction, translate } = this.props;
+		const { isChecked, renderSearch, filtrationChecked, onFilter, onRemoveItem, onClear, currentLanguage, selectedOptions, flage, direction, translate , isVehicleSelected } = this.props;
 		const { searchGeneral: { filterObjects }, loading } = this.state;
 		let key = this.props.currentLanguage === constant.EN ? 'filterTitle' : 'filterTitleAr';
 		if (flage) {
@@ -430,7 +435,7 @@ class SearchResult extends Component {
 				<LargeScreen>
 					<section className="results-container gray-bg">
 						<div className="container-fluid">
-							<ListingVechile/>
+							<ListingVechile  selectedVehicleData = {this.getSelectedVehicle} />
 							<div className="row">
 								<div className="filter-col">
 									<ul className="filter">
@@ -449,7 +454,7 @@ class SearchResult extends Component {
 																className="form-control"
 																placeholder={this.props.translate("general.buttons.search")} />
 														</div>
-														{renderSearch(filterObject, onFilter, isChecked, currentLanguage)}
+														{renderSearch(filterObject, onFilter, isChecked, currentLanguage , isVehicleSelected ,this.state.selectedVehicle)}
 														{/*<ul className="options-list">
 													<li>
 														<div className="checkbox">
@@ -803,7 +808,8 @@ const mapStateToProps = state => {
 		currentLanguage: getActiveLanguage(state.localize).code,
 		translate: getTranslate(state.localize),
 		direction: state.customer.direction,
-		flage: state.api.flage
+		flage: state.api.flage,
+		isVehicleSelected: state.api.isVehicleSelected,
 	}
 }
 const mapDispatchToProps = dispatch => {
